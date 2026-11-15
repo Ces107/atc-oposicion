@@ -1,0 +1,136 @@
+¿Para qué sirve la «dirección de aeronave de 24 bits» del modo S?	Para la interrogación selectiva de una aeronave y la identificación inequívoca de sus respuestas (se asigna individualmente según la matrícula OACI)	ATC::T05b
+¿Cuántos códigos de identificador de interrogador (II) existen para el uso operativo del modo S?	15	ATC::T05b
+¿Qué técnica permite a un interrogador de modo S dejar de reinterrogar a una aeronave que ya ha adquirido?	Los protocolos de bloqueo (lock-out): suprimen las respuestas del transpondedor a nuevas interrogaciones all-call de esa unidad terrestre	ATC::T05b
+¿Cuál es el alcance máximo nominal de un interrogador de modo S?	256 NM	ATC::T05b
+Según el Concepto de Operaciones de EUROCONTROL, ¿qué fiabilidad de vigilancia garantiza el modo S?	Al menos el 99 %	ATC::T05b
+¿Qué modulación de enlace ascendente usa el modo S en las interrogaciones?	Modulación por desplazamiento diferencial de fase binaria (DPSK)	ATC::T05b
+¿Qué modulación de enlace descendente usa un transpondedor de modo S en las respuestas?	Modulación por posición de pulsos (PPM)	ATC::T05b
+¿Qué exige a una aeronave la «vigilancia elemental (ELS)» del modo S?	La capacidad básica del transpondedor de modo S, obligatoria para prácticamente todo el tránsito aéreo general IFR de la región EUR	ATC::T05b
+¿Qué añade la «vigilancia mejorada (EHS)» del modo S respecto a la ELS?	La extracción de parámetros adicionales de a bordo mediante el enlace descendente Comm-B (nivel seleccionado, ángulo de alabeo, ángulo de derrota, velocidad sobre el suelo, rumbo, velocidad aerodinámica, Mach, velocidad vertical) usando registros BDS	ATC::T05b
+Según el Reglamento (UE) 2023/1770, ¿qué aeronaves deben tener vigilancia mejorada (EHS) de modo S?	Aeronaves de ala fija con MTOW > 5700 kg o TAS máxima de crucero > 250 kt, certificadas por primera vez el 7 de junio de 1995 o después	ATC::T05b
+Según el Reglamento (UE) 2023/1770, ¿qué aeronaves deben tener ADS-B Out (1090ES)?	Aeronaves con MTOW > 5700 kg o TAS máxima de crucero > 250 kt, certificadas por primera vez el 7 de junio de 1995 o después	ATC::T05b
+Según el Reglamento (UE) 2023/1770, ¿qué característica física de los equipos se exige a las aeronaves grandes o rápidas con ADS-B Out/EHS?	Diversidad de antenas (dos antenas de transpondedor)	ATC::T05b
+Según el AUR.SUR.2010 del Reglamento (UE) 2023/1770, ¿durante cuántos días consecutivos puede volar una aeronave con la capacidad ADS-B Out/EHS inoperativa?	Un máximo de 3 días consecutivos	ATC::T05b
+Según el AUR.SUR.2015 del Reglamento (UE) 2023/1770, ¿a qué vuelos se aplica la norma de la dirección de aeronave OACI de 24 bits?	A todos los vuelos que operan como tránsito aéreo general (no solo a las aeronaves mayores o más rápidas sujetas a ADS-B Out/EHS)	ATC::T05b
+Según el Reglamento (UE) 2023/1770, ¿antes de qué fecha debían existir los programas de adaptación de los operadores establecidos para ADS-B Out/EHS?	Antes del 7 de diciembre de 2020	ATC::T05b
+¿Qué cuatro reglamentos de la UE derogó y refundió el Reglamento (UE) 2023/1770?	(CE) 29/2009, (UE) 1206/2011, (UE) 1207/2011 y (UE) 1079/2012	ATC::T05b
+¿Qué cubre la «Part-COM» del Reglamento (UE) 2023/1770?	Los servicios de enlace de datos y la separación entre canales de voz (8,33 kHz)	ATC::T05b
+¿Qué cubre la «Part-SUR» del Reglamento (UE) 2023/1770?	La vigilancia: ELS, EHS, ADS-B Out y la dirección de aeronave de 24 bits	ATC::T05b
+¿Cuándo se adoptó el Reglamento (UE) 2023/1770 y cuándo se publicó en el Diario Oficial?	Hecho en Bruselas el 12 de septiembre de 2023; publicado en el DO L 228 el 15 de septiembre de 2023	ATC::T05b
+¿Por encima de qué nivel de vuelo se aplica el mandato de CPDLC de la Part-COM del Reglamento (UE) 2023/1770?	FL285 (tránsito aéreo general IFR en el espacio aéreo SES aplicable)	ATC::T05b
+¿En qué banda de frecuencias VHF se aplica el título de separación entre canales de voz del Reglamento (UE) 2023/1770?	117,975-137 MHz	ATC::T05b
+¿Qué FIR/UIR queda excluida del título de separación entre canales de voz (8,33 kHz) del Reglamento (UE) 2023/1770?	La FIR/UIR Canarias	ATC::T05b
+¿Desde qué fecha un operador no podía volar en espacio aéreo ATS de la UE sin capacidad de separación de canales de 8,33 kHz (antiguo Reglamento 1079/2012)?	Desde el 1 de enero de 2018	ATC::T05b
+¿Antes de qué fecha debían convertir los Estados miembros de la UE las asignaciones VHF a la separación de 8,33 kHz (antiguo Reglamento 1079/2012)?	El 31 de diciembre de 2018	ATC::T05b
+¿Qué cuatro categorías de asignaciones VHF se mantuvieron con separación de 25 kHz según el reglamento de 8,33 kHz?	121,5 MHz (emergencia), 123,1 MHz (SAR), ACARS/VDL y las asignaciones de aeronaves de Estado (militares)	ATC::T05b
+¿Qué frecuencia real sintoniza el designador de canal de 8,33 kHz «132.035»?	132,0333 MHz	ATC::T05b
+Según el Anexo 10, Vol. II de la OACI, ¿cómo se transmite en radiotelefonía «118.005 MHz» (un canal de 8,33 kHz)?	«ONE ONE EIGHT DECIMAL ZERO ZERO FIVE»	ATC::T05b
+Según la norma de 8,33 kHz, ¿cuándo se usan solo 4 cifras (y no 6) para pronunciar un canal VHF?	Cuando la 5.ª y la 6.ª cifras son cero	ATC::T05b
+Según el AIP GEN 3.4 de ENAIRE, ¿qué cuatro servicios CPDLC enumera la sección «3.5.1 ATN B1 DLS»?	DLIC, ACL, ACM y AMC	ATC::T05b
+¿Qué significa DLIC en el CPDLC ATN B1?	Data Link Initiation Capability (capacidad de inicio de enlace de datos)	ATC::T05b
+¿Qué significa ACL en el CPDLC ATN B1?	ATC Clearances and instructions (autorizaciones e instrucciones ATC)	ATC::T05b
+¿Qué significa ACM en el CPDLC ATN B1?	ATC Communications Management (gestión de comunicaciones ATC)	ATC::T05b
+¿Qué significa AMC en el CPDLC ATN B1 (que no debe confundirse con Acceptable Means of Compliance)?	ATC Microphone check (comprobación de micrófono ATC)	ATC::T05b
+Según el AIP España, ¿por encima de qué nivel de vuelo está disponible el CPDLC ATN B1 en las UIR de Madrid y Barcelona?	FL285	ATC::T05b
+¿Qué aviónica requiere el CPDLC ATN B1 en España y qué excluye?	Equipo CPDLC ATN VDL modo 2; no está disponible para aeronaves que solo tengan equipo FANS-1/A	ATC::T05b
+¿En qué FIR/UIR españolas está disponible el enlace de datos FANS (ADS-C + CPDLC)?	FIR/UIR Canarias (área de servicio ATS oceánico)	ATC::T05b
+¿En qué norma de la OACI se basa la aplicación CPDLC FANS de España?	El Global Operational Data Link Document (GOLD)	ATC::T05b
+¿Qué debe completarse antes de usar los servicios de enlace de datos ATN B1 o FANS en España?	El procedimiento de LOG-ON (según el AIP ENR 1.3)	ATC::T05b
+Según el AIP España GEN 3.4, ¿qué ocurre con el intervalo del acuerdo ADS-C durante una emergencia ADS-C en el ACC de Canarias?	Cambia automáticamente a 64 segundos	ATC::T05b
+Según el AIP España GEN 3.4, ¿cómo se cancelan los contratos ADS-C en el ACC de Canarias?	Automáticamente, algún tiempo después de salir de la FIR o de aterrizar, o manualmente por el controlador	ATC::T05b
+Según el AIP GEN 3.4, ¿cuál es la dirección AFTN de ENAIRE para la correspondencia general?	LEANYANX	ATC::T05b
+¿En qué documento de fuente primaria figura ya la «vigilancia mejorada» del modo S, años antes del reglamento actual de la UE?	En el Mode S Concept of Operations in Europe de EUROCONTROL (1996)	ATC::T05b
+¿Cuáles son los cuatro indicadores de calidad de la posición horizontal ADS-B en el aire que enumera el DAP/ADD Handbook de EUROCONTROL?	NIC, NACp, SDA y SIL	ATC::T05b
+¿Qué significa NIC en los indicadores de calidad ADS-B?	Navigation Integrity Category (categoría de integridad de navegación)	ATC::T05b
+¿Qué significa NAC en los indicadores de calidad ADS-B?	Navigation Accuracy Category (categoría de exactitud de navegación)	ATC::T05b
+¿Qué significa SDA en los indicadores de calidad ADS-B?	System Design Assurance (garantía de diseño del sistema)	ATC::T05b
+¿Qué significa SIL en los indicadores de calidad ADS-B?	Source Integrity Level (nivel de integridad de la fuente)	ATC::T05b
+Aproximadamente, ¿qué acota el NIC en un informe de posición ADS-B?	El radio de contención de la posición notificada (la probabilidad de que la posición real esté dentro de una distancia dada)	ATC::T05b
+En el código de colores del DAP/ADD Handbook, ¿qué significa el «azul» para un elemento de datos?	Requerido por el modo S ELS	ATC::T05b
+En el código de colores del DAP/ADD Handbook, ¿qué significa el «verde» para un elemento de datos?	Requerido por el modo S EHS	ATC::T05b
+¿Dónde figura el PAR (radar para aproximación de precisión) como servicio disponible en España?	En el AIP España GEN 3.4 §3.1, lista de servicios de radionavegación	ATC::T05b
+¿Qué significa A-SMGCS?	Advanced Surface Movement Guidance and Control System (sistema avanzado de guiado y control del movimiento en superficie)	ATC::T05b
+Según el texto de formación ATM-ANS de la EASA, ¿con qué otras tres herramientas se agrupa el A-SMGCS como herramienta de automatización de aproximación y torre?	MTCD, AMAN y DMAN	ATC::T05b
+¿Qué código de tecnología de traza de vigilancia usa el AIP España ENR 1.6 para las estaciones «modo S»?	(SM)	ATC::T05b
+¿Qué código de tecnología de traza de vigilancia usa el AIP España ENR 1.6 para las estaciones de «multilateración»?	(MLAT)	ATC::T05b
+¿Qué significa el código de tipo de estación «LRR» del AIP España ENR 1.6?	En ruta (radar de largo alcance)	ATC::T05b
+¿Qué significa el código de tipo de estación «TAR» del AIP España ENR 1.6?	Radar de área terminal (Terminal Area Radar)	ATC::T05b
+¿Qué significa el código de tipo de estación «WAM» del AIP España ENR 1.6?	Multilateración de área extensa (Wide Area Multilateration)	ATC::T05b
+¿Qué significa el código de tipo de estación «SMMS» del AIP España ENR 1.6?	Sistema de multilateración de movimiento en superficie (Surface Movement Multilateration System)	ATC::T05b
+Según el AIP España ENR 1.6 §6.1, ¿cuál es el mínimo de separación horizontal entre dos trazas PSR en el espacio aéreo TMA/APP/TWR?	5 NM	ATC::T05b
+Según el AIP España ENR 1.6, ¿qué mínimo de separación se aplica entre aeronaves sucesivas en la misma derrota de aproximación final, dentro de las 10 NM del umbral, en condiciones HIRO en el APP de Barcelona?	2,5 NM	ATC::T05b
+Según el AIP España ENR 1.6, ¿cuál es la regla para combinar un mínimo de separación SSR con un mínimo de separación ADS-B en el mismo par de trazas?	Se aplica el mayor (más estricto) de los dos mínimos aplicables	ATC::T05b
+Según el AIP España ENR 1.6 §4.1, ¿qué código y modo del transpondedor selecciona un piloto en una emergencia?	Modo A/3, código 7700	ATC::T05b
+Según el AIP España ENR 1.6 §4.3, ¿qué selecciona un piloto en caso de fallo del receptor de radio?	Modo A/3, código 7600 (o transmitir el mensaje ADS-B de fallo de comunicaciones)	ATC::T05b
+Según el AIP España ENR 1.6 §2.1, ¿qué modo y código del transpondedor usan por defecto los vuelos controlados que entran en la FIR/UIR de Madrid, Barcelona o Canarias, sin instrucciones ATC?	Modo A/3, código 2000	ATC::T05b
+Según el AIP España ENR 1.6 §2.1, ¿qué modo y código del transpondedor usan por defecto los vuelos no controlados que entran en la FIR/UIR de Madrid, Barcelona o Canarias?	Modo A/3, código 7000	ATC::T05b
+Según el AIP España ENR 1.6, ¿qué debe hacer un piloto en relación con la ADS-B si su aeronave no cumple los requisitos de exactitud e integridad ADS-B del Reglamento (UE) 2023/1770?	Transmitir siempre el valor cero en los indicadores de calidad de la posición, o desactivar la transmisión ADS-B	ATC::T05b
+¿Qué cuatro familias de ANSP europeos se citan juntas como programas paralelos de sistemas ATM de nueva generación en el texto de formación ATM-ANS de la EASA?	Coflight, iTEC y SESAR (el seguimiento multisensor, SWIM y el objeto de vuelo son elementos de competencia relacionados)	ATC::T05b
+¿Qué significa MTCD?	Medium-Term Conflict Detection (detección de conflictos a medio plazo)	ATC::T05b
+¿Qué significa AMAN?	Arrival Manager (gestor de llegadas)	ATC::T05b
+¿Qué significa DMAN?	Departure Manager (gestor de salidas)	ATC::T05b
+¿Qué significa SWIM?	System Wide Information Management (gestión de información a nivel de todo el sistema)	ATC::T05b
+¿Qué acrónimo confirmado por la EASA se expande como «Minimum Safe Altitude Warning»?	MSAW (aviso de altitud mínima de seguridad)	ATC::T05b
+¿Qué acrónimo confirmado por la EASA se expande como «Area Proximity Warning»?	APW (aviso de proximidad de área)	ATC::T05b
+¿Qué significa en inglés SCV, el sistema de comunicaciones de voz de ENAIRE?	Voice Communication Systems (sistemas de comunicaciones de voz)	ATC::T05b
+¿Qué estándar de interoperabilidad VoIP usa el SCV de ENAIRE?	EUROCAE ED-137	ATC::T05b
+¿Por qué despliega ENAIRE su SCV como «sistema dual»?	Son dos sistemas con idéntica funcionalidad pero software crítico distinto, para tener redundancia de seguridad	ATC::T05b
+¿Qué red transporta la interconexión del SCV de ENAIRE con los equipos de radio y con otros SCV?	REDAN (la red de voz y datos de navegación aérea)	ATC::T05b
+¿Qué significa SACTA?	Sistema Automatizado de Control de Tránsito Aéreo	ATC::T05b
+¿Qué significa TCPV en el SACTA?	Tratamiento Central de Planes de Vuelo	ATC::T05b
+¿Qué significa TLPV en el SACTA?	Tratamientos Locales de Planes de Vuelo	ATC::T05b
+Cita tres de las funciones principales del SACTA, según la propia descripción de ENAIRE.	Cualquiera de estas: tratamiento de planes de vuelo (TCPV/TLPV), herramientas de planificación del tráfico, tratamiento radar, correlación de radar con planes de vuelo, presentación de información meteorológica, alertas de desviación, comunicación de datos entre aeronave y controlador, presentación de información aeronáutica, supervisión y grabación distribuidas	ATC::T05b
+¿Qué significa ICARO?	Integrated COM/AIS/AIP & Reporting Office Automated System (sistema automatizado integrado de las oficinas COM/AIS/AIP y de notificación)	ATC::T05b
+¿Las tareas de qué oficina automatiza ICARO en materia de información aeronáutica (NOTAM)?	Las de la Oficina NOTAM española (NOF)	ATC::T05b
+Según ENAIRE, ¿qué suministra ICARO al SACTA?	Información aeronáutica y meteorológica, en particular la activación y desactivación de áreas de uso especial	ATC::T05b
+¿Con qué programa de mensajería de EUROCONTROL se interconecta ICARO, a través de los sistemas de Aena?	Airport Collaborative Decision Making (A-CDM)	ATC::T05b
+¿Qué es un «PIB» que entrega ICARO?	Boletín de información previa al vuelo (Pre-flight Information Bulletin)	ATC::T05b
+Según la propia página web de ENAIRE, ¿cuándo se puso en marcha el programa iTEC SkyNex?	En 2021	ATC::T05b
+¿Qué empresa es el socio tecnológico de iTEC SkyNex?	Indra	ATC::T05b
+Aproximadamente, ¿cuánto espacio aéreo y cuántos vuelos al año supervisa la alianza iTEC, según las cifras de ENAIRE?	Más de 26 millones de kilómetros cuadrados de espacio aéreo y más de 12 millones de vuelos al año, desde 27 centros de control	ATC::T05b
+¿Es ENAIRE miembro de COOPANS o de iTEC?	De iTEC (ENAIRE no es miembro de COOPANS)	ATC::T05b
+¿Qué constelación de satélites aloja la carga útil ADS-B espacial de Aireon?	Iridium	ATC::T05b
+Según el informe de situación de EUROCONTROL de 2018, ¿qué latencia se fijó como objetivo Aireon una vez completada su constelación?	Mejor que 2 segundos	ATC::T05b
+Según el concepto GADSS de la OACI, ¿con qué frecuencia debe notificar su posición una aeronave en peligro y con qué frecuencia en vuelo normal?	Cada 1 minuto en peligro; cada 15 minutos en condiciones normales de vuelo	ATC::T05b
+¿Qué versión del TCAS II es obligatoria actualmente en Europa y desde cuándo?	La versión 7.1, desde el 1 de diciembre de 2015	ATC::T05b
+¿A partir de qué MTOW o configuración de asientos se aplica el mandato europeo del TCAS II v7.1?	MTOW superior a 5700 kg o capacidad máxima aprobada de más de 19 asientos de pasajeros	ATC::T05b
+¿Qué segundo sistema anticolisión de a bordo se aprobó para operaciones europeas en marzo de 2025, junto con el TCAS II v7.1?	El ACAS Xa/Xo	ATC::T05b
+¿Qué enmienda del Anexo 10 de la OACI convirtió el ACAS Xa en un sistema anticolisión conforme a la OACI?	La enmienda 91 (al Anexo 10, Volumen IV)	ATC::T05b
+¿Qué capacidad exclusiva añade el ACAS Xu respecto al TCAS II/ACAS Xa?	Guiado de maniobra horizontal (además de vertical), para aeronaves pilotadas por control remoto	ATC::T05b
+¿Cuáles son los números de los documentos MOPS del TCAS II versión 7.1?	RTCA DO-185B / EUROCAE ED-143 (2008)	ATC::T05b
+¿Por debajo de qué altura sobre el terreno (AGL) se inhiben todos los RA del TCAS II?	1000 pies (±100 ft) AGL	ATC::T05b
+¿Por debajo de qué altura AGL se inhiben los RA «Increase Descent» del TCAS II?	1550 pies (±100 ft) AGL	ATC::T05b
+¿Por debajo de qué altura AGL se inhiben los RA «Descend» del TCAS II?	1100 pies AGL	ATC::T05b
+¿Por debajo de qué altura AGL se inhiben las alertas sonoras TA del TCAS II?	500 pies (±100 ft) AGL	ATC::T05b
+¿Qué RA se anuncia por voz como «Monitor Vertical Speed»?	Un RA preventivo (internamente un «Do Not Climb» o «Do Not Descend») que restringe, en lugar de invertir, el régimen vertical de la aeronave	ATC::T05b
+Según un conjunto de datos citado en la Guía ACAS v5.0 de EUROCONTROL, ¿cuál fue el tipo de RA inicial más común (64,0 %)?	Level Off	ATC::T05b
+Cuando una aeronave lleva solo TCAS I, tiene tren fijo y no tiene radioaltímetro, ¿cuándo se inhiben sus alertas sonoras?	Nunca (en esa configuración no se inhiben jamás)	ATC::T05b
+Aproximadamente, ¿cuántas aeronaves equipadas con TCAS II se estima que hay en el mundo, según la Guía ACAS 2025 de EUROCONTROL?	Al menos 25 000	ATC::T05b
+Cuando un piloto notifica que sigue un RA, ¿quién es responsable de la separación de las aeronaves implicadas?	El piloto o la tripulación de vuelo; el controlador deja de ser responsable de la separación en ese encuentro	ATC::T05b
+¿Cuál es la frase radiotelefónica estándar que usa un piloto para notificar un RA?	«[indicativo] TCAS RA»	ATC::T05b
+¿Qué NO notifica un piloto al anunciar un RA del TCAS y por qué?	El sentido (ascender o descender), porque puede cambiar durante el encuentro	ATC::T05b
+¿Cómo debe acusar recibo el controlador de una notificación «TCAS RA» de un piloto?	«Roger»	ATC::T05b
+¿Qué frase usa un piloto para notificar el fin de un encuentro con RA al reanudar la autorización asignada?	«[indicativo] CLEAR OF CONFLICT (assigned clearance) RESUMED»	ATC::T05b
+¿Qué frase usa un piloto si ATC da una instrucción contraria a un RA activo?	«[indicativo] UNABLE, TCAS RA» (mientras sigue el RA)	ATC::T05b
+Al notificar un RA, ¿usa la fraseología estándar de la OACI el término «ACAS» o «TCAS», incluso para el ACAS Xa?	«TCAS», siempre	ATC::T05b
+¿Qué es el STCA?	Short Term Conflict Alert (aviso de conflicto a corto plazo): una red de seguridad terrestre que avisa al controlador de una posible o real infracción de los mínimos de separación	ATC::T05b
+¿Proporciona el STCA consejos de resolución al controlador?	No: solo detecta y alerta; el controlador debe decidir la acción adecuada	ATC::T05b
+¿Qué frecuencia de actualización usa normalmente la vigilancia del STCA terrestre, frente a la vigilancia propia del ACAS II?	STCA: 4-10 segundos; ACAS II: 1 segundo	ATC::T05b
+¿Qué precisión de altitud usa normalmente el STCA para la altitud de la traza, frente a la precisión de altitud propia del ACAS II?	STCA: 25 ft o 100 ft (altitud notificada); ACAS II: 1 pie (altitud propia)	ATC::T05b
+¿Cuál es el margen mínimo deseado de tiempo de aviso entre una alerta STCA y el primer RA posible?	Al menos 30 segundos	ATC::T05b
+¿Es el STCA un sistema normalizado entre los ANSP?	No: se ajusta a cada entorno operativo; el ACAS II está totalmente normalizado	ATC::T05b
+¿Qué significa DAIW (marcado como no verificado en la biblioteca)?	Danger Area Infringement Warning (aviso de infracción de zona peligrosa)	ATC::T05b
+¿En el texto de qué reglamento de la EASA figuran explícitamente juntos MSAW y APW como ejemplos de «herramientas de monitorización», junto con el MTCD?	En las Easy Access Rules de ATM/ANS de la EASA (Reg. 2017/373 / programa de formación CS-ACNS)	ATC::T05b
+¿Qué tabla, exclusiva del AIP España ENR 1.6, da los mínimos de separación reales de las dependencias ATS españolas (no cifras genéricas de manual)?	Las tablas de mínimos de separación del ENR 1.6 §6 (por dependencia ACC/APP/TWR concreta y disponibilidad de sensores)	ATC::T05b
+Según SERA.6001, ¿cuál es la única clase de espacio aéreo donde solo se permiten vuelos IFR?	Clase A	ATC::T05b
+Según SERA.6001, ¿qué clase de espacio aéreo no presta servicio ATC a los vuelos VFR pero sí servicio ATC completo y separación a los vuelos IFR?	Clase E	ATC::T05b
+Según SERA.6001, ¿puede usarse el espacio aéreo de clase E para una zona de control (CTR)?	No, la clase E no se utilizará para zonas de control	ATC::T05b
+Según SERA.6001, ¿en qué dos clases de espacio aéreo no se requiere autorización ATC?	Clase F y clase G	ATC::T05b
+Según SERA.6001(b), ¿de qué clase debe ser todo el espacio aéreo por encima del FL195, sea cual sea su designación local?	Clase C	ATC::T05b
+Según SERA.6001(a)(8), ¿cuál es el carácter del espacio aéreo de clase F según el propio reglamento?	Una medida temporal, hasta que pueda sustituirse por una clasificación alternativa	ATC::T05b
+Según SERA.6001, ¿qué limitación de velocidad se aplica (solo) a los vuelos VFR en clase C por debajo del FL100/3050 m?	250 kt IAS	ATC::T05b
+Según SERA.6001, en clase D, ¿a qué vuelos se aplica la limitación de 250 kt IAS por debajo del FL100?	A todos los vuelos (IFR y VFR)	ATC::T05b
+¿En qué tres UIR/FIR españolas está disponible el CPDLC ATN B1 (totalmente por encima del FL285, parcialmente por debajo según la cobertura VDL2)?	Madrid, Barcelona y Canarias	ATC::T05b
+¿Cómo se llama la arquitectura de red que usan el CPDLC ATN B1 y (con el tiempo) el AMHS?	ATN (red de telecomunicaciones aeronáuticas, Aeronautical Telecommunication Network)	ATC::T05b
+¿Qué sección del AIP España recoge juntos los mapas de cobertura PSR, SSR y ADS-B y los mínimos de separación?	ENR 1.6 (servicios y procedimientos de vigilancia ATS)	ATC::T05b
+¿Qué sección del AIP España enumera los tipos de radioayudas para la navegación y de servicios de enlace de datos que ofrece ENAIRE?	GEN 3.4 (servicios de comunicaciones y navegación)	ATC::T05b

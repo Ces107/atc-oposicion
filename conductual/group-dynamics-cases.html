@@ -1,0 +1,631 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>25 casos de dinámica de grupo</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Conductual</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-el-motor-reutilizable">1. El motor reutilizable</a><ul>
+<li><a href="#11-guion-de-estructuracion-de-los-2-primeros-minutos-la-jugada-de-apertura">1.1 Guion de estructuración de los 2 primeros minutos (la jugada de apertura)</a></li>
+<li><a href="#12-integrar-a-un-miembro-callado-jugada-de-mitad-de-discusion">1.2 Integrar a un miembro callado (jugada de mitad de discusión)</a></li>
+<li><a href="#13-resumen-de-cierre-los-ultimos-2-3-minutos">1.3 Resumen de cierre (los últimos 2-3 minutos)</a></li>
+<li><a href="#14-que-elimina-a-un-candidato-en-general">1.4 Qué elimina a un candidato, en general</a></li>
+</ul>
+</li>
+<li><a href="#2-casos-de-supervivencia-priorizacion">2. Casos de supervivencia / priorización</a><ul>
+<li><a href="#caso-1-clasificacion-clasica-de-supervivencia-calentamiento">Caso 1 — Clasificación clásica de supervivencia (calentamiento)</a></li>
+<li><a href="#caso-2-una-tormenta-cierra-la-unica-pista">Caso 2 — Una tormenta cierra la única pista</a></li>
+<li><a href="#caso-3-recortar-uno-de-cinco-proyectos-de-inversion-atc">Caso 3 — Recortar uno de cinco proyectos de inversión ATC</a></li>
+<li><a href="#caso-4-ordenar-seis-perfiles-de-candidatos-para-una-vacante">Caso 4 — Ordenar seis perfiles de candidatos para una vacante</a></li>
+<li><a href="#caso-5-cual-de-cuatro-informes-de-incidentes-sin-consecuencias-investigar-primero">Caso 5 — Cuál de cuatro informes de incidentes sin consecuencias investigar primero</a></li>
+<li><a href="#caso-6-horas-extra-y-personal-en-periodo-vacacional-con-equidad">Caso 6 — Horas extra y personal en periodo vacacional, con equidad</a></li>
+</ul>
+</li>
+<li><a href="#3-casos-de-dilemas-eticos">3. Casos de dilemas éticos</a><ul>
+<li><a href="#caso-7-un-companero-falsea-un-registro-de-seguridad">Caso 7 — Un compañero falsea un registro de seguridad</a></li>
+<li><a href="#caso-8-el-regalo-de-un-proveedor">Caso 8 — El regalo de un proveedor</a></li>
+<li><a href="#caso-9-un-amigo-quiere-informacion-privilegiada">Caso 9 — Un amigo quiere información privilegiada</a></li>
+<li><a href="#caso-10-comunicar-tu-propio-error-no-detectado">Caso 10 — Comunicar tu propio error no detectado</a></li>
+<li><a href="#caso-11-un-supervisor-presiona-para-saltarse-una-comprobacion-por-puntualidad">Caso 11 — Un supervisor presiona para saltarse una comprobación por puntualidad</a></li>
+<li><a href="#caso-12-un-mando-quiere-contratar-a-un-amigo-de-la-familia">Caso 12 — Un mando quiere contratar a un amigo de la familia</a></li>
+<li><a href="#caso-13-la-opcion-barata-contamina-mas">Caso 13 — La opción barata contamina más</a></li>
+</ul>
+</li>
+<li><a href="#4-casos-de-asignacion-de-recursos">4. Casos de asignación de recursos</a><ul>
+<li><a href="#caso-14-plazas-limitadas-de-formacion-en-simulador-avanzado">Caso 14 — Plazas limitadas de formación en simulador avanzado</a></li>
+<li><a href="#caso-15-disputa-por-el-reparto-de-horas-extra">Caso 15 — Disputa por el reparto de horas extra</a></li>
+<li><a href="#caso-16-mejora-del-radar-frente-a-programa-de-bienestar">Caso 16 — Mejora del radar frente a programa de bienestar</a></li>
+<li><a href="#caso-17-que-torre-regional-recibe-primero-la-mejora">Caso 17 — Qué torre regional recibe primero la mejora</a></li>
+<li><a href="#caso-18-cuadrante-de-turnos-de-vacaciones-con-poco-personal">Caso 18 — Cuadrante de turnos de vacaciones con poco personal</a></li>
+</ul>
+</li>
+<li><a href="#5-casos-de-seguridad-frente-a-eficiencia">5. Casos de seguridad frente a eficiencia</a><ul>
+<li><a href="#caso-19-meteorologia-marginal-retrasar-por-margen-o-proteger-el-indicador-de-puntualidad">Caso 19 — Meteorología marginal: retrasar por margen o proteger el indicador de puntualidad</a></li>
+<li><a href="#caso-20-reducir-la-separacion-de-manera-informal-para-despejar-una-acumulacion">Caso 20 — Reducir la separación de manera informal para despejar una acumulación</a></li>
+<li><a href="#caso-21-flexibilizar-una-norma-menor-para-ayudar-a-una-familia-atrapada">Caso 21 — Flexibilizar una norma menor para ayudar a una familia atrapada</a></li>
+<li><a href="#caso-22-un-companero-visiblemente-fatigado-o-afectado-en-pleno-turno">Caso 22 — Un compañero visiblemente fatigado o afectado en pleno turno</a></li>
+<li><a href="#caso-23-parchear-un-fallo-de-software-ahora-o-esperar-a-la-ventana-de-mantenimiento-programada">Caso 23 — Parchear un fallo de software ahora o esperar a la ventana de mantenimiento programada</a></li>
+</ul>
+</li>
+<li><a href="#6-casos-de-equipo-con-sabor-atc">6. Casos de equipo con sabor ATC</a><ul>
+<li><a href="#caso-24-coordinacion-entre-organismos-ante-la-incursion-de-un-dron">Caso 24 — Coordinación entre organismos ante la incursión de un dron</a></li>
+<li><a href="#caso-25-disenar-un-sistema-de-padrinos-para-controladores-nuevos">Caso 25 — Diseñar un sistema de padrinos para controladores nuevos</a></li>
+</ul>
+</li>
+<li><a href="#7-trampas-del-examen">7. Trampas del examen</a></li>
+<li><a href="#8-para-memorizar">8. Para memorizar</a></li>
+<li><a href="#9-glosario-bilingue-ingles-espanol">9. Glosario bilingüe (inglés → español)</a></li>
+<li><a href="#10-que-esta-confirmado-y-que-no">10. Qué está confirmado y qué no</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">40 min de lectura</div><h1 id="dinamica-de-grupo-25-casos-resueltos">Dinámica de grupo: 25 casos resueltos</h1>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>La Fase 3 de ENAIRE (evaluación conductual) incluye muy probablemente una <strong>dinámica de grupo</strong>: una discusión de grupo sin líder (LGD, por sus siglas en inglés) que se resuelve por consenso, del tipo que las Directrices de la International Taskforce on Assessment Center Guidelines describen como «ejercicio de simulación conductual», uno de los componentes habituales de un assessment center (AC) junto con los juegos de rol, los análisis de casos y los ejercicios de bandeja de entrada o de búsqueda de información. En una LGD <strong>no hay líder asignado ni una única respuesta correcta</strong>; los evaluadores entrenados observan la <strong>conducta manifiesta</strong>, no las intenciones declaradas, y la clasifican según constructos conductuales (competencias) predefinidos y ligados a los valores de la organización y a los requisitos del puesto. Este archivo ofrece 25 casos resueltos en cinco familias (supervivencia/priorización, dilemas éticos, asignación de recursos, seguridad frente a eficiencia y casos de sabor ATC), cada uno con su análisis completo. Complementa, sin repetirla, la guía genérica de dinámica de grupo que ya está en <a href="star-bank-and-competencies.html">el banco STAR</a> §5 (frases hechas, estrategia general para un candidato dubitativo). La línea «Competencias» de cada caso es una correspondencia propia con las 7 competencias oficiales de la Fase 3B (Anexo IV), no de ENAIRE; los nombres completos y las reglas para aprobar están en <code>annex-iv-competency-map.md</code>.</p>
+<p><strong>No inventes nunca experiencias personales que no sean tuyas.</strong> Son escenarios de casos y marcos de análisis, no historias reales; donde un caso se beneficiaría de una anécdota personal, se deja el marcador <code>[TU EJEMPLO AQUÍ]</code> para que lo completes a mano.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>El motor reutilizable: guion de estructuración, integrar a los miembros callados, resumen de cierre</li>
+<li>Casos de supervivencia / priorización (1-6)</li>
+<li>Casos de dilemas éticos (7-13)</li>
+<li>Casos de asignación de recursos (14-18)</li>
+<li>Casos de seguridad frente a eficiencia (19-23)</li>
+<li>Casos de equipo con sabor ATC (24-25)</li>
+<li>Trampas del examen</li>
+<li>Para memorizar</li>
+<li>Glosario bilingüe (inglés → español)</li>
+<li>Qué está confirmado y qué no</li>
+</ol>
+<hr />
+<h2 id="1-el-motor-reutilizable">1. El motor reutilizable</h2>
+<p>Todos los casos siguientes se resuelven con el mismo motor de tres partes. Apréndelo una vez y adapta la redacción a cada caso.</p>
+<h3 id="11-guion-de-estructuracion-de-los-2-primeros-minutos-la-jugada-de-apertura">1.1 Guion de estructuración de los 2 primeros minutos (la jugada de apertura)</h3>
+<p>Objetivo: intervenir pronto (reduce la ansiedad, y los evaluadores premian a quien aporta orden, no solo a quien más habla), sin imponer una solución.</p>
+<ol>
+<li><strong>Nombra la tarea y la restricción</strong> en una frase: qué nos piden, qué es fijo (tiempo, presupuesto, personas, mínimos de seguridad) y qué es negociable.</li>
+<li><strong>Propón un método</strong>, no una respuesta: criterios para evaluar las opciones (por ejemplo, impacto / reversibilidad / urgencia / a quién afecta) y cómo usar el tiempo del grupo (por ejemplo, «5 minutos para listar criterios, 15 para puntuar cada opción, 10 para acordar el orden, 5 para preparar el resumen»).</li>
+<li><strong>Abre el turno</strong>: «¿Empezamos por ahí, o alguien ve un criterio que nos falta?». Convierte una propuesta en una invitación, lo que se percibe como colaborativo y no como dominante.</li>
+</ol>
+<h3 id="12-integrar-a-un-miembro-callado-jugada-de-mitad-de-discusion">1.2 Integrar a un miembro callado (jugada de mitad de discusión)</h3>
+<p>Úsala cuando el grupo lleva 10-15 minutos y una o dos personas aún no han hablado. Nómbralas, hazles una pregunta real (no de sí o no) y hazles sitio también físicamente (contacto visual, medio giro del cuerpo). Ejemplo: «Antes de decidir, me gustaría oír a [nombre]: ¿tú cómo ves el riesgo de la opción B?». Si alguien es interrumpido una y otra vez, protégelo: «Dejemos que [nombre] termine la idea.».</p>
+<h3 id="13-resumen-de-cierre-los-ultimos-2-3-minutos">1.3 Resumen de cierre (los últimos 2-3 minutos)</h3>
+<p>Ofrécete a resumir; no resumas sin que te lo pidan, porque un grupo con prisa puede necesitar el tiempo para otra cosa. «Nos quedan pocos minutos: si os parece, resumo lo acordado y decís si falta algo.» Después: enuncia la decisión, uno o dos puntos discrepantes (si los hay, «anotamos la minoría») y la razón principal. Es la jugada de mayor rendimiento para un candidato callado: convierte el silencio de la parte central de la discusión en protagonismo visible al final, sin haber dominado.</p>
+<h3 id="14-que-elimina-a-un-candidato-en-general">1.4 Qué elimina a un candidato, en general</h3>
+<p><strong>Monopolizar</strong> (hablar por encima de su cuota de tiempo, decidir solo y presentarlo como conclusión del grupo), <strong>interrumpir</strong> (cortar a los demás, terminarles las frases), <strong>el silencio</strong> (menos de 1-2 aportaciones sustanciales en 45-60 minutos: los evaluadores no pueden puntuar una conducta que nunca han observado), <strong>ganar a toda costa</strong> (reabrir un punto cerrado para que se acepte tu idea original), <strong>mirar al evaluador en vez de al grupo</strong> (la tarea es resolver el problema del grupo, no actuar para el evaluador) y <strong>la incoherencia con las respuestas del test de personalidad</strong>: que un evaluador compare los rasgos declarados con la conducta demostrada es un riesgo concreto y conocido, señalado en <code>star-bank-and-competencies.md</code> §1.</p>
+<hr />
+<h2 id="2-casos-de-supervivencia-priorizacion">2. Casos de supervivencia / priorización</h2>
+<h3 id="caso-1-clasificacion-clasica-de-supervivencia-calentamiento">Caso 1 — Clasificación clásica de supervivencia (calentamiento)</h3>
+<p><strong>Escenario:</strong> Tras estrellarse una avioneta en un desierto (o en una montaña, o tras un naufragio: las academias rotan el escenario), el grupo dispone de 15 objetos (un espejo, una brújula, chocolate, una cuerda, un cuchillo, un mapa, cerillas, un botiquín, una linterna, una lámina de plástico, un silbato, una pistola, un libro de plantas comestibles, una radio con la batería agotada, gafas de sol) y debe ordenarlos por utilidad para sobrevivir, primero individualmente y luego por consenso.
+<strong>Tensión:</strong> pericia individual frente a consenso del grupo; en algunas variantes existe una clave de respuestas «correcta» de la NASA o de la Fuerza Aérea de EE. UU.; a los evaluadores les importa <em>cómo razona el grupo</em>, no si coincide con la clave.
+<strong>Valores de ENAIRE en juego:</strong> Somos un Equipo (equipo), Lideramos desde la excelencia (iniciativa sin imponer).
+<strong>Competencias:</strong> TW, DM
+<strong>Roles que suelen surgir:</strong> el «experto» que ha leído la clave antes (descártalo con educación si intenta acortar la discusión), el cronometrador, el escéptico que cuestiona las suposiciones.
+<strong>Jugada de apertura:</strong> «Propongo que cada uno diga en 30 segundos su top-3 y por qué, así vemos dónde coincidimos antes de discutir el resto.»
+<strong>Integrar a los callados:</strong> pídeles directamente su top-3 en la ronda; es una forma de bajo riesgo de que un candidato dubitativo hable también pronto.
+<strong>Resumen de cierre:</strong> «Coincidimos en signal (espejo, silbato) y en agua/comida; discrepamos en el orden de la brújula y el mapa. Proponemos este orden final con esa salvedad.»
+<strong>Qué elimina:</strong> citar «la respuesta oficial» y cortar la discusión; ignorar las elecciones de la primera ronda de los más callados al construir la lista final.</p>
+<h3 id="caso-2-una-tormenta-cierra-la-unica-pista">Caso 2 — Una tormenta cierra la única pista</h3>
+<p><strong>Escenario:</strong> Una tormenta repentina obliga a cerrar la única pista utilizable de un aeropuerto mediano durante un tiempo indeterminado (de 30 minutos a 4 horas). Doce vuelos de llegada están en espera con estados de combustible de urgencia variable; el grupo hace de coordinadores del aeropuerto y debe decidir, en 20 minutos, una política de desvíos y prioridades mientras sigue llegando información en tiempo real.
+<strong>Tensión:</strong> seguridad (mínimos de combustible, meteorología) frente a eficiencia (costes de retraso, conexiones) con información incompleta y cambiante.
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero (suelo no negociable), Somos profesionales.
+<strong>Competencias:</strong> DM, ST
+<strong>Roles:</strong> el «ancla de seguridad» que repite el mínimo de combustible, la «voz de la eficiencia» que empuja el caudal, el integrador que propone niveles.
+<strong>Jugada de apertura:</strong> «Fijemos primero el criterio que no se negocia — combustible mínimo — y luego repartamos el resto por orden de llegada y de restricciones operativas.»
+<strong>Integrar a los callados:</strong> pide a la persona más callada que lleve la lista actualizada de aeronaves y su estado: una entrada natural y con poca presión.
+<strong>Resumen de cierre:</strong> enuncia la política por niveles (combustible crítico → desviado primero / combustible normal → orden de espera) y nombra la única suposición que la rompería (que la pista siga cerrada más tiempo del previsto).
+<strong>Qué elimina:</strong> que alguien proponga flexibilizar el mínimo de combustible «solo esta vez» para ayudar a un vuelo concreto; que el grupo no advierta la nueva información que llega a mitad de la discusión por estar atado a su primer plan.</p>
+<h3 id="caso-3-recortar-uno-de-cinco-proyectos-de-inversion-atc">Caso 3 — Recortar uno de cinco proyectos de inversión ATC</h3>
+<p><strong>Escenario:</strong> Tras un recorte presupuestario (en la línea del objetivo «Competitividad y eficiencia» del PV2030), el grupo representa al comité de inversiones de ENAIRE y debe recortar uno de cinco proyectos: (a) una modernización de radar en un centro regional, (b) un programa de bienestar y salud mental de los controladores, (c) un piloto de gestión del tráfico de drones (U-espacio), (d) una iniciativa de sostenibilidad/descarbonización, (e) un proyecto de digitalización del tratamiento de planes de vuelo.
+<strong>Tensión:</strong> seguridad/cumplimiento a corto plazo frente a posicionamiento estratégico a largo plazo; ninguna opción es «errónea» de recortar, todas se vinculan con un objetivo del PV2030.
+<strong>Valores de ENAIRE en juego:</strong> Perseguimos la excelencia, Competitividad y eficiencia, Movilidad aérea sostenible.
+<strong>Competencias:</strong> DM, RO
+<strong>Roles:</strong> los defensores se forman de manera natural en torno a «su» proyecto; vigila a quien nunca defiende nada (silencio) y a quien lo defiende todo (dominio).
+<strong>Jugada de apertura:</strong> «Antes de defender proyectos, acordemos 3 criterios de corte: impacto en seguridad, reversibilidad y coste de oportunidad si lo retrasamos un año.»
+<strong>Integrar a los callados:</strong> asígnales argumentar <em>en contra</em> del primer favorito del grupo para recortar; es una forma estructurada de sacar a la luz una perspectiva que falta sin señalarlos como «callados».
+<strong>Resumen de cierre:</strong> nombra el recorte, el criterio que lo decidió y una medida de mitigación (p. ej., «revisamos el proyecto aplazado en la próxima ventana presupuestaria»).
+<strong>Qué elimina:</strong> recortar la opción vinculada a la seguridad (la mejora del radar) solo por coste sin discutir en voz alta su implicación para la seguridad; los evaluadores anotarán que un candidato de «la seguridad primero» lo deje pasar en silencio.</p>
+<h3 id="caso-4-ordenar-seis-perfiles-de-candidatos-para-una-vacante">Caso 4 — Ordenar seis perfiles de candidatos para una vacante</h3>
+<p><strong>Escenario:</strong> El grupo debe ordenar seis perfiles anonimizados de candidatos para una única vacante en un equipo operativo, con solo un párrafo breve de cada uno (experiencia, un punto fuerte, un error pasado, una nota interpersonal).
+<strong>Tensión:</strong> criterios objetivos frente a química personal y sesgos; refleja el propio compromiso del Código Ético de ENAIRE con la «máxima objetividad, imparcialidad y transparencia» y con los «principios de igualdad, mérito y capacidad» en la selección.
+<strong>Valores de ENAIRE en juego:</strong> Somos profesionales, Respetamos y confiamos, Igualdad.
+<strong>Competencias:</strong> DM, TW
+<strong>Roles:</strong> la voz del «instinto» (este me cae bien), la voz de los «criterios», el abogado del diablo del perfil peor clasificado.
+<strong>Jugada de apertura:</strong> «Definamos 3-4 criterios ligados al puesto antes de mirar nombres, para no decidir por simpatía.»
+<strong>Integrar a los callados:</strong> pídeles que lean un perfil en voz alta y den la primera lectura independiente; evita anclarse en quien habló primero.
+<strong>Resumen de cierre:</strong> la clasificación más el criterio que separó al n.º 1 del n.º 2 (la decisión más ajustada), pues es lo que un tribunal de selección real tendría que defender.
+<strong>Qué elimina:</strong> ordenar por un sustituto de características protegidas (edad, situación familiar) disfrazado de «encaje cultural»; no darse cuenta de que el grupo lo hace.</p>
+<h3 id="caso-5-cual-de-cuatro-informes-de-incidentes-sin-consecuencias-investigar-primero">Caso 5 — Cuál de cuatro informes de incidentes sin consecuencias investigar primero</h3>
+<p><strong>Escenario:</strong> Con un solo investigador de seguridad disponible esta semana, el grupo (oficina de seguridad) debe priorizar cuatro informes de incidentes sin consecuencias (precursores) para una investigación completa: (1) una pérdida menor de separación sin heridos pero con una causa novedosa, (2) la repetición de un desliz procedimental conocido, (3) un informe que afecta a un controlador muy veterano que insiste en que no pasó nada, (4) un informe anónimo y vago, sin detalle.
+<strong>Tensión:</strong> priorización clásica de la gestión de la seguridad: novedad/riesgo sistémico frente a frecuencia, sensibilidad política y calidad de la evidencia; aquí se pone a prueba directamente la «cultura justa».
+<strong>Valores de ENAIRE en juego:</strong> Actitud de confianza y «cultura justa», Refuerzo e impulso de la seguridad.
+<strong>Competencias:</strong> DM, OC
+<strong>Roles:</strong> quien quiere saltarse el informe vago («no hay suficiente para empezar»), quien se siente incómodo investigando a un compañero veterano.
+<strong>Jugada de apertura:</strong> «Prioricemos por riesgo sistémico, no por quién esté implicado ni por cuánto detalle tengamos ya — eso lo resolvemos investigando.»
+<strong>Integrar a los callados:</strong> pídeles que defiendan el informe anónimo, el que la mayoría descarta primero y el que la «cultura justa» protege.
+<strong>Resumen de cierre:</strong> el orden más una declaración explícita de que la antigüedad no cambió la clasificación.
+<strong>Qué elimina:</strong> despriorizar el informe del controlador veterano por razones sociales; tratar «sin consecuencias» como «sin necesidad de investigar» (contradice el objetivo de seguridad declarado del manual de reforzar la seguridad de forma proactiva, no solo reactiva).</p>
+<h3 id="caso-6-horas-extra-y-personal-en-periodo-vacacional-con-equidad">Caso 6 — Horas extra y personal en periodo vacacional, con equidad</h3>
+<p><strong>Escenario:</strong> Con poco personal en un periodo vacacional, el grupo (supervisores de unidad) debe decidir quién cubre turnos extra entre seis controladores con circunstancias personales distintas (uno tiene hijos pequeños, otro acaba de volver de una baja, otro se ha ofrecido voluntario antes y siente que se abusa de él, uno es nuevo y entusiasta, uno tiene un segundo empleo, uno no ha dicho nada).
+<strong>Tensión:</strong> equidad frente a voluntariado, necesidad operativa y riesgo de agotamiento; conecta con los compromisos de bienestar y conciliación del PV2030 en el Código Ético («conciliación de la vida laboral con la personal y familiar»).
+<strong>Valores de ENAIRE en juego:</strong> Somos empáticos, Respetamos y confiamos, Somos un Equipo.
+<strong>Competencias:</strong> TW, OC
+<strong>Roles:</strong> la voz de «pidamos voluntarios sin más», la voz de «rotemos con una fórmula transparente».
+<strong>Jugada de apertura:</strong> «Propongo un criterio transparente — rotación por horas ya cubiertas este año — y luego ajustamos por circunstancias personales que la gente quiera compartir.»
+<strong>Integrar a los callados:</strong> pregúntales cómo se ve desde la silla de un supervisor eso de «sentirse dado por supuesto»; invita al miembro callado a la parte emocionalmente más difícil del caso.
+<strong>Resumen de cierre:</strong> el cuadrante más la regla de equidad que se aplicará la próxima vez, para que la decisión no parezca improvisada.
+<strong>Qué elimina:</strong> dar por hecho que el padre o el voluntario deben cubrir siempre los turnos extra sin preguntarles; una decisión que no se puede explicar con una regla (parece arbitraria, lo contrario de «somos profesionales»).</p>
+<hr />
+<h2 id="3-casos-de-dilemas-eticos">3. Casos de dilemas éticos</h2>
+<p>Los siete casos siguientes se basan en compromisos reales del Código Ético de ENAIRE, no en reglas inventadas: el Canal Ético (anónimo y confidencial, conforme a la Ley 2/2023 de protección del informante), la prohibición de regalos y atenciones que puedan crear «ventaja, diferencia de trato... u obligación», el deber de secreto profesional sobre la información no pública, la prohibición de usar información de ENAIRE en beneficio personal y el deber de comunicar las conductas irregulares de las que se tenga conocimiento.</p>
+<h3 id="caso-7-un-companero-falsea-un-registro-de-seguridad">Caso 7 — Un compañero falsea un registro de seguridad</h3>
+<p><strong>Escenario:</strong> El grupo se entera (en el enunciado ficticio) de que un miembro del equipo rellena a posteriori una lista de comprobación de seguridad obligatoria en lugar de completarla en tiempo real, y nunca ha causado un incidente. Debatid qué debe hacer el grupo, como compañeros y no como mandos.
+<strong>Tensión:</strong> lealtad a un compañero frente al deber de comunicar del Código Ético («ponemos en conocimiento de los órganos competentes cualquier actuación irregular de la cual tengamos conocimiento») frente a la «cultura justa» (que protege la comunicación honesta de <em>errores</em>, no su ocultación).
+<strong>Valores de ENAIRE en juego:</strong> Actitud de confianza y cultura justa, La integridad es nuestro carácter.
+<strong>Competencias:</strong> OC, DM
+<strong>Roles:</strong> la voz de «hablemos antes con él», la voz de «denunciar ya», la voz de «nunca causó daño, dejadlo» (una trampa).
+<strong>Jugada de apertura:</strong> «Distingamos dos cosas: hablar primero con el compañero no es lo mismo que ocultarlo; el Canal Ético existe justo para esto.»
+<strong>Integrar a los callados:</strong> pregúntales qué querrían que hiciera un compañero si fuera su propio registro.
+<strong>Resumen de cierre:</strong> un consenso en dos pasos (plantearlo directa y brevemente al compañero y luego escalarlo por el canal adecuado, sea cual sea el resultado de esa conversación) y no un binario «denunciar o no».
+<strong>Qué elimina:</strong> «nunca causó daño, así que no pasa nada»: es la frase más descalificadora en una organización que pone la seguridad primero; también descalifica proponer tratarlo del todo de manera extraoficial.</p>
+<h3 id="caso-8-el-regalo-de-un-proveedor">Caso 8 — El regalo de un proveedor</h3>
+<p><strong>Escenario:</strong> Un proveedor que concursa por un contrato tecnológico de ENAIRE envía al equipo (ficticiamente) una caja de buen vino «como agradecimiento, sin ninguna condición», justo antes de la decisión sobre la adjudicación.
+<strong>Tensión:</strong> buena voluntad genuina frente a un «regalo... que pueda influir... creando cualquier ventaja... u obligación (directa o indirecta)»; el Código lo prohíbe con independencia de la intención, por la <em>apariencia</em> de influencia.
+<strong>Valores de ENAIRE en juego:</strong> La integridad es nuestro carácter, Buena gobernanza.
+<strong>Competencias:</strong> OC
+<strong>Roles:</strong> la voz de «es poca cosa, demos las gracias» (trampa), la voz de «la norma es la norma».
+<strong>Jugada de apertura:</strong> «El Código Ético no habla de intención, habla de apariencia de influencia — con eso ya tenemos la respuesta.»
+<strong>Integrar a los callados:</strong> pregúntales cómo explicarían la decisión a un periodista; la replantea lejos de «¿esto es realmente para tanto?».
+<strong>Resumen de cierre:</strong> rechazarlo con educación, dejar constancia y, ante la duda, escalarlo al contacto de ética en lugar de decidir de manera informal.
+<strong>Qué elimina:</strong> «lo dejamos en poco / lo repartimos / no se lo decimos a nadie»: cualquier variante que trate el tamaño del regalo como la variable relevante, cuando la norma trata del momento y de la relación con una decisión.</p>
+<h3 id="caso-9-un-amigo-quiere-informacion-privilegiada">Caso 9 — Un amigo quiere información privilegiada</h3>
+<p><strong>Escenario:</strong> Un amigo íntimo, que trabaja para una aerolínea, pide (ficticiamente) información anticipada y no pública sobre una decisión de reestructuración del espacio aéreo que afectará a las rutas de su empresa, «solo entre nosotros».
+<strong>Tensión:</strong> amistad frente a secreto profesional («guardamos secreto profesional de toda aquella información... que no sea pública») y a la prohibición de usar la información «en beneficio propio o de un tercero».
+<strong>Valores de ENAIRE en juego:</strong> La integridad es nuestro carácter, Respetamos y confiamos (la confianza va en ambos sentidos: interna, no favores externos).
+<strong>Competencias:</strong> OC
+<strong>Roles:</strong> el minimizador de «no pide tanto» (trampa), quien quiere un «no» rotundo sin explicación (demasiado brusco, daña la relación sin necesidad).
+<strong>Jugada de apertura:</strong> «Separar la amistad de la información: no podemos compartirla, pero sí podemos explicarle por qué, sin sonar acusatorios.»
+<strong>Integrar a los callados:</strong> pídeles una frase concreta para decirle al amigo; convierte la ética abstracta en un guion práctico, buena tarea para quien ha estado callado.
+<strong>Resumen de cierre:</strong> confirmar que el grupo acuerda que la información sigue siendo confidencial y señalar que no es un caso especial por tratarse de un amigo y no de un desconocido.
+<strong>Qué elimina:</strong> cualquier versión de «solo esta vez» o «solo la idea general, no los detalles».</p>
+<h3 id="caso-10-comunicar-tu-propio-error-no-detectado">Caso 10 — Comunicar tu propio error no detectado</h3>
+<p><strong>Escenario:</strong> Un miembro del equipo cometió la semana pasada un pequeño error de planificación que nadie ha notado y que, hasta donde se sabe, no tuvo ningún efecto medible. El grupo debate, en abstracto, qué debería esperar la cultura de la organización de esa persona.
+<strong>Tensión:</strong> es el caso de manual de la «cultura justa»: un entorno en el que «todos comunican información esencial... sin miedo a consecuencias punitivas» existe precisamente para que se produzca este tipo de autoinforme.
+<strong>Valores de ENAIRE en juego:</strong> Actitud de confianza y cultura justa (el valor más directamente puesto a prueba).
+<strong>Competencias:</strong> OC, RS
+<strong>Roles:</strong> la voz de «si no hay daño, no hay falta» (trampa, repite la trampa del Caso 7 en registro personal), la voz de «comunicarlo siempre».
+<strong>Jugada de apertura:</strong> «La cultura justa no es "siempre se castiga", es "siempre se comunica" — son cosas distintas.»
+<strong>Integrar a los callados:</strong> pregúntales si la comunicación debería ser distinta si el error fuera más grave; pone a prueba si el principio del grupo escala bien, una buena pregunta para añadir complejidad a un miembro analítico más callado.
+<strong>Resumen de cierre:</strong> se espera la comunicación sea cual sea la consecuencia, porque el sentido de la «cultura justa» es detectar a tiempo el riesgo sistémico, no repartir culpas a posteriori.
+<strong>Qué elimina:</strong> que alguien del grupo insinúe que solo hay que comunicar cuando alguien podría enterarse de todos modos.</p>
+<h3 id="caso-11-un-supervisor-presiona-para-saltarse-una-comprobacion-por-puntualidad">Caso 11 — Un supervisor presiona para saltarse una comprobación por puntualidad</h3>
+<p><strong>Escenario:</strong> Ante la presión por alcanzar un indicador de puntualidad (en la línea de los objetivos de demora ATFM del PV2030), un supervisor insinúa (ficticiamente) que una comprobación cruzada secundaria podría «agilizarse» durante un pico de tráfico. Un miembro júnior del grupo lo ha oído directamente.
+<strong>Tensión:</strong> la prueba central de «la seguridad es lo primero»: jerarquía y presión por los indicadores frente al suelo de seguridad no negociable.
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero (En nuestro ADN; explícitamente «máxima prioridad»), Actitud de confianza y cultura justa.
+<strong>Competencias:</strong> DM, ST
+<strong>Roles:</strong> la voz de «no te enfrentes a un supervisor» (trampa), la voz de «escalar ya, sin discutir» (también algo brusca: debatid cuál es el primer paso correcto).
+<strong>Jugada de apertura:</strong> «La seguridad está en nuestro ADN, dice el propio Plan de Vuelo: eso significa que ni siquiera un superior puede pedir que se salte una verificación.»
+<strong>Integrar a los callados:</strong> pregúntales qué hace esto más difícil de plantear que el Caso 7 (un igual); saca a la luz la dificultad añadida de cuestionar la jerarquía, que el grupo debe nombrar abiertamente en lugar de pasar por alto.
+<strong>Resumen de cierre:</strong> la comprobación nunca es opcional; el cauce correcto es primero una conversación directa y documentada y, si no se resuelve, el Canal Ético, sin riesgo de represalias para el miembro júnior que lo planteó.
+<strong>Qué elimina:</strong> decidir cumplir «solo esta vez porque es el supervisor»; dejar sin apoyo, en la respuesta del grupo, al compañero júnior que planteó la inquietud.</p>
+<h3 id="caso-12-un-mando-quiere-contratar-a-un-amigo-de-la-familia">Caso 12 — Un mando quiere contratar a un amigo de la familia</h3>
+<p><strong>Escenario:</strong> Durante un proceso de selección, un miembro del grupo (que hace de tribunal de selección) revela que un compañero defendió con insistencia a un candidato externo concreto que resulta ser familiar de un amigo íntimo, sin declarar la relación hasta ahora.
+<strong>Tensión:</strong> conflicto de interés directo, cubierto expresamente por el deber del Código Ético de abstenerse en decisiones «en los que nos encontremos ante una situación de conflicto de interés» y por los principios de selección de «igualdad, mérito y capacidad».
+<strong>Valores de ENAIRE en juego:</strong> Buena gobernanza, Igualdad, La integridad es nuestro carácter.
+<strong>Competencias:</strong> OC, DM
+<strong>Roles:</strong> el defensor de «seguramente sigue siendo el mejor candidato» (trampa: confunde el mérito del candidato con la integridad del proceso), la voz de «reiniciar todo el proceso» (posiblemente desproporcionada: debatidlo).
+<strong>Jugada de apertura:</strong> «El problema no es si el candidato vale, es que quien lo propuso no podía decidir con objetividad estando en conflicto de interés.»
+<strong>Integrar a los callados:</strong> pregúntales qué debería haber ocurrido en el momento en que la relación se volvió relevante; desplaza la discusión de la culpa al diseño del proceso.
+<strong>Resumen de cierre:</strong> el compañero debió declarar el conflicto y apartarse de esa decisión; el tribunal reevalúa ahora al candidato con un miembro no implicado que lo sustituya, sin necesariamente empezar de cero.
+<strong>Qué elimina:</strong> decidir que la relación «no importa porque está cualificado»: es exactamente el razonamiento que el Código Ético descarta.</p>
+<h3 id="caso-13-la-opcion-barata-contamina-mas">Caso 13 — La opción barata contamina más</h3>
+<p><strong>Escenario:</strong> Para una sustitución rutinaria de equipos, el grupo debe elegir entre un proveedor más barato con peor huella ambiental y otro más caro alineado con los compromisos de «Green Sky» / descarbonización de ENAIRE, con un presupuesto ajustado.
+<strong>Tensión:</strong> objetivo de eficiencia de costes frente a «protegemos el medioambiente» y «movilidad aérea sostenible»; ambos son objetivos reales del PV2030, así que el caso no tiene victoria gratuita.
+<strong>Valores de ENAIRE en juego:</strong> Protegemos el medioambiente, Competitividad y eficiencia.
+<strong>Competencias:</strong> DM, OC
+<strong>Roles:</strong> la voz de «el presupuesto es el presupuesto», la voz de «el medioambiente siempre gana» (ambas son simplificaciones que el grupo debe complicar).
+<strong>Jugada de apertura:</strong> «Miremos coste total, no solo precio de compra: mantenimiento, vida útil y coste reputacional también cuentan.»
+<strong>Integrar a los callados:</strong> pídeles que estimen los costes «ocultos» de la opción barata (riesgo de cumplimiento, riesgo reputacional ante el escrutinio de las partes interesadas); una tarea analítica concreta.
+<strong>Resumen de cierre:</strong> una decisión con el equilibrio explícito dicho en voz alta (p. ej., «elegimos la opción B, aceptando un coste mayor a corto plazo, porque alinea con el compromiso de descarbonización»); evita la trampa de fingir que no había contrapartida.
+<strong>Qué elimina:</strong> presentar la decisión como gratuita en cualquier dirección; ignorar por completo la restricción presupuestaria como si los fondos fueran ilimitados.</p>
+<hr />
+<h2 id="4-casos-de-asignacion-de-recursos">4. Casos de asignación de recursos</h2>
+<h3 id="caso-14-plazas-limitadas-de-formacion-en-simulador-avanzado">Caso 14 — Plazas limitadas de formación en simulador avanzado</h3>
+<p><strong>Escenario:</strong> Este trimestre solo hay tres plazas en el simulador avanzado para seis controladores que las quieren todas, con antigüedad distinta, necesidades distintas de anotación de unidad próximas y trayectorias formativas distintas.
+<strong>Tensión:</strong> mérito frente a necesidad frente a equidad de acceso al desarrollo; se hace eco del «impulsamos el desarrollo profesional de las personas» del Código Ético.
+<strong>Valores de ENAIRE en juego:</strong> Somos innovadores, Lideramos desde la excelencia, Igualdad.
+<strong>Competencias:</strong> DM, TW
+<strong>Roles:</strong> la voz de «primero el más antiguo», la voz de «quien más lo necesite operativamente».
+<strong>Jugada de apertura:</strong> «Separemos "lo urgente" (anotación de unidad que caduca) de "lo deseable" (desarrollo general) y empecemos por lo urgente.»
+<strong>Integrar a los callados:</strong> pídeles que avisen si el grupo está favoreciendo sin querer a los que se defienden más alto frente a casos más callados pero igual de merecedores; una metapregunta que premia la capacidad de observación.
+<strong>Resumen de cierre:</strong> los tres nombres más el criterio, y el compromiso de revisar los otros tres el próximo trimestre (convierte un caso de suma cero en una secuencia más justa).
+<strong>Qué elimina:</strong> asignar según quién argumentó más fuerte en la sala, justo la dinámica que el propio ejercicio corre el riesgo de premiar si el grupo no tiene cuidado; un buen candidato nombra explícitamente este riesgo.</p>
+<h3 id="caso-15-disputa-por-el-reparto-de-horas-extra">Caso 15 — Disputa por el reparto de horas extra</h3>
+<p><strong>Escenario:</strong> Un controlador ha asumido la mayor parte de las horas extra voluntarias durante meses (más ingresos, más horas); los demás se sienten ahora excluidos estructuralmente aunque nunca dijeron explícitamente que no cuando se les ofreció.
+<strong>Tensión:</strong> iniciativa individual frente a una injusticia implícita que nadie señaló a tiempo.
+<strong>Valores de ENAIRE en juego:</strong> Respetamos y confiamos, Somos un Equipo.
+<strong>Competencias:</strong> TW
+<strong>Roles:</strong> la persona que defiende «yo solo dije que sí cuando me lo pidieron, no es culpa mía», la persona que quiere un tope estricto.
+<strong>Jugada de apertura:</strong> «No se trata de culpar a quien aceptó horas, se trata de que el reparto no sea "quien se ofrezca primero" de forma indefinida.»
+<strong>Integrar a los callados:</strong> pregúntales si alguna vez no levantaron la mano por algo porque les parecía «ya cogido»; saca a la luz directamente la dinámica de exclusión pasiva.
+<strong>Resumen de cierre:</strong> proponer un tope rotatorio o un cuadrante transparente de ahora en adelante, sin plantearlo como un castigo para el controlador que más horas hizo.
+<strong>Qué elimina:</strong> personalizar la solución como «castigar al que trabaja de más» en vez de «arreglar el sistema».</p>
+<h3 id="caso-16-mejora-del-radar-frente-a-programa-de-bienestar">Caso 16 — Mejora del radar frente a programa de bienestar</h3>
+<p><strong>Escenario:</strong> Un excedente presupuestario puntual puede financiar o bien una mejora acelerada de las pantallas de radar en un centro o bien un programa de bienestar y salud mental de los controladores en todos los centros, pero no ambos este año.
+<strong>Tensión:</strong> infraestructura dura de seguridad y tecnología frente a factor humano y bienestar, ambos nombrados expresamente en el Objetivo 1 del PV2030 («seguridad... con atención al... factor humano»).
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero, Somos empáticos.
+<strong>Competencias:</strong> DM, OC
+<strong>Roles:</strong> la voz de «el hardware es seguridad, es obvio», la voz de «los controladores quemados también son un riesgo para la seguridad»; ambas son legítimas, el caso está diseñado para que no haya un ganador fácil.
+<strong>Jugada de apertura:</strong> «Antes de elegir, preguntemos: ¿cuál de los dos, si no se hace este año, genera más riesgo acumulado?»
+<strong>Integrar a los callados:</strong> pregúntales qué opción defenderían si tuvieran que argumentar la <em>contraria</em>; útil para un grupo que ya ha convergido demasiado rápido.
+<strong>Resumen de cierre:</strong> una elección razonada con el reconocimiento explícito de lo que se aplaza y por qué, no la afirmación de que la opción aplazada «no importa».
+<strong>Qué elimina:</strong> tratar el gasto en «factor humano» como un extra blando y opcional; es malinterpretar el propio objetivo declarado de ENAIRE.</p>
+<h3 id="caso-17-que-torre-regional-recibe-primero-la-mejora">Caso 17 — Qué torre regional recibe primero la mejora</h3>
+<p><strong>Escenario:</strong> Las cinco regiones/centros de ENAIRE (Madrid, Barcelona, Sevilla, Palma y Gran Canaria; véase <a href="../temario/07-entorno-profesional/guia.html">la guía del tema 7</a>) compiten por una única plaza de mejora tecnológica disponible este año; el grupo representa a un comité de planificación interregional.
+<strong>Tensión:</strong> equidad regional (el PV2030 nombra el «Impulso a las Regiones» como área estratégica) frente a eficiencia pura según el volumen de tráfico.
+<strong>Valores de ENAIRE en juego:</strong> Perseguimos la excelencia, Impulso a las Regiones.
+<strong>Competencias:</strong> DM, RO
+<strong>Roles:</strong> los representantes «defienden su región» de forma natural aunque nadie se lo pida; observa si alguien es capaz de argumentar contra el interés de su propia región cuando los datos lo exigen.
+<strong>Jugada de apertura:</strong> «Miremos datos objetivos primero — tráfico, antigüedad del equipo, incidencias — y dejemos la defensa regional para después, si el dato no decide solo.»
+<strong>Integrar a los callados:</strong> pídeles que lleven la lista de «criterios objetivos» y avisen cuando la discusión se desvíe de ella; un papel natural para alguien menos inclinado a defender a voces.
+<strong>Resumen de cierre:</strong> la región elegida más el dato que inclinó la balanza, y una nota sobre cuándo se revisarán las demás.
+<strong>Qué elimina:</strong> una decisión que coincide exactamente con la región que tiene al defensor más vocal en la sala en lugar de con los criterios declarados.</p>
+<h3 id="caso-18-cuadrante-de-turnos-de-vacaciones-con-poco-personal">Caso 18 — Cuadrante de turnos de vacaciones con poco personal</h3>
+<p><strong>Escenario:</strong> (Variante del Caso 6, planteada como un puzle puramente logístico): con dos controladores de baja y un nivel mínimo de personal fijo por turno, el grupo debe construir un cuadrante factible para la semana de vacaciones con los ocho controladores restantes sin incumplir las normas de descanso.
+<strong>Tensión:</strong> un caso genuino de optimización con restricciones (no solo de valores); pone a prueba si el grupo sabe estructurar un problema complejo bajo presión de tiempo, una competencia muy próxima al ATC (gestión de la carga de trabajo, priorización; ambas figuran en el programa de rendimiento humano del ATCO Common Core de EUROCONTROL).
+<strong>Valores de ENAIRE en juego:</strong> Somos profesionales, Refuerzo e impulso de la seguridad (las normas de descanso existen por seguridad, no por comodidad).
+<strong>Competencias:</strong> RO, DM
+<strong>Roles:</strong> quien calcula más rápido mentalmente tiende a dominar; vigílalo, porque puede excluir en silencio a otros de un caso que premia tanto otra habilidad (estructurar) como la velocidad.
+<strong>Jugada de apertura:</strong> «Antes de rellenar el cuadrante, escribamos las restricciones duras (descanso mínimo, mínimo de personal) para no proponer algo que luego haya que deshacer.»
+<strong>Integrar a los callados:</strong> entrégales la lista de restricciones para que verifiquen con ella el cuadrante propuesto por el grupo una vez redactado; una entrada concreta y estructurada que no exige velocidad.
+<strong>Resumen de cierre:</strong> el cuadrante más una confirmación de una línea de que no se incumple ninguna norma de descanso.
+<strong>Qué elimina:</strong> un cuadrante que «casi funciona» pero incumple en silencio una norma de descanso porque el grupo fue demasiado rápido para revisarla; un paralelismo directo con un error operativo real.</p>
+<hr />
+<h2 id="5-casos-de-seguridad-frente-a-eficiencia">5. Casos de seguridad frente a eficiencia</h2>
+<h3 id="caso-19-meteorologia-marginal-retrasar-por-margen-o-proteger-el-indicador-de-puntualidad">Caso 19 — Meteorología marginal: retrasar por margen o proteger el indicador de puntualidad</h3>
+<p><strong>Escenario:</strong> El tiempo está en el límite de los mínimos. Retrasar 20 minutos una oleada de salidas protegería un margen de seguridad cómodo, pero incumpliría el objetivo de puntualidad de la unidad (en la línea del indicador del PV2030 «vuelos con demora ATFM inferior a 15 min: 93 %»).
+<strong>Tensión:</strong> la disyuntiva de manual entre seguridad y eficiencia; está diseñado para que «la seguridad siempre gana» sea correcto en el fondo, pero el grupo debe mostrar <em>cómo</em> llega a esa conclusión, no solo afirmarla.
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero (explícitamente el valor de máxima prioridad).
+<strong>Competencias:</strong> DM, ST
+<strong>Roles:</strong> la voz de «el indicador también importa a la organización» (no está mal plantearlo, está mal si se impone a la seguridad), la voz de «obviamente seguridad, siguiente caso» (demasiado rápida: un grupo sólido discute igualmente el razonamiento).
+<strong>Jugada de apertura:</strong> «El indicador de puntualidad existe para medir la eficiencia dentro de un margen ya seguro, no para presionar el margen de seguridad — empecemos por ahí.»
+<strong>Integrar a los callados:</strong> pídeles que redacten la explicación de una frase que se daría a la aerolínea cuyo vuelo se retrasa; una tarea práctica de comunicación.
+<strong>Resumen de cierre:</strong> retraso confirmado, con el razonamiento enunciado explícitamente (no solo la conclusión) y una nota de que el incumplimiento del indicador se documentará como causado por la meteorología, no por el rendimiento.
+<strong>Qué elimina:</strong> tratarlo como una no-discusión («obviamente seguridad») sin mostrar el razonamiento que el evaluador necesita ver; que alguien sugiera que el margen podría flexibilizarse «solo esta vez».</p>
+<h3 id="caso-20-reducir-la-separacion-de-manera-informal-para-despejar-una-acumulacion">Caso 20 — Reducir la separación de manera informal para despejar una acumulación</h3>
+<p><strong>Escenario:</strong> Se ha acumulado tráfico tras una parada en tierra. Alguien (ficticiamente, un compañero bajo presión) sugiere reducir de manera informal el espaciado por debajo del colchón cómodo, aunque dentro del mínimo legal, «solo para ponernos al día».
+<strong>Tensión:</strong> mínimo legal frente a colchón operativo; una trampa más sutil que el Caso 19, porque la sugerencia no es técnicamente ilegal, solo imprudente.
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero, Refuerzo e impulso de la seguridad.
+<strong>Competencias:</strong> DM, ST
+<strong>Roles:</strong> el racionalizador de «sigue dentro del mínimo legal, así que vale» (trampa), la voz de «los colchones existen por algo».
+<strong>Jugada de apertura:</strong> «El mínimo legal es el límite del sistema, no el objetivo operativo — trabajar pegados a él de forma sistemática es justo lo que un margen de seguridad quiere evitar.»
+<strong>Integrar a los callados:</strong> pregúntales qué debería significar «riesgo aceptable» en una organización cuyo propósito declarado empieza por «seguro»; vuelve a atar la discusión al material de origen.
+<strong>Resumen de cierre:</strong> rechazar el acercamiento informal; proponer otro remedio para la acumulación (secuenciación, tasa de aceptación reducida temporal, escalado) que no toque el colchón de seguridad.
+<strong>Qué elimina:</strong> «es legal, así que no es un problema de seguridad»: confunde el suelo legal con la buena práctica, una trampa clásica de examen.</p>
+<h3 id="caso-21-flexibilizar-una-norma-menor-para-ayudar-a-una-familia-atrapada">Caso 21 — Flexibilizar una norma menor para ayudar a una familia atrapada</h3>
+<p><strong>Escenario:</strong> A un miembro del equipo de atención al público (ficticiamente, en un contexto de facturación o junto a la puerta de embarque) le piden flexibilizar una norma administrativa menor, ajena a la seguridad, para ayudar a una familia a llegar a una conexión ajustada. El grupo debate dónde está la línea entre un buen servicio (empatía) y el cumplimiento de las normas (integridad/coherencia).
+<strong>Tensión:</strong> «somos empáticos» frente a «la integridad es nuestro carácter» y a la equidad con todos los demás que sí cumplieron la norma.
+<strong>Valores de ENAIRE en juego:</strong> Somos empáticos, La integridad es nuestro carácter.
+<strong>Competencias:</strong> OC, DM
+<strong>Roles:</strong> la voz de «solo esta vez, es un detalle» (tiene un atractivo real: discutid su riesgo), la voz de «normas para todos o para nadie».
+<strong>Jugada de apertura:</strong> «Preguntemos primero si la norma que se plantea saltar tiene algo que ver con seguridad — si no, el debate es sobre equidad, no sobre riesgo.»
+<strong>Integrar a los callados:</strong> pregúntales qué precedente sienta esto para la siguiente petición similar; una pregunta de ampliación natural.
+<strong>Resumen de cierre:</strong> distinguir la flexibilidad administrativa (puede usarse con criterio, documentada y coherente si se repite la misma situación) de las normas de seguridad (nunca flexibles); esta distinción es el verdadero objetivo del caso.
+<strong>Qué elimina:</strong> confundir este caso con los casos de seguridad anteriores (11, 19, 20) como si la empatía pudiera justificar alguna vez flexibilizar una norma de seguridad; una respuesta sólida separa explícitamente ambos planos.</p>
+<h3 id="caso-22-un-companero-visiblemente-fatigado-o-afectado-en-pleno-turno">Caso 22 — Un compañero visiblemente fatigado o afectado en pleno turno</h3>
+<p><strong>Escenario:</strong> Un compañero del equipo del grupo parece inusualmente fatigado, o posiblemente afectado (conforme a los compromisos de salud del Código Ético y al contenido de rendimiento humano de EUROCONTROL sobre fatiga y alcohol/drogas), poco antes de tomar posición. Debatid qué debe hacer el grupo, como iguales.
+<strong>Tensión:</strong> lealtad e incomodidad social frente a un deber de seguridad directo e innegociable.
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero, Somos empáticos (la persona también necesita apoyo, no solo ser apartada).
+<strong>Competencias:</strong> TW, DM
+<strong>Roles:</strong> la voz de «no lo avergoncemos, vigilémoslo de cerca» (trampa: no ofrece ninguna garantía real de seguridad), la voz de «retirarlo ya, sin excepciones».
+<strong>Jugada de apertura:</strong> «Aquí no hay término medio: si hay duda razonable de aptitud para el puesto, se retira de posición — punto. Lo que sí se puede matizar es cómo se le acompaña después.»
+<strong>Integrar a los callados:</strong> pregúntales cómo querrían que los trataran si la situación fuera la inversa; ancla el caso en la empatía sin suavizar la acción de seguridad.
+<strong>Resumen de cierre:</strong> retirada inmediata y respetuosa de la posición por el cauce adecuado, seguida de una conversación de apoyo, no punitiva; refleja la «cultura justa» aplicada a la aptitud para el servicio, no solo a los errores.
+<strong>Qué elimina:</strong> «vigilar de cerca en lugar de actuar»: no ofrece ninguna mitigación real del riesgo y es el estado de fallo más claro de este caso.</p>
+<h3 id="caso-23-parchear-un-fallo-de-software-ahora-o-esperar-a-la-ventana-de-mantenimiento-programada">Caso 23 — Parchear un fallo de software ahora o esperar a la ventana de mantenimiento programada</h3>
+<p><strong>Escenario:</strong> Se descubre un nuevo fallo de software que reduce ligeramente la fiabilidad del sistema (no crítico para la seguridad por sí solo, según el enunciado ficticio), pero corregirlo exige dejar el sistema fuera de línea durante un periodo en el que la redundancia se reduce. El grupo debe decidir: parchear de inmediato (introduce una ventana de riesgo distinta, conocida y acotada) o esperar a la siguiente ventana programada (deja el fallo activo más tiempo, un riesgo continuo no acotado pero menor).
+<strong>Tensión:</strong> se comparan dos tipos distintos de riesgo, no es una división limpia de «seguridad frente a eficiencia»; el objetivo del caso es forzar una comparación explícita de riesgos en lugar de una respuesta refleja.
+<strong>Valores de ENAIRE en juego:</strong> Refuerzo e impulso de la seguridad, Somos innovadores (criterio técnico, no solo cautela).
+<strong>Competencias:</strong> DM, FL
+<strong>Roles:</strong> la voz de «todo fallo conocido se corrige ya» (puede infravalorar el riesgo de perder redundancia), la voz de «nunca toques un sistema que funciona fuera de su ventana» (puede infravalorar el riesgo acumulado del fallo).
+<strong>Jugada de apertura:</strong> «Comparemos los dos riesgos con los mismos términos: probabilidad y gravedad de cada uno, no solo cuál nos resulta más incómodo.»
+<strong>Integrar a los callados:</strong> pídeles que estimen, aunque sea de forma aproximada, qué ventana de riesgo es más corta; un planteamiento cuantitativo concreto que invita a contribuir a un pensador cuidadoso.
+<strong>Resumen de cierre:</strong> sea cual sea la elección, enuncia los dos riesgos que se intercambian y por qué se juzga menor uno de ellos; lo que se evalúa aquí es el proceso, no la respuesta concreta (no existe una clave «correcta» pública para este caso).
+<strong>Qué elimina:</strong> elegir una respuesta por instinto sin comparar nunca explícitamente los dos riesgos; descartar la opinión minoritaria que defendía lo contrario sin abordar su argumento real.</p>
+<hr />
+<h2 id="6-casos-de-equipo-con-sabor-atc">6. Casos de equipo con sabor ATC</h2>
+<h3 id="caso-24-coordinacion-entre-organismos-ante-la-incursion-de-un-dron">Caso 24 — Coordinación entre organismos ante la incursión de un dron</h3>
+<p><strong>Escenario:</strong> Se notifica un dron volando cerca de la trayectoria de aproximación de un aeropuerto (un «nuevo entrante», tráfico nombrado expresamente en el Objetivo 3 del PV2030 y en «Servicios a Drones y Nuevos Usuarios» del Bloque 4). El grupo representa a una célula de coordinación rápida entre ATC, seguridad aeroportuaria y policía, con información incompleta sobre el operador del dron y 10 minutos para acordar una respuesta inicial.
+<strong>Tensión:</strong> coordinación entre organismos bajo presión de tiempo y ambigüedad; nadie en la sala controla el cuadro completo, que es el verdadero objetivo del caso (ningún papel puede «resolverlo» solo).
+<strong>Valores de ENAIRE en juego:</strong> La seguridad es lo primero, Somos un Equipo, Somos innovadores (el tráfico de nuevos entrantes es un tipo de problema genuinamente nuevo).
+<strong>Competencias:</strong> TW, FL
+<strong>Roles:</strong> quien tenga el perfil más «de ATC» puede intentar tomar el mando; hay que resistirse, pues el caso exige deliberadamente también la pericia de otros organismos.
+<strong>Jugada de apertura:</strong> «Repartamos: ¿quién tiene qué información ahora mismo, y qué necesitamos confirmar en los próximos 5 minutos?»
+<strong>Integrar a los callados:</strong> asígnales la lista de «incógnitas» (lo que el grupo aún no sabe); un papel que premia la escucha atenta por encima del hablar rápido.
+<strong>Resumen de cierre:</strong> la acción inmediata (p. ej., retención temporal del tráfico o desvío en la aproximación afectada) más el siguiente punto de control de información, no la afirmación de que el incidente está «resuelto».
+<strong>Qué elimina:</strong> que una persona decida unilateralmente «como la voz de ATC» sin integrar a los demás organismos representados en el grupo; bloquearse porque la información es incompleta en lugar de adoptar una acción segura por defecto.</p>
+<h3 id="caso-25-disenar-un-sistema-de-padrinos-para-controladores-nuevos">Caso 25 — Diseñar un sistema de padrinos para controladores nuevos</h3>
+<p><strong>Escenario:</strong> Se pide al grupo diseñar desde cero un sistema informal de «padrinos» entre iguales para ayudar a los controladores recién habilitados (tras el OJT) a integrarse en la cultura de una unidad y a aprender antes las normas no escritas.
+<strong>Tensión:</strong> un caso de diseño genuinamente abierto y de bajo riesgo (un contraste deliberado con los casos de alta tensión anteriores); los evaluadores lo usan para ver cómo se comporta el grupo sin una «respuesta errónea» evidente que empuje a todos hacia la cautela.
+<strong>Valores de ENAIRE en juego:</strong> Somos ENAIRE (orgullo de pertenencia), Somos un Equipo, Somos innovadores.
+<strong>Competencias:</strong> TW, OC
+<strong>Roles:</strong> sin una respuesta evidente, el riesgo de dominio <em>sube</em>, no baja; vigila que el diseño de una sola persona se convierta en «el plan» por defecto porque nadie se opuso.
+<strong>Jugada de apertura:</strong> «Con un caso tan abierto, propongo generar ideas 2 minutos en silencio y luego ponerlas en común, para no anclarnos en la primera que se diga.»
+<strong>Integrar a los callados:</strong> el paso de lluvia de ideas en silencio (arriba) es en sí el mecanismo de integración; garantiza estructuralmente que todas las voces llegan a la mesa antes de que la discusión se estreche.
+<strong>Resumen de cierre:</strong> el diseño final (quién apadrina a quién, cuánto tiempo, qué cubre) más una pregunta abierta sobre la que el grupo querría opinión si esto fuera real.
+<strong>Qué elimina:</strong> dejar que gane por defecto la idea más ruidosa a falta de una restricción externa en torno a la cual organizarse; el caso está diseñado para revelar exactamente este fallo.</p>
+<hr />
+<h2 id="7-trampas-del-examen">7. Trampas del examen</h2>
+<ol>
+<li><strong>«Sin consecuencias» nunca es una razón válida para omitir la comunicación o la investigación</strong> (Casos 5, 7, 10): contradice directamente la «cultura justa», cuyo objetivo entero es detectar el riesgo sistémico antes de que cause consecuencias.</li>
+<li><strong>«Es legal» no es lo mismo que «es seguro»</strong> (Caso 20): el mínimo legal es un suelo, no un objetivo; existe un colchón precisamente porque trabajar en el suelo es más arriesgado.</li>
+<li><strong>La empatía nunca anula una norma de seguridad</strong> (Caso 21 frente a 19/20/22): un buen candidato separa explícitamente la flexibilidad administrativa (puede flexibilizarse) de las normas de seguridad (no).</li>
+<li><strong>La antigüedad y la presión social no son criterios válidos de clasificación</strong> (Casos 5, 12, 17): la objetividad («máxima objetividad, imparcialidad y transparencia», Código Ético) se aplica incluso cuando es socialmente incómoda.</li>
+<li><strong>«Solo esta vez» es la frase de fallo más común en los casos de dilemas éticos</strong> (Casos 7, 8, 9, 11, 20): los evaluadores están entrenados específicamente para detectar que un grupo normalice una excepción.</li>
+<li><strong>Un caso sin respuesta «correcta» publicada (23, 25) no es un caso sin evaluación</strong>: lo que se puntúa es el <em>proceso de razonamiento</em>, conforme al énfasis de las Directrices de la ITF en la observación conductual por encima del resultado.</li>
+<li><strong>El silencio no es neutro</strong>: un evaluador no puede puntuar una conducta que no ha observado; 45-60 minutos de casi silencio eliminan a un candidato por bueno que fuera su razonamiento.</li>
+<li><strong>El riesgo de dominio es más alto, no más bajo, en los casos abiertos</strong> (Caso 25): sin una restricción externa, una propuesta temprana y segura puede apoderarse de la sala por defecto.</li>
+</ol>
+<h2 id="8-para-memorizar">8. Para memorizar</h2>
+<ul>
+<li>Cinco familias de casos: supervivencia/priorización, dilema ético, asignación de recursos, seguridad frente a eficiencia, equipo con sabor ATC.</li>
+<li>El motor de tres partes: guion de estructuración (nombrar tarea + restricción, proponer método, abrir el turno) → integrar a los callados (nombrarlos, hacerles una pregunta real) → resumen de cierre (ofrecerse a resumir, enunciar decisión + discrepancia + razón).</li>
+<li>Qué elimina: monopolizar, interrumpir, el silencio, ganar a toda costa, mirar al evaluador, la incoherencia con las respuestas del test de personalidad.</li>
+<li>Anclas éticas reales de ENAIRE usadas en los casos de dilemas éticos: Canal Ético (Ley 2/2023, anónimo/confidencial), prohibición de regalos y atenciones que puedan crear influencia, secreto profesional, deber de abstención por conflicto de interés, deber de comunicar conductas irregulares, «cultura justa».</li>
+<li>Los 12 valores del PV2030 se corresponden con casos concretos: los casos de seguridad primero (11, 19, 20, 22) ponen a prueba «La seguridad es lo primero»; los casos de ética (7-13) ponen a prueba la «cultura justa» y «la integridad es nuestro carácter»; los casos abiertos (25) ponen a prueba «Somos un Equipo» y «Somos innovadores» con poca restricción externa.</li>
+</ul>
+<h2 id="9-glosario-bilingue-ingles-espanol">9. Glosario bilingüe (inglés → español)</h2>
+<table>
+<thead>
+<tr>
+<th>Inglés</th>
+<th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>group dynamic / leaderless group discussion</td>
+<td>dinámica de grupo</td>
+</tr>
+<tr>
+<td>behavioral simulation exercise</td>
+<td>ejercicio de simulación conductual</td>
+</tr>
+<tr>
+<td>behavioral construct / competency</td>
+<td>constructo conductual / competencia</td>
+</tr>
+<tr>
+<td>consensus</td>
+<td>consenso</td>
+</tr>
+<tr>
+<td>structuring script</td>
+<td>guion de estructuración</td>
+</tr>
+<tr>
+<td>integrating a quiet member</td>
+<td>integrar a un miembro callado</td>
+</tr>
+<tr>
+<td>closing summary</td>
+<td>resumen de cierre</td>
+</tr>
+<tr>
+<td>dominating / interrupting</td>
+<td>monopolizar / interrumpir</td>
+</tr>
+<tr>
+<td>just culture</td>
+<td>cultura justa</td>
+</tr>
+<tr>
+<td>ethics channel</td>
+<td>Canal Ético</td>
+</tr>
+<tr>
+<td>conflict of interest</td>
+<td>conflicto de interés</td>
+</tr>
+<tr>
+<td>whistleblower / informant</td>
+<td>informante</td>
+</tr>
+<tr>
+<td>professional secrecy</td>
+<td>secreto profesional</td>
+</tr>
+<tr>
+<td>near-miss / precursor incident</td>
+<td>incidente sin consecuencias / precursor</td>
+</tr>
+<tr>
+<td>fitness for duty</td>
+<td>aptitud para el puesto</td>
+</tr>
+<tr>
+<td>rest-time rule</td>
+<td>norma de descanso</td>
+</tr>
+<tr>
+<td>separation (air traffic)</td>
+<td>separación (entre aeronaves)</td>
+</tr>
+<tr>
+<td>new entrants (drones, etc.)</td>
+<td>nuevos entrantes</td>
+</tr>
+<tr>
+<td>resource allocation</td>
+<td>asignación de recursos</td>
+</tr>
+<tr>
+<td>overtime</td>
+<td>horas extra</td>
+</tr>
+<tr>
+<td>unit endorsement</td>
+<td>anotación de unidad</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-que-esta-confirmado-y-que-no">10. Qué está confirmado y qué no</h2>
+<p>ENAIRE no ha publicado una lista oficial de tipos de casos ni de temas de la dinámica de grupo de la Fase 3: las cinco familias y los 25 casos de aquí se construyen a partir de la práctica general de los assessment centers (Directrices de la ITF, CIPD) más los documentos publicados de valores y ética de la propia ENAIRE, no de un banco de casos filtrado u oficial de ENAIRE. Trátalo como material de práctica de alta calidad, no como contenido de examen confirmado. Se desconoce si la dinámica de grupo de la próxima convocatoria seguirá un formato estricto de discusión de grupo sin líder o incluirá elementos de juego de rol o de búsqueda de información; las fuentes de academias describen «unos 10 candidatos, hasta 1 hora, consenso», coherente con una LGD pero no confirmado oficialmente por ENAIRE. El texto del Código Ético utilizado aquí tiene fecha de 25-09-2024 y aún emplea la redacción del PV2025 y no la del PV2030; esto no afecta a la sustancia ética usada en estos casos (regalos, conflicto de interés, Canal Ético, cultura justa), que es ajena a la redacción de los valores.</p></main></div><script src="../assets/search.js" defer></script><script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

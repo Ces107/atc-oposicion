@@ -1,0 +1,757 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Listening resources and routines for the ENAIRE English path (oral interview, ESTEL, ICAO)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>English</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#what-the-exam-covers-where-listening-matters">What the exam covers (where listening matters)</a></li>
+<li><a href="#1-ranked-list-of-resources-start-here">1. Ranked list of resources (start here)</a></li>
+<li><a href="#2-accents-a-listening-map">2. Accents: a listening map</a></li>
+<li><a href="#3-aviation-audio">3. Aviation audio</a><ul>
+<li><a href="#31-whats-actually-available">3.1 What's actually available</a></li>
+<li><a href="#32-what-atc-english-sounds-like">3.2 What ATC English sounds like</a></li>
+</ul>
+</li>
+<li><a href="#4-the-dictation-routine">4. The dictation routine</a></li>
+<li><a href="#5-note-taking-for-listening">5. Note-taking for listening</a></li>
+<li><a href="#6-number-and-callsign-drills-aviation">6. Number and callsign drills (aviation)</a></li>
+<li><a href="#7-weekly-listening-plan">7. Weekly listening plan</a></li>
+<li><a href="#exam-traps">Exam traps</a></li>
+<li><a href="#must-memorize">Must memorize</a></li>
+<li><a href="#bilingual-glossary-en-es">Bilingual glossary (EN → ES)</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">15 min de lectura</div><h1 id="listening-resources-and-routines-for-the-enaire-english-path-oral-interview-estel-icao">Listening resources and routines for the ENAIRE English path (oral interview, ESTEL, ICAO)</h1>
+<h2 id="what-the-exam-covers-where-listening-matters">What the exam covers (where listening matters)</h2>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What is listened to</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ESTEL</strong> (English listening and comprehension test in <strong>FEAST I</strong>, Phase 2)</td>
+<td>An English listening and comprehension test. It's the one FEAST test you can actually prepare for, by listening to radio/TV in English, reading and talking to native speakers. FEAST does <strong>not</strong> test spoken English. There's a glossary of aviation words in the annex of the candidate leaflet.</td>
+<td>Source: EUROCONTROL FEAST information for candidates</td>
+</tr>
+<tr>
+<td><strong>Oral English interview</strong> (Phase 3 test A, C1)</td>
+<td>Understanding the examiner in real time, face to face or online; possibly an audio with gaps to fill and sentences to repeat after hearing them once.</td>
+<td>Comprehension is one of the four skills the 2025 bases measure; the audio-with-gaps and repeat-sentence blocks are an academy description, not ENAIRE's own</td>
+</tr>
+<tr>
+<td><strong>Written English test</strong> (Phase 1)</td>
+<td>Reading and use of English, C1, 20 questions. No listening.</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Career later (ICAO / ELPAC)</strong></td>
+<td>ELPAC Paper 1: 45-item computer-marked listening test in ATC context (four parts), based on radiotelephony recordings, routine and non-routine. Paper 2: live speaking.</td>
+<td>ELPAC leaflet says it takes around 40 minutes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Consequence:</strong> you need three kinds of listening: (1) <em>general C1 English</em>, mixed accents, natural speed (ESTEL and the interview); (2) <em>fast, exact listening for numbers and instructions</em> (aviation); (3) <em>strategies to repair misunderstandings</em> (comprehension and interaction). The rest of this file gives you resources and routines for each.</p>
+<h2 id="1-ranked-list-of-resources-start-here">1. Ranked list of resources (start here)</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Resource</th>
+<th>Link / file</th>
+<th>What it trains</th>
+<th>How to use</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Cambridge C1 Advanced official listening sample tests</strong> (2 sample papers, 12 mp3, tapescript for sample 1)</td>
+<td>Local: <code>fuentes/11-ingles/cambridge/202476-c1-advanced-handbook-for-teachers-listening-audio-files/</code>, <code>.../174025-…-sample-papers-1/</code> and <code>178484-…-sample-papers-2/</code> (answer keys), tapescript <code>697500-c1-advanced-listening-sample-1-tapescript.pdf</code></td>
+<td>Exam-style C1 listening: four parts, about 40 minutes, every recording played twice. Official transcripts let you check dictation exactly.</td>
+<td>Do a full part timed; check with the key; then dictate 30-second slices against the tapescript</td>
+<td>Free (already downloaded)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>BBC Learning English: 6 Minute English</strong></td>
+<td>https://www.bbc.co.uk/learningenglish/english/features/6-minute-english</td>
+<td>Two presenters discuss a topic; intermediate level; six vocabulary items; quiz. Episode page has audio, transcript (not word-for-word) and download. 16 recent worksheets are in <code>fuentes/11-ingles/bbc/</code>.</td>
+<td>Shadowing, first-hearing summary, dictation (check by ear, the transcript is approximate)</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>TED Talks</strong></td>
+<td>https://www.ted.com/talks (talks listed in section 2)</td>
+<td>Long structured monologue (10–18 min), varied accents, interactive transcript</td>
+<td>Split into 30-second pieces; one talk per week; summarise in 1 minute aloud</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>BBC Learning English: Real Easy English</strong></td>
+<td>https://www.bbc.co.uk/learningenglish/english/features/real-easy-english</td>
+<td>Slower, easier real conversations</td>
+<td>Warm-up, or a low-energy-day option</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>BBC Learning English: English at Work</strong> and <strong>The English We Speak</strong></td>
+<td>https://www.bbc.co.uk/learningenglish/english/features/english-at-work · https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak</td>
+<td>Workplace situations; short idiom episodes (3 min)</td>
+<td>One idiom per day into your vocabulary list</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>BBC Radio 4: In Our Time</strong> (in-depth discussion, several accents) · <strong>Today</strong> (fast news interviews) · <strong>Any Questions?</strong> (live debate, interruptions)</td>
+<td>https://www.bbc.co.uk/programmes/b006qykl · https://www.bbc.co.uk/programmes/b006qj9z · https://www.bbc.co.uk/programmes/b006qgvj</td>
+<td>Native British speech at full speed; debate language</td>
+<td>From week 5, 10 minutes of one episode, no transcript. Old episodes are on BBC Sounds.</td>
+<td>Free (BBC Sounds account)</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>BBC World Service news</strong></td>
+<td>https://www.bbc.co.uk/programmes/p002vsmz</td>
+<td>Global accents, formal register</td>
+<td>5-minute bulletin for gist (who, what, where, number)</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>ELPAC sample tests</strong> (ATC and pilot)</td>
+<td>https://elpac.eurocontrol.int/sample-tests</td>
+<td>The real interface, audio quality and question format of the EUROCONTROL/ICAO test — not ENAIRE content, but the best free aviation-English listening simulation</td>
+<td>Do the ATC sample once in week 4 and again in week 9; compare</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>YouGlish</strong> (real speakers saying a word in context)</td>
+<td>https://www.youglish.com/pronounce/pilot/english</td>
+<td>Shows how many accents pronounce the same word</td>
+<td>5 minutes a week for words you keep mispronouncing</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Cambridge Dictionary</strong> (UK/US audio for every word)</td>
+<td>https://dictionary.cambridge.org</td>
+<td>Pronunciation of each word</td>
+<td>Check the audio of every new word before you use it aloud</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>RTÉ Radio 1</strong> (Irish) and <strong>ABC Listen</strong> (Australian)</td>
+<td>https://www.rte.ie/radio/radio1/ · https://www.abc.net.au/listen/</td>
+<td>Irish and Australian accents in real broadcasts</td>
+<td>10 minutes a week from week 4</td>
+<td>Free</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why not just "listen more"?</strong> Listening improves when it's <em>active</em> (dictation, summary, questions), <em>varied</em> (accents) and <em>measured</em> (a weekly score). Passive listening while doing something else gives you no feedback.</p>
+<h2 id="2-accents-a-listening-map">2. Accents: a listening map</h2>
+<p>The ICAO scale expects comprehension of "a range of speech varieties (dialect and/or accent) or registers" at level 5, and at level 4 it's "mostly accurate... when the accent or variety used is sufficiently intelligible for an international community of users." Cambridge C1 listening mixes British and other accents. Train the ear on many.</p>
+<table>
+<thead>
+<tr>
+<th>Accent</th>
+<th>Talk or source</th>
+<th>Link</th>
+<th>Why it's useful</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>British (England)</strong></td>
+<td>Sir Ken Robinson, "Do schools kill creativity?"</td>
+<td>https://www.ted.com/talks/ken_robinson_do_schools_kill_creativity</td>
+<td>Very clear British speech, humour, long sentences</td>
+</tr>
+<tr>
+<td>British</td>
+<td>Julian Treasure, "How to speak so that people want to listen"</td>
+<td>https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen</td>
+<td>Vocal technique: useful for your own speaking too</td>
+</tr>
+<tr>
+<td>British</td>
+<td>Tim Harford, "How frustration can make us more creative"</td>
+<td>https://www.ted.com/talks/tim_harford_how_frustration_can_make_us_more_creative</td>
+<td>Fast, structured, argumentative</td>
+</tr>
+<tr>
+<td>British</td>
+<td>Matt Walker, "Sleep is your superpower"</td>
+<td>https://www.ted.com/talks/matt_walker_sleep_is_your_superpower</td>
+<td>Fatigue and sleep: your human-factors topic (Tema 8)</td>
+</tr>
+<tr>
+<td><strong>American</strong></td>
+<td>Amy Cuddy, "Your body language may shape who you are"</td>
+<td>https://www.ted.com/talks/amy_cuddy_your_body_language_may_shape_who_you_are</td>
+<td>General American; relevant to nerves and presence</td>
+</tr>
+<tr>
+<td>American</td>
+<td>Susan Cain, "The power of introverts"</td>
+<td>https://www.ted.com/talks/susan_cain_the_power_of_introverts</td>
+<td>Quiet, slower American delivery</td>
+</tr>
+<tr>
+<td>American</td>
+<td>Amy Edmondson, "How to turn a group of strangers into a team"</td>
+<td>https://www.ted.com/talks/amy_edmondson_how_to_turn_a_group_of_strangers_into_a_team</td>
+<td>Teamwork in high-risk work, fits the ATC context</td>
+</tr>
+<tr>
+<td>American</td>
+<td>Tim Urban, "Inside the mind of a master procrastinator"</td>
+<td>https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator</td>
+<td>Casual, fast, humorous</td>
+</tr>
+<tr>
+<td><strong>Canadian</strong></td>
+<td>Chris Hadfield, "What I learned from going blind in space"</td>
+<td>https://www.ted.com/talks/chris_hadfield_what_i_learned_from_going_blind_in_space</td>
+<td>Astronaut and test pilot; pressure, complexity, calm decisions</td>
+</tr>
+<tr>
+<td><strong>Indian English</strong></td>
+<td>Shashi Tharoor, "Why nations should pursue soft power"</td>
+<td>https://www.ted.com/talks/shashi_tharoor_why_nations_should_pursue_soft_power</td>
+<td>Formal Indian English, rich vocabulary</td>
+</tr>
+<tr>
+<td>Indian English</td>
+<td>Sugata Mitra, "Build a School in the Cloud"</td>
+<td>https://www.ted.com/talks/sugata_mitra_build_a_school_in_the_cloud</td>
+<td>Indian accent in a talk about learning</td>
+</tr>
+<tr>
+<td><strong>Irish</strong></td>
+<td>Bono, "The good news on poverty"</td>
+<td>https://www.ted.com/talks/bono_the_good_news_on_poverty_yes_there_s_good_news</td>
+<td>Irish accent, emotional delivery</td>
+</tr>
+<tr>
+<td><strong>Australian</strong></td>
+<td>Hugh Evans, "What does it mean to be a citizen of the world?"</td>
+<td>https://www.ted.com/talks/hugh_evans_what_does_it_mean_to_be_a_citizen_of_the_world</td>
+<td>Australian accent</td>
+</tr>
+<tr>
+<td><strong>Nigerian English</strong></td>
+<td>Chimamanda Ngozi Adichie, "The danger of a single story"</td>
+<td>https://www.ted.com/talks/chimamanda_ngozi_adichie_the_danger_of_a_single_story</td>
+<td>Clear, slow, expressive African English</td>
+</tr>
+<tr>
+<td><strong>Non-native (international English)</strong></td>
+<td>Hans Rosling, "The best stats you've ever seen" (Swedish); Elif Shafak, "The politics of fiction" (Turkish-British)</td>
+<td>https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen · https://www.ted.com/talks/elif_shafak_the_politics_of_fiction</td>
+<td>Non-native accents — the reality of the aeronautical community</td>
+</tr>
+<tr>
+<td><strong>Live radio, Ireland / Australia</strong></td>
+<td>RTÉ Radio 1, ABC Listen</td>
+<td>see table above</td>
+<td>Real unscripted speech and regional vocabulary</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How to use it:</strong> one accent per week from week 3. Method: 3 minutes without transcript; write 3 keywords and 1 number you heard; listen again with the transcript; write the 5 words you misheard and why (linking, reduced vowel, unfamiliar name). Over the weeks, the misheard words tell you which sounds you don't process well.</p>
+<p><strong>Spanish-speaker traps to listen for:</strong> reduced vowels (schwa /ə/), weak forms (<em>of, to, and, for</em>), linking (<em>"going to" as "gonna"</em>, <em>"want to" as "wanna"</em>), final consonant clusters, and the difference between <em>ship/sheep</em> and <em>full/fool</em>. Also the American flap /t/ in <em>water, better</em> and the British non-rhotic <em>r</em> (<em>car, term</em>).</p>
+<h2 id="3-aviation-audio">3. Aviation audio</h2>
+<h3 id="31-whats-actually-available">3.1 What's actually available</h3>
+<p>LiveATC doesn't cover Madrid-Barajas (LEMD); check LEBL (Barcelona) or LEVC (Valencia) yourself in a browser. Don't look for unofficial Spanish streams — there's no source saying they're legal, and whether recording/re-broadcasting ATC frequencies is legal in Spain isn't something to rely on either way. Use published, authorised recordings.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Link</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ELPAC ATC sample test</strong> (EUROCONTROL)</td>
+<td>https://elpac.eurocontrol.int/sample-tests</td>
+<td>Recordings in aeronautical context, real question format, free, no sign-in</td>
+</tr>
+<tr>
+<td><strong>VASAviation</strong> (YouTube)</td>
+<td>https://www.youtube.com/@VASAviation</td>
+<td>Real recordings from airports and events, with on-screen captions so you can check what you heard. Mixed accents and quality — pick recent videos labelled "ATC" and check the captions match what you hear.</td>
+</tr>
+<tr>
+<td><strong>SkyListening</strong> (web player, "Europe" list)</td>
+<td>https://skylistening.com/liveatc</td>
+<td>Plays LiveATC.net feeds</td>
+</tr>
+<tr>
+<td><strong>Written phraseology, to read aloud in two roles</strong></td>
+<td>Local: <code>aviation/skybrary-icao-standard-phraseology-quickref.pdf</code>, <code>aviation/cap413-ed24.pdf</code></td>
+<td>Fictional dialogues ("Big Jet 345", "Metro Ground") you can read aloud as pilot and controller, recording yourself</td>
+</tr>
+<tr>
+<td><strong>Cambridge listening tapescripts</strong></td>
+<td>Local (tapescript sample 1)</td>
+<td>Not aviation, but exact transcripts for dictation</td>
+</tr>
+<tr>
+<td><strong>UK CAA CAP 413 Radiotelephony Manual</strong></td>
+<td><code>aviation/cap413-ed24.pdf</code></td>
+<td>Complete phraseology, including emergency and ATS surveillance chapters</td>
+</tr>
+<tr>
+<td><strong>FAA AIM chapter 4, section 2</strong></td>
+<td>https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap4_section_2.html</td>
+<td>American phraseology — differs from ICAO in places (terms, number pronunciation); use only to recognise the American style</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mixed-accent practice without live audio:</strong> read the dialogues in the phraseology documents aloud using different voices; record yourself; play back at the end of the day.</p>
+<h3 id="32-what-atc-english-sounds-like">3.2 What ATC English sounds like</h3>
+<ul>
+<li>"ICAO standardized phraseology shall be used in all situations for which it has been specified. Only when standardized phraseology cannot serve an intended transmission, plain language shall be used." (Annex 10 Vol II 5.1.1.1)</li>
+<li>Standard words: <em>Roger, Wilco, Affirm, Negative, Say again, Standby, Unable, Confirm, Correction, I say again</em> — each with a fixed meaning (CAP 413 Table 8).</li>
+<li>Communication error is the biggest causal factor in both level busts and runway incursions in Europe.</li>
+<li>Numbers are said digit by digit: 0 ZERO, 1 WUN, 2 TOO, 3 TREE, 4 FOWER, 5 FIFE, 6 SIX, 7 SEVEN, 8 AIT, 9 NINER, decimal DAYSEEMAL, hundred HUN DRED, thousand TOUSAND; "FL100" is "flight level one hundred" (CAP 413 §2.13 and the numeral table).</li>
+</ul>
+<h2 id="4-the-dictation-routine">4. The dictation routine</h2>
+<p>Active dictation — listen 30 seconds, transcribe, compare with the original — is the single best ESTEL-prep technique: it forces you to hear every word, you can't pretend to understand.</p>
+<p><strong>Materials:</strong> an audio player with a loop function, a text editor or paper, headphones. Best sources: the <strong>Cambridge tapescript</strong> (official, word-for-word), TED (subtitles close to literal), BBC 6 Minute English (approximate transcript: fine for gist/vocabulary, not for exact checking).</p>
+<p><strong>Steps (about 12 minutes per segment):</strong></p>
+<ol>
+<li>Choose a 20–30 second segment (one or two speakers). Set a loop.</li>
+<li><strong>Listen once</strong> without writing. Who, what, how many? (Gist.)</li>
+<li><strong>Listen again and write</strong> what you hear, pausing after each sentence. Max 5 listens per sentence (5-minute timer — don't chase one word for 15 minutes).</li>
+<li>Mark every gap with "___". Don't use the transcript yet.</li>
+<li><strong>Compare</strong> with the transcript. Three colours: red = missed, orange = heard wrongly (write what you wrote), green = correct.</li>
+<li><strong>Classify each error</strong> in one word: <em>vocabulary</em> (didn't know it), <em>sound</em> (knew it, didn't recognise it), <em>speed/linking</em>, <em>grammar</em> (missed -s, -ed, auxiliary), <em>attention</em> (distracted).</li>
+<li><strong>Repeat the segment aloud</strong> (shadowing, once), copying rhythm and stress.</li>
+<li><strong>Log:</strong> words in segment, words wrong or missing, error type. Word error rate (WER) = errors ÷ words × 100.</li>
+</ol>
+<p><strong>Levels (progress only when you hit the target twice in a row):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Material</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>BBC Real Easy English, or the first two minutes of a 6 Minute English episode</td>
+<td>WER under 15%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>6 Minute English, TED talks with clear speakers</td>
+<td>WER under 15% on 30s</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Cambridge Part 2/3 audio; TED with accents (Indian, Irish, Australian)</td>
+<td>WER under 20%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Radio 4 speech, fast; non-native accents</td>
+<td>WER under 25%</td>
+</tr>
+<tr>
+<td>5 (aviation)</td>
+<td>Number/callsign dictation (§6); ELPAC sample; short ATC phrases</td>
+<td>0 errors in numbers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variation for variety:</strong> alternate formats — gap-fill (transcript with 10 words removed), "detective" mode (find 3 words the presenter says that aren't in the transcript), translate the gist into Spanish in one sentence, predict the next sentence.</p>
+<h2 id="5-note-taking-for-listening">5. Note-taking for listening</h2>
+<p>You rarely need to write in the oral interview; in ESTEL and ELPAC you may hear numbers, names and sequences you have to hold for a few seconds. In ATC work, complex or lengthy taxi clearances should be noted down, and a correct read-back is the defence against errors.</p>
+<p><strong>System (one page):</strong></p>
+<ol>
+<li><strong>Layout:</strong> two columns. Left: keywords and numbers. Right: your own comments and questions.</li>
+<li><strong>Abbreviations, invent once and keep:</strong> → (leads to), ↑ ↓ (increase, decrease), ≠ (different), = (same), b/c (because), w/ (with), w/o (without), # (number), ? (unclear), ! (important). Aviation: ↑ climb, ↓ descend, FL, HDG, QNH, R (right), L (left), RWY.</li>
+<li><strong>Signposts to listen for:</strong> "however, on the other hand" (contrast); "first, second, finally" (list); "for example" (example); "in conclusion" (summary); "the main reason" (key point).</li>
+<li><strong>Numbers:</strong> write digits, not words; write the unit next to them; check by repeating the digits aloud.</li>
+<li><strong>After listening:</strong> cover the notes and say the summary aloud in 30 seconds, then compare.</li>
+</ol>
+<p><strong>Drill:</strong> listen to a 2-minute TED excerpt, note only <em>3 keywords and 2 numbers</em>, summarise aloud. Repeat with 4-minute pieces. Target: a summary that names the main idea and two supporting points.</p>
+<h2 id="6-number-and-callsign-drills-aviation">6. Number and callsign drills (aviation)</h2>
+<p>Callsigns, altimeter settings, flight levels, headings, wind speeds/directions, airspeed and frequencies are transmitted <strong>digit by digit</strong>: 3 = "TREE", 4 = "FOWER", 5 = "FIFE", 9 = "NINER", "FL100" = "flight level one hundred" (WUN HUN DRED). Frequencies: "122.1" is "one two two decimal one" (CAP 413 §2.13 and Table 4).</p>
+<p><strong>Drill A: numbers dictation (5 min).</strong></p>
+<ol>
+<li>Generate 10 random sequences: a callsign (e.g. BIGJET 345), a heading (e.g. 140), a flight level (e.g. FL 240), a QNH (e.g. 1006), a frequency (e.g. 118.750). Dice or a random-number website.</li>
+<li>Say them aloud the aviation way, record.</li>
+<li>Next day, listen and write down what you hear without looking at the originals. Compare. Target: 0 errors.</li>
+</ol>
+<p><strong>Drill B: read-back pairs (7 min).</strong> Take the dialogues in the SKYbrary phraseology guide (e.g. "Big Jet 345, Metro Ground, taxi to holding point C, runway 27"). Read aloud in both roles; then a friend or tutor changes <strong>one</strong> item in the read-back (level, heading, runway) and you must detect it. Checking a read-back is easier if the information is given back in the same order — omissions are harder to catch than wrong data.</p>
+<p><strong>Drill C: "say again" strategy.</strong> For every sentence you don't understand, practise the correct reaction — "Say again", "Say again the last part", "Confirm heading" — instead of silence or guessing.</p>
+<h2 id="7-weekly-listening-plan">7. Weekly listening plan</h2>
+<p>This is the listening backbone.</p>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Accent focus</th>
+<th>Main resource</th>
+<th>Dictation level</th>
+<th>Aviation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Baseline: BBC</td>
+<td>6 Minute English + Cambridge Part 2 (timed)</td>
+<td>1–2</td>
+<td>Standard words table (CAP 413 Table 8)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>British</td>
+<td>TED (Robinson) + Real Easy English</td>
+<td>2</td>
+<td>Number drill A</td>
+</tr>
+<tr>
+<td>3</td>
+<td>American</td>
+<td>TED (Cuddy/Cain)</td>
+<td>2</td>
+<td>Read-back drill B</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Indian English</td>
+<td>TED (Tharoor/Mitra)</td>
+<td>3</td>
+<td><strong>ELPAC ATC sample test #1</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Irish and Australian</td>
+<td>RTÉ / ABC / TED (Bono, Evans)</td>
+<td>3</td>
+<td>Emergency phrases</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Non-native / international</td>
+<td>TED (Rosling, Shafak)</td>
+<td>3</td>
+<td>Callsigns, number drill</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Fast native speech</td>
+<td>Radio 4 (Today, Any Questions?)</td>
+<td>4</td>
+<td>Read-back drill B with a tutor</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Mixed</td>
+<td>Cambridge Part 3 + 4</td>
+<td>3–4</td>
+<td>VASAviation recordings with captions</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Mixed, timed</td>
+<td>Full Cambridge sample test + <strong>ELPAC sample #2</strong></td>
+<td>4</td>
+<td>Mock interviews (block E)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Review</td>
+<td>Your weakest accent</td>
+<td>4</td>
+<td>Full number drill, 0 errors</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Self-check every Sunday (5 min):</strong> Weekly WER trend? Which accent or speed dropped? Most frequent error type (sound, vocabulary, speed)? One decision for next week.</p>
+<h2 id="exam-traps">Exam traps</h2>
+<ul>
+<li><strong>Trusting a transcript that isn't word-for-word.</strong> BBC 6 Minute English's transcript is approximate — use official tapescripts for exact dictation.</li>
+<li><strong>Listening only to native British/American speakers.</strong> The aeronautical community uses many accents.</li>
+<li><strong>Passive background listening.</strong> No feedback, no improvement.</li>
+<li><strong>Confusing "Roger" (message received) with "Wilco" (will comply) or "Affirm" (yes).</strong></li>
+<li><strong>"Standby"</strong> means wait — it's not an approval or a denial, and isn't used for climb/descend instructions.</li>
+<li><strong>"Pan-pan" versus "mayday":</strong> urgency versus distress. "PAN PAN MEDICAL" in CAP 413 is a special term for protected medical transports.</li>
+<li><strong>Reading a read-back from memory instead of your note:</strong> write it down first.</li>
+</ul>
+<h2 id="must-memorize">Must memorize</h2>
+<ul>
+<li>ESTEL = the FEAST test you can improve through listening practice; FEAST doesn't test speaking.</li>
+<li>ELPAC: Paper 1 listening (45 items, computer-marked), Paper 2 speaking (three tasks, two assessors); ICAO level = lowest of the six criteria.</li>
+<li>Dictation loop: 30s → gist → write → compare → classify errors → shadow aloud → log WER.</li>
+<li>Aviation numbers digit by digit: WUN, TOO, TREE, FOWER, FIFE, AIT, NINER; thousand = TOUSAND.</li>
+<li>Standard words: roger, wilco, affirm, negative, say again, standby, unable, confirm, correction.</li>
+</ul>
+<h2 id="bilingual-glossary-en-es">Bilingual glossary (EN → ES)</h2>
+<table>
+<thead>
+<tr>
+<th>English</th>
+<th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listening comprehension</td>
+<td>comprensión oral (auditiva)</td>
+</tr>
+<tr>
+<td>dictation</td>
+<td>dictado</td>
+</tr>
+<tr>
+<td>shadowing</td>
+<td>repetición simultánea (shadowing)</td>
+</tr>
+<tr>
+<td>gist</td>
+<td>idea general</td>
+</tr>
+<tr>
+<td>transcript / tapescript</td>
+<td>transcripción</td>
+</tr>
+<tr>
+<td>accent</td>
+<td>acento</td>
+</tr>
+<tr>
+<td>gap-fill</td>
+<td>ejercicio de huecos</td>
+</tr>
+<tr>
+<td>note-taking</td>
+<td>toma de apuntes</td>
+</tr>
+<tr>
+<td>read-back</td>
+<td>lectura de comprobación (colacionamiento)</td>
+</tr>
+<tr>
+<td>callsign</td>
+<td>indicativo de llamada</td>
+</tr>
+<tr>
+<td>flight level</td>
+<td>nivel de vuelo</td>
+</tr>
+<tr>
+<td>heading</td>
+<td>rumbo</td>
+</tr>
+<tr>
+<td>altimeter setting (QNH)</td>
+<td>reglaje del altímetro (QNH)</td>
+</tr>
+<tr>
+<td>frequency</td>
+<td>frecuencia</td>
+</tr>
+<tr>
+<td>squawk (transponder code)</td>
+<td>código del transpondedor</td>
+</tr>
+<tr>
+<td>word error rate</td>
+<td>tasa de error de palabras</td>
+</tr>
+<tr>
+<td>weak form</td>
+<td>forma débil</td>
+</tr>
+<tr>
+<td>linking</td>
+<td>enlace entre palabras</td>
+</tr>
+<tr>
+<td>phraseology</td>
+<td>fraseología</td>
+</tr>
+<tr>
+<td>plain language</td>
+<td>lenguaje claro</td>
+</tr>
+</tbody>
+</table></main></div><script src="../assets/search.js" defer></script><script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

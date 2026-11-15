@@ -1,0 +1,1032 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Productos meteorológicos aeronáuticos y ejercicios de decodificación (T03b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Meteorología</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#1-marco-normativo-anexo-3-omm-no-49-y-el-servicio-de-aemet">1. Marco normativo: Anexo 3 / OMM-N.º 49 y el servicio de AEMET</a></li>
+<li><a href="#2-metarspecitrend-reglas-completas-grupo-por-grupo">2. METAR/SPECI/TREND: reglas completas grupo por grupo</a><ul>
+<li><a href="#21-definiciones-redaccion-de-la-fuente-primaria">2.1 Definiciones (redacción de la fuente primaria)</a></li>
+<li><a href="#22-criterios-de-emision-de-speci-informe-especial-local-la-lista-que-los-apuntes-base-senalaban-como-no-detallada-por-aemet">2.2 Criterios de emisión de SPECI / informe especial local (la lista que los apuntes base señalaban como «no detallada por AEMET»)</a></li>
+<li><a href="#23-grupo-de-viento-criterios-exactos">2.3 Grupo de viento: criterios exactos</a></li>
+<li><a href="#24-visibilidad-rvr-y-nube-de-importancia-para-las-operaciones-la-definicion-de-cavok-que-resuelve-la-duda-no-3-de-los-apuntes-base">2.4 Visibilidad, RVR y «nube de importancia para las operaciones» (la definición de CAVOK, que resuelve la duda n.º 3 de los apuntes base)</a></li>
+<li><a href="#25-tiempo-reciente-re-lista-exacta-que-resuelve-el-vago-re-p-ej-rets-reva-refzdz-de-los-apuntes-base">2.5 Tiempo reciente (RE): lista exacta (que resuelve el vago «RE, p. ej. RETS, REVA, REFZDZ» de los apuntes base)</a></li>
+<li><a href="#26-tiempo-presente-nubes-y-temperatura-adiciones-a-los-apuntes-base">2.6 Tiempo presente, nubes y temperatura: adiciones a los apuntes base</a></li>
+<li><a href="#27-trend">2.7 TREND</a></li>
+</ul>
+</li>
+<li><a href="#3-taf-reglas-completas">3. TAF: reglas completas</a><ul>
+<li><a href="#31-contenido-validez-frecuencia-de-emision">3.1 Contenido, validez, frecuencia de emisión</a></li>
+<li><a href="#32-grupos-de-cambio-definiciones-exactas-y-reglas-de-periodo-omm-49-apendice-5-tabla-a5-2">3.2 Grupos de cambio: definiciones exactas y reglas de periodo (OMM-49, Apéndice 5, tabla A5-2,)</a></li>
+</ul>
+</li>
+<li><a href="#4-sigmetairmetgamet-reglas-completas">4. SIGMET/AIRMET/GAMET: reglas completas</a><ul>
+<li><a href="#41-sigmet-validez-numeracion-fenomenos-cifras-exactas-de-la-fuente-primaria">4.1 SIGMET: validez, numeración, fenómenos (cifras exactas de la fuente primaria)</a></li>
+<li><a href="#42-airmet-validez-area-fenomenos">4.2 AIRMET: validez, área, fenómenos</a></li>
+<li><a href="#43-gamet">4.3 GAMET</a></li>
+</ul>
+</li>
+<li><a href="#5-mapas-sigwx-mapas-de-viento-y-temperatura-informacion-previa-al-vuelo">5. Mapas SIGWX, mapas de viento y temperatura, información previa al vuelo</a></li>
+<li><a href="#6-meteorologia-para-el-atc-capacidad-lvp-cat-iiiiii-altimetria-minimos">6. Meteorología para el ATC: capacidad, LVP, CAT I/II/III, altimetría, mínimos</a><ul>
+<li><a href="#61-aproximacion-instrumental-y-categorias-de-pista-tabla-de-altura-de-decision-rvr">6.1 Aproximación instrumental y categorías de pista (tabla de altura de decisión / RVR)</a></li>
+<li><a href="#62-procedimientos-de-baja-visibilidad-lvp">6.2 Procedimientos de baja visibilidad (LVP)</a></li>
+<li><a href="#63-factores-meteorologicos-que-reducen-la-capacidad-cualitativo-con-referencia-cruzada-al-capitulo-de-peligros-de-om03">6.3 Factores meteorológicos que reducen la capacidad (cualitativo, con referencia cruzada al capítulo de peligros de OM03)</a></li>
+<li><a href="#64-reglas-de-ajuste-altimetrico-y-niveles-de-transicion-en-espana-anade-detalle-de-fuente-primaria-a-om03-210">6.4 Reglas de ajuste altimétrico y niveles de transición en España (añade detalle de fuente primaria a OM03 §2.10)</a></li>
+</ul>
+</li>
+<li><a href="#7-chuleta-todos-los-codigos-de-tiempo-y-de-productos">7. Chuleta: todos los códigos de tiempo y de productos</a><ul>
+<li><a href="#71-tiempo-presente-consolidado-intensidad-descriptor-fenomeno-omm-49-apendice-1-guia-de-aemet-coincide-exactamente-con-la-tabla-de-los-apuntes-base-salvo-donde-se-marca-como-nuevo">7.1 Tiempo presente (consolidado; intensidad + descriptor + fenómeno, OMM-49 Apéndice 1 + Guía de AEMET, coincide exactamente con la tabla de los apuntes base salvo donde se marca como nuevo)</a></li>
+<li><a href="#72-nubes">7.2 Nubes</a></li>
+<li><a href="#73-rvr-tendencia-indicadores-de-cambio">7.3 RVR / tendencia / indicadores de cambio</a></li>
+<li><a href="#74-codigos-de-fenomenos-sigmet">7.4 Códigos de fenómenos SIGMET</a></li>
+<li><a href="#75-codigos-de-fenomenos-airmet">7.5 Códigos de fenómenos AIRMET</a></li>
+<li><a href="#76-oficinas-y-centros-referencia-cruzada-a-om03-12-no-se-repite-en-su-totalidad">7.6 Oficinas y centros (referencia cruzada a OM03 §1.2, no se repite en su totalidad)</a></li>
+</ul>
+</li>
+<li><a href="#8-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">8. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#9-61-ejercicios-de-decodificacion-con-soluciones-completas">9. 61 ejercicios de decodificación con soluciones completas</a><ul>
+<li><a href="#parte-a-metar-speci-25-ejercicios">Parte A — METAR / SPECI (25 ejercicios)</a></li>
+<li><a href="#parte-b-taf-15-ejercicios">Parte B — TAF (15 ejercicios)</a></li>
+<li><a href="#parte-c-sigmet-airmet-gamet-15-ejercicios">Parte C — SIGMET / AIRMET / GAMET (15 ejercicios)</a></li>
+<li><a href="#parte-d-ejercicios-mixtos-y-aplicados-6-ejercicios">Parte D — Ejercicios mixtos y aplicados (6 ejercicios)</a></li>
+</ul>
+</li>
+<li><a href="#10-trampas-de-examen">10. Trampas de examen</a></li>
+<li><a href="#11-imprescindible-memorizar">11. Imprescindible memorizar</a></li>
+<li><a href="#12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#13-fuentes">13. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">69 min de lectura</div><h1 id="t03b-productos-meteorologicos-aeronauticos-y-ejercicios-de-decodificacion">T03b - Productos meteorológicos aeronáuticos y ejercicios de decodificación</h1>
+<p>Apuntes de estudio del tema 3 (Conceptos básicos de meteorología), que van <strong>más allá</strong> del manual oficial de ENAIRE (<code>syllabus/manual/OM03-meteorology-study-guide.md</code>) con fuentes primarias: el equivalente en texto del Anexo 3 de la OACI, la <strong>OMM-N.º 49, vol. II</strong> (<em>WMO-No. 49</em>, «Servicio meteorológico para la navegación aérea internacional», 2018, actualizada en 2021; la OMM dejó de publicar la N.º 49 a finales de 2023, pero su texto sigue siendo la copia completa gratuita más próxima al contenido técnico del Anexo 3, y las definiciones y umbrales que siguen no han cambiado en el Anexo 3 vigente), la <strong>Guía MET de AEMET</strong> (Guía de meteorología aeronáutica, 14.ª ed., texto en inglés y texto actualizado en español), el <strong>AIP España GEN 3.5</strong> (servicio meteorológico) y el <strong>Doc 013 EUR de la OACI «Material de orientación europeo sobre operaciones con cualquier condición meteorológica en aeródromos»</strong> (<em>European Guidance Material on All-Weather Operations at Aerodromes</em>, 5.ª ed., 2016, mediante la copia de la biblioteca de SKYbrary de EUROCONTROL). Este archivo no repite el contenido de meteorología general de OM03 (atmósfera, circulación, frentes, física de las nubes): se centra en la <strong>decodificación de los productos meteorológicos aeronáuticos</strong> y en su <strong>uso operativo por el ATC</strong>, que OM03 no cubre de forma expresa («No figura en el manual: los grupos de código METAR/TAF/SIGMET... las definiciones de SIGMET/AIRMET»). Tampoco repite la Parte B del archivo base <code>syllabus/t03-meteorology.md</code>, que ya incluye 5 METAR/SPECI, 2 TAF y 3 SIGMET resueltos: este archivo profundiza en las <em>reglas</em> de cada grupo del código (con los umbrales exactos de la fuente primaria) y añade 61 ejercicios nuevos de decodificación.</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El tema 3 se evalúa con 50 preguntas de opción múltiple en español compartidas entre los nueve temas, de modo que solo unas pocas preguntas del examen serán de meteorología pura y, de estas, solo una parte tratará de la decodificación de productos (la mayoría, según OM03, versa sobre conceptos generales: atmósfera, ISA, frentes, nubes). Aun así, la decodificación de METAR/TAF/SIGMET encaja de forma natural en preguntas de opción múltiple concretas y sin ambigüedad (estilo de oposición: «qué significa el grupo X», «cuál es la validez de Y», «qué umbral activa Z»), por lo que conviene dominar las cifras <em>exactas</em>: el umbral de VRB (3 kt, no los 6 kt que se citan con frecuencia), la definición de CAVOK (nube de importancia para las operaciones = base por debajo de 1500 m/5000 ft o de la MSA más alta, o CB/TCU a cualquier altura), los criterios de emisión de SPECI (umbrales de viento, visibilidad, RVR, base de las nubes y fenómenos meteorológicos), las tablas de validez y fenómenos de SIGMET/AIRMET, las reglas de los grupos de cambio del TAF (BECMG/TEMPO/PROB/FM) y los umbrales de CAT I/II/III y LVP que enlazan la meteorología con los procedimientos ATC (operaciones con baja visibilidad, capacidad del aeródromo). Este archivo aporta ese detalle de fuente primaria más 61 ejercicios de decodificación resueltos.</p>
+<hr />
+<h2 id="1-marco-normativo-anexo-3-omm-no-49-y-el-servicio-de-aemet">1. Marco normativo: Anexo 3 / OMM-N.º 49 y el servicio de AEMET</h2>
+<ul>
+<li><strong>El Anexo 3 de la OACI, «Servicio meteorológico para la navegación aérea internacional» (<em>Meteorological Service for International Air Navigation</em>)</strong>, es la norma de la OACI que define toda la familia de productos tratada en este archivo. Se publica conjuntamente con la OMM como <strong>OMM-N.º 49 «Reglamento Técnico», volumen II</strong>, cuyo texto de 2018 (actualizado en 2021) es la fuente primaria usada aquí. La OMM dejó de publicar la N.º 49 como documento independiente a finales de 2023 y trasladó su contenido al Manual de Claves de la OMM y al propio Anexo 3, pero el texto de 2018/2021 sigue siendo la mejor copia completa gratuita de las especificaciones técnicas, y no consta que ninguno de los umbrales citados abajo haya cambiado desde entonces.</li>
+<li>Dos principios fundamentales del Anexo 3 (ya recogidos en OM03 §1.2 y repetidos aquí porque la Parte 2 se apoya en ellos): (a) finalidad = seguridad, regularidad y eficiencia de la navegación aérea internacional; (b) cada Estado decide su propio servicio en su espacio aéreo, conforme a los acuerdos regionales de navegación aérea.</li>
+<li><strong>Estructura de un informe, pronóstico o mensaje</strong>: la Parte I del Anexo 3 fija las <em>normas y métodos recomendados</em> (SARPS): lo que debe o conviene hacer; los <strong>Apéndices 1-10</strong> de la Parte II dan las <strong>plantillas y umbrales</strong> exactos de cada producto. Este archivo cita directamente los números de apéndice: Apéndice 3 (observaciones: METAR/SPECI/TREND), Apéndice 4 (observaciones de aeronave, AIREP), Apéndice 5 (pronósticos: TAF, GAMET), Apéndice 6 (SIGMET/AIRMET/avisos de aeródromo y de cizalladura del viento).</li>
+<li><strong>AEMET (Agencia Estatal de Meteorología)</strong> es la autoridad meteorológica aeronáutica de España (ya detallada en OM03 §1.2). Este archivo añade la redacción del <strong>AIP España GEN 3.5</strong> sobre los productos que AEMET difunde realmente y sobre cómo los usa el ATC (contenido del ATIS, información previa al vuelo).</li>
+<li><strong>AMA (Autoservicio Meteorológico Aeronáutico)</strong>: portal web de autoservicio de AEMET para datos OPMET (METAR/SPECI/TAF/SIGMET, mapas); el archivo base ya lo menciona como aún no abierto, y sigue sin consultarse aquí: queda fuera del alcance de un repaso basado en documentos.</li>
+</ul>
+<hr />
+<h2 id="2-metarspecitrend-reglas-completas-grupo-por-grupo">2. METAR/SPECI/TREND: reglas completas grupo por grupo</h2>
+<h3 id="21-definiciones-redaccion-de-la-fuente-primaria">2.1 Definiciones (redacción de la fuente primaria)</h3>
+<ul>
+<li><strong>METAR</strong>: «Informe meteorológico ordinario de aeródromo» (<em>Aerodrome routine meteorological report</em>) (OMM-49, Parte I). Se emite a <strong>intervalos fijos de una hora o de media hora</strong> (Anexo 3, 4.3; España usa la media hora, confirmado en la Guía de AEMET). <strong>AUTO</strong> precede al grupo de viento cuando el informe es totalmente automático (sin observador humano).</li>
+<li><strong>SPECI</strong>: «Informe meteorológico especial de aeródromo... emitido en cualquier momento» cuando se cumplen criterios especificados (definiciones de la OMM-49, Parte I,). Dos formas: <strong>informe especial local</strong> (solo se difunde en el aeródromo de origen y alimenta el ATIS) y <strong>SPECI</strong> (se difunde fuera del aeródromo, sobre todo para la planificación del vuelo, VOLMET y D-VOLMET); el SPECI solo se emite si <strong>no se emite ya un METAR cada media hora</strong> en ese aeródromo, OMM-49 §4.4.2. Esto resuelve una sutileza que los apuntes base no recogían: en un aeródromo con METAR cada media hora, un cambio «digno de SPECI» queda recogido en el siguiente METAR programado, y no en un SPECI aparte, salvo que el cambio sea lo bastante grave como para exigir una difusión inmediata. En la práctica, la mayoría de los aeródromos civiles españoles con METAR cada media hora siguen emitiendo SPECI cuando se cumplen los criterios siguientes, porque el «se emitirá» (§4.4.2(b)) rige la difusión del SPECI fuera del aeródromo con independencia del METAR local de cada media hora.</li>
+<li><strong>Orden de los elementos en un informe ordinario/especial (METAR/SPECI) (OMM-49 §4.5.1,, el orden oficial)</strong>: (a) identificador del tipo de informe; (b) indicador de lugar; (c) hora de observación; (d) identificador de informe automático o ausente; (e) viento en superficie; (f) visibilidad; (g) RVR cuando proceda; (h) tiempo presente; (i) cantidad, tipo y altura de las nubes, o visibilidad vertical; (j) temperatura y punto de rocío; (k) QNH y, solo en los informes locales, QFE. La información suplementaria (RE, WS y, en los informes locales, también el estado de la pista) se coloca <strong>después</strong> del elemento (k).</li>
+<li><strong>COR</strong>: corrección de un informe ya emitido. <strong>NIL</strong>: un informe programado no se emitió (aeródromo cerrado, fallo de equipos).</li>
+</ul>
+<h3 id="22-criterios-de-emision-de-speci-informe-especial-local-la-lista-que-los-apuntes-base-senalaban-como-no-detallada-por-aemet">2.2 Criterios de emisión de SPECI / informe especial local (la lista que los apuntes base señalaban como «no detallada por AEMET»)</h3>
+<p>Esta es la <strong>lista exacta del Apéndice 3 §2.3 de la OMM-49</strong> (criterios obligatorios, §2.3.2, más los criterios recomendados por la OACI, §2.3.3, que los Estados suelen adoptar también; la práctica de AEMET sigue esta lista, como confirma el resumen más breve de la guía de AEMET, que nombra las mismas variables). Se emite un SPECI o informe especial local siempre que:</p>
+<p><strong>Obligatorios (§2.3.2):</strong></p>
+<ol>
+<li>La <strong>dirección</strong> media del viento en superficie cambia <strong>60° o más</strong> respecto al último informe, con velocidad media antes o después <strong>≥ 10 kt (5 m/s)</strong>.</li>
+<li>La <strong>velocidad</strong> media del viento en superficie cambia <strong>≥ 10 kt (5 m/s)</strong> respecto al último informe.</li>
+<li>La variación de la racha cambia <strong>≥ 10 kt (5 m/s)</strong>, con velocidad media antes o después <strong>≥ 15 kt (7,5 m/s)</strong>.</li>
+<li>Inicio, cese o cambio de intensidad de: <strong>precipitación engelante</strong>; <strong>precipitación moderada o fuerte</strong> (incluidos los chubascos); <strong>tormenta con precipitación</strong>.</li>
+<li>Inicio o cese de: <strong>niebla engelante</strong>; <strong>tormenta sin precipitación</strong>.</li>
+<li>La cantidad de nubes de una capa <strong>por debajo de 450 m (1500 ft)</strong> pasa de <strong>SCT o menos ↔ BKN u OVC</strong>.</li>
+</ol>
+<p><strong>Recomendados, adoptados en general (§2.3.3):</strong></p>
+<ol start="7">
+<li>El viento supera un umbral de importancia operativa (cambio de pista, límite de viento cruzado o de cola).</li>
+<li>La visibilidad mejora o empeora al cruzar <strong>800, 1500 o 3000 m</strong>, y también <strong>5000 m</strong> donde operan muchos vuelos VFR.</li>
+<li>El RVR mejora o empeora al cruzar <strong>50, 175, 300, 550 u 800 m</strong>.</li>
+<li>Inicio, cese o cambio de intensidad de <strong>tempestad de polvo, tempestad de arena, nubes de embudo</strong>.</li>
+<li>Inicio o cese de polvo, arena o nieve (<strong>ventisca baja</strong> o <strong>ventisca alta</strong>), o de <strong>turbonada</strong>.</li>
+<li>La base de la capa BKN/OVC más baja sube o baja al cruzar <strong>30, 60, 150 o 300 m (100, 200, 500 o 1000 ft)</strong>, y también <strong>450 m (1500 ft)</strong> donde operan muchos vuelos VFR.</li>
+<li>La visibilidad vertical (cielo oscurecido) mejora o empeora al cruzar <strong>30, 60, 150 o 300 m (100, 200, 500 o 1000 ft)</strong>.</li>
+<li>Cualquier otro umbral acordado localmente sobre la base de los <strong>mínimos de utilización del aeródromo</strong>.</li>
+<li>La temperatura del aire aumenta <strong>≥ 2 °C</strong> respecto al último informe (solo informes especiales locales, §2.3.1(c)).</li>
+</ol>
+<p>Un empeoramiento de un elemento junto con la mejora de otro sigue exigiendo <strong>un solo</strong> SPECI, tratado como informe de empeoramiento (§2.3.4,).</p>
+<h3 id="23-grupo-de-viento-criterios-exactos">2.3 Grupo de viento: criterios exactos</h3>
+<ul>
+<li>Se notifica en escalones de <strong>10° verdaderos</strong> y de <strong>1 kt (o 1 m/s)</strong>.</li>
+<li><strong>Variación direccional (ddd1Vddd2)</strong>: se notifica cuando la variación total durante los <strong>10 minutos precedentes</strong> es <strong>≥ 60°</strong> <strong>y</strong> la velocidad media es <strong>≥ 3 kt (1,5 m/s)</strong>. Es la confirmación en fuente primaria de que <strong>3 kt</strong>, y no los 6 kt que se citan con frecuencia (cifra de Wikipedia que los apuntes base marcaron como sin resolver), es el umbral correcto del Anexo 3: resuelve la duda n.º 2 de los apuntes base.</li>
+<li><strong>VRB (variable, sin dirección media notificada)</strong>: cuando la variación total es <strong>≥ 60° y &lt; 180°</strong> con velocidad media <strong>&lt; 3 kt</strong>, <strong>o</strong> la variación total es <strong>≥ 180°</strong> (a cualquier velocidad).</li>
+<li><strong>Racha (G)</strong>: se notifica cuando la velocidad máxima supera a la media en <strong>≥ 10 kt (5 m/s)</strong>, o en <strong>≥ 5 kt (2,5 m/s)</strong> en aeródromos que aplican procedimientos de atenuación del ruido.</li>
+<li><strong>Unidades</strong>: nudos (KT) en España y en la mayor parte de la región EUR de la OACI; metros por segundo (MPS) o km/h (KMH) en otros lugares. Las letras de la unidad son <strong>obligatorias</strong> y cambian toda la lectura (p. ej., <code>12012MPS</code> ≈ 23 kt, no 12 kt).</li>
+</ul>
+<h3 id="24-visibilidad-rvr-y-nube-de-importancia-para-las-operaciones-la-definicion-de-cavok-que-resuelve-la-duda-no-3-de-los-apuntes-base">2.4 Visibilidad, RVR y «nube de importancia para las operaciones» (la definición de CAVOK, que resuelve la duda n.º 3 de los apuntes base)</h3>
+<ul>
+<li><strong>CAVOK («<em>ceiling and visibility OK</em>»)</strong> sustituye a los grupos de visibilidad, RVR, tiempo presente y nubes cuando se cumplen <strong>las tres</strong> condiciones a la vez: (a) visibilidad <strong>≥ 10 km</strong> y la visibilidad mínima no es notificable por separado; (b) <strong>ausencia de nubes de importancia para las operaciones</strong>; (c) <strong>ausencia de fenómenos meteorológicos significativos para la aviación</strong>.</li>
+<li><strong>«Nube de importancia para las operaciones»</strong> (definición exacta de la OMM-49,): «nube cuya base está a una altura <strong>inferior a 1500 m (5000 ft) o inferior a la altitud mínima de sector (MSA) más alta, la que sea mayor</strong>, o un cumulonimbo o un cúmulo en forma de torre <strong>a cualquier altura</strong>». Esta es la cifra que los apuntes base e incluso OM03 señalaron como ausente («la entrada de CAVOK del manual [...] no repite la fórmula habitual de la OACI», OM03, apartado 8.1.3): la fuente primaria confirma que la altura de referencia es <strong>1500 m / 5000 ft o la MSA más alta, la que sea mayor</strong>, y que CB/TCU siempre descalifican CAVOK, sea cual sea la altura.</li>
+<li><strong>NSC (sin nubes significativas)</strong> usa la misma regla de altura de referencia o MSA, pero se emplea en lugar de CAVOK cuando la visibilidad o el tiempo no cumplen las condiciones de CAVOK aunque las nubes sí lo hagan.</li>
+<li><strong>Visibilidad predominante</strong>: el valor máximo de visibilidad alcanzado en al menos la mitad del círculo del horizonte o de la mitad de la superficie del aeródromo. Se notifica como <strong>9999</strong> para ≥ 10 km. Se notifica un segundo valor con dirección (p. ej., <code>2000E</code>) cuando la visibilidad mínima difiere de la predominante y es inferior a 1500 m (o inferior a 5000 m si está en otra dirección y es sensiblemente distinta).</li>
+<li><strong>RVR</strong>: se notifica cuando la visibilidad (o la visibilidad predominante) es <strong>inferior a 1500 m</strong>. Formato <code>Rrr[/R]/vvvv[V o tendencia]</code>; <strong>P</strong> antes del valor = «más de» el extremo superior de la escala (p. ej., <code>P2000</code>), <strong>M</strong> = «menos de» el extremo inferior (p. ej., <code>M0050</code>); tendencia <strong>U</strong> (<em>upward</em>, mejora), <strong>D</strong> (<em>downward</em>, empeora), <strong>N</strong> (sin cambio), basada en una variación <strong>≥ 100 m</strong> entre la media de los últimos 5 minutos y la media de los primeros 5 de los 10 minutos precedentes.</li>
+<li><strong>Cizalladura del viento (WS)</strong>, grupo suplementario: <code>[MOD o SEV] WS [APCH] RWYnn</code> para la cizalladura que afecta a una pista concreta (en aproximación o en toda la pista), o <code>WS ALL RWY</code> para todas las pistas. Se notifica cuando la cizalladura se observa, o la notifican aeronaves, en la capa <strong>inferior a 500 m (1600 ft)</strong> sobre el nivel de la pista (nota: 500 m/1600 ft es la cifra de la OMM-49; la guía de AEMET, citada por los apuntes base, describe el mismo fenómeno sin repetir la altura exacta, por lo que esto precisa B.6/A.10 de los apuntes base). <em>Trampa de examen</em>: el ejemplo 3 del archivo base la codifica como <code>WS R17</code>, sin MOD/SEV ni la palabra RWY; en la práctica se ven tanto la forma corta (<code>WS Rnn</code>) como la completa (<code>WS RWYnn</code>), pero la plantilla de la OMM-49 es <code>WS RWYnn</code>.</li>
+</ul>
+<h3 id="25-tiempo-reciente-re-lista-exacta-que-resuelve-el-vago-re-p-ej-rets-reva-refzdz-de-los-apuntes-base">2.5 Tiempo reciente (RE): lista exacta (que resuelve el vago «RE, p. ej. RETS, REVA, REFZDZ» de los apuntes base)</h3>
+<p>RE notifica el tiempo ocurrido <strong>desde el último informe ordinario (o en la última hora, lo que sea más corto) pero no en el momento de la observación</strong>, hasta <strong>3 grupos</strong>. La <strong>lista completa</strong> de fenómenos admisibles en RE: <strong>precipitación engelante</strong> (REFZRA, REFZDZ); <strong>precipitación moderada o fuerte</strong>, incluidos los chubascos (RERA, RESHRA, RESN...); <strong>ventisca alta de nieve</strong> (REBLSN); <strong>tempestad de polvo o de arena</strong> (REDS/RESS); <strong>tormenta</strong> (RETS, RETSRA); <strong>nubes de embudo</strong> (REFC); <strong>cenizas volcánicas</strong> (REVA); y, <strong>solo en informes automáticos</strong>, <strong>precipitación desconocida reciente</strong> (REUP) cuando el sensor no puede clasificar el tipo. Con RE no se usa calificador de intensidad (describe siempre lo que ya ha ocurrido, no lo que ocurre ahora).</p>
+<h3 id="26-tiempo-presente-nubes-y-temperatura-adiciones-a-los-apuntes-base">2.6 Tiempo presente, nubes y temperatura: adiciones a los apuntes base</h3>
+<ul>
+<li>La tabla de tiempo presente (códigos de intensidad, descriptor y fenómeno) ya figura completa en los apuntes base §B.3; este archivo no la repite (véase la chuleta del §7 siguiente para una versión consolidada). Una adición procedente de los propios ejemplos resueltos del Apéndice 1 de la OMM-49: <strong>SNRA</strong> = «nieve y lluvia moderadas» (dos tipos de precipitación simultáneos sin separador, con moderada implícita por la ausencia de signo +/−), y <strong>+TSSNGR</strong> = «tormenta con nieve fuerte y granizo»; se confirma que en un mismo METAR pueden concatenarse hasta <strong>tres grupos de tiempo</strong>.</li>
+<li>Informes automáticos: cuando el sistema automático detecta nubes convectivas pero no puede asignarlas a una capa concreta, se codifica <code>///CB</code> (tres barras sustituyen a la cobertura y la altura, y se conserva CB); ya figura en el ejemplo de LEBG de los apuntes base; la OMM-49 confirma que es el comportamiento estándar de los sistemas automáticos, no una peculiaridad de AEMET.</li>
+<li>El <strong>QFE</strong> se incluye <strong>solo en los informes ordinarios y especiales locales</strong>, nunca en los METAR/SPECI de difusión internacional; trampa de examen: el QFE no forma parte en absoluto de la clave METAR/SPECI de difusión internacional, aunque muchos materiales de formación lo muestren como grupo opcional.</li>
+</ul>
+<h3 id="27-trend">2.7 TREND</h3>
+<ul>
+<li>Se adjunta al final de un informe local, METAR o SPECI; pronostica las <strong>2 horas</strong> siguientes a la observación. Elementos que puede abarcar: viento en superficie, visibilidad, tiempo, nubes/visibilidad vertical, o CAVOK; <strong>NOSIG</strong> (no se espera ningún cambio significativo), <strong>BECMG</strong> (cambio permanente durante el periodo) o <strong>TEMPO</strong> (fluctuación temporal, &lt; 1 hora en cada episodio).</li>
+<li>Solo se emite en los aeródromos designados para ello (el archivo base ya lo señala: España tiene listas separadas por zona de FIR). El TREND es un producto <em>local</em>; no lleva el grupo FM (véase el §3, solo TAF).</li>
+</ul>
+<hr />
+<h2 id="3-taf-reglas-completas">3. TAF: reglas completas</h2>
+<h3 id="31-contenido-validez-frecuencia-de-emision">3.1 Contenido, validez, frecuencia de emisión</h3>
+<ul>
+<li>Elementos obligatorios, por orden (OMM-49 §Parte I 6.2.3,): identificación; lugar; hora de emisión; periodo de validez; identificador de cancelación (cuando proceda); viento; visibilidad; tiempo; nubes; cambios significativos esperados.</li>
+<li><strong>Validez</strong>: la validez de un TAF ordinario «no debería ser inferior a 6 horas ni superior a 30 horas». <strong>Frecuencia de emisión ligada a la validez</strong>: los TAF con validez <strong>&lt; 12 horas</strong> se emiten <strong>cada 3 horas</strong>; los TAF con validez de <strong>12 a 30 horas</strong> se emiten <strong>cada 6 horas</strong>. Es un detalle nuevo de fuente primaria; los apuntes base solo tenían «se emite al menos 4 veces al día», de un resumen de Wikipedia, ahora confirmado y precisado: la cadencia de emisión depende de la duración de validez elegida, no de una regla única fija.</li>
+<li>El TAF debe mantenerse bajo <strong>vigilancia continua</strong>; si no es posible, se <strong>cancela</strong>, no se deja obsoleto. <strong>AMD</strong> = enmienda tras la revisión (un pronóstico que deja de ser adecuado), no un error; <strong>COR</strong> = corrección de un error de sintaxis o de transmisión (ya en los apuntes base, confirmado aquí).</li>
+<li><strong>NIL</strong>: pronóstico no emitido (fallo de equipos o de personal, o aeródromo cerrado).</li>
+</ul>
+<h3 id="32-grupos-de-cambio-definiciones-exactas-y-reglas-de-periodo-omm-49-apendice-5-tabla-a5-2">3.2 Grupos de cambio: definiciones exactas y reglas de periodo (OMM-49, Apéndice 5, tabla A5-2,)</h3>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Significado</th>
+<th>Regla de periodo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FM</strong>ddhhmm</td>
+<td>«Cambio rápido y significativo», normalmente en aproximadamente 1 hora; <strong>todos los elementos indicados antes de FM quedan totalmente sustituidos</strong> por los posteriores (un «reinicio» completo del pronóstico)</td>
+<td>Un solo instante (día, hora, minuto); sin hora final: el grupo FM define una nueva base hasta el siguiente grupo de cambio</td>
+</tr>
+<tr>
+<td><strong>BECMG</strong> ddhh/ddhh</td>
+<td>Cambio permanente que se espera en un momento no especificado dentro de la ventana indicada; después de BECMG <strong>solo se indican los elementos que cambian</strong></td>
+<td>Periodo de cambio normalmente de <strong>2 horas</strong>, <strong>nunca superior a 4 horas</strong></td>
+</tr>
+<tr>
+<td><strong>TEMPO</strong> ddhh/ddhh</td>
+<td>Cambio temporal y fluctuante; <strong>solo se indican los elementos que fluctúan</strong></td>
+<td>Cada episodio <strong>&lt; 1 hora</strong>; el conjunto de todos los episodios <strong>&lt; la mitad</strong> del periodo TEMPO; <strong>no se recomienda para periodos &gt; 8 horas</strong> ni dentro de las <strong>primeras 6 horas</strong> posteriores a la entrada en vigor del TAF</td>
+</tr>
+<tr>
+<td><strong>PROB</strong>30 / <strong>PROB</strong>40 [TEMPO] ddhh/ddhh</td>
+<td>Probabilidad de un <strong>valor alternativo</strong> para uno o más elementos; <strong>solo se usa con TEMPO</strong> en la práctica del Anexo 3, y únicamente para una probabilidad <strong>&lt; 50 %</strong> (30-39 % → PROB30; 40-49 % → PROB40)</td>
+<td>Las mismas reglas de ventana que el TEMPO al que califica</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>FM es un grupo real y definido de la OACI</strong> (plantilla y ejemplos resueltos del Apéndice 5 de la OMM-49: <code>FM242200 24010KT CAVOK</code>, <code>FM 2422 04020KT CAVOK</code>), lo que resuelve una duda de los apuntes base: «El formato FM [...] no figura en los ejemplos de la guía de AEMET; no está en lo que he leído de AEMET.» Los dos ejemplos resueltos de la guía de AEMET (apuntes base §B.8) sencillamente no usan FM, pero es un grupo estándar de la OACI y la OMM y podría aparecer en el examen si una pregunta procede de la clave de la OACI y no de los ejemplos locales de AEMET. <strong>Trampa de examen</strong>: a diferencia de BECMG/TEMPO, FM lleva <strong>una sola</strong> marca de tiempo, no una ventana «desde/hasta», y todo lo que se indica después de FM (viento, visibilidad, tiempo, nubes) es una <strong>sustitución completa</strong>, no una adición.</li>
+<li><strong>TX/TN</strong> (temperatura máxima/mínima pronosticada con la hora UTC de aparición) es opcional, hasta <strong>4 valores</strong> (2 máximas + 2 mínimas) según la OMM-49; el ejemplo resuelto de los apuntes base (TAF 2, LEST) solo muestra una TX y una TN, que es la práctica habitual en España pero no el límite fijado por el Anexo 3.</li>
+</ul>
+<hr />
+<h2 id="4-sigmetairmetgamet-reglas-completas">4. SIGMET/AIRMET/GAMET: reglas completas</h2>
+<h3 id="41-sigmet-validez-numeracion-fenomenos-cifras-exactas-de-la-fuente-primaria">4.1 SIGMET: validez, numeración, fenómenos (cifras exactas de la fuente primaria)</h3>
+<ul>
+<li>Lo emite una <strong>Oficina de Vigilancia Meteorológica (OVM)</strong> (<em>Meteorological Watch Office</em>, MWO); describe fenómenos en ruta que afectan a la <strong>seguridad</strong> del vuelo (no solo a la comodidad).</li>
+<li><strong>Validez</strong>: <strong>no superior a 4 horas</strong>, ampliada a <strong>no superior a 6 horas</strong> solo para los SIGMET de <strong>cenizas volcánicas</strong> y de <strong>ciclón tropical</strong> (confirma con la fuente primaria las cifras de los apuntes base).</li>
+<li><strong>Antelación</strong>: el SIGMET se emite <strong>no más de 4 horas</strong> antes del inicio del periodo de validez, salvo los SIGMET de VA/TC, que pueden emitirse hasta <strong>12 horas</strong> antes, y debe <strong>actualizarse al menos cada 6 horas</strong>; detalle nuevo respecto a los apuntes base.</li>
+<li><strong>Número de secuencia</strong>: corresponde al recuento de SIGMET emitidos para esa <strong>FIR</strong> desde las <strong>0001 UTC</strong> de ese día (los apuntes base tenían 0100Z, tomado del propio ejemplo resuelto de la guía de AEMET; la regla primaria del Anexo 3 es <strong>0001 UTC</strong>, es decir, la medianoche; el ejemplo de AEMET resultó ser el segundo SIGMET de ese día concreto, emitido después de las 01:00Z, y no prueba que el recuento se reinicie a las 0100Z. Se anota como discrepancia de <strong>Manual frente a fuentes primarias</strong>, §8).</li>
+<li>Se emite un <strong>SIGMET separado por FIR/CTA</strong> aunque una misma OVM atienda a varias (coincide con OM03 y los apuntes base: España emite SIGMET por separado para la FIR de Madrid, la FIR de Barcelona y la FIR de Canarias).</li>
+<li><strong>Un solo fenómeno por SIGMET</strong>, y el texto de un SIGMET de tormentas o de ciclón tropical <strong>no</strong> debe mencionar además turbulencia ni engelamiento (se dan por implícitos, no se codifican aparte).</li>
+<li><strong>Lista exacta de fenómenos y códigos</strong> (tabla del Apéndice 6 de la OMM-49,, «en niveles de crucero, con independencia de la altitud»): tormenta <strong>OBSC TS / EMBD TS / FRQ TS / SQL TS</strong> (oscurecida/integrada/frecuente/línea de turbonada) y las variantes con granizo <strong>OBSC TSGR / EMBD TSGR / FRQ TSGR / SQL TSGR</strong>; <strong>TC</strong> (+ nombre) cuando el <strong>viento medio en superficie de 10 minutos ≥ 34 kt (17 m/s)</strong>; <strong>SEV TURB</strong>; <strong>SEV ICE</strong> y <strong>SEV ICE (FZRA)</strong>; <strong>SEV MTW</strong>; <strong>HVY DS</strong>; <strong>HVY SS</strong>; <strong>VA</strong> (+ nombre del volcán, si se conoce); <strong>RDOACT CLD</strong>.</li>
+<li>Cancelación: un nuevo mensaje SIGMET con <strong>CNL SIGMET n VALID ddhhmm/ddhhmm</strong> (ya en los apuntes base, confirmado aquí como forma estándar, no como práctica específica de AEMET).</li>
+</ul>
+<h3 id="42-airmet-validez-area-fenomenos">4.2 AIRMET: validez, área, fenómenos</h3>
+<ul>
+<li>Abarca los <strong>niveles de crucero por debajo de FL100</strong> (o por debajo de <strong>FL150 en zonas montañosas</strong>, o más alto donde lo fije el acuerdo regional de navegación aérea); precisa el «por debajo de FL150» sin matices de los apuntes base: el umbral por defecto de la OACI es <strong>FL100</strong>, y <strong>FL150</strong> es la excepción para <em>zonas montañosas</em> (España, con los Pirineos y otras cordilleras, usa verosímilmente FL150 en algunas FIR/CTA, en línea con la guía de AEMET, pero la referencia de la OACI es FL100).</li>
+<li>Validez: <strong>no superior a 4 horas</strong>.</li>
+<li>Fenómenos (confirman y completan la lista de los apuntes base): <strong>SFC WIND</strong> (viento medio en superficie <strong>&gt; 30 kt / 15 m/s</strong> en áreas extensas); <strong>SFC VIS</strong> (reducción extensa <strong>por debajo de 5000 m</strong>, con el fenómeno meteorológico causante); <strong>BKN CLD/OVC CLD</strong> por debajo de un nivel indicado; <strong>ISOL/OCNL/FRQ CB</strong>; <strong>ISOL/OCNL/FRQ TCU</strong>; <strong>ISOL/OCNL TS</strong> y <strong>TSGR</strong>; <strong>MOD ICE</strong>; <strong>MOD TURB</strong>; <strong>MOD MTW</strong>; <strong>MT OBSC</strong>.</li>
+<li>La FIR se divide en <strong>subáreas cuando es necesario</strong> para el AIRMET, a diferencia del SIGMET, que normalmente abarca toda la FIR o una parte descrita de ella.</li>
+</ul>
+<h3 id="43-gamet">4.3 GAMET</h3>
+<ul>
+<li>Pronóstico de área para <strong>vuelos por debajo de FL150</strong>, emitido <strong>cada 6 horas</strong>, válido <strong>6 horas</strong> (ya confirmado por los apuntes base y por la referencia cruzada de OM03). Sección I (peligros: SFC WIND, SFC VIS, SIGWX, MT OBSC, ICE, TURB, MTW) y Sección II (PSYS, WIND/T en niveles fijos, CLD, FZLVL, MNM QNH, VA); los apuntes base ya lo recogen; no se ha hallado ninguna contradicción nueva en fuente primaria.</li>
+</ul>
+<hr />
+<h2 id="5-mapas-sigwx-mapas-de-viento-y-temperatura-informacion-previa-al-vuelo">5. Mapas SIGWX, mapas de viento y temperatura, información previa al vuelo</h2>
+<ul>
+<li>Los <strong>WAFC de Londres y Washington</strong> (véase OM03 §1.2) elaboran los <strong>pronósticos globales en malla</strong> y los <strong>mapas de tiempo significativo (SIGWX)</strong>, que existen en tres bandas de altitud, según los mapas modelo del Apéndice 1 de la OMM-49: <strong>SIGWX de alta cota (SWH)</strong>, típicamente <strong>FL250-630</strong>; <strong>SIGWX de media cota (SWM)</strong>, banda que varía según la región OACI (el ejemplo resuelto de la región NAT de la OMM-49 es <strong>FL100-250</strong>; la guía de AEMET, según los apuntes base, da <strong>FL100-450</strong> para el mapa de media cota de la región EUR usado operativamente en España; se registra como dependiente de la región, no como contradicción: véase §8); <strong>SIGWX de baja cota (SWL)</strong>, <strong>de superficie a FL100 (10 000 ft)</strong>, emitido por el Estado (en España, las OVM de Valencia y de Las Palmas, según los apuntes base).</li>
+<li>Todo mapa SIGWX lleva la leyenda estándar <strong>«CB IMPLIES TS, [GR,] MOD OR SEV TURB AND ICE [AND HAIL]»</strong>; confirma y amplía ligeramente el resumen de OM03 sobre la misma leyenda (OM03 citaba «tormentas, turbulencia moderada o fuerte, engelamiento moderado o fuerte y granizo» para el mapa de baja cota en concreto; las plantillas de la OMM-49 muestran la frase, con pequeñas diferencias de redacción, en los mapas de alta, media y baja cota por igual).</li>
+<li><strong>Mapas de viento y temperatura en altura (modelo IS)</strong>: mapas de pronóstico a hora fija para <strong>superficies isobáricas tipo</strong> (es decir, niveles de vuelo fijos), que muestran el viento con flechas, barbas y banderines y los valores de temperatura, elaborados por el WAFC; unidades <strong>nudos y °C</strong>, temperaturas negativas sin marcar, las positivas con el prefijo <strong>«PS»</strong> o <strong>«+»</strong>.</li>
+<li><strong>Exposición verbal (<em>briefing</em>; definición, glosario de la OMM-49 Parte I,)</strong>: «Comentario verbal sobre las condiciones meteorológicas existentes y/o previstas». Se distingue la <strong>consulta</strong> como «discusión... incluidas las respuestas a preguntas»: la exposición verbal es unidireccional, la consulta es interactiva. Ambas son funciones de la OMAe (ya en OM03 §1.2).</li>
+<li><strong>ATIS</strong> (AIP GEN 3.5,, detalle adicional a OM03 y a los apuntes base): el contenido de la difusión incluye, entre otros elementos operativos, el <strong>nivel de transición</strong>, el viento, la visibilidad y el RVR, el tiempo presente, las nubes o la visibilidad vertical, la temperatura, el punto de rocío, el <strong>QNH</strong> y el pronóstico de tipo <strong>TREND</strong>. Cada difusión se identifica con una letra del alfabeto de la OACI, y los pilotos deben <strong>acusar recibo de la letra</strong> en el primer contacto para que el ATC sepa que disponen de la última información.</li>
+</ul>
+<hr />
+<h2 id="6-meteorologia-para-el-atc-capacidad-lvp-cat-iiiiii-altimetria-minimos">6. Meteorología para el ATC: capacidad, LVP, CAT I/II/III, altimetría, mínimos</h2>
+<p>Esta sección es el material de «meteorología para el ATC» que el manual no cubre y que los apuntes base apenas tocan: cómo las cifras meteorológicas decodificadas arriba se traducen en categorías de pista, procedimientos de baja visibilidad y gestión de la capacidad, conocimientos esenciales para un controlador.</p>
+<h3 id="61-aproximacion-instrumental-y-categorias-de-pista-tabla-de-altura-de-decision-rvr">6.1 Aproximación instrumental y categorías de pista (tabla de altura de decisión / RVR)</h3>
+<p>Fuente: <strong>Doc 013 EUR de la OACI, «Material de orientación europeo sobre operaciones con cualquier condición meteorológica en aeródromos»</strong>, 5.ª ed. (septiembre de 2016), capítulo de definiciones. Este documento es la referencia de EUROCONTROL/OACI-EUR para justamente este material.</p>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Altura de decisión (DH)</th>
+<th>RVR mínimo (o visibilidad)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No de precisión (Tipo A)</strong></td>
+<td>DH/MDH ≥ 75 m (250 ft)</td>
+<td>visibilidad ≥ 1000 m (clasificación de la pista)</td>
+</tr>
+<tr>
+<td><strong>CAT I</strong></td>
+<td>DH ≥ 60 m (200 ft) (no inferior)</td>
+<td>visibilidad ≥ 800 m <strong>o</strong> RVR ≥ 550 m</td>
+</tr>
+<tr>
+<td><strong>LTS CAT I</strong> (<em>Lower Than Standard CAT I</em>, CAT I inferior a la estándar)</td>
+<td>misma DH que CAT I</td>
+<td>RVR de hasta <strong>400 m</strong></td>
+</tr>
+<tr>
+<td><strong>CAT II</strong></td>
+<td>30 m (100 ft) ≤ DH &lt; 60 m (200 ft)</td>
+<td>RVR ≥ 300 m</td>
+</tr>
+<tr>
+<td><strong>OTS CAT II</strong> (<em>Other Than Standard CAT II</em>, CAT II distinta de la estándar)</td>
+<td>100 ft ≤ DH &lt; 200 ft</td>
+<td>RVR ≥ 350 m</td>
+</tr>
+<tr>
+<td><strong>CAT IIIA</strong></td>
+<td>DH &lt; 30 m (100 ft), o sin DH</td>
+<td>RVR ≥ 175 m</td>
+</tr>
+<tr>
+<td><strong>CAT IIIB</strong></td>
+<td>DH &lt; 15 m (50 ft), o sin DH</td>
+<td>50 m ≤ RVR &lt; 175 m</td>
+</tr>
+<tr>
+<td><strong>CAT IIIC</strong></td>
+<td>sin DH</td>
+<td>sin límite de RVR (0 m)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Enfoque de examen</em>: las cifras exactas de DH/RVR de arriba son datos densos y evaluables (estilo de oposición: «¿qué categoría tiene DH &lt; 100 ft y RVR no inferior a 175 m?» → CAT IIIA). Conviene memorizar los puntos de corte de DH <strong>200 / 100 / 50 ft</strong> y los de RVR <strong>550 / 300 / 175 / 50 m</strong>.</p>
+<h3 id="62-procedimientos-de-baja-visibilidad-lvp">6.2 Procedimientos de baja visibilidad (LVP)</h3>
+<ul>
+<li><strong>Definición</strong>: «Procedimientos específicos aplicados en un aeródromo con el fin de garantizar operaciones seguras durante las operaciones de <strong>Categoría II</strong>, <strong>Categoría III</strong> y de <strong>despegue con baja visibilidad (LVTO)</strong>.»</li>
+<li><strong>Los LVP se establecen y activan para apoyar</strong>: (a) <strong>salidas con RVR &lt; 550 m</strong>; (b) <strong>aproximación y aterrizaje CAT II/III</strong>; (c) <strong>OTS CAT II</strong>; (d) aproximación y aterrizaje <strong>LTS CAT I</strong>.</li>
+<li><strong>Umbrales operativos que activan la preparación o la finalización de los LVP</strong>: <strong>RVR &lt; 550 m</strong> y/o <strong>altura de la base de las nubes/DH &lt; 200 ft</strong> activan la fase de <em>preparación</em>; <strong>RVR &lt; 400 m</strong>, la fase de <em>operaciones</em> (protección de las áreas sensibles del ILS, protección contra incursiones en pista); otros puntos de corte en <strong>RVR &lt; 300 m/DH &lt; 100 ft</strong> (se entra en territorio CAT III) y <strong>RVR &lt; 175 m/DH &lt; 50 ft</strong>.</li>
+<li><strong>LVTO (despegue con baja visibilidad)</strong>: las salidas con RVR inferior a <strong>550 m</strong> necesitan procedimientos específicos; un <strong>RVR mínimo general de 400 m para el despegue</strong> citado con frecuencia (usado en la lista de comprobación ATC resuelta del documento AWO, «LVTO RVR ≤ 400 m», como desencadenante de la activación de estados específicos de bomberos y de protección de pista); los mínimos LVTO más bajos (hasta 75-150 m) exigen una aprobación específica de aeronave, tripulación y aeródromo y quedan fuera del alcance básico de este examen.</li>
+<li><strong>Finalidad de los LVP</strong>: proteger la pista frente a incursiones y proteger la <strong>integridad de las señales de navegación terrestres</strong> (áreas críticas y sensibles del ILS) durante las operaciones de aproximación o salida especificadas; por eso los LVP restringen los movimientos de vehículos y de otras aeronaves cerca de la pista y del ILS, y no solo las reglas de vuelo relacionadas con la visibilidad.</li>
+<li>Por qué importa a un controlador: los LVP reducen directamente la <strong>capacidad del aeródromo</strong> (mayores separaciones, operación con una sola pista, movimiento en tierra restringido, vehículos retenidos fuera de las áreas sensibles del ILS), que es justo el tipo de enlace con la ATFCM (tema 6) y con los factores humanos (tema 8) que puede evaluar una pregunta de ENAIRE combinando temas.</li>
+</ul>
+<h3 id="63-factores-meteorologicos-que-reducen-la-capacidad-cualitativo-con-referencia-cruzada-al-capitulo-de-peligros-de-om03">6.3 Factores meteorológicos que reducen la capacidad (cualitativo, con referencia cruzada al capítulo de peligros de OM03)</h3>
+<ul>
+<li><strong>Baja visibilidad / base baja de las nubes</strong> → LVP, operaciones CAT II/III, menor ritmo de llegadas (más separación, operación con una sola pista), posibles desvíos si se está por debajo de los mínimos de aproximación más bajos del aeródromo.</li>
+<li><strong>Viento cruzado o de cola fuerte o racheado</strong> más allá de los límites demostrados de un tipo de aeronave → cambio de pista (con pérdida temporal de capacidad mientras se hace la transición del tráfico) o cierre de una pista a ciertas categorías de aeronave.</li>
+<li><strong>Tormentas/CB</strong> cerca del aeródromo o en el área de maniobras terminal → esperas, desvíos para evitar las células, riesgo de cierre temporal de pista (rayos, cizalladura, granizo) y el procedimiento de círculos concéntricos del aviso de rayos de AEMET ya descrito en los apuntes base (25/8/5 km alrededor del ARP).</li>
+<li><strong>Nieve o hielo en la pista o en las calles de rodaje</strong> → menor rozamiento (informes de acción de frenado), posible cierre de pista para su limpieza, colas de deshielo antes de la salida, menor ritmo de aterrizajes.</li>
+<li><strong>Avisos de cizalladura / microrreventón</strong> → motores y al aire (<em>go-arounds</em>), aproximaciones suspendidas temporalmente en la pista afectada.</li>
+<li>Todo lo anterior son las razones operativas por las que los avisos meteorológicos (aviso de aeródromo, aviso de cizalladura, SIGMET) existen como producto de <em>seguridad</em> pero tienen una consecuencia inmediata sobre la <strong>capacidad</strong>: el puente conceptual con el tema 6 (Plan de vuelo y ATFCM).</li>
+</ul>
+<h3 id="64-reglas-de-ajuste-altimetrico-y-niveles-de-transicion-en-espana-anade-detalle-de-fuente-primaria-a-om03-210">6.4 Reglas de ajuste altimétrico y niveles de transición en España (añade detalle de fuente primaria a OM03 §2.10)</h3>
+<ul>
+<li>OM03 ya da las <strong>altitudes de transición</strong> españolas: TMA de Madrid 13 000 ft; CTA de Granada 7000 ft; resto de España 6000 ft. Este archivo añade la <strong>regla de procedimiento</strong>: la altitud de transición es un <strong>valor fijo publicado por cada TMA/CTA</strong>, que se usa en el <strong>ascenso</strong> (QNH → estándar 1013,25 hPa/QNE); el <strong>nivel de transición</strong> es <strong>variable</strong>, lo publica el ATC (normalmente mediante el ATIS, véase §5) o se calcula a partir del QNH, y se usa en el <strong>descenso</strong> (estándar → QNH); la <strong>capa de transición</strong> entre ambos debe tener <strong>al menos 1000 ft</strong> de espesor para que una aeronave en ascenso y otra en descenso no reciban nunca el mismo nivel nominal con referencias distintas al mismo tiempo.</li>
+<li><strong>QNH, QFE, QNE</strong> (ya plenamente definidos en OM03 §2.10.3): el punto operativo que conviene añadir aquí es que <strong>el QNH se difunde en METAR/SPECI/TAF y por el ATIS</strong>, siempre en <strong>hectopascales enteros, truncados (no redondeados) hacia abajo</strong> (p. ej., un valor real de 1008,7 hPa se codifica <code>Q1008</code>, no <code>Q1009</code>).</li>
+<li><strong>Mínimos meteorológicos de aeródromo / mínimos de utilización</strong>: las condiciones meteorológicas más bajas (RVR/visibilidad y base de las nubes/DH) a partir de las cuales pueden realizarse el despegue, la aproximación o el aterrizaje en una combinación dada de aeródromo, pista y categoría de aeronave; los fijan los <strong>mínimos aprobados del operador</strong> (nunca por debajo de los límites de categoría de pista publicados en el Anexo 14, del §6.1) y están condicionados por factores locales de terreno, obstáculos e iluminación publicados en la <strong>sección AD del AIP</strong>.</li>
+</ul>
+<hr />
+<h2 id="7-chuleta-todos-los-codigos-de-tiempo-y-de-productos">7. Chuleta: todos los códigos de tiempo y de productos</h2>
+<h3 id="71-tiempo-presente-consolidado-intensidad-descriptor-fenomeno-omm-49-apendice-1-guia-de-aemet-coincide-exactamente-con-la-tabla-de-los-apuntes-base-salvo-donde-se-marca-como-nuevo">7.1 Tiempo presente (consolidado; intensidad + descriptor + fenómeno, OMM-49 Apéndice 1 + Guía de AEMET, coincide exactamente con la tabla de los apuntes base salvo donde se marca como <em>nuevo</em>)</h3>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Códigos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intensidad/proximidad</td>
+<td><code>-</code> leve · (nada) moderada · <code>+</code> fuerte · <code>VC</code> en las inmediaciones (8-16 km)</td>
+</tr>
+<tr>
+<td>Descriptor</td>
+<td>MI superficial · BC bancos · PR parcial · DR ventisca baja (&lt;2 m) · BL ventisca alta (≥2 m) · SH chubasco(s) · TS tormenta · FZ engelante</td>
+</tr>
+<tr>
+<td>Precipitación</td>
+<td>DZ llovizna · RA lluvia · SN nieve · SG cinarra · PL gránulos de hielo · GR granizo · GS granizo pequeño/nieve granulada · UP desconocida (solo estaciones automáticas)</td>
+</tr>
+<tr>
+<td>Oscurecimiento</td>
+<td>BR neblina · FG niebla · FU humo · VA cenizas volcánicas · DU polvo extendido · SA arena · HZ calima</td>
+</tr>
+<tr>
+<td>Otros</td>
+<td>PO torbellinos de polvo/arena · SQ turbonada · FC nubes de embudo · SS tempestad de arena · DS tempestad de polvo</td>
+</tr>
+<tr>
+<td><em>Nuevo: solo tiempo reciente</em></td>
+<td>RE + cualquiera de los anteriores, limitado a: precipitación engelante, precipitación moderada/fuerte, ventisca alta de nieve, tempestad de polvo/arena, tormenta, nubes de embudo, cenizas volcánicas, (AUTO) precipitación desconocida (REUP)</td>
+</tr>
+<tr>
+<td>Solo en grupos de cambio</td>
+<td>NSW sin tiempo significativo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-nubes">7.2 Nubes</h3>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FEW</td>
+<td>1-2 octas</td>
+</tr>
+<tr>
+<td>SCT</td>
+<td>3-4 octas</td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>5-7 octas</td>
+</tr>
+<tr>
+<td>OVC</td>
+<td>8 octas</td>
+</tr>
+<tr>
+<td>NSC</td>
+<td>sin nubes por debajo de 1500 m/5000 ft o de la MSA más alta (la que sea mayor) y sin CB/TCU</td>
+</tr>
+<tr>
+<td>NCD</td>
+<td>no se detectan nubes (estación automática, sin retorno del sensor de nubes)</td>
+</tr>
+<tr>
+<td>VV<em>hhh</em></td>
+<td>cielo oscurecido; visibilidad vertical en centenares de pies</td>
+</tr>
+<tr>
+<td>///CB</td>
+<td>nube convectiva detectada, pero capa o altura no asignables (estación automática)</td>
+</tr>
+<tr>
+<td>CB / TCU</td>
+<td>se añade al grupo de altura de una capa cuando esa capa es de cumulonimbo / de cúmulo en forma de torre</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73-rvr-tendencia-indicadores-de-cambio">7.3 RVR / tendencia / indicadores de cambio</h3>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R<em>rr</em>[L/C/R]/<em>vvvv</em></td>
+<td>RVR de la pista <em>rr</em>, [pista paralela izquierda/central/derecha], valor en metros</td>
+</tr>
+<tr>
+<td>Prefijo P / M</td>
+<td>más de / menos de lo que el instrumento puede medir</td>
+</tr>
+<tr>
+<td>Sufijo U / D / N</td>
+<td>mejora / empeora / sin cambio</td>
+</tr>
+<tr>
+<td>NOSIG</td>
+<td>TREND: no se espera ningún cambio significativo en las próximas 2 horas</td>
+</tr>
+<tr>
+<td>BECMG</td>
+<td>cambio permanente en algún momento del periodo indicado (TAF) o implícito de 2 horas (TREND)</td>
+</tr>
+<tr>
+<td>TEMPO</td>
+<td>fluctuación temporal, cada episodio &lt; 1 hora</td>
+</tr>
+<tr>
+<td>FM<em>ddhhmm</em></td>
+<td>solo TAF: cambio rápido, instante único, reinicio completo de todos los elementos</td>
+</tr>
+<tr>
+<td>PROB30 / PROB40</td>
+<td>probabilidad 30-39 % / 40-49 %, solo combinado con TEMPO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="74-codigos-de-fenomenos-sigmet">7.4 Códigos de fenómenos SIGMET</h3>
+<p>OBSC/EMBD/FRQ/SQL TS (+ GR para granizo) · TC (nombre) · SEV TURB · SEV ICE / SEV ICE (FZRA) · SEV MTW · HVY DS · HVY SS · VA (+ volcán) · RDOACT CLD.</p>
+<h3 id="75-codigos-de-fenomenos-airmet">7.5 Códigos de fenómenos AIRMET</h3>
+<p>SFC WIND (&gt;30 kt) · SFC VIS (&lt;5000 m + causa) · BKN CLD / OVC CLD · ISOL/OCNL/FRQ CB · ISOL/OCNL/FRQ TCU · ISOL/OCNL TS(GR) · MOD ICE · MOD TURB · MOD MTW · MT OBSC.</p>
+<h3 id="76-oficinas-y-centros-referencia-cruzada-a-om03-12-no-se-repite-en-su-totalidad">7.6 Oficinas y centros (referencia cruzada a OM03 §1.2, no se repite en su totalidad)</h3>
+<p>WAFC (2: Londres/Washington) · VAAC (9) · TCAC (7) · CMRE (8) · OVM (España: Valencia + Las Palmas) · OMAe (España: 5) · EMAe (España: 40 aeropuertos + 8 bases aéreas).</p>
+<hr />
+<h2 id="8-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">8. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tema</th>
+<th>Afirmación de OM03 / del manual</th>
+<th>Fuente primaria (este archivo)</th>
+<th>Cuál es probable que siga el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Decodificación de METAR/TAF/SIGMET</td>
+<td>No se cubre en absoluto (OM03 nombra METAR/SPECI, TAF, TREND y avisos de aeródromo una sola vez, §1.2, sin decodificación)</td>
+<td>Cubierta por completo aquí a partir de OMM-49/AEMET/AIP</td>
+<td>Es poco probable que el examen evalúe la decodificación profunda de claves a partir de <em>este manual concreto</em>, pero el título del tema («conceptos básicos de meteorología») no lo excluye, y otros temas (2, «Códigos OACI/IATA») muestran que ENAIRE evalúa conocimientos de claves en otros apartados. Conviene tratar este archivo como valioso pero de prioridad algo inferior al contenido propio de OM03.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Umbral del viento VRB</td>
+<td>El archivo base t03 señaló el «≤ 6 kt» de Wikipedia frente al «3 kt» de AEMET, sin resolver</td>
+<td>OMM-49 §4.1.5.2(b): <strong>3 kt (1,5 m/s)</strong> es el umbral exacto del Anexo 3</td>
+<td><strong>3 kt</strong> (fuente primaria confirmada; la cifra de 6 kt parece un error de Wikipedia o un valor obsoleto)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Altura de referencia de CAVOK</td>
+<td>OM03 recoge la redacción del propio manual como un simple «sin nubes» sin la altura explícita; los apuntes base tenían la misma laguna</td>
+<td>OMM-49: «nube de importancia para las operaciones» = base &lt; 1500 m/5000 ft o MSA más alta (la que sea mayor), o CB/TCU a cualquier altura</td>
+<td>Fuente primaria (una cifra precisa y evaluable que el manual omite)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Hora de reinicio del número de secuencia de SIGMET</td>
+<td>El ejemplo resuelto de la guía de AEMET (apuntes base B.10) implica un patrón «desde las 0100Z»</td>
+<td>OMM-49 §7.1.1 establece explícitamente que el recuento es «desde las 0001 UTC»</td>
+<td><strong>0001 UTC</strong> (regla de la fuente primaria); el SIGMET 2 del ejemplo de AEMET simplemente fue el segundo emitido ese día en algún momento posterior a las 01:00Z, no prueba que el contador se reinicie a las 01:00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Banda del mapa SIGWX de media cota</td>
+<td>Los apuntes base (de la guía de AEMET) indican <strong>FL100-450</strong> para el mapa de media cota usado operativamente en la región EUR</td>
+<td>La plantilla resuelta del Apéndice 1 de la OMM-49 para la región <strong>NAT</strong> muestra <strong>FL100-250</strong> para el mapa de media cota</td>
+<td>No es una contradicción: <strong>depende de la región</strong>, según el acuerdo regional de navegación aérea de la OACI. Para el examen español, <strong>la cifra de AEMET para la región EUR (FL100-450) es la que hay que memorizar</strong>; el ejemplo NAT de la OMM-49 se cita aquí solo para mostrar que el formato es específico de cada región, no que una de las cifras sea errónea.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Techo del AIRMET</td>
+<td>Apuntes base / guía de AEMET: «por debajo de FL150»</td>
+<td>El valor por defecto de la OMM-49 es <strong>por debajo de FL100</strong>, ampliado a <strong>FL150 en zonas montañosas</strong> o más alto por acuerdo regional</td>
+<td>Pueden aparecer ambos: <strong>FL150 es la cifra que usa España</strong> (el terreno montañoso justifica la excepción, en línea con AEMET), pero conviene conocer la referencia de la OACI (FL100) por si una pregunta pide el valor <em>por defecto</em> de la OACI y no la práctica española.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Calor específico del agua (ya señalado por el propio OM03, repetido aquí por su relevancia directa para las preguntas de niebla y brisa marina que toca la Parte 6 de este archivo)</td>
+<td>OM03, p. 15, dice que la tierra tiene mayor variación diaria «porque el agua tiene un calor específico <strong>menor</strong> que la tierra» (aparente error de redacción); OM03, p. 27, dice correctamente que el agua tiene el calor específico <strong>más alto</strong></td>
+<td>La física y todas las demás fuentes coinciden: el calor específico del agua es <strong>mayor</strong> que el de la tierra, y por eso el mar varía menos</td>
+<td>El calor específico del agua es <strong>mayor</strong> (p. 27 del propio OM03 y hecho físico); la redacción de la p. 15 es un error interno del manual, ya señalado como tal en la propia guía OM03 (apartado 2.5, trampa de examen n.º 9 de la sección 10); se repite aquí solo porque reaparece en el análisis de LVP y de niebla y capacidad de este archivo.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-61-ejercicios-de-decodificacion-con-soluciones-completas">9. 61 ejercicios de decodificación con soluciones completas</h2>
+<p>Los ejercicios 1-4 (METAR/SPECI), 5-7 (TAF) y 8 (SIGMET) de abajo son <strong>ejemplos oficiales</strong>, reproducidos literalmente de la <strong>OMM-N.º 49, vol. II, Apéndice 1 «Documentación de vuelo: mapas y formularios modelo»</strong> (los ejemplos resueltos que la propia OACI/OMM publican para ilustrar las claves; los aeropuertos son indicadores OACI reales usados solo como ilustración, y las observaciones son didácticas, no observaciones históricas reales: se tratan igual que los ejemplos de la propia guía de AEMET). Todos los demás ejercicios son <strong>sintéticos</strong> (inventados para este archivo, realistas pero no observaciones reales), con aeródromos españoles que no figuran en los ejemplos del archivo base (que usaba LEDA, LEZL, LEST, LEPP, LEBG) ni en las guías con nombre de AEMET (LEMD, LEBL, LEPA, LEMG, LEBB, LECO, GCLP, GCTS, GCXO): los ejercicios sintéticos de este archivo usan <strong>LEAL</strong> (Alicante-Elche), <strong>LEIB</strong> (Ibiza), <strong>LEVX</strong> (Vigo), <strong>LEGE</strong> (Girona), <strong>LEZG</strong> (Zaragoza), <strong>LEBZ</strong> (Badajoz), <strong>LERT</strong> (Rota), <strong>LEXJ</strong> (Santander... reutilizado solo donde sea inevitable) y códigos de FIR ficticios de estilo OACI para los SIGMET, en línea con el uso que hace la propia guía de AEMET de una FIR ficticia («Shanlon», «Amswell») para los SIGMET didácticos.</p>
+<h3 id="parte-a-metar-speci-25-ejercicios">Parte A — METAR / SPECI (25 ejercicios)</h3>
+<p><strong>Ej. 1 (ejemplo oficial, OMM-49 Apéndice 1):</strong>
+<code>METAR CYUL 240700Z 27018G30KT 5000 SN FEW020 BKN045 M02/M07 Q0995=</code>
+Montreal/Pierre Elliott Trudeau; día 24, 07:00 UTC; viento 270° a 18 kt, con rachas de 30 kt; visibilidad 5000 m; nieve moderada (SN, sin signo de intensidad); FEW020 (1-2 octas, 2000 ft), BKN045 (5-7 octas, 4500 ft); temperatura -2 °C, punto de rocío -7 °C; QNH 995 hPa.</p>
+<p><strong>Ej. 2 (ejemplo oficial):</strong>
+<code>METAR EDDF 240950Z 05015KT 9999 FEW025 04/M05 Q1018 NOSIG=</code>
+Fráncfort del Meno; día 24, 09:50 UTC; viento 050° a 15 kt; visibilidad ≥ 10 km; FEW025 (2500 ft); 4 °C / -5 °C; QNH 1018 hPa; NOSIG (no se esperan cambios significativos en las próximas 2 horas).</p>
+<p><strong>Ej. 3 (ejemplo oficial):</strong>
+<code>METAR LFPG 241000Z 07010KT 5000 SCT010 BKN040 02/M01 Q1014 NOSIG=</code>
+París/Charles de Gaulle; día 24, 10:00 UTC; viento 070° a 10 kt; visibilidad 5000 m; SCT010 (1000 ft), BKN040 (4000 ft); 2 °C / -1 °C (cerca de la saturación: atención al riesgo de niebla); QNH 1014; NOSIG.</p>
+<p><strong>Ej. 4 (ejemplo oficial, SPECI):</strong>
+<code>SPECI GMMC 220530Z 24006KT 5000 -TSGR BKN016TCU FEW020CB SCT026 08/07 Q1013=</code>
+Casablanca/Anfa; informe especial; día 22, 05:30 UTC; viento 240° a 6 kt; visibilidad 5000 m; <strong>-TSGR</strong> = tormenta leve con granizo; BKN016TCU (5-7 octas de cúmulo en forma de torre, 1600 ft), FEW020CB (1-2 octas de cumulonimbo, 2000 ft), SCT026 (3-4 octas, 2600 ft): tres capas, dos de ellas convectivas; 8 °C / 7 °C (cerca de la saturación); QNH 1013 hPa. Este SPECI cumple el criterio 4 del §2.2 (inicio de tormenta con precipitación).</p>
+<p><strong>Ej. 5 (sintético, LEAL):</strong>
+<code>METAR LEAL 121030Z 09008KT 060V120 9999 FEW030 22/14 Q1019 NOSIG=</code>
+Alicante-Elche; día 12, 10:30 UTC; viento 090° a 8 kt, con variación entre 060° y 120° (variación ≥ 60°, velocidad media ≥ 3 kt, por lo que la variación se notifica con una dirección media, según el §2.3); visibilidad ≥ 10 km; FEW030 (3000 ft); 22 °C / 14 °C; QNH 1019; NOSIG.</p>
+<p><strong>Ej. 6 (sintético, LEIB):</strong>
+<code>METAR LEIB 121100Z VRB02KT 9999 FEW025 SCT100 25/12 Q1017 NOSIG=</code>
+Ibiza; VRB02KT = viento variable a 2 kt; como 2 kt &lt; 3 kt, según el §2.3 no hace falta ningún ángulo de variación total para que se aplique VRB (viento flojo y variable cumple por la velocidad si la variación es ≥ 60°, o el observador puede notificar simplemente VRB para un viento muy flojo y cambiante); visibilidad ≥ 10 km; dos capas de nubes; 25 °C / 12 °C; QNH 1017.</p>
+<p><strong>Ej. 7 (sintético, LEVX, niebla):</strong>
+<code>METAR LEVX 130630Z 00000KT 0400 R02/0350N FG VV002 08/08 Q1022=</code>
+Vigo; viento en calma (00000KT); visibilidad 400 m; RVR de la pista 02: 350 m, sin cambio (N); FG = niebla; <strong>VV002</strong> = cielo oscurecido, visibilidad vertical de 200 ft (con VV no se usan grupos de cobertura de nubes; esto es distinto de CAVOK/NSC porque la visibilidad está muy por debajo de 10 km); 8 °C / 8 °C (saturado, coherente con niebla); QNH 1022. Este informe activaría la preparación de los LVP en cualquier aeródromo (RVR 350 m &lt; 550 m, véase §6.2).</p>
+<p><strong>Ej. 8 (sintético, LEGE, SPECI por cambio de viento):</strong>
+<code>SPECI LEGE 140915Z 32018G30KT 9999 SCT025CB 19/09 Q1011=</code>
+Girona; SPECI emitido porque la dirección media del viento cambió ≥ 60° con velocidad media ≥ 10 kt respecto al informe anterior (§2.2, criterio 1); el viento es ahora de 320° con rachas de 30 kt (variación de la racha de 12 kt ≥ umbral de 10 kt, criterio 3); SCT025CB = cumulonimbo a 2500 ft; 19 °C / 9 °C; QNH 1011.</p>
+<p><strong>Ej. 9 (sintético, LEZG, polvo):</strong>
+<code>METAR LEZG 150530Z 27025G40KT 2000 DRDU BKN035 26/05 Q1008=</code>
+Zaragoza; viento 270° a 25 kt con rachas de 40 kt; visibilidad 2000 m; <strong>DRDU</strong> = ventisca baja de polvo; BKN035; 26 °C / 5 °C (gran diferencia: aire seco); QNH 1008.</p>
+<p><strong>Ej. 10 (sintético, LEBZ, niebla engelante):</strong>
+<code>METAR LEBZ 010600Z 03003KT 0600 FZFG VV001 M02/M02 Q1025=</code>
+Badajoz; viento 030° a 3 kt; visibilidad 600 m; <strong>FZFG</strong> = niebla engelante; VV001 (100 ft); -2 °C / -2 °C; QNH 1025. El inicio de FZFG es un desencadenante de SPECI del criterio 5 del §2.2 (inicio o cese de niebla engelante).</p>
+<p><strong>Ej. 11 (sintético, LERT, tormenta que se aproxima):</strong>
+<code>METAR LERT 160200Z 18012KT 9999 VCTS FEW020 SCT025CB BKN100 27/19 Q1006=</code>
+Rota; viento 180° a 12 kt; visibilidad ≥ 10 km; <strong>VCTS</strong> = tormenta en las inmediaciones (8-16 km, aún no sobre el aeródromo, por lo que no es «en el aeródromo» y todavía no se aplicaría RE ni TS actual); tres capas de nubes, una de ellas CB; 27 °C / 19 °C; QNH 1006.</p>
+<p><strong>Ej. 12 (sintético, LEAL, SPECI por granizo):</strong>
+<code>SPECI LEAL 170445Z 24020G35KT 1500 +TSGR BKN008CB 18/17 Q0998=</code>
+Alicante; SPECI por el inicio de tormenta con granizo y precipitación fuerte (§2.2, criterios 4 y, con matices, también los umbrales de RVR/visibilidad); viento 240° con rachas de 35 kt; visibilidad 1500 m; <strong>+TSGR</strong> = tormenta fuerte con granizo; BKN008CB (800 ft); 18 °C / 17 °C; QNH 998 (presión baja, coherente con un sistema tormentoso).</p>
+<p><strong>Ej. 13 (sintético, LEIB, nieve):</strong>
+<code>METAR LEIB 200500Z 05010KT 1200 -SN BKN012 M01/M02 Q1030=</code>
+(La nieve en Ibiza es climatológicamente muy rara; es deliberadamente inusual para comprobar que el alumno lee el código y no da por supuesto el lugar.) Viento 050° a 10 kt; visibilidad 1200 m; <strong>-SN</strong> = nieve leve; BKN012; -1 °C / -2 °C; QNH 1030 (anticiclón fuerte, ola de frío).</p>
+<p><strong>Ej. 14 (sintético, LEVX, AUTO con precipitación desconocida):</strong>
+<code>METAR LEVX 210330Z AUTO 21006KT 4000 -UP BKN020/// 09/08 Q1015=</code>
+Estación AUTO; viento 210° a 6 kt; visibilidad 4000 m; <strong>-UP</strong> = precipitación leve desconocida (el sistema automático no puede clasificar lluvia, nieve o llovizna); <strong>BKN020///</strong> = capa detectada a 2000 ft pero cuyo tipo o género de nube no pudo determinarse automáticamente (las tres barras sustituyen a la clasificación CB/TCU, no a la altura en este caso; contrástese con el ejercicio anterior, en el que lo desconocido era la propia altura); 9 °C / 8 °C; QNH 1015.</p>
+<p><strong>Ej. 15 (sintético, LEGE, CAVOK):</strong>
+<code>METAR LEGE 220730Z 24005KT CAVOK 21/06 Q1023 NOSIG=</code>
+Girona; viento 240° a 5 kt; <strong>CAVOK</strong> (visibilidad ≥ 10 km, sin nubes de importancia para las operaciones, sin tiempo significativo: se cumplen las tres condiciones del §2.4, por lo que se omiten por completo los grupos de visibilidad, nubes y tiempo); 21 °C / 6 °C; QNH 1023; NOSIG.</p>
+<p><strong>Ej. 16 (sintético, LEZG, RVR con letra de pista):</strong>
+<code>METAR LEZG 230600Z 06004KT 0900 FG R12L/0800N R12R/1000U 08/08 Q1019=</code>
+Zaragoza; dos pistas paralelas 12L/12R con RVR independiente: 800 m sin cambio en la 12L, 1000 m en mejora en la 12R; 8 °C / 8 °C (condiciones de niebla).</p>
+<p><strong>Ej. 17 (sintético, LEBZ, turbonada):</strong>
+<code>METAR LEBZ 240815Z 21008KT 9999 SQ FEW040CB 24/11 Q1012=</code>
+Badajoz; <strong>SQ</strong> = turbonada (aumento repentino y fuerte del viento ≥ 16 kt, con una duración ≥ 1 minuto, y luego amaina; el propio grupo de viento puede no mostrar la racha máxima si esta se produjo y terminó justo antes del minuto de observación); FEW040CB; 24 °C / 11 °C; QNH 1012.</p>
+<p><strong>Ej. 18 (sintético, LERT, tempestad de arena, un código inusual para España):</strong>
+<code>METAR LERT 250330Z 18025G45KT 0300 +SS 26/04 Q1002=</code>
+Rota; <strong>+SS</strong> = tempestad de arena fuerte (episodio de levante o de polvo sahariano, raro pero documentado en el sur de España); viento 180° con rachas de 45 kt; visibilidad 300 m; no se da grupo de nubes (oscurecido por el polvo, pero aquí no se codifica VV porque el cielo no está necesariamente cubierto por nubes; trampa de examen: los episodios de polvo o arena no siempre llevan un grupo VV como la niebla, según lo que se observe realmente); 26 °C / 4 °C; QNH 1002.</p>
+<p><strong>Ej. 19 (sintético, LEAL, dos temperaturas próximas a la congelación con M):</strong>
+<code>METAR LEAL 260600Z 32003KT 9999 SCT200 M01/M03 Q1028=</code>
+Viento 320° a 3 kt; visibilidad ≥ 10 km; SCT200 (20 000 ft, capa alta de tipo cirro); <strong>M01/M03</strong> = -1 °C / -3 °C; QNH 1028.</p>
+<p><strong>Ej. 20 (sintético, LEIB, neblina, no niebla):</strong>
+<code>METAR LEIB 270545Z 00000KT 4000 BR SCT008 18/17 Q1020=</code>
+Calma; visibilidad 4000 m; <strong>BR</strong> (neblina, no FG, porque la visibilidad es ≥ 1000 m; el límite entre niebla y neblina son 1000 m, según OM03); SCT008; 18 °C / 17 °C (HR &gt; 70 %, coherente con neblina y no con calima); QNH 1020.</p>
+<p><strong>Ej. 21 (sintético, LEVX, criterio de racha en el umbral exacto):</strong>
+<code>METAR LEVX 280930Z 25015G25KT 9999 SCT030 16/10 Q1016=</code>
+Viento 250° a 15 kt con rachas de 25 kt: la racha supera a la media exactamente en 10 kt, el umbral mínimo para que se codifique siquiera el grupo G (§2.3); si la racha hubiera sido de solo 22 kt (7 kt por encima de la media), no aparecería ningún grupo G.</p>
+<p><strong>Ej. 22 (sintético, LEGE, grupo RE):</strong>
+<code>METAR LEGE 291200Z 30010KT 9999 SCT025 RETS 19/12 Q1014=</code>
+Viento 300° a 10 kt; visibilidad ≥ 10 km; SCT025; <strong>RETS</strong> = hubo una tormenta desde el último informe o en la última hora, pero no está ocurriendo ahora (no hay TS en el grupo de tiempo actual); 19 °C / 12 °C; QNH 1014.</p>
+<p><strong>Ej. 23 (sintético, LEZG, corrección):</strong>
+<code>METAR COR LEZG 300730Z 18006KT 9999 FEW040 20/09 Q1017=</code>
+COR = sustituye a un METAR anterior erróneo para la misma hora; por lo demás se lee como un informe normal: viento 180° a 6 kt, visibilidad ≥ 10 km, FEW040, 20 °C / 9 °C, QNH 1017.</p>
+<p><strong>Ej. 24 (sintético, LEBZ, grupo ausente con barras):</strong>
+<code>METAR LEBZ 010900Z ///// 9999 SCT030 21/10 Q1018=</code>
+El grupo de viento no está disponible en absoluto (fallo del sensor): se codifica como <strong>/////</strong> (5 barras, igual que el número habitual de caracteres del grupo de viento), no se omite; un informe nunca se salta sin más un elemento obligatorio: los datos no disponibles se muestran siempre con el número correcto de barras para ese grupo.</p>
+<p><strong>Ej. 25 (sintético, LERT, AUTO + TREND a la vez):</strong>
+<code>METAR LERT 021300Z AUTO 09012KT 9999 SCT025 25/13 Q1015 BECMG 1315/1317 24020G35KT TSRA BKN010CB=</code>
+Estación AUTO; viento 090° a 12 kt; SCT025; 25 °C / 13 °C; QNH 1015; <strong>TREND</strong>: BECMG entre las 13:15 y las 13:17 UTC, cambio permanente a viento 240° con rachas de 35 kt, tormenta con lluvia, BKN010CB; una tendencia de empeoramiento que el sistema automático notifica igualmente (las estaciones automáticas pueden llevar grupos TREND cuando se dispone de los sensores necesarios).</p>
+<h3 id="parte-b-taf-15-ejercicios">Parte B — TAF (15 ejercicios)</h3>
+<p><strong>Ej. 26 (ejemplo oficial, OMM-49 Apéndice 1):</strong>
+<code>TAF AMD NZAA 240855Z 2409/2506 24010KT 9999 FEW030 BECMG 2411/2413 VRB02KT 2000 HZ FM 242200 24010KT CAVOK=</code>
+Auckland; <strong>AMD</strong> = enmienda; emitido el día 24 a las 08:55 UTC; válido desde las 09 UTC del día 24 hasta las 06 UTC del día 25; viento 240° a 10 kt, visibilidad ≥ 10 km, FEW030; <strong>BECMG 2411/2413</strong>: entre las 11 y las 13 UTC del día 24, cambio permanente a VRB02KT, visibilidad 2000 m, calima (HZ); <strong>FM242200</strong>: exactamente a las 22:00 UTC del día 24, reinicio completo a viento 240° a 10 kt y CAVOK (todos los grupos anteriores quedan sustituidos).</p>
+<p><strong>Ej. 27 (ejemplo oficial):</strong>
+<code>TAF ZBAA 240440Z 2406/2506 13004MPS 6000 NSC BECMG 2415/2416 2000 SN OVC040 TEMPO 2418/24211000 SN BECMG 2500/2501 32004MPS 3500 BR NSC BECMG 2503/2504 32010G20MPS CAVOK=</code>
+Pekín; emitido el día 24 a las 04:40 UTC; válido de las 06 UTC del 24 a las 06 UTC del 25; viento 130° a 4 m/s (unidad MPS, no KT; unos 8 kt); visibilidad 6000 m; NSC; <strong>BECMG 2415/2416</strong>: de 15 a 16 UTC del 24, cambio permanente a visibilidad 2000 m, nieve, OVC040; <strong>TEMPO 2418/2421 1000 SN</strong>: de 18 a 21 UTC del 24, fluctuación temporal a visibilidad 1000 m con nieve; <strong>BECMG 2500/2501</strong>: de 00 a 01 UTC del 25, cambio permanente a viento 320° a 4 m/s, visibilidad 3500 m, neblina, NSC; <strong>BECMG 2503/2504</strong>: de 03 a 04 UTC del 25, cambio permanente a viento 320° a 10 m/s con rachas de 20 m/s, CAVOK. Cuatro grupos de cambio distintos en un mismo TAF: buen ejemplo de cuántos grupos puede llevar legítimamente un solo pronóstico cuando las condiciones evolucionan a lo largo de la noche.</p>
+<p><strong>Ej. 28 (ejemplo oficial):</strong>
+<code>TAF YSSY 240443Z 2406/2506 05015KT 3000 BR SCT030 BECMG 2414/2416 33008KT FM 2422 04020KT CAVOK=</code>
+Sídney; emitido el día 24 a las 04:43 UTC; válido de las 06 del 24 a las 06 del 25; viento 050° a 15 kt; visibilidad 3000 m; neblina; SCT030; <strong>BECMG 2414/2416</strong>: cambio permanente solo del viento, a 330° a 8 kt (los demás elementos no cambian, ya que solo se da el viento después de BECMG); <strong>FM2422</strong>: a las 22:00 UTC del 24, reinicio completo a viento 040° a 20 kt y CAVOK.</p>
+<p><strong>Ej. 29 (sintético, LEAL, tormenta + PROB):</strong>
+<code>TAF LEAL 051100Z 0512/0612 25012KT 9999 FEW030 TEMPO 0515/0518 SCT025CB PROB30 TEMPO 0518/0521 TSRA BKN015CB=</code>
+Alicante; emitido el día 5 a las 11:00 UTC; válido de las 12 del 5 a las 12 del 6 (24 h); viento 250° a 12 kt; visibilidad ≥ 10 km; FEW030; TEMPO de 15 a 18 UTC del 5: nubes convectivas temporales SCT025CB; PROB30 TEMPO de 18 a 21 UTC del 5: probabilidad del 30-39 % de una tormenta temporal con lluvia y BKN015CB.</p>
+<p><strong>Ej. 30 (sintético, LEIB, pronóstico nocturno de baja visibilidad):</strong>
+<code>TAF LEIB 101700Z 1018/1118 VRB02KT 9000 NSC BECMG 1102/1104 1500 BR BKN006 TEMPO 1104/1107 0400 FG VV001 BECMG 1108/1110 8000 NSW SCT015=</code>
+Ibiza; TAF de 30 horas; viento flojo y variable, visibilidad 9000 m, NSC; niebla prevista durante la noche: BECMG de 02 a 04 UTC a visibilidad 1500 m, neblina, BKN006; TEMPO de 04 a 07 UTC a visibilidad 400 m, niebla, visibilidad vertical 100 ft; BECMG de 08 a 10 UTC con mejora a 8000 m, sin tiempo significativo, SCT015: el patrón clásico de TAF de niebla de radiación (noche despejada → la niebla se forma pasada la medianoche → se disipa a media mañana).</p>
+<p><strong>Ej. 31 (sintético, LEVX, grupo FM usado dos veces):</strong>
+<code>TAF LEVX 121400Z 1215/1315 21015G28KT 9999 SCT025 FM122100 24020G35KT 4000 SHRA BKN015CB FM130300 27012KT 9999 NSC=</code>
+Vigo; viento 210° con rachas de 28 kt al principio; <strong>FM122100</strong>: a las 21:00 UTC del 12, reinicio completo: el viento rola a 240° con rachas de 35 kt, la visibilidad baja a 4000 m con chubascos de lluvia y BKN015CB; <strong>FM130300</strong>: a las 03:00 UTC del 13, otro reinicio completo: el frente ha pasado, viento 270° a 12 kt, visibilidad ≥ 10 km, NSC. Dos grupos FM consecutivos modelan con limpieza el paso de un frente, cada uno como una base nueva y completa.</p>
+<p><strong>Ej. 32 (sintético, LEGE, nieve y condiciones de engelamiento):</strong>
+<code>TAF LEGE 200500Z 2006/2106 32010KT 9000 -SN BKN020 TEMPO 2008/2012 4000 SN BKN010 BECMG 2014/2016 34006KT 9999 NSC=</code>
+Girona; nieve leve durante toda la mañana; TEMPO con empeoramiento a 4000 m con nieve y BKN010 entre las 08 y las 12 UTC; despeje (BECMG) hacia condiciones parecidas a CAVOK (NSC, 9999) entre las 14 y las 16 UTC.</p>
+<p><strong>Ej. 33 (sintético, LEZG, viento fuerte y polvo):</strong>
+<code>TAF LEZG 010600Z 0106/0206 28030G50KT 9999 NSC TEMPO 0106/0112 3000 DRDU BECMG 0118/0120 24015KT 9999=</code>
+Zaragoza (episodio de cierzo); viento 280° con rachas de hasta 50 kt; TEMPO de 06 a 12 UTC: reducción temporal a 3000 m por ventisca baja de polvo; BECMG de 18 a 20 UTC: el viento amaina a 240° a 15 kt.</p>
+<p><strong>Ej. 34 (sintético, LEBZ, TX/TN con dos valores cada uno):</strong>
+<code>TAF LEBZ 150500Z 1506/1606 VRB02KT 9999 NSC TX34/1514Z TN14/1605Z TX20/1523Z TN10/1523Z=</code>
+(Deliberadamente denso e inusual: dos TX y dos TN en un mismo TAF, el máximo que permite la OMM-49.) Máxima de 34 °C a las 14 UTC del 15; mínima de 14 °C a las 05 UTC del 16; una segunda máxima, más baja, de 20 °C a las 23 UTC del 15 y una segunda mínima de 10 °C a las 23 UTC del 15; trampa de examen que comprueba si el alumno sabe que TX/TN pueden aparecer <strong>hasta 4 veces</strong>, y no solo una cada una, según el Anexo 3 (§3.2).</p>
+<p><strong>Ej. 35 (sintético, LERT, VRB en el cuerpo principal del TAF):</strong>
+<code>TAF LERT 220500Z 2206/2306 VRB03KT 9999 SCT025 BECMG 2212/2214 21015KT 9999 NSC=</code>
+VRB03KT al inicio de la validez (un patrón habitual de primera hora de la mañana, con viento en calma y cambiante); BECMG posterior a un viento estable.</p>
+<p><strong>Ej. 36 (sintético, LEAL, TAF cancelado):</strong>
+<code>TAF LEAL 231000Z 2312/2412 24010KT 9999 NSC=</code> seguido más tarde de <code>TAF LEAL CNL 231400Z 2312/2412=</code>
+El primer TAF se emite con normalidad; a las 14:00 UTC del mismo día se <strong>cancela (CNL)</strong> porque ya no puede mantenerse bajo vigilancia continua (problema de equipos o de personal); según el §3.1, un TAF que no puede revisarse debe cancelarse, no dejarse caducar en silencio.</p>
+<p><strong>Ej. 37 (sintético, LEIB, PROB40 sin TEMPO, trampa de examen):</strong>
+<code>TAF LEIB 240500Z 2406/2506 30012KT 9999 SCT030 PROB40 2412/2415 TSRA BKN012CB=</code>
+Esta línea está escrita <strong>como trampa</strong>: un <code>PROB40 ddhh/ddhh</code> solo, <strong>sin</strong> un TEMPO a continuación, no es el uso estándar del Anexo 3 (el §3.2 establece que PROB se combina normalmente con TEMPO); un TAF bien formado diría <code>PROB40 TEMPO 2412/2415 TSRA BKN012CB</code>. Hay que reconocer la falta del TEMPO como un error de formato, no como una construcción alternativa válida.</p>
+<p><strong>Ej. 38 (sintético, LEVX, BECMG que supera la ventana recomendada, trampa de examen):</strong>
+<code>TAF LEVX 010600Z 0106/0206 24010KT 9999 NSC BECMG 0106/0112 1500 BR BKN006=</code>
+La ventana del BECMG abarca aquí <strong>6 horas</strong> (de 06 a 12 UTC), lo que supera la pauta de «nunca más de 4 horas» del §3.2; se incluye a propósito para comprobar que se reconoce una duración de grupo de cambio fuera de especificación (aunque no inválida en el código).</p>
+<p><strong>Ej. 39 (sintético, LEGE, enmienda por mejora):</strong>
+<code>TAF LEGE 051100Z 0512/0612 20008KT 9999 SCT025 BECMG 0518/0520 24012KT 9999 NSC=</code>, enmendado más tarde: <code>TAF AMD LEGE 051500Z 0515/0612 20008KT 9999 SCT025 NSC=</code>
+El AMD elimina por completo el BECMG anterior porque el pronosticador ya no espera empeoramiento; demuestra que una enmienda puede <strong>simplificar</strong> un TAF, y no solo añadir complejidad, cuando se reevalúan las condiciones como mejores de lo previsto en un principio (§3.1, vigilancia continua).</p>
+<p><strong>Ej. 40 (sintético, LEZG, contraste entre BECMG solo de viento y BECMG con todos los grupos):</strong>
+<code>TAF LEZG 090500Z 0906/1006 18008KT 9999 SCT030 BECMG 0912/0914 27020G35KT BECMG 0918/0920 27015KT 6000 BR NSC=</code>
+El primer BECMG cambia <strong>solo el viento</strong> (los grupos de visibilidad, nubes y tiempo permanecen implícitamente sin cambios, ya que no sigue nada más a BECMG; coincide con la regla del §3.2 de que solo se indican los elementos que cambian); el segundo BECMG cambia el viento <strong>y</strong> la visibilidad <strong>y</strong> el tiempo <strong>y</strong> las nubes a la vez, porque los cuatro se enumeran de forma explícita a continuación.</p>
+<h3 id="parte-c-sigmet-airmet-gamet-15-ejercicios">Parte C — SIGMET / AIRMET / GAMET (15 ejercicios)</h3>
+<p><strong>Ej. 41 (ejemplo oficial, OMM-49 Apéndice 1):</strong>
+<code>HECC SIGMET 2 VALID 240900/241200 HECA- HECC CAIRO FIR SEV TURB OBS N OF N27 FL 390/440 MOV E 25KMH NC.</code>
+FIR de El Cairo; SIGMET número 2 del día; válido de las 09:00 a las 12:00 UTC del día 24 (3 horas, dentro del techo de 4 horas); emitido por HECA; <strong>turbulencia fuerte observada</strong> al norte de la latitud 27°N, entre FL390 y FL440; se desplaza al este a 25 km/h; <strong>NC</strong> = sin cambio (intensidad estable, ni debilitándose ni intensificándose).</p>
+<p><strong>Ej. 42 (sintético, FIR ficticia «MARVELON», engelamiento fuerte):</strong>
+<code>LEXX SIGMET 1 VALID 010600/010900 LEYY- LEXX MARVELON FIR SEV ICE FCST 0700Z N40 W004 FL080/140 MOV NE 15KT INTSF=</code>
+FIR ficticia (en línea con el uso que hace la propia guía de AEMET de nombres de FIR inventados para SIGMET didácticos, p. ej., «Shanlon», «Amswell»); SIGMET 1, validez de 3 horas; engelamiento fuerte <strong>previsto</strong> (aún no observado) a las 07:00 UTC, posición 40°N 004°W, FL080-140; se desplaza al NE a 15 kt; <strong>INTSF</strong> = intensificándose.</p>
+<p><strong>Ej. 43 (sintético, tormentas con granizo):</strong>
+<code>LEXX SIGMET 4 VALID 021300/021700 LEYY- LEXX MARVELON FIR EMBD TSGR OBS AT 1300Z WI N39/W002 - N41/W001 - N41/W003 - N39/W002 TOP FL450 STNR NC=</code>
+<strong>EMBD TSGR</strong> = tormentas integradas con granizo; el área se describe mediante un <strong>polígono</strong> de puntos de latitud/longitud («WI» = dentro de) en lugar de un solo punto + radio, y se cierra volviendo al primer punto; tope FL450; <strong>STNR</strong> = estacionario; NC = sin cambio. La validez es aquí de <strong>4 horas</strong>, el máximo para un fenómeno que no sea VA/TC.</p>
+<p><strong>Ej. 44 (sintético, SIGMET de tipo ciclón tropical con validez de 6 h, trampa de examen sobre la duración de la validez):</strong>
+<code>LEXX SIGMET 5 VALID 030600/031200 LEYY- LEXX MARVELON FIR SEV TURB OBS AT 0600Z N38/W006 FL200/300 MOV SW 10KT WKN=</code>
+Esta línea es una <strong>trampa deliberada</strong>: declara <strong>SEV TURB</strong> (turbulencia ordinaria, no TC ni VA) pero le da una <strong>validez de 6 horas</strong> (06:00-12:00 UTC), superior al techo de 4 horas que se aplica a todos los fenómenos SIGMET salvo las cenizas volcánicas y los ciclones tropicales (§4.1). Un SIGMET correctamente emitido para SEV TURB no podría llevar esta ventana de validez.</p>
+<p><strong>Ej. 45 (sintético, cenizas volcánicas, validez de 6 h, bien formado):</strong>
+<code>LEXX SIGMET 6 VALID 040300/040900 LEYY- LEXX MARVELON FIR VA ERUPTION MT FICTICIA PSN N4200 W00300 VA CLD OBS AT 0300Z N4200 W00300 - N4230 W00230 - N4145 W00200 FL200/350 MOV NE 20KT INTSF FCST AT 0900Z VA CLD APRX N4300 W00130 - N4330 W00030=</code>
+SIGMET de cenizas volcánicas, con la <strong>validez ampliada de 6 horas</strong> correctamente usada; erupción de un «Mt Fisticia» ficticio; posición de la nube de cenizas dada como polígono, FL200-350; se desplaza al NE a 20 kt; intensificándose; se da una posición prevista al final de la validez (práctica estándar en los SIGMET de VA, en línea con el SIGMET resuelto 3 de los apuntes base).</p>
+<p><strong>Ej. 46 (sintético, ciclón tropical con el umbral exacto de 34 kt):</strong>
+<code>LEXX SIGMET 7 VALID 050000/050600 LEYY- LEXX MARVELON FIR TC PENELOPE PSN N2000 W02500 CB OBS AT 0000Z WI 200NM OF TC CENTRE TOP FL480 MOV W 12KT INTSF FCST AT 0600Z TC CENTRE N2015 W02620=</code>
+TC «Penelope»; cumple implícitamente el umbral de viento medio en superficie de 10 minutos <strong>≥ 34 kt (17 m/s)</strong> que hace que una depresión reciba el tratamiento de SIGMET de categoría TC (§4.1); el propio texto del SIGMET no repite la velocidad del viento (está implícita en la clasificación TC, en línea con la regla del §4.1 de que un SIGMET de tormenta o de TC no debe llevar material descriptivo adicional).</p>
+<p><strong>Ej. 47 (sintético, nube radiactiva, un código que rara vez se evalúa pero es real):</strong>
+<code>LEXX SIGMET 8 VALID 060800/061200 LEYY- LEXX MARVELON FIR RDOACT CLD OBS AT 0800Z N4000 W00500 SFC/FL100 MOV NE 08KT NC=</code>
+<strong>RDOACT CLD</strong> = nube radiactiva, la categoría de SIGMET correspondiente a la cadena de productos del CMRE (OM03 §1.2); rara vez se ve en operaciones, pero es un código válido y evaluable.</p>
+<p><strong>Ej. 48 (sintético, onda de montaña):</strong>
+<code>LEXX SIGMET 9 VALID 070600/071000 LEYY- LEXX MARVELON FIR SEV MTW OBS AT 0600Z N4230 W00100 FL080/180 STNR NC=</code>
+<strong>SEV MTW</strong> = onda de montaña fuerte, un fenómeno importante en España (Pirineos, cordillera Cantábrica, Sierra Nevada) que enlaza esta categoría de SIGMET con el material de OM03 sobre ondas de montaña y rotores (§9.5 del manual).</p>
+<p><strong>Ej. 49 (sintético, tempestad de polvo):</strong>
+<code>LEXX SIGMET 10 VALID 080900/081300 LEYY- LEXX MARVELON FIR HVY DS OBS AT 0900Z ENTIRE FIR MOV E 20KT NC=</code>
+<strong>HVY DS</strong> sobre <strong>toda la FIR</strong> (alternativa a un área delimitada por latitud/longitud cuando el fenómeno es realmente generalizado); ocasión para una trampa de examen: el alumno debe reconocer «ENTIRE FIR» como descriptor de área válido, no como un error de formato.</p>
+<p><strong>Ej. 50 (sintético, AIRMET, viento en superficie):</strong>
+<code>LEXX AIRMET 1 VALID 090600/091000 LEYY- LEXX MARVELON FIR/CTA SFC WIND 35KT OBS AT 0600Z N39/W002 MOV NE 10KT NC=</code>
+AIRMET (no SIGMET; obsérvese que no usa el vocabulario de fenómenos del SIGMET): <strong>SFC WIND</strong>, viento medio extenso de 35 kt, por encima del umbral de 30 kt del AIRMET; validez de 4 horas (el techo del AIRMET).</p>
+<p><strong>Ej. 51 (sintético, AIRMET, visibilidad reducida):</strong>
+<code>LEXX AIRMET 2 VALID 091000/091400 LEYY- LEXX MARVELON FIR/CTA SFC VIS 3000M BR OBS AT 1000Z WI N38/W004 - N39/W003 - N38/W002 NC=</code>
+<strong>SFC VIS</strong>, reducción extensa a 3000 m por neblina, por debajo del umbral de 5000 m del AIRMET, con el área dada como polígono.</p>
+<p><strong>Ej. 52 (sintético, AIRMET, CB aislados):</strong>
+<code>LEXX AIRMET 3 VALID 100600/101000 LEYY- LEXX MARVELON FIR/CTA ISOL CB OBS AT 0600Z N40/W003 TOP FL120 STNR NC=</code>
+<strong>ISOL CB</strong> = cumulonimbos aislados, por debajo de FL150 en la parte montañosa de la FIR (según el techo aplicable en España del §4.2), lo que distingue «aislados» del vocabulario «integrados/frecuentes» reservado a la cobertura de tormentas de nivel SIGMET.</p>
+<p><strong>Ej. 53 (sintético, cancelación de AIRMET):</strong>
+<code>LEXX AIRMET 3 VALID 100600/101000 ... (como en el Ej. 52)</code>, cancelado por: <code>LEXX CNL AIRMET 3 VALID 100600/101000 LEYY- LEXX MARVELON FIR/CTA CNL AIRMET 3 VALID 100600/101000=</code>
+Forma estándar de cancelación, que reproduce la propia estructura CNL del SIGMET (§4.1); el equivalente para el AIRMET usa el mismo patrón «CNL [tipo] n VALID ...».</p>
+<p><strong>Ej. 54 (sintético, extracto de la Sección I del GAMET):</strong>
+<code>GAMET VALID 111200/111800 LEXX MARVELON FIR/CTA SECTION I SFC WIND 20/25KT SFC VIS 4000 BR MT OBSC N PARTS ICE MOD FL050/100 TURB MOD FL080/150 SIGMET APPLICABLE HAZARDOUS WX NIL=</code>
+GAMET válido durante 6 horas; la Sección I enumera (en este orden, según la plantilla del §4.3 de la OMM-49): viento en superficie con rachas de 20-25 kt, visibilidad en superficie de 4000 m con neblina, montañas oscurecidas en las partes norte, engelamiento moderado FL050-100, turbulencia moderada FL080-150 y una nota de que hay un SIGMET en vigor para parte del área; «HAZARDOUS WX NIL» es una frase de cierre fija que se usa <strong>solo</strong> cuando no se aplica ninguna de las categorías de peligro, por lo que su presencia aquí junto a otros peligros es en sí misma una incoherencia que conviene detectar (al estilo de las trampas de examen): un GAMET genuino omitiría «HAZARDOUS WX NIL» en cuanto se enumerase cualquier peligro.</p>
+<p><strong>Ej. 55 (sintético, extracto de la Sección II del GAMET):</strong>
+<code>GAMET VALID 111200/111800 LEXX MARVELON FIR/CTA SECTION II PSYS LOW N40/W005 1006HPA MOV NE 10KT WIND/T 2000FT 250/15KT PS08 5000FT 240/25KT PS02 10000FT 260/35KT MS06 CLD BKN020/080 FZLVL 8000FT MNM QNH 1004=</code>
+Sección II: una <strong>baja</strong> centrada en 40°N 005°W, 1006 hPa, que se desplaza al NE a 10 kt; viento y temperatura en los cuatro niveles estándar (2000/5000/10 000/15 000 ft, aunque aquí solo se muestran tres por brevedad) con <strong>PS</strong> = temperatura positiva, <strong>MS</strong> = negativa; una capa de nubes BKN entre 2000 y 8000 ft; nivel de congelación a 8000 ft; QNH mínimo previsto en el área de 1004 hPa.</p>
+<h3 id="parte-d-ejercicios-mixtos-y-aplicados-6-ejercicios">Parte D — Ejercicios mixtos y aplicados (6 ejercicios)</h3>
+<p><strong>Ej. 56 (sintético, METAR + TREND, decidir si se aplican los LVP):</strong>
+<code>METAR LEAL 200600Z 21004KT 0500 R10/0350N FG VV001 06/06 Q1021 BECMG 0608/0610 1500 BR NSC=</code>
+Decodifíquese y responda: ¿necesita este aeródromo tener activos los LVP en el momento de la observación? <strong>Sí</strong>: el RVR de 350 m está por debajo del umbral de preparación de LVP de 550 m y por debajo del umbral de operaciones de 400 m (§6.2), y el TREND (mejora a 1500 m hacia las 08-10 UTC) muestra que los LVP solo se desactivarían más tarde por la mañana.</p>
+<p><strong>Ej. 57 (sintético, TAF + correspondencia de categoría CAT):</strong>
+<code>TAF LEIB 210500Z 2106/2206 18010KT 9999 SCT030 TEMPO 2114/2117 0400 FZFG VV001=</code>
+Durante el periodo TEMPO, ¿se prevé que el aeródromo necesite aproximaciones capaces de CAT I, CAT II o CAT III para seguir operando por instrumentos? Con visibilidad de 400 m y visibilidad vertical de 100 ft (sin DH definida a partir de las nubes, ya que el cielo está oscurecido y no hay una base de nubes discreta), las operaciones requerirían capacidad <strong>CAT II o CAT III</strong> (RVR muy por debajo del mínimo de CAT I de 550 m/800 m de visibilidad, según el §6.1); una combinación de pista y aeronave equipada solo para CAT I tendría que suspender las aproximaciones durante la ventana TEMPO.</p>
+<p><strong>Ej. 58 (sintético, identificación de los criterios de SPECI):</strong>
+Dados dos informes consecutivos, <code>METAR LEVX 221200Z 18008KT 9999 SCT025 18/10 Q1015=</code> y, 20 minutos después, <code>SPECI LEVX 221220Z 24016KT 9999 SCT025 18/09 Q1014=</code>, identifíquese qué criterio del §2.2 desencadenó el SPECI. <strong>Respuesta</strong>: la dirección del viento cambió 60° (180°→240°) con una velocidad media posterior al cambio (16 kt) ≥ 10 kt: criterio 1.</p>
+<p><strong>Ej. 59 (sintético, clasificación SIGMET frente a AIRMET):</strong>
+Un pronosticador espera cumulonimbos aislados con engelamiento moderado en FL090 sobre una zona montañosa de la FIR. ¿Debe emitirse como SIGMET o como AIRMET? <strong>AIRMET</strong>: el fenómeno (CB aislados, engelamiento moderado) coincide con la lista de fenómenos del AIRMET (§4.2) y está por debajo del techo de FL100/150; el SIGMET se reserva a fenómenos <em>fuertes</em> (SEV ICE, SEV TURB, TS frecuentes/integradas/de línea de turbonada, no CB aislados), sea cual sea el nivel.</p>
+<p><strong>Ej. 60 (sintético, elección del grupo de cambio del TAF):</strong>
+Un pronosticador espera que la visibilidad baje de 9999 a 3000 m por neblina durante una ventana bien definida de dos horas que empieza a una hora conocida, con alta confianza, y que luego se mantenga así durante el resto de la validez (sin previsión de recuperación dentro del TAF). ¿Qué grupo de cambio es el correcto: BECMG, TEMPO o FM? <strong>BECMG</strong> (un cambio permanente con una ventana de inicio definida) es más apropiado que TEMPO (que implica fluctuaciones temporales que se revierten) o que FM (que implica un cambio rápido, casi instantáneo, y que normalmente se reserva a transiciones bien definidas y bruscas como el paso de un frente); aunque FM también podría justificarse si se espera que la transición sea abrupta, la distinción clave para el examen es que <strong>TEMPO debe descartarse</strong> porque el cambio no fluctúa ni se revierte, sino que persiste.</p>
+<p><strong>Ej. 61 (sintético, escenario completo de impacto sobre la capacidad, de principio a fin):</strong>
+<code>METAR LEZG 010700Z 27035G55KT 9999 FEW040 22/05 Q0995=</code>
+Decodifíquese el METAR y evalúese después el impacto sobre la capacidad ATC. El viento de 270° con rachas de 55 kt se decodifica con normalidad, pero desde el punto de vista operativo: una racha tan fuerte probablemente <strong>supera los límites demostrados de viento cruzado o de cola de la mayoría de los tipos de aeronave</strong> en cualquier pista que no esté muy alineada con 270°, lo que obliga a un cambio de pista (pérdida temporal de capacidad mientras el tráfico hace la transición) y quizá a suspender por completo las operaciones de las categorías de aeronave más pequeñas (§6.3); un ejemplo de cómo un único grupo de viento de un METAR de apariencia sencilla puede ser la base de una pregunta de examen aplicada, del tipo «qué debe esperar el controlador», que combina contenidos del tema 3 con el tema 6 (ATFCM).</p>
+<hr />
+<h2 id="10-trampas-de-examen">10. Trampas de examen</h2>
+<ul>
+<li><strong>El umbral de VRB es 3 kt</strong>, no 6 kt (fuente primaria OMM-49, §2.3/tabla de discrepancias del §8). Un distractor que ofrezca «6 kt» debe reconocerse como erróneo.</li>
+<li><strong>La regla de nubes de CAVOK</strong> es «base por debajo de 1500 m/5000 ft <strong>o</strong> de la MSA más alta, <strong>la que sea mayor</strong>», <strong>más</strong> «sin CB/TCU a ninguna altura»; un distractor que omita la cláusula de CB/TCU a cualquier altura, o que dé una única cifra fija sin la alternativa de la MSA, está incompleto.</li>
+<li><strong>El QFE no aparece nunca en el METAR/SPECI internacional</strong>, solo en los informes locales; una pregunta del tipo «qué grupo es opcional en el METAR de difusión internacional» no debe tratar el QFE como grupo de METAR/SPECI en absoluto.</li>
+<li><strong>FM en un TAF sustituye a todo lo anterior</strong>; BECMG solo cambia los elementos indicados de forma explícita a continuación. No hay que suponer que BECMG reinicia todo el pronóstico como lo hace FM.</li>
+<li><strong>PROB va siempre (en el uso estándar del Anexo 3) acompañado de TEMPO</strong>, y nunca se emite solo como «PROB30 ddhh/ddhh fenómeno» sin la palabra clave TEMPO (la trampa deliberada del Ej. 37).</li>
+<li><strong>La validez del SIGMET es de 4 horas, salvo VA y TC (6 horas)</strong>; un SIGMET que declare 6 horas de validez para un fenómeno ordinario (turbulencia, engelamiento, tormenta, tempestad de polvo...) está mal formado (la trampa del Ej. 44).</li>
+<li><strong>El techo por defecto del AIRMET en la OACI es FL100</strong>; la cifra práctica de España (que coincide con la excepción para zonas montañosas y con la guía de AEMET) es <strong>FL150</strong>: el examen puede pedir la cifra por defecto de la OACI o la práctica española, así que hay que leer la pregunta con atención.</li>
+<li><strong>Los números de secuencia de SIGMET se reinician a las 0001 UTC</strong>, no a ninguna otra hora.</li>
+<li>Los puntos de corte de <strong>altura de decisión</strong> de las categorías CAT son <strong>200/100/50 ft</strong>; los de <strong>RVR</strong>, <strong>550/300/175/50 m</strong>; no hay que intercambiar los números de DH y de RVR entre categorías (patrón clásico de distractor).</li>
+<li><strong>Los LVP se activan con RVR &lt; 550 m y/o DH &lt; 200 ft</strong> para la preparación, y se endurecen con <strong>RVR &lt; 400 m</strong> para el modo de operaciones completo; no hay que confundirlo con los propios umbrales CAT II/III, que son límites de diseño de la pista o del procedimiento y no el punto de activación de los LVP (los LVP se activan <em>antes</em> de llegar a los mínimos CAT III, para estar preparados).</li>
+</ul>
+<hr />
+<h2 id="11-imprescindible-memorizar">11. Imprescindible memorizar</h2>
+<ul>
+<li>Criterios obligatorios de SPECI: dirección del viento ≥60°/velocidad ≥10 kt; cambio de velocidad del viento ≥10 kt; cambio de racha ≥10 kt (media ≥15 kt); inicio, cese o cambio de precipitación engelante, precipitación moderada o fuerte, TS con precipitación; inicio o cese de niebla engelante, TS sin precipitación; capa de nubes &lt;1500 ft que cruza SCT↔BKN/OVC.</li>
+<li>VRB: variación ≥60°&lt;180° y velocidad &lt;3 kt, O variación ≥180°.</li>
+<li>Regla de nubes de CAVOK: base &lt;1500 m/5000 ft o MSA más alta (la que sea mayor), o CB/TCU a cualquier altura.</li>
+<li>Lista de RE: precipitación engelante, precipitación moderada o fuerte, ventisca alta de nieve, tempestad de polvo o de arena, tormenta, nubes de embudo, cenizas volcánicas (+ REUP para AUTO).</li>
+<li>Validez y emisión del TAF: validez de 6-30 h; &lt;12 h, emitido cada 3 h; 12-30 h, emitido cada 6 h. Ventana de BECMG ≤4 h (normalmente 2 h). Episodios TEMPO &lt;1 h, conjunto &lt;la mitad del periodo.</li>
+<li>SIGMET: validez ≤4 h (6 h para VA/TC); se emite ≤4 h antes del inicio (≤12 h para VA/TC, actualizado cada 6 h); un fenómeno por mensaje; el número se reinicia a las 0001 UTC.</li>
+<li>AIRMET: validez ≤4 h; por debajo de FL100 (FL150 en zonas montañosas y en España).</li>
+<li>Umbral del SIGMET de TC: viento medio de 10 min ≥34 kt.</li>
+<li>CAT I: DH≥200 ft, RVR≥550 m/vis≥800 m. CAT II: DH 100-200 ft, RVR≥300 m. CAT IIIA: DH&lt;100 ft, RVR≥175 m. CAT IIIB: DH&lt;50 ft, RVR 50-175 m. CAT IIIC: sin DH, sin límite de RVR.</li>
+<li>LVP: RVR&lt;550 m y/o DH&lt;200 ft (preparación); RVR&lt;400 m (operaciones); finalidad = protección frente a incursiones en pista + integridad de las áreas sensibles del ILS.</li>
+</ul>
+<hr />
+<h2 id="12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oficina de Vigilancia Meteorológica (OVM)</td>
+<td>Meteorological Watch Office (MWO)</td>
+</tr>
+<tr>
+<td>Informe especial local</td>
+<td>Local special report</td>
+</tr>
+<tr>
+<td>Nube de importancia para las operaciones</td>
+<td>Cloud of operational significance</td>
+</tr>
+<tr>
+<td>Altitud mínima de sector (MSA)</td>
+<td>Minimum sector altitude (MSA)</td>
+</tr>
+<tr>
+<td>Visibilidad predominante (Anexo 3: reinante)</td>
+<td>Prevailing visibility</td>
+</tr>
+<tr>
+<td>Tiempo reciente (RE)</td>
+<td>Recent weather (RE)</td>
+</tr>
+<tr>
+<td>Grupo de cambio (BECMG/TEMPO/FM/PROB)</td>
+<td>Change group (BECMG/TEMPO/FM/PROB)</td>
+</tr>
+<tr>
+<td>Cambio rápido (FM)</td>
+<td>Rapid change (FM)</td>
+</tr>
+<tr>
+<td>Vigilancia/revisión continua</td>
+<td>Continuous review</td>
+</tr>
+<tr>
+<td>Enmienda (AMD)</td>
+<td>Amendment (AMD)</td>
+</tr>
+<tr>
+<td>Corrección (COR)</td>
+<td>Correction (COR)</td>
+</tr>
+<tr>
+<td>Pronóstico cancelado (CNL)</td>
+<td>Cancelled forecast (CNL)</td>
+</tr>
+<tr>
+<td>Subárea (AIRMET)</td>
+<td>Sub-area (AIRMET)</td>
+</tr>
+<tr>
+<td>Nube radiactiva</td>
+<td>Radioactive cloud</td>
+</tr>
+<tr>
+<td>Altura de decisión (DH)</td>
+<td>Decision height (DH)</td>
+</tr>
+<tr>
+<td>Altitud de decisión (DA)</td>
+<td>Decision altitude (DA)</td>
+</tr>
+<tr>
+<td>Alcance visual en la pista (RVR)</td>
+<td>Runway visual range (RVR)</td>
+</tr>
+<tr>
+<td>Procedimientos de baja visibilidad (LVP)</td>
+<td>Low Visibility Procedures (LVP)</td>
+</tr>
+<tr>
+<td>Despegue con baja visibilidad (LVTO)</td>
+<td>Low Visibility Take-off (LVTO)</td>
+</tr>
+<tr>
+<td>Aproximación de categoría I/II/III</td>
+<td>Category I/II/III approach</td>
+</tr>
+<tr>
+<td>Área sensible del ILS</td>
+<td>Instrument landing system (ILS) sensitive area</td>
+</tr>
+<tr>
+<td>Mínimos de utilización de aeródromo</td>
+<td>Aerodrome operating minima</td>
+</tr>
+<tr>
+<td>Altitud de transición</td>
+<td>Transition altitude</td>
+</tr>
+<tr>
+<td>Nivel de transición</td>
+<td>Transition level</td>
+</tr>
+<tr>
+<td>Capa de transición</td>
+<td>Transition layer</td>
+</tr>
+<tr>
+<td>Exposición verbal (briefing)</td>
+<td>Briefing</td>
+</tr>
+<tr>
+<td>Consulta</td>
+<td>Consultation</td>
+</tr>
+<tr>
+<td>Mapa de pronóstico</td>
+<td>Prognostic chart</td>
+</tr>
+<tr>
+<td>Superficie isobárica tipo</td>
+<td>Standard isobaric surface</td>
+</tr>
+<tr>
+<td>Mapa modelo</td>
+<td>Model chart</td>
+</tr>
+<tr>
+<td>Autoridad meteorológica</td>
+<td>Meteorological authority</td>
+</tr>
+<tr>
+<td>Autoridad de servicios de tránsito aéreo</td>
+<td>ATS authority</td>
+</tr>
+<tr>
+<td>Certificado de aeródromo</td>
+<td>Aerodrome certificate</td>
+</tr>
+<tr>
+<td>Acción de frenado</td>
+<td>Braking action</td>
+</tr>
+<tr>
+<td>Incursión en pista</td>
+<td>Runway incursion</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-fuentes">13. Fuentes</h2>
+<ul>
+<li><strong>OMM-N.º 49, Reglamento Técnico, volumen II: Servicio meteorológico para la navegación aérea internacional</strong> (<em>WMO-No. 49, Technical Regulations, Volume II — Meteorological Service for International Air Navigation</em>) (ed. de 2018, actualizada en 2021). Secciones leídas: Parte I §4 (observaciones), §6 (pronósticos/TAF), §7 (SIGMET/AIRMET); Parte II Apéndice 1 (mapas modelo/ejemplos), Apéndice 3 (plantillas y criterios de METAR/SPECI/TREND), Apéndice 5 (plantillas de TAF/GAMET), Apéndice 6 (plantillas y fenómenos de SIGMET/AIRMET); definiciones del glosario (<em>briefing</em>, nube de importancia para las operaciones, consulta).</li>
+<li><strong>Guía MET de AEMET (Guía de meteorología aeronáutica)</strong>, 14.ª ed. en inglés + texto actualizado en español (octubre de 2025). Usada para: redacción de la definición de SPECI, contraste de la emisión del TAF.</li>
+<li><strong>Doc 013 EUR de la OACI, «Material de orientación europeo sobre operaciones con cualquier condición meteorológica en aeródromos»</strong> (<em>European Guidance Material on All-Weather Operations at Aerodromes</em>), 5.ª ed. (septiembre de 2016), mediante la copia de la biblioteca de SKYbrary de EUROCONTROL. Usado para: definiciones de CAT I/II/III/DH/RVR (§6.1), definición y umbrales de los LVP (§6.2).</li>
+<li><strong>AIP España GEN 3.5</strong> (servicio meteorológico), texto en inglés. Usado para: lista de contenido del ATIS (§5).</li>
+<li><strong>Manual 3 de ENAIRE</strong> («Conceptos básicos de Meteorología Aeronáutica»), con referencia cruzada (no releído íntegramente aquí; véase <code>syllabus/manual/OM03-meteorology-study-guide.md</code> para la cita completa de ese documento).</li>
+<li>Archivo base <code>syllabus/t03-meteorology.md</code>, con referencia cruzada para evitar duplicar sus 5 METAR/SPECI, 2 TAF y 3 SIGMET de ejemplo de la guía de AEMET.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

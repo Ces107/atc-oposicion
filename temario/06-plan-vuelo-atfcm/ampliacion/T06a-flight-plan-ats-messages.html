@@ -1,0 +1,930 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Plan de vuelo, mensajes ATS e IFPS (T06a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Plan de vuelo y gestión de afluencia (ATFCM)</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-contexto-de-espacio-aereo-y-reglas-que-el-plan-de-vuelo-necesita">1. Contexto de espacio aéreo y reglas que el plan de vuelo necesita</a><ul>
+<li><a href="#11-reglas-de-vuelo-ifr-vfr-y-z-casilla-8">1.1 Reglas de vuelo: IFR, VFR, Y, Z (casilla 8)</a></li>
+<li><a href="#12-gat-oat">1.2 GAT / OAT</a></li>
+<li><a href="#13-clases-de-espacio-aereo">1.3 Clases de espacio aéreo</a></li>
+<li><a href="#14-designadores-de-ruta-ats-puntos-significativos-sidstar">1.4 Designadores de ruta ATS, puntos significativos, SID/STAR</a></li>
+<li><a href="#15-niveles-de-vuelo-y-regla-semicircular-niveles-de-crucero">1.5 Niveles de vuelo y regla semicircular (niveles de crucero)</a></li>
+<li><a href="#16-puntos-de-notificacion">1.6 Puntos de notificación</a></li>
+</ul>
+</li>
+<li><a href="#2-el-formulario-de-plan-de-vuelo-fpl-de-la-oaci-2012-casilla-por-casilla">2. El formulario de plan de vuelo (FPL) de la OACI 2012, casilla por casilla</a><ul>
+<li><a href="#21-casilla-7-identificacion-de-aeronave-max-7-caracteres">2.1 Casilla 7 - Identificación de aeronave (máx. 7 caracteres)</a></li>
+<li><a href="#22-casilla-8-reglas-de-vuelo-y-tipo-de-vuelo-1-o-2-caracteres">2.2 Casilla 8 - Reglas de vuelo y tipo de vuelo (1 o 2 caracteres)</a></li>
+<li><a href="#23-casilla-9-numero-y-tipo-de-aeronaves-categoria-de-estela-turbulenta">2.3 Casilla 9 - Número y tipo de aeronaves, categoría de estela turbulenta</a></li>
+<li><a href="#24-casilla-10-equipo-y-capacidades">2.4 Casilla 10 - Equipo y capacidades</a></li>
+<li><a href="#25-casilla-13-aerodromo-de-salida-y-hora-8-caracteres">2.5 Casilla 13 - Aeródromo de salida y hora (8 caracteres)</a></li>
+<li><a href="#26-casilla-15-ruta-velocidad-nivel-descripcion-de-la-ruta">2.6 Casilla 15 - Ruta (velocidad, nivel, descripción de la ruta)</a></li>
+<li><a href="#27-casilla-16-aerodromo-de-destino-y-eet-total-aerodromos-de-alternativa">2.7 Casilla 16 - Aeródromo de destino y EET total; aeródromo(s) de alternativa</a></li>
+<li><a href="#28-casilla-18-otros-datos-el-catalogo-de-otros-datos">2.8 Casilla 18 - Otros datos (el catálogo de «OTROS DATOS»)</a></li>
+<li><a href="#29-casilla-19-informacion-suplementaria-no-se-transmite-en-el-mensaje-fpl">2.9 Casilla 19 - Información suplementaria (no se transmite en el mensaje FPL)</a></li>
+<li><a href="#210-solicitud-de-plan-de-vuelo-presentado-rqp-y-solicitud-de-informacion-suplementaria-rqs-en-la-practica">2.10 Solicitud de plan de vuelo presentado (RQP) y solicitud de información suplementaria (RQS) en la práctica</a></li>
+<li><a href="#211-ff-ice-efpl-y-gufi-mas-alla-del-fpl-clasico">2.11 FF-ICE, eFPL y GUFI (más allá del FPL clásico)</a></li>
+</ul>
+</li>
+<li><a href="#3-mensajes-ats-catalogo-completo">3. Mensajes ATS: catálogo completo</a><ul>
+<li><a href="#31-mensajes-de-movimiento">3.1 Mensajes de movimiento</a></li>
+<li><a href="#32-mensajes-de-coordinacion">3.2 Mensajes de coordinación</a></li>
+<li><a href="#33-mensajes-suplementarios">3.3 Mensajes suplementarios</a></li>
+<li><a href="#34-mensajes-aidc-el-equivalente-mundial-de-la-oaci-del-oldi">3.4 Mensajes AIDC (el equivalente mundial de la OACI del OLDI)</a></li>
+<li><a href="#35-mensajes-de-emergencia-y-de-alerta-repaso-vease-tambien-om06-23">3.5 Mensajes de emergencia y de alerta (repaso; véase también OM06 §2.3)</a></li>
+</ul>
+</li>
+<li><a href="#4-direccionamiento-prioridades-y-categorias-aftn-amhs">4. Direccionamiento, prioridades y categorías AFTN; AMHS</a><ul>
+<li><a href="#41-estructura-de-una-direccion-aftn">4.1 Estructura de una dirección AFTN</a></li>
+<li><a href="#42-categorias-de-mensajes-e-indicadores-de-prioridad-mas-completo-que-la-tabla-del-manual">4.2 Categorías de mensajes e indicadores de prioridad (más completo que la tabla del manual)</a></li>
+<li><a href="#43-amhs">4.3 AMHS</a></li>
+</ul>
+</li>
+<li><a href="#5-ifps-zonas-tratamiento-validacion-plazos-rpl-ff-ice">5. IFPS: zonas, tratamiento, validación, plazos, RPL, FF-ICE</a><ul>
+<li><a href="#51-la-zona-ifps-ifpz">5.1 La zona IFPS (IFPZ)</a></li>
+<li><a href="#52-plazos-de-presentacion">5.2 Plazos de presentación</a></li>
+<li><a href="#53-validacion-y-respuesta-orm-ack-man-rej">5.3 Validación y respuesta: ORM (ACK / MAN / REJ)</a></li>
+<li><a href="#54-rpl-plan-de-vuelo-repetitivo-lo-que-el-manual-omite">5.4 RPL (plan de vuelo repetitivo): lo que el manual omite</a></li>
+<li><a href="#55-ff-ice-repaso-detalle-en-211">5.5 FF-ICE (repaso; detalle en §2.11)</a></li>
+</ul>
+</li>
+<li><a href="#6-contexto-de-slots-y-afluencia-eobttobttsatctot-mensajes-atfcm-a-cdm">6. Contexto de slots y afluencia: EOBT/TOBT/TSAT/CTOT, mensajes ATFCM, A-CDM</a><ul>
+<li><a href="#61-definiciones-temporales-basicas">6.1 Definiciones temporales básicas</a></li>
+<li><a href="#62-mensajes-de-regulacion-y-de-slot-atfcm-mas-completo-que-la-lista-del-manual">6.2 Mensajes de regulación y de slot ATFCM (más completo que la lista del manual)</a></li>
+<li><a href="#63-hitos-de-a-cdm-airport-collaborative-decision-making-toma-de-decisiones-colaborativa-en-aeropuerto-y-dpi">6.3 Hitos de A-CDM (Airport Collaborative Decision Making, toma de decisiones colaborativa en aeropuerto) y DPI</a></li>
+</ul>
+</li>
+<li><a href="#7-manual-frente-a-fuentes-primarias">7. Manual frente a fuentes primarias</a><ul>
+<li><a href="#rfpqn-primer-o-ultimo-elemento-de-la-casilla-18-rastreo-hasta-las-fuentes-primarias">RFP/Qn: ¿«primer» o «último» elemento de la casilla 18? Rastreo hasta las fuentes primarias</a></li>
+</ul>
+</li>
+<li><a href="#8-15-ejemplos-resueltos-de-planes-de-vuelo">8. 15 ejemplos resueltos de planes de vuelo</a></li>
+<li><a href="#9-15-ejercicios-de-localizar-el-error">9. 15 ejercicios de localizar el error</a></li>
+<li><a href="#10-trampas-de-examen">10. Trampas de examen</a></li>
+<li><a href="#imprescindible-memorizar">Imprescindible memorizar</a></li>
+<li><a href="#glosario-bilingue-es-en">Glosario bilingüe (ES -&gt; EN)</a></li>
+<li><a href="#13-fuentes">13. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">60 min de lectura</div><h1 id="t06a-plan-de-vuelo-mensajes-ats-e-ifps-ampliado">T06a - Plan de vuelo, mensajes ATS e IFPS (ampliado)</h1>
+<p><strong>Alcance de este archivo:</strong> es el material <strong>ampliado, más allá del manual</strong>, del tema 6. El propio manual de ENAIRE se cubre de forma exhaustiva en <code>syllabus/manual/OM06-flight-plan-atfcm-study-guide.md</code> (no se vuelve a estudiar aquí el contenido de esa guía: se remite a ella, no se repite). Este archivo profundiza en el <strong>formulario de plan de vuelo (FPL) de la OACI 2012 casilla por casilla</strong>, el <strong>catálogo completo de mensajes ATS</strong>, el <strong>direccionamiento AFTN/AMHS</strong>, el <strong>tratamiento y la validación del IFPS</strong> y el <strong>contexto de slots y A-CDM</strong> necesario para leer un plan de vuelo real y un mensaje ATFCM real. Se apoya en <strong>fuentes primarias</strong>: el <strong>Manual de Usuario del IFPS</strong> de EUROCONTROL (Wave 2.3, vigencia 22-04-2026), el <strong>Manual de Usuario ATFCM</strong> (Wave 2.3), la <strong>Especificación de EUROCONTROL para A-CDM</strong> (2025-01) y su <strong>Guía de implantación de DPI</strong>, la <strong>lista de comprobación PANS-ATM de EASA</strong> (que reproduce el texto del capítulo 11 y del apéndice 2 del Doc 4444 de la OACI frente a su transposición en la UE), el <strong>AIP España ENR 1.10</strong> (edición de 2026, WEF 06-AUG-26, que reproduce íntegras las instrucciones de la OACI para cumplimentar el plan de vuelo), los <strong>SUPPs EUR del Doc 7030 de la OACI</strong> (Ed. 5, Enm. 9) y <strong>SKYbrary</strong>. Todos los hechos que siguen se leyeron en el texto completo extraído de estos documentos (lista de rutas en «Fuentes»).</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>Un examen de oposición de tipo test sobre esta materia se apoya en datos exactos: la letra que corresponde al contenido de cada casilla del FPL, la longitud máxima de una casilla, los minutos u horas exactos de una regla de plazos, qué campos no puede tocar un CHG, qué significa ACK/MAN/REJ, la estructura de una dirección AFTN y la ventana de cumplimiento del slot (CTOT). Cabe esperar preguntas del tipo «localiza el error en este plan de vuelo», porque así es, literalmente, como se forma al personal del IFPS para revisar planes de vuelo. Este archivo ofrece la especificación casilla por casilla del FPL de la OACI 2012 (casillas 7-19), el catálogo completo de mensajes con emisor, receptor y plazos, el direccionamiento AFTN/AMHS, la validación y la gestión de errores del IFPS, el vocabulario de slots y A-CDM, 15 ejemplos resueltos de planes de vuelo y 15 ejercicios de localizar el error.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Contexto de espacio aéreo y reglas que el plan de vuelo necesita</li>
+<li>El formulario de plan de vuelo (FPL) de la OACI 2012, casilla por casilla</li>
+<li>Mensajes ATS: catálogo completo</li>
+<li>Direccionamiento, prioridades y categorías AFTN; AMHS</li>
+<li>IFPS: zonas, tratamiento, validación, plazos, RPL, FF-ICE</li>
+<li>Contexto de slots y afluencia: EOBT/TOBT/TSAT/CTOT, A-CDM, DPI</li>
+<li>Manual frente a fuentes primarias (incluida la controversia «primero frente a último» de RFP/Qn)</li>
+<li>15 ejemplos resueltos de planes de vuelo</li>
+<li>15 ejercicios de localizar el error</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES -&gt; EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-contexto-de-espacio-aereo-y-reglas-que-el-plan-de-vuelo-necesita">1. Contexto de espacio aéreo y reglas que el plan de vuelo necesita</h2>
+<h3 id="11-reglas-de-vuelo-ifr-vfr-y-z-casilla-8">1.1 Reglas de vuelo: IFR, VFR, Y, Z (casilla 8)</h3>
+<p>La casilla 8 del FPL lleva una letra para las <strong>reglas de vuelo</strong>: <strong>I</strong> = todo el vuelo bajo IFR (<em>Instrument Flight Rules</em>, reglas de vuelo por instrumentos); <strong>V</strong> = todo el vuelo bajo VFR (<em>Visual Flight Rules</em>, reglas de vuelo visual); <strong>Y</strong> = comienza en IFR y después cambia a VFR («IFR y luego VFR»); <strong>Z</strong> = comienza en VFR y después cambia a IFR («VFR y luego IFR»). AIP ENR 1.10. Cuando se usa Y o Z, <strong>la casilla 15 debe indicar el punto en el que se produce el cambio de reglas</strong>, escrito como el punto seguido de un espacio y «VFR» o «IFR» (p. ej. <code>LN VFR</code>, <code>LN/N0284A050 IFR</code>). AIP ENR 1.10.
+Un segundo carácter, opcional, de la casilla 8 indica el <strong>tipo de vuelo</strong>: S servicio aéreo regular, N transporte aéreo no regular, G aviación general, M militar, X otro. AIP ENR 1.10.</p>
+<h3 id="12-gat-oat">1.2 GAT / OAT</h3>
+<p><strong>GAT (<em>General Air Traffic</em>, Circulación Aérea General, CAG)</strong> es el tránsito civil que se rige por las reglas y procedimientos de la OACI; <strong>OAT (<em>Operational Air Traffic</em>, Circulación Aérea Operativa, CAO)</strong> es el tránsito (sobre todo militar) que no cumple íntegramente las reglas y procedimientos de la OACI, típicamente vuelos militares de instrucción u operativos. El IFPS trata <strong>solo la parte GAT</strong> de los planes de vuelo mixtos GAT/OAT dentro del área ECAC. AIP ENR 1.10. El cambio entre ambos se codifica <strong>en la casilla 15</strong> como «punto significativo/GAT» o «punto significativo/OAT» (p. ej. <code>...NTM/OAT TB6...</code>); <strong>el IFPS supone que un plan de vuelo comienza como GAT</strong> salvo que se indique un cambio a OAT, y en ese caso supone OAT todos los tramos anteriores al cambio. AIP ENR 1.10.</p>
+<h3 id="13-clases-de-espacio-aereo">1.3 Clases de espacio aéreo</h3>
+<p>España aplica la <strong>clasificación A a G</strong> de la OACI y de SERA (apéndice 4 de SERA): AIP ENR 1.4.</p>
+<ul>
+<li><strong>A:</strong> solo IFR, servicio ATC, todos los vuelos separados, radiotelefonía (R/T) continua, autorización ATC obligatoria.</li>
+<li><strong>B:</strong> IFR y VFR, servicio ATC, todos los vuelos separados, R/T continua, autorización ATC.</li>
+<li><strong>C:</strong> IFR y VFR; el IFR se separa del IFR y del VFR; el VFR se separa solo del IFR (recibe información de tránsito sobre los demás VFR y, a petición, aviso para evitarlos); R/T continua; autorización ATC; límite de velocidad de 250 kt IAS por debajo del FL100 (salvo exención).</li>
+<li><strong>D:</strong> IFR y VFR, servicio ATC a todos; el IFR se separa solo del IFR; el VFR recibe información de tránsito y, a petición, aviso para evitar el tráfico; R/T continua; autorización ATC; límite de 250 kt IAS por debajo del FL100.</li>
+<li><strong>E:</strong> IFR y VFR; el IFR se separa del IFR y recibe servicio ATC; el VFR recibe información de tránsito «en la medida de lo posible»; R/T continua solo para el IFR; <strong>la clase E no se usa en zonas de control</strong>; límite de 250 kt IAS por debajo del FL100; <strong>autorización ATC obligatoria solo para el IFR</strong>.</li>
+<li><strong>F:</strong> IFR y VFR; <strong>servicio de asesoramiento</strong> (no de control) a los IFR participantes; servicio de información de vuelo a petición; <strong>sin autorización ATC</strong>.</li>
+<li><strong>G:</strong> IFR y VFR; servicio de información de vuelo a petición; <strong>sin autorización ATC</strong>.
+<strong>Regla propia de España: todo el espacio aéreo por encima del FL195 es de clase C.</strong> AIP ENR 1.4. La clase F es, según la OACI, «una medida temporal» a la espera de sustituirla por otra clase. AIP ENR 1.4.</li>
+</ul>
+<h3 id="14-designadores-de-ruta-ats-puntos-significativos-sidstar">1.4 Designadores de ruta ATS, puntos significativos, SID/STAR</h3>
+<p>Un <strong>designador de ruta ATS</strong> es un <strong>designador codificado de 2 a 7 caracteres</strong> (letras más un número), p. ej. <code>BCN1</code>, <code>B1</code>, <code>R14</code>, <code>UB10</code>, o el designador de una SID/STAR como <code>KODAP2A</code>. AIP ENR 1.10. Las convenciones completas de codificación (qué letra de prefijo distingue una ruta convencional de una RNAV, o una ruta inferior de una superior) pertenecen al material del tema 5 y <strong>no se repiten aquí</strong>.
+Un <strong>punto significativo</strong> es un <strong>designador codificado (2-5 caracteres)</strong>, p. ej. <code>LN</code>, <code>MAY</code>, <code>HADDY</code>, o, si no tiene ninguno asignado, una <strong>posición geográfica</strong>: solo grados (7 caracteres, p. ej. <code>46N078W</code>), grados y minutos (11 caracteres, p. ej. <code>4620N07805W</code>) o <strong>marcación y distancia respecto a una ayuda para la navegación</strong> (identificador + marcación magnética de 3 cifras + distancia de 3 cifras en NM, p. ej. <code>DUB180040</code> = 180° magnéticos, 40 NM del VOR DUB). AIP ENR 1.10.
+<strong>SID (<em>Standard Instrument Departure</em>, salida normalizada por instrumentos)</strong> y <strong>STAR (<em>Standard Arrival Route</em>, llegada normalizada)</strong> son procedimientos de salida y de llegada publicados. En los planes de vuelo IFR/GAT que salgan de un aeródromo español, <strong>el primer elemento de la ruta de la casilla 15 (después del grupo velocidad/nivel) debe ser el primer punto significativo de la SID utilizada</strong> o, si no hay SID publicada, el punto donde se enlaza la primera ruta ATS; <strong>el campo ruta no debe contener nunca las siglas «SID» o «STAR» ni sus nombres</strong>, «debido a requisitos operativos del IFPS». AIP ENR 1.10. Es un error de presentación muy frecuente.</p>
+<h3 id="15-niveles-de-vuelo-y-regla-semicircular-niveles-de-crucero">1.5 Niveles de vuelo y regla semicircular (niveles de crucero)</h3>
+<p>Los niveles de crucero se expresan en <strong>niveles de vuelo (FL)</strong> a partir del nivel de vuelo mínimo utilizable, y en <strong>altitudes</strong> por debajo de él. AIP ENR 1.7. En ruta, el nivel que se debe volar depende de la <strong>derrota magnética</strong> y de si el vuelo es IFR o VFR (la «regla semicircular»): AIP ENR 1.7, tabla.</p>
+<ul>
+<li><strong>Derrota 000-179° (el AIP rotula este conjunto de columnas como «090-269° IMPARES», véase la nota siguiente):</strong> el IFR usa <strong>centenares impares de pies</strong> (FL010, FL030, FL050...); el VFR, impares más 500 ft (FL035, FL055, FL075...).</li>
+<li><strong>Derrota 180-359°:</strong> el IFR usa <strong>centenares pares de pies</strong> (FL020, FL040, FL060...); el VFR, pares más 500 ft (FL045, FL065, FL085...).
+(Los encabezados de columna del propio AIP dicen «De 090° a 269° (IMPARES)» y «De 270° a 089° (PARES)»; es la convención semicircular estándar de la OACI, aplicada en toda Europa.) Por encima del FL410 termina la banda RVSM (el RVSM se aplica entre el FL290 y el FL410 inclusive, con separación vertical de 300 m/1000 ft). AIP ENR 1.7.</li>
+</ul>
+<h3 id="16-puntos-de-notificacion">1.6 Puntos de notificación</h3>
+<p>Un <strong>punto de notificación</strong> es un punto significativo sobre el cual una aeronave debe notificar su posición al ATC, y se define igual que cualquier punto significativo de la casilla 15 (nombre codificado, latitud/longitud o marcación/distancia). No existe una codificación aparte: «notificar» es un requisito de servicio asociado a un punto, no otro tipo de punto.</p>
+<hr />
+<h2 id="2-el-formulario-de-plan-de-vuelo-fpl-de-la-oaci-2012-casilla-por-casilla">2. El formulario de plan de vuelo (FPL) de la OACI 2012, casilla por casilla</h2>
+<p>El manual (OM06) reproduce la <strong>maqueta</strong> del formulario bilingüe, pero no explica las casillas una a una; lo que sigue es la <strong>instrucción completa de cumplimentación</strong> de las casillas 7 a 19, tomada del AIP ENR 1.10 (2026), que reproduce casi literalmente las reglas del apéndice 2 del Doc 4444 de la OACI. <strong>Regla general de la casilla 18 (vale para toda la casilla):</strong> <em>«Insértese 0 (cero) si no hay otros datos; o cualquier otra información necesaria ... mediante el indicador apropiado ... seguido de una barra oblicua ('/') y de la información que ha de consignarse... Los guiones o barras oblicuas sólo deberían usarse como se estipula. El uso de indicadores que no se incluyan puede ocasionar que los datos se rechacen, se procesen de manera incorrecta o se pierdan.»</em> AIP ENR 1.10. En general, las casillas del plan de vuelo de la OACI usan <strong>letras latinas mayúsculas, cifras y la barra oblicua «/»</strong>; no se emplean minúsculas ni otros signos de puntuación.</p>
+<h3 id="21-casilla-7-identificacion-de-aeronave-max-7-caracteres">2.1 Casilla 7 - Identificación de aeronave (máx. 7 caracteres)</h3>
+<p>Una de estas opciones: (1) el <strong>designador OACI del explotador + número de vuelo</strong> (p. ej. <code>KLM511</code>, <code>IBE3160</code>); (2) la <strong>matrícula de la aeronave</strong> (marca de nacionalidad o común + matrícula, p. ej. <code>EIAKO</code>, <code>N2567GA</code>), cuando el indicativo de llamada R/T es solo la matrícula, o va precedida del designador de radiotelefonía, o cuando la aeronave no lleva radio; (3) para <strong>aeronaves militares en vuelos nacionales</strong>, la matrícula o el indicativo de llamada R/T. <strong>Sin guiones ni símbolos, máx. 7 caracteres alfanuméricos.</strong> AIP ENR 1.10.</p>
+<h3 id="22-casilla-8-reglas-de-vuelo-y-tipo-de-vuelo-1-o-2-caracteres">2.2 Casilla 8 - Reglas de vuelo y tipo de vuelo (1 o 2 caracteres)</h3>
+<p>Véase el apartado 1.1. AIP ENR 1.10.</p>
+<h3 id="23-casilla-9-numero-y-tipo-de-aeronaves-categoria-de-estela-turbulenta">2.3 Casilla 9 - Número y tipo de aeronaves, categoría de estela turbulenta</h3>
+<ul>
+<li><strong>Número de aeronaves</strong> (1-2 caracteres): solo si hay más de una.</li>
+<li><strong>Tipo de aeronave</strong> (2-4 caracteres): el designador del Doc 8643 de la OACI (p. ej. <code>A320</code>, <code>B738</code>); si no existe, o en una formación de más de un tipo, se inserta <strong><code>ZZZZ</code></strong> y se indican el número y el tipo en la casilla 18, precedidos de <strong><code>TYP/</code></strong>.</li>
+<li><strong>Categoría de estela turbulenta</strong> (1 carácter, precedido de «/»): <strong>J = SUPER</strong> (solo el Airbus A380-800); <strong>H = PESADA</strong> (MTOW ≥ 136 000 kg); <strong>M = MEDIA</strong> (7000 kg &lt; MTOW &lt; 136 000 kg); <strong>L = LIGERA</strong> (MTOW ≤ 7000 kg). AIP ENR 1.10. (Nota: la lista actual añade la J del A380 al conjunto clásico H/M/L; ojo con las opciones de examen que omitan la J o enuncien mal el umbral de la M.)</li>
+</ul>
+<h3 id="24-casilla-10-equipo-y-capacidades">2.4 Casilla 10 - Equipo y capacidades</h3>
+<p><strong>Bloque de radiocomunicaciones, navegación y ayudas para la aproximación:</strong> se inserta <strong>N</strong> (ninguno o no funciona) <strong>o S</strong> (equipo normalizado: RTF en VHF + VOR + ILS, salvo que se prescriba otra cosa) <strong>y/o</strong> una o más letras de una lista definida, entre ellas (selección relevante para el examen): <strong>A</strong> sistema de aterrizaje GBAS, <strong>B</strong> LPV (APV/SBAS), <strong>D</strong> DME, <strong>F</strong> ADF, <strong>G</strong> GNSS, <strong>H</strong> RTF en HF, <strong>I</strong> navegación inercial, <strong>K</strong> MLS, <strong>L</strong> ILS, <strong>O</strong> VOR, <strong>R</strong> aprobación PBN, <strong>T</strong> TACAN, <strong>U</strong> RTF en UHF, <strong>V</strong> RTF en VHF, <strong>W</strong> aprobación RVSM, <strong>X</strong> aprobación MNPS, <strong>Y</strong> capacidad de espaciado entre canales de 8,33 kHz, <strong>Z</strong> otros (se especifican en la casilla 18 bajo COM/, NAV/, DAT/). AIP ENR 1.10.
+Notas clave: <strong>W (aprobación RVSM)</strong> exige la <strong>matrícula de la aeronave en la casilla 18 bajo <code>REG/</code></strong>; <strong>las aeronaves de Estado en formación no deben usar nunca la W</strong>, y si tienen intención de operar como GAT en espacio aéreo RVSM insertan en su lugar <strong><code>STS/NONRVSM</code></strong> en la casilla 18. AIP ENR 1.10. <strong>R (PBN)</strong> exige los niveles PBN en la casilla 18 bajo <strong><code>PBN/</code></strong>.
+<strong>Bloque de vigilancia:</strong> <strong>N</strong> (ninguno o no funciona) o hasta <strong>20 caracteres</strong> de entre: SSR modos A/C — <strong>A</strong> modo A (4096 códigos), <strong>C</strong> modo A + C; SSR modo S — <strong>E</strong> modo S con identificación + altitud de presión + señales espontáneas (<em>squitter</em>) ampliadas ADS-B, <strong>H</strong> modo S con identificación + altitud de presión + vigilancia mejorada, <strong>I</strong> modo S con identificación, sin altitud, <strong>L</strong> modo S con identificación + altitud + ADS-B + vigilancia mejorada, <strong>P</strong> modo S con altitud, sin identificación, <strong>S</strong> modo S con identificación y altitud, <strong>X</strong> modo S sin ninguna de las dos; ADS-B — <strong>B1/B2</strong> (1090 MHz solo transmisión / transmisión y recepción), <strong>U1/U2</strong> (UAT solo transmisión / transmisión y recepción), <strong>V1/V2</strong> (VDL modo 4 solo transmisión / transmisión y recepción); ADS-C — <strong>D1</strong> (FANS 1/A), <strong>G1</strong> (ATN). Ejemplo del AIP: <code>ADE3RV/HB2U2V2G1</code>. AIP ENR 1.10.</p>
+<h3 id="25-casilla-13-aerodromo-de-salida-y-hora-8-caracteres">2.5 Casilla 13 - Aeródromo de salida y hora (8 caracteres)</h3>
+<p>El <strong>indicador de lugar OACI de 4 letras</strong> (Doc 7910), p. ej. <code>LEMD</code>; o, si no tiene, <strong><code>ZZZZ</code></strong> más el nombre y lugar en la casilla 18 bajo <strong><code>DEP/</code></strong>, o el primer punto de la ruta o la radiobaliza si la aeronave no ha despegado de un aeródromo; o, <strong>para un plan de vuelo presentado en vuelo, <code>AFIL</code></strong> más la dependencia ATS que dispone de los datos suplementarios, precedida de <code>DEP/</code>. A continuación, <strong>sin espacio</strong>, la <strong>EOBT</strong> (<em>Estimated Off-Block Time</em>, hora prevista de fuera calzos) en un plan presentado antes de la salida, o la <strong>hora real o estimada de paso sobre el primer punto de la ruta</strong> en un plan presentado en vuelo. AIP ENR 1.10.</p>
+<h3 id="26-casilla-15-ruta-velocidad-nivel-descripcion-de-la-ruta">2.6 Casilla 15 - Ruta (velocidad, nivel, descripción de la ruta)</h3>
+<ol>
+<li><strong>Velocidad de crucero</strong> (máx. 5 caracteres): <strong>K</strong> + 4 cifras (km/h, p. ej. <code>K0830</code>), <strong>N</strong> + 4 cifras (nudos, p. ej. <code>N0485</code>) o <strong>M</strong> + 3 cifras (Mach a la centésima más próxima, p. ej. <code>M082</code>).</li>
+<li><strong>Nivel de crucero</strong> (máx. 5 caracteres): <strong>F</strong> + 3 cifras (nivel de vuelo, p. ej. <code>F330</code>), <strong>S</strong> + 4 cifras (nivel métrico, decenas de metros), <strong>A</strong> + 3 cifras (altitud, centenares de pies), <strong>M</strong> + 4 cifras (altitud, decenas de metros) o <strong>VFR</strong> para vuelos VFR no controlados.</li>
+<li><strong>Ruta:</strong> en las rutas ATS designadas, el designador de la ruta o <code>DCT</code> hasta el punto de enlace más el designador; cada punto de cambio de velocidad, nivel, ruta o reglas; <code>DCT</code> entre puntos que no estén en una ruta, salvo que ambos vengan dados por coordenadas geográficas. Fuera de las rutas designadas: puntos separados normalmente <strong>no más de 30 minutos de tiempo de vuelo o 370 km (200 NM)</strong>.</li>
+<li><strong>Cambio de velocidad o de nivel</strong> (máx. 21 caracteres): punto + «/» + nueva velocidad + nuevo nivel, sin espacio, p. ej. <code>LN/N0284A045</code>, <code>HADDY/N0420F330</code>, <code>4602N07805W/N0500F350</code>.</li>
+<li><strong>Cambio de reglas de vuelo</strong> (máx. 3 caracteres): punto + espacio + <code>VFR</code> o <code>IFR</code>, p. ej. <code>LN VFR</code>.</li>
+<li><strong>Cambio de GAT/OAT:</strong> punto/GAT o punto/OAT.</li>
+<li><strong>Ascenso en crucero</strong> (máx. 28 caracteres): <code>C/</code> + punto de inicio + <code>/</code> + velocidad + los dos niveles que delimitan la capa (o un nivel + <code>PLUS</code>), p. ej. <code>C/48N050W/M082F290F350</code>, <code>C/48N050W/M082F290PLUS</code>. AIP ENR 1.10, todos los ejemplos.</li>
+</ol>
+<h3 id="27-casilla-16-aerodromo-de-destino-y-eet-total-aerodromos-de-alternativa">2.7 Casilla 16 - Aeródromo de destino y EET total; aeródromo(s) de alternativa</h3>
+<p><strong>Destino</strong>: indicador de 4 letras o <code>ZZZZ</code> + <code>DEST/</code> en la casilla 18, seguido inmediatamente (sin espacio) de la <strong>duración total prevista (EET)</strong>. <strong>Aeródromo(s) de alternativa de destino:</strong> hasta <strong>dos</strong> indicadores de 4 letras separados por un espacio, o <code>ZZZZ</code> + <code>ALTN/</code> en la casilla 18. AIP ENR 1.10.</p>
+<h3 id="28-casilla-18-otros-datos-el-catalogo-de-otros-datos">2.8 Casilla 18 - Otros datos (el catálogo de «OTROS DATOS»)</h3>
+<p>Se inserta <strong><code>0</code></strong> si no hay nada más. En caso contrario, uno o varios de los indicadores siguientes, cada uno seguido de «/» y del valor, <strong>en el orden indicado</strong> (el orden importa por disciplina de presentación, aunque el IFPS analiza por palabra clave). El catálogo completo de los campos relevantes para el examen:</p>
+<ul>
+<li><strong><code>RFP/</code></strong> número del plan de vuelo que reemplaza (<code>RFP/Qn</code>); sobre la controversia de su posición, véase el apartado 7.</li>
+<li><strong><code>STS/</code></strong> motivo del tratamiento especial por el ATS: <strong>ALTRV</strong> (reserva de altitud), <strong>ATFMX</strong> (exención de medidas ATFM autorizada por el proveedor de servicios ATS), <strong>FFR</strong> (extinción de incendios), <strong>FLTCK</strong> (vuelo de calibración de ayudas a la navegación), <strong>HAZMAT</strong> (mercancías peligrosas), <strong>HEAD</strong> (jefe de Estado), <strong>HOSP</strong> (vuelo médico declarado por las autoridades sanitarias), <strong>HUM</strong> (misión humanitaria), <strong>MARSA</strong> (una entidad militar asume la separación respecto de aeronaves militares), <strong>MEDEVAC</strong> (evacuación médica de emergencia con riesgo para la vida), <strong>NONRVSM</strong> (aeronave no RVSM que pretende operar en espacio aéreo RVSM), <strong>SAR</strong> (búsqueda y salvamento), <strong>STATE</strong> (vuelos militares, de aduanas o policiales). AIP ENR 1.10. El uso fraudulento «podrá ser considerado un quebranto serio» con consecuencias disciplinarias y jurídicas.</li>
+<li><strong><code>PBN/</code></strong> capacidad RNAV/RNP, hasta <strong>8 entradas (16 caracteres)</strong>: especificaciones RNAV <strong>A1</strong> RNAV 10/RNP 10, <strong>B1-B6</strong> RNAV 5 (todos los sensores/GNSS/DME-DME/VOR-DME/INS-IRS/LORAN-C), <strong>C1-C4</strong> RNAV 2, <strong>D1-D4</strong> RNAV 1; especificaciones RNP <strong>L1</strong> RNP 4, <strong>O1-O4</strong> RNP 1 básica, <strong>S1</strong> RNP APCH, <strong>S2</strong> RNP APCH + BARO-VNAV, <strong>T1/T2</strong> RNP AR APCH con/sin RF (requiere autorización especial). AIP ENR 1.10.</li>
+<li><strong><code>NAV/</code></strong> otros datos de navegación (p. ej. métodos de aumentación GNSS, separados por espacios: <code>NAV/GBAS SBAS</code>); los operadores solo P-RNAV que usan VOR/DME insertan la Z en la casilla 10 y <code>EURPRNAV</code> bajo NAV/.</li>
+<li><strong><code>COM/</code>, <code>DAT/</code>, <code>SUR/</code></strong> otras capacidades de comunicaciones, datos y vigilancia no cubiertas por la casilla 10.</li>
+<li><strong><code>DEP/</code>, <code>DEST/</code>, <code>ALTN/</code></strong> nombre y lugar cuando se usó <code>ZZZZ</code> en las casillas 13/16.</li>
+<li><strong><code>DOF/</code></strong> fecha del vuelo, <code>AAMMDD</code>.</li>
+<li><strong><code>REG/</code></strong> matrícula, cuando difiere de la casilla 7 y cuando se usa W o X en la casilla 10.</li>
+<li><strong><code>EET/</code></strong> duraciones previstas acumuladas hasta puntos significativos o límites de FIR (p. ej. <code>EET/CAP0745 XYZ0830</code>); <strong>no es obligatorio hasta los límites de las FIR de Madrid y Barcelona</strong>.</li>
+<li><strong><code>SEL/</code></strong> clave SELCAL.</li>
+<li><strong><code>TYP/</code></strong> número y tipo de aeronaves cuando se usó <code>ZZZZ</code> en la casilla 9 (p. ej. <code>TYP/2F15 5F5 3B2</code>).</li>
+<li><strong><code>CODE/</code></strong> dirección de aeronave de 24 bits, 6 caracteres hexadecimales (p. ej. <code>F00001</code>).</li>
+<li><strong><code>DLE/</code></strong> demora o espera en ruta: punto + duración de 4 cifras <code>hhmm</code> (p. ej. <code>DLE/MDG0030</code>).</li>
+<li><strong><code>OPR/</code></strong> explotador, si es distinto del de la casilla 7.</li>
+<li><strong><code>ORGN/</code></strong> dirección AFTN de 8 letras del originador, cuando no se le puede identificar de otro modo.</li>
+<li><strong><code>PER/</code></strong> letra de performance de la aeronave (Doc 8168 de la OACI, PANS-OPS, vol. I).</li>
+<li><strong><code>RALT/</code>, <code>TALT/</code></strong> aeródromos de alternativa en ruta / de despegue.</li>
+<li><strong><code>RIF/</code></strong> ruta revisada hacia un destino revisado, sujeta a nueva autorización en vuelo (p. ej. <code>RIF/DTA HEC KLUX</code>).</li>
+<li><strong><code>RMK/</code></strong> observaciones en lenguaje claro. AIP ENR 1.10, lista completa leída en el texto de la fuente.</li>
+</ul>
+<h3 id="29-casilla-19-informacion-suplementaria-no-se-transmite-en-el-mensaje-fpl">2.9 Casilla 19 - Información suplementaria (no se transmite en el mensaje FPL)</h3>
+<p><strong>E/</strong> autonomía (horas y minutos, 4 cifras). <strong>P/</strong> personas a bordo (o <code>TBN</code> si se desconoce al presentar el plan). <strong>R/</strong> radio de emergencia: se tacha <strong>U</strong> (UHF 243,0), <strong>V</strong> (VHF 121,5) o <strong>E</strong> (ELBA) si no se lleva. <strong>S/</strong> equipo de supervivencia: se tacha <strong>P</strong> (polar), <strong>D</strong> (desierto), <strong>M</strong> (marítimo), <strong>J</strong> (selva) según proceda, o todos si no se lleva ninguno. <strong>J/</strong> chalecos salvavidas: se tacha <strong>L</strong> (luces) o <strong>F</strong> (fluoresceína) si faltan, más <strong>U/V</strong> para la radio del chaleco. <strong>D/</strong> botes neumáticos: número, capacidad total, cubiertos (se tacha <strong>C</strong> si no lo están), color. <strong>A/</strong> color y marcas de la aeronave. <strong>N/</strong> observaciones (se tacha si no hay). <strong>C/</strong> nombre del piloto al mando. <strong>Presentado por:</strong> nombre de la dependencia, empresa o persona que presenta el plan. AIP ENR 1.10. <strong>Los datos de la casilla 19 no se transmiten nunca en el propio mensaje FPL</strong>: es la distinción clásica que preguntan los examinadores. Las casillas 7-18 viajan por AFTN/AMHS hasta las dependencias ATS; la casilla 19 se queda en la oficina que presenta el plan y en las autoridades SAR, para usarla solo si el vuelo entra en emergencia.</p>
+<h3 id="210-solicitud-de-plan-de-vuelo-presentado-rqp-y-solicitud-de-informacion-suplementaria-rqs-en-la-practica">2.10 Solicitud de plan de vuelo presentado (RQP) y solicitud de información suplementaria (RQS) en la práctica</h3>
+<p>Una dependencia ATS que necesita un FPL IFR/GAT envía un <strong>RQP a las dos direcciones del IFPS</strong>; el IFPS devuelve el <strong>FPL solicitado con <code>SRC/RQP</code> insertado en la casilla 18</strong> o un <strong>REJ</strong> que indica que no existe ningún FPL coincidente. Ejemplo del AIP: <code>(RQP-BAW123-EGLL-LIRF)</code>. AIP ENR 1.10. Los datos suplementarios (casilla 19) se solicitan con un <strong>RQS</strong> al supervisor del IFPS y a las dos direcciones del IFPS. AIP ENR 1.10.</p>
+<h3 id="211-ff-ice-efpl-y-gufi-mas-alla-del-fpl-clasico">2.11 FF-ICE, eFPL y GUFI (más allá del FPL clásico)</h3>
+<p>Desde la enmienda del AIP de 2026, España exige que el <strong>tránsito aéreo general que opera íntegramente bajo IFR presente eFPL mediante los servicios FF-ICE del NM</strong>, no mensajes FPL clásicos. <strong>FF-ICE (<em>Flight and Flow — Information for a Collaborative Environment</em>, información de vuelo y flujo para un entorno colaborativo)</strong> intercambia más datos que el FPL (trayectoria 4D ampliada, perfiles de performance, masa al despegue) a través de los <strong>servicios B2B del NM</strong>. Todo plan de vuelo FF-ICE lleva un <strong>GUFI (<em>Globally Unique Flight Identifier</em>, identificador único de vuelo a escala mundial)</strong>, un identificador inmutable, distinto del ARCID, que genera el operador; el <strong>conjunto de mensajes FF-ICE</strong> incluye respuesta de envío, solicitud y respuesta de prueba, plan de vuelo presentado (eFPL), estado de presentación, actualización del plan de vuelo, cancelación de vuelo, solicitud y respuesta de datos de vuelo, y notificaciones de salida y de llegada de un vuelo. <strong>El NM reevalúa un eFPL del mismo modo que se revalida un FPL clásico</strong>, y entrega el resultado como un estado de presentación actualizado. AIP ENR 1.10 (apartado «Planes de vuelo FF-ICE»). Es material de 2026 y con proyección de futuro, ausente del manual de ENAIRE (de noviembre de 2024) y de la mención de una línea de las notas base; conviene tenerlo como contexto, no como objetivo principal de examen, pero estar preparado para reconocer «GUFI» o «eFPL» si aparecen.</p>
+<hr />
+<h2 id="3-mensajes-ats-catalogo-completo">3. Mensajes ATS: catálogo completo</h2>
+<p>Fuente de este apartado: la <strong>lista de comprobación PANS-ATM de EASA</strong>, que reproduce casi literalmente el texto del <strong>capítulo 11 del Doc 4444 de la OACI</strong> (párrafos 11.3.7.x-11.4.2.5.x), contrastada con el manual (OM06 §2) y con el AIP ENR 1.10. Los mensajes se agrupan en cuatro familias de la OACI: <strong>mensajes de movimiento</strong>, <strong>mensajes de coordinación</strong>, <strong>mensajes suplementarios</strong> y <strong>mensajes AIDC</strong> (estos últimos son el equivalente mundial de la OACI del OLDI europeo, ya recogido en las notas base).</p>
+<h3 id="31-mensajes-de-movimiento">3.1 Mensajes de movimiento</h3>
+<table>
+<thead>
+<tr>
+<th>Msg</th>
+<th>Nombre completo</th>
+<th>Quién lo envía y a quién</th>
+<th>Regla de plazos (OACI/AIP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FPL</strong></td>
+<td>Plan de vuelo presentado</td>
+<td>Dependencia ATS del ADEP, a: el ACC/FIC de la FIR del ADEP; todo centro FIR/UIR en ruta que no pueda tratar datos actuales; la TWR del ADES; los centros de gestión de afluencia si se requiere; centros adicionales si se presentó un RIF</td>
+<td>Se transmite <strong>inmediatamente</strong> tras la presentación; si se presentó <strong>más de 24 h antes de la EOBT</strong>, <strong>la casilla 18 debe llevar la fecha del vuelo</strong> (base OACI; el AIP/IFPS lo amplían a <code>DOF/</code> en cualquier presentación, y se recomienda siempre)</td>
+</tr>
+<tr>
+<td><strong>DLA</strong></td>
+<td>Demora</td>
+<td>Dependencia ATS del ADEP, a todos los destinatarios de los datos básicos del FPL</td>
+<td>Base OACI: <strong>más de 30 min</strong> después de la EOBT. <strong>El AIP España es más estricto y más fino</strong>: <strong>&gt;15 min IFR (sin slot)</strong>, <strong>&gt;30 min VFR controlado</strong>, <strong>&gt;60 min VFR no controlado</strong>; IFR con <strong>SLOT</strong> asignado: <strong>&gt;30 min → DLA</strong>, <strong>15-30 min → SRR</strong> (solicitud de revisión de slot) [V ambos]</td>
+</tr>
+<tr>
+<td><strong>CHG</strong></td>
+<td>Modificación</td>
+<td>Dependencia ATS afectada por el cambio, a los destinatarios de los datos originales</td>
+<td>Cualquier cambio de los datos básicos del FPL/RPL <strong>salvo</strong> los 5 campos no modificables (§7)</td>
+</tr>
+<tr>
+<td><strong>CNL</strong></td>
+<td>Cancelación de plan de vuelo</td>
+<td>Dependencia ATS del ADEP, a los destinatarios de los datos básicos del FPL</td>
+<td>En cuanto se sepa que el vuelo no se realizará, o antes de presentar un plan que lo reemplace</td>
+</tr>
+<tr>
+<td><strong>DEP</strong></td>
+<td>Salida</td>
+<td>Dependencia ATS del ADEP, a los destinatarios de los datos básicos del FPL</td>
+<td><strong>Inmediatamente después del despegue</strong>; <strong>España: se omite en los vuelos IFR dentro de la región EUR (en ambos sentidos)</strong>, pero se envía siempre para VFR y para IFR cuando se requiere expresamente</td>
+</tr>
+<tr>
+<td><strong>ARR</strong></td>
+<td>Llegada</td>
+<td>Dependencia ATS del ADES (o del aeródromo de desvío)</td>
+<td>Al aterrizar en el destino: al ACC/FIC si lo exige, y a la dependencia de origen del ADEP si se solicitó un ARR. Al aterrizar en otro aeródromo: al ACC/FIC del aeródromo de aterrizaje, a la TWR de destino, a la ARO de salida y a todo ACC/FIC que habría sido sobrevolado. <strong>Caso de fallo de comunicaciones:</strong> la TWR de llegada lo notifica a todas las dependencias interesadas durante el fallo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-mensajes-de-coordinacion">3.2 Mensajes de coordinación</h3>
+<table>
+<thead>
+<tr>
+<th>Msg</th>
+<th>Nombre completo</th>
+<th>Regla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPL</strong></td>
+<td>Plan de vuelo actualizado</td>
+<td>Se envía <strong>del ACC al ACC siguiente</strong>, y del último ACC a la TWR de destino, cuando los datos básicos no se han distribuido ya. <strong>Antelación: al menos 20 minutos antes de la hora estimada de llegada de la aeronave al punto de transferencia o de límite</strong> (más si el centro receptor no dispone de tratamiento automático). Contiene <strong>solo</strong> los datos desde el punto de entrada hasta el destino</td>
+</tr>
+<tr>
+<td><strong>EST</strong></td>
+<td>Estimada</td>
+<td>Se envía cuando los datos básicos <strong>ya</strong> se han distribuido, para actualizar las condiciones en el límite. <strong>Misma regla de antelación de 20 minutos que el CPL</strong></td>
+</tr>
+<tr>
+<td><strong>CDN</strong></td>
+<td>Coordinación</td>
+<td>Lo envía la dependencia aceptante para proponer un cambio en los datos del CPL/EST, o la dependencia transferidora en respuesta; se repite hasta que se cierra con un ACP</td>
+</tr>
+<tr>
+<td><strong>ACP</strong></td>
+<td>Aceptación</td>
+<td>Confirma que los datos del CPL/EST/CDN se aceptan y que el diálogo de coordinación ha terminado</td>
+</tr>
+<tr>
+<td><strong>LAM</strong></td>
+<td>Acuse de recibo lógico</td>
+<td><strong>Solo entre ordenadores.</strong> Se devuelve automáticamente al recibir un CPL/EST una vez que el mensaje está libre de errores sintácticos y semánticos. Si no llega ningún LAM dentro del parámetro de tiempo de reacción fijado, <strong>se genera una alerta operativa y las dependencias vuelven a la coordinación telefónica o manual</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-mensajes-suplementarios">3.3 Mensajes suplementarios</h3>
+<ul>
+<li><strong>RQP</strong> (solicitud de plan de vuelo): una dependencia ATS que carece de los datos básicos de un vuelo lo envía a la <strong>dependencia transferidora que envió un EST</strong>, al centro que envió una actualización sin datos básicos correspondientes o, si no se recibió nada pero se establece contacto RTF, a la <strong>dependencia ATS anterior en la ruta</strong>.</li>
+<li><strong>RQS</strong> (solicitud de plan de vuelo suplementario): se envía a la <strong>ARO del aeródromo de salida</strong> o, en un plan presentado en vuelo, a la dependencia designada en el plan de vuelo.</li>
+<li><strong>SPL</strong> (plan de vuelo suplementario): lo envía <strong>la ARO de salida</strong> a las dependencias que solicitaron datos adicionales a los que ya llevaba un CPL/FPL; <strong>cuando se envía por AFTN, adopta el mismo indicador de prioridad que la solicitud que lo originó</strong>.</li>
+</ul>
+<h3 id="34-mensajes-aidc-el-equivalente-mundial-de-la-oaci-del-oldi">3.4 Mensajes AIDC (el equivalente mundial de la OACI del OLDI)</h3>
+<p>El AIDC (<em>ATS Interfacility Data Communications</em>, comunicación de datos entre instalaciones ATS) es el <strong>estándar mundial de la OACI</strong> para la coordinación entre ordenadores; el <strong>OLDI</strong> (ya en las notas base) es su <strong>implantación regional europea</strong>. El Doc 4444 de la OACI enumera: <strong>Notify</strong> (aviso previo a las dependencias que necesitarán coordinación, enviado a una hora o distancia acordada antes del límite, con los datos de estimada en el límite), <strong>Coordinate Initial</strong> (abre la coordinación formal, de ACC a ACC siguiente y por último a la dependencia de aproximación o TWR de destino), <strong>Coordinate Negotiate</strong> (contrapropuesta), <strong>Coordinate Accept/Reject/Cancel/Update/Standby</strong>, <strong>Transfer Initiate</strong>, <strong>Transfer Conditions Proposal/Accept</strong>, <strong>Transfer Communication Request/Message/Assume</strong>, <strong>Transfer Control/Transfer Control Assume</strong>, <strong>General Point / General Executive Data</strong>, <strong>Free Text Emergency</strong> y <strong>Free Text General</strong>, y los acuses técnicos <strong>Application Accept/Reject</strong>. Lista de comprobación PANS-ATM §11.4.2.5. Trampa de examen: <strong>AIDC ≠ OLDI</strong>; el AIDC es el estándar de la OACI y el OLDI, su conjunto regional de mensajes en EUR (ABI, ACT, REV, PAC, MAC, LAM, BFD/CFD/TFD...).</p>
+<h3 id="35-mensajes-de-emergencia-y-de-alerta-repaso-vease-tambien-om06-23">3.5 Mensajes de emergencia y de alerta (repaso; véase también OM06 §2.3)</h3>
+<p>Un <strong>mensaje de alerta</strong> se envía a toda dependencia ATS que pueda estar interesada y al <strong>centro de coordinación de salvamento (RCC)</strong> asociado cuando una dependencia estima que una aeronave se encuentra en una fase de emergencia, con los datos del apéndice 3 §1 (en esencia, los datos suplementarios de la casilla 19). Un mensaje <strong>RCF (<em>radiocommunication failure</em>, fallo de radiocomunicaciones)</strong> se envía a toda dependencia ATS posterior que ya disponga de datos básicos y a la TWR de destino; si la siguiente dependencia aún no ha recibido datos básicos, <strong>se envían juntos un RCF y un CPL</strong>, y esta a su vez repite el proceso hacia delante. Un <strong>mensaje de texto libre de emergencia</strong> se usa siempre que la situación no pueda codificarse en ningún otro tipo de mensaje AIDC (interferencia ilícita, aviso de bomba, enfermedad grave de un pasajero, cambio súbito de perfil, fallo de comunicaciones). Lista de comprobación PANS-ATM §11.4.1.</p>
+<hr />
+<h2 id="4-direccionamiento-prioridades-y-categorias-aftn-amhs">4. Direccionamiento, prioridades y categorías AFTN; AMHS</h2>
+<h3 id="41-estructura-de-una-direccion-aftn">4.1 Estructura de una dirección AFTN</h3>
+<p>Una <strong>dirección AFTN tiene exactamente 8 letras</strong>: el <strong>indicador de lugar OACI de 4 letras</strong> (Doc 7910) + el <strong>designador de organización de 3 letras</strong> (Doc 8585; <strong><code>YYY</code></strong> si no se ha asignado ninguno, <strong><code>YXY</code></strong> para una organización militar sin designador, <strong><code>ZZZ</code></strong> para una aeronave en vuelo) + <strong>1 letra adicional para el departamento</strong>, con <strong><code>X</code></strong> cuando no hace falta identificar un departamento concreto. Ejemplo: <strong><code>EBLGZTZX</code></strong> = EBLG (Lieja) + ZTZ (torre de control de aeródromo) + X (sin departamento concreto). SKYbrary/AFTN (artículo que cita el Anexo 10 vol. II y el Doc 4444 cap. 11 de la OACI).</p>
+<h3 id="42-categorias-de-mensajes-e-indicadores-de-prioridad-mas-completo-que-la-tabla-del-manual">4.2 Categorías de mensajes e indicadores de prioridad (más completo que la tabla del manual)</h3>
+<table>
+<thead>
+<tr>
+<th>Prioridad</th>
+<th>Categoría</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SS</strong></td>
+<td>Socorro</td>
+<td>Aeronave que notifica un peligro inminente y todos los mensajes de asistencia inmediata relacionados</td>
+</tr>
+<tr>
+<td><strong>DD</strong></td>
+<td>Urgencia</td>
+<td>Mensajes sobre la seguridad de un buque, una aeronave, un vehículo o una persona a bordo o a la vista</td>
+</tr>
+<tr>
+<td><strong>FF</strong></td>
+<td>Seguridad de los vuelos</td>
+<td><strong>Mensajes de movimiento y control</strong> (FPL, DLA, CNL, DEP, ARR, OLDI...), mensajes de los explotadores de interés inmediato para las aeronaves, y <strong>algunos</strong> mensajes meteorológicos (SIGMET, aeronotificaciones especiales, AIRMET, avisos de ceniza volcánica y de ciclones tropicales)</td>
+</tr>
+<tr>
+<td><strong>GG</strong></td>
+<td>Meteorológicos</td>
+<td>Pronósticos TAF; observaciones METAR/SPECI</td>
+</tr>
+<tr>
+<td><strong>GG</strong></td>
+<td>Regularidad de los vuelos</td>
+<td>Mantenimiento, aterrizajes no rutinarios, piezas y materiales requeridos con urgencia</td>
+</tr>
+<tr>
+<td><strong>GG</strong></td>
+<td>AIS</td>
+<td>NOTAM, SNOWTAM</td>
+</tr>
+<tr>
+<td><strong>KK</strong></td>
+<td>Administrativos</td>
+<td>Funcionamiento y mantenimiento de instalaciones, funcionamiento de los servicios de telecomunicaciones, correspondencia entre autoridades</td>
+</tr>
+</tbody>
+</table>
+<p>| <strong>según proceda</strong> | Mensajes de servicio | Peticiones de información o verificación sobre mensajes al parecer mal transmitidos | SKYbrary/AFTN, contrastado con la tabla de OM06 (que agrupa GG/AIS/regularidad y omite los «mensajes de servicio»). Un <strong>mensaje que solicita información adopta la misma prioridad que la categoría solicitada</strong>, salvo que la seguridad de vuelo justifique una superior. <strong>Orden de precedencia de transmisión: SS; después DD y FF juntos; después GG y KK juntos</strong> (tres niveles, en coincidencia con el manual).</p>
+<h3 id="43-amhs">4.3 AMHS</h3>
+<p>El <strong>AMHS (<em>ATS Message Handling System</em>, sistema de tratamiento de mensajes ATS)</strong> es el sucesor del AFTN basado en X.400; lo va sustituyendo progresivamente como columna vertebral europea del intercambio de mensajes ATS, y durante la transición interopera mediante pasarelas con el AFTN para que las dependencias solo AFTN y las AMHS puedan seguir intercambiando tráfico. Los sistemas IFPS/NM aceptan tanto el direccionamiento AFTN como el IATA tipo B y, cada vez más, los canales B2B/NMP/NOP (véase §5). el detalle técnico propio del AMHS que exceda este párrafo].</p>
+<hr />
+<h2 id="5-ifps-zonas-tratamiento-validacion-plazos-rpl-ff-ice">5. IFPS: zonas, tratamiento, validación, plazos, RPL, FF-ICE</h2>
+<h3 id="51-la-zona-ifps-ifpz">5.1 La zona IFPS (IFPZ)</h3>
+<p>La <strong>IFPZ (zona IFPS)</strong> es el espacio aéreo del área ECAC en el que el IFPS trata los planes de vuelo de los vuelos que operan <strong>total o parcialmente como IFR/GAT</strong> (incluida la parte GAT de los vuelos mixtos IFR/VFR o GAT/OAT, y los vuelos que entran en la IFPZ o salen de ella). Manual del IFPS.</p>
+<h3 id="52-plazos-de-presentacion">5.2 Plazos de presentación</h3>
+<ul>
+<li><strong>Antelación máxima: 120 horas (5 días) antes de la EOBT.</strong> El IFPS <strong>no aceptará</strong> un plan de vuelo presentado antes. Manual del IFPS (enunciado tres veces en el manual, redactado como límite duro del sistema, coherente con SERA.4005(d) y con el AIP).</li>
+<li><strong>Mínimo recomendado: al menos 3 horas antes de la EOBT</strong> «en la medida de lo posible», para los vuelos que puedan estar regulados. Manual del IFPS.</li>
+<li><strong>Fecha del vuelo (DOF) obligatoria</strong> en todo mensaje presentado con <strong>más de 24 horas</strong> de antelación a la EOBT (y recomendada en todas las presentaciones). Manual del IFPS.</li>
+<li><strong>Cambios de EOBT:</strong> todo cambio <strong>superior a 15 minutos debe comunicarse al IFPS</strong>; <strong>el IFPS no acepta nunca una demora negativa</strong>: adelantar la EOBT exige siempre <strong>cancelar y volver a presentar</strong> con la nueva EOBT. Manual del IFPS, coincide con la lista de campos no modificables del AIP ENR 1.10 (§7 más abajo).</li>
+</ul>
+<h3 id="53-validacion-y-respuesta-orm-ack-man-rej">5.3 Validación y respuesta: ORM (ACK / MAN / REJ)</h3>
+<p>El IFPS contesta a cada mensaje recibido con un <strong>mensaje de respuesta operacional (ORM)</strong>, en <strong>formato ADEXP</strong>: Manual del IFPS §8-11.</p>
+<ul>
+<li><strong>ACK (acuse de recibo, aceptación):</strong> el mensaje <strong>se procesó con éxito</strong> (automáticamente, o de forma manual por el personal de planes de vuelo del IFPS tras corregirlo) <strong>frente a los datos del entorno (ENV) vigentes en ese momento</strong>. Un ACK <strong>no garantiza</strong> el cumplimiento de las autorizaciones diplomáticas ni de los requisitos ETOPS, SAFA o MNPS: siguen siendo responsabilidad del operador. Un plan aceptado <strong>se reevalúa más tarde</strong> y aún puede suspenderse si cambian las condiciones del espacio aéreo antes de la EOBT.</li>
+<li><strong>MAN (tratamiento manual):</strong> el mensaje <strong>no superó el tratamiento automático</strong> y quedó en cola para <strong>corrección manual por el personal de planes de vuelo</strong> («QUEUED FOR CORRECTION» en NMP/NMUI/NOP); <strong>el originador no debe hacer nada</strong> y no debe reenviarlo hasta que llegue un ACK o un REJ. Un MAN va siempre seguido de un ACK o un REJ.</li>
+<li><strong>REJ (rechazo):</strong> el mensaje <strong>no pudo procesarse</strong>, ni automática ni manualmente, y <strong>el IFPS no lo conserva en absoluto</strong>. Contiene hasta <strong>10 entradas de error</strong> (texto libre + campo erróneo). Si el vuelo aún va a operar, el <strong>originador debe corregirlo y volver a presentarlo</strong>. También se emite un REJ cuando llega un <strong>FPL duplicado</strong> de otra fuente, con el texto <em>«The following FPL has already been received from another source»</em> y una copia del plan existente adjunta.
+El originador de un mensaje puede renunciar a recibir ACK/MAN/REJ por dirección en la base de datos central del NM (NM CACD); si no llega ningún ORM, <strong>comprobar el estado sigue siendo responsabilidad del propio originador</strong>.</li>
+</ul>
+<h3 id="54-rpl-plan-de-vuelo-repetitivo-lo-que-el-manual-omite">5.4 RPL (plan de vuelo repetitivo): lo que el manual omite</h3>
+<p>Un <strong>RPL (<em>Repetitive Flight Plan</em>, plan de vuelo repetitivo)</strong> cubre una serie de <strong>vuelos individuales frecuentes, operados con regularidad y con datos básicos idénticos</strong>, presentada una sola vez para todo un periodo de programación en lugar de vuelo a vuelo. Los RPL usan un <strong>formulario de cumplimentación distinto (apéndice 3 del Doc 4444 de la OACI) con casillas identificadas por letras y no por números</strong>; por ejemplo, el AIP ENR 1.10 se refiere a la <strong>«casilla Q del RPL»</strong> para el equipo (el análogo de la casilla 10 del FPL) y establece que <strong>los vuelos RPL con aprobación RVSM deben indicar su situación RVSM en la casilla Q</strong>. AIP ENR 1.10. <strong>El umbral exacto de regularidad o frecuencia que hace que una serie de vuelos reciba tratamiento RPL no se encontró en los documentos leídos en esta sesión; cualquier cifra concreta (p. ej. «10 vuelos») debe tratarse como hasta comprobarla en el apéndice 3 del Doc 4444 de la OACI.</strong></p>
+<h3 id="55-ff-ice-repaso-detalle-en-211">5.5 FF-ICE (repaso; detalle en §2.11)</h3>
+<p>Véase §2.11 para el eFPL, el GUFI y el conjunto de mensajes FF-ICE; el NM es la <strong>unidad de servicios FF-ICE</strong> designada para la IFPZ, y presta servicios de presentación, prueba, solicitud de datos de vuelo, notificación y publicación mediante <strong>B2B</strong>. AIP ENR 1.10.</p>
+<hr />
+<h2 id="6-contexto-de-slots-y-afluencia-eobttobttsatctot-mensajes-atfcm-a-cdm">6. Contexto de slots y afluencia: EOBT/TOBT/TSAT/CTOT, mensajes ATFCM, A-CDM</h2>
+<h3 id="61-definiciones-temporales-basicas">6.1 Definiciones temporales básicas</h3>
+<ul>
+<li><strong>EOBT (<em>Estimated Off-Block Time</em>, hora prevista de fuera calzos):</strong> la hora de fuera calzos presentada y planificada; la referencia sobre la que se construye toda la cadena ATFCM.</li>
+<li><strong>TOBT (<em>Target Off-Block Time</em>, hora objetivo de fuera de calzos):</strong> la hora en que el operador de aeronave o el agente de handling estima que la aeronave estará <strong>totalmente lista</strong> (puertas cerradas, pasarela retirada, vehículo de empuje disponible) para iniciar la puesta en marcha o el empuje <strong>de inmediato</strong> al recibir la autorización. Especificación A-CDM.</li>
+<li><strong>TSAT (<em>Target Start-up Approval Time</em>, hora objetivo de autorización de puesta en marcha):</strong> la hora que da el <strong>secuenciador de presalida</strong>, teniendo en cuenta la <strong>TOBT, la CTOT y/o la situación del tráfico</strong>, hacia la cual la aeronave puede esperar la aprobación de puesta en marcha o de empuje. Especificación A-CDM.</li>
+<li><strong>TTOT (<em>Target Take-Off Time</em>, hora objetivo de despegue):</strong> la hora de despegue calculada por la torre de control, coherente con la TSAT/TOBT y con el tiempo de rodaje variable (VTT). Especificación A-CDM.</li>
+<li><strong>CTOT (<em>Calculated Take-Off Time</em>, hora calculada de despegue):</strong> el propio slot ATFM: la hora en que el Gestor de Red de EUROCONTROL calcula que el vuelo debe despegar, teniendo en cuenta la afluencia en todo el ECAC. <strong>Ventana de cumplimiento del slot (STW, <em>Slot Tolerance Window</em>): -5 / +10 minutos</strong> (es decir, la aeronave debe estar en el aire entre CTOT-5 y CTOT+10). SKYbrary/CTOT (que cita el Manual de Usuario ATFCM).</li>
+</ul>
+<h3 id="62-mensajes-de-regulacion-y-de-slot-atfcm-mas-completo-que-la-lista-del-manual">6.2 Mensajes de regulación y de slot ATFCM (más completo que la lista del manual)</h3>
+<ul>
+<li><strong>SAM (<em>Slot Allocation Message</em>, mensaje de asignación de slot):</strong> se envía cuando un vuelo <strong>pasa a estar regulado</strong>, como pronto <strong>2 horas antes de la última EOBT recibida</strong>; informa a los AO y al ATS de la <strong>CTOT</strong>. Respuesta requerida: <strong>cumplir la CTOT</strong>. Manual de Usuario ATFCM.</li>
+<li><strong>SRM (<em>Slot Revision Message</em>, mensaje de revisión de slot):</strong> se envía para <strong>mejorar o cambiar</strong> una CTOT existente: ante un cambio de la CTOT <strong>superior a 5 minutos</strong>, un cambio de la regulación más penalizadora, como respuesta a un <strong>DLA/CHG/DPI</strong> que rompe el cumplimiento de la CTOT vigente, ante un <strong>SPA (aceptación de propuesta de mejora de slot)</strong> válido, o ante una mejora rutinaria mientras el vuelo está en estado <strong>RFI</strong> o <strong>REA</strong>. Contiene un campo <strong><code>--REGUL</code></strong> con la(s) regulación(es) que afectan al vuelo, la primera de las cuales es la <strong>más penalizadora</strong>. Manual de Usuario ATFCM.</li>
+<li><strong>SLC (<em>Slot Cancellation</em>, cancelación de slot):</strong> el vuelo <strong>ya no está regulado</strong>; puede salir sin slot ATFM.</li>
+<li><strong>FLS (<em>Flight Suspension</em>, suspensión del vuelo):</strong> se suspende un plan aceptado; <strong>inicialmente el vuelo no está autorizado a salir</strong> (véase OM06 §3.5).</li>
+<li><strong>DES (<em>De-suspension</em>, levantamiento de la suspensión):</strong> el vuelo queda liberado de un FLS.</li>
+<li><strong>RFI (<em>Ready For Improvement</em>, listo para mejora)</strong> y <strong>REA (<em>Ready</em>, listo)</strong>: estados en los que puede ponerse un vuelo (por el ATC o el AO) para que se le considere para un slot mejor a medida que se libera capacidad; <strong>el REA puede enviarse entre EOBT-15 min y la CTOT</strong>. Una <strong>actualización de la TTOT que cruce la ventana de cumplimiento del slot tras un REA/RFI</strong> puede desencadenar un recálculo de la CTOT (SRM/SLC/FLS según corresponda). Manual de Usuario ATFCM. (El catálogo completo de acrónimos ya figura de forma densa en el §8.6 de las notas base: SIP/SPA/SRJ/SWM/RRP/RRN/RJT/SMM/FCM/ERR; no se repite aquí para evitar duplicidades.)</li>
+</ul>
+<h3 id="63-hitos-de-a-cdm-airport-collaborative-decision-making-toma-de-decisiones-colaborativa-en-aeropuerto-y-dpi">6.3 Hitos de A-CDM (<em>Airport Collaborative Decision Making</em>, toma de decisiones colaborativa en aeropuerto) y DPI</h3>
+<p>El <strong>A-CDM</strong> sincroniza la información del aeropuerto, de la compañía aérea y de la gestión de la red en torno a <strong>16 hitos numerados</strong>, desde el <strong>hito 1 (plan de vuelo ATC activado)</strong>, pasando por el <strong>hito 2 (EOBT-2h)</strong>, el <strong>hito 3 (despegue desde la estación de origen)</strong>, ..., el <strong>hito 9 (entrada o actualización manual de la TOBT)</strong>, el <strong>hito 10 (TSAT emitida)</strong>, el <strong>hito 11 (embarque iniciado)</strong>, el <strong>hito 12 (aeronave lista)</strong>, el <strong>hito 13 (puesta en marcha solicitada)</strong>, el <strong>hito 14 (puesta en marcha aprobada)</strong>, el <strong>hito 15 (fuera calzos)</strong>, hasta el <strong>hito 16 (despegue)</strong>. Especificación A-CDM de EUROCONTROL 2025-01 (leídos el índice y los apartados de los hitos).
+Los mensajes <strong>DPI (<em>Departure Planning Information</em>, información de planificación de salida)</strong> mantienen actualizado el ETFMS del Gestor de Red con la situación cambiante del aeropuerto: <strong>E-DPI</strong> (<em>Early</em>, anticipado), <strong>T-DPI-t</strong> (<em>Target</em>, objetivo, basado en la <strong>TOBT</strong>, «estimado»), <strong>T-DPI-s</strong> (<em>Target</em>, objetivo, basado en la <strong>TSAT</strong>, «secuenciado/fijado»), <strong>A-DPI</strong> (ATC, confirmación de la salida real), <strong>C-DPI</strong> (<em>Cancel</em>, cancelación). Un <strong>T-DPI-s con una TTOT fuera de la ventana de cumplimiento del slot</strong> desencadena el recálculo de la CTOT y un SRM/SLC según proceda. Guía de implantación de DPI / Manual de Usuario ATFCM.</p>
+<hr />
+<h2 id="7-manual-frente-a-fuentes-primarias">7. Manual frente a fuentes primarias</h2>
+<p>Este apartado añade hallazgos <strong>más allá</strong> de la propia tabla de OM06 (el §7 de OM06 ya cubre 15 puntos; las entradas siguientes son adicionales o profundizan en la del manual).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Punto</th>
+<th>Qué dice cada fuente</th>
+<th>Valoración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td><strong>Posición de RFP/Qn en la casilla 18: análisis en profundidad (discrepancia señalada en el encargo)</strong></td>
+<td>Véase el análisis específico más abajo</td>
+<td>Véase más abajo</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Campos que un CHG no puede modificar</td>
+<td>OM06/manual: <strong>3</strong> campos (ARCID, ADEP, ADES). <strong>El AIP ENR 1.10 (2026) enumera 5</strong>: identificación de aeronave, aeródromo de salida, aeródromo de destino, <strong>fecha estimada de fuera calzos</strong> y <strong>hora estimada de fuera calzos cuando el cambio es un adelanto</strong> (una demora se trata con CHG+DLA, pero un adelanto de la EOBT exige siempre CNL+nuevo FPL).</td>
+<td>La lista de 3 campos del manual es el mínimo seguro para el examen; la lista de 5 del AIP es la operativamente completa. Si la pregunta se plantea desde la práctica del IFPS/AIP, se usan 5; si cita literalmente el manual, se usan 3.</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Umbral del DLA</td>
+<td>OM06/manual: no da ninguno y remite al AIP. <strong>Base OACI (lista de comprobación PANS-ATM, Doc 4444 §11.4.2.2.3): DLA si la demora supera los 30 minutos</strong>, sin distinguir por reglas de vuelo. <strong>El AIP España es más estricto y más fino</strong>: &gt;15 min IFR (sin slot), &gt;30 min VFR controlado, &gt;60 min VFR no controlado; IFR con slot: &gt;30 min DLA, 15-30 min SRR [V ambos].</td>
+<td>Tres cifras distintas para la «misma» regla según el nivel de la fuente (base global de la OACI frente a la concreción nacional de España). Para el examen hay que aprender las cifras de España (es lo que usaría un examinador de ENAIRE), pero reconocer «30 minutos, sin distinción» como la respuesta solo OACI si una pregunta cita expresamente el Doc 4444/PANS-ATM.</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Antelación del CPL/EST</td>
+<td>No figura en el manual. <strong>OACI (lista de comprobación PANS-ATM §11.4.2.3.2.3/.3.3.2): al menos 20 minutos</strong> antes de la hora estimada de llegada de la aeronave al punto de transferencia o de límite (más si la dependencia receptora no dispone de tratamiento automático).</td>
+<td>Añadido puro; cifra plausible de examen junto con las definiciones de CPL/EST.</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Estructura de la dirección AFTN</td>
+<td>El manual no la detalla (solo da la tabla de prioridades de 5 letras). <strong>SKYbrary/Anexo 10 de la OACI: 8 letras = lugar de 4 letras + organización de 3 letras (o YYY/YXY/ZZZ) + 1 letra de departamento (X si no hace falta)</strong>.</td>
+<td>Añadido puro.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rfpqn-primer-o-ultimo-elemento-de-la-casilla-18-rastreo-hasta-las-fuentes-primarias">RFP/Qn: ¿«primer» o «último» elemento de la casilla 18? Rastreo hasta las fuentes primarias</h3>
+<p>Es exactamente la discrepancia que señalaba el encargo, y la guía OM06 del manual ya la había detectado a grandes rasgos (OM06 §7, punto 1) sin rastrearla del todo. Se rastrea aquí capa por capa:</p>
+<ol>
+<li>Los <strong>SUPPs EUR del Doc 7030 de la OACI</strong> (Ed. 5, Enm. 9, el procedimiento suplementario regional de la OACI que creó el mecanismo RFP) dicen solo: <em>«el RFP contendrá, </em><em>en la casilla 18</em><em>, la indicación 'RFP/Qn'...»</em>; <strong>no especifica ninguna posición</strong>, ni primera ni última. <code>icao-fpl-ats/ICAO-Doc7030-EUR-SUPPs-Ed5-Amd9.txt</code>.</li>
+<li>El <strong>Manual de Usuario ATFCM de EUROCONTROL</strong> (Wave 2.3) y la <strong>sección propia del Manual de Usuario del IFPS «96 Replacement Flight Plan (RFP)»</strong> (p. 263) reproducen la misma redacción neutra, <strong>«y en la casilla 18, la indicación RFP/Q<número>»</strong>, de nuevo <strong>sin indicar posición</strong>, y remiten al lector al Manual del IFPS para el detalle de procedimiento. ambos archivos.</li>
+<li><strong>El propio Manual del IFPS</strong>, en un <strong>párrafo-resumen de procedimientos generales</strong> anterior (p. 12, fuera de la sección específica de RFP), afirma: <em>«el RFP contendrá, </em><em>como primer elemento de la casilla 18</em><em>, la indicación 'RFP/Qn'»</em>: una incoherencia interna, porque <strong>el Manual del IFPS se contradice</strong> entre su resumen (primero) y su propia sección detallada (sin posición). <code>IFPS-Users-Manual-Wave2.3-2026-04.txt</code>, línea ~1828.</li>
+<li>El <strong>AIP España ENR 1.10</strong> y el <strong>manual de ENAIRE (OM06)</strong> dicen ambos <strong>«como último elemento de la casilla 18»</strong>: coinciden entre sí, pero esta redacción <strong>no aparece en ningún lugar del Doc 7030 de la OACI</strong>, el documento que ambos citan en última instancia como origen del procedimiento. Puede heredarse de una edición más antigua del Doc 7030 que no está en la biblioteca, o ser una aclaración añadida por España o por el AIP.
+<strong>Conclusión de trabajo:</strong> la única fuente firme y unánime (el Doc 7030 de la OACI, origen de la regla) no especifica posición; «primero» es una simplificación añadida por EUROCONTROL que aparece una sola vez y contradice el procedimiento detallado de la propia EUROCONTROL; «último» es una instrucción propia de España, sin respaldo en el texto de la OACI. <strong>En la práctica es probablemente inocuo</strong>: el IFPS analiza la casilla 18 <strong>por prefijo de palabra clave</strong> (<code>RFP/</code>, <code>STS/</code>, <code>PBN/</code>...) y no por posición, igual que cualquier otro subcampo de la casilla 18, de modo que el orden que elija quien presenta el plan no debería provocar por sí solo un REJ. <strong>Para el examen:</strong> si una pregunta cita el <strong>manual de ENAIRE o el AIP</strong>, la respuesta es <strong>«último elemento»</strong>; si cita expresamente el <strong>Manual de Usuario del IFPS</strong>, la respuesta es <strong>«primer elemento» solo para ese único párrafo</strong> (p. 12), teniendo en cuenta que la sección específica sobre RFP del propio manual no repite esa afirmación. Si se pregunta de forma genérica «¿dónde va RFP/Qn en la casilla 18?», la respuesta más segura y defendible con todas las fuentes primarias es <strong>«en la casilla 18, como uno de los indicadores de Otros datos (la OACI no fija la posición)»</strong>.</li>
+</ol>
+<hr />
+<h2 id="8-15-ejemplos-resueltos-de-planes-de-vuelo">8. 15 ejemplos resueltos de planes de vuelo</h2>
+<p>Cada ejemplo es un mensaje FPL de la OACI 2012 completo o casi completo (casillas 3, 7, 8, 9, 10, 13, 15, 16, 18 según proceda), a partir de las reglas por casilla anteriores, seguido de una explicación casilla por casilla. Los aeropuertos son indicadores OACI de 4 letras reales para dar verosimilitud; los vuelos son ilustrativos, no horarios reales.</p>
+<p><strong>1. Vuelo IFR sencillo de línea aérea, Madrid-Londres</strong>
+<code>(FPL-IBE3160-IS -A320/M-SDE2E3FGHIRWY/LB1 -LEMD1030 -N0450F350 PPN UN725 BOJ UN601 CGN -EGLL0205 EGKK -DOF/260924 REG/ECMXA EET/LFFF0025)</code></p>
+<ul>
+<li>Casilla 3: <code>FPL</code>. Casilla 7: <code>IBE3160</code> (ARCID = código de operador OACI + número de vuelo, 7 caracteres). Casilla 8: <code>IS</code> = IFR, regular. Casilla 9: 1 aeronave, <code>A320</code>, estela <code>/M</code> MEDIA. Casilla 10: <code>SDE2E3FGHIRWY</code> (una cadena de equipo moderna verosímil) <code>/LB1</code> (modo S con identificación + altitud + ADS-B, <code>B1</code> = ADS-B de transmisión 1090ES). Casilla 13: <code>LEMD1030</code> (Madrid-Barajas, EOBT 1030). Casilla 15: <code>N0450F350</code> velocidad/nivel, ruta por puntos y aerovías con nombre hasta <code>CGN</code>. Casilla 16: <code>EGLL0205 EGKK</code> (Heathrow, EET total 2 h 05, alternativa Gatwick). Casilla 18: <code>DOF/260924</code> fecha del vuelo, <code>REG/ECMXA</code> matrícula, <code>EET/LFFF0025</code> duración prevista hasta el límite de la FIR de París.</li>
+</ul>
+<p><strong>2. Aeronave ligera VFR que cruza una frontera internacional</strong>
+<code>(FPL-EIABC-VG -C172/L-SV/C -EIDW0900 -N0120A045 DCT WELIN DCT -EGPF0140 -RMK/VFR CROSS-BORDER FLT PIC SMITH)</code></p>
+<ul>
+<li>Casilla 8: <code>VG</code> = VFR, aviación general. Casilla 9: <code>C172</code>, estela <code>/L</code> LIGERA. Casilla 10: <code>SV</code> equipo normalizado + solo VHF, vigilancia <code>/C</code> (solo modo A+C: un transpondedor antiguo). Casilla 13: Dublín, EOBT 0900. Casilla 15: <code>N0120A045</code> (120 kt, altitud de 4500 ft: el VFR usa <strong>altitud</strong>, no FL, por debajo de la altitud de transición) <code>DCT WELIN DCT</code>. Casilla 16: Glasgow, EET 1 h 40. Casilla 18: observación en texto libre. Este vuelo <strong>requiere</strong> un FPL porque cruza una frontera internacional (véase OM06 §1.3).</li>
+</ul>
+<p><strong>3. Formación de dos aeronaves militares, tipo sin codificar individualmente</strong>
+<code>(FPL-SPAR11-M -2ZZZZ/M -LEZG0800 -N0420F310 DCT -LEAB0055 -TYP/2F18 STS/STATE)</code></p>
+<ul>
+<li>Casilla 8: el segundo carácter <code>M</code> = tipo de vuelo militar. Casilla 9: <code>2ZZZZ</code> (2 aeronaves, sin un designador único del Doc 8643 para una formación mixta o no declarada), estela <code>/M</code>. Casilla 18: <code>TYP/2F18</code> da el tipo real, ya que se usó <code>ZZZZ</code>; <code>STS/STATE</code> marca un vuelo militar o de Estado. <strong>Ojo con la trampa:</strong> las aeronaves de Estado en formación no deben usar <strong>nunca</strong> la <code>W</code> en la casilla 10, aunque tengan aprobación RVSM (§2.4); aquí no se usa.</li>
+</ul>
+<p><strong>4. Aeronave sin indicador de lugar asignado en la salida</strong>
+<code>(FPL-N2567GA-IG -PA46/L-SDFGRY/S -ZZZZ0915 -N0210F090 DCT ABB DCT -LEBL0100 -DEP/4130N00230W)</code></p>
+<ul>
+<li>Casilla 7: matrícula estadounidense usada como ARCID (sin diferencia de indicativo radio). Casilla 13: <code>ZZZZ</code> + EOBT, porque el aeródromo no figura en las listas; la casilla 18 <code>DEP/4130N00230W</code> da la latitud/longitud (11 caracteres, grados y minutos, según la regla 2 del §2.6).</li>
+</ul>
+<p><strong>5. Vuelo que requiere entradas RVSM y PBN</strong>
+<code>(FPL-DLH4XY-IS -A20N/M-SDE3FGHIRWY/LB1 -EDDF1200 -N0460F370 DCT KENUM UN852 -LEMD0135 -PBN/A1B1D1L1O1S1S2 NAV/GBAS SBAS REG/DAIXX EET/LECB0055)</code></p>
+<ul>
+<li>Casilla 10: <code>W</code> = aprobación RVSM. Casilla 18: <code>REG/DAIXX</code> es obligatorio porque figura la <code>W</code> y la matrícula difiere de la casilla 7; <code>PBN/A1B1D1L1O1S1S2</code> (seis especificaciones PBN, por debajo del máximo de 8 entradas); <code>NAV/GBAS SBAS</code> tipos de aumentación GNSS, separados por espacios según la regla.</li>
+</ul>
+<p><strong>6. Plan de vuelo que reemplaza (RFP) tras un CNL</strong>
+Original: <code>(FPL-VLG1234-IN -A321/M-SDE2E3GHIRY/LB1 -LEBL0700 -N0470F360 DCT -LEMH0040 -DOF/260924)</code>.
+Cancelación: <code>(CNL-VLG1234-LEBL-LEMH)</code> enviada con <strong>prioridad DD</strong>.
+Reemplazo (≥5 min después): <code>(FPL-VLG1234-IN -A321/M-SDE2E3GHIRY/LB1 -LEBL0700 -N0470F340 DCT UN860 -LEMH0040 -DOF/260924 RFP/Q1)</code></p>
+<ul>
+<li>Mismo ARCID (VLG1234), mismos ADEP/ADES, ruta y nivel nuevos; <code>RFP/Q1</code> en la casilla 18 (primer reemplazo); el CNL usó la prioridad <code>DD</code>, no la <code>FF</code> habitual del FPL (véase el manual §2.7/OM06). Presentado dentro de la etapa previa al vuelo (EOBT-4h) y con el par CNL/RFP completado al menos 30 min antes de la EOBT (véase el §7 sobre la posición exacta de RFP/Qn).</li>
+</ul>
+<p><strong>7. Vuelo con cambio de reglas de vuelo a mitad de ruta (Y)</strong>
+<code>(FPL-ECDEF-YG -TB20/L-SGV/A -LEVT0930 -N0140F060 DCT PONTE PONTE VFR DCT -LELC0115 -RMK/CHANGE TO VFR AT PONTE)</code></p>
+<ul>
+<li>Casilla 8: <code>Y</code> = comienza en <strong>IFR</strong> y después cambia <strong>a VFR</strong> (§1.1). La casilla 15 muestra el cambio en <code>PONTE</code>: el punto, un espacio y luego <code>VFR</code> (regla 5, §2.6). Pasado ese punto el vuelo continúa como VFR, en la práctica a una altitud y no a un nivel de vuelo, aunque el nivel de crucero presentado antes del cambio (<code>F060</code>) se expresa como nivel de vuelo porque el vuelo empieza en IFR.</li>
+</ul>
+<p><strong>8. Salida de largo recorrido con ascenso en crucero</strong>
+<code>(FPL-AFR072-IS -A359/H-SDE2E3FGHIRWY/LB1D1 -LFPG1400 -M084F350 DCT NORTE C/NORTE/M084F350F390 DCT -SBGR1130 -DOF/260924 EET/LPPO0230 GOOO0410 SPACE 0530 SBBV... )</code></p>
+<ul>
+<li>Casilla 9: estela <code>/H</code> PESADA (MTOW del A350 &gt; 136 t). La casilla 15 usa una cláusula de <strong>ascenso en crucero</strong>: <code>C/NORTE/M084F350F390</code> = ascenso que comienza en el punto NORTE, Mach 0,84, entre el FL350 y el FL390 (regla 7, §2.6). Las entradas EET marcan límites sucesivos de FIR.</li>
+</ul>
+<p><strong>9. Plan de vuelo presentado desde el aire (AFIL)</strong>
+<code>(FPL-G-ABCD-VG -PA28/L-S/A -AFIL1145 -N0110A035 DCT -EGKB0030 -DEP/EGKKATZX)</code></p>
+<ul>
+<li>Casilla 13: <code>AFIL</code> (presentación en vuelo) + la hora sobre el primer punto de la ruta; casilla 18 <code>DEP/EGKKATZX</code> da la <strong>dirección AFTN de 8 letras</strong> de la dependencia ATS que dispone de los datos suplementarios (EGKK + ATZ (aproximación) + X), según la regla de direccionamiento del §4.1.</li>
+</ul>
+<p><strong>10. Vuelo con un plan suspendido y reactivado (contexto, no un mensaje literal)</strong>
+FPL como en el ejemplo 1, y después se recibe un <strong>FLS</strong>: <code>-COMMENT SUSPENDED DUE TO RVR BELOW MINIMA-</code>. Cuando mejoran las condiciones, el IFPS emite un <strong>DES</strong> y, si está regulado, un nuevo <strong>SAM</strong> con la nueva CTOT. Ilustra la cadena REJ/ACK/FLS del §3.5 de OM06 junto con los mensajes de slot del §6.2.</p>
+<p><strong>11. Vuelo con dos alternativas y desglose de EET</strong>
+<code>(FPL-TAP1234-IS -A21N/M-SDE2E3FGHIRWY/LB1 -LPPT0600 -N0455F360 DCT -LEMD0115 LEVX LEZL -EET/LECM0035 REG/CSTVX)</code></p>
+<ul>
+<li>Casilla 16: dos alternativas de destino (<code>LEVX LEZL</code>), separadas por un espacio, máximo 2 según la regla. Casilla 18 <code>EET/LECM0035</code> hasta el límite de la FIR de Madrid.</li>
+</ul>
+<p><strong>12. Vuelo con una demora que se tramita con DLA (no con CHG)</strong>
+EOBT original 0800, vuelo IFR sin slot; la nueva hora de fuera calzos prevista es 0835 (35 minutos de demora). Según el umbral del AIP (&gt;15 min IFR sin slot, §7 fila C), debe enviarse un <strong>DLA</strong>, no un CHG, porque <strong>la EOBT es uno de los 5 campos no modificables por CHG cuando el cambio es una demora superior al umbral</strong>; en realidad, una <em>demora</em> se permite expresamente mediante DLA aunque la EOBT en sí no pueda cambiarse con un CHG a secas; es el matiz que se examina en el ejercicio 9 (§9).</p>
+<p><strong>13. Vuelo con contexto de MDI (secuenciación de salidas, no un mensaje en sí)</strong>
+Aeródromo bajo un MDI de 5 minutos entre salidas; la autorización ATC del vuelo debe permitirle cumplir <strong>a la vez</strong> su CTOT y su hueco MDI (OM06 §3.11/§3.13); si la TWR determina que no puede cumplir ambos, debe solicitar orientación a la FMP antes de autorizar el empuje. No existe un tipo de mensaje ATS propio: es una acción de autorización o de coordinación.</p>
+<p><strong>14. Vuelo de transporte militar mixto GAT/OAT</strong>
+<code>(FPL-SPAR21-YM -C130/H-SDGRY/S -LEZL0700 -N0280F240 DCT VELAS/GAT UN860 -LEBB0210 -STS/STATE)</code></p>
+<ul>
+<li>Casilla 8: <code>Y</code> (comienza en IFR y después pasa a VFR; aquí se usa para mostrar un cambio de reglas junto a un cambio GAT/OAT) combinada con el tipo de vuelo <code>M</code>; la casilla 15 muestra <code>VELAS/GAT</code>, que marca el punto en que el vuelo pasa a ser GAT (antes de ese punto se supone <strong>OAT</strong>; es la regla del §1.2 por la que el IFPS asume GAT salvo que se marque lo contrario, invertida aquí porque el OAT se declara primero por el contexto, lo que ilustra por qué los examinadores preguntan esta regla en ambos sentidos).</li>
+</ul>
+<p><strong>15. Vuelo cancelado y vuelto a presentar por un adelanto de 40 minutos de la EOBT</strong>
+EOBT original 1400; el operador está ahora listo a las 1320 (40 min antes). Como <strong>el IFPS no acepta nunca una demora negativa</strong> y ningún <strong>adelanto de la EOBT puede enviarse por CHG</strong> (§5.2, §7 fila B), lo correcto es: <strong>CNL</strong> del FPL original y <strong>presentar un nuevo FPL</strong> con EOBT 1320 (no RFP, porque la ruta y los aeródromos no cambian: el RFP es solo para un cambio de ruta entre los mismos aeródromos, OM06 §1.6).</p>
+<hr />
+<h2 id="9-15-ejercicios-de-localizar-el-error">9. 15 ejercicios de localizar el error</h2>
+<p>Cada elemento muestra un fragmento de plan de vuelo o una acción descrita con <strong>un error deliberado</strong>. Identifícalo y compruébalo después con la solución.</p>
+<p><strong>1.</strong> <code>(FPL-IBERIA3160-IS -A320/M-...)</code>
+<em>Solución:</em> <strong>La casilla 7 supera los 7 caracteres</strong> (<code>IBERIA3160</code> = 10 caracteres). Debe usarse el código de operador OACI de 3 letras + el número de vuelo, p. ej. <code>IBE3160</code>.</p>
+<p><strong>2.</strong> Casilla 9 escrita como <code>A320/H</code> para un Airbus A320 (MTOW muy inferior a 136 000 kg).
+<em>Solución:</em> <strong>Categoría de estela turbulenta errónea.</strong> El A320 es <code>/M</code> MEDIA (7000 kg &lt; MTOW &lt; 136 000 kg), no <code>/H</code> PESADA.</p>
+<p><strong>3.</strong> La ruta de la casilla 15 dice <code>...DCT LEMD SID1A UN725...</code> para una salida de LEMD.
+<em>Solución:</em> <strong>El campo ruta no debe incluir nunca el nombre de la SID</strong> («SID1A»); solo puede figurar el <strong>primer punto significativo</strong> de la SID, según el AIP ENR 1.10 («debido a requisitos operativos del IFPS»).</p>
+<p><strong>4.</strong> Se presenta un plan de vuelo 130 horas antes de la EOBT.
+<em>Solución:</em> <strong>Supera la antelación máxima de 120 horas (5 días) del IFPS</strong>; el IFPS no lo aceptará (REJ).</p>
+<p><strong>5.</strong> Se envía un mensaje CHG para cambiar el aeródromo de destino de LEBL a LEVC.
+<em>Solución:</em> <strong>El aeródromo de destino no puede cambiarse con un CHG</strong> (es uno de los 5 campos no modificables, §7 fila B); lo correcto es CNL + nuevo FPL.</p>
+<p><strong>6.</strong> Casilla 8 presentada como <code>Z</code> para un vuelo que comienza en IFR y después cambia a VFR.
+<em>Solución:</em> <strong>Letra errónea.</strong> <code>Z</code> significa «comienza en VFR y después cambia a IFR». Un vuelo que empieza en IFR y pasa después a VFR debe usar <strong><code>Y</code></strong>.</p>
+<p><strong>7.</strong> Casilla 18 escrita con <code>PBN/A1B1D1L1O1S1S2T1T2A2C2</code> (11 entradas).
+<em>Solución:</em> <strong>PBN/ admite un máximo de 8 entradas (16 caracteres)</strong>; 11 entradas exceden el límite.</p>
+<p><strong>8.</strong> Se envía un mensaje DLA por una demora de 10 minutos en un vuelo IFR sin slot asignado que sale de un aeródromo español.
+<em>Solución:</em> <strong>Por debajo del umbral del AIP.</strong> Solo se requiere un DLA a partir de <strong>15 minutos</strong> en un vuelo IFR sin slot; una demora de 10 minutos no necesita ningún mensaje.</p>
+<p><strong>9.</strong> Un operador quiere retrasar la EOBT de 0900 a 0925 y envía un CNL + nuevo FPL en lugar de un CHG.
+<em>Solución:</em> <strong>Innecesariamente drástico.</strong> Una <strong>demora</strong> (EOBT posterior) puede tramitarse con un <strong>DLA</strong> (o, según la nota del Manual del IFPS, el IFPS también acepta un CHG que modifique la EOBT a una hora posterior, aunque el Reglamento de Circulación Aérea de España exige específicamente un DLA para las demoras); cancelar y volver a presentar solo es necesario para un <strong>adelanto</strong> de la EOBT o para cambiar alguno de los otros 4 campos fijos.</p>
+<p><strong>10.</strong> La casilla 10, bloque de vigilancia, muestra <code>N</code> junto con <code>E</code>.
+<em>Solución:</em> <strong>Contradicción.</strong> <code>N</code> significa que no hay equipo de vigilancia en funcionamiento; no puede combinarse con una letra de capacidad como <code>E</code> (modo S con identificación + altitud + ADS-B). Se usa <code>N</code> sola o solo las letras de capacidad.</p>
+<p><strong>11.</strong> Se transmite un mensaje CPL 10 minutos antes de la hora estimada de llegada de la aeronave al punto de transferencia.
+<em>Solución:</em> <strong>Demasiado tarde.</strong> La OACI exige una antelación <strong>de al menos 20 minutos</strong> para un CPL (y para un EST) respecto de la hora estimada de cruce del límite, salvo que se haya acordado un plazo distinto.</p>
+<p><strong>12.</strong> Se presenta un RFP como tercer reemplazo, etiquetado de nuevo como <code>RFP/Q1</code>.
+<em>Solución:</em> <strong>Número de secuencia erróneo.</strong> Cada reemplazo sucesivo incrementa <code>n</code> (<code>RFP/Q1</code>, <code>RFP/Q2</code>, <code>RFP/Q3</code>...); reutilizar <code>Q1</code> para el tercer reemplazo es un error de presentación.</p>
+<p><strong>13.</strong> Se presenta un último RFP 20 minutos antes de la EOBT.
+<em>Solución:</em> <strong>Demasiado tarde.</strong> El último RFP debe presentarse <strong>al menos 30 minutos antes de la EOBT</strong> (el AIP ENR 1.10 y el Manual del IFPS coinciden en esta cifra).</p>
+<p><strong>14.</strong> Una dirección AFTN se escribe como <code>EBLGZTZ</code> (7 letras).
+<em>Solución:</em> <strong>Una dirección AFTN tiene siempre exactamente 8 letras</strong>: lugar de 4 letras + organización de 3 letras + 1 letra de departamento (p. ej. <code>EBLGZTZX</code>, con <code>X</code> para «sin departamento concreto»). Al ejemplo le falta la letra final del departamento.</p>
+<p><strong>15.</strong> Se recibe un ORM REJ y el originador se limita a esperar, suponiendo que el IFPS aún conserva una versión anterior del plan.
+<em>Solución:</em> <strong>Suposición errónea.</strong> Un REJ significa que <strong>no existe ningún plan de vuelo</strong> para ese vuelo en las dependencias ATS interesadas (ni siquiera una versión anterior); si el vuelo aún va a operar, el originador debe <strong>corregir y volver a presentar</strong> un mensaje nuevo completo.</p>
+<hr />
+<h2 id="10-trampas-de-examen">10. Trampas de examen</h2>
+<ol>
+<li><strong>Posición de RFP/Qn:</strong> no hay una única respuesta «correcta» en todas las fuentes primarias; hay que anclar la respuesta al documento que nombre la pregunta (véase el análisis del §7).</li>
+<li><strong>Lista de lo que un CHG no puede modificar:</strong> el manual dice 3 campos; la lista operativa del AIP tiene 5 (añade la EOBD y el adelanto de la EOBT). Hay que ajustar la lista a la fuente citada en la pregunta.</li>
+<li><strong>Los umbrales del DLA difieren según el nivel:</strong> base OACI = 30 min sin más; AIP España = 15/30/60 min según reglas de vuelo y estado, más las reglas de 30 y de 15-30 min para los vuelos IFR con slot.</li>
+<li><strong>Antelación del CPL/EST = 20 minutos</strong>, no las «3 horas» de ATFCM (esa es otra regla, sobre cuándo empieza la monitorización pretáctica de la HEC, OM06 §3.9).</li>
+<li><strong>La W en la casilla 10 (RVSM) exige siempre REG/ en la casilla 18</strong>; las aeronaves de Estado en formación no deben usar nunca la W aunque tengan aprobación RVSM: usan <code>STS/NONRVSM</code> si pretenden operar como GAT en espacio aéreo RVSM.</li>
+<li><strong>PBN/ máximo 8 entradas / 16 caracteres.</strong> SUR/ (vigilancia) máximo 20 caracteres: no hay que intercambiar los dos límites.</li>
+<li><strong>La casilla 19 no se transmite nunca en el mensaje FPL:</strong> trampa clásica de «qué viaja con el plan de vuelo».</li>
+<li><strong>AFIL</strong> (casilla 13) frente a <strong>ZZZZ</strong> (casillas 13, 16, 9): AFIL solo sirve para un plan de vuelo presentado desde el aire; ZZZZ es para «sin indicador o designador OACI asignado» y va con un complemento DEP/, DEST/ o TYP/ de la casilla 18, respectivamente.</li>
+<li><strong>Dirección AFTN = exactamente 8 letras</strong> (4+3+1); no hay que confundirla con el indicador de lugar OACI de 4 letras solo.</li>
+<li><strong>Cadena ORM:</strong> un MAN va siempre seguido de ACK o REJ; REJ significa que no existe ningún plan, no que «el plan antiguo sigue vigente».</li>
+<li><strong>Ventana de cumplimiento del slot (CTOT) -5/+10 minutos</strong>, distinta del «máximo 5 minutos entre salidas durante unos 30 minutos» del MDI (OM06 §3.11): son dos cifras diferentes, que no deben mezclarse.</li>
+<li><strong>A-CDM tiene 16 hitos numerados</strong>; conviene conocer al menos M1 (FPL activado), M9 (TOBT), M10 (TSAT), M15 (fuera calzos) y M16 (despegue) como puntos de anclaje.</li>
+<li><strong>Nomenclatura DPI:</strong> E- (<em>Early</em>), T-DPI-t (<em>Target</em>, basado en la TOBT), T-DPI-s (<em>Target</em>, basado en la TSAT), A- (ATC/real), C- (<em>Cancel</em>): los sufijos «t»/«s» son fáciles de intercambiar en un distractor.</li>
+<li><strong>120 horas es el límite duro del propio sistema IFPS</strong>, no solo una convención de España/SERA: coinciden tres fuentes independientes (SERA, AIP, Manual del IFPS).</li>
+<li><strong>La prioridad del CNL es DD</strong>, no la FF que usan el FPL/CHG/DLA/DEP/ARR ordinarios: distractor de detalle.</li>
+</ol>
+<h2 id="imprescindible-memorizar">Imprescindible memorizar</h2>
+<ul>
+<li><strong>Longitudes y límites de las casillas:</strong> ARCID ≤7 caracteres; estela 1 letra (J/H/M/L); vigilancia ≤20 caracteres; PBN/ ≤8 entradas/16 caracteres; cambio de EOBD de más de 15 min → cancelar y volver a presentar.</li>
+<li><strong>No modificables por CHG (AIP, 5):</strong> ARCID, ADEP, ADES, EOBD, EOBT si es un adelanto.</li>
+<li><strong>DLA (AIP España):</strong> &gt;15 min IFR sin slot / &gt;30 min VFR controlado / &gt;60 min VFR no controlado; IFR con slot: &gt;30 min DLA, 15-30 min SRR. Base OACI: &gt;30 min sin más.</li>
+<li><strong>Antelación de CPL/EST: ≥20 minutos</strong> antes del punto de límite o de transferencia.</li>
+<li><strong>LAM:</strong> solo entre ordenadores; la ausencia de LAM ⇒ volver a teléfono o coordinación manual.</li>
+<li><strong>RQP</strong> a la dependencia transferidora / dependencia anterior en la ruta; <strong>RQS</strong> a la ARO de salida; <strong>SPL</strong> desde la ARO de salida, con la misma prioridad que la solicitud.</li>
+<li><strong>Dirección AFTN = 8 letras</strong> (4 lugar + 3 organización + 1 departamento; YYY/YXY/ZZZ si no hay código de organización; X si no hace falta departamento).</li>
+<li><strong>Tabla completa de prioridades AFTN:</strong> SS socorro; DD urgencia; FF seguridad de los vuelos (movimiento + parte de meteorología); GG pronósticos y observaciones meteorológicos + regularidad de los vuelos + AIS; KK administrativos; los mensajes de servicio adoptan la prioridad de la categoría a la que se refieren. Precedencia: SS &gt; DD+FF &gt; GG+KK.</li>
+<li><strong>IFPS:</strong> antelación máxima 120 h (rechazo duro más allá); ≥3 h recomendadas; DOF obligatoria a partir de 24 h; el cambio de EOBT &gt;15 min debe notificarse; nunca se aceptan demoras negativas.</li>
+<li><strong>ORM:</strong> ACK = procesado correctamente (no garantiza el cumplimiento diplomático/ETOPS/SAFA/MNPS); MAN = en cola para corrección manual, siempre seguido de ACK/REJ; REJ = no existe ningún plan, máx. 10 errores listados.</li>
+<li><strong>RFP/Qn:</strong> el Doc 7030 de la OACI dice solo «en la casilla 18» (sin posición); el resumen del Manual del IFPS dice «primero» (contradiciendo su propia sección detallada); el AIP y el manual dicen «último».</li>
+<li><strong>Ventana de cumplimiento del slot (CTOT): -5/+10 minutos.</strong></li>
+<li><strong>A-CDM: 16 hitos</strong>; TOBT (hora de listo estimada por el operador) → TSAT (aprobación de puesta en marcha dada por el secuenciador) → TTOT (despegue calculado por la torre) frente a CTOT (slot ATFM del NM).</li>
+<li><strong>Tipos de DPI:</strong> E- / T-DPI-t / T-DPI-s / A- / C-.</li>
+<li><strong>FF-ICE:</strong> eFPL, GUFI (único, inmutable), el NM = unidad de servicios FF-ICE de la IFPZ, prestados por B2B.</li>
+<li><strong>Clases de espacio aéreo A-G</strong>, España: por encima del FL195 = clase C; la clase E nunca se usa en zonas de control; la clase F es «temporal» a la espera de sustitución; F y G no requieren autorización ATC.</li>
+<li><strong>Regla semicircular:</strong> derrota 000-179° (aprox.; «090-269 IMPARES» según el encabezado del AIP) → IFR FL impares, VFR impares + 500 ft; el rango recíproco → IFR FL pares, VFR pares + 500 ft.</li>
+</ul>
+<h2 id="glosario-bilingue-es-en">Glosario bilingüe (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Red de Telecomunicaciones Fijas Aeronáuticas (AFTN)</td>
+<td>Aeronautical Fixed Telecommunication Network (AFTN)</td>
+</tr>
+<tr>
+<td>Sistema de tratamiento de mensajes ATS (AMHS)</td>
+<td>ATS Message Handling System (AMHS)</td>
+</tr>
+<tr>
+<td>Comunicación de datos entre instalaciones ATS (AIDC)</td>
+<td>ATS Interfacility Data Communication (AIDC)</td>
+</tr>
+<tr>
+<td>Acuse de recibo (aceptación) (ACK)</td>
+<td>Acknowledgement (ACK)</td>
+</tr>
+<tr>
+<td>(Mensaje de) tratamiento manual (MAN)</td>
+<td>Manual (MAN)</td>
+</tr>
+<tr>
+<td>Rechazo (REJ)</td>
+<td>Reject (REJ)</td>
+</tr>
+<tr>
+<td>Mensaje de respuesta operacional (ORM)</td>
+<td>Operational Reply Message (ORM)</td>
+</tr>
+<tr>
+<td>Mensaje de coordinación (CDN)</td>
+<td>Coordination message (CDN)</td>
+</tr>
+<tr>
+<td>Mensaje de plan de vuelo actualizado (CPL)</td>
+<td>Current flight plan message (CPL)</td>
+</tr>
+<tr>
+<td>Mensaje de estimada (EST)</td>
+<td>Estimate message (EST)</td>
+</tr>
+<tr>
+<td>Acuse de recibo lógico (LAM)</td>
+<td>Logical acknowledgement (LAM)</td>
+</tr>
+<tr>
+<td>Solicitud de plan de vuelo (RQP)</td>
+<td>Request flight plan (RQP)</td>
+</tr>
+<tr>
+<td>Solicitud de plan de vuelo suplementario (RQS)</td>
+<td>Request supplementary flight plan (RQS)</td>
+</tr>
+<tr>
+<td>Plan de vuelo suplementario (SPL)</td>
+<td>Supplementary flight plan (SPL)</td>
+</tr>
+<tr>
+<td>Mensaje de fallo de radiocomunicaciones (RCF)</td>
+<td>Radiocommunication failure (RCF)</td>
+</tr>
+<tr>
+<td>Mensaje de alerta (ALR)</td>
+<td>Alerting message (ALR)</td>
+</tr>
+<tr>
+<td>Plan de vuelo repetitivo (RPL)</td>
+<td>Repetitive flight plan (RPL)</td>
+</tr>
+<tr>
+<td>Información de vuelo y flujo para un entorno colaborativo (FF-ICE)</td>
+<td>Flight and Flow — Information for a Collaborative Environment (FF-ICE)</td>
+</tr>
+<tr>
+<td>Plan de vuelo presentado electrónico (eFPL)</td>
+<td>Electronic filed flight plan (eFPL)</td>
+</tr>
+<tr>
+<td>Identificador único de vuelo a escala mundial (GUFI)</td>
+<td>Globally Unique Flight Identifier (GUFI)</td>
+</tr>
+<tr>
+<td>Hora prevista de fuera calzos (EOBT)</td>
+<td>Estimated Off-Block Time (EOBT)</td>
+</tr>
+<tr>
+<td>Hora objetivo de fuera de calzos (TOBT)</td>
+<td>Target Off-Block Time (TOBT)</td>
+</tr>
+<tr>
+<td>Hora objetivo de autorización de puesta en marcha (TSAT)</td>
+<td>Target Start-up Approval Time (TSAT)</td>
+</tr>
+<tr>
+<td>Hora objetivo de despegue (TTOT)</td>
+<td>Target Take-Off Time (TTOT)</td>
+</tr>
+<tr>
+<td>Hora calculada de despegue (CTOT)</td>
+<td>Calculated Take-Off Time (CTOT)</td>
+</tr>
+<tr>
+<td>Mensaje de asignación de slot (SAM)</td>
+<td>Slot Allocation Message (SAM)</td>
+</tr>
+<tr>
+<td>Mensaje de revisión de slot (SRM)</td>
+<td>Slot Revision Message (SRM)</td>
+</tr>
+<tr>
+<td>Cancelación de slot (SLC)</td>
+<td>Slot Cancellation (SLC)</td>
+</tr>
+<tr>
+<td>Listo para mejora (RFI)</td>
+<td>Ready For Improvement (RFI)</td>
+</tr>
+<tr>
+<td>Información de planificación de salida (DPI)</td>
+<td>Departure Planning Information (DPI)</td>
+</tr>
+<tr>
+<td>Toma de decisiones colaborativa en aeropuerto (A-CDM)</td>
+<td>Airport Collaborative Decision Making (A-CDM)</td>
+</tr>
+<tr>
+<td>Plan de vuelo que reemplaza (RFP)</td>
+<td>Replacement Flight Plan (RFP)</td>
+</tr>
+<tr>
+<td>Categoría de estela turbulenta</td>
+<td>Wake turbulence category</td>
+</tr>
+<tr>
+<td>Navegación basada en la performance (PBN)</td>
+<td>Performance-Based Navigation (PBN)</td>
+</tr>
+<tr>
+<td>Punto significativo</td>
+<td>Significant point</td>
+</tr>
+<tr>
+<td>Salida normalizada por instrumentos (SID)</td>
+<td>Standard Instrument Departure (SID)</td>
+</tr>
+<tr>
+<td>Llegada normalizada (STAR)</td>
+<td>Standard Arrival Route (STAR)</td>
+</tr>
+<tr>
+<td>Regla semicircular</td>
+<td>Semicircular rule</td>
+</tr>
+<tr>
+<td>Clase de espacio aéreo</td>
+<td>Airspace class</td>
+</tr>
+<tr>
+<td>Circulación Aérea General (GAT)</td>
+<td>General Air Traffic (GAT)</td>
+</tr>
+<tr>
+<td>Circulación Aérea Operativa (OAT)</td>
+<td>Operational Air Traffic (OAT)</td>
+</tr>
+<tr>
+<td>Zona IFPS (IFPZ)</td>
+<td>IFPS Zone (IFPZ)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-fuentes">13. Fuentes</h2>
+<p>Todas leídas en el texto local extraído completo, salvo indicación contraria.</p>
+<ul>
+<li><strong>SUPPs EUR del Doc 7030 de la OACI</strong>, Ed. 5 Enm. 9 (2013) — procedimiento RFP, redacción original.</li>
+<li><strong>Lista de comprobación PANS-ATM de EASA</strong> (reproduce el texto del cap. 11 y del apéndice 2 del Doc 4444 de la OACI frente a la transposición en la UE): <code>...\icao-fpl-ats\EASA-PANS-ATM-Checklist.txt</code> — reglas de mensajes de movimiento/coordinación/suplementarios/AIDC, antelaciones, ejemplo de RQP.</li>
+<li><strong>AIP España ENR 1.10</strong> (en), AIRAC AMDT 07/26, WEF 06-AUG-26: <code>...\aip-spain\LE_ENR_1_10_en.txt</code> — instrucciones de cumplimentación de las casillas 7-19, umbrales de DLA/CHG/CNL/DEP/ARR, RFP, FF-ICE/eFPL/GUFI.</li>
+<li><strong>AIP España ENR 1.4</strong> (en/es): <code>...\aip-spain\LE_ENR_1_4_en.txt</code> — clases de espacio aéreo A-G, regla de España «por encima del FL195 = C».</li>
+<li><strong>AIP España ENR 1.7</strong> (en): <code>...\aip-spain\LE_ENR_1_7_en.txt</code> — tabla semicircular de niveles de crucero, banda RVSM.</li>
+<li><strong>Manual de Usuario del IFPS de EUROCONTROL</strong>, Wave 2.3, vigencia 22-04-2026: <code>...\eurocontrol\IFPS-Users-Manual-Wave2.3-2026-04.txt</code> — IFPZ, límites de presentación, ORM (ACK/MAN/REJ), párrafo «primer elemento» de RFP y §96 específico, referencia a la «casilla Q» del RPL.</li>
+<li><strong>Manual de Usuario ATFCM de EUROCONTROL</strong>, Wave 2.3: <code>...\eurocontrol\ATFCM-Users-Manual-Wave2.3-2026-03.txt</code> — SAM/SRM, campo REGUL, estados RFI/REA/SWM.</li>
+<li><strong>SKYbrary — Calculated Take Off Time (CTOT)</strong>: <code>...\web-pages\SKYbrary-CTOT.txt</code> — ventana de cumplimiento del slot (CTOT) -5/+10 minutos.</li>
+<li><strong>SKYbrary — Aeronautical Fixed Telecommunication Network (AFTN)</strong>: <code>...\web-pages\SKYbrary-AFTN.txt</code> — estructura de dirección de 8 letras, tabla completa de categorías de prioridad.</li>
+<li><strong>Especificación de EUROCONTROL para A-CDM</strong>, 2025-01: <code>...\eurocontrol\EUROCONTROL-Specification-A-CDM-2025-01.txt</code> — 16 hitos, definiciones de TOBT/TSAT/TTOT/VTT.</li>
+<li><strong>Guía de implantación de DPI de EUROCONTROL</strong>, 2.700, 2025-06: <code>...\eurocontrol\DPI-Implementation-Guide-2.700-2025-06.txt</code> — nomenclatura E-/T-DPI-t/T-DPI-s/A-/C-DPI.</li>
+<li><strong>Referencias cruzadas (no citadas por separado):</strong> <code>syllabus\manual\OM06-flight-plan-atfcm-study-guide.md</code> (contenido fiel al manual, no duplicado aquí), <code>syllabus\t06-flight-plan-atfcm.md</code> (notas base, no duplicadas aquí).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

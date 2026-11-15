@@ -1,0 +1,642 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Europa: EASA, EUROCONTROL, la UE y el Cielo Único Europeo (T01b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Instituciones y legislación aeronáutica</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-se-examina">Qué se examina</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-easa-agencia-de-la-union-europea-para-la-seguridad-aerea-european-union-aviation-safety-agency">1. EASA: Agencia de la Unión Europea para la Seguridad Aérea (European Union Aviation Safety Agency)</a><ul>
+<li><a href="#11-creacion-e-historia-juridica">1.1 Creación e historia jurídica</a></li>
+<li><a href="#12-reglamento-de-base-20181139-estructura-y-contenido-clave">1.2 Reglamento de base 2018/1139: estructura y contenido clave</a></li>
+<li><a href="#13-mision-y-tareas">1.3 Misión y tareas</a></li>
+<li><a href="#14-estructura-consejo-de-administracion-director-ejecutivo-direcciones">1.4 Estructura: Consejo de Administración, Director Ejecutivo, Direcciones</a></li>
+<li><a href="#15-proceso-de-elaboracion-de-normas">1.5 Proceso de elaboración de normas</a></li>
+<li><a href="#16-parte-atmans-reglamento-ue-2017373">1.6 Parte ATM/ANS: Reglamento (UE) 2017/373</a></li>
+<li><a href="#17-licencias-de-controlador-de-transito-aereo-reglamento-ue-2015340">1.7 Licencias de controlador de tránsito aéreo: Reglamento (UE) 2015/340</a></li>
+<li><a href="#18-sera-reglamento-ue-9232012">1.8 SERA: Reglamento (UE) 923/2012</a></li>
+</ul>
+</li>
+<li><a href="#2-eurocontrol-organizacion-europea-para-la-seguridad-de-la-navegacion-aerea-european-organisation-for-the-safety-of-air-navigation">2. EUROCONTROL (Organización Europea para la Seguridad de la Navegación Aérea, European Organisation for the Safety of Air Navigation)</a><ul>
+<li><a href="#21-origenes-y-revision-de-1997-la-verdadera-historia-de-la-ratificacion">2.1 Orígenes y revisión de 1997: la verdadera historia de la ratificación</a></li>
+<li><a href="#22-estados-miembros-recuento-exacto-y-ultimas-incorporaciones">2.2 Estados miembros: recuento exacto y últimas incorporaciones</a></li>
+<li><a href="#23-estructura-de-la-agencia-comite-ejecutivo-actual">2.3 Estructura de la Agencia: comité ejecutivo actual</a></li>
+<li><a href="#24-gestor-de-red-designacion-y-base-juridica">2.4 Gestor de Red: designación y base jurídica</a></li>
+<li><a href="#25-muac-confirma-y-amplia-el-manual-y-las-notas-base-existentes">2.5 MUAC (confirma y amplía el manual y las notas base existentes)</a></li>
+<li><a href="#26-crco-y-tasas-de-ruta">2.6 CRCO y tasas de ruta</a></li>
+<li><a href="#27-centro-de-formacion-aviation-learning-centre-alc">2.7 Centro de formación: Aviation Learning Centre (ALC)</a></li>
+<li><a href="#28-comision-de-evaluacion-de-resultados-prc">2.8 Comisión de Evaluación de Resultados (PRC)</a></li>
+<li><a href="#29-esarr">2.9 ESARR</a></li>
+</ul>
+</li>
+<li><a href="#3-la-union-europea-y-el-cielo-unico-europeo-ses">3. La Unión Europea y el Cielo Único Europeo (SES)</a><ul>
+<li><a href="#31-ses-i-2004-los-cuatro-reglamentos-originales">3.1 SES I (2004): los cuatro reglamentos originales</a></li>
+<li><a href="#32-ses-ii-y-ses-ii-segun-el-manual-contrastado-con-los-considerandos-del-20242803-que-repasan-la-historia-legislativa">3.2 SES II y SES II+ (según el manual, contrastado con los considerandos del 2024/2803, que repasan la historia legislativa)</a></li>
+<li><a href="#33-sistema-de-evaluacion-del-rendimiento-y-de-tarificacion-del-ses-periodos-de-referencia">3.3 Sistema de evaluación del rendimiento y de tarificación del SES: períodos de referencia</a></li>
+<li><a href="#34-la-refundicion-de-2024-reglamento-ue-20242803">3.4 La refundición de 2024: Reglamento (UE) 2024/2803</a></li>
+<li><a href="#35-bloques-funcionales-de-espacio-aereo-fab-la-lista-que-faltaba-ya-completa">3.5 Bloques funcionales de espacio aéreo (FAB): la lista que faltaba, ya completa</a></li>
+<li><a href="#36-sesar-fases-y-programa-actual-amplia-el-manual">3.6 SESAR: fases y programa actual (amplía el manual)</a></li>
+<li><a href="#37-u-space">3.7 U-space</a></li>
+<li><a href="#38-funciones-de-la-comision-europea-y-del-parlamento-europeo">3.8 Funciones de la Comisión Europea y del Parlamento Europeo</a></li>
+<li><a href="#39-notificacion-de-sucesos-reglamento-ue-3762014">3.9 Notificación de sucesos: Reglamento (UE) 376/2014</a></li>
+<li><a href="#310-reglamento-de-la-ue-sobre-formacion-y-licencias-de-controladores">3.10 Reglamento de la UE sobre formación y licencias de controladores</a></li>
+</ul>
+</li>
+<li><a href="#4-otros-organismos-europeos">4. Otros organismos europeos</a><ul>
+<li><a href="#41-ceac-conferencia-europea-de-aviacion-civil-european-civil-aviation-conference-ecac">4.1 CEAC: Conferencia Europea de Aviación Civil (European Civil Aviation Conference, ECAC)</a></li>
+<li><a href="#42-relacion-ue-eurocontrol">4.2 Relación UE-EUROCONTROL</a></li>
+</ul>
+</li>
+<li><a href="#5-ejemplos-resueltos">5. Ejemplos resueltos</a></li>
+<li><a href="#6-trampas-de-examen">6. Trampas de examen</a></li>
+<li><a href="#7-manual-frente-a-fuentes-primarias">7. Manual frente a fuentes primarias</a></li>
+<li><a href="#8-imprescindible-memorizar">8. Imprescindible memorizar</a></li>
+<li><a href="#9-glosario-bilingue-es-en">9. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#10-fuentes">10. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">42 min de lectura</div><h1 id="t01b-europa-easa-eurocontrol-la-ue-y-el-cielo-unico-europeo">T01b: Europa: EASA, EUROCONTROL, la UE y el Cielo Único Europeo</h1>
+<p>Este archivo va <strong>más allá</strong> del capítulo del tema 1 del manual de ENAIRE (basado en el manual oficial «Instituciones y Legislación Aeronáutica», noviembre de 2025). Se apoya en textos primarios: los reglamentos de la UE consolidados, el Convenio de EUROCONTROL y las páginas e informes oficiales de las propias instituciones. Cuando el manual y una fuente primaria discrepan, ambas posturas se recogen en el §7 «Manual frente a fuentes primarias». El término oficial en inglés se da entre paréntesis en la primera mención.</p>
+<h2 id="que-se-examina">Qué se examina</h2>
+<p>El tema 1 («Instituciones y legislación aeronáutica») es terreno de datos exactos: años de creación, números de reglamento, recuentos de miembros, sedes, competencias. Este archivo profundiza específicamente en el <strong>ámbito europeo</strong>: la Agencia de la Unión Europea para la Seguridad Aérea (EASA), EUROCONTROL, las instituciones de la Unión Europea que legislan sobre aviación y el paquete del Cielo Único Europeo (<em>Single European Sky</em>, SES) que las une: sistema de evaluación del rendimiento y de tarificación, bloques funcionales de espacio aéreo, Gestor de Red, SESAR y U-space. Cabe esperar preguntas de un solo dato: qué reglamento creó qué, qué organismo hace qué, cuántos miembros tiene, desde cuándo, qué número lleva una habilitación o un período de referencia. La biblioteca utilizada (<code>ATC\fuentes\01-instituciones-legislacion\{eu,eurocontrol,easa,sesar,fab}\</code>) contiene los reglamentos consolidados y las páginas institucionales oficiales, de modo que este archivo corrige y precisa varios puntos que el manual y las notas base existentes (<code>syllabus/t01-institutions-legislation.md</code>) dejaban como «no encontrado» o sin verificar.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>EASA: Agencia de la Unión Europea para la Seguridad Aérea</li>
+<li>EUROCONTROL</li>
+<li>La Unión Europea y el Cielo Único Europeo (SES)</li>
+<li>Otros organismos europeos (CEAC, relación UE-EUROCONTROL)</li>
+<li>Ejemplos resueltos</li>
+<li>Trampas de examen</li>
+<li>Manual frente a fuentes primarias</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-easa-agencia-de-la-union-europea-para-la-seguridad-aerea-european-union-aviation-safety-agency">1. EASA: Agencia de la Unión Europea para la Seguridad Aérea (<em>European Union Aviation Safety Agency</em>)</h2>
+<h3 id="11-creacion-e-historia-juridica">1.1 Creación e historia jurídica</h3>
+<p>EASA se <strong>creó mediante el Reglamento (CE) n.º 1592/2002</strong> del Parlamento Europeo y del Consejo, de <strong>15 de julio de 2002</strong>, sobre normas comunes en el ámbito de la aviación civil y por el que se crea una Agencia Europea de Seguridad Aérea (el manual dice solo «creada en 2002», sin el número de reglamento). Ese primer reglamento de base fue <strong>derogado y sustituido por el Reglamento (CE) n.º 216/2008</strong> de <strong>20 de febrero de 2008</strong>, que a su vez fue <strong>derogado por el Reglamento (UE) 2018/1139</strong> de 4 de julio de 2018 (en vigor desde el <strong>11 de septiembre de 2018</strong>), el <strong>Reglamento de base</strong> actual. El Reglamento 2018/1139 <strong>derogó</strong> además expresamente el <strong>Reglamento (CE) n.º 552/2004</strong> (el reglamento de interoperabilidad del SES), lo que explica que el 552/2004 no deba aparecer junto a los reglamentos SES actuales como si siguiera en vigor (véase §7.1). Desde el 2018/1139, la agencia pasó de llamarse «Agencia Europea de Seguridad Aérea» a <strong>Agencia de la Unión Europea para la Seguridad Aérea</strong>, con las mismas siglas, EASA.</p>
+<h3 id="12-reglamento-de-base-20181139-estructura-y-contenido-clave">1.2 Reglamento de base 2018/1139: estructura y contenido clave</h3>
+<p>Archivo local leído por completo: <code>fuentes/01-instituciones-legislacion/eu/reg-2018-1139-basic-regulation-consolidated-20260802-en.pdf</code> (texto consolidado, aplicable a 2026-08-02).</p>
+<ul>
+<li>El <strong>artículo 1</strong> fija el objetivo del Reglamento: establecer y mantener un <strong>nivel elevado y uniforme de seguridad de la aviación civil</strong> en la Unión; contribuir a un <strong>nivel elevado y uniforme de protección del medio ambiente</strong>; facilitar la libre circulación de mercancías, personas y servicios; promover la <strong>rentabilidad</strong>; ayudar a los Estados miembros a cumplir sus obligaciones con la OACI; y promover los puntos de vista de la UE sobre las normas de aviación civil en el ámbito internacional.</li>
+<li>El Reglamento abarca, mediante <strong>anexos de requisitos esenciales</strong> separados, cada uno vinculado a su propia familia de productos: el <strong>anexo II</strong>, requisitos esenciales de aeronavegabilidad; el <strong>anexo III</strong>, requisitos esenciales de compatibilidad medioambiental; y otros anexos para las operaciones aéreas, las licencias de controladores y de tripulaciones, los aeródromos, ATM/ANS (<strong>anexo VII «requisitos esenciales aplicables al diseño de estructuras del espacio aéreo» y anexo VIII «requisitos esenciales para ATM/ANS y para los controladores de tránsito aéreo»</strong>), las aeronaves no tripuladas, etc.</li>
+<li>El Reglamento amplió el ámbito actual más allá de la aeronavegabilidad a los <strong>drones/UAS, los aeródromos, ATM/ANS y los aspectos de ciberseguridad</strong>.</li>
+<li>El Reglamento (UE) 2024/2803 (la refundición del SES de 2024, §3) <strong>modifica varios artículos del 2018/1139</strong> directamente (su propio artículo 57): redefine «ATM/ANS» en el artículo 3, punto 5, por remisión al 2024/2803, actualiza el artículo de certificación ATM/ANS (artículo 43) y añade un nuevo requisito esencial 2.3 bis «Servicios de datos del tránsito aéreo» al anexo VIII, además de un nuevo punto 7 «Solidez financiera, responsabilidad, requisitos de cobertura de seguro, propiedad y estructura organizativa» para los proveedores de ATM/ANS.</li>
+</ul>
+<h3 id="13-mision-y-tareas">1.3 Misión y tareas</h3>
+<p>Garantizar el nivel común más alto de seguridad y de protección del medio ambiente; un proceso único de certificación entre los Estados miembros; facilitar el mercado interior de la aviación. Tareas principales: <strong>elaboración de normativa</strong>, inspecciones de estandarización de las autoridades nacionales, <strong>certificación de tipo</strong> de aeronaves, motores y componentes, supervisión de organizaciones de terceros países, recogida y análisis de datos de seguridad y coordinación del <strong>programa SAFA</strong> (evaluación de la seguridad de las aeronaves extranjeras, <em>Safety Assessment of Foreign Aircraft</em>).</p>
+<h3 id="14-estructura-consejo-de-administracion-director-ejecutivo-direcciones">1.4 Estructura: Consejo de Administración, Director Ejecutivo, Direcciones</h3>
+<ul>
+<li><strong>Consejo de Administración</strong> (<em>Management Board</em>): un representante por Estado miembro más uno de la Comisión Europea, cada uno con un suplente; <strong>mandatos de cinco años renovables</strong> (según el manual, confirmado en su estructura por la lista vigente). <strong>Presidenta del Consejo de Administración actual: Ana Vieira da Mata</strong> (Portugal); <strong>Vicepresidenta: Anelia Marinova</strong> (Bulgaria).</li>
+<li><strong>Estados miembros de EASA: 31</strong>: los <strong>27 Estados miembros de la UE</strong> más <strong>4 Estados de la AELC no pertenecientes a la UE: Islandia, Liechtenstein, Noruega y Suiza</strong> (cada uno tiene asiento en el Consejo de Administración con pleno derecho de voto; la Comisión Europea ocupa un 32.º puesto, pero no es un «Estado miembro»). Esta cifra falta en el manual (señalada allí como laguna) y en las notas base existentes.</li>
+<li><strong>Director Ejecutivo: Florian Guillermet</strong>. Es plenamente independiente en el ejercicio de sus funciones; responde ante el Parlamento Europeo y el Consejo, que pueden convocarlo para que rinda cuentas.</li>
+<li><strong>Direcciones actuales (según la página vigente «Agency Organisation Structure», leída en 2026-09)</strong>: <strong>Dirección de Certificación</strong>; <strong>Dirección de Normas de Vuelo</strong>; <strong>Dirección de Gestión de la Seguridad, Sostenibilidad y Proyección Global</strong>; <strong>Dirección de Recursos y Apoyo</strong>. Esto difiere de la lista de nombres de direcciones del manual («Estrategia y Gestión de la Seguridad», «Certificación», «Normas de Vuelo», «Recursos y Apoyo»); véase §7.2 para la denominación actual y verificada.</li>
+<li><strong>Sede de EASA: Colonia (<em>Köln</em>), Alemania</strong>.</li>
+<li><strong>Personal: 771 FTE (equivalentes a tiempo completo) desplegados en 2025</strong>. Esto cubre una laguna que el propio manual admite («sin cifras de personal ni de presupuesto de EASA»).</li>
+<li><strong>Salas de recurso</strong>: resuelven los recursos contra las decisiones de EASA (certificación, tasas, investigaciones); la <strong>Comisión decide el número de salas y el reparto de tareas</strong> entre ellas (según el manual, coherente en su estructura con las disposiciones sobre recursos del 2018/1139).</li>
+</ul>
+<h3 id="15-proceso-de-elaboracion-de-normas">1.5 Proceso de elaboración de normas</h3>
+<p>EASA redacta <strong>avisos de modificación propuesta (NPA)</strong>, recoge comentarios, emite un <strong>documento de respuesta a comentarios (CRD)</strong> y un <strong>dictamen</strong> dirigido a la Comisión Europea; los <strong>actos de ejecución o delegados</strong> de la propia Comisión pasan después por el procedimiento de control del Parlamento y del Consejo antes de su publicación en el <strong>Diario Oficial de la Unión Europea</strong>. EASA, por sí sola y sin intervención de la Comisión, emite los <strong>medios aceptables de cumplimiento (AMC)</strong>, el <strong>material guía (GM)</strong> y las <strong>especificaciones de certificación (CS)</strong>; estos <strong>no son jurídicamente vinculantes</strong> por sí mismos (un explotador puede demostrar el cumplimiento mediante unos «medios alternativos de cumplimiento», AltMoC), pero son los textos de trabajo de facto (las consolidaciones «Easy Access Rules» que se usan en todo este archivo son precisamente los AMC/GM agrupados con la norma de ejecución).</p>
+<h3 id="16-parte-atmans-reglamento-ue-2017373">1.6 Parte ATM/ANS: Reglamento (UE) 2017/373</h3>
+<p>Archivo local: <code>fuentes/01-instituciones-legislacion/eu/reg-2017-373-atm-ans-consolidated-20260222-en.pdf</code> (también como «Easy Access Rules for ATM/ANS» de la propia EASA). El Reglamento 2017/373 establece <strong>requisitos comunes para los proveedores de gestión del tránsito aéreo y servicios de navegación aérea (ATM/ANS, <em>air traffic management/air navigation services</em>) y de otras funciones de la red ATM</strong>, y para su supervisión; es el reglamento que pone en práctica los requisitos esenciales ATM/ANS del anexo VIII del 2018/1139. Abarca los requisitos de organización, la gestión de la seguridad y los requisitos específicos según el tipo de proveedor (proveedores de ANS, Gestor de Red, servicios meteorológicos, servicios de información aeronáutica, proveedores de servicios de comunicaciones, navegación y vigilancia, servicios de datos y ATFM). España desarrolla su aplicación mediante el <strong>Real Decreto 515/2020</strong> (procedimiento de certificación de los ANSP y de las funciones) y el <strong>Real Decreto 310/2022</strong> (diseño del espacio aéreo y procedimientos de vuelo civiles), ambos ya recogidos en el §4.4 del manual.</p>
+<h3 id="17-licencias-de-controlador-de-transito-aereo-reglamento-ue-2015340">1.7 Licencias de controlador de tránsito aéreo: Reglamento (UE) 2015/340</h3>
+<p>Archivo local: <code>fuentes/01-instituciones-legislacion/eu/reg-2015-340-atco-licensing-consolidated-20260513-en.pdf</code> (consolidado a 13 de mayo de 2026) y el PDF equivalente «Easy Access Rules for ATCO» de EASA. Es el reglamento que examinará más directamente al aspirante a controlador y va mucho más allá de la breve mención del manual.</p>
+<p><strong>1.7.1 Dos tipos de licencia.</strong></p>
+<ul>
+<li><strong>Licencia de alumno controlador de tránsito aéreo</strong> (ATCO.B.001): se expide al solicitante que <strong>tenga 18 años cumplidos</strong>, haya completado en los 12 meses previos la formación inicial correspondiente a la habilitación en una organización de formación aprobada, sea titular de un <strong>certificado médico válido</strong> y haya demostrado la <strong>competencia lingüística</strong> exigida. Autoriza a prestar servicios ATC <em>bajo la supervisión de un instructor de formación en el puesto de trabajo</em> y a recibir formación para habilitaciones y unidades adicionales. Si su titular no empieza a ejercer las atribuciones de la licencia (o las interrumpe durante <strong>más de 1 año</strong>), es necesaria una reevaluación de la competencia antes de continuar la formación.</li>
+<li><strong>Licencia de controlador de tránsito aéreo</strong> (ATCO.B.005): se expide cuando el titular ha completado un <strong>curso de anotación de unidad</strong> y ha superado los exámenes pertinentes, y sigue con un certificado médico y una competencia lingüística válidos. Incluye todas las atribuciones de la licencia de alumno.</li>
+</ul>
+<p><strong>1.7.2 Las cinco habilitaciones vigentes (ATCO.B.010)</strong>. Esta lista ha cambiado hace poco (véase §7.3):</p>
+<table>
+<thead>
+<tr>
+<th>Habilitación</th>
+<th>Código</th>
+<th>Qué autoriza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control de aeródromo</td>
+<td><strong>ADC</strong></td>
+<td>Servicio ATC al tránsito de aeródromo</td>
+</tr>
+<tr>
+<td>Control de aproximación por procedimientos</td>
+<td><strong>APP</strong></td>
+<td>ATC a aeronaves en llegada, salida o tránsito <strong>sin</strong> equipos de vigilancia</td>
+</tr>
+<tr>
+<td>Control de vigilancia de aproximación</td>
+<td><strong>APS</strong></td>
+<td>Lo mismo, <strong>con</strong> equipos de vigilancia</td>
+</tr>
+<tr>
+<td>Control de área por procedimientos</td>
+<td><strong>ACP</strong></td>
+<td>ATC en ruta <strong>sin</strong> equipos de vigilancia</td>
+</tr>
+<tr>
+<td>Control de vigilancia de área</td>
+<td><strong>ACS</strong></td>
+<td>Lo mismo, <strong>con</strong> equipos de vigilancia</td>
+</tr>
+</tbody>
+</table>
+<p>Anotaciones de habilitación (ATCO.B.015): la ADC puede llevar la anotación de <strong>vigilancia de control de aeródromo (SUR)</strong>; la APS puede llevar la de <strong>radar de aproximación de precisión (PAR)</strong> o la de <strong>aproximación con radar de vigilancia (SRA)</strong>; la ACP y la ACS pueden llevar ambas la anotación de <strong>control oceánico (OCN)</strong>. Si el titular de una habilitación ha interrumpido el ejercicio de sus atribuciones durante <strong>4 o más años seguidos</strong>, es necesaria una reevaluación de la competencia antes de reanudar la formación en el puesto de trabajo.</p>
+<p><strong>1.7.3 Anotaciones de unidad (ATCO.B, parte ATCO, subparte D, sección 3).</strong> Son válidas durante un período fijado por el <strong>plan de competencia de la unidad</strong> local, que <strong>no puede exceder de 3 años</strong>. La revalidación exige un número mínimo de horas de ejercicio, formación de refresco y una evaluación de la competencia <strong>no anterior a 3 meses antes del vencimiento</strong>.</p>
+<p><strong>1.7.4 Competencia lingüística (ATCO.B.030-.040, apéndice 1 del anexo I).</strong> Usa la escala de 6 niveles de la OACI; los controladores deben alcanzar como mínimo el <strong>nivel operacional (nivel 4)</strong>. Validez de la anotación según el nivel:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Nombre</th>
+<th>Validez</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Operacional</td>
+<td><strong>3 años</strong> desde la evaluación</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Avanzado</td>
+<td><strong>6 años</strong> desde la evaluación</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Experto</td>
+<td><strong>9 años</strong> para el inglés; <strong>ilimitada</strong> para cualquier otro idioma</td>
+</tr>
+</tbody>
+</table>
+<p>La evaluación de revalidación debe hacerse dentro de los <strong>3 meses inmediatamente anteriores</strong> a la fecha de vencimiento (el nuevo período se cuenta entonces desde la antigua fecha de vencimiento, no desde la fecha de la nueva evaluación).</p>
+<p><strong>1.7.5 Certificado médico (ATCO.MED, clase 3).</strong> Válido <strong>24 meses</strong>; se reduce a <strong>12 meses cuando el titular ha cumplido 40 años</strong>, y un certificado expedido antes de los 40 años <strong>deja de ser válido al cumplir los 41</strong>. Los reconocimientos de revalidación pueden hacerse hasta <strong>45 días</strong> antes del vencimiento.</p>
+<h3 id="18-sera-reglamento-ue-9232012">1.8 SERA: Reglamento (UE) 923/2012</h3>
+<p>Archivo local: <code>fuentes/01-instituciones-legislacion/eu/reg-923-2012-sera-consolidated-20250501-en.pdf</code> (también «Easy Access Rules for SERA» de EASA). <strong>Reglamento del aire y disposiciones operativas comunes</strong> (<em>Standardised European Rules of the Air</em>, SERA). Se aplica al <strong>tránsito aéreo general (GAT)</strong> (el tránsito realizado conforme a procedimientos de tipo OACI, en contraposición al tránsito aéreo operativo, OAT, sobre todo militar) que opera hacia, dentro o desde la Unión, o que lleva matrícula de un Estado miembro en cualquier lugar donde no entre en conflicto con las normas del Estado sobrevolado. Recoge y armoniza las disposiciones pertinentes del Anexo 2 de la OACI (Reglamento del aire) y del Anexo 11 como Derecho de la UE directamente aplicable, de modo que un controlador en España aplica el SERA aunque sea un reglamento de la UE y no una ley española. La estructura del manual (15 secciones + 6 apéndices) se confirma con el índice del texto consolidado.</p>
+<hr />
+<h2 id="2-eurocontrol-organizacion-europea-para-la-seguridad-de-la-navegacion-aerea-european-organisation-for-the-safety-of-air-navigation">2. EUROCONTROL (Organización Europea para la Seguridad de la Navegación Aérea, <em>European Organisation for the Safety of Air Navigation</em>)</h2>
+<h3 id="21-origenes-y-revision-de-1997-la-verdadera-historia-de-la-ratificacion">2.1 Orígenes y revisión de 1997: la verdadera historia de la ratificación</h3>
+<p>El <strong>Convenio fundacional se firmó en Bruselas el 13 de diciembre de 1960</strong> y <strong>entró en vigor el 1 de marzo de 1963</strong>. Por eso los propios materiales de EUROCONTROL dicen «<strong>Founded 1963</strong>» en su infografía, mientras que el manual de ENAIRE (y la mayoría de las fuentes secundarias) dicen «creada en 1960»: ambas fechas son defendibles, pero «1963» es la de entrada en vigor y el año que EUROCONTROL mismo usa como fundación.</p>
+<p>El Convenio se modificó mediante protocolos de <strong>1970, 1978 y 1981</strong>, y el <strong>27 de junio de 1997</strong> se abrió a la firma un <strong>Protocolo de consolidación del Convenio</strong> («el Convenio revisado»). Archivo local leído por completo: <code>fuentes/01-instituciones-legislacion/eurocontrol/convention-1997-consolidated-protocol-pca.pdf</code>. Dos hechos que van mucho más allá del manual:</p>
+<ul>
+<li>El <strong>artículo II.3 del propio Protocolo de 1997</strong> establece que «entrará en vigor el 1 de enero de 2000, <strong>siempre que todos los Estados partes en el Convenio lo hayan ratificado en esa fecha</strong>»; en caso contrario entra en vigor gradualmente a medida que se depositan las ratificaciones. <strong>No todos los Estados lo ratificaron a tiempo.</strong></li>
+<li>El Convenio revisado <strong>sigue sin haber entrado formalmente en vigor</strong> a todos los efectos, porque no lo han ratificado todas las Partes Contratantes; en cambio, sus disposiciones clave se <strong>aplican provisionalmente desde 1998</strong>, en virtud de una <strong>Decisión de la (antigua) Comisión Permanente, la Decisión n.º 72, adoptada el 9 de diciembre de 1997, «sobre la aplicación anticipada de determinadas disposiciones del Convenio revisado, en particular el establecimiento de un Consejo provisional»</strong>. Esta es exactamente la razón por la que el órgano que hace las veces del «Consejo» del Convenio de 1997 se sigue llamando hoy <strong>Consejo Provisional</strong> (<em>Provisional Council</em>): es provisional en sentido literal y jurídico, una aplicación anticipada y no ratificada del texto de 1997.</li>
+<li>El <strong>texto jurídico del propio Convenio de 1997 no utiliza las palabras «Comisión Permanente» ni «Consejo Provisional»</strong>: su <strong>artículo 5</strong> denomina al órgano de nivel ministerial la <strong>«Asamblea General»</strong> y al órgano de nivel de directores generales simplemente el <strong>«Consejo»</strong>. En la práctica institucional actual (las páginas vigentes «About us» y «Governing bodies»), EUROCONTROL sigue usando los nombres anteriores a 1997, <strong>«Comisión Permanente» y «Consejo Provisional»</strong>, precisamente por el estatus de aplicación provisional descrito arriba. Considera «Asamblea General/Consejo» (texto del tratado de 1997) y «Comisión Permanente/Consejo Provisional» (práctica actual y términos del manual de ENAIRE) como <strong>nombres de los mismos dos órganos en dos capas jurídicas distintas</strong>, una trampa de examen de peso (§6).</li>
+</ul>
+<h3 id="22-estados-miembros-recuento-exacto-y-ultimas-incorporaciones">2.2 Estados miembros: recuento exacto y últimas incorporaciones</h3>
+<p><strong>42 Estados miembros europeos más 2 Estados del Acuerdo Global (Israel y Marruecos, ambos desde 2016)</strong>. Miembros fundadores (1963): <strong>Bélgica, Francia, Alemania, Luxemburgo, los Países Bajos y el Reino Unido</strong>. <strong>Irlanda</strong> ingresó en 1965. <strong>España ingresó en 1997</strong> (coincide con el manual). <strong>El último en incorporarse es Islandia (2025)</strong>, un dato que no figura en el manual y que conviene memorizar precisamente porque es el más reciente y, por tanto, el más «de actualidad» que un examinador podría añadir. Presupuesto de <strong>más de 1000 millones de euros</strong>; <strong>más de 2000 funcionarios</strong>; <strong>4 sedes</strong> (Bélgica, Francia, Luxemburgo, Países Bajos; sede central en <strong>Bruselas</strong>). <strong>Director General: Raúl Medina</strong>.</p>
+<h3 id="23-estructura-de-la-agencia-comite-ejecutivo-actual">2.3 Estructura de la Agencia: comité ejecutivo actual</h3>
+<p>El manual enumera las direcciones de la Agencia así: Network Manager Directorate; Directorate Air Traffic Management; Directorate Pan-European Single Sky; Directorate Central Route Charges Office; MUAC. La <strong>lista vigente del consejo de la Agencia en «About us» (leída en 2026-09)</strong> muestra, en cambio, estos altos cargos actuales: <strong>Director General</strong> (Raúl Medina); <strong>Director Financiero</strong> (<em>Chief Financial Officer</em>), responsable de Instalaciones, CRCO y Finanzas; <strong>Director de MUAC</strong>; <strong>Director de Gestión de la Red</strong>; <strong>Director de Personas</strong>; <strong>Director de Transformación de la Aviación</strong>; un <strong>Asesor Militar del Director General</strong> (también jefe de la División de Cooperación Civil-Militar); un <strong>Jefe de Gabinete</strong>; un <strong>Jefe del Servicio Jurídico</strong>; y un <strong>Jefe de Estrategia, Compromiso y Relaciones Institucionales</strong>. El organigrama interno de la Agencia (2026-08, <code>agency-organigram-2026-08.pdf</code>) agrupa el trabajo técnico en divisiones llamadas <strong>Airspace &amp; Capacity, Operations, Technology, Infrastructure</strong>, más el <strong>Aviation Learning Centre (ALC)</strong>; véase §7.4 para la discrepancia con el manual.</p>
+<h3 id="24-gestor-de-red-designacion-y-base-juridica">2.4 Gestor de Red: designación y base jurídica</h3>
+<p>La <strong>Comisión Europea designó a EUROCONTROL como Gestor de Red (<em>Network Manager</em>) para el período comprendido entre el 1 de enero de 2020 y el 31 de diciembre de 2029</strong>, mediante la <strong>Decisión de Ejecución (UE) 2019/709 de la Comisión, de 6 de mayo de 2019</strong>. Base jurídica de las funciones del Gestor de Red: el <strong>Reglamento (UE) 2019/123</strong> (archivo local <code>reg-2019-123-network-manager-en.pdf</code>), que enumera sus tareas (diseño de la red de rutas, coordinación central de radiofrecuencias y códigos SSR, ATFM, apoyo a la gestión de crisis de la red), coincidiendo con el resumen del §2.3.6.5 del manual.</p>
+<h3 id="25-muac-confirma-y-amplia-el-manual-y-las-notas-base-existentes">2.5 MUAC (confirma y amplía el manual y las notas base existentes)</h3>
+<p><strong>Centro de control de área en espacio aéreo superior de Maastricht</strong> (<em>Maastricht Upper Area Control Centre</em>): el ANSP propio de EUROCONTROL, que presta servicios ATC en el espacio aéreo superior de <strong>Bélgica, Luxemburgo, los Países Bajos y el noroeste de Alemania</strong>; según las notas base existentes, espacio aéreo superior <strong>de FL 245 a FL 660</strong>. <strong>Directora de MUAC actual: Peggy Devestel</strong>.</p>
+<h3 id="26-crco-y-tasas-de-ruta">2.6 CRCO y tasas de ruta</h3>
+<p><strong>Oficina Central de Tasas de Ruta</strong> (<em>Central Route Charges Office</em>, CRCO), archivo local <code>fuentes/01-instituciones-legislacion/eurocontrol/html-crco.txt</code> (página oficial, leída por completo). Factura, cobra y distribuye las <strong>tasas en ruta</strong> por cuenta de los Estados miembros (y, a petición, las tasas de navegación y comunicación terminales), con un sistema <strong>basado en los costes, no discriminatorio y de factura mensual única</strong>, coherente con la política de tasas de la OACI y con el sistema de evaluación del rendimiento y de tarificación del SES. Cifras operativas clave de 2025: <strong>13,2 mil millones de euros facturados en tasas</strong>, <strong>más de 6600 usuarios del espacio aéreo en todo el mundo</strong> y una <strong>tasa de recuperación del 99,7 % en los últimos 10 años</strong>. Plazos de pago: los usuarios del espacio aéreo deben pagar <strong>en un plazo de 30 días</strong> desde la fecha de la factura; una discrepancia de facturación (<strong>reclamación</strong>) debe presentarse <strong>en un plazo de 60 días</strong> desde la fecha de la factura.</p>
+<h3 id="27-centro-de-formacion-aviation-learning-centre-alc">2.7 Centro de formación: Aviation Learning Centre (ALC)</h3>
+<p>El organismo de formación de EUROCONTROL es el <strong>Aviation Learning Centre (ALC)</strong>, con sede en <strong>Luxemburgo</strong>. Imparte cursos para controladores, pilotos y otras partes interesadas (por ejemplo, un curso introductorio de IA, «AI-FUT»). Esto coincide con la afirmación del manual de que EUROCONTROL tiene «oficinas especializadas en otros tres países europeos (Países Bajos, Francia y Luxemburgo)», siendo Luxemburgo la ubicación del centro de formación.</p>
+<h3 id="28-comision-de-evaluacion-de-resultados-prc">2.8 Comisión de Evaluación de Resultados (PRC)</h3>
+<p>Órgano consultivo independiente de EUROCONTROL (figura en la tabla de «estructura consultiva» del manual, como <em>Performance Review Commission</em>). Publica, entre otros productos, el <strong>informe anual de evaluación comparativa de la rentabilidad de ATM</strong> (<em>ATM Cost-Effectiveness Benchmarking Report</em>) y retrospectivas periódicas (por ejemplo, sobre la respuesta del sector ANS a la COVID-19); ambos se confirman como noticias vigentes de 2024-2026 en el sitio de la CRCO/EUROCONTROL.</p>
+<h3 id="29-esarr">2.9 ESARR</h3>
+<p>La lista del manual de las <strong>seis ESARR</strong> (Safety Oversight, Occurrence Reporting, SMS, Risk Assessment and Mitigation, ATM Personnel, Software in ATM Functional Systems) no queda contradicha por ninguna fuente primaria consultada aquí; considérala firme.</p>
+<hr />
+<h2 id="3-la-union-europea-y-el-cielo-unico-europeo-ses">3. La Unión Europea y el Cielo Único Europeo (SES)</h2>
+<h3 id="31-ses-i-2004-los-cuatro-reglamentos-originales">3.1 SES I (2004): los cuatro reglamentos originales</h3>
+<p>Entraron en vigor en <strong>abril de 2004</strong>: <strong>Reglamento (CE) n.º 549/2004</strong> (marco), <strong>550/2004</strong> (prestación de servicios), <strong>551/2004</strong> (organización y utilización del espacio aéreo), <strong>552/2004</strong> (interoperabilidad de la red europea de ATM). Archivos locales: <code>fuentes/01-instituciones-legislacion/eu/reg-549-2004-*</code>, <code>reg-550-2004-*</code>, <code>reg-551-2004-*</code>, <code>reg-552-2004-*</code> (versiones original y consolidada, EN/ES). <strong>El 552/2004 fue derogado por el Reglamento (UE) 2018/1139</strong> (véase §1.1); <em>no</em> es uno de los tres reglamentos derogados por la refundición de 2024 (§3.4), que solo deroga el 549/2004, el 550/2004 y el 551/2004. Mantén separados los dos hechos de derogación: <strong>la interoperabilidad (552/2004) pasó al Reglamento de base de EASA en 2018; el marco, la prestación de servicios y el espacio aéreo (549-551/2004) pasaron a la refundición del SES de 2024.</strong></p>
+<h3 id="32-ses-ii-y-ses-ii-segun-el-manual-contrastado-con-los-considerandos-del-20242803-que-repasan-la-historia-legislativa">3.2 SES II y SES II+ (según el manual, contrastado con los considerandos del 2024/2803, que repasan la historia legislativa)</h3>
+<p>El SES II (2009, Reglamento (CE) n.º 1070/2009, archivo local <code>reg-1070-2009-ses2plus-original-en.pdf</code>) amplió las competencias de EASA a los aeródromos y ATM/ANS; creó el sistema de evaluación del rendimiento y la función de Gestor de Red europeo; introdujo los bloques funcionales de espacio aéreo. «SES 2+» se refiere a una propuesta de la Comisión de 2013 para reformar aún más el marco, que nunca se adoptó como tal; sus ideas principales (un sistema de evaluación del rendimiento más sólido, una separación más clara entre prestación de servicios y regulación) acabaron incorporándose a la refundición de 2024.</p>
+<h3 id="33-sistema-de-evaluacion-del-rendimiento-y-de-tarificacion-del-ses-periodos-de-referencia">3.3 Sistema de evaluación del rendimiento y de tarificación del SES: períodos de referencia</h3>
+<p>Base jurídica: <strong>Reglamento (UE) 2019/317</strong> (archivo local <code>reg-2019-317-performance-scheme-consolidated-20251102-en.pdf</code>), que establece el sistema de evaluación del rendimiento y de tarificación, con <strong>cuatro ámbitos clave de rendimiento (KPA): seguridad, medio ambiente, capacidad y rentabilidad</strong>. Períodos de referencia (RP), cada uno un ciclo plurianual de objetivos de rendimiento fijado por acto de ejecución:</p>
+<table>
+<thead>
+<tr>
+<th>RP</th>
+<th>Años</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RP1</td>
+<td>2012-2014</td>
+</tr>
+<tr>
+<td>RP2</td>
+<td>2015-2019</td>
+</tr>
+<tr>
+<td>RP3</td>
+<td>2020-2024</td>
+</tr>
+<tr>
+<td>RP4</td>
+<td><strong>2025-2029 (vigente)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>El plan de rendimiento vigente de España es el <strong>ESPP4 (España, Plan de Rendimiento RP4, 2025-2029)</strong>, que fija los objetivos de rendimiento de alto nivel de ENAIRE para los mismos cuatro KPA. El artículo 58 del Reglamento (UE) 2024/2803 (leído por completo) contiene <strong>disposiciones transitorias</strong>: el antiguo Órgano de Evaluación del Rendimiento mantuvo sus funciones <strong>hasta el 2 de junio de 2025</strong>; el artículo 11 del 549/2004 y el artículo 15 del 550/2004 siguen aplicándose <strong>a efectos del RP3 y el RP4</strong>; los artículos <em>nuevos</em> del sistema de rendimiento (21-34 del 2024/2803) se aplican <strong>desde la entrada en vigor, para el RP5 y posteriores</strong>; es decir, <strong>el RP4 sigue rigiéndose por la arquitectura jurídica antigua, y solo el RP5 (desde 2030) se regirá íntegramente por el Reglamento (UE) 2024/2803.</strong></p>
+<h3 id="34-la-refundicion-de-2024-reglamento-ue-20242803">3.4 La refundición de 2024: Reglamento (UE) 2024/2803</h3>
+<p>Archivo local <code>fuentes/01-instituciones-legislacion/eu/reg-2024-2803-ses-recast-en.pdf</code>, leído por completo. Título completo: «Reglamento (UE) 2024/2803 del Parlamento Europeo y del Consejo <strong>de 23 de octubre de 2024</strong> relativo a la realización del Cielo Único Europeo (versión refundida)». Fechas exactas:</p>
+<ul>
+<li><strong>Adoptado y fechado: 23 de octubre de 2024</strong> (hecho en Estrasburgo).</li>
+<li><strong>Publicado en el Diario Oficial: 11 de noviembre de 2024</strong> (DO L, 2024/2803).</li>
+<li><strong>Entrada en vigor: el vigésimo día siguiente al de su publicación</strong> (es decir, hacia el <strong>1 de diciembre de 2024</strong>).</li>
+<li><strong>Deroga los Reglamentos (CE) n.º 549/2004, 550/2004 y 551/2004</strong> (artículo 56), sin perjuicio del artículo 58, transitorio.</li>
+<li>Varias disposiciones tienen <strong>fechas de aplicación diferidas</strong>: los <strong>artículos 4, apartados 3 y 5, y 36, apartado 3, se aplican solo a partir del 2 de diciembre de 2026</strong>; el <strong>artículo 53 se aplica a partir del 2 de diciembre de 2026</strong>; los <strong>artículos 13-16 se aplican a partir de los 6 meses de la entrada en vigor</strong>; los <strong>artículos 21-34 (las nuevas normas del sistema de rendimiento) se aplican desde la entrada en vigor, pero solo «a efectos de la aplicación de los sistemas de evaluación del rendimiento y de tarificación correspondientes al quinto período de referencia y a los siguientes».</strong></li>
+<li>El <strong>artículo 57 modifica directamente el Reglamento (UE) 2018/1139</strong> (véase §1.2).</li>
+<li>Objetivo enunciado en los considerandos: reforzar las normas de seguridad de ATM/ANS, contribuir al desarrollo sostenible del transporte aéreo y mejorar el rendimiento global de ATM/ANS para el tránsito aéreo general en toda Europa (coincide con la paráfrasis del objetivo que hace el propio manual, lo que confirma esa parte).</li>
+</ul>
+<h3 id="35-bloques-funcionales-de-espacio-aereo-fab-la-lista-que-faltaba-ya-completa">3.5 Bloques funcionales de espacio aéreo (FAB): la lista que faltaba, ya completa</h3>
+<p>El manual no da los nombres de los demás FAB. La lista completa de los <strong>nueve FAB</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>FAB</th>
+<th>Estados miembros/FIR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FAB Reino Unido-Irlanda</strong></td>
+<td>Reino Unido, Irlanda</td>
+</tr>
+<tr>
+<td><strong>FAB Danés-Sueco (DK-SE)</strong></td>
+<td>Dinamarca, Suecia</td>
+</tr>
+<tr>
+<td><strong>NEFAB</strong> (FAB del Norte de Europa)</td>
+<td>Estonia, Finlandia, Letonia, Noruega</td>
+</tr>
+<tr>
+<td><strong>FAB Báltico</strong></td>
+<td>Polonia, Lituania</td>
+</tr>
+<tr>
+<td><strong>FABEC</strong> (FAB de Europa Central)</td>
+<td>Francia, Alemania, Bélgica, Países Bajos, Luxemburgo, Suiza</td>
+</tr>
+<tr>
+<td><strong>FAB CE</strong> (FAB de Europa Central, países del este)</td>
+<td>Chequia, Eslovaquia, Austria, Hungría, Croacia, Eslovenia, Bosnia y Herzegovina</td>
+</tr>
+<tr>
+<td><strong>FAB Danubio</strong></td>
+<td>Bulgaria, Rumanía</td>
+</tr>
+<tr>
+<td><strong>FAB Blue Med</strong></td>
+<td>Italia, Malta, Grecia, Chipre</td>
+</tr>
+<tr>
+<td><strong>SW FAB</strong> (FAB Sudoeste)</td>
+<td><strong>España y Portugal</strong> (FIR de Lisboa)</td>
+</tr>
+</tbody>
+</table>
+<p>El <strong>SW FAB</strong> se puso en marcha políticamente mediante una <strong>Declaración política</strong> y el <strong>Acuerdo del SW FAB</strong>, ambos firmados por el <strong>Ministro de Economía y Empleo de Portugal y el Ministro de Fomento de España en mayo de 2013</strong>. Tiene una <strong>estructura de gobernanza de tres niveles</strong>: el <strong>Consejo del SW FAB</strong> (política institucional), el <strong>Comité de Autoridades de Supervisión (SAC)</strong> (supervisión; incluye a AESA y a la ANAC portuguesa) y la <strong>Junta Operativa (OB)</strong> (prestación de servicios; incluye a ENAIRE y NAV Portugal), con <strong>representación civil y militar en los tres niveles</strong>. Base jurídica de las obligaciones de información de los FAB a la Comisión: el <strong>Reglamento (UE) n.º 176/2011</strong> (archivo local <code>reg-176-2011-fab-info-original-en.pdf</code>), sobre la información previa que los Estados miembros deben facilitar antes de notificar un FAB.</p>
+<h3 id="36-sesar-fases-y-programa-actual-amplia-el-manual">3.6 SESAR: fases y programa actual (amplía el manual)</h3>
+<p><strong>SESAR (Investigación del Cielo Único Europeo ATM, <em>Single European Sky ATM Research</em>)</strong> es el pilar tecnológico del SES. Su gobernanza ha evolucionado a través de <strong>Empresas Comunes</strong>:</p>
+<ul>
+<li>La <strong>Empresa Común SESAR (SESAR JU)</strong> (primera Empresa Común), creada en 2007, gestionó las fases de <strong>definición (2005-2008), desarrollo (2008-2016) y despliegue</strong>; el despliegue comenzó formalmente en <strong>2014</strong> con el <strong>Proyecto Común Piloto</strong> de la Comisión (Proyecto Común 1, «CP1», base jurídica <strong>Reglamento (UE) 2021/116</strong>, archivo local <code>reg-2021-116-cp1-original-en.pdf</code>).</li>
+<li>La <strong>Empresa Común SESAR 3 (SESAR 3 JU)</strong> es el vehículo actual, establecida con arreglo al <strong>Reglamento (UE) 2021/2085</strong> (archivo local <code>reg-2021-2085-sesar-ju-consolidated-en.pdf</code>, uno de los reglamentos de «acto de base único» de Horizonte Europa para varias empresas comunes de la UE), leído por completo: se basa en <strong>miembros fundadores</strong>, con una <strong>presidencia rotatoria del Consejo de Administración con periodicidad bienal</strong>. Según el manual, la SESAR 3 JU <strong>funciona hasta el 31 de diciembre de 2031</strong>, con sede en <strong>Bruselas</strong>.</li>
+<li>El <strong>Plan Maestro Europeo para la Gestión del Tránsito Aéreo</strong> (<em>European ATM Master Plan</em>) es la hoja de ruta de SESAR. La <strong>edición de 2025</strong> (archivo local <code>fuentes/01-instituciones-legislacion/sesar/atm-master-plan-2025.pdf</code>, leído por completo) organiza el despliegue en torno a <strong>10 objetivos estratégicos de despliegue (SDO)</strong>, contenido nuevo y más concreto que el que ofrece el manual:
+  1. Alertas para la reducción de los riesgos de colisión en calles de rodaje y pistas
+  2. Optimización de la huella medioambiental de aeropuertos y TMA
+  3. Configuración dinámica del espacio aéreo
+  4. Mayor apoyo de la automatización
+  5. Transformación hacia operaciones basadas en la trayectoria (<strong>TBO</strong>)
+  6. Virtualización de las operaciones
+  7. Transición hacia una conectividad tierra-aire de altas prestaciones (<strong>multienlace</strong>, <em>multilink</em>)
+  8. Modelo de prestación orientado a servicios (basado en datos y en la nube)
+  9. Optimización, modernización y resiliencia de CNS
+  10. Habilitar la movilidad aérea innovadora (<strong>IAM</strong>) y las operaciones con drones</li>
+</ul>
+<h3 id="37-u-space">3.7 U-space</h3>
+<p>Archivos locales <code>fuentes/01-instituciones-legislacion/eu/reg-2021-664-*</code>, <code>reg-2021-665-*</code>, <code>reg-2021-666-*</code> (marco regulador, evaluación del riesgo del espacio aéreo y normas y procedimientos U-space para aeronaves no tripuladas, respectivamente). <strong>U-space (Reglamentos 2021/664-666)</strong> es la respuesta reguladora del SES a la gestión del tránsito de drones. Agentes clave:</p>
+<ul>
+<li><strong>Proveedor de servicios U-space (USSP)</strong>: presta servicios U-space (entre los servicios obligatorios figuran el <strong>servicio de identificación de red</strong>, artículo 8, y el <strong>servicio de geoconsciencia</strong>, artículo 9, ambos leídos por completo) a los operadores de UAS dentro del <strong>espacio aéreo U-space</strong> designado.</li>
+<li><strong>Proveedor del servicio de información común</strong>: presta el <strong>«servicio de información común»</strong>, definido como la difusión de los datos estáticos y dinámicos (espacio aéreo, meteorología, tránsito) que los UAS necesitan para operar con seguridad; un Estado miembro <strong>puede designar a un único proveedor del servicio de información común</strong> en exclusiva para uno o varios de sus espacios aéreos U-space. Este es el nombre exacto de lo que el alcance de la ficha llama «CISP»: el texto primario usa «servicio(s) de información común» y «proveedor(es)» de ese servicio, no una sigla oficial CISP.</li>
+</ul>
+<h3 id="38-funciones-de-la-comision-europea-y-del-parlamento-europeo">3.8 Funciones de la Comisión Europea y del Parlamento Europeo</h3>
+<p>En el marco del SES, la <strong>Comisión Europea</strong> actúa como el <strong>regulador comunitario o de la Unión</strong> al que se refiere el §2.3.6.2 del manual: adopta actos de ejecución o delegados (objetivos de rendimiento, normas de tarificación, designación del Gestor de Red, requisitos de información sobre los FAB), recibe los dictámenes de EASA y supervisa a las autoridades nacionales de supervisión de los Estados miembros. El <strong>Parlamento Europeo</strong>, junto con el Consejo, es <strong>colegislador</strong> de los propios reglamentos de base (el 2018/1139 y el 2024/2803 son ambos «Reglamentos del Parlamento Europeo y del Consejo») y controla los actos delegados de la Comisión.</p>
+<h3 id="39-notificacion-de-sucesos-reglamento-ue-3762014">3.9 Notificación de sucesos: Reglamento (UE) 376/2014</h3>
+<p>Archivo local <code>fuentes/01-instituciones-legislacion/eu/reg-376-2014-occurrence-reporting-consolidated-en.pdf</code>, leído por completo. Establece la <strong>notificación obligatoria de sucesos</strong>: las personas enumeradas en el artículo 4, apartado 6 (que incluye a los controladores y a otro personal de ATM/ANS) deben notificar un suceso <strong>en un plazo de 72 horas desde que tengan conocimiento de él</strong>, salvo circunstancias excepcionales. Existe también un <strong>sistema de notificación voluntaria</strong> para los sucesos no cubiertos por la obligación. La Comisión gestiona un <strong>Repositorio Central Europeo (ECR)</strong> al que los Estados miembros deben transferir todos los datos de sucesos recogidos y que las autoridades competentes, EASA y la Comisión pueden consultar para detectar problemas de seguridad.</p>
+<h3 id="310-reglamento-de-la-ue-sobre-formacion-y-licencias-de-controladores">3.10 Reglamento de la UE sobre formación y licencias de controladores</h3>
+<p>Es el <strong>Reglamento (UE) 2015/340</strong>, ya tratado a fondo en el §1.7 (es un reglamento de ejecución adoptado en virtud de la delegación del Reglamento de base, pero es Derecho de la UE directamente aplicable en todos los Estados miembros, exactamente igual que los reglamentos del SES).</p>
+<hr />
+<h2 id="4-otros-organismos-europeos">4. Otros organismos europeos</h2>
+<h3 id="41-ceac-conferencia-europea-de-aviacion-civil-european-civil-aviation-conference-ecac">4.1 CEAC: Conferencia Europea de Aviación Civil (<em>European Civil Aviation Conference</em>, ECAC)</h3>
+<p><strong>Fundada en Estrasburgo (Francia), con su sesión inaugural del 29 de noviembre al 16 de diciembre de 1955, por 19 Estados fundadores</strong>, por iniciativa de la OACI y del Consejo de Europa (una Conferencia de 1954 sobre la coordinación del transporte aéreo en Europa, «CATE», propuso el organismo permanente). Es <strong>intergubernamental</strong>, atendida en estrecha relación con la <strong>OACI</strong> (un foro europeo único para el debate de la política de aviación, sin el poder regulador propio de la OACI). <strong>Composición actual: 44 Estados</strong>, un superconjunto que incluye a todos los Estados miembros de la UE, prácticamente a todos los de EASA y a todos los de EUROCONTROL, además de algunos Estados que no pertenecen a ninguno de ellos (por ejemplo, Andorra y San Marino).</p>
+<h3 id="42-relacion-ue-eurocontrol">4.2 Relación UE-EUROCONTROL</h3>
+<p>La <strong>Unión Europea (entonces Comunidad Europea) se adhirió al Convenio revisado de EUROCONTROL</strong> mediante un protocolo de adhesión específico; según el manual, el <strong>protocolo se firmó el 8 de octubre de 2002</strong>, y el manual afirma que el <strong>Parlamento español lo ratificó en 2016</strong>. Los propios considerandos del protocolo de adhesión («Whereas the purpose of the accession of the European Community to the [EUROCONTROL] Convention...») confirman el mecanismo jurídico utilizado. Desde entonces las dos organizaciones cooperan estrechamente: EUROCONTROL es el <strong>Gestor de Red designado por la Comisión Europea</strong> (§2.4), un <strong>asesor técnico de EASA y de la Comisión</strong> en la aplicación del SES (el artículo 93 del Reglamento (UE) 2018/1139, modificado por el 2024/2803, encarga expresamente a EASA que preste asistencia técnica a la Comisión en la aplicación del SES «en cooperación con el Comité de Evaluación del Rendimiento (PRB) a que se refiere el artículo 13 del Reglamento (UE) 2024/2803») y alberga varias funciones encomendadas por la UE (el papel de tarificación de la CRCO se apoya en parte en los reglamentos del SES, y no solo en el Convenio de EUROCONTROL).</p>
+<hr />
+<h2 id="5-ejemplos-resueltos">5. Ejemplos resueltos</h2>
+<p><strong>Ejemplo 1: la cadena de validez de una licencia de controlador.</strong> Una controladora supera la prueba de inglés de nivel operacional (nivel 4) el 1 de marzo de 2024. Su evaluación es válida <strong>3 años</strong>, es decir, hasta el <strong>1 de marzo de 2027</strong>. Si revalida haciendo una nueva evaluación el <strong>15 de diciembre de 2026</strong> (dentro de los 3 meses anteriores al vencimiento), el <strong>nuevo período de validez se cuenta desde la antigua fecha de vencimiento (1 de marzo de 2027)</strong>, no desde el 15 de diciembre de 2026, de modo que su nueva anotación llega hasta el <strong>1 de marzo de 2030</strong>.</p>
+<p><strong>Ejemplo 2: el límite de edad del certificado médico.</strong> Un controlador cumple 40 años el 10 de junio de 2026 y tenía un certificado médico de clase 3 expedido el 1 de enero de 2026 (antes de cumplir los 40, por lo que nominalmente es válido 24 meses, hasta el 1 de enero de 2028). Como el artículo ATCO.MED.A.045, letra a), punto 2, dice que un certificado así «dejará de ser válido cuando el titular de la licencia cumpla 41 años» (10 de junio de 2027), el <strong>certificado caduca en realidad el 10 de junio de 2027</strong>, unos 7 meses antes de su fecha nominal de 24 meses.</p>
+<p><strong>Ejemplo 3: cronología de la refundición del SES.</strong> El Reglamento (UE) 2024/2803 tiene fecha de 23 de octubre de 2024, se publicó el 11 de noviembre de 2024 y entra en vigor el vigésimo día siguiente al de su publicación. Contando 20 días desde el 11 de noviembre de 2024 se llega al <strong>1 de diciembre de 2024</strong>, de modo que el Reglamento lleva ya en vigor unos <strong>1 año y 10 meses</strong> a la fecha de preparación del examen que se usa en este archivo (24 de septiembre de 2026), mientras que sus disposiciones sobre el sistema de rendimiento (artículos 21-34) solo rigen el <strong>RP5, que empieza en 2030</strong>, y varios otros artículos (4, apartados 3 y 5, 36, apartado 3, y 53) solo se aplican a partir del <strong>2 de diciembre de 2026</strong>, es decir, unos <strong>2 años y 1 mes</strong> después de la entrada en vigor.</p>
+<p><strong>Ejemplo 4: recuentos de miembros de EUROCONTROL, EASA y la UE.</strong> EUROCONTROL tiene 42 Estados + 2 Estados del Acuerdo Global = 44 partes en total; EASA tiene 31 Estados miembros (27 de la UE + 4 de la AELC); la UE tiene 27 Estados miembros. Los tres círculos están <strong>anidados, pero no son idénticos</strong>: todo Estado de la UE está en EASA y en EUROCONTROL, pero EASA y EUROCONTROL añaden cada uno Estados no pertenecientes a la UE (EASA añade Islandia, Liechtenstein, Noruega y Suiza; EUROCONTROL añade muchos más Estados europeos no pertenecientes a la UE, además de Israel y Marruecos como Estados del Acuerdo Global, que <em>no</em> son miembros de pleno derecho).</p>
+<hr />
+<h2 id="6-trampas-de-examen">6. Trampas de examen</h2>
+<ol>
+<li><strong>«EUROCONTROL creada en 1960» frente a «fundada en 1963».</strong> El Convenio se <em>firmó</em> el 13 de diciembre de 1960, pero <em>entró en vigor</em> el 1 de marzo de 1963; los propios materiales de EUROCONTROL dicen «Founded 1963». Ambos años pueden ser defendibles según la redacción de la pregunta («firmado» frente a «entrada en vigor»/«fundada»): lee la pregunta con atención.</li>
+<li><strong>«Comisión Permanente / Consejo Provisional» frente a «Asamblea General / Consejo».</strong> El <strong>texto jurídico</strong> del Convenio revisado de 1997 llama a los dos órganos de gobierno «Asamblea General» y «Consejo». La <strong>práctica institucional actual</strong> (y el manual de ENAIRE) los llama «Comisión Permanente» y «Consejo Provisional», porque el Convenio de 1997 sigue aplicándose solo <strong>provisionalmente</strong> (nunca se ratificó por completo). Si una pregunta dice «¿cómo llama el <em>texto del Convenio revisado</em> al órgano ministerial?», la respuesta es <strong>Asamblea General</strong>, no Comisión Permanente.</li>
+<li><strong>Las direcciones de EASA han cambiado de nombre con el tiempo.</strong> No confundas la «Dirección de Estrategia y Gestión de la Seguridad» del manual con la estructura <em>vigente</em>, que es <strong>Certificación / Normas de Vuelo / Gestión de la Seguridad, Sostenibilidad y Proyección Global / Recursos y Apoyo</strong>.</li>
+<li><strong>ADV/ADI frente a ADC.</strong> Las antiguas habilitaciones <strong>ADV (control de aeródromo visual)</strong> y <strong>ADI (control de aeródromo por instrumentos)</strong> ya no existen como habilitaciones separadas con el Reglamento (UE) 2015/340 consolidado vigente: se <strong>fusionaron en una única habilitación de control de aeródromo (ADC)</strong>, con efecto desde el <strong>4 de agosto de 2024</strong>. Los titulares de una habilitación anterior a 2024 se convirtieron automáticamente; una pregunta que presente «ADV» o «ADI» como habilitación <em>expedible actualmente</em> es incorrecta: las cinco habilitaciones vigentes son <strong>ADC, APP, APS, ACP, ACS</strong>.</li>
+<li><strong>Dos hechos de derogación distintos del «552/2004».</strong> El Reglamento de interoperabilidad 552/2004 fue derogado por el <strong>Reglamento (UE) 2018/1139</strong> (2018, el Reglamento de base de EASA), <strong>no</strong> por la refundición del SES de 2024. La refundición de 2024 (2024/2803) deroga <strong>solo el 549/2004, el 550/2004 y el 551/2004</strong>.</li>
+<li><strong>La validez del nivel 6 (experto) de competencia lingüística no es igual para todos los idiomas.</strong> El inglés en el nivel 6 es válido <strong>9 años</strong>; cualquier otro idioma en el nivel 6 es <strong>ilimitado</strong>. Una pregunta que diga «el nivel 6 es siempre ilimitado» es una trampa: solo los idiomas distintos del inglés tienen validez ilimitada.</li>
+<li><strong>El RP4 aún no se rige por las nuevas normas de rendimiento de la refundición de 2024.</strong> El RP4 (2025-2029) sigue funcionando con la arquitectura <em>antigua</em> del 549/2004 y el 550/2004, según el artículo 58, transitorio, de la refundición; solo el <strong>RP5 (desde 2030)</strong> aplica los nuevos artículos 21-34 del Reglamento (UE) 2024/2803.</li>
+<li><strong>Los Estados del Acuerdo Global no son «Estados miembros».</strong> Israel y Marruecos son los 2 <strong>Estados del Acuerdo Global</strong> de EUROCONTROL, una categoría jurídica distinta de los 42 <strong>Estados miembros</strong>: no los sumes a «42» para responder a «¿cuántos Estados miembros tiene EUROCONTROL?».</li>
+<li><strong>El «CISP» de U-space no es una sigla definida por EASA.</strong> Los reglamentos hablan de «servicio de información común» y de «proveedor del servicio de información común», no de una abreviatura formal «CISP»: desconfía si un distractor inventa una sigla que suena oficial pero no está definida en el texto de los Reglamentos 2021/664-666.</li>
+</ol>
+<hr />
+<h2 id="7-manual-frente-a-fuentes-primarias">7. Manual frente a fuentes primarias</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (OM01, §)</th>
+<th>Hallazgo en la fuente primaria</th>
+<th>Cuál sigue con más probabilidad el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>«Creada en 1960» para EUROCONTROL (§2.2.1)</td>
+<td>El Convenio se <em>firmó</em> en 1960, pero <em>entró en vigor</em> («fundada») en <strong>1963</strong> según la propia página de EUROCONTROL</td>
+<td>Lo más probable es que prevalezca la redacción del manual (1960), por ser la bibliografía más cercana; pero una pregunta basada en la fuente primaria esperaría <strong>1963</strong> como «fundada» o «en vigor». Anota ambas.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>El manual llama a los órganos de gobierno de EUROCONTROL «Comisión Permanente» y «Consejo Provisional» sin más matices (§2.2.4)</td>
+<td>El <strong>texto jurídico del Convenio de 1997</strong> los llama «Asamblea General» y «Consejo»; «Comisión Permanente»/«Consejo Provisional» son los nombres anteriores a 1997 que se mantienen porque el Convenio revisado solo se <strong>aplica provisionalmente desde 1998</strong> (Decisión n.º 72, 9 dic. 1997) y nunca se ratificó por completo</td>
+<td>Los términos del manual son los que usa la práctica actual (y casi con seguridad el examen); la denominación «Asamblea General/Consejo» es un matiz más profundo de la fuente primaria que conviene conocer como trampa, no un sustituto.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Lista de direcciones de EASA del manual: Estrategia y Gestión de la Seguridad; Certificación; Normas de Vuelo; Recursos y Apoyo (§2.4.4). La guía de estudio ya la señalaba como necesitada de una comprobación de nombres</td>
+<td>Página vigente de la organización de EASA (2026): <strong>Certificación; Normas de Vuelo; Gestión de la Seguridad, Sostenibilidad y Proyección Global; Recursos y Apoyo</strong></td>
+<td>Deben usarse los nombres actuales y verificados (§1.4 de este archivo); la dirección «Estrategia y Gestión de la Seguridad» del manual parece haber sido rebautizada o reestructurada como «Gestión de la Seguridad, Sostenibilidad y Proyección Global».</td>
+</tr>
+<tr>
+<td>4</td>
+<td>El manual no da ningún recuento de Estados miembros de EASA ni cifras de personal o presupuesto</td>
+<td><strong>31 Estados miembros de EASA</strong> (27 de la UE + Islandia, Liechtenstein, Noruega, Suiza); <strong>771 FTE</strong> en 2025; sede en <strong>Colonia</strong></td>
+<td>Usa las cifras de la fuente primaria; el manual no tiene aquí ninguna afirmación contrapuesta.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Estructura de la Agencia de EUROCONTROL en el manual: Network Manager Directorate; ATM Directorate; Pan-European Single Sky Directorate; CRCO; MUAC (§2.2.4)</td>
+<td>Consejo vigente de la Agencia en «About us» (2026): Director General, Director Financiero (Instalaciones/CRCO/Finanzas), Director de MUAC, Director de Gestión de la Red, Director de Personas, Director de Transformación de la Aviación, Asesor Militar, Jefe de Gabinete, Jefe del Servicio Jurídico, Jefe de Estrategia/Compromiso/Relaciones Institucionales; divisiones internas: Airspace &amp; Capacity, Operations, Technology, Infrastructure, Aviation Learning Centre</td>
+<td>La estructura del manual parece un organigrama anterior; el examen (elaborado a partir del manual) probablemente seguirá esperando la lista de cinco direcciones del manual, pero la versión de este archivo es la actual y verificada.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>El manual no da la lista de los Estados miembros de los 9 FAB (ya señalado en OM01 como «no encontrado»)</td>
+<td>Lista completa en el §3.5 de este archivo (Reino Unido-Irlanda, DK-SE, NEFAB, Báltico, FABEC, FAB CE, Danubio, Blue Med, SW FAB)</td>
+<td>Usa la lista de este archivo; el manual no la contradice.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Las notas base <code>t01-institutions-legislation.md</code> enumeran las habilitaciones ATCO como ADV, ADI, APP, APS, ACP, ACS (seis habilitaciones, ya señaladas por OM01 como una laguna de «contenido que falta» respecto a su propio texto)</td>
+<td>El Reglamento (UE) 2015/340 consolidado vigente (versión de 13 de mayo de 2026) tiene <strong>cinco</strong> habilitaciones: <strong>ADC</strong> (fusión de ADV+ADI desde el 4 de agosto de 2024), APP, APS, ACP, ACS</td>
+<td>La reglamentación <strong>vigente</strong> (§1.7.2 de este archivo) es la correcta; ADV/ADI son históricas y no deben enumerarse como habilitaciones expedibles actualmente.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-imprescindible-memorizar">8. Imprescindible memorizar</h2>
+<ul>
+<li>EASA: <strong>1592/2002</strong> → <strong>216/2008</strong> → <strong>2018/1139</strong> (vigente, en vigor desde el <strong>11 sep. 2018</strong>); <strong>31 Estados miembros</strong> (27 de la UE + Islandia, Liechtenstein, Noruega, Suiza); sede en <strong>Colonia</strong>; Director Ejecutivo <strong>Florian Guillermet</strong>; <strong>771 FTE</strong> (2025).</li>
+<li>Cadena de elaboración de normas de EASA: <strong>NPA → CRD → dictamen → Comisión → control del PE y del Consejo → DOUE</strong>; solo EASA emite los <strong>AMC/GM/CS</strong>.</li>
+<li>Habilitaciones ATCO (vigentes, desde el 4 ago. 2024): <strong>ADC, APP, APS, ACP, ACS</strong>. Anotaciones: <strong>SUR</strong> (en ADC), <strong>PAR/SRA</strong> (en APS), <strong>OCN</strong> (en ACP/ACS).</li>
+<li>Validez de la competencia lingüística: <strong>nivel 4 = 3 años; nivel 5 = 6 años; nivel 6 = 9 años (inglés) / ilimitada (otros idiomas)</strong>.</li>
+<li>Certificado médico de clase 3: <strong>24 meses</strong>, <strong>12 meses después de los 40 años</strong>, deja de valer a los <strong>41 años</strong> si se expidió antes de los 40.</li>
+<li>Anotación de unidad: máximo <strong>3 años</strong>; evaluación de revalidación dentro de los <strong>3 meses</strong> anteriores al vencimiento.</li>
+<li>Notificación obligatoria de sucesos: <strong>en un plazo de 72 horas</strong> (Reglamento 376/2014).</li>
+<li>EUROCONTROL: firmado en <strong>1960</strong>, en vigor en <strong>1963</strong>; <strong>42 Estados miembros + 2 Estados del Acuerdo Global</strong> (Israel, Marruecos, ambos 2016); último miembro <strong>Islandia (2025)</strong>; España <strong>1997</strong>; sede en <strong>Bruselas</strong>; Director General <strong>Raúl Medina</strong>; centro de formación = <strong>Aviation Learning Centre, Luxemburgo</strong>.</li>
+<li>Convenio revisado de 1997: nunca ratificado por completo, <strong>aplicado provisionalmente desde 1998</strong> (Decisión n.º 72, 9 dic. 1997); su propio texto llama a los órganos <strong>Asamblea General/Consejo</strong>.</li>
+<li>Gestor de Red: EUROCONTROL, designado por la Comisión para <strong>2020-2029</strong> (Decisión de Ejecución 2019/709).</li>
+<li>CRCO 2025: <strong>13,2 mil millones de euros facturados</strong>, tasa de recuperación a 10 años del <strong>99,7 %</strong>, pago en <strong>30 días</strong>, reclamación en <strong>60 días</strong>.</li>
+<li>Reglamentos SES I: <strong>549, 550, 551, 552 /2004</strong>. El 552/2004 fue derogado por el <strong>2018/1139</strong>; el 549-551/2004, por el <strong>2024/2803</strong>.</li>
+<li>2024/2803: fechado el <strong>23 oct. 2024</strong>, publicado el <strong>11 nov. 2024</strong>, en vigor <strong>20 días después</strong>; fechas diferidas clave <strong>2 dic. 2026</strong>; el RP5 (desde <strong>2030</strong>) es el primero que se rige íntegramente por las nuevas normas.</li>
+<li>RP del sistema de rendimiento: <strong>RP1 2012-14, RP2 2015-19, RP3 2020-24, RP4 2025-29 (vigente)</strong>; 4 KPA: <strong>seguridad, medio ambiente, capacidad, rentabilidad</strong>; el plan actual de España = <strong>ESPP4</strong>.</li>
+<li><strong>9 FAB</strong>: Reino Unido-Irlanda, DK-SE, NEFAB, Báltico, FABEC, FAB CE, Danubio, Blue Med, <strong>SW FAB (España-Portugal, desde mayo de 2013)</strong>.</li>
+<li>SESAR 3 JU: Reglamento <strong>(UE) 2021/2085</strong>, funciona hasta el <strong>31 dic. 2031</strong>, Bruselas; Plan Maestro ATM 2025 = <strong>10 SDO</strong>.</li>
+<li>U-space: Reglamentos <strong>2021/664-666</strong>; servicios obligatorios = <strong>identificación de red</strong> + <strong>geoconsciencia</strong>; agentes = <strong>USSP</strong> y <strong>proveedor del servicio de información común</strong>.</li>
+<li>CEAC: fundada en <strong>Estrasburgo, 1955</strong>, <strong>19</strong> Estados fundadores, hoy <strong>44</strong> miembros.</li>
+</ul>
+<hr />
+<h2 id="9-glosario-bilingue-es-en">9. Glosario bilingüe (ES → EN)</h2>
+<ul>
+<li>Medios aceptables de cumplimiento → Acceptable Means of Compliance (AMC)</li>
+<li>Habilitación de control de aeródromo (ADC) → Aerodrome Control (ADC) rating</li>
+<li>Proveedor de servicios de navegación aérea (ANSP) → Air Navigation Service Provider (ANSP)</li>
+<li>Gestión del tránsito aéreo/Servicios de navegación aérea (ATM/ANS) → Air Traffic Management/Air Navigation Services (ATM/ANS)</li>
+<li>Habilitación de control de aproximación por procedimientos/de vigilancia (APP/APS) → Approach Control Procedural/Surveillance (APP/APS)</li>
+<li>Habilitación de control de área por procedimientos/de vigilancia (ACP/ACS) → Area Control Procedural/Surveillance (ACP/ACS)</li>
+<li>Aviation Learning Centre (ALC) (centro de formación de EUROCONTROL, Luxemburgo) → Aviation Learning Centre (ALC)</li>
+<li>Reglamento de base → Basic Regulation</li>
+<li>Oficina Central de Tasas de Ruta (CRCO) → Central Route Charges Office (CRCO)</li>
+<li>Especificaciones de certificación (CS) → Certification Specifications (CS)</li>
+<li>Documento de respuesta a comentarios (CRD) → Comment-Response Document (CRD)</li>
+<li>Estado del Acuerdo Global → Comprehensive Agreement State</li>
+<li>Servicio de información común → Common information service</li>
+<li>Agencia de la Unión Europea para la Seguridad Aérea (EASA) → European Aviation Safety Agency / EU Aviation Safety Agency (EASA)</li>
+<li>Repositorio Central Europeo (ECR) → European Central Repository (ECR)</li>
+<li>Conferencia Europea de Aviación Civil (CEAC) → European Civil Aviation Conference (ECAC)</li>
+<li>Bloque funcional de espacio aéreo (FAB) → Functional Airspace Block (FAB)</li>
+<li>Tránsito aéreo general (GAT) → General Air Traffic (GAT)</li>
+<li>Material guía (GM) → Guidance Material (GM)</li>
+<li>Ámbito clave de rendimiento (KPA) → Key Performance Area (KPA)</li>
+<li>Gestor de Red (NM) → Network Manager (NM)</li>
+<li>Aviso de modificación propuesta (NPA) → Notice of Proposed Amendment (NPA)</li>
+<li>Notificación de sucesos → Occurrence reporting</li>
+<li>Anotación de control oceánico (OCN) → Oceanic Control (OCN) endorsement</li>
+<li>Comisión de Evaluación de Resultados (PRC) → Performance Review Commission (PRC)</li>
+<li>Comisión Permanente → Permanent Commission</li>
+<li>Consejo Provisional → Provisional Council</li>
+<li>Período de referencia (RP) → Reference period (RP)</li>
+<li>Investigación del Cielo Único Europeo ATM (SESAR) → SESAR (Single European Sky ATM Research)</li>
+<li>Cielo Único Europeo (SES) → Single European Sky (SES)</li>
+<li>Reglamento del aire y disposiciones operativas comunes (SERA) → Standardised European Rules of the Air (SERA)</li>
+<li>Licencia de alumno controlador de tránsito aéreo → Student air traffic controller licence</li>
+<li>Anotación de unidad → Unit endorsement</li>
+<li>Proveedor de servicios U-space (USSP) → U-space service provider (USSP)</li>
+</ul>
+<hr />
+<h2 id="10-fuentes">10. Fuentes</h2>
+<ul>
+<li>Reglamento (UE) 2018/1139 (Reglamento de base de EASA) y Reglamento (UE) 2024/2803 (refundición del SES).</li>
+<li>Reglamentos (CE) 549/2004, 550/2004, 551/2004, 552/2004 (SES I).</li>
+<li>Reglamento (UE) 2015/340 (licencias de controladores), 2017/373 (requisitos comunes ATM/ANS) y 923/2012 (SERA).</li>
+<li>Reglamento (UE) 2019/123 (Gestor de Red) y 2019/317 (sistema de evaluación del rendimiento y de tarificación).</li>
+<li>Reglamento (UE) n.º 176/2011 (información sobre los FAB) y 2021/2085 (SESAR 3 JU).</li>
+<li>Reglamentos (UE) 2021/664-666 (U-space) y 376/2014 (notificación de sucesos).</li>
+<li>Convenio revisado de EUROCONTROL (1997) y su protocolo de adhesión de la UE.</li>
+<li>Páginas institucionales oficiales de EUROCONTROL, EASA y el SW FAB; Plan Maestro Europeo ATM de SESAR 2025.</li>
+<li>Manual de ENAIRE «Instituciones y Legislación Aeronáutica» (nov. 2025).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,200 @@
+Según el manual de ENAIRE, ¿qué es la geodesia?	La ciencia que estudia la forma y las dimensiones de la Tierra, su campo de gravedad, sus variaciones temporales y la manera de representarla en un plano.	ATC::OM04
+¿Qué ciencias estudian la representación de la superficie terrestre sobre un mapa o un plano?	La cartografía y la topografía: representación total o parcial de la superficie terrestre sobre un mapa o un plano.	ATC::OM04
+En la terminología del manual, ¿qué es una carta y qué es una carta aeronáutica?	Carta: mapa o plano diseñado para atender necesidades funcionales establecidas por sus usuarios. Carta aeronáutica: la que sirve al desarrollo de las diferentes fases de un vuelo y cumple los requerimientos operativos de la navegación aérea.	ATC::OM04
+¿Qué ramas usan los resultados de la geodesia como base geométrica?	La topografía, la cartografía, la fotogrametría, la navegación, las ingenierías de todo tipo, los fines militares y los programas espaciales.	ATC::OM04
+¿Cómo se llama la forma real de la Tierra?	El geoide: ligeramente achatado en los polos y ensanchado por el Ecuador, por la combinación de fuerzas centrífugas y gravitatorias.	ATC::OM04
+Define el geoide según el manual.	La superficie equipotencial del campo de gravedad de la Tierra, coincidente aproximadamente con el nivel promedio del mar; es irregular porque la distribución de masas no es uniforme.	ATC::OM04
+¿Qué superficie geométrica se aproxima mucho a la Tierra para su estudio?	El elipsoide de revolución: la superficie que se obtiene al girar una elipse alrededor de uno de sus ejes principales.	ATC::OM04
+¿Cómo se modela la Tierra para el estudio de puntos y líneas?	Como una esfera perfecta cuyo radio medio se mide desde el centro de la Tierra hasta la superficie del mar.	ATC::OM04
+Diámetro de la Tierra en el manual	12 742 km	ATC::OM04
+Radio de la Tierra en el manual	6371 km	ATC::OM04
+Perímetro de la Tierra en el manual	40 076 km	ATC::OM04
+Volumen de la Tierra en el manual	108,321 x 10^10 km3	ATC::OM04
+Superficie de la Tierra en el manual	510 x 10^6 km2	ATC::OM04
+¿Qué es el centro de la Tierra?	El punto de simetría de la Tierra, «equidistante» de todos los puntos de la superficie (6371 km).	ATC::OM04
+¿Qué es el eje terrestre y cuál es el más importante?	Una línea ideal que atraviesa la Tierra por su centro. El más importante es el eje de rotación, cuya prolongación pasa por un punto fijo del universo, la estrella polar.	ATC::OM04
+¿Qué son los polos geográficos?	Los dos puntos en los que el eje de rotación corta la superficie: Polo Norte Geográfico (PNg) y Polo Sur Geográfico (PSg).	ATC::OM04
+Define círculo máximo.	Círculo ideal definido por un plano que pasa por el centro de la Tierra; divide la Tierra en dos hemisferios iguales. Circunferencia: 40 076 km.	ATC::OM04
+Define círculo menor.	Círculo ideal definido por un plano que no pasa por el centro de la Tierra; divide la Tierra en dos partes desiguales llamadas casquetes esféricos.	ATC::OM04
+¿Qué es un meridiano?	Cada uno de los infinitos semicírculos máximos que pasan por los polos; corta perpendicularmente al Ecuador y a todos los paralelos. Dos meridianos opuestos forman un círculo máximo.	ATC::OM04
+¿Cuál es el meridiano de origen y desde cuándo?	El meridiano de Greenwich (pasa por el observatorio astronómico de Londres), considerado meridiano de referencia del sistema horario a partir de 1884.	ATC::OM04
+¿Qué hemisferios define el meridiano de Greenwich?	Hemisferio oriental: al este del meridiano de origen. Hemisferio occidental: al oeste.	ATC::OM04
+Define el Ecuador terrestre.	El círculo máximo cuyo plano es perpendicular al eje de la Tierra; divide la Tierra en el hemisferio norte (contiene el Polo Norte) y el hemisferio sur.	ATC::OM04
+Define los paralelos.	Los círculos menores paralelos al Ecuador y perpendiculares a los meridianos; por cualquier punto de la superficie pasa un paralelo.	ATC::OM04
+Nombra los paralelos más importantes.	Círculo Polar Ártico, Círculo Polar Antártico, Trópico de Cáncer y Trópico de Capricornio.	ATC::OM04
+¿Cuántos movimientos de la Tierra estudia el manual y cuáles son?	Cuatro (de los más de 16 descritos): rotación, traslación, precesión y nutación.	ATC::OM04
+Según el manual, ¿por qué importan los movimientos de la Tierra para la navegación?	Influyen al tomar referencias cartográficas y al calcular rutas y ajustes electrónicos, por las desviaciones del norte magnético que causan los movimientos.	ATC::OM04
+Tiempo que tarda una rotación de la Tierra en el manual	23 horas, 56 minutos y 4 segundos (distancia angular de 360 grados).	ATC::OM04
+Sentido de la rotación de la Tierra	De oeste a este.	ATC::OM04
+¿Por qué es variable la velocidad de rotación?	Principalmente por las fuerzas gravitatorias de la Luna.	ATC::OM04
+Principales efectos de la rotación de la Tierra	El día y la noche; la forma achatada del planeta (fuerzas centrífugas).	ATC::OM04
+¿Qué es la traslación y cuánto dura?	El movimiento de la Tierra alrededor del Sol; 365 días.	ATC::OM04
+¿Qué es la eclíptica?	La órbita de la Tierra alrededor del Sol: una elipse con el Sol en uno de sus focos.	ATC::OM04
+Afelio y perihelio: significado y fechas en el manual	Afelio: punto más alejado del Sol, en torno al 4 de julio. Perihelio: punto más cercano, el 4 de enero.	ATC::OM04
+Ángulo entre el eje de la Tierra y el plano de la órbita (manual)	Unos 66 grados 33'.	ATC::OM04
+Trópico de Cáncer: posición	Paralelo situado a 23 grados 27' al norte del Ecuador.	ATC::OM04
+Trópico de Capricornio: posición	Paralelo situado a 23 grados 27' al sur del Ecuador.	ATC::OM04
+¿Cuándo inciden los rayos solares perpendicularmente sobre el Trópico de Cáncer?	Una vez al año, en el Solsticio de Verano: día más largo en el hemisferio norte y más corto en el hemisferio sur.	ATC::OM04
+¿Cuándo inciden los rayos solares perpendicularmente sobre el Trópico de Capricornio?	Una vez al año, en el Solsticio de Invierno: menos horas de luz solar en el hemisferio norte y día más largo en el hemisferio sur.	ATC::OM04
+¿Qué son los equinoccios?	Los momentos en que los rayos solares inciden perpendicularmente sobre el Ecuador; el número de horas de noche y de día es el mismo.	ATC::OM04
+¿Qué causa la combinación de traslación, rotación e inclinación del eje?	Los ciclos climáticos y atmosféricos, la duración del día, la dirección de los vientos predominantes, la cantidad de radiación solar y el movimiento aparente de los astros.	ATC::OM04
+¿Qué es la precesión?	Desplazamiento del eje de rotación en el espacio: el eje describe un cono en unos 25 700 años.	ATC::OM04
+Sentido y velocidad de la precesión en el manual	Sentido contrario al de rotación de la Tierra; velocidad de unos «50 minutos anuales» (redacción del manual).	ATC::OM04
+¿Cuál es la causa de la precesión?	Las fuerzas gravitatorias, principalmente del Sol y la Luna, sobre una Tierra ensanchada en el Ecuador, que crean pares de fuerzas que alteran la posición de equilibrio del eje.	ATC::OM04
+Efecto de la precesión sobre la estrella polar	La estrella polar ha variado su posición aproximadamente 1 grado respecto al norte geográfico; las estrellas cambian de posición respecto a la Tierra.	ATC::OM04
+¿Qué es la nutación?	Una ligera oscilación del eje terrestre superpuesta a la trayectoria de la precesión.	ATC::OM04
+Duración y amplitud de un ciclo de nutación en el manual	Algo más de dieciocho años; el eje oscila unos 9 minutos alrededor de su posición media (redacción del manual).	ATC::OM04
+Efecto principal de la combinación de precesión y nutación	La variación de la posición del norte magnético.	ATC::OM04
+¿Tienen la precesión y la nutación las mismas causas?	Sí: los mismos factores que causan la precesión originan la nutación.	ATC::OM04
+Magnetismo terrestre: dato clave	La Tierra funciona como un enorme imán con un polo Norte y un polo Sur no alineados con los polos geográficos.	ATC::OM04
+Polo Norte Magnético: definición del manual	El polo por donde entran las líneas de fuerza del campo magnético terrestre.	ATC::OM04
+Polo Sur Magnético: definición del manual	El polo por donde salen las líneas de fuerza del campo magnético terrestre.	ATC::OM04
+Define la declinación magnética.	El ángulo comprendido entre el norte magnético local y el norte geográfico en un punto.	ATC::OM04
+Declinación este (E): signo y definición geométrica	Positiva: un observador que mira al norte geográfico ve el norte magnético a su derecha.	ATC::OM04
+Declinación oeste (W): signo y definición geométrica	Negativa: un observador que mira al norte geográfico ve el norte magnético a su izquierda.	ATC::OM04
+Define rumbo.	La distancia angular entre el norte de referencia y el eje longitudinal de la aeronave (rumbo magnético o geográfico).	ATC::OM04
+¿Cómo se escriben y se miden los rumbos?	Con tres cifras, como ángulo respecto al norte (geográfico o magnético), medido en el sentido de giro de las agujas del reloj.	ATC::OM04
+Fórmula del manual para obtener el rumbo magnético	Rumbo magnético = rumbo geográfico - declinación (declinación positiva E, negativa W).	ATC::OM04
+Rumbo geográfico 081, declinación 3E: ¿rumbo magnético?	078 (081 - (+3)).	ATC::OM04
+Rumbo geográfico 122, declinación 5W: ¿rumbo magnético?	127 (122 - (-5)). Nota: el manual imprime «122 - (-3) = 125», una errata aritmética.	ATC::OM04
+Define ruta en el manual.	La proyección del movimiento de una aeronave, persona u objeto sobre la superficie terrestre; en una carta, la trayectoria que une el punto de salida con el de destino (magnética o geográfica).	ATC::OM04
+Sin viento, ¿cómo se comparan el rumbo y la ruta?	El rumbo de la aeronave coincide con la ruta que sobrevuela.	ATC::OM04
+¿Cuáles son los dos tipos de ruta más importantes?	Ortodrómica y loxodrómica.	ATC::OM04
+Define la ruta ortodrómica.	Arco de círculo máximo que une dos puntos de la superficie; la ruta más corta entre dos puntos.	ATC::OM04
+Define la ruta loxodrómica.	La que se describe al desplazarse de un punto a otro manteniendo un rumbo constante en la brújula; más larga que la ortodrómica.	ATC::OM04
+¿Qué ruta forma ángulos distintos con cada meridiano: la ortodrómica o la loxodrómica?	La ortodrómica (salvo cuando coincide con un meridiano o con el Ecuador). La loxodrómica forma el mismo ángulo con todos los meridianos.	ATC::OM04
+¿Qué ruta es difícil de seguir y cuál es fácil?	Ortodrómica: difícil. Loxodrómica: fácil.	ATC::OM04
+¿Cuándo se suele seguir la ruta loxodrómica (umbral de distancia)?	En distancias cortas: rutas inferiores a 1000 km, donde la diferencia con la ortodrómica es pequeña.	ATC::OM04
+¿Por qué es fundamental la ruta ortodrómica en aviación?	Sobre todo en largas distancias: el ahorro de combustible es uno de los objetivos principales del transporte aéreo.	ATC::OM04
+Situación de la navegación loxodrómica en aeronáutica (manual)	Cae en desuso: su sencillez ha sido superada por la precisión de los sistemas modernos de navegación.	ATC::OM04
+Define la milla náutica en el manual.	La longitud recorrida en un minuto sobre un arco de círculo máximo: 1 NM = 1,852 km.	ATC::OM04
+Define deriva en el manual.	El ángulo existente entre la ruta deseada de una aeronave y la dirección de su movimiento.	ATC::OM04
+¿Cuándo es máxima la deriva y cuándo es mínima o nula?	Máxima: viento perpendicular al rumbo de la aeronave. Mínima o nula: la dirección del viento coincide con la de la aeronave.	ATC::OM04
+Define derrota.	La proyección sobre el suelo de la trayectoria que ha seguido realmente la aeronave al intentar sobrevolar una determinada ruta; resultado de las sucesivas correcciones de rumbo, debidas principalmente al viento.	ATC::OM04
+Ruta frente a derrota: diferencia	Ruta: línea prevista que se quiere seguir. Derrota: trayectoria realmente recorrida sobre el suelo.	ATC::OM04
+¿Qué dos elementos caracterizan un sistema de referencia terrestre?	Un sistema de coordenadas para posicionar puntos sobre el elipsoide y un datum.	ATC::OM04
+Define datum en el manual.	Conjunto de parámetros que fijan el origen, la orientación y la escala del sistema de coordenadas respecto a un elipsoide de referencia.	ATC::OM04
+Define latitud.	Distancia angular, medida sobre un meridiano, entre un punto y el Ecuador (origen de latitudes); de 0 a 90 grados, N (positiva) o S (negativa).	ATC::OM04
+Define longitud.	Distancia angular, medida sobre el Ecuador, entre el meridiano del lugar y el meridiano de Greenwich; de 0 a 180 grados, E (positiva, a la derecha) o W (negativa, a la izquierda).	ATC::OM04
+¿Qué latitud tienen los puntos del Ecuador y los de los polos?	Ecuador: 0 grados. Polos: 90 grados.	ATC::OM04
+¿Qué comparten todos los puntos de un mismo paralelo? ¿Y de un mismo meridiano?	Paralelo: la misma latitud. Meridiano: la misma longitud.	ATC::OM04
+Intervalo de la latitud y de la longitud	Latitud 0-90 grados; longitud 0-180 grados.	ATC::OM04
+¿Quién desarrolló el WGS84 y por qué?	El Departamento de Defensa de EE. UU., para normalizar un modelo único de referencia, porque el uso de distintos datums causaba ambigüedad en las coordenadas.	ATC::OM04
+Origen del WGS84	El centro de masas de la Tierra.	ATC::OM04
+Eje Z del WGS84	Dirección del polo medio convencional terrestre definido por el IERS, perpendicular al plano del Ecuador medio; coincidente con el eje medio de rotación.	ATC::OM04
+¿Qué significan las siglas IERS en el manual?	Servicio Internacional de Rotación de la Tierra (International Earth Rotation Service).	ATC::OM04
+Eje X del WGS84	Intersección del plano del Ecuador con el meridiano de Greenwich (también definido por el IERS).	ATC::OM04
+Eje Y del WGS84	Sobre el plano del Ecuador medio y a 90 grados a la derecha del eje X; forma con el eje Z un triedro a derechas con origen en el centro de masas.	ATC::OM04
+Semieje mayor del WGS84 (a)	6 378 137 m	ATC::OM04
+Semieje menor del WGS84 (b)	6 356 752 m	ATC::OM04
+Constante de gravitación terrestre GM del WGS84 (manual)	(3 986 004,418 +/- 0,008) x 10^8 m3/s2	ATC::OM04
+Velocidad angular W del WGS84 (manual)	7 292 115 x 10^-11 rad/s	ATC::OM04
+Coeficiente de forma dinámica J2 del WGS84 (manual)	-484,166 85 x 10^-6	ATC::OM04
+¿En qué sistema se publican las coordenadas del AIP-ESPAÑA y según qué Anexo de la OACI?	WGS84, de acuerdo con el Anexo 15 de la OACI.	ATC::OM04
+¿Qué Real Decreto regula el sistema geodésico oficial en España y de qué fecha es?	Real Decreto 1071/2007, de 27 de julio (adaptación del mandato de la Comisión Europea de 1999).	ATC::OM04
+Sistema geodésico de referencia oficial en la península Ibérica y las Islas Baleares	ETRS89 (European Terrestrial Reference System 1989).	ATC::OM04
+Sistema geodésico de referencia oficial en las islas Canarias	REGCAN95.	ATC::OM04
+¿Qué elipsoide usan el ETRS89 y el REGCAN95?	El GRS80 (Sistema de Referencia Geodésico 1980).	ATC::OM04
+¿Qué materializa el ETRS89 y el REGCAN95 en España?	El marco que define la Red Geodésica Nacional por Técnicas Espaciales (REGENTE) y sus densificaciones.	ATC::OM04
+¿Son válidos el ETRS89 y el REGCAN95 para publicar coordenadas en el AIP ESPAÑA? ¿Por qué?	No: por la deriva existente entre estos sistemas y el WGS84, las discrepancias superan la exactitud requerida para algunos datos (inicialmente se consideraron equivalentes al WGS84).	ATC::OM04
+Define escala en el manual.	La relación entre la dimensión real de un objeto y su representación gráfica; un factor de reducción o ampliación.	ATC::OM04
+Las dos formas más comunes de expresar una escala	Gráfica y numérica.	ATC::OM04
+Fórmula de la escala numérica	E = longitud en el plano / longitud en el terreno (mismas unidades).	ATC::OM04
+Escala 1:10: ¿a qué distancia real equivalen 5 cm en el plano?	5 x 10 = 50 cm.	ATC::OM04
+¿Qué es una escala grande y para qué se usa?	Denominador pequeño; abarca poco terreno; ciudades, fincas, caminos. Ejemplos: 1:5000, 1:10 000.	ATC::OM04
+¿Qué es una escala pequeña y para qué se usa?	Denominador grande; abarca mucho terreno; países y continentes. Ejemplos: 1:5 000 000, 1:7 000 000.	ATC::OM04
+Escala de reducción, de ampliación y natural: ¿en qué se diferencian?	Reducción: numerador menor que el denominador. Ampliación: numerador mayor (p. ej., 2/1). Natural: tamaño real, 1:1.	ATC::OM04
+Escala gráfica: definición	Línea graduada dividida en partes, cada una con su equivalencia con la magnitud real, para leer las proporciones de forma visual y sin cálculos.	ATC::OM04
+En una escala 1/5 000 000, ¿a qué equivale 1 cm de la escala gráfica?	A 50 km.	ATC::OM04
+Define proyección cartográfica.	Las transformaciones matemáticas que permiten representar o proyectar la Tierra en un plano.	ATC::OM04
+¿Por qué todo mapa tiene distorsiones?	Es geométrica y analíticamente imposible transformar un área esférica en una plana sin deformarla: hay distorsiones en las distancias, los ángulos y las áreas.	ATC::OM04
+Dos factores principales para elegir una proyección	La zona de la superficie terrestre que se quiere representar y la especialización (finalidad) del mapa.	ATC::OM04
+Dos formas de clasificar las proyecciones en el manual	(a) Según la magnitud geométrica que conservan; (b) según la forma de proyección.	ATC::OM04
+Proyección conforme	Conserva el ángulo entre dos puntos medido en la superficie de referencia y en el mapa.	ATC::OM04
+Proyección equivalente	Conserva la proporcionalidad entre las áreas; no es posible sin deformar considerablemente los ángulos.	ATC::OM04
+Proyección equidistante	Mantiene la proporcionalidad entre las distancias; en la práctica ninguna proyección la conserva en todo el mapa.	ATC::OM04
+Proyección afiláctica	No tiene ninguna de las tres propiedades (conforme, equivalente, equidistante).	ATC::OM04
+¿Puede una proyección ser a la vez conforme, equivalente y equidistante?	No: está matemáticamente demostrado que ninguna mantiene las tres propiedades, solo una.	ATC::OM04
+Dos familias de proyecciones según su forma	Puras y modificadas.	ATC::OM04
+Proyección ortográfica: posición del foco de proyección	Fuera de la Tierra, a una distancia infinita.	ATC::OM04
+Proyección escenográfica: posición del foco	Fuera de la Tierra, a una distancia finita.	ATC::OM04
+Proyección estereográfica: posición del foco	Sobre la superficie terrestre.	ATC::OM04
+Proyección gnomónica: posición del foco	En el centro de la Tierra.	ATC::OM04
+Proyecciones polar, ecuatorial y horizontal: ¿qué define cada una?	La posición del plano de proyección: tangente en un Polo (polar), en un punto del Ecuador (ecuatorial) o en un punto no significativo (horizontal).	ATC::OM04
+Dos tipos de proyección por desarrollo	Cónica (cono tangente o secante) y cilíndrica (cilindro tangente o secante).	ATC::OM04
+Proyección directa, transversal y oblicua: el eje de la superficie de proyección es...	Directa: paralelo al eje de rotación terrestre. Transversal: perpendicular. Oblicua: forma un ángulo entre 0 y 90 grados.	ATC::OM04
+¿Qué son las proyecciones modificadas?	Proyecciones puras alteradas con artificios geométricos y analíticos para adquirir una propiedad que no tenían, con menos distorsiones en las áreas de interés; hoy, la mayoría de los mapas.	ATC::OM04
+Proyecciones modificadas populares citadas en el manual	Bonne, Lambert, Mercator, Mollweide, Goode.	ATC::OM04
+¿Qué proyecciones se usan mucho en la cartografía aeronáutica, sobre todo en ruta?	Las cónicas, por la facilidad y la exactitud con que se representan las trayectorias.	ATC::OM04
+En una proyección cónica gnomónica directa, ¿cómo se coloca el cono?	Tangente a la Tierra a lo largo de un paralelo denominado paralelo estándar.	ATC::OM04
+Meridianos y paralelos en la proyección cónica	Meridianos: rectas concurrentes en el Polo. Paralelos: arcos de circunferencias concéntricas. Mantienen 90 grados.	ATC::OM04
+¿Qué significa automecoico?	Sin deformación lineal; en la proyección cónica tangente solo el paralelo estándar es automecoico.	ATC::OM04
+¿En qué se diferencia la cónica conforme de Lambert del cono tangente?	Usa un cono secante: dos paralelos estándar automecoicos y deformaciones lineales reducidas a la mitad de las del cono tangente.	ATC::OM04
+¿Por qué es útil la Lambert conforme para la navegación aérea?	Es conforme y prácticamente equidistante, así que los rumbos y las distancias se miden directamente; la ortodrómica es casi una recta.	ATC::OM04
+¿Cómo se representa la ortodrómica en la proyección de Lambert? ¿Y la loxodrómica?	Ortodrómica: casi una recta. Loxodrómica: una curva con la concavidad orientada hacia el vértice de la proyección.	ATC::OM04
+Define topografía en el manual.	La ciencia que se ocupa de la representación de pequeñas extensiones de la superficie terrestre.	ATC::OM04
+¿Qué es el sistema de planos acotados?	Un método con un único plano de proyección (plano de referencia o del cuadro) mediante proyección cilíndrica ortogonal; un punto queda definido por sus coordenadas planas y su cota (distancia vertical, + por encima / - por debajo).	ATC::OM04
+¿Qué es una proyección cilíndrica ortogonal?	Aquella en la que los rayos proyectantes parten del infinito, son todos paralelos entre sí y perpendiculares al plano de proyección.	ATC::OM04
+¿Qué son las curvas de nivel o isohipsas?	Perímetros de igual cota obtenidos al cortar el terreno con planos paralelos a la misma altitud, proyectados en el plano.	ATC::OM04
+Define equidistancia en los mapas de curvas de nivel.	La distancia vertical constante entre los planos paralelos que cortan el terreno.	ATC::OM04
+¿De qué depende la precisión de un mapa de curvas de nivel?	De la equidistancia y de la escala; para reflejar pequeños detalles hay que disminuir la equidistancia.	ATC::OM04
+¿Qué se puede calcular con las curvas de nivel?	Distancias, áreas, ángulos e incluso volúmenes, de forma sencilla y precisa.	ATC::OM04
+¿Qué cartas aeronáuticas usan habitualmente la topografía por curvas de nivel?	Las cartas para la navegación visual, las que representan aeródromos y las que definen superficies limitadoras de obstáculos.	ATC::OM04
+¿Qué documento de la OACI normaliza los símbolos de las cartas aeronáuticas?	El Anexo 4 de la OACI.	ATC::OM04
+¿Dónde se publican los símbolos propios de España, que no están en el Anexo 4, y cómo se marcan?	En el AIP-España GEN 2.3, marcados con un asterisco (*): «No incluidos en el ANEXO 4 de OACI».	ATC::OM04
+Definición de carta aeronáutica en el apartado 4	La representación de una porción de tierra, su relieve y sus construcciones, diseñada especialmente para satisfacer los requisitos de la navegación aérea.	ATC::OM04
+¿En qué documentos de la OACI se desarrollan las cartas aeronáuticas?	El Anexo 4 y el Documento 8697 (Manual de Cartas Aeronáuticas).	ATC::OM04
+¿Qué Anexo de la OACI asigna al AIS la producción de la cartografía aeronáutica?	El Anexo 15 «Servicios de Información Aeronáutica».	ATC::OM04
+¿Quién es responsable de la cartografía aeronáutica de España?	ENAIRE, en concreto su División AIS.	ATC::OM04
+¿Qué equilibrio deben lograr las cartas del Anexo 4?	Entre la uniformidad de presentación, los requisitos operacionales y la aplicación de técnicas eficaces y económicas; las cartas deben ser de interpretación rápida; la cooperación entre Estados es fundamental.	ATC::OM04
+Enumera los aspectos que recoge el Anexo 4 (en orden)	1 Declaración de las diferencias; 2 Información sobre la disponibilidad; 3 Idioma; 4 Especificaciones generales (utilización, título, símbolos); 5 Cada carta y sus especificaciones (de forma exhaustiva en el Doc 8697).	ATC::OM04
+Idioma de las cartas españolas hoy (manual)	Empiezan a publicarse bilingües: español e inglés.	ATC::OM04
+Doc 8697: ¿cómo clasifica las cartas según su carácter?	Obligatorias, opcionales y condicionalmente necesarias.	ATC::OM04
+Enumera las cartas obligatorias	Plano de Obstáculos de Aeródromo Tipo A; Carta Topográfica para Aproximaciones de Precisión; Carta de Navegación en Ruta; Carta de Aproximación por Instrumentos; Plano de Aeródromo / Helipuerto; Carta Aeronáutica Mundial 1:1 000 000.	ATC::OM04
+Enumera las cartas opcionales	Plano de Obstáculos de Aeródromo Tipo B; Plano de Aeródromo para Movimientos en Tierra; Plano de Estacionamiento y Atraque de Aeronaves; Carta Aeronáutica OACI 1:500 000; Carta de Navegación Aeronáutica de Escala Pequeña; Carta de Posición.	ATC::OM04
+¿Cuándo se elaboran las cartas opcionales?	Solo si, en opinión de las autoridades estatales, su disponibilidad contribuiría a la seguridad, regularidad y eficiencia de las operaciones de las aeronaves.	ATC::OM04
+Enumera las cartas condicionalmente necesarias	Carta de Área; SID; STAR; Carta de Aproximación Visual; Carta de altitud mínima de vigilancia ATC.	ATC::OM04
+¿Cuándo se requiere la Carta de Área?	Solo si las rutas ATS o los requisitos de notificación de posición son complicados y no pueden indicarse en la Carta de Navegación en Ruta.	ATC::OM04
+¿Cuándo hay que elaborar una carta SID o STAR?	Siempre que se haya establecido una ruta de salida o de llegada normalizada por instrumentos y no pueda indicarse con suficiente claridad en la Carta de Área.	ATC::OM04
+¿Cuándo se requiere la Carta de Aproximación Visual?	Para aeródromos con instalaciones de navegación limitadas, sin instalaciones de radiocomunicaciones, sin otras cartas de aeródromo adecuadas a escala 1:500 000 o superior, o donde existan procedimientos de aproximación visual.	ATC::OM04
+¿Cuándo se requiere la Carta de altitud mínima de vigilancia ATC?	Cuando existan procedimientos de guía vectorial radar y las altitudes mínimas de guía vectorial no puedan indicarse con suficiente claridad en la Carta de Área, la SID o la STAR.	ATC::OM04
+Otras cartas que se elaboran en España: completa la lista (9)	Área de cobertura radar; ATCSMAC en TMA; circulación VFR en TMA; TRAN; CDA; luces aeronáuticas de superficie en ruta; áreas prioritarias a evitar; concentración de aves; presencia de buitres y cigüeñas.	ATC::OM04
+¿Cuántas fases del vuelo usa el manual para relacionar las cartas y cuál es la primera?	Seis; la fase 1 es el rodaje desde el puesto de estacionamiento hasta el punto de despegue.	ATC::OM04
+Cartas de la fase 1 (rodaje hasta el despegue)	Plano de Estacionamiento y Atraque de Aeronaves; Plano de Aeródromo para Movimientos en Tierra; Plano de Aeródromo / Helipuerto.	ATC::OM04
+Cartas de la fase 2 (despegue y ascenso hasta la estructura de rutas ATS)	Plano de Obstáculos de Aeródromo Tipo A; SID; Carta de altitud mínima de vigilancia ATC.	ATC::OM04
+Cartas de la fase 3 (estructura de rutas ATS en ruta)	Carta de Área (salida y tránsito); Carta de Navegación en Ruta; Carta de Área (llegada y tránsito); Carta de Circulación VFR.	ATC::OM04
+Cartas de la fase 4 (descenso hasta la aproximación)	STAR; CDA; TRAN; Carta de altitud mínima de vigilancia ATC.	ATC::OM04
+Cartas de la fase 5 (aproximación para aterrizar)	Carta de Aproximación por Instrumentos; Carta Topográfica para Aproximaciones de Precisión; Carta de Aproximación Visual; Plano de Obstáculos de Aeródromo Tipo A (limitaciones de utilización).	ATC::OM04
+Cartas de la fase 6 (aterrizaje y rodaje hasta el puesto de estacionamiento)	Plano de Aeródromo / Helipuerto; Plano de Aeródromo para Movimientos en Tierra; Plano de Estacionamiento y Atraque de Aeronaves.	ATC::OM04
+Finalidad del Plano de Aeródromo / Helipuerto	Facilitar el movimiento de las aeronaves desde los puestos de estacionamiento hasta la pista y viceversa, y dar información esencial sobre las operaciones en el aeródromo.	ATC::OM04
+¿Qué aeródromos requieren un Plano de Aeródromo / Helipuerto según la OACI y cuáles en España?	OACI: los utilizados regularmente por la aviación civil internacional. España: prácticamente todos los aeródromos y helipuertos civiles.	ATC::OM04
+¿Cuándo se usa el Plano de Aeródromo para Movimientos en Tierra?	Cuando, por la complejidad de las instalaciones terminales, la información no puede mostrarse con claridad en el Plano de Aeródromo; refleja las calles de rodaje con su designador y sentido si no son bidireccionales.	ATC::OM04
+¿Cuándo se usa el Plano de Estacionamiento y Atraque de Aeronaves?	Cuando la complejidad de las instalaciones terminales impide detallar con claridad la información en el Plano de Aeródromo y/o en el de Movimientos en Tierra; facilita el movimiento entre las calles de rodaje y los puestos de estacionamiento y la maniobra de estacionamiento.	ATC::OM04
+¿Qué tres casos cubre el Plano de Obstáculos de Aeródromo Tipo A?	Despegue (interrumpirlo dentro de la distancia de aceleración-parada disponible o continuarlo salvando los obstáculos tras un fallo del motor crítico); en ruta con un motor inactivo (llegar a un aeródromo donde aterrizar); aterrizaje (salvar los obstáculos con margen seguro y detenerse dentro de la distancia de aterrizaje disponible).	ATC::OM04
+Finalidad de la Carta Topográfica para Aproximaciones de Precisión	Ofrecer el perfil detallado del terreno de una parte del área de aproximación final para que los explotadores evalúen el efecto del terreno al determinar la altura de decisión con radioaltímetros.	ATC::OM04
+¿Para qué pistas se facilita la Carta Topográfica para Aproximaciones de Precisión?	Pistas de aproximación de precisión de las categorías II y III en aeródromos utilizados por la aviación civil internacional.	ATC::OM04
+Finalidad de la Carta de Navegación en Ruta	Ayudar a la navegación a lo largo de las rutas ATS, de conformidad con los procedimientos ATS; se facilita en todas las áreas en que se hayan establecido FIR y UIR.	ATC::OM04
+¿Cómo se proporciona la Carta de Navegación en Ruta en España?	Exclusivamente en formato digital en insignia.enaire.es.	ATC::OM04
+¿Qué fases facilita la Carta de Área?	La transición entre la fase en ruta y la aproximación; la transición entre el despegue o la aproximación frustrada y la fase en ruta; los vuelos por áreas de estructura compleja de rutas ATS o del espacio aéreo.	ATC::OM04
+Carta SID: finalidad	Aeronaves IFR; rutas a seguir desde el despegue hasta la fase en ruta.	ATC::OM04
+Carta STAR: finalidad	Aeronaves IFR; rutas a seguir desde la fase en ruta hasta la fase de aproximación.	ATC::OM04
+¿Qué es una carta CDA (Descenso Continuo)?	Se basa en las STAR actuales, eliminando las restricciones de velocidad y altitud excepto las altitudes mínimas de seguridad; da también la distancia de llegada desde los puntos de notificación hasta el umbral.	ATC::OM04
+¿Qué es una carta TRAN (Transición a la Aproximación Final)?	«Transiciones» RNAV 1 con tramos en forma de trombón para secuenciar flujos de llegadas en aeropuertos de alta densidad: 1 tramo inicial, 1 tramo de alejamiento y 1 tramo de acercamiento que enlazan una STAR con la aproximación final de un ILS.	ATC::OM04
+¿En qué aeropuerto español existen actualmente transiciones TRAN?	Solo en Barcelona/El Prat.	ATC::OM04
+Finalidad de la Carta de altitud mínima de vigilancia ATC y nota obligatoria	Permite a la tripulación vigilar y verificar las altitudes asignadas por un controlador que usa un sistema de vigilancia ATS; una nota en el anverso indica que solo puede usarse para verificar las altitudes asignadas cuando la aeronave está identificada.	ATC::OM04
+Carta de Aproximación por Instrumentos (IAC): contenido y cuántas se publican	Información para efectuar los procedimientos de aproximación instrumental a la pista, incluidos los de aproximación frustrada y espera; una carta por procedimiento.	ATC::OM04
+Finalidad de la carta OACI 1:500 000	Navegación aérea visual en vuelos a baja velocidad, distancias cortas o medias y altitudes bajas o intermedias; también carta básica, instrucción, complemento de cartas especializadas y planificación previa al vuelo.	ATC::OM04
+¿Se incluye la carta 1:500 000 en el AIP-España?	No: España la proporciona, pero no la incluye en el AIP-España.	ATC::OM04
+¿Qué TMA justifican la carta de circulación VFR en España?	Madrid, Barcelona, Palma de Mallorca, Valencia, Sevilla y Galicia.	ATC::OM04
+¿Qué establece la Carta de circulación VFR para TMA?	Pasillos y/o sectores con las altitudes a las que pueden operar los vuelos VFR, para evitar conflictos con el tránsito aéreo comercial.	ATC::OM04
+Contenido de la carta de luces aeronáuticas de superficie (en ruta)	Luces de superficie y otros faros que designan posiciones geográficas seleccionadas por el Estado como significativas, identificadas con el nombre de la ciudad o población.	ATC::OM04
+¿Quién facilita los datos de las cartas de áreas prioritarias a evitar y de concentración de aves?	El Ministerio de Agricultura y Pesca, Alimentación y Medio Ambiente.	ATC::OM04
+¿Qué muestra la carta de concentración de aves?	Las zonas húmedas de invernada de aves acuáticas, además de otras especies.	ATC::OM04
+¿Qué definió la OACI sobre las cartas electrónicas (presentación electrónica)?	Una especificación para publicar cartas de forma electrónica; todos los tipos de carta son candidatos; es más interactiva que el PDF.	ATC::OM04
+Características exigidas a las cartas electrónicas (lista)	Agregar o quitar información de forma simple, pero no la presentación básica; pueden mostrar información suplementaria; posición dinámica continua de la aeronave con recentrado automático; escala variable.	ATC::OM04
+¿Qué aplicación muestra las cartas electrónicas del AIP-España?	Insignia; p. ej., el ENR 6.1 «Cartas en Ruta» indica cuándo una carta es solo electrónica.	ATC::OM04
+¿Cómo se notifican las erratas y los cambios urgentes de las cartas significativos para las operaciones?	Por NOTAM, con referencia a la carta afectada.	ATC::OM04
+¿Cómo se publican los cambios de las cartas sin repercusión operacional?	Mediante enmienda regular al AIP, Suplemento Regular (SUP) o corrección manuscrita al AIP.	ATC::OM04
+¿Cómo se publica un cambio de importancia operacional en los procedimientos de las cartas?	Con una nueva edición de la carta distribuida mediante el sistema AIRAC.	ATC::OM04
+¿Cuál es la fecha («Elaborado») del manual de Cartografía de ENAIRE?	Noviembre de 2024 (66 páginas).	ATC::OM04
+¿Qué dos partes del AIP-España contienen cartas de ejemplo en el anexo del manual?	ENR (cobertura radar, luces de superficie, áreas prioritarias, aves, VFR en TMA, ATCSMAC) y AD (planos de aeródromo, AOC A, PATC, SID, STAR, TRAN, ATCSMAC, IAC, VAC).	ATC::OM04

@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenador de matrices</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18'/%3E%3Cpath d='M9 3v18M15 3v18M3 9h18M3 15h18'/%3E%3Ccircle cx='18' cy='18' r='1.7'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onacc:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a6c8f0; --onacc:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans)}
+.top{display:flex;align-items:center;gap:10px;margin:0 auto;padding:14px 16px 10px}
+.top .logo{width:30px;height:30px;color:var(--accent);flex:none}
+.top .brand{font:700 20px/1 var(--serif);letter-spacing:.01em}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.logo{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 28px/1.2 var(--serif);margin:.3em 0 .5em}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:1.6em 0 .6em}
+h3{font:700 17px var(--serif);margin:1em 0 .3em}
+p{margin:.4rem 0}
+.soft{color:var(--muted)} .small{font-size:14px}
+.good{color:var(--ok)} .bad{color:var(--err)} .warn{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.4;cursor:default}
+.link{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0;margin-bottom:6px;min-height:40px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;width:100%;max-width:420px}
+input[type=range]{width:100%;max-width:420px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;vertical-align:-3px;margin-right:8px}
+label.lb{display:block;margin:1rem 0 .3rem;font-weight:600}
+label.lb.inline{font-weight:400}
+kbd,.key{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.head{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;color:var(--muted);font-size:15px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.head b{color:var(--text)}
+.head .ic{margin-right:4px}
+.bar{height:3px;background:var(--rule);margin:0 0 12px}
+.bar>div{height:100%;background:var(--accent);width:0}
+.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.fig{padding:10px 26px 10px 0}
+.fig b{display:block;font:700 28px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.fig span{color:var(--muted);font-size:13px}
+.tbl,.tbl-box,.tab-box,.tabla-caja{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 12px 6px 0;white-space:nowrap}
+td{padding:6px 12px 6px 0;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top}
+.list{border-top:1px solid var(--text);margin:8px 0 16px}
+.card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 4px;cursor:pointer;color:var(--text)}
+.card:hover{background:var(--stripe)}
+.card .ic{width:30px;height:30px;color:var(--accent);stroke-width:1.5}
+.card .nm{display:block;font:700 20px/1.2 var(--serif)}
+.card .dt{display:block;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.hintbox{border-top:1px solid var(--rule);padding-top:8px;margin-top:10px}
+@media (max-width:640px){.fig{padding-right:18px}.fig b{font-size:24px}h1{font-size:25px}}
+
+#app{max-width:1000px;margin:0 auto;padding:8px 16px 56px}
+.top{max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 32px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--text)}
+.timer.late{color:var(--warn)}
+.timer.over{color:var(--err)}
+svg.cell{display:block;width:100%;height:auto}
+.mat{display:grid;grid-template-columns:repeat(3,minmax(0,112px));gap:6px;justify-content:center;margin:14px auto}
+.seq{display:grid;grid-template-columns:repeat(6,minmax(0,100px));gap:6px;justify-content:center;margin:14px auto}
+.ana{display:grid;grid-template-columns:repeat(2,minmax(0,112px));gap:6px 40px;justify-content:center;margin:14px auto}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,108px));gap:10px;justify-content:center;margin:18px auto}
+.opt{position:relative;background:var(--surface);border:2px solid var(--rule);border-radius:2px;padding:5px;cursor:pointer;color:var(--text)}
+.opt:hover{border-color:var(--accent)}
+.opt .let{position:absolute;left:5px;top:3px;font:12px/1 ui-monospace,Consolas,monospace;color:#5f5b53}
+.opt.right{border-color:var(--ok)}
+.opt.wrong{border-color:var(--err)}
+.opt.hinted{border-color:var(--warn)}
+.opt[disabled]{cursor:default}
+.lamp{display:inline-block;width:14px;height:14px;border-radius:50%;background:transparent;border:2px solid var(--muted);vertical-align:-2px}
+.lamp.on{background:var(--err);border-color:var(--err)}
+ul.rules{list-style:none;margin:10px 0;padding:0;border-top:1px solid var(--rule)}
+ul.rules li{padding:5px 0;border-bottom:1px solid var(--rule)}
+.hintbox:empty{display:none}
+.chart{display:block;width:100%;height:auto;margin:8px 0}
+.status{font-size:18px;margin:12px 0 0}
+.slider{max-width:420px}
+.cust{border-top:1px solid var(--rule);margin-top:14px}
+td .ic{margin-right:6px;color:var(--muted)}
+@media (max-width:640px){
+  .mat{grid-template-columns:repeat(3,minmax(0,92px))}
+  .seq{grid-template-columns:repeat(3,minmax(0,92px))}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.5L20 9"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4.5L4 15"/><path d="M4 20v-5h5"/></symbol><symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-skip" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7z"/><path d="M19 5v14"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-dash" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol><symbol id="i-matrix" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><circle cx="18" cy="18" r="1.7"/></symbol><symbol id="i-k-logic" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/></symbol><symbol id="i-k-series" viewBox="0 0 24 24"><rect x="2.5" y="8" width="5" height="8"/><rect x="9.5" y="8" width="5" height="8"/><path d="M17 12h4.5M19.5 9.5l2 2.5-2 2.5"/></symbol><symbol id="i-k-analogy" viewBox="0 0 24 24"><rect x="3" y="3.5" width="7" height="7"/><rect x="14" y="3.5" width="7" height="7"/><path d="M10.5 7h3"/><rect x="3" y="13.5" width="7" height="7"/><rect x="14" y="13.5" width="7" height="7" stroke-dasharray="2 2"/><path d="M10.5 17h3"/></symbol><symbol id="i-k-odd" viewBox="0 0 24 24"><circle cx="7" cy="7.5" r="3"/><circle cx="17" cy="7.5" r="3"/><circle cx="7" cy="17" r="3"/><rect x="14" y="14" width="6" height="6"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><circle cx="18" cy="18" r="1.7"/></symbol></defs></svg>
+<header class="top"><svg class="logo" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand">Matrices</span></header>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Entrenador de matrices</h1>
+<div id="app"></div>
+<script>
+'use strict';
+// ==== PURE LOGIC START ====
+/* =====================================================================
+   PURE LOGIC (no DOM). Everything here is deterministic given a seed and is
+   tested with node (see trainer-matrices-README.md).
+   ===================================================================== */
+
+/* ---------- Seeded random numbers ---------- */
+function makeRng(seed){
+  let h = 2166136261 >>> 0;
+  const s = String(seed);
+  for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  let a = h;
+  function next(){
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  return {
+    next: next,
+    int: function(n){ return Math.floor(next() * n); },
+    range: function(lo, hi){ return lo + Math.floor(next() * (hi - lo + 1)); },
+    pick: function(arr){ return arr[Math.floor(next() * arr.length)]; },
+    chance: function(p){ return next() < p; },
+    shuffle: function(arr){
+      const b = arr.slice();
+      for (let i = b.length - 1; i > 0; i--){ const j = Math.floor(next() * (i + 1)); const t = b[i]; b[i] = b[j]; b[j] = t; }
+      return b;
+    }
+  };
+}
+function mod(a, n){ return ((a % n) + n) % n; }
+function uniq(arr){ const seen = {}; const out = []; arr.forEach(function(x){ if (!seen[x]){ seen[x] = 1; out.push(x); } }); return out; }
+function fill3(x){ return [[x, x, x], [x, x, x], [x, x, x]]; }
+function transpose3(g){ return [[g[0][0], g[1][0], g[2][0]], [g[0][1], g[1][1], g[2][1]], [g[0][2], g[1][2], g[2][2]]]; }
+function range(n){ const r = []; for (let i = 0; i < n; i++) r.push(i); return r; }
+
+/* ---------- Attribute model ---------- */
+const SHAPES = ['circle','square','triangle','diamond','pentagon','star','cross','hexagon','arrow','ell','halfdisc','rtri'];
+const SYM_IDX = [0,1,2,3,4,5,6,7];
+const ASYM_IDX = [8,9,10,11];              // shapes with no rotational symmetry: the only ones used when rotation is a rule
+const ALL_SHAPES = range(12);
+const ATTRS = ['shape','count','shade','size','rot','pos'];
+const ATTR_KIND = { shape:'cat', count:'ord', shade:'ord', size:'ord', rot:'cyc', pos:'cyc' };
+const ATTR_D = { shape:12, count:5, shade:4, size:3, rot:8, pos:8 };
+const ATTR_LABEL = { shape:'Forma', count:'Número de figuras', shade:'Sombreado', size:'Tamaño', rot:'Rotación', pos:'Posición' };
+const SHAPE_ES = ['círculo','cuadrado','triángulo','rombo','pentágono','estrella','cruz','hexágono','flecha','ele','semicírculo','triángulo rectángulo'];
+const SHAPE_ES_PL = ['círculos','cuadrados','triángulos','rombos','pentágonos','estrellas','cruces','hexágonos','flechas','eles','semicírculos','triángulos rectángulos'];
+const DIRW = { row:'fila', column:'columna' };
+const SHADE_NAMES = ['blanco','rayado','gris','negro'];
+const SIZE_NAMES = ['pequeño','mediano','grande'];
+function valName(a, v){
+  if (a === 'shape') return SHAPE_ES[v];
+  if (a === 'count') return String(v + 1);
+  if (a === 'shade') return SHADE_NAMES[v];
+  if (a === 'size') return SIZE_NAMES[v];
+  if (a === 'rot') return (v * 45) + ' grados';
+  if (a === 'pos') return 'posición ' + (v + 1);
+  return String(v);
+}
+function mkCell(o){ return { t:'a', shape:o.shape, count:o.count, shade:o.shade, size:o.size, rot:o.rot, pos:o.pos }; }
+function sig(c){
+  if (c === null || c === undefined) return '?';
+  if (c.t === 'l') return 'l' + c.slots.map(function(x){ return x ? 1 : 0; }).join('');
+  return 'a' + [c.shape, c.count, c.shade, c.size, c.rot, c.pos].join(',');
+}
+function hamming(c1, c2){ let n = 0; ATTRS.forEach(function(a){ if (c1[a] !== c2[a]) n++; }); return n; }
+
+/* Context: which attributes are "alive" in an item, and the fixed values of the rest. */
+function makeCtx(chosen){
+  const hasPos = chosen.indexOf('pos') >= 0, hasRot = chosen.indexOf('rot') >= 0;
+  const active = hasPos ? ['shape','shade','pos'] : ['shape','count','shade','size'];
+  if (hasRot) active.push('rot');
+  const fixed = { count:0, size:(hasPos ? 2 : 1), rot:0, pos:-1 };
+  if (hasPos){ fixed.count = 0; fixed.size = 2; }
+  return { active: active, fixed: fixed, shapeDom: hasRot ? ASYM_IDX : ALL_SHAPES };
+}
+function domainOf(ctx, a){ return a === 'shape' ? ctx.shapeDom : range(ATTR_D[a]); }
+function cellFrom(ctx, vals){
+  const o = {};
+  ATTRS.forEach(function(a){ o[a] = (vals[a] !== undefined && ctx.active.indexOf(a) >= 0) ? vals[a] : ctx.fixed[a]; });
+  return mkCell(o);
+}
+// count and size conflict with position (a lone small shape moves round the cell)
+function pickAttrs(rng, pool, n){
+  const order = rng.shuffle(pool);
+  const out = [];
+  for (let i = 0; i < order.length && out.length < n; i++){
+    const a = order[i];
+    const hasPos = out.indexOf('pos') >= 0;
+    if (a === 'pos' && (out.indexOf('count') >= 0 || out.indexOf('size') >= 0)) continue;
+    if ((a === 'count' || a === 'size') && hasPos) continue;
+    out.push(a);
+  }
+  return out.length === n ? out : null;
+}
+
+/* ---------- Levels (the ladder) ---------- */
+const LEVEL_NAMES = ['', 'Calentamiento', 'Fácil', 'Estable', 'Estándar', 'Competitivo', 'Difícil', 'Élite', 'Extremo', 'Sobrehumano', 'Imposible'];
+// prompt = seconds after which the 15-second style prompt appears; hard = automatic skip (0 = none)
+const TIMING = [null,
+  { prompt:40, hard:0 }, { prompt:30, hard:0 }, { prompt:24, hard:0 }, { prompt:18, hard:0 }, { prompt:15, hard:0 },
+  { prompt:13, hard:22 }, { prompt:11, hard:16 }, { prompt:9, hard:12 }, { prompt:7, hard:9 }, { prompt:5, hard:6 }];
+const HINT_MAX_LEVEL = 6;                 // hints are unavailable from level 7 up
+const PASS_ACCURACY = 96;                 // the anti-acceleration threshold
+function levelStatement(l){
+  if (l <= 2) return 'El nivel ' + l + ' es de aprendizaje, muy por debajo del examen. Úsalo para ver las reglas, no para medirte.';
+  if (l <= 4) return 'El nivel ' + l + ' está por debajo del objetivo. Nivel 5 = objetivo de la Fase 2; sigue hasta que el 96 % te resulte fácil.';
+  if (l === 5) return 'Nivel 5 = objetivo de la Fase 2 (lo que debe dominar un candidato bien preparado).';
+  if (l === 6) return 'El nivel 6 está por encima del objetivo: margen cómodo sobre la mayoría de competidores.';
+  return 'El nivel ' + l + ' supera el de la competición (7+). Es entrenamiento de estrés: no te juzgues por su precisión.';
+}
+const MATRIX_P = [null,
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1'],                                   opts:4,  transp:0,  close:0 },
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1','dist3'],                           opts:5,  transp:0,  close:0 },
+  { nVar:2, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1','dist3'],                           opts:6,  transp:.4, close:.1 },
+  { nVar:2, attrs:['shade','size','count','shape','rot'],          rules:['rowconst','prog1','prog2','dist3'],                   opts:6,  transp:.5, close:.2 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['rowconst','prog1','prog2','dist3','arith'],           opts:8,  transp:.5, close:.35 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['rowconst','prog1','prog2','prog3','dist3','arith'],   opts:8,  transp:.5, close:.5 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','prog3','dist3','arith'],              opts:8,  transp:.5, close:.65 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:9,  transp:.5, close:.8 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:10, transp:.5, close:.95 },
+  { nVar:5, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:10, transp:.5, close:1 }];
+const SERIES_P = [null,
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['prog1','alt2'],                          opts:4,  close:0 },
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['prog1','alt2','cyc3'],                   opts:5,  close:0 },
+  { nVar:2, attrs:['shade','size','count','shape'],                rules:['prog1','alt2','cyc3'],                   opts:6,  close:.1 },
+  { nVar:2, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','alt2','cyc3'],           opts:6,  close:.2 },
+  { nVar:2, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','alt2','cyc3','lag2'],    opts:8,  close:.35 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','alt2','cyc3','lag2','bounce'], opts:8, close:.5 },
+  { nVar:3, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:8,  close:.65 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:9,  close:.8 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:10, close:.95 },
+  { nVar:5, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:10, close:1 }];
+const ANALOGY_P = [null,
+  { changes:1, maxD:1, attrs:['shade','size','count'],                opts:4,  close:0 },
+  { changes:1, maxD:1, attrs:['shade','size','count','rot'],          opts:5,  close:0 },
+  { changes:2, maxD:1, attrs:['shade','size','count','rot'],          opts:6,  close:.1 },
+  { changes:2, maxD:1, attrs:['shade','size','count','rot','pos'],    opts:6,  close:.2 },
+  { changes:2, maxD:2, attrs:['shade','size','count','rot','pos'],    opts:8,  close:.35 },
+  { changes:3, maxD:2, attrs:['shade','size','count','rot'],          opts:8,  close:.5 },
+  { changes:3, maxD:2, attrs:['shade','size','count','rot'],          opts:8,  close:.65 },
+  { changes:3, maxD:3, attrs:['shade','size','count','rot'],          opts:9,  close:.8 },
+  { changes:4, maxD:3, attrs:['shade','size','count','rot'],          opts:10, close:.95 },
+  { changes:4, maxD:4, attrs:['shade','size','count','rot'],          opts:10, close:1 }];
+const ODD_P = [null,
+  { n:5, cons:['v'],           near:false, rot:false },
+  { n:5, cons:['v'],           near:false, rot:false },
+  { n:6, cons:['v'],           near:true,  rot:false },
+  { n:6, cons:['v','v'],       near:true,  rot:false },
+  { n:6, cons:['r'],           near:false, rot:false },
+  { n:6, cons:['r','v'],       near:false, rot:false },
+  { n:7, cons:['r'],           near:true,  rot:false },
+  { n:7, cons:['r','v'],       near:true,  rot:true },
+  { n:8, cons:['r','v'],       near:true,  rot:true },
+  { n:8, cons:['r','v','v'],   near:true,  rot:true }];
+const LOGIC_OPS = ['or','and','xor','andnot','notand','xnor'];
+const OP_FN = {
+  or:     function(a, b){ return a || b; },
+  and:    function(a, b){ return a && b; },
+  xor:    function(a, b){ return a !== b; },
+  andnot: function(a, b){ return a && !b; },
+  notand: function(a, b){ return !a && b; },
+  xnor:   function(a, b){ return a === b; }
+};
+const OP_TEXT = {
+  or:     'OR (O): hay marca si está en la primera celda, en la segunda o en ambas',
+  and:    'AND (Y): hay marca solo si está en AMBAS de las dos primeras celdas',
+  xor:    'XOR (O exclusivo): hay marca si está en exactamente UNA de las dos primeras celdas (las marcas presentes en ambas se anulan)',
+  andnot: 'PRIMERA MENOS SEGUNDA: hay marca si está en la primera celda y NO en la segunda',
+  notand: 'SEGUNDA MENOS PRIMERA: hay marca si está en la segunda celda y NO en la primera',
+  xnor:   'XNOR: hay marca si está en las dos celdas o en ninguna (lo contrario de XOR)'
+};
+const OP_WEIGHT = { or:1, and:1, xor:2, andnot:2.5, notand:2.5, xnor:3 };
+const LOGIC_P = [null,
+  { N:4, groups:1, ops:['or','and'],                 opts:4 },
+  { N:4, groups:1, ops:['or','and','xor'],           opts:5 },
+  { N:6, groups:1, ops:['or','and','xor'],           opts:6 },
+  { N:6, groups:1, ops:['or','and','xor','andnot'],  opts:6 },
+  { N:9, groups:1, ops:['or','and','xor','andnot'],  opts:8 },
+  { N:9, groups:2, ops:['or','and','xor','andnot'],  opts:8 },
+  { N:9, groups:2, ops:LOGIC_OPS,                    opts:8 },
+  { N:9, groups:3, ops:['or','and','xor','andnot'],  opts:9 },
+  { N:9, groups:3, ops:LOGIC_OPS,                    opts:10 },
+  { N:9, groups:3, ops:LOGIC_OPS,                    opts:10 }];
+const KIND_LABEL = { matrix:'Matriz', logic:'Matriz lógica', series:'Serie de figuras', analogy:'Analogía', odd:'Intruso' };
+const KINDS = ['matrix','logic','series','analogy','odd'];
+const RULE_WEIGHT = { const:0, rowconst:1, prog1:1.5, prog2:2.2, prog3:2.6, dist3:2, arith:3, alt2:1, cyc3:2, lag2:3, bounce:3.5 };
+
+/* ---------- Rule descriptions ---------- */
+function stepText(a, s, wrap){
+  const n = Math.abs(s), w = wrap ? ' (vuelve al principio al llegar al final de la escala)' : '';
+  if (a === 'count') return (s > 0 ? 'gana ' : 'pierde ') + n + ' figura' + (n > 1 ? 's' : '') + w;
+  if (a === 'shade') return 'se hace ' + (s > 0 ? 'más oscuro' : 'más claro') + ' en ' + n + ' paso' + (n > 1 ? 's' : '') + w;
+  if (a === 'size')  return (s > 0 ? 'crece' : 'se reduce') + ' en ' + n + ' paso' + (n > 1 ? 's' : '') + w;
+  if (a === 'rot')   return 'gira ' + (n * 45) + ' grados en sentido ' + (s > 0 ? 'horario' : 'antihorario');
+  if (a === 'pos')   return 'avanza ' + n + (n > 1 ? ' posiciones' : ' posición') + (s > 0 ? ' en sentido horario' : ' en sentido antihorario') + ' por el borde de la celda';
+  return 'cambia';
+}
+function matrixRuleText(a, spec, g, dirWord){
+  const L = ATTR_LABEL[a], along = dirWord === 'row' ? 'a lo largo de cada fila' : 'hacia abajo en cada columna', dw = DIRW[dirWord];
+  const vals = function(x){ return valName(a, x); };
+  if (spec.type === 'const') return L + ': constante, igual en las nueve celdas (' + vals(g[0][0]) + ').';
+  if (spec.type === 'rowconst') return L + ': constante dentro de cada ' + dw + ' y distinta en cada ' + dw + '.';
+  if (spec.type === 'prog') return L + ': progresión. De una celda a la siguiente ' + along + ', ' + stepText(a, spec.s, false) + '.';
+  if (spec.type === 'dist3'){
+    const set = uniq([g[0][0], g[0][1], g[0][2], g[1][0], g[1][1], g[1][2]]).map(vals).join(', ');
+    return L + ': distribución de tres. Los tres valores (' + set + ') aparecen una vez en cada ' + dw + ', desplazados una posición de una ' + dw + ' a la siguiente.';
+  }
+  if (spec.type === 'arith') return L + ': aritmética. En cada ' + dw + ' la tercera celda tiene el número de la primera ' + (spec.op === 'add' ? 'MÁS' : 'MENOS') + ' el de la segunda.';
+  return L + ': ' + spec.type;
+}
+function seqRuleText(a, spec, seq){
+  const L = ATTR_LABEL[a], wrap = ATTR_KIND[a] !== 'cyc';
+  if (spec.type === 'const') return L + ': constante (' + valName(a, seq[0]) + ').';
+  if (spec.type === 'prog1' || spec.type === 'prog2' || spec.type === 'prog3') return L + ': progresión. En cada paso ' + stepText(a, spec.s, wrap) + '.';
+  if (spec.type === 'alt2') return L + ': alterna entre ' + valName(a, seq[0]) + ' y ' + valName(a, seq[1]) + '.';
+  if (spec.type === 'cyc3') return L + ': recorre tres valores (' + [0,1,2].map(function(i){ return valName(a, seq[i]); }).join(', ') + ') y se repite.';
+  if (spec.type === 'lag2'){
+    const de = spec.de, dO = spec.dO;
+    const t = function(d){ return d === 0 ? 'se mantiene igual' : stepText(a, d > (ATTR_D[a] / 2) ? d - ATTR_D[a] : d, wrap); };
+    return L + ': dos secuencias intercaladas. Figuras 1, 3, 5: en cada paso ' + t(de) + '; figuras 2, 4, 6: en cada paso ' + t(dO) + '.';
+  }
+  if (spec.type === 'bounce') return L + ': sube o baja un paso cada vez e invierte el sentido al llegar al final de la escala (rebote).';
+  return L + ': ' + spec.type;
+}
+
+/* ---------- Matrix: rule generation ---------- */
+function tierToSpec(rng, tier){
+  if (tier === 'rowconst') return { type:'rowconst' };
+  if (tier === 'dist3') return { type:'dist3' };
+  if (tier === 'arith') return { type:'arith', op: rng.pick(['add','sub']) };
+  if (tier === 'prog1') return { type:'prog', s: rng.pick([1, -1]) };
+  if (tier === 'prog2') return { type:'prog', s: rng.pick([2, -2]) };
+  if (tier === 'prog3') return { type:'prog', s: rng.pick([3, -3]) };
+  return { type:'const' };
+}
+function compatRule(a, tier){
+  const kind = ATTR_KIND[a];
+  if (a === 'shape') return tier === 'rowconst' || tier === 'dist3';
+  if (tier === 'arith') return a === 'count';
+  if (tier === 'prog3') return kind === 'cyc';
+  return true;
+}
+const ADD_TRIPLES = [[1,1,2],[1,2,3],[2,1,3],[2,2,4],[1,3,4],[3,1,4],[1,4,5],[4,1,5],[2,3,5],[3,2,5]];
+const SUB_TRIPLES = [[2,1,1],[3,1,2],[3,2,1],[4,1,3],[4,2,2],[4,3,1],[5,1,4],[5,2,3],[5,3,2],[5,4,1]];
+function genGrid(rng, a, spec, dom){
+  const D = ATTR_D[a], kind = ATTR_KIND[a];
+  if (spec.type === 'const') return fill3(rng.pick(dom));
+  if (spec.type === 'rowconst'){
+    if (dom.length < 3) return null;
+    const v = rng.shuffle(dom).slice(0, 3);
+    return [[v[0], v[0], v[0]], [v[1], v[1], v[1]], [v[2], v[2], v[2]]];
+  }
+  if (spec.type === 'prog'){
+    const s = spec.s;
+    const starts = range(D).filter(function(x){ return kind === 'cyc' || (x + 2 * s >= 0 && x + 2 * s < D); });
+    if (!starts.length) return null;
+    const sh = rng.shuffle(starts), rows = [];
+    for (let r = 0; r < 3; r++){
+      const x = sh[r % sh.length];
+      rows.push(kind === 'cyc' ? [x, mod(x + s, D), mod(x + 2 * s, D)] : [x, x + s, x + 2 * s]);
+    }
+    return rows;
+  }
+  if (spec.type === 'dist3'){
+    if (dom.length < 3) return null;
+    const t = rng.shuffle(dom).slice(0, 3), k = rng.pick([1, 2]), rows = [];
+    for (let r = 0; r < 3; r++) rows.push([t[mod(0 + r * k, 3)], t[mod(1 + r * k, 3)], t[mod(2 + r * k, 3)]]);
+    return rows;
+  }
+  if (spec.type === 'arith'){
+    const tr = rng.shuffle(spec.op === 'add' ? ADD_TRIPLES : SUB_TRIPLES).slice(0, 3);
+    return tr.map(function(t){ return [t[0] - 1, t[1] - 1, t[2] - 1]; });
+  }
+  return null;
+}
+
+/* ---------- Matrix: independent solver ---------- */
+// g: 3x3 grid of attribute values with g[2][2] === null. Lines are rows. Returns every prediction
+// of the hypotheses in the catalogue that fit the eight visible cells.
+function lineHyps(g, a){
+  const kind = ATTR_KIND[a], D = ATTR_D[a], preds = [];
+  const l0 = g[0], l1 = g[1], l2 = g[2];
+  const eq3 = function(l){ return l[0] === l[1] && l[1] === l[2]; };
+  if (eq3(l0) && eq3(l1) && l0[0] === l1[0] && l2[0] === l0[0] && l2[1] === l0[0]) preds.push({ n:'const', p:l0[0] });
+  if (eq3(l0) && eq3(l1) && l2[0] === l2[1]) preds.push({ n:'rowconst', p:l2[0] });
+  if (kind !== 'cat'){
+    const steps = kind === 'cyc' ? [1, -1, 2, -2, 3, -3] : [1, -1, 2, -2];
+    steps.forEach(function(s){
+      const ok = function(l){
+        return kind === 'cyc' ? (mod(l[1] - l[0], D) === mod(s, D) && mod(l[2] - l[1], D) === mod(s, D)) : (l[1] - l[0] === s && l[2] - l[1] === s);
+      };
+      if (ok(l0) && ok(l1)){
+        const fits = kind === 'cyc' ? mod(l2[1] - l2[0], D) === mod(s, D) : l2[1] - l2[0] === s;
+        if (fits){
+          const p = kind === 'cyc' ? mod(l2[1] + s, D) : l2[1] + s;
+          if (kind === 'cyc' || (p >= 0 && p < D)) preds.push({ n:'prog' + s, p:p });
+        }
+      }
+    });
+  }
+  const d3 = function(l){ return l[0] !== l[1] && l[1] !== l[2] && l[0] !== l[2]; };
+  const sameSet = function(x, y){ return x.every(function(v){ return y.indexOf(v) >= 0; }); };
+  if (d3(l0) && d3(l1) && sameSet(l0, l1) && l2[0] !== l2[1] && l0.indexOf(l2[0]) >= 0 && l0.indexOf(l2[1]) >= 0){
+    preds.push({ n:'dist3', p: l0.filter(function(v){ return v !== l2[0] && v !== l2[1]; })[0] });
+  }
+  if (a === 'count'){
+    const addOk = function(l){ return (l[0] + 1) + (l[1] + 1) === l[2] + 1; };
+    const subOk = function(l){ return (l[0] + 1) - (l[1] + 1) === l[2] + 1; };
+    if (addOk(l0) && addOk(l1)){ const p = (l2[0] + 1) + (l2[1] + 1) - 1; if (p < D) preds.push({ n:'add', p:p }); }
+    if (subOk(l0) && subOk(l1)){ const p = (l2[0] + 1) - (l2[1] + 1) - 1; if (p >= 0) preds.push({ n:'sub', p:p }); }
+  }
+  return preds;
+}
+function solveMatrix(cells, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    const g = [[0,0,0],[0,0,0],[0,0,null]];
+    for (let i = 0; i < 8; i++) g[Math.floor(i / 3)][i % 3] = cells[i][a];
+    const preds = lineHyps(g, a).concat(lineHyps(transpose3(g), a));
+    const set = uniq(preds.map(function(h){ return h.p; }));
+    if (set.length === 0) return { ok:false, why:'no rule fits attribute ' + a };
+    if (set.length > 1) return { ok:false, why:'ambiguous attribute ' + a };
+    vals[a] = set[0];
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+
+/* ---------- Distractors ---------- */
+function cycDist(a, x, y){ const D = ATTR_D[a]; const d = Math.abs(x - y); return ATTR_KIND[a] === 'cyc' ? Math.min(d, D - d) : d; }
+// Builds nOpts options: the answer plus distractors that each differ from it in exactly ONE attribute
+// (one broken rule). hints[a] = preferred wrong values (values that appear nearby, or the step before/after).
+function buildOptions(rng, answer, ctx, nOpts, hints, closeP, varying){
+  const per = {};
+  ctx.active.forEach(function(a){
+    const dom = domainOf(ctx, a).filter(function(v){ return v !== answer[a]; });
+    const pref = uniq((hints[a] || []).filter(function(v){ return dom.indexOf(v) >= 0; }));
+    let rest = dom.filter(function(v){ return pref.indexOf(v) < 0; });
+    if (ATTR_KIND[a] !== 'cat' && rng.chance(closeP)){
+      rest = rng.shuffle(rest).sort(function(x, y){ return cycDist(a, x, answer[a]) - cycDist(a, y, answer[a]); });
+    } else rest = rng.shuffle(rest);
+    let order = pref.concat(rest);
+    if (ATTR_KIND[a] !== 'cat' && closeP >= 0.5 && rng.chance(closeP)){
+      order = order.slice().sort(function(x, y){ return cycDist(a, x, answer[a]) - cycDist(a, y, answer[a]); });
+    }
+    per[a] = { vals: order, i: 0 };
+  });
+  const vary = ctx.active.filter(function(a){ return varying.indexOf(a) >= 0; });
+  const rest = ctx.active.filter(function(a){ return varying.indexOf(a) < 0; });
+  const attrOrder = rng.shuffle(vary).concat(rng.shuffle(rest));
+  const opts = [{ cell: answer, attr: null, from: null, to: null }];
+  const seen = {}; seen[sig(answer)] = 1;
+  let progress = true;
+  while (opts.length < nOpts && progress){
+    progress = false;
+    for (let k = 0; k < attrOrder.length && opts.length < nOpts; k++){
+      const a = attrOrder[k], p = per[a];
+      while (p.i < p.vals.length){
+        const v = p.vals[p.i++];
+        const cell = Object.assign({}, answer); cell[a] = v;
+        if (!seen[sig(cell)]){ seen[sig(cell)] = 1; opts.push({ cell: cell, attr: a, from: answer[a], to: v }); progress = true; break; }
+      }
+    }
+  }
+  if (opts.length < nOpts) return null;
+  const shuffled = rng.shuffle(opts);
+  return { options: shuffled.map(function(o){ return o.cell; }), notes: shuffled.map(function(o){ return o.attr === null ? null : { attr:o.attr, from:o.from, to:o.to }; }), answer: shuffled.findIndex(function(o){ return o.attr === null; }) };
+}
+function noteText(n, kindWord){
+  if (!n) return '';
+  return 'Difiere de la figura correcta solo en ' + (ATTR_LABEL[n.attr].toLowerCase()) + ': muestra ' + valName(n.attr, n.to) + ' donde ' + (kindWord === 'analogy' ? 'la analogía' : 'la regla') + ' exige ' + valName(n.attr, n.from) + '.';
+}
+
+/* ---------- Hints ---------- */
+function makeHints(kind, varying, typeTexts, rulesText, answerLetterFn){
+  const names = varying.map(function(a){ return ATTR_LABEL[a].toLowerCase(); }).join(', ');
+  let h1, h2;
+  const nv = varying.length, chg = nv === 1 ? '1 atributo cambia' : nv + ' atributos cambian';
+  if (kind === 'matrix') h1 = chg + ' entre las figuras: ' + names + '. Ignora el resto, que nunca cambia.';
+  else if (kind === 'series') h1 = chg + ' a lo largo de la serie: ' + names + '. Sigue cada uno por separado.';
+  else if (kind === 'analogy') h1 = 'El cambio de A a B afecta a: ' + names + '. Todo lo demás se mantiene.';
+  else if (kind === 'odd') h1 = 'La figura distinta rompe una regla sobre: ' + names + '. Compara esos atributos en todas las figuras.';
+  else h1 = 'Toma las dos primeras celdas de una fila (o columna) y mira qué marcas aparecen en la tercera. Hazlo marca por marca.';
+  if (kind === 'matrix') h2 = 'Método: toma un atributo cada vez y léelo a lo largo de las filas y hacia abajo en las columnas. Tipo de regla por atributo: ' + typeTexts.join('; ') + '.';
+  else if (kind === 'series') h2 = 'Método: escribe el valor de un atributo para cada figura y busca un paso constante, una alternancia, un ciclo de tres o dos secuencias intercaladas. Tipos de regla: ' + typeTexts.join('; ') + '.';
+  else if (kind === 'analogy') h2 = 'Método: describe de A a B una lista de cambios (cada atributo: igual, o un paso arriba/abajo) y aplica exactamente la misma lista a C. Tipos de cambio: ' + typeTexts.join('; ') + '.';
+  else if (kind === 'odd') h2 = 'Método: para cada atributo pregúntate si todas las figuras menos una comparten un valor o una relación. Tipos de regla: ' + typeTexts.join('; ') + '.';
+  else h2 = 'Método: deduce el operador lógico con las filas 1 y 2 y aplícalo marca por marca a la fila 3. Tipo: ' + typeTexts.join('; ') + '.';
+  return [h1, h2, 'Solución paso a paso:\n' + rulesText.join('\n') + '\nLa figura correcta es la opción ' + answerLetterFn() + '.'];
+}
+
+/* ---------- Matrix builder ---------- */
+function buildMatrix(rng, level, ov){
+  const P = MATRIX_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const chosen = pickAttrs(rng, P.attrs, P.nVar);
+  if (!chosen) return null;
+  const ctx = makeCtx(chosen);
+  const grids = {}, specs = {}, tiersUsed = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    if (chosen.indexOf(a) >= 0){
+      const tiers = rng.shuffle(P.rules.filter(function(t){ return compatRule(a, t); }));
+      let done = false;
+      for (let j = 0; j < tiers.length && !done; j++){
+        const spec = tierToSpec(rng, tiers[j]);
+        const g = genGrid(rng, a, spec, domainOf(ctx, a));
+        if (g){ grids[a] = g; specs[a] = spec; tiersUsed[a] = tiers[j]; done = true; }
+      }
+      if (!done) return null;
+    } else { grids[a] = fill3(rng.pick(domainOf(ctx, a))); specs[a] = { type:'const' }; tiersUsed[a] = 'const'; }
+  }
+  const transposed = rng.chance(P.transp);
+  const cells = [];
+  for (let i = 0; i < 9; i++){
+    const r = Math.floor(i / 3), c = i % 3, vals = {};
+    ctx.active.forEach(function(a){ vals[a] = transposed ? grids[a][c][r] : grids[a][r][c]; });
+    cells.push(cellFrom(ctx, vals));
+  }
+  const answer = cells[8];
+  const prompt = cells.slice(0, 8).concat([null]);
+  const hints = {};
+  chosen.forEach(function(a){
+    const h = [];
+    [cells[6], cells[7], cells[2], cells[5]].forEach(function(x){ h.push(x[a]); });
+    if (ATTR_KIND[a] !== 'cat'){ h.push(answer[a] + 1, answer[a] - 1); if (ATTR_KIND[a] === 'cyc'){ h.push(mod(answer[a] + 2, ATTR_D[a]), mod(answer[a] - 2, ATTR_D[a])); } }
+    hints[a] = h.map(function(v){ return ATTR_KIND[a] === 'cyc' ? mod(v, ATTR_D[a]) : v; });
+  });
+  const built = buildOptions(rng, answer, ctx, nOpts, hints, P.close, chosen);
+  if (!built) return null;
+  const dirWord = transposed ? 'column' : 'row';
+  const rules = ctx.active.map(function(a){ return matrixRuleText(a, specs[a], grids[a], dirWord); });
+  let score = 0;
+  chosen.forEach(function(a){ score += RULE_WEIGHT[tiersUsed[a]] || 1; });
+  score += nOpts * 0.3 + P.close * 2;
+  const typeTexts = chosen.map(function(a){ return ATTR_LABEL[a].toLowerCase() + ' = ' + ruleKindName(specs[a]); });
+  const item = { kind:'matrix', level:level, prompt:prompt, options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:chosen, dir:dirWord, score:score, nOpts:nOpts };
+  item.hints = makeHints('matrix', chosen, typeTexts, rules, function(){ return String(item.answer + 1); });
+  return item;
+}
+function ruleKindName(spec){
+  if (spec.type === 'prog') return 'progresión de paso ' + (spec.s > 0 ? '+' : '') + spec.s;
+  if (spec.type === 'rowconst') return 'constante por línea';
+  if (spec.type === 'dist3') return 'distribución de tres';
+  if (spec.type === 'arith') return spec.op === 'add' ? 'suma' : 'resta';
+  return spec.type;
+}
+
+/* ---------- Series ---------- */
+function seqHyps(v, a){
+  const kind = ATTR_KIND[a], D = ATTR_D[a], preds = [];
+  [1, 2, 3].forEach(function(p){
+    let ok = true;
+    for (let i = p; i < 5; i++) if (v[i] !== v[i - p]) ok = false;
+    if (ok) preds.push({ n:'period' + p, p: v[5 - p] });
+  });
+  if (kind !== 'cat'){
+    const d = mod(v[1] - v[0], D);
+    let ok = true;
+    for (let i = 1; i < 5; i++) if (mod(v[i] - v[i - 1], D) !== d) ok = false;
+    if (ok && d !== 0) preds.push({ n:'step', p: mod(v[4] + d, D) });
+    const de = mod(v[2] - v[0], D);
+    if (mod(v[4] - v[2], D) === de){
+      const dO = mod(v[3] - v[1], D);
+      preds.push({ n:'lag2', p: mod(v[3] + dO, D) });
+    }
+    if (kind === 'ord' && Math.abs(v[1] - v[0]) === 1){
+      let pos = v[0], dir = v[1] - v[0], ok2 = true;
+      for (let i = 1; i < 5 && ok2; i++){
+        let nx = pos + dir;
+        if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; }
+        if (nx !== v[i]) ok2 = false;
+        pos = nx;
+      }
+      if (ok2){ let nx = pos + dir; if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; } preds.push({ n:'bounce', p: nx }); }
+    }
+  }
+  return preds;
+}
+function solveSeries(cells, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    const v = cells.slice(0, 5).map(function(c){ return c[a]; });
+    const set = uniq(seqHyps(v, a).map(function(h){ return h.p; }));
+    if (set.length !== 1) return { ok:false, why: set.length ? 'ambiguous attribute ' + a : 'no rule fits attribute ' + a };
+    vals[a] = set[0];
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+function genSeq(rng, a, tier, dom){
+  const D = ATTR_D[a], kind = ATTR_KIND[a];
+  if (tier === 'const'){ const x = rng.pick(dom); return { seq:[x,x,x,x,x,x], spec:{ type:'const' } }; }
+  if (tier === 'prog1' || tier === 'prog2' || tier === 'prog3'){
+    if (a === 'shape') return null;
+    const n = tier === 'prog1' ? 1 : (tier === 'prog2' ? 2 : 3);
+    if (n > 1 && kind !== 'cyc' && D < 5) return null;
+    if (kind !== 'cyc' && n >= D - 1) return null;
+    const s = rng.pick([n, -n]), x = rng.int(D), seq = [];
+    for (let i = 0; i < 6; i++) seq.push(mod(x + s * i, D));
+    return { seq:seq, spec:{ type:tier, s:s } };
+  }
+  if (tier === 'alt2'){
+    if (dom.length < 2) return null;
+    const t = rng.shuffle(dom).slice(0, 2);
+    return { seq:[t[0],t[1],t[0],t[1],t[0],t[1]], spec:{ type:'alt2' } };
+  }
+  if (tier === 'cyc3'){
+    if (dom.length < 3) return null;
+    const t = rng.shuffle(dom).slice(0, 3);
+    return { seq:[t[0],t[1],t[2],t[0],t[1],t[2]], spec:{ type:'cyc3' } };
+  }
+  if (tier === 'lag2'){
+    if (a === 'shape') return null;
+    const de = rng.pick([1, 2, D - 1, D - 2]), dO = rng.pick([0, 1, D - 1]);
+    if (de === dO) return null;
+    const e0 = rng.int(D), o0 = rng.int(D), seq = [];
+    if (e0 === o0) return null;
+    for (let i = 0; i < 6; i++) seq.push(i % 2 === 0 ? mod(e0 + de * (i / 2), D) : mod(o0 + dO * ((i - 1) / 2), D));
+    return { seq:seq, spec:{ type:'lag2', de:de, dO:dO } };
+  }
+  if (tier === 'bounce'){
+    if (kind !== 'ord') return null;
+    let pos = rng.int(D), dir = rng.pick([1, -1]); const seq = [pos];
+    for (let i = 1; i < 6; i++){ let nx = pos + dir; if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; } seq.push(nx); pos = nx; }
+    return { seq:seq, spec:{ type:'bounce' } };
+  }
+  return null;
+}
+function buildSeries(rng, level, ov){
+  const P = SERIES_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const chosen = pickAttrs(rng, P.attrs, P.nVar);
+  if (!chosen) return null;
+  const ctx = makeCtx(chosen);
+  const seqs = {}, specs = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k], dom = domainOf(ctx, a);
+    if (chosen.indexOf(a) >= 0){
+      const tiers = rng.shuffle(P.rules);
+      let done = false;
+      for (let j = 0; j < tiers.length && !done; j++){
+        const r = genSeq(rng, a, tiers[j], dom);
+        if (r){ seqs[a] = r.seq; specs[a] = r.spec; done = true; }
+      }
+      if (!done) return null;
+    } else { const r = genSeq(rng, a, 'const', dom); seqs[a] = r.seq; specs[a] = r.spec; }
+  }
+  const cells = [];
+  for (let i = 0; i < 6; i++){ const vals = {}; ctx.active.forEach(function(a){ vals[a] = seqs[a][i]; }); cells.push(cellFrom(ctx, vals)); }
+  const answer = cells[5];
+  const hints = {};
+  chosen.forEach(function(a){
+    const h = [cells[4][a], cells[3][a], cells[2][a]];
+    if (ATTR_KIND[a] !== 'cat') h.push(mod(answer[a] + 1, ATTR_D[a]), mod(answer[a] - 1, ATTR_D[a]));
+    hints[a] = h;
+  });
+  const built = buildOptions(rng, answer, ctx, nOpts, hints, P.close, chosen);
+  if (!built) return null;
+  const rules = ctx.active.map(function(a){ return seqRuleText(a, specs[a], seqs[a]); });
+  let score = 0;
+  chosen.forEach(function(a){ score += RULE_WEIGHT[specs[a].type] || 1; });
+  score += nOpts * 0.3 + P.close * 2;
+  const typeTexts = chosen.map(function(a){ return ATTR_LABEL[a].toLowerCase() + ' = ' + ({ const:'constante', prog1:'progresión 1', prog2:'progresión 2', prog3:'progresión 3', alt2:'alternancia', cyc3:'ciclo de tres', lag2:'dos secuencias intercaladas', bounce:'rebote' })[specs[a].type] || specs[a].type; });
+  const item = { kind:'series', level:level, prompt:cells.slice(0, 5), options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:chosen, score:score, nOpts:nOpts };
+  item.hints = makeHints('series', chosen, typeTexts, rules, function(){ return String(item.answer + 1); });
+  return item;
+}
+
+/* ---------- Analogies ---------- */
+function solveAnalogy(A, B, C, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k], kind = ATTR_KIND[a], D = ATTR_D[a];
+    if (A[a] === B[a]) { vals[a] = C[a]; continue; }
+    if (kind === 'cat') return { ok:false, why:'shape changes cannot be transferred' };
+    const d = kind === 'cyc' ? mod(B[a] - A[a], D) : B[a] - A[a];
+    const p = kind === 'cyc' ? mod(C[a] + d, D) : C[a] + d;
+    if (kind !== 'cyc' && (p < 0 || p >= D)) return { ok:false, why:'change does not fit C' };
+    vals[a] = p;
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+function buildAnalogy(rng, level, ov){
+  const P = ANALOGY_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const changed = pickAttrs(rng, P.attrs, P.changes);
+  if (!changed) return null;
+  const ctx = makeCtx(changed);
+  const deltas = {};
+  const A = {}, B = {}, C = {}, Dd = {};
+  ctx.active.forEach(function(a){
+    const dom = domainOf(ctx, a), kind = ATTR_KIND[a], D = ATTR_D[a];
+    A[a] = rng.pick(dom); C[a] = rng.pick(dom);
+    if (a === 'shape'){ while (C[a] === A[a]) C[a] = rng.pick(dom); B[a] = A[a]; Dd[a] = C[a]; return; }
+    if (changed.indexOf(a) >= 0){
+      const mags = range(P.maxD).map(function(x){ return x + 1; });
+      let d = rng.pick(mags) * rng.pick([1, -1]);
+      if (kind === 'cyc' && Math.abs(d) >= 4) d = 3;
+      if (kind !== 'cyc'){
+        // A and C both need room for the same step
+        const okVals = dom.filter(function(x){ return x + d >= 0 && x + d < D; });
+        if (okVals.length < 2) { deltas[a] = null; return; }
+        A[a] = rng.pick(okVals); C[a] = rng.pick(okVals);
+        B[a] = A[a] + d; Dd[a] = C[a] + d;
+      } else { B[a] = mod(A[a] + d, D); Dd[a] = mod(C[a] + d, D); }
+      deltas[a] = d;
+    } else { B[a] = A[a]; Dd[a] = C[a]; }
+  });
+  for (let k = 0; k < changed.length; k++) if (deltas[changed[k]] === null || deltas[changed[k]] === undefined) return null;
+  const cA = cellFrom(ctx, A), cB = cellFrom(ctx, B), cC = cellFrom(ctx, C), cD = cellFrom(ctx, Dd);
+  if (sig(cA) === sig(cC)) return null;
+  const hints = {};
+  ctx.active.forEach(function(a){
+    const h = [cC[a]];
+    if (deltas[a] !== undefined && ATTR_KIND[a] !== 'cat'){
+      const d = deltas[a], D = ATTR_D[a];
+      h.push(cD[a] + d, cD[a] - d, cC[a] - d, cC[a] + 2 * d);
+    } else if (ATTR_KIND[a] !== 'cat'){ h.push(cD[a] + 1, cD[a] - 1); }
+    hints[a] = h.map(function(v){ return ATTR_KIND[a] === 'cyc' ? mod(v, ATTR_D[a]) : v; }).filter(function(v){ return ATTR_KIND[a] === 'cyc' || (v >= 0 && v < ATTR_D[a]); });
+  });
+  const built = buildOptions(rng, cD, ctx, nOpts, hints, P.close, changed);
+  if (!built) return null;
+  const rules = [];
+  changed.forEach(function(a){
+    const d = deltas[a];
+    rules.push(ATTR_LABEL[a] + ': de A a B ' + stepText(a, d, false) + '; aplica el mismo cambio a C.');
+  });
+  rules.push('Todo lo demás (' + ctx.active.filter(function(a){ return changed.indexOf(a) < 0; }).map(function(a){ return ATTR_LABEL[a].toLowerCase(); }).join(', ') + ') se queda como en C. La analogía es relativa: aplica el mismo paso, no el mismo valor absoluto.');
+  let score = 0;
+  changed.forEach(function(a){ score += 1.5 + Math.abs(deltas[a]) * 0.8; });
+  score += nOpts * 0.3 + P.close * 2;
+  const typeTexts = changed.map(function(a){ return ATTR_LABEL[a].toLowerCase() + ' cambia en ' + (deltas[a] > 0 ? '+' : '') + deltas[a]; });
+  const item = { kind:'analogy', level:level, prompt:[cA, cB, cC], options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:changed, score:score, nOpts:nOpts };
+  item.hints = makeHints('analogy', changed, typeTexts, rules, function(){ return String(item.answer + 1); });
+  return item;
+}
+
+/* ---------- Odd one out ---------- */
+const REL_PAIRS = [['count','shade'], ['count','size'], ['shade','size']];
+// Cells singled out by any rule of the catalogue: "all the others share value X" or "all the others keep the same difference between two ordinal attributes".
+function oddCandidates(cells, ctx){
+  const out = {}, n = cells.length;
+  const single = function(vals){
+    // returns index of the only cell whose value differs from the common value of all the others, or -1
+    for (let i = 0; i < n; i++){
+      const others = vals.filter(function(_, j){ return j !== i; });
+      if (others.every(function(x){ return x === others[0]; }) && vals[i] !== others[0]) return i;
+    }
+    return -1;
+  };
+  ctx.active.forEach(function(a){ const i = single(cells.map(function(c){ return c[a]; })); if (i >= 0) out['v:' + a] = i; });
+  REL_PAIRS.forEach(function(p){
+    if (ctx.active.indexOf(p[0]) < 0 || ctx.active.indexOf(p[1]) < 0) return;
+    const i = single(cells.map(function(c){ return c[p[0]] - c[p[1]]; })); if (i >= 0) out['r:' + p.join('-')] = i;
+    // a coincidental constant SUM of two ordinal indices is also a readable rule: an item where it points at another figure is ambiguous
+    const j = single(cells.map(function(c){ return c[p[0]] + c[p[1]]; })); if (j >= 0) out['s:' + p.join('+')] = j;
+  });
+  return out;
+}
+function solveOdd(cells, ctx){
+  const c = oddCandidates(cells, ctx);
+  const idxs = uniq(Object.keys(c).map(function(k){ return c[k]; }));
+  if (idxs.length !== 1) return { ok:false, why: idxs.length ? 'several odd figures' : 'no odd figure' };
+  return { ok:true, index: idxs[0], via: Object.keys(c) };
+}
+function buildOdd(rng, level, ov){
+  const P = ODD_P[level];
+  const n = (ov && ov.opts) ? Math.max(4, Math.min(ov.opts, 10)) : P.n;
+  const ctx = makeCtx(P.rot ? ['rot'] : []);
+  const cons = [];
+  let pool = ctx.active.slice();
+  const ordPool = ['count','shade','size'].filter(function(a){ return ctx.active.indexOf(a) >= 0; });
+  let ordLeft = ordPool.slice();
+  for (let k = 0; k < P.cons.length; k++){
+    if (P.cons[k] === 'v'){
+      const cand = rng.shuffle(pool.filter(function(a){ return true; }));
+      if (!cand.length) return null;
+      cons.push({ type:'v', a:cand[0] }); pool = pool.filter(function(a){ return a !== cand[0]; }); ordLeft = ordLeft.filter(function(a){ return a !== cand[0]; });
+    } else {
+      if (ordLeft.length < 2) return null;
+      const two = rng.shuffle(ordLeft).slice(0, 2);
+      const A = two[0], B = two[1];
+      const dA = ATTR_D[A], dB = ATTR_D[B];
+      const ks = [];
+      for (let d = -(dB - 1); d <= dA - 1; d++){
+        let cnt = 0; for (let b = 0; b < dB; b++){ if (b + d >= 0 && b + d < dA) cnt++; }
+        if (cnt >= 3) ks.push(d);
+      }
+      if (!ks.length) return null;
+      cons.push({ type:'r', a:A, b:B, k: rng.pick(ks) });
+      pool = pool.filter(function(x){ return x !== A && x !== B; }); ordLeft = ordLeft.filter(function(x){ return x !== A && x !== B; });
+    }
+  }
+  const oddIdx = rng.int(n), broken = rng.int(cons.length);
+  const cells = [];
+  const shared = {};
+  cons.forEach(function(c, i){ if (c.type === 'v') shared[i] = rng.pick(domainOf(ctx, c.a)); });
+  for (let i = 0; i < n; i++){
+    const vals = {};
+    ctx.active.forEach(function(a){ vals[a] = rng.pick(domainOf(ctx, a)); });
+    cons.forEach(function(c, ci){
+      const isBroken = i === oddIdx && ci === broken;
+      if (c.type === 'v'){
+        if (!isBroken) vals[c.a] = shared[ci];
+        else {
+          const dom = domainOf(ctx, c.a).filter(function(v){ return v !== shared[ci]; });
+          let pick = rng.pick(dom);
+          if (P.near && ATTR_KIND[c.a] !== 'cat'){ const near = dom.filter(function(v){ return cycDist(c.a, v, shared[ci]) === 1; }); if (near.length) pick = rng.pick(near); }
+          vals[c.a] = pick;
+        }
+      } else {
+        const bs = range(ATTR_D[c.b]).filter(function(b){ return b + c.k >= 0 && b + c.k < ATTR_D[c.a]; });
+        const b = rng.pick(bs);
+        vals[c.b] = b;
+        if (!isBroken) vals[c.a] = b + c.k;
+        else {
+          const wrong = range(ATTR_D[c.a]).filter(function(x){ return x !== b + c.k; });
+          let pick = rng.pick(wrong);
+          if (P.near){ const near = wrong.filter(function(x){ return Math.abs(x - (b + c.k)) === 1; }); if (near.length) pick = rng.pick(near); }
+          vals[c.a] = pick;
+        }
+      }
+    });
+    cells.push(cellFrom(ctx, vals));
+  }
+  const sigs = cells.map(sig);
+  if (uniq(sigs).length !== cells.length) return null;
+  const rules = [];
+  const oddLetter = String(oddIdx + 1);
+  cons.forEach(function(c, ci){
+    if (c.type === 'v') rules.push('Todas las figuras salvo la ' + oddLetter + ' tienen ' + ATTR_LABEL[c.a].toLowerCase() + ' = ' + valName(c.a, shared[ci]) + '.' + (ci === broken ? ' La figura ' + oddLetter + ' muestra ' + valName(c.a, cells[oddIdx][c.a]) + ' en su lugar. Esa es la regla que rompe.' : ''));
+    else rules.push('En todas las figuras salvo la ' + oddLetter + ', el índice de ' + ATTR_LABEL[c.a].toLowerCase() + ' menos el índice de ' + ATTR_LABEL[c.b].toLowerCase() + ' es siempre ' + c.k + ' (1 figura es el índice 0, negro es el índice 3, grande es el índice 2)' + (ci === broken ? '; la figura ' + oddLetter + ' tiene ' + (cells[oddIdx][c.a] - cells[oddIdx][c.b]) + ' ahí. Esa es la regla que rompe.' : '.'));
+  });
+  rules.push('Los demás atributos varían al azar y son irrelevantes.');
+  const notes = cells.map(function(c, i){ return i === oddIdx ? null : { text:'La figura ' + (i + 1) + ' cumple todas las reglas, así que no es la distinta.' }; });
+  let score = P.cons.length * 1.2 + n * 0.4 + (P.near ? 2 : 0) + P.cons.filter(function(t){ return t === 'r'; }).length * 3.5 + (P.rot ? 1 : 0);
+  const varyAttrs = uniq([].concat.apply([], cons.map(function(c){ return c.type === 'v' ? [c.a] : [c.a, c.b]; })));
+  const typeTexts = cons.map(function(c){ return c.type === 'v' ? 'todas menos una comparten ' + ATTR_LABEL[c.a].toLowerCase() : 'diferencia fija entre ' + ATTR_LABEL[c.a].toLowerCase() + ' y ' + ATTR_LABEL[c.b].toLowerCase(); });
+  const item = { kind:'odd', level:level, prompt:[], options:cells, answer:oddIdx, notes:notes, ctx:ctx, rules:rules, varying:varyAttrs, score:score, nOpts:n };
+  item.hints = makeHints('odd', varyAttrs, typeTexts, rules, function(){ return oddLetter; });
+  return item;
+}
+
+/* ---------- Logic matrices (XOR / AND / OR ...) ---------- */
+const GLYPH_SHAPES = [0, 1, 2, 3, 5, 7];
+function logicCell(slots, glyphs){ return { t:'l', slots:slots.slice(), glyphs:glyphs }; }
+function solveLogic(cells, groupsOf, nGroups){
+  // Hypotheses: (direction, one operator per glyph group). Prediction = 9th cell slots.
+  const N = cells[0].slots.length, preds = {};
+  let count = 0;
+  const combos = [];
+  const rec = function(i, cur){ if (i === nGroups){ combos.push(cur.slice()); return; } LOGIC_OPS.forEach(function(o){ cur.push(o); rec(i + 1, cur); cur.pop(); }); };
+  rec(0, []);
+  [false, true].forEach(function(tr){
+    const at = function(r, c){ return tr ? cells[c * 3 + r] : cells[r * 3 + c]; };
+    combos.forEach(function(ops){
+      let ok = true;
+      for (let r = 0; r < 2 && ok; r++){
+        for (let s = 0; s < N && ok; s++){
+          const f = OP_FN[ops[groupsOf[s]]];
+          if (f(at(r, 0).slots[s], at(r, 1).slots[s]) !== at(r, 2).slots[s]) ok = false;
+        }
+      }
+      // in the transposed reading, "row" r is column r
+      if (!ok) return;
+      const a = at(2, 0), b = at(2, 1), out = [];
+      for (let s = 0; s < N; s++) out.push(OP_FN[ops[groupsOf[s]]](a.slots[s], b.slots[s]));
+      preds[out.map(function(x){ return x ? 1 : 0; }).join('')] = out; count++;
+    });
+  });
+  const keys = Object.keys(preds);
+  if (keys.length !== 1) return { ok:false, why: keys.length ? 'ambiguous logic' : 'no logic fits' };
+  return { ok:true, slots: preds[keys[0]] };
+}
+function buildLogic(rng, level, ov){
+  const P = LOGIC_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const N = P.N, G = P.groups;
+  const shapes = rng.shuffle(GLYPH_SHAPES).slice(0, G);
+  const gl = [];
+  const groupsOf = [];
+  const order = rng.shuffle(range(N));
+  for (let i = 0; i < N; i++) groupsOf[order[i]] = i % G;
+  for (let s = 0; s < N; s++) gl.push({ shape: shapes[groupsOf[s]], shade: 3 });
+  const ops = rng.shuffle(P.ops).slice(0, G);
+  if (ops.length < G) return null;
+  const transposed = level >= 2 && rng.chance(0.5);
+  const grid = [[null,null,null],[null,null,null],[null,null,null]];
+  for (let r = 0; r < 3; r++){
+    const a = [], b = [], c = [];
+    for (let s = 0; s < N; s++){ a.push(rng.chance(0.5)); b.push(rng.chance(0.5)); c.push(OP_FN[ops[groupsOf[s]]](a[s], b[s])); }
+    const cnt = function(x){ return x.filter(Boolean).length; };
+    if (cnt(a) === 0 || cnt(b) === 0 || cnt(c) === 0) return null;
+    const same = function(x, y){ return x.every(function(v, i){ return v === y[i]; }); };
+    if (same(c, a) || same(c, b)) return null;
+    grid[r] = [logicCell(a, gl), logicCell(b, gl), logicCell(c, gl)];
+  }
+  const cells = [];
+  for (let i = 0; i < 9; i++){ const r = Math.floor(i / 3), c = i % 3; cells.push(transposed ? grid[c][r] : grid[r][c]); }
+  const answer = cells[8];
+  const prompt = cells.slice(0, 8).concat([null]);
+  // distractors: one group given the wrong operator, then single-slot toggles
+  const a3 = transposed ? grid[2][0] : grid[2][0], b3 = grid[2][1];
+  const cand = [];
+  const seen = {}; seen[sig(answer)] = 1;
+  const wrongOps = [];
+  for (let g = 0; g < G; g++){
+    LOGIC_OPS.forEach(function(o){
+      if (o === ops[g]) return;
+      const sl = answer.slots.slice();
+      for (let s = 0; s < N; s++) if (groupsOf[s] === g) sl[s] = OP_FN[o](a3.slots[s], b3.slots[s]);
+      wrongOps.push({ cell: logicCell(sl, gl), why: (G > 1 ? 'las marcas del grupo ' + (g + 1) + ' (' + SHAPE_ES_PL[shapes[g]] + ')' : 'las marcas') + ' se combinaron con ' + o.toUpperCase() + ' en vez de ' + ops[g].toUpperCase() });
+    });
+  }
+  const toggles = [];
+  for (let s = 0; s < N; s++){
+    const sl = answer.slots.slice(); sl[s] = !sl[s];
+    toggles.push({ cell: logicCell(sl, gl), why: 'la posición ' + (s + 1) + ' está ' + (sl[s] ? 'rellena y debería estar vacía' : 'vacía y debería estar rellena') });
+  }
+  const pool = rng.shuffle(wrongOps).slice(0, Math.ceil((nOpts - 1) / 2)).concat(rng.shuffle(toggles));
+  const opts = [{ cell: answer, why: null }];
+  pool.forEach(function(o){
+    if (opts.length >= nOpts) return;
+    const k = sig(o.cell);
+    if (seen[k]) return;
+    seen[k] = 1; opts.push(o);
+  });
+  if (opts.length < nOpts){
+    rng.shuffle(wrongOps).forEach(function(o){ if (opts.length >= nOpts) return; const k = sig(o.cell); if (!seen[k]){ seen[k] = 1; opts.push(o); } });
+  }
+  if (opts.length < nOpts) return null;
+  const sh = rng.shuffle(opts);
+  const dirWord = transposed ? 'column' : 'row';
+  const third = transposed ? 'la celda inferior de cada columna' : 'la celda de la derecha de cada fila';
+  const rules = [];
+  for (let g = 0; g < G; g++){
+    rules.push((G > 1 ? 'Grupo ' + (g + 1) + ' (' + SHAPE_ES_PL[shapes[g]] + '): ' : 'Todas las marcas: ') + OP_TEXT[ops[g]] + '. Lee ' + third + ' como el resultado de las dos primeras celdas de esa ' + DIRW[dirWord] + '.');
+  }
+  let score = 0;
+  ops.forEach(function(o){ score += OP_WEIGHT[o]; });
+  score += G * 1.5 + N * 0.3 + nOpts * 0.3 + (level >= 6 ? 1 : 0);
+  const typeTexts = ops.map(function(o) { return o.toUpperCase(); });
+  const item = { kind:'logic', level:level, prompt:prompt, options:sh.map(function(o){ return o.cell; }), answer:sh.findIndex(function(o){ return o.why === null; }),
+    notes: sh.map(function(o){ return o.why === null ? null : { text:'Esta opción difiere de la correcta porque ' + o.why + '.' }; }),
+    ctx:{ groupsOf:groupsOf, nGroups:G, N:N }, rules:rules, varying:[], score:score, nOpts:nOpts, dir:dirWord };
+  item.hints = makeHints('logic', [], typeTexts, rules, function(){ return String(item.answer + 1); });
+  return item;
+}
+
+/* ---------- Independent verification of any item ---------- */
+function verifyItem(it){
+  const sigs = it.options.map(sig);
+  if (uniq(sigs).length !== sigs.length) return { ok:false, why:'duplicate options' };
+  if (it.answer < 0 || it.answer >= it.options.length) return { ok:false, why:'bad answer index' };
+  if (it.kind === 'odd'){
+    const r = solveOdd(it.options, it.ctx);
+    if (!r.ok) return r;
+    return r.index === it.answer ? { ok:true } : { ok:false, why:'solver found another odd figure' };
+  }
+  let sol;
+  if (it.kind === 'matrix') sol = solveMatrix(it.prompt, it.ctx);
+  else if (it.kind === 'series') sol = solveSeries(it.prompt, it.ctx);
+  else if (it.kind === 'analogy') sol = solveAnalogy(it.prompt[0], it.prompt[1], it.prompt[2], it.ctx);
+  else if (it.kind === 'logic'){
+    const r = solveLogic(it.prompt, it.ctx.groupsOf, it.ctx.nGroups);
+    if (!r.ok) return r;
+    sol = { ok:true, cell: logicCell(r.slots, it.prompt[0].glyphs) };
+  }
+  if (!sol.ok) return sol;
+  const s = sig(sol.cell);
+  const hits = sigs.map(function(x, i){ return x === s ? i : -1; }).filter(function(i){ return i >= 0; });
+  if (hits.length !== 1) return { ok:false, why:'solver answer matches ' + hits.length + ' options' };
+  if (hits[0] !== it.answer) return { ok:false, why:'solver answer differs from the stored answer' };
+  if (it.kind !== 'logic'){
+    const ans = it.options[it.answer];
+    for (let i = 0; i < it.options.length; i++) if (i !== it.answer && hamming(it.options[i], ans) !== 1) return { ok:false, why:'a distractor differs by more than one rule' };
+  }
+  return { ok:true };
+}
+
+/* ---------- Item generation ---------- */
+const BUILDERS = { matrix:buildMatrix, series:buildSeries, analogy:buildAnalogy, odd:buildOdd, logic:buildLogic };
+function genItem(seed, kind, level, index, ov){
+  ov = ov ? Object.assign({}, ov) : {};
+  for (let att = 0; att < 600; att++){
+    if (att === 250 && ov.opts && ov.opts > 4) ov.opts--;       // custom option counts that cannot be met are relaxed deterministically
+    if (att === 400 && ov.opts && ov.opts > 4) ov.opts--;
+    const rng = makeRng(seed + '|' + index + '|' + kind + '|' + level + '|' + att);
+    let it = null;
+    try { it = BUILDERS[kind](rng, level, ov); } catch (e) { it = null; }
+    if (it && verifyItem(it).ok){
+      it.seed = seed; it.index = index; it.attempts = att + 1;
+      return it;
+    }
+  }
+  throw new Error('item generation failed for ' + kind + ' level ' + level);
+}
+const MIX_CYCLE = ['matrix','series','logic','analogy','odd','matrix','series','odd','analogy','matrix'];
+function kindFor(type, seed, index){
+  if (type !== 'mixed') return type;
+  const order = makeRng(seed + '|mixorder').shuffle(MIX_CYCLE);
+  return order[index % order.length];
+}
+
+/* ---------- Scoring, goals, recommendations, adaptive mode ---------- */
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function fmt(x, d){ if (x === null || x === undefined || isNaN(x)) return '-'; return Number(x).toFixed(d === undefined ? 1 : d); }
+// Returns true / false, or null if the text has no recognisable numeric goal.
+// Recognised: "96 %" (accuracy), "12 s" (seconds per item), "18 correct" / "18 aciertos" (correct answers).
+function parseGoal(text){
+  const t = String(text || '').replace(/\s+/g, ' ');
+  const num = function(x){ return parseFloat(x.replace(',', '.')); };
+  const g = { acc:null, sec:null, correct:null };
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/); if (mp) g.acc = num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-z])/i); if (ms) g.sec = num(ms[1]);
+  const ma = t.match(/(\d+)\s*(?:correct|hits|correctas|correcta|aciertos|acierto)/i); if (ma) g.correct = parseInt(ma[1], 10);
+  return (g.acc === null && g.sec === null && g.correct === null) ? null : g;
+}
+function evaluateGoal(text, r){
+  const g = parseGoal(text);
+  if (!g) return null;
+  let ok = true;
+  if (g.acc !== null) ok = ok && r.accuracy >= g.acc;
+  if (g.sec !== null && r.spi !== null) ok = ok && r.spi <= g.sec;
+  if (g.correct !== null) ok = ok && r.correct >= g.correct;
+  return ok;
+}
+// Anti-acceleration rule: never advise going faster or harder while accuracy is below 96 %.
+function recommend(accuracy, spi, level, promptSec){
+  if (accuracy < 60) return { action:'down', text:'Precisión baja. Baja un nivel (o activa las pistas) y reconstruye el método. No intentes ir más rápido.' };
+  if (accuracy < PASS_ACCURACY) return { action:'stay', text:'Precisión por debajo del ' + PASS_ACCURACY + ' %: NO subas la velocidad ni el nivel. Quédate aquí y ve más despacio hasta llegar al ' + PASS_ACCURACY + ' %; la velocidad viene después.' };
+  if (level >= 10) return { action:'stay', text:'Precisión igual o superior al ' + PASS_ACCURACY + ' % en el nivel máximo. Notable. Úsalo como prueba de estrés ocasional.' };
+  if (spi !== null && spi > promptSec) return { action:'stay', text:'Preciso, pero más lento que el límite de ' + promptSec + ' s de este nivel. Quédate aquí hasta que la media entre en el límite y entonces sube.' };
+  return { action:'up', text:'Precisión igual o superior al ' + PASS_ACCURACY + ' % y ritmo dentro del límite. Puedes subir un nivel.' };
+}
+// Adaptive mode: blocks of 5 items. 2 successful blocks in a row (>= 96 %) go up, 2 failed blocks (< 75 %) go down.
+const ADAPT = { block:5, upAfter:2, downAfter:2, failBelow:75 };
+function adaptiveStep(state, blockAccuracy){
+  const s = { level:state.level, ups:state.ups, downs:state.downs, moved:0 };
+  if (blockAccuracy >= PASS_ACCURACY){ s.ups++; s.downs = 0; }
+  else if (blockAccuracy < ADAPT.failBelow){ s.downs++; s.ups = 0; }
+  else { s.ups = 0; s.downs = 0; }
+  if (s.ups >= ADAPT.upAfter && s.level < 10){ s.level++; s.ups = 0; s.moved = 1; }
+  else if (s.downs >= ADAPT.downAfter && s.level > 1){ s.level--; s.downs = 0; s.moved = -1; }
+  return s;
+}
+function csvField(v){
+  const s = (v === null || v === undefined) ? '' : String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function dateES(iso){
+  const d = new Date(iso);
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+const CSV_HEADER = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
+function toCSV(sessions){
+  const rows = sessions.map(function(s){
+    return [dateES(s.ts), s.module, s.level, s.correct, s.wrong, s.blank,
+      (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
+      s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
+  });
+  return '﻿' + [CSV_HEADER.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+// Personal best per level: best pace among manual sessions at >= 96 % accuracy.
+function personalBest(sessions, level){
+  const ok = sessions.filter(function(s){ return s.mode === 'manual' && s.level === level && s.accuracy >= PASS_ACCURACY && s.spi !== null && s.spi !== undefined; });
+  if (!ok.length) return null;
+  return Math.min.apply(null, ok.map(function(s){ return s.spi; }));
+}
+function currentStreak(sessions){
+  let n = 0;
+  for (let i = sessions.length - 1; i >= 0; i--){ if (sessions[i].accuracy >= PASS_ACCURACY) n++; else break; }
+  return n;
+}
+// ---- Endurance ("thirds", wave 5 U1): identical copy in every ATC game; see coord/SCHEMA-thirds.md ----
+// results = [{ok, blank, sec, t}] (optional n/c/b give weighted counts, e.g. one d2 row or one n-back stimulus).
+// durationSec > 0: time thirds (group = min(2, floor(t*3/duration))); otherwise index thirds (min(2, floor(i*3/N))).
+// Fewer than 9 results: null. Returns [{n,c,b,s} x3]; wrong = n - c - b.
+function atcThirds(results, durationSec){
+  const N = results ? results.length : 0;
+  if (N < 9) return null;
+  const th = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  results.forEach(function(r, i){
+    const g = durationSec > 0 ? Math.max(0, Math.min(2, Math.floor((r.t || 0) * 3 / durationSec))) : Math.min(2, Math.floor(i * 3 / N));
+    th[g].n += r.n === undefined ? 1 : r.n;
+    th[g].c += r.c === undefined ? (r.ok ? 1 : 0) : r.c;
+    th[g].b += r.b === undefined ? (r.blank ? 1 : 0) : r.b;
+    th[g].s += r.sec || 0;
+  });
+  th.forEach(function(x){ x.s = Math.round(x.s * 100) / 100; });
+  return th;
+}
+// One result-screen line: accuracy per third and the fade (third 3 minus third 1); fade only when both thirds have n >= 8.
+function atcThirdsLine(th){
+  if (!th || th.length !== 3) return '';
+  const acc = function(x){ return x.n > 0 ? x.c / x.n * 100 : null; };
+  const a = th.map(acc);
+  const txt = a.map(function(v){ return v === null ? '—' : String(Math.round(v)); }).join(' / ');
+  let fade = ' (muy pocos ítems por tercio para estimar la caída)';
+  if (th[0].n >= 8 && th[2].n >= 8){
+    const f = Math.round(a[2]) - Math.round(a[0]);
+    fade = ' → caída ' + (f > 0 ? '+' : (f < 0 ? '−' : '')) + Math.abs(f) + ' pts';
+  }
+  return 'Precisión por tercios: ' + txt + ' %' + fade;
+}
+// ==== PURE LOGIC END ====
+</script>
+<script>
+'use strict';
+/* =====================================================================
+   RENDERING (SVG) AND USER INTERFACE
+   ===================================================================== */
+function f1(n){ return Math.round(n * 10) / 10; }
+function regPoly(n){ const p = []; for (let i = 0; i < n; i++){ const a = i * 2 * Math.PI / n; p.push([Math.sin(a), -Math.cos(a)]); } return p; }
+function starPts(){ const p = []; for (let i = 0; i < 10; i++){ const a = i * Math.PI / 5, r = i % 2 === 0 ? 1 : 0.45; p.push([r * Math.sin(a), -r * Math.cos(a)]); } return p; }
+const POLY = {
+  triangle:[[0,-1],[.87,.5],[-.87,.5]],
+  square:[[-.75,-.75],[.75,-.75],[.75,.75],[-.75,.75]],
+  diamond:[[0,-1],[.7,0],[0,1],[-.7,0]],
+  pentagon:regPoly(5), hexagon:regPoly(6), star:starPts(),
+  cross:[[-.3,-.9],[.3,-.9],[.3,-.3],[.9,-.3],[.9,.3],[.3,.3],[.3,.9],[-.3,.9],[-.3,.3],[-.9,.3],[-.9,-.3],[-.3,-.3]],
+  arrow:[[0,-1],[.8,0],[.35,0],[.35,.95],[-.35,.95],[-.35,0],[-.8,0]],
+  ell:[[-.6,-.8],[-.05,-.8],[-.05,.3],[.75,.3],[.75,.8],[-.6,.8]],
+  rtri:[[-.8,-.8],[-.8,.8],[.8,.8]]
+};
+const LAY = {
+  1:{ R:38, pts:[[0,0]] },
+  2:{ R:20, pts:[[-22,0],[22,0]] },
+  3:{ R:17, pts:[[0,-22],[-24,17],[24,17]] },
+  4:{ R:19, pts:[[-22,-22],[22,-22],[-22,22],[22,22]] },
+  5:{ R:15, pts:[[-27,-27],[27,-27],[-27,27],[27,27],[0,0]] }
+};
+const SIZE_SCALE = [0.55, 0.78, 1];
+const RING = [[-30,-30],[0,-30],[30,-30],[30,0],[30,30],[0,30],[-30,30],[-30,0]];
+let svgUid = 0;
+function shapeEl(shape, r, shade, rot, cx, cy, uid){
+  const fill = shade === 0 ? '#ffffff' : (shade === 1 ? 'url(#h' + uid + ')' : (shade === 2 ? '#9aa0a8' : '#222222'));
+  const st = ' fill="' + fill + '" stroke="#222" stroke-width="2.5" stroke-linejoin="round"';
+  const tf = ' transform="translate(' + f1(cx) + ' ' + f1(cy) + ')' + (rot ? ' rotate(' + (rot * 45) + ')' : '') + '"';
+  const name = SHAPES[shape];
+  if (name === 'circle') return '<circle r="' + f1(r) + '"' + st + tf + '/>';
+  if (name === 'halfdisc') return '<path d="M ' + f1(-r) + ' ' + f1(0.3 * r) + ' A ' + f1(r) + ' ' + f1(r) + ' 0 0 1 ' + f1(r) + ' ' + f1(0.3 * r) + ' Z"' + st + tf + '/>';
+  const sc = (name === 'ell' || name === 'rtri') ? 0.92 : 1;
+  return '<polygon points="' + POLY[name].map(function(p){ return f1(p[0] * r * sc) + ',' + f1(p[1] * r * sc); }).join(' ') + '"' + st + tf + '/>';
+}
+function attrBody(c, uid){
+  let out = '';
+  if (c.pos >= 0){
+    out += shapeEl(c.shape, 14, c.shade, c.rot, 50 + RING[c.pos][0], 50 + RING[c.pos][1], uid);
+    return out;
+  }
+  const lay = LAY[c.count + 1], r = lay.R * SIZE_SCALE[c.size];
+  lay.pts.forEach(function(p){ out += shapeEl(c.shape, r, c.shade, c.rot, 50 + p[0], 50 + p[1], uid); });
+  return out;
+}
+function logicBody(c, uid){
+  const N = c.slots.length;
+  let xs, ys, r;
+  if (N === 4){ xs = [30, 70]; ys = [30, 70]; r = 15; }
+  else if (N === 6){ xs = [22, 50, 78]; ys = [32, 68]; r = 11; }
+  else { xs = [22, 50, 78]; ys = [22, 50, 78]; r = 10; }
+  let out = '';
+  for (let s = 0; s < N; s++){
+    const cx = xs[s % xs.length], cy = ys[Math.floor(s / xs.length)];
+    if (c.slots[s]) out += shapeEl(c.glyphs[s].shape, r, c.glyphs[s].shade, 0, cx, cy, uid);
+    else out += '<circle cx="' + cx + '" cy="' + cy + '" r="1.6" fill="#c9c4b5"/>';
+  }
+  return out;
+}
+function cellSVG(c){
+  const uid = ++svgUid;
+  let body;
+  if (c === null) body = '<text x="50" y="68" text-anchor="middle" font-size="56" font-weight="700" fill="#777">?</text>';
+  else if (c.t === 'l') body = logicBody(c, uid);
+  else body = attrBody(c, uid);
+  return '<svg class="cell" viewBox="0 0 100 100" role="img" aria-label="figura"><defs><pattern id="h' + uid + '" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><line x1="0" y1="0" x2="0" y2="6" stroke="#222" stroke-width="2.2"/></pattern></defs><rect x="1" y="1" width="98" height="98" rx="2" fill="#fbfaf6" stroke="#8a8578"/>' + body + '</svg>';
+}
+
+/* ---------- Storage ---------- */
+const STORE_KEY = 'atc_matrices_v1';
+let mem = null, storeOk = true, onKey = null, S = null, tickId = null;
+function load(){
+  if (mem) return mem;
+  let d = null;
+  try { const r = localStorage.getItem(STORE_KEY); if (r) d = JSON.parse(r); } catch (e) { storeOk = false; }
+  if (!d || !Array.isArray(d.sessions)) d = { sessions:[], prefs:{} };
+  if (!d.prefs) d.prefs = {};
+  mem = d;
+  return d;
+}
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(mem)); return true; } catch (e) { storeOk = false; return false; } }
+function esc(s){ return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function $(id){ return document.getElementById(id); }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+const KIND_ICON = { matrix:'matrix', logic:'k-logic', series:'k-series', analogy:'k-analogy', odd:'k-odd' };
+const app = document.getElementById('app');
+function show(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function stopTick(){ if (tickId){ clearInterval(tickId); tickId = null; } }
+function clearAll(){ stopTick(); onKey = null; }
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+    e.preventDefault();
+    if (S && !S.done){ if (window.confirm('¿Abandonar la sesión?')){ S = null; clearAll(); menu(); } return; }
+    clearAll(); menu(); return;
+  }
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  // no accidental page scroll during a session (Space / arrows), except inside form fields
+  if (S && !S.done && (e.key === ' ' || e.key.indexOf('Arrow') === 0) && !/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) e.preventDefault();
+  if (onKey) onKey(e);
+});
+
+document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('#dualp')) dualPress(); });   // tap works like the K key
+
+/* ---------- Menu ---------- */
+// MODULE_LABEL stays English: it is the `module` string stored in the session record, parsed by the dashboard. Spanish only at display.
+const MODULE_LABEL = { mixed:'Abstract reasoning (mixed)', matrix:'Matrices', logic:'Logic matrices', series:'Figure series', analogy:'Analogies', odd:'Odd one out' };
+function moduleEs(m){
+  return String(m === null || m === undefined ? '' : m).replace('Abstract reasoning (mixed)', 'Razonamiento abstracto (mixto)').replace('Logic matrices', 'Matrices lógicas')
+    .replace('Figure series', 'Series de figuras').replace('Analogies', 'Analogías').replace('Odd one out', 'Intruso')
+    .replace('[adaptive]', '[adaptativo]').replace('[custom]', '[personalizado]');
+}
+function paramsEs(p){
+  return String(p === null || p === undefined ? '' : p).replace(/^seed /, 'semilla ').replace(/ items,/, ' ítems,').replace('hints<=', 'pistas<=').replace('dual task', 'doble tarea').replace(', limit ', ', límite ').replace(/ options$/, ' opciones');
+}
+function levelOptions(sel){
+  let h = '';
+  for (let l = 1; l <= 10; l++) h += '<option value="' + l + '"' + (l === sel ? ' selected' : '') + '>' + l + ' ' + LEVEL_NAMES[l] + ' · ' + TIMING[l].prompt + ' s</option>';
+  return h;
+}
+function menu(){
+  clearAll(); S = null;
+  const d = load(), p = d.prefs, fresh = !d.sessions.length && p.level === undefined;
+  const last = d.sessions.length ? d.sessions[d.sessions.length - 1] : null;
+  show(
+    '<div class="grid2"><div>' +
+    '<label class="lb" for="mode">Modo</label><select id="mode"><option value="manual">Manual</option><option value="adaptive">Adaptativo</option><option value="custom">Personalizado</option></select>' +
+    '<label class="lb" for="type">Tipo</label><select id="type">' + ['mixed','matrix','logic','series','analogy','odd'].map(function(k){ return '<option value="' + k + '"' + (p.type === k ? ' selected' : '') + '>' + moduleEs(MODULE_LABEL[k]) + '</option>'; }).join('') + '</select>' +
+    '<div id="boxLevel"><label class="lb" for="level">Nivel</label><select id="level">' + levelOptions(p.level || (fresh ? 1 : 3)) + '</select></div>' +
+    '<label class="lb" for="hint">Pistas</label><select id="hint"><option value="0">No</option><option value="1">1 Empujón</option><option value="2">2 Método</option><option value="3">3 Solución</option></select>' +
+    '</div><div>' +
+    '<label class="lb" for="goal">Objetivo</label><input type="text" id="goal" value="' + esc(p.goal || (fresh ? '80 %' : '')) + '">' +
+    '<label class="lb" for="seed">Semilla</label><input type="text" id="seed" value="">' +
+    '<label class="lb inline"><input type="checkbox" id="dual"' + (p.dual ? ' checked' : '') + '>Doble tarea</label>' +
+    '</div></div>' +
+    '<div id="boxCustom" class="cust" style="display:none">' +
+    '<label class="lb" for="cLevel">Nivel <b id="vLevel"></b></label><input type="range" id="cLevel" min="1" max="10" value="' + (p.level || 5) + '">' +
+    '<label class="lb" for="cTime">Límite de tiempo, s <b id="vTime"></b></label><input type="range" id="cTime" min="3" max="60" value="' + (p.cTime || 15) + '">' +
+    '<label class="lb" for="cItems">Ítems <b id="vItems"></b></label><input type="range" id="cItems" min="5" max="60" step="5" value="' + (p.cItems || 20) + '">' +
+    '<label class="lb" for="cOpts">Opciones <b id="vOpts"></b></label><input type="range" id="cOpts" min="4" max="10" value="' + (p.cOpts || 6) + '">' +
+    '<label class="lb inline"><input type="checkbox" id="cHard"' + (p.cHard ? ' checked' : '') + '>Límite estricto</label></div>' +
+    '<div id="err"></div>' +
+    '<p class="row" style="margin-top:18px"><button class="btn primary" id="go">' + ic('play') + 'Empezar</button><button class="btn" id="hist">' + ic('history') + 'Historial <kbd>H</kbd></button></p>'
+  );
+  const modeSel = $('mode'); modeSel.value = p.mode || 'manual';
+  $('hint').value = String(p.hint !== undefined ? p.hint : (fresh ? 1 : 0));
+  const upd = function(){
+    $('boxLevel').style.display = modeSel.value === 'manual' ? '' : 'none';
+    $('boxCustom').style.display = modeSel.value === 'custom' ? '' : 'none';
+    $('vLevel').textContent = $('cLevel').value + ' ' + LEVEL_NAMES[+$('cLevel').value];
+    $('vTime').textContent = $('cTime').value; $('vItems').textContent = $('cItems').value; $('vOpts').textContent = $('cOpts').value;
+  };
+  ['mode','cLevel','cTime','cItems','cOpts'].forEach(function(id){ $(id).addEventListener('input', upd); $(id).addEventListener('change', upd); });
+  upd();
+  $('go').addEventListener('click', startFromMenu);
+  $('hist').addEventListener('click', showHistory);
+  onKey = function(e){
+    if (e.target.tagName === 'INPUT' && e.target.type === 'text'){ if (e.key === 'Enter'){ e.preventDefault(); startFromMenu(); } return; }
+    if (e.target.tagName === 'SELECT') return;
+    if (e.key === 'Enter'){ e.preventDefault(); startFromMenu(); }
+    else if (e.key === 'h' || e.key === 'H') showHistory();
+  };
+}
+function startFromMenu(){
+  const p = load().prefs;
+  const goal = $('goal').value.trim();
+  if (!parseGoal(goal)){ $('err').innerHTML = '<p class="bad">Falta el objetivo</p>'; $('goal').focus(); return; }
+  const mode = $('mode').value;
+  const cfg = { mode:mode, type:$('type').value, goal:goal, dual:$('dual').checked, hintMax:+$('hint').value,
+    seed: ($('seed').value.trim() || ('s' + Math.floor(Math.random() * 1e9).toString(36))), items:20 };
+  if (mode === 'manual') cfg.level = +$('level').value;
+  else if (mode === 'adaptive') cfg.level = 2;
+  else {
+    cfg.level = +$('cLevel').value; cfg.promptSec = +$('cTime').value; cfg.items = +$('cItems').value; cfg.opts = +$('cOpts').value; cfg.enforce = $('cHard').checked;
+  }
+  if (mode !== 'custom') cfg.items = 20;
+  if (cfg.level > HINT_MAX_LEVEL) cfg.hintMax = 0;
+  Object.assign(p, { mode:mode, type:cfg.type, goal:goal, dual:cfg.dual, hint:cfg.hintMax, level:mode === 'manual' ? cfg.level : p.level });
+  if (mode === 'custom') Object.assign(p, { level:cfg.level, cTime:cfg.promptSec, cItems:cfg.items, cOpts:cfg.opts, cHard:cfg.enforce });
+  save();
+  startSession(cfg);
+}
+
+/* ---------- Session ---------- */
+function timingFor(cfg, level){
+  if (cfg.mode === 'custom') return { prompt:cfg.promptSec, hard: cfg.enforce ? Math.round(cfg.promptSec * 1.5) : 0 };
+  return TIMING[level];
+}
+function startSession(cfg){
+  clearAll();
+  S = { cfg:cfg, idx:0, results:[], items:[], done:false, adapt:{ level:cfg.level, ups:0, downs:0 }, hintTier:0, prompted:false, t0:0, phase:'item',
+    dual:{ rng:makeRng(cfg.seed + '|dual'), next:0, until:0, hits:0, misses:0, falsePress:0, responded:false, on:false } };
+  S.dual.next = performance.now() + 5000 + S.dual.rng.int(5000);
+  tickId = setInterval(tick, 100);
+  nextItem();
+}
+function levelNow(){ return S.cfg.mode === 'adaptive' ? S.adapt.level : S.cfg.level; }
+function nextItem(){
+  const cfg = S.cfg, i = S.idx, level = levelNow();
+  const kind = kindFor(cfg.type, cfg.seed, i);
+  let item;
+  try { item = genItem(cfg.seed, kind, level, i, cfg.mode === 'custom' ? { opts:cfg.opts } : null); }
+  catch (e) { show('<p class="bad">' + esc(e.message) + '</p>'); return; }
+  item.playLevel = level;
+  S.items[i] = item; S.hintTier = 0; S.prompted = false; S.phase = 'item'; S.t0 = performance.now();
+  renderItem();
+}
+function optionLabel(i){ return String(i + 1); }
+function figuresHTML(item, mode, chosen){
+  let h = '';
+  if (item.kind === 'matrix' || item.kind === 'logic'){
+    h += '<div class="mat">' + item.prompt.map(function(c){ return '<div>' + cellSVG(c) + '</div>'; }).join('') + '</div>';
+  } else if (item.kind === 'series'){
+    h += '<div class="seq">' + item.prompt.map(function(c){ return '<div>' + cellSVG(c) + '</div>'; }).join('') + '<div>' + cellSVG(null) + '</div></div>';
+  } else if (item.kind === 'analogy'){
+    h += '<div class="ana"><div>' + cellSVG(item.prompt[0]) + '</div><div>' + cellSVG(item.prompt[1]) + '</div><div>' + cellSVG(item.prompt[2]) + '</div><div>' + cellSVG(null) + '</div></div>';
+  }
+  h += '<div class="opts" id="opts">' + item.options.map(function(c, i){
+    let cls = 'opt';
+    if (mode === 'review'){ if (i === item.answer) cls += ' right'; else if (i === chosen) cls += ' wrong'; }
+    return '<button class="' + cls + '" data-i="' + i + '"' + (mode === 'review' ? ' disabled' : '') + ' aria-label="Opción ' + optionLabel(i) + '"><span class="let">' + optionLabel(i) + '</span>' + cellSVG(c) + '</button>';
+  }).join('') + '</div>';
+  return h;
+}
+const INSTR = { matrix:'', logic:'', series:'', analogy:'A : B = C : ?', odd:'La figura distinta' };
+function dualHTML(){
+  if (!S.cfg.dual) return '';
+  return '<p class="soft small" id="dualp" style="cursor:pointer;min-height:40px;display:flex;align-items:center;gap:6px"><span class="lamp" id="lamp"></span> <kbd>K</kbd> <span id="dstat"></span></p>';
+}
+function headerHTML(item){
+  const done = S.results.length, correct = S.results.filter(function(r){ return r.ok; }).length;
+  return '<div class="head"><span><b>' + (S.idx + 1) + '</b> / ' + S.cfg.items + '</span><span>' + ic(KIND_ICON[item.kind]) + KIND_LABEL[item.kind] + '</span><span>N<b>' + item.playLevel + '</b> ' + LEVEL_NAMES[item.playLevel] + '</span>' +
+    '<span>' + ic('check') + '<b>' + correct + '</b> / ' + done + '</span><span class="timer" id="tm">0.0 s</span></div>' +
+    '<div class="bar"><div style="width:' + Math.round(done / S.cfg.items * 100) + '%"></div></div>' + dualHTML();
+}
+function hintAllowed(){ return S.cfg.hintMax > 0 && S.items[S.idx].playLevel <= HINT_MAX_LEVEL; }
+function renderItem(){
+  const item = S.items[S.idx];
+  show(headerHTML(item) + (INSTR[item.kind] ? '<p><b>' + INSTR[item.kind] + '</b></p>' : '') +
+    figuresHTML(item, 'play') +
+    '<div id="banner"></div>' +
+    '<p class="row"><button class="btn" id="skip">' + ic('skip') + 'Saltar <kbd>S</kbd></button>' + (hintAllowed() ? '<button class="btn" id="hintb">' + ic('hint') + 'Pista <kbd>H</kbd></button>' : '') + '</p>' +
+    '<div id="hintbox" class="hintbox"></div>');
+  $('opts').addEventListener('click', function(e){
+    const b = e.target.closest ? e.target.closest('button.opt') : null;
+    if (b) answer(+b.getAttribute('data-i'), 'pick');
+  });
+  $('skip').addEventListener('click', function(){ answer(-1, 'skip'); });
+  if ($('hintb')) $('hintb').addEventListener('click', giveHint);
+  onKey = function(e){
+    const k = e.key;
+    if (/^[0-9]$/.test(k)){ const i = k === '0' ? 9 : (+k - 1); if (i < item.options.length) answer(i, 'pick'); return; }
+    if (k === 's' || k === 'S') answer(-1, 'skip');
+    else if (k === 'h' || k === 'H') giveHint();
+    else if (k === 'g' || k === 'G'){ if (S.prompted) answer(S.dual.rng.int(item.options.length), 'guess'); }
+    else if (k === 'k' || k === 'K') dualPress();
+  };
+}
+function giveHint(){
+  if (!hintAllowed() || S.phase !== 'item') return;
+  const item = S.items[S.idx];
+  if (S.hintTier >= Math.min(3, S.cfg.hintMax)) return;
+  S.hintTier++;
+  let h = '';
+  for (let t = 0; t < S.hintTier; t++) h += '<p>' + esc(item.hints[t]).replace(/\n/g, '<br>') + '</p>';
+  $('hintbox').innerHTML = '<p><b>' + S.hintTier + ' / ' + Math.min(3, S.cfg.hintMax) + '</b>' + (S.hintTier === 3 ? ' · en blanco' : '') + '</p>' + h;
+  if (S.hintTier === 3){
+    const b = document.querySelectorAll('button.opt')[item.answer];
+    if (b) b.classList.add('hinted');
+  }
+}
+function tick(){
+  if (!S || S.done) return;
+  const now = performance.now();
+  if (S.phase === 'item'){
+    const item = S.items[S.idx], tm = timingFor(S.cfg, item.playLevel);
+    const el = now - S.t0, t = $('tm');
+    if (t){
+      t.textContent = fmt(el / 1000, 1) + ' s';
+      t.className = 'timer' + (el >= tm.prompt * 1000 ? (tm.hard && el >= tm.hard * 1000 * 0.85 ? ' over' : ' late') : '');
+    }
+    if (el >= tm.prompt * 1000 && !S.prompted){
+      S.prompted = true;
+      const bn = $('banner');
+      if (bn) bn.innerHTML = '<p class="warn"><b>' + tm.prompt + ' s</b> · <kbd>G</kbd> adivinar' + (tm.hard ? ' · se salta a los ' + tm.hard + ' s' : '') + '</p>';
+    }
+    if (tm.hard && el >= tm.hard * 1000) answer(-1, 'timeout');
+  }
+  // dual task lamp
+  if (S && S.cfg.dual){
+    const d = S.dual;
+    if (!d.on && now >= d.next){ d.on = true; d.responded = false; d.until = now + 2500; }
+    if (d.on && now >= d.until){ d.on = false; if (!d.responded) d.misses++; d.next = now + 6000 + d.rng.int(6000); }
+    const l = $('lamp'); if (l) l.className = 'lamp' + (d.on ? ' on' : '');
+    const s = $('dstat'); if (s) s.textContent = d.hits + ' / ' + d.misses;
+  }
+}
+function dualPress(){
+  if (!S || !S.cfg.dual) return;
+  const d = S.dual;
+  if (d.on && !d.responded){ d.responded = true; d.hits++; d.on = false; d.next = performance.now() + 6000 + d.rng.int(6000); }
+  else d.falsePress++;
+}
+function answer(i, how){
+  if (!S || S.phase !== 'item') return;
+  S.phase = 'feedback';
+  const item = S.items[S.idx], ms = performance.now() - S.t0;
+  const revealed = S.hintTier >= 3;
+  const blank = i < 0 || revealed;
+  const ok = !blank && i === item.answer;
+  S.results.push({ ok:ok, blank:blank, ms:ms, kind:item.kind, level:item.playLevel, chosen:i, how:how, hints:S.hintTier, guessed:how === 'guess', rule:item.rules[0], score:item.score });
+  renderFeedback(item, i, how, ok, revealed);
+}
+function renderFeedback(item, chosen, how, ok, revealed){
+  const r = S.results[S.results.length - 1];
+  let status;
+  if (revealed) status = '<p class="status warn"><b>En blanco</b></p>';
+  else if (how === 'timeout') status = '<p class="status warn"><b>Tiempo agotado</b></p>';
+  else if (chosen < 0) status = '<p class="status warn"><b>Saltada</b></p>';
+  else if (ok) status = '<p class="status good"><b>Correcta</b></p>';
+  else status = '<p class="status bad"><b>Fallo</b> · ' + optionLabel(item.answer) + '</p>';
+  let why = '';
+  if (chosen >= 0 && !ok && !revealed){
+    const n = item.notes[chosen];
+    if (n) why = '<p class="soft">' + optionLabel(chosen) + ': ' + esc(n.text || noteText(n, item.kind === 'analogy' ? 'analogy' : 'rule')) + '</p>';
+  }
+  let adapt = '';
+  const cfg = S.cfg;
+  const last = S.idx + 1 >= cfg.items;
+  if (cfg.mode === 'adaptive' && (S.idx + 1) % ADAPT.block === 0){
+    const blk = S.results.slice(-ADAPT.block);
+    const acc = blk.filter(function(x){ return x.ok; }).length / blk.length * 100;
+    const st = adaptiveStep(S.adapt, acc);
+    S.adapt = { level:st.level, ups:st.ups, downs:st.downs };
+    adapt = '<p><b>' + fmt(acc, 0) + ' %</b> · ' +
+      (st.moved > 0 ? 'sube a ' + st.level + ' ' + LEVEL_NAMES[st.level] : st.moved < 0 ? 'baja a ' + st.level + ' ' + LEVEL_NAMES[st.level] :
+       acc >= PASS_ACCURACY ? st.ups + ' / ' + ADAPT.upAfter : acc < ADAPT.failBelow ? st.downs + ' / ' + ADAPT.downAfter : 'se mantiene en ' + st.level) + '</p>';
+  }
+  show(headerHTML(item) + status +
+    figuresHTML(item, 'review', chosen) +
+    '<p class="row"><button class="btn primary" id="next">' + ic('next') + (last ? 'Resultados' : 'Siguiente') + '</button><span class="soft">' + fmt(r.ms / 1000, 1) + ' s</span></p>' +
+    '<ul class="rules">' + item.rules.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' + why + adapt);
+  const tm = $('tm'); if (tm) tm.textContent = fmt(r.ms / 1000, 1) + ' s';
+  const go = function(){ S.idx++; if (S.idx >= cfg.items) finish(); else nextItem(); };
+  $('next').addEventListener('click', go);
+  $('next').focus({ preventScroll:true });
+  onKey = function(e){
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); }
+    else if (e.key === 'k' || e.key === 'K') dualPress();
+  };
+}
+function finish(){
+  const cfg = S.cfg, res = S.results;
+  S.done = true; stopTick();
+  const correct = res.filter(function(r){ return r.ok; }).length, blank = res.filter(function(r){ return r.blank; }).length, wrong = res.length - correct - blank;
+  const accuracy = correct / res.length * 100;
+  const spi = res.reduce(function(a, r){ return a + r.ms; }, 0) / res.length / 1000;
+  const lv = cfg.mode === 'adaptive' ? Math.round(res.reduce(function(a, r){ return a + r.level; }, 0) / res.length) : cfg.level;
+  const met = evaluateGoal(cfg.goal, { accuracy:accuracy, spi:spi, correct:correct });
+  const d = load();
+  const timing = timingFor(cfg, lv);
+  const rec = recommend(accuracy, spi, lv, timing.prompt);
+  const before = d.sessions.slice();
+  const rec0 = {
+    ts: new Date().toISOString(), module: MODULE_LABEL[cfg.type] + (cfg.mode === 'manual' ? '' : ' [' + cfg.mode + ']'), level: lv, mode: cfg.mode,
+    correct:correct, wrong:wrong, blank:blank, spi:spi, accuracy:accuracy, goal:cfg.goal, met:met,
+    params: 'seed ' + cfg.seed + ', ' + cfg.items + ' items, hints<=' + cfg.hintMax + (cfg.dual ? ', dual task' : '') + (cfg.mode === 'custom' ? ', limit ' + cfg.promptSec + ' s, ' + cfg.opts + ' options' : ''),
+    thirds: atcThirds(res.map(function(r){ return { ok:r.ok, blank:r.blank, sec:r.ms / 1000 }; }), 0)
+  };
+  d.sessions.push(rec0); save();
+  const pbPrev = cfg.mode === 'manual' ? personalBest(before, lv) : null;
+  const newPB = cfg.mode === 'manual' && accuracy >= PASS_ACCURACY && (pbPrev === null || spi < pbPrev);
+  const streak = currentStreak(d.sessions);
+  // by kind
+  const kinds = {};
+  res.forEach(function(r){ const k = kinds[r.kind] = kinds[r.kind] || { n:0, ok:0, ms:0 }; k.n++; if (r.ok) k.ok++; k.ms += r.ms; });
+  const kindRows = Object.keys(kinds).map(function(k){ const x = kinds[k]; return '<tr><td>' + ic(KIND_ICON[k]) + KIND_LABEL[k] + '</td><td>' + x.n + '</td><td>' + x.ok + '</td><td>' + fmt(x.ok / x.n * 100, 0) + ' %</td><td>' + fmt(x.ms / x.n / 1000, 1) + ' s</td></tr>'; }).join('');
+  const itemRows = res.map(function(r, i){
+    return '<tr><td>' + (i + 1) + '</td><td>' + ic(KIND_ICON[r.kind]) + KIND_LABEL[r.kind] + '</td><td>' + r.level + '</td><td>' + (r.ok ? '<span class="good">correcta</span>' : (r.blank ? '<span class="warn">en blanco</span>' : '<span class="bad">fallo</span>')) + '</td><td>' + fmt(r.ms / 1000, 1) + ' s</td><td>' + (r.hints || '') + '</td></tr>';
+  }).join('');
+  const dual = cfg.dual ? '<div class="fig"><b>' + S.dual.hits + ' / ' + (S.dual.hits + S.dual.misses) + '</b><span>Lámpara</span></div>' : '';
+  show('<h1>' + esc(moduleEs(rec0.module)) + '</h1><p class="soft">N' + lv + ' ' + LEVEL_NAMES[lv] + (cfg.mode === 'adaptive' ? ' → ' + S.adapt.level : '') + ' · ' + esc(cfg.seed) + '</p>' +
+    '<div class="figs"><div class="fig"><b>' + fmt(accuracy, 1) + ' %</b><span>' + correct + ' / ' + wrong + ' / ' + blank + '</span></div>' +
+    '<div class="fig"><b>' + fmt(spi, 1) + ' s</b><span>por ítem</span></div>' +
+    '<div class="fig"><b>' + (met === true ? '<span class="good">Cumplido</span>' : (met === false ? '<span class="bad">No cumplido</span>' : '–')) + '</b><span>' + esc(cfg.goal) + '</span></div>' +
+    '<div class="fig"><b>' + streak + '</b><span>Racha</span></div>' + dual + '</div>' +
+    (newPB ? '<p class="good"><b>' + ic('check') + 'Récord</b> · ' + fmt(spi, 2) + ' s</p>' : '') +
+    (rec0.thirds ? '<p class="soft" id="thirdsLine">' + esc(atcThirdsLine(rec0.thirds)) + '</p>' : '') +
+    '<div class="tab-box"><table><thead><tr><th>Tipo</th><th>Ítems</th><th>Aciertos</th><th>Precisión</th><th>Ritmo</th></tr></thead><tbody>' + kindRows + '</tbody></table></div>' +
+    '<h2>Ítems</h2><div class="tab-box"><table><thead><tr><th>#</th><th>Tipo</th><th>Nivel</th><th></th><th>Tiempo</th><th>Pistas</th></tr></thead><tbody>' + itemRows + '</tbody></table></div>' +
+    '<p class="row" style="margin-top:18px"><button class="btn primary" id="again">' + ic('repeat') + 'Repetir</button><button class="btn" id="replay">' + ic('repeat') + 'Misma serie</button><button class="btn" id="menu">' + ic('back') + 'Menú</button><button class="btn" id="hist">' + ic('history') + 'Historial</button></p>');
+  const again = function(){ const c = Object.assign({}, cfg); c.seed = 's' + Math.floor(Math.random() * 1e9).toString(36); if (c.mode === 'adaptive') c.level = 2; startSession(c); };
+  $('again').addEventListener('click', again);
+  $('replay').addEventListener('click', function(){ const c = Object.assign({}, cfg); if (c.mode === 'adaptive') c.level = 2; startSession(c); });
+  $('menu').addEventListener('click', menu);
+  $('hist').addEventListener('click', showHistory);
+  onKey = function(e){ if (e.key === 'Enter'){ e.preventDefault(); again(); } else if (e.key === 'h' || e.key === 'H') showHistory(); };
+}
+
+/* ---------- History and CSV ---------- */
+function trendChart(ses){
+  const pts = ses.slice(-30);
+  if (pts.length < 2) return '';
+  const W = 640, H = 200, ml = 36, mr = 10, mt = 10, mb = 24;
+  const x = function(i){ return ml + i * (W - ml - mr) / (pts.length - 1); };
+  const y = function(v){ return mt + (100 - v) * (H - mt - mb) / 100; };
+  let s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Precisión" style="font-family:system-ui,sans-serif">';
+  [0, 25, 50, 75, 100].forEach(function(v){ s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(v) + '" y2="' + y(v) + '" style="stroke:var(--rule)"/><text x="' + (ml - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" style="fill:var(--muted)">' + v + '</text>'; });
+  s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(PASS_ACCURACY) + '" y2="' + y(PASS_ACCURACY) + '" stroke-dasharray="5 4" style="stroke:var(--ok)"/><text x="' + (W - mr) + '" y="' + (y(PASS_ACCURACY) - 4) + '" text-anchor="end" font-size="11" style="fill:var(--ok)">96</text>';
+  s += '<polyline fill="none" stroke-width="1.6" style="stroke:var(--accent)" points="' + pts.map(function(p, i){ return f1(x(i)) + ',' + f1(y(p.accuracy)); }).join(' ') + '"/>';
+  pts.forEach(function(p, i){ s += '<circle cx="' + f1(x(i)) + '" cy="' + f1(y(p.accuracy)) + '" r="3" style="fill:var(--accent)"/><text x="' + f1(x(i)) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="10" style="fill:var(--muted)">' + esc(p.level) + '</text>'; });
+  return s + '</svg>';
+}
+function showHistory(){
+  clearAll(); S = null;
+  const d = load(), ses = d.sessions;
+  const rows = ses.slice().reverse().slice(0, 100).map(function(s){
+    return '<tr><td>' + dateES(s.ts) + '</td><td>' + esc(moduleEs(s.module)) + '</td><td>' + esc(s.level) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 2) + '</td><td>' + fmt(s.accuracy, 1) + '</td><td>' + esc(s.goal) + '</td><td>' + (s.met === true ? 'Sí' : (s.met === false ? 'No' : '-')) + '</td><td>' + esc(paramsEs(s.params)) + '</td></tr>';
+  }).join('');
+  show('<button class="link" id="back">' + ic('back') + 'Menú</button><h1>Historial</h1>' + trendChart(ses) +
+    '<h2>Sesiones</h2>' +
+    (ses.length ? '<div class="tab-box"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>Blanco</th><th>s/ítem</th><th>Precisión %</th><th>Objetivo</th><th>Cumplido</th><th>Parámetros</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<p class="soft">Sin sesiones</p>') +
+    '<p class="row" style="margin-top:18px"><button class="btn primary" id="csv">' + ic('download') + 'CSV</button><button class="btn danger" id="del">' + ic('trash') + 'Borrar</button><span id="conf"></span></p>');
+  $('back').addEventListener('click', menu);
+  $('csv').addEventListener('click', function(){
+    try {
+      const blob = new Blob([toCSV(d.sessions)], { type:'text/csv;charset=utf-8' });
+      const a = document.createElement('a'), f = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'trainer-matrices-' + f.getFullYear() + pad2(f.getMonth() + 1) + pad2(f.getDate()) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    } catch (e) { $('conf').innerHTML = '<span class="bad">Error</span>'; }
+  });
+  $('del').addEventListener('click', function(){
+    $('conf').innerHTML = '<span class="warn">¿Borrar todo?</span> <button class="btn danger" id="yes">Borrar</button> <button class="btn" id="no">Cancelar</button>';
+    $('no').addEventListener('click', function(){ $('conf').innerHTML = ''; });
+    $('yes').addEventListener('click', function(){ d.sessions = []; save(); showHistory(); });
+  });
+  onKey = null;
+}
+menu();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

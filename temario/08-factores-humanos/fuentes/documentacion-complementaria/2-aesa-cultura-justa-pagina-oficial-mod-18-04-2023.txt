@@ -1,0 +1,89 @@
+SOURCE: https://www.seguridadaerea.gob.es/en/ambitos/gestion-de-la-seguridad-operacional/cultura-justa
+
+Safety management
+
+        General framework of the PESO State Operational Safety Programme
+
+        Occurrence Reporting System
+
+        CEANITA
+
+        Safety assessment methodologies and tools
+
+        Fair culture
+
+        State promotion of operational safety
+
+       Last modified:  Tuesday, 18 April 2023 
+
+Fair culture
+
+          Concept of Just Culture
+
+‘Fair culture’ means: where operators and other frontline personnel are not punished for their actions, omissions or decisions when they are in line with their experience and training, but in which gross negligence, intentional infringements or destructive acts are not tolerated.
+
+    Unprotection of information in case of indications of wilful misconduct or gross negligence
+
+Article 11, third paragraph, of Law 21/2003 of 7 July 2003 on Aviation Safety — as amended by Law 1/2011 of 4 March 2011 establishing the State Programme on Operational Safety for Civil Aviation and amending Law 21/2003 of 7 July 2003 on Aviation Safety — states that safety information voluntarily provided in which no intentional or gross negligence is detected may not be used as a valid means of proof for any type of administrative procedure, nor may it be disclosed to the public, except as provided in Article 19, in order to ensure continued availability in order to be able to take appropriate and timely preventive measures. Article 12.1 of the same law provides that the information provided by aeronautical professionals and suppliers of aeronautical services and products within the framework of the Programme may not be used to take any type of unfavourable measure as a result of such information or to incorporate it in procedures already initiated, unless it is manifestly established that the actions carried out have been carried out with intent or gross negligence.
+
+Furthermore, Article 8(2) of Royal Decree 995/2013 of 13 December 2013 implementing the regulation of the State Operational Safety Programme for Civil Aviation provides that the measures for the protection of information provided under the Programme shall not apply to safety information or data revealing actions in which intentional or gross negligence is detected, in accordance with the provisions of Articles 11 and 12 of Law 21/2003 of 7 July. For its part, the third paragraph of Article 16 of that Royal Decree provides that the public supervisory bodies shall refrain from taking coercive or punitive measures in the event of deviations of operational safety notified by the supplier, where the supplier complies with the provisions of Article 11 unless one of the following circumstances exists:
+
+it must be clearly stated that the deviation was carried out with intent or gross negligence.
+
+that gross negligence is found as a result of the repetition of the conduct.
+
+For its part, the European regulation, pursuant to Article 16(6), (7), (9) and (10) of Regulation (EU) No 376/2014 of the European Parliament and of the Council of 3 April 2014 on occurrence reporting in civil aviation, which applies since 15 November 2015, provides:
+
+Article 16. Protection of information sources
+
+6. Without prejudice to the applicable national criminal law, Member States shall refrain from bringing proceedings in respect of unintended or neglected offences which have come to their knowledge only because they have been notified under Articles 4 and 5.
+
+The first subparagraph shall not apply in the cases referred to in paragraph 10. Member States may maintain or adopt measures to strengthen the protection of persons reporting an occurrence or mentioned in occurrence reports, and may apply this rule in particular without the exceptions referred to in paragraph 10.
+
+7. In the case of disciplinary or administrative proceedings under national law, the information contained in occurrence reports shall not be used against:
+
+the notifiers; or
+
+the persons mentioned in the occurrence reports.
+
+The first subparagraph shall not apply in the cases referred to in paragraph 10.
+
+Member States may maintain or adopt measures to strengthen the protection of persons who report an occurrence or are mentioned in occurrence reports, and may extend this protection, in particular, to civil or criminal proceedings.
+
+[...]
+
+9. Except where paragraph 10 applies, workers and contract staff who report occurrences or appear to be mentioned in connection with occurrences reported in accordance with Articles 4 and 5 shall not be retaliated by their employer or the organisation for which the services are provided for the information communicated by the notifier.
+
+10. The protection provided for in paragraphs 6, 7 and 9 of this Article shall not apply in any of the following situations:
+
+in cases of deliberate misconduct;
+
+where there has been a manifest, significant and serious omission of the duty of care in the face of an obvious risk and serious professional misconduct in the exercise of the care evidently required in those circumstances, resulting in foreseeable damage to persons or property or seriously jeopardising the level of aviation safety.
+
+In other words, the European legislature has also considered as exceptions to the protection of sources of information related to occurrence reporting in civil aviation cases where intentional conduct (deliberate misconduct) or grossly negligent conduct is assessed, although, instead of referring to those two terms expressly, for the purposes of the Regulation, a definition of such conduct has been included in Article 16(10) itself.
+
+In the light of the provisions of the national and European legal framework, and in particular in the light of the objectives set out in Regulation (EU) No 376/2014 to promote a “fair culture” among aeronautical professionals and providers of aeronautical services and products, it is necessary to clarify in which cases the information provided under the Programme (including occurrence reporting systems in civil aviation) may be considered by public supervisory bodies as acts involving intentional or seriously negligent conduct, and therefore subject to the possibility of being used to take any adverse action as a result of such information or to incorporate it into procedures already initiated.
+
+In view of the above, EASA has established the internal procedure to be followed for the identification of indications of intentional or grossly negligent conduct that could justify the lack of protection of the information provided to the Agency under the State Programme on Operational Safety for Civil Aviation for the purpose of determining the responsibilities involved.
+
+The procedure is supported by widely accepted bibliography on human behavior and fair culture such as the works of James T. Reason or David Marx.
+
+In this procedure, a substitution test is used in order to determine the existence of indications of gross negligence or intentional negligence from a technical point of view, which is shown in the following diagram:
+
+The purpose of the replacement test is to discern whether another professional with the right conditions to perform the task, with the same qualification and experience, and in the same circumstances, would have acted in the same way.
+
+In order to increase the guarantees, a group of three officials is established who apply the technical determination diagram for the assessment of gross negligence or wilful negligence and take the decision in a collegiate manner. The group consists of an official seconded to the Directorate responsible for risk management, a legal adviser and another official seconded to the Directorate responsible for the situation being assessed for the assessment of gross negligence or wilful misconduct.
+
+The assessment of intent or gross negligence shall be unanimous among the three officials involved in the proceedings. In the absence of unanimity, reasonable doubt shall be deemed to exist and the assessment shall therefore be negative.
+
+Only if the assessment of intentional or seriously negligent acts is confirmed will the information be declared unprotected in application of the Articles. 8.2 and 16.3 of Royal Decree 995/2013, which implements the regulation of the State Operational Safety Programme for Civil Aviation and will act as appropriate in each particular case.
+
+Cannot find what you are looking for?
+
+                  Frequently asked questions
+
+          Contact us
+
+Concept of Just Culture
+
+Unprotection of information in case of indications of wilful misconduct or gross negligence

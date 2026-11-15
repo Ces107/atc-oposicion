@@ -1,0 +1,1089 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ATFCM, Gestor de Red, FUA y capacidad (T06b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Plan de vuelo y gestión de afluencia (ATFCM)</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen-la-parte-de-este-archivo">Qué cubre el examen (la parte de este archivo)</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-atfcm-demanda-capacidad-y-complejidad-en-profundidad">1. ATFCM: demanda, capacidad y complejidad, en profundidad</a></li>
+<li><a href="#2-el-gestor-de-red-base-juridica-gobernanza-sistemas">2. El Gestor de Red: base jurídica, gobernanza, sistemas</a><ul>
+<li><a href="#21-base-juridica">2.1 Base jurídica</a></li>
+<li><a href="#22-el-consejo-de-administracion-de-la-red-nmb-network-management-board">2.2 El Consejo de Administración de la Red (NMB, Network Management Board)</a></li>
+<li><a href="#23-la-celula-europea-de-coordinacion-de-crisis-de-aviacion-eaccc-european-aviation-crisis-coordination-cell">2.3 La Célula Europea de Coordinación de Crisis de Aviación (EACCC, European Aviation Crisis Coordination Cell)</a></li>
+<li><a href="#24-sistemas-del-nm-en-profundidad-mas-alla-de-la-breve-tabla-de-om06">2.4 Sistemas del NM (en profundidad, más allá de la breve tabla de OM06)</a></li>
+</ul>
+</li>
+<li><a href="#3-fases-atfcm-productos-y-plazos-en-profundidad">3. Fases ATFCM: productos y plazos, en profundidad</a></li>
+<li><a href="#4-el-algoritmo-de-asignacion-de-slots-casa-completo">4. El algoritmo de asignación de slots CASA, completo</a><ul>
+<li><a href="#41-como-se-construye-la-lista-de-slots">4.1 Cómo se construye la lista de slots</a></li>
+<li><a href="#42-fase-de-preasignacion">4.2 Fase de preasignación</a></li>
+<li><a href="#43-tasa-pendiente">4.3 Tasa pendiente</a></li>
+<li><a href="#44-proceso-de-modificacion-de-slots">4.4 Proceso de modificación de slots</a></li>
+<li><a href="#45-fase-de-asignacion-sit1">4.5 Fase de asignación: SIT1</a></li>
+<li><a href="#46-anchura-de-ventana-ww-window-width">4.6 Anchura de ventana (WW, Window Width)</a></li>
+<li><a href="#47-umbral-de-confirmacion-de-demora-el-mecanismo-ptot">4.7 Umbral de confirmación de demora: el mecanismo PTOT</a></li>
+<li><a href="#48-tis-y-trs-proteger-la-ctot-de-cambios-de-ultima-hora">4.8 TIS y TRS: proteger la CTOT de cambios de última hora</a></li>
+</ul>
+</li>
+<li><a href="#5-el-catalogo-completo-de-mensajes-atfcm-slot-y-dpi">5. El catálogo completo de mensajes ATFCM (slot y DPI)</a><ul>
+<li><a href="#51-mensajes-dpi-planificacion-de-salida">5.1 Mensajes DPI (planificación de salida)</a></li>
+<li><a href="#52-el-campo-regcause-composicion">5.2 El campo REGCAUSE (composición)</a></li>
+</ul>
+</li>
+<li><a href="#6-codigos-de-motivo-de-regulacion-del-nm-y-regcause">6. Códigos de motivo de regulación del NM y REGCAUSE</a></li>
+<li><a href="#7-stam-en-el-acc-limitacion-de-niveles-reencaminamiento-mdi-mit-procedimientos-internos">7. STAM en el ACC: limitación de niveles, reencaminamiento, MDI, MIT (procedimientos internos)</a></li>
+<li><a href="#8-fua-en-profundidad-niveles-asm-tipos-de-rsa-amc-cadf-amc-lider">8. FUA en profundidad: niveles ASM, tipos de RSA, AMC, CADF, AMC líder</a><ul>
+<li><a href="#81-niveles-asm-las-definiciones-exactas-del-manual">8.1 Niveles ASM: las definiciones exactas del manual</a></li>
+<li><a href="#82-tipos-de-rsa-reservedsegregated-airspace-espacio-aereo-reservadosegregado">8.2 Tipos de RSA (Reserved/Segregated Airspace, espacio aéreo reservado/segregado)</a></li>
+<li><a href="#83-la-celula-de-gestion-de-espacio-aereo-amc-procedimiento-de-trabajo">8.3 La Célula de Gestión de Espacio Aéreo (AMC): procedimiento de trabajo</a></li>
+<li><a href="#84-cadf-centralised-airspace-data-function-y-el-eaupeuup">8.4 CADF (Centralised Airspace Data Function) y el EAUP/EUUP</a></li>
+<li><a href="#85-concepto-de-amc-lider">8.5 Concepto de AMC líder</a></li>
+</ul>
+</li>
+<li><a href="#9-airport-cdm-a-cdm-los-16-hitos-tobttsatttot">9. Airport CDM (A-CDM): los 16 hitos, TOBT/TSAT/TTOT</a><ul>
+<li><a href="#91-definiciones">9.1 Definiciones</a></li>
+<li><a href="#92-los-16-hitos">9.2 Los 16 hitos</a></li>
+<li><a href="#93-comprobaciones-de-discrepancia-umbrales-numericos">9.3 Comprobaciones de discrepancia (umbrales numéricos)</a></li>
+<li><a href="#94-beneficios-segun-el-planteamiento-del-propio-manual">9.4 Beneficios (según el planteamiento del propio manual)</a></li>
+</ul>
+</li>
+<li><a href="#10-espana-las-cinco-fmp-codigos-de-exencion-sts-slots-de-aena-frente-a-slots-atfm">10. España: las cinco FMP, códigos de exención STS, slots de AENA frente a slots ATFM</a><ul>
+<li><a href="#101-las-cinco-fmp-de-espana">10.1 Las cinco FMP de España</a></li>
+<li><a href="#102-codigos-de-exencion-sts-la-lista-exacta-espanola">10.2 Códigos de exención STS/: la lista exacta española</a></li>
+<li><a href="#103-slots-aeroportuarios-aenacoordinador-frente-a-slots-atfm-la-diferencia">10.3 Slots aeroportuarios (Aena/coordinador) frente a slots ATFM: la diferencia</a></li>
+</ul>
+</li>
+<li><a href="#11-ejemplos-resueltos-capacidad-slots-demora">11. Ejemplos resueltos (capacidad, slots, demora)</a></li>
+<li><a href="#12-manual-frente-a-fuentes-primarias">12. Manual frente a fuentes primarias</a></li>
+<li><a href="#13-trampas-de-examen">13. Trampas de examen</a></li>
+<li><a href="#14-imprescindible-memorizar">14. Imprescindible memorizar</a></li>
+<li><a href="#15-glosario-bilingue-es-en">15. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#16-fuentes">16. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">59 min de lectura</div><h1 id="t06b-atfcm-gestor-de-red-fua-y-capacidad-mas-alla-del-manual-de-enaire">T06b — ATFCM, Gestor de Red, FUA y capacidad (más allá del manual de ENAIRE)</h1>
+<p>Notas de estudio del tema 6, «Plan de vuelo y gestión de la capacidad y afluencia de tráfico». Redactadas el 24 de septiembre de 2026.</p>
+<p><strong>Alcance de este archivo:</strong> todo lo que el manual oficial de ENAIRE (OM06, <code>syllabus/manual/OM06-flight-plan-atfcm-study-guide.md</code>) <strong>no</strong> cubre, o cubre solo brevemente. OM06 ya ofrece el plan de vuelo (conceptos de las casillas 1-19), los mensajes AFTN/ATS, las cuatro fases ATFCM, los cuatro tipos de capacidad, las seis técnicas que evitan regular y una primera pasada sobre FUA: <strong>léelo antes</strong>; no se repite aquí salvo cuando hace falta para el contexto. Las notas base <code>syllabus/t06-flight-plan-atfcm.md</code> también cubren ya el formato de las casillas del FPL de la OACI 2012, los fundamentos de CASA (SIT1, STW -5/+10, umbrales de DLA) y una primera pasada sobre FUA a partir del Manual de Operaciones ATFCM de 2019: este archivo usa los <strong>manuales vigentes de EUROCONTROL Wave 2.3 (válidos desde el 22-04-2026)</strong> y profundiza en la mecánica: las tablas internas del algoritmo CASA, el catálogo completo de mensajes de slot y de DPI, el sistema de códigos de motivo de regulación del NM, los 16 hitos de A-CDM, la arquitectura jurídica del Gestor de Red (Reglamento (UE) 2019/123: Consejo de Administración de la Red, EACCC) y las cinco FMP regionales de España.</p>
+<h2 id="que-cubre-el-examen-la-parte-de-este-archivo">Qué cubre el examen (la parte de este archivo)</h2>
+<p>Conviene pensar el tema 6 como tres capas: (1) el plan de vuelo y sus mensajes, territorio de OM06; (2) el ATFCM como un <strong>proceso llevado por instituciones reales con reglas numéricas</strong>, territorio de este archivo: las tablas del algoritmo CASA (anchura de ventana, tasa pendiente), el catálogo completo de mensajes de slot, los códigos de letra de motivo de regulación del NM, los números de los hitos de A-CDM y las fórmulas de TOBT/TSAT/TTOT, la composición exacta del Consejo de Administración de la Red (NMB); (3) el FUA como <strong>sistema jurídico-operativo</strong>: los niveles ASM 1-3 con su redacción exacta, la tabla de tipos de RSA (espacio aéreo reservado/segregado) y las cinco FMP de España con sus direcciones AFTN y su cadena de respaldo. Un examinador de ENAIRE que arme un examen de 50 preguntas sobre este tema podría tomar con verosimilitud datos de una línea de cualquiera de estas tres capas; este archivo está escrito para que la segunda y la tercera sean memorizables con números y letras, que es como los exámenes de oposición evalúan esta materia.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>ATFCM: demanda, capacidad y complejidad, en profundidad</li>
+<li>El Gestor de Red: base jurídica, gobernanza, sistemas</li>
+<li>Fases ATFCM: productos y plazos, en profundidad</li>
+<li>El algoritmo de asignación de slots CASA, completo</li>
+<li>El catálogo completo de mensajes ATFCM (slot y DPI)</li>
+<li>Códigos de motivo de regulación del NM y REGCAUSE</li>
+<li>STAM en el ACC: limitación de niveles, reencaminamiento, MDI, MIT (procedimientos internos)</li>
+<li>FUA en profundidad: niveles ASM, tipos de RSA, AMC, CADF, AMC líder</li>
+<li>Airport CDM (A-CDM): los 16 hitos, TOBT/TSAT/TTOT</li>
+<li>España: las cinco FMP, códigos de exención STS, slots de AENA frente a slots ATFM</li>
+<li>Ejemplos resueltos (capacidad, slots, demora)</li>
+<li>Manual frente a fuentes primarias</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-atfcm-demanda-capacidad-y-complejidad-en-profundidad">1. ATFCM: demanda, capacidad y complejidad, en profundidad</h2>
+<ul>
+<li><strong>ATFM (<em>Air Traffic Flow Management</em>, gestión de la afluencia del tránsito aéreo)</strong>: servicio cuyo objetivo es «contribuir a un flujo de tránsito aéreo seguro, ordenado y rápido, asegurando que la capacidad ATC se utilice en la mayor medida posible y que el volumen de tránsito sea compatible con las capacidades declaradas por la autoridad de servicios de tránsito aéreo competente» (Manual de Operaciones ATFCM Wave 2.3, definiciones).</li>
+<li><strong>ATFCM (<em>Air Traffic Flow and Capacity Management</em>, gestión de la afluencia y capacidad del tránsito aéreo)</strong>: el ATFM ampliado con la optimización de los patrones de tránsito en el tiempo y en el espacio y con la gestión de la capacidad. El mecanismo central es el <strong>DCB (<em>Demand and Capacity Balancing</em>, equilibrio entre demanda y capacidad)</strong>: ajustar el tráfico que quiere volar por un espacio aéreo al volumen operativamente aceptable de ese espacio aéreo, con las herramientas que se describen en este archivo.</li>
+<li><strong>Volumen de tráfico (TV, <em>traffic volume</em>)</strong>: una porción definida de espacio aéreo (un sector, un grupo de sectores, un aeropuerto) para la que se vigilan la capacidad y la demanda y, cuando procede, se aplica una medida ATFCM. Cada TV tiene asignado un <strong>valor de monitorización (MV, <em>monitoring value</em>)</strong>: el número de vuelos por periodo móvil acordado por encima del cual se considera que la carga de tráfico supera el nivel aceptable. Manual de Operaciones ATFCM.</li>
+<li><strong>Complejidad</strong>: una valoración cualitativa y cuantitativa, distinta del simple recuento, de lo difícil que es controlar una muestra de tráfico: patrones de cruce, tráfico en ascenso o descenso mezclado con tráfico a nivel, puntos de convergencia, desvíos por meteorología. El manual y los procedimientos STAM permiten expresamente reducir la <strong>complejidad, y no solo el recuento</strong>, como motivo para aplicar una medida (véanse los motivos de regulación del NM «ATC Routeings» y «Airspace Management», apartado 6).</li>
+<li><strong>Carga de trabajo</strong>: lo que experimenta el controlador; se correlaciona con el recuento de tráfico, pero no es idéntica a él: un recuento bajo de tráfico de cruce complejo puede generar más carga de trabajo que un recuento mayor de tráfico paralelo en el mismo sentido. La cadena «Jefe de Sala, Supervisor, CTA con habilitación más antigua» de OM06 para fijar la capacidad disponible (apartado 3.8 de OM06) existe precisamente porque la carga de trabajo se juzga localmente y en tiempo real, no se lee de una fórmula.</li>
+<li><strong>Cómputo de ocupación frente a cómputo de entradas</strong>: OM06 ya introduce el <strong>HEC (<em>Hourly Entry Count</em>, cómputo horario de entradas)</strong> y la <strong>OCC (ocupación)</strong> sin desarrollarlos (OM06 apartado 3.9, marcado allí como «no desarrollado»). Por definición: un <strong>cómputo de entradas</strong> mide cuántas aeronaves <em>entran</em> en un TV en un periodo (lo usa el HEC); un <strong>cómputo de ocupación</strong> mide cuántas aeronaves se estima que están <em>dentro</em> de un TV en un momento dado, muestreado a intervalos; los gráficos de ocupación son mucho más sensibles a pequeños cambios en los perfiles individuales de los vuelos y por eso solo son fiables en horizontes temporales cortos, que es exactamente la razón por la que OM06 dice que solo se usa el HEC en la fase pretáctica o con más de 3 horas de antelación (OM06 3.9). El <strong>OTMV (<em>Occupancy Traffic Monitoring Value</em>, valor de vigilancia de tráfico por ocupación)</strong> es el umbral basado en la ocupación, que se usa solo en los TV donde se ha definido (OM06 3.12).</li>
+</ul>
+<hr />
+<h2 id="2-el-gestor-de-red-base-juridica-gobernanza-sistemas">2. El Gestor de Red: base jurídica, gobernanza, sistemas</h2>
+<h3 id="21-base-juridica">2.1 Base jurídica</h3>
+<ul>
+<li>La función de Gestor de Red la crea y regula el <strong>Reglamento de Ejecución (UE) 2019/123 de la Comisión</strong>, «por el que se establecen normas detalladas para la ejecución de las funciones de red de la gestión del tránsito aéreo (ATM)» (Reglamento de funciones de red), aplicable desde 2020, que deroga el <strong>Reglamento (UE) n.º 677/2011</strong> <code>regulations/Reg-2019-123-Network-Functions.txt</code>. Se enmarca en el <strong>Cielo Único Europeo (SES, <em>Single European Sky</em>)</strong>.</li>
+<li>La Comisión Europea <strong>designó a EUROCONTROL como Gestor de Red</strong>; el periodo de designación actual llega hasta 2029 <span class="b vs" title="leído solo en un resumen">V*</span> (coherente con la mención de OM06 al Plan Estratégico Operativo quinquenal y con las notas base t06).</li>
+<li>El Reglamento 2019/123 enumera las <strong>funciones de red</strong>: (a) diseño de la red europea de rutas (ERND); (b) <strong>ATFM (<em>Air Traffic Flow Management</em>)</strong>; (c) coordinación de recursos escasos: radiofrecuencias y códigos de transpondedor SSR; (d) el <strong>Plan de Operaciones de la Red (NOP)</strong>. Artículo 1, apartado 3: el Reglamento se aplica a los Estados miembros, al Gestor de Red, a la <strong>EASA (Agencia de la Unión Europea para la Seguridad Aérea)</strong>, a los usuarios del espacio aéreo, a los ANSP, a los gestores aeroportuarios y a los <strong>coordinadores de slots aeroportuarios</strong>; estos últimos se nombran expresamente, lo que confirma que los slots de aeropuerto (Aena) y los slots ATFM se rigen por instrumentos distintos, aunque relacionados (véase el apartado 10.3).</li>
+<li><strong>Papel de la EASA</strong>: la Comisión «debería garantizar una supervisión adecuada del Gestor de Red», teniendo en cuenta «el papel de la Agencia de la Unión Europea para la Seguridad Aérea como autoridad competente para la certificación y la supervisión del Gestor de Red»; es decir, la EASA certifica y supervisa al Gestor de Red igual que a un ANSP.</li>
+</ul>
+<h3 id="22-el-consejo-de-administracion-de-la-red-nmb-network-management-board">2.2 El Consejo de Administración de la Red (NMB, <em>Network Management Board</em>)</h3>
+<p>OM06 menciona el NMB solo de pasada («gobernado por un comité... en el cual se encuentran representadas las diversas ramas de la aviación»). El artículo 18 del Reglamento 2019/123 lo desarrolla por completo:</p>
+<ul>
+<li><strong>Función</strong>: «supervisa y orienta la ejecución de las funciones de red, incluido el desempeño de las tareas del Gestor de Red».</li>
+<li><strong>12 miembros con voto</strong>: (a) <strong>4 votos en total</strong>: un representante de los ANSP <strong>por bloque funcional de espacio aéreo (FAB, <em>Functional Airspace Block</em>)</strong>, establecido o en proceso de establecimiento; (b) <strong>4 representantes de los usuarios civiles, comerciales y no comerciales, del espacio aéreo</strong>; (c) <strong>2 representantes de los gestores aeroportuarios</strong>; (d) <strong>2 representantes de los ANSP y usuarios del espacio aéreo militares</strong>.</li>
+<li><strong>6 categorías / 7 personas sin voto</strong> (art. 18.4 del Reglamento (UE) 2019/123: el artículo enumera 6 puntos a-f, pero el punto (e) nombra a 2 personas): el presidente del NMB; un representante de la Comisión; <strong>el director del Gestor de Red</strong>; el presidente del grupo de trabajo de operaciones; <strong>2 representantes de los ANSP de países asociados</strong> (Estados no pertenecientes a la UE que cooperan con el NM, designados por rotación; son 2 personas dentro de un solo punto del artículo); un representante de EUROCONTROL.</li>
+<li><strong>Presidencia</strong>: la nombra la Comisión «en función de su competencia técnica y su experiencia», a propuesta de los miembros con voto; <strong>2 vicepresidentes</strong> también nombrados entre los miembros con voto.</li>
+<li><strong>Reuniones</strong>: «al menos tres reuniones ordinarias al año»; el Gestor de Red presta la secretaría.</li>
+<li><strong>Decisiones</strong>: la mayoría de las decisiones enumeradas se adoptan «por mayoría simple de sus miembros con voto».</li>
+<li>Un <strong>grupo de trabajo de operaciones</strong>, formado por los directores de operaciones de las partes interesadas operativas, asiste al Consejo aportando conocimiento operativo.</li>
+</ul>
+<h3 id="23-la-celula-europea-de-coordinacion-de-crisis-de-aviacion-eaccc-european-aviation-crisis-coordination-cell">2.3 La Célula Europea de Coordinación de Crisis de Aviación (EACCC, <em>European Aviation Crisis Coordination Cell</em>)</h3>
+<p>No figura en OM06 ni en las notas base. La crea el artículo 19 del Reglamento 2019/123 para «contribuir, mediante su trabajo, a coordinar las respuestas a las crisis de la red». Miembros permanentes: un representante de cada uno de estos: la Comisión, la EASA, los Estados miembros (con estructura de presidencia rotatoria), el Gestor de Red, los ANSP y usuarios del espacio aéreo militares, los usuarios civiles del espacio aéreo y los aeropuertos; cada <strong>Estado miembro designa un «punto focal del Estado»</strong> y un suplente para el enlace con las estructuras nacionales de crisis. La EACCC elabora su propio <strong>Reglamento interno</strong>, aprobado por el NMB. <strong>Trampa:</strong> no hay que confundir la EACCC (coordinación de crisis de la red, p. ej. ceniza volcánica o perturbación a gran escala) con las estructuras de contingencia FMP/ACC del ENR 2.3 (planes de contingencia ATS, PCATS): alcance distinto, nivel distinto.</p>
+<h3 id="24-sistemas-del-nm-en-profundidad-mas-alla-de-la-breve-tabla-de-om06">2.4 Sistemas del NM (en profundidad, más allá de la breve tabla de OM06)</h3>
+<p>OM06 enumera NMOC, ETFMS, TACT (antiguo nombre del ETFMS), CASA, ENV, IFPS, FMP. Otros sistemas y servicios usados en los manuales ATFCM <code>eurocontrol/ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code> y <code>eurocontrol/CHMI-ATFCM-Reference-Guide-Ed9.txt</code>:</p>
+<ul>
+<li><strong>NM B2B (<em>Business-to-Business</em>)</strong>: la interfaz de servicios web de máquina a máquina a través de la cual los sistemas propios de las compañías aéreas y de los ANSP consultan y actualizan directamente los datos de vuelo, de slot y de regulación (frente a una persona que usa un portal).</li>
+<li><strong>Portal NOP (<em>Network Operations Portal</em>)</strong>: la aplicación web con la que las FMP, los AO y otras partes interesadas ven la situación ATFCM en vivo (regulaciones, demoras, el ADP, el propio NOP); la contrapartida orientada a personas de NM B2B.</li>
+<li><strong>CHMI (<em>Common Human-Machine Interface</em>)</strong>: el software cliente que usa el personal de FMP y del NM para interactuar con el ETFMS (crear y vigilar regulaciones, escenarios, el Regulation Editor mencionado en el apartado 4).</li>
+<li><strong>PREDICT</strong>: la herramienta de previsión de demanda de tráfico del NM, que produce la previsión usada en la fase estratégica y pretáctica (hasta unos 6 días de antelación según las notas base).</li>
+<li><strong>SIMEX, IMPACT, ASIM</strong>: herramientas de simulación que OM06 (3.12) nombra como utilizables para determinar el rate de una regulación en los TV con OTMV definido; ASIM/IMPACT/SIMEX permiten «simulaciones con datos de EUROCONTROL» para probar rates antes de aplicarlos.</li>
+<li><strong>CACD (<em>Central Airspace and Capacity Database</em>)</strong> y <strong>ENV</strong>: las bases de datos de entorno y de espacio aéreo (OM06 llama a ENV simplemente «una base de datos... del área de operaciones de la red»); CACD es la denominación propia de EUROCONTROL del sistema de datos de espacio aéreo subyacente que alimenta ENV y CASA.</li>
+<li><strong>CADF (<em>Centralised Airspace Data Function</em>)</strong>: la función del NM que consolida y difunde los datos nacionales de AUP/UUP en el AUP/UUP europeo (<strong>EAUP/EUUP</strong>), el producto diario de FUA distribuido a todas las partes interesadas de la red (véase el apartado 8).</li>
+</ul>
+<hr />
+<h2 id="3-fases-atfcm-productos-y-plazos-en-profundidad">3. Fases ATFCM: productos y plazos, en profundidad</h2>
+<p>OM06 ya da las cuatro fases con sus plazos (estratégica ≥7 días, pretáctica los 6 días previos, táctica el propio día, post-operacional desde el día+1) y sus productos (NOP, ADP). Detalle adicional del Manual de Operaciones Wave 2.3:</p>
+<ul>
+<li><strong>Productos de la fase estratégica</strong>: además del NOP, en la fase estratégica se preparan de antemano los <strong>escenarios de red</strong> (p. ej. escenarios de contingencia meteorológica, escenarios de eventos), de modo que, cuando la fase pretáctica o la táctica los necesita, la FMP o el NM solo tenga que <em>cargar</em> un escenario en lugar de diseñar una medida desde cero; de ahí viene la expresión «cargar el escenario apropiado» que se usa en todos los procedimientos CDM del Manual de Operaciones.</li>
+<li><strong>Producto de la fase pretáctica, con precisión</strong>: el <strong>Plan Diario ATFCM (ADP)</strong> se publica mediante el <strong>mensaje de notificación ATFCM (ANM)</strong> y el <strong>Plan Inicial de Red (INP)</strong>, ambos distribuidos en el <strong>portal NOP</strong>.</li>
+<li><strong>Fase táctica: Regulation Editor</strong>: la herramienta de trabajo con la que el personal de FMP y del NM construye o modifica una regulación; en ella se configura el <strong>umbral de confirmación de demora</strong> (apartado 4.6) para las regulaciones excepcionales.</li>
+<li><strong>EU Restriction</strong>: una herramienta de la fase táctica distinta de una regulación ordinaria basada en un rate, que se usa cuando un aeródromo o un espacio aéreo está realmente <em>no disponible</em> (y no simplemente con exceso de demanda). Su efecto es que el <strong>IFPS rechaza (invalida) los planes de vuelo</strong> que cruzarían el periodo cerrado, en lugar de dejarlos pasar y después demorarlos mediante el ETFMS: «en comparación con una regulación de rate cero, la EU Restriction invalidará los FPL». Criterios para aplicar una, acordados por CDM entre el NM y la FMP: <strong>(1) Antelación</strong>: al menos 2 horas antes de la hora de efectividad; <strong>(2) Estabilidad</strong>: solo para eventos planificados en el nivel estratégico o pretáctico, o perturbaciones graves sin mejora prevista a corto plazo; <strong>(3) Duración</strong>: se considera necesario un mínimo de 1 hora; <strong>(4) Publicación</strong>: debe estar respaldada por información oficial (NOTAM, suplemento AIP). <code>eurocontrol/ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code>, apartado 5.6.7.</li>
+<li><strong>Medidas ATFCM sobre el área adyacente</strong>: el «Área ATFCM» (Estados atendidos directamente por el NM, entre ellos España) es distinta del «Área adyacente» (Estados cooperantes que reciben solo un servicio limitado, según su acuerdo con el NM). El NMOC puede aplicar medidas ATFCM a los vuelos <strong>que se originan en una FIR del Área adyacente y entran en el Área del NM</strong>: una medida excepcional para resolver problemas de la red (el ejemplo del propio manual: medidas de reencaminamiento desde Egipto para evitar Chipre).</li>
+</ul>
+<hr />
+<h2 id="4-el-algoritmo-de-asignacion-de-slots-casa-completo">4. El algoritmo de asignación de slots CASA, completo</h2>
+<p>OM06 no describe en absoluto la mecánica interna de CASA (es un tema exclusivo de las notas base y de este archivo). Las notas base t06 ya dan SIT1 = EOBT-2h, STW -5/+10 y la idea general de «primero planificado, primero servido». Este apartado amplía con las tablas numéricas que da el Manual de Operaciones Wave 2.3 <code>eurocontrol/ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code>, capítulo «Annex C: Slot Allocation Process» (numeración de apartados tal como figura impresa: 14.1-14.2).</p>
+<h3 id="41-como-se-construye-la-lista-de-slots">4.1 Cómo se construye la lista de slots</h3>
+<ul>
+<li>CASA es <strong>en gran medida automático y centralizado</strong>; desde el punto de vista del AO funciona en <strong>modo pasivo</strong>: presentar el FPL <em>es</em> la solicitud de slot, no hace falta ninguna otra acción.</li>
+<li>Tras la coordinación con la FMP, el NM activa una regulación en un punto, área o aeropuerto, con una <strong>hora de inicio, hora de fin, ubicación, rate de entrada y otros parámetros</strong>. Una regulación puede tener varios <strong>subperiodos</strong>, cada uno con su propio rate.</li>
+<li><strong>Ejemplo resuelto que da el propio manual</strong>: un <strong>subperiodo de 4 horas con un rate de 28 vuelos/hora produce una lista de slots de 112 slots, separados unos 2 minutos</strong> (4 × 28 = 112; 60 min / 28 ≈ 2,14 min).</li>
+<li><strong>Algoritmo de priorización de CASA</strong>: busca <strong>minimizar la demora global (de toda la red)</strong>, no la de cada vuelo individual. El principio básico sigue siendo <strong>«primero planificado, primero servido»</strong> (equivalente al FCFS, <em>first-come-first-served</em>, aplicado al orden <em>planificado</em> de ETO, no al orden de presentación).</li>
+<li>Cada vuelo de la lista de slots del operador del NM muestra una columna de <strong>factor de prioridad</strong> que indica qué vuelos es probable que reciban prioridad <em>por encima</em> del principio FCFS básico (se usa, p. ej., para vuelos ligados a STAM o críticos para la red).</li>
+</ul>
+<h3 id="42-fase-de-preasignacion">4.2 Fase de preasignación</h3>
+<ul>
+<li>Cuando se activa la regulación, CASA empieza a recibir datos de FPL y da a cada vuelo afectado un <strong>slot provisional</strong> según el orden de su <strong>ETO (<em>Estimated Time Over</em>, hora estimada de paso)</strong> sobre el lugar regulado. Este slot provisional es puramente interno (ETFMS) y se recalcula constantemente conforme llegan planes nuevos; se describe como la <strong>lista de asignación de slots (SAL, <em>Slot Allocation List</em>)</strong>.</li>
+<li>Cuando llegan datos de vuelo nuevos, CASA preasigna el vuelo al slot libre o preasignado <strong>más cercano a la hora que da el algoritmo de priorización</strong>; si dos vuelos compiten por el mismo slot, <strong>prevalece el de mayor factor de prioridad</strong>.</li>
+</ul>
+<h3 id="43-tasa-pendiente">4.3 Tasa pendiente</h3>
+<ul>
+<li>Para limitar las grandes demoras de las aeronaves que actualizan su plan tarde, se reserva una <strong>tasa pendiente</strong> exclusivamente para los vuelos <strong>modificados después de emitirse su SAM</strong> (mediante mensajes FCM, DLA o CHG). <strong>Los que presentan tarde no se benefician</strong> de los slots pendientes.</li>
+<li>Los slots pendientes <strong>no se usan</strong> durante: la activación de una regulación, un cambio de tiempo de rodaje o una «rectificación profunda». Nunca se da un slot pendiente anterior a un vuelo que actualiza más tarde (no hay «mejora por ir tarde»); los slots pendientes se convierten en slots normales <strong>2h15 antes de la hora de referencia del slot</strong>.</li>
+<li><strong>Regla por defecto de la tasa pendiente</strong>: el 5% del rate total, cuando el <strong>rate es ≥ 20/hora</strong>. Por debajo, se aplica una tabla de conversión fija:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Rate global (vuelos/h)</th>
+<th>Slots normales</th>
+<th>Slots pendientes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-19</td>
+<td>19</td>
+<td>0</td>
+</tr>
+<tr>
+<td>20-29</td>
+<td>19-28</td>
+<td>1</td>
+</tr>
+<tr>
+<td>30-49</td>
+<td>28-47</td>
+<td>2</td>
+</tr>
+<tr>
+<td>50-69</td>
+<td>47-66</td>
+<td>3</td>
+</tr>
+<tr>
+<td>70-89</td>
+<td>66-85</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-proceso-de-modificacion-de-slots">4.4 Proceso de modificación de slots</h3>
+<ul>
+<li>Cuando CASA recibe una <strong>cancelación</strong>, los slots liberados pueden mejorar la asignación de otros vuelos. Este proceso se aplica <strong>solo a los vuelos preasignados (aún no asignados definitivamente)</strong>, que es exactamente la razón por la que los manuales insisten, y OM06 también lo señala de forma independiente (apartado 2.7), en la importancia de <strong>cancelar pronto</strong>.</li>
+</ul>
+<h3 id="45-fase-de-asignacion-sit1">4.5 Fase de asignación: SIT1</h3>
+<ul>
+<li>A una hora fija antes de la EOBT de cada vuelo preasignado, llamada <strong>SIT1 (<em>Slot Issue Time 1</em>)</strong>, el slot se <strong>asigna</strong> definitivamente y se envía un <strong>SAM (<em>Slot Allocation Message</em>)</strong> al AO y al ATC. En coherencia con las notas base t06: <strong>SIT1 = EOBT − 2 horas</strong>.</li>
+<li>Un slot <strong>asignado</strong> normalmente no puede ocuparlo otro vuelo salvo que la regulación se <strong>rectifique en profundidad</strong> y la CTOT no se haya «forzado», o mediante el <strong>proceso de revisión real</strong> (un mecanismo automático de mejora). Un AO cuyo vuelo no pueda cumplir su slot debe, de todos modos, actualizar su EOBT.</li>
+</ul>
+<h3 id="46-anchura-de-ventana-ww-window-width">4.6 Anchura de ventana (WW, <em>Window Width</em>)</h3>
+<p>Una tabla ausente de OM06 y de las notas base, que normaliza cuán estrechamente separa CASA los vuelos en torno a su slot calculado, para equilibrar la «reducción suave de picos» con la flexibilidad operativa:</p>
+<table>
+<thead>
+<tr>
+<th>Rate (vuelos/h)</th>
+<th>Anchura de ventana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-2</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>3-6</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>7</td>
+<td>18 min</td>
+</tr>
+<tr>
+<td>8</td>
+<td>16 min</td>
+</tr>
+<tr>
+<td>9</td>
+<td>14 min</td>
+</tr>
+<tr>
+<td>10-11</td>
+<td>12 min</td>
+</tr>
+<tr>
+<td>12-29</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td>≥30</td>
+<td>6 min</td>
+</tr>
+</tbody>
+</table>
+<p>Una <strong>anchura de ventana menor reparte demoras pequeñas entre más vuelos</strong> (suaviza los picos de ocupación) en lugar de concentrar unas pocas demoras mayores; el NMOC puede modificar estos valores por razones operativas o a petición justificada de la FMP. Esto importa en las preguntas de cálculo de slots: un rate de regulación más alto va acompañado de una ventana <em>más estrecha</em>, no más ancha.</p>
+<h3 id="47-umbral-de-confirmacion-de-demora-el-mecanismo-ptot">4.7 Umbral de confirmación de demora: el mecanismo PTOT</h3>
+<p>Se usa para <strong>regulaciones excepcionales</strong> (huelgas, escenarios; codificadas internamente como <strong>XCD/FCM</strong>), en las que los vuelos afectados quedan <strong>suspendidos</strong> y el AO debe confirmar positivamente su intención de volar:</p>
+<ul>
+<li>Los vuelos cuya demora calculada <strong>es igual o inferior al umbral configurado</strong> reciben un slot ordinario.</li>
+<li>Los vuelos <strong>por encima del umbral</strong> reciben un <strong>FLS (mensaje de suspensión de vuelo, <em>Flight Suspension</em>)</strong> especial en <strong>SIT1 (EOBT − 2h), no antes</strong>, con una <strong>PTOT (<em>Provisional Take-Off Time</em>, hora provisional de despegue)</strong>.</li>
+<li>El AO dispone de un <strong>plazo de «responder antes de» de 20 minutos (RESPBY)</strong> para confirmar (enviar un <strong>FCM</strong>). Si confirma dentro de esa ventana, <strong>la PTOT pasa a ser la CTOT</strong>. Si no confirma, se pierde la reserva y el slot se libera para otros vuelos.</li>
+<li>El valor del umbral introducido en el Regulation Editor se muestra automáticamente en el campo de descripción del TV del ANM como <strong>«DELAY THRESHOLD XX MIN»</strong>.</li>
+</ul>
+<h3 id="48-tis-y-trs-proteger-la-ctot-de-cambios-de-ultima-hora">4.8 TIS y TRS: proteger la CTOT de cambios de última hora</h3>
+<p>No figuran en OM06 ni en las notas base:</p>
+<ul>
+<li><strong>TIS (<em>Time to Insert in the Sequence</em>, tiempo para insertar en la secuencia)</strong>: evita que una <em>mejora</em> de la CTOT se envíe demasiado tarde para que el aeródromo pueda aprovecharla: el aeródromo necesita tiempo para reinsertar el vuelo en su secuencia de salidas; concepto de fórmula: <strong>hora del reloj + TIS + tiempo de rodaje</strong>.</li>
+<li><strong>TRS (<em>Time to Remove from the Sequence</em>, tiempo para retirar de la secuencia)</strong>: la regla simétrica: especifica el momento a partir del cual la CTOT <strong>ya no puede modificarse</strong> porque el vuelo está ya en la secuencia de salidas activa; concepto de fórmula: <strong>CTOT − tiempo de rodaje − TRS</strong>.</li>
+<li>Ambos parámetros pueden fijarse por pista o configuración de pista, y cambian automáticamente con un cambio de configuración de pista (que también cambia el tiempo de rodaje y las SID/STAR).</li>
+</ul>
+<hr />
+<h2 id="5-el-catalogo-completo-de-mensajes-atfcm-slot-y-dpi">5. El catálogo completo de mensajes ATFCM (slot y DPI)</h2>
+<p>Las notas base t06 ya enumeran los mensajes de slot clásicos (SAM, SRM, SLC, FLS, DES, RRP/RRN/RJT, SMM, REA, FCM, RFI, ERR, SIP/SPA/SRJ/SWM). Este apartado añade la familia de mensajes <strong>DPI (<em>Departure Planning Information</em>, información de planificación de salida)</strong>, central en A-CDM, y aclara la estructura del campo REGCAUSE que se usa dentro de los SAM/SRM. <code>eurocontrol/DPI-Implementation-Guide-2.700-2025-06.txt</code>, <code>eurocontrol/A-CDM-Implementation-Manual-node10373.txt</code>, <code>eurocontrol/ATFCM-Users-Manual-Wave2.3-2026-03.txt</code>.</p>
+<h3 id="51-mensajes-dpi-planificacion-de-salida">5.1 Mensajes DPI (planificación de salida)</h3>
+<ul>
+<li><strong>E-DPI (<em>Early DPI</em>, DPI anticipado)</strong>: el primer mensaje que se envía al NM una vez que el plan de vuelo ATC, el slot aeroportuario y los datos de vuelo del aeropuerto se han contrastado y son coherentes (hito 1 de A-CDM, apartado 9). Lleva la SOBT confirmada, la matrícula y el primer destino.</li>
+<li><strong>T-DPI-t (<em>Target DPI - Target</em>, DPI objetivo puntual)</strong>: se envía en puntos de disparo fijos (p. ej. EOBT − 2h, hito 2 de A-CDM) para actualizar la estimación de TTOT del NM, calculada a partir de EIBT+MTTT+EXOT o, una vez que existe una TOBT manual, a partir de TOBT+EXOT.</li>
+<li><strong>T-DPI-s (<em>Target DPI - sequenced</em>, DPI objetivo secuenciado)</strong>: se envía una vez <strong>emitida la TSAT</strong> (hito 10): el mensaje que le dice al NM «este vuelo tiene ya una posición confirmada en la secuencia de presalida».</li>
+<li><strong>A-DPI (<em>Actual DPI</em>, DPI real)</strong>: confirma que ha ocurrido un evento real (p. ej. fuera calzos real, despegue real).</li>
+<li><strong>C-DPI (<em>Cancel DPI</em>, DPI de cancelación)</strong>: cancela información DPI enviada antes, p. ej. cuando se supera el número permitido de <strong>actualizaciones de la TOBT tras la TSAT</strong> (hito 10, segunda comprobación, máximo por defecto p. ej. 3 actualizaciones); el NM descarta entonces los datos T-DPI previos y recurre a la última información del plan de vuelo ATC, conservando el último tiempo de rodaje variable y la SID.</li>
+<li><strong>API (<em>Arrival Planning Information</em>, información de planificación de llegada)</strong>: la familia de mensajes equivalente para el lado de la llegada (actualizaciones de EIBT), distinta del DPI.</li>
+</ul>
+<h3 id="52-el-campo-regcause-composicion">5.2 El campo REGCAUSE (composición)</h3>
+<p>Va en los mensajes <strong>SAM</strong> y <strong>SRM</strong>, asociado a la <strong>regulación más penalizadora</strong> que afecta al vuelo. Tiene tres partes:</p>
+<ol>
+<li><strong>Código de causa de la regulación</strong>: una letra (el motivo de regulación del NM, apartado 6);</li>
+<li><strong>Código de ubicación de la regulación</strong>: una letra: <strong>D</strong> (<em>Departure</em>, salida), <strong>E</strong> (<em>En-route</em>, en ruta) o <strong>A</strong> (<em>Arrival</em>, llegada), que describe qué fase del vuelo afecta la regulación más penalizadora;</li>
+<li>tras un espacio, <strong>el código de demora IATA en forma numérica</strong> (p. ej. 81, 82, 83, 89) o <strong>00</strong> cuando no hay código IATA disponible.
+Estructura de ejemplo (mía,, ilustrativa): <code>REGCAUSE CE 81</code> = causa <strong>C</strong> (capacidad ATC), ubicación <strong>E</strong> (en ruta), código de demora IATA <strong>81</strong>.</li>
+</ol>
+<hr />
+<h2 id="6-codigos-de-motivo-de-regulacion-del-nm-y-regcause">6. Códigos de motivo de regulación del NM y REGCAUSE</h2>
+<p>OM06 y las notas base no dan esta tabla en absoluto: pertenece por entero a la fuente primaria de EUROCONTROL. El <strong>motivo de regulación del NM (<em>NM Regulation Reason</em>)</strong> es la letra única que nombra <em>por qué</em> existe una regulación; aparece en el ANM y es la mitad «causa» del REGCAUSE. <code>eurocontrol/ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code>, tabla del capítulo 5 (nota de lectura: la maquetación de la tabla del PDF fuente sale desordenada por columnas en la extracción de texto; el emparejamiento código-nombre que sigue respeta la lista estándar de EUROCONTROL, coincide con los fragmentos de texto que se conservan y se contrastó con el texto descriptivo de cada fila):</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Motivo de regulación</th>
+<th>Qué significa (guía de aplicación del manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C</strong></td>
+<td>Capacidad ATC (<em>ATC Capacity</em>)</td>
+<td>En ruta: la demanda supera la capacidad ATC declarada o prevista, o la complejidad la reduce. Aeropuerto: la demanda supera la capacidad declarada o prevista. El motivo de la reducción debe indicarse en la observación del ANM.</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td>Acción sindical ATC (<em>ATC Industrial Action</em>)</td>
+<td>Reducción de capacidad por acción sindical del personal ATC.</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Encaminamientos ATC (<em>ATC Routeings</em>)</td>
+<td>Soluciones o escenarios de red para equilibrar demanda y capacidad (p. ej. escenarios de reencaminamiento obligatorio).</td>
+</tr>
+<tr>
+<td><strong>S</strong></td>
+<td>Personal ATC (<em>ATC Staffing</em>)</td>
+<td>Falta imprevista de personal que reduce la capacidad prevista.</td>
+</tr>
+<tr>
+<td><strong>T</strong></td>
+<td>Equipo ATC (<em>ATC Equipment</em>)</td>
+<td>Reducción de la capacidad prevista o declarada por indisponibilidad o degradación del equipo ATC; el tipo de equipo debe indicarse en la observación del ANM.</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Accidente/incidente (<em>Accident/Incident</em>)</td>
+<td>Reducción de la capacidad ATC prevista por un accidente o incidente de aeronave.</td>
+</tr>
+<tr>
+<td><strong>G</strong></td>
+<td>Capacidad del aeródromo (<em>Aerodrome Capacity</em>)</td>
+<td>Reducción de la capacidad declarada o prevista por degradación o indisponibilidad de la infraestructura del aeropuerto (p. ej. obras en curso, escasez de puestos de estacionamiento), o demanda que supera la capacidad prevista del aeródromo.</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>Servicios del aeródromo (<em>Aerodrome Services</em>)</td>
+<td>Capacidad reducida por degradación o indisponibilidad del equipo de apoyo (servicio contra incendios, deshielo o retirada de nieve, equipo de asistencia en tierra).</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>Acción sindical no ATC (<em>Industrial Action, Non-ATC</em>)</td>
+<td>Reducción de la capacidad prevista o planificada por acción sindical de personal que no es ATC.</td>
+</tr>
+<tr>
+<td><strong>M</strong></td>
+<td>Gestión del espacio aéreo (<em>Airspace Management</em>)</td>
+<td>Reducción de la capacidad declarada o prevista tras cambios en la disponibilidad de espacio aéreo o rutas por actividad militar de pequeña escala.</td>
+</tr>
+<tr>
+<td><strong>P</strong></td>
+<td>Evento especial (<em>Special Event</em>)</td>
+<td>Reducción de la capacidad planificada, declarada o prevista, o demanda que la supera, por un gran evento deportivo, gubernamental o social; también aplicable a actualizaciones o transiciones del sistema ATM y a grandes ejercicios militares multinacionales. <strong>Requiere aprobación previa durante el proceso de planificación.</strong></td>
+</tr>
+<tr>
+<td><strong>W</strong></td>
+<td>Meteorología (<em>Weather</em>)</td>
+<td>Reducción de la capacidad prevista por la meteorología, incluidos los casos en que esta afecta a la capacidad de la infraestructura del aeropuerto pero los servicios del aeródromo funcionan según lo previsto. El tipo de fenómeno debe indicarse en la observación del ANM.</td>
+</tr>
+<tr>
+<td><strong>V</strong></td>
+<td>Cuestiones medioambientales (<em>Environmental Issues</em>)</td>
+<td>Reducción de la capacidad, o demanda que la supera, por procedimientos locales acordados de ruido, uso de pistas o similares. <strong>Requiere acuerdo previo en el proceso de planificación.</strong></td>
+</tr>
+<tr>
+<td><strong>O</strong></td>
+<td>Otros (<em>Other</em>)</td>
+<td>Se usa solo cuando no es aplicable ningún otro código de motivo.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cada motivo de regulación se combina con un <strong>código de ubicación (D/E/A)</strong> (salida, en ruta, llegada) para construir el REGCAUSE completo, como en el apartado 5.2.</li>
+<li><strong>Trampa:</strong> la lista de causas de demora del propio manual de ENAIRE (usada en las notas base t06, apartado 8.5, que cita los indicadores del Plan de Vuelo 2030 de ENAIRE) da un <strong>subconjunto más corto: C, R, S, T, M, P</strong> para los informes ATFM internos de ENAIRE. La lista completa del NM anterior es el estándar común de EUROCONTROL y es un superconjunto (añade I, A, G, E, N, W, V, O). Ambas son correctas en su propio documento; si una pregunta nombra «las causas de demora ATFM de ENAIRE» hay que usar el conjunto corto, y si nombra «los motivos de regulación del NM», el completo.</li>
+</ul>
+<hr />
+<h2 id="7-stam-en-el-acc-limitacion-de-niveles-reencaminamiento-mdi-mit-procedimientos-internos">7. STAM en el ACC: limitación de niveles, reencaminamiento, MDI, MIT (procedimientos internos)</h2>
+<p>OM06 describe las seis técnicas que evitan regular desde el punto de vista propio de ENAIRE (apartado 3.11); este apartado añade el <strong>planteamiento de procedimientos internos del lado de EUROCONTROL</strong> para las mismas técnicas, que está redactado de otro modo y es útil para contrastar la redacción del examen <code>eurocontrol/ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code>, apartado 5.9.1:</p>
+<ul>
+<li><strong>Level capping (limitación de niveles, interna)</strong>: puede afectar a los perfiles verticales <strong>dentro de un ACC y en el ACC inmediatamente adyacente</strong>; los ACC afectados deben coordinarse antes de iniciar estas medidas. Cuando la medida afecta al tráfico por debajo de un ACC o adyacente a él, <strong>hay que pedir a los vuelos afectados que vuelvan a presentar su plan al IFPS</strong>. Cuando se coordinan descensos anticipados entre ACC o dentro de ellos, <strong>no se requieren mensajes AFP (<em>ATC Flight Plan Proposal</em>, propuesta de plan de vuelo ATC)</strong> salvo que haya cambiado el nivel de vuelo solicitado (RFL) entre ACC adyacentes. <strong>No se requiere coordinación individual con el NMOC</strong> para esta medida interna.</li>
+<li><strong>Escenarios de reencaminamiento (reencaminamiento interno o táctico)</strong>: se aplican dentro del ACC para distribuir mejor el tráfico y reducir la complejidad y la ocupación de los sectores; estas medidas <strong>no requieren mensajes AFP</strong> y <strong>no se requiere coordinación individual con el NMOC</strong>. (Contraste con el reencaminamiento pretáctico de OM06, que <em>sí</em> pasa por el FMP Manager y normalmente exige un nuevo plan de vuelo.)</li>
+<li><strong>MDI (<em>Minimum Departure Intervals</em>, intervalos mínimos de salida)</strong>: «se coordinan ocasionalmente entre ACC y aeropuertos y FMP adyacentes»; pueden <strong>evitar la necesidad de una regulación completa</strong> en el área del ACC. <strong>Aplicar un MDI no elimina la exigencia de respetar la EOBT/CTOT</strong>: un vuelo sujeto a MDI debe seguir respetando su slot. Se usa normalmente <strong>de forma táctica y por poco tiempo</strong>, solicitado a grandes aeródromos o grupos de aeródromos situados por debajo del área de responsabilidad (AoR) del ACC o adyacentes a ella; se coordina <strong>directamente entre el ACC y las FMP o aeropuertos adyacentes</strong>; <strong>no es obligatoria la coordinación previa con el NMOC</strong>.</li>
+<li><strong>MIT (<em>Miles in Trail</em>, separación en millas entre aeronaves de un mismo flujo)</strong>: «se coordina ocasionalmente entre sectores de un ACC y ACC adyacentes»; normalmente también táctico y de corta duración, solicitado a ACC adyacentes situados por debajo del AoR del ACC o junto a ella.</li>
+<li><strong>Denominador común</strong>: las cuatro medidas internas o tácticas anteriores comparten el mismo patrón de gobernanza: se coordinan directamente entre dependencias ATC vecinas (ACC-ACC o ACC-FMP-aeropuerto), <strong>sin participación obligatoria del NMOC</strong>, precisamente porque son arreglos localizados y a corto plazo; es la razón operativa por la que OM06 las sitúa <em>antes</em> de la «regulación» plena en el orden de escalada (adaptar capacidad → STAM → regular).</li>
+</ul>
+<hr />
+<h2 id="8-fua-en-profundidad-niveles-asm-tipos-de-rsa-amc-cadf-amc-lider">8. FUA en profundidad: niveles ASM, tipos de RSA, AMC, CADF, AMC líder</h2>
+<p>OM06 da solo brevemente los tres niveles de FUA y TSA/TRA/CDR (apartado 4). Este apartado usa el <strong>Manual de Operaciones FUA/AMC/CADF (ed. 21.0, válido desde el 10-11-2025)</strong> <code>eurocontrol/FUA-AMC-CADF-Operations-Manual-21.0-2026-04.txt</code>, el documento específico de EUROCONTROL sobre el tema.</p>
+<h3 id="81-niveles-asm-las-definiciones-exactas-del-manual">8.1 Niveles ASM: las definiciones exactas del manual</h3>
+<ul>
+<li><strong>Nivel 1 (estratégico)</strong>: «el acto de definir y revisar, según se requiera, la política nacional de espacio aéreo, teniendo en cuenta los requisitos nacionales e internacionales de espacio aéreo». <strong>La activación de un RSA de nivel 1 la determina su disponibilidad</strong> (es decir, simplemente si la estructura existe o está publicada, no un acto diario de asignación).</li>
+<li><strong>Nivel 2 (pretáctico)</strong>: «el acto de llevar a cabo la gestión operativa en el marco de la estructura ATM existente predeterminada y de los procedimientos definidos en el nivel 1 de ASM, y de alcanzar un acuerdo específico entre las autoridades civiles y militares implicadas». <strong>Un RSA de nivel 2 se activa mediante su asignación en el AUP/UUP.</strong></li>
+<li><strong>Nivel 3 (táctico)</strong>: «el acto de activar, desactivar o reasignar en tiempo real, el día de las operaciones, el espacio aéreo asignado en el nivel 2, y de resolver problemas específicos de espacio aéreo y/o situaciones individuales de tránsito OAT/GAT en tiempo real, entre unidades y/o controladores civiles y militares, según proceda». Un RSA de nivel 3 se activa mediante <strong>activaciones en tiempo real</strong> que, y esto es importante, <strong>no son necesariamente conocidas de antemano por el NM</strong>.</li>
+<li><strong>Trampa:</strong> nivel 1 = política/existencia; nivel 2 = el acto diario de <em>asignación</em> (AUP/UUP); nivel 3 = el acto de <em>uso</em> en tiempo real. No hay que confundir «el nivel 2 activa la estructura en el AUP» con «el nivel 3 activa la estructura en tiempo real»: ambos usan la palabra «activar», pero en etapas distintas.</li>
+</ul>
+<h3 id="82-tipos-de-rsa-reservedsegregated-airspace-espacio-aereo-reservadosegregado">8.2 Tipos de RSA (<em>Reserved/Segregated Airspace</em>, espacio aéreo reservado/segregado)</h3>
+<p>La tabla de parámetros FUA del manual enumera varios códigos de tipo de RSA además del conjunto TSA/TRA/CDR de OM06:</p>
+<ul>
+<li><strong>D</strong>: área peligrosa (<em>Danger area</em>)</li>
+<li><strong>R</strong>: área restringida (<em>Restricted area</em>)</li>
+<li><strong>P</strong>: área prohibida (<em>Prohibited area</em>)</li>
+<li><strong>TRA</strong>: área temporalmente reservada (<em>Temporary Reserved Area</em>; ya figura en OM06)</li>
+<li><strong>TSA</strong>: área temporalmente segregada (<em>Temporarily Segregated Area</em>; ya figura en OM06); según la tabla, la TSA es obligatoriamente de uso flexible y gestionable <strong>opcionalmente en el nivel 1, nunca en el nivel 2 ni en el 3</strong> (una TSA está totalmente preplanificada en el nivel estratégico o no se gestiona con FUA en absoluto: no es una estructura asignada a diario o en tiempo real como lo es una CDR).</li>
+<li><strong>RCA</strong>: espacio aéreo de coordinación reducida (<em>Reduced Coordination Airspace</em>; ya nombrado como acrónimo en el glosario de OM06 pero no desarrollado allí); siempre de uso flexible.</li>
+<li><strong>MTA</strong>: área de entrenamiento militar (<em>Military Training Area</em>); siempre de uso flexible.</li>
+<li><strong>CBA</strong>: área transfronteriza (<em>Cross Border Area</em>); de uso flexible y, según la tabla, <strong>obligatoria en los niveles 1 y 2</strong>, opcional en el nivel 3.</li>
+<li><strong>FBZ</strong>: en el glosario de OM06 FBZ <em>no</em> figura (las notas base t06 usan «FBZ» para «bloque/zona de planificación de vuelo» en el contexto del AIP, un significado distinto); en la tabla de tipos de RSA del manual FUA, FBZ aparece como tipo de estructura de uso flexible.</li>
+<li><strong>NPZ</strong>: una estructura de uso flexible, obligatoria en el nivel 1, <strong>no permitida en el nivel 2</strong>, opcional en el nivel 3 (es decir, una estructura que se planifica estratégicamente y solo se usa tácticamente, nunca mediante un paso diario de asignación por AUP/UUP).</li>
+<li><strong>MRA</strong>: uso flexible, obligatoria en los niveles 1 y 2, opcional en el nivel 3.</li>
+<li>Leyenda de la tabla: <strong>Y = obligatorio para este tipo de RSA; N = no permitido; Y/N = opcional.</strong></li>
+</ul>
+<h3 id="83-la-celula-de-gestion-de-espacio-aereo-amc-procedimiento-de-trabajo">8.3 La Célula de Gestión de Espacio Aéreo (AMC): procedimiento de trabajo</h3>
+<p>Más allá del párrafo de OM06: la AMC «debería promulgar a diario el AUP lo antes posible» y debe coordinar la promulgación con la FMP correspondiente. Punto crucial: <strong>cada AMC debe producir un AUP «READY» para cada día, incluso cuando no hay aperturas ni restricciones que declarar</strong>; si una AMC no tiene personal en un fin de semana o festivo, debe preparar los AUP de ese periodo <strong>antes de cerrar</strong> por la pausa.</p>
+<h3 id="84-cadf-centralised-airspace-data-function-y-el-eaupeuup">8.4 CADF (<em>Centralised Airspace Data Function</em>) y el EAUP/EUUP</h3>
+<p>El <strong>CADF</strong>, a nivel del NM, consolida los AUP/UUP nacionales en el <strong>AUP europeo (EAUP)</strong> y el <strong>UUP europeo (EUUP)</strong>, publicados en el <strong>portal NOP</strong>: es el mecanismo al que se refiere la tabla de contraste de OM06 (punto 11: «el EAUP se publica en el portal NOP a las 16:00 UTC / 15:00 en verano, válido 24 h desde las 06:00 UTC del día siguiente»). El AUP propio de la AMC nacional (antes de las 14:00 UTC, según OM06) alimenta después este EAUP consolidado.</p>
+<h3 id="85-concepto-de-amc-lider">8.5 Concepto de AMC líder</h3>
+<p>Una estructura que no figura en OM06: para las rutas y áreas transfronterizas compartidas por más de una AMC («Related Routes», áreas transfronterizas), el manual define el concepto de <strong>«AMC líder»</strong>, de modo que <strong>una AMC asume la responsabilidad</strong> de coordinar y promulgar el estado de la estructura compartida, en lugar de que cada AMC gestione su propia porción de forma independiente; así se evita que los AUP nacionales discrepen sobre un mismo trozo físico de espacio aéreo. El manual también especifica los <strong>horarios de operación de las AMC</strong> y la <strong>delegación de las responsabilidades de AMC líder</strong> cuando la AMC líder no tiene personal (reflejo, a nivel de FMP en España, de la cadena de respaldo del apartado 10).</p>
+<hr />
+<h2 id="9-airport-cdm-a-cdm-los-16-hitos-tobttsatttot">9. Airport CDM (A-CDM): los 16 hitos, TOBT/TSAT/TTOT</h2>
+<p>Totalmente ausente de OM06 y solo nombrado (no desarrollado) en la lista de fuentes de las notas base t06; la ficha de la tarea pide expresamente los hitos de A-CDM y TOBT/TSAT/TTOT. Fuente: la <strong>Especificación de EUROCONTROL para A-CDM (2025-01)</strong> y el anterior <strong>Manual de implantación de A-CDM v5.0 (2017)</strong>, que sigue conteniendo los procedimientos detallados hito por hito <code>eurocontrol/A-CDM-Implementation-Manual-node10373.txt</code>, <code>eurocontrol/EUROCONTROL-Specification-A-CDM-2025-01.txt</code>.</p>
+<h3 id="91-definiciones">9.1 Definiciones</h3>
+<ul>
+<li><strong>TOBT (<em>Target Off-Block Time</em>, hora objetivo de fuera de calzos)</strong>: la hora en que el operador de aeronave o el agente de handling <strong>estima que la aeronave estará lista</strong>, con todas las puertas cerradas, la pasarela de embarque retirada, el vehículo de empuje preparado, y lista para iniciar la puesta en marcha o el empuje <strong>inmediatamente al recibir la autorización</strong>.</li>
+<li><strong>TSAT (<em>Target Start-Up Approval Time</em>, hora objetivo de autorización de puesta en marcha)</strong>: la hora, calculada por el secuenciador de presalida del ATC a partir de la TOBT y de otras restricciones operativas, en que se <strong>prevé que la aeronave reciba la autorización de puesta en marcha o de empuje</strong>, para colocar a todas las aeronaves en una secuencia de salida eficiente y segura.</li>
+<li><strong>TTOT (<em>Target Take-Off Time</em>, hora objetivo de despegue)</strong>: se calcula a partir del tramo <em>de llegada</em> (aeronave en rotación) o de la TOBT (una vez confirmada):</li>
+<li><strong>TTOT = EIBT + MTTT + EXOT</strong> (calculada automáticamente, antes de que exista una TOBT manual), donde <strong>EIBT</strong> = <em>Estimated In-Block Time</em> (hora estimada de calzos puestos; = ELDT + EXIT, hora estimada de aterrizaje + tiempo estimado de rodaje de llegada), <strong>MTTT</strong> = <em>Minimum Turn-Round Time</em> (tiempo mínimo de rotación), <strong>EXOT</strong> = tiempo estimado de rodaje de salida.</li>
+<li><strong>TTOT = TOBT + EXOT</strong>, una vez que se dispone de una <strong>TOBT manual</strong> (que prevalece sobre la estimación calculada automáticamente).</li>
+<li><strong>TTOT = EOBT + EXOT</strong>, como alternativa cuando aún no se dispone ni de EIBT+MTTT ni de una TOBT (p. ej. aeronaves estacionadas mucho tiempo).</li>
+<li><strong>CTOT (<em>Calculated Take-Off Time</em>, hora calculada de despegue)</strong>: como en OM06 y las notas base, la hora de slot ATFCM emitida por el NM; distinta de la TTOT (el objetivo <em>local, de A-CDM</em>), aunque ambas deben conciliarse: <strong>los sistemas del NM tratan la TTOT como una hora de «no slot antes de»</strong>.</li>
+</ul>
+<h3 id="92-los-16-hitos">9.2 Los 16 hitos</h3>
+<p>El proceso A-CDM se construye sobre 16 hitos secuenciales, cada uno con un objetivo, un disparador, una comprobación y una salida definidos. Lista completa (numeración del Manual de implantación):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Hito</th>
+<th>Contenido esencial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Plan de vuelo ATC activado</td>
+<td>Comprueba la coherencia entre el plan de vuelo ATC, el slot aeroportuario y los datos de vuelo del aeropuerto; si son coherentes, genera el primer <strong>E-DPI</strong>; si no, alerta al AO/GH. Se dispara con la primera activación del FPL (como pronto <strong>EOBT − 3h</strong>) o con un FPL nuevo, tardío o revisado.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>EOBT − 2h</td>
+<td>Comprueba si EIBT+MTTT (o la TOBT manual) está dentro de <strong>EOBT + 15 min</strong>; si es coherente, envía el primer <strong>T-DPI-t</strong>; si no, alerta al AO/GH. Se dispara con una marca de tiempo fija en EOBT − 2h.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Despegue desde la estación de origen</td>
+<td>Para las aeronaves en rotación: la salida real del tramo de llegada anterior. Puede ocurrir <em>antes</em> del hito 2 si el vuelo de llegada despega antes de EOBT − 2h.</td>
+</tr>
+<tr>
+<td>4/5</td>
+<td>Actualización de radar local / Aproximación final</td>
+<td>Afina la EIBT a medida que se sigue y se aproxima la aeronave de llegada.</td>
+</tr>
+<tr>
+<td>6-8</td>
+<td>Aterrizada / Calzos puestos / Handling iniciado</td>
+<td>Empieza físicamente la rotación; se siguen los procesos de asistencia en tierra (repostaje, catering, limpieza, preparación del embarque).</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Confirmación de la TOBT antes de emitir la TSAT</td>
+<td>Confirma o actualiza la TOBT antes de usarla para calcular una TSAT; requiere como mínimo los hitos 1-3 completados.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>TSAT emitida</td>
+<td>Dos comprobaciones: (1) emite la TSAT e informa a los socios y al NM (mediante <strong>T-DPI-s</strong> en los vuelos no regulados); (2) comprueba si el <strong>número de actualizaciones de la TOBT tras la TSAT supera un máximo definido localmente (p. ej. 3)</strong>: si se supera, se generan un <strong>C-DPI</strong> y una alerta; comprueba también si la TTOT o el estado han cambiado <strong>≥5 minutos</strong>, lo que desencadena un nuevo <strong>T-DPI-t</strong>.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Embarque iniciado</td>
+<td>Comienza el embarque de pasajeros según el plan de asistencia en tierra.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Aeronave lista</td>
+<td>Todas las puertas cerradas, lista para el empuje o el rodaje.</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Puesta en marcha solicitada</td>
+<td>La tripulación de vuelo solicita al ATC la autorización de puesta en marcha.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Puesta en marcha aprobada</td>
+<td>El ATC concede la autorización, normalmente conforme a la TSAT.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Fuera calzos</td>
+<td>La aeronave abandona físicamente el puesto: <strong>AOBT (<em>Actual Off-Block Time</em>, hora real de fuera calzos)</strong>.</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Despegue</td>
+<td>La aeronave despega: <strong>ATOT (<em>Actual Take-Off Time</em>, hora real de despegue)</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-comprobaciones-de-discrepancia-umbrales-numericos">9.3 Comprobaciones de discrepancia (umbrales numéricos)</h3>
+<ul>
+<li><strong>Discrepancia EOBT/TOBT</strong>: si la TOBT y la EOBT difieren <strong>≥15 minutos</strong>, la persona responsable de la TOBT (el AO o, si se ha delegado, el agente de handling) debe actualizarla; una actualización que deje la TOBT <em>posterior</em> a EOBT+15 min genera una <strong>alerta CDM (CDM08)</strong>.</li>
+<li><strong>Discrepancia de TTOT</strong>: se evalúa siempre que cambia la TTOT; el <strong>requisito mínimo es un cambio de ≥5 minutos</strong> para desencadenar un nuevo DPI, aunque puede enviarse un mensaje ante cualquier cambio.</li>
+<li><strong>Responsable de la TOBT</strong>: normalmente el operador de aeronave, pero si las circunstancias de la rotación (p. ej. llegada tardía, demora de la asistencia en tierra) afectan a la TOBT, <strong>el agente de handling puede pasar a ser el responsable de la TOBT</strong> y actualizarla con la información más reciente.</li>
+</ul>
+<h3 id="94-beneficios-segun-el-planteamiento-del-propio-manual">9.4 Beneficios (según el planteamiento del propio manual)</h3>
+<p>El fin declarado del A-CDM es dar a <strong>todos los socios (AO, agente de handling, aeropuerto, ATC, NM) la misma imagen, actualizada de forma continua</strong>, del avance de la rotación de cada vuelo, reduciendo las colas de «posicionamiento para salir», mejorando la exactitud de la CTOT (porque la TTOT alimenta al NM en tiempo real mediante el DPI) y permitiendo una secuenciación de presalida previsible y eficiente en lugar de una cola de rodaje por orden de llegada.</p>
+<hr />
+<h2 id="10-espana-las-cinco-fmp-codigos-de-exencion-sts-slots-de-aena-frente-a-slots-atfm">10. España: las cinco FMP, códigos de exención STS, slots de AENA frente a slots ATFM</h2>
+<h3 id="101-las-cinco-fmp-de-espana">10.1 Las cinco FMP de España</h3>
+<p>OM06 menciona «la FMP» solo de forma genérica. El <strong>AIP España ENR 1.9</strong> <code>aip-spain/LE_ENR_1_9_en.txt</code> nombra la estructura regional real de ENAIRE: <strong>cinco posiciones de gestión de afluencia (FMP) regionales</strong>, una por ACC, que sirven de enlace entre los ATS, los aeropuertos y el NM (NMOC):</p>
+<table>
+<thead>
+<tr>
+<th>FMP</th>
+<th>Ubicación (Dirección Regional)</th>
+<th>Área de responsabilidad</th>
+<th>ACC atendido</th>
+<th>AFTN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FMP Madrid</strong></td>
+<td>Dirección Regional</td>
+<td>FIR/UIR Madrid, al norte del paralelo (Madrid, parte norte)</td>
+<td>ACC Madrid</td>
+<td>LECMZDZX</td>
+</tr>
+<tr>
+<td><strong>FMP Barcelona</strong></td>
+<td>Dirección Regional Este</td>
+<td>FIR/UIR Barcelona, excepto TMA Palma</td>
+<td>ACC Barcelona</td>
+<td>LECBZDZX</td>
+</tr>
+<tr>
+<td><strong>FMP Sevilla</strong></td>
+<td>Dirección Regional Sur</td>
+<td>FIR/UIR Madrid, al sur del paralelo 39°00'00"N</td>
+<td>ACC Sevilla</td>
+<td>LECSZDZX</td>
+</tr>
+<tr>
+<td><strong>FMP Palma</strong></td>
+<td>—</td>
+<td>TMA Palma</td>
+<td>TMA Palma</td>
+<td>LECPZDZX</td>
+</tr>
+<tr>
+<td><strong>FMP Canarias</strong></td>
+<td>Dirección Regional</td>
+<td>FIR/UIR Canarias</td>
+<td>ACC Canarias (GCCC)</td>
+<td>GCCCZDZX</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Cadena de respaldo</strong>: la <strong>FMP Madrid</strong> presta el servicio de las <strong>FMP Sevilla y Canarias</strong> cuando estas unidades no están operativas; la <strong>FMP Barcelona</strong> presta el servicio de la <strong>FMP Palma</strong> cuando esta unidad no está operativa. Es el reflejo, a nivel de FMP, de la estructura de respaldo de las AMC del apartado 8.3 (cada célula debe estar cubierta también fuera de su propio horario de operación).</li>
+<li><strong>Responsabilidades de la FMP</strong> (AIP ENR 1.9): vigilancia, planificación y coordinación diarias del ATFM dentro de su área; toda la coordinación entre el ATC y el NM (el AIP sigue escribiendo «FMD», el término antiguo de la unidad central ATFM, junto a «NM»); prestar apoyo ATFM a los operadores de aeronaves; vigilar las demoras y las regulaciones del NM para optimizar la afluencia por los sectores españoles; intercambiar mensajes con el NM en nombre del ATC o de los AO cuando se requiera.</li>
+</ul>
+<h3 id="102-codigos-de-exencion-sts-la-lista-exacta-espanola">10.2 Códigos de exención STS/: la lista exacta española</h3>
+<p>OM06 da 5 categorías de vuelos exentos en términos generales; el <strong>AIP ENR 1.9</strong> da los <strong>indicadores STS/ exactos</strong> que se usan en la casilla 18:</p>
+<ul>
+<li><strong>STS/HEAD</strong>: vuelos que transportan jefes de Estado o equivalentes.</li>
+<li><strong>STS/SAR</strong>: vuelos de búsqueda y salvamento.</li>
+<li><strong>STS/ATFMX</strong>: vuelos autorizados por las autoridades estatales pertinentes para quedar exentos (es el código operativo del AIP para los «vuelos autorizados por los Estados» de OM06, e incluye, según el AIP: vuelos de Estado [<strong>STS/STATE</strong>]; vuelos de equipo médico o de posicionamiento y vuelos humanitarios cuando la situación lo requiera [<strong>STS/HOSP</strong>, <strong>STS/HUM</strong>]; y vuelos que transportan vacunas consideradas críticas, señalados además con <strong>RMK/VACCINE</strong>, cuando una demora pudiera poner en riesgo las vacunas).</li>
+<li><strong>STS/MEDEVAC</strong>: vuelos que transportan una evacuación de emergencia con riesgo para la vida.</li>
+<li><strong>STS/FFR</strong>: vuelos dedicados a servicios de extinción de incendios.</li>
+<li><strong>Nota de procedimiento</strong>: para usar la exención STS/ATFMX por razones médicas o humanitarias, el AO u operador debe completar el propio formulario o procedimiento de <strong>«Exenciones ATFM»</strong> de ENAIRE, justificando la urgencia, a través de la sede electrónica de ENAIRE.</li>
+<li><strong>Contraste con la lista de 5 vuelos exentos de OM06</strong> (jefes de Estado, SAR, autorizados por el Estado, médicos o ambulancia con vidas en juego, extinción de incendios): el conjunto STS/ del AIP coincide punto por punto con la lista de OM06, lo que confirma que la lista del manual no es una aproximación sino el conjunto español operativo.</li>
+</ul>
+<h3 id="103-slots-aeroportuarios-aenacoordinador-frente-a-slots-atfm-la-diferencia">10.3 Slots aeroportuarios (Aena/coordinador) frente a slots ATFM: la diferencia</h3>
+<p>No cubierto con plena seguridad por ninguna fuente única leída en esta sesión; reconstruido a partir del contexto y contrastado solo en parte:</p>
+<ul>
+<li>Un <strong>slot aeroportuario</strong> (slot de Aena/coordinador, «slot aeroportuario») es un <strong>permiso de programación</strong> para usar la infraestructura de pista, puestos de estacionamiento o terminal de un aeropuerto coordinado a una hora concreta, asignado en el marco de las <strong>IATA Worldwide Slot Guidelines</strong> tal como se aplican en la UE (históricamente el Reglamento (CEE) 95/93 y sus sucesores) por el <strong>coordinador de slots del aeropuerto</strong>; en España, la <strong>oficina de coordinación de slots de Aena (AECFA, Aena Coordinación y Facilitación Aeroportuaria)</strong>. Responde a la pregunta <strong>«¿puede este aeropuerto aceptar este movimiento a esta hora, dada su capacidad declarada para la temporada?»</strong> y se fija <strong>con meses de antelación</strong>, en las conferencias de slots de IATA, que se celebran dos veces al año.</li>
+<li>Un <strong>slot ATFM/ATFCM (CTOT)</strong>, por el contrario, es una <strong>instrucción táctica de hora de salida</strong> emitida por el NM, generalmente en EOBT − 2h (SIT1), para suavizar la demanda frente a la <strong>capacidad ATC en ruta o de llegada, o de un TV concreto</strong>, el día de la operación; responde a <strong>«¿a qué hora exacta de hoy puede este vuelo entrar con seguridad en el recurso regulado?»</strong>.</li>
+<li>El <strong>artículo 1, apartado 3, del Reglamento 2019/123 nombra expresamente a los coordinadores de slots aeroportuarios</strong> como una de las entidades a las que se aplica el Reglamento de funciones de red: confirma que los dos sistemas de slots están vinculados formalmente (una CTOT ATFM no debería obligar a un vuelo a incumplir su ventana de slot aeroportuario, y viceversa) aunque los fijen organismos distintos, en escalas de tiempo distintas y por razones distintas.</li>
+<li><strong>Trampa</strong>: «slot» sin calificar es ambiguo en el lenguaje coloquial; lo probable es que el examen evalúe la <em>distinción</em> (quién lo asigna, Aena/coordinador o el NM; qué responde, la capacidad del aeropuerto durante toda la temporada o la capacidad ATC del día) más que el procedimiento detallado del coordinador, que queda fuera de esta biblioteca (véase el apartado 17).</li>
+</ul>
+<hr />
+<h2 id="11-ejemplos-resueltos-capacidad-slots-demora">11. Ejemplos resueltos (capacidad, slots, demora)</h2>
+<p>Todas las cifras siguientes son mías, construidas estrictamente a partir de las fórmulas y tablas dadas más arriba; conviene revisar la aritmética antes de fiarse de ella en un contexto de examen.</p>
+<p><strong>Ejemplo 1: construcción de la lista de slots.</strong> Se activa una regulación en un TV durante un subperiodo de 3 horas con un rate de 24 vuelos/hora.</p>
+<ul>
+<li>Número de slots = 3 × 24 = <strong>72 slots</strong>.</li>
+<li>Separación media = 60/24 = <strong>2,5 minutos</strong> entre slots consecutivos.</li>
+<li>Anchura de ventana aplicable (rate 24, que cae en la banda 12-29) = <strong>10 minutos</strong>.</li>
+<li>Tasa pendiente (rate global 24, en la banda 20-29) = <strong>1 slot pendiente</strong>; slots normales = hasta 28 (pero limitados por el rate real de 24/h, de modo que en valor absoluto serán efectivamente menos los «pendientes»: la tabla da la <em>conversión</em>, no recuentos literales de slots a cada rate; hay que tratar la fila de la tasa pendiente como la regla que se aplica, no como un recuento literal de slots a 24/h).</li>
+</ul>
+<p><strong>Ejemplo 2: SIT1 y STW.</strong> Un vuelo tiene EOBT = 14:00 UTC en una ruta regulada.</p>
+<ul>
+<li><strong>SAM emitido (SIT1)</strong> = EOBT − 2h = <strong>12:00 UTC</strong>, con la CTOT.</li>
+<li>Si la CTOT dada es 14:35 UTC, la <strong>ventana de cumplimiento del slot</strong> es <strong>14:30-14:45 UTC</strong> (−5/+10 min en torno a la CTOT).</li>
+<li>Si el ATC o la tripulación solo pueden estar listos a las 14:50 UTC (5 minutos tarde respecto de la ventana), debe presentarse un <strong>DLA</strong> o solicitarse una <strong>revisión del slot</strong>, en lugar de salir fuera de la ventana.</li>
+</ul>
+<p><strong>Ejemplo 3: HEC + regla del 10% (amplía el ejemplo resuelto del propio OM06, apartado 3.12).</strong> Capacidad HEC declarada de un sector = 40/h; un TV sin OTMV definido (no es la TMA de Madrid/Barcelona).</p>
+<ul>
+<li>Valor de monitorización de los primeros 60 minutos = 40 × 1,10 = <strong>44</strong>.</li>
+<li>Caso: carga de la primera hora = 43 (por debajo de 44, es decir, por debajo de lo declarado + 10%), y los 120 minutos siguientes se mantienen en 40 o menos → <strong>sin regulación</strong> (regla b de OM06).</li>
+<li>Caso: carga de la primera hora = 47 (por encima de 44), los 120 minutos siguientes se mantienen ≤ 40 → <strong>se regula la primera hora a 44</strong> y las horas siguientes a 40 si sigue siendo necesario (regla c de OM06).</li>
+<li>Caso: carga de la primera hora = 42 (por encima de 40 pero por debajo de 44) y una hora posterior dentro de los 120 min también supera 40 (digamos 45) → <strong>se regula a 40 desde el principio</strong> (regla d de OM06), porque la exención de «no regulación» de la regla b exige que los 120 minutos <em>siguientes</em> se mantengan dentro de la capacidad declarada, y aquí no se cumple.</li>
+</ul>
+<p><strong>Ejemplo 4: cadena de TTOT de A-CDM.</strong> Una aeronave en rotación: ELDT (llegada) = 09:10, EXIT (rodaje de llegada) = 8 min → EIBT = 09:18. MTTT = 45 min → hora de listo calculada automáticamente = 10:03. EXOT (rodaje de salida) = 12 min.</p>
+<ul>
+<li><strong>TTOT calculada automáticamente = EIBT + MTTT + EXOT = 09:18 + 0:45 + 0:12 = 10:15</strong>.</li>
+<li>Si el agente de handling introduce después una <strong>TOBT manual = 10:05</strong> (lista 10 minutos antes que el cálculo automático, p. ej. por una rotación rápida), la fórmula pasa a <strong>TTOT = TOBT + EXOT = 10:05 + 0:12 = 10:17</strong>: obsérvese que es <em>posterior</em>, no anterior, a los 10:15 calculados automáticamente, lo que ilustra que una TOBT manual <strong>prevalece sobre</strong> la estimación automática y no se limita a mejorarla.</li>
+<li>Si la EOBT original presentada en el plan de vuelo era 10:20 y la nueva TOBT (10:05) difiere de ella exactamente en 15 minutos, esto queda <strong>en el umbral, no por encima</strong> de la discrepancia EOBT/TOBT: una diferencia de 16 minutos o más desencadenaría la exigencia de actualización o la alerta descritas en el apartado 9.3.</li>
+</ul>
+<p><strong>Ejemplo 5: tasa pendiente en un TV muy cargado.</strong> Rate de regulación = 36 vuelos/hora (≥20/h, por lo que se aplica directamente la regla por defecto del 5%, no la tabla de conversión, que en el extracto del manual llega solo hasta 89/h).</p>
+<ul>
+<li>Slots pendientes = 36 × 0,05 = <strong>1,8 → efectivamente 2 slots pendientes por hora</strong> reservados para vuelos que actualizan tarde (FCM/DLA/CHG tras el SAM), en coherencia con la fila «30-49» de la tabla, que da 2 slots pendientes.</li>
+</ul>
+<hr />
+<h2 id="12-manual-frente-a-fuentes-primarias">12. Manual frente a fuentes primarias</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Punto</th>
+<th>Qué dice OM06 (manual de ENAIRE)</th>
+<th>Qué dice la fuente primaria (Wave 2.3 / Reg. 2019/123 / A-CDM / AIP)</th>
+<th>Cómo responder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Principio de CASA</td>
+<td>No se describe (OM06 solo nombra CASA como «el sistema de asignación de slots»)</td>
+<td>«Primero planificado, primero servido»; el algoritmo de priorización de CASA minimiza la demora <strong>global</strong>, no la propia de cada vuelo</td>
+<td>Usar la fuente primaria; OM06 no ofrece una redacción competidora</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Códigos de motivo de regulación</td>
+<td>OM06 no da las letras de motivo de regulación del NM en absoluto</td>
+<td>Lista completa de 14 códigos de EUROCONTROL (C, I, R, S, T, A, G, E, N, M, P, W, V, O); el conjunto de indicadores propio de ENAIRE (notas base t06, del Plan de Vuelo 2030) usa solo C, R, S, T, M, P</td>
+<td>Si la pregunta dice «causas de demora ATFM de ENAIRE», usar el conjunto de 6 códigos; si dice «motivo de regulación del NM», usar el conjunto completo de 14</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Coordinación de las técnicas STAM con el NMOC</td>
+<td>OM06: «la idoneidad... la estudia el TCA, se analiza con el Supervisor, se propone al Jefe de Sala... el Jefe de Sala decide siempre» (cadena interna española)</td>
+<td>Manual de Operaciones Wave 2.3: la limitación de niveles, el reencaminamiento táctico, el MDI y el MIT <strong>no requieren coordinación individual con el NMOC</strong></td>
+<td>Coherentes, con distinto nivel de detalle: OM06 describe la <em>cadena de decisión interna española</em>, el manual de EUROCONTROL confirma que <em>la participación del NM no es obligatoria</em> para estas medidas; ambas son ciertas a la vez</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Redacción de los niveles FUA</td>
+<td>OM06: nivel 1 «planificación a largo plazo... proceso conjunto civil/militar»; nivel 2 «gestión día a día... a través de la AMC»; nivel 3 «tiempo real»</td>
+<td>Definiciones casi literales de la OACI/EUROCONTROL en el manual FUA/AMC/CADF (apartado 8.1)</td>
+<td>Coherentes; la fuente primaria es más precisa («activación determinada por la disponibilidad» en el nivel 1; «activado mediante asignación en el AUP/UUP» en el nivel 2; «activaciones en tiempo real... no necesariamente conocidas por el NM» en el nivel 3)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Obligación diaria de la AMC</td>
+<td>OM06: la AMC «gestiona diariamente... la asignación temporal del espacio aéreo»</td>
+<td>Manual FUA: <strong>la AMC debe producir un AUP READY todos los días, aunque no haya aperturas ni restricciones</strong>; para fines de semana y festivos sin personal, los AUP deben prepararse antes del cierre</td>
+<td>La fuente primaria añade una obligación operativa que OM06 no menciona</td>
+</tr>
+<tr>
+<td>6</td>
+<td>A-CDM</td>
+<td>No figura en OM06 en absoluto</td>
+<td>16 hitos, fórmulas de TOBT/TSAT/TTOT, familia de mensajes DPI</td>
+<td>Enteramente adicional; no es examinable a partir de OM06, pero sí verosímil a partir de las fuentes primarias, dado que la propia bibliografía del manual enumera «www.EUROCONTROL.int» de forma genérica</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Gobernanza del Gestor de Red</td>
+<td>OM06: «un comité, el Network Manager Board... diversas ramas de la aviación representadas»</td>
+<td>Reg. 2019/123, art. 18: composición exacta (12 miembros con voto + 6 sin voto), frecuencia de reuniones (≥3/año), regla de decisión (mayoría simple)</td>
+<td>Solo fuente primaria; la frase de OM06 es una paráfrasis amplia</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Estructura de FMP de España</td>
+<td>OM06 no nombra individualmente las FMP de España</td>
+<td>AIP ENR 1.9: 5 FMP nombradas (Madrid, Barcelona, Sevilla, Palma, Canarias) con cadena de respaldo explícita (Madrid→Sevilla/Canarias; Barcelona→Palma)</td>
+<td>Solo fuente primaria</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Vuelos exentos, códigos exactos</td>
+<td>OM06 da 5 categorías con palabras, sin códigos STS/</td>
+<td>El AIP ENR 1.9 da los indicadores STS/ literales (HEAD, SAR, ATFMX, STATE, HOSP, HUM, MEDEVAC, FFR) más RMK/VACCINE</td>
+<td>Coherentes; la fuente primaria da la forma codificable exacta</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-trampas-de-examen">13. Trampas de examen</h2>
+<ol>
+<li><strong>CASA es pasivo para el AO</strong>: presentar el FPL <em>es</em> la solicitud de slot; no existe un paso aparte de «pedir un slot».</li>
+<li><strong>CASA minimiza la demora global, no la de cada vuelo</strong>: una pregunta que insinúe que CASA optimiza la equidad vuelo a vuelo es errónea; el principio rector es «primero planificado, primero servido» a nivel de red.</li>
+<li><strong>La anchura de ventana se reduce al subir el rate</strong> (30 min con 1-2/h hasta 6 min con ≥30/h): una opción que afirme ventanas más anchas con rates mayores es una trampa.</li>
+<li><strong>La tasa pendiente es del 5% solo cuando el rate es ≥ 20/h</strong>; por debajo, se usa la tabla de conversión fija (p. ej. rate 15 → sigue siendo solo 19 normales/0 pendientes en el límite de la banda «0-19»: hay que leer la tabla, no calcular sin más el 5%).</li>
+<li><strong>Los slots pendientes no van nunca a los que presentan tarde</strong>, solo a los vuelos modificados <em>después</em> de su SAM (FCM/DLA/CHG): «presentar tarde» y «actualizar tarde» son poblaciones distintas y la regla solo protege a la segunda.</li>
+<li><strong>REGCAUSE tiene tres partes</strong>: letra de causa + letra de ubicación (D/E/A) + código numérico IATA (o 00); no hay que reducirlo a «una letra».</li>
+<li><strong>D/E/A en REGCAUSE = salida/en ruta/llegada</strong> (<em>Departure/En-route/Arrival</em>), no «Doméstico/Europeo/Área» ni ninguna otra expansión.</li>
+<li><strong>Consejo de Administración de la Red (NMB): 12 miembros con voto (4+4+2+2), 6 sin voto</strong>: a una pregunta del tipo «¿cuántos votos tiene la propia EUROCONTROL en el NMB?» hay que responder <strong>cero: el representante de EUROCONTROL no tiene voto</strong>.</li>
+<li><strong>EU Restriction ≠ regulación de rate cero</strong>: una EU Restriction hace que el IFPS <strong>rechace</strong> los FPL de plano (obligando a volver a presentarlos), mientras que una regulación de rate cero deja pasar el FPL y después lo demora o suspende en el ETFMS.</li>
+<li><strong>El nivel 2 de ASM se activa por el acto de asignación del AUP/UUP; el nivel 3 se activa en tiempo real y puede que el NM no lo conozca de antemano</strong>: no hay que decir que el nivel 3 está «planificado el día anterior» (eso es el nivel 2).</li>
+<li><strong>La TSA es solo de nivel 1 (o no está gestionada por FUA), nunca de nivel 2 ni 3</strong> en la tabla de parámetros FUA; contraste con CBA/MRA, que abarcan los tres niveles.</li>
+<li><strong>La TOBT prevalece sobre la estimación automática EIBT+MTTT+EXOT, no se promedia con ella.</strong></li>
+<li><strong>El hito 3 de A-CDM (despegue desde la estación de origen) puede ocurrir antes del hito 2 (comprobación de EOBT−2h)</strong> en un vuelo cuyo tramo de llegada sale pronto: los números de hito no siempre son estrictamente cronológicos entre vuelos distintos.</li>
+<li><strong>La TTOT es una restricción de «no slot antes de» para el NM</strong>: no se emitirá una CTOT anterior a la TTOT, aunque las condiciones de la red lo permitieran de otro modo.</li>
+<li><strong>El respaldo de las FMP de España es asimétrico</strong>: Madrid respalda <strong>a la vez</strong> a Sevilla y a Canarias; Barcelona respalda <strong>solo</strong> a Palma: no hay que suponer un patrón uniforme de «cada una cubre a una vecina».</li>
+<li><strong>STS/ATFMX es el código de exención de los vuelos autorizados por el Estado en general</strong>, mientras que HEAD, SAR, MEDEVAC y FFR son códigos específicos independientes; los vuelos HOSP/HUM/de vacunas se tramitan <em>a través de</em> ATFMX mediante el procedimiento propio de solicitud de exención de ENAIRE, y no tienen un código de exención ATFM de primer nivel propio en el texto del AIP leído.</li>
+<li><strong>Los slots aeroportuarios (Aena/coordinador) y los slots ATFM (CTOT) son sistemas distintos, fijados por organismos distintos y en escalas de tiempo distintas</strong>: una pregunta que use «slot» de forma genérica puede estar evaluando justo esta distinción.</li>
+</ol>
+<hr />
+<h2 id="14-imprescindible-memorizar">14. Imprescindible memorizar</h2>
+<ul>
+<li><strong>CASA</strong>: pasivo para el AO (presentar el FPL = solicitar el slot); FCFS/«primero planificado, primero servido»; minimiza la demora global; columna de factor de prioridad; ejemplo 4 h × 28/h = 112 slots, separados ~2 min.</li>
+<li><strong>Tasa pendiente</strong>: 5% por defecto con rate ≥20/h; tabla por debajo (0-19→0 pendientes, 20-29→1, 30-49→2, 50-69→3, 70-89→4); solo para vuelos actualizados tras el SAM (FCM/DLA/CHG), nunca para los que presentan tarde; los slots pendientes pasan a normales 2h15 antes de la hora de referencia del slot.</li>
+<li><strong>Anchura de ventana</strong>: 30 min (1-2/h) → 20 (3-6) → 18 (7) → 16 (8) → 14 (9) → 12 (10-11) → 10 (12-29) → 6 min (≥30/h).</li>
+<li><strong>Umbral de confirmación de demora</strong>: las regulaciones excepcionales (XCD/FCM) suspenden los vuelos por encima del umbral; FLS con PTOT en SIT1 (EOBT-2h); RESPBY = 20 min; confirmado → la PTOT pasa a ser la CTOT.</li>
+<li><strong>TIS/TRS</strong>: el TIS protege las <em>mejoras</em> tardías de la CTOT (el aeródromo necesita tiempo para resecuenciar); el TRS protege frente a <em>cambios</em> tardíos de la CTOT una vez en la secuencia de salidas.</li>
+<li><strong>Familia DPI</strong>: E-DPI (hito 1, comprobación de coherencia), T-DPI-t (objetivo puntual, p. ej. EOBT-2h), T-DPI-s (secuenciado, al emitir la TSAT), A-DPI (evento real), C-DPI (cancelación, p. ej. demasiadas actualizaciones de TOBT); el API es el equivalente del lado de la llegada.</li>
+<li><strong>REGCAUSE</strong> = letra de causa + D/E/A (ubicación) + código numérico de demora IATA (o 00).</li>
+<li><strong>Motivos de regulación del NM (14)</strong>: C capacidad ATC, I acción sindical ATC, R encaminamientos ATC, S personal ATC, T equipo ATC, A accidente/incidente, G capacidad del aeródromo, E servicios del aeródromo, N acción sindical no ATC, M gestión del espacio aéreo, P evento especial, W meteorología, V cuestiones medioambientales, O otros.</li>
+<li><strong>NMB (Consejo de Administración de la Red)</strong>: 12 con voto (4 ANSP/FAB + 4 usuarios del espacio aéreo + 2 aeropuertos + 2 militares), 6 sin voto (presidente, Comisión, director del NM, presidente del GT de operaciones, 2 ANSP de países asociados, EUROCONTROL); ≥3 reuniones/año; mayoría simple.</li>
+<li><strong>EACCC</strong>: célula de coordinación de crisis; miembros permanentes de la Comisión, la EASA, los Estados miembros, el NM, los militares, los usuarios civiles y los aeropuertos; puntos focales de los Estados; el Reglamento interno lo aprueba el NMB.</li>
+<li><strong>Niveles ASM</strong>: 1 estratégico (política, activación = disponibilidad), 2 pretáctico (asignación diaria de la AMC mediante AUP/UUP), 3 táctico (tiempo real, no siempre conocido de antemano por el NM).</li>
+<li><strong>Tipos de RSA</strong>: D, R, P, TRA, TSA (solo nivel 1), RCA, MTA, CBA (obligatoria en niveles 1+2), FBZ, NPZ (obligatoria en el nivel 1, prohibida en el 2), MRA (obligatoria en niveles 1+2).</li>
+<li><strong>AMC</strong>: debe emitir un AUP READY cada día, aunque no haya nada que declarar; concepto de AMC líder para estructuras transfronterizas compartidas.</li>
+<li><strong>A-CDM</strong>: 16 hitos; TOBT (estimación de listo del AO/GH) → TSAT (objetivo de aprobación de puesta en marcha del ATC) → TTOT; TTOT = EIBT+MTTT+EXOT (automática) o TOBT+EXOT (manual, prevalece) o EOBT+EXOT (alternativa); umbral de discrepancia EOBT/TOBT 15 min; umbral de discrepancia de TTOT 5 min; el máximo de actualizaciones de TOBT tras la TSAT (p. ej. 3) desencadena C-DPI/alerta.</li>
+<li><strong>Las 5 FMP de España</strong>: Madrid, Barcelona, Sevilla, Palma, Canarias; Madrid respalda a Sevilla+Canarias; Barcelona respalda a Palma.</li>
+<li><strong>Códigos STS/</strong>: HEAD, SAR, ATFMX, STATE, HOSP, HUM (+RMK/VACCINE), MEDEVAC, FFR.</li>
+<li><strong>Slot aeroportuario (Aena/coordinador) ≠ slot ATFM (CTOT del NM)</strong>: distinto organismo, distinta escala de tiempo, distinta pregunta a la que responde.</li>
+</ul>
+<hr />
+<h2 id="15-glosario-bilingue-es-en">15. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Toma de decisiones en colaboración en aeropuerto (A-CDM)</td>
+<td>A-CDM (Airport Collaborative Decision Making)</td>
+</tr>
+<tr>
+<td>Hora real de fuera calzos (AOBT)</td>
+<td>Actual Off-Block Time (AOBT)</td>
+</tr>
+<tr>
+<td>Hora real de despegue (ATOT)</td>
+<td>Actual Take-Off Time (ATOT)</td>
+</tr>
+<tr>
+<td>Área adyacente</td>
+<td>Adjacent Area</td>
+</tr>
+<tr>
+<td>Coordinador de slots aeroportuarios</td>
+<td>Airport slot coordinator</td>
+</tr>
+<tr>
+<td>Célula de Gestión de Espacio Aéreo (AMC)</td>
+<td>Airspace Management Cell (AMC)</td>
+</tr>
+<tr>
+<td>Interfaz B2B del Gestor de Red</td>
+<td>Business-to-Business interface (NM B2B)</td>
+</tr>
+<tr>
+<td>Función centralizada de datos de espacio aéreo (CADF)</td>
+<td>Centralised Airspace Data Function (CADF)</td>
+</tr>
+<tr>
+<td>Complejidad</td>
+<td>Complexity</td>
+</tr>
+<tr>
+<td>Área transfronteriza (CBA)</td>
+<td>Cross Border Area (CBA)</td>
+</tr>
+<tr>
+<td>Umbral de confirmación de demora</td>
+<td>Delay Confirmation Threshold</td>
+</tr>
+<tr>
+<td>Equilibrio entre demanda y capacidad (DCB)</td>
+<td>Demand and Capacity Balancing (DCB)</td>
+</tr>
+<tr>
+<td>Información de planificación de salida (DPI)</td>
+<td>Departure Planning Information (DPI)</td>
+</tr>
+<tr>
+<td>Cómputo de entradas</td>
+<td>Entry count</td>
+</tr>
+<tr>
+<td>Célula Europea de Coordinación de Crisis de Aviación (EACCC)</td>
+<td>European Aviation Crisis Coordination Cell (EACCC)</td>
+</tr>
+<tr>
+<td>AUP/UUP europeo (EAUP/EUUP)</td>
+<td>European AUP/UUP (EAUP/EUUP)</td>
+</tr>
+<tr>
+<td>Hora estimada de calzos puestos (EIBT)</td>
+<td>Estimated In-Block Time (EIBT)</td>
+</tr>
+<tr>
+<td>Tiempo estimado de rodaje de llegada (EXIT)</td>
+<td>Estimated Taxi-In Time (EXIT)</td>
+</tr>
+<tr>
+<td>Tiempo estimado de rodaje de salida (EXOT)</td>
+<td>Estimated Taxi-Out Time (EXOT)</td>
+</tr>
+<tr>
+<td>Bloque Funcional de Espacio Aéreo (FAB)</td>
+<td>Functional Airspace Block (FAB)</td>
+</tr>
+<tr>
+<td>Agente/Asistente de handling (GH)</td>
+<td>Ground Handler (GH)</td>
+</tr>
+<tr>
+<td>AMC líder</td>
+<td>Lead AMC</td>
+</tr>
+<tr>
+<td>Área de entrenamiento militar (MTA)</td>
+<td>Military Training Area (MTA)</td>
+</tr>
+<tr>
+<td>Tiempo mínimo de rotación (MTTT)</td>
+<td>Minimum Turn-Round Time (MTTT)</td>
+</tr>
+<tr>
+<td>Consejo de Administración de la Red (NMB)</td>
+<td>Network Management Board (NMB)</td>
+</tr>
+<tr>
+<td>Portal de operaciones de la red (portal NOP)</td>
+<td>Network Operations Portal (NOP Portal)</td>
+</tr>
+<tr>
+<td>Cómputo de ocupación</td>
+<td>Occupancy count</td>
+</tr>
+<tr>
+<td>Tasa pendiente</td>
+<td>Pending rate</td>
+</tr>
+<tr>
+<td>Hora provisional de despegue (PTOT)</td>
+<td>Provisional Take-Off Time (PTOT)</td>
+</tr>
+<tr>
+<td>Motivo de la regulación</td>
+<td>Regulation Reason</td>
+</tr>
+<tr>
+<td>Espacio aéreo reservado/segregado (RSA)</td>
+<td>Reserved/Segregated Airspace (RSA)</td>
+</tr>
+<tr>
+<td>Lista de asignación de slots (SAL)</td>
+<td>Slot Allocation List (SAL)</td>
+</tr>
+<tr>
+<td>Hora objetivo de fuera de calzos (TOBT)</td>
+<td>Target Off-Block Time (TOBT)</td>
+</tr>
+<tr>
+<td>Hora objetivo de autorización de puesta en marcha (TSAT)</td>
+<td>Target Start-Up Approval Time (TSAT)</td>
+</tr>
+<tr>
+<td>Hora objetivo de despegue (TTOT)</td>
+<td>Target Take-Off Time (TTOT)</td>
+</tr>
+<tr>
+<td>Tiempo para insertar en la secuencia (TIS)</td>
+<td>Time to Insert in the Sequence (TIS)</td>
+</tr>
+<tr>
+<td>Tiempo para retirar de la secuencia (TRS)</td>
+<td>Time to Remove from the Sequence (TRS)</td>
+</tr>
+<tr>
+<td>Volumen de tráfico (TV)</td>
+<td>Traffic volume (TV)</td>
+</tr>
+<tr>
+<td>Anchura de ventana (WW)</td>
+<td>Window Width (WW)</td>
+</tr>
+<tr>
+<td>Carga de trabajo</td>
+<td>Workload</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-fuentes">16. Fuentes</h2>
+<ul>
+<li><strong>Manual de Operaciones ATFCM de EUROCONTROL, Wave 2.3, válido desde el 22-04-2026</strong> <code>ATC\fuentes\06-plan-vuelo-atfcm\eurocontrol\ATFCM-Operations-Manual-Wave2.3-2026-03.pdf</code> (texto: <code>...\texto\06-plan-vuelo-atfcm\eurocontrol\ATFCM-Operations-Manual-Wave2.3-2026-03.txt</code>) — apartados usados: definiciones (ATFM/ATFCM/TV/MV), procedimiento de la EU Restriction (5.6.7), medidas sobre el área adyacente (5.6.8), tabla de motivos de regulación (cap. 5), procedimientos internos STAM (5.9.1), algoritmo CASA y tablas (Annex C, «14.1-14.2»).</li>
+<li><strong>Manual de Usuario ATFCM de EUROCONTROL, Wave 2.3, válido desde el 22-04-2026</strong> <code>...\eurocontrol\ATFCM-Users-Manual-Wave2.3-2026-03.txt</code> — composición del REGCAUSE, confirmación de la STW, ubicación del apéndice de fraseología RTF.</li>
+<li><strong>Manual de Operaciones FUA/AMC/CADF de EUROCONTROL, ed. 21.0, válido desde el 10-11-2025</strong> <code>...\eurocontrol\FUA-AMC-CADF-Operations-Manual-21.0-2026-04.txt</code> — niveles ASM (4.1.4), procedimientos de trabajo de la AMC (cap. 2), concepto de AMC líder (cap. 6), tabla de tipos de RSA.</li>
+<li><strong>Manual de implantación de A-CDM de EUROCONTROL v5.0 (31-03-2017)</strong> <code>...\eurocontrol\A-CDM-Implementation-Manual-node10373.txt</code> — 16 hitos, fórmulas de TOBT/TSAT/TTOT y comprobaciones de discrepancia (Attachment 12).</li>
+<li><strong>Especificación de EUROCONTROL para A-CDM (2025-01)</strong> <code>...\eurocontrol\EUROCONTROL-Specification-A-CDM-2025-01.txt</code>.</li>
+<li><strong>Guía de implantación de DPI de EUROCONTROL 2.700 (2025-06)</strong> <code>...\eurocontrol\DPI-Implementation-Guide-2.700-2025-06.txt</code>.</li>
+<li><strong>Reglamento de Ejecución (UE) 2019/123 de la Comisión</strong> (Reglamento de funciones de red) <code>ATC\fuentes\06-plan-vuelo-atfcm\regulations\Reg-2019-123-Network-Functions.html</code> (texto: <code>...\texto\06-plan-vuelo-atfcm\regulations\Reg-2019-123-Network-Functions.txt</code>) — artículos 1, 18 (NMB), 19 (EACCC).</li>
+<li><strong>AIP España ENR 1.9</strong> (en) <code>ATC\fuentes\06-plan-vuelo-atfcm\aip-spain\LE_ENR_1_9_en.pdf</code> (texto: <code>...\texto\06-plan-vuelo-atfcm\aip-spain\LE_ENR_1_9_en.txt</code>) — cinco FMP de España y cadena de respaldo, códigos de exención STS/ y procedimiento de exención.</li>
+<li>Las notas base y la guía OM06 del tema 6, leídas para evitar duplicidades; este archivo las referencia expresamente allí donde el contenido se solapa.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

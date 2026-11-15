@@ -1,0 +1,129 @@
+¿Qué ley creó la EPE Aena (Entidad Pública Empresarial Aeropuertos españoles y Navegación Aérea), luego ENAIRE?	El artículo 82 de la Ley 4/1990, de 29 de junio, de Presupuestos Generales del Estado para 1990.	ATC::OM07
+¿Qué ley cambió el nombre de Aena EPE por ENAIRE?	La Ley 18/2014, de 15 de octubre, de aprobación de medidas urgentes para el crecimiento, la competitividad y la eficiencia.	ATC::OM07
+¿Cuál es la forma jurídica de ENAIRE y a qué ministerio está adscrita?	Entidad pública empresarial, adscrita al Ministerio de Transportes y Movilidad Sostenible.	ATC::OM07
+¿Cuántos centros de control y torres tiene ENAIRE según el manual 7 (p. 4)?	Cinco centros de control y 21 torres; más de 2 millones de vuelos al año.	ATC::OM07
+¿Qué extensión del espacio aéreo español gestiona ENAIRE según el manual 7?	2 190 000 km² (2.190.000 kilómetros cuadrados).	ATC::OM07
+¿Qué posición ocupa ENAIRE en Europa por volumen de tráfico (manual 7)?	La cuarta en Europa por volumen de tráfico y una de las más importantes a nivel mundial.	ATC::OM07
+¿A cuántas personas transportó en 2023 el tráfico atendido por ENAIRE (manual 7)?	A más de 328 millones de personas (en más de 2 millones de vuelos).	ATC::OM07
+¿Qué cuatro cualidades enumera el manual para la prestación del servicio encomendado a ENAIRE?	Que sea «segura, eficaz, continuada y sostenible».	ATC::OM07
+¿Qué tiene encomendado ENAIRE en el sistema de navegación aérea?	La planificación, dirección, coordinación, explotación, conservación y administración del tráfico aéreo, de los servicios de telecomunicaciones e información aeronáutica, así como de las infraestructuras, instalaciones y redes de comunicaciones.	ATC::OM07
+¿Qué servicios de tránsito aéreo de control presta ENAIRE (manual 7, p. 4)?	Control de área, aproximación y aeródromo, además de información de vuelo, alerta y asesoramiento.	ATC::OM07
+¿Dónde presta ENAIRE los servicios CNS (comunicaciones, navegación y vigilancia)?	En todo el espacio aéreo español y en los aeropuertos de la red Aena.	ATC::OM07
+¿En qué año fue designada ENAIRE Operador de Infraestructuras Críticas?	2015.	ATC::OM07
+¿En qué año fue designada ENAIRE Operador de Servicios Esenciales?	2019.	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 1991?	Creación del Ente Público Aeropuertos Españoles y Navegación Aérea (AENA).	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2010?	Ley 9/2010: liberalización de los servicios de tránsito aéreo (ATS) de aeródromo.	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2011?	Separación efectiva entre Aena Aeropuertos S.A. y Aena Entidad Pública Empresarial.	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2013?	Acuerdo entre España y Portugal para crear el bloque funcional de espacio aéreo del suroeste (SW FAB, South West Functional Airspace Block).	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2014?	Aena pasó a ser ENAIRE, en el contexto de la privatización parcial de Aena S.A.	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2015?	Entró capital privado en el 49 % de Aena S.A.; ENAIRE conservó el 51 % de las acciones.	ATC::OM07
+Cronología del manual 7: ¿qué ocurrió en 2016?	Nuevo acuerdo ENAIRE-Aena S.A. para la prestación de servicios de navegación aérea, firmado el 23 de diciembre de 2016 por 5 años.	ATC::OM07
+¿Qué plan estratégico abarcó 2017-2020 y cuáles fueron sus seis palabras con «+»?	Plan de Vuelo 2020: +Seguros, +Competitivos, +Ecológicos, +Puntuales, +Valorados, +Comprometidos.	ATC::OM07
+¿Qué plan estratégico presenta el manual 7 y qué periodo abarca?	Plan de Vuelo 2025, 2021-2025 («hoja de ruta de la transformación de ENAIRE»).	ATC::OM07
+Cadena institucional del manual 7: ¿qué órgano diseña la estrategia, dirige la política aeronáutica y ejerce de regulador?	La Dirección General de la Aviación Civil (DGAC), órgano del Ministerio.	ATC::OM07
+Regulador, supervisor y proveedor: ¿qué papel asigna el manual 7 a AESA y a ENAIRE?	AESA (Agencia Estatal de Seguridad Aérea) = supervisor del cumplimiento de la normativa de aviación civil en España; ENAIRE = Proveedor Nacional de Servicios de Navegación Aérea.	ATC::OM07
+Enumera los cinco ACC / regiones de ENAIRE (región / centro).	Centro-Norte / Madrid; Este / Barcelona; Sur / Sevilla; Canarias / Gran Canaria; Balear / Palma.	ATC::OM07
+¿Cuántas FIR (regiones de información de vuelo) tiene España en el manual 7 y cuáles son?	3: Madrid, Barcelona y Canarias.	ATC::OM07
+¿Cuáles son los dos TACC (centros de control de área terminal) del manual 7?	Santiago y Valencia.	ATC::OM07
+¿Superficie del ACC Madrid en el mapa del manual 7?	435 000 km².	ATC::OM07
+¿Superficie del ACC Barcelona en el mapa del manual 7?	266 000 km².	ATC::OM07
+¿Superficie del ACC Sevilla en el mapa del manual 7?	179 000 km².	ATC::OM07
+¿Superficie del ACC Palma en el mapa del manual 7?	51 400 km².	ATC::OM07
+¿Superficie del ACC Gran Canaria en el mapa del manual 7?	1 370 000 km².	ATC::OM07
+¿Qué ACC tiene la mayor superficie en el manual 7 y cuál la menor?	Mayor: Gran Canaria (1 370 000 km²); menor: Palma (51 400 km²).	ATC::OM07
+¿Quién es el Presidente de ENAIRE en el organigrama del manual (nov. 2024)?	José Antonio Santano Clavero.	ATC::OM07
+¿Quién es el Director General de ENAIRE en el organigrama del manual (nov. 2024)?	Enrique Maurer Somolinos.	ATC::OM07
+¿Quién es el Director de Servicios de Navegación Aérea en el organigrama del manual?	José Luis Meler Jordán (tiene una Directora Adjunta, Laura Garcés Acín, y por debajo los directores de Sistemas y de Operaciones).	ATC::OM07
+En el organigrama del manual, ¿qué directores dependen del Director de Servicios de Navegación Aérea?	El Director de Sistemas y el Director de Operaciones, y los cinco directores regionales (Balear, Canarias, Centro-Norte, Este, Sur); también el responsable de la división de Diseño, Desarrollo e Implantación ATM.	ATC::OM07
+¿Qué porcentaje de Aena S.A. posee ENAIRE (manual 7)?	El 51 % (accionista mayoritario).	ATC::OM07
+¿Qué participación tiene ENAIRE en CRIDA (manual 7)?	El 66,66 % (participación mayoritaria).	ATC::OM07
+¿Qué participación tiene ENAIRE en STARTICAL (manual 7)?	El 50 %.	ATC::OM07
+¿Qué participación tiene ENAIRE en Ineco (manual 7)?	El 45,85 %.	ATC::OM07
+¿Qué participación tiene ENAIRE en el Grupo EAD (manual 7)?	El 36 %.	ATC::OM07
+Completa: participaciones de ENAIRE en empresas estratégicas (manual 7): CRIDA ___, STARTICAL ___, Ineco ___, Grupo EAD ___.	CRIDA 66,66 %; STARTICAL 50 %; Ineco 45,85 %; Grupo EAD 36 % (y Aena 51 %).	ATC::OM07
+¿Qué participaciones de ENAIRE son «participación mayoritaria» en el organigrama del grupo (manual 7, p. 7)?	Aena (51 %) y CRIDA (66,66 %). Ineco, GroupEAD y Startical son «Participadas ENAIRE».	ATC::OM07
+¿Qué empresa es filial al 100 % de Aena en el organigrama del grupo del manual?	Aena Internacional (100 %).	ATC::OM07
+¿A qué se dedica la Fundación ENAIRE?	A gestionar, conservar y difundir el patrimonio artístico de la entidad y a fomentar, divulgar e impulsar la cultura aeronáutica en la sociedad (en el organigrama del grupo depende del «Patronato»).	ATC::OM07
+¿Cuántas personas componen la plantilla de ENAIRE en el manual 7 y con qué fecha?	Más de 4200 personas, datos a 31 de octubre de 2024.	ATC::OM07
+¿Qué dos convenios colectivos existen en ENAIRE?	III Convenio Colectivo profesional de Controladores de Tránsito Aéreo y I Convenio Colectivo del Grupo Aena (personal no controlador).	ATC::OM07
+¿A qué personal se aplica el I Convenio Colectivo del Grupo Aena?	Al personal no controlador: Técnicos de Mantenimiento, Operaciones, Sistemas, Seguridad, Personas, Calidad y Medioambiente, Comunicación, Jurídico, Sistemas de Información, Económico-Administrativo, Planificación, Delineación, Servicios y Mantenimiento General.	ATC::OM07
+¿Qué porcentaje de la plantilla de ENAIRE son controladores aéreos (manual 7)?	Alrededor del 49 %.	ATC::OM07
+Plantilla por ocupaciones: ¿qué porcentaje corresponde a Ingeniería y Explotación Técnica?	Sobre un 20 %.	ATC::OM07
+Plantilla por ocupaciones: ¿qué porcentaje corresponde a Operaciones y qué incluye?	Sobre un 5 %: información aeronáutica, planes de vuelo y apoyo a la gestión de los servicios de tránsito aéreo ATS.	ATC::OM07
+Plantilla por ocupaciones: ¿qué porcentaje corresponde a Gestión y qué incluye?	Alrededor de un 26 %: administración y gestión de la empresa (incluye ambos convenios).	ATC::OM07
+Completa: controladores ___ %, ingeniería y explotación técnica ___ %, operaciones ___ %, gestión ___ %.	49 %, 20 %, 5 % y 26 %.	ATC::OM07
+Nombra los cinco ámbitos de los grupos de interés de ENAIRE.	Clientes, Personas, Sociedad, Reguladores/Administraciones públicas, Partners/Proveedores.	ATC::OM07
+¿Cuáles son los grupos de interés de ENAIRE en el ámbito «Clientes»?	Asociaciones de aviación comercial; compañías aéreas y sus pilotos; gestores aeroportuarios; asociaciones de aviación no comercial; operadores de drones.	ATC::OM07
+¿Cuáles son los grupos de interés de ENAIRE en el ámbito «Personas»?	Empleados; organizaciones sindicales; asociaciones profesionales; antiguo personal; personas candidatas a un empleo.	ATC::OM07
+¿En qué ámbito de los grupos de interés está la Fundación ENAIRE?	En Sociedad (junto con la ciudadanía y las asociaciones locales, los organismos de protección del medioambiente, los organismos de cooperación social, las instituciones educativas y los medios de comunicación).	ATC::OM07
+¿Qué organismos figuran en el ámbito «Reguladores / Administraciones públicas»?	OACI, Eurocontrol, Dirección General de Aviación Civil, otros Ministerios, instituciones regionales y locales, Comisión Europea, EASA, AESA y el Ejército del Aire y del Espacio.	ATC::OM07
+¿Qué organismos figuran en el ámbito «Partners / Proveedores»?	Gestor de Red, A6 Alliance, empresas participadas (Aena, Ineco, Crida, EAD, ESSP, Startical), iTEC, SJU/SDM (SESAR), CANSO, otros ANSP, AEMET, contratistas.	ATC::OM07
+¿Dónde aparece AEMET (Agencia Estatal de Meteorología) en el mapa de grupos de interés de ENAIRE?	En el ámbito Partners / Proveedores.	ATC::OM07
+Plan de Vuelo 2025: ¿cuál es el Propósito de ENAIRE?	«Cuidamos de tu vuelo para que sea seguro, rápido, eficiente y sostenible» (cuatro adjetivos).	ATC::OM07
+Plan de Vuelo 2025: ¿cuál es la Misión de ENAIRE?	«Proporcionamos servicios de navegación aérea con seguridad, calidad, eficiencia y respeto al medioambiente, contribuyendo al desarrollo de la aviación y, por tanto, al desarrollo económico y social de España.»	ATC::OM07
+Plan de Vuelo 2025: ¿cuál es la Visión de ENAIRE?	«Queremos convertir a ENAIRE en un operador global, líder del sector de la navegación aérea, basándonos en las personas, la innovación y la digitalización.»	ATC::OM07
+Plan de Vuelo 2025: ¿en qué tres cosas se basa la Visión?	En las personas, la innovación y la digitalización.	ATC::OM07
+Plan de Vuelo 2025: ¿cuántos valores tiene ENAIRE y cómo se organizan?	12 valores en 4 grupos de 3.	ATC::OM07
+Plan de Vuelo 2025: nombra los cuatro grupos de valores por orden.	1) La seguridad es lo primero; 2) Comprometidos con los clientes y la sociedad; 3) Somos un solo y gran equipo; 4) «Hambre» de mejora de nuestra organización.	ATC::OM07
+Grupo de valores 1 «La seguridad es lo primero»: ¿qué tres valores incluye?	En nuestro ADN; Actitud de confianza y «cultura justa»; Refuerzo e impulso de la Seguridad.	ATC::OM07
+Grupo de valores 2 «Comprometidos con los clientes y la sociedad»: ¿qué tres valores incluye (PV2025)?	Buscamos la excelencia; Somos empáticos; Responsables con el Medioambiente.	ATC::OM07
+Grupo de valores 3 «Somos un solo y gran equipo»: ¿qué tres valores incluye?	Somos ENAIRE; La integridad es nuestro carácter; Respetamos y confiamos.	ATC::OM07
+Grupo de valores 4 «Hambre de mejora de nuestra organización»: ¿qué tres valores incluye (PV2025)?	Somos innovadores; Flexibles ante los cambios; Somos proactivos.	ATC::OM07
+¿Qué valor dice «nos ponemos en el lugar del otro para comprender y responder a las necesidades del cliente interno y externo»?	Somos empáticos (grupo 2, Comprometidos con los clientes y la sociedad).	ATC::OM07
+¿Qué valor dice «participamos en un ambiente de confianza en el que todas las personas comunican la información esencial sin miedo a consecuencias punitivas»?	Actitud de confianza y «cultura justa» (grupo 1), para mantener y reforzar la Cultura de Seguridad.	ATC::OM07
+¿Qué valor se define como «actuar con ética, honestidad y transparencia»?	La integridad es nuestro carácter (grupo 3).	ATC::OM07
+¿Qué valor menciona «generosidad y humildad» y reconocer el mérito de los compañeros?	Respetamos y confiamos (grupo 3): para lograr una organización interconectada.	ATC::OM07
+¿Qué valor se define como «con implicación e iniciativa construimos el futuro de ENAIRE»?	Somos proactivos (grupo 4).	ATC::OM07
+¿Qué valor se define como «la seguridad es nuestra máxima prioridad, un pilar sobre el que se sustentan nuestro servicio y el bienestar de las personas»?	En nuestro ADN (grupo 1).	ATC::OM07
+¿Qué valor dice «somos conscientes del impacto de nuestra actividad en el entorno natural y ponemos en práctica acciones para desarrollar soluciones sostenibles»?	Responsables con el Medioambiente (grupo 2).	ATC::OM07
+¿Qué valor dice «mente abierta, nos adaptamos a los cambios para que ENAIRE se transforme y crezca»?	Flexibles ante los cambios (grupo 4).	ATC::OM07
+¿Qué valor es: «orgullosos de pertenecer a ENAIRE; con nuestro trabajo hacemos todo lo posible por alcanzar los objetivos colectivos»?	Somos ENAIRE (grupo 3).	ATC::OM07
+¿Cuántos objetivos estratégicos enumera el Plan de Vuelo 2025 en el manual 7?	Seis.	ATC::OM07
+Plan de Vuelo 2025, objetivo 1.	Reforzar continuamente la seguridad, prestando especial atención a la cultura de seguridad, al factor humano y a la ciberseguridad ante los nuevos riesgos emergentes.	ATC::OM07
+Plan de Vuelo 2025, objetivo 2.	Mejorar la calidad, escalabilidad y resiliencia de los servicios prestados, a través de la digitalización, la modernización del espacio aéreo y los conceptos operativos, y el refuerzo de la cultura de orientación al cliente y grupos de interés.	ATC::OM07
+Plan de Vuelo 2025, objetivo 3.	Contribuir a la movilidad sostenible en el sector, minimizando el impacto de la actividad de ENAIRE en el medioambiente e impulsando su descarbonización.	ATC::OM07
+Plan de Vuelo 2025, objetivo 4.	Acometer el desarrollo del negocio e internacionalización de ENAIRE, para posicionarse en un entorno global y liberalizado del futuro sector de la navegación aérea.	ATC::OM07
+Plan de Vuelo 2025, objetivo 5.	Asegurar la recuperación económica y viabilidad futura de ENAIRE, y aumentar la eficiencia, productividad y competitividad, para superar la crisis y adaptarse a los cambios estructurales del sector, contribuyendo a la recuperación global de la aviación.	ATC::OM07
+Plan de Vuelo 2025, objetivo 6.	Acelerar la transformación cultural, organizativa y modernización de ENAIRE, aprovechando las nuevas tecnologías para ser más ágiles y eficientes (el texto se corta tras «desarrollando una cultura»).	ATC::OM07
+¿Qué objetivo del Plan de Vuelo 2025 menciona «superar la crisis»?	Objetivo 5: recuperación económica y viabilidad futura, eficiencia, productividad y competitividad.	ATC::OM07
+¿Qué objetivo del Plan de Vuelo 2025 menciona el factor humano y la ciberseguridad?	Objetivo 1: reforzar continuamente la seguridad (cultura de seguridad, factor humano y ciberseguridad).	ATC::OM07
+¿Quién creó la iniciativa del Cielo Único Europeo (SES, Single European Sky) y cuándo?	La Comisión Europea, en 1999.	ATC::OM07
+¿Cuál es el objetivo principal de la iniciativa SES (manual 7)?	Aumentar la eficiencia de la gestión del tránsito aéreo y de los servicios de navegación aérea.	ATC::OM07
+¿Qué dos medios da el manual 7 para lograr el objetivo del SES?	a) mejorar la prestación de los servicios de navegación aérea en capacidad, seguridad, coste-eficiencia y medio ambiente, para hacer frente a la demanda creciente; b) reducir la fragmentación del espacio aéreo europeo.	ATC::OM07
+¿Cuántos ANSP y centros de control de tránsito aéreo muestra el mapa de Europa del manual 7?	38 proveedores de servicios de navegación aérea y 63 centros de control de tránsito aéreo.	ATC::OM07
+¿En qué años se aprobaron los paquetes SES I y SES II?	SES I en 2004; SES II en 2009.	ATC::OM07
+¿Qué es SES2+ y en qué estado estaba cuando se redactó el manual 7?	El nuevo texto reglamentario que la Comisión retomó a finales de 2020; en negociación (trílogos entre Comisión, Consejo y Parlamento Europeo).	ATC::OM07
+¿Qué cuatro áreas abarca el sistema europeo de rendimientos?	Seguridad, Coste-Eficiencia, Capacidad y Medioambiente, con un esquema de incentivos y penalizaciones asociado.	ATC::OM07
+¿Cuánto duran los periodos de referencia del sistema de rendimientos (manual 7)?	Cinco años, aunque el primero duró tres.	ATC::OM07
+Indica las fechas de los cuatro periodos de referencia RP1 a RP4.	RP1 2012-2014; RP2 2015-2019; RP3 2020-2024; RP4 2025-2029.	ATC::OM07
+¿Cuál es «el periodo actual» en el manual 7 y cuál supone «un importante reto»?	Actual: 2020-2024 (RP3). RP4 (2025-2029) será un reto porque se prevé que los objetivos sean ambiciosos.	ATC::OM07
+¿Sigue siendo cierta hoy la afirmación del manual «el periodo actual es 2020-2024»?	No: está desfasada. Está en curso el RP4 (2025-2029) (plan español ESPP4, aprobado por la Decisión (UE) 2025/1063) y el SES2+ se publicó el 11 de noviembre de 2024 (PV2030).	ATC::OM07 NV
+Enumera por orden los seis servicios para los que ENAIRE está certificada (manual 7, capítulo 1.4).	1.4.1 ATS; 1.4.2 CNS; 1.4.3 AIS; 1.4.4 ATFM; 1.4.5 ASM local (táctico/nivel 3); 1.4.6 FPD (diseño de procedimientos de vuelo).	ATC::OM07
+¿Con arreglo a qué normativa está certificada ENAIRE como proveedor de servicios de navegación aérea (manual 7)?	De acuerdo con la normativa aplicable de la Unión Europea.	ATC::OM07
+Manual 7: ¿qué tres cosas hace el ATS?	Previene colisiones y acelera y mantiene ordenadamente el movimiento del tránsito aéreo; proporciona asesoramiento e información útil para la operación segura y eficaz de los vuelos; notifica y auxilia a los organismos pertinentes respecto de las aeronaves que necesitan ayuda y salvamento.	ATC::OM07
+Manual 7: ¿qué garantiza el servicio CNS?	La disponibilidad, explotación y mantenimiento de los medios técnicos e instalaciones del sistema de navegación aérea en apoyo a la operación de aeronaves.	ATC::OM07
+Manual 7: ¿qué pone a disposición el AIS?	De los usuarios del espacio aéreo, toda la información del sistema de navegación aérea relevante para la planificación de sus operaciones, de forma adecuada, actualizada y con la calidad necesaria para que se desarrollen de forma segura y eficiente.	ATC::OM07
+Manual 7: ¿cuál es el objetivo del servicio ATFM?	Garantizar la regularidad de los vuelos y la capacidad en el espacio aéreo.	ATC::OM07
+Manual 7: ¿qué nivel de ASM presta ENAIRE y para qué?	ASM local, táctico (nivel 3), asegurando la coordinación civil / militar en el desarrollo de las operaciones.	ATC::OM07
+¿Es la meteorología (MET) uno de los seis servicios del capítulo 1.4 del manual 7?	No. Solo ATS, CNS, AIS, ATFM, ASM y FPD. AEMET aparece como partner en el mapa de grupos de interés.	ATC::OM07
+¿En qué partes se divide la Formación de Unidad de los controladores de ENAIRE?	En tres: Formación de transición (teoría), Pre-OJT (formación en simulador) y OJT (On the Job Training, formación en el puesto de trabajo).	ATC::OM07
+¿Qué permite a un controlador ejercer las atribuciones de la licencia en una unidad (manual 7)?	Superar la formación de unidad de la anotación de unidad definida en el plan de formación de la unidad.	ATC::OM07
+¿Qué es el Pre-OJT en la formación de unidad?	Formación en simulador.	ATC::OM07
+¿Cuál es la finalidad de la Formación continua?	Mantener la cualificación: formación de actualización y conversión, de conformidad con los requisitos del plan de capacitación de unidad.	ATC::OM07
+¿Qué es la Formación de Actualización y qué materias enumera el manual?	La necesaria para mantener la anotación de unidad: procedimientos y prácticas estándar, situaciones anormales y emergencias, PCATS (Plan de contingencia ATS) y factores humanos, etc.	ATC::OM07
+¿Qué es la Formación de Conversión?	La asociada a los cambios operativos que se implementen en cada unidad.	ATC::OM07
+¿Qué significa PCATS en el manual 7?	Plan de contingencia ATS.	ATC::OM07
+¿Qué puestos abarca la formación de «carrera profesional»?	Instructores, evaluadores, supervisores y puestos de Gestión y de Libre designación.	ATC::OM07
+¿Qué formación lingüística enumera ENAIRE (Lingüística)?	Formación en idioma inglés.	ATC::OM07
+¿Qué incluye la formación «Otra»?	Prevención de riesgos laborales, seguridad física y operacional, ofimática, técnica, etc.	ATC::OM07
+¿Qué instituciones imparten con ENAIRE el Máster en Gestión de Servicios de Navegación Aérea?	La Universidad Politécnica y la Universidad Autónoma de Madrid, en colaboración con la OACI.	ATC::OM07
+¿Qué certificación de la OACI tiene el Máster de ENAIRE (manual 7)?	La certificación de programa TRAINAIR PLUS de la OACI.	ATC::OM07
+¿A quién se dirige principalmente el Máster de ENAIRE?	Principalmente a profesionales de ENAIRE, proveedores de servicios internacionales y otras organizaciones (compañías aéreas, gestores aeroportuarios, reguladores y supervisores, autoridades militares, proveedores de meteorología, industria tecnológica, consultoras, titulados universitarios).	ATC::OM07
+¿Cuál es el enfoque del Máster de ENAIRE?	Orientado al management: conocimientos y resolución de casos reales, con foco en la estrategia y en el desarrollo de habilidades de gestión y toma de decisiones.	ATC::OM07
+Plan de Vuelo 2030 frente al manual 7: ¿qué cambió en el Propósito?	El PV2030 suprime «rápido»: «seguro, eficiente y sostenible». El manual (PV2025) dice «seguro, rápido, eficiente y sostenible».	ATC::OM07
+Plan de Vuelo 2030 frente al manual 7: ¿es igual la Misión?	Sí, la Misión no cambia.	ATC::OM07
+Plan de Vuelo 2030 frente al manual 7: ¿cómo cambió la Visión?	PV2030: «Afianzar a ENAIRE como operador global, líder en la provisión de servicios de navegación aérea por su seguridad y calidad, basándonos en nuestros profesionales, la innovación y la tecnología». PV2025: personas, innovación, digitalización.	ATC::OM07
+Plan de Vuelo 2030 frente al PV2025: ¿qué dos títulos de grupo de valores cambiaron?	Grupo 3: «Somos un solo y gran equipo» (PV2025) pasó a «Somos un Equipo»; grupo 4: «Hambre de mejora de nuestra organización» pasó a «Perseguimos la excelencia».	ATC::OM07
+Plan de Vuelo 2030 frente al PV2025: ¿qué valores concretos cambiaron?	Buscamos la excelencia → Somos profesionales; Responsables con el Medioambiente → Protegemos el medioambiente; Somos proactivos → Lideramos desde la excelencia.	ATC::OM07
+Plan de Vuelo 2030: ¿cuáles son las fechas de su aprobación y su periodo?	Periodo 2026-2030; aprobado por el Consejo Rector el 19-12-2025 (versión 1.1 con fecha 19-03-2026).	ATC::OM07
+¿Qué objetivo sustituyó en el PV2030 al de «recuperación económica y viabilidad tras la crisis»?	El objetivo 5 «Competitividad y eficiencia» (PV2030); el objetivo 5 del PV2025 era la recuperación económica y la viabilidad.	ATC::OM07 NV

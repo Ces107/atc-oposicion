@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrenador espacial</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l8 4.5v9L12 21l-8-4.5v-9z'/%3E%3Cpath d='M4 7.5l8 4.5 8-4.5M12 12v9'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onacc:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a6c8f0; --onacc:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans)}
+.top{display:flex;align-items:center;gap:10px;margin:0 auto;padding:14px 16px 10px}
+.top .logo{width:30px;height:30px;color:var(--accent);flex:none}
+.top .brand{font:700 20px/1 var(--serif);letter-spacing:.01em}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.logo{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 28px/1.2 var(--serif);margin:.3em 0 .5em}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:1.6em 0 .6em}
+h3{font:700 17px var(--serif);margin:1em 0 .3em}
+p{margin:.4rem 0}
+.soft{color:var(--muted)} .small{font-size:14px}
+.good{color:var(--ok)} .bad{color:var(--err)} .warn{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.4;cursor:default}
+.link{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0;margin-bottom:6px;min-height:40px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;width:100%;max-width:420px}
+input[type=range]{width:100%;max-width:420px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;vertical-align:-3px;margin-right:8px}
+label.lb{display:block;margin:1rem 0 .3rem;font-weight:600}
+label.lb.inline{font-weight:400}
+kbd,.key{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.head{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;color:var(--muted);font-size:15px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.head b{color:var(--text)}
+.head .ic{margin-right:4px}
+.bar{height:3px;background:var(--rule);margin:0 0 12px}
+.bar>div{height:100%;background:var(--accent);width:0}
+.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.fig{padding:10px 26px 10px 0}
+.fig b{display:block;font:700 28px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.fig span{color:var(--muted);font-size:13px}
+.tbl,.tbl-box,.tab-box,.tabla-caja{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 12px 6px 0;white-space:nowrap}
+td{padding:6px 12px 6px 0;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top}
+.list{border-top:1px solid var(--text);margin:8px 0 16px}
+.card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 4px;cursor:pointer;color:var(--text)}
+.card:hover{background:var(--stripe)}
+.card .ic{width:30px;height:30px;color:var(--accent);stroke-width:1.5}
+.card .nm{display:block;font:700 20px/1.2 var(--serif)}
+.card .dt{display:block;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.hintbox{border-top:1px solid var(--rule);padding-top:8px;margin-top:10px}
+@media (max-width:640px){.fig{padding-right:18px}.fig b{font-size:24px}h1{font-size:25px}}
+
+#app{max-width:1040px;margin:0 auto;padding:8px 16px 56px}
+.top{max-width:1040px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 32px}
+.bar.late>div{background:var(--err)}
+.svgbox{background:#fbfaf6;border:1px solid var(--rule);border-radius:2px;padding:6px}
+.svgbox svg{display:block;margin:0 auto;width:100%;height:auto;max-height:360px}
+.ref svg{max-height:400px}
+.refbox{position:relative}
+.hiddenref{position:absolute;inset:0;background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.opt{position:relative;background:#fbfaf6;border:2px solid var(--rule);border-radius:2px;padding:8px;color:#1b1b1b;cursor:pointer;text-align:center}
+.opt:hover{border-color:var(--accent)}
+.opt .lt{position:absolute;left:6px;top:4px;font:700 13px/1 ui-monospace,Consolas,monospace;color:#5f5b53}
+.opt svg{display:block;margin:0 auto;width:100%;height:auto;max-height:230px}
+.opt.txt{font-size:17px;padding:26px 8px}
+.opt.right{border-color:var(--ok)}
+.opt.wrong{border-color:var(--err)}
+.opt[disabled]{cursor:default}
+.dual{display:flex;align-items:center;gap:14px;border:1px solid var(--rule);border-radius:2px;padding:6px 12px;margin-bottom:8px;width:max-content;cursor:pointer;min-height:44px}
+.dual .dg{font:700 30px/1 var(--serif);min-width:24px;text-align:center}
+.cap{font-size:13px;color:var(--muted);text-align:center;margin:.3rem 0}
+.panels{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.panels figure{margin:0;width:150px;text-align:center;font-size:13px;color:var(--muted)}
+.panels svg{width:150px;height:150px;background:#fbfaf6;border:1px solid var(--rule)}
+#fb{position:sticky;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--text);padding:8px 0 6px;margin-top:10px}
+#fb:empty{display:none}
+#fb p{margin:.25rem 0}
+.rv{border-top:1px solid var(--text);margin-top:20px;padding-top:8px}
+.hintbox p{margin:.25rem 0}
+.hintbox:empty{display:none}
+.slider label{display:block}
+td .ic{margin-right:6px;color:var(--muted)}
+@media (min-width:900px){
+  .stage.split{display:grid;grid-template-columns:minmax(0,370px) minmax(0,1fr);gap:22px;align-items:start;margin-top:.4rem}
+  .stage.split .stageR{min-width:0}
+  .stage.split .opts{margin:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage.split .opts.n5,.stage.split .opts.n6{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stage.split .opt svg{max-height:180px}
+  .stage.split .ref svg{max-height:330px}
+  .stage.split .opt.txt{padding:26px 8px}
+  .stage.split .stageR .svgbox{max-width:190px!important;margin:0 auto .6rem!important}
+}
+@media (max-width:640px){ .opts{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.5L20 9"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4.5L4 15"/><path d="M4 20v-5h5"/></symbol><symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-skip" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7z"/><path d="M19 5v14"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-dash" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 3h5"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-s-rot3d" viewBox="0 0 24 24"><path d="M10 3.5l6 3.4v6.8l-6 3.4-6-3.4V6.9z"/><path d="M4 6.9l6 3.4 6-3.4M10 10.3v6.8"/><path d="M14 20.5a7 7 0 0 0 7-6"/><path d="M21 17.5v-3.5h-3.5"/></symbol><symbol id="i-s-net" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/><path d="M9 9h6v6H9z"/></symbol><symbol id="i-s-shape2d" viewBox="0 0 24 24"><path d="M3 4h5v10h6v5H3z"/><path d="M17 3v18" stroke-dasharray="2 2"/></symbol><symbol id="i-s-fold" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16" stroke-dasharray="2 2"/><path d="M8 12h.01M16 12h.01" stroke-width="3"/></symbol><symbol id="i-s-view" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></symbol></defs></svg>
+<header class="top"><svg class="logo" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand">Espacial</span></header>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Entrenador espacial</h1>
+<main id="app"></main>
+<script>
+// ==== PURE LOGIC START ====
+// (Everything between the START and END markers is DOM-free and is tested with node.)
+function mulberry32(seed){
+  let a = seed >>> 0;
+  return function(){
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function randInt(rnd, a, b){ return a + Math.floor(rnd() * (b - a + 1)); }
+function pick(rnd, arr){ return arr[Math.floor(rnd() * arr.length)]; }
+function shuffle(rnd, arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function fmt(x, d){
+  if (x === null || x === undefined || isNaN(x)) return '—';
+  return Number(x).toFixed(d === undefined ? 1 : d);
+}
+const LETTERS = ['A','B','C','D','E','F'];
+
+/* ---------------- Difficulty ladder (10 levels) ---------------- */
+// limit = hard time limit per item in seconds (item counted as blank when it expires)
+// options = answer options per item (distractors + 1); exposure = seconds the reference stays visible (0 = always)
+// dual = dual-task load (0 off, 1 light, 2 medium, 3 heavy); hints available at levels 1-6 only.
+const LADDER = [null,
+  { name:'Calentamiento',     limit:60, options:3, exposure:0, dual:0 },
+  { name:'Fácil',        limit:45, options:3, exposure:0, dual:0 },
+  { name:'Estable',      limit:35, options:4, exposure:0, dual:0 },
+  { name:'Estándar',    limit:28, options:4, exposure:0, dual:0 },
+  { name:'Competitivo', limit:22, options:4, exposure:0, dual:0 },
+  { name:'Difícil',        limit:18, options:4, exposure:0, dual:0 },
+  { name:'Élite',       limit:15, options:5, exposure:0, dual:0 },
+  { name:'Extremo',     limit:12, options:5, exposure:8, dual:1 },
+  { name:'Sobrehumano',  limit:10, options:6, exposure:5, dual:2 },
+  { name:'Imposible',  limit:8,  options:6, exposure:3, dual:3 }
+];
+const MAX_LEVEL = 10;
+const HINT_MAX_LEVEL = 6;          // hints are off from level 7 up
+const MIN_ACCURACY = 96;           // anti-acceleration rule: never speed up below this accuracy
+const DUAL_INTERVAL_MS = [0, 3000, 2200, 1600];
+const ITEMS_PER_SESSION = 20;
+const RULE15 = 15;                 // the 15-second rule
+
+function ladderParams(level){
+  level = Math.max(1, Math.min(MAX_LEVEL, level));
+  const L = LADDER[level];
+  return { level:level, name:L.name, limit:L.limit, options:L.options, exposure:L.exposure, dual:L.dual,
+           hintMax: level <= HINT_MAX_LEVEL ? 3 : 0, items:ITEMS_PER_SESSION };
+}
+function customParams(c){
+  const level = Math.max(1, Math.min(MAX_LEVEL, c.level));
+  return { level:level, name:'Personalizado', limit:c.limit, options:Math.max(2, Math.min(6, c.options)), exposure:c.exposure,
+           dual:c.dual, hintMax: level <= HINT_MAX_LEVEL ? Math.max(0, Math.min(3, c.hint)) : 0,
+           items:Math.max(5, Math.min(40, c.items)) };
+}
+
+/* ---------------- Adaptive engine ---------------- */
+// Complexity level goes up after 5 consecutive correct answers and down after 2 consecutive failures.
+// The speed level (time limit) follows the complexity level but is capped by speedCap, which can only be
+// raised when the last 10 answers are at least 96 % accurate (so speed never rises while accuracy is low).
+function adaptiveInit(startLevel){
+  const l = Math.max(1, Math.min(MAX_LEVEL, startLevel));
+  return { level:l, streak:0, fails:0, speedCap:l, recent:[] };
+}
+function adaptiveSpeedLevel(s){ return Math.max(1, Math.min(s.level, s.speedCap)); }
+function adaptiveStep(s, correct){
+  const n = { level:s.level, streak:s.streak, fails:s.fails, speedCap:s.speedCap, recent:s.recent.slice() };
+  n.recent.push(correct ? 1 : 0);
+  if (n.recent.length > 10) n.recent.shift();
+  if (correct){
+    n.fails = 0; n.streak += 1;
+    if (n.streak >= 5){ n.streak = 0; if (n.level < MAX_LEVEL) n.level += 1; }
+  } else {
+    n.streak = 0; n.fails += 1;
+    if (n.fails >= 2){ n.fails = 0; if (n.level > 1) n.level -= 1; }
+  }
+  if (n.recent.length >= 10){
+    const acc = n.recent.reduce(function(a, b){ return a + b; }, 0) / n.recent.length * 100;
+    if (acc >= MIN_ACCURACY && n.speedCap < n.level){ n.speedCap += 1; n.recent = []; }
+  }
+  if (n.speedCap > n.level) n.speedCap = n.level;
+  return n;
+}
+function adaptiveItemParams(s, opts){
+  const cx = ladderParams(s.level), sp = ladderParams(adaptiveSpeedLevel(s));
+  return { level:s.level, name:'Adaptativo', limit:sp.limit, options:cx.options, exposure:sp.exposure, dual:0,
+           hintMax: s.level <= HINT_MAX_LEVEL ? Math.max(0, Math.min(3, (opts && opts.hint) || 0)) : 0,
+           items:(opts && opts.items) || ITEMS_PER_SESSION };
+}
+
+/* ---------------- Vectors and rotations ---------------- */
+function vkey(v){ return v[0] + ',' + v[1] + ',' + v[2]; }
+function vadd(a, b){ return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+function vneg(a){ return [-a[0] + 0, -a[1] + 0, -a[2] + 0]; }
+function vcross(a, b){ return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+function matVec(M, v){
+  return [M[0] * v[0] + M[1] * v[1] + M[2] * v[2] + 0, M[3] * v[0] + M[4] * v[1] + M[5] * v[2] + 0, M[6] * v[0] + M[7] * v[1] + M[8] * v[2] + 0];
+}
+function matMul(A, B){
+  const C = new Array(9);
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) C[i * 3 + j] = A[i * 3] * B[j] + A[i * 3 + 1] * B[3 + j] + A[i * 3 + 2] * B[6 + j];
+  return C;
+}
+function matDet(M){
+  return M[0] * (M[4] * M[8] - M[5] * M[7]) - M[1] * (M[3] * M[8] - M[5] * M[6]) + M[2] * (M[3] * M[7] - M[4] * M[6]);
+}
+// The 24 proper rotations of the cube, built as the closure of two 90-degree turns (generation side).
+function buildRot24(){
+  const gens = [[1,0,0, 0,0,-1, 0,1,0], [0,-1,0, 1,0,0, 0,0,1]];
+  const I = [1,0,0, 0,1,0, 0,0,1];
+  const seen = new Map(); seen.set(I.join(), I);
+  const q = [I];
+  while (q.length){
+    const m = q.shift();
+    for (let g = 0; g < gens.length; g++){
+      const n = matMul(gens[g], m).map(function(x){ return x + 0; });
+      const k = n.join();
+      if (!seen.has(k)){ seen.set(k, n); q.push(n); }
+    }
+  }
+  return Array.from(seen.values());
+}
+// The same 24 rotations obtained a different way: signed permutation matrices with determinant +1 (verification side).
+function buildRot24Indep(){
+  const perms = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+  const out = [];
+  perms.forEach(function(p){
+    for (let s = 0; s < 8; s++){
+      const M = [0,0,0, 0,0,0, 0,0,0];
+      for (let i = 0; i < 3; i++) M[i * 3 + p[i]] = (s >> i) & 1 ? -1 : 1;
+      if (matDet(M) === 1) out.push(M);
+    }
+  });
+  return out;
+}
+const ROT24 = buildRot24();
+const ROT24_INDEP = buildRot24Indep();
+const DIRS6 = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+
+/* ---------------- 3D block figures ---------------- */
+function normCubes(cubes){
+  let mx = Infinity, my = Infinity, mz = Infinity;
+  cubes.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); mz = Math.min(mz, c[2]); });
+  return cubes.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0, c[2] - mz + 0]; });
+}
+function shapeKey3(cubes){
+  return normCubes(cubes).map(vkey).sort().join(';');
+}
+// Canonical form under the 24 rotations (independent verification path).
+function canonShape3(cubes){
+  let best = null;
+  for (let i = 0; i < ROT24_INDEP.length; i++){
+    const k = shapeKey3(cubes.map(function(c){ return matVec(ROT24_INDEP[i], c); }));
+    if (best === null || k < best) best = k;
+  }
+  return best;
+}
+function sameShape3(a, b){ return canonShape3(a) === canonShape3(b); }
+function mirrorCubes(cubes){ return cubes.map(function(c){ return [-c[0] + 0, c[1], c[2]]; }); }
+function rotateCubes(cubes, M){ return cubes.map(function(c){ return matVec(M, c); }); }
+function isChiral3(cubes){ return canonShape3(cubes) !== canonShape3(mirrorCubes(cubes)); }
+
+const FIG_LEVELS = [null,
+  { arms:[3,3], len:[2,2] }, { arms:[3,3], len:[2,3] }, { arms:[4,4], len:[1,2] }, { arms:[4,4], len:[2,2] },
+  { arms:[4,5], len:[2,2] }, { arms:[5,5], len:[2,3] }, { arms:[5,6], len:[2,2] }, { arms:[6,6], len:[2,3] },
+  { arms:[7,7], len:[2,3] }, { arms:[8,8], len:[2,3] }
+];
+// Shepard-Metzler style: a chain of straight arms, each perpendicular to the previous one; must be chiral.
+function genFigure(rnd, level){
+  const P = FIG_LEVELS[level];
+  for (let t = 0; t < 4000; t++){
+    const arms = randInt(rnd, P.arms[0], P.arms[1]);
+    let cur = [0, 0, 0];
+    const seen = new Set([vkey(cur)]); const cubes = [cur]; let prev = -1, ok = true;
+    for (let a = 0; a < arms && ok; a++){
+      let axis; do { axis = randInt(rnd, 0, 2); } while (axis === prev);
+      const sg = rnd() < 0.5 ? -1 : 1, len = randInt(rnd, P.len[0], P.len[1]);
+      for (let s = 0; s < len; s++){
+        cur = cur.slice(); cur[axis] += sg;
+        const k = vkey(cur);
+        if (seen.has(k)){ ok = false; break; }
+        seen.add(k); cubes.push(cur);
+      }
+      prev = axis;
+    }
+    if (!ok) continue;
+    if (!isChiral3(cubes)) continue;
+    return normCubes(cubes);
+  }
+  throw new Error('genFigure failed at level ' + level);
+}
+// Number of cubes completely hidden in the isometric drawing (viewer looks from +x,+y,+z).
+function hiddenCount(cubes){
+  const set = new Set(cubes.map(vkey));
+  let n = 0;
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    if (set.has(vkey([x + 1, y + 1, z + 1])) || (set.has(vkey([x + 1, y, z])) && set.has(vkey([x, y + 1, z])) && set.has(vkey([x, y, z + 1])))) n++;
+  });
+  return n;
+}
+function bestViewRotation(rnd, cubes, avoidKey){
+  let best = null, bh = Infinity;
+  for (let i = 0; i < 60; i++){
+    const rc = normCubes(rotateCubes(cubes, pick(rnd, ROT24)));
+    if (avoidKey && shapeKey3(rc) === avoidKey) continue;
+    const h = hiddenCount(rc);
+    if (h < bh){ bh = h; best = rc; }
+    if (h === 0) break;
+  }
+  return best || normCubes(cubes);
+}
+// Move one end cube to another free position touching the figure (near = stay within 2 steps of the old place).
+function alterCubes(rnd, cubes, near){
+  const set = new Set(cubes.map(vkey));
+  function deg(c){ let n = 0; DIRS6.forEach(function(d){ if (set.has(vkey(vadd(c, d)))) n++; }); return n; }
+  const ends = shuffle(rnd, cubes.filter(function(c){ return deg(c) === 1; }));
+  for (let i = 0; i < ends.length; i++){
+    const e = ends[i], ek = vkey(e);
+    const rest = cubes.filter(function(c){ return vkey(c) !== ek; });
+    const rs = new Set(rest.map(vkey));
+    const cands = [];
+    rest.forEach(function(c){
+      DIRS6.forEach(function(d){
+        const p = vadd(c, d), k = vkey(p);
+        if (rs.has(k) || k === ek) return;
+        if (near && Math.abs(p[0] - e[0]) + Math.abs(p[1] - e[1]) + Math.abs(p[2] - e[2]) > 2) return;
+        cands.push(p);
+      });
+    });
+    if (cands.length) return normCubes(rest.concat([pick(rnd, cands)]));
+  }
+  return null;
+}
+const WHY3 = {
+  correct:'Es la figura de referencia girada: mismos brazos, mismos giros, misma lateralidad.',
+  mirror:'Es la imagen especular de la referencia: ningún giro la convierte en la referencia (la lateralidad de las esquinas de los brazos está invertida).',
+  altered:'Se ha movido un cubo de la referencia a otro lugar.',
+  alteredMirror:'Imagen especular en la que, además, se ha movido un cubo.'
+};
+function makeRot3d(level, rnd, nopts){
+  for (let t = 0; t < 300; t++){
+    const fig = genFigure(rnd, level);
+    const ref = bestViewRotation(rnd, fig, null);
+    const correct = bestViewRotation(rnd, fig, shapeKey3(ref));
+    const keys = new Set([canonShape3(fig)]);
+    const opts = [{ cubes:correct, kind:'correct' }];
+    let ok = true;
+    for (let i = 0; i < nopts - 1 && ok; i++){
+      const kind = i === 0 ? 'mirror' : (i % 2 === 1 ? (level <= 2 ? 'altered' : 'alteredMirror') : 'altered');
+      let shape = null;
+      for (let r = 0; r < 12 && !shape; r++){
+        let s;
+        if (kind === 'mirror') s = mirrorCubes(fig);
+        else s = alterCubes(rnd, kind === 'altered' ? fig : mirrorCubes(fig), level >= 6);
+        if (!s) continue;
+        const ck = canonShape3(s);
+        if (keys.has(ck)) continue;
+        keys.add(ck); shape = s;
+      }
+      if (!shape){ ok = false; break; }
+      opts.push({ cubes:bestViewRotation(rnd, shape, null), kind:kind });
+    }
+    if (!ok) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHY3[o.kind]; });
+    return {
+      type:'rot3d', level:level, ref:ref, options:options, answer:answer, whys:whys,
+      prompt:'¿Qué figura es la de referencia girada (rotada, no reflejada)?',
+      hints:[
+        'Ignora la orientación del dibujo. Compara la longitud de los brazos y el orden de los giros, empezando por un extremo de la figura.',
+        'Comprobación de espejo: toma tres brazos consecutivos perpendiculares entre sí y aplica la regla de la mano derecha; las opciones cuya esquina tiene la lateralidad opuesta son imágenes especulares. Entre las demás, compara la longitud de los brazos y busca un cubo desplazado.',
+        'Respuesta correcta: ' + LETTERS[answer] + '. ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+      ]
+    };
+  }
+  throw new Error('makeRot3d failed');
+}
+// What the player actually SEES: a signature of the visible faces of the isometric drawing (viewer at +x,+y,+z).
+// Two different solids can be drawn identically (a cube hidden behind others, or shifted along the line of sight);
+// such options would be indistinguishable on screen, so the item must be rejected.
+function drawSig(cubes){
+  const IC2 = 0.8660254, res = 6, best = new Map();
+  cubes.forEach(function(c){
+    ['T','X','Y'].forEach(function(t){
+      for (let i = 0; i < res; i++) for (let j = 0; j < res; j++){
+        const a = (i + 0.5) / res, b = (j + 0.5) / res;
+        const P = t === 'T' ? [c[0] + a, c[1] + b, c[2] + 1] : (t === 'X' ? [c[0] + 1, c[1] + a, c[2] + b] : [c[0] + a, c[1] + 1, c[2] + b]);
+        const sx = (P[1] - P[0]) * IC2, sy = (P[0] + P[1]) / 2 - P[2];
+        const key = Math.round(sx * 1000) + ',' + Math.round(sy * 1000), depth = P[0] + P[1] + P[2];
+        const cur = best.get(key);
+        if (!cur || depth > cur.depth + 1e-9){
+          const ox = t === 'T' ? c[1] - c[0] : (t === 'X' ? c[1] - c[0] - 1 : c[1] + 1 - c[0]);
+          best.set(key, { depth:depth, tag:t + '@' + Math.round(ox * IC2 * 1000) + ',' + Math.round(((c[0] + c[1]) / 2 - c[2]) * 1000) });
+        }
+      }
+    });
+  });
+  return Array.from(best.entries()).map(function(e){ return e[0] + '=' + e[1].tag; }).sort().join('|');
+}
+function verifyRot3d(item){
+  const flags = item.options.map(function(o){ return sameShape3(o.cubes, item.ref); });
+  const n = flags.filter(Boolean).length;
+  if (n !== 1 || !flags[item.answer]) return false;
+  const pics = item.options.map(function(o){ return drawSig(o.cubes); });
+  if (new Set(pics).size !== pics.length) return false;              // two options drawn identically
+  if (pics.indexOf(drawSig(item.ref)) >= 0) return false;            // an option looks exactly like the reference picture
+  // pairwise distinct shapes, mirror options really mirror
+  const ck = item.options.map(function(o){ return canonShape3(o.cubes); });
+  if (new Set(ck).size !== ck.length) return false;
+  const cref = canonShape3(item.ref), cmir = canonShape3(mirrorCubes(item.ref));
+  if (cref === cmir) return false;
+  for (let i = 0; i < item.options.length; i++){
+    if (item.options[i].kind === 'mirror' && ck[i] !== cmir) return false;
+    if (item.options[i].kind === 'correct' && ck[i] !== cref) return false;
+  }
+  return true;
+}
+
+/* ---------------- Cube nets ---------------- */
+const NET_T8 = [[1,0,0,1],[-1,0,0,1],[1,0,0,-1],[-1,0,0,-1],[0,1,1,0],[0,-1,1,0],[0,1,-1,0],[0,-1,-1,0]];
+function normCells2(cells){
+  let mx = Infinity, my = Infinity;
+  cells.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); });
+  return cells.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0].concat(c.slice(2)); }).sort(function(a, b){ return a[1] - b[1] || a[0] - b[0]; });
+}
+function canonCells2(cells){
+  let best = null;
+  NET_T8.forEach(function(T){
+    const k = normCells2(cells.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0]; })).map(function(c){ return c[0] + ',' + c[1]; }).join(';');
+    if (best === null || k < best) best = k;
+  });
+  return best;
+}
+// Fold a net (cells [col,row], row grows downwards) into a cube; the net is seen from outside and folds away from the viewer.
+// Each face gets an outward normal n and a frame (r = right, u = up as seen from outside). Returns null when it is not a cube net.
+function foldNet(cells){
+  const idx = new Map();
+  cells.forEach(function(c, i){ idx.set(c[0] + ',' + c[1], i); });
+  const faces = new Array(cells.length).fill(null);
+  faces[0] = { n:[0,0,1], r:[1,0,0], u:[0,1,0] };
+  const q = [0];
+  while (q.length){
+    const i = q.shift(), f = faces[i], cx = cells[i][0], cy = cells[i][1];
+    [[1,0],[-1,0],[0,-1],[0,1]].forEach(function(d){
+      const j = idx.get((cx + d[0]) + ',' + (cy + d[1]));
+      if (j === undefined || faces[j]) return;
+      let nf;
+      if (d[0] === 1) nf = { n:f.r, r:vneg(f.n), u:f.u };
+      else if (d[0] === -1) nf = { n:vneg(f.r), r:f.n, u:f.u };
+      else if (d[1] === -1) nf = { n:f.u, r:f.r, u:vneg(f.n) };
+      else nf = { n:vneg(f.u), r:f.r, u:f.n };
+      faces[j] = nf; q.push(j);
+    });
+  }
+  if (faces.some(function(f){ return f === null; })) return null;
+  if (new Set(faces.map(function(f){ return vkey(f.n); })).size !== cells.length) return null;
+  return faces;
+}
+function hasStrip4(cells){
+  const s = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+  for (let i = 0; i < cells.length; i++){
+    const x = cells[i][0], y = cells[i][1];
+    if (s.has((x + 1) + ',' + y) && s.has((x + 2) + ',' + y) && s.has((x + 3) + ',' + y)) return true;
+    if (s.has(x + ',' + (y + 1)) && s.has(x + ',' + (y + 2)) && s.has(x + ',' + (y + 3))) return true;
+  }
+  return false;
+}
+// All free hexominoes (35) by growth; those that fold into a cube are the 11 nets.
+function enumNets(){
+  let level = new Map(); level.set('0,0', [[0, 0]]);
+  for (let size = 2; size <= 6; size++){
+    const next = new Map();
+    level.forEach(function(cells){
+      const set = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+      cells.forEach(function(c){
+        [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+          const p = [c[0] + d[0], c[1] + d[1]];
+          if (set.has(p[0] + ',' + p[1])) return;
+          const nc = normCells2(cells.concat([p]));
+          const k = canonCells2(nc);
+          if (!next.has(k)) next.set(k, nc);
+        });
+      });
+    });
+    level = next;
+  }
+  const all = Array.from(level.values());
+  return { hexominoes:all, nets:all.filter(function(c){ return foldNet(c) !== null; }) };
+}
+const NET_ENUM = enumNets();
+const NETS = NET_ENUM.nets;
+const COLOR_NAMES = ['rojo','azul','verde','amarillo','morado','blanco'];
+const NET_ARROWS = [0, 0, 0, 0, 0, 2, 3, 4, 5, 6, 6];   // number of faces carrying an arrow, by level
+const NET_KIND_POOL = [null, ['opp','hidden'], ['opp','hidden','swap'], ['hidden','swap'], ['swap','hidden'],
+  ['arrow','swap','hidden'], ['arrow','swap','hidden'], ['arrow','swap','swap'], ['arrow','swap','swap'], ['arrow','swap','swap'], ['arrow','swap','swap']];
+const VIEW_NORMALS = { top:[0,0,1], left:[1,0,0], right:[0,1,0] };
+const VIEW_FACES = ['top','left','right'];
+function cubeMap(cube, R){
+  const m = new Map();
+  cube.forEach(function(f){
+    m.set(vkey(matVec(R, f.n)), { col:f.col, a:f.a ? matVec(R, f.a) : null });
+  });
+  return m;
+}
+function viewTriple(cube, R){
+  const m = cubeMap(cube, R), t = {};
+  VIEW_FACES.forEach(function(k){ const f = m.get(vkey(VIEW_NORMALS[k])); t[k] = { col:f.col, a:f.a }; });
+  return t;
+}
+function tripleKey(t){
+  return VIEW_FACES.map(function(k){ return t[k].col + ':' + (t[k].a ? vkey(t[k].a) : '-'); }).join('|');
+}
+// Independent check: can the cube show exactly this visible corner (top, left, right) in some orientation?
+function tripleAchievable(cube, t){
+  const key = tripleKey(t);
+  for (let i = 0; i < ROT24_INDEP.length; i++) if (tripleKey(viewTriple(cube, ROT24_INDEP[i])) === key) return true;
+  return false;
+}
+function cloneTriple(t){ return JSON.parse(JSON.stringify(t)); }
+function mutateTriple(rnd, cube, R, t, kind){
+  const c = cloneTriple(t), m = cubeMap(cube, R);
+  const X = pick(rnd, VIEW_FACES);
+  const others = VIEW_FACES.filter(function(k){ return k !== X; });
+  if (kind === 'swap'){
+    const Y = pick(rnd, others);
+    const tmp = c[X].col; c[X].col = c[Y].col; c[Y].col = tmp;
+  } else if (kind === 'opp'){
+    const Y = pick(rnd, others);
+    c[X].col = m.get(vkey(vneg(VIEW_NORMALS[Y]))).col;
+  } else if (kind === 'hidden'){
+    const hid = [vneg(VIEW_NORMALS.top), vneg(VIEW_NORMALS.left), vneg(VIEW_NORMALS.right)].map(function(n){ return m.get(vkey(n)).col; });
+    c[X].col = pick(rnd, hid);
+  } else if (kind === 'arrow'){
+    const withA = VIEW_FACES.filter(function(k){ return c[k].a; });
+    if (!withA.length) return null;
+    const F = pick(rnd, withA);
+    let a = c[F].a; const turns = randInt(rnd, 1, 3);
+    for (let i = 0; i < turns; i++) a = vcross(VIEW_NORMALS[F], a);
+    c[F].a = a.map(function(x){ return x + 0; });
+  }
+  return c;
+}
+const WHYNET = {
+  correct:'Correcta: estas tres caras coinciden en una esquina en este orden, tal como se pliega el desarrollo.',
+  opp:'Imposible: muestra juntas dos caras que son opuestas en el desarrollo (las caras opuestas nunca se tocan).',
+  hidden:'Imposible: estas tres caras no coinciden en una misma esquina del cubo construido con este desarrollo.',
+  swap:'Dos caras están intercambiadas: la esquina existe, pero el orden de los colores en sentido horario está invertido (disposición especular).',
+  arrow:'Una flecha apunta en sentido erróneo para esta orientación del cubo.'
+};
+function makeNet(level, rnd, nopts){
+  for (let t = 0; t < 400; t++){
+    let base = pick(rnd, NETS.filter(function(c){ return level > 3 || hasStrip4(c); }));
+    const T = pick(rnd, NET_T8);
+    const cells = normCells2(base.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0]; }));
+    const fold = foldNet(cells);
+    if (!fold) throw new Error('transformed net does not fold');
+    const perm = shuffle(rnd, [0,1,2,3,4,5]);
+    const arrowIdx = new Set(shuffle(rnd, [0,1,2,3,4,5]).slice(0, NET_ARROWS[level]));
+    const faces = fold.map(function(f, i){
+      const k = arrowIdx.has(i) ? randInt(rnd, 0, 3) : null;
+      const dirs = [f.u, f.r, vneg(f.u), vneg(f.r)];
+      return { cell:cells[i], n:f.n, col:perm[i], k:k, a:k === null ? null : dirs[k].map(function(x){ return x + 0; }) };
+    });
+    const cube = faces.map(function(f){ return { n:f.n, col:f.col, a:f.a }; });
+    const R = pick(rnd, ROT24);
+    const correct = viewTriple(cube, R);
+    const opts = [{ t:correct, kind:'correct' }], keys = new Set([tripleKey(correct)]);
+    const pool = NET_KIND_POOL[level];
+    let guard = 0;
+    while (opts.length < nopts && guard++ < 600){
+      const kind = pool[(opts.length - 1 + Math.floor(guard / 8)) % pool.length];
+      const m = mutateTriple(rnd, cube, R, correct, kind);
+      if (!m) continue;
+      const k = tripleKey(m);
+      if (keys.has(k) || tripleAchievable(cube, m)) continue;
+      keys.add(k); opts.push({ t:m, kind:kind });
+    }
+    if (opts.length < nopts) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHYNET[o.kind]; });
+    const opp = [];
+    for (let i = 0; i < 6; i++) for (let j = i + 1; j < 6; j++){
+      if (vkey(faces[i].n) === vkey(vneg(faces[j].n))) opp.push(COLOR_NAMES[faces[i].col] + '–' + COLOR_NAMES[faces[j].col]);
+    }
+    return {
+      type:'net', level:level, cells:cells, faces:faces, options:options, answer:answer, whys:whys,
+      prompt:'¿Qué cubo se obtiene al plegar este desarrollo? (El desarrollo se ve desde fuera; las flechas también deben coincidir.)',
+      hints:[
+        'Busca primero las caras opuestas: en una tira recta de casillas, dos caras separadas por exactamente una cara son opuestas. Las caras opuestas nunca se ven a la vez.',
+        'Pares opuestos de este desarrollo: ' + opp.join(', ') + '. Tacha toda opción que muestre un par junto y comprueba después el orden horario de las tres caras alrededor de su esquina común' + (NET_ARROWS[level] ? ' y el sentido de las flechas.' : '.'),
+        'Respuesta correcta: ' + LETTERS[answer] + '. ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+      ]
+    };
+  }
+  throw new Error('makeNet failed');
+}
+function verifyNet(item){
+  const cube = item.faces.map(function(f){ return { n:f.n, col:f.col, a:f.a }; });
+  if (new Set(item.faces.map(function(f){ return vkey(f.n); })).size !== 6) return false;
+  const flags = item.options.map(function(o){ return tripleAchievable(cube, o.t); });
+  const keys = item.options.map(function(o){ return tripleKey(o.t); });
+  if (new Set(keys).size !== keys.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- 2D shapes: rotation and reflection ---------------- */
+const ROT2 = [[1,0,0,1],[0,-1,1,0],[-1,0,0,-1],[0,1,-1,0]];   // x' = a x + b y ; y' = c x + d y
+function normShape2(cells){
+  let mx = Infinity, my = Infinity;
+  cells.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); });
+  return cells.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0, c[2]]; });
+}
+function shapeKey2(cells){ return normShape2(cells).map(function(c){ return c[0] + ',' + c[1] + ',' + c[2]; }).sort().join(';'); }
+function canonRot2(cells){   // independent path: explicit rotation matrices
+  let best = null;
+  ROT2.forEach(function(T){
+    const k = shapeKey2(cells.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0, c[2]]; }));
+    if (best === null || k < best) best = k;
+  });
+  return best;
+}
+function eqRot2(a, b){ return canonRot2(a) === canonRot2(b); }
+function mirror2(cells){ return cells.map(function(c){ return [-c[0] + 0, c[1], c[2]]; }); }
+function rot90(cells, k){   // generation path: repeated quarter turns (x,y) -> (-y,x)
+  let r = cells;
+  for (let i = 0; i < (k % 4 + 4) % 4; i++) r = r.map(function(c){ return [-c[1] + 0, c[0], c[2]]; });
+  return r;
+}
+function isChiral2(cells){ return !eqRot2(cells, mirror2(cells)); }
+function bbox2(cells){
+  let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+  cells.forEach(function(p){ a = Math.min(a, p[0]); b = Math.min(b, p[1]); c = Math.max(c, p[0]); d = Math.max(d, p[1]); });
+  return { w:c - a + 1, h:d - b + 1 };
+}
+function connected2(cells){
+  if (!cells.length) return false;
+  const set = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+  const seen = new Set([cells[0][0] + ',' + cells[0][1]]); const q = [cells[0]];
+  while (q.length){
+    const c = q.shift();
+    [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+      const k = (c[0] + d[0]) + ',' + (c[1] + d[1]);
+      if (set.has(k) && !seen.has(k)){ seen.add(k); q.push([c[0] + d[0], c[1] + d[1]]); }
+    });
+  }
+  return seen.size === cells.length;
+}
+const SHAPE_LEVELS = [null,
+  { N:4, k:5, col:0 }, { N:4, k:6, col:0 }, { N:5, k:7, col:0 }, { N:5, k:8, col:0 }, { N:5, k:9, col:1 },
+  { N:6, k:10, col:2 }, { N:6, k:12, col:2 }, { N:7, k:14, col:3 }, { N:7, k:16, col:3 }, { N:8, k:20, col:4 }
+];
+function genShape(rnd, level){
+  const P = SHAPE_LEVELS[level];
+  for (let t = 0; t < 4000; t++){
+    let cells = [[randInt(rnd, 0, P.N - 1), randInt(rnd, 0, P.N - 1), 1]];
+    const set = new Set([cells[0][0] + ',' + cells[0][1]]);
+    let guard = 0;
+    while (cells.length < P.k && guard++ < 400){
+      const c = pick(rnd, cells), d = pick(rnd, [[1,0],[-1,0],[0,1],[0,-1]]);
+      const x = c[0] + d[0], y = c[1] + d[1];
+      if (x < 0 || y < 0 || x >= P.N || y >= P.N || set.has(x + ',' + y)) continue;
+      set.add(x + ',' + y); cells.push([x, y, 1]);
+    }
+    if (cells.length < P.k) continue;
+    const bb = bbox2(cells);
+    if (bb.w < Math.min(3, P.N) || bb.h < Math.min(3, P.N)) continue;
+    const idx = shuffle(rnd, cells.map(function(c, i){ return i; })).slice(0, P.col);
+    idx.forEach(function(i, j){ cells[i][2] = j % 2 === 0 ? 2 : 3; });
+    if (!isChiral2(cells)) continue;
+    return normShape2(cells);
+  }
+  throw new Error('genShape failed');
+}
+function alterShape(rnd, cells, N, near){
+  for (let t = 0; t < 60; t++){
+    const kind = rnd() < 0.5 ? 'move' : 'color';
+    if (kind === 'color'){
+      const colored = cells.filter(function(c){ return c[2] !== 1; });
+      if (!colored.length) continue;
+      const a = pick(rnd, colored), b = pick(rnd, cells.filter(function(c){ return c[2] === 1; }));
+      if (!b) continue;
+      const res = cells.map(function(c){
+        if (c === a) return [c[0], c[1], 1];
+        if (c === b) return [c[0], c[1], a[2]];
+        return c.slice();
+      });
+      return normShape2(res);
+    }
+    const victim = pick(rnd, cells);
+    const rest = cells.filter(function(c){ return c !== victim; });
+    const rs = new Set(rest.map(function(c){ return c[0] + ',' + c[1]; }));
+    const cands = [];
+    rest.forEach(function(c){
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+        const p = [c[0] + d[0], c[1] + d[1]];
+        if (rs.has(p[0] + ',' + p[1]) || (p[0] === victim[0] && p[1] === victim[1])) return;
+        if (near && Math.abs(p[0] - victim[0]) + Math.abs(p[1] - victim[1]) > 2) return;
+        cands.push(p);
+      });
+    });
+    if (!cands.length) continue;
+    const p = pick(rnd, cands);
+    const res = rest.map(function(c){ return c.slice(); }).concat([[p[0], p[1], victim[2]]]);
+    const bb = bbox2(res);
+    if (Math.max(bb.w, bb.h) > N || !connected2(res)) continue;
+    return normShape2(res);
+  }
+  return null;
+}
+const WHY2 = {
+  correct:'Correcta.',
+  rotated:'Es solo un giro de la referencia (no una imagen especular).',
+  mirror:'Imagen especular de la referencia: no se obtiene girándola.',
+  altered:'Un cuadrado está en otro lugar (o es de otro color) respecto a la referencia.',
+  alteredMirror:'Imagen especular con un cuadrado cambiado.'
+};
+function makeShape2d(level, rnd, nopts, variant){
+  const P = SHAPE_LEVELS[level];
+  for (let t = 0; t < 300; t++){
+    const ref = genShape(rnd, level);
+    const near = level >= 6;
+    const opts = [];
+    let correct;
+    if (variant === 'rotate') correct = normShape2(rot90(ref, randInt(rnd, 1, 3)));
+    else correct = normShape2(rot90(mirror2(ref), randInt(rnd, 0, 3)));
+    opts.push({ cells:correct, kind:'correct' });
+    const keys = new Set([canonRot2(correct)]);
+    let ok = true;
+    for (let i = 0; i < nopts - 1 && ok; i++){
+      let kind;
+      if (variant === 'rotate') kind = i === 0 ? 'mirror' : (i % 2 === 1 ? (level <= 2 ? 'altered' : 'alteredMirror') : 'altered');
+      else kind = i === 0 ? 'rotated' : (i % 2 === 1 ? 'alteredMirror' : 'altered');
+      let shape = null;
+      for (let r = 0; r < 14 && !shape; r++){
+        let s;
+        if (kind === 'mirror') s = mirror2(ref);
+        else if (kind === 'rotated') s = ref;
+        else if (kind === 'altered') s = alterShape(rnd, ref, P.N, near);
+        else s = alterShape(rnd, normShape2(mirror2(ref)), P.N, near);
+        if (!s) continue;
+        const ck = canonRot2(s);
+        if (keys.has(ck)) continue;
+        keys.add(ck); shape = normShape2(rot90(s, randInt(rnd, 0, 3)));
+      }
+      if (!shape){ ok = false; break; }
+      opts.push({ cells:shape, kind:kind });
+    }
+    if (!ok) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return o.kind === 'correct' ? (variant === 'rotate' ? 'Correcta: la referencia girada en el plano.' : 'Correcta: la imagen especular de la referencia.') : WHY2[o.kind]; });
+    const prompt = variant === 'rotate'
+      ? '¿Qué forma es la referencia girada en el plano (solo giro, sin voltear)?'
+      : '¿Qué forma es la IMAGEN ESPECULAR de la referencia (volteada, y quizá también girada)?';
+    return {
+      type:'shape2d', level:level, variant:variant, N:P.N, ref:ref, options:options, answer:answer, whys:whys, prompt:prompt,
+      hints:[
+        'Elige el rasgo más distintivo de la referencia (un brazo largo, un saliente, un cuadrado de color) y síguelo en cada opción.',
+        variant === 'rotate'
+          ? 'Comprobación de espejo: gira mentalmente la opción hasta que su brazo largo apunte como el de la referencia; si entonces el saliente o el cuadrado de color queda en el lado opuesto, es una imagen especular.'
+          : 'Alinea el brazo largo de la referencia con el mismo brazo de la opción; una imagen especular tiene el saliente en el lado opuesto. Las opciones que coinciden solo girando son rotaciones y hay que descartarlas.',
+        'Respuesta correcta: ' + LETTERS[answer] + '. ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+      ]
+    };
+  }
+  throw new Error('makeShape2d failed');
+}
+function verifyShape2d(item){
+  const flags = item.options.map(function(o){
+    if (item.variant === 'rotate') return eqRot2(o.cells, item.ref);
+    return !eqRot2(o.cells, item.ref) && eqRot2(mirror2(o.cells), item.ref);
+  });
+  if (flags.filter(Boolean).length !== 1 || !flags[item.answer]) return false;
+  const ck = item.options.map(function(o){ return canonRot2(o.cells); });
+  if (new Set(ck).size !== ck.length) return false;
+  if (eqRot2(item.ref, mirror2(item.ref))) return false;
+  return true;
+}
+
+/* ---------------- Paper folding and punching (8 x 8 cells) ---------------- */
+const PAPER = 8;
+function foldMap(f, p){   // forward: where a cell of the current region ends up after the fold
+  const r = f.region, x = p[0], y = p[1];
+  if (f.t === 'V'){
+    const xm = (r.x0 + r.x1) / 2;
+    if ((f.keep === 'R' && x < xm) || (f.keep === 'L' && x >= xm)) return [r.x0 + r.x1 - 1 - x, y];
+    return [x, y];
+  }
+  if (f.t === 'H'){
+    const ym = (r.y0 + r.y1) / 2;
+    if ((f.keep === 'B' && y < ym) || (f.keep === 'T' && y >= ym)) return [x, r.y0 + r.y1 - 1 - y];
+    return [x, y];
+  }
+  const s = r.x1 - r.x0, u = x - r.x0, v = y - r.y0;
+  if (f.t === 'D1'){
+    if ((f.keep === 'A' && u < v) || (f.keep === 'B' && u > v)) return [r.x0 + v, r.y0 + u];
+    return [x, y];
+  }
+  // D2: anti-diagonal
+  if ((f.keep === 'A' && u + v < s - 1) || (f.keep === 'B' && u + v > s - 1)) return [r.x0 + s - 1 - v, r.y0 + s - 1 - u];
+  return [x, y];
+}
+function foldReflect(f, p){   // the reflection across the crease (an involution)
+  const r = f.region, x = p[0], y = p[1];
+  if (f.t === 'V') return [r.x0 + r.x1 - 1 - x, y];
+  if (f.t === 'H') return [x, r.y0 + r.y1 - 1 - y];
+  const s = r.x1 - r.x0, u = x - r.x0, v = y - r.y0;
+  if (f.t === 'D1') return [r.x0 + v, r.y0 + u];
+  return [r.x0 + s - 1 - v, r.y0 + s - 1 - u];
+}
+function foldRegionAfter(f){
+  const r = f.region;
+  if (f.t === 'V'){ const xm = (r.x0 + r.x1) / 2; return f.keep === 'R' ? { x0:xm, y0:r.y0, x1:r.x1, y1:r.y1 } : { x0:r.x0, y0:r.y0, x1:xm, y1:r.y1 }; }
+  if (f.t === 'H'){ const ym = (r.y0 + r.y1) / 2; return f.keep === 'B' ? { x0:r.x0, y0:ym, x1:r.x1, y1:r.y1 } : { x0:r.x0, y0:r.y0, x1:r.x1, y1:ym }; }
+  return { x0:r.x0, y0:r.y0, x1:r.x1, y1:r.y1 };
+}
+function foldKeptCells(folds){   // cells of the final folded shape
+  const out = [];
+  for (let y = 0; y < PAPER; y++) for (let x = 0; x < PAPER; x++){
+    let p = [x, y];
+    for (let i = 0; i < folds.length; i++) p = foldMap(folds[i], p);
+    if (p[0] === x && p[1] === y) out.push(p);
+  }
+  return out;
+}
+const FOLD_LEVELS = [null,
+  { n:1, diag:false, alt:false, punches:1 }, { n:2, diag:false, alt:false, punches:1 }, { n:2, diag:false, alt:false, punches:2 },
+  { n:3, diag:false, alt:false, punches:1 }, { n:3, diag:false, alt:false, punches:2 },
+  { n:2, diag:true, alt:true, punches:1 },   { n:2, diag:true, alt:true, punches:2 },
+  { n:2, diag:true, alt:true, punches:3 },   { n:4, diag:false, alt:true, punches:3 }, { n:4, diag:true, alt:true, punches:3 }
+];
+// n = number of straight folds; diag = a final diagonal fold after them; alt = straight folds alternate V/H so the region stays square.
+function genFolds(rnd, level){
+  const P = FOLD_LEVELS[level];
+  for (let t = 0; t < 200; t++){
+    let region = { x0:0, y0:0, x1:PAPER, y1:PAPER };
+    const folds = [];
+    let axis = rnd() < 0.5 ? 'V' : 'H', ok = true;
+    for (let i = 0; i < P.n; i++){
+      const w = region.x1 - region.x0, h = region.y1 - region.y0;
+      let a = P.alt ? axis : pick(rnd, ['V','H']);
+      if (a === 'V' && (w < 2 || w % 2)) a = 'H';
+      if (a === 'H' && (h < 2 || h % 2)) a = 'V';
+      if ((a === 'V' && (w < 2 || w % 2)) || (a === 'H' && (h < 2 || h % 2))){ ok = false; break; }
+      const f = { t:a, keep:a === 'V' ? pick(rnd, ['L','R']) : pick(rnd, ['T','B']), region:region };
+      folds.push(f); region = foldRegionAfter(f);
+      axis = a === 'V' ? 'H' : 'V';
+    }
+    if (!ok) continue;
+    if (P.diag){
+      if (region.x1 - region.x0 !== region.y1 - region.y0) continue;
+      const f = { t:pick(rnd, ['D1','D2']), keep:pick(rnd, ['A','B']), region:region };
+      folds.push(f);
+    }
+    return folds;
+  }
+  throw new Error('genFolds failed');
+}
+function unfoldHoles(folds, punches){
+  let set = new Map();
+  punches.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+  for (let i = folds.length - 1; i >= 0; i--){
+    const add = [];
+    set.forEach(function(p){ add.push(foldReflect(folds[i], p)); });
+    add.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+  }
+  return Array.from(set.values());
+}
+function holesByForward(folds, punches){   // verification: push every cell through the folds and see where it lands
+  const target = new Set(punches.map(function(p){ return p[0] + ',' + p[1]; }));
+  const out = [];
+  for (let y = 0; y < PAPER; y++) for (let x = 0; x < PAPER; x++){
+    let p = [x, y];
+    for (let i = 0; i < folds.length; i++) p = foldMap(folds[i], p);
+    if (target.has(p[0] + ',' + p[1])) out.push([x, y]);
+  }
+  return out;
+}
+function holesKey(h){ return h.map(function(p){ return p[0] + ',' + p[1]; }).sort().join(';'); }
+const WHYFOLD = {
+  correct:'Correcta: cada agujero se repite en cada capa, así que al desplegar cada doblez se reflejan todos los agujeros respecto a él.',
+  partial:'Se olvidó un desdoblado: los agujeros no se reflejaron respecto a todos los pliegues.',
+  shift:'Un agujero está mal colocado (el agujero se refleja exactamente respecto al pliegue, así que conserva su distancia a él).',
+  extra:'Tiene un agujero que ninguna capa del papel plegado podría haber producido.',
+  wrongaxis:'Los agujeros se reflejaron respecto a una línea equivocada.',
+  missing:'Falta un agujero: cada perforación hace un agujero por capa.'
+};
+function makeFold(level, rnd, nopts){
+  const P = FOLD_LEVELS[level];
+  for (let t = 0; t < 300; t++){
+    const folds = genFolds(rnd, level);
+    const kept = foldKeptCells(folds);
+    if (kept.length < P.punches) continue;
+    const punches = shuffle(rnd, kept).slice(0, P.punches);
+    const S = unfoldHoles(folds, punches);
+    const sKey = holesKey(S);
+    const cands = [];
+    // partial: skip one unfolding
+    for (let skip = 0; skip < folds.length; skip++){
+      let set = new Map(); punches.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+      for (let i = folds.length - 1; i >= 0; i--){
+        if (i === skip) continue;
+        const add = []; set.forEach(function(p){ add.push(foldReflect(folds[i], p)); });
+        add.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+      }
+      cands.push({ holes:Array.from(set.values()), kind:'partial' });
+    }
+    // wrong axis: mirror everything across a wrong paper line
+    cands.push({ holes:S.map(function(p){ return [PAPER - 1 - p[0], p[1]]; }), kind:'wrongaxis' });
+    cands.push({ holes:S.map(function(p){ return [p[0], PAPER - 1 - p[1]]; }), kind:'wrongaxis' });
+    cands.push({ holes:S.map(function(p){ return [p[1], p[0]]; }), kind:'wrongaxis' });
+    // random one-hole edits, several of each
+    for (let e = 0; e < 40; e++){
+      const i = randInt(rnd, 0, S.length - 1);
+      const dx = pick(rnd, [-1, 0, 1]), dy = pick(rnd, [-1, 0, 1]);
+      const q = [S[i][0] + dx, S[i][1] + dy];
+      if ((dx || dy) && q[0] >= 0 && q[1] >= 0 && q[0] < PAPER && q[1] < PAPER){
+        cands.push({ holes:S.map(function(p, j){ return j === i ? q : p; }), kind:'shift' });
+      }
+      if (S.length > 1) cands.push({ holes:S.filter(function(p, j){ return j !== i; }), kind:'missing' });
+      cands.push({ holes:S.concat([[randInt(rnd, 0, PAPER - 1), randInt(rnd, 0, PAPER - 1)]]), kind:'extra' });
+    }
+    const keys = new Set([sKey]); const opts = [{ holes:S, kind:'correct' }];
+    const pool = shuffle(rnd, cands);
+    // prefer the plausible families first (partial, wrongaxis), then edits
+    pool.sort(function(a, b){ return ['partial','wrongaxis'].indexOf(b.kind) < 0 ? -1 : 1; });
+    for (let i = 0; i < pool.length && opts.length < nopts; i++){
+      const k = holesKey(pool[i].holes);
+      if (keys.has(k)) continue;
+      const dedup = new Map(); pool[i].holes.forEach(function(p){ dedup.set(p[0] + ',' + p[1], p); });
+      if (dedup.size !== pool[i].holes.length) continue;
+      keys.add(k); opts.push(pool[i]);
+    }
+    if (opts.length < nopts) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHYFOLD[o.kind]; });
+    const nHoles = S.length;
+    return {
+      type:'fold', level:level, folds:folds, punches:punches, kept:kept, options:options, answer:answer, whys:whys,
+      prompt:'El papel se pliega paso a paso (línea discontinua = pliegue, flecha = parte que se dobla) y después se perfora donde se indica. ¿Cómo queda desplegado?',
+      hints:[
+        'Desdobla en orden inverso: empieza por el último pliegue y refleja cada agujero respecto a él; después retrocede de pliegue en pliegue.',
+        'Cada pliegue duplica los agujeros (un agujero sobre el pliegue no se duplica). Aquí la respuesta final debe tener ' + nHoles + ' agujero' + (nHoles === 1 ? '' : 's') + ' y el patrón debe ser simétrico respecto a cada línea de pliegue.',
+        'Respuesta correcta: ' + LETTERS[answer] + ' (' + nHoles + ' agujeros). ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+      ]
+    };
+  }
+  throw new Error('makeFold failed');
+}
+function verifyFold(item){
+  const truth = holesKey(holesByForward(item.folds, item.punches));
+  const flags = item.options.map(function(o){ return holesKey(o.holes) === truth; });
+  const keys = item.options.map(function(o){ return holesKey(o.holes); });
+  if (new Set(keys).size !== keys.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- Views: top / front / side ---------------- */
+// Viewer of the isometric drawing looks from +x, +y, +z. FRONT = seen from +x (lower-left faces, right = +y);
+// RIGHT side = seen from +y (lower-right faces, right = -x); LEFT = from -y; BACK = from -x; TOP = from above with the front
+// edge (x max) at the bottom of the diagram; BOTTOM = same layout seen from below.
+const VIEW_NAMES = ['Vista superior','Vista frontal','Vista lateral derecha','Vista lateral izquierda','Vista posterior','Vista inferior'];
+const VIEW_IDS = ['top','front','right','left','back','bottom'];
+function solidDims(cubes){
+  let gx = 0, gy = 0, gz = 0;
+  cubes.forEach(function(c){ gx = Math.max(gx, c[0] + 1); gy = Math.max(gy, c[1] + 1); gz = Math.max(gz, c[2] + 1); });
+  return { gx:gx, gy:gy, gz:gz };
+}
+function viewDims(d, id){
+  if (id === 'top' || id === 'bottom') return { rows:d.gx, cols:d.gy };
+  if (id === 'front' || id === 'back') return { rows:d.gz, cols:d.gy };
+  return { rows:d.gz, cols:d.gx };
+}
+function viewGrid(cubes, d, id){   // generation path: scatter every cube onto the picture
+  const vd = viewDims(d, id);
+  const g = []; for (let r = 0; r < vd.rows; r++){ g.push(new Array(vd.cols).fill(0)); }
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    let r, k;
+    if (id === 'top'){ r = x; k = y; }
+    else if (id === 'bottom'){ r = d.gx - 1 - x; k = y; }
+    else if (id === 'front'){ r = d.gz - 1 - z; k = y; }
+    else if (id === 'back'){ r = d.gz - 1 - z; k = d.gy - 1 - y; }
+    else if (id === 'right'){ r = d.gz - 1 - z; k = d.gx - 1 - x; }
+    else { r = d.gz - 1 - z; k = x; }
+    g[r][k] = 1;
+  });
+  return g;
+}
+function viewGridIndep(cubes, d, id){   // verification path: for every pixel, look for any cube along its line of sight
+  const vd = viewDims(d, id);
+  const set = new Set(cubes.map(vkey));
+  const g = [];
+  for (let r = 0; r < vd.rows; r++){
+    const row = [];
+    for (let k = 0; k < vd.cols; k++){
+      let hit = 0;
+      const depthMax = (id === 'top' || id === 'bottom') ? d.gz : ((id === 'front' || id === 'back') ? d.gx : d.gy);
+      for (let s = 0; s < depthMax && !hit; s++){
+        let x, y, z;
+        if (id === 'top'){ x = r; y = k; z = s; }
+        else if (id === 'bottom'){ x = d.gx - 1 - r; y = k; z = s; }
+        else if (id === 'front'){ z = d.gz - 1 - r; y = k; x = s; }
+        else if (id === 'back'){ z = d.gz - 1 - r; y = d.gy - 1 - k; x = s; }
+        else if (id === 'right'){ z = d.gz - 1 - r; x = d.gx - 1 - k; y = s; }
+        else { z = d.gz - 1 - r; x = k; y = s; }
+        if (set.has(x + ',' + y + ',' + z)) hit = 1;
+      }
+      row.push(hit);
+    }
+    g.push(row);
+  }
+  return g;
+}
+function gridKey(g){ return g.length + 'x' + (g[0] ? g[0].length : 0) + ':' + g.map(function(r){ return r.join(''); }).join('/'); }
+function flipH(g){ return g.map(function(r){ return r.slice().reverse(); }); }
+function flipV(g){ return g.slice().reverse().map(function(r){ return r.slice(); }); }
+const SOLID_LEVELS = [null,
+  { gx:3, gy:3, hmax:2 }, { gx:3, gy:3, hmax:3 }, { gx:3, gy:4, hmax:3 }, { gx:4, gy:4, hmax:2 }, { gx:4, gy:4, hmax:3 },
+  { gx:4, gy:4, hmax:4 }, { gx:5, gy:4, hmax:4 }, { gx:5, gy:5, hmax:4 }, { gx:5, gy:5, hmax:5 }, { gx:6, gy:5, hmax:5 }
+];
+function hiddenSet(cubes){
+  const set = new Set(cubes.map(vkey)), out = new Set();
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    if (set.has(vkey([x + 1, y + 1, z + 1])) || (set.has(vkey([x + 1, y, z])) && set.has(vkey([x, y + 1, z])) && set.has(vkey([x, y, z + 1])))) out.add(vkey(c));
+  });
+  return out;
+}
+// All levels: hidden cubes are allowed only if they do not change any of the six views (so the drawing is fair).
+function hiddenMatters(cubes, d){
+  const hs = hiddenSet(cubes);
+  if (!hs.size) return false;
+  const vis = cubes.filter(function(c){ return !hs.has(vkey(c)); });
+  return VIEW_IDS.some(function(id){ return gridKey(viewGrid(vis, d, id)) !== gridKey(viewGrid(cubes, d, id)); });
+}
+function genSolid(rnd, level){
+  const P = SOLID_LEVELS[level];
+  const cells = P.gx * P.gy;
+  for (let t = 0; t < 60000; t++){
+    const cubes = [];
+    for (let x = 0; x < P.gx; x++) for (let y = 0; y < P.gy; y++){
+      const h = rnd() < 0.18 ? 0 : randInt(rnd, 1, P.hmax);
+      for (let z = 0; z < h; z++) cubes.push([x, y, z]);
+    }
+    if (cubes.length < Math.ceil(cells * 0.7) || cubes.length > Math.floor(cells * P.hmax * 0.75)) continue;
+    const d = solidDims(cubes);
+    if (d.gx < 2 || d.gy < 2 || d.gz < 2) continue;
+    if (hiddenMatters(cubes, d)) continue;   // every level: the drawing must show everything that decides a view
+    return { cubes:cubes, dims:d };
+  }
+  throw new Error('genSolid failed');
+}
+function makeView(level, rnd, nopts, variant){
+  for (let t = 0; t < 300; t++){
+    const S = genSolid(rnd, level), d = S.dims;
+    const grids = {}; VIEW_IDS.forEach(function(id){ grids[id] = viewGrid(S.cubes, d, id); });
+    if (variant === 'named'){
+      const idx = randInt(rnd, 0, 2);
+      const target = ['top','front','right'][idx];
+      const correct = grids[target], ck = gridKey(correct);
+      const cands = [];
+      VIEW_IDS.forEach(function(id){ if (id !== target) cands.push({ g:grids[id], kind:'other', id:id }); });
+      cands.push({ g:flipH(correct), kind:'flip' }); cands.push({ g:flipV(correct), kind:'flip' });
+      for (let e = 0; e < 30; e++){
+        const g = correct.map(function(r){ return r.slice(); });
+        const r = randInt(rnd, 0, g.length - 1), c = randInt(rnd, 0, g[0].length - 1);
+        g[r][c] = 1 - g[r][c];
+        cands.push({ g:g, kind:'tweak' });
+      }
+      const keys = new Set([ck]); const opts = [{ g:correct, kind:'correct' }];
+      shuffle(rnd, cands).forEach(function(c){
+        if (opts.length >= nopts) return;
+        const k = gridKey(c.g);
+        if (keys.has(k)) return;
+        if (!c.g.some(function(r){ return r.some(function(v){ return v; }); })) return;
+        keys.add(k); opts.push(c);
+      });
+      if (opts.length < nopts) continue;
+      const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+      const options = order.map(function(i){ return opts[i]; });
+      const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+      const whys = options.map(function(o){
+        if (o.kind === 'correct') return 'Correcta.';
+        if (o.kind === 'other') return 'Es la ' + VIEW_NAMES[VIEW_IDS.indexOf(o.id)].toLowerCase() + ' del sólido, no la ' + VIEW_NAMES[VIEW_IDS.indexOf(target)].toLowerCase() + '.';
+        if (o.kind === 'flip') return 'Es la vista pedida volteada (izquierda y derecha, o arriba y abajo, intercambiadas).';
+        return 'Un cuadrado difiere de la vista real.';
+      });
+      const tname = VIEW_NAMES[VIEW_IDS.indexOf(target)];
+      return {
+        type:'view', level:level, variant:variant, cubes:S.cubes, dims:d, target:target, options:options, answer:answer, whys:whys,
+        prompt:'¿Qué imagen es la ' + tname.toUpperCase() + ' de este sólido?',
+        hints:[
+          'Una vista muestra cada cuadrado en el que hay al menos un cubo en la línea de visión. Para la ' + tname.toLowerCase() + ' cuenta columnas y filas, no la profundidad.',
+          target === 'top' ? 'Vista superior: para cada (fila, columna) de la planta, ¿hay al menos un cubo? El borde frontal del sólido es el borde inferior del diagrama.'
+            : (target === 'front' ? 'Vista frontal: el frente es la cara inferior izquierda del dibujo. Para cada columna de la imagen toma la pila de cubos más alta.'
+              : 'Vista lateral derecha: la cara inferior derecha del dibujo; el extremo lejano del sólido (la parte posterior) aparece a la izquierda de la imagen. Toma la pila más alta de cada columna.'),
+          'Respuesta correcta: ' + LETTERS[answer] + '. ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+        ]
+      };
+    }
+    // variant 'identify': a picture is given, the solid is shown; which view is it?
+    const names = VIEW_IDS.slice();
+    const target = pick(rnd, names);
+    const given = grids[target], gk = gridKey(given);
+    const chosen = shuffle(rnd, names.filter(function(n){ return n !== target; })).slice(0, nopts - 1).concat([target]);
+    if (chosen.some(function(id){ return id !== target && gridKey(grids[id]) === gk; })) continue;
+    const order = shuffle(rnd, chosen);
+    const options = order.map(function(id){ return { id:id, kind:id === target ? 'correct' : 'other' }; });
+    const answer = order.indexOf(target);
+    const whys = options.map(function(o){ return o.kind === 'correct' ? 'Correcta.' : 'La ' + VIEW_NAMES[VIEW_IDS.indexOf(o.id)].toLowerCase() + ' de este sólido es una imagen distinta.'; });
+    return {
+      type:'view', level:level, variant:variant, cubes:S.cubes, dims:d, target:target, given:given, options:options, answer:answer, whys:whys,
+      prompt:'¿Desde qué lado es la imagen dada la vista de este sólido?',
+      hints:[
+        'Compara el tamaño de la imagen (filas x columnas) con el sólido: la altura de la imagen indica si es una vista lateral o una vista superior/inferior.',
+        'Las vistas superior e inferior muestran la planta (borde frontal abajo en la vista superior, invertida arriba-abajo en la inferior). Las parejas frontal/posterior y derecha/izquierda son imágenes especulares entre sí; fíjate en dónde está la pila más alta.',
+        'Respuesta correcta: ' + LETTERS[answer] + ' (' + VIEW_NAMES[VIEW_IDS.indexOf(target)] + '). ' + whys.map(function(w, i){ return LETTERS[i] + ': ' + w; }).join(' ')
+      ]
+    };
+  }
+  throw new Error('makeView failed');
+}
+function verifyView(item){
+  const d = item.dims;
+  if (item.variant === 'named'){
+    const truth = gridKey(viewGridIndep(item.cubes, d, item.target));
+    const flags = item.options.map(function(o){ return gridKey(o.g) === truth; });
+    const keys = item.options.map(function(o){ return gridKey(o.g); });
+    if (new Set(keys).size !== keys.length) return false;
+    return flags.filter(Boolean).length === 1 && flags[item.answer];
+  }
+  const gk = gridKey(item.given);
+  const flags = item.options.map(function(o){ return gridKey(viewGridIndep(item.cubes, d, o.id)) === gk; });
+  const ids = item.options.map(function(o){ return o.id; });
+  if (new Set(ids).size !== ids.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- Item factory and verification ---------------- */
+const TYPES = ['rot3d','net','shape2d','fold','view'];
+const TYPE_NAMES = { rot3d:'3D mental rotation', net:'Cube nets', shape2d:'2D rotation and reflection', fold:'Paper folding and punching', view:'Views (top, front, side)' };
+// Spanish display names; TYPE_NAMES (English) stays as the stored `module` string the dashboard parses.
+const TYPE_ES = { rot3d:'Rotación mental 3D', net:'Desarrollo de cubos', shape2d:'Rotación y simetría 2D', fold:'Plegado y perforado de papel', view:'Vistas (superior, frontal, lateral)' };
+function typeEs(t){ return TYPE_ES[t] || t; }
+function moduleEs(m){ return String(m || '').replace(/^Spatial:\s*/, 'Espacial: ').replace(/mixed$/, 'mixto').replace(/3D mental rotation$/, TYPE_ES.rot3d).replace(/Cube nets$/, TYPE_ES.net).replace(/2D rotation and reflection$/, TYPE_ES.shape2d).replace(/Paper folding and punching$/, TYPE_ES.fold).replace(/Views \(top, front, side\)$/, TYPE_ES.view); }
+function levelEs(l){ return String(l === null || l === undefined ? '' : l).replace(/^Custom\b/, 'Personalizado').replace(/^Adaptive\b/, 'Adaptativo'); }
+const OUT_ES = { correct:'correcta', wrong:'fallo', assisted:'con pista', blank:'en blanco' };
+function generateItem(type, level, rnd, nopts, seq){
+  level = Math.max(1, Math.min(MAX_LEVEL, level));
+  nopts = Math.max(2, Math.min(6, nopts || ladderParams(level).options));
+  seq = seq || 0;
+  for (let t = 0; t < 8; t++){
+    let item;
+    if (type === 'rot3d') item = makeRot3d(level, rnd, nopts);
+    else if (type === 'net') item = makeNet(level, rnd, nopts);
+    else if (type === 'shape2d') item = makeShape2d(level, rnd, nopts, (level >= 3 && seq % 2 === 1) ? 'mirror' : 'rotate');
+    else if (type === 'fold') item = makeFold(level, rnd, nopts);
+    else if (type === 'view') item = makeView(level, rnd, nopts, (level >= 2 && seq % 2 === 1) ? 'identify' : 'named');
+    else throw new Error('unknown type ' + type);
+    if (verifyItem(item)) return item;
+  }
+  throw new Error('could not generate a verified item of type ' + type + ' level ' + level);
+}
+function verifyItem(item){
+  if (item.options.length < 2) return false;
+  if (item.type === 'rot3d') return verifyRot3d(item);
+  if (item.type === 'net') return verifyNet(item);
+  if (item.type === 'shape2d') return verifyShape2d(item);
+  if (item.type === 'fold') return verifyFold(item);
+  if (item.type === 'view') return verifyView(item);
+  return false;
+}
+// Answer keys spread: shuffled at generation; helper for the tests.
+function selfTest(perCell, seed){
+  const rnd = mulberry32(seed || 12345);
+  const res = { total:0, failures:[], byType:{}, keys:[0,0,0,0,0,0] };
+  for (let level = 1; level <= MAX_LEVEL; level++){
+    TYPES.forEach(function(type){
+      for (let i = 0; i < perCell; i++){
+        res.total++;
+        try {
+          const item = generateItem(type, level, rnd, ladderParams(level).options, i);
+          if (!verifyItem(item)) res.failures.push(type + ' L' + level + ' fails verification');
+          if (item.options.length !== ladderParams(level).options) res.failures.push(type + ' L' + level + ' wrong option count');
+          res.keys[item.answer]++;
+          res.byType[type] = (res.byType[type] || 0) + 1;
+        } catch (e) { res.failures.push(type + ' L' + level + ' ' + e.message); }
+      }
+    });
+  }
+  return res;
+}
+
+/* ---------------- Goal, records, CSV ---------------- */
+function evaluateGoal(text, r){
+  const t = String(text || '').replace(/\s+/g, ' ');
+  const num = function(x){ return parseFloat(x.replace(',', '.')); };
+  let res = null;
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (mp) res = r.accuracy >= num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-z])/i);
+  if (ms && r.spi !== null && r.spi !== undefined){ const ok = r.spi <= num(ms[1]); res = res === null ? ok : (res && ok); }
+  const ma = t.match(/(\d+)\s*(?:correct|hits|correctas|correcta|aciertos|acierto)/i);
+  if (ma){ const ok = r.correct >= parseInt(ma[1], 10); res = res === null ? ok : (res && ok); }
+  return res;
+}
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function dateES(iso){
+  const d = new Date(iso);
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+function csvField(v){
+  const s = (v === null || v === undefined) ? '' : String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function toCSV(sessions){
+  const head = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
+  const rows = sessions.map(function(s){
+    return [dateES(s.ts), s.module, s.levelLabel, s.correct, s.wrong, s.blank,
+      (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
+      s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
+  });
+  return '﻿' + [head.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+// Personal best per level (manual sessions only, no hints): highest accuracy, ties broken by faster seconds per item.
+function personalBest(sessions, level){
+  let best = null;
+  sessions.forEach(function(s){
+    if (s.mode !== 'manual' || s.level !== level || s.hintsUsed > 0) return;
+    if (!best || s.accuracy > best.accuracy || (s.accuracy === best.accuracy && s.spi < best.spi)) best = s;
+  });
+  return best;
+}
+function currentStreak(sessions){
+  let n = 0;
+  for (let i = sessions.length - 1; i >= 0; i--){ if (sessions[i].met === true) n++; else break; }
+  return n;
+}
+function levelStatement(level){
+  if (level <= 3) return 'El nivel ' + level + ' está por debajo del objetivo: úsalo para construir el método y luego sube.';
+  if (level === 4) return 'Nivel 4 = candidato sólido, estándar. Un escalón por debajo del objetivo.';
+  if (level === 5) return 'Nivel 5 = objetivo de la Fase 2: lo que debe dominar un candidato bien preparado.';
+  if (level === 6) return 'Nivel 6 = por encima del objetivo; margen cómodo sobre la mayoría de candidatos.';
+  return 'El nivel ' + level + ' supera el de la competición: no esperes una precisión alta; entrena tu techo.';
+}
+// Recommendation after a session; never recommends speeding up when accuracy is below MIN_ACCURACY.
+function recommendation(level, accuracy, spi, mode){
+  if (accuracy < 60) return 'Precisión baja: baja un nivel y lee el panel de técnicas antes de la próxima sesión.';
+  if (accuracy < MIN_ACCURACY) return 'Precisión por debajo del ' + MIN_ACCURACY + ' %: NO aceleres. Repite este nivel con el mismo límite de tiempo y prioriza la precisión.';
+  if (level >= MAX_LEVEL) return 'Mantienes la precisión en el nivel máximo. No hay nada por encima: repite para consolidar.';
+  return 'Precisión igual o superior al ' + MIN_ACCURACY + ' %: puedes probar el nivel ' + (level + 1) + '.';
+}
+// Dual task: a digit appears every interval; press K when the digit equals the previous one (1-back).
+function dualNextDigit(rnd, prev){
+  if (prev !== null && rnd() < 0.28) return prev;
+  let d; do { d = randInt(rnd, 1, 9); } while (d === prev);
+  return d;
+}
+// ---- Endurance ("thirds", wave 5 U1): identical copy in every ATC game; see coord/SCHEMA-thirds.md ----
+// results = [{ok, blank, sec, t}] (optional n/c/b give weighted counts, e.g. one d2 row or one n-back stimulus).
+// durationSec > 0: time thirds (group = min(2, floor(t*3/duration))); otherwise index thirds (min(2, floor(i*3/N))).
+// Fewer than 9 results: null. Returns [{n,c,b,s} x3]; wrong = n - c - b.
+function atcThirds(results, durationSec){
+  const N = results ? results.length : 0;
+  if (N < 9) return null;
+  const th = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  results.forEach(function(r, i){
+    const g = durationSec > 0 ? Math.max(0, Math.min(2, Math.floor((r.t || 0) * 3 / durationSec))) : Math.min(2, Math.floor(i * 3 / N));
+    th[g].n += r.n === undefined ? 1 : r.n;
+    th[g].c += r.c === undefined ? (r.ok ? 1 : 0) : r.c;
+    th[g].b += r.b === undefined ? (r.blank ? 1 : 0) : r.b;
+    th[g].s += r.sec || 0;
+  });
+  th.forEach(function(x){ x.s = Math.round(x.s * 100) / 100; });
+  return th;
+}
+// One result-screen line: accuracy per third and the fade (third 3 minus third 1); fade only when both thirds have n >= 8.
+function atcThirdsLine(th){
+  if (!th || th.length !== 3) return '';
+  const acc = function(x){ return x.n > 0 ? x.c / x.n * 100 : null; };
+  const a = th.map(acc);
+  const txt = a.map(function(v){ return v === null ? '—' : String(Math.round(v)); }).join(' / ');
+  let fade = ' (muy pocos ítems por tercio para estimar la caída)';
+  if (th[0].n >= 8 && th[2].n >= 8){
+    const f = Math.round(a[2]) - Math.round(a[0]);
+    fade = ' → caída ' + (f > 0 ? '+' : (f < 0 ? '−' : '')) + Math.abs(f) + ' pts';
+  }
+  return 'Precisión por tercios: ' + txt + ' %' + fade;
+}
+// ==== PURE LOGIC END ====
+
+// ==================== USER INTERFACE ====================
+const STORE_KEY = 'atc_spatial_v1';
+let memory = null, storageOk = true;
+let onKey = null, timers = [];
+const app = document.getElementById('app');
+
+function loadMem(){
+  if (memory) return memory;
+  let d = null;
+  try { const r = localStorage.getItem(STORE_KEY); if (r) d = JSON.parse(r); } catch (e) { storageOk = false; }
+  if (!d || !Array.isArray(d.sessions)) d = { sessions:[], last:{} };
+  if (!d.last) d.last = {};
+  memory = d;
+  return d;
+}
+function saveMem(){
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(memory)); return true; }
+  catch (e) { storageOk = false; return false; }
+}
+function esc(s){
+  return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+function $(id){ return document.getElementById(id); }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+const TYPE_ICON = { rot3d:'s-rot3d', net:'s-net', shape2d:'s-shape2d', fold:'s-fold', view:'s-view' };
+function shortPrompt(item){
+  if (item.type === 'rot3d') return 'Girada, no reflejada';
+  if (item.type === 'net') return 'Cubo del desarrollo';
+  if (item.type === 'shape2d') return item.variant === 'rotate' ? 'Girada, sin voltear' : 'Imagen especular';
+  if (item.type === 'fold') return 'Desplegado';
+  if (item.type === 'view') return item.variant === 'identify' || item.given ? '¿Qué lado?' : VIEW_NAMES[VIEW_IDS.indexOf(item.target)].toUpperCase();
+  return item.prompt;
+}
+function screen(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function clearAll(){
+  timers.forEach(function(t){ clearTimeout(t); clearInterval(t); });
+  timers = []; onKey = null;
+}
+function track(t){ timers.push(t); return t; }
+document.addEventListener('keydown', function(e){
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')){
+    if (e.key === 'Enter' && onKey) onKey(e);
+    return;
+  }
+  // no accidental page scroll while an item is on screen
+  if ((e.key === ' ' || e.key.indexOf('Arrow') === 0) && document.getElementById('opts')) e.preventDefault();
+  if (onKey) onKey(e);
+});
+
+/* ---------- SVG drawing ---------- */
+const IC = 0.8660254;
+function isoP(x, y, z){ return [(y - x) * IC, (x + y) * 0.5 - z]; }
+function pstr(list){
+  return list.map(function(p){ const q = isoP(p[0], p[1], p[2]); return q[0].toFixed(3) + ',' + q[1].toFixed(3); }).join(' ');
+}
+function isoCubeCorners(c){
+  const x = c[0], y = c[1], z = c[2], pts = [];
+  [0, 1].forEach(function(a){ [0, 1].forEach(function(b){ [0, 1].forEach(function(e){ pts.push(isoP(x + a, y + b, z + e)); }); }); });
+  return pts;
+}
+function isoBBox(cubes){
+  let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+  cubes.forEach(function(cu){ isoCubeCorners(cu).forEach(function(p){ a = Math.min(a, p[0]); b = Math.min(b, p[1]); c = Math.max(c, p[0]); d = Math.max(d, p[1]); }); });
+  return { minx:a, miny:b, maxx:c, maxy:d, w:c - a, h:d - b };
+}
+function svgBox(cx, cy, side, inner, extra){
+  const s = side;
+  return '<svg viewBox="' + (cx - s / 2).toFixed(3) + ' ' + (cy - s / 2).toFixed(3) + ' ' + s.toFixed(3) + ' ' + s.toFixed(3) +
+    '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(extra || 'figura') + '">' + inner + '</svg>';
+}
+function isoFigureInner(cubes){
+  const sorted = cubes.slice().sort(function(a, b){ return (a[0] + a[1] + a[2]) - (b[0] + b[1] + b[2]) || a[0] - b[0] || a[1] - b[1] || a[2] - b[2]; });
+  let out = '<g stroke="#1b1b1b" stroke-width="0.07" stroke-linejoin="round">';
+  sorted.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    out += '<polygon fill="#d6ecfb" points="' + pstr([[x,y,z+1],[x+1,y,z+1],[x+1,y+1,z+1],[x,y+1,z+1]]) + '"/>';
+    out += '<polygon fill="#79b3d9" points="' + pstr([[x+1,y,z],[x+1,y+1,z],[x+1,y+1,z+1],[x+1,y,z+1]]) + '"/>';
+    out += '<polygon fill="#4a86ad" points="' + pstr([[x,y+1,z],[x+1,y+1,z],[x+1,y+1,z+1],[x,y+1,z+1]]) + '"/>';
+  });
+  return out + '</g>';
+}
+function figureSet(cubeLists){   // common scale for a group of figures
+  let side = 0;
+  cubeLists.forEach(function(cl){ const b = isoBBox(cl); side = Math.max(side, b.w, b.h); });
+  return side + 0.6;
+}
+function isoFigureSvg(cubes, side, label){
+  const b = isoBBox(cubes);
+  return svgBox((b.minx + b.maxx) / 2, (b.miny + b.maxy) / 2, side, isoFigureInner(cubes), label);
+}
+
+const FACE_COLORS = ['#c8452f','#2f6fb3','#4a9a63','#e0b23a','#7a5aa6','#f4f1e8'];
+function arrowPoly3(c, n, a){
+  const w = vcross(n, a);
+  function P(s, t){ return [c[0] + a[0] * s + w[0] * t, c[1] + a[1] * s + w[1] * t, c[2] + a[2] * s + w[2] * t]; }
+  return [P(-0.32, 0.08), P(0.02, 0.08), P(0.02, 0.22), P(0.34, 0), P(0.02, -0.22), P(0.02, -0.08), P(-0.32, -0.08)];
+}
+function isoFaceCubeSvg(t){
+  const faces = [
+    { k:'top',   pts:[[0,0,1],[1,0,1],[1,1,1],[0,1,1]], c:[0.5,0.5,1], n:[0,0,1], shade:0 },
+    { k:'left',  pts:[[1,0,0],[1,1,0],[1,1,1],[1,0,1]], c:[1,0.5,0.5], n:[1,0,0], shade:0.10 },
+    { k:'right', pts:[[0,1,0],[1,1,0],[1,1,1],[0,1,1]], c:[0.5,1,0.5], n:[0,1,0], shade:0.22 }
+  ];
+  let out = '<g stroke="#1b1b1b" stroke-width="0.05" stroke-linejoin="round">';
+  faces.forEach(function(f){
+    const face = t[f.k];
+    out += '<polygon fill="' + FACE_COLORS[face.col] + '" points="' + pstr(f.pts) + '"/>';
+    if (f.shade) out += '<polygon fill="rgba(0,0,0,' + f.shade + ')" stroke="none" points="' + pstr(f.pts) + '"/>';
+    if (face.a) out += '<polygon fill="#111" stroke="#fff" stroke-width="0.02" points="' + pstr(arrowPoly3(f.c, f.n, face.a)) + '"/>';
+  });
+  return svgBox(0, -0.25, 3.0, out + '</g>', 'cubo');
+}
+function netSvg(item){
+  let mx = 0, my = 0;
+  item.faces.forEach(function(f){ mx = Math.max(mx, f.cell[0] + 1); my = Math.max(my, f.cell[1] + 1); });
+  const side = Math.max(mx, my) + 0.6;
+  let out = '<g stroke="#1b1b1b" stroke-width="0.05">';
+  item.faces.forEach(function(f){
+    const x = f.cell[0], y = f.cell[1];
+    out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + FACE_COLORS[f.col] + '"/>';
+    if (f.k !== null){
+      const dirs = [[0,-1],[1,0],[0,1],[-1,0]], d = dirs[f.k], cx = x + 0.5, cy = y + 0.5;
+      const P = function(s, t){ return (cx + d[0] * s - d[1] * t).toFixed(3) + ',' + (cy + d[1] * s + d[0] * t).toFixed(3); };
+      out += '<polygon fill="#111" stroke="#fff" stroke-width="0.02" points="' + [P(-0.32,0.08),P(0.02,0.08),P(0.02,0.22),P(0.34,0),P(0.02,-0.22),P(0.02,-0.08),P(-0.32,-0.08)].join(' ') + '"/>';
+    }
+  });
+  return svgBox(mx / 2, my / 2, side, out + '</g>', 'desarrollo de cubo');
+}
+const SHAPE_FILL = { 1:'#3f78b5', 2:'#d98b3a', 3:'#6ea57b' };
+function shapeSvg(cells, N){
+  const bb = bbox2(cells), ox = (N - bb.w) / 2, oy = (N - bb.h) / 2;
+  let out = '<g stroke="#1b1b1b" stroke-width="0.06">';
+  cells.forEach(function(c){ out += '<rect x="' + (c[0] + ox).toFixed(2) + '" y="' + (c[1] + oy).toFixed(2) + '" width="1" height="1" fill="' + SHAPE_FILL[c[2]] + '"/>'; });
+  return svgBox(N / 2, N / 2, N + 0.6, out + '</g>', 'forma plana');
+}
+function gridSvg(g, maxR, maxC){
+  const R = g.length, C = g[0].length, ox = (maxC - C) / 2, oy = (maxR - R) / 2;
+  let out = '<g stroke="#b7b2a3" stroke-width="0.05">';
+  for (let r = 0; r < R; r++) for (let c = 0; c < C; c++){
+    out += '<rect x="' + (c + ox) + '" y="' + (r + oy) + '" width="1" height="1" fill="' + (g[r][c] ? '#1a4d8f' : '#f4f1e8') + '"/>';
+  }
+  const side = Math.max(maxR, maxC) + 0.6;
+  return svgBox(maxC / 2, maxR / 2, side, out + '</g>', 'vista');
+}
+let markerCounter = 0;
+function paperSvg(o){   // o: {region, tri, creases:[{x1,y1,x2,y2}], arrow:{x1,y1,x2,y2}, holes:[[x,y]], ghost:true}
+  const id = 'ah' + (markerCounter++);
+  let out = '<defs><marker id="' + id + '" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 z" fill="#b3450d"/></marker></defs>';
+  out += '<rect x="0" y="0" width="8" height="8" fill="none" stroke="#b7b2a3" stroke-width="0.06" stroke-dasharray="0.25 0.2"/>';
+  if (o.poly) out += '<polygon points="' + o.poly + '" fill="#f4f1e8" stroke="#222" stroke-width="0.08"/>';
+  else if (o.region) out += '<rect x="' + o.region.x0 + '" y="' + o.region.y0 + '" width="' + (o.region.x1 - o.region.x0) + '" height="' + (o.region.y1 - o.region.y0) + '" fill="#f4f1e8" stroke="#222" stroke-width="0.08"/>';
+  if (o.grid){
+    for (let i = 1; i < 8; i++) out += '<line x1="' + i + '" y1="0" x2="' + i + '" y2="8" stroke="#00000022" stroke-width="0.04"/><line x1="0" y1="' + i + '" x2="8" y2="' + i + '" stroke="#00000022" stroke-width="0.04"/>';
+  }
+  (o.creases || []).forEach(function(c){ out += '<line x1="' + c.x1 + '" y1="' + c.y1 + '" x2="' + c.x2 + '" y2="' + c.y2 + '" stroke="#d62828" stroke-width="0.14" stroke-dasharray="0.4 0.25"/>'; });
+  if (o.arrow) out += '<line x1="' + o.arrow.x1.toFixed(2) + '" y1="' + o.arrow.y1.toFixed(2) + '" x2="' + o.arrow.x2.toFixed(2) + '" y2="' + o.arrow.y2.toFixed(2) + '" stroke="#b3450d" stroke-width="0.2" marker-end="url(#' + id + ')"/>';
+  (o.holes || []).forEach(function(h){ out += '<circle cx="' + (h[0] + 0.5) + '" cy="' + (h[1] + 0.5) + '" r="0.32" fill="#1b1b1b" stroke="#fbfaf6" stroke-width="0.06"/>'; });
+  return '<svg viewBox="-0.4 -0.4 8.8 8.8" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="papel">' + out + '</svg>';
+}
+function triPoly(region, f){   // kept triangle after a diagonal fold
+  const r = region, s = r.x1 - r.x0;
+  if (f.t === 'D1') return f.keep === 'A' ? [[r.x0,r.y0],[r.x1,r.y0],[r.x1,r.y1]] : [[r.x0,r.y0],[r.x0,r.y1],[r.x1,r.y1]];
+  return f.keep === 'A' ? [[r.x1,r.y0],[r.x1,r.y1],[r.x0,r.y1]] : [[r.x0,r.y0],[r.x1,r.y0],[r.x0,r.y1]];
+}
+function foldPanels(item){
+  const panels = [];
+  const folds = item.folds;
+  let region = { x0:0, y0:0, x1:PAPER, y1:PAPER };
+  for (let i = 0; i < folds.length; i++){
+    const f = folds[i], r = f.region;
+    let crease, from, to;
+    if (f.t === 'V'){
+      const xm = (r.x0 + r.x1) / 2; crease = { x1:xm, y1:r.y0, x2:xm, y2:r.y1 };
+      const ym = (r.y0 + r.y1) / 2, a = (r.x0 + xm) / 2, b = (xm + r.x1) / 2;
+      from = f.keep === 'R' ? [a, ym] : [b, ym]; to = f.keep === 'R' ? [b, ym] : [a, ym];
+    } else if (f.t === 'H'){
+      const ym = (r.y0 + r.y1) / 2; crease = { x1:r.x0, y1:ym, x2:r.x1, y2:ym };
+      const xm = (r.x0 + r.x1) / 2, a = (r.y0 + ym) / 2, b = (ym + r.y1) / 2;
+      from = f.keep === 'B' ? [xm, a] : [xm, b]; to = f.keep === 'B' ? [xm, b] : [xm, a];
+    } else {
+      crease = f.t === 'D1' ? { x1:r.x0, y1:r.y0, x2:r.x1, y2:r.y1 } : { x1:r.x1, y1:r.y0, x2:r.x0, y2:r.y1 };
+      const kept = triPoly(r, f);
+      const cxk = (kept[0][0] + kept[1][0] + kept[2][0]) / 3, cyk = (kept[0][1] + kept[1][1] + kept[2][1]) / 3;
+      const mx = (r.x0 + r.x1) / 2, my = (r.y0 + r.y1) / 2;
+      to = [cxk, cyk]; from = [2 * mx - cxk, 2 * my - cyk];
+    }
+    const sh = 0.35, dx = to[0] - from[0], dy = to[1] - from[1], len = Math.sqrt(dx * dx + dy * dy) || 1;
+    const arrow = { x1:from[0] + dx / len * sh, y1:from[1] + dy / len * sh, x2:to[0] - dx / len * sh, y2:to[1] - dy / len * sh };
+    panels.push({ label:'Pliegue ' + (i + 1), svg:paperSvg({ region:region, creases:[crease], arrow:arrow }) });
+    if (f.t === 'D1' || f.t === 'D2'){
+      const tp = triPoly(r, f);
+      region = { poly:tp.map(function(p){ return p[0] + ',' + p[1]; }).join(' ') };
+    } else region = foldRegionAfter(f);
+  }
+  const finalOpts = { holes:item.punches };
+  if (region.poly) finalOpts.poly = region.poly; else finalOpts.region = region;
+  panels.push({ label:'Perforar', svg:paperSvg(finalOpts) });
+  return panels;
+}
+
+/* ---------- Item rendering ---------- */
+function letterBtn(i, inner, cls){
+  return '<button class="opt ' + (cls || '') + '" data-i="' + i + '" aria-label="Opción ' + LETTERS[i] + '"><span class="lt">' + LETTERS[i] + '</span>' + inner + '</button>';
+}
+// Returns {ref, given, opts:[html]} ; ref is hideable after the exposure time.
+function renderItem(item){
+  let ref = '', given = '', opts = [];
+  if (item.type === 'rot3d'){
+    const side = figureSet([item.ref].concat(item.options.map(function(o){ return o.cubes; })));
+    ref = '<div class="svgbox ref" style="max-width:420px;margin:0 auto">' + isoFigureSvg(item.ref, side, 'figura de referencia') + '</div>';
+    opts = item.options.map(function(o, i){ return letterBtn(i, isoFigureSvg(o.cubes, side, 'opción ' + LETTERS[i])); });
+  } else if (item.type === 'net'){
+    ref = '<div class="svgbox ref" style="max-width:420px;margin:0 auto">' + netSvg(item) + '</div>';
+    opts = item.options.map(function(o, i){ return letterBtn(i, isoFaceCubeSvg(o.t)); });
+  } else if (item.type === 'shape2d'){
+    ref = '<div class="svgbox ref" style="max-width:340px;margin:0 auto">' + shapeSvg(item.ref, item.N) + '</div>';
+    opts = item.options.map(function(o, i){ return letterBtn(i, shapeSvg(o.cells, item.N)); });
+  } else if (item.type === 'fold'){
+    ref = '<div class="panels">' + foldPanels(item).map(function(p){ return '<figure>' + p.svg + '<figcaption>' + p.label + '</figcaption></figure>'; }).join('') + '</div>';
+    opts = item.options.map(function(o, i){ return letterBtn(i, paperSvg({ region:{ x0:0, y0:0, x1:8, y1:8 }, holes:o.holes, grid:true })); });
+  } else if (item.type === 'view'){
+    const side = figureSet([item.cubes]);
+    ref = '<div class="svgbox ref" style="max-width:420px;margin:0 auto">' + isoFigureSvg(item.cubes, side + 0.4, 'sólido') + '</div>' +
+      '<p class="cap">Frente: abajo izquierda · Lado: abajo derecha</p>';
+    if (item.variant === 'named'){
+      let mr = 0, mc = 0;
+      item.options.forEach(function(o){ mr = Math.max(mr, o.g.length); mc = Math.max(mc, o.g[0].length); });
+      opts = item.options.map(function(o, i){ return letterBtn(i, gridSvg(o.g, mr, mc)); });
+    } else {
+      given = '<div class="svgbox" style="max-width:260px;margin:.6rem auto">' + gridSvg(item.given, item.given.length, item.given[0].length) + '</div>';
+      opts = item.options.map(function(o, i){ return letterBtn(i, VIEW_NAMES[VIEW_IDS.indexOf(o.id)], 'txt'); });
+    }
+  }
+  return { ref:ref, given:given, opts:opts };
+}
+
+/* ---------- Home ---------- */
+function fillSelect(id, items, sel){
+  return '<select id="' + id + '">' + items.map(function(it){ return '<option value="' + it[0] + '"' + (String(it[0]) === String(sel) ? ' selected' : '') + '>' + esc(it[1]) + '</option>'; }).join('') + '</select>';
+}
+let setup = null;
+function home(){
+  clearAll();
+  const d = loadMem();
+  if (!setup){
+    const l = d.last || {};
+    setup = { type:l.type || 'mixed', mode:l.mode || 'manual', level:l.level || 1, goal:l.goal || '80 % y 20 s',
+      hint:l.hint === undefined ? (d.sessions.length ? 0 : 1) : l.hint, rule15:l.rule15 || 'warn',
+      c:l.c || { level:5, limit:22, options:4, exposure:0, dual:0, hint:0, items:20 } };
+  }
+  const typeItems = [['mixed','Mixto']].concat(TYPES.map(function(t){ return [t, TYPE_ES[t]]; }));
+  screen(
+    '<div class="grid2"><div>' +
+    '<label class="lb" for="ty">Ejercicio</label>' + fillSelect('ty', typeItems, setup.type) +
+    '<label class="lb" for="mo">Modo</label>' + fillSelect('mo', [['manual','Manual'],['adaptive','Adaptativo'],['custom','Personalizado']], setup.mode) +
+    '<div id="modebox"></div>' +
+    '</div><div>' +
+    '<label class="lb" for="goal">Objetivo</label>' +
+    '<input type="text" id="goal" maxlength="80" autocomplete="off" value="' + esc(setup.goal) + '">' +
+    '<label class="lb" for="r15">Regla de 15 s</label>' + fillSelect('r15', [['off','No'],['warn','Aviso'],['enforce','Estricta']], setup.rule15) +
+    '<label class="lb" for="hi">Pistas</label>' + fillSelect('hi', [[0,'No'],[1,'1 Empujón'],[2,'2 Método'],[3,'3 Solución']], setup.hint) +
+    '</div></div>' +
+    '<p id="err" class="bad" role="alert"></p>' +
+    '<p class="row" style="margin-top:20px"><button class="btn primary" id="go">' + ic('play') + 'Empezar</button><button class="btn" id="hist">' + ic('history') + 'Historial <kbd>H</kbd></button></p>'
+  );
+  function drawMode(){
+    const mo = $('mo').value; let h = '';
+    if (mo === 'manual'){
+      const opts = []; for (let l = 1; l <= MAX_LEVEL; l++) opts.push([l, l + ' ' + LADDER[l].name + ' · ' + LADDER[l].limit + ' s']);
+      h = '<label class="lb" for="lv">Nivel</label>' + fillSelect('lv', opts, setup.level);
+    } else if (mo === 'custom'){
+      const c = setup.c;
+      function sl(id, lab, min, max, val, unit){ return '<label class="lb" for="' + id + '">' + lab + ' <b id="' + id + 'v">' + val + '</b>' + (unit ? ' ' + unit : '') + '</label><input type="range" id="' + id + '" min="' + min + '" max="' + max + '" value="' + val + '">'; }
+      h = sl('cl', 'Nivel', 1, 10, c.level) + sl('cli', 'Límite', 0, 90, c.limit, 's') + sl('cop', 'Opciones', 2, 6, c.options) +
+        sl('cex', 'Referencia visible', 0, 15, c.exposure, 's') + sl('cdu', 'Doble tarea', 0, 3, c.dual) + sl('cit', 'Ítems', 5, 40, c.items);
+    }
+    $('modebox').innerHTML = h;
+    if (mo === 'manual') $('lv').addEventListener('change', function(){ setup.level = parseInt($('lv').value, 10); });
+    if (mo === 'custom') ['cl','cli','cop','cex','cdu','cit'].forEach(function(id){ $(id).addEventListener('input', function(){ $(id + 'v').textContent = $(id).value; }); });
+  }
+  drawMode();
+  $('mo').addEventListener('change', function(){ setup.mode = $('mo').value; drawMode(); });
+  const start = function(){
+    const g = $('goal').value.trim();
+    if (!g){ $('err').textContent = 'Falta el objetivo'; $('goal').focus(); return; }
+    if (evaluateGoal(g, { accuracy:100, spi:0, correct:9999 }) === null){ $('err').textContent = 'El objetivo necesita un número'; $('goal').focus(); return; }
+    setup.type = $('ty').value; setup.mode = $('mo').value; setup.goal = g; setup.hint = parseInt($('hi').value, 10); setup.rule15 = $('r15').value;
+    if (setup.mode === 'manual') setup.level = parseInt($('lv').value, 10);
+    if (setup.mode === 'custom') setup.c = { level:+$('cl').value, limit:+$('cli').value, options:+$('cop').value, exposure:+$('cex').value, dual:+$('cdu').value, hint:setup.hint, items:+$('cit').value };
+    d.last = Object.assign(d.last, { type:setup.type, mode:setup.mode, level:setup.level, goal:g, hint:setup.hint, rule15:setup.rule15, c:setup.c });
+    saveMem();
+    startSession();
+  };
+  $('go').addEventListener('click', start);
+  $('hist').addEventListener('click', history);
+  onKey = function(e){
+    if (e.key === 'Enter') start();
+    else if (e.key === 'h' || e.key === 'H') history();
+  };
+}
+
+/* ---------- Session ---------- */
+let S = null;
+function startSession(){
+  clearAll();
+  const d = loadMem();
+  const seed = (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0;
+  const rnd = mulberry32(seed);
+  let params = null, adapt = null;
+  if (setup.mode === 'manual') params = ladderParams(setup.level);
+  else if (setup.mode === 'custom') params = customParams(setup.c);
+  else adapt = adaptiveInit(d.last.adaptiveStart || 2);
+  const total = setup.mode === 'adaptive' ? ITEMS_PER_SESSION : params.items;
+  S = { rnd:rnd, mode:setup.mode, type:setup.type, params:params, adapt:adapt, total:total, idx:0, results:[], startedAt:Date.now(),
+        dualStats:{ hits:0, misses:0, falseAlarms:0 }, cur:null, typeCounter:0 };
+  nextItem();
+}
+function currentParams(){
+  if (S.mode === 'adaptive') return adaptiveItemParams(S.adapt, { hint:setup.hint });
+  return S.params;
+}
+function effectiveLimit(p){
+  let lim = p.limit;   // 0 = none
+  if (setup.rule15 === 'enforce') lim = lim ? Math.min(lim, RULE15) : RULE15;
+  return lim;
+}
+function nextItem(){
+  if (S.idx >= S.total){ finishSession(); return; }
+  const p = currentParams();
+  const type = S.type === 'mixed' ? TYPES[S.idx % TYPES.length] : S.type;
+  let item;
+  try { item = generateItem(type, p.level, S.rnd, p.options, S.idx); }
+  catch (e) { screen('<p class="bad">' + esc(e.message) + '</p><button class="btn" id="b">' + ic('back') + 'Volver</button>'); $('b').addEventListener('click', home); return; }
+  if (S.timer){ clearInterval(S.timer); S.timer = null; }
+  const r = renderItem(item);
+  S.cur = { item:item, params:p, start:performance.now(), answered:false, hint:0, elapsed:0, limit:effectiveLimit(p) };
+  const cur = S.cur;
+  const tot = S.results.length;
+  const okc = S.results.filter(function(x){ return x.outcome === 'correct'; }).length;
+  screen(
+    (p.dual ? '<div class="dual" id="dualbox"><kbd>K</kbd><div class="dg" id="dualdig">-</div></div>' : '') +
+    '<div class="head"><span><b>' + (S.idx + 1) + '</b> / ' + S.total + '</span><span>' + ic(TYPE_ICON[item.type]) + esc(typeEs(item.type)) + '</span>' +
+    '<span>N<b>' + p.level + '</b> ' + esc(LADDER[p.level].name) + '</span><span>' + ic('check') + '<b>' + okc + '</b> / ' + tot + '</span><span>' + ic('timer') + '<b id="tm">0.0</b> s' + (cur.limit ? ' / ' + cur.limit : '') + '</span></div>' +
+    '<div class="bar" id="bar"><div id="barin"></div></div><p id="warn" class="warn" role="status" style="min-height:1.5rem"></p>' +
+    '<p style="font-size:18px"><b>' + esc(shortPrompt(item)) + '</b></p>' +
+    '<div class="stage' + (item.type === 'fold' ? '' : ' split') + '"><div class="stageL"><div class="refbox" id="refbox"><div id="ref">' + r.ref + '</div></div></div><div class="stageR">' + r.given +
+    '<div class="opts n' + r.opts.length + '" id="opts">' + r.opts.join('') + '</div></div></div>' +
+    '<p class="row"><button class="btn" id="hintbtn"' + (p.hintMax ? '' : ' disabled') + '>' + ic('hint') + 'Pista <kbd>H</kbd></button><button class="btn" id="skip">' + ic('skip') + 'Saltar <kbd>S</kbd></button><button class="link" id="quit">' + ic('x') + 'Salir</button></p>' +
+    '<div id="hinttext" class="hintbox"></div><div id="fb"></div>'
+  );
+  Array.prototype.forEach.call(document.querySelectorAll('#opts .opt'), function(b){ b.addEventListener('click', function(){ answer(parseInt(b.dataset.i, 10)); }); });
+  $('hintbtn').addEventListener('click', giveHint);
+  $('skip').addEventListener('click', function(){ answer(-1); });
+  $('quit').addEventListener('click', function(){ if (confirm('¿Salir de la sesión?')){ endDual(); home(); } });
+  onKey = function(e){
+    const k = e.key;
+    if (!cur.answered){
+      const n = parseInt(k, 10);
+      if (n >= 1 && n <= item.options.length) answer(n - 1);
+      else if (k.length === 1 && 'abcdefABCDEF'.indexOf(k) >= 0 && k.toLowerCase().charCodeAt(0) - 97 < item.options.length && 'kKsShH'.indexOf(k) < 0) answer(k.toLowerCase().charCodeAt(0) - 97);
+      else if (k === 'h' || k === 'H') giveHint();
+      else if (k === 's' || k === 'S') answer(-1);
+      else if (k === 'k' || k === 'K') dualPress();
+      else if (k === 'Escape'){ $('quit').click(); }
+    } else {
+      if (k === 'Enter' || k === ' ' || k === 'n' || k === 'N'){ e.preventDefault(); advance(); }
+      else if (k === 'k' || k === 'K') dualPress();
+      else if (k === 'Escape'){ $('quit').click(); }
+    }
+  };
+  // timer
+  S.timer = track(setInterval(function(){
+    if (cur.answered) return;
+    cur.elapsed = (performance.now() - cur.start) / 1000;
+    $('tm').textContent = cur.elapsed.toFixed(1);
+    const lim = cur.limit || 60;
+    $('barin').style.width = Math.min(100, cur.elapsed / lim * 100) + '%';
+    if (setup.rule15 !== 'off' && cur.elapsed >= RULE15 && (!cur.limit || cur.limit > RULE15)){
+      $('bar').className = 'bar late';
+      $('warn').textContent = '15 s: decide';
+    }
+    if (p.exposure && cur.elapsed >= p.exposure && !cur.hidden){
+      cur.hidden = true;
+      $('refbox').insertAdjacentHTML('beforeend', '<div class="hiddenref" id="hid">' + ic('eye') + ' Oculta</div>');
+    }
+    if (cur.limit && cur.elapsed >= cur.limit){ answer(-1, true); }
+  }, 100));
+  startDual(p);
+  if ($('dualbox')) $('dualbox').addEventListener('click', dualPress);   // tap works like the K key
+}
+function giveHint(){
+  const cur = S.cur;
+  if (!cur || cur.answered) return;
+  if (!cur.params.hintMax) return;
+  if (cur.hint >= cur.params.hintMax){ return; }
+  cur.hint += 1;
+  $('hinttext').innerHTML = '<p><b>' + cur.hint + ' / ' + cur.params.hintMax + '</b></p><p>' + esc(cur.item.hints[cur.hint - 1]) + '</p>';
+  if (cur.hint >= cur.params.hintMax) $('hintbtn').disabled = true;
+}
+function answer(choice, timeout){
+  const cur = S.cur;
+  if (!cur || cur.answered) return;
+  cur.answered = true;
+  if (S.timer){ clearInterval(S.timer); S.timer = null; }
+  cur.elapsed = (performance.now() - cur.start) / 1000;
+  if (timeout) cur.elapsed = cur.limit;
+  const item = cur.item;
+  let outcome;
+  if (choice < 0) outcome = 'blank';
+  else if (choice === item.answer) outcome = cur.hint > 0 ? 'assisted' : 'correct';
+  else outcome = 'wrong';
+  if (choice >= 0 && choice !== item.answer && cur.hint > 0) outcome = 'wrong';
+  S.results.push({ item:item, choice:choice, outcome:outcome, seconds:cur.elapsed, level:cur.params.level, hint:cur.hint, timeout:!!timeout, type:item.type });
+  if (S.mode === 'adaptive') S.adapt = adaptiveStep(S.adapt, outcome === 'correct');
+  Array.prototype.forEach.call(document.querySelectorAll('#opts .opt'), function(b){
+    b.disabled = true;
+    const i = parseInt(b.dataset.i, 10);
+    if (i === item.answer) b.classList.add('right');
+    else if (i === choice) b.classList.add('wrong');
+  });
+  const hid = $('hid'); if (hid) hid.remove();
+  const msg = outcome === 'correct' ? '<b class="good">Correcta</b>' : outcome === 'assisted' ? '<b class="warn">Con pista</b>'
+    : outcome === 'blank' ? '<b class="warn">' + (timeout ? 'Tiempo agotado' : 'Saltada') + '</b>' : '<b class="bad">Fallo</b>';
+  const why = '<p class="small">' + LETTERS[item.answer] + (item.whys[item.answer] === 'Correcta.' ? '' : ' · ' + esc(item.whys[item.answer])) + (choice >= 0 && choice !== item.answer ? '<br>' + LETTERS[choice] + ' · ' + esc(item.whys[choice]) : '') + '</p>';
+  $('fb').innerHTML = '<p>' + msg + ' · ' + cur.elapsed.toFixed(1) + ' s</p>' + why +
+    '<p><button class="btn primary" id="next">' + ic('next') + (S.idx + 1 >= S.total ? 'Resultados' : 'Siguiente') + '</button></p>';
+  $('next').addEventListener('click', advance);
+  $('next').focus({ preventScroll:true });
+  $('bar').className = 'bar';
+}
+function advance(){ S.idx += 1; nextItem(); }
+
+/* ---------- Dual task ---------- */
+let dualState = null;
+function startDual(p){
+  endDual();
+  if (!p.dual) return;
+  dualState = { prev:null, cur:null, target:false, responded:false, rnd:S.rnd };
+  const tick = function(){
+    if (!dualState) return;
+    if (dualState.target && !dualState.responded) S.dualStats.misses += 1;
+    const dg = dualNextDigit(dualState.rnd, dualState.cur);
+    dualState.target = dualState.cur !== null && dg === dualState.cur;
+    dualState.responded = false; dualState.prev = dualState.cur; dualState.cur = dg;
+    const el = $('dualdig'); if (el) { el.textContent = ''; setTimeout(function(){ const e2 = $('dualdig'); if (e2) e2.textContent = dg; }, 150); } /* blank for 150 ms so that a repeated digit is still visible as a new flash */
+  };
+  tick();
+  dualState.timer = setInterval(tick, DUAL_INTERVAL_MS[p.dual]);
+  timers.push(dualState.timer);
+}
+function endDual(){
+  if (dualState && dualState.timer) clearInterval(dualState.timer);
+  dualState = null;
+}
+function dualPress(){
+  if (!dualState) return;
+  if (dualState.target && !dualState.responded){ dualState.responded = true; S.dualStats.hits += 1; const b = $('dualbox'); if (b){ b.style.borderColor = 'var(--ok)'; setTimeout(function(){ b.style.borderColor = ''; }, 250); } }
+  else if (!dualState.responded){ dualState.responded = true; S.dualStats.falseAlarms += 1; const b = $('dualbox'); if (b){ b.style.borderColor = 'var(--err)'; setTimeout(function(){ b.style.borderColor = ''; }, 250); } }
+}
+
+/* ---------- Results ---------- */
+function finishSession(){
+  endDual();
+  clearAll();
+  const d = loadMem();
+  const R = S.results, n = R.length;
+  const cnt = function(o){ return R.filter(function(x){ return x.outcome === o; }).length; };
+  const correct = cnt('correct'), blank = cnt('blank'), assisted = cnt('assisted'), wrongOnly = cnt('wrong');
+  const wrong = wrongOnly + assisted;
+  const accuracy = n ? correct / n * 100 : 0;
+  const spi = n ? R.reduce(function(a, x){ return a + x.seconds; }, 0) / n : null;
+  const within15 = n ? R.filter(function(x){ return x.seconds <= RULE15; }).length / n * 100 : 0;
+  const avgLevel = n ? R.reduce(function(a, x){ return a + x.level; }, 0) / n : 0;
+  const level = S.mode === 'manual' ? S.params.level : (S.mode === 'custom' ? S.params.level : Math.round(avgLevel));
+  const levelLabel = S.mode === 'manual' ? String(S.params.level) : (S.mode === 'custom' ? 'Custom ' + S.params.level : 'Adaptive ' + fmt(avgLevel, 1));
+  const goalMet = evaluateGoal(setup.goal, { accuracy:accuracy, spi:spi, correct:correct });
+  const moduleName = 'Spatial: ' + (S.type === 'mixed' ? 'mixed' : TYPE_NAMES[S.type]);
+  const rec = { ts:new Date().toISOString(), module:moduleName, type:S.type, mode:S.mode, level:level, levelLabel:levelLabel,
+    correct:correct, wrong:wrong, blank:blank, assisted:assisted, spi:spi, accuracy:accuracy, within15:within15, goal:setup.goal, met:goalMet,
+    hintsUsed:R.filter(function(x){ return x.hint > 0; }).length, n:n,
+    thirds: atcThirds(R.map(function(x){ return { ok:x.outcome === 'correct', blank:x.outcome === 'blank', sec:x.seconds }; }), 0) };
+  const before = personalBest(d.sessions, level);
+  const beforeStreak = currentStreak(d.sessions);
+  d.sessions.push(rec);
+  if (S.mode === 'adaptive'){
+    const endLevel = S.adapt.level;
+    d.last.adaptiveStart = accuracy < MIN_ACCURACY && accuracy < 60 ? Math.max(1, endLevel - 1) : Math.max(1, endLevel);
+  }
+  const okSave = saveMem();
+  const isRecord = S.mode === 'manual' && rec.hintsUsed === 0 && (!before || accuracy > before.accuracy || (accuracy === before.accuracy && spi < before.spi));
+  const streak = currentStreak(d.sessions);
+  const byType = {};
+  R.forEach(function(x){ const b = byType[x.type] || (byType[x.type] = { n:0, ok:0, s:0 }); b.n++; if (x.outcome === 'correct') b.ok++; b.s += x.seconds; });
+  const pb = personalBest(d.sessions, level);
+  const dual = S.dualStats, hasDual = R.some(function(x){ return false; }) || (S.mode !== 'adaptive' && S.params.dual > 0);
+  screen(
+    '<h1>' + esc(moduleEs(moduleName)) + '</h1><p class="soft">' + (/^\d+$/.test(levelLabel) ? 'Nivel ' : '') + esc(levelEs(levelLabel)) + (S.mode === 'adaptive' ? ' → ' + d.last.adaptiveStart : '') + '</p>' +
+    '<div class="figs"><div class="fig"><b>' + fmt(accuracy, 1) + ' %</b><span>' + correct + ' / ' + n + '</span></div>' +
+    '<div class="fig"><b>' + fmt(spi, 1) + ' s</b><span>por ítem</span></div>' +
+    '<div class="fig"><b>' + fmt(within15, 0) + ' %</b><span>&lt; 15 s</span></div>' +
+    '<div class="fig"><b>' + wrongOnly + ' / ' + assisted + ' / ' + blank + '</b><span>fallos / con pista / en blanco</span></div>' +
+    (hasDual ? '<div class="fig"><b>' + dual.hits + ' / ' + dual.misses + ' / ' + dual.falseAlarms + '</b><span>aciertos / omitidos / falsos</span></div>' : '') +
+    '<div class="fig"><b>' + streak + '</b><span>Racha</span></div></div>' +
+    '<p><b class="' + (goalMet ? 'good' : (goalMet === null ? '' : 'warn')) + '">' + (goalMet === null ? '–' : (goalMet ? 'Objetivo cumplido' : 'Objetivo no cumplido')) + '</b> · ' + esc(setup.goal) +
+    (isRecord ? ' · <b class="good">' + ic('check') + 'Récord</b>' : '') + '</p>' +
+    (rec.thirds ? '<p class="soft" id="thirdsLine">' + esc(atcThirdsLine(rec.thirds)) + '</p>' : '') +
+    '<div class="tbl"><table><thead><tr><th>Ejercicio</th><th>Ítems</th><th>Precisión</th><th>s por ítem</th></tr></thead><tbody>' +
+    Object.keys(byType).map(function(t){ const b = byType[t]; return '<tr><td>' + ic(TYPE_ICON[t]) + esc(typeEs(t)) + '</td><td>' + b.n + '</td><td>' + fmt(b.ok / b.n * 100, 0) + ' %</td><td>' + fmt(b.s / b.n, 1) + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+    '<p class="row" style="margin-top:18px"><button class="btn primary" id="again">' + ic('repeat') + 'Nueva</button><button class="btn" id="rev">' + ic('x') + 'Errores <kbd>R</kbd></button><button class="btn" id="hist">' + ic('history') + 'Historial</button></p>'
+  );
+  $('again').addEventListener('click', home);
+  $('rev').addEventListener('click', review);
+  $('hist').addEventListener('click', history);
+  onKey = function(e){
+    if (e.key === 'Enter') home();
+    else if (e.key === 'r' || e.key === 'R') review();
+    else if (e.key === 'h' || e.key === 'H') history();
+  };
+}
+function review(){
+  const bad = S.results.filter(function(x){ return x.outcome !== 'correct'; });
+  let h = '<button class="link" id="back">' + ic('back') + 'Volver</button><h1>Errores</h1>';
+  if (!bad.length) h += '<p class="good"><b>0</b></p>';
+  bad.forEach(function(x, k){
+    const r = renderItem(x.item);
+    h += '<div class="rv"><p class="soft">' + ic(TYPE_ICON[x.type]) + esc(typeEs(x.type)) + ' · N' + x.level + ' · ' + (OUT_ES[x.outcome] || x.outcome) + ' · ' + x.seconds.toFixed(1) + ' s</p><p><b>' + esc(shortPrompt(x.item)) + '</b></p>' +
+      '<div id="rv' + k + '">' + r.ref + '</div>' + r.given + '<div class="opts">' +
+      r.opts.map(function(o, i){ return o.replace('class="opt ', 'class="opt ' + (i === x.item.answer ? 'right ' : (i === x.choice ? 'wrong ' : ''))); }).join('') + '</div>' +
+      '<p class="small">' + LETTERS[x.item.answer] + ' · ' + esc(x.item.whys[x.item.answer]) + (x.choice >= 0 && x.choice !== x.item.answer ? '<br>' + LETTERS[x.choice] + ' · ' + esc(x.item.whys[x.choice]) : '') + '</p></div>';
+  });
+  screen(h);
+  $('back').addEventListener('click', function(){ finishScreenAgain(); });
+  onKey = function(e){ if (e.key === 'Escape') finishScreenAgain(); };
+}
+function finishScreenAgain(){ home(); }
+
+/* ---------- History ---------- */
+function history(){
+  clearAll();
+  const d = loadMem();
+  const ses = d.sessions.slice().reverse();
+  let bests = '';
+  for (let l = 1; l <= MAX_LEVEL; l++){
+    const b = personalBest(d.sessions, l);
+    if (b) bests += '<tr><td>' + l + ' ' + LADDER[l].name + '</td><td>' + fmt(b.accuracy, 1) + ' %</td><td>' + fmt(b.spi, 1) + ' s</td><td>' + esc(dateES(b.ts)) + '</td></tr>';
+  }
+  screen(
+    '<button class="link" id="back">' + ic('back') + 'Volver</button><h1>Historial</h1>' +
+    (bests ? '<div class="tbl"><table><thead><tr><th>Nivel</th><th>Mejor %</th><th>s por ítem</th><th>Fecha</th></tr></thead><tbody>' + bests + '</tbody></table></div>' : '') +
+    '<h2>Sesiones</h2>' + (ses.length ? '<div class="tbl"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>Blanco</th><th>s/ítem</th><th>Precisión</th><th>Objetivo</th><th>Cumplido</th></tr></thead><tbody>' +
+    ses.map(function(s){ return '<tr><td>' + esc(dateES(s.ts)) + '</td><td>' + esc(moduleEs(s.module)) + '</td><td>' + esc(levelEs(s.levelLabel)) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 1) + '</td><td>' + fmt(s.accuracy, 1) + ' %</td><td>' + esc(s.goal) + '</td><td>' + (s.met === true ? 'Sí' : (s.met === false ? 'No' : '')) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<p class="soft">Sin sesiones</p>') +
+    '<p class="row" style="margin-top:18px"><button class="btn primary" id="csv">' + ic('download') + 'CSV</button><button class="btn danger" id="del">' + ic('trash') + 'Borrar</button><span id="conf"></span></p>'
+  );
+  $('back').addEventListener('click', home);
+  onKey = function(e){ if (e.key === 'Escape') home(); };
+  $('csv').addEventListener('click', function(){
+    try {
+      const blob = new Blob([toCSV(d.sessions)], { type:'text/csv;charset=utf-8' });
+      const a = document.createElement('a'); const f = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'spatial-trainer-' + f.getFullYear() + pad2(f.getMonth() + 1) + pad2(f.getDate()) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    } catch (e) { $('conf').textContent = 'Error'; }
+  });
+  $('del').addEventListener('click', function(){
+    if (confirm('¿Borrar el historial?')){ d.sessions = []; saveMem(); history(); }
+  });
+}
+
+/* ---------- Self-test and preview (developer aids) ---------- */
+function showSelfTest(){
+  clearAll();
+  screen('<button class="link" id="back">' + ic('back') + 'Volver</button><h1>Prueba</h1><p id="st" class="soft">…</p>');
+  $('back').addEventListener('click', home);
+  setTimeout(function(){
+    const t0 = performance.now();
+    const r = selfTest(6, 20260924);
+    $('st').innerHTML = r.total + ' · ' + ((performance.now() - t0) / 1000).toFixed(1) + ' s · ' +
+      (r.failures.length ? '<span class="bad">' + r.failures.length + ': ' + esc(r.failures.slice(0, 5).join('; ')) + '</span>' : '<span class="good">OK</span>') +
+      ' · ' + r.keys.join(', ') + ' · ' + NETS.length + ' / ' + NET_ENUM.hexominoes.length;
+  }, 30);
+}
+function preview(spec){
+  const parts = spec.split(':'), type = parts[0], level = parseInt(parts[1] || '1', 10), seq = parseInt(parts[2] || '0', 10);
+  const rnd = mulberry32(parseInt(parts[3] || '7', 10));
+  const item = generateItem(type, level, rnd, ladderParams(level).options, seq);
+  const r = renderItem(item);
+  screen('<p><b>' + esc(item.prompt) + '</b> (' + LETTERS[item.answer] + ')</p><div>' + r.ref + '</div>' + r.given + '<div class="opts">' + r.opts.join('') + '</div>');
+}
+(function boot(){
+  const h = (location.hash || '').replace('#', '');
+  if (h.indexOf('preview=') === 0){ try { preview(h.slice(8)); } catch (e) { screen('<pre>' + esc(e.stack) + '</pre>'); } return; }
+  if (h === 'selftest'){ showSelfTest(); return; }
+  home();
+})();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

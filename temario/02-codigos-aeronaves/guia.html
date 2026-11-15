@@ -1,0 +1,2378 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Códigos OACI/IATA y aeronaves</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Códigos OACI/IATA y aeronaves</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-apartado-de-esta-guia">Tabla de cobertura (capítulo del manual → apartado de esta guía)</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-introduccion-los-servicios-fijo-y-movil-aeronauticos-y-la-aftn-p-4-del-manual">1. Introducción: los servicios fijo y móvil aeronáuticos y la AFTN (p. 4 del manual)</a></li>
+<li><a href="#2-indicadores-de-lugar-oaci">2. Indicadores de lugar OACI</a><ul>
+<li><a href="#21-conceptos-previos-p-4-5">2.1 Conceptos previos (p. 4-5)</a></li>
+<li><a href="#22-asignacion-de-los-indicadores-de-lugar-p-5">2.2 Asignación de los indicadores de lugar (p. 5)</a></li>
+<li><a href="#23-formulacion-de-indicadores-de-lugar-p-6-7">2.3 Formulación de indicadores de lugar (p. 6-7)</a></li>
+<li><a href="#24-listado-de-indicadores-de-lugar-p-7-9">2.4 Listado de indicadores de lugar (p. 7-9)</a></li>
+<li><a href="#25-identificacion-de-oficinas-en-los-indicadores-de-lugar-p-9-10">2.5 Identificación de oficinas en los indicadores de lugar (p. 9-10)</a></li>
+</ul>
+</li>
+<li><a href="#3-designadores-de-companias-aereas-p-10-11">3. Designadores de compañías aéreas (p. 10-11)</a></li>
+<li><a href="#4-distintivos-oaci-de-nacionalidad-y-matriculas-de-aeronaves-p-11-13">4. Distintivos OACI de nacionalidad y matrículas de aeronaves (p. 11-13)</a></li>
+<li><a href="#5-codigos-iata-p-14-16">5. Códigos IATA (p. 14-16)</a><ul>
+<li><a href="#51-conceptos-previos-p-14">5.1 Conceptos previos (p. 14)</a></li>
+<li><a href="#52-indicadores-de-lugar-iata-p-14-15">5.2 Indicadores de lugar IATA (p. 14-15)</a></li>
+<li><a href="#53-designadores-de-aerolineas-p-15-16">5.3 Designadores de aerolíneas (p. 15-16)</a></li>
+</ul>
+</li>
+<li><a href="#6-aeronaves-p-16-32">6. Aeronaves (p. 16-32)</a><ul>
+<li><a href="#61-partes-de-la-aeronave-p-16-17">6.1 Partes de la aeronave (p. 16-17)</a></li>
+<li><a href="#62-caracteristicas-basicas-para-el-reconocimiento-de-aeronaves-p-18-23">6.2 Características básicas para el reconocimiento de aeronaves (p. 18-23)</a></li>
+<li><a href="#63-caracteristicas-basicas-para-el-reconocimiento-de-helicopteros-p-23-25">6.3 Características básicas para el reconocimiento de helicópteros (p. 23-25)</a></li>
+<li><a href="#64-catalogo-de-reconocimiento-de-aeronaves-p-25-32">6.4 Catálogo de reconocimiento de aeronaves (p. 25-32)</a></li>
+</ul>
+</li>
+<li><a href="#7-indicadores-de-tipo-de-aeronave-p-33-36">7. Indicadores de tipo de aeronave (p. 33-36)</a><ul>
+<li><a href="#71-designador-y-descripcion-de-aeronave-oaci-p-33-35">7.1 Designador y descripción de aeronave OACI (p. 33-35)</a></li>
+<li><a href="#72-designador-ataiata-p-35-36">7.2 Designador ATA/IATA (p. 35-36)</a></li>
+</ul>
+</li>
+<li><a href="#8-glosario-del-manual-p-37-39">8. Glosario del manual (p. 37-39)</a></li>
+<li><a href="#9-vocabulario-especifico-ingles-espanol-p-40-44">9. Vocabulario específico inglés-español (p. 40-44)</a></li>
+<li><a href="#10-acronimos-del-manual-p-45">10. Acrónimos del manual (p. 45)</a></li>
+<li><a href="#11-trampas-de-examen">11. Trampas de examen</a></li>
+<li><a href="#12-imprescindible-memorizar">12. Imprescindible memorizar</a></li>
+<li><a href="#13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#14-manual-frente-a-fuentes-primarias">14. Manual frente a fuentes primarias</a></li>
+<li><a href="#15-fuentes">15. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">48 min de lectura</div><h1 id="om02-guia-de-estudio-del-manual-oficial-de-enaire-no-2-codigos-oaciiata-y-caracteristicas-de-aeronaves-codigos-oaciiata-y-caracteristicas-de-aeronaves">Guía: Códigos OACI/IATA y aeronaves</h1>
+<p>Fuente: el manual oficial de ENAIRE «Códigos OACI/IATA y Características de Aeronaves», 45 páginas, «Elaborado: Noviembre 2024» (© 2024 ENAIRE).
+Todos los datos de esta guía proceden de ese manual y se leyeron en el texto completo o en las páginas del PDF renderizadas (marca). Cuando se contrastaron con una fuente primaria, la marca lo indica. Los números de página <code>(p. N)</code> son páginas del manual. Esta guía sigue la terminología del manual, que es la del examen; el inglés se da entre paréntesis cuando ayuda.</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El manual es un tema de «códigos y datos» puro. Los tipos de pregunta más probables son:</p>
+<ul>
+<li>Estructura de un indicador de lugar OACI de cuatro letras: qué significan la primera, la segunda, la tercera y la cuarta letra; prefijos españoles; indicadores concretos de aeródromos, ACC y helipuertos españoles; reglas de asignación (seis meses, NOTAM/AIP, asterisco, prohibido usarlos por radio); designadores de oficinas (estilo LEACYAYX).</li>
+<li>Designadores de compañías aéreas: telegráfico (tres letras) frente a telefónico (el que se pronuncia) frente a IATA (dos caracteres); ejemplos (IBE / IBERIA, BAW / SPEEDBIRD, AFR / AIRFRANS...).</li>
+<li>Marcas de nacionalidad y matrículas: estructura, regla del guion, marca común (4U), combinaciones prohibidas, Anexo 7, tabla de países.</li>
+<li>Códigos IATA: códigos de tres letras de los aeropuertos españoles, designadores de aerolínea de dos caracteres, mezclas de códigos IATA y OACI.</li>
+<li>Partes de la aeronave y sus funciones; rasgos de reconocimiento (ala, flecha, cola, motores, tren de aterrizaje, helicópteros); el catálogo del apartado 6.4 con tipo, TAS de crucero, régimen máximo de ascenso, techo y categoría de estela.</li>
+<li>Designadores de tipo (Doc. 8643): de 2 a 4 caracteres, la descripción de tres caracteres (L2J...), la categoría de estela turbulenta (J/H/M/L con los límites en kg), la regla del B757, RECAT-EU, el designador ATA/IATA.</li>
+<li>Definiciones del glosario y vocabulario específico inglés-español del final del manual.</li>
+</ul>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-apartado-de-esta-guia">Tabla de cobertura (capítulo del manual → apartado de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual (páginas)</th>
+<th>Apartado de esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Introducción: AFS, AMS, AFTN (p. 4)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2.1 Conceptos previos (p. 4-5)</td>
+<td>2.1</td>
+</tr>
+<tr>
+<td>2.2 Asignación de los indicadores de lugar (p. 5)</td>
+<td>2.2</td>
+</tr>
+<tr>
+<td>2.3 Formulación de indicadores de lugar (p. 6-7)</td>
+<td>2.3</td>
+</tr>
+<tr>
+<td>2.4 Listado de indicadores de lugar (p. 7-9)</td>
+<td>2.4 (tablas 2.4.a a 2.4.e)</td>
+</tr>
+<tr>
+<td>2.5 Identificación de oficinas (p. 9-10)</td>
+<td>2.5</td>
+</tr>
+<tr>
+<td>3 Designadores de compañías aéreas (p. 10-11)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4 Distintivos OACI de nacionalidad y matrículas de aeronaves (p. 11-13)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5 Códigos IATA (p. 14-16)</td>
+<td>5 (5.1, tabla 5.2, tabla 5.3)</td>
+</tr>
+<tr>
+<td>6.1 Partes de la aeronave (p. 16-17)</td>
+<td>6.1</td>
+</tr>
+<tr>
+<td>6.2 Características básicas para el reconocimiento de aeronaves (p. 18-23)</td>
+<td>6.2</td>
+</tr>
+<tr>
+<td>6.3 Helicópteros (p. 23-25)</td>
+<td>6.3</td>
+</tr>
+<tr>
+<td>6.4 Reconocimiento de aeronaves (p. 25-32)</td>
+<td>6.4 (tablas de actuaciones)</td>
+</tr>
+<tr>
+<td>7.1 Designador y descripción de aeronave OACI (p. 33-35)</td>
+<td>7.1</td>
+</tr>
+<tr>
+<td>7.2 Designador ATA/IATA (p. 35-36)</td>
+<td>7.2</td>
+</tr>
+<tr>
+<td>Glosario (p. 37-39)</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Vocabulario inglés-español (p. 40-44)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Acrónimos (p. 45)</td>
+<td>10</td>
+</tr>
+<tr>
+<td>(añadido)</td>
+<td>11 Trampas de examen · 12 Imprescindible memorizar · 13 Glosario bilingüe · 14 Manual frente a fuentes primarias</td>
+</tr>
+</tbody>
+</table>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Introducción: los servicios fijo y móvil aeronáuticos y la AFTN</li>
+<li>Indicadores de lugar OACI</li>
+<li>Designadores de compañías aéreas (OACI)</li>
+<li>Distintivos OACI de nacionalidad y matrículas de aeronaves</li>
+<li>Códigos IATA</li>
+<li>Aeronaves: partes, rasgos de reconocimiento y catálogo de reconocimiento</li>
+<li>Indicadores de tipo de aeronave (Doc. 8643 de la OACI y ATA/IATA)</li>
+<li>Glosario del manual</li>
+<li>Vocabulario específico inglés-español</li>
+<li>Acrónimos del manual</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Manual frente a fuentes primarias</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-introduccion-los-servicios-fijo-y-movil-aeronauticos-y-la-aftn-p-4-del-manual">1. Introducción: los servicios fijo y móvil aeronáuticos y la AFTN (p. 4 del manual)</h2>
+<p>El manual arranca diciendo que las comunicaciones aeronáuticas son un aspecto estratégico para lograr el objetivo de seguridad, regularidad y eficiencia en la navegación aérea. Se llevan a cabo a través de <strong>dos tipos de servicio</strong>:</p>
+<ol>
+<li><strong>AFS, Servicio Fijo Aeronáutico (<em>Aeronautical Fixed Service</em>)</strong>: comunicaciones <strong>entre estaciones terrestres fijas</strong>. Se presta a través de la <strong>AFTN</strong> (Red de Telecomunicaciones Fijas Aeronáuticas, <em>Aeronautical Fixed Telecommunication Network</em>).</li>
+<li><strong>AMS, Servicio Móvil Aeronáutico (<em>Aeronautical Mobile Service</em>)</strong>: comunicaciones <strong>entre estaciones terrestres fijas y estaciones de aeronave</strong>.</li>
+</ol>
+<p><strong>AFTN</strong> (definición, p. 4): sistema completo y mundial de circuitos fijos aeronáuticos, dispuestos como parte del AFS, para el intercambio de <strong>mensajes o de datos numéricos</strong> entre estaciones fijas aeronáuticas que posean características de comunicación idénticas o compatibles.</p>
+<ul>
+<li>A nivel mundial, la AFTN tiene <strong>estructura de malla</strong>: cualquier estación o centro que pertenezca a ella se comunica con todas las demás, de modo que los mensajes distribuidos por la AFTN llegan a todas las estaciones o centros conectados.</li>
+<li>Por las limitaciones de los primeros equipos terminales (<strong>teletipos, hoy en desuso</strong>), la comunicación se hacía en origen por <strong>líneas telegráficas</strong>. Estas se han sustituido por <strong>redes de comunicaciones de datos como REDAN, CIDIN</strong>, etc., porque los terminales actuales son ordenadores personales, que no imponen restricciones de velocidad.</li>
+<li>La red usa <strong>protocolos, formatos, códigos y abreviaturas</strong> propios; conocerlos es «el objetivo de esta unidad».</li>
+</ul>
+<p>Enfoque de examen: AFS = estaciones fijas; AMS = de estación fija a aeronave. La AFTN pertenece al AFS.</p>
+<hr />
+<h2 id="2-indicadores-de-lugar-oaci">2. Indicadores de lugar OACI</h2>
+<h3 id="21-conceptos-previos-p-4-5">2.1 Conceptos previos (p. 4-5)</h3>
+<ul>
+<li>El indicador de lugar OACI es un <strong>grupo de cuatro letras</strong> cuyo fin es identificar localizaciones geográficas, <strong>por lo general conectadas al AFS</strong>, como los <strong>aeródromos y helipuertos civiles y los Centros de Control</strong>.</li>
+<li>Pero hay indicadores que <strong>no están conectados</strong> a la red, por ejemplo los <strong>aeródromos privados</strong>.</li>
+</ul>
+<h3 id="22-asignacion-de-los-indicadores-de-lugar-p-5">2.2 Asignación de los indicadores de lugar (p. 5)</h3>
+<p>a. Los códigos los <strong>asignan los Estados pertinentes</strong>. La <strong>OACI supervisa</strong> que su formulación se ajuste a las normas del <strong>documento 7910 «Indicadores de lugar»</strong> (<em>Location Indicators</em>).
+b. <strong>No debería volverse a asignar un indicador de lugar a otro lugar durante un período de seis meses, como mínimo</strong>, después de que se haya anulado su asignación previa.
+c. Los cambios de asignación deberían promulgarse por <strong>NOTAM o AIP</strong> con la mayor antelación posible a la fecha de efectividad.
+d. Los indicadores que se asignan a lugares en los que <strong>no es posible cursar mensajes por la AFTN</strong> (por no estar conectados a la red) <strong>deberían identificarse con un asterisco (*)</strong>. El manual reproduce una página del AIP de España (GEN 2.4-1, WEF 21-JUN-18) con la nota «<em> No conectado al AFS / Not connected to the AFS»; los ejemplos destacados son </em><em>LETU (Ablitas, Navarra, militar)</em><em> y </em><em>LEAH (Aeródromo Aerohispalis-Mairena del Alcor, Sevilla)</em><em>.
+e. Los indicadores de lugar de la OACI </em><em>no deberían utilizarse para identificar transmisiones de radio en lugar de los distintivos de llamada</em><em>. Ejemplo del manual: el distintivo de llamada del ACC de Canarias es </em><em>«Canarias Control»</em><em> y su indicador de lugar es </em><em>GCCC</em>*; no se puede utilizar GCCC en las comunicaciones por radio.</p>
+<p>(Notas al pie del manual: la OACI, el NOTAM y el AIP se explican en el tema «Instituciones y Legislación Aeronáutica».)</p>
+<h3 id="23-formulacion-de-indicadores-de-lugar-p-6-7">2.3 Formulación de indicadores de lugar (p. 6-7)</h3>
+<p>Un indicador consta de <strong>cuatro letras</strong>:</p>
+<ol>
+<li><strong>Primera letra</strong>: el mundo está dividido en <strong>áreas de encaminamiento del AFS</strong>, a cada una de las cuales se asigna una letra distinta. Las áreas <strong>no se superponen</strong> y sus límites <strong>no tienen que coincidir forzosamente con los de un Estado, territorio o FIR</strong>; se deciden <strong>considerando únicamente los requisitos del AFS</strong>, para facilitar el encaminamiento de los mensajes. Figura de la p. 6 (fuente: Doc. 7910, 193.ª edición, Montreal, septiembre de 2024): mapa del mundo con una letra por área de encaminamiento (letras visibles en el mapa: B, C, D, E, F, G, H, K, L, M, N, O, P, R, S, T, U, V, W, Y, Z, A). A España le corresponden:
+   - <strong>L para la Península</strong>
+   - <strong>G para Canarias, Ceuta y Melilla</strong></li>
+<li><strong>Segunda letra</strong>: la letra asignada al <strong>Estado o territorio (o parte del mismo)</strong> en el que está situado el lugar. A España le corresponden:
+   - <strong>E</strong> para la Península, Ceuta y Melilla
+   - <strong>C</strong> para Canarias</li>
+<li><strong>Tercera y cuarta letras</strong>: el lugar en sí, por ejemplo un aeródromo. Ejemplo: <strong>MD</strong> para el aeródromo de MADRID/Adolfo Suárez Madrid-Barajas → <strong>LEMD</strong>.</li>
+</ol>
+<p>Consecuencias (deducidas de lo que dice el manual): la España peninsular y las Baleares = <strong>LE</strong>xx; Canarias = <strong>GC</strong>xx; Ceuta y Melilla = <strong>GE</strong>xx (primera letra G por el área de encaminamiento, segunda letra E por la parte del Estado). En los listados del manual: helipuerto de Ceuta = GECE, aeródromo de Melilla = GEML, helipuerto de Melilla = GEHM.</p>
+<h3 id="24-listado-de-indicadores-de-lugar-p-7-9">2.4 Listado de indicadores de lugar (p. 7-9)</h3>
+<p>El manual muestra «algunos de los indicadores de lugar de mayor uso en España», agrupados en cinco categorías: <strong>aeródromos, helipuertos, FIC y ACC, aeródromos en situación excepcional, FIC y ACC adyacentes (colaterales)</strong>. Advierte de que los datos están <strong>sujetos a continuas actualizaciones</strong>; para consultas específicas hay que acudir a la <strong>última edición del Doc. 7910 de la OACI</strong>.</p>
+<p>Abreviaturas al pie de la tabla (p. 8): <strong>ACC</strong> centro de control de área · <strong>FIC</strong> centro de información de vuelo · <strong>OAC</strong> centro de control de área oceánica · <strong>TACC</strong> centro de control de área terminal · <strong>UAC</strong> centro de control de área superior.</p>
+<p><strong>Tabla 2.4.a - FIC/ACC/TACC de España</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lugar</th>
+<th>Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Barcelona FIC/ACC</td>
+<td>LECB</td>
+</tr>
+<tr>
+<td>Canarias FIC/ACC</td>
+<td>GCCC</td>
+</tr>
+<tr>
+<td>Madrid FIC/ACC</td>
+<td>LECM</td>
+</tr>
+<tr>
+<td>Palma TACC</td>
+<td>LECP</td>
+</tr>
+<tr>
+<td>Santiago TACC</td>
+<td>LECG</td>
+</tr>
+<tr>
+<td>Sevilla FIC/ACC</td>
+<td>LECS</td>
+</tr>
+<tr>
+<td>Valencia TACC</td>
+<td>LECL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 2.4.b - Centros adyacentes (colaterales) FIC/ACC/UAC/OAC</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lugar</th>
+<th>Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alger ACC</td>
+<td>DAAA</td>
+</tr>
+<tr>
+<td>Bordeaux FIC/ACC/UAC</td>
+<td>LFBB</td>
+</tr>
+<tr>
+<td>Brest FIC/ACC/UAC</td>
+<td>LFRR</td>
+</tr>
+<tr>
+<td>Brindisi FIC</td>
+<td>LIBB</td>
+</tr>
+<tr>
+<td>Casablanca ACC/FIC</td>
+<td>GMMM</td>
+</tr>
+<tr>
+<td>Dakar ACC/FIC</td>
+<td>GOOO</td>
+</tr>
+<tr>
+<td>Lisboa ACC/FIC</td>
+<td>LPPC</td>
+</tr>
+<tr>
+<td>Marselle FIC/ACC/UAC</td>
+<td>LFMM</td>
+</tr>
+<tr>
+<td>Milano ACC</td>
+<td>LIMM</td>
+</tr>
+<tr>
+<td>Roma ACC</td>
+<td>LIRR</td>
+</tr>
+<tr>
+<td>SAL FIR/UIR</td>
+<td>GVSC</td>
+</tr>
+<tr>
+<td>Santa María OAC/FIC</td>
+<td>LPPO</td>
+</tr>
+<tr>
+<td>Tunis ACC/FIC</td>
+<td>DTTC</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 2.4.c - Aeródromos españoles</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lugar</th>
+<th>Indicador</th>
+<th>Lugar</th>
+<th>Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A CORUÑA</td>
+<td>LECO</td>
+<td>MADRID/Cuatro Vientos</td>
+<td>LECU / LEVS (dos indicadores)</td>
+</tr>
+<tr>
+<td>ALBACETE</td>
+<td>LEAB</td>
+<td>MADRID/Getafe</td>
+<td>LEGT</td>
+</tr>
+<tr>
+<td>ALICANTE-ELCHE Miguel Hernández</td>
+<td>LEAL</td>
+<td>MADRID/Torrejón</td>
+<td>LETO</td>
+</tr>
+<tr>
+<td>ALMERÍA</td>
+<td>LEAM</td>
+<td>MÁLAGA/Costa del Sol</td>
+<td>LEMG</td>
+</tr>
+<tr>
+<td>ANDORRA-LA SEU D'URGELL</td>
+<td>LESU</td>
+<td>MALLORCA/Pollensa</td>
+<td>LEPO</td>
+</tr>
+<tr>
+<td>ASTURIAS</td>
+<td>LEAS</td>
+<td>MALLORCA/Son Bonet</td>
+<td>LESB</td>
+</tr>
+<tr>
+<td>BADAJOZ/Talavera La Real</td>
+<td>LEBZ</td>
+<td>MELILLA</td>
+<td>GEML</td>
+</tr>
+<tr>
+<td>BARCELONA/Josep Tarradellas Barcelona-El Prat</td>
+<td>LEBL</td>
+<td>MENORCA</td>
+<td>LEMH</td>
+</tr>
+<tr>
+<td>BILBAO</td>
+<td>LEBB</td>
+<td>MURCIA/Aeropuerto de la Región de Murcia</td>
+<td>LEMI</td>
+</tr>
+<tr>
+<td>BURGOS/Villafría</td>
+<td>LEBG</td>
+<td>MURCIA/Alcantarilla</td>
+<td>LERI</td>
+</tr>
+<tr>
+<td>CÁDIZ/Rota</td>
+<td>LERT</td>
+<td>MURCIA/San Javier</td>
+<td>LELC</td>
+</tr>
+<tr>
+<td>CASTELLÓN</td>
+<td>LECH</td>
+<td>PALMA DE MALLORCA</td>
+<td>LEPA / LESJ (dos indicadores)</td>
+</tr>
+<tr>
+<td>CIUDAD REAL</td>
+<td>LERL</td>
+<td>PAMPLONA</td>
+<td>LEPP</td>
+</tr>
+<tr>
+<td>CÓRDOBA</td>
+<td>LEBA</td>
+<td>REUS</td>
+<td>LERS</td>
+</tr>
+<tr>
+<td>FUERTEVENTURA</td>
+<td>GCFV</td>
+<td>SABADELL</td>
+<td>LELL</td>
+</tr>
+<tr>
+<td>GIRONA</td>
+<td>LEGE</td>
+<td>SALAMANCA/Matacán</td>
+<td>LESA</td>
+</tr>
+<tr>
+<td>GRAN CANARIA</td>
+<td>GCLP</td>
+<td>SAN SEBASTIÁN</td>
+<td>LESO</td>
+</tr>
+<tr>
+<td>GRANADA/Armilla</td>
+<td>LEGA</td>
+<td>SANTANDER/Seve Ballesteros-Santander</td>
+<td>LEXJ</td>
+</tr>
+<tr>
+<td>GRANADA/Federico García Lorca, Granada-Jaén</td>
+<td>LEGR</td>
+<td>SANTIAGO/Rosalía de Castro</td>
+<td>LEST</td>
+</tr>
+<tr>
+<td>EL HIERRO</td>
+<td>GCHI</td>
+<td>SEVILLA</td>
+<td>LEZL</td>
+</tr>
+<tr>
+<td>HUESCA/Pirineos</td>
+<td>LEHC</td>
+<td>SEVILLA/Morón</td>
+<td>LEMO</td>
+</tr>
+<tr>
+<td>IBIZA</td>
+<td>LEIB</td>
+<td>TENERIFE NORTE/Ciudad de La Laguna</td>
+<td>GCXO</td>
+</tr>
+<tr>
+<td>JEREZ</td>
+<td>LEJR</td>
+<td>TENERIFE SUR</td>
+<td>GCTS</td>
+</tr>
+<tr>
+<td>LA GOMERA</td>
+<td>GCGM</td>
+<td>TERUEL</td>
+<td>LETL</td>
+</tr>
+<tr>
+<td>LA PALMA</td>
+<td>GCLA</td>
+<td>VALENCIA</td>
+<td>LEVC</td>
+</tr>
+<tr>
+<td>LANZAROTE/César Manrique</td>
+<td>GCRR</td>
+<td>VALLADOLID/Villanubla</td>
+<td>LEVD</td>
+</tr>
+<tr>
+<td>LEÓN</td>
+<td>LELN</td>
+<td>VIGO</td>
+<td>LEVX</td>
+</tr>
+<tr>
+<td>LLEIDA/Alguaire</td>
+<td>LEDA</td>
+<td>VITORIA</td>
+<td>LEVT</td>
+</tr>
+<tr>
+<td>LOGROÑO</td>
+<td>LERJ</td>
+<td>ZARAGOZA</td>
+<td>LEZG</td>
+</tr>
+<tr>
+<td>MADRID/Adolfo Suárez Madrid-Barajas</td>
+<td>LEMD</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Notas: Madrid/Cuatro Vientos y Palma de Mallorca tienen <strong>dos indicadores</strong> cada uno en el manual (LECU/LEVS y LEPA/LESJ). Aeródromos canarios (GC..): GCFV Fuerteventura, GCLP Gran Canaria, GCHI El Hierro, GCGM La Gomera, GCLA La Palma, GCRR Lanzarote, GCXO Tenerife Norte, GCTS Tenerife Sur. El aeródromo de Melilla es GEML (GE..). La lectura tipográfica de las columnas del manual (LEHC junto a Huesca, GCHI junto a El Hierro) se confirma en la imagen renderizada.</p>
+<p><strong>Tabla 2.4.d - Helipuertos españoles</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lugar</th>
+<th>Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALGECIRAS</td>
+<td>LEAG</td>
+</tr>
+<tr>
+<td>CEUTA</td>
+<td>GECE</td>
+</tr>
+<tr>
+<td>CIUDAD REAL/Almagro</td>
+<td>LEAO</td>
+</tr>
+<tr>
+<td>LOGROÑO/Agoncillo</td>
+<td>LELO</td>
+</tr>
+<tr>
+<td>MADRID/Colmenar Viejo</td>
+<td>LECV</td>
+</tr>
+<tr>
+<td>MELILLA</td>
+<td>GEHM</td>
+</tr>
+<tr>
+<td>SERVEIS GENERALS DEL CIRCUIT DE CATALUNYA</td>
+<td>LETA</td>
+</tr>
+<tr>
+<td>SEVILLA/El Copero</td>
+<td>LEEC</td>
+</tr>
+<tr>
+<td>TENERIFE NORTE/Los Rodeos</td>
+<td>GCXM</td>
+</tr>
+<tr>
+<td>VALENCIA/Bétera</td>
+<td>LEBT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 2.4.e - Aeródromos en situación excepcional</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lugar</th>
+<th>Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EL AAIUN</td>
+<td>GSAI</td>
+</tr>
+<tr>
+<td>GIBRALTAR</td>
+<td>LXGB</td>
+</tr>
+<tr>
+<td>VILLACISNEROS</td>
+<td>GSVO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-identificacion-de-oficinas-en-los-indicadores-de-lugar-p-9-10">2.5 Identificación de oficinas en los indicadores de lugar (p. 9-10)</h3>
+<p>En ciertos mensajes AFTN es necesario indicar un destinatario o un remitente, y el indicador de lugar por sí solo no basta. Para ello se añade <strong>al final del indicador de lugar el designador OACI de tres o cuatro letras que corresponda</strong>, tomado del <strong>Doc. 8585 (Designadores de empresas explotadoras de aeronaves, de entidades oficiales y de servicios aeronáuticos)</strong>.</p>
+<ul>
+<li>Los designadores de tres letras pueden usarse a continuación del indicador de lugar como <strong>quinta, sexta y séptima letras</strong>, seguidos de la <strong>letra de relleno «X»</strong> o de una letra que represente un <strong>departamento o división</strong> dentro del organismo respectivo. (La dirección completa tiene, por tanto, 8 letras.)</li>
+</ul>
+<p>Ejemplos (p. 10):</p>
+<table>
+<thead>
+<tr>
+<th>Indicador de lugar</th>
+<th>Designador</th>
+<th>Entidad o servicio</th>
+<th>Indicador completo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEAC (Dirección General de Aviación Civil)</td>
+<td>YAY</td>
+<td>Director General de Aviación Civil</td>
+<td>LEACYAYX</td>
+</tr>
+<tr>
+<td>LEAN (Aeropuertos Españoles y Navegación Aérea)</td>
+<td>YUY</td>
+<td>Director de Aeropuertos Españoles</td>
+<td>LEANYUYX</td>
+</tr>
+<tr>
+<td>LEAN</td>
+<td>YNYX</td>
+<td>Oficina NOTAM Internacional</td>
+<td>LEANYNYX</td>
+</tr>
+<tr>
+<td>GCHI (estaciones aeronáuticas)</td>
+<td>YMY</td>
+<td>Oficina Meteorológica (por ejemplo, la de El Hierro)</td>
+<td>GCHIYMYX</td>
+</tr>
+<tr>
+<td>LEAM</td>
+<td>YOY</td>
+<td>Oficina del Servicio de Información Aeronáutica de Aeródromo (Almería)</td>
+<td>LEAMYOYX</td>
+</tr>
+<tr>
+<td>LEAL</td>
+<td>ZTZ</td>
+<td>Torre de Control de Aeródromo (por ejemplo, la de Alicante)</td>
+<td>LEALZTZX</td>
+</tr>
+</tbody>
+</table>
+<p>Clave de lectura: <strong>YMY = oficina meteorológica, YOY = oficina AIS de aeródromo, ZTZ = torre de control de aeródromo</strong>. Obsérvese que el manual imprime «YNYX» como designador de la Oficina NOTAM Internacional (la X ya forma parte de la forma de cuatro letras).</p>
+<hr />
+<h2 id="3-designadores-de-companias-aereas-p-10-11">3. Designadores de compañías aéreas (p. 10-11)</h2>
+<p>La OACI establece <strong>dos tipos de designadores</strong> para identificar a las empresas explotadoras de aeronaves, a los organismos oficiales y a las entidades de aviación internacional:</p>
+<ul>
+<li><strong>Designadores telegráficos</strong>: <strong>grupos de tres letras</strong> destinados al uso en el <strong>servicio internacional de telecomunicaciones</strong>. Se utilizan para identificar a las compañías aéreas, a las entidades y servicios gubernamentales y a otros suministradores de servicios aeronáuticos.</li>
+<li><strong>Designadores telefónicos</strong>: sirven para identificar a las empresas explotadoras <strong>en las comunicaciones</strong>. También pueden utilizarse <strong>como parte del distintivo de llamada radiotelefónico de la aeronave</strong>, seguidos de la identificación del vuelo. Ejemplo: <strong>IBERIA 301</strong>.</li>
+</ul>
+<p>A cada designador telefónico le corresponde un designador telegráfico determinado.</p>
+<p>Los datos se actualizan de forma continua (las compañías aparecen y desaparecen; los designadores se eliminan o se reasignan): para consultas hay que acudir a la última edición del <strong>Doc. 8585</strong> («Designadores de empresas explotadoras de aeronaves, de entidades oficiales y de servicios aeronáuticos»). La línea de fuente del manual cita el Doc. 8585, <strong>210.ª edición, Montreal, octubre de 2024</strong>.</p>
+<p><strong>Los designadores OACI no coinciden con los códigos IATA.</strong> Los IATA los utilizan las compañías aéreas para su <strong>gestión comercial y sus relaciones con los clientes</strong>. En muchos casos el designador telefónico coincide con el nombre comercial de la empresa; en otros, no:</p>
+<table>
+<thead>
+<tr>
+<th>Empresa explotadora de la aeronave</th>
+<th>Designador telegráfico</th>
+<th>Designador telefónico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AIR FRANCE</td>
+<td>AFR</td>
+<td>AIRFRANS</td>
+</tr>
+<tr>
+<td>AMERICAN AIRLINES INC.</td>
+<td>AAL</td>
+<td>AMERICAN</td>
+</tr>
+<tr>
+<td>BRITISH AIRWAYS</td>
+<td>BAW</td>
+<td>SPEEDBIRD</td>
+</tr>
+<tr>
+<td>IBERIA - LINEAS AEREAS DE ESPAÑA, SOCIEDAD ANONIMA OPERADORA</td>
+<td>IBE</td>
+<td>IBERIA</td>
+</tr>
+<tr>
+<td>RYANAIR</td>
+<td>RYR</td>
+<td>RYANAIR</td>
+</tr>
+<tr>
+<td>VUELING AIRLINES</td>
+<td>VLG</td>
+<td>VUELING</td>
+</tr>
+</tbody>
+</table>
+<p>(La extracción de texto del PDF desordena esta tabla; los emparejamientos de arriba siguen la lógica de la página renderizada y los datos del Doc. 8585.)</p>
+<p>Regla mnemotécnica: los casos en que el nombre hablado difiere del nombre comercial son <strong>AIRFRANS</strong> (Air France) y <strong>SPEEDBIRD</strong> (British Airways).</p>
+<hr />
+<h2 id="4-distintivos-oaci-de-nacionalidad-y-matriculas-de-aeronaves-p-11-13">4. Distintivos OACI de nacionalidad y matrículas de aeronaves (p. 11-13)</h2>
+<p>Las marcas de nacionalidad y las matrículas identifican a las aeronaves. Son grupos de caracteres (letras y/o cifras) que se componen <strong>en este orden</strong>:</p>
+<p><strong>1. Marca de nacionalidad o marca común</strong></p>
+<ul>
+<li>La <strong>marca de nacionalidad</strong> consta normalmente de <strong>uno o dos caracteres</strong> e indica el <strong>Estado en cuyo registro está inscrita la aeronave</strong>.</li>
+<li>La <strong>marca común</strong> se utiliza <strong>en lugar de la marca de nacionalidad</strong> cuando la aeronave pertenece a una <strong>empresa explotadora internacional sin base nacional</strong>, por ejemplo <strong>las Naciones Unidas, a las que se ha asignado la marca 4U</strong>.</li>
+<li>La marca de nacionalidad o la marca común <strong>precede</strong> a la marca de matrícula. <strong>Cuando el primer carácter de la marca de matrícula es una letra, va precedido de un guion</strong>.</li>
+<li>Tanto las marcas de nacionalidad como las marcas comunes las <strong>asigna la OACI</strong>.</li>
+</ul>
+<p><strong>2. Matrícula de la aeronave</strong></p>
+<ul>
+<li>Puede componerse de <strong>letras y/o números</strong>.</li>
+<li>La <strong>asigna la autoridad competente de cada país</strong>.</li>
+<li>Cuando la matrícula se compone de letras, <strong>no deben utilizarse combinaciones que puedan confundirse con los grupos de cinco letras de la segunda parte del Código Internacional de Señales, con las combinaciones de tres letras de la señal de socorro SOS ni con otras señales de urgencia similares, como XXX, PAN y TTT</strong>.</li>
+</ul>
+<p>La marca de nacionalidad (o común) y la marca de matrícula se <strong>pintan en la aeronave o se fijan a ella por cualquier otro medio que les dé una permanencia similar</strong>, y deben aparecer <strong>limpias y visibles en todo momento</strong>.</p>
+<p>La normativa de la OACI sobre marcas de nacionalidad y de matrícula figura en el <strong>Anexo 7 al Convenio sobre Aviación Civil Internacional</strong>.</p>
+<p>Figura (p. 12): una cola de aeronave con <strong>OE-FMK</strong> (el ejemplo austriaco): <strong>OE = marca de nacionalidad de Austria; FMK = matrícula</strong>.</p>
+<p><strong>Tabla de las marcas de nacionalidad más vistas en las dependencias ATS españolas (p. 13)</strong> (para consultas específicas, la última edición del Anexo 7):</p>
+<table>
+<thead>
+<tr>
+<th>País</th>
+<th>Marca</th>
+<th>País</th>
+<th>Marca</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alemania</td>
+<td>D</td>
+<td>Israel</td>
+<td>4X</td>
+</tr>
+<tr>
+<td>Argelia</td>
+<td>7T</td>
+<td>Italia</td>
+<td>I</td>
+</tr>
+<tr>
+<td>Austria</td>
+<td>OE</td>
+<td>Luxemburgo</td>
+<td>LX</td>
+</tr>
+<tr>
+<td>Bélgica</td>
+<td>OO</td>
+<td>Marruecos</td>
+<td>CN</td>
+</tr>
+<tr>
+<td>Dinamarca</td>
+<td>OY</td>
+<td>Mónaco</td>
+<td>3A</td>
+</tr>
+<tr>
+<td>EE.UU.</td>
+<td>N</td>
+<td>Noruega</td>
+<td>LN</td>
+</tr>
+<tr>
+<td>Emiratos Árabes Unidos</td>
+<td>A6</td>
+<td>Países Bajos</td>
+<td>PH</td>
+</tr>
+<tr>
+<td>España</td>
+<td>EC</td>
+<td>Portugal</td>
+<td>CR, CS</td>
+</tr>
+<tr>
+<td>Finlandia</td>
+<td>OH</td>
+<td>Reino Unido</td>
+<td>G</td>
+</tr>
+<tr>
+<td>Francia</td>
+<td>F</td>
+<td>República Checa</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>Gibraltar</td>
+<td>VP-G</td>
+<td>Suiza</td>
+<td>HB</td>
+</tr>
+<tr>
+<td>Grecia</td>
+<td>SX</td>
+<td>Túnez</td>
+<td>TS</td>
+</tr>
+<tr>
+<td>Hungría</td>
+<td>HA</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Irlanda</td>
+<td>EI</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Para aprenderlas por grupos: marcas de dos letras con O: OE Austria, OO Bélgica, OY Dinamarca, OH Finlandia, OK República Checa. Marcas que empiezan por cifra: 4X Israel, 4U Naciones Unidas (marca común), 7T Argelia, 3A Mónaco. Portugal tiene <strong>dos</strong> marcas (CR y CS) en la tabla del manual. La de Gibraltar es <strong>VP-G</strong> (territorio británico de ultramar).</p>
+<hr />
+<h2 id="5-codigos-iata-p-14-16">5. Códigos IATA (p. 14-16)</h2>
+<h3 id="51-conceptos-previos-p-14">5.1 Conceptos previos (p. 14)</h3>
+<p>Los códigos de la IATA (Organización Internacional para el Transporte Aéreo, <em>International Air Transport Association</em>) son <strong>identificadores alfanuméricos que utilizan las compañías aéreas</strong> en el ejercicio de sus funciones: <strong>programación de vuelos, operaciones comerciales, emisión de billetes, comunicaciones entre aerolíneas</strong>, etc. Los más utilizados son:</p>
+<ul>
+<li><strong>Indicadores de lugar</strong></li>
+<li><strong>Designadores de aerolíneas</strong></li>
+</ul>
+<h3 id="52-indicadores-de-lugar-iata-p-14-15">5.2 Indicadores de lugar IATA (p. 14-15)</h3>
+<p>Los indicadores de lugar IATA constan de <strong>tres letras</strong> y permiten identificar localizaciones de interés operativo para las aerolíneas, <strong>principalmente aeropuertos</strong>. El manual da los códigos IATA de los aeropuertos españoles (fuente: www.iata.org):</p>
+<table>
+<thead>
+<tr>
+<th>Aeródromo</th>
+<th>IATA</th>
+<th>Aeródromo</th>
+<th>IATA</th>
+<th>Aeródromo</th>
+<th>IATA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A CORUÑA</td>
+<td>LCG</td>
+<td>HUESCA/Pirineos</td>
+<td>HSK</td>
+<td>PAMPLONA</td>
+<td>PNA</td>
+</tr>
+<tr>
+<td>ALBACETE</td>
+<td>ABC</td>
+<td>IBIZA</td>
+<td>IBZ</td>
+<td>REUS</td>
+<td>REU</td>
+</tr>
+<tr>
+<td>ALICANTE-ELCHE Miguel Hernández</td>
+<td>ALC</td>
+<td>JEREZ</td>
+<td>XRY</td>
+<td>SABADELL</td>
+<td>QSA</td>
+</tr>
+<tr>
+<td>ALMERÍA</td>
+<td>LEI</td>
+<td>LA GOMERA</td>
+<td>GMZ</td>
+<td>SALAMANCA/Matacán</td>
+<td>SLM</td>
+</tr>
+<tr>
+<td>ANDORRA-LA SEU D'URGELL</td>
+<td>LEU</td>
+<td>LA PALMA</td>
+<td>SPC</td>
+<td>SAN SEBASTIÁN</td>
+<td>EAS</td>
+</tr>
+<tr>
+<td>ASTURIAS</td>
+<td>OVD</td>
+<td>LANZAROTE/César Manrique</td>
+<td>ACE</td>
+<td>SANTANDER/Seve Ballesteros</td>
+<td>SDR</td>
+</tr>
+<tr>
+<td>BADAJOZ/Talavera La Real</td>
+<td>BJZ</td>
+<td>LEÓN</td>
+<td>LEN</td>
+<td>SANTIAGO/Rosalía de Castro</td>
+<td>SCQ</td>
+</tr>
+<tr>
+<td>BARCELONA/Josep Tarradellas Barcelona-El Prat</td>
+<td>BCN</td>
+<td>LLEIDA/Alguaire</td>
+<td>ILD</td>
+<td>SEVILLA</td>
+<td>SVQ</td>
+</tr>
+<tr>
+<td>BILBAO</td>
+<td>BIO</td>
+<td>LOGROÑO</td>
+<td>RJL</td>
+<td>TENERIFE NORTE/Ciudad de La Laguna</td>
+<td>TFN</td>
+</tr>
+<tr>
+<td>BURGOS/Villafría</td>
+<td>RGS</td>
+<td>MADRID/Adolfo Suárez Madrid-Barajas</td>
+<td>MAD</td>
+<td>TENERIFE SUR</td>
+<td>TFS</td>
+</tr>
+<tr>
+<td>CÁDIZ/Rota</td>
+<td>ROZ</td>
+<td>MADRID/Cuatro Vientos</td>
+<td>MCV</td>
+<td>TERUEL</td>
+<td>TEV</td>
+</tr>
+<tr>
+<td>CASTELLÓN</td>
+<td>CDT</td>
+<td>MADRID/Torrejón</td>
+<td>TOJ</td>
+<td>VALENCIA</td>
+<td>VLC</td>
+</tr>
+<tr>
+<td>CIUDAD REAL</td>
+<td>CQM</td>
+<td>MÁLAGA/Costa del Sol</td>
+<td>AGP</td>
+<td>VALLADOLID/Villanubla</td>
+<td>VLL</td>
+</tr>
+<tr>
+<td>CÓRDOBA</td>
+<td>ODB</td>
+<td>MALLORCA/Son Bonet</td>
+<td>SBO</td>
+<td>VIGO</td>
+<td>VGO</td>
+</tr>
+<tr>
+<td>FUERTEVENTURA</td>
+<td>FUE</td>
+<td>MELILLA</td>
+<td>MLN</td>
+<td>VITORIA</td>
+<td>VIT</td>
+</tr>
+<tr>
+<td>GIRONA</td>
+<td>GRO</td>
+<td>MENORCA</td>
+<td>MAH</td>
+<td>ZARAGOZA</td>
+<td>ZAZ</td>
+</tr>
+<tr>
+<td>GRAN CANARIA</td>
+<td>LPA</td>
+<td>MURCIA/Aeropuerto de la Región de Murcia</td>
+<td>RMU</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GRANADA/Federico García Lorca, Granada-Jaén</td>
+<td>GRX</td>
+<td>MURCIA/San Javier</td>
+<td>MJV</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>EL HIERRO</td>
+<td>VDE</td>
+<td>PALMA DE MALLORCA</td>
+<td>PMI</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Observaciones: la lista IATA <strong>no</strong> tiene entrada para algunos aeródromos que sí están en la lista OACI (Madrid/Getafe, Mallorca/Pollensa, Murcia/Alcantarilla, Granada/Armilla, Sevilla/Morón). Cádiz/Rota es ROZ y Melilla, MLN. Varios códigos IATA no tienen nada que ver con el nombre (LEI Almería, LEU Andorra-La Seu, XRY Jerez, VDE El Hierro, SPC La Palma, LPA Gran Canaria, GMZ La Gomera, TFN/TFS Tenerife, EAS San Sebastián, RJL Logroño, CQM Ciudad Real, RGS Burgos, ILD Lleida, ZAZ Zaragoza).
+Trampas: <strong>IATA Sevilla = SVQ, OACI Sevilla = LEZL; IATA Gran Canaria = LPA, OACI = GCLP; IATA Palma = PMI, OACI = LEPA; IATA Tenerife Norte = TFN, OACI = GCXO</strong>.</p>
+<h3 id="53-designadores-de-aerolineas-p-15-16">5.3 Designadores de aerolíneas (p. 15-16)</h3>
+<ul>
+<li>Los códigos IATA de aerolínea constan de <strong>dos caracteres alfanuméricos</strong>.</li>
+<li>A veces se asigna un <strong>código duplicado</strong>, es decir, el mismo código lo utilizan dos transportistas para operar tipos de servicio distintos; estos casos se indican con un <strong>asterisco tras el designador</strong>.</li>
+<li>La IATA está <strong>asignando actualmente designadores de tres letras en cooperación con la OACI, la FAA y Transport Canada</strong>; los <strong>designadores IATA de tres letras coinciden con los establecidos por la OACI</strong>.</li>
+<li>Los códigos de aerolínea pueden consultarse en el <strong>Airline Coding Directory (ACD)</strong> de la IATA, que se actualiza periódicamente.</li>
+</ul>
+<p>Ejemplos del manual (p. 15-16):</p>
+<table>
+<thead>
+<tr>
+<th>Aerolínea</th>
+<th>Código IATA</th>
+<th>Designador OACI</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Air France</td>
+<td>AF</td>
+<td>AFR</td>
+<td>Francia</td>
+</tr>
+<tr>
+<td>American Airlines</td>
+<td>AA</td>
+<td>AAL</td>
+<td>EE.UU.</td>
+</tr>
+<tr>
+<td>British Airways</td>
+<td>BA</td>
+<td>BAW</td>
+<td>Reino Unido</td>
+</tr>
+<tr>
+<td>Emirates</td>
+<td>EK</td>
+<td>UAE</td>
+<td>Emiratos Árabes Unidos</td>
+</tr>
+<tr>
+<td>IBERIA</td>
+<td>IB</td>
+<td>IBE</td>
+<td>España</td>
+</tr>
+<tr>
+<td>Japan Airlines</td>
+<td>JL</td>
+<td>JAL</td>
+<td>Japón</td>
+</tr>
+<tr>
+<td>Jat Airways</td>
+<td>JU</td>
+<td>JAT</td>
+<td>Serbia</td>
+</tr>
+<tr>
+<td>Kuwait Airways</td>
+<td>KU</td>
+<td>KAC</td>
+<td>Kuwait</td>
+</tr>
+<tr>
+<td>Scandinavian Airlines System (SAS)</td>
+<td>SK</td>
+<td>SAS</td>
+<td>Suecia</td>
+</tr>
+<tr>
+<td>Vueling</td>
+<td>VY</td>
+<td>VLG</td>
+<td>(el manual imprime «Vueling» en la columna del Estado, un descuido evidente; Vueling es española)</td>
+</tr>
+</tbody>
+</table>
+<p>Trampa: <strong>EK = Emirates, pero su designador OACI es UAE</strong>; el designador OACI no siempre es «las letras IATA + una letra».</p>
+<hr />
+<h2 id="6-aeronaves-p-16-32">6. Aeronaves (p. 16-32)</h2>
+<h3 id="61-partes-de-la-aeronave-p-16-17">6.1 Partes de la aeronave (p. 16-17)</h3>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Definición y función según el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hélice</strong></td>
+<td>Perfil aerodinámico giratorio, con <strong>dos o más palas</strong> implantadas en un soporte, que proporciona <strong>tracción o impulsión</strong> con la potencia que le transmite el motor.</td>
+</tr>
+<tr>
+<td><strong>Alas</strong></td>
+<td>Componente que genera la <strong>sustentación</strong> necesaria en cualquiera de las <strong>cinco condiciones de vuelo: despegue, subida, crucero, descenso y aterrizaje</strong>.</td>
+</tr>
+<tr>
+<td><strong>Alerón</strong></td>
+<td>Permite el <strong>alabeo</strong>: mientras el alerón de una de las alas sube, el de la otra baja. Figura: viraje a la derecha = alerón derecho arriba, izquierdo abajo; viraje a la izquierda = alerón izquierdo arriba, derecho abajo.</td>
+</tr>
+<tr>
+<td><strong>Empenaje</strong></td>
+<td>Cola o parte posterior del avión, donde suelen estar situados los <strong>estabilizadores horizontal y vertical</strong>.</td>
+</tr>
+<tr>
+<td><strong>Estabilizador horizontal</strong></td>
+<td>Da al avión la estabilidad para mantener el vuelo recto y el movimiento del morro hacia arriba y hacia abajo (<strong>cabeceo</strong>). Se compone de una <strong>parte fija (estabilizador)</strong> y una <strong>parte móvil (timón de profundidad)</strong>.</td>
+</tr>
+<tr>
+<td><strong>Estabilizador vertical o deriva</strong></td>
+<td>Controla el <strong>deslizamiento lateral sobre el eje vertical, es decir, la guiñada</strong>.</td>
+</tr>
+<tr>
+<td><strong>Fuselaje</strong></td>
+<td>Cuerpo del avión donde van los pasajeros y las mercancías; en él se sitúan la <strong>cabina de mando, la zona de pasajeros, las bodegas y la zona de los equipos de funcionamiento de la aeronave</strong>.</td>
+</tr>
+<tr>
+<td><strong>Motor</strong></td>
+<td>Genera la <strong>propulsión</strong> que necesita la aeronave.</td>
+</tr>
+<tr>
+<td><strong>Timón horizontal o de profundidad</strong></td>
+<td><strong>Parte del estabilizador horizontal</strong>. <strong>Al tirar de la palanca de mando hacia atrás (hacia el piloto) se eleva el morro; al empujarla hacia adelante, baja.</strong></td>
+</tr>
+<tr>
+<td><strong>Timón vertical o de dirección o de cola</strong></td>
+<td><strong>Parte del estabilizador vertical</strong>. Funciona mediante <strong>pedales</strong> que permiten al avión virar a la <strong>derecha (pedal derecho) o a la izquierda (pedal izquierdo)</strong>.</td>
+</tr>
+<tr>
+<td><strong>Tren de aterrizaje</strong></td>
+<td>Estructura formada por el conjunto de ruedas, soportes, amortiguadores y diversos equipos; es el soporte general del avión; permite el movimiento de la aeronave en la superficie en el despegue y el aterrizaje; <strong>amortigua y absorbe el impacto del aterrizaje</strong>; debe tener capacidad de <strong>frenado y direccionamiento</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Figura rotulada (p. 17): ala derecha, estabilizador vertical, timón vertical, alerón derecho, timón de profundidad, estabilizador horizontal, motor, hélice, fuselaje, rueda de proa, alerón izquierdo, ala izquierda, tren de aterrizaje principal, empenaje.</p>
+<h3 id="62-caracteristicas-basicas-para-el-reconocimiento-de-aeronaves-p-18-23">6.2 Características básicas para el reconocimiento de aeronaves (p. 18-23)</h3>
+<p>Las aeronaves se reconocen por siete rasgos externos: <strong>tipo de ala, tipo de flecha, tipo de cola, tipo de motorización, número de motores, lugar de ubicación de los motores y características del tren de aterrizaje</strong>. El manual ilustra cada uno con siluetas (vistas de planta, frontal y lateral); las siluetas no llevan más rótulo que el nombre de la categoría.</p>
+<table>
+<thead>
+<tr>
+<th>Rasgo</th>
+<th>Categorías del manual (en el orden impreso)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6.2.1 Tipo de ala</strong></td>
+<td><strong>Ala alta</strong>, <strong>Ala baja</strong>, <strong>Doble ala o biplano</strong></td>
+</tr>
+<tr>
+<td><strong>6.2.2 Tipo de flecha</strong></td>
+<td><strong>Flecha regresiva o positiva</strong>, <strong>Flecha recta</strong>, <strong>Flecha progresiva o invertida</strong>. Ejemplos de las figuras: flecha regresiva = un cuatrimotor de línea (tipo 747); recta = un bimotor pequeño con ala recta; progresiva = un reactor pequeño con ala en flecha invertida</td>
+</tr>
+<tr>
+<td><strong>6.2.3 Tipo de cola</strong></td>
+<td><strong>Cola en T</strong>, <strong>Cola en cruz</strong>, <strong>Cola fuselada</strong> (cola situada en el fuselaje; la figura muestra un trirreactor con el motor en la base de la deriva, tipo DC-10/MD-11), <strong>Cola doble</strong></td>
+</tr>
+<tr>
+<td><strong>6.2.4 Tipo de motorización</strong></td>
+<td><strong>Motor de pistón</strong>, <strong>Motor turbohélice</strong>, <strong>Motores a reacción</strong></td>
+</tr>
+<tr>
+<td><strong>6.2.5 Número de motores</strong></td>
+<td><strong>Monomotor</strong> (1), <strong>dos motores</strong>, <strong>tres motores</strong>, <strong>cuatro motores</strong>, <strong>seis motores</strong>, <strong>ocho motores</strong>. (Ejemplos de las figuras: 6 = tipo An-225, 8 = tipo B-52.) Obsérvese que la serie del manual es 1, 2, 3, 4, 6, 8 (no hay cinco ni siete).</td>
+</tr>
+<tr>
+<td><strong>6.2.6 Ubicación de los motores</strong></td>
+<td><strong>En el morro</strong>, <strong>en las alas</strong>, <strong>en el fuselaje</strong>, <strong>en el ala y el empenaje</strong> (la figura es un trirreactor con un motor sobre la cola y dos bajo las alas, tipo DC-10), <strong>en el fuselaje y empenaje</strong></td>
+</tr>
+<tr>
+<td><strong>6.2.7 Tren de aterrizaje (solo en aeronaves ligeras o de características especiales)</strong></td>
+<td><strong>Tren fijo sin carenado</strong>, <strong>tren fijo carenado</strong>, <strong>tren retráctil</strong>, <strong>patines en el ala para amerizaje</strong> (la figura es un tipo hidroavión/anfibio contra incendios)</td>
+</tr>
+</tbody>
+</table>
+<p>Enfoque de examen: una pregunta puede describir una aeronave («cola en T, motores en el fuselaje») y preguntar qué rasgo se indica; conviene conservar los nombres españoles exactos de arriba.</p>
+<h3 id="63-caracteristicas-basicas-para-el-reconocimiento-de-helicopteros-p-23-25">6.3 Características básicas para el reconocimiento de helicópteros (p. 23-25)</h3>
+<p>Los helicópteros se reconocen por: <strong>tipo de apoyo en el suelo, número de rotores, número de palas</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Rasgo</th>
+<th>Categorías</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6.3.1 Tipos de apoyo en el suelo</strong></td>
+<td><strong>Con patines</strong> · <strong>Con tren de aterrizaje</strong> (con ruedas)</td>
+</tr>
+<tr>
+<td><strong>6.3.2 Número de rotores</strong></td>
+<td><strong>Con un rotor</strong> · <strong>Con dos rotores</strong></td>
+</tr>
+<tr>
+<td><strong>6.3.3 Número de palas</strong></td>
+<td><strong>Dos palas</strong> (2), <strong>tres palas</strong> (3), <strong>cuatro palas</strong> (4), <strong>cinco palas</strong> (5), <strong>ocho palas</strong> (8)</td>
+</tr>
+</tbody>
+</table>
+<p>Definición (glosario, p. 39): <strong>helicóptero</strong>: aerodino que se mantiene en vuelo principalmente en virtud de la reacción del aire sobre uno o más rotores propulsados mecánicamente, que giran alrededor de ejes verticales o casi verticales.</p>
+<h3 id="64-catalogo-de-reconocimiento-de-aeronaves-p-25-32">6.4 Catálogo de reconocimiento de aeronaves (p. 25-32)</h3>
+<p>El manual dice que el catálogo «no pretende ser exhaustivo». De <strong>cada aeronave</strong> da: <strong>fabricante, nombre, designador OACI, tipo de aeronave (código de descripción), características básicas y de actuaciones (<em>performance</em>): velocidad de crucero TAS (kt o número de Mach), régimen máximo de ascenso (ft/min), techo (FL), categoría de estela turbulenta</strong> (más foto y silueta a tres vistas). Las aeronaves se presentan en <strong>seis grupos, por uso y tipo de motorización</strong>:</p>
+<ol>
+<li>6.4.1.1 <strong>Aviones comerciales de pasajeros</strong></li>
+<li>6.4.1.2 <strong>Commuter + regional jet para líneas de corto alcance</strong></li>
+<li>6.4.1.3 <strong>Executive, aviones privados</strong></li>
+<li>6.4.1.4 <strong>Helicópteros</strong></li>
+<li>6.4.1.5 <strong>Motorizaciones alternativas o de pistón (RECIPROCATING)</strong></li>
+<li>6.4.1.6 <strong>Turbohélices de transporte militar</strong></li>
+</ol>
+<p>«Vel. crucero - TAS» es un número de Mach para los reactores rápidos y nudos para los tipos lentos. «Rég. máx. ascenso» se da en ft/min; «Techo», en niveles de vuelo.</p>
+<p><strong>Tabla 6.4.a - Aviones comerciales de pasajeros (p. 26-28)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador(es)</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx. (ft/min)</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A124</td>
+<td>Antonov</td>
+<td>L4J</td>
+<td>M0,78</td>
+<td>1000</td>
+<td>FL390</td>
+<td>H</td>
+</tr>
+<tr>
+<td>A319 / A320 / A321</td>
+<td>Airbus</td>
+<td>L2J</td>
+<td>M0,79</td>
+<td>2000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>A332 / A333</td>
+<td>Airbus</td>
+<td>L2J</td>
+<td>M0,81</td>
+<td>2000</td>
+<td>FL410</td>
+<td>H</td>
+</tr>
+<tr>
+<td>A342 / A343 / A345 / A346</td>
+<td>Airbus</td>
+<td>L4J</td>
+<td>M0,82</td>
+<td>1500</td>
+<td>FL410</td>
+<td>H</td>
+</tr>
+<tr>
+<td>A388</td>
+<td>Airbus</td>
+<td>L4J</td>
+<td>M0,89 (impreso «0.89»)</td>
+<td>1500</td>
+<td>FL430</td>
+<td>J</td>
+</tr>
+<tr>
+<td>B733 (B733/B734/B735)</td>
+<td>Boeing</td>
+<td>L2J</td>
+<td>M0,74</td>
+<td>2000</td>
+<td>FL370</td>
+<td>M</td>
+</tr>
+<tr>
+<td>B738 / B739</td>
+<td>Boeing</td>
+<td>L2J</td>
+<td>M0,78</td>
+<td>2000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>B744</td>
+<td>Boeing</td>
+<td>L4J</td>
+<td>M0,85</td>
+<td>1500</td>
+<td>FL450</td>
+<td>H</td>
+</tr>
+<tr>
+<td>B752 / B753</td>
+<td>Boeing</td>
+<td>L2J</td>
+<td>M0,8</td>
+<td>2000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>B762 / B763 / B764</td>
+<td>Boeing</td>
+<td>L2J</td>
+<td>M0,8</td>
+<td>2000</td>
+<td>FL450</td>
+<td>H</td>
+</tr>
+<tr>
+<td>B772 / B773</td>
+<td>Boeing</td>
+<td>L2J</td>
+<td>M0,84</td>
+<td>2000</td>
+<td>FL430</td>
+<td>H</td>
+</tr>
+<tr>
+<td>IL62</td>
+<td>Ilyushin</td>
+<td>L4J</td>
+<td>M0,82</td>
+<td>1000</td>
+<td>FL390</td>
+<td>H</td>
+</tr>
+<tr>
+<td>IL76</td>
+<td>Ilyushin</td>
+<td>L4J</td>
+<td>M0,74</td>
+<td>1000</td>
+<td>FL390</td>
+<td>H</td>
+</tr>
+<tr>
+<td>MD11</td>
+<td>McDonnell-Douglas Boeing</td>
+<td>L3J</td>
+<td>M0,83</td>
+<td>1500</td>
+<td>FL410</td>
+<td>H</td>
+</tr>
+<tr>
+<td>MD83 / MD87</td>
+<td>McDonnell-Douglas Boeing</td>
+<td>L2J</td>
+<td>M0,76</td>
+<td>2000</td>
+<td>FL370</td>
+<td>M</td>
+</tr>
+<tr>
+<td>T154 (impreso «T154»)</td>
+<td>Tupolev</td>
+<td>L3J</td>
+<td>M0,82</td>
+<td>2000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>T204</td>
+<td>Tupolev</td>
+<td>L2J</td>
+<td>M0,79</td>
+<td>1500</td>
+<td>FL400</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p>Notas: el valor de crucero del A388 está impreso sin «M» (0.89), pero es un número de Mach. Los <strong>B738/B739 tienen techo FL410, pero el B733, FL370</strong>; <strong>B762/B763/B764 y B744 tienen ambos FL450</strong>, B752/B753 solo FL410. El <strong>único J del catálogo es el A388</strong>. Todos los transportes de cuatro o tres motores se describen como L4J / L3J (descripción del Doc. 8643, véase 7.1).</p>
+<p><strong>Tabla 6.4.b - Commuter y reactores regionales (p. 29-30)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador(es)</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx.</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AT72</td>
+<td>ATR</td>
+<td>L2T</td>
+<td>270 kt</td>
+<td>1000</td>
+<td>FL250</td>
+<td>M</td>
+</tr>
+<tr>
+<td>CRJ1 / CRJ2 / CRJ7 / CRJ9</td>
+<td>Canadair</td>
+<td>L2J</td>
+<td>440 kt</td>
+<td>2000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>E145</td>
+<td>Embraer</td>
+<td>L2J</td>
+<td>M0,76</td>
+<td>1500</td>
+<td>FL370</td>
+<td>M</td>
+</tr>
+<tr>
+<td>E175 / E190</td>
+<td>Embraer</td>
+<td>L2J</td>
+<td>M0,83</td>
+<td>3000</td>
+<td>FL410</td>
+<td>M</td>
+</tr>
+<tr>
+<td>F100</td>
+<td>Fokker</td>
+<td>L2J</td>
+<td>M0,73</td>
+<td>1500</td>
+<td>FL350</td>
+<td>M</td>
+</tr>
+<tr>
+<td>F50</td>
+<td>Fokker</td>
+<td>L2T</td>
+<td>240 kt</td>
+<td>1000</td>
+<td>FL250</td>
+<td>M</td>
+</tr>
+<tr>
+<td>RJ85</td>
+<td>BAE (British Aerospace)</td>
+<td>L4J</td>
+<td>M0,68</td>
+<td>1500</td>
+<td>FL310</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: el <strong>RJ85 aparece dos veces en el manual</strong> (p. 30, al final del grupo de reactores regionales, y de nuevo en la p. 31, al principio del grupo Executive) con datos idénticos; es un reactor regional cuatrimotor de ala alta (familia BAe 146), no una aeronave ejecutiva.</p>
+<p><strong>Tabla 6.4.c - Aeronaves Executive (privadas) (p. 30-31)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx.</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLEX</td>
+<td>Canadair</td>
+<td>L2J</td>
+<td>M0,85</td>
+<td>3000</td>
+<td>FL510</td>
+<td>M</td>
+</tr>
+<tr>
+<td>F2HT</td>
+<td>Dassault</td>
+<td>L2J</td>
+<td>M0,82</td>
+<td>2000</td>
+<td>FL470</td>
+<td>M</td>
+</tr>
+<tr>
+<td>GLF5</td>
+<td>Gulfstream</td>
+<td>L2J</td>
+<td>M0,85</td>
+<td>3000</td>
+<td>FL510</td>
+<td>M</td>
+</tr>
+<tr>
+<td>LJ55</td>
+<td>Gates Learjet</td>
+<td>L2J</td>
+<td>M0,76</td>
+<td>2000</td>
+<td>FL510</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C550</td>
+<td>Cessna</td>
+<td>L2J</td>
+<td>M0,63</td>
+<td>1500</td>
+<td>FL430</td>
+<td><strong>L</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 6.4.d - Helicópteros (p. 31-32)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx.</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AS32</td>
+<td>Aerospatiale</td>
+<td>H2T</td>
+<td>140 kt</td>
+<td>1500</td>
+<td>FL200</td>
+<td>M</td>
+</tr>
+<tr>
+<td>B212</td>
+<td>Bell Augusta</td>
+<td>H2T</td>
+<td>110 kt</td>
+<td>1500</td>
+<td>FL150</td>
+<td>L</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 6.4.e - Aeronaves de pistón (reciprocating) (p. 32)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx.</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C337</td>
+<td>Cessna</td>
+<td>L2P</td>
+<td>165 kt</td>
+<td>1000</td>
+<td>FL190</td>
+<td>L</td>
+</tr>
+<tr>
+<td>PA34</td>
+<td>Piper</td>
+<td>L2P</td>
+<td>180 kt</td>
+<td>1000</td>
+<td>FL250</td>
+<td>L</td>
+</tr>
+<tr>
+<td>TOBA</td>
+<td>EADS Socata</td>
+<td>L1P</td>
+<td>120 kt</td>
+<td>1000</td>
+<td>FL130</td>
+<td>L</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla 6.4.f - Turbohélices de transporte militar (p. 32)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Designador</th>
+<th>Fabricante</th>
+<th>Tipo</th>
+<th>TAS de crucero</th>
+<th>Ascenso máx.</th>
+<th>Techo</th>
+<th>WTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C130</td>
+<td>Lockheed</td>
+<td>L4T</td>
+<td>290 kt</td>
+<td>1000</td>
+<td>FL300</td>
+<td>M</td>
+</tr>
+<tr>
+<td>C295</td>
+<td>Airtech Casa</td>
+<td>L2T</td>
+<td>230 kt</td>
+<td>1500</td>
+<td>FL300</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p>Pautas que conviene advertir:</p>
+<ul>
+<li><strong>Los turbohélices (L#T) cruzan en nudos y tienen techos en torno a FL250-FL300</strong> (AT72 FL250, F50 FL250, C130 y C295 FL300); los reactores cruzan en número de Mach (salvo la familia CRJ: 440 kt).</li>
+<li><strong>Régimen máximo de ascenso de 3000 ft/min: solo E175/E190, GLEX y GLF5</strong>.</li>
+<li><strong>Techos más altos: GLEX, GLF5 y LJ55 (FL510)</strong>, después F2HT (FL470), B744 y B762/B763/B764 (FL450); el A388 FL430; los B772/B773 FL430; el C550 FL430.</li>
+<li><strong>Pesadas (H)</strong>: A124, A332/A333, A342-A346, B744, B762-B764, B772/B773, IL62, IL76, MD11. <strong>Súper (J)</strong>: A388. <strong>Ligeras (L)</strong>: C550, B212, C337, PA34, TOBA. Todo lo demás del catálogo es <strong>Media (M)</strong>, incluidos los B752/B753, T154, AS32 y los militares C130/C295.</li>
+<li>Tipos de tres motores: <strong>MD11 y T154 (L3J)</strong>.</li>
+<li>Techo más bajo: TOBA FL130; B212 FL150.</li>
+</ul>
+<p>Pistas de reconocimiento a partir de las siluetas de las páginas: el A124 es un carguero cuatrimotor de ala alta; el A388 es el cuatrimotor de doble cubierta; el B744 tiene la joroba; el IL62 tiene cuatro motores en la parte trasera del fuselaje y cola en T; el T154 es un trimotor con cola en T; el MD11 tiene un motor en la base de la deriva; el AT72 y el F50 son bimotores turbohélice de ala alta; el C337 es un bimotor de pistón de doble botalón con hélices en configuración tractora y propulsora (push-pull); el C130 es un transporte de ala alta con cuatro turbohélices; el RJ85 es un cuatrimotor de ala alta con cola en T.</p>
+<hr />
+<h2 id="7-indicadores-de-tipo-de-aeronave-p-33-36">7. Indicadores de tipo de aeronave (p. 33-36)</h2>
+<h3 id="71-designador-y-descripcion-de-aeronave-oaci-p-33-35">7.1 Designador y descripción de aeronave OACI (p. 33-35)</h3>
+<p>El <strong>Doc. 8643 de la OACI</strong> permite conocer el designador y la descripción de una aeronave.</p>
+<p><strong>Designador</strong>: <strong>código alfanumérico de 2 a 4 caracteres</strong> que identifica:</p>
+<ol>
+<li>a los <strong>fabricantes</strong> de la aeronave, por ejemplo AIRBUS, Antonov;</li>
+<li>las <strong>denominaciones de las aeronaves</strong>, dadas por los fabricantes: pueden ser siglas o un nombre determinado. Ejemplos del manual: <strong>PiperSport</strong> (del fabricante PIPER), <strong>Skymaster</strong> (CESSNA), <strong>Metro</strong> (SWEARINGEN), <strong>A380</strong> (AIRBUS).</li>
+</ol>
+<p><strong>Indicador de la categoría de estela turbulenta (WTC)</strong></p>
+<p><em>1. Clasificación OACI.</em> Las mínimas de separación por estela turbulenta se basan en la clasificación de los tipos de aeronaves <strong>según su masa máxima certificada al despegue (MTOW)</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Categoría WTC</th>
+<th>Masa máxima certificada al despegue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>J (Súper)</strong></td>
+<td><strong>Exclusiva de la aeronave AIRBUS A380-800 (560 000 kg)</strong></td>
+</tr>
+<tr>
+<td><strong>H (<em>Heavy</em> / Pesada)</strong></td>
+<td>Aeronaves de <strong>136 000 kg o más</strong></td>
+</tr>
+<tr>
+<td><strong>M (<em>Medium</em> / Media)</strong></td>
+<td>Aeronaves de <strong>menos de 136 000 kg y más de 7000 kg</strong></td>
+</tr>
+<tr>
+<td><strong>L (<em>Light</em> / Ligera)</strong></td>
+<td>Aeronaves de <strong>7000 kg o menos</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla del Boeing 757 (p. 34):</strong> a los efectos de la clasificación de aeronaves por estela turbulenta, los modelos <strong>B757 deberán considerarse aeronaves: a) PESADAS cuando vayan seguidas de otra aeronave, y b) MEDIAS cuando sigan a otra aeronave.</strong> (Dicho de otro modo: como aeronave que precede cuenta como Pesada; como aeronave que sigue, como Media.)</p>
+<p><em>2. Clasificación RECAT-EU (p. 34).</em> El esquema de estela turbulenta RECAT-EU introduce <strong>seis categorías basadas tanto en la masa máxima certificada al despegue como en la envergadura</strong>:
+a. <strong>Super Pesada (J)</strong> (<em>SUPER HEAVY</em>): equivalente a la categoría SÚPER (J) de la clasificación WTC de la OACI
+b. <strong>Pesada superior (H+)</strong> (<em>UPPER HEAVY</em>)
+c. <strong>Pesada inferior (H-)</strong> (<em>LOWER HEAVY</em>)
+d. <strong>Media superior (M+)</strong> (<em>UPPER MEDIUM</em>)
+e. <strong>Media inferior (M-)</strong> (<em>LOWER MEDIUM</em>)
+f. <strong>Ligera (L+)</strong> (<em>LIGHT</em>)</p>
+<p>Nota (1): las categorías <strong>se designan oficialmente como CAT-A a CAT-F</strong>, pero comúnmente se designan, y se muestran a los controladores de tránsito aéreo (ATCO), como <strong>J, H+, H-, M+, M- y L+</strong>, para una mejor identificación y distinción respecto de las categorías WTC de la OACI. (Correspondencia: CAT-A = Super Pesada, B = Pesada superior, C = Pesada inferior, D = Media superior, E = Media inferior, F = Ligera; confirmada por el documento RECAT-EU de EUROCONTROL, cuya fila de cabecera es CAT-A ... CAT-F.)</p>
+<p>Afirmaciones del manual sobre la implantación:</p>
+<ul>
+<li><strong>RECAT-EU no cambia la manera de rellenar el plan de vuelo.</strong> Los operadores de aeronaves <strong>siguen rellenando la casilla 9 del plan de vuelo con la WTC de la OACI: J, H, M o L</strong>.</li>
+<li>La implantación de los mínimos de separación RECAT-EU <strong>no afecta a los procedimientos de vuelo</strong>, ni cambia nada respecto a la planificación o gestión de los vuelos ni a la <strong>fraseología</strong>. <strong>El piloto no necesita conocer la categoría RECAT-EU de la aeronave.</strong></li>
+</ul>
+<p><strong>Tabla «Categorías RECAT-EU pertinentes» (p. 34)</strong> («(2) Todas las series»; «(3) Todas las series, incluido NEO»; «(4) Todas las series, incluido MAX»):</p>
+<table>
+<thead>
+<tr>
+<th>Super Pesada (SUPER HEAVY)</th>
+<th>Pesada superior (UPPER HEAVY)</th>
+<th>Pesada inferior (LOWER HEAVY)</th>
+<th>Media superior (UPPER MEDIUM)</th>
+<th>Media inferior (LOWER MEDIUM)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A388</td>
+<td>A330 (2), A340 (2), A350 (2), B747 (2), B777 (2), B787 (2)</td>
+<td>A310 (2), B757 (2), B767 (2)</td>
+<td>A318-A321 (3), B736-B739 (4)</td>
+<td>AT43-AT46, AT72-AT76, B461-B463, B732-B735, CRJ1-CRJ9, CRJX, DH8A-DH8D, E145-E190</td>
+</tr>
+</tbody>
+</table>
+<p>(La tabla del manual no tiene columna Ligera (LIGHT).) Obsérvese que el manual <strong>incluye el B757 como Pesada inferior (LOWER HEAVY)</strong> en RECAT-EU, mientras que en la WTC de la OACI es el caso especial de aeronave que precede o que sigue.</p>
+<p><strong>Descripción del tipo de aeronave</strong> (p. 35): <strong>tres caracteres</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Posición</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primer carácter</strong></td>
+<td><strong>L</strong> Avión terrestre (<em>landplane</em>) · <strong>S</strong> Hidroavión (<em>seaplane</em>) · <strong>A</strong> Anfibio (<em>amphibian</em>) · <strong>H</strong> Helicóptero (<em>helicopter</em>) · <strong>G</strong> Girohelicóptero (<em>gyrocopter</em>) · <strong>T</strong> Aeronave de ala basculante (<em>tilt-wing</em>)</td>
+</tr>
+<tr>
+<td><strong>Segundo carácter</strong></td>
+<td><strong>1, 2, 3, 4, 6, 8 o C(*)</strong> (número de motores)</td>
+</tr>
+<tr>
+<td><strong>Tercer carácter</strong></td>
+<td><strong>P</strong> Motor de pistón (<em>piston</em>) · <strong>T</strong> Motor de turbohélice/turboeje (<em>turboprop/turboshaft</em>) · <strong>J</strong> Motor a reacción (<em>jet</em>) · <strong>E</strong> Motor eléctrico (<em>electric</em>)</td>
+</tr>
+</tbody>
+</table>
+<p>(<em>) El carácter </em><em>C se aplica únicamente a aeronaves de alas fijas e indica que dos motores están acoplados para accionar un solo sistema de hélice.</em>*</p>
+<p>Ejemplo resuelto (p. 35): fabricante/modelo <strong>AIRBUS A-300B2</strong>, designador <strong>A30B</strong>, WTC <strong>H</strong> (pesada), descripción <strong>L2J</strong> = <strong>L</strong> avión terrestre, <strong>2</strong> motores, <strong>J</strong> motor a reacción.</p>
+<p>Nota: el manual no incluye <strong>ningún tipo de motor «R» (cohete)</strong> y llama «ala basculante» (<em>tilt-wing</em>) a la T; véase el apartado 14.</p>
+<h3 id="72-designador-ataiata-p-35-36">7.2 Designador ATA/IATA (p. 35-36)</h3>
+<p>Los identificadores que clasifican los tipos de aeronave se componen de:</p>
+<ul>
+<li>a. <strong>Designador general</strong>: <strong>código de tres caracteres</strong> que se asigna a cada <strong>familia de aviones con una misma configuración (pasajeros, carga o mixta) y una sección de fuselaje común</strong>.</li>
+<li>b. <strong>Subtipo de avión</strong>: <strong>código de tres caracteres</strong> que se asigna cuando hay <strong>modelos distintos dentro de una misma familia de aeronaves</strong> (distinta longitud de fuselaje, envergadura, etc.).</li>
+<li>c. <strong>Categoría</strong>:</li>
+<li><strong>H</strong> Helicóptero</li>
+<li><strong>J</strong> Motor a reacción (turborreactor), <strong>precedido del número de motores</strong></li>
+<li><strong>P</strong> Motor de pistón, <strong>precedido del número de motores</strong></li>
+<li><strong>S</strong> Hidroavión</li>
+<li><strong>T</strong> Turbohélice, <strong>precedido del número de motores</strong></li>
+</ul>
+<p>Ejemplos (p. 36):</p>
+<table>
+<thead>
+<tr>
+<th>Fabricante y modelo</th>
+<th>Designador general</th>
+<th>Subtipo de avión</th>
+<th>Categoría</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embraer 190</td>
+<td>EMJ</td>
+<td>E90</td>
+<td>2J</td>
+</tr>
+<tr>
+<td>Airbus 340-300</td>
+<td>340</td>
+<td>343</td>
+<td>4J</td>
+</tr>
+<tr>
+<td>Airbus 340-500</td>
+<td>340</td>
+<td>345</td>
+<td>4J</td>
+</tr>
+<tr>
+<td>Airbus 340-600</td>
+<td>340</td>
+<td>346</td>
+<td>4J</td>
+</tr>
+<tr>
+<td>MD Helicopters Inc MD 900 Explorer</td>
+<td>MD9</td>
+<td>MD9</td>
+<td>H</td>
+</tr>
+</tbody>
+</table>
+<p>Los códigos figuran en el <strong>Apéndice A del «Standard Schedules Information Manual (SSIM)»</strong>, que la IATA edita y actualiza periódicamente. Contraste: los códigos OACI proceden del <strong>Doc. 8643</strong> (2-4 caracteres + una descripción de 3 caracteres + WTC); los códigos IATA/ATA tienen <strong>3 caracteres</strong> más una categoría como 2J o 4J.</p>
+<hr />
+<h2 id="8-glosario-del-manual-p-37-39">8. Glosario del manual (p. 37-39)</h2>
+<p>Definiciones del manual (redacción del propio manual):</p>
+<ul>
+<li><strong>Aeronave</strong>: toda máquina que puede sustentarse en la atmósfera por reacciones del aire que no sean las reacciones del mismo contra la superficie de la tierra.</li>
+<li><strong>Aeronave ligera</strong>: aeronave de masa certificada de despegue de <strong>7000 kg o menos</strong>.</li>
+<li><strong>Aeronave media</strong>: aeronave de masa máxima certificada de despegue de <strong>menos de 136 000 kg pero más de 7000 kg</strong>.</li>
+<li><strong>Aeronave militar</strong>: aeronave que tiene como misión la defensa nacional o está mandada por un militar comisionado al efecto.</li>
+<li><strong>Aeronave pesada</strong>: aeronave de masa máxima certificada de despegue de <strong>136 000 kg o más</strong>.</li>
+<li><strong>Altitud</strong>: distancia vertical entre un nivel, punto u objeto considerado como punto, y el <strong>nivel medio del mar (MSL)</strong>.</li>
+<li><strong>Altura</strong>: distancia vertical entre un nivel, punto u objeto considerado como punto, y <strong>una referencia especificada</strong>.</li>
+<li><strong>Dependencia de servicios de tránsito aéreo (ATS)</strong>: expresión genérica que se aplica, según el caso, a una dependencia de control de tránsito aéreo, a un centro de información de vuelo, a una dependencia de información de vuelo de aeródromo o a una oficina de notificación de los servicios de tránsito aéreo.</li>
+<li><strong>Estela turbulenta</strong>: masa de aire en <strong>movimiento espiral y descendente que se genera en el extremo de los planos de una aeronave en vuelo</strong>.</li>
+<li><strong>Explotador</strong>: persona, organismo o empresa que se dedica a la explotación de aeronaves.</li>
+<li><strong>Helicóptero</strong>: véase 6.3.</li>
+<li><strong>Número de Mach</strong>: relación entre la velocidad verdadera y la del sonido.</li>
+<li><strong>Régimen de ascenso</strong>: velocidad vertical de subida que puede alcanzar una aeronave en unas determinadas condiciones.</li>
+<li><strong>Región de información de vuelo (FIR)</strong>: espacio aéreo de dimensiones definidas dentro del cual se suministran los <strong>servicios de información de vuelo y de alerta</strong>.</li>
+<li><strong>Servicio de tránsito aéreo (ATS)</strong>: expresión genérica que se aplica, según el caso, a los servicios de información de vuelo, alerta, asesoramiento de tránsito aéreo, control de tránsito aéreo (servicios de control de área, control de aproximación o control de aeródromo).</li>
+<li><strong>Servicio fijo aeronáutico (AFS)</strong>: servicio de telecomunicaciones entre puntos fijos determinados, que se suministra primordialmente para la seguridad de la navegación aérea y para que la operación de los servicios aéreos sea regular, eficiente y económica.</li>
+<li><strong>Servicio internacional de telecomunicaciones</strong>: servicio de telecomunicaciones entre oficinas o estaciones de diferentes Estados, o entre estaciones móviles que no se encuentren en el mismo Estado o que estén sujetas a diferentes Estados.</li>
+<li><strong>Techo de vuelo</strong>: <strong>altitud máxima</strong> que puede alcanzar una aeronave en unas determinadas condiciones.</li>
+<li><strong>Tipo de aeronave</strong>: todas las aeronaves del mismo diseño básico, con sus modificaciones, <strong>excepto las que alteren sus características de manejo o de vuelo</strong>.</li>
+<li><strong>Velocidad de crucero</strong>: velocidad que puede alcanzar una aeronave en unas determinadas condiciones de actuaciones en crucero.</li>
+<li><strong>Velocidad verdadera (TAS)</strong>: velocidad de la aeronave respecto al aire, <strong>considerando la corrección por densidad del aire en el nivel de vuelo considerado</strong>.</li>
+</ul>
+<hr />
+<h2 id="9-vocabulario-especifico-ingles-espanol-p-40-44">9. Vocabulario específico inglés-español (p. 40-44)</h2>
+<p>Inglés → español (tal como se imprime): Ailerons = alerones · Air compressor = compresor de aire · Airspeed indicator = anemómetro · Altimeter = altímetro · Anticollision lights = luces anticolisión · Artificial horizon = horizonte artificial · Altitude indicator = indicador de posición de vuelo · Auxiliary power unit = grupo electrógeno auxiliar · Auxiliary tank = depósito auxiliar · Belly landing = aterrizaje con el tren plegado · Blow out = reventón · Brake = freno · Cabin = cabina de pasaje · Cabin pressure indicator = indicador de presión de cabina · Cargo compartment = compartimento de cabina (sic; la lista español-inglés dice compartimento de carga) · Cockpit = cabina de pilotaje · Compass = brújula · Control stick = palanca de mando · Course deviation indicator = indicador de desviación de rumbo · De-icer boot = descongelador automático · Elevator = timón de profundidad · Emergency door = puerta de emergencia · Empennage = empenaje, cola · Engine = motor · Engine instruments = instrumentos del motor · Escalator = escalera mecánica · Fire truck = coche de bomberos · Flap position indicator = indicador de posición de flaps · Oil temperature gauge = indicador temperatura de aceite · Parking brake = freno de aparcamiento · Pedals = pedales · Position lights = luces de posición · Radio magnetic indicator (RMI) = indicador radiomagnético · Rain remover = deflector de lluvia · Rear door = puerta trasera · Rudder = timón de dirección · Single engine = monomotor · Spare parts = repuestos · Stretcher = camilla · Swept wing = ala en flecha · Tachometer = tacómetro, cuentarrevoluciones · Tail parachute = paracaídas de cola · Tail skid = patín de cola · Tail surfaces = superficies de cola · Tail wheel = rueda de cola · Taxi lights = luces de rodaje · Throttle control = mando de gases · Tow service = servicio de remolque · Trim tabs = compensadores · Tyre = neumático · Van = camioneta · Vertical speed indicator = indicador de velocidad vertical · Vertical stabilizer = estabilizador vertical · Warning lights = luces de alarma · Wing span = envergadura de ala.</p>
+<p>Español → inglés (tal como se imprime): Ala en flecha = swept wing · Alas = wings · Alerones = ailerons · Altímetro = altimeter · Anemómetro = airspeed indicator · Aterrizaje con el tren desplegado (sic, en esta lista; la lista inglés-español dice «con el tren plegado») = belly landing · Bodega = hold · Brújula = compass · Cabina de pasaje = cabin · Cabina de pilotaje = cockpit - flight deck · Camilla = stretcher · Camioneta = van · Coche con espuma = foam truck · Coche de bomberos = fire truck · Compartimento de carga = cargo compartment · Compensadores = trim tabs · Compresor de aire = air compressor · Compuerta del tren de aterrizaje = landing gear hatch · Deflector de lluvia = rain remover · Depósito auxiliar = auxiliary tank · Depósito de combustible = fuel tank · Depósito principal = main tank · Descongelador automático = de-icer boot · Dispositivo director de vuelo = flight director · Dispositivos hipersustentadores = flaps · Empenaje, cola = empennage · Envergadura de ala = wing span · Escalera mecánica = escalator · Estabilizador horizontal = horizontal stabilizer · Estabilizador vertical = vertical stabilizer · Motor = engine · Neumático = tyre · Office de abordo = galley · Palanca de mando = control stick · Parabrisas = windshield · Paracaídas de cola = tail parachute · Pata del tren de aterrizaje = landing gear leg · Patín de cola = tail skid · Pedales = pedals · Polimotor = multiengine · Puerta de emergencia = emergency door · Puerta delantera = front door · Puerta trasera = rear door · Punta de ala vertical = winglet · Repuestos = spare parts · Reventón = blow out - tyre burst · Rueda = wheel · Rueda de cola = tail wheel · Rueda de morro = nose wheel · Señalero = marshal · Servicio de remolque = tow service · Silla de ruedas = wheel chair · Superficies de cola = tail surfaces · Tacómetro, cuentarrevoluciones = tachometer · Timón de dirección = rudder · Timón de profundidad = elevator · Tren de aterrizaje = landing gear · Tren de aterrizaje principal = main landing gear · Tren delantero = nose gear.</p>
+<p>Puntos que probablemente se pregunten: <strong>anemómetro = airspeed indicator</strong> (falso amigo: en meteorología el «anemómetro» mide el viento); <strong>cabina de pilotaje = cockpit; cabina de pasaje = cabin; bodega = hold</strong>; <strong>compensadores = trim tabs; dispositivos hipersustentadores = flaps; punta de ala vertical = winglet; polimotor = multiengine; señalero = marshal; reventón = tyre burst / blow out; empenaje = empennage; envergadura = wing span.</strong></p>
+<hr />
+<h2 id="10-acronimos-del-manual-p-45">10. Acrónimos del manual (p. 45)</h2>
+<p>ACC Centro de control de área (<em>Area control centre</em>) · ACD <em>Airline Coding Directory</em> · AFS Servicio fijo aeronáutico (<em>Aeronautical fixed service</em>) · ATA <em>American Transport Association</em> (tal como se imprime) · ATS Servicios de tránsito aéreo (<em>Air traffic services</em>) · FAA <em>Federal Aviation Administration</em> · FIC Centro de información de vuelo (<em>Flight information centre</em>) · FIR Región de información de vuelo (<em>Flight information region</em>) · FL Nivel de vuelo (<em>Flight level</em>) · ft Pies (<em>Feet</em>) · IATA Organización Internacional para el Transporte Aéreo (<em>International Air Transport Association</em>) · KT Nudos (<em>Knots</em>) · MIN Minuto (<em>Minute</em>) · MTOW Peso máximo al despegue (<em>Maximum take-off weight</em>) · OAC Centro de control de área oceánica (<em>Oceanic area control centre</em>) · OACI Organización de Aviación Civil Internacional · SSIM <em>Standard Schedules Information Manual</em> · TACC Centro de control de área terminal (<em>Terminal area control centre</em>) · TAS Velocidad verdadera (<em>True airspeed</em>) · UAC Centro de control de área superior (<em>Upper area control centre</em>) · UIR Región superior de información de vuelo (<em>Upper flight information region</em>) · UP Límite superior (<em>Upper level</em>) · WTC Categoría de estela turbulenta (<em>Wake turbulence category</em>).</p>
+<hr />
+<h2 id="11-trampas-de-examen">11. Trampas de examen</h2>
+<ol>
+<li><strong>Indicador de lugar frente a nombre de radio</strong>: GCCC es el indicador de lugar del ACC; el nombre por radio es «Canarias Control». Los indicadores no se usan para identificar transmisiones de radio.</li>
+<li><strong>Cuatro letras (indicador de lugar OACI) frente a tres (lugar IATA) frente a tres letras (aerolínea OACI) frente a dos caracteres (aerolínea IATA)</strong>. Hay que distinguir los cuatro.</li>
+<li><strong>Primera letra = área de encaminamiento del AFS, no el Estado</strong>: España tiene dos primeras letras: <strong>L</strong> (Península) y <strong>G</strong> (Canarias, Ceuta, Melilla). Segunda letra: <strong>E</strong> (Península, Ceuta, Melilla) y <strong>C</strong> (Canarias). Por tanto, Ceuta y Melilla son <strong>GE..</strong> (primera letra G, segunda E).</li>
+<li><strong>Asterisco (*) = no conectado al AFS/AFTN</strong>, no «militar» ni «aeródromo privado» en sí (los aeródromos privados son un ejemplo de indicadores no conectados).</li>
+<li><strong>Seis meses</strong> como mínimo antes de reasignar un indicador; los cambios se promulgan por NOTAM o AIP.</li>
+<li><strong>Identificación de oficinas</strong>: designador de 3 letras como letras 5.ª a 7.ª + X (o una letra de departamento), p. ej. LEACYAYX; fuente: Doc. 8585. No confundir con el Doc. 7910 (indicadores de lugar) ni con el Doc. 8643 (tipos de aeronave).</li>
+<li><strong>Telegráfico (3 letras) frente a telefónico (el que se pronuncia)</strong>: IBE/IBERIA, AFR/AIRFRANS, BAW/SPEEDBIRD. El designador telefónico se usa en el distintivo de llamada (IBERIA 301).</li>
+<li><strong>Los designadores OACI de aerolínea ≠ códigos IATA</strong> (IB frente a IBE; EK frente a UAE; VY frente a VLG).</li>
+<li><strong>Regla del guion</strong>: el guion aparece cuando el primer carácter de la matrícula es una letra (OE-FMK). La marca de nacionalidad tiene 1-2 caracteres; la <strong>marca común</strong> (4U) es para explotadores internacionales sin base nacional.</li>
+<li><strong>Grupos de matrícula prohibidos</strong>: combinaciones que puedan confundirse con los grupos de cinco letras del Código Internacional de Señales, con SOS, XXX, PAN, TTT.</li>
+<li><strong>Quién asigna qué</strong>: las marcas de nacionalidad y comunes, la OACI; la matrícula, la autoridad competente de cada país; las normas de nacionalidad, en el <strong>Anexo 7</strong>.</li>
+<li><strong>Portugal tiene dos marcas en el manual (CR, CS)</strong>; Gibraltar VP-G; Marruecos CN; Argelia 7T; Túnez TS; Israel 4X; Mónaco 3A; República Checa OK.</li>
+<li><strong>Límites de WTC</strong>: H = 136 000 kg <strong>o más</strong>; M = <strong>menos de 136 000 y más de 7000</strong>; L = <strong>7000 kg o menos</strong>; J = solo el A380-800. Atención a «o más / o menos» y «menos de / más de».</li>
+<li><strong>B757</strong>: Pesada cuando va seguido de otra aeronave (es decir, como aeronave que precede), Media cuando sigue a otra.</li>
+<li><strong>RECAT-EU</strong> no cambia la casilla 9 del plan de vuelo (sigue siendo J/H/M/L); nombres oficiales CAT-A a CAT-F, mostrados a los controladores como J, H+, H-, M+, M-, L+. Se basa en la MTOW <strong>y en la envergadura</strong> (la WTC de la OACI, solo en la MTOW).</li>
+<li><strong>Código de descripción</strong>: 1.er carácter = clase (L/S/A/H/G/T), 2.º = número de motores (1, 2, 3, 4, 6, 8, C), 3.º = tipo de motor (P/T/J/E). <strong>C = dos motores acoplados a una hélice (solo ala fija).</strong></li>
+<li><strong>Designador OACI de 2-4 caracteres; código de tipo ATA/IATA de 3 caracteres + categoría (2J, 4J, H).</strong></li>
+<li><strong>Timón de dirección frente a timón de profundidad frente a alerón</strong>: el timón de dirección (timón vertical) = guiñada, pedales; el timón de profundidad (timón horizontal) = cabeceo, palanca hacia atrás = morro arriba; el alerón = alabeo. El estabilizador vertical controla la guiñada; el horizontal, el cabeceo.</li>
+<li><strong>Altitud frente a altura</strong>: la altitud se mide sobre el MSL; la altura, sobre una referencia especificada.</li>
+<li><strong>Trampas del catálogo</strong>: el A388 es J; el C550 es L (un reactor, pero Ligero); el AT72 y el F50 son turbohélices (L2T) con techo FL250; el MD11 y el T154 son trimotores (L3J); B738/B739 con techo FL410 frente a B733 con FL370; el E175/E190 asciende a 3000 ft/min; el crucero del CRJ se da en nudos (440).</li>
+</ol>
+<h2 id="12-imprescindible-memorizar">12. Imprescindible memorizar</h2>
+<ul>
+<li>AFS = estaciones fijas, la AFTN pertenece a él; AMS = de estación fija a aeronave.</li>
+<li>Indicador de lugar OACI: 4 letras; Doc. 7910; no se reasigna en ≥ 6 meses; NOTAM/AIP; asterisco = no está en el AFS; no se usa por radio.</li>
+<li>España: L (Península), G (Canarias, Ceuta, Melilla); E (Península, Ceuta, Melilla), C (Canarias).</li>
+<li>Códigos de ACC/FIC: Barcelona LECB, Canarias GCCC, Madrid LECM, Palma LECP, Santiago LECG, Sevilla LECS, Valencia LECL.</li>
+<li>Aeropuertos: LEMD, LEBL, LEPA/LESJ, LEAL, LEVC, LEZL, LEMG, LEBB, LEST, LEPP, LEBG, LEDA, LEIB, LEMH, LEGE, LEGR, LEAS, LEXJ, LEVX, LECO, LEJR, LEAM, LELC, LEVD, LERS, LEVT, LEZG; Canarias GCLP, GCTS, GCXO, GCFV, GCRR, GCLA, GCGM, GCHI; helipuerto de Ceuta GECE; Melilla GEML/GEHM; Gibraltar LXGB.</li>
+<li>Doc. 8585 = designadores (3 o 4 letras); dirección = indicador de lugar + 3 letras + X (LEACYAYX); YMY, YOY, ZTZ.</li>
+<li>Designadores telegráficos (3 letras) / telefónicos (los que se pronuncian); IBE-IBERIA, AFR-AIRFRANS, AAL-AMERICAN, BAW-SPEEDBIRD, RYR-RYANAIR, VLG-VUELING.</li>
+<li>Marca de nacionalidad: 1-2 caracteres; marca común 4U (ONU); guion antes de una letra; Anexo 7; marcas de la tabla (D, 7T, OE, OO, OY, N, A6, EC, OH, F, VP-G, SX, HA, EI, 4X, I, LX, CN, 3A, LN, PH, CR/CS, G, OK, HB, TS).</li>
+<li>IATA: aeropuerto de 3 letras; aerolínea de 2 caracteres alfanuméricos; asterisco = código duplicado; los designadores IATA de 3 letras = los OACI; ACD; SSIM Apéndice A.</li>
+<li>IATA España: MAD, BCN, PMI, AGP, ALC, VLC, SVQ, BIO, LPA, TFN, TFS, ACE, FUE, IBZ, MAH, SCQ, VGO, GRO, LCG, OVD, ZAZ, PNA, LEI, XRY, VDE, SPC, GMZ, MLN, RJL, RGS.</li>
+<li>Pares de aerolíneas: AF-AFR, AA-AAL, BA-BAW, EK-UAE, IB-IBE, JL-JAL, JU-JAT, KU-KAC, SK-SAS, VY-VLG.</li>
+<li>Cinco condiciones de vuelo: despegue, subida, crucero, descenso, aterrizaje.</li>
+<li>Rasgos de reconocimiento (7) y de helicópteros (3); ala: alta/baja/biplano; flecha: regresiva/recta/progresiva; cola: T/cruz/fuselada/doble.</li>
+<li>WTC J/H/M/L: A380-800 / ≥136 000 / 7000-136 000 / ≤7000; regla del B757; RECAT-EU 6 categorías CAT-A..F.</li>
+<li>Descripción: L/S/A/H/G/T + 1/2/3/4/6/8/C + P/T/J/E; ejemplo A30B, H, L2J.</li>
+<li>Tipo ATA/IATA: designador general + subtipo + categoría (H, nJ, nP, S, nT).</li>
+<li>Catálogo: A388 J FL430 M0,89; B744 M0,85 FL450; AT72 270 kt FL250; C550 Ligera.</li>
+</ul>
+<h2 id="13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servicio Fijo Aeronáutico</td>
+<td>Aeronautical Fixed Service (AFS)</td>
+</tr>
+<tr>
+<td>Servicio Móvil Aeronáutico</td>
+<td>Aeronautical Mobile Service (AMS)</td>
+</tr>
+<tr>
+<td>Red de Telecomunicaciones Fijas Aeronáuticas</td>
+<td>Aeronautical Fixed Telecommunication Network (AFTN)</td>
+</tr>
+<tr>
+<td>indicador de lugar OACI</td>
+<td>ICAO location indicator</td>
+</tr>
+<tr>
+<td>área de encaminamiento</td>
+<td>routing area</td>
+</tr>
+<tr>
+<td>aeródromo / helipuerto</td>
+<td>aerodrome / heliport</td>
+</tr>
+<tr>
+<td>aeródromo privado</td>
+<td>private aerodrome</td>
+</tr>
+<tr>
+<td>centro de información de vuelo</td>
+<td>flight information centre (FIC)</td>
+</tr>
+<tr>
+<td>centro de control de área</td>
+<td>area control centre (ACC)</td>
+</tr>
+<tr>
+<td>centro de control de área terminal</td>
+<td>terminal area control centre (TACC)</td>
+</tr>
+<tr>
+<td>centro de control de área superior</td>
+<td>upper area control centre (UAC)</td>
+</tr>
+<tr>
+<td>centro de control de área oceánica</td>
+<td>oceanic area control centre (OAC)</td>
+</tr>
+<tr>
+<td>región de información de vuelo</td>
+<td>flight information region (FIR)</td>
+</tr>
+<tr>
+<td>región superior de información de vuelo</td>
+<td>upper flight information region (UIR)</td>
+</tr>
+<tr>
+<td>NOTAM / Publicación de Información Aeronáutica (AIP)</td>
+<td>NOTAM / AIP</td>
+</tr>
+<tr>
+<td>distintivo de llamada</td>
+<td>call sign</td>
+</tr>
+<tr>
+<td>designador telegráfico</td>
+<td>telegraphic designator</td>
+</tr>
+<tr>
+<td>designador telefónico</td>
+<td>telephony (radiotelephony) designator</td>
+</tr>
+<tr>
+<td>empresa explotadora de aeronaves</td>
+<td>aircraft operating agency</td>
+</tr>
+<tr>
+<td>marca de nacionalidad</td>
+<td>nationality mark</td>
+</tr>
+<tr>
+<td>marca común</td>
+<td>common mark</td>
+</tr>
+<tr>
+<td>marca de matrícula / matrícula</td>
+<td>registration mark</td>
+</tr>
+<tr>
+<td>guion</td>
+<td>hyphen</td>
+</tr>
+<tr>
+<td>Código Internacional de Señales</td>
+<td>International Code of Signals</td>
+</tr>
+<tr>
+<td>Anexo 7 (Marcas de nacionalidad y de matrícula de las aeronaves)</td>
+<td>Annex 7 (Aircraft Nationality and Registration Marks)</td>
+</tr>
+<tr>
+<td>designador de aerolínea</td>
+<td>airline designator</td>
+</tr>
+<tr>
+<td>Directorio de Codificación de Aerolíneas</td>
+<td>Airline Coding Directory</td>
+</tr>
+<tr>
+<td>hélice</td>
+<td>propeller</td>
+</tr>
+<tr>
+<td>ala</td>
+<td>wing</td>
+</tr>
+<tr>
+<td>alerón</td>
+<td>aileron</td>
+</tr>
+<tr>
+<td>alabeo</td>
+<td>roll</td>
+</tr>
+<tr>
+<td>empenaje</td>
+<td>empennage / tail unit</td>
+</tr>
+<tr>
+<td>estabilizador horizontal</td>
+<td>horizontal stabilizer</td>
+</tr>
+<tr>
+<td>timón de profundidad (timón horizontal)</td>
+<td>elevator</td>
+</tr>
+<tr>
+<td>cabeceo</td>
+<td>pitch</td>
+</tr>
+<tr>
+<td>estabilizador vertical (deriva)</td>
+<td>vertical stabilizer (fin)</td>
+</tr>
+<tr>
+<td>timón de dirección (timón vertical, timón de cola)</td>
+<td>rudder</td>
+</tr>
+<tr>
+<td>guiñada</td>
+<td>yaw</td>
+</tr>
+<tr>
+<td>fuselaje</td>
+<td>fuselage</td>
+</tr>
+<tr>
+<td>tren de aterrizaje</td>
+<td>landing gear</td>
+</tr>
+<tr>
+<td>ala alta / ala baja / biplano</td>
+<td>high wing / low wing / biplane</td>
+</tr>
+<tr>
+<td>flecha regresiva / recta / progresiva</td>
+<td>swept-back / straight / forward-swept wing</td>
+</tr>
+<tr>
+<td>cola en T / cola en cruz / cola fuselada / cola doble</td>
+<td>T-tail / cruciform tail / fuselage-mounted tail / twin tail</td>
+</tr>
+<tr>
+<td>motor de pistón / turbohélice / a reacción</td>
+<td>piston / turboprop / jet engine</td>
+</tr>
+<tr>
+<td>monomotor</td>
+<td>single-engine</td>
+</tr>
+<tr>
+<td>tren fijo sin carenado / carenado / retráctil</td>
+<td>fixed unfaired / faired / retractable gear</td>
+</tr>
+<tr>
+<td>patines</td>
+<td>skids</td>
+</tr>
+<tr>
+<td>rotor / palas</td>
+<td>rotor / rotor blades</td>
+</tr>
+<tr>
+<td>velocidad de crucero (velocidad verdadera)</td>
+<td>cruise speed (TAS)</td>
+</tr>
+<tr>
+<td>régimen de ascenso</td>
+<td>rate of climb</td>
+</tr>
+<tr>
+<td>techo</td>
+<td>ceiling</td>
+</tr>
+<tr>
+<td>estela turbulenta</td>
+<td>wake turbulence</td>
+</tr>
+<tr>
+<td>categoría de estela turbulenta</td>
+<td>wake turbulence category (WTC)</td>
+</tr>
+<tr>
+<td>masa máxima certificada al despegue</td>
+<td>maximum take-off weight (MTOW)</td>
+</tr>
+<tr>
+<td>envergadura</td>
+<td>wingspan</td>
+</tr>
+<tr>
+<td>Súper / Pesada / Media / Ligera</td>
+<td>Super / Heavy / Medium / Light</td>
+</tr>
+<tr>
+<td>designador de tipo de aeronave</td>
+<td>aircraft type designator</td>
+</tr>
+<tr>
+<td>descripción de la aeronave</td>
+<td>aircraft description</td>
+</tr>
+<tr>
+<td>avión terrestre / hidroavión / anfibio</td>
+<td>landplane / seaplane / amphibian</td>
+</tr>
+<tr>
+<td>girohelicóptero / aeronave de ala basculante</td>
+<td>gyrocopter / tilt-wing aircraft</td>
+</tr>
+<tr>
+<td>turboeje</td>
+<td>turboshaft</td>
+</tr>
+<tr>
+<td>motor eléctrico</td>
+<td>electric engine</td>
+</tr>
+<tr>
+<td>designador general / subtipo de avión / categoría (ATA/IATA)</td>
+<td>general designator / subtype / category (ATA/IATA)</td>
+</tr>
+<tr>
+<td>altitud / altura</td>
+<td>altitude / height</td>
+</tr>
+<tr>
+<td>nivel medio del mar</td>
+<td>mean sea level (MSL)</td>
+</tr>
+<tr>
+<td>número de Mach</td>
+<td>Mach number</td>
+</tr>
+<tr>
+<td>explotador</td>
+<td>operator</td>
+</tr>
+<tr>
+<td>aeronave militar</td>
+<td>military aircraft</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-manual-frente-a-fuentes-primarias">14. Manual frente a fuentes primarias</h2>
+<table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Lo que dice el manual</th>
+<th>Fuente primaria consultada</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formato de la matrícula española</td>
+<td>El manual <strong>no</strong> indica el formato español</td>
+<td>AIP España GEN 2.1, apartado 5: EC + guion + 3 letras o 2 letras y una cifra (EC-AUM, EC-JM7); RD 384/2015, art. 17: EC + guion + «4 letras». <strong>Actualización de 25 de septiembre de 2026:</strong> el RD 384/2015 fue derogado; se aplica el RD 1029/2025 (BOE de 13-11-2025), que mantiene la regla en el art. 4.1 (EC + 4 letras), con una norma transitoria por la que se siguen expidiendo marcas de 3 letras (DA 2.ª)</td>
+<td>El manual guarda silencio. Regla de examen: «según el Reglamento» = 4 letras; «actual» o un ejemplo EC-xxx = 3 letras. No cabe esperar que el examen lo pregunte salvo que siga otra fuente.</td>
+</tr>
+<tr>
+<td>Primer carácter T de la descripción</td>
+<td>«Aeronave de ala basculante (<em>tilt-wing</em>)»</td>
+<td>SKYbrary (notas base anteriores): convertiplano (<em>tiltrotor</em>); la FAA JO 7360.1K sustituyó «tiltrotor» por «powered-lift»</td>
+<td>Seguir el manual.</td>
+</tr>
+<tr>
+<td>Letras de tipo de motor</td>
+<td>P, T, J, E</td>
+<td>SKYbrary (notas base) incluye también R (cohete)</td>
+<td>Seguir el manual (sin R).</td>
+</tr>
+<tr>
+<td>Jat Airways JU/JAT, Serbia</td>
+<td>figura como ejemplo</td>
+<td>FAA JO 7340.2P: JAT está asignado hoy a JetSMART (Chile); Jat Airways como aerolínea dejó de existir (ahora vuela Air Serbia)</td>
+<td>El ejemplo está desfasado; aun así, lo más probable es que el examen reproduzca la tabla del manual.</td>
+</tr>
+<tr>
+<td>Columna del Estado de Vueling</td>
+<td>imprime «Vueling»</td>
+<td>Vueling es española</td>
+<td>Errata de imprenta del manual.</td>
+</tr>
+<tr>
+<td>Masa del A380</td>
+<td>J = A380-800 «(560.000 kg)»</td>
+<td>SKYbrary dice «del orden de 560 000 kg», Wikipedia 575 t (notas base)</td>
+<td>Aprender «solo el A380-800» y 560 000 kg tal como los da el manual.</td>
+</tr>
+<tr>
+<td>Sexta categoría de RECAT-EU</td>
+<td>«LIGHT (L+)»</td>
+<td>Cabecera del documento RECAT-EU de EUROCONTROL: «LIGHT» CAT-F</td>
+<td>Misma categoría; el «+» es la etiqueta del manual.</td>
+</tr>
+<tr>
+<td>B757 en RECAT-EU</td>
+<td>Pesada inferior (<em>Lower Heavy</em>, tabla)</td>
+<td>EUROCONTROL: B752/B753/B762/B763 en CAT-C (Pesada inferior)</td>
+<td>Coherente.</td>
+</tr>
+<tr>
+<td>WTC de la OACI</td>
+<td>J/H/M/L con límites en kg</td>
+<td>Igual que SKYbrary (notas base)</td>
+<td>Coherente.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-fuentes">15. Fuentes</h2>
+<ul>
+<li>Manual de ENAIRE «Códigos OACI/IATA y Características de Aeronaves», noviembre de 2024, 45 pp. (texto completo y todas las páginas de tablas y figuras renderizadas y leídas: pp. 5-10, 12-16, 19, 21-23, 26-36).</li>
+<li>AIP España GEN 2.1, apartado 5 (<code>...\texto\02-codigos-aeronaves\aip\LE_GEN_2_1_es.txt</code>); BOE, RD 384/2015 consolidado (<code>...\boe\RD384-2015_consolidado.txt</code>), derogado por el RD 1029/2025 (BOE-A-2025-22950); documento RECAT-EU de EUROCONTROL (<code>...\eurocontrol\RECAT-EU_European_Wake_Turbulence_Categorisation.txt</code>); FAA JO 7340.2P y JO 7360.1K (<code>...\faa\</code>).</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

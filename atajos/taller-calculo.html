@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller de cálculo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='3' width='14' height='18' rx='1.5'/%3E%3Cpath d='M8 7h8v3H8z'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onaccent:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --c1:#1a4d8f; --c2:#2d6a3e; --c3:#b3450d; --c4:#5f5b53;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a3c6ef; --onaccent:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    --c1:#7fb0e8; --c2:#7cbf8a; --c3:#e08a55; --c4:#a19c90}
+}
+*{box-sizing:border-box}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:14px 16px 56px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;margin:0}
+h1{font-size:1.9rem;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:30px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px}
+h3{font-size:1.02rem;margin:16px 0 6px}
+a{color:var(--accent)}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:16px;height:16px}
+.nav{margin-bottom:6px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;padding:6px 0;min-height:32px}
+.back:hover{text-decoration:underline}
+.top{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.top .logo{width:32px;height:32px;color:var(--accent);stroke-width:1.5}
+.top h1{flex:1}
+.muted{color:var(--muted)} .ok{color:var(--ok)} .err{color:var(--err)} .warnc{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;line-height:1.2;min-height:38px}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onaccent)}
+.btn.primary:hover{background:var(--accent-h)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.sm{padding:5px 10px;min-height:30px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:7px 10px;width:100%;min-height:38px;font-family:var(--mono)}
+select{font-family:var(--sans)}
+input[aria-invalid=true]{border-color:var(--err)}
+input[type=range]{width:100%;accent-color:var(--accent);margin:6px 0}
+.split{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px;align-items:start}
+.form{border-top:1px solid var(--rule)}
+.fr{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule)}
+.fr>label{color:var(--muted);font-size:.92rem}
+.inp{display:flex;align-items:center;gap:8px}
+.inp .u{color:var(--muted);min-width:2.4em;font-size:.9rem}
+.fr.calc input{background:var(--stripe);border-bottom:2px solid var(--accent)}
+.fr.calc>label{color:var(--accent);font-weight:600}
+.steps{list-style:none;counter-reset:s;padding:0;margin:14px 0;border-top:1px solid var(--rule)}
+.steps li{counter-increment:s;display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:.95rem;overflow-wrap:anywhere}
+.steps li::before{content:counter(s);color:var(--muted);min-width:1.1em;flex:none}
+.steps li.hid{display:none}
+.steps li.res{font-weight:700;color:var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.85rem}
+thead th{border-top:1px solid var(--rule)}
+tbody tr:nth-child(even){background:var(--stripe)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td .sub{display:block;color:var(--muted);font-size:.82rem;font-family:var(--mono)}
+.big{font-family:var(--mono);font-size:1.5rem;font-weight:600}
+.chart{display:block;width:100%;height:auto}
+.chart text{font-family:var(--sans)}
+.chart .t{fill:var(--muted);font-size:11px}
+.chart .tm{fill:var(--muted);font-size:11px;font-family:var(--mono)}
+.chart .ta{fill:var(--accent);font-size:11px;font-family:var(--mono)}
+.chart .g{stroke:var(--rule);stroke-width:1;fill:none}
+.chart .ax{stroke:var(--muted);stroke-width:1;fill:none}
+.chart .ln{stroke:var(--accent);stroke-width:2;fill:none}
+.chart .dash{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:5 4;fill:none}
+.chart .wd{fill:var(--accent);fill-opacity:.16;stroke:var(--accent);stroke-width:1}
+.chart .pt{fill:var(--accent)}
+.chart .hub{fill:var(--surface);stroke:var(--rule)}
+.foot{margin-top:36px;padding-top:12px;border-top:1px solid var(--rule)}
+.foot a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:.95rem}
+.foot a:hover{text-decoration:underline}
+.small{font-size:.85rem}
+.tab-box{max-width:100%;overflow-x:auto}
+@media (max-width:760px){
+  html{font-size:16px}
+  .split{grid-template-columns:1fr;gap:16px}
+  h1{font-size:1.55rem}
+}
+@media (max-width:420px){
+  .fr{grid-template-columns:82px minmax(0,1fr);gap:8px}
+  th,td{padding:6px 5px}
+}
+
+.ops{display:inline-flex;border:1px solid var(--accent);border-radius:2px;overflow:hidden}
+.ops label{position:relative;cursor:pointer}
+.ops input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.ops span{display:block;min-width:46px;text-align:center;padding:8px 0;font-size:1.15rem;color:var(--accent);border-right:1px solid var(--accent);font-family:var(--mono)}
+.ops label:last-child span{border-right:0}
+.ops input:checked+span{background:var(--accent);color:var(--onaccent)}
+.ops input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.expr{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0}
+.expr .f{display:flex;align-items:center;gap:8px}
+.expr .f label{color:var(--muted);font-size:.9rem}
+.expr input{width:130px}
+.res{font-family:var(--mono);font-size:1.7rem;font-weight:600;margin:10px 0 2px}
+.cota{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:.95rem;margin:4px 0 10px}
+details.route{border-top:1px solid var(--rule)}
+details.route:last-of-type{border-bottom:1px solid var(--rule)}
+details.route>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:10px 4px;cursor:pointer;min-height:44px}
+details.route>summary::-webkit-details-marker{display:none}
+details.route>summary .nm{flex:1;font-weight:600}
+details.route>summary .mt{font-family:var(--mono);font-size:.85rem;color:var(--muted);white-space:nowrap}
+details.route>summary::before{content:"";width:7px;height:7px;border-right:1.6px solid var(--muted);border-bottom:1.6px solid var(--muted);transform:rotate(-45deg);flex:none;margin:0 4px}
+details.route[open]>summary::before{transform:rotate(45deg)}
+details.route.best>summary .nm{color:var(--accent)}
+.best .ic.ck{color:var(--ok)}
+.rb{padding:2px 4px 16px}
+.rb .btns{display:flex;gap:8px;margin:8px 0}
+.vis{margin:8px 0;max-width:560px}
+.vis text{font-size:15px!important}
+.dg{display:flex;gap:4px;font-family:var(--mono);font-size:1.2rem;margin:6px 0}
+.dg b{min-width:2.2em;padding:4px 6px;text-align:center;border:1px solid var(--rule);background:var(--surface);font-weight:600}
+.dg b.s{color:var(--accent)}
+.sw{width:12px;height:12px;display:inline-block;margin-right:6px}
+.chk{margin-top:6px}
+.vd{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:10px;font-weight:600}
+.vd .y{color:var(--ok)} .vd .n{color:var(--err)}
+.vd .ic{vertical-align:-4px;margin-right:4px}
+.rt{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.rt input{width:150px}
+.why{margin:10px 0 12px;font-size:.95rem}
+.msg{min-height:1.4em;color:var(--err);font-weight:600}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5V12l3.6 2.2M12 3v1.6M21 12h-1.6M12 21v-1.6M3 12h1.6"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3.5 15.5 15.5 3.5l5 5-12 12z"/><path d="M7 12l2.2 2.2M10 9l2.2 2.2M13 6l2.2 2.2"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8v3H8zM8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3.5h10V8M7 17H4v-8h16v8h-3M7 14h10v6.5H7z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5"/></symbol>
+<symbol id="i-steps" viewBox="0 0 24 24"><path d="M3 19h5v-5h5V9h5V4h3"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9M3 20h18"/></symbol>
+
+</defs></svg>
+<div class="wrap">
+<nav class="nav"><a class="back" href="index.html"><svg class="ic sm" aria-hidden="true"><use href="#i-back"/></svg>Atajos</a></nav>
+<header class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Taller de cálculo</h1></header>
+
+<section aria-labelledby="h-op">
+<h2 id="h-op"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg>Cálculo</h2>
+<div class="ops" role="radiogroup" aria-label="Operación" id="ops">
+  <label><input type="radio" name="op" value="mul" aria-label="Multiplicar"><span>&times;</span></label>
+  <label><input type="radio" name="op" value="add" aria-label="Sumar"><span>+</span></label>
+  <label><input type="radio" name="op" value="sub" aria-label="Restar"><span>&minus;</span></label>
+  <label><input type="radio" name="op" value="div" aria-label="Dividir"><span>&divide;</span></label>
+  <label><input type="radio" name="op" value="pct" aria-label="Porcentaje"><span>%</span></label>
+</div>
+<div class="expr">
+  <div class="f"><label for="f-a" id="l-a">a</label><input id="f-a" type="text" inputmode="decimal" autocomplete="off"></div>
+  <span id="sym" class="big" aria-hidden="true">&times;</span>
+  <div class="f"><label for="f-b" id="l-b">b</label><input id="f-b" type="text" inputmode="decimal" autocomplete="off"></div>
+</div>
+<div class="msg" id="msg" role="alert"></div>
+<div id="out" hidden>
+  <div class="res" id="res"></div>
+  <div class="cota" id="cota"></div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-steps"/></svg>Rutas</h2>
+  <div class="tab-box"><table id="rtab"><thead><tr><th>Ruta</th><th class="num">Pasos</th><th class="num">Acarreos</th><th class="num">Mult.</th></tr></thead><tbody></tbody></table></div>
+  <p class="why" id="why"></p>
+  <div id="routes"></div>
+  <h2><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Comprobar</h2>
+  <div id="chk"></div>
+  <div class="rt chk"><label for="f-ans">Mi resultado</label><input id="f-ans" type="text" inputmode="decimal" autocomplete="off"></div>
+  <div class="vd" id="vd" aria-live="polite"></div>
+</div>
+</section>
+
+<footer class="foot"><a href="../practica/aptitude/game-mental-math.html">Practicar<svg class="ic sm" aria-hidden="true"><use href="#i-arrow"/></svg></a></footer>
+</div>
+
+<script>
+// ==== LOGIC START ====
+function parseNum(s){
+  if(typeof s==='number') return isFinite(s)?s:NaN;
+  s=String(s==null?'':s).trim().replace(/[\s  ]/g,'').replace('−','-').replace(',','.');
+  if(!/^-?(\d+(\.\d*)?|\.\d+)$/.test(s)) return NaN;
+  return parseFloat(s);
+}
+function rn(x){ return Math.round(x*1e9)/1e9; }
+function fmt(n){
+  if(!isFinite(n)) return '—';
+  var r=Math.round(n*1e6)/1e6, neg=r<0; r=Math.abs(r);
+  var p=String(r).split('.'), i=p[0], f=p[1];
+  if(i.length>=5) i=i.replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+  return (neg?'−':'')+i+(f?','+f:'');
+}
+function fmtPct(frac){ // fraction -> "+4,0 %"
+  var v=Math.round(frac*1000)/10; var s=String(Math.abs(v).toFixed(1)).replace('.',',');
+  return (v>0?'+':(v<0?'−':'±'))+s+' %';
+}
+function norm360(x){ return ((x%360)+360)%360; }
+function pad2(n){ return (n<10?'0':'')+n; }
+function pad3(n){ n=Math.round(n); return (n<10?'00':(n<100?'0':''))+n; }
+function digitRoot(n){ n=Math.floor(Math.abs(n)); return n===0?0:1+((n-1)%9); }
+var TRANSPOSITION_DEMO={good:1081,bad:1018};
+var MINUS='−', TIMES='×', DIVS='÷';
+function pow10(k){ return Math.pow(10,k); }
+function placeParts(n){
+  var s=String(Math.floor(n)), out=[];
+  for(var k=0;k<s.length;k++){ var d=+s[k]; if(d) out.push(d*pow10(s.length-1-k)); }
+  return out;
+}
+function carriesAdd(x,y){
+  var c=0, carry=0;
+  while(x>0||y>0||carry){ var s=(x%10)+(y%10)+carry; carry=s>=10?1:0; c+=carry; x=Math.floor(x/10); y=Math.floor(y/10); }
+  return c;
+}
+function borrowsSub(x,y){
+  var b=0, br=0;
+  while(x>0||y>0){ var dx=x%10, dy=(y%10)+br; if(dx<dy){br=1;b++;} else br=0; x=Math.floor(x/10); y=Math.floor(y/10); }
+  return b;
+}
+function scaleInts(x,y){
+  var k=0;
+  function isI(v){ return Math.abs(v-Math.round(v))<1e-7; }
+  while(k<6&&(!isI(x*pow10(k))||!isI(y*pow10(k)))) k++;
+  return [Math.round(x*pow10(k)),Math.round(y*pow10(k))];
+}
+function stripZ(n){ n=Math.abs(Math.round(n)); while(n>0&&n%10===0) n=n/10; return n; }
+function mulEffort(x,y){
+  var s=scaleInts(Math.abs(x),Math.abs(y)), sx=stripZ(s[0]), sy=stripZ(s[1]);
+  if(sx<=1||sy<=1) return 0;
+  var nx=String(sx).length, ny=String(sy).length;
+  return nx*ny+(nx>1&&ny>1?2:0)-1;
+}
+function opCarries(op){
+  var t=op[0], x=Math.abs(op[1]), y=Math.abs(op[2]);
+  if(t==='+'){ var s=scaleInts(x,y); return carriesAdd(s[0],s[1]); }
+  if(t==='-'){ var q=scaleInts(x,y); return q[0]>=q[1]?borrowsSub(q[0],q[1]):borrowsSub(q[1],q[0]); }
+  return 0;
+}
+function S(t,e,ops,extra){ return {t:t,e:e,ops:ops||[],extra:extra||0}; }
+function fin(r){
+  var c=0,m=0;
+  r.steps.forEach(function(s){
+    c+=s.extra; s.ops.forEach(function(o){ c+=opCarries(o); if(o[0]==='*') m+=mulEffort(o[1],o[2]); });
+  });
+  r.cost={steps:r.steps.length,carries:c,effort:m,score:r.steps.length+c+2*m};
+  return r;
+}
+function roundCand(x){
+  var tab=[[1000,12],[100,6],[10,3]];
+  for(var i=0;i<tab.length;i++){
+    var base=tab[i][0], lim=tab[i][1], xr=Math.round(x/base)*base, d=xr-x;
+    if(d!==0&&Math.abs(d)<=lim&&xr>0) return {xr:xr,d:d,base:base};
+  }
+  return null;
+}
+// ---------- estimacion y cotas ----------
+function sig(x){ // {f,c,n}: suelo, techo y redondeo a 1 cifra significativa (x>0)
+  if(x<=0) return {f:0,c:0,n:0};
+  var s=x.toExponential(), m=s.match(/^(\d)(?:\.(\d+))?e([+-]\d+)$/);
+  var lead=+m[1], rest=m[2]?+('0.'+m[2]):0, e=+m[3], u=pow10(e);
+  var f=rn(lead*u), exact=rest===0;
+  var c=exact?f:rn((lead+1)*u);
+  var n=(rest>=0.5)?rn((lead+1)*u):f;
+  return {f:f,c:c,n:n};
+}
+function estimate(op,a,b){
+  var A=sig(a), B=sig(b), lo,hi,near;
+  if(op==='mul'){ lo=A.f*B.f; hi=A.c*B.c; near=A.n*B.n; }
+  else if(op==='add'){ lo=A.f+B.f; hi=A.c+B.c; near=A.n+B.n; }
+  else if(op==='sub'){ lo=Math.max(0,A.f-B.c); hi=A.c-B.f; near=A.n-B.n; }
+  else if(op==='div'){ lo=A.f/B.c; hi=B.f>0?A.c/B.f:Infinity; near=B.n>0?A.n/B.n:NaN; }
+  else { lo=A.f*B.f/100; hi=A.c*B.c/100; near=A.n*B.n/100; }
+  return {lo:rn(lo),hi:rn(hi),near:rn(near)};
+}
+function exactOf(op,a,b){
+  if(op==='mul') return a*b; if(op==='add') return a+b; if(op==='sub') return a-b;
+  if(op==='div') return a/b; return rn(a*b/100);
+}
+// ---------- multiplicacion ----------
+function mulRoutes(a,b){
+  var R=[], big=Math.max(a,b), small=Math.min(a,b), i;
+  if(big<10||stripZ(small)<=1){
+    R.push(fin({id:'directo',name:big<10?'Tabla':'Directo',steps:[S(a+' '+TIMES+' '+b,fmt(a*b))],result:a*b,visual:null}));
+    return R;
+  }
+  // izquierda a derecha
+  (function(){
+    var parts=placeParts(big), run=0, st=[];
+    parts.forEach(function(p,i){
+      var pr=p*small, ops=[['*',p,small]];
+      if(i===0){ run=pr; st.push(S(fmt(p)+' '+TIMES+' '+fmt(small),fmt(pr),ops)); }
+      else { var nr=run+pr; ops.push(['+',run,pr]); st.push(S(fmt(p)+' '+TIMES+' '+fmt(small)+' = '+fmt(pr),fmt(run)+' + '+fmt(pr)+' = '+fmt(nr),ops)); run=nr; }
+    });
+    R.push(fin({id:'izq',name:'De izquierda a derecha',steps:st,result:run,visual:{type:'box',cols:parts,rows:[small]}}));
+  })();
+  // area: descomponer los dos
+  (function(){
+    var pc=placeParts(big), pr=placeParts(small);
+    if(pr.length<2||small<10) return;
+    var run=0, first=true, st=[];
+    pc.forEach(function(p){ pr.forEach(function(q){
+      var m=p*q, ops=[['*',p,q]];
+      if(first){ run=m; first=false; st.push(S(fmt(p)+' '+TIMES+' '+fmt(q),fmt(m),ops)); }
+      else { var nr=run+m; ops.push(['+',run,m]); st.push(S(fmt(p)+' '+TIMES+' '+fmt(q)+' = '+fmt(m),fmt(run)+' + '+fmt(m)+' = '+fmt(nr),ops)); run=nr; }
+    }); });
+    R.push(fin({id:'area',name:'Descomponer los dos (área)',steps:st,result:run,visual:{type:'box',cols:pc,rows:pr}}));
+  })();
+  // redondear y compensar
+  (function(){
+    var ca=roundCand(a), cb=roundCand(b), pick=null, y;
+    if(ca&&cb){ if(Math.abs(ca.d)/a<=Math.abs(cb.d)/b){pick=ca;y=b;} else {pick=cb;y=a;} }
+    else if(ca){pick=ca;y=b;} else if(cb){pick=cb;y=a;}
+    if(!pick) return;
+    var d=pick.d, ad=Math.abs(d), p1=pick.xr*y, p2=ad*y, res=d>0?p1-p2:p1+p2, x=(pick===ca&&y===b)?a:b;
+    var st=[S(fmt(pick.xr)+' '+TIMES+' '+fmt(y),fmt(p1),[['*',pick.xr,y]]),
+            S(fmt(ad)+' '+TIMES+' '+fmt(y),fmt(p2),[['*',ad,y]]),
+            S(d>0?'quitar':'añadir',fmt(p1)+' '+(d>0?MINUS:'+')+' '+fmt(p2)+' = '+fmt(res),[[d>0?'-':'+',p1,p2]])];
+    R.push(fin({id:'comp',name:'Redondear y compensar',steps:st,result:res,
+      visual:{type:'nl',pts:[{v:Math.min(p1,res),l:fmt(Math.min(p1,res))},{v:Math.max(p1,res),l:fmt(Math.max(p1,res))}],jumps:[{from:p1,to:res,l:(d>0?MINUS:'+')+fmt(p2)}],note:fmt(x)+' ≈ '+fmt(pick.xr)}}));
+  })();
+  // mitad y doble
+  (function(){
+    var cand=[];
+    if(a%2===0) cand.push([a/2,b*2]);
+    if(b%2===0) cand.push([b/2,a*2]);
+    var base=mulEffort(a,b), best=null;
+    cand.forEach(function(c){ var e=mulEffort(c[0],c[1]); if(e<base&&(best===null||e<best.e)) best={x:c[0],y:c[1],e:e}; });
+    if(!best) return;
+    var res=best.x*best.y;
+    R.push(fin({id:'dbl',name:'Mitad y doble',steps:[S('mitad y doble',fmt(best.x)+' '+TIMES+' '+fmt(best.y)),S('producto',fmt(res),[['*',best.x,best.y]])],result:res,visual:null}));
+  })();
+  // x5 / x25 / x50 ...
+  (function(){
+    var T={5:[10,2],50:[100,2],500:[1000,2],25:[100,4],250:[1000,4]}, m=null, x;
+    if(T[a]){m=a;x=b;} else if(T[b]){m=b;x=a;}
+    if(m===null) return;
+    var mu=T[m][0], dv=T[m][1], mid=x*mu, res=mid/dv;
+    R.push(fin({id:'x5',name:m+' = '+mu+' '+DIVS+' '+dv,steps:[S(fmt(x)+' '+TIMES+' '+fmt(mu),fmt(mid)),S(DIVS+' '+dv,fmt(mid)+' '+DIVS+' '+dv+' = '+fmt(res))],result:res,visual:null}));
+  })();
+  // x9 / x99 / x999
+  (function(){
+    var T={9:10,99:100,999:1000}, m=null, x;
+    if(T[a]){m=a;x=b;} else if(T[b]){m=b;x=a;}
+    if(m===null) return;
+    var mid=x*T[m], res=mid-x;
+    R.push(fin({id:'x9',name:m+' = '+T[m]+' '+MINUS+' 1',steps:[S(fmt(x)+' '+TIMES+' '+fmt(T[m]),fmt(mid)),S(MINUS+' '+fmt(x),fmt(mid)+' '+MINUS+' '+fmt(x)+' = '+fmt(res),[['-',mid,x]])],result:res,visual:null}));
+  })();
+  // x11: suma de cifras vecinas
+  (function(){
+    var x=null; if(a===11) x=b; else if(b===11) x=a; if(x===null||x<1) return;
+    var d=String(x).split('').map(Number), cols=[d[0]], k;
+    for(k=1;k<d.length;k++) cols.push(d[k-1]+d[k]);
+    cols.push(d[d.length-1]);
+    var carry=0, out=[], cc=0;
+    for(k=cols.length-1;k>=0;k--){ var v=cols[k]+carry; out.unshift(v%10); carry=Math.floor(v/10); if(carry) cc++; }
+    if(carry) out.unshift(carry);
+    var res=Number(out.join(''));
+    var lab=cols.map(function(c,i){ return (i>0&&i<cols.length-1)?(d[i-1]+'+'+d[i]):String(c); }).join(' | ');
+    R.push(fin({id:'x11',name:'× 11: cifras vecinas',steps:[S('cifras',lab+'  =  '+cols.join(' | ')),S('acarreos',fmt(res),[],cc)],result:res,visual:{type:'x11',d:d,cols:cols,res:res}}));
+  })();
+  // cerca de la base (100 o 1000)
+  (function(){
+    var T=[[100,20],[1000,50]];
+    for(var i=0;i<T.length;i++){
+      var base=T[i][0], lim=T[i][1];
+      if(a!==base&&b!==base&&Math.abs(a-base)<=lim&&Math.abs(b-base)<=lim){
+        var dA=base-a, dB=base-b, cross=dB>=0?a-dB:a+Math.abs(dB), p=dA*dB, hi=cross*base, res=hi+p, pa=Math.abs(p);
+        var ds=function(x,v){ return fmt(x)+(v>0?' = '+base+' '+MINUS+' '+v:' = '+base+' + '+Math.abs(v)); };
+        var st=[S('diferencias',ds(a,dA)+' ; '+ds(b,dB)),
+                S('cruz',fmt(a)+' '+(dB>=0?MINUS:'+')+' '+fmt(Math.abs(dB))+' = '+fmt(cross),[[dB>=0?'-':'+',a,Math.abs(dB)]]),
+                S(TIMES+' '+base,fmt(cross)+' '+TIMES+' '+base+' = '+fmt(hi)),
+                S(fmt(dA)+' '+TIMES+' '+fmt(dB),fmt(p),[['*',Math.abs(dA),Math.abs(dB)]]),
+                S('suma',fmt(hi)+' '+(p>=0?'+':MINUS)+' '+fmt(pa)+' = '+fmt(res),[[p>=0?'+':'-',hi,pa]])];
+        R.push(fin({id:'base',name:'Cerca de '+base,steps:st,result:res,visual:{type:'base',a:a,b:b,base:base}}));
+        break;
+      }
+    }
+  })();
+  // cuadrado terminado en 5
+  (function(){
+    if(a!==b||a%10!==5) return;
+    var n=(a-5)/10, m=n*(n+1), res=m*100+25;
+    R.push(fin({id:'sq5',name:'Cuadrado terminado en 5',steps:[S('n = '+fmt(n),fmt(n)+' '+TIMES+' '+fmt(n+1)+' = '+fmt(m),[['*',n,n+1]]),S('detrás, 25',fmt(m)+' | 25 = '+fmt(res))],result:res,visual:{type:'sq5',n:n,m:m,res:res}}));
+  })();
+  return R;
+}
+// ---------- suma ----------
+function addRoutes(a,b){
+  var R=[];
+  if(a===0||b===0||(a<10&&b<10)){
+    R.push(fin({id:'directo',name:'Directo',steps:[S(a+' + '+b,fmt(a+b))],result:a+b,visual:null})); return R;
+  }
+  // izquierda a derecha por columnas
+  (function(){
+    var L=Math.max(String(a).length,String(b).length), run=0, st=[], first=true;
+    for(var k=L-1;k>=0;k--){
+      var u=pow10(k), ca=Math.floor(a/u)%10*u, cb=Math.floor(b/u)%10*u, col=ca+cb;
+      if(col===0) continue;
+      var lab=[ca,cb].filter(Boolean).map(fmt).join(' + '), ops=[];
+      if(ca&&cb) ops.push(['+',ca,cb]);
+      if(first){ run=col; first=false; st.push(S(lab,fmt(col),ops)); }
+      else { var nr=run+col; ops.push(['+',run,col]); st.push(S(lab+(ca&&cb?' = '+fmt(col):''),fmt(run)+' + '+fmt(col)+' = '+fmt(nr),ops)); run=nr; }
+    }
+    R.push(fin({id:'izq',name:'De izquierda a derecha',steps:st,result:run,visual:{type:'nl',pts:[{v:0,l:'0'},{v:run,l:fmt(run)}],jumps:[]}}));
+  })();
+  // por partes
+  (function(){
+    var pa=placeParts(a), pb=placeParts(b), x,y,py;
+    if(pb.length<pa.length||(pb.length===pa.length&&b<a)){x=a;y=b;py=pb;} else {x=b;y=a;py=pa;}
+    var run=x, st=[], jumps=[];
+    py.forEach(function(p){ var nr=run+p; st.push(S(fmt(run)+' + '+fmt(p),fmt(nr),[['+',run,p]])); jumps.push({from:run,to:nr,l:'+'+fmt(p)}); run=nr; });
+    R.push(fin({id:'partes',name:'Sumar por partes',steps:st,result:run,visual:{type:'nl',pts:[{v:x,l:fmt(x)},{v:run,l:fmt(run)}],jumps:jumps}}));
+  })();
+  // redondear y compensar
+  (function(){
+    var ca=roundCand(a), cb=roundCand(b), pick=null, y;
+    if(ca&&cb){ if(Math.abs(ca.d)/a<=Math.abs(cb.d)/b){pick=ca;y=b;} else {pick=cb;y=a;} }
+    else if(ca){pick=ca;y=b;} else if(cb){pick=cb;y=a;}
+    if(!pick) return;
+    var d=pick.d, ad=Math.abs(d), s1=pick.xr+y, res=d>0?s1-ad:s1+ad;
+    R.push(fin({id:'comp',name:'Redondear y compensar',steps:[S(fmt(pick.xr)+' + '+fmt(y),fmt(s1),[['+',pick.xr,y]]),S(d>0?MINUS+' '+ad:'+ '+ad,fmt(s1)+' '+(d>0?MINUS:'+')+' '+ad+' = '+fmt(res),[[d>0?'-':'+',s1,ad]])],result:res,
+      visual:{type:'nl',pts:[{v:Math.min(s1,res),l:fmt(Math.min(s1,res))},{v:Math.max(s1,res),l:fmt(Math.max(s1,res))}],jumps:[{from:s1,to:res,l:(d>0?MINUS:'+')+ad}]}}));
+  })();
+  // completar a la decena
+  (function(){
+    var opts=[[a,b],[b,a]], best=null;
+    opts.forEach(function(o){ var gap=(10-o[0]%10)%10; if(gap>0&&o[1]>gap&&(best===null||gap<best.gap)) best={x:o[0],y:o[1],gap:gap}; });
+    if(!best) return;
+    var x2=best.x+best.gap, y2=best.y-best.gap, res=x2+y2;
+    R.push(fin({id:'dec',name:'Completar a la decena',steps:[S(fmt(best.x)+' + '+best.gap,fmt(x2),[['+',best.x,best.gap]]),S(fmt(best.y)+' '+MINUS+' '+best.gap,fmt(y2),[['-',best.y,best.gap]]),S(fmt(x2)+' + '+fmt(y2),fmt(res),[['+',x2,y2]])],result:res,
+      visual:{type:'nl',pts:[{v:best.x,l:fmt(best.x)},{v:res,l:fmt(res)}],jumps:[{from:best.x,to:x2,l:'+'+best.gap},{from:x2,to:res,l:'+'+fmt(y2)}]}}));
+  })();
+  return R;
+}
+// ---------- resta (a>=b) ----------
+function subRoutes(a,b){
+  var R=[];
+  if(b===0||(a<10&&b<10)){
+    R.push(fin({id:'directo',name:'Directo',steps:[S(a+' '+MINUS+' '+b,fmt(a-b))],result:a-b,visual:null})); return R;
+  }
+  (function(){
+    var parts=placeParts(b), run=a, st=[], jumps=[];
+    parts.forEach(function(p){ var nr=run-p; st.push(S(fmt(run)+' '+MINUS+' '+fmt(p),fmt(nr),[['-',run,p]])); jumps.push({from:run,to:nr,l:MINUS+fmt(p)}); run=nr; });
+    R.push(fin({id:'izq',name:'Restar por partes',steps:st,result:run,visual:{type:'nl',pts:[{v:run,l:fmt(run)},{v:a,l:fmt(a)}],jumps:jumps}}));
+  })();
+  (function(){
+    var cb=roundCand(b), pick=null;
+    if(cb&&cb.xr<=a) pick={kind:'b',c:cb};
+    var ca=roundCand(a);
+    if(ca&&ca.xr>=b&&(!pick||Math.abs(ca.d)<Math.abs(cb.d))) pick={kind:'a',c:ca};
+    if(!pick) return;
+    var d=pick.c.d, ad=Math.abs(d), s1, res, st;
+    if(pick.kind==='b'){
+      s1=a-pick.c.xr; res=s1+d;
+      st=[S(fmt(a)+' '+MINUS+' '+fmt(pick.c.xr),fmt(s1),[['-',a,pick.c.xr]]),S(d>0?'devolver +'+ad:'quitar '+MINUS+ad,fmt(s1)+' '+(d>0?'+':MINUS)+' '+ad+' = '+fmt(res),[[d>0?'+':'-',s1,ad]])];
+    } else {
+      s1=pick.c.xr-b; res=s1-d;
+      st=[S(fmt(pick.c.xr)+' '+MINUS+' '+fmt(b),fmt(s1),[['-',pick.c.xr,b]]),S(d>0?'quitar '+MINUS+ad:'añadir +'+ad,fmt(s1)+' '+(d>0?MINUS:'+')+' '+ad+' = '+fmt(res),[[d>0?'-':'+',s1,ad]])];
+    }
+    R.push(fin({id:'comp',name:'Redondear y compensar',steps:st,result:res,visual:{type:'nl',pts:[{v:Math.min(s1,res),l:fmt(Math.min(s1,res))},{v:Math.max(s1,res),l:fmt(Math.max(s1,res))}],jumps:[{from:s1,to:res,l:(res>s1?'+':MINUS)+ad}]}}));
+  })();
+  (function(){
+    var cur=b, incs=[];
+    if(cur%10&&cur+(10-cur%10)<=a){ var i1=10-cur%10; incs.push(i1); cur+=i1; }
+    if(cur%100&&cur+(100-cur%100)<=a){ var i2=100-cur%100; incs.push(i2); cur+=i2; }
+    placeParts(a-cur).forEach(function(p){ incs.push(p); });
+    var pos=b, st=[], jumps=[], sum=0;
+    incs.forEach(function(inc){ st.push(S('+ '+fmt(inc),fmt(pos)+' → '+fmt(pos+inc))); jumps.push({from:pos,to:pos+inc,l:'+'+fmt(inc)}); pos+=inc; });
+    var run=0, ops=[], lab=[];
+    incs.forEach(function(inc,i){ if(i>0) ops.push(['+',run,inc]); run+=inc; lab.push(fmt(inc)); });
+    st.push(S('saltos',lab.join(' + ')+' = '+fmt(run),ops));
+    R.push(fin({id:'up',name:'Contar hacia arriba',steps:st,result:run,visual:{type:'nl',pts:[{v:b,l:fmt(b)},{v:a,l:fmt(a)}],jumps:jumps}}));
+  })();
+  return R;
+}
+// ---------- division ----------
+function divStr(a,b){
+  var q=Math.floor(a/b), r=a-q*b;
+  if(r===0) return fmt(q);
+  var bb=b/gcd(a,b); while(bb%2===0) bb/=2; while(bb%5===0) bb/=5;
+  if(bb===1) return fmt(rn(a/b));
+  return fmt(q)+' resto '+fmt(r)+'  (≈ '+fmt(Math.round(a/b*1000)/1000)+')';
+}
+function gcd(x,y){ while(y){ var t=y; y=x%y; x=t; } return x; }
+function divRoutes(a,b){
+  var R=[];
+  if(a<b||a<10){
+    R.push(fin({id:'directo',name:'Directo',steps:[S(a+' '+DIVS+' '+b,divStr(a,b))],result:a/b,visual:null})); return R;
+  }
+  (function(){
+    var rem=a, q=0, st=[], L=String(a).length, jumps=[], pos=0;
+    for(var i=L-1;i>=0;i--){
+      var unit=b*pow10(i), m=Math.floor(rem/unit);
+      if(m>0){
+        var part=m*pow10(i), prod=part*b;
+        st.push(S(fmt(b)+' '+TIMES+' '+fmt(part)+' = '+fmt(prod),'resto '+fmt(rem)+' '+MINUS+' '+fmt(prod)+' = '+fmt(rem-prod),[['*',b,part],['-',rem,prod]]));
+        jumps.push({from:pos,to:pos+prod,l:fmt(part)+' '+TIMES+' '+fmt(b)}); pos+=prod;
+        rem-=prod; q+=part;
+      }
+    }
+    R.push(fin({id:'troceo',name:'Trocear en múltiplos',steps:st,result:q+rem/b,visual:{type:'nl',pts:[{v:0,l:'0'},{v:a,l:fmt(a)}],jumps:jumps}}));
+  })();
+  (function(){
+    var T={5:[2,10],50:[2,100],500:[2,1000],25:[4,100],250:[4,1000],125:[8,1000]};
+    if(!T[b]) return;
+    var m=T[b][0], dv=T[b][1], mid=a*m, res=mid/dv;
+    R.push(fin({id:'inv',name:DIVS+' '+b+' = '+TIMES+' '+m+' '+DIVS+' '+dv,steps:[S(fmt(a)+' '+TIMES+' '+m,fmt(mid)),S(DIVS+' '+fmt(dv),fmt(mid)+' '+DIVS+' '+fmt(dv)+' = '+fmt(res))],result:res,visual:null}));
+  })();
+  (function(){
+    var K={2:1,4:2,8:3};
+    if(!K[b]) return;
+    var cur=a, st=[];
+    for(var i=0;i<K[b];i++){ st.push(S('mitad',fmt(cur)+' '+DIVS+' 2 = '+fmt(cur/2))); cur=cur/2; }
+    R.push(fin({id:'mit',name:'Mitades sucesivas',steps:st,result:cur,visual:null}));
+  })();
+  (function(){
+    var x=a, y=b, k=0;
+    while(x%10===0&&y%10===0&&y>=10){ x/=10; y/=10; k++; }
+    if(!k) return;
+    R.push(fin({id:'ceros',name:'Quitar ceros',steps:[S(DIVS+' '+pow10(k)+' los dos',fmt(x)+' '+DIVS+' '+fmt(y)),S('dividir',divStr(x,y))],result:x/y,visual:null}));
+  })();
+  (function(){
+    var x=a, y=b, k=0;
+    while(x%2===0&&y%2===0&&y>9){ x/=2; y/=2; k++; }
+    if(!k||y>12) return;
+    R.push(fin({id:'mit2',name:'Mitad a los dos',steps:[S('mitad '+(k>1?'×'+k:''),fmt(x)+' '+DIVS+' '+fmt(y)),S('dividir',divStr(x,y))],result:x/y,visual:null}));
+  })();
+  return R;
+}
+// ---------- porcentaje ----------
+function pctRoutes(p,n){
+  var R=[], ex=rn(p*n/100);
+  // construir con 10 %, 5 %, 1 %
+  (function(){
+    if(Math.abs(p*2-Math.round(p*2))>1e-9||p<0.5||p>1000) return;
+    var a=Math.floor(p/10), r=rn(p-10*a), five=r>=5?1:0; r=rn(r-5*five);
+    var ones=Math.floor(r), half=rn(r-ones)>=0.5?1:0;
+    var t10=rn(n/10), t1=rn(n/100), st=[], run=0, nPieces=0;
+    function piece(lab,val,ops){
+      var o=ops||[], e;
+      if(nPieces===0){ run=val; e=fmt(val); }
+      else { o=o.concat([['+',run,val]]); var nr=rn(run+val); e=fmt(run)+' + '+fmt(val)+' = '+fmt(nr); run=nr; }
+      nPieces++; st.push(S(lab,e,o));
+    }
+    if(a>0||five) st.push(S('10 %',fmt(n)+' '+DIVS+' 10 = '+fmt(t10)));
+    if(ones>0||half) st.push(S('1 %',fmt(n)+' '+DIVS+' 100 = '+fmt(t1)));
+    if(a>0) piece(a>1?a+' '+TIMES+' 10 % = '+a+' '+TIMES+' '+fmt(t10)+' = '+fmt(rn(a*t10)):'10 %', rn(a*t10), a>1?[['*',a,t10]]:[]);
+    if(five) piece('5 % = mitad de '+fmt(t10),rn(t10/2));
+    if(ones>0) piece(ones>1?ones+' '+TIMES+' 1 % = '+ones+' '+TIMES+' '+fmt(t1)+' = '+fmt(rn(ones*t1)):'1 %',rn(ones*t1),ones>1?[['*',ones,t1]]:[]);
+    if(half) piece('0,5 % = mitad de '+fmt(t1),rn(t1/2));
+    var parts=[]; if(a>0)parts.push(10*a); if(five)parts.push(5); if(ones)parts.push(ones); if(half)parts.push(0.5);
+    R.push(fin({id:'build',name:'10 %, 5 %, 1 %',steps:st,result:run,visual:{type:'pct',p:p,n:n}}));
+  })();
+  // por resta: 7, 8, 9 al final
+  (function(){
+    if(!Number.isInteger(p)||p%10<7||p>1000) return;
+    var a=Math.floor(p/10)+1, k=10-p%10, t10=rn(n/10), t1=rn(n/100);
+    var up=rn(a*t10), dn=rn(k*t1), res=rn(up-dn);
+    var st=[S('10 %',fmt(n)+' '+DIVS+' 10 = '+fmt(t10)),S('1 %',fmt(n)+' '+DIVS+' 100 = '+fmt(t1)),
+            S(a+'0 %',a+' '+TIMES+' '+fmt(t10)+' = '+fmt(up),a>1?[['*',a,t10]]:[]),
+            S(k+' %',k+' '+TIMES+' '+fmt(t1)+' = '+fmt(dn),k>1?[['*',k,t1]]:[]),
+            S('restar',fmt(up)+' '+MINUS+' '+fmt(dn)+' = '+fmt(res),[['-',up,dn]])];
+    R.push(fin({id:'resta',name:a+'0 % '+MINUS+' '+k+' %',steps:st,result:res,visual:{type:'pct',p:p,n:n}}));
+  })();
+  // fraccion
+  (function(){
+    var T={1:[1,100],5:[1,20],10:[1,10],12.5:[1,8],20:[1,5],25:[1,4],50:[1,2],75:[3,4]};
+    var f=T[p]; if(!f) return;
+    var q=rn(n/f[1]), res=rn(q*f[0]), st=[S(p+' % = '+f[0]+'/'+f[1],fmt(n)+' '+DIVS+' '+f[1]+' = '+fmt(q))];
+    if(f[0]>1) st.push(S(TIMES+' '+f[0],f[0]+' '+TIMES+' '+fmt(q)+' = '+fmt(res),[['*',f[0],q]]));
+    R.push(fin({id:'frac',name:'Fracción',steps:st,result:res,visual:{type:'pct',p:p,n:n}}));
+  })();
+  // invertir: p % de n = n % de p
+  (function(){
+    var T={10:[1,10],20:[1,5],25:[1,4],50:[1,2],75:[3,4]};
+    var f=T[n]; if(!f||!Number.isInteger(p)||p>1000) return;
+    var q=rn(p/f[1]), res=rn(q*f[0]), st=[S('invertir',p+' % de '+n+' = '+n+' % de '+p),S(n+' % de '+p,fmt(p)+' '+DIVS+' '+f[1]+' = '+fmt(q))];
+    if(f[0]>1) st.push(S(TIMES+' '+f[0],f[0]+' '+TIMES+' '+fmt(q)+' = '+fmt(res),[['*',f[0],q]]));
+    R.push(fin({id:'inv',name:'Invertir',steps:st,result:res,visual:null}));
+  })();
+  // multiplicar y mover la coma
+  (function(){
+    var prod=rn(p*n);
+    R.push(fin({id:'coma',name:'Multiplicar y mover la coma',steps:[S(fmt(p)+' '+TIMES+' '+fmt(n),fmt(prod),[['*',p,n]]),S('coma 2 lugares',fmt(prod)+' '+DIVS+' 100 = '+fmt(rn(prod/100)))],result:rn(prod/100),visual:null}));
+  })();
+  return R;
+}
+// ---------- comprobacion ----------
+function checkDigits(op,a,b,res){
+  if(!Number.isInteger(a)||!Number.isInteger(b)) return null;
+  var ra=digitRoot(a), rb=digitRoot(b), l, r;
+  if(op==='mul'){ l=digitRoot(ra*rb); r=digitRoot(res); return {ra:ra,rb:rb,left:l,right:r,ok:l===r,sym:TIMES}; }
+  if(op==='add'){ l=digitRoot(ra+rb); r=digitRoot(res); return {ra:ra,rb:rb,left:l,right:r,ok:l===r,sym:'+'}; }
+  if(op==='sub'){ l=((ra-rb)%9+9)%9; r=res%9; return {ra:ra,rb:rb,left:l===0?9:l,right:r===0?9:r,ok:l===(r%9),sym:MINUS}; }
+  if(op==='div'){
+    var q=Math.floor(a/b), rm=a-q*b, lhs=digitRoot(digitRoot(q)*rb+digitRoot(rm)), rr=digitRoot(a);
+    return {ra:ra,rb:rb,left:lhs,right:rr,ok:lhs===rr,sym:DIVS,q:q,rem:rm};
+  }
+  return null;
+}
+// ---------- calculo completo ----------
+function calc(op,a,b){
+  var routes, exact=exactOf(op,a,b), neg=false, A=a, B=b;
+  if(op==='sub'&&a<b){ neg=true; A=b; B=a; }
+  if(op==='mul') routes=mulRoutes(A,B);
+  else if(op==='add') routes=addRoutes(A,B);
+  else if(op==='sub') routes=subRoutes(A,B);
+  else if(op==='div') routes=divRoutes(A,B);
+  else routes=pctRoutes(A,B);
+  var easiest=0;
+  routes.forEach(function(r,i){ if(r.cost.score<=routes[easiest].cost.score) easiest=i; });
+  if(neg) routes.forEach(function(r){ r.result=-r.result; });
+  var est=estimate(op,A,B);
+  if(neg){ est={lo:-est.hi,hi:-est.lo,near:-est.near}; }
+  return {op:op,a:a,b:b,exact:exact,routes:routes,easiest:easiest,est:est,neg:neg,
+          check:(op==='pct'||neg)?null:checkDigits(op,a,b,op==='div'?Math.floor(a/b):exact)};
+}
+function judge(c,ans){
+  var ok=Math.abs(ans-c.exact)<1e-9, inb=ans>=c.est.lo-1e-9&&ans<=c.est.hi+1e-9;
+  var root=null;
+  if(Number.isInteger(ans)&&Number.isInteger(c.exact)&&c.op!=='pct'&&c.op!=='div'&&c.check&&!c.neg){
+    root=(digitRoot(ans)===c.check.left);
+  }
+  return {exact:ok,inBounds:inb,rootOk:root};
+}
+// ==== LOGIC END ====
+
+(function(){
+var KEY='atc_aid_taller';
+var st={op:'mul',a:'36',b:'14',ans:''};
+try{ var j=JSON.parse(localStorage.getItem(KEY)||'null'); if(j&&typeof j==='object'){ if(['mul','add','sub','div','pct'].indexOf(j.op)>=0) st.op=j.op; if(typeof j.a==='string') st.a=j.a.slice(0,12); if(typeof j.b==='string') st.b=j.b.slice(0,12); if(typeof j.ans==='string') st.ans=j.ans.slice(0,14); } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){} }
+function $(id){ return document.getElementById(id); }
+var SYM={mul:'×',add:'+',sub:'−',div:'÷',pct:'%'};
+var LAB={mul:['a','b'],add:['a','b'],sub:['a','b'],div:['a','b'],pct:['%','de']};
+var cur=null, reveal={};
+var CLR=['var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+// ---------- visuales ----------
+function visBox(v){
+  var cols=v.cols, rows=v.rows, W=520, left=44, top=34, rh=46, gw=W-left-6, tot=cols.reduce(function(a,b){return a+b;},0);
+  var wd=cols.map(function(c){ return 0.4/cols.length+0.6*c/tot; });
+  var sum=wd.reduce(function(a,b){return a+b;},0), H=top+rows.length*rh+8, x=left, h='';
+  cols.forEach(function(c,i){
+    var w=wd[i]/sum*gw;
+    h+='<text class="tm" x="'+(x+w/2)+'" y="'+(top-10)+'" text-anchor="middle">'+fmt(c)+'</text>';
+    rows.forEach(function(r,j){
+      h+='<rect x="'+x+'" y="'+(top+j*rh)+'" width="'+w+'" height="'+rh+'" fill="'+CLR[(i+j)%4]+'" fill-opacity=".16" stroke="var(--rule)"/>';
+      h+='<text class="ta" style="font-size:'+(w<44?10:13)+'px" x="'+(x+w/2)+'" y="'+(top+j*rh+rh/2+5)+'" text-anchor="middle">'+fmt(c*r)+'</text>';
+    });
+    x+=w;
+  });
+  rows.forEach(function(r,j){ h+='<text class="tm" x="'+(left-6)+'" y="'+(top+j*rh+rh/2+4)+'" text-anchor="end">'+fmt(r)+'</text>'; });
+  return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Modelo de área">'+h+'</svg>';
+}
+function visNL(v){
+  if(!v.jumps||!v.jumps.length) return '';
+  var nodes=[v.jumps[0].from]; v.jumps.forEach(function(j){ nodes.push(j.to); });
+  var n=nodes.length, W=520, pad=40, y=86, step=n>1?(W-2*pad)/(n-1):0, h='<path class="ax" d="M'+(pad-20)+' '+y+'H'+(W-pad+20)+'"/>';
+  nodes.forEach(function(val,i){
+    var x=pad+i*step;
+    h+='<path class="ax" d="M'+x+' '+(y-4)+'v8"/><text class="tm" x="'+x+'" y="'+(y+20)+'" text-anchor="middle">'+fmt(val)+'</text>';
+  });
+  v.jumps.forEach(function(j,i){
+    var x1=pad+i*step, x2=x1+step, up=22+(i%2)*16, mx=(x1+x2)/2;
+    h+='<path class="ln" d="M'+x1+' '+(y-4)+' Q'+mx+' '+(y-4-up*2)+' '+x2+' '+(y-4)+'"/><path class="ln" d="M'+(x2-5)+' '+(y-11)+'L'+x2+' '+(y-4)+'L'+(x2-7)+' '+(y-3)+'"/>';
+    h+='<text class="ta" x="'+mx+'" y="'+(y-4-up-4)+'" text-anchor="middle">'+esc(j.l)+'</text>';
+  });
+  return '<svg class="chart" viewBox="0 0 '+W+' 112" role="img" aria-label="Recta numérica">'+h+'</svg>';
+}
+function visBase(v){
+  var W=520, left=50, bw=400, sc=bw/(v.base*1.25), h='';
+  [[v.a,0],[v.b,1]].forEach(function(p){
+    var val=p[0], y=20+p[1]*52, d=v.base-val;
+    h+='<text class="tm" x="'+(left-8)+'" y="'+(y+19)+'" text-anchor="end">'+fmt(val)+'</text>';
+    h+='<rect x="'+left+'" y="'+y+'" width="'+Math.min(val,v.base)*sc+'" height="26" fill="var(--c1)" fill-opacity=".2" stroke="var(--c1)"/>';
+    if(d>0) h+='<rect x="'+(left+val*sc)+'" y="'+y+'" width="'+d*sc+'" height="26" fill="none" stroke="var(--c3)" stroke-dasharray="4 3"/><text class="ta" style="fill:var(--warn)" x="'+(left+val*sc+d*sc/2)+'" y="'+(y+18)+'" text-anchor="middle">−'+d+'</text>';
+    else h+='<rect x="'+(left+v.base*sc)+'" y="'+y+'" width="'+(-d)*sc+'" height="26" fill="var(--c3)" fill-opacity=".25" stroke="var(--c3)"/><text class="ta" style="fill:var(--warn)" x="'+(left+v.base*sc+(-d)*sc/2)+'" y="'+(y+18)+'" text-anchor="middle">+'+(-d)+'</text>';
+  });
+  h+='<path class="ax" d="M'+(left+v.base*sc)+' 10V100"/><text class="tm" x="'+(left+v.base*sc)+'" y="116" text-anchor="middle">'+v.base+'</text>';
+  return '<svg class="chart" viewBox="0 0 '+W+' 124" role="img" aria-label="Barras hasta la base">'+h+'</svg>';
+}
+function visPct(v){
+  var W=520, left=10, bw=500, p=Math.min(v.p,100), h='';
+  h+='<rect x="'+left+'" y="14" width="'+bw*p/100+'" height="28" fill="var(--c1)" fill-opacity=".2"/>';
+  for(var i=0;i<10;i++){ h+='<rect x="'+(left+i*bw/10)+'" y="14" width="'+bw/10+'" height="28" fill="none" stroke="var(--rule)"/>'; }
+  h+='<rect x="'+left+'" y="14" width="'+bw+'" height="28" fill="none" stroke="var(--muted)"/>';
+  h+='<text class="tm" x="'+left+'" y="62">0</text><text class="tm" x="'+(left+bw)+'" y="62" text-anchor="end">'+fmt(v.n)+'</text>';
+  h+='<text class="ta" x="'+(left+bw*p/100)+'" y="10" text-anchor="'+(p>85?'end':'middle')+'">'+fmt(v.p)+' %'+(v.p>100?' (>100)':'')+'</text>';
+  return '<svg class="chart" viewBox="0 0 '+W+' 70" role="img" aria-label="Barra de porcentaje">'+h+'</svg>';
+}
+function visX11(v){
+  var h='<div class="dg" aria-label="cifras">'+v.d.map(function(d){return '<b>'+d+'</b>';}).join('')+'</div><div class="dg" aria-label="sumas vecinas">'+v.cols.map(function(c){return '<b class="s">'+c+'</b>';}).join('')+'</div><div class="dg">'+String(v.res).split('').map(function(c){return '<b>'+c+'</b>';}).join('')+'</div>';
+  return h;
+}
+function visSq5(v){ return '<div class="dg"><b>'+v.n+'</b><b>&times;</b><b>'+(v.n+1)+'</b><b>=</b><b class="s">'+v.m+'</b><b>|</b><b>25</b></div>'; }
+function vis(v){
+  if(!v) return '';
+  if(v.type==='box') return visBox(v);
+  if(v.type==='nl') return visNL(v);
+  if(v.type==='base') return visBase(v);
+  if(v.type==='pct') return visPct(v);
+  if(v.type==='x11') return visX11(v);
+  if(v.type==='sq5') return visSq5(v);
+  return '';
+}
+
+// ---------- render ----------
+function stepsHTML(r,n){
+  var h='';
+  r.steps.forEach(function(s,i){ h+='<li'+(i>=n?' class="hid"':'')+'><span>'+esc(s.t)+(s.e&&s.e!==s.t?' &nbsp;→&nbsp; '+esc(s.e):'')+'</span></li>'; });
+  h+='<li class="res'+(n>=r.steps.length?'':' hid')+'"><span>= '+esc(resStr(r.result))+'</span></li>';
+  return h;
+}
+function resStr(x){ return cur&&cur.op==='div'?divStr(cur.a,cur.b):fmt(x); }
+function render(){
+  var op=st.op, a=parseNum(st.a), b=parseNum(st.b), msg='';
+  $('sym').textContent=SYM[op]; $('l-a').textContent=LAB[op][0]; $('l-b').textContent=LAB[op][1];
+  var isPct=op==='pct';
+  if(st.a===''||st.b===''||isNaN(a)||isNaN(b)) msg=(st.a===''&&st.b==='')?'':'Escribe dos números';
+  else if(a<0||b<0) msg='Solo positivos';
+  else if(!isPct&&(!Number.isInteger(a)||!Number.isInteger(b))) msg='Enteros';
+  else if(!isPct&&(a>99999||b>99999)) msg='Hasta 99 999';
+  else if(isPct&&(a>1000||b>9999999||String(st.a).replace(/^\D*\d*[.,]?/,'').length>2||String(st.b).replace(/^\D*\d*[.,]?/,'').length>2)) msg='Máx. 2 decimales, % hasta 1000';
+  else if(op==='div'&&b===0) msg='No se divide entre 0';
+  else if(isPct&&(a===0||b===0)) msg='Mayor que 0';
+  $('msg').textContent=msg;
+  if(msg||st.a===''||st.b===''){ $('out').hidden=true; cur=null; save(); return; }
+  cur=calc(op,a,b);
+  $('out').hidden=false;
+  var neg=cur.neg;
+  var exactTxt=op==='div'?divStr(a,b):fmt(cur.exact);
+  $('res').textContent=fmt(a)+(op==='pct'?' % de ':' '+SYM[op]+' ')+fmt(b)+' = '+exactTxt+(op==='pct'?'':'');
+  $('cota').innerHTML='<span>entre '+fmt(cur.est.lo)+' y '+(isFinite(cur.est.hi)?fmt(cur.est.hi):'∞')+'</span><span>≈ '+fmt(cur.est.near)+(cur.exact!==0?' ('+fmtPct((cur.est.near-cur.exact)/Math.abs(cur.exact))+')':'')+'</span>';
+  var tb='', best=cur.easiest;
+  cur.routes.forEach(function(r,i){ tb+='<tr'+(i===best?' style="font-weight:700;color:var(--accent)"':'')+'><td>'+(i===best?'<svg class="ic sm" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><use href="#i-check"/></svg>':'')+esc(r.name)+'</td><td class="num">'+r.cost.steps+'</td><td class="num">'+r.cost.carries+'</td><td class="num">'+r.cost.effort+'</td></tr>'; });
+  $('rtab').tBodies[0].innerHTML=tb;
+  var B=cur.routes[best], why=[];
+  if(cur.routes.length>1){
+    ['steps','carries','effort'].forEach(function(k,ki){
+      var lbl=['menos pasos','menos acarreos','menos multiplicaciones difíciles'][ki];
+      var others=cur.routes.filter(function(r,i){return i!==best;});
+      if(others.every(function(r){return B.cost[k]<=r.cost[k];})&&others.some(function(r){return B.cost[k]<r.cost[k];})) why.push(lbl);
+    });
+  }
+  $('why').textContent=cur.routes.length>1?(B.name+': '+B.cost.steps+(B.cost.steps===1?' paso, ':' pasos, ')+B.cost.carries+(B.cost.carries===1?' acarreo':' acarreos')+(why.length?' · '+why.join(', '):'')):'Una sola ruta';
+  var h='';
+  cur.routes.forEach(function(r,i){
+    var n=(reveal[r.id]==null)?1:reveal[r.id];
+    h+='<details class="route'+(i===best?' best':'')+'" data-id="'+r.id+'"'+(i===best?' open':'')+'><summary><span class="nm">'+(i===best?'<svg class="ic sm ck" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><use href="#i-check"/></svg>':'')+esc(r.name)+'</span><span class="mt">'+r.cost.steps+' · '+r.cost.carries+' · '+r.cost.effort+'</span></summary><div class="rb"><div class="vis">'+vis(r.visual)+'</div><ol class="steps">'+stepsHTML(r,n)+'</ol><div class="btns"><button class="btn sm" data-act="next" data-id="'+r.id+'"'+(n>=r.steps.length?' disabled':'')+'>Paso</button><button class="btn sm" data-act="all" data-id="'+r.id+'"'+(n>=r.steps.length?' disabled':'')+'>Todo</button><button class="btn sm" data-act="reset" data-id="'+r.id+'">Reiniciar</button></div></div></details>';
+  });
+  $('routes').innerHTML=h;
+  // comprobar
+  var c=cur.check, ch='';
+  if(c){
+    if(op==='div') ch='<table><tbody><tr><td>'+fmt(a)+'</td><td class="num">raíz '+c.ra+'</td></tr><tr><td>'+fmt(b)+'</td><td class="num">raíz '+c.rb+'</td></tr><tr><td>'+c.q+' × '+fmt(b)+' + '+c.rem+'</td><td class="num">raíz '+c.left+' '+(c.ok?'=':'≠')+' '+c.right+'</td></tr></tbody></table>';
+    else ch='<table><tbody><tr><td>'+fmt(a)+'</td><td class="num">raíz '+c.ra+'</td></tr><tr><td>'+fmt(b)+'</td><td class="num">raíz '+c.rb+'</td></tr><tr><td>raíz '+c.ra+' '+c.sym+' raíz '+c.rb+'</td><td class="num">'+c.left+'</td></tr><tr><td>'+fmt(cur.exact)+'</td><td class="num">raíz '+c.right+' '+(c.ok?'<span class="ok">✓</span>':'<span class="err">✗</span>')+'</td></tr></tbody></table>';
+    ch+='<p class="small muted" style="margin:8px 0 0">'+TRANSPOSITION_DEMO.good+' y '+TRANSPOSITION_DEMO.bad+': misma raíz ('+digitRoot(TRANSPOSITION_DEMO.good)+'). Descarta, no confirma.</p>';
+  } else ch='<p class="small muted" style="margin:0">Solo cotas</p>';
+  $('chk').innerHTML=ch;
+  verdict();
+  save();
+}
+function verdict(){
+  var box=$('vd'); box.innerHTML='';
+  if(!cur) return;
+  var x=parseNum(st.ans);
+  if(st.ans===''||isNaN(x)) return;
+  var j=judge(cur,x);
+  function item(ok,txt){ return '<span class="'+(ok?'y':'n')+'"><svg class="ic sm" aria-hidden="true"><use href="#'+(ok?'i-check':'i-x')+'"/></svg>'+txt+'</span>'; }
+  var h=item(j.inBounds,'cota')+(j.rootOk===null?'':item(j.rootOk,'raíz'))+item(j.exact,'exacto');
+  box.innerHTML=h;
+}
+
+// ---------- eventos ----------
+function readInputs(){ st.a=$('f-a').value.trim(); st.b=$('f-b').value.trim(); }
+function setOp(op){ st.op=op; reveal={}; render(); }
+document.querySelectorAll('input[name=op]').forEach(function(r){ r.checked=(r.value===st.op); r.addEventListener('change',function(){ if(this.checked) setOp(this.value); }); });
+$('f-a').value=st.a; $('f-b').value=st.b; $('f-ans').value=st.ans;
+['f-a','f-b'].forEach(function(id){ $(id).addEventListener('input',function(){ readInputs(); reveal={}; render(); }); });
+$('f-ans').addEventListener('input',function(){ st.ans=this.value.trim(); verdict(); save(); });
+$('routes').addEventListener('click',function(e){
+  var btn=e.target.closest('button[data-act]'); if(!btn||!cur) return;
+  var r=cur.routes.filter(function(x){return x.id===btn.getAttribute('data-id');})[0], act=btn.getAttribute('data-act');
+  var n=reveal[r.id]==null?1:reveal[r.id];
+  if(act==='next') n=Math.min(r.steps.length,n+1); else if(act==='all') n=r.steps.length; else n=1;
+  reveal[r.id]=n;
+  var d=btn.closest('details'); d.querySelector('ol').innerHTML=stepsHTML(r,n);
+  d.querySelectorAll('button[data-act=next],button[data-act=all]').forEach(function(b){ b.disabled=n>=r.steps.length; });
+  var focusAct=act; if(btn.disabled){ var rs=d.querySelector('button[data-act=reset]'); if(rs) rs.focus(); }
+});
+render();
+})();
+</script>
+<script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body>
+</html>

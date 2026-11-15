@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memoria y atención</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Ccircle cx='12' cy='12' r='4.8'/%3E%3Cpath d='M12 12 19.2 4.8'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onaccent:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a3c6ef; --onaccent:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d}
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5}
+#app{max-width:880px;margin:0 auto;padding:20px 16px 56px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;margin:0}
+h1{font-size:1.9rem;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+h3{font-size:1.02rem;margin:18px 0 6px}
+p{margin:.5rem 0}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:16px;height:16px}
+.muted{color:var(--muted)} .ok{color:var(--ok)} .err{color:var(--err)} .warnc{color:var(--warn)}
+.top{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--rule)}
+.top .logo{width:32px;height:32px;color:var(--accent);stroke-width:1.5}
+.top h1{flex:1}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;line-height:1.2}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onaccent)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onaccent)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn:focus-visible,.mod:focus-visible,.opt:focus-visible,.ico:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ico{background:none;border:0;color:var(--muted);padding:4px;min-width:40px;min-height:40px;align-items:center;justify-content:center;cursor:pointer;display:inline-flex;border-radius:2px}
+.ico:hover{color:var(--text)}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:7px 10px;width:100%;min-height:40px}
+input[type=range]{width:100%;min-height:32px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.setup{display:grid;grid-template-columns:250px 1fr;gap:6px 36px;align-items:start}
+.mods{border-top:1px solid var(--rule)}
+.mod{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:10px 8px;cursor:pointer;color:var(--text);border-radius:0}
+.mod:hover{background:var(--stripe)}
+.mod[aria-checked=true]{background:var(--stripe);color:var(--accent);font-weight:600}
+.form{border-top:1px solid var(--rule)}
+.fr{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule)}
+.fr>label{color:var(--muted);font-size:.92rem}
+.fr .chk{display:flex;align-items:center;gap:10px}
+.msg{min-height:1.4em;margin-top:12px;font-weight:600}
+.head{display:flex;align-items:center;gap:16px;padding-bottom:10px;margin-bottom:22px;border-bottom:1px solid var(--rule);color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.head .hm{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.head .sp{flex:1}
+.head .pr{color:var(--warn);font-weight:700}
+.cd{display:flex;align-items:center;gap:14px;margin-top:18px}
+.cd .bar{flex:1;height:4px;background:var(--stripe);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.cd .bar i{display:block;height:100%;width:100%;background:var(--accent)}
+.cd .timer{font-family:var(--mono);min-width:3.4em;text-align:right}
+.timer{font-variant-numeric:tabular-nums}
+.timer.late{color:var(--warn)} .timer.over{color:var(--err)}
+.bignum{font-family:var(--mono);font-size:3.4rem;text-align:center;padding:28px 0;font-weight:600}
+.stim{font-family:var(--mono);font-size:3rem;font-weight:600;text-align:center;padding:24px 8px;min-height:110px;display:flex;align-items:center;justify-content:center;margin:0}
+.stim.word{font-family:var(--sans);letter-spacing:.04em}
+.center{text-align:center}
+.q{font-family:var(--serif);font-size:1.3rem;margin:6px 0 16px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:1.02rem;min-height:44px}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--err);color:var(--err);text-decoration:line-through}
+.opt[disabled]{cursor:default}
+.key{display:inline-block;min-width:22px;text-align:center;padding:0 5px;border:1px solid var(--rule);border-radius:2px;font-family:var(--mono);font-size:.82rem;color:var(--muted);background:var(--bg)}
+.foot{display:flex;align-items:center;gap:14px;margin-top:16px}
+.foot .sp{flex:1}
+.hinttxt{color:var(--warn);margin:10px 0 0;min-height:1.2em}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:6px 10px;text-align:left;white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:.85rem}
+tbody tr:nth-child(even){background:var(--stripe)}
+.tab-box{overflow-x:auto;max-width:100%;border-top:1px solid var(--rule);margin-bottom:18px}
+table.strips{font-family:var(--mono);font-size:1.15rem}
+table.strips td{padding:9px 12px}
+table.strips td:first-child{font-weight:700}
+table.rb th{width:110px;background:none}
+table.rb td{font-family:var(--mono);white-space:normal}
+table.kv td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+table.kv th{font-weight:400}
+.big{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:18px 0}
+.big>div{flex:1 1 140px;padding:14px 16px 12px 0}
+.big b{display:block;font-family:var(--serif);font-size:2.3rem;line-height:1.1}
+.big span{color:var(--muted);font-size:.85rem}
+.fb{min-height:1.8em;text-align:center;font-weight:700;margin:12px 0}
+.pad{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pad .btn{min-width:130px;justify-content:center;padding:12px 16px}
+.stimbox{min-height:130px;text-align:center;display:flex;align-items:center;justify-content:center;margin:0 0 6px}
+.rule{text-align:center;font-weight:700;min-height:1.5em}
+.chart{display:block;width:100%;height:auto;margin-bottom:14px}
+.chart .g{stroke:var(--rule);stroke-width:1}
+.chart .t{fill:var(--muted);font-size:11px;font-family:var(--sans)}
+.chart .l{fill:none;stroke:var(--accent);stroke-width:2}
+.chart .p{fill:var(--accent)}
+.chart .m{stroke:var(--ok);stroke-dasharray:6 4;fill:none}
+.chart .mt{fill:var(--ok);font-size:11px}
+@media (max-width:640px){.chart .t,.chart .mt{font-size:17px}}
+.sh-c{fill:var(--muted)} .sh-s{fill:var(--warn)} .sh-t{fill:var(--accent)}
+.swatch{width:12px;height:12px;border-radius:1px;display:inline-block;flex:none}
+.back{display:inline-flex;margin-bottom:14px}
+@media (max-width:720px){
+  html{font-size:16px}
+  .setup{grid-template-columns:1fr}
+  .mods{display:grid;grid-template-columns:1fr 1fr}
+  .mod{border-right:1px solid var(--rule)}
+  h1{font-size:1.6rem}
+  .stim{font-size:2.4rem}
+}
+@media (max-width:420px){
+  .fr{grid-template-columns:82px 1fr;gap:8px}
+  .opts{grid-template-columns:1fr}
+}
+.stim .ic{width:52px;height:52px;stroke-width:1.8}
+.small{font-size:.85rem}
+.top+.form,.top+.list,.top+.setup{border-top:0}
+.top>.ic:not(.logo){width:26px;height:26px}
+.head span{white-space:nowrap}
+@media (max-width:420px){.head{gap:10px;font-size:.82rem}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
+<symbol id="i-strip" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M9 6v12M12.5 10h5M12.5 14h3"/></symbol>
+<symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4 7.5 20M16.5 4l-2 16M4 9h16M3.5 15h16"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4z"/><path d="M8 9h8M8 12.2h5"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10M3.5 6l1.2 1.2L7 4.8M3.5 12l1.2 1.2L7 10.8M3.5 18l1.2 1.2L7 16.8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-switch" viewBox="0 0 24 24"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3.8 1.3 1.8V9l8 4.7v2l-8-2.2v4.4l2.2 1.6v1.5L12 20l-3.5 1v-1.5l2.2-1.6v-4.4l-8 2.2v-2l8-4.7V4.3c0-1 .5-1.8 1.3-1.8z"/></symbol>
+<symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/><path d="M12 8h.01M12 12h.01M12 16h.01" /></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8v3H8zM8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5M12 7.5V12l3 2"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4.5h6V7M7 7l1 13h8l1-13"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-skip" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM18.5 5v14"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.1 2.2h5c0-1 .5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h12l-3-3M20 13v2a3 3 0 0 1-3 3H5l3 3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5.7 1.5 1.5z"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9M3 20h18"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1"/><rect x="13" y="4" width="8" height="7" rx="1"/><path d="M3 15h18M3 19h18"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M13 5v4M7 15v4"/></symbol>
+<symbol id="i-steps" viewBox="0 0 24 24"><path d="M3 19h5v-5h5V9h5V4h3"/></symbol>
+<symbol id="i-dual" viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></symbol>
+</defs></svg>
+<div id="app"></div>
+<script>
+'use strict';
+// ==== PURE LOGIC START ====
+/* =====================================================================
+   PURE LOGIC (no DOM). Deterministic given a seed. Tested with node
+   (see game-memory-attention-README.md, "What was tested").
+   ===================================================================== */
+
+/* ---------- Seeded RNG ---------- */
+function makeRng(seed){
+  let h = 2166136261 >>> 0;
+  const s = String(seed);
+  for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  let a = h;
+  function next(){
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  return {
+    next: next,
+    int: function(n){ return Math.floor(next() * n); },
+    range: function(lo, hi){ return lo + Math.floor(next() * (hi - lo + 1)); },
+    pick: function(arr){ return arr[Math.floor(next() * arr.length)]; },
+    chance: function(p){ return next() < p; },
+    shuffle: function(arr){
+      const b = arr.slice();
+      for (let i = b.length - 1; i > 0; i--){ const j = Math.floor(next() * (i + 1)); const t = b[i]; b[i] = b[j]; b[j] = t; }
+      return b;
+    }
+  };
+}
+function uniq(arr){ const seen = {}; const out = []; arr.forEach(function(x){ if (!seen[x]){ seen[x] = 1; out.push(x); } }); return out; }
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function fmt(x, d){ if (x === null || x === undefined || isNaN(x)) return '-'; return Number(x).toFixed(d === undefined ? 1 : d); }
+
+/* ---------- Levels (shared naming and pass threshold) ---------- */
+const LEVEL_NAMES = ['', 'Calentamiento', 'Fácil', 'Constante', 'Estándar', 'Competitivo', 'Difícil', 'Élite', 'Extremo', 'Sobrehumano', 'Imposible'];
+const HINT_MAX_LEVEL = 6;
+const PASS_ACCURACY = 96;
+function levelStatement(l){ return 'Nivel ' + l; }
+
+/* =====================================================================
+   MODULE 1: Flight strip recall
+   ===================================================================== */
+const CALLSIGN_AIRLINES = ['IBE','VLG','RYR','EZY','AFR','DLH','BAW','KLM','TAP','AEA','UAE','THY','EIN','WZZ','NOZ'];
+const FIXES = ['DEGOS','LASPO','GEMAX','TOSVA','ROBIL','BUSTA','SOKOR','MEDAS','BEGAS','VAXOS','NUBLA','ORVEN','ASBOT','KUVAL','TIMBA'];
+function m1Callsign(rng){
+  const a = rng.pick(CALLSIGN_AIRLINES);
+  const n = rng.range(100, 9999);
+  return a + String(n);
+}
+function m1SimilarCallsign(rng, cs){
+  const m = cs.match(/^([A-Z]{3})(\d+)$/);
+  if (!m) return cs;
+  const airline = m[1], num = m[2];
+  if (rng.chance(0.5) && num.length >= 2){
+    const i = rng.int(num.length - 1);
+    const arr = num.split('');
+    const t = arr[i]; arr[i] = arr[i + 1]; arr[i + 1] = t;
+    return airline + arr.join('');
+  }
+  return rng.pick(CALLSIGN_AIRLINES.filter(function(x){ return x !== airline; })) + num;
+}
+const M1_P = [null,
+  { n:3, dispSec:5.0, distract:'wait',  distractSec:3,  probes:1, similar:0 },
+  { n:3, dispSec:4.0, distract:'wait',  distractSec:5,  probes:2, similar:0 },
+  { n:4, dispSec:3.2, distract:'arith', distractSec:6,  probes:2, similar:.2 },
+  { n:5, dispSec:2.6, distract:'arith', distractSec:8,  probes:3, similar:.3 },
+  { n:5, dispSec:1.9, distract:'arith', distractSec:9,  probes:3, similar:.4 },
+  { n:6, dispSec:1.7, distract:'arith', distractSec:10, probes:4, similar:.5 },
+  { n:7, dispSec:1.5, distract:'arith', distractSec:11, probes:4, similar:.6 },
+  { n:8, dispSec:1.3, distract:'arith', distractSec:12, probes:5, similar:.7 },
+  { n:9, dispSec:1.1, distract:'arith', distractSec:13, probes:5, similar:.85 },
+  { n:10,dispSec:1.0, distract:'arith', distractSec:14, probes:6, similar:1 }];
+const M1_FIELDS = ['callsign','level','heading','fix'];
+function m1Flight(rng, usedCS){
+  let cs; do { cs = m1Callsign(rng); } while (usedCS[cs]);
+  usedCS[cs] = 1;
+  return { callsign:cs, level:rng.range(1, 39) * 10, heading:rng.range(0, 35) * 10, fix:rng.pick(FIXES) };
+}
+// Builds one flight-strip-recall round: n flights + q probes (each with 4 options, exactly 1 correct).
+// ov (optional): { distract:true|false } forces the distractor harder/lighter than the level default (custom mode).
+function buildFlightRound(rng, level, ov){
+  const p = Object.assign({}, M1_P[level]);
+  if (ov && ov.distract === true){ p.distract = 'arith'; p.similar = Math.max(p.similar, .6); }
+  else if (ov && ov.distract === false){ p.distract = 'wait'; p.similar = 0; }
+  const used = {};
+  const flights = []; for (let i = 0; i < p.n; i++) flights.push(m1Flight(rng, used));
+  const probes = [];
+  for (let i = 0; i < p.probes; i++){
+    const fi = rng.int(flights.length);
+    const flight = flights[fi];
+    const field = rng.pick(M1_FIELDS);
+    const correct = flight[field];
+    let options = [correct];
+    if (field === 'callsign'){
+      while (options.length < 4){
+        const opt = rng.chance(p.similar) ? m1SimilarCallsign(rng, correct) : m1Callsign(rng);
+        if (options.indexOf(opt) === -1) options.push(opt);
+      }
+    } else if (field === 'level'){
+      while (options.length < 4){ const opt = rng.range(1, 39) * 10; if (options.indexOf(opt) === -1) options.push(opt); }
+    } else if (field === 'heading'){
+      while (options.length < 4){ const opt = rng.range(0, 35) * 10; if (options.indexOf(opt) === -1) options.push(opt); }
+    } else {
+      while (options.length < 4){ const opt = rng.pick(FIXES); if (options.indexOf(opt) === -1) options.push(opt); }
+    }
+    options = rng.shuffle(options);
+    probes.push({ flightIndex:fi, field:field, correct:correct, options:options, answerIndex:options.indexOf(correct) });
+  }
+  return { level:level, flights:flights, distract:p.distract, distractSec:p.distractSec, dispSec:p.dispSec, probes:probes };
+}
+function checkFlightProbe(probe, chosenIndex){ return chosenIndex === probe.answerIndex; }
+function m1Arith(rng){
+  const a = rng.range(2, 19), b = rng.range(2, 19), op = rng.pick(['+','-']);
+  const val = op === '+' ? a + b : a - b;
+  return { text:a + ' ' + op + ' ' + b + ' =', answer:val };
+}
+
+/* =====================================================================
+   MODULE 2: Digit / letter span
+   ===================================================================== */
+const DIGITS = '0123456789'.split('');
+const LETTERS = 'BCDFGHJKLMNPQRSTVWXYZ'.split(''); // no vowels: avoids accidental words
+const M2_P = [null,
+  { len:3, alphabet:'digit',  order:'forward',   distract:false },
+  { len:4, alphabet:'digit',  order:'forward',   distract:false },
+  { len:5, alphabet:'digit',  order:'forward',   distract:true  },
+  { len:4, alphabet:'digit',  order:'backward',  distract:false },
+  { len:5, alphabet:'digit',  order:'backward',  distract:true  },
+  { len:5, alphabet:'digit',  order:'sequenced', distract:true  },
+  { len:6, alphabet:'letter', order:'forward',   distract:true  },
+  { len:6, alphabet:'letter', order:'backward',  distract:true  },
+  { len:7, alphabet:'letter', order:'sequenced', distract:true  },
+  { len:8, alphabet:'mixed',  order:'random',    distract:true  }];
+function m2Sequence(rng, level, ov){
+  const p = Object.assign({}, M2_P[level]);
+  if (ov && ov.distract === true) p.distract = true;
+  else if (ov && ov.distract === false) p.distract = false;
+  const alpha = p.alphabet === 'digit' ? DIGITS : p.alphabet === 'letter' ? LETTERS : DIGITS.concat(LETTERS);
+  const order = p.order === 'random' ? rng.pick(['forward','backward','sequenced']) : p.order;
+  const seq = []; const used = {};
+  for (let i = 0; i < p.len; i++){
+    let v; do { v = rng.pick(alpha); } while (used[v] && alpha.length > p.len);
+    used[v] = 1; seq.push(v);
+  }
+  let expected;
+  if (order === 'forward') expected = seq.slice();
+  else if (order === 'backward') expected = seq.slice().reverse();
+  else expected = seq.slice().sort();
+  return { level:level, seq:seq, order:order, distract:p.distract, expected:expected };
+}
+function checkSpan(item, answerArr){
+  if (!answerArr || answerArr.length !== item.expected.length) return false;
+  for (let i = 0; i < item.expected.length; i++) if (String(answerArr[i]).toUpperCase() !== String(item.expected[i]).toUpperCase()) return false;
+  return true;
+}
+
+/* =====================================================================
+   MODULE 3: Read-back checker
+   ===================================================================== */
+const M3_P = [null,
+  { fields:2, errorP:.5, similarCS:0,  subtle:false },
+  { fields:2, errorP:.5, similarCS:.2, subtle:false },
+  { fields:3, errorP:.5, similarCS:.3, subtle:false },
+  { fields:3, errorP:.5, similarCS:.4, subtle:true  },
+  { fields:4, errorP:.5, similarCS:.5, subtle:true  },
+  { fields:4, errorP:.5, similarCS:.6, subtle:true  },
+  { fields:4, errorP:.55,similarCS:.7, subtle:true  },
+  { fields:5, errorP:.55,similarCS:.8, subtle:true  },
+  { fields:5, errorP:.6, similarCS:.9, subtle:true  },
+  { fields:5, errorP:.6, similarCS:1,  subtle:true  }];
+const M3_ALLFIELDS = ['callsign','level','heading','freq','speed'];
+function m3FreqSimple(rng){ return (118 + rng.int(18)) + '.' + [String(rng.pick([0,2,5,7])) + String(rng.pick([0,2,5,7]))].join(''); }
+function buildReadback(rng, level, ov){
+  const p = Object.assign({}, M3_P[level]);
+  if (ov && ov.distract === true){ p.subtle = true; p.similarCS = Math.max(p.similarCS, .7); }
+  else if (ov && ov.distract === false){ p.subtle = false; p.similarCS = 0; }
+  const fieldSet = M3_ALLFIELDS.slice(0, p.fields);
+  const cs = m1Callsign(rng);
+  const clearance = { callsign:cs };
+  fieldSet.forEach(function(f){
+    if (f === 'level') clearance.level = rng.range(1, 39) * 10;
+    else if (f === 'heading') clearance.heading = rng.range(0, 35) * 10;
+    else if (f === 'freq') clearance.freq = m3FreqSimple(rng);
+    else if (f === 'speed') clearance.speed = rng.range(160, 340);
+  });
+  const hasError = rng.chance(p.errorP);
+  const readback = Object.assign({}, clearance);
+  let errorField = null;
+  if (hasError){
+    errorField = rng.pick(['callsign'].concat(fieldSet));
+    if (errorField === 'callsign') readback.callsign = rng.chance(p.similarCS) ? m1SimilarCallsign(rng, cs) : m1Callsign(rng);
+    else if (errorField === 'level'){
+      const delta = p.subtle ? rng.pick([10, -10, 100, -100]) : rng.pick([50, -50, 100, -100]);
+      readback.level = clearance.level + delta;
+      if (readback.level < 10 || readback.level > 390) readback.level = clearance.level - delta;   // stay inside FL10-FL390
+    } else if (errorField === 'heading'){
+      const delta = p.subtle ? rng.pick([10, -10, 180]) : rng.pick([90, -90, 180]);
+      readback.heading = ((clearance.heading + delta) % 360 + 360) % 360;
+    } else if (errorField === 'freq') readback.freq = m3FreqSimple(rng);
+    else if (errorField === 'speed') readback.speed = clearance.speed + rng.pick([10, -10, 20, -20]);
+    if (JSON.stringify(readback) === JSON.stringify(clearance)) { readback.level = (clearance.level || 100) + 10; errorField = 'level'; if (fieldSet.indexOf('level') === -1) { clearance.level = 100; readback.level=110; } }
+  }
+  const options = ['correct'].concat(fieldSet.indexOf('callsign') === -1 ? ['callsign'] : []).concat(fieldSet).filter(function(v,i,a){return a.indexOf(v)===i;});
+  const correctAnswer = hasError ? errorField : 'correct';
+  return { level:level, clearance:clearance, readback:readback, fieldSet:fieldSet, hasError:hasError, errorField:errorField, options:options, correctAnswer:correctAnswer };
+}
+function checkReadback(item, chosen){ return chosen === item.correctAnswer; }
+
+/* =====================================================================
+   MODULE 4: Instruction execution without rereading
+   ===================================================================== */
+const M4_P = [null,
+  { steps:2 }, { steps:3 }, { steps:3 }, { steps:4 }, { steps:5 },
+  { steps:5 }, { steps:6 }, { steps:7 }, { steps:7 }, { steps:8 }];
+const M4_KINDS = ['level','heading','freq','speed','squawk','direct'];
+function m4Label(step){
+  if (step.kind === 'level') return 'ascender/descender a FL' + step.value;
+  if (step.kind === 'heading') return 'virar a rumbo ' + String(step.value).padStart(3,'0');
+  if (step.kind === 'freq') return 'contactar con la siguiente dependencia en ' + step.value;
+  if (step.kind === 'speed') return 'reducir/aumentar velocidad a ' + step.value + ' kt';
+  if (step.kind === 'squawk') return 'código transpondedor ' + step.value;
+  return 'proceder directo a ' + step.value;
+}
+function buildInstruction(rng, level, ov){
+  const p = Object.assign({}, M4_P[level]);
+  if (ov && ov.steps) p.steps = ov.steps;
+  const kinds = rng.shuffle(M4_KINDS.slice());
+  const steps = [];
+  for (let i = 0; i < p.steps; i++){
+    const kind = kinds[i % kinds.length];
+    let value;
+    if (kind === 'level') value = rng.range(1, 39) * 10;
+    else if (kind === 'heading') value = rng.range(0, 35) * 10;
+    else if (kind === 'freq') value = m3FreqSimple(rng);
+    else if (kind === 'speed') value = rng.range(160, 340);
+    else if (kind === 'squawk') value = String(rng.range(1,7)) + String(rng.range(0,7)) + String(rng.range(0,7)) + String(rng.range(0,7));
+    else value = rng.pick(FIXES);
+    steps.push({ kind:kind, value:value, text:m4Label({ kind:kind, value:value }) });
+  }
+  const probes = steps.map(function(st, idx){
+    let options = [st.value];
+    if (st.kind === 'level') while (options.length < 4){ const o = rng.range(1,39)*10; if (options.indexOf(o)===-1) options.push(o); }
+    else if (st.kind === 'heading') while (options.length < 4){ const o = rng.range(0,35)*10; if (options.indexOf(o)===-1) options.push(o); }
+    else if (st.kind === 'freq') while (options.length < 4){ const o = m3FreqSimple(rng); if (options.indexOf(o)===-1) options.push(o); }
+    else if (st.kind === 'speed') while (options.length < 4){ const o = rng.range(160,340); if (options.indexOf(o)===-1) options.push(o); }
+    else if (st.kind === 'squawk') while (options.length < 4){ const o = String(rng.range(1,7))+String(rng.range(0,7))+String(rng.range(0,7))+String(rng.range(0,7)); if (options.indexOf(o)===-1) options.push(o); }
+    else while (options.length < 4){ const o = rng.pick(FIXES); if (options.indexOf(o)===-1) options.push(o); }
+    options = rng.shuffle(options);
+    return { stepIndex:idx, kind:st.kind, correct:st.value, options:options, answerIndex:options.indexOf(st.value) };
+  });
+  return { level:level, steps:steps, probes:probes };
+}
+function checkInstructionProbe(probe, chosenIndex){ return chosenIndex === probe.answerIndex; }
+
+/* =====================================================================
+   MODULE 5: Vigilance (rare-event detection)
+   ===================================================================== */
+const M5_P = [null,
+  { nTrials:60,  isiMs:1200, targetP:.15, subtle:false },
+  { nTrials:80,  isiMs:1100, targetP:.13, subtle:false },
+  { nTrials:100, isiMs:1000, targetP:.11, subtle:false },
+  { nTrials:120, isiMs:950,  targetP:.10, subtle:false },
+  { nTrials:150, isiMs:900,  targetP:.09, subtle:false },
+  { nTrials:180, isiMs:850,  targetP:.08, subtle:true  },
+  { nTrials:210, isiMs:800,  targetP:.07, subtle:true  },
+  { nTrials:240, isiMs:750,  targetP:.06, subtle:true  },
+  { nTrials:280, isiMs:700,  targetP:.05, subtle:true  },
+  { nTrials:320, isiMs:650,  targetP:.04, subtle:true  }];
+function buildVigilanceStream(rng, level, ov){
+  const p = Object.assign({}, M5_P[level]);
+  if (ov && ov.distract === true) p.subtle = true;
+  else if (ov && ov.distract === false) p.subtle = false;
+  if (ov && ov.nTrials) p.nTrials = ov.nTrials;
+  if (ov && ov.isiMs) p.isiMs = ov.isiMs;
+  const trials = [];
+  // Exact target count (never zero in a real session), spread out: no two targets closer than 3 trials, none in the first 2.
+  const n = p.nTrials;
+  const nT = Math.min(Math.floor(n / 4), Math.max(n >= 60 ? 3 : (n >= 20 ? 1 : 0), Math.round(n * p.targetP)));
+  const tset = {}; let placed = 0, guard = 0;
+  while (placed < nT && guard++ < 5000){
+    const i = rng.range(Math.min(2, n - 1), n - 1);
+    if (tset[i] || tset[i - 1] || tset[i + 1] || tset[i - 2] || tset[i + 2]) continue;
+    tset[i] = 1; placed++;
+  }
+  for (let i = 0; i < n; i++){
+    const isTarget = !!tset[i];
+    const isDecoy = !isTarget && p.subtle && rng.chance(.12);
+    trials.push({ i:i, isTarget:isTarget, isDecoy:isDecoy, isiMs:p.isiMs });
+  }
+  return { level:level, trials:trials, isiMs:p.isiMs, subtle:p.subtle, targetShape:'triangle', decoyShape:'square', normalShape:'circle' };
+}
+function scoreVigilance(trials){
+  let hits = 0, misses = 0, falseAlarms = 0, correctRejections = 0, rtSum = 0, rtN = 0;
+  trials.forEach(function(t){
+    if (t.isTarget){
+      if (t.responded){ hits++; rtSum += t.rtMs; rtN++; } else misses++;
+    } else {
+      if (t.responded) falseAlarms++; else correctRejections++;
+    }
+  });
+  const nTargets = hits + misses;
+  // Accuracy of a vigilance run = hits / (targets + false alarms). Correct rejections are NOT counted: otherwise a player who
+  // never presses anything would score 90 %+ just because targets are rare.
+  const denom = nTargets + falseAlarms;
+  return { hits:hits, misses:misses, falseAlarms:falseAlarms, correctRejections:correctRejections,
+    hitRate: nTargets ? hits / nTargets * 100 : null, avgRtMs: rtN ? rtSum / rtN : null, nTargets:nTargets,
+    accuracy: denom ? hits / denom * 100 : null };
+}
+function byThirdAccuracy(trials, isTargetFn, isCorrectFn){
+  const n = trials.length, cut1 = Math.floor(n / 3), cut2 = Math.floor(2 * n / 3);
+  const parts = [trials.slice(0, cut1), trials.slice(cut1, cut2), trials.slice(cut2)];
+  return parts.map(function(part){
+    const relevant = part.filter(isTargetFn);
+    if (!relevant.length) return null;
+    const ok = relevant.filter(isCorrectFn).length;
+    return ok / relevant.length * 100;
+  });
+}
+
+/* =====================================================================
+   MODULE 6: Task switching
+   ===================================================================== */
+const M6_P = [null,
+  { nTrials:24, switchP:.3, isiMs:0,    respMs:4000 },
+  { nTrials:32, switchP:.35,isiMs:0,    respMs:3200 },
+  { nTrials:40, switchP:.4, isiMs:200,  respMs:2600 },
+  { nTrials:48, switchP:.45,isiMs:200,  respMs:2200 },
+  { nTrials:56, switchP:.5, isiMs:150,  respMs:1900 },
+  { nTrials:64, switchP:.5, isiMs:150,  respMs:1600 },
+  { nTrials:72, switchP:.55,isiMs:100,  respMs:1400 },
+  { nTrials:80, switchP:.55,isiMs:100,  respMs:1200 },
+  { nTrials:90, switchP:.6, isiMs:80,   respMs:1050 },
+  { nTrials:100,switchP:.6, isiMs:60,   respMs:900  }];
+function m6Answer(task, n){
+  if (task === 'parity') return n % 2 === 0 ? 'even' : 'odd';
+  return n < 5 ? 'low' : 'high';
+}
+function buildSwitchStream(rng, level, ov){
+  const p = Object.assign({}, M6_P[level]);
+  if (ov && ov.distract === true) p.switchP = Math.min(.7, p.switchP + .15);
+  else if (ov && ov.distract === false) p.switchP = Math.max(.15, p.switchP - .15);
+  if (ov && ov.nTrials) p.nTrials = ov.nTrials;
+  if (ov && ov.respMs) p.respMs = ov.respMs;
+  const digits = [1,2,3,4,6,7,8,9];
+  const trials = []; let task = rng.pick(['parity','magnitude']);
+  for (let i = 0; i < p.nTrials; i++){
+    if (i > 0 && rng.chance(p.switchP)) task = task === 'parity' ? 'magnitude' : 'parity';
+    const n = rng.pick(digits);
+    const isSwitch = i > 0 && trials[i - 1].task !== task;
+    trials.push({ i:i, task:task, n:n, correct:m6Answer(task, n), isSwitch: i === 0 ? false : isSwitch, respMs:p.respMs, isiMs:p.isiMs });
+  }
+  return { level:level, trials:trials };
+}
+function scoreSwitching(outcomes){
+  const rep = outcomes.filter(function(o){ return !o.isSwitch; });
+  const swi = outcomes.filter(function(o){ return o.isSwitch; });
+  const acc = function(arr){ return arr.length ? arr.filter(function(o){ return o.ok; }).length / arr.length * 100 : null; };
+  const rt = function(arr){ const ok = arr.filter(function(o){ return o.ok && o.rtMs !== null; }); return ok.length ? ok.reduce(function(a,o){return a+o.rtMs;},0) / ok.length : null; };
+  const rtRep = rt(rep), rtSwi = rt(swi);
+  return { accRep:acc(rep), accSwi:acc(swi), rtRep:rtRep, rtSwi:rtSwi, switchCostMs: (rtRep !== null && rtSwi !== null) ? rtSwi - rtRep : null, accAll:acc(outcomes) };
+}
+
+/* =====================================================================
+   MODULE 7: Stroop-like aviation interference
+   ===================================================================== */
+const M7_WORDS = [
+  { word:'ASCENDER', cat:'up' },
+  { word:'DESCENDER', cat:'down' },
+  { word:'MANTENER', cat:'level' }
+];
+const M7_COLOR_CAT = { green:'up', red:'down', amber:'level' };
+const M7_COLORS = Object.keys(M7_COLOR_CAT);
+const M7_P = [null,
+  { nTrials:24, incongP:.25, respMs:3000 },
+  { nTrials:30, incongP:.3,  respMs:2600 },
+  { nTrials:36, incongP:.4,  respMs:2200 },
+  { nTrials:42, incongP:.45, respMs:1900 },
+  { nTrials:48, incongP:.5,  respMs:1600 },
+  { nTrials:54, incongP:.55, respMs:1400 },
+  { nTrials:60, incongP:.6,  respMs:1200 },
+  { nTrials:66, incongP:.65, respMs:1000 },
+  { nTrials:72, incongP:.7,  respMs:850  },
+  { nTrials:80, incongP:.75, respMs:700  }];
+function buildStroopStream(rng, level, ov){
+  const p = Object.assign({}, M7_P[level]);
+  if (ov && ov.distract === true) p.incongP = Math.min(.85, p.incongP + .15);
+  else if (ov && ov.distract === false) p.incongP = Math.max(.1, p.incongP - .15);
+  if (ov && ov.nTrials) p.nTrials = ov.nTrials;
+  if (ov && ov.respMs) p.respMs = ov.respMs;
+  const trials = [];
+  for (let i = 0; i < p.nTrials; i++){
+    const w = rng.pick(M7_WORDS);
+    const incongruent = rng.chance(p.incongP);
+    let color;
+    if (incongruent){
+      const others = M7_COLORS.filter(function(c){ return M7_COLOR_CAT[c] !== w.cat; });
+      color = rng.pick(others);
+    } else {
+      color = M7_COLORS.filter(function(c){ return M7_COLOR_CAT[c] === w.cat; })[0];
+    }
+    trials.push({ i:i, word:w.word, wordCat:w.cat, color:color, colorCat:M7_COLOR_CAT[color], incongruent:incongruent, correct:M7_COLOR_CAT[color], respMs:p.respMs });
+  }
+  return { level:level, trials:trials };
+}
+function scoreStroop(outcomes){
+  const cong = outcomes.filter(function(o){ return !o.incongruent; });
+  const inco = outcomes.filter(function(o){ return o.incongruent; });
+  const acc = function(arr){ return arr.length ? arr.filter(function(o){ return o.ok; }).length / arr.length * 100 : null; };
+  const rt = function(arr){ const ok = arr.filter(function(o){ return o.ok && o.rtMs !== null; }); return ok.length ? ok.reduce(function(a,o){return a+o.rtMs;},0) / ok.length : null; };
+  const rtC = rt(cong), rtI = rt(inco);
+  return { accCong:acc(cong), accIncong:acc(inco), rtCong:rtC, rtIncong:rtI, interferenceMs:(rtC !== null && rtI !== null) ? rtI - rtC : null, accAll:acc(outcomes) };
+}
+
+/* ---------- Shared: goals, recommendations, adaptive, CSV, personal best ---------- */
+function parseGoal(text){
+  const t = String(text || '').replace(/\s+/g, ' ');
+  const num = function(x){ return parseFloat(x.replace(',', '.')); };
+  const g = { acc:null, sec:null, correct:null };
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/); if (mp) g.acc = num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-zá-ú])/i); if (ms) g.sec = num(ms[1]);
+  const ma = t.match(/(\d+)\s*(?:correct|hits|correctas|correcta|aciertos|acierto)/i); if (ma) g.correct = parseInt(ma[1], 10);
+  return (g.acc === null && g.sec === null && g.correct === null) ? null : g;
+}
+function evaluateGoal(text, r){
+  const g = parseGoal(text);
+  if (!g) return null;
+  let ok = true;
+  if (g.acc !== null) ok = ok && r.accuracy >= g.acc;
+  if (g.sec !== null && r.spi !== null) ok = ok && r.spi <= g.sec;
+  if (g.correct !== null) ok = ok && r.correct >= g.correct;
+  return ok;
+}
+function recommend(accuracy, spi, level, promptSec){
+  if (accuracy < 60) return { action:'down', text:'Baja un nivel' };
+  if (accuracy < PASS_ACCURACY) return { action:'stay', text:'Mantén el nivel, más despacio' };
+  if (level >= 10) return { action:'stay', text:'Nivel máximo' };
+  if (spi !== null && promptSec !== null && spi > promptSec) return { action:'stay', text:'Mantén el nivel, dentro de ' + fmt(promptSec,0) + ' s' };
+  return { action:'up', text:'Sube un nivel' };
+}
+const ADAPT = { block:5, upAfter:2, downAfter:2, failBelow:75 };
+function adaptiveStep(state, blockAccuracy){
+  const s = { level:state.level, ups:state.ups, downs:state.downs, moved:0 };
+  if (blockAccuracy >= PASS_ACCURACY){ s.ups++; s.downs = 0; }
+  else if (blockAccuracy < ADAPT.failBelow){ s.downs++; s.ups = 0; }
+  else { s.ups = 0; s.downs = 0; }
+  if (s.ups >= ADAPT.upAfter && s.level < 10){ s.level++; s.ups = 0; s.moved = 1; }
+  else if (s.downs >= ADAPT.downAfter && s.level > 1){ s.level--; s.downs = 0; s.moved = -1; }
+  return s;
+}
+function csvField(v){
+  const s = (v === null || v === undefined) ? '' : String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function dateES(iso){
+  const d = new Date(iso);
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+const CSV_HEADER = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
+function toCSV(sessions){
+  const rows = sessions.map(function(s){
+    return [dateES(s.ts), s.module, s.level, s.correct, s.wrong, s.blank,
+      (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
+      s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
+  });
+  return '﻿' + [CSV_HEADER.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+function personalBest(sessions, module, level){
+  const ok = sessions.filter(function(s){ return s.mode === 'manual' && s.moduleKey === module && s.level === level && s.accuracy >= PASS_ACCURACY && s.spi !== null && s.spi !== undefined; });
+  if (!ok.length) return null;
+  return Math.min.apply(null, ok.map(function(s){ return s.spi; }));
+}
+function currentStreak(sessions, module){
+  const filtered = module ? sessions.filter(function(s){ return s.moduleKey === module; }) : sessions;
+  let n = 0;
+  for (let i = filtered.length - 1; i >= 0; i--){ if (filtered[i].accuracy >= PASS_ACCURACY) n++; else break; }
+  return n;
+}
+// ==== PURE LOGIC END ====
+</script>
+<script>
+'use strict';
+/* =====================================================================
+   RENDERING (DOM) AND USER INTERFACE
+   ===================================================================== */
+const STORE_KEY = 'atc_memattn_v1';
+let mem = null, storeOk = true, onKey = null, S = null;
+function load(){
+  if (mem) return mem;
+  let d = null;
+  try { const r = localStorage.getItem(STORE_KEY); if (r) d = JSON.parse(r); } catch (e) { storeOk = false; }
+  if (!d || !Array.isArray(d.sessions)) d = { sessions:[], prefs:{} };
+  if (!d.prefs) d.prefs = {};
+  mem = d;
+  return d;
+}
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(mem)); return true; } catch (e) { storeOk = false; return false; } }
+function esc(s){ return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function $(id){ return document.getElementById(id); }
+function IC(n, c){ return '<svg class="ic' + (c ? ' ' + c : '') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+const app = document.getElementById('app');
+function show(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function pad3(n){ return String(n).padStart(3,'0'); }
+function clearAll(){
+  if (S){
+    (S.timers || []).forEach(clearTimeout);
+    if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+    if (S.cdTimer){ clearTimeout(S.cdTimer); S.cdTimer = null; }
+  }
+  onKey = null;
+}
+function quit(){
+  if (S && !S.done){ if (!window.confirm('¿Salir de la sesión?')) return; }
+  clearAll(); S = null; menu();
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){ e.preventDefault(); quit(); return; }
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (onKey) onKey(e);
+});
+document.addEventListener('click', function(e){
+  const t = e.target && e.target.closest ? e.target.closest('[data-quit]') : null;
+  if (t){ e.preventDefault(); quit(); }
+});
+
+/* ---------- Module registry ---------- */
+const MODULES = ['m1','m2','m3','m4','m5','m6','m7'];
+const MODULE_LABEL_ES = { m1:'Memoria de tiras de vuelo', m2:'Serie de dígitos / letras', m3:'Verificación de colación', m4:'Ejecución de instrucciones', m5:'Vigilancia', m6:'Cambio de tarea', m7:'Interferencia tipo Stroop' };
+const MODE_ES = { manual:'', adaptive:'adaptativo', custom:'personalizado' };
+// MODULE_LABEL (English) is the STORED/CSV form parsed by the dashboard; MODULE_LABEL_ES is display only.
+function modDisp(key, mode){ return (MODULE_LABEL_ES[key] || key) + (MODE_ES[mode] ? ' [' + MODE_ES[mode] + ']' : ''); }
+const MODULE_LABEL = { m1:'Flight strip recall', m2:'Digit / letter span', m3:'Read-back checker', m4:'Instruction execution', m5:'Vigilance', m6:'Task switching', m7:'Stroop-like interference' };
+const MODULE_ICON = { m1:'strip', m2:'hash', m3:'chat', m4:'plane', m5:'eye', m6:'switch', m7:'contrast' };
+const HINTABLE = { m1:true, m2:true, m3:true, m4:true, m5:false, m6:false, m7:false };
+const P_OF = { m1:M1_P, m2:M2_P, m3:M3_P, m4:M4_P, m5:M5_P, m6:M6_P, m7:M7_P };
+const BLOCK = { m1:5, m2:5, m3:5, m4:5, m5:20, m6:10, m7:10 };
+const MODCFG = {
+  m1:{ countRange:[3,20,1],  timeRange:[5,45,1],   countLabel:'Rondas', timeLabel:'Respuesta s', roundsDefault:6 },
+  m2:{ countRange:[6,40,1],  timeRange:[5,40,1],   countLabel:'Ensayos', timeLabel:'Aviso s',  roundsDefault:15 },
+  m3:{ countRange:[8,60,1],  timeRange:[5,40,1],   countLabel:'Ítems', timeLabel:'Límite s', roundsDefault:20 },
+  m4:{ countRange:[3,20,1],  timeRange:[5,45,1],   countLabel:'Rondas', timeLabel:'Respuesta s', roundsDefault:6 },
+  m5:{ countRange:[30,400,10], timeRange:[0.4,2,0.1],  countLabel:'Ensayos', timeLabel:'Intervalo s', roundsDefault:null },
+  m6:{ countRange:[20,150,5],  timeRange:[0.5,4,0.1],  countLabel:'Ensayos', timeLabel:'Ventana s', roundsDefault:null },
+  m7:{ countRange:[20,150,5],  timeRange:[0.4,3,0.1],  countLabel:'Ensayos', timeLabel:'Ventana s', roundsDefault:null }
+};
+const TIMING = [null,
+  { prompt:40, hard:0 }, { prompt:30, hard:0 }, { prompt:24, hard:0 }, { prompt:18, hard:0 }, { prompt:15, hard:0 },
+  { prompt:13, hard:22 }, { prompt:11, hard:16 }, { prompt:9, hard:12 }, { prompt:7, hard:9 }, { prompt:5, hard:6 }];
+function timingFor(level){
+  if (S.cfg.mode === 'custom' && S.cfg.respSec) return { prompt:S.cfg.respSec, hard:Math.round(S.cfg.respSec * 1.6) };
+  return TIMING[level] || { prompt:null, hard:0 };
+}
+
+/* ---------- Menu ---------- */
+function levelOptions(sel){
+  let h = ''; for (let l = 1; l <= 10; l++) h += '<option value="' + l + '"' + (l === sel ? ' selected' : '') + '>' + l + ' ' + LEVEL_NAMES[l] + '</option>'; return h;
+}
+let menuKeep = {};
+function menu(){
+  clearAll(); S = null;
+  const d = load();
+  const module = d.prefs.lastModule || 'm1';
+  const p = d.prefs[module] || {};
+  const mc = MODCFG[module];
+  show('<div class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Memoria y atención</h1></div>' +
+    '<div class="setup"><div class="mods" role="radiogroup" aria-label="Módulo">' +
+    MODULES.map(function(m){ return '<button type="button" class="mod" role="radio" data-m="' + m + '" aria-checked="' + (m === module) + '">' + IC(MODULE_ICON[m]) + '<span>' + MODULE_LABEL_ES[m] + '</span></button>'; }).join('') +
+    '</div><div class="form"><input type="hidden" id="module" value="' + module + '">' +
+    '<div class="fr"><label for="mode">Modo</label><select id="mode"><option value="manual">Manual</option><option value="adaptive">Adaptativo</option><option value="custom">Personalizado</option></select></div>' +
+    '<div class="fr" id="boxLevel"><label for="level">Nivel</label><select id="level">' + levelOptions(p.level || 3) + '</select></div>' +
+    (HINTABLE[module] ? '<div class="fr"><label for="hint">Pistas</label><select id="hint"><option value="0">No</option><option value="1">Aviso</option><option value="2">Método</option><option value="3">Solución</option></select></div>' : '') +
+    '<div id="boxCustom" style="display:none">' +
+    '<div class="fr"><label for="cLevel">Base <b id="vLevel"></b></label><input type="range" id="cLevel" min="1" max="10" value="' + (p.level || 5) + '"></div>' +
+    '<div class="fr"><label for="cCount">' + mc.countLabel + ' <b id="vCount"></b></label><input type="range" id="cCount" min="' + mc.countRange[0] + '" max="' + mc.countRange[1] + '" step="' + mc.countRange[2] + '" value="' + (p.cCount || mc.countRange[0]) + '"></div>' +
+    '<div class="fr"><label for="cTime">' + mc.timeLabel + ' <b id="vTime"></b></label><input type="range" id="cTime" min="' + mc.timeRange[0] + '" max="' + mc.timeRange[1] + '" step="' + mc.timeRange[2] + '" value="' + (p.cTime || mc.timeRange[0]) + '"></div>' +
+    '<div class="fr"><label for="cDistract">Carga</label><span class="chk"><input type="checkbox" id="cDistract"' + (p.cDistract ? ' checked' : '') + '></span></div></div>' +
+    '<div class="fr"><label for="goal">Objetivo</label><input type="text" id="goal" value="' + esc(menuKeep.goal !== undefined ? menuKeep.goal : (p.goal || '96 %')) + '" placeholder="96 %, 15 s, 18 aciertos"></div>' +
+    '<div class="fr"><label for="seed">Semilla</label><input type="text" id="seed" value="' + esc(menuKeep.seed || '') + '" placeholder="aleatoria"></div>' +
+    '</div></div><div id="err" class="msg err" role="alert"></div>' +
+    '<div class="actions"><button class="btn primary" id="go" title="Enter">' + IC('play') + 'Iniciar</button><button class="btn" id="prac">' + IC('target') + 'Práctica</button><button class="btn" id="hist" title="H">' + IC('history') + 'Historial</button></div>'
+  );
+  const modeSel = $('mode'); modeSel.value = p.mode || 'manual';
+  if ($('hint')) $('hint').value = String(p.hint || 0);
+  Array.prototype.forEach.call(app.querySelectorAll('.mod'), function(b){
+    b.addEventListener('click', function(){ const dd = load(); dd.prefs.lastModule = b.dataset.m; save(); menuKeep = { goal:$('goal').value, seed:$('seed').value }; menu(); });
+  });
+  const upd = function(){
+    $('boxLevel').style.display = modeSel.value === 'manual' ? '' : 'none';
+    $('boxCustom').style.display = modeSel.value === 'custom' ? '' : 'none';
+    $('vLevel').textContent = $('cLevel').value + ' ' + LEVEL_NAMES[+$('cLevel').value];
+    $('vCount').textContent = $('cCount').value;
+    $('vTime').textContent = $('cTime').value;
+  };
+  ['mode','cLevel','cCount','cTime'].forEach(function(id){ $(id).addEventListener('input', upd); $(id).addEventListener('change', upd); });
+  upd();
+  $('go').addEventListener('click', function(){ startFromMenu(false); });
+  $('prac').addEventListener('click', function(){ startFromMenu(true); });
+  $('hist').addEventListener('click', showHistory);
+  onKey = function(e){
+    if (e.target.tagName === 'INPUT' && e.target.type === 'text'){ if (e.key === 'Enter'){ e.preventDefault(); startFromMenu(false); } return; }
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON' || e.target.type === 'range' || e.target.type === 'checkbox') return;
+    if (e.key === 'Enter'){ e.preventDefault(); startFromMenu(false); }
+    else if (e.key === 'h' || e.key === 'H') showHistory();
+  };
+}
+const PRACTICE_N = { m1:1, m2:3, m3:4, m4:1, m5:15, m6:8, m7:8 };
+function startFromMenu(practiceOnly){
+  menuKeep = {};
+  const goal = $('goal').value.trim();
+  if (!practiceOnly && !parseGoal(goal)){ $('err').textContent = 'Falta el objetivo'; $('goal').focus(); return; }
+  const module = $('module').value, mode = $('mode').value;
+  const cfg = { module:module, mode:mode, goal:goal, seed: ($('seed').value.trim() || ('s' + Math.floor(Math.random() * 1e9).toString(36))), hintMax: HINTABLE[module] ? +$('hint').value : 0, blockSize: BLOCK[module] };
+  if (mode === 'manual'){ cfg.level = +$('level').value; }
+  else if (mode === 'adaptive'){ cfg.level = 2; }
+  else { cfg.level = +$('cLevel').value; cfg.cCount = +$('cCount').value; cfg.cTime = +$('cTime').value; cfg.cDistract = $('cDistract').checked; }
+  if (cfg.level > HINT_MAX_LEVEL) cfg.hintMax = 0;
+  if (mode === 'custom'){ cfg.count = cfg.cCount; cfg.respSec = cfg.cTime; }
+  else { cfg.count = MODCFG[module].roundsDefault !== null ? MODCFG[module].roundsDefault : P_OF[module][cfg.level].nTrials; cfg.respSec = null; }
+  const d = load();
+  d.prefs[module] = Object.assign({}, d.prefs[module] || {}, { mode:mode, goal:goal, level: (mode === 'manual' || mode === 'custom') ? cfg.level : ((d.prefs[module] && d.prefs[module].level) || 3), hint:cfg.hintMax, cCount:cfg.cCount, cTime:cfg.cTime, cDistract:cfg.cDistract });
+  d.prefs.lastModule = module;
+  save();
+  if (practiceOnly) return startSession(practiceCfg(cfg));
+  startSession(cfg);
+}
+function practiceCfg(real){
+  return { module:real.module, mode:'manual', level:1, goal:'practice', seed:'practice' + Math.floor(Math.random() * 1e6), hintMax:0, blockSize:BLOCK[real.module],
+    count:PRACTICE_N[real.module], respSec:null, practice:true, after:real };
+}
+
+/* ---------- Session bookkeeping shared by every module ---------- */
+function startSession(cfg){
+  clearAll();
+  S = { cfg:cfg, results:[], adapt:{ level:cfg.level, ups:0, downs:0 }, timers:[], done:false, lastTask:null, m1Distract:{ ok:0, n:0 }, practice:!!cfg.practice };
+  ({ m1:runM1, m2:runM2, m3:runM3, m4:runM4, m5:runM5, m6:runM6, m7:runM7 })[cfg.module]();
+}
+function levelNow(){ return S.cfg.mode === 'adaptive' ? S.adapt.level : S.cfg.level; }
+function pushResult(ok, blank, ms, level){
+  S.results.push({ ok:!!ok, blank:!!blank, ms:ms, level:level });
+  if (S.cfg.mode === 'adaptive'){
+    const bs = S.cfg.blockSize;
+    if (S.results.length % bs === 0){
+      const blk = S.results.slice(-bs);
+      const acc = blk.filter(function(r){ return r.ok; }).length / bs * 100;
+      S.adapt = adaptiveStep(S.adapt, acc);
+    }
+  }
+}
+// Every timer is bound to the session that created it: if the session was abandoned or replaced, the callback does nothing.
+function setTimer(fn, ms){
+  const my = S;
+  const id = setTimeout(function(){ if (S !== my || !S || S.done) return; fn(); }, ms);
+  S.timers.push(id);
+  if (S.timers.length > 400) S.timers = S.timers.slice(-200);
+  return id;
+}
+/* One monotonic clock (performance.now) for every phase. The deadline is fixed when the phase starts; the
+   completion callback is scheduled against that deadline (re-armed if the timer fires early), so a throttled or
+   late timer cannot stretch or shorten a phase. The on-screen number and bar are only a view of the same deadline. */
+function cdView(){
+  const left = Math.max(0, S.cdEnd - performance.now());
+  const cd = $('cd'); if (cd) cd.textContent = fmt(left / 1000, 1);
+  const bar = $('cdBar'); if (bar) bar.style.width = (S.cdTotal > 0 ? Math.min(100, left / S.cdTotal * 100) : 0) + '%';
+}
+function cdHTML(){
+  const left = Math.max(0, S.cdEnd - performance.now());
+  return '<div class="cd"><div class="bar"><i id="cdBar" style="width:' + (S.cdTotal > 0 ? Math.min(100, left / S.cdTotal * 100) : 0) + '%"></i></div><span id="cd" class="timer">' + fmt(left / 1000, 1) + '</span></div>';
+}
+function countdown(sec, cb){
+  const my = S;
+  if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+  if (S.cdTimer){ clearTimeout(S.cdTimer); S.cdTimer = null; }
+  S.cdTotal = sec * 1000; S.cdEnd = performance.now() + S.cdTotal;
+  const fire = function(){
+    if (S !== my || !S || S.done) return;
+    const left = S.cdEnd - performance.now();
+    if (left > 1){ S.cdTimer = setTimeout(fire, left); return; }
+    S.cdTimer = null;
+    if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+    cdView();
+    cb();
+  };
+  S.cdTimer = setTimeout(fire, S.cdTotal);
+  S.intervalId = setInterval(function(){ if (S !== my || !S){ return; } cdView(); }, 100);
+  cdView();
+}
+function headBar(module, idx, total, level){
+  return '<div class="head"><span class="hm">' + IC(MODULE_ICON[module]) + MODULE_LABEL_ES[module] + '</span>' + (S.practice ? '<span class="pr">Práctica</span>' : '') + '<span class="sp"></span>' +
+    (idx != null ? '<span>' + (idx + 1) + ' / ' + total + '</span>' : '') + '<span>L' + level + '</span><button class="ico" data-quit type="button" aria-label="Salir">' + IC('x','sm') + '</button></div>';
+}
+function headBarStream(module, done, total, level){ return headBar(module, done, total, level); }
+
+/* ---------- Generic MCQ runner (used by modules 1, 3 and 4) ---------- */
+function renderMCQ(o){
+  const timing = timingFor(o.level);
+  let hintTier = 0, answered = false;
+  const optHTML = o.options.map(function(t, i){ return '<button class="opt" data-i="' + i + '"><span class="key">' + (i + 1) + '</span>' + esc(String(t)) + '</button>'; }).join('');
+  show((o.sub || '') + (o.prompt ? '<p class="q">' + esc(o.prompt) + '</p>' : '') +
+    '<div id="optWrap" class="opts">' + optHTML + '</div>' +
+    '<div class="foot">' + (o.hint ? '<button class="btn" id="hintBtn" type="button" title="H">' + IC('bulb','sm') + 'Pista</button>' : '') + '<span class="sp"></span><span class="muted"><span id="tm" class="timer">0.0</span> s</span></div>' +
+    '<p id="hintTxt" class="hinttxt"></p>');
+  const t0 = performance.now();
+  const myS = S;
+  const finishAnswer = function(idx, blank){
+    if (answered || S !== myS) return; answered = true;
+    const ms = performance.now() - t0; onKey = null;
+    if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+    document.querySelectorAll('.opt').forEach(function(b, i){
+      b.disabled = true;
+      if (o.correctIndex !== undefined){ if (i === o.correctIndex) b.classList.add('right'); else if (i === idx) b.classList.add('wrong'); }
+    });
+    setTimer(function(){ o.onAnswer(idx, ms, blank); }, blank ? 150 : 650);
+  };
+  document.querySelectorAll('.opt').forEach(function(b){ b.addEventListener('click', function(){ finishAnswer(+b.dataset.i, false); }); });
+  if (o.hint && $('hintBtn')){
+    $('hintBtn').addEventListener('click', function(){
+      if (answered || hintTier >= 3 || hintTier >= S.cfg.hintMax) return;
+      hintTier++; $('hintTxt').textContent = o.hint[hintTier - 1];
+      if (hintTier >= 3) finishAnswer(-1, true);
+    });
+  }
+  if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+  S.intervalId = setInterval(function(){
+    if (S !== myS || !S){ return; }
+    const sec = (performance.now() - t0) / 1000; const el = $('tm');
+    if (el){ el.textContent = fmt(sec, 1); el.className = 'timer' + (timing.prompt && sec > timing.prompt ? ' late' : ''); }
+  }, 100);
+  // hard limit fires from its own deadline timer (not from the 100 ms display poll)
+  if (timing.hard) setTimer(function(){ finishAnswer(-1, true); }, Math.max(0, t0 + timing.hard * 1000 - performance.now()));
+  onKey = function(e){
+    if (e.repeat) return;
+    const n = parseInt(e.key, 10);
+    if (!isNaN(n) && n >= 1 && n <= o.options.length){ finishAnswer(n - 1, false); return; }
+    if (e.key === 's' || e.key === 'S'){ finishAnswer(-1, true); return; }
+    if ((e.key === 'h' || e.key === 'H') && o.hint && $('hintBtn')) $('hintBtn').click();
+  };
+}
+
+/* =====================================================================
+   MODULE 1 RUNNER: Flight strip recall
+   Timing source of truth = M1_P: dispSec is seconds PER STRIP (memorise time = n x dispSec);
+   distractSec is the total length of the filled delay.
+   ===================================================================== */
+function runM1(){ S.roundIdx = 0; S.total = S.cfg.count; nextM1(); }
+function nextM1(){
+  if (S.roundIdx >= S.total){ return finishSession(); }
+  const level = levelNow();
+  const rng = makeRng(S.cfg.seed + '|m1|' + S.roundIdx);
+  const ov = S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract } : null;
+  const round = buildFlightRound(rng, level, ov);
+  S.round = round; S.probeI = 0; S.roundLevel = level;
+  encodeM1(round);
+}
+function encodeM1(round){
+  const rows = round.flights.map(function(f){ return '<tr><td>' + esc(f.callsign) + '</td><td>FL' + f.level + '</td><td>' + pad3(f.heading) + '&deg;</td><td>' + esc(f.fix) + '</td></tr>'; }).join('');
+  const total = round.dispSec * round.flights.length;
+  S.cdTotal = total * 1000; S.cdEnd = performance.now() + S.cdTotal;
+  show(headBar('m1', S.roundIdx, S.total, S.roundLevel) +
+    '<div class="tab-box"><table class="strips"><tbody>' + rows + '</tbody></table></div>' + cdHTML());
+  onKey = null;
+  countdown(total, function(){ afterEncodeM1(round); });
+}
+function afterEncodeM1(round){
+  if (round.distract === 'wait') return renderFillerM1(round.distractSec, function(){ askM1(round); });
+  return renderArithM1(round.distractSec, function(){ askM1(round); });
+}
+function renderFillerM1(sec, cb){
+  S.cdTotal = sec * 1000; S.cdEnd = performance.now() + S.cdTotal;
+  show(headBar('m1', S.roundIdx, S.total, S.roundLevel) + '<div class="bignum" id="cdBig">&middot;&middot;&middot;</div>' + cdHTML());
+  onKey = null; countdown(sec, cb);
+}
+// Filled delay: sums are shown one after another for exactly `sec` seconds (single deadline), then recall starts.
+function renderArithM1(sec, cb){
+  const my = { done:false, i:0 };
+  const end = function(){ if (my.done) return; my.done = true; cb(); };
+  S.cdTotal = sec * 1000; S.cdEnd = performance.now() + S.cdTotal;
+  showArithM1(my);
+  countdown(sec, end);
+}
+function showArithM1(my){
+  if (my.done) return;
+  const rng = makeRng(S.cfg.seed + '|arith|' + S.roundIdx + '|' + my.i);
+  const pr = m1Arith(rng);
+  show(headBar('m1', S.roundIdx, S.total, S.roundLevel) +
+    '<p class="stim">' + pr.text + '</p><p class="center"><input type="text" inputmode="numeric" id="ans" autocomplete="off" aria-label="Respuesta" style="max-width:160px;text-align:center;font-size:1.3rem"> ' +
+    '<button class="btn primary" id="ok" type="button" title="Enter">' + IC('arrow') + '</button></p>' + cdHTML());
+  $('ans').focus();
+  const submit = function(){
+    if (my.done) return;
+    const v = parseInt($('ans').value, 10); S.m1Distract.n++; if (v === pr.answer) S.m1Distract.ok++;
+    my.i++; showArithM1(my);
+  };
+  $('ok').addEventListener('click', submit);
+  onKey = function(e){ if (e.target && e.target.id === 'ans' && e.key === 'Enter'){ e.preventDefault(); submit(); } };
+}
+function askM1(round){
+  if (S.probeI >= round.probes.length){ S.roundIdx++; return nextM1(); }
+  const probe = round.probes[S.probeI];
+  const flight = round.flights[probe.flightIndex];
+  const promptTxt = probe.field === 'callsign'
+    ? ('Indicativo a FL' + flight.level + ', ' + pad3(flight.heading) + '°, ' + flight.fix)
+    : (({ level:'Nivel', heading:'Rumbo', fix:'Siguiente punto' })[probe.field] + ' de ' + flight.callsign);
+  const fmtOpt = function(o){ return probe.field === 'level' ? ('FL' + o) : probe.field === 'heading' ? (pad3(o) + '°') : String(o); };
+  renderMCQ({
+    sub: headBar('m1', S.roundIdx, S.total, S.roundLevel),
+    prompt: promptTxt,
+    options: probe.options.map(fmtOpt),
+    correctIndex: probe.answerIndex,
+    level: S.roundLevel,
+    hint: S.cfg.hintMax > 0 ? [
+      'Campo: ' + fieldLabel(probe.field).toLowerCase(),
+      'Agrupa cada tira como una sola frase: indicativo, nivel, rumbo, punto.',
+      fmtOpt(probe.correct)
+    ] : null,
+    onAnswer:function(idx, ms, blank){
+      const ok = !blank && checkFlightProbe(probe, idx);
+      pushResult(ok, blank, ms, S.roundLevel);
+      S.probeI++; askM1(round);
+    }
+  });
+}
+
+/* =====================================================================
+   MODULE 2 RUNNER: Digit / letter span
+   ===================================================================== */
+const ORDER_WORD = { forward:'Directo', backward:'Inverso', sequenced:'Ascendente' };
+function runM2(){ S.trialIdx = 0; S.total = S.cfg.count; nextM2(); }
+function nextM2(){
+  if (S.trialIdx >= S.total){ return finishSession(); }
+  const level = levelNow();
+  const rng = makeRng(S.cfg.seed + '|m2|' + S.trialIdx);
+  const ov = S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract } : null;
+  const item = m2Sequence(rng, level, ov);
+  S.item = item; S.itemLevel = level; S.presentI = 0; S.symAt = null;
+  showM2Symbol(item);
+}
+function showM2Symbol(item){
+  if (S.presentI >= item.seq.length){ return afterEncodeM2(item); }
+  const sym = item.seq[S.presentI];
+  show(headBar('m2', S.trialIdx, S.total, S.itemLevel) +
+    '<p class="center muted">' + ORDER_WORD[item.order] + ' &middot; ' + (S.presentI + 1) + ' / ' + item.seq.length + '</p>' +
+    '<p class="stim">' + esc(sym) + '</p>');
+  onKey = null;
+  // symbols are scheduled on absolute deadlines (900 ms each) so rendering time cannot accumulate
+  const now = performance.now();
+  if (S.symAt === null) S.symAt = now;
+  S.symAt += 900;
+  setTimer(function(){ S.presentI++; showM2Symbol(item); }, Math.max(0, S.symAt - performance.now()));
+}
+function afterEncodeM2(item){
+  if (!item.distract) return askM2(item);
+  renderArithM2(function(){ askM2(item); });
+}
+function renderArithM2(cb){
+  const rng = makeRng(S.cfg.seed + '|m2arith|' + S.trialIdx);
+  const pr = m1Arith(rng);
+  show(headBar('m2', S.trialIdx, S.total, S.itemLevel) +
+    '<p class="stim">' + pr.text + '</p><p class="center"><input type="text" inputmode="numeric" id="ans" autocomplete="off" aria-label="Respuesta" style="max-width:160px;text-align:center;font-size:1.3rem"> ' +
+    '<button class="btn primary" id="ok" type="button" title="Enter">' + IC('arrow') + '</button></p>');
+  $('ans').focus();
+  let sent = false;
+  const submit = function(){
+    if (sent) return; sent = true;
+    const v = parseInt($('ans').value, 10); S.m1Distract.n++; if (v === pr.answer) S.m1Distract.ok++;
+    cb();
+  };
+  $('ok').addEventListener('click', submit);
+  onKey = function(e){ if (e.target && e.target.id === 'ans' && e.key === 'Enter'){ e.preventDefault(); submit(); } };
+}
+function askM2(item){
+  const timing = timingFor(S.itemLevel);
+  const t0 = performance.now();
+  show(headBar('m2', S.trialIdx, S.total, S.itemLevel) +
+    '<p class="center muted">' + ORDER_WORD[item.order] + '</p>' +
+    '<p class="center"><input type="text" id="ans" autocomplete="off" aria-label="Respuesta" maxlength="' + item.expected.length + '" placeholder="' + '&middot;'.repeat(item.expected.length) + '" style="max-width:320px;text-align:center;font-family:var(--mono);font-size:1.5rem;letter-spacing:.2em"></p>' +
+    '<div class="foot" style="justify-content:center"><button class="btn primary" id="ok" type="button" title="Enter">' + IC('arrow') + 'Enviar</button><button class="btn" id="skip" type="button" title="S">' + IC('skip','sm') + 'Omitir</button>' +
+    (S.cfg.hintMax > 0 && S.itemLevel <= HINT_MAX_LEVEL ? '<button class="btn" id="hintBtn" type="button" title="H">' + IC('bulb','sm') + 'Pista</button>' : '') + '</div>' +
+    '<p id="hintTxt" class="hinttxt center"></p><p class="center muted"><span id="tm" class="timer">0.0</span> s</p>');
+  $('ans').focus();
+  let answered = false, hintTier = 0;
+  if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+  const myS = S;
+  S.intervalId = setInterval(function(){
+    if (S !== myS || !S) return;
+    const sec = (performance.now() - t0) / 1000; const el = $('tm');
+    if (el){ el.textContent = fmt(sec, 1); el.className = 'timer' + (timing.prompt && sec > timing.prompt ? ' late' : ''); }
+  }, 100);
+  const finish = function(text, blank){
+    if (answered) return; answered = true; onKey = null;
+    if (S.intervalId){ clearInterval(S.intervalId); S.intervalId = null; }
+    const ms = performance.now() - t0;
+    const arr = blank ? null : text.trim().toUpperCase().split('').filter(function(c){ return c.trim().length; });
+    const ok = !blank && checkSpan(item, arr);
+    pushResult(ok, blank, ms, S.itemLevel);
+    show(headBar('m2', S.trialIdx, S.total, S.itemLevel) +
+      '<p class="stim ' + (ok ? 'ok' : (blank ? 'warnc' : 'err')) + '">' + IC(ok ? 'check' : 'x') + '</p>' +
+      '<p class="center" style="font-family:var(--mono);font-size:1.3rem">' + esc(item.expected.join(' ')) + '</p>' +
+      (blank || ok ? '' : '<p class="center muted" style="font-family:var(--mono)">' + esc(arr.join(' ') || '-') + '</p>'));
+    S.trialIdx++;
+    setTimer(nextM2, ok ? 700 : 1500);
+  };
+  $('ok').addEventListener('click', function(){ finish($('ans').value, false); });
+  $('skip').addEventListener('click', function(){ finish('', true); });
+  if ($('hintBtn')) $('hintBtn').addEventListener('click', function(){
+    if (hintTier >= 3 || hintTier >= S.cfg.hintMax) return; hintTier++;
+    const texts = [
+      item.expected.length + ' caracteres, ' + ORDER_WORD[item.order].toLowerCase(),
+      'Recuerda en bloques de 2-3.',
+      item.expected.join('')
+    ];
+    $('hintTxt').textContent = texts[hintTier - 1];
+    if (hintTier >= 3) finish('', true);
+  });
+  onKey = function(e){
+    if (e.target && e.target.id === 'ans' && e.key === 'Enter'){ e.preventDefault(); finish($('ans').value, false); return; }
+    if (e.target && e.target.id === 'ans') return;
+    if (e.key === 's' || e.key === 'S'){ finish('', true); return; }
+    if ((e.key === 'h' || e.key === 'H') && $('hintBtn')) $('hintBtn').click();
+  };
+}
+
+/* =====================================================================
+   MODULE 3 RUNNER: Read-back checker
+   ===================================================================== */
+function runM3(){ S.idx = 0; S.total = S.cfg.count; nextM3(); }
+function nextM3(){
+  if (S.idx >= S.total){ return finishSession(); }
+  const level = levelNow();
+  const rng = makeRng(S.cfg.seed + '|m3|' + S.idx);
+  const ov = S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract } : null;
+  const item = buildReadback(rng, level, ov);
+  S.item = item; S.itemLevel = level;
+  showM3(item);
+}
+function fieldLabel(f){ return ({ callsign:'Indicativo', level:'Nivel', heading:'Rumbo', freq:'Frecuencia', speed:'Velocidad', correct:'Correcto' })[f] || f; }
+function clearanceLine(c){
+  const parts = [c.callsign];
+  if (c.level !== undefined) parts.push('FL' + c.level);
+  if (c.heading !== undefined) parts.push('rumbo ' + pad3(c.heading));
+  if (c.freq !== undefined) parts.push(c.freq);
+  if (c.speed !== undefined) parts.push(c.speed + ' kt');
+  return parts.join(', ');
+}
+function showM3(item){
+  const optionsText = item.options.map(fieldLabel);
+  const correctIndex = item.options.indexOf(item.correctAnswer);
+  renderMCQ({
+    sub: headBar('m3', S.idx, S.total, S.itemLevel) + '<div class="tab-box"><table class="rb"><tbody><tr><th>Autorización</th><td>' + esc(clearanceLine(item.clearance)) + '</td></tr><tr><th>Colación</th><td>' + esc(clearanceLine(item.readback)) + '</td></tr></tbody></table></div><p></p>',
+    prompt:'',
+    options: optionsText,
+    correctIndex: correctIndex,
+    level: S.itemLevel,
+    hint: S.cfg.hintMax > 0 ? [
+      'Compara campo a campo.',
+      'Para en la primera discrepancia.',
+      item.hasError ? fieldLabel(item.errorField) : 'Correcto'
+    ] : null,
+    onAnswer:function(idx, ms, blank){
+      const chosen = blank ? null : item.options[idx];
+      const ok = !blank && checkReadback(item, chosen);
+      pushResult(ok, blank, ms, S.itemLevel);
+      S.idx++; nextM3();
+    }
+  });
+}
+
+/* =====================================================================
+   MODULE 4 RUNNER: Instruction execution without rereading
+   ===================================================================== */
+function runM4(){ S.roundIdx = 0; S.total = S.cfg.count; nextM4(); }
+function nextM4(){
+  if (S.roundIdx >= S.total){ return finishSession(); }
+  const level = levelNow();
+  const rng = makeRng(S.cfg.seed + '|m4|' + S.roundIdx);
+  const round = buildInstruction(rng, level, null);
+  S.round = round; S.probeI = 0; S.roundLevel = level;
+  encodeM4(round);
+}
+function labelFull(s){
+  if (s.kind === 'level') return 'ascender o descender a FL' + s.value;
+  if (s.kind === 'heading') return 'virar a rumbo ' + pad3(s.value);
+  if (s.kind === 'freq') return 'contactar con la siguiente dependencia en ' + s.value;
+  if (s.kind === 'speed') return 'ajustar velocidad a ' + s.value + ' kt';
+  if (s.kind === 'squawk') return 'código transpondedor ' + s.value;
+  return 'proceder directo a ' + s.value;
+}
+function kindLabel(k){ return ({ level:'nivel', heading:'rumbo', freq:'frecuencia', speed:'velocidad', squawk:'código transpondedor', direct:'directo a' })[k]; }
+function encodeM4(round){
+  const lines = round.steps.map(function(s, i){ return '<tr><td class="muted">' + (i + 1) + '</td><td>' + esc(labelFull(s)) + '</td></tr>'; }).join('');
+  const dispSec = Math.max(4, round.steps.length * 2.2);
+  S.cdTotal = dispSec * 1000; S.cdEnd = performance.now() + S.cdTotal;
+  show(headBar('m4', S.roundIdx, S.total, S.roundLevel) +
+    '<div class="tab-box"><table class="rb"><tbody>' + lines + '</tbody></table></div>' + cdHTML());
+  onKey = null;
+  countdown(dispSec, function(){ askM4(round); });
+}
+function askM4(round){
+  if (S.probeI >= round.probes.length){ S.roundIdx++; return nextM4(); }
+  const probe = round.probes[S.probeI]; const step = round.steps[probe.stepIndex];
+  const fmt1 = function(v){ return step.kind === 'level' ? ('FL' + v) : step.kind === 'heading' ? (pad3(v) + '°') : step.kind === 'speed' ? (v + ' kt') : String(v); };
+  renderMCQ({
+    sub: headBar('m4', S.roundIdx, S.total, S.roundLevel),
+    prompt:'Paso ' + (probe.stepIndex + 1) + ': ' + kindLabel(step.kind),
+    options: probe.options.map(fmt1),
+    correctIndex: probe.answerIndex,
+    level: S.roundLevel,
+    hint: S.cfg.hintMax > 0 ? [
+      'Los pasos iban en un orden fijo.',
+      'Encadena los pasos: luego, luego, luego.',
+      fmt1(probe.correct)
+    ] : null,
+    onAnswer:function(idx, ms, blank){
+      const ok = !blank && checkInstructionProbe(probe, idx);
+      pushResult(ok, blank, ms, S.roundLevel);
+      S.probeI++; askM4(round);
+    }
+  });
+}
+
+/* =====================================================================
+   MODULE 5 RUNNER: Vigilance
+   ===================================================================== */
+function shapeSVG(shape, size){
+  const s = size || 90;
+  if (shape === 'circle') return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 100 100" aria-hidden="true"><circle class="sh-c" cx="50" cy="50" r="38"/></svg>';
+  if (shape === 'square') return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 100 100" aria-hidden="true"><rect class="sh-s" x="14" y="14" width="72" height="72"/></svg>';
+  return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 100 100" aria-hidden="true"><polygon class="sh-t" points="50,10 90,85 10,85"/></svg>';
+}
+function runM5(){ S.queue = []; S.produced = 0; S.totalPlanned = S.cfg.count; S.chunkIdx = 0; S.trialResults = []; S.m5Frame = false; S.m5Fb = null; S.m5Next = null; nextM5Trial(); }
+function ensureM5Queue(){
+  if (S.queue.length > 0) return;
+  if (S.produced >= S.totalPlanned) return;
+  const level = levelNow();
+  const remain = S.totalPlanned - S.produced;
+  const size = S.cfg.mode === 'adaptive' ? Math.min(S.cfg.blockSize, remain) : remain;
+  const rng = makeRng(S.cfg.seed + '|m5|c' + S.chunkIdx); S.chunkIdx++;
+  const ov = Object.assign({ nTrials:size }, S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract, isiMs:Math.round(S.cfg.respSec * 1000) } : {});
+  const chunk = buildVigilanceStream(rng, level, ov);
+  S.streamMeta = chunk;
+  chunk.trials.forEach(function(t){ S.queue.push(Object.assign({}, t, { level:level })); });
+  S.produced += size;
+}
+// Stream modules (5-7) draw one persistent frame and only update its parts: no full re-render per trial (no flicker, no scroll jump).
+function streamFrame(ruleHTML, buttons){
+  show('<div id="hd"></div><p class="rule" id="rule">' + ruleHTML + '</p>' +
+    '<div class="stimbox" id="stim" aria-live="off"></div>' +
+    '<p class="fb" id="fb"></p>' +
+    '<div class="pad" id="pad">' + buttons + '</div>');
+  document.querySelectorAll('#pad [data-k]').forEach(function(b){
+    b.addEventListener('mousedown', function(e){ e.preventDefault(); });   // keep keyboard focus off the buttons
+    b.addEventListener('click', function(){ if (S && S.trialAdvance) S.trialAdvance(b.getAttribute('data-k')); });
+  });
+}
+function setFb(text, cls){ const el = $('fb'); if (el){ el.className = 'fb ' + (cls || ''); el.textContent = text; } }
+function vigOk(r){ return (r.isTarget && r.responded) || (!r.isTarget && !r.responded); }
+function nextM5Trial(){
+  ensureM5Queue();
+  if (S.queue.length === 0) return finishStream('m5');
+  if (!$('stim') || !S.m5Frame){
+    streamFrame('Solo ' + shapeSVG('triangle', 22),
+      '<button class="btn primary" data-k="space" type="button">Objetivo <span class="key">Espacio</span></button>');
+    S.m5Frame = true;
+  }
+  const t = S.queue.shift();
+  const shape = t.isTarget ? S.streamMeta.targetShape : (t.isDecoy ? S.streamMeta.decoyShape : S.streamMeta.normalShape);
+  $('hd').innerHTML = headBarStream('m5', S.trialResults.length, S.totalPlanned, t.level);
+  $('stim').innerHTML = shapeSVG(shape);
+  setFb(S.m5Fb ? S.m5Fb.text : '', S.m5Fb ? S.m5Fb.cls : '');
+  const t0 = performance.now(); let pressed = false, rt = null;
+  // Trial onsets follow one absolute schedule (previous onset + ISI): timer lateness does not accumulate.
+  if (S.m5Next === null || S.m5Next < t0 - t.isiMs) S.m5Next = t0;
+  S.m5Next += t.isiMs;
+  // the shape is visible for a short time, then blank until the next one: consecutive circles are distinguishable events
+  setTimer(function(){ const s = $('stim'); if (s) s.innerHTML = ''; }, Math.min(500, Math.round(t.isiMs * 0.6)));
+  const press = function(){
+    if (pressed) return; pressed = true; rt = performance.now() - t0;
+    const fb = $('fb'); if (fb){ fb.className = 'fb muted'; fb.textContent = '·'; }
+  };
+  S.trialAdvance = press;
+  onKey = function(e){ if (e.repeat) { if (e.key === ' ') e.preventDefault(); return; } if (e.code === 'Space' || e.key === ' '){ e.preventDefault(); press(); } };
+  setTimer(function(){
+    S.trialResults.push({ isTarget:t.isTarget, responded:pressed, rtMs: pressed ? rt : null, level:t.level });
+    if (t.isTarget) S.m5Fb = pressed ? { text:'Acierto', cls:'ok' } : { text:'Omisión', cls:'err' };
+    else if (pressed) S.m5Fb = { text:'Falsa alarma', cls:'err' };
+    else S.m5Fb = null;
+    if (S.cfg.mode === 'adaptive' && S.trialResults.length % S.cfg.blockSize === 0){
+      const blk = S.trialResults.slice(-S.cfg.blockSize);
+      const hits = blk.filter(function(r){ return r.isTarget && r.responded; }).length, den = blk.filter(function(r){ return r.isTarget || r.responded; }).length;
+      if (den > 0) S.adapt = adaptiveStep(S.adapt, hits / den * 100);   // blocks with no target and no press are neutral
+    }
+    nextM5Trial();
+  }, Math.max(0, S.m5Next - performance.now()));
+}
+
+/* =====================================================================
+   MODULE 6 RUNNER: Task switching
+   ===================================================================== */
+function runM6(){ S.queue = []; S.produced = 0; S.totalPlanned = S.cfg.count; S.chunkIdx = 0; S.trialResults = []; S.lastTask = null; S.frameOn = false; nextM6Trial(); }
+function ensureM6Queue(){
+  if (S.queue.length > 0) return;
+  if (S.produced >= S.totalPlanned) return;
+  const level = levelNow();
+  const remain = S.totalPlanned - S.produced;
+  const size = S.cfg.mode === 'adaptive' ? Math.min(S.cfg.blockSize, remain) : remain;
+  const rng = makeRng(S.cfg.seed + '|m6|c' + S.chunkIdx); S.chunkIdx++;
+  const ov = Object.assign({ nTrials:size }, S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract, respMs:Math.round(S.cfg.respSec * 1000) } : {});
+  const chunk = buildSwitchStream(rng, level, ov);
+  chunk.trials.forEach(function(t, i){
+    const tt = Object.assign({}, t, { level:level });
+    if (i === 0 && S.lastTask !== null) tt.isSwitch = (S.lastTask !== t.task);
+    S.queue.push(tt);
+  });
+  S.produced += size;
+}
+function nextM6Trial(){
+  ensureM6Queue();
+  if (S.queue.length === 0) return finishStream('m6');
+  const t = S.queue.shift();
+  if (!S.frameOn){ streamFrame('', '<button class="btn" data-k="f" id="bF" type="button"></button><button class="btn" data-k="j" id="bJ" type="button"></button>'); S.frameOn = true; }
+  const lf = t.task === 'parity' ? 'Impar' : 'Bajo', lj = t.task === 'parity' ? 'Par' : 'Alto';
+  $('hd').innerHTML = headBarStream('m6', S.trialResults.length, S.totalPlanned, t.level);
+  $('rule').textContent = t.task === 'parity' ? 'Impar / par' : 'Bajo / alto';
+  $('bF').innerHTML = '<span class="key">F</span>' + lf; $('bJ').innerHTML = '<span class="key">J</span>' + lj;
+  $('stim').innerHTML = '<p class="stim" style="margin:0">' + t.n + '</p>';
+  $('stim').style.borderBottom = '3px solid ' + (t.task === 'parity' ? 'var(--accent)' : 'var(--warn)');   // colour cue of the current rule
+  setFb('', '');
+  timedTrial(t, ['f','j'], function(key){ const ans = key === 'f' ? (t.task === 'parity' ? 'odd' : 'low') : (t.task === 'parity' ? 'even' : 'high'); return ans === t.correct; },
+    function(key, rt, ok){
+      S.trialResults.push({ isSwitch:t.isSwitch, ok:ok, rtMs: key ? rt : null, level:t.level });
+      S.lastTask = t.task;
+      if (S.cfg.mode === 'adaptive' && S.trialResults.length % S.cfg.blockSize === 0){
+        const blk = S.trialResults.slice(-S.cfg.blockSize);
+        S.adapt = adaptiveStep(S.adapt, blk.filter(function(r){ return r.ok; }).length / blk.length * 100);
+      }
+      nextM6Trial();
+    });
+}
+// One timed trial: waits for one of `keys` (or a button), then shows Correct / Wrong / Too slow for 220 ms (+ the level's ISI), then calls done().
+function timedTrial(t, keys, isOk, done){
+  const t0 = performance.now(); let responded = false;
+  const advance = function(key){
+    if (responded) return; responded = true; onKey = null;
+    const rt = key ? performance.now() - t0 : null, ok = key ? isOk(key) : false;
+    setFb(ok ? 'Correcto' : (key ? 'Incorrecto' : 'Muy lento'), ok ? 'ok' : (key ? 'err' : 'warnc'));
+    const st = $('stim'); if (st) st.innerHTML = '';
+    setTimer(function(){ done(key, rt, ok); }, 220 + (t.isiMs || 0));
+  };
+  S.trialAdvance = advance;
+  onKey = function(e){ if (e.repeat) return; const k = e.key.toLowerCase(); if (keys.indexOf(k) >= 0){ e.preventDefault(); advance(k); } };
+  setTimer(function(){ advance(null); }, t.respMs);
+}
+
+/* =====================================================================
+   MODULE 7 RUNNER: Stroop-like interference
+   ===================================================================== */
+const M7_COLOR_VAR = { green:'var(--ok)', red:'var(--err)', amber:'var(--warn)' };
+function runM7(){ S.queue = []; S.produced = 0; S.totalPlanned = S.cfg.count; S.chunkIdx = 0; S.trialResults = []; S.frameOn = false; nextM7Trial(); }
+function ensureM7Queue(){
+  if (S.queue.length > 0) return;
+  if (S.produced >= S.totalPlanned) return;
+  const level = levelNow();
+  const remain = S.totalPlanned - S.produced;
+  const size = S.cfg.mode === 'adaptive' ? Math.min(S.cfg.blockSize, remain) : remain;
+  const rng = makeRng(S.cfg.seed + '|m7|c' + S.chunkIdx); S.chunkIdx++;
+  const ov = Object.assign({ nTrials:size }, S.cfg.mode === 'custom' ? { distract:S.cfg.cDistract, respMs:Math.round(S.cfg.respSec * 1000) } : {});
+  const chunk = buildStroopStream(rng, level, ov);
+  chunk.trials.forEach(function(t){ S.queue.push(Object.assign({}, t, { level:level })); });
+  S.produced += size;
+}
+function nextM7Trial(){
+  ensureM7Queue();
+  if (S.queue.length === 0) return finishStream('m7');
+  const t = S.queue.shift();
+  if (!S.frameOn){
+    streamFrame('Color de la tinta',
+      '<button class="btn" data-k="v" type="button"><span class="swatch" style="background:var(--ok)"></span><span class="key">V</span>Verde</button><button class="btn" data-k="r" type="button"><span class="swatch" style="background:var(--err)"></span><span class="key">R</span>Rojo</button><button class="btn" data-k="a" type="button"><span class="swatch" style="background:var(--warn)"></span><span class="key">A</span>Ámbar</button>');
+    S.frameOn = true;
+  }
+  $('hd').innerHTML = headBarStream('m7', S.trialResults.length, S.totalPlanned, t.level);
+  $('stim').innerHTML = '<p class="stim word" style="margin:0;color:' + M7_COLOR_VAR[t.color] + '">' + t.word + '</p>';
+  setFb('', '');
+  timedTrial(t, ['v','r','a'], function(key){ return (key === 'v' ? 'up' : key === 'r' ? 'down' : 'level') === t.correct; },
+    function(key, rt, ok){
+      S.trialResults.push({ incongruent:t.incongruent, ok:ok, rtMs: key ? rt : null, level:t.level });
+      if (S.cfg.mode === 'adaptive' && S.trialResults.length % S.cfg.blockSize === 0){
+        const blk = S.trialResults.slice(-S.cfg.blockSize);
+        S.adapt = adaptiveStep(S.adapt, blk.filter(function(r){ return r.ok; }).length / blk.length * 100);
+      }
+      nextM7Trial();
+    });
+}
+function finishStream(module){
+  if (module === 'm5'){
+    // scored items = every target (hit = correct, miss = blank) and every false alarm (wrong); correct rejections are not items
+    S.results = S.trialResults.filter(function(r){ return r.isTarget || r.responded; }).map(function(r){
+      return { ok: r.isTarget && r.responded, blank: r.isTarget && !r.responded, ms: (r.isTarget && r.responded) ? r.rtMs : null, level:r.level }; });
+    S.extra = scoreVigilance(S.trialResults);
+  } else if (module === 'm6'){
+    S.results = S.trialResults.map(function(r){ return { ok:r.ok, blank: r.rtMs === null, ms:r.rtMs, level:r.level }; });
+    S.extra = scoreSwitching(S.trialResults);
+  } else {
+    S.results = S.trialResults.map(function(r){ return { ok:r.ok, blank: r.rtMs === null, ms:r.rtMs, level:r.level }; });
+    S.extra = scoreStroop(S.trialResults);
+  }
+  finishSession();
+}
+
+/* ---------- Shared results screen ---------- */
+/* ---------- Endurance (wave 5, schema coord/SCHEMA-thirds.md): identical copy in every game ---------- */
+function atcThirds(results, durationSec){
+  var N = results ? results.length : 0; if (N < 9) return null;
+  var g = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  for (var i = 0; i < N; i++){ var r = results[i]; var k = durationSec > 0 ? Math.min(2, Math.floor(Math.max(0, +r.t || 0) * 3 / durationSec)) : Math.min(2, Math.floor(i * 3 / N));
+    g[k].n++; if (r.blank) g[k].b++; else if (r.ok) g[k].c++; g[k].s += (isFinite(+r.sec) ? +r.sec : 0); }
+  for (var j = 0; j < 3; j++) g[j].s = Math.round(g[j].s * 100) / 100;
+  return g;
+}
+function thirdsOf(res){
+  const n = res.length, c1 = Math.floor(n / 3), c2 = Math.floor(2 * n / 3);
+  const parts = [res.slice(0, c1), res.slice(c1, c2), res.slice(c2)];
+  return parts.map(function(p){ return p.length ? (p.filter(function(r){ return r.ok; }).length / p.length * 100) : null; });
+}
+function thirdsHTML(thirds){
+  const lbl = ['1.er tercio', '2.º tercio', '3.er tercio'];
+  const rows = thirds.map(function(v, i){ return '<tr><td>' + lbl[i] + '</td><td>' + (v === null ? '-' : fmt(v, 0) + ' %') + '</td></tr>'; }).join('');
+  return '<h2>Tercios</h2><div class="tab-box"><table class="kv"><tbody>' + rows + '</tbody></table></div>';
+}
+function kvRow(k, v){ return '<tr><th>' + k + '</th><td>' + v + '</td></tr>'; }
+function extraRows(cfg){
+  if (cfg.module === 'm1' && S.m1Distract && S.m1Distract.n) return kvRow('Sumas', S.m1Distract.ok + ' / ' + S.m1Distract.n);
+  if (cfg.module === 'm5' && S.extra){
+    const e = S.extra;
+    return kvRow('Tasa de aciertos', fmt(e.hitRate, 0) + ' % (' + e.hits + '/' + e.nTargets + ')') + kvRow('Falsas alarmas', e.falseAlarms) + kvRow('Reacción', e.avgRtMs !== null ? fmt(e.avgRtMs, 0) + ' ms' : '-');
+  }
+  if (cfg.module === 'm6' && S.extra){
+    const e = S.extra;
+    return kvRow('Coste del cambio', e.switchCostMs !== null ? fmt(e.switchCostMs, 0) + ' ms' : '-') + kvRow('Repetición / cambio', fmt(e.accRep, 0) + ' % / ' + fmt(e.accSwi, 0) + ' %');
+  }
+  if (cfg.module === 'm7' && S.extra){
+    const e = S.extra;
+    return kvRow('Interferencia', e.interferenceMs !== null ? fmt(e.interferenceMs, 0) + ' ms' : '-') + kvRow('Congruente / incongruente', fmt(e.accCong, 0) + ' % / ' + fmt(e.accIncong, 0) + ' %');
+  }
+  return '';
+}
+function personalBestForModule(sessions, moduleKey, level){ return personalBest(sessions, moduleKey, level); }
+function finishPractice(){
+  const cfg = S.cfg, res = S.results, real = cfg.after;
+  const correct = res.filter(function(r){ return r.ok; }).length;
+  show('<div class="top">' + IC(MODULE_ICON[cfg.module]) + '<h1>Práctica</h1></div>' +
+    '<div class="big"><div><b>' + correct + ' / ' + res.length + '</b><span>Correctas</span></div></div>' +
+    '<div class="actions"><button class="btn primary" id="real" title="Enter">' + IC('play') + 'Iniciar</button><button class="btn" id="again">' + IC('repeat') + 'Otra vez</button><button class="btn" id="menu">' + IC('back') + 'Menú</button></div>');
+  const goReal = function(){ if (parseGoal(real.goal)) startSession(real); else menu(); };
+  $('real').addEventListener('click', goReal);
+  $('again').addEventListener('click', function(){ startSession(practiceCfg(real)); });
+  $('menu').addEventListener('click', menu);
+  onKey = function(e){ if (e.target.tagName === 'BUTTON') return; if (e.key === 'Enter'){ e.preventDefault(); goReal(); } };
+}
+function finishSession(){
+  S.done = true; clearAll();
+  if (S.cfg.practice) return finishPractice();
+  const cfg = S.cfg, res = S.results;
+  const correct = res.filter(function(r){ return r.ok; }).length, blank = res.filter(function(r){ return r.blank; }).length, wrong = res.length - correct - blank;
+  const accuracy = res.length ? correct / res.length * 100 : 0;
+  const msVals = res.filter(function(r){ return r.ms !== null && r.ms !== undefined; }).map(function(r){ return r.ms; });
+  const spi = msVals.length ? (msVals.reduce(function(a, b){ return a + b; }, 0) / msVals.length / 1000) : null;
+  const lv = (cfg.mode === 'adaptive' && res.length) ? Math.round(res.reduce(function(a, r){ return a + r.level; }, 0) / res.length) : cfg.level;
+  const met = evaluateGoal(cfg.goal, { accuracy:accuracy, spi:spi, correct:correct });
+  const d = load();
+  const timing = TIMING[lv] || { prompt:null };
+  const rec = recommend(accuracy, spi, lv, timing.prompt);
+  const before = d.sessions.slice();
+  const thirds = thirdsOf(res);
+  const endur = atcThirds(res.map(function(r){ return { ok:r.ok, blank:r.blank, sec:(r.ms === null || r.ms === undefined) ? 0 : r.ms / 1000, t:0 }; }), 0);
+  const rec0 = {
+    ts: new Date().toISOString(), module: MODULE_LABEL[cfg.module] + (cfg.mode === 'manual' ? '' : ' [' + cfg.mode + ']'), moduleKey: cfg.module,
+    level:lv, mode:cfg.mode, correct:correct, wrong:wrong, blank:blank, spi:spi, accuracy:accuracy, goal:cfg.goal, met:met,
+    params: 'seed ' + cfg.seed + ', ' + res.length + ' items' + (cfg.hintMax ? (', hints<=' + cfg.hintMax) : '') + (cfg.mode === 'custom' ? ', custom' : ''),
+    thirds: endur
+  };
+  d.sessions.push(rec0); save();
+  const pbPrev = cfg.mode === 'manual' ? personalBestForModule(before, cfg.module, lv) : null;
+  const newPB = cfg.mode === 'manual' && accuracy >= PASS_ACCURACY && (pbPrev === null || (spi !== null && spi < pbPrev));
+  const streak = currentStreak(d.sessions, cfg.module);
+  show('<div class="top">' + IC(MODULE_ICON[cfg.module]) + '<h1>Resultado</h1></div>' +
+    '<p class="muted">' + esc(modDisp(cfg.module, cfg.mode)) + ' &middot; L' + lv + ' ' + LEVEL_NAMES[lv] + (cfg.mode === 'adaptive' ? (' &rarr; L' + S.adapt.level) : '') + ' &middot; ' + esc(cfg.seed) + '</p>' +
+    '<div class="big"><div><b>' + fmt(accuracy, 1) + ' %</b><span>Precisión</span></div>' +
+    '<div><b>' + (spi !== null ? fmt(spi, 1) + ' s' : '-') + '</b><span>Por ítem</span></div>' +
+    '<div><b class="' + (met === true ? 'ok' : (met === false ? 'err' : '')) + '">' + (met === true ? 'Cumplido' : (met === false ? 'No cumplido' : '-')) + '</b><span>' + esc(cfg.goal) + '</span></div></div>' +
+    '<div class="tab-box"><table class="kv"><tbody>' +
+    kvRow('Correctas', correct) + kvRow('Incorrectas', wrong) + kvRow('En blanco', blank) + kvRow('Racha', streak) + extraRows(cfg) +
+    (cfg.mode === 'manual' ? kvRow(newPB ? 'Nuevo récord' : 'Récord', newPB ? (spi !== null ? fmt(spi, 2) + ' s' : '-') : (pbPrev === null ? '-' : fmt(pbPrev, 2) + ' s')) : '') +
+    kvRow('Siguiente', '<b>' + esc(rec.text) + '</b>') + '</tbody></table></div>' +
+    (storeOk ? '' : '<p class="err"><b>No guardado</b></p>') +
+    thirdsHTML(thirds) +
+    '<div class="actions"><button class="btn primary" id="again" title="Enter">' + IC('arrow') + 'Otra vez</button><button class="btn" id="replay">' + IC('repeat') + 'Repetir</button><button class="btn" id="menu">' + IC('back') + 'Menú</button><button class="btn" id="hist" title="H">' + IC('history') + 'Historial</button></div>');
+  const again = function(){ const c = Object.assign({}, cfg); c.seed = 's' + Math.floor(Math.random() * 1e9).toString(36); if (c.mode === 'adaptive') c.level = 2; startSession(c); };
+  $('again').addEventListener('click', again);
+  $('replay').addEventListener('click', function(){ const c = Object.assign({}, cfg); if (c.mode === 'adaptive') c.level = 2; startSession(c); });
+  $('menu').addEventListener('click', menu);
+  $('hist').addEventListener('click', showHistory);
+  onKey = function(e){ if (e.target && e.target.tagName === 'BUTTON') return; if (e.key === 'Enter'){ e.preventDefault(); again(); } else if (e.key === 'h' || e.key === 'H') showHistory(); };
+}
+
+/* ---------- History and CSV ---------- */
+function trendChart(ses){
+  const pts = ses.slice(-30);
+  if (pts.length < 2) return '';
+  const W = 640, H = 200, ml = 36, mr = 10, mt = 10, mb = 24;
+  const x = function(i){ return ml + i * (W - ml - mr) / (pts.length - 1); };
+  const y = function(v){ return mt + (100 - v) * (H - mt - mb) / 100; };
+  let s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Precisión">';
+  [0, 25, 50, 75, 100].forEach(function(v){ s += '<line class="g" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(v) + '" y2="' + y(v) + '"/><text class="t" x="' + (ml - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+  s += '<line class="m" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(PASS_ACCURACY) + '" y2="' + y(PASS_ACCURACY) + '"/><text class="mt" x="' + (W - mr) + '" y="' + (y(PASS_ACCURACY) - 4) + '" text-anchor="end">96 %</text>';
+  s += '<polyline class="l" points="' + pts.map(function(p, i){ return x(i).toFixed(1) + ',' + y(p.accuracy).toFixed(1); }).join(' ') + '"/>';
+  pts.forEach(function(p, i){ s += '<circle class="p" cx="' + x(i).toFixed(1) + '" cy="' + y(p.accuracy).toFixed(1) + '" r="3.2"/><text class="t" x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + (i % Math.ceil(pts.length / 10) === 0 ? 'L' + esc(p.level) : '') + '</text>'; });
+  return s + '</svg>';
+}
+function showHistory(){
+  clearAll(); S = null;
+  const d = load(), ses = d.sessions;
+  const rows = ses.slice().reverse().slice(0, 150).map(function(s){
+    return '<tr><td>' + dateES(s.ts) + '</td><td>' + esc(s.moduleKey ? modDisp(s.moduleKey, s.mode) : s.module) + '</td><td>' + esc(s.level) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 2) + '</td><td>' + fmt(s.accuracy, 1) + '</td><td>' + esc(s.goal) + '</td><td>' + (s.met === true ? 'Sí' : (s.met === false ? 'No' : '-')) + '</td></tr>';
+  }).join('');
+  show('<button class="btn back" id="back" title="Esc">' + IC('back') + 'Menú</button><div class="top">' + IC('history') + '<h1>Historial</h1></div>' + trendChart(ses) +
+    (ses.length ? '<div class="tab-box"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Errores</th><th>Blanco</th><th>s/ítem</th><th>Prec. %</th><th>Objetivo</th><th>Cumplido</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<p class="muted">Sin sesiones</p>') +
+    '<div class="actions"><button class="btn primary" id="csv">' + IC('download') + 'CSV</button><button class="btn danger" id="del">' + IC('trash') + 'Borrar</button><span id="conf" style="display:inline-flex;gap:10px;align-items:center"></span></div>');
+  $('back').addEventListener('click', menu);
+  $('csv').addEventListener('click', function(){
+    try {
+      const blob = new Blob([toCSV(d.sessions)], { type:'text/csv;charset=utf-8' });
+      const a = document.createElement('a'), f = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'game-memory-attention-' + f.getFullYear() + pad2(f.getMonth() + 1) + pad2(f.getDate()) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    } catch (e) { $('conf').innerHTML = '<span class="err">Error</span>'; }
+  });
+  $('del').addEventListener('click', function(){
+    $('conf').innerHTML = '<span class="warnc">¿Borrar todo?</span> <button class="btn danger" id="yes">Sí</button> <button class="btn" id="no">No</button>';
+    $('no').addEventListener('click', function(){ $('conf').innerHTML = ''; });
+    $('yes').addEventListener('click', function(){ d.sessions = []; save(); showHistory(); });
+  });
+  onKey = null;
+}
+menu();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

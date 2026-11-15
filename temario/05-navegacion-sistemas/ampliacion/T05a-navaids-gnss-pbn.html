@@ -1,0 +1,637 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Radioayudas, GNSS y PBN (T05a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Navegación, equipos y sistemas</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-fundamentos-de-la-navegacion-aerea">1. Fundamentos de la navegación aérea</a></li>
+<li><a href="#2-radioayudas-terrestres-profundidad-de-fuente-primaria-mas-alla-del-manual">2. Radioayudas terrestres: profundidad de fuente primaria más allá del manual</a></li>
+<li><a href="#3-el-ils-en-detalle-contraste-con-fuentes-primarias">3. El ILS en detalle: contraste con fuentes primarias</a></li>
+<li><a href="#4-tacan-vortac-y-mls">4. TACAN, VORTAC y MLS</a></li>
+<li><a href="#5-constelaciones-gnss-principales-frecuencias-y-exactitud-segun-fuentes-primarias">5. Constelaciones GNSS principales: frecuencias y exactitud según fuentes primarias</a></li>
+<li><a href="#6-sistemas-de-aumentacion-gnss-en-detalle-cifras-de-prestaciones-sbasegnos">6. Sistemas de aumentación GNSS en detalle (cifras de prestaciones SBAS/EGNOS)</a></li>
+<li><a href="#7-vulnerabilidades-del-gnss">7. Vulnerabilidades del GNSS</a></li>
+<li><a href="#8-pbn-especificaciones-de-navegacion-en-profundidad-adiciones-de-fuente-primaria-a-la-seccion-7-de-om05">8. PBN: especificaciones de navegación en profundidad (adiciones de fuente primaria a la sección 7 de OM05)</a></li>
+<li><a href="#9-tramos-rf-rnp-ar-y-funcionalidades-avanzadas-ampliacion-de-om05">9. Tramos RF, RNP AR y funcionalidades avanzadas (ampliación de OM05)</a></li>
+<li><a href="#10-minimos-de-aproximacion-lnav-lnavvnav-lp-lpv">10. Mínimos de aproximación: LNAV, LNAV/VNAV, LP, LPV</a></li>
+<li><a href="#11-sidstariap-puntos-de-recorrido-y-estructura-de-rutas-ats">11. SID/STAR/IAP, puntos de recorrido y estructura de rutas ATS</a></li>
+<li><a href="#12-implantacion-de-la-pbn-en-espana">12. Implantación de la PBN en España</a></li>
+<li><a href="#13-categorias-de-aproximacion-pans-ops">13. Categorías de aproximación PANS-OPS</a></li>
+<li><a href="#14-sistemas-inerciales-y-fms">14. Sistemas inerciales y FMS</a></li>
+<li><a href="#15-navegacion-vertical-basada-en-altimetria-rvsm-y-radioaltimetro">15. Navegación vertical basada en altimetría, RVSM y radioaltímetro</a></li>
+<li><a href="#16-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">16. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#17-ejemplos-resueltos-verificados-dos-veces">17. Ejemplos resueltos (verificados dos veces)</a></li>
+<li><a href="#18-trampas-de-examen">18. Trampas de examen</a></li>
+<li><a href="#19-imprescindible-memorizar">19. Imprescindible memorizar</a></li>
+<li><a href="#20-glosario-bilingue-es-en">20. Glosario bilingüe (ES -&gt; EN)</a></li>
+<li><a href="#21-fuentes">21. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">44 min de lectura</div><h1 id="t05a-radioayudas-gnss-y-pbn-apuntes-ampliados-de-estudio-tema-5">T05a - Radioayudas, GNSS y PBN (apuntes ampliados de estudio, Tema 5)</h1>
+<p>Este archivo va <strong>más allá</strong> del manual de ENAIRE (<code>syllabus/manual/OM05-navigation-systems-study-guide.md</code>) y de los apuntes base <code>syllabus/t05-navigation-systems.md</code>. No repite lo que esos dos archivos ya dicen, salvo cuando una fuente primaria añade una cifra, un matiz o una contradicción que ellos no tienen. Abarca las radioayudas, el GNSS/PBN y los sistemas autónomos (el archivo complementario <code>T05b-surveillance-communications-atc-systems.md</code> trata la vigilancia, las comunicaciones y los sistemas ATC).</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El Tema 5 combina el manual descriptivo propio de ENAIRE (que explica <em>qué es cada sistema y cómo funciona</em>, casi sin cifras salvo unas pocas tablas: categorías del ILS, alcances de los sistemas hiperbólicos, número de luces del PAPI) con el tipo de datos concretos y comprobables que favorece una oposición: bandas de frecuencia, número de canales, cifras de exactitud, fechas y estaciones españolas con nombre. Este archivo añade justamente esa capa: la mecánica del triángulo de vientos que subyace a la navegación a estima, las cifras de fuente primaria sobre las prestaciones de GPS/Galileo/EGNOS, las especificaciones de navegación PBN con el detalle del Doc 9613 de la OACI (tramos RF, RNP AR, mínimos LNAV/LNAV-VNAV/LPV), las estaciones españolas VOR/DME/TACAN/GBAS con nombre según el AIP, y la mecánica del INS/IRS, el FMS y el RVSM. Cabe esperar preguntas del estilo <em>«¿qué significa PDE en el TSE?»</em>, <em>«¿qué especificación de navegación permite tramos RF en cualquier parte, incluida la aproximación final?»</em>, <em>«¿en qué frecuencia está centrada la señal E5a de Galileo?»</em>, <em>«¿dónde hay en España una estación GBAS operativa?»</em>, <em>«¿entre qué niveles de vuelo se aplica el RVSM?»</em>.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Fundamentos de la navegación aérea 2. Radioayudas terrestres 3. El ILS en detalle y contraste con las ayudas visuales 4. TACAN, VORTAC y MLS 5. Constelaciones GNSS principales 6. Sistemas de aumentación GNSS en detalle 7. Vulnerabilidades del GNSS 8. PBN: especificaciones de navegación en profundidad 9. Tramos RF, RNP AR y funcionalidades avanzadas 10. Mínimos de aproximación: LNAV, LNAV/VNAV, LP, LPV 11. SID/STAR/IAP, puntos de recorrido y estructura de rutas ATS 12. Implantación de la PBN en España 13. Categorías de aproximación PANS-OPS 14. Sistemas inerciales y FMS 15. Navegación vertical basada en altimetría, RVSM y radioaltímetro 16. Manual frente a fuentes primarias (tabla de discrepancias) 17. Ejemplos resueltos 18. Trampas de examen 19. Imprescindible memorizar 20. Glosario bilingüe (ES -&gt; EN) 21. Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-fundamentos-de-la-navegacion-aerea">1. Fundamentos de la navegación aérea</h2>
+<ul>
+<li>La <strong>navegación a estima</strong> (<em>dead reckoning</em>) se apoya en <strong>cuatro componentes: posición, dirección, tiempo y velocidad</strong>; si se conocen tres, se puede hallar el cuarto (distancia = velocidad x tiempo). CNATRA, <em>Intro to Air Navigation</em>, Information Sheet 6-1-2. Es la versión de fuente primaria de la misma idea que el manual de ENAIRE expresa con palabras («la velocidad, el tiempo y el rumbo de la aeronave») en la tabla de su sección 3 (manual p.8): el manual no cita la «posición» como cuarto componente explícito y enumera solo velocidad, tiempo y rumbo; la versión de cuatro componentes de CNATRA es más completa y es la que se usa en la formación de la FAA y de la Armada de EE. UU.</li>
+<li>La <strong>posición</strong> se da normalmente en <strong>latitud/longitud</strong>: la latitud, de 0 a 90° N/S desde el Ecuador; la longitud, de 0 a 180° E/W desde el Meridiano de Greenwich; ambas en grados y minutos (60' = 1°). La convención es «leer siempre primero la latitud, y la longitud con 3 cifras» (p. ej. N30°22', W087°19'). CNATRA.</li>
+<li>La <strong>dirección</strong> se mide de 001° a 360° y se refiere al <strong>Norte verdadero</strong> (parte superior de la Tierra) o al <strong>Norte magnético</strong> (cerca de la bahía de Hudson, en Canadá); un sistema de compás magnético convierte las líneas de fuerza magnéticas locales en una lectura en cabina. CNATRA.</li>
+<li>El <strong>triángulo de vientos</strong> (<em>wind triangle</em>), llamado también triángulo de navegación (<em>Navigation Triangle</em>), lo forman tres vectores (CNATRA, Information Sheet 6-5-2):</li>
+<li><strong>Vector aire</strong>: el <strong>rumbo verdadero</strong> de la aeronave (<strong>TH</strong>, <em>True Heading</em>) y su <strong>velocidad verdadera</strong> (<strong>TAS</strong>, <em>True Airspeed</em>), es decir, hacia dónde apunta y a qué velocidad se mueve respecto a la masa de aire.</li>
+<li><strong>Vector viento</strong>: <strong>dirección y velocidad</strong> del viento.</li>
+<li><strong>Vector tierra</strong> (resultante de los otros dos): <strong>derrota/ruta verdadera y velocidad respecto a tierra</strong> (<strong>GS</strong>, <em>Ground Speed</em>), es decir, hacia dónde se mueve realmente la aeronave y a qué velocidad, respecto al suelo.</li>
+<li><strong>Ángulo de deriva</strong> (<em>drift angle</em>): diferencia entre el rumbo verdadero y la derrota, a izquierda o derecha del rumbo (el viento empuja a la aeronave fuera de la derrota prevista). <strong>Ángulo de corrección o aproado</strong> (<em>crab angle</em>): corrección que aplica el piloto al virar hacia el viento para compensarlo; es <strong>igual en magnitud y de sentido contrario al ángulo de deriva</strong>. CNATRA.</li>
+<li><strong>La regla del 10 %</strong>: si la componente de viento cruzado es el <strong>10 % de la TAS, el ángulo de corrección es de unos 6°</strong>; la relación es aproximadamente lineal en los rangos de velocidad de la aviación (p. ej. TAS de 150 kt y viento cruzado de 30 kt (20 % de la TAS) -&gt; corrección de unos 12°, el doble de 6°). Es una comprobación de cálculo mental que usan los pilotos y, potencialmente, quienes redactan preguntas de examen en lugar de la trigonometría. CNATRA.</li>
+<li>La <strong>TAS</strong> es la velocidad calibrada corregida por la densidad del aire no estándar (presión y temperatura); la <strong>GS</strong> es la velocidad real sobre el suelo y solo coincide con la TAS si no hay componente de viento a lo largo de la derrota. CNATRA.</li>
+<li><strong>Errores de navegación</strong>: la posición que calcula la navegación a estima es solo una <strong>estimación</strong>; no tiene en cuenta el viento ni los errores de pilotaje e instrumentales, de modo que el error se acumula a lo largo de un tramo (manual, sección 5, p.8). En los sistemas autónomos esta misma acumulación se llama <strong>deriva</strong>, véase la sección 14 más abajo.</li>
+<li><strong>Líneas de situación</strong> (<em>position lines</em>): línea sobre la que se sabe que se encuentra la aeronave, obtenida a partir de una única medida de navegación (p. ej. un radial VOR, una marcación NDB, un arco DME, una línea celeste). Dos líneas de situación que se cortan dan una <strong>posición observada</strong> (<em>fix</em>). Este concepto está implícito en todas las descripciones del manual sobre el NDB, el VOR y los sistemas hiperbólicos (cada uno da por sí solo <em>un</em> único tipo de línea de situación: marcación para NDB/VOR, arco de distancia para el DME, hipérbola para LORAN/DECCA/OMEGA).</li>
+<li><strong>RNAV frente a navegación convencional</strong>: la navegación radioeléctrica convencional obliga a una <strong>red de rutas fija</strong> ligada a la ubicación de las estaciones («de estación en estación»); la RNAV permite volar a cualquier punto de recorrido definido por <strong>latitud/longitud</strong>, con independencia de dónde estén las estaciones terrestres (manual, sección 5). Matiz de fuente primaria: la navegación convencional <em>puede</em> seguir usando internamente cálculos de estilo RNAV (RNAV VOR/DME, véase la sección 8) mientras el sensor subyacente siga siendo una estación terrestre; lo que distingue a la RNAV «verdadera» es la <strong>base de datos de puntos de recorrido</strong>, no solo la libertad respecto a las rutas fijas.</li>
+</ul>
+<hr />
+<h2 id="2-radioayudas-terrestres-profundidad-de-fuente-primaria-mas-alla-del-manual">2. Radioayudas terrestres: profundidad de fuente primaria más allá del manual</h2>
+<p>El manual (secciones 12-15) explica bien el <em>principio</em> del NDB, el VOR, el DME y el ILS, pero casi no da cifras. Las fuentes primarias que siguen aportan las cifras que faltan; cuando los apuntes base (<code>t05-navigation-systems.md</code>) ya tienen una cifra, no se repite aquí salvo que una fuente primaria añada un matiz.</p>
+<ul>
+<li><strong>Errores del NDB/ADF más allá del «±5°»</strong>: el manual afirma que el margen de error del ADF no es superior a ±5° en condiciones normales (manual p.22). Las fuentes de la FAA describen <strong>mecanismos de error concretos</strong>: error de alabeo (la posición de la antena de cuadro cambia durante un viraje inclinado), efecto montaña (reflexión de la señal en terreno alto) y error cuadrantal (la estructura de la aeronave reirradia la señal), además del «efecto nocturno» y la «refracción costera» que ya figuran en los apuntes base.</li>
+<li><strong>Exactitud del VOR más allá del «±1°»</strong>: el AIM de la FAA da la cifra de ±1° para EE. UU. (ya está en los apuntes base); la norma de exactitud OACI/europea para el VOR se basa en el Anexo 10; no se cita aquí una cifra exacta porque no se ha contrastado directamente contra el texto del Anexo 10.</li>
+<li><strong>Infraestructura VOR/DME de España (estaciones con nombre)</strong>, leída directamente en el AIP España vigente, ENR 4.1:</li>
+<li><strong>ALBACETE VAB</strong>: DVOR/DME, <strong>115,80 MHz, canal 105X</strong>, coemplazado con un <strong>TACAN</strong> militar «TAB», <strong>canal 17X</strong>, en el mismo emplazamiento (H24).</li>
+<li><strong>ALICANTE ATE</strong>: DVOR/DME, <strong>114,65 MHz, canal 93Y</strong>.</li>
+<li><strong>ALMERÍA AMN</strong>: NDB, <strong>310,00 kHz</strong>.</li>
+<li><strong>ASTURIAS VES</strong>: DVOR/DME, <strong>112,40 MHz, canal 71X</strong>; <strong>ASTURIAS AV</strong>, NDB, <strong>387,00 kHz</strong>.</li>
+<li><strong>BARAJAS (Madrid) BRA</strong>: DVOR/DME, <strong>116,45 MHz</strong>.</li>
+<li><strong>BURGOS BUR</strong>: VOR/DME, <strong>111,40 MHz</strong>.</li>
+<li>La declinación magnética de cada estación figura junto a ella, p. ej. «(1°E 2025)», «(2°E 2025)»: las radioayudas de España presentan una pequeña <strong>declinación este</strong>, actualizada cada año en el AIP.</li>
+<li><strong>ALCANTARILLA TRL</strong>: <strong>TACAN</strong> militar, <strong>canal 113X</strong>, sin VOR coemplazado (estación militar «solo TACAN», a diferencia de un VORTAC).</li>
+<li><strong>Patrón que hay que recordar, no las frecuencias individuales</strong>: las radioayudas españolas en ruta del ENR 4.1 son sobre todo pares <strong>DVOR/DME</strong> (coemplazados, con un solo canal para el VOR y el DME), más unos pocos NDB independientes y varias estaciones <strong>TACAN militares</strong> (algunas coemplazadas con un DVOR/DME civil, p. ej. Albacete; otras independientes, p. ej. Alcantarilla).</li>
+<li><strong>GNSS en el AIP de España (ENR 4.3)</strong>: enumera solo <strong>EGNOS</strong> (operado por el proveedor europeo de servicios de satélite, ESSP, bajo la autoridad de operación de la EASA) y <strong>GPS</strong> (operado por el Gobierno de EE. UU.), ambos en <strong>L1 1575,42 MHz</strong>, con cobertura de las FIR/UIR de Barcelona, Canarias y Madrid completas. Galileo y GLONASS <strong>no figuran</strong> como elementos GNSS en esta sección del AIP, aunque Galileo sea un sistema de la UE: posible trampa de examen (la lista GNSS del propio AIP es solo EGNOS + GPS).</li>
+<li><strong>AIP GEN 3.4 (servicios de comunicaciones y navegación)</strong> indica que ENAIRE es la <strong>autoridad responsable de las comunicaciones aeronáuticas en España</strong> y enumera los tipos de radioayudas para la navegación disponibles a escala nacional: <strong>PAR (radar para aproximación de precisión), NDB, VDF (estación radiogoniométrica VHF), ILS, VOR, DME, TACAN, GBAS</strong>. Es la <em>lista oficial completa de tipos de radioayudas</em> que opera ENAIRE/España, útil como lista de comprobación para el examen (<strong>no</strong> incluye el MLS ni los sistemas hiperbólicos, en coherencia con que estén obsoletos en España).</li>
+</ul>
+<hr />
+<h2 id="3-el-ils-en-detalle-contraste-con-fuentes-primarias">3. El ILS en detalle: contraste con fuentes primarias</h2>
+<p>La tabla de categorías del ILS del manual (RVR/DH por categoría, sección 15, ya resumida en OM05) y la tabla de los apuntes base derivada de la FAA (frecuencias de LOC/GS, tonos y colores de las radiobalizas) no se repiten aquí. Una adición:</p>
+<ul>
+<li><strong>El GBAS como alternativa al ILS en España</strong>: <strong>el aeropuerto de Málaga tiene una estación GBAS operativa que da soporte a tráfico comercial regular</strong>, junto con Bremen y Fráncfort (Alemania), Sídney (Australia) y Zúrich (Suiza). FAA, GBAS FAQ TC16-0005. Es un dato concreto y comprobable del tipo «qué aeropuerto español tiene X», que ni el manual ni los apuntes base mencionan.</li>
+<li><strong>GAST (<em>GBAS Approach Service Type</em>, tipo de servicio de aproximación GBAS)</strong>: <strong>GAST-C</strong> admite mínimos de <strong>CAT I</strong> (aumentación monofrecuencia); <strong>GAST-D</strong> está concebido para <strong>hasta CAT III</strong>.</li>
+<li><strong>GBAS frente a ILS, ventajas operacionales</strong> (fuente primaria, no figuran en el manual): <strong>una sola estación terrestre GBAS puede dar servicio a varios extremos de pista</strong>, con <strong>hasta 48 procedimientos de aproximación en una única asignación VHF</strong> (el ILS necesita una frecuencia por extremo de pista); el GBAS tiene una <strong>ubicación más flexible</strong> (no está ligado a la alineación con una sola pista) y <strong>áreas críticas y sensibles más pequeñas</strong>, y requiere <strong>inspecciones en vuelo menos frecuentes</strong> que el ILS.</li>
+<li><strong>GBAS frente a WAAS/SBAS, la diferencia operacional clave</strong>: las correcciones WAAS/SBAS proceden de <strong>estaciones de referencia muy separadas entre sí</strong> y las difunde un <strong>satélite geoestacionario en la frecuencia L1 del GPS</strong>; las correcciones GBAS se calculan <strong>localmente en el aeropuerto</strong> (promedio de 3 o más antenas GPS) y se difunden mediante un enlace de <strong>radiodifusión de datos VHF (VDB)</strong> que cubre solo el entorno del aeropuerto. Esto permite al GBAS alcanzar una <strong>exactitud más estricta, suficiente para CAT III</strong>, algo que el SBAS (de área amplia, con menor exactitud local) todavía no puede certificar.</li>
+<li><strong>GLS = <em>GBAS Landing System</em></strong> (sistema de aterrizaje GBAS): nombre del <em>procedimiento de aproximación instrumental o capacidad</em> que proporciona una estación GBAS (el GBAS es el sistema de navegación; GLS es el nombre del procedimiento en la carta).</li>
+</ul>
+<hr />
+<h2 id="4-tacan-vortac-y-mls">4. TACAN, VORTAC y MLS</h2>
+<ul>
+<li><strong>TACAN (<em>Tactical Air Navigation</em>, ayuda táctica a la navegación aérea)</strong>: se desarrolló porque el VOR/DME (basado en amplitud, considerado demasiado voluminoso e impreciso para el uso militar y naval a bordo de buques) no era adecuado para las fuerzas armadas. El TACAN es un <strong>sistema de pulsos que opera en UHF</strong> y da <strong>acimut y distancia</strong> con un único equipo de a bordo; su principio técnico de funcionamiento es <strong>distinto del VOR/DME</strong>, aunque la información de navegación que ofrece a la tripulación es equivalente (FAA AIM 1-1-5).</li>
+<li><strong>VORTAC</strong>: instalación que combina <strong>VOR + TACAN</strong> y presta <strong>tres servicios individuales desde un solo emplazamiento</strong>: acimut VOR, acimut TACAN y distancia TACAN (que las aeronaves civiles utilizan como DME). AIM 1-1-5.</li>
+<li><strong>Interbloqueo de identificación</strong>: las señales VOR y TACAN de un VORTAC se identifican cada una con un código Morse de 3 letras y están <strong>interbloqueadas</strong>, de modo que, cuando un piloto combina el acimut VOR con la distancia derivada del TACAN, ambos proceden con seguridad de la <strong>misma estación física</strong>. AIM.</li>
+<li>En España, varias estaciones TACAN en ruta son <strong>exclusivamente militares, sin VOR coemplazado</strong> (p. ej. Alcantarilla TRL), y otras están coemplazadas con un DVOR/DME civil (p. ej. Albacete), según el AIP ENR 4.1: un distractor de examen podría afirmar que «todo TACAN de España forma parte de un VORTAC», lo cual es falso.</li>
+<li><strong>MLS (<em>Microwave Landing System</em>, sistema de aterrizaje por microondas)</strong>: ayuda de aproximación y aterrizaje de precisión normalizada en el Anexo 10 de la OACI, con frecuencias de microondas (banda C, en torno a 5 GHz), pensada como sucesora del ILS con una selección mucho más amplia de ángulos de aproximación y cobertura. <strong>No se adoptó de forma generalizada</strong> y ha quedado prácticamente sustituida por el GBAS/GLS; no figura entre las radioayudas que España opera actualmente (GEN 3.4, sección 2 más arriba).</li>
+</ul>
+<hr />
+<h2 id="5-constelaciones-gnss-principales-frecuencias-y-exactitud-segun-fuentes-primarias">5. Constelaciones GNSS principales: frecuencias y exactitud según fuentes primarias</h2>
+<ul>
+<li><strong>Exactitud de la señal en el espacio (SIS) del servicio de posicionamiento estándar (SPS) del GPS</strong>, según la 5.ª edición del GPS SPS Performance Standard (abril de 2020): el estándar comprometido es de <strong>7,0 m, 95 % de error de alcance del usuario (URE) estadístico global, en Operaciones Normales, para todos los valores de antigüedad de los datos (AOD)</strong> de cada combinación de componentes SIS del SPS; un valor más estricto de <strong>3,8 m 95 % con AOD cero</strong>, y uno más laxo de <strong>9,7 m 95 % con cualquier AOD</strong>. Hay además un estándar de <strong>30 m, 99,94 % de URE estadístico global</strong> y otro de <strong>30 m, 99,79 % de URE en el peor punto individual</strong> (basados en un intervalo de medida de un año y en la hipótesis de 3 fallos de servicio al año, de hasta 6 horas cada uno). En <strong>Operaciones Extendidas (14 días sin carga de datos)</strong>, el estándar de URE del código C/A monofrecuencia se relaja a <strong>388 m, 95 %</strong>. (Tabla 3.4-1).</li>
+<li><strong>En la práctica, el GPS ya rinde mucho mejor que el estándar comprometido</strong>: el documento señala que el GPS «ha logrado en los últimos años una exactitud horizontal de 3 metros o mejor y una exactitud vertical de 5 metros o mejor». El matiz relevante para el examen es que el <strong>compromiso oficial del SPS PS (7,0 m, 95 % de URE)</strong> y la <strong>exactitud realmente observada (3 m/5 m)</strong> son dos cifras distintas; una pregunta podría pedir cualquiera de ellas.</li>
+<li><strong>Constelación GPS</strong>: <strong>constelación base de 24 posiciones, 6 planos orbitales, 4 posiciones por plano</strong>; 6 de las 24 posiciones son «ampliables» (pueden ocuparse para mejorar la geometría y la disponibilidad).</li>
+<li><strong>Constelación Galileo</strong>: <strong>24 satélites nominales en órbita terrestre media (MEO)</strong>, dispuestos en <strong>3 planos orbitales</strong> (nodos ascendentes separados 120°), con <strong>56° de inclinación</strong> respecto al Ecuador; cada plano tiene <strong>8 posiciones de satélite</strong>, separadas 45° dentro del plano, con un <strong>desfase angular de 15° entre planos adyacentes</strong>; la constelación se completa con <strong>satélites auxiliares (de reserva en órbita)</strong>.</li>
+<li><strong>Frecuencias de señal del servicio abierto (OS) de Galileo</strong> (fuente primaria, no figuran en el manual ni en los apuntes base): <strong>E1, centrada en 1575,42 MHz</strong> (la misma frecuencia que la L1/C/A del GPS, lo que permite receptores combinados); <strong>E5a en 1176,45 MHz</strong> y <strong>E5b en 1207,14 MHz</strong> (multiplexadas juntas en 1191,795 MHz); <strong>E6, centrada en 1278,75 MHz</strong>. Los modos de uso monofrecuencia (SF) del servicio abierto son solo E1, solo E5a o solo E5b; los modos bifrecuencia (DF) son E1/E5a y E1/E5b.</li>
+<li><strong>Principio de determinación de la posición</strong> (ya en el manual, sección 18): la distancia a cada satélite se obtiene del <strong>tiempo de propagación de la señal</strong>; <strong>3 satélites</strong> fijan la posición en el espacio y se necesita un <strong>4.º</strong> para resolver a la vez el sesgo del reloj del receptor; es común a GPS, Galileo, GLONASS y BeiDou.</li>
+<li><strong>GLONASS y BeiDou</strong>: el manual los cita como constelaciones principales (Rusia y China, respectivamente); sus cifras operativas de precisión no están cubiertas en las fuentes primarias de este archivo, que se centran en GPS y Galileo/EGNOS.</li>
+</ul>
+<hr />
+<h2 id="6-sistemas-de-aumentacion-gnss-en-detalle-cifras-de-prestaciones-sbasegnos">6. Sistemas de aumentación GNSS en detalle (cifras de prestaciones SBAS/EGNOS)</h2>
+<p>El manual (sección 18) distingue correctamente entre ABAS/SBAS/GBAS por área de servicio y mecanismo; las cifras siguientes, del <strong>Documento de Definición del Servicio (SDD) de Seguridad de la Vida Humana (SoL) de EGNOS, edición 3.6</strong>, son la profundidad de fuente primaria que faltaba en el manual y en los apuntes base:</p>
+<ul>
+<li><strong>Prestaciones exigidas por la OACI según el tipo de operación</strong> (Tabla 7 del SDD, valores a los que apunta el diseño de EGNOS):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>Exactitud horizontal 95 %</th>
+<th>Exactitud vertical 95 %</th>
+<th>Integridad</th>
+<th>Tiempo hasta la alerta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>En ruta (oceánica/continental, baja densidad)</td>
+<td>3,7 km (2,0 NM)</td>
+<td>N/A</td>
+<td>1 - 1x10⁻⁷/h</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>En ruta, terminal</td>
+<td>3,7 km (2,0 NM)</td>
+<td>N/A</td>
+<td>1 - 1x10⁻⁷/h</td>
+<td>15 s</td>
+</tr>
+<tr>
+<td>Aproximación inicial/intermedia, NPA, salida</td>
+<td>220 m (720 ft)</td>
+<td>N/A</td>
+<td>1 - 1x10⁻⁷/h</td>
+<td>10 s</td>
+</tr>
+<tr>
+<td>APV-I (aproximación con guiado vertical)</td>
+<td>16,0 m (52 ft)</td>
+<td>20 m (66 ft)</td>
+<td>1 - 2x10⁻⁷/aproximación</td>
+<td>10 s</td>
+</tr>
+<tr>
+<td>Aproximación de precisión CAT I</td>
+<td>16,0 m (52 ft)</td>
+<td>6,0-4,0 m (20-13 ft)</td>
+<td>1 - 2x10⁻⁷/aproximación</td>
+<td>6 s</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Servicio SoL de EGNOS para la aviación: prestaciones realmente prestadas</strong> (Tabla 8, lo que EGNOS se compromete a dar, no el techo de la OACI de arriba) :</li>
+<li><strong>NPA</strong>: exactitud horizontal <strong>200 m 95 %</strong>, integridad <strong>1-1x10⁻⁷/h</strong>, tiempo hasta la alerta <strong>&lt;6 s</strong>, continuidad <strong>&lt;1x10⁻³/h en la mayor parte de la ECAC</strong> (hasta 2,5x10⁻³/h en el resto), <strong>disponibilidad 0,999 en toda la ECAC</strong>.</li>
+<li><strong>APV-I y LPV-200</strong>: exactitud horizontal <strong>3 m 95 %</strong>, exactitud vertical <strong>4 m 95 %</strong>, integridad <strong>1-2x10⁻⁷/aproximación</strong>, continuidad <strong>&lt;1x10⁻⁴ por 15 s en el núcleo de la ECAC</strong> (hasta 5x10⁻⁴/15 s en el resto), <strong>disponibilidad 0,99 en la mayor parte de las áreas terrestres de la ECAC</strong>.</li>
+<li>Para el <strong>LPV-200</strong> en concreto se aplican requisitos de integridad adicionales: la probabilidad de un error del sistema de navegación vertical (VNSE) &gt; 10 m debe ser <strong>&lt; 10⁻⁷ por aproximación</strong> (condiciones nominales) y la probabilidad de un VNSE &gt; 15 m debe ser <strong>&lt; 10⁻⁵ por aproximación</strong> (condiciones degradadas).</li>
+<li>Matiz de examen: la <strong>exactitud realmente prestada por EGNOS (3 m/4 m)</strong> es mucho más estricta que el <strong>mínimo de la OACI para APV-I/CAT I (16 m/6-20 m)</strong>: las prestaciones reales del sistema de aumentación superan con creces el umbral reglamentario.</li>
+<li><strong>Hitos de EGNOS</strong> (contraste con los apuntes base, que citan Wikipedia): el SDD SoL confirma que <strong>los niveles de servicio NPA y APV-I se declararon con el SDD SoL v1.0 en marzo de 2011</strong>, y que <strong>el LPV-200 se añadió más tarde</strong> como nivel de servicio adicional. Por tanto, la cifra de los apuntes base («certificado para seguridad de la vida humana en marzo de 2011») queda confirmada por una fuente primaria.</li>
+<li><strong>WAAS (SBAS de EE. UU.)</strong>: comparte la L1 del GPS, igual que EGNOS en Europa; son los equivalentes SBAS de EE. UU. y Europa respectivamente.</li>
+</ul>
+<hr />
+<h2 id="7-vulnerabilidades-del-gnss">7. Vulnerabilidades del GNSS</h2>
+<ul>
+<li><strong>Interferencia intencionada (<em>jamming</em>)</strong>: interferencia de radiofrecuencia, intencionada o no, que sobrepasa o enmascara la señal GNSS, muy débil, en el receptor y provoca la pérdida de la posición; las señales GNSS llegan al receptor con una potencia extremadamente baja (muy por debajo del ruido térmico antes del desensanchamiento), y eso es precisamente lo que hace que sean <strong>fáciles de interferir con transmisores de potencia comparativamente baja</strong>.</li>
+<li><strong>Suplantación (<em>spoofing</em>)</strong>: transmisión de una <strong>señal GNSS falsa</strong> que imita las señales genuinas de los satélites con la suficiente fidelidad como para que el receptor se enganche a ella y calcule una posición o una hora falsas, sin una alarma evidente de pérdida de señal (a diferencia de la interferencia).</li>
+<li><strong>Retardo ionosférico</strong>: la ionosfera refracta y retrasa las señales GNSS; el documento GPS SPS PS <strong>excluye explícitamente los errores del modelo de retardo ionosférico monofrecuencia del estándar de exactitud URE de la SIS básica</strong>, y los trata aparte con un modelo de corrección cuyo error residual se aborda en un apéndice del GPS SPS PS. Es un matiz concreto relevante para el examen: la cifra «oficial» de exactitud de 7,0 m <strong>no</strong> incluye ya el error ionosférico, que se añade sobre ella mediante el modelo de corrección ionosférica difundido, y los usuarios monofrecuencia soportan un error residual mayor que los bifrecuencia (que pueden medirlo y eliminarlo directamente, una de las razones por las que los receptores GNSS multifrecuencia, p. ej. Galileo E1/E5a bifrecuencia, mejoran la robustez).</li>
+<li><strong>Mitigaciones que citan las fuentes primarias leídas</strong>: RAIM/FDE (detección y exclusión de fallos autónoma del receptor, ya en los apuntes base), la monitorización y alerta de integridad del SBAS/GBAS (secciones 5-6 más arriba) y los <strong>receptores multiconstelación y multifrecuencia</strong> (reducen los puntos únicos de fallo y el error ionosférico residual).</li>
+</ul>
+<hr />
+<h2 id="8-pbn-especificaciones-de-navegacion-en-profundidad-adiciones-de-fuente-primaria-a-la-seccion-7-de-om05">8. PBN: especificaciones de navegación en profundidad (adiciones de fuente primaria a la sección 7 de OM05)</h2>
+<p>La tabla de especificaciones de navegación del manual (sección 7 de OM05) es exhaustiva; las adiciones siguientes proceden de la lectura directa del <strong>Manual PBN, Doc 9613 de la OACI, 5.ª edición (sin editar, copia del PBN Portal)</strong>.</p>
+<ul>
+<li><strong>Descomposición del TSE, confirmación de fuente primaria</strong>: el error total del sistema (TSE) combina el <strong>error del sistema de navegación (NSE)</strong>, el <strong>error técnico de vuelo (FTE)</strong> y el <strong>error de definición de trayectoria (PDE)</strong>; los apuntes base ya indican que el Doc 9613 trata el PDE como despreciable, y la estructura de la 5.ª edición lo confirma de nuevo (el capítulo 5 sobre RNP APCH analiza repetidamente los presupuestos de TSE lateral sin un término PDE para trayectorias codificadas en la base de datos de a bordo), en el capítulo 5 (RNP APCH) del Manual PBN.</li>
+<li><strong>RNP AR APCH, matiz adicional que no figura en la tabla resumen del manual</strong>: la 4.ª edición del Manual PBN (2013) introdujo por primera vez la funcionalidad de <strong>terminador de trayectoria de radio fijo (RF)</strong> como capacidad <em>dentro</em> de la RNP AR APCH; la <strong>5.ª edición y el Doc 8168 (PANS-OPS, Volumen II) aclaran que los tramos RF también pueden usarse en especificaciones de navegación distintas de la RNP AR APCH</strong> (es decir, el RF ya no es exclusivo de la RNP AR). Esto matiza o corrige directamente la fila de RNP APCH del manual de ENAIRE, que dice que los tramos RF se limitan a la «aproximación inicial o intermedia, o algunas partes de la aproximación frustrada» en la RNP APCH: la fuente primaria aclara que el RF es una <strong>capacidad general</strong>, y que su ubicación permitida exacta depende de la especificación de navegación y del segmento de que se trate.</li>
+<li><strong>La RNP AR se complementa con los procedimientos de salida RNP AR (DP)</strong>, apoyados en un manual específico de diseño de procedimientos (<strong>Doc 9905</strong>) y en requisitos específicos de cartografía (<strong>Doc 8697, Manual de cartas aeronáuticas</strong>); tanto la RNP AR APCH como la RNP AR DP exigen una <strong>autorización específica (a nivel de aeronave y de tripulación)</strong>, a diferencia de la mayoría de las demás operaciones PBN, que solo requieren una aprobación general.</li>
+<li><strong>Denominación de los puntos de recorrido</strong>: el ENR 4.4 del AIP de España enumera <strong>designadores «código-nombre» pronunciables de cinco letras</strong> para los puntos significativos en ruta (la convención DesignatedPoint de la OACI/AIXM, p. ej. ABOSI, ABRIX, ABUPI, ADINO), cada uno con sus coordenadas y observaciones sobre su relevancia para las rutas ATS (p. ej. reglas obligatorias de niveles de vuelo pares/impares en ciertos cruces de límites de FIR). Es la versión concreta, propia de España, de la afirmación abstracta del manual de que los «puntos de recorrido RNAV se definen por latitud/longitud, sin ligarse a estaciones terrestres».</li>
+<li><strong>P-RNAV / B-RNAV (términos históricos)</strong>: el documento de argumentación de seguridad de P-RNAV de EUROCONTROL (leído en su introducción) presenta la <strong>P-RNAV (<em>Precision RNAV</em>, RNAV de precisión)</strong> como la especificación de navegación europea de espacio aéreo terminal anterior a la PBN, evaluada en seguridad por EUROCONTROL durante «los últimos 5-10 años» (respecto a la fecha del propio documento) mediante una evaluación estructurada de riesgos funcionales y una evaluación preliminar de seguridad del sistema (FHA/PSSA); la <strong>B-RNAV (<em>Basic RNAV</em>, RNAV básica)</strong> era su equivalente en ruta (EUROCONTROL, <em>Precision RNAV / P-RNAV Safety Argument</em>, introducción). Referencia cruzada: la P-RNAV y la B-RNAV fueron <strong>sustituidas por la RNAV 1 y la RNAV 5, respectivamente</strong>, al adoptarse la PBN; una pregunta que empareje «P-RNAV» con «RNAV 1 terminal» y «B-RNAV» con «RNAV 5 en ruta» estaría comprobando esta correspondencia histórica.</li>
+</ul>
+<hr />
+<h2 id="9-tramos-rf-rnp-ar-y-funcionalidades-avanzadas-ampliacion-de-om05">9. Tramos RF, RNP AR y funcionalidades avanzadas (ampliación de OM05)</h2>
+<ul>
+<li><strong>Tramo RF (<em>radius to fix</em>, radio fijo hasta un punto)</strong>: segmento de trayectoria curvo definido por un <strong>radio fijo, un punto (el extremo) y un centro</strong>, frente al tramo recto («TF», <em>track to fix</em>); los tramos RF permiten que un procedimiento haga describir a la aeronave un arco exactamente repetible en lugar de un segmento de círculo máximo, lo que importa cuando el terreno o el espacio aéreo obligan a virar cerca de la pista.</li>
+<li><strong>A-RNP (RNP avanzada)</strong>: <strong>especificación universal única con valores de exactitud RNP escalables</strong> (el resumen del manual ya dice «entre 2 y 0,3»); la guía breve de EUROCONTROL «Introducing PBN and A-RNP» presenta la RNP escalable como una <strong>función opcional incluso dentro de la A-RNP</strong>, es decir, una aeronave u operador certificado para A-RNP no tiene garantizado automáticamente todo valor escalable; los valores concretos deben seguir demostrándose y aprobándose.</li>
+<li><strong>Niveles de autorización, confirmación de fuente primaria</strong>: «la mayoría de las operaciones PBN requieren una aprobación» (proceso operacional de aprobación estándar), mientras que la <strong>RNP AR APCH y la RNP AR DP requieren una aprobación <em>específica</em></strong> (proceso más exigente, específico de aeronave y tripulación, dada la mayor exactitud y la falta de los márgenes habituales de contención). Manual PBN.</li>
+</ul>
+<hr />
+<h2 id="10-minimos-de-aproximacion-lnav-lnavvnav-lp-lpv">10. Mínimos de aproximación: LNAV, LNAV/VNAV, LP, LPV</h2>
+<ul>
+<li><strong>La RNP APCH se divide en dos secciones operacionales</strong> en el Doc 9613, Volumen II: <strong>Sección A, operaciones hasta mínimos LNAV y LNAV/VNAV</strong> (guiado lateral solamente, o con guiado vertical asistido por baro-VNAV, sin más aumentación que el GNSS básico/ABAS) y <strong>Sección B, operaciones hasta mínimos LP y LPV</strong> (ambos requieren <strong>SBAS</strong>, p. ej. EGNOS en Europa). Manual PBN.</li>
+<li><strong>LNAV (<em>Lateral Navigation</em>, navegación lateral)</strong>: solo guiado lateral, línea de mínimos de una <strong>aproximación de no precisión</strong>; <strong>LNAV/VNAV</strong>: guiado lateral más <strong>guiado vertical de baro-VNAV</strong> (derivado de la altimetría barométrica, véase la sección 15), que sigue sin ser una aproximación de precisión en el sentido del ILS, pero se vuela con un perfil vertical estabilizado.</li>
+<li><strong>LPV (<em>Localizer Performance with Vertical guidance</em>, prestación de localizador con guiado vertical)</strong>: aproximación <strong>basada en SBAS</strong>, con una prestación lateral comparable a la del localizador ILS y guiado vertical derivado del SBAS; <strong>LP (<em>Localizer Performance</em>, prestación de localizador)</strong>: contrapartida SBAS solo lateral (sin guiado vertical), que suele emplearse cuando el terreno o los obstáculos impiden una trayectoria vertical LPV estabilizada (lista de acrónimos y Sección B del capítulo 5 del Manual PBN).</li>
+<li><strong>Una carta de aproximación puede llevar simultáneamente mínimos LNAV, LNAV/VNAV y LPV</strong>, y consigna una <strong>línea de mínimos LP solo cuando el segmento de aproximación final (FAS) exige SBAS</strong> pero no se publica un perfil vertical LPV completo; el Manual PBN señala expresamente esta posibilidad de combinación.</li>
+<li><strong>Los mínimos LPV pueden llegar hasta 60 m (200 ft) de altura de decisión</strong>, es decir, equivalen a la <strong>altura de decisión de un ILS CAT I</strong>, según la geometría concreta del FAS y el nivel de servicio SBAS disponible.</li>
+<li><strong>Obligación del Reglamento de Ejecución (UE) 2018/1048</strong> (la copia consolidada del Reino Unido da el 3 de diciembre de 2020, que es la fecha del Brexit británico; el texto del Diario Oficial de la UE da el <strong>3 de diciembre de 2020</strong>, con excepciones hasta el 25 de enero de 2024 y el 6 de junio de 2030): desde el <strong>3 de diciembre de 2020</strong>, los proveedores de ATM/ANS deben implantar, en (casi) todos los extremos de pista instrumentales, <strong>procedimientos RNP APCH con mínimos LNAV, LNAV/VNAV y LPV</strong>, añadiendo <strong>tramos RF cuando la densidad o la complejidad del tráfico lo requieran</strong>. Se establecen expresamente dos excepciones: (a) cuando los procedimientos 3D sean excesivamente difíciles (terreno, obstáculos, separación), pueden implantarse en su lugar <strong>procedimientos RNP APCH 2D</strong> (solo LNAV), complementados opcionalmente con RNP AR APCH; (b) cuando <strong>todavía no haya cobertura SBAS</strong>, deben implantarse igualmente LNAV y LNAV/VNAV, y el <strong>LPV se añade en los 18 meses siguientes a la disponibilidad de cobertura SBAS</strong>.</li>
+<li><strong>Las rutas ATS en ruta por encima del FL150 deben usar RNAV 5</strong> según el mismo reglamento; <strong>las rutas SID/STAR de helicópteros pueden usar en su lugar RNP 0,3, RNAV 1 o RNP 1</strong> (a elección del proveedor de servicios de navegación aérea).</li>
+</ul>
+<hr />
+<h2 id="11-sidstariap-puntos-de-recorrido-y-estructura-de-rutas-ats">11. SID/STAR/IAP, puntos de recorrido y estructura de rutas ATS</h2>
+<ul>
+<li><strong>SID (salida normalizada por instrumentos) y STAR (llegada normalizada por instrumentos)</strong>: ya definidas en el manual (sección 3, fases del vuelo); la adición de fuente primaria es el <strong>mecanismo real de lista de puntos de recorrido del AIP</strong> (sección 8 más arriba), que concreta los tramos SID/STAR/en ruta: puntos de 5 letras con nombre, cada uno etiquetado con su relevancia para las rutas ATS y cualquier restricción de cruce (p. ej. nivel de vuelo par/impar obligatorio en el límite de una FIR). AIP ENR 4.4.</li>
+<li><strong>IAP (procedimiento de aproximación por instrumentos)</strong>: se compone de segmentos, <strong>inicial, intermedio, final y aproximación frustrada</strong>; la sección de fases del vuelo del manual ya los enumera implícitamente mediante «aproximación y aterrizaje»; cada especificación de navegación RNP indica cuáles de esos segmentos admite (p. ej. RNP 1: «inicial/intermedia, o en algunas partes de la aproximación frustrada»; RNP AR APCH: «en cualquier parte del procedimiento, incluida la aproximación final»).</li>
+<li><strong>Implicación de la PBN para la estructura de rutas ATS</strong>: como los procedimientos RNAV/RNP definen las trayectorias por las coordenadas de los puntos de recorrido y no por el sobrevuelo de estaciones, una misma ruta ATS puede construirse <strong>con independencia de dónde estén físicamente las estaciones terrestres</strong>, que es precisamente la ventaja de flexibilidad que el manual enumera en su sección 8 (mayor flexibilidad en el diseño de la red de rutas, reducción de las distancias de vuelo).</li>
+</ul>
+<hr />
+<h2 id="12-implantacion-de-la-pbn-en-espana">12. Implantación de la PBN en España</h2>
+<ul>
+<li>España, como Estado miembro de la UE y de la EASA, está sujeta al <strong>Reglamento (UE) 2018/1048</strong>: RNP APCH con LNAV/LNAV-VNAV/LPV en (casi) todos los extremos de pista instrumentales desde el <strong>3 de diciembre de 2020</strong>, y RNAV 5 por encima del FL150 en ruta.</li>
+<li><strong>Prueba concreta de implantación</strong> hallada en la biblioteca: la <strong>lista de puntos de recorrido código-nombre del AIP (ENR 4.4)</strong> muestra que la red de rutas ATS de España ya se apoya en puntos de 5 letras de estilo RNAV, y no en el sobrevuelo de estaciones, para la mayor parte de su estructura. La <strong>estación GBAS operativa de Málaga</strong> muestra que España ha ido más allá del mínimo SBAS/RNP APCH y ha desplegado una aproximación <strong>GLS</strong> GAST-C con capacidad CAT I, por delante de la mayoría de los Estados de la UE.</li>
+<li><strong>Los elementos GNSS reconocidos en el AIP español son solo EGNOS y GPS</strong> (ENR 4.3): es la infraestructura GNSS <em>legalmente reconocida</em> para las operaciones españolas, aunque las señales de Galileo puedan usarlas receptores multiconstelación debidamente certificados (véase la sección 5, más arriba).</li>
+</ul>
+<hr />
+<h2 id="13-categorias-de-aproximacion-pans-ops">13. Categorías de aproximación PANS-OPS</h2>
+<ul>
+<li><strong>Categorías de aproximación de las aeronaves (A-E), según la velocidad indicada (IAS) en la configuración de aproximación final/en circuito</strong> (leídas en el Instrument Procedures Handbook de la FAA, que usa expresamente el esquema de categorías alineado con la OACI que también emplea el diseño de procedimientos PANS-OPS/Doc 8168):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Rango de velocidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>menos de 91 kt</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>de 91 kt a menos de 121 kt</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>de 121 kt a menos de 141 kt</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>aprox. 141-166 kt</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>aprox. 166 kt o más</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Por qué importa para el diseño de procedimientos</strong>: el <strong>tamaño del área protegida de la aproximación en circuito depende de la velocidad de la categoría de aproximación</strong>: una aeronave más rápida (de categoría superior) necesita un radio de circuito y un área de franqueamiento de obstáculos mayores.</li>
+<li><strong>El piloto que vuele a una velocidad de circuito superior a la normal de la categoría de su aeronave debe usar los mínimos de la categoría superior que corresponda a la velocidad realmente volada</strong> (p. ej. una aeronave de categoría B que haga circuito a 145 kt IAS debe usar los <strong>mínimos de la categoría D</strong>, no los de la B).</li>
+<li><strong>Relación con el Doc 8168 de la OACI (PANS-OPS)</strong>: la tabla de arriba es la del Instrument Procedures Handbook de la FAA, que la presenta como alineada con la OACI; el Doc 8168 (PANS-OPS) es de pago y no se ha contrastado directamente, así que trátala como una referencia equivalente, no como la cifra literal del documento OACI.</li>
+</ul>
+<hr />
+<h2 id="14-sistemas-inerciales-y-fms">14. Sistemas inerciales y FMS</h2>
+<p>La sección del manual sobre el INS (la 19 de OM05, con cuatro componentes: acelerómetros, plataforma, integradores y computador) es exhaustiva; la adición de fuente primaria es la <strong>historia y la función del FMS</strong>, ausentes por completo del manual.</p>
+<ul>
+<li><strong>Origen del FMS</strong>: a mediados de la década de 1970, Hubert Naimer (Universal Avionics) concibió un <strong>«sistema maestro de navegación»</strong> (<em>Master Navigation System</em>) que combinara las entradas de todos los sensores de navegación de a bordo (VOR, ADF, INS, Omega, Doppler, LORAN) en una única <strong>«mejor posición calculada»</strong> (<em>Best Computed Position</em>), controlada mediante una sola <strong>unidad de control y visualización (CDU)</strong> en lugar de un panel independiente por sensor.</li>
+<li><strong>Primera implantación</strong>: el <strong>UNS-1</strong> de Universal, presentado en <strong>1982</strong>, fue el primer sistema al que se llamó realmente «sistema de gestión de vuelo (FMS)».</li>
+<li><strong>Cómo mejora el FMS a los sensores individuales</strong>: con una base de datos de posiciones de estaciones DME, el FMS puede seleccionar automáticamente qué estaciones DME interrogar según la posición estimada de la aeronave, y luego triangular o multilaterar las distancias de varias estaciones para calcular una posición <strong>«casi tan exacta como la del GPS»</strong> incluso sin señal de satélites; es decir, el posicionamiento DME/DME, que el manual ya cita en su lista de infraestructuras PBN, solo resulta prácticamente utilizable gracias a la automatización del FMS.</li>
+<li><strong>Capacidad del FMS moderno</strong>: proporciona tanto <strong>navegación lateral (LNAV)</strong> como <strong>navegación vertical (VNAV)</strong>, lo que permite al piloto volar un perfil 3D sincronizado (a diferencia de los sistemas primitivos, como un IRS independiente, que según la fuente «solo servía para la navegación en ruta»); un FMS moderno guía además las <strong>aproximaciones instrumentales</strong> y se interconecta con la gestión de combustible, las pantallas de cabina, la meteorología por enlace ascendente y las comunicaciones por enlace de datos.</li>
+</ul>
+<hr />
+<h2 id="15-navegacion-vertical-basada-en-altimetria-rvsm-y-radioaltimetro">15. Navegación vertical basada en altimetría, RVSM y radioaltímetro</h2>
+<ul>
+<li><strong>Baro-VNAV</strong>: el manual ya lo define como guiado vertical calculado a partir de <strong>información baroaltimétrica</strong> (nota 1 de OM05, sección 7). Matiz de fuente primaria: como la altitud barométrica se ve afectada por la temperatura y la presión no estándar, <strong>las aproximaciones baro-VNAV suelen llevar restricciones o correcciones por temperatura fría</strong> que el piloto o el FMS deben aplicar; es coherente con el principio general de altimetría según el cual la altitud indicada resulta <strong>alta en aire más frío que el ISA</strong> y baja en aire más cálido (conocimiento estándar de altimetría aeronáutica).</li>
+<li><strong>RVSM (<em>Reduced Vertical Separation Minimum</em>, separación vertical mínima reducida, como la denomina el AIP)</strong>: se aplica <strong>entre el FL290 y el FL410</strong>; las aeronaves con aprobación RVSM en esa banda se separan verticalmente <strong>1000 ft</strong> (la misma mínima que se usa por debajo del FL290); las aeronaves <strong>en el FL290 o por encima que no cumplan el RVSM</strong> (o por encima del FL410) se separan <strong>2000 ft</strong>. Es la cifra de la FAA/EE. UU., pero <strong>la banda FL290-FL410 y el reparto 1000 ft/2000 ft es la misma estructura que se usa en el espacio aéreo RVSM de la OACI/Europa</strong>.</li>
+<li><strong>Radioaltímetro/radaraltímetro</strong>: mide la <strong>altura sobre el terreno situado justo bajo la aeronave</strong> (no sobre el nivel del mar, a diferencia del altímetro barométrico), enviando una señal al suelo y midiendo el tiempo de retorno; su aplicación principal es la <strong>altura absoluta precisa durante la aproximación y el aterrizaje</strong>, y alimenta también sistemas como el <strong>GPWS (<em>Ground Proximity Warning System</em>, sistema de aviso de proximidad del terreno)</strong>, que emplea la altura del radioaltímetro junto con la velocidad y otros parámetros para avisar de una aproximación insegura al terreno.</li>
+<li><strong>Sustitución de las radiobalizas ILS, referencia cruzada</strong>: el manual ya afirma que las radiobalizas están «en desuso, sustituyéndose por un DME» (OM05 sección 15); el radioaltímetro es una fuente <strong>independiente y adicional</strong> de confianza en la posición vertical durante el segmento final, no una sustitución de las radiobalizas en sí; en un examen no deben confundirse.</li>
+</ul>
+<hr />
+<h2 id="16-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">16. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (OM05)</th>
+<th>Fuente primaria</th>
+<th>Cuál sigue probablemente el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>La navegación a estima se basa en «<strong>tres</strong> parámetros: la velocidad, el tiempo y el rumbo» (manual p.8)</td>
+<td>CNATRA: la navegación a estima se apoya en <strong>cuatro</strong> componentes: posición, dirección, tiempo y velocidad</td>
+<td>El manual es el texto propio de ENAIRE y la fuente directa del examen para el Tema 5; lo más probable es que el examen espere la versión de <strong>tres parámetros</strong> que da el manual. La versión de cuatro componentes es técnicamente más completa (estándar de formación de la Armada de EE. UU.), pero es un <strong>planteamiento pedagógico distinto</strong>, no una contradicción de hechos.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RNP APCH: los tramos RF se limitan a la «aproximación inicial, intermedia o algunas partes de la aproximación frustrada» solamente (manual p.13, tabla resumen)</td>
+<td>Manual PBN 5.ª ed.: a partir de la 5.ª edición y del Doc 8168 (PANS-OPS Vol II), <strong>los tramos RF son una capacidad general</strong>, no exclusiva de un conjunto fijo de segmentos en todas las especificaciones; su ubicación permitida exacta depende de la especificación de navegación concreta (la RNP AR APCH permite RF <strong>en cualquier parte, incluida la aproximación final</strong>)</td>
+<td>La fila específica de RNP APCH del manual es <strong>correcta para esa especificación</strong>; no es errónea, pero no debe leerse como «los tramos RF están siempre así de restringidos»: la RNP AR APCH (otra fila de la misma tabla del manual) ya permite el RF en aproximación final. No hay contradicción real, pero sí una <strong>laguna de completitud</strong> que el examen podría sondear con una pregunta del tipo «qué especificación permite RF en aproximación final».</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Los cuatro parámetros PBN del manual incluyen como cuarto la «<strong>disponibilidad</strong>» (exactitud, integridad, continuidad, disponibilidad) (manual p.11-12)</td>
+<td>El propio Doc 9613 de la OACI, en la terminología coherente de las secciones de acrónimos y definiciones del Manual PBN 5.ª ed., presenta a veces el cuarto atributo PBN como «<strong>funcionalidad</strong>» en lugar de «disponibilidad» en ciertos pasajes o ediciones</td>
+<td>Ambos términos aparecen en distintos materiales de la OACI; el manual es la paráfrasis autorizada de ENAIRE para el examen, así que <strong>«disponibilidad» es la respuesta más segura</strong> para este examen, pero una pregunta que cite literalmente el Doc 9613 de la OACI podría esperar «funcionalidad»: <strong>hay que anotar ambos</strong>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>El manual enumera los tipos de radioayudas terrestres como «<strong>NDB, VOR, DME, ILS</strong>» solamente (sección 11, sin MLS ni TACAN en esa lista concreta)</td>
+<td>El AIP España GEN 3.4 enumera los tipos reales de radioayudas para la navegación de España como <strong>PAR, NDB, VDF, ILS, VOR, DME, TACAN, GBAS</strong>: el TACAN y el GBAS <strong>no</strong> están en la lista breve del manual</td>
+<td>No es una contradicción (la lista del manual en ese párrafo concreto ilustraba un ejemplo de clasificación, sin pretender ser exhaustiva), pero sí una <strong>laguna de cobertura</strong>: el TACAN y el GBAS son tipos de radioayuda españoles reales y examinables que el manual destaca poco. Si el examen se inspira en fuentes primarias, podría preguntar directamente por el TACAN o el GBAS.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>La sección GNSS del manual (18) cita GPS, GLONASS, Galileo y BeiDou como «constelaciones principales» sin distinguir cuáles están <em>oficialmente reconocidas en el AIP español</em></td>
+<td>El AIP ENR 4.3 (GNSS) enumera <strong>solo EGNOS y GPS</strong> como elementos GNSS del espacio aéreo español</td>
+<td>Ambos son correctos en su propio nivel (el manual describe el GNSS en términos generales; el AIP indica en qué elementos se apoyan actualmente los procedimientos propios de España): <strong>no hay contradicción</strong>, pero una pregunta formulada como «qué sistemas GNSS enumera el AIP español en el ENR 4.3» necesitaría la respuesta más estrecha del AIP (EGNOS + GPS), no la lista de cuatro constelaciones del manual.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="17-ejemplos-resueltos-verificados-dos-veces">17. Ejemplos resueltos (verificados dos veces)</h2>
+<ol>
+<li><strong>Triángulo de vientos por trigonometría</strong> (contraste con el método de CR-3/regla del 10 % de la sección 1). TAS = 250 kt, rumbo verdadero de la derrota = 090°, viento de 030° a 40 kt (es decir, dirección del viento 030°, soplando hacia 210°).
+- Ángulo del viento respecto a la derrota: el viento procede de 030° y la derrota es 090°; el ángulo entre la dirección recíproca del viento (210°, hacia donde sopla) y la derrota (090°) es de 120°, pero el método estándar usa el ángulo entre la derrota y la dirección <em>de procedencia</em>: 090° - 030° = 60° (viento a 60° a la izquierda de la proa, con componente de viento cruzado por la izquierda y de viento de cara).
+- Componente de viento de cara = 40 x cos(60°) = 40 x 0,5 = <strong>20 kt</strong> (reduce la GS).
+- Componente de viento cruzado = 40 x sen(60°) = 40 x 0,866 = <strong>34,6 kt</strong> (por la izquierda, requiere corrección de deriva a la derecha).
+- Ángulo de deriva/corrección (aproximación de ángulo pequeño, válida porque el viento cruzado &lt;&lt; TAS): sen(corrección) = viento cruzado / TAS = 34,6 / 250 = 0,1385 -&gt; corrección = <strong>7,96° ≈ 8°</strong>, hacia la <strong>derecha</strong> (hacia el viento, puesto que este procede de la izquierda).
+- Velocidad respecto a tierra ≈ TAS - componente de viento de cara, ajustada por el ángulo de corrección: GS ≈ raíz(TAS² - viento cruzado²) - viento de cara = raíz(250² - 34,6²) - 20 = raíz(62 500 - 1197) - 20 = raíz(61 303) - 20 ≈ 247,6 - 20 = <strong>227,6 kt</strong>.
+- Contraste con la regla del 10 % (sección 1): el viento cruzado es 34,6/250 = 13,85 % de la TAS; el 13,85 % se acerca al 15 % y la regla del 10 % indica que el 15 % de la TAS da una corrección de unos 9° (según las marcas de escala de la Figura 5-10 de CNATRA: 5 %→3°, 10 %→6°, 15 %→9°); nuestros 7,96° trigonométricos para el 13,85 % quedan de forma coherente entre las marcas de 6° (10 %) y 9° (15 %), lo que confirma que ambos métodos concuerdan razonablemente.</li>
+<li><strong>Presupuesto de exactitud del segmento final en RNP APCH</strong>: la aproximación final RNP APCH exige un TSE lateral ≤ <strong>0,3 NM (RNP 0,3)</strong> el 95 % del tiempo (OM05 sección 7). Convertido a metros: 0,3 NM x 1852 m/NM = <strong>555,6 m</strong> ≈ 556 m; coincide exactamente con los 556 m (0,3 NM) de límite de alerta horizontal que indica el SDD SoL de EGNOS para «aproximación inicial, aproximación intermedia, NPA, salida» en la Tabla 7 (sección 6 más arriba), con lo que el valor de exactitud lateral RNP y el límite de alerta horizontal SBAS de esa misma categoría de procedimiento son numéricamente la misma cifra, expresada por dos documentos distintos.</li>
+<li><strong>Mejora de exactitud de EGNOS frente al GPS solo</strong>: el GPS SPS sin aumentación se compromete a 7,0 m 95 % de URE (presupuesto de error de alcance o pseudodistancia, no directamente un error de posición, pero de orden similar); EGNOS APV-I/LPV-200 se compromete a una exactitud de <strong>posición</strong> de 3 m horizontal / 4 m vertical al 95 %. Por tanto, la aumentación <strong>reduce a la mitad o más</strong> el presupuesto de error en el dominio de la posición respecto a la cifra de URE del SPS sin aumentar, en coherencia con la afirmación general del manual de que la aumentación existe para mejorar la exactitud, la integridad, la continuidad y la disponibilidad más allá de la constelación básica.</li>
+<li><strong>Ganancia de niveles de tráfico con el RVSM</strong>: sin RVSM (separación vertical de 2000 ft), una banda dada de 12 000 ft de altitud (p. ej. FL290-FL410) puede contener como máximo (12 000/2000)+1 = <strong>7 niveles utilizables</strong>; con RVSM (separación de 1000 ft), la misma banda contiene (12 000/1000)+1 = <strong>13 niveles utilizables</strong>, es decir, <strong>casi se duplica</strong> el número de niveles de vuelo utilizables en la banda RVSM.</li>
+</ol>
+<hr />
+<h2 id="18-trampas-de-examen">18. Trampas de examen</h2>
+<ul>
+<li><strong>«Tres» frente a «cuatro» componentes de la navegación a estima</strong>: el propio texto del manual de ENAIRE dice «velocidad, tiempo, rumbo» (tres); hay que usar esa fórmula si la pregunta cita el manual; las fuentes primarias de la Armada de EE. UU. añaden la «posición» como cuarto componente explícito. Ambas describen la misma técnica.</li>
+<li><strong>Ángulo de corrección frente a ángulo de deriva</strong>: numéricamente iguales, <strong>de sentido contrario</strong>. La deriva es lo que te hace el viento (sin corregir); la corrección es lo que haces tú al respecto (corrección hacia el viento).</li>
+<li><strong>Los tramos RF no son exclusivos de la RNP AR APCH</strong>: nacieron allí, pero el Manual PBN de 5.ª edición y los PANS-OPS extienden la <em>posibilidad</em> de tramos RF a otras especificaciones; solo cambia, según la especificación, el <em>segmento</em> exacto permitido (aproximación final, aproximación frustrada, etc.).</li>
+<li><strong>La exactitud comprometida por EGNOS (3 m/4 m) es mucho más estricta que el requisito mínimo de la OACI para APV-I/CAT I (16 m/6-20 m)</strong>: no hay que confundir el umbral reglamentario con las prestaciones realmente prestadas; una pregunta podría pedir cualquiera de las dos cifras.</li>
+<li><strong>El GBAS usa VHF (VDB)</strong>, no un satélite de retransmisión, a diferencia del SBAS, que usa un satélite geoestacionario en la frecuencia L1 del GPS; por eso el GBAS alcanza una exactitud local más estricta (potencial CAT III), mientras que el SBAS sigue siendo de área amplia (actualmente, como mucho de clase CAT I mediante APV-I/LPV-200).</li>
+<li><strong>La propia lista GNSS del AIP español (ENR 4.3) nombra solo EGNOS y GPS</strong>: Galileo no figura por separado, aunque exista y puedan usarlo receptores con capacidad para ello.</li>
+<li><strong>El TACAN no siempre va emparejado con un VOR</strong> (VORTAC); algunas estaciones TACAN españolas son exclusivamente militares e independientes.</li>
+<li><strong>La banda RVSM es FL290-FL410</strong>; fuera de esa banda (o para aeronaves sin aprobación RVSM dentro de ella) la separación vertical vuelve a ser de 2000 ft.</li>
+<li><strong>El LP no tiene guiado vertical; el LPV sí</strong>: ambos dependen del SBAS; el guiado vertical del LNAV/VNAV procede en cambio del baro-VNAV, no del SBAS.</li>
+<li><strong>La categoría de aproximación depende de la velocidad realmente volada en esa maniobra</strong>, no de la categoría «habitual» de la aeronave: si se vuela una aproximación en circuito más rápido que la categoría normal, hay que usar los mínimos de la categoría superior que corresponda a la velocidad real.</li>
+</ul>
+<h2 id="19-imprescindible-memorizar">19. Imprescindible memorizar</h2>
+<ul>
+<li>Vectores del triángulo de vientos: <strong>vector aire (TH/TAS) + vector viento = vector tierra (derrota/GS)</strong>; regla del 10 %: viento cruzado = 10 % de la TAS -&gt; corrección ≈ 6°.</li>
+<li>Estándar de URE de la SIS del SPS del GPS: <strong>7,0 m 95 %</strong> (para todo AOD, operaciones normales); la exactitud real del GPS suele ser de <strong>3 m horizontal / 5 m vertical</strong> o mejor.</li>
+<li>Galileo: <strong>24 satélites MEO nominales, 3 planos x 8 posiciones, 56° de inclinación</strong>; frecuencias del OS <strong>E1 1575,42, E5a 1176,45, E5b 1207,14, E6 1278,75 MHz</strong>.</li>
+<li>Exactitud prestada por EGNOS APV-I/LPV-200: <strong>3 m horizontal / 4 m vertical, 95 %</strong>; disponibilidad <strong>0,99 en la mayor parte de la ECAC</strong>; exactitud horizontal NPA <strong>200 m 95 %</strong>.</li>
+<li>Aproximación final RNP APCH: <strong>RNP 0,3 = 0,3 NM = 556 m</strong> de exactitud lateral el 95 % del tiempo.</li>
+<li>(UE) 2018/1048: RNP APCH con LNAV/LNAV-VNAV/LPV en (casi) todos los extremos de pista desde el <strong>3 de diciembre de 2020</strong>; RNAV 5 en ruta por encima del <strong>FL150</strong>.</li>
+<li>RVSM: <strong>FL290-FL410</strong>, separación vertical de <strong>1000 ft</strong> para aeronaves con aprobación (<strong>2000 ft</strong> en caso contrario).</li>
+<li>Categorías de aproximación por IAS: <strong>A &lt; 91 kt; B 91-120 kt; C 121-140 kt; D aprox. 141-166 kt; E aprox. 166 kt o más</strong>.</li>
+<li>Málaga tiene una <strong>estación GBAS (GLS) operativa</strong> en España; GAST-C = CAT I, GAST-D = hasta CAT III.</li>
+<li>FMS: primer sistema comercial <strong>UNS-1, Universal Avionics, 1982</strong>.</li>
+</ul>
+<h2 id="20-glosario-bilingue-es-en">20. Glosario bilingüe (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector aire</td>
+<td>Air vector</td>
+</tr>
+<tr>
+<td>Categoría de aeronave (para aproximación)</td>
+<td>Approach category (aircraft)</td>
+</tr>
+<tr>
+<td>Aproximación en circuito / maniobra a la vista</td>
+<td>Circling approach</td>
+</tr>
+<tr>
+<td>Ángulo de corrección / aproado</td>
+<td>Crab angle</td>
+</tr>
+<tr>
+<td>Navegación a estima</td>
+<td>Dead reckoning</td>
+</tr>
+<tr>
+<td>Altura de decisión (LPV)</td>
+<td>Decision height (LPV)</td>
+</tr>
+<tr>
+<td>Ángulo de deriva</td>
+<td>Drift angle</td>
+</tr>
+<tr>
+<td>Tipo de servicio de aproximación GBAS</td>
+<td>GBAS Approach Service Type (GAST)</td>
+</tr>
+<tr>
+<td>Sistema de aterrizaje GBAS</td>
+<td>GBAS Landing System (GLS)</td>
+</tr>
+<tr>
+<td>Vector tierra</td>
+<td>Ground vector</td>
+</tr>
+<tr>
+<td>Prestación de localizador (sin guiado vertical)</td>
+<td>Localizer Performance (LP)</td>
+</tr>
+<tr>
+<td>Prestación de localizador con guiado vertical</td>
+<td>Localizer Performance with Vertical guidance (LPV)</td>
+</tr>
+<tr>
+<td>Designador código-nombre (punto de recorrido)</td>
+<td>Name-code designator (waypoint)</td>
+</tr>
+<tr>
+<td>Línea de situación (línea de posición)</td>
+<td>Position line</td>
+</tr>
+<tr>
+<td>Tramo de radio fijo (RF)</td>
+<td>Radius to fix (RF) leg</td>
+</tr>
+<tr>
+<td>Procedimiento de salida RNP AR</td>
+<td>RNP AR Departure Procedure (RNP AR DP)</td>
+</tr>
+<tr>
+<td>Error de alcance de usuario de la señal en el espacio</td>
+<td>Signal-in-space User Range Error (SIS URE)</td>
+</tr>
+<tr>
+<td>Servicio de posicionamiento estándar</td>
+<td>Standard Positioning Service (SPS)</td>
+</tr>
+<tr>
+<td>Ayuda táctica a la navegación aérea (TACAN)</td>
+<td>TACAN (Tactical Air Navigation)</td>
+</tr>
+<tr>
+<td>Velocidad verdadera</td>
+<td>True airspeed (TAS)</td>
+</tr>
+<tr>
+<td>Rumbo / derrota verdadera</td>
+<td>True course / track</td>
+</tr>
+<tr>
+<td>Radiodifusión de datos VHF</td>
+<td>VHF Data Broadcast (VDB)</td>
+</tr>
+<tr>
+<td>VORTAC (VOR + TACAN)</td>
+<td>VORTAC</td>
+</tr>
+<tr>
+<td>Triángulo de vientos / triángulo de navegación</td>
+<td>Wind triangle / navigation triangle</td>
+</tr>
+</tbody>
+</table>
+<h2 id="21-fuentes">21. Fuentes</h2>
+<ul>
+<li>ENAIRE, manual oficial <em>Navegación aérea, equipos y sistemas</em> (OM05), y los apuntes base de este mismo tema.</li>
+<li>AIP España: ENR 4.1 (radioayudas en ruta), ENR 4.3 (GNSS), ENR 4.4 (designadores de puntos de recorrido), GEN 3.4 (servicios de comunicaciones y navegación).</li>
+<li>GPS SPS Performance Standard (5.ª ed., 2020) y EGNOS Safety of Life Service Definition Document (ed. 3.6), para las cifras de exactitud GPS/EGNOS.</li>
+<li>Galileo Open Service SDD v1.3 (2023), para frecuencias y geometría de la constelación.</li>
+<li>OACI, Doc 9613, Manual PBN (5.ª ed.), para el tramo RF, RNP AR y las secciones A/B de RNP APCH.</li>
+<li>Reglamento de Ejecución (UE) 2018/1048, para fechas de implantación PBN.</li>
+<li>EUROCONTROL: <em>Precision RNAV / P-RNAV Safety Argument</em> e <em>Introducing PBN and A-RNP</em>.</li>
+<li>FAA: GBAS FAQ (TC16-0005), Instrument Procedures Handbook (H-8083-16B), Instrument Flying Handbook (H-8083-15B), AIM (TACAN/VORTAC), y CNATRA <em>Introduction to Air Navigation</em> (navegación a estima, triángulo de vientos).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

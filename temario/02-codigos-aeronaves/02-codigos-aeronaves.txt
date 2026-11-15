@@ -1,0 +1,293 @@
+¿Qué dos servicios soportan las comunicaciones aeronáuticas según el manual 2?	El AFS (Servicio Fijo Aeronáutico, Aeronautical Fixed Service) y el AMS (Servicio Móvil Aeronáutico, Aeronautical Mobile Service).	ATC::OM02
+¿Qué conecta el AFS (Servicio Fijo Aeronáutico)?	Las estaciones terrestres fijas entre sí. Se presta a través de la AFTN.	ATC::OM02
+¿Qué conecta el AMS (Servicio Móvil Aeronáutico)?	Las estaciones terrestres fijas con las estaciones de aeronave.	ATC::OM02
+¿Qué significa la sigla AFTN?	Red de Telecomunicaciones Fijas Aeronáuticas (Aeronautical Fixed Telecommunication Network). Forma parte del AFS.	ATC::OM02
+¿Cómo es la estructura de la AFTN a nivel mundial?	De malla: cualquier estación o centro conectado puede comunicarse con todos los demás, de modo que los mensajes llegan a todas las estaciones.	ATC::OM02
+¿Qué redes han sustituido a las antiguas líneas telegráficas de la AFTN (teletipos)?	Redes de comunicaciones de datos como REDAN y CIDIN, porque los terminales actuales son ordenadores personales que no imponen restricciones de velocidad.	ATC::OM02
+¿Qué es un indicador de lugar OACI?	Un grupo de cuatro letras que identifica localizaciones geográficas, por lo general conectadas al AFS, como los aeródromos y helipuertos civiles y los centros de control.	ATC::OM02
+¿Qué indicadores de lugar no suelen estar conectados al AFS?	Los de los aeródromos privados.	ATC::OM02
+¿Quién asigna los indicadores de lugar OACI y quién supervisa la asignación?	Los asignan los Estados pertinentes; la OACI supervisa que su formulación siga el Doc 7910 «Indicadores de lugar».	ATC::OM02
+¿Cuánto tiempo mínimo debe pasar antes de reasignar un indicador de lugar a otro lugar?	Al menos seis meses después de anulada la asignación anterior.	ATC::OM02
+¿Cómo deben promulgarse los cambios en la asignación de indicadores de lugar?	Por NOTAM o AIP, con la mayor antelación posible a la fecha de efectividad.	ATC::OM02
+¿Cómo se identifican los indicadores de lugar de sitios no conectados a la AFTN?	Con un asterisco (*).	ATC::OM02
+¿Puede el indicador de lugar OACI sustituir al distintivo de llamada en las transmisiones de radio?	No. Ejemplo: Canarias ACC es «Canarias Control» por radio; su indicador GCCC no puede usarse en las comunicaciones radio.	ATC::OM02
+¿Cuál es la primera letra de un indicador de lugar OACI?	La letra del área de encaminamiento del AFS donde está el lugar. Las áreas no se superponen y no tienen que coincidir con los límites de un Estado, territorio o FIR.	ATC::OM02
+¿Con qué criterio se deciden las áreas de encaminamiento del AFS?	Solo según los requisitos del AFS, para facilitar el encaminamiento de mensajes (no según las fronteras de Estados o FIR).	ATC::OM02
+¿Qué primera letra corresponde a España en el indicador de lugar OACI?	L para la Península; G para Canarias, Ceuta y Melilla.	ATC::OM02
+¿Qué identifica la segunda letra de un indicador de lugar OACI?	El Estado o territorio (o parte de él) donde está situado el lugar.	ATC::OM02
+¿Qué segunda letra corresponde a España?	E para la Península, Ceuta y Melilla; C para Canarias.	ATC::OM02
+¿Qué identifican la tercera y la cuarta letra de un indicador de lugar?	El lugar en sí, por ejemplo un aeródromo (MD en LEMD para Madrid-Barajas).	ATC::OM02
+¿Qué edición del Doc 7910 cita el manual 2 en el mapa de áreas de encaminamiento?	La 193.ª edición (Montreal, septiembre de 2024).	ATC::OM02
+¿Qué indicador OACI tiene el helipuerto de Ceuta?	GECE.	ATC::OM02
+¿Qué indicador OACI tiene el aeródromo de Melilla y cuál el helipuerto de Melilla?	GEML (aeródromo) y GEHM (helipuerto).	ATC::OM02
+¿Qué indicador OACI tiene Barcelona FIC/ACC?	LECB.	ATC::OM02
+¿Qué indicador OACI tiene Madrid FIC/ACC?	LECM.	ATC::OM02
+¿Qué indicador OACI tiene Canarias FIC/ACC?	GCCC.	ATC::OM02
+¿Qué indicador OACI tiene Sevilla FIC/ACC?	LECS.	ATC::OM02
+¿Qué indicador OACI tiene Palma TACC?	LECP.	ATC::OM02
+¿Qué indicador OACI tiene Santiago TACC?	LECG.	ATC::OM02
+¿Qué indicador OACI tiene Valencia TACC?	LECL.	ATC::OM02
+Completa la lista de indicadores de FIC/ACC/TACC españoles del manual 2 (7 dependencias).	Barcelona LECB, Canarias GCCC, Madrid LECM, Palma LECP, Santiago LECG, Sevilla LECS, Valencia LECL.	ATC::OM02
+¿Qué significan las abreviaturas TACC y UAC (manual 2)?	TACC: centro de control de área terminal (terminal area control centre). UAC: centro de control de área superior (upper area control centre).	ATC::OM02
+¿Qué significa OAC?	Centro de control de área oceánica (oceanic area control centre).	ATC::OM02
+¿Cuál es el indicador OACI de Lisboa ACC/FIC en la tabla de centros adyacentes del manual?	LPPC.	ATC::OM02
+¿Cuál es el indicador OACI de Marsella FIC/ACC/UAC?	LFMM.	ATC::OM02
+¿Cuál es el indicador OACI de Burdeos FIC/ACC/UAC y de Brest FIC/ACC/UAC?	Burdeos LFBB; Brest LFRR.	ATC::OM02
+¿Cuál es el indicador OACI de Casablanca ACC/FIC y de Argel ACC?	Casablanca GMMM; Argel DAAA.	ATC::OM02
+¿Cuál es el indicador OACI de Milán ACC, Roma ACC y Brindisi FIC?	Milán LIMM; Roma LIRR; Brindisi LIBB.	ATC::OM02
+¿Cuál es el indicador OACI de Túnez ACC/FIC y de Dakar ACC/FIC?	Túnez DTTC; Dakar GOOO.	ATC::OM02
+¿Cuál es el indicador OACI de SAL FIR/UIR y de Santa María OAC/FIC?	SAL GVSC; Santa María LPPO.	ATC::OM02
+¿Qué indicador OACI tiene Sevilla/Morón?	LEMO. (El aeropuerto de Sevilla es LEZL.)	ATC::OM02
+¿Qué indicador OACI tiene Menorca?	LEMH.	ATC::OM02
+¿Qué indicador OACI tiene Ibiza?	LEIB.	ATC::OM02
+¿Qué indicador OACI tiene A Coruña?	LECO.	ATC::OM02
+¿Qué indicador OACI tiene Santander (Seve Ballesteros-Santander)?	LEXJ.	ATC::OM02
+¿Qué indicador OACI tiene Vigo?	LEVX.	ATC::OM02
+¿Qué indicador OACI tiene Asturias?	LEAS.	ATC::OM02
+¿Qué indicador OACI tiene Girona?	LEGE.	ATC::OM02
+¿Qué indicador OACI tiene Granada (Federico García Lorca Granada-Jaén)?	LEGR. (Granada/Armilla es LEGA.)	ATC::OM02
+¿Qué indicador OACI tiene Zaragoza?	LEZG.	ATC::OM02
+¿Qué indicador OACI tiene Valladolid/Villanubla?	LEVD.	ATC::OM02
+¿Qué indicador OACI tiene Vitoria?	LEVT.	ATC::OM02
+¿Qué indicador OACI tiene Jerez?	LEJR.	ATC::OM02
+¿Qué indicador OACI tiene Almería?	LEAM.	ATC::OM02
+¿Qué indicador OACI tiene Reus?	LERS.	ATC::OM02
+¿Qué indicador OACI tiene Murcia/San Javier?	LELC. (Murcia/Alcantarilla es LERI; el Aeropuerto de la Región de Murcia es LEMI.)	ATC::OM02
+¿Qué indicadores OACI tiene Madrid/Cuatro Vientos en el manual?	Dos: LECU/LEVS.	ATC::OM02
+¿Qué indicadores OACI tiene Palma de Mallorca en el manual?	Dos: LEPA/LESJ.	ATC::OM02
+¿Qué indicador OACI tiene Madrid/Getafe y cuál Madrid/Torrejón?	Getafe LEGT; Torrejón LETO.	ATC::OM02
+¿Qué indicador OACI tiene Cádiz/Rota?	LERT.	ATC::OM02
+¿Qué indicador OACI tiene Huesca/Pirineos?	LEHC.	ATC::OM02
+¿Qué indicador OACI tiene Lleida/Alguaire?	LEDA.	ATC::OM02
+¿Qué indicador OACI tiene Logroño (aeródromo) y cuál Logroño/Agoncillo (helipuerto)?	Logroño LERJ (aeródromo); Logroño/Agoncillo LELO (helipuerto).	ATC::OM02
+¿Qué indicador OACI tiene Salamanca/Matacán?	LESA.	ATC::OM02
+¿Qué indicador OACI tiene San Sebastián?	LESO.	ATC::OM02
+¿Qué indicador OACI tiene Teruel y cuál Sabadell?	Teruel LETL; Sabadell LELL.	ATC::OM02
+¿Qué indicador OACI tiene León?	LELN.	ATC::OM02
+¿Qué indicador OACI tiene Badajoz/Talavera La Real?	LEBZ.	ATC::OM02
+¿Qué indicador OACI tienen Córdoba, Castellón y Ciudad Real (aeródromos)?	Córdoba LEBA; Castellón LECH; Ciudad Real LERL.	ATC::OM02
+¿Qué indicador OACI tiene Albacete?	LEAB.	ATC::OM02
+¿Qué indicador OACI tiene Andorra-La Seu d'Urgell?	LESU.	ATC::OM02
+¿Qué indicador OACI tienen Mallorca/Pollensa y Mallorca/Son Bonet?	Pollensa LEPO; Son Bonet LESB.	ATC::OM02
+¿Qué indicador OACI tiene Fuerteventura?	GCFV.	ATC::OM02
+¿Qué indicador OACI tiene Lanzarote/César Manrique?	GCRR.	ATC::OM02
+¿Qué indicadores OACI tienen La Palma, La Gomera y El Hierro?	La Palma GCLA; La Gomera GCGM; El Hierro GCHI.	ATC::OM02
+¿Qué indicador OACI tiene el helipuerto de Tenerife Norte/Los Rodeos?	GCXM. (El aeródromo de Tenerife Norte/Ciudad de La Laguna es GCXO.)	ATC::OM02
+Enumera los aeródromos canarios del manual con sus indicadores.	Fuerteventura GCFV, Gran Canaria GCLP, El Hierro GCHI, La Gomera GCGM, La Palma GCLA, Lanzarote GCRR, Tenerife Norte GCXO, Tenerife Sur GCTS.	ATC::OM02
+¿Qué indicadores OACI tienen los helipuertos de Algeciras y de Ciudad Real/Almagro?	Algeciras LEAG; Ciudad Real/Almagro LEAO.	ATC::OM02
+¿Qué indicador OACI tiene el helipuerto de Madrid/Colmenar Viejo y cuál el de Valencia/Bétera?	Colmenar Viejo LECV; Bétera LEBT.	ATC::OM02
+¿Qué indicador OACI tiene el helipuerto de Sevilla/El Copero y cuál el de Serveis Generals del Circuit de Catalunya?	El Copero LEEC; Circuit de Catalunya LETA.	ATC::OM02
+¿Qué tres aeródromos figuran como «aeródromos en situación excepcional» y con qué indicadores?	El Aaiún GSAI, Gibraltar LXGB, Villacisneros GSVO.	ATC::OM02
+¿Qué documento se recomienda para consultas concretas sobre indicadores de lugar?	La última edición del Doc 7910 de la OACI (las tablas del manual 2 están sujetas a actualización continua).	ATC::OM02
+¿Qué ejemplos de indicadores no conectados (con asterisco) aparecen en la página del AIP que muestra el manual 2?	LETU (Ablitas, Navarra, militar) y LEAH (aeródromo Aerohispalis-Mairena del Alcor, Sevilla). Página del AIP GEN 2.4-1.	ATC::OM02
+¿Cómo se identifica una oficina en una dirección AFTN?	Añadiendo, tras el indicador de lugar, el designador OACI de tres o cuatro letras que corresponda, tomado del Doc 8585.	ATC::OM02
+¿Qué posiciones ocupan los designadores de tres letras tras un indicador de lugar?	Las letras 5.ª, 6.ª y 7.ª, seguidas de la letra de relleno X o de una letra que indica un departamento o división.	ATC::OM02
+¿Cuál es la dirección completa del Director General de Aviación Civil (LEAC + YAY)?	LEACYAYX.	ATC::OM02
+¿Cuál es la dirección completa del Director de Aeropuertos Españoles (LEAN + YUY)?	LEANYUYX.	ATC::OM02
+¿Cuál es la dirección completa de la Oficina NOTAM Internacional (LEAN)?	LEANYNYX.	ATC::OM02
+¿Qué designador identifica una oficina meteorológica en la dirección AFTN (ejemplo: El Hierro GCHIYMYX)?	YMY.	ATC::OM02
+¿Qué designador identifica la oficina AIS de aeródromo (ejemplo: Almería LEAMYOYX)?	YOY.	ATC::OM02
+¿Qué designador identifica la torre de control de aeródromo (ejemplo: Alicante LEALZTZX)?	ZTZ.	ATC::OM02
+¿Qué documento de la OACI contiene los designadores para la identificación de oficinas y de compañías aéreas?	El Doc 8585 «Designadores de empresas explotadoras de aeronaves, de entidades oficiales y de servicios aeronáuticos».	ATC::OM02
+¿Qué dos tipos de designadores establece la OACI para las empresas explotadoras de aeronaves?	Designadores telegráficos (tres letras) y designadores telefónicos.	ATC::OM02
+¿Qué es un designador telegráfico?	Un grupo de tres letras para uso en el servicio internacional de telecomunicaciones; identifica a las compañías aéreas, a entidades y servicios gubernamentales y a otros suministradores de servicios aeronáuticos.	ATC::OM02
+¿Para qué sirve un designador telefónico?	Para identificar a las empresas explotadoras en las comunicaciones; puede formar parte del distintivo de llamada radiotelefónico, seguido de la identificación del vuelo (ejemplo: IBERIA 301).	ATC::OM02
+¿Cuántos designadores telegráficos corresponden a cada designador telefónico?	Un designador telegráfico determinado por cada designador telefónico.	ATC::OM02
+¿Quién usa los códigos IATA y para qué?	Las compañías aéreas, para su gestión comercial y sus relaciones con los clientes (programación, emisión de billetes, comunicaciones entre compañías). No coinciden con los designadores OACI.	ATC::OM02
+Indica los designadores telegráfico y telefónico de Air France.	AFR / AIRFRANS.	ATC::OM02
+Indica los designadores telegráfico y telefónico de American Airlines.	AAL / AMERICAN.	ATC::OM02
+Indica los designadores telegráfico y telefónico de British Airways.	BAW / SPEEDBIRD.	ATC::OM02
+Indica los designadores telegráfico y telefónico de Iberia.	IBE / IBERIA.	ATC::OM02
+Indica los designadores telegráfico y telefónico de Ryanair.	RYR / RYANAIR.	ATC::OM02
+Indica los designadores telegráfico y telefónico de Vueling.	VLG / VUELING.	ATC::OM02
+¿Qué dos empresas de la tabla del manual tienen un designador telefónico distinto de su nombre comercial?	Air France (AIRFRANS) y British Airways (SPEEDBIRD).	ATC::OM02
+¿Qué edición del Doc 8585 cita el manual 2?	La 210.ª edición (Montreal, octubre de 2024).	ATC::OM02
+¿Qué anexo de la OACI contiene las normas sobre marcas de nacionalidad y de matrícula?	El Anexo 7 del Convenio sobre Aviación Civil Internacional.	ATC::OM02
+¿En qué orden se componen los elementos de las marcas de identificación de una aeronave?	Primero la marca de nacionalidad o la marca común y, después, la marca de matrícula.	ATC::OM02
+¿Qué indica la marca de nacionalidad y cuántos caracteres tiene normalmente?	El Estado en cuyo registro está inscrita la aeronave; normalmente uno o dos caracteres.	ATC::OM02
+¿Qué es la marca común?	Una marca que se usa en vez de la marca de nacionalidad cuando la aeronave pertenece a un organismo internacional de explotación sobre una base no nacional. Ejemplo: Naciones Unidas, 4U.	ATC::OM02
+¿Cuándo se pone un guion entre la marca de nacionalidad y la matrícula?	Cuando el primer carácter de la marca de matrícula es una letra.	ATC::OM02
+¿Quién asigna las marcas de nacionalidad y las comunes, y quién las matrículas?	Las marcas (de nacionalidad y comunes) las asigna la OACI; la matrícula la adjudica la autoridad competente de cada país.	ATC::OM02
+¿De qué puede componerse una matrícula?	De letras y/o números.	ATC::OM02
+¿Qué combinaciones de letras no deben usarse como marcas de matrícula?	Las que puedan confundirse con los grupos de cinco letras de la segunda parte del Código Internacional de Señales, con las combinaciones de tres letras de la señal de auxilio SOS o con señales de urgencia como XXX, PAN y TTT.	ATC::OM02
+¿Cómo deben figurar las marcas de nacionalidad y de matrícula en la aeronave?	Pintadas o fijadas de cualquier otra forma que les dé una permanencia similar; limpias y visibles en todo momento.	ATC::OM02
+En la figura del manual OE-FMK, ¿qué parte es la marca de nacionalidad y cuál la matrícula?	OE es la marca de nacionalidad (Austria); FMK es la matrícula.	ATC::OM02
+¿Qué marca de nacionalidad tiene Alemania?	D.	ATC::OM02
+¿Qué marca de nacionalidad tiene Argelia?	7T.	ATC::OM02
+¿Qué marca de nacionalidad tiene Austria?	OE.	ATC::OM02
+¿Qué marca de nacionalidad tiene Bélgica?	OO.	ATC::OM02
+¿Qué marca de nacionalidad tiene Dinamarca?	OY.	ATC::OM02
+¿Qué marca de nacionalidad tienen los Emiratos Árabes Unidos?	A6.	ATC::OM02
+¿Qué marca de nacionalidad tiene Finlandia?	OH.	ATC::OM02
+¿Qué marca de nacionalidad tiene Gibraltar?	VP-G.	ATC::OM02
+¿Qué marca de nacionalidad tiene Grecia?	SX.	ATC::OM02
+¿Qué marca de nacionalidad tiene Hungría?	HA.	ATC::OM02
+¿Qué marca de nacionalidad tiene Israel?	4X.	ATC::OM02
+¿Qué marca de nacionalidad tiene Luxemburgo?	LX.	ATC::OM02
+¿Qué marca de nacionalidad tiene Marruecos?	CN.	ATC::OM02
+¿Qué marca de nacionalidad tiene Mónaco?	3A.	ATC::OM02
+¿Qué marca de nacionalidad tiene Noruega?	LN.	ATC::OM02
+¿Qué marca de nacionalidad tiene la República Checa?	OK.	ATC::OM02
+¿Qué marca de nacionalidad tiene Túnez?	TS.	ATC::OM02
+¿Qué marcas de nacionalidad tiene Portugal en la tabla del manual?	CR y CS.	ATC::OM02
+¿Qué marcas de nacionalidad recoge el manual para Países Bajos, Italia, Irlanda y Suiza?	Países Bajos PH; Italia I; Irlanda EI; Suiza HB.	ATC::OM02
+¿Qué marcas de nacionalidad recoge el manual para el Reino Unido, EE. UU., Francia y España?	Reino Unido G; EE. UU. N; Francia F; España EC.	ATC::OM02
+¿Cuál de estas marcas no es de un país: 4U, 4X, 7T, 3A?	4U: es la marca común de Naciones Unidas. 4X Israel, 7T Argelia, 3A Mónaco.	ATC::OM02
+¿Cuántos caracteres tiene un código IATA de aeropuerto (de lugar)?	Tres letras. Los indicadores de lugar IATA identifican lugares de interés operativo para las compañías aéreas, principalmente aeropuertos.	ATC::OM02
+¿Para qué se usan los códigos IATA en el trabajo de las compañías (manual 2)?	Programación de vuelos, operaciones comerciales, emisión de billetes y comunicaciones entre compañías.	ATC::OM02
+¿Cuáles son los dos códigos IATA más usados según el manual?	Los indicadores de lugar y los designadores de compañías aéreas.	ATC::OM02
+¿Cuántos caracteres tiene un designador IATA de compañía y qué significa un asterisco tras él?	Dos caracteres alfanuméricos. El asterisco marca un código duplicado, usado por dos transportistas para tipos de servicio distintos.	ATC::OM02
+¿Qué documento de IATA lista los designadores de compañías aéreas?	El Airline Coding Directory (ACD).	ATC::OM02
+¿Son iguales los designadores IATA de tres letras de las compañías y los de la OACI?	Sí: IATA está asignando designadores de tres letras en cooperación con la OACI, la FAA y Transport Canada, y coinciden con los de la OACI.	ATC::OM02
+¿Códigos IATA y OACI de Emirates?	IATA EK; OACI UAE.	ATC::OM02
+¿Códigos IATA y OACI de Japan Airlines?	IATA JL; OACI JAL.	ATC::OM02
+¿Códigos IATA y OACI de Kuwait Airways?	IATA KU; OACI KAC.	ATC::OM02
+¿Códigos IATA y OACI de SAS (Scandinavian Airlines System)?	IATA SK; OACI SAS.	ATC::OM02
+¿Códigos IATA y OACI de Iberia?	IATA IB; OACI IBE.	ATC::OM02
+¿Códigos IATA y OACI de Vueling?	IATA VY; OACI VLG.	ATC::OM02
+¿Códigos IATA y OACI de British Airways?	IATA BA; OACI BAW.	ATC::OM02
+¿Códigos IATA y OACI de Jat Airways en la tabla del manual?	IATA JU; OACI JAT (Estado: Serbia).	ATC::OM02
+¿Código IATA del aeropuerto de A Coruña?	LCG.	ATC::OM02
+¿Código IATA del aeropuerto de Almería?	LEI.	ATC::OM02
+¿Código IATA del aeropuerto de Andorra-La Seu d'Urgell?	LEU.	ATC::OM02
+¿Código IATA del aeropuerto de Asturias?	OVD.	ATC::OM02
+¿Código IATA del aeropuerto de Bilbao?	BIO.	ATC::OM02
+¿Código IATA del aeropuerto de Burgos/Villafría?	RGS.	ATC::OM02
+¿Código IATA del aeropuerto de Sevilla?	SVQ (OACI LEZL).	ATC::OM02
+¿Código IATA del aeropuerto de Valencia?	VLC (OACI LEVC).	ATC::OM02
+¿Código IATA del aeropuerto de Gran Canaria?	LPA (OACI GCLP).	ATC::OM02
+¿Códigos IATA de Tenerife Norte y Tenerife Sur?	TFN (Tenerife Norte, OACI GCXO) y TFS (Tenerife Sur, OACI GCTS).	ATC::OM02
+¿Código IATA de Lanzarote y de Fuerteventura?	Lanzarote ACE; Fuerteventura FUE.	ATC::OM02
+¿Código IATA de La Palma, La Gomera y El Hierro?	La Palma SPC; La Gomera GMZ; El Hierro VDE.	ATC::OM02
+¿Código IATA del aeropuerto de Jerez?	XRY.	ATC::OM02
+¿Código IATA de Ibiza y de Menorca?	Ibiza IBZ; Menorca MAH.	ATC::OM02
+¿Código IATA de Santiago (Rosalía de Castro) y de Vigo?	Santiago SCQ; Vigo VGO.	ATC::OM02
+¿Código IATA del aeropuerto de San Sebastián?	EAS.	ATC::OM02
+¿Código IATA del aeropuerto de Santander (Seve Ballesteros)?	SDR.	ATC::OM02
+¿Código IATA de Girona y de Reus?	Girona GRO; Reus REU.	ATC::OM02
+¿Código IATA de Zaragoza y de Pamplona?	Zaragoza ZAZ; Pamplona PNA.	ATC::OM02
+¿Código IATA de Logroño y de León?	Logroño RJL; León LEN.	ATC::OM02
+¿Código IATA del aeropuerto de Melilla?	MLN.	ATC::OM02
+¿Código IATA de Murcia (Región de Murcia) y de Murcia/San Javier?	Región de Murcia RMU; San Javier MJV.	ATC::OM02
+¿Código IATA de Madrid/Cuatro Vientos y de Madrid/Torrejón?	Cuatro Vientos MCV; Torrejón TOJ.	ATC::OM02
+¿Código IATA de Granada (Federico García Lorca Granada-Jaén)?	GRX.	ATC::OM02
+¿Código IATA de Cádiz/Rota?	ROZ.	ATC::OM02
+¿Código IATA de Castellón, Ciudad Real y Córdoba?	Castellón CDT; Ciudad Real CQM; Córdoba ODB.	ATC::OM02
+¿Código IATA de Huesca/Pirineos y de Teruel?	Huesca HSK; Teruel TEV.	ATC::OM02
+¿Código IATA de Sabadell, Salamanca/Matacán y Lleida/Alguaire?	Sabadell QSA; Salamanca SLM; Lleida ILD.	ATC::OM02
+¿Código IATA de Valladolid, Vitoria y Badajoz?	Valladolid VLL; Vitoria VIT; Badajoz BJZ.	ATC::OM02
+¿Código IATA de Albacete y de Alicante?	Albacete ABC; Alicante ALC.	ATC::OM02
+¿Código IATA de Mallorca/Son Bonet?	SBO.	ATC::OM02
+¿Qué documento contiene los códigos IATA de tipo de aeronave (Apéndice A)?	El Standard Schedules Information Manual (SSIM) de IATA, Apéndice A.	ATC::OM02
+¿Cuáles son las cinco condiciones de vuelo en las que las alas generan sustentación (manual 2)?	Despegue, subida, crucero, descenso y aterrizaje.	ATC::OM02
+¿Cuál es la función de la hélice según el manual 2?	Perfil aerodinámico giratorio, con dos o más palas, que proporciona tracción o impulsión con la potencia que le transmite el motor.	ATC::OM02
+¿Qué hacen los alerones?	Permiten el alabeo: cuando el alerón de un ala sube, el del ala opuesta baja.	ATC::OM02
+¿Qué es el empenaje?	La cola o parte posterior de la aeronave, donde suelen estar situados los estabilizadores horizontal y vertical.	ATC::OM02
+¿Qué controla el estabilizador horizontal?	La estabilidad en vuelo recto y el movimiento del morro hacia arriba y hacia abajo (cabeceo). Tiene una parte fija (estabilizador) y una parte móvil (timón de profundidad).	ATC::OM02
+¿Qué controla el estabilizador vertical (deriva)?	El deslizamiento lateral sobre el eje vertical, es decir, la guiñada.	ATC::OM02
+¿Qué ocurre al tirar hacia atrás de la palanca de mando (hacia el piloto)?	El timón de profundidad eleva el morro; al empujarla hacia delante, lo baja.	ATC::OM02
+¿Cómo funciona el timón de dirección (timón vertical o de cola)?	Forma parte del estabilizador vertical y se acciona con los pedales: el pedal derecho vira a la derecha y el izquierdo, a la izquierda.	ATC::OM02
+¿Qué contiene el fuselaje?	La cabina de mando, la zona de pasajeros, las bodegas y la zona de los equipos de funcionamiento de la aeronave.	ATC::OM02
+¿Qué debe hacer el tren de aterrizaje?	Sostener la aeronave, permitir su movimiento en superficie en el despegue y el aterrizaje, absorber el impacto del aterrizaje y tener capacidad de frenado y de direccionamiento.	ATC::OM02
+Enumera las siete características externas que sirven para reconocer aeronaves (manual 2).	Tipo de ala, tipo de flecha, tipo de cola, tipo de motorización, número de motores, ubicación de los motores y características del tren de aterrizaje.	ATC::OM02
+¿Tipos de ala del manual?	Ala alta, ala baja, doble ala o biplano.	ATC::OM02
+¿Tipos de flecha del manual?	Flecha regresiva o positiva, flecha recta y flecha progresiva o invertida.	ATC::OM02
+¿Tipos de cola del manual?	Cola en T, cola en cruz, cola fuselada y cola doble.	ATC::OM02
+¿Tipos de motor para el reconocimiento (6.2.4)?	Motor de pistón, turbohélice y motores a reacción.	ATC::OM02
+¿Números de motores que muestra el apartado 6.2.5?	Monomotor, dos, tres, cuatro, seis y ocho motores.	ATC::OM02
+¿Ubicaciones de los motores en el apartado 6.2.6?	En el morro, en las alas, en el fuselaje, en el ala y el empenaje, y en el fuselaje y el empenaje.	ATC::OM02
+¿Tipos de tren de aterrizaje del apartado 6.2.7 (aeronaves ligeras o especiales)?	Fijo sin carenado, fijo carenado, retráctil y patines en el ala para amerizaje.	ATC::OM02
+¿Características de reconocimiento de los helicópteros (manual 2)?	Tipo de soporte en tierra (patines o tren de aterrizaje), número de rotores (uno o dos) y número de palas del rotor.	ATC::OM02
+¿Número de palas en las figuras de helicópteros?	Dos, tres, cuatro, cinco y ocho palas.	ATC::OM02
+¿Qué seis grupos organizan el catálogo de aeronaves del apartado 6.4?	Aeronaves comerciales de pasajeros; reactores de cercanías y regionales (commuter); aeronaves ejecutivas (privadas); helicópteros; motores alternativos o de pistón; turbohélices de transporte militar.	ATC::OM02
+¿Qué datos da el catálogo de cada aeronave?	Fabricante, nombre, designador OACI, tipo de aeronave, TAS de crucero (kt o Mach), régimen máximo de ascenso (ft/min), techo (FL) y categoría de estela turbulenta.	ATC::OM02
+A124 (Antonov): ¿descripción, TAS de crucero, ascenso, techo, WTC?	L4J; M0,78; 1000 ft/min; FL390; H.	ATC::OM02
+A319/A320/A321: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,79; 2000 ft/min; FL410; M.	ATC::OM02
+A332/A333: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,81; 2000; FL410; H.	ATC::OM02
+A342/A343/A345/A346: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,82; 1500; FL410; H.	ATC::OM02
+A388: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,89; 1500 ft/min; FL430; J.	ATC::OM02
+B733 (B733/B734/B735): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,74; 2000; FL370; M.	ATC::OM02
+B738/B739: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,78; 2000; FL410; M.	ATC::OM02
+B744: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,85; 1500; FL450; H.	ATC::OM02
+B752/B753: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,8; 2000; FL410; M.	ATC::OM02
+B762/B763/B764: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,8; 2000; FL450; H.	ATC::OM02
+B772/B773: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,84; 2000; FL430; H.	ATC::OM02
+IL62 (Ilyushin): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,82; 1000; FL390; H.	ATC::OM02
+IL76 (Ilyushin): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,74; 1000; FL390; H.	ATC::OM02
+MD11: ¿descripción, crucero, ascenso, techo, WTC?	L3J; M0,83; 1500; FL410; H.	ATC::OM02
+MD83/MD87: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 2000; FL370; M.	ATC::OM02
+T154 (Tupolev): ¿descripción, crucero, ascenso, techo, WTC?	L3J; M0,82; 2000; FL410; M.	ATC::OM02
+T204 (Tupolev): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,79; 1500; FL400; M.	ATC::OM02
+AT72 (ATR): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 270 kt; 1000 ft/min; FL250; M.	ATC::OM02
+CRJ1/CRJ2/CRJ7/CRJ9 (Canadair): ¿descripción, crucero, ascenso, techo, WTC?	L2J; 440 kt; 2000; FL410; M.	ATC::OM02
+E145 (Embraer): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 1500; FL370; M.	ATC::OM02
+E175/E190 (Embraer): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,83; 3000 ft/min; FL410; M.	ATC::OM02
+F100 (Fokker): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,73; 1500; FL350; M.	ATC::OM02
+F50 (Fokker): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 240 kt; 1000; FL250; M.	ATC::OM02
+RJ85 (BAE): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,68; 1500; FL310; M. (Aparece dos veces en el manual, en el grupo regional y en el ejecutivo.)	ATC::OM02
+GLEX (Canadair): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,85; 3000; FL510; M.	ATC::OM02
+F2HT (Dassault): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,82; 2000; FL470; M.	ATC::OM02
+GLF5 (Gulfstream): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,85; 3000; FL510; M.	ATC::OM02
+LJ55 (Gates Learjet): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 2000; FL510; M.	ATC::OM02
+C550 (Cessna): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,63; 1500; FL430; L (Ligera).	ATC::OM02
+Helicóptero AS32 (Aerospatiale): ¿descripción, crucero, ascenso, techo, WTC?	H2T; 140 kt; 1500; FL200; M.	ATC::OM02
+Helicóptero B212 (Bell Augusta): ¿descripción, crucero, ascenso, techo, WTC?	H2T; 110 kt; 1500; FL150; L.	ATC::OM02
+C337 (Cessna): ¿descripción, crucero, ascenso, techo, WTC?	L2P; 165 kt; 1000; FL190; L.	ATC::OM02
+PA34 (Piper): ¿descripción, crucero, ascenso, techo, WTC?	L2P; 180 kt; 1000; FL250; L.	ATC::OM02
+TOBA (EADS Socata): ¿descripción, crucero, ascenso, techo, WTC?	L1P; 120 kt; 1000; FL130; L.	ATC::OM02
+C130 (Lockheed): ¿descripción, crucero, ascenso, techo, WTC?	L4T; 290 kt; 1000; FL300; M.	ATC::OM02
+C295 (Airtech Casa): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 230 kt; 1500; FL300; M.	ATC::OM02
+¿Qué aeronave del catálogo del manual es la única Súper (J)?	El A388 (Airbus A380-800).	ATC::OM02
+¿Qué aeronaves del catálogo tienen tres motores (L3J)?	El MD11 y el T154.	ATC::OM02
+¿Qué aeronave del catálogo tiene motor a reacción pero es Ligera (L)?	La Cessna C550 (L2J, WTC L).	ATC::OM02
+¿Qué aeronaves del catálogo alcanzan el FL510?	GLEX, GLF5 y LJ55.	ATC::OM02
+¿Qué aeronaves del catálogo tienen un régimen máximo de ascenso de 3000 ft/min?	E175/E190, GLEX y GLF5.	ATC::OM02
+¿Cómo es el designador OACI (Doc 8643) en cuanto a caracteres?	Un código alfanumérico de 2 a 4 caracteres.	ATC::OM02
+¿Qué identifica el designador de tipo OACI (manual 2)?	Los fabricantes (AIRBUS, Antonov...) y las denominaciones de aeronave que estos dan (siglas o un nombre).	ATC::OM02
+Da los ejemplos del manual de denominaciones dadas por los fabricantes.	PiperSport (PIPER), Skymaster (CESSNA), Metro (SWEARINGEN), A380 (AIRBUS).	ATC::OM02
+¿En qué se basan los mínimos de separación por estela turbulenta de la OACI?	En la clasificación de los tipos de aeronave según su masa máxima certificada al despegue (MTOW).	ATC::OM02
+¿Qué aeronave es la única de categoría WTC J en la clasificación OACI del manual?	El Airbus A380-800 (560 000 kg, según lo impreso en el manual).	ATC::OM02
+¿Cuáles son los límites de masa de las WTC de la OACI según el manual 2?	J: solo el A380-800; H: 136 000 kg o más; M: menos de 136 000 kg y más de 7000 kg; L: 7000 kg o menos.	ATC::OM02
+¿Cómo debe considerarse el B757 a efectos de estela turbulenta?	Pesada cuando va seguido de otra aeronave; Media cuando sigue a otra aeronave.	ATC::OM02
+¿Cuántas categorías introduce RECAT-EU y en qué se basan?	Seis categorías, basadas tanto en el peso máximo certificado al despegue como en la envergadura.	ATC::OM02
+Enumera por orden las seis categorías RECAT-EU.	Super Pesada (J), Pesada superior (H+), Pesada inferior (H-), Media superior (M+), Media inferior (M-), Ligera (L+) (en inglés: Super Heavy, Upper Heavy, Lower Heavy, Upper Medium, Lower Medium, Light).	ATC::OM02
+¿Cuál es la designación oficial de las categorías RECAT-EU?	CAT-A a CAT-F, pero a los controladores se les muestran como J, H+, H-, M+, M- y L+ para distinguirlas de las WTC de la OACI.	ATC::OM02
+¿Qué categoría WTC de la OACI equivale a la Super Pesada (Super Heavy) de RECAT-EU?	SUPER (J).	ATC::OM02
+¿Cambia RECAT-EU la forma de rellenar el plan de vuelo?	No. Los operadores siguen rellenando la casilla 9 con la WTC de la OACI: J, H, M o L.	ATC::OM02
+¿Necesita el piloto conocer la categoría RECAT-EU de su aeronave?	No. No es necesario ni se requiere, y RECAT-EU no cambia los procedimientos, la planificación de vuelos ni la fraseología.	ATC::OM02
+¿Qué tipos de aeronave son Pesada superior (Upper Heavy) de RECAT-EU en la tabla del manual?	A330, A340, A350, B747, B777 y B787 (todas las series).	ATC::OM02
+¿Qué tipos de aeronave son Pesada inferior (Lower Heavy) de RECAT-EU en la tabla del manual?	A310, B757 y B767 (todas las series).	ATC::OM02
+¿Qué tipos de aeronave son Media superior (Upper Medium) de RECAT-EU en la tabla del manual?	A318-A321 (todas las series, incluidos los NEO) y B736-B739 (todas las series, incluidos los MAX).	ATC::OM02
+¿Qué tipos son Media inferior (Lower Medium) de RECAT-EU en la tabla del manual?	AT43-AT46, AT72-AT76, B461-B463, B732-B735, CRJ1-CRJ9, CRJX, DH8A-DH8D, E145-E190.	ATC::OM02
+¿Qué aeronave es Super Pesada (Super Heavy) de RECAT-EU en la tabla del manual?	El A388.	ATC::OM02
+¿Cuántos caracteres tiene la descripción del tipo de aeronave OACI y qué significan?	Tres: clase de aeronave, número de motores y tipo de motor (ejemplo: L2J).	ATC::OM02
+¿Primer carácter de la descripción de aeronave en el manual 2?	L avión terrestre (landplane), S hidroavión (seaplane), A anfibio (amphibian), H helicóptero, G girohelicóptero (gyrocopter), T aeronave de ala basculante (tilt-wing).	ATC::OM02
+¿Segundo carácter de la descripción de aeronave?	Número de motores: 1, 2, 3, 4, 6, 8 o C.	ATC::OM02
+¿Qué significa C como segundo carácter de la descripción?	Dos motores acoplados para accionar un solo sistema de hélice; se aplica solo a aeronaves de ala fija.	ATC::OM02
+¿Tercer carácter de la descripción de aeronave en el manual 2?	P pistón, T turbohélice/turboeje, J reacción, E eléctrico.	ATC::OM02
+Descifra el ejemplo del manual A30B / H / L2J (Airbus A-300B2).	Designador A30B; WTC H (pesada); L2J = avión terrestre, 2 motores, reacción.	ATC::OM02
+¿Qué significa T como primer carácter de la descripción en el manual 2?	Aeronave de ala basculante (tilt-wing aircraft).	ATC::OM02
+¿De qué se compone el identificador de tipo de aeronave ATA/IATA?	Designador general (3 caracteres: familia con la misma configuración y sección de fuselaje común), subtipo de avión (3 caracteres: modelo dentro de la familia) y categoría.	ATC::OM02
+¿Categorías del designador ATA/IATA?	H helicóptero; J turborreactor (precedido del número de motores); P motor de pistón (precedido del número de motores); S hidroavión; T turbohélice (precedido del número de motores).	ATC::OM02
+¿Datos ATA/IATA del Embraer 190?	Designador general EMJ; subtipo E90; categoría 2J.	ATC::OM02
+¿Datos ATA/IATA del Airbus 340-300, 340-500 y 340-600?	Designador general 340; subtipos 343, 345, 346; categoría 4J.	ATC::OM02
+¿Datos ATA/IATA del MD 900 Explorer (MD Helicopters)?	Designador general MD9; subtipo MD9; categoría H.	ATC::OM02
+¿En qué documento se recogen los códigos de tipo de aeronave ATA/IATA?	En el Apéndice A del Standard Schedules Information Manual (SSIM) de IATA.	ATC::OM02
+¿Definición de altitud en el manual 2?	Distancia vertical entre un nivel, punto u objeto considerado como punto y el nivel medio del mar (MSL).	ATC::OM02
+¿Definición de altura en el manual 2?	Distancia vertical entre un nivel, punto u objeto considerado como punto y una referencia especificada.	ATC::OM02
+¿Definición de estela turbulenta en el glosario?	Masa de aire en movimiento espiral y descendente que se genera en el extremo de los planos de una aeronave en vuelo.	ATC::OM02
+¿Definición de número de Mach en el glosario?	Relación entre la velocidad verdadera y la del sonido.	ATC::OM02
+¿Definición de velocidad verdadera en el glosario?	Velocidad de la aeronave respecto al aire, considerando la corrección por densidad del aire al nivel de vuelo considerado.	ATC::OM02
+¿Definición de techo de vuelo en el glosario?	Altitud máxima que puede alcanzar una aeronave en unas determinadas condiciones.	ATC::OM02
+¿Definición de régimen de ascenso en el glosario?	Velocidad vertical de subida que puede alcanzar una aeronave en unas determinadas condiciones.	ATC::OM02
+¿Definición de tipo de aeronave en el glosario?	Todas las aeronaves de un mismo diseño básico con sus modificaciones, excepto las que alteran su manejo o sus características de vuelo.	ATC::OM02
+¿Definición de región de información de vuelo?	Espacio aéreo de dimensiones definidas, dentro del cual se suministran los servicios de información de vuelo y de alerta.	ATC::OM02
+¿Definición de aeronave militar en el glosario?	Aeronave que tiene como misión la defensa nacional o está mandada por un militar comisionado al efecto.	ATC::OM02
+¿Cómo se dice en español «airspeed indicator» y «altimeter» en el vocabulario del manual?	Anemómetro y altímetro.	ATC::OM02
+¿Cómo se dice en español «cockpit», «cabin» y «hold» en el vocabulario del manual?	Cabina de pilotaje; cabina de pasaje; bodega.	ATC::OM02
+¿Cómo se dice en español «trim tabs», «flaps» y «winglet» en el manual?	Compensadores; dispositivos hipersustentadores; punta de ala vertical.	ATC::OM02
+¿Cómo se dice en español «rudder» y «elevator» en el vocabulario del manual?	Rudder = timón de dirección; elevator = timón de profundidad.	ATC::OM02
+¿Cómo se dice en español «tyre burst / blow out», «marshal» y «multiengine» en el manual?	Reventón; señalero; polimotor.	ATC::OM02
+¿Cómo se dice en inglés «empenaje», «envergadura de ala» y «rueda de morro»?	Empennage; wing span; nose wheel.	ATC::OM02
+¿Cómo se dice en inglés «office de abordo», «parabrisas» y «pata del tren de aterrizaje»?	Galley; windshield; landing gear leg.	ATC::OM02
+¿Cómo se dice en inglés «deflector de lluvia», «descongelador automático» y «dispositivo director de vuelo»?	Rain remover; de-icer boot; flight director.	ATC::OM02

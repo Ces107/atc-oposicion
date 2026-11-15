@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Plegado y agujeros</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='5.5'/%3E%3Cpath d='M12 12L19 5'/%3E%3Ccircle cx='16.4' cy='16.6' r='1.1'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light dark;
+--bg:#f4f2ec;--stripe:#ebe8df;--surface:#ffffff;--text:#1b1b1b;--muted:#5f5b53;--rule:#cfcabd;
+--accent:#1a4d8f;--accent-h:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--err:#a3241c;
+--serif:Georgia,"Iowan Old Style",serif;--sans:system-ui,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+--bg:#161615;--stripe:#262624;--surface:#1e1e1c;--text:#e7e4dc;--muted:#a19c90;--rule:#3a3935;
+--accent:#7fb0e8;--accent-h:#a6c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--err:#e5766d}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans);overflow-x:hidden}
+a{color:var(--accent)}a:hover{color:var(--accent-h)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+svg.logo{width:28px;height:28px;flex:none;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+header.top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+header.top h1{font:700 26px/1.15 var(--serif);margin:0;letter-spacing:-.005em}
+header.top a.back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:6px 0}
+header.top a.back:hover{text-decoration:underline}
+header.top a.back svg{transform:scaleX(-1)}
+main{max-width:1100px;margin:0 auto;padding:16px 16px 40px}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:26px 0 10px}
+button,input,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;min-height:40px}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.on{background:var(--accent);color:var(--onacc)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.sm{padding:5px 10px;min-height:32px}
+.seg{display:inline-flex}
+.seg .btn{border-radius:0;margin-left:-1px}
+.seg .btn:first-child{border-radius:2px 0 0 2px;margin-left:0}
+.seg .btn:last-child{border-radius:0 2px 2px 0}
+.seg .btn:focus-visible{position:relative;z-index:1}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number]{background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:7px 9px;min-height:36px;max-width:100%}
+input[type=range]{accent-color:var(--accent);width:100%}
+.muted{color:var(--muted)}.small{font-size:14px}
+.ok{color:var(--ok)}.bad{color:var(--err)}.warn{color:var(--warn)}
+.mono{font-family:var(--mono);font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 10px 6px 0}
+td{padding:6px 10px 6px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.tblw{overflow-x:auto}
+.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--rule);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.foot a{display:inline-flex;align-items:center;gap:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg text{font-family:var(--sans)}
+.cv{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
+@media (max-width:820px){.two{grid-template-columns:minmax(0,1fr);gap:24px}}
+svg.sq{display:block;width:100%;height:auto;max-width:520px;aspect-ratio:1;margin:10px 0 4px;background:var(--bg);border:1px solid var(--rule);border-radius:2px}
+svg.sq:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg.sq .paper{fill:var(--surface);stroke:var(--text);stroke-width:1.6;vector-effect:non-scaling-stroke}
+svg.sq .flap{fill:var(--stripe);stroke:var(--text);stroke-width:1.6;vector-effect:non-scaling-stroke;opacity:.92}
+svg.sq .gl{stroke:var(--rule);stroke-width:1;vector-effect:non-scaling-stroke;fill:none}
+svg.sq .cr{stroke:var(--warn);stroke-width:1.6;stroke-dasharray:6 4;vector-effect:non-scaling-stroke;fill:none}
+svg.sq .hole{fill:var(--bg);stroke:var(--text);stroke-width:1.8;vector-effect:non-scaling-stroke}
+svg.sq .hole.fl{fill:var(--stripe)}
+svg.sq .hole.okh{stroke:var(--ok);stroke-width:2.6}
+svg.sq .gs{fill:none;stroke:var(--accent);stroke-width:2.4;vector-effect:non-scaling-stroke}
+svg.sq .miss{fill:none;stroke:var(--err);stroke-width:2;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+svg.sq .xx{stroke:var(--err);stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke;fill:none}
+svg.sq .cur{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+svg.sq{cursor:crosshair}
+.ctlrow{margin:6px 0}
+.sub{min-height:26px;margin:4px 0}
+ol.folds{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--text);max-width:520px}
+ol.folds li{padding:5px 2px;border-bottom:1px solid var(--rule);font-size:15px}
+ol.folds b{display:inline-block;width:1.6em;color:var(--accent);font-family:var(--serif)}
+#rs.ok{color:var(--ok);font-weight:600}#rs.bad{color:var(--err);font-weight:600}
+[hidden]{display:none!important}
+svg.sq:not(:focus-visible) .cur{display:none}
+
+</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M6 5l8 7-8 7M18 5v14"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 6L4 11l5 5M4 11h9a6 6 0 0 1 0 8"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></symbol><symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15l-3-3M20 16H5l3 3"/></symbol><symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M8 7L3 18h5zM16 7l5 11h-5z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol></svg>
+
+<header class="top"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg><h1>Plegado y agujeros</h1><a class="back" href="index.html"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>Atajos</a></header>
+<main>
+<div class="two">
+<section>
+<div class="row ctlrow">
+<button class="btn" id="f-V" type="button" aria-label="Pliegue vertical"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16" stroke-dasharray="2.5 2.5"/></svg>Vertical</button>
+<button class="btn" id="f-H" type="button" aria-label="Pliegue horizontal"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 12h16" stroke-dasharray="2.5 2.5"/></svg>Horizontal</button>
+<button class="btn" id="f-D1" type="button" aria-label="Pliegue diagonal ascendente"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 20L20 4" stroke-dasharray="2.5 2.5"/></svg>Diag</button>
+<button class="btn" id="f-D2" type="button" aria-label="Pliegue diagonal descendente"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 4L20 20" stroke-dasharray="2.5 2.5"/></svg>Diag</button>
+<button class="btn" id="fl" type="button" aria-label="Invertir sentido del pliegue" title="Sentido"><svg class="ic"><use href="#i-swap"/></svg></button>
+<button class="btn" id="undo" type="button"><svg class="ic"><use href="#i-undo"/></svg>Quitar</button>
+</div>
+<svg id="st" class="cv sq" viewBox="-0.4 -0.4 8.8 8.8" tabindex="0" role="application" aria-label="Papel plegado: pulsa para perforar; flechas y Enter"></svg>
+<div class="row sub"><span class="muted small" id="cnt"></span></div>
+<div class="row ctlrow">
+<button class="btn primary" id="b-des" type="button"><svg class="ic"><use href="#i-play"/></svg><span id="b-des-t">Desplegar</span></button>
+<button class="btn" id="b-paso" type="button"><svg class="ic"><use href="#i-next"/></svg>Paso</button>
+<button class="btn" id="clr" type="button"><svg class="ic"><use href="#i-trash"/></svg>Agujeros</button>
+</div>
+<div class="row ctlrow"><span class="muted small">Ejemplo</span><span class="row" id="ex"></span></div>
+<ol class="folds" id="folds"></ol>
+</section>
+<section>
+<div class="row ctlrow">
+<div class="seg" role="group" aria-label="Modo"><button class="btn" id="m-ver" type="button">Ver</button><button class="btn" id="m-pre" type="button">Predecir</button></div>
+<button class="btn primary" id="chk" type="button" hidden><svg class="ic"><use href="#i-check"/></svg>Comprobar</button>
+<button class="btn" id="gclr" type="button" hidden><svg class="ic"><use href="#i-reset"/></svg>Borrar</button>
+</div>
+<svg id="sh" class="cv sq" viewBox="-0.4 -0.4 8.8 8.8" tabindex="0" role="application" aria-label="Hoja desplegada"></svg>
+<div class="row sub"><span class="muted small" id="sh-t">Hoja</span><span id="rs" aria-live="polite"></span></div>
+</section>
+</div>
+
+<div class="foot"><a href="../practica/aptitude/trainer-spatial.html"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Practicar</a><span class="muted small">Método de ayuda; no garantiza mejora de nota.</span></div>
+</main>
+<script>
+// ==== LOGIC START ====
+const EPS=1e-9;
+const NRM={V:[1,0],H:[0,1],D1:[Math.SQRT1_2,Math.SQRT1_2],D2:[Math.SQRT1_2,-Math.SQRT1_2]};
+function rectPoly(N){return[[0,0],[N,0],[N,N],[0,N]]}
+function bbox(P){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const p of P){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])}return{x0,y0,x1,y1}}
+function area(P){let a=0;for(let i=0;i<P.length;i++){const p=P[i],q=P[(i+1)%P.length];a+=p[0]*q[1]-q[0]*p[1]}return Math.abs(a)/2}
+// fold line through the centre of the bounding box of the current shape
+function lineOf(P,k){const b=bbox(P);return{c:[(b.x0+b.x1)/2,(b.y0+b.y1)/2],n:NRM[k]}}
+function sd(p,ln){return(p[0]-ln.c[0])*ln.n[0]+(p[1]-ln.c[1])*ln.n[1]}
+function reflectPt(p,ln){const d=sd(p,ln);return[p[0]-2*d*ln.n[0],p[1]-2*d*ln.n[1]]}
+function dedupePts(P){const o=[];for(const p of P){const q=o[o.length-1];if(!q||Math.hypot(p[0]-q[0],p[1]-q[1])>1e-9)o.push(p)}if(o.length>1&&Math.hypot(o[0][0]-o[o.length-1][0],o[0][1]-o[o.length-1][1])<=1e-9)o.pop();return o}
+// keep the part with s*sd >= 0 (Sutherland-Hodgman, convex)
+function clipHalf(P,ln,s){const out=[];for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length],fa=s*sd(a,ln),fb=s*sd(b,ln);
+  if(fa>=-EPS)out.push(a);
+  if((fa>EPS&&fb<-EPS)||(fa<-EPS&&fb>EPS)){const t=fa/(fa-fb);out.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])])}}
+  return dedupePts(out)}
+function inside(P,p,tol){tol=tol===undefined?1e-7:tol;let pos=0,neg=0;for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length];const L=Math.hypot(b[0]-a[0],b[1]-a[1])||1;const c=((b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]))/L;if(c>tol)pos++;else if(c<-tol)neg++}return!(pos&&neg)}
+function applyFold(P,spec){const ln=lineOf(P,spec.k),kept=clipHalf(P,ln,spec.s),disc=clipHalf(P,ln,-spec.s);
+  if(kept.length<3||disc.length<3||area(kept)<1e-6||area(disc)<1e-6)return null;
+  const rdisc=disc.map(v=>reflectPt(v,ln));
+  for(const v of rdisc)if(!inside(kept,v))return null;
+  return{poly:kept,ln,s:spec.s,disc,rdisc}}
+// model: shapes[0..k] (shape after i folds) and steps[1..k]
+function buildModel(N,specs){const shapes=[rectPoly(N)],steps=[null];for(const sp of specs){const r=applyFold(shapes[shapes.length-1],sp);if(!r)return null;shapes.push(r.poly);steps.push({ln:r.ln,s:sp.s,k:sp.k,disc:r.disc,rdisc:r.rdisc})}return{N,specs:specs.slice(),shapes,steps}}
+function addFold(N,specs,spec){if(specs.length>=3)return null;const sp=specs.concat([spec]);return buildModel(N,sp)?sp:null}
+function key(p){return Math.round(p[0]*1e6)+','+Math.round(p[1]*1e6)}
+function dedupeSet(A){const m=new Map();for(const p of A)m.set(key(p),p);return[...m.values()]}
+// reverse-order unfolding: H[i] = holes seen on shape i (H[k] = punched, H[0] = on the flat sheet)
+function unfoldAll(model,holes){const k=model.specs.length,H=new Array(k+1);H[k]=dedupeSet(holes);
+  for(let i=k;i>=1;i--){const st=model.steps[i],next=H[i].slice();
+    for(const q of H[i]){const r=reflectPt(q,st.ln);if(inside(st.disc,r))next.push(r)}
+    H[i-1]=dedupeSet(next)}
+  return H}
+// forward simulation of the paper as a point-set transformation
+function forward(model,p){let q=p;for(let i=1;i<model.steps.length;i++){const st=model.steps[i];if(st.s*sd(q,st.ln)<-EPS)q=reflectPt(q,st.ln)}return q}
+// all paper points of `grid` that end up under the punch q
+function bruteUnfold(model,q,grid){const o=[];for(const p of grid){const f=forward(model,p);if(Math.hypot(f[0]-q[0],f[1]-q[1])<1e-6)o.push(p)}return dedupeSet(o)}
+function cellGrid(N){const g=[];for(let i=0;i<N;i++)for(let j=0;j<N;j++)g.push([i+.5,j+.5]);return g}
+function snapCell(N,p){return[Math.min(N-1,Math.max(0,Math.floor(p[0])))+.5,Math.min(N-1,Math.max(0,Math.floor(p[1])))+.5]}
+function punchable(model,c){return inside(model.shapes[model.shapes.length-1],c,1e-7)}
+// crease segments on the flat sheet, per fold
+function lineSeg(P,ln){const t=[-ln.n[1],ln.n[0]],pts=[];for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length],fa=sd(a,ln),fb=sd(b,ln);
+  if(Math.abs(fa)<1e-9)pts.push(a);else if((fa<0)!==(fb<0)&&Math.abs(fb)>1e-9){const u=fa/(fa-fb);pts.push([a[0]+u*(b[0]-a[0]),a[1]+u*(b[1]-a[1])])}}
+  if(pts.length<2)return null;let lo=pts[0],hi=pts[0];const pr=p=>p[0]*t[0]+p[1]*t[1];for(const p of pts){if(pr(p)<pr(lo))lo=p;if(pr(p)>pr(hi))hi=p}return[lo,hi]}
+function creases(model){const out=[];for(let i=1;i<model.steps.length;i++){const st=model.steps[i],sg=lineSeg(model.shapes[i-1],st.ln);if(!sg){out.push([]);continue}
+  let segs=[sg];for(let j=i-1;j>=1;j--){const s2=model.steps[j],add=[];for(const s of segs){const r=[reflectPt(s[0],s2.ln),reflectPt(s[1],s2.ln)];
+    // reflected copy only exists where the flap covers the segment
+    if(inside(s2.disc,[(r[0][0]+r[1][0])/2,(r[0][1]+r[1][1])/2]))add.push(r)}segs=segs.concat(add)}
+  out.push(segs)}return out}
+function foldOptions(N,specs,s){const o={};for(const k of Object.keys(NRM))o[k]=!!addFold(N,specs,{k,s});return o}
+function checkGuess(truth,guess){const T=new Set(truth.map(key)),G=new Set(guess.map(key));let hit=0,miss=0,extra=0;for(const k of T)G.has(k)?hit++:miss++;for(const k of G)if(!T.has(k))extra++;return{hit,miss,extra,ok:miss===0&&extra===0}}
+// ==== LOGIC END ====
+
+(function(){
+if(typeof document==='undefined')return;
+const $=s=>document.querySelector(s);
+const N=8,KEY='atc_aid_plegado_v1';
+const ST={specs:[],holes:[],flip:false,j:0,mode:'ver',guess:[],checked:null,anim:null,cur:[0.5,0.5],play:0};
+let model=buildModel(N,[]),H=unfoldAll(model,[]);
+const NAMES={V:'Vertical',H:'Horizontal',D1:'Diagonal /',D2:'Diagonal \\'};
+const ARR={V:{1:'→',[-1]:'←'},H:{1:'↓',[-1]:'↑'},D1:{1:'↗',[-1]:'↙'},D2:{1:'↘',[-1]:'↖'}};
+function save(){try{localStorage.setItem(KEY,JSON.stringify({specs:ST.specs,holes:ST.holes}))}catch(e){}}
+function load(){try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&Array.isArray(j.specs)){const m=buildModel(N,j.specs);if(m&&j.specs.length<=3){ST.specs=j.specs;ST.holes=(j.holes||[]).filter(h=>Array.isArray(h)&&h.length===2&&isFinite(h[0])&&isFinite(h[1]))}}}catch(e){}}
+function recompute(){model=buildModel(N,ST.specs);ST.holes=ST.holes.filter(h=>punchable(model,h));H=unfoldAll(model,ST.holes);ST.j=ST.specs.length;ST.anim=null;ST.checked=null}
+const pts=P=>P.map(p=>p[0].toFixed(3)+','+p[1].toFixed(3)).join(' ');
+function gridLines(){let s='';for(let i=0;i<=N;i++)s+=`<path class="gl" d="M${i} 0V${N}M0 ${i}H${N}"/>`;return s}
+const hole=(p,cls)=>`<circle class="hole ${cls||''}" cx="${p[0]}" cy="${p[1]}" r=".3"/>`;
+function flapPos(q,st,phi){const D=st.s*sd(q,st.ln),f=D*(1-Math.cos(phi));return[q[0]-st.s*st.ln.n[0]*f,q[1]-st.s*st.ln.n[1]*f]}
+function drawStage(){
+  const k=model.specs.length,a=ST.anim;let s='';
+  if(a){
+    const st=model.steps[a.i],base=model.shapes[a.i];
+    s+=`<defs><clipPath id="cpb"><polygon points="${pts(base)}"/></clipPath></defs>`;
+    s+=`<polygon class="paper" points="${pts(base)}"/><g clip-path="url(#cpb)">${gridLines()}</g>`;
+    for(const q of H[a.i])s+=hole(q);
+    const fl=st.rdisc.map(v=>flapPos(v,st,a.phi));
+    s+=`<polygon class="flap" points="${pts(fl)}"/>`;
+    for(const q of H[a.i]){const r=reflectPt(q,st.ln);if(inside(st.disc,r))s+=hole(flapPos(q,st,a.phi),'fl')}
+  }else{
+    const P=model.shapes[ST.j];
+    s+=`<defs><clipPath id="cpb"><polygon points="${pts(P)}"/></clipPath></defs>`;
+    s+=`<polygon class="paper" points="${pts(P)}"/><g clip-path="url(#cpb)">${gridLines()}</g>`;
+    // fold edge hint for the last fold
+    for(const q of H[ST.j])s+=hole(q);
+    if(ST.j===k){const c=ST.cur;s+=`<rect class="cur" x="${c[0]-.5}" y="${c[1]-.5}" width="1" height="1"/>`}
+  }
+  $('#st').innerHTML=s;
+}
+function drawSheet(){
+  let s=`<rect class="paper" x="0" y="0" width="${N}" height="${N}"/>${gridLines()}`;
+  const cr=creases(model);for(const segs of cr)for(const g of segs)s+=`<path class="cr" d="M${g[0][0].toFixed(3)} ${g[0][1].toFixed(3)}L${g[1][0].toFixed(3)} ${g[1][1].toFixed(3)}"/>`;
+  const truth=H[0];
+  if(ST.mode==='ver'){if(ST.j===0&&!ST.anim)for(const q of truth)s+=hole(q)}
+  else{
+    const ck=ST.checked;
+    if(!ck){for(const g of ST.guess)s+=`<circle class="gs" cx="${g[0]}" cy="${g[1]}" r=".34"/>`}
+    else{const T=new Set(truth.map(key)),G=new Set(ST.guess.map(key));
+      for(const q of truth)s+=G.has(key(q))?hole(q,'okh'):`<circle class="miss" cx="${q[0]}" cy="${q[1]}" r=".34"/>`;
+      for(const g of ST.guess)if(!T.has(key(g)))s+=`<path class="xx" d="M${g[0]-.26} ${g[1]-.26}l.52 .52M${g[0]+.26} ${g[1]-.26}l-.52 .52"/>`}
+    {const c=ST.cur;s+=`<rect class="cur" x="${c[0]-.5}" y="${c[1]-.5}" width="1" height="1"/>`}
+  }
+  $('#sh').innerHTML=s;
+}
+function renderUI(){
+  const k=model.specs.length,opt=foldOptions(N,ST.specs,ST.flip?-1:1);
+  for(const kk of Object.keys(NRM))$('#f-'+kk).disabled=!opt[kk]||ST.anim!==null;
+  $('#fl').classList.toggle('on',ST.flip);
+  $('#undo').disabled=!k;$('#clr').disabled=!ST.holes.length;
+  $('#folds').innerHTML=k?ST.specs.map((s,i)=>`<li><b>${i+1}</b> ${NAMES[s.k]} <span class="muted">${ARR[s.k][s.s]}</span></li>`).join(''):'<li class="muted">0</li>';
+  $('#cnt').textContent=k?(ST.j===k?'plegado':'pliegue '+(k-ST.j)+'/'+k)+' · '+ST.holes.length+' ag.':'';
+  $('#b-des').disabled=!(k&&ST.holes.length);
+  $('#b-des-t').textContent=ST.j>0?'Desplegar':'Plegar';
+  $('#b-paso').disabled=!(k&&ST.holes.length&&ST.j>0);
+  $('#m-ver').classList.toggle('on',ST.mode==='ver');$('#m-pre').classList.toggle('on',ST.mode==='pre');
+  $('#chk').hidden=ST.mode!=='pre';$('#gclr').hidden=ST.mode!=='pre';
+  const r=$('#rs');
+  if(ST.mode==='pre'&&ST.checked){const c=ST.checked;r.className=c.ok?'ok':'bad';r.textContent=c.ok?'Correcto · '+c.hit:`${c.hit} bien · faltan ${c.miss} · sobran ${c.extra}`}
+  else if(ST.mode==='pre'){r.className='muted';r.textContent=ST.guess.length+' / ?'}
+  else{r.className='muted';r.textContent=ST.j===0&&ST.holes.length?H[0].length+' agujeros':''}
+  $('#sh-t').textContent=ST.mode==='pre'?'Tu marca':'Hoja';
+}
+function render(){drawStage();drawSheet();renderUI()}
+// animation
+let tok=0;const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function swing(i,from,to,ms){const my=++tok;return new Promise(res=>{if(reduce){ST.anim=null;return res()}const t0=performance.now();ST.anim={i,phi:from};(function f(t){if(my!==tok){return res()}let u=Math.min(1,(t-t0)/ms);u=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;ST.anim.phi=from+(to-from)*u;render();u<1?requestAnimationFrame(f):res()})(t0)})}
+async function unfoldStep(){if(ST.j<=0)return;const my=++ST.play,i=ST.j;await swing(i,0,Math.PI,800);if(ST.play!==my)return;ST.anim=null;ST.j=i-1;render()}
+async function playAll(){const my=++ST.play;while(ST.j>0&&ST.play===my){const i=ST.j;await swing(i,0,Math.PI,800);if(ST.play!==my)return;ST.anim=null;ST.j=i-1;render();await new Promise(r=>setTimeout(r,reduce?0:250))}}
+function stop(){ST.play=0;tok++;ST.anim=null}
+async function addF(k){stop();const sp=addFold(N,ST.specs,{k,s:ST.flip?-1:1});if(!sp)return;ST.specs=sp;ST.holes=[];recompute();save();const i=sp.length;ST.anim={i,phi:Math.PI};render();await swing(i,Math.PI,0,700);if(ST.specs.length!==i)return;ST.anim=null;ST.j=i;render()}
+function toggleHole(c){const kk=key(c),ix=ST.holes.findIndex(h=>key(h)===kk);if(ix>=0)ST.holes.splice(ix,1);else{if(!punchable(model,c))return;ST.holes.push(c)}H=unfoldAll(model,ST.holes);ST.j=model.specs.length;ST.checked=null;save();render()}
+function toggleGuess(c){const kk=key(c),ix=ST.guess.findIndex(h=>key(h)===kk);if(ix>=0)ST.guess.splice(ix,1);else ST.guess.push(c);ST.checked=null;render()}
+function ptr(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(svg.getScreenCTM().inverse());return[q.x,q.y]}
+function inGrid(q){return q[0]>=0&&q[1]>=0&&q[0]<=N&&q[1]<=N}
+$('#st').addEventListener('click',e=>{if(ST.anim||ST.j!==model.specs.length)return;const q=ptr($('#st'),e);if(!inGrid(q))return;ST.cur=snapCell(N,q);toggleHole(ST.cur)});
+$('#sh').addEventListener('click',e=>{if(ST.mode!=='pre')return;const q=ptr($('#sh'),e);if(!inGrid(q))return;ST.cur=snapCell(N,q);toggleGuess(ST.cur)});
+function kb(svg,fn){svg.addEventListener('keydown',e=>{const d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+  if(d){e.preventDefault();ST.cur=[Math.min(N-.5,Math.max(.5,ST.cur[0]+d[0])),Math.min(N-.5,Math.max(.5,ST.cur[1]+d[1]))];render()}
+  else if(e.key==='Enter'||e.key===' '){e.preventDefault();fn()}});}
+kb($('#st'),()=>{if(!ST.anim&&ST.j===model.specs.length)toggleHole(ST.cur)});
+kb($('#sh'),()=>{if(ST.mode==='pre')toggleGuess(ST.cur)});
+for(const k of Object.keys(NRM))$('#f-'+k).onclick=()=>addF(k);
+$('#fl').onclick=()=>{ST.flip=!ST.flip;renderUI()};
+$('#undo').onclick=()=>{stop();ST.specs=ST.specs.slice(0,-1);ST.holes=[];recompute();save();render()};
+$('#clr').onclick=()=>{stop();ST.holes=[];recompute();save();render()};
+$('#b-des').onclick=()=>{if(ST.j>0)playAll();else{stop();ST.j=model.specs.length;render()}};
+$('#b-paso').onclick=()=>{stop();unfoldStep()};
+$('#m-ver').onclick=()=>{ST.mode='ver';ST.checked=null;render()};
+$('#m-pre').onclick=()=>{ST.mode='pre';ST.checked=null;render()};
+$('#chk').onclick=()=>{ST.checked=checkGuess(H[0],ST.guess);render()};
+$('#gclr').onclick=()=>{ST.guess=[];ST.checked=null;render()};
+const EX=[
+ {t:'1',specs:[{k:'V',s:1}],holes:[[5.5,2.5]]},
+ {t:'2',specs:[{k:'V',s:1},{k:'H',s:1}],holes:[[6.5,6.5]]},
+ {t:'3',specs:[{k:'D2',s:1},{k:'V',s:1}],holes:[[5.5,1.5]]}];
+$('#ex').innerHTML=EX.map((x,i)=>`<button class="btn sm" type="button" data-i="${i}">${x.t}</button>`).join('');
+$('#ex').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;stop();const x=EX[+b.dataset.i];ST.specs=x.specs.map(s=>({...s}));ST.holes=x.holes.map(h=>h.slice());ST.guess=[];recompute();save();render()});
+load();recompute();render();
+window.__plg={ST,get model(){return model},get H(){return H},render};
+})();
+
+</script>
+<script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

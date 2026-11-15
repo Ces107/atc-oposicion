@@ -1,0 +1,1135 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Los planes estratégicos de ENAIRE (Plan de Vuelo 2025, Plan de Vuelo 2030) y el contexto SES/SESAR (T07b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Entorno profesional</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-plan-de-vuelo-2025-cierre-y-legado-2021-2025">1. Plan de Vuelo 2025: cierre y legado (2021-2025)</a></li>
+<li><a href="#2-plan-de-vuelo-2030-base-juridica-aprobacion-y-alcance">2. Plan de Vuelo 2030: base jurídica, aprobación y alcance</a></li>
+<li><a href="#3-los-6-objetivos-estrategicos-del-pv2030-texto-completo">3. Los 6 objetivos estratégicos del PV2030 (texto completo)</a></li>
+<li><a href="#4-indicadores-del-pv2030-estrategicos-de-seguimiento-y-del-marco-europeo">4. Indicadores del PV2030: estratégicos, de seguimiento y del marco europeo</a><ul>
+<li><a href="#41-indicadores-estrategicos-con-metas-2026-2030-por-objetivo">4.1 Indicadores estratégicos (con metas 2026-2030), por objetivo</a></li>
+<li><a href="#42-indicadores-de-seguimiento-seleccion-con-umbrales-de-alerta-cuando-estan-definidos-pp-52-53">4.2 Indicadores de seguimiento (selección, con umbrales de alerta cuando están definidos) pp. 52-53</a></li>
+<li><a href="#43-indicadores-del-marco-europeo-espp4rp4-resumen-detalle-completo-en-8-pp-53-55">4.3 Indicadores del marco europeo (ESPP4/RP4), resumen (detalle completo en §8) pp. 53-55</a></li>
+</ul>
+</li>
+<li><a href="#5-la-estructura-de-los-56-planes-estrategicos-4-bloques-17-areas-lista-completa">5. La estructura de los 56 planes estratégicos (4 bloques, 17 áreas): lista completa</a></li>
+<li><a href="#6-el-mapa-de-riesgos-13-riesgos-estrategicos">6. El mapa de riesgos: 13 riesgos estratégicos</a></li>
+<li><a href="#7-contexto-internacional-oaci-sesses2-sesar-el-plan-maestro-atm">7. Contexto internacional: OACI, SES/SES2+, SESAR, el Plan Maestro ATM</a><ul>
+<li><a href="#71-oaci">7.1 OACI</a></li>
+<li><a href="#72-cielo-unico-europeo-ses-y-ses2">7.2 Cielo Único Europeo (SES) y SES2+</a></li>
+<li><a href="#73-sesar">7.3 SESAR</a></li>
+<li><a href="#74-el-plan-maestro-atm-europeo">7.4 El Plan Maestro ATM Europeo</a></li>
+</ul>
+</li>
+<li><a href="#8-el-marco-europeo-de-rendimientos-en-profundidad-rp4espp4">8. El marco europeo de rendimientos en profundidad: RP4/ESPP4</a><ul>
+<li><a href="#81-metas-del-rp4-para-toda-la-ue-frente-a-las-especificas-de-espana-comparacion-resuelta">8.1 Metas del RP4 para toda la UE frente a las específicas de España (comparación resuelta)</a></li>
+</ul>
+</li>
+<li><a href="#9-contexto-nacional-ley-de-movilidad-perte-dora-el-contrato-aena-enaire-u-spacepandu">9. Contexto nacional: ley de movilidad, PERTE, DORA, el contrato Aena-ENAIRE, U-Space/PANDU</a></li>
+<li><a href="#10-sostenibilidad-green-sky-huella-de-carbono-certificaciones">10. Sostenibilidad: Green Sky, huella de carbono, certificaciones</a></li>
+<li><a href="#11-gobernanza-etica-y-cultura-justa-contenido-de-las-politicas">11. Gobernanza, ética y Cultura Justa (contenido de las políticas)</a></li>
+<li><a href="#12-carta-de-servicios-compromisos">12. Carta de Servicios: compromisos</a></li>
+<li><a href="#13-previsiones-de-trafico-2026-2030">13. Previsiones de tráfico 2026-2030</a></li>
+<li><a href="#14-manual-frente-a-fuentes-primarias-discrepancias-adicionales-mas-alla-de-la-tabla-de-om07">14. Manual frente a fuentes primarias: discrepancias adicionales (más allá de la tabla de OM07)</a></li>
+<li><a href="#15-argumentos-para-la-fase-3-conductual-mas-alla-del-resumen-existente">15. Argumentos para la fase 3 (conductual) más allá del resumen existente</a></li>
+<li><a href="#16-ejemplos-resueltos">16. Ejemplos resueltos</a></li>
+<li><a href="#17-trampas-de-examen">17. Trampas de examen</a></li>
+<li><a href="#18-imprescindible-memorizar">18. Imprescindible memorizar</a></li>
+<li><a href="#19-glosario-bilingue-es-en">19. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#20-fuentes">20. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">55 min de lectura</div><h1 id="t07b-los-planes-estrategicos-de-enaire-plan-de-vuelo-2025-plan-de-vuelo-2030-y-el-contexto-sessesar">T07b — Los planes estratégicos de ENAIRE (Plan de Vuelo 2025, Plan de Vuelo 2030) y el contexto SES/SESAR</h1>
+<p>Apuntes de ampliación (24 de septiembre de 2026), más allá del manual oficial 7 de ENAIRE (<code>syllabus/manual/OM07-professional-environment-study-guide.md</code>, que ya incluye una tabla detallada «Manual (nov. 2024) frente a Plan de Vuelo 2030», <strong>no duplicada aquí</strong>) y más allá de <code>behavioral/flight-plan-2030-summary.md</code> (que ya cubre el propósito, la misión, la visión y los valores del PV2030 y los convierte en historias STAR para la fase 3, <strong>tampoco duplicado aquí</strong>, salvo cuando un dato necesita actualizarse). También complementa <code>syllabus/ext/T07a-enaire-organization-figures.md</code> (gobernanza, infraestructura, tarifas, convenio colectivo; no se repite). El enfoque: la <strong>arquitectura completa del Plan de Vuelo 2030</strong> (contexto, riesgos, 6 objetivos, indicadores, los 56 planes estratégicos), <strong>cómo se cerró el PV2025</strong> y el <strong>marco europeo de SES, SESAR y rendimientos</strong> en el que opera ENAIRE, con cifras de fuentes primarias que un examinador podría citar.</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El tema 7 («Entorno profesional») no tiene subapartados más allá del manual de 15 páginas, pero el manual es de noviembre de 2024 y describe el <strong>Plan de Vuelo 2025 (PV2025)</strong>, ya saliente. La estrategia <em>vigente</em> de ENAIRE es el <strong>Plan de Vuelo 2030 (PV2030)</strong>, aprobado por el Consejo Rector el 19 de diciembre de 2025 y por Orden ministerial el 19 de marzo de 2026 (versión 1.1): un documento de 251 páginas con una escala y una estructura completamente distintas de las que describe el manual (56 planes estratégicos frente a los seis objetivos de una línea del manual). Un examen de la fase 1 actualizado después de noviembre de 2025 tiene más probabilidades de basarse en el PV2030; y la fase 3 (entrevista conductual) se basa explícitamente en «el plan estratégico de ENAIRE», así que conocer de memoria los objetivos, los indicadores y los valores rinde por partida doble. Este archivo cubre además el andamiaje europeo en el que se inserta el plan de ENAIRE (Cielo Único Europeo, SES/SES2+, SESAR, el Plan Maestro ATM y el esquema de rendimientos del RP4, ESPP4), porque el PV2030 construye sus propios indicadores a partir de esos textos europeos. Cabe esperar preguntas de recuerdo sobre: los 6 objetivos estratégicos (orden y redacción exactos), el número de planes estratégicos (56, 4 bloques, 17 áreas), códigos de planes concretos (p. ej., «a qué bloque pertenece SM1 Fly Clean»), los 13 riesgos estratégicos (letras A-M), las metas numéricas de los indicadores para 2030, las fechas del SES (1999, 2004, 2009, refundición 2024/2803) y los 6 objetivos del Plan Estratégico de la OACI.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Plan de Vuelo 2025: cierre y legado (2021-2025)</li>
+<li>Plan de Vuelo 2030: base jurídica, aprobación y alcance</li>
+<li>Los 6 objetivos estratégicos del PV2030 (texto completo)</li>
+<li>Indicadores del PV2030: estratégicos, de seguimiento y del marco europeo</li>
+<li>La estructura de los 56 planes estratégicos (4 bloques, 17 áreas): lista completa</li>
+<li>El mapa de riesgos: 13 riesgos estratégicos</li>
+<li>Contexto internacional: OACI, SES/SES2+, SESAR, el Plan Maestro ATM</li>
+<li>El marco europeo de rendimientos en profundidad: RP4/ESPP4</li>
+<li>Contexto nacional: ley de movilidad, PERTE Aeroespacial, DORA, el contrato Aena-ENAIRE, U-Space/PANDU</li>
+<li>Sostenibilidad: Green Sky, huella de carbono, certificaciones</li>
+<li>Gobernanza, ética y Cultura Justa (contenido de las políticas)</li>
+<li>Carta de Servicios: compromisos</li>
+<li>Previsiones de tráfico 2026-2030</li>
+<li>Manual frente a fuentes primarias: discrepancias adicionales (más allá de la tabla de OM07)</li>
+<li>Argumentos para la fase 3 (conductual) más allá del resumen existente</li>
+<li>Ejemplos resueltos</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-plan-de-vuelo-2025-cierre-y-legado-2021-2025">1. Plan de Vuelo 2025: cierre y legado (2021-2025)</h2>
+<ul>
+<li>El PV2025 fue <strong>aprobado por el Consejo Rector en abril de 2021</strong> y <strong>actualizado y vuelto a aprobar en diciembre de 2023</strong> («Actualización del Consejo Rector, 21 de diciembre de 2023»), en cumplimiento de la <strong>Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público</strong>, cuyos arts. 85.1, 92.2 y 92.3 exigen a las entidades públicas un <em>plan de actuación</em> revisado cada tres años.</li>
+<li>El <strong>Propósito</strong> del PV2025 conservaba los cuatro adjetivos: <em>«Cuidamos de tu vuelo para que sea seguro, rápido, eficiente y sostenible»</em>. Sigue vigente en la <strong>Carta de Servicios 2025-2027 (de febrero de 2025)</strong>, que cita esta misma redacción; es decir, «rápido» seguía siendo lenguaje oficial de ENAIRE en febrero de 2025, meses antes de que el borrador del PV2030 lo suprimiera.</li>
+<li><strong>La estructura del PV2025</strong> (distinta de la del PV2030): <strong>12 «Planes Estratégicos de Actuación»</strong>, cada uno formado por un número variable de «iniciativas estratégicas» (de 2 a 5 por plan), clasificados en <strong>tres áreas de actividad: Servicios, Desarrollo de Negocio y Transformación, con la Gobernanza como garante transversal</strong>. Es una arquitectura mucho más sencilla que la de los 56 planes, 4 bloques y 17 áreas del PV2030.</li>
+<li><strong>El texto completo del objetivo 6, resuelto:</strong> en las notas de OM07 sobre el manual, el objetivo 6 aparecía cortado a mitad de frase en el PDF («...desarrollando una cultura»). El texto de la actualización del PV2025 da la frase completa: <em>«Acelerar la transformación cultural, organizativa y modernización de ENAIRE, aprovechando las nuevas tecnologías para ser más ágiles y eficientes y desarrollando una cultura organizativa centrada en nuestras personas como principal activo de la empresa»</em>.</li>
+<li><strong>El informe de «Grado de Cumplimiento» del PV2025, de junio de 2026</strong>, cierra el plan con estos logros principales:</li>
+<li>Se aseguró la viabilidad futura de ENAIRE mientras se adaptaba al cambio estructural del sector.</li>
+<li>Mejora de los servicios: en 2025, con más vuelos gestionados que en 2019, ENAIRE mejoró sus niveles de seguridad y eficiencia y aumentó su competitividad frente a los principales Estados europeos.</li>
+<li>Impulso de la transformación y la modernización: tras la evaluación EFQM de 2021, los resultados mejoraron en 2024 y valieron el <strong>Sello EFQM 600</strong> del Club de Excelencia en Gestión.</li>
+<li>Preparación para el futuro: se desarrollaron nuevos servicios de drones, se puso en marcha <strong>Startical</strong> (servicios por satélite) y se constituyó <strong>ENAIRE Global Services (EGS)</strong>.</li>
+<li><strong>Tráfico de 2025</strong>: ENAIRE cerró 2025 con un <strong>récord histórico de 2,5 millones de vuelos</strong>, un <strong>14,9 % por encima de la referencia prepandemia de 2019</strong> y un <strong>4,7 % por encima de 2024</strong>, con España representando el <strong>22 % del tráfico aéreo europeo</strong>. <strong>Récord histórico diario: 8103 vuelos el 5 de julio de 2025</strong> (igualado el 9 de agosto de 2025).</li>
+<li>En el marco de cinco años del PV2025 se aplicaron <strong>dos periodos de referencia europeos de rendimientos distintos</strong> (RP3 2020-2024 y RP4 2025-2029). Por eso los indicadores del propio PV2025 tuvieron que ajustarse a mitad del plan para seguir dos conjuntos distintos de metas vinculantes de la UE: un desajuste estructural que el informe del PV2030 señala expresamente como recurrente («no perfectamente sincronizados»).</li>
+</ul>
+<h2 id="2-plan-de-vuelo-2030-base-juridica-aprobacion-y-alcance">2. Plan de Vuelo 2030: base jurídica, aprobación y alcance</h2>
+<ul>
+<li><strong>Base jurídica:</strong> la elaboración del PV2030 responde a la <strong>Ley 40/2015, arts. 85.1, 92.2 y 92.3</strong>, que exigen a las entidades públicas un <em>«plan de actuación que contendrá las líneas estratégicas... que se revisarán cada tres años»</em> y ordenan publicar el plan y sus actualizaciones anuales en la web de la entidad. Es el <strong>mismo fundamento jurídico que el del PV2025</strong>: no es una ley nueva, sino la base legal recurrente de <em>todos</em> los planes estratégicos de ENAIRE.</li>
+<li><strong>Cronología de aprobación</strong>:</li>
+<li><strong>24 de noviembre de 2025</strong>: el Comité de Dirección de ENAIRE acuerda, en reunión extraordinaria, presentar la propuesta de PV2030 al Consejo Rector.</li>
+<li><strong>19 de diciembre de 2025</strong>: el <strong>Consejo Rector aprueba</strong> el PV2030 (versión 1.0).</li>
+<li><strong>19 de marzo de 2026</strong>: tras incorporar los comentarios de varios departamentos ministeriales, el plan es <strong>aprobado por Orden de la persona titular del Ministerio de Transportes y Movilidad Sostenible</strong> (versión 1.1: es la que se estudia aquí, código <strong>G1-25-PLA-001-1.1</strong>).</li>
+<li><strong>Vigencia:</strong> una vez aprobado, el plan <strong>se mantiene en vigor durante 5 años</strong>, sin perjuicio del mandato de la Ley 40/2015 de revisarlo durante ese periodo (es decir, se espera una revisión intermedia a los 3 años, como la que tuvo el PV2025 en diciembre de 2023).</li>
+<li><strong>Canales de publicación:</strong> internamente, la intranet <strong>«Nube»</strong>; externamente, <strong>www.enaire.es</strong>.</li>
+<li><strong>Proceso de elaboración:</strong> descrito como colaborativo, con la participación de la plantilla de ENAIRE y de los grupos de interés clave (clientes, socios estratégicos). El borrador se presentó a la representación sindical y a los principales reguladores y administraciones públicas antes de la aprobación del Consejo Rector, «como muestra de transparencia y compromiso».</li>
+<li><strong>Cinco pilares estratégicos citados en la introducción:</strong> <em>movilidad sostenible</em>, <em>digitalización</em>, <em>eficiencia</em>, <em>innovación</em> e <em>internacionalización</em>, «manteniendo siempre la seguridad como principal prioridad estratégica».</li>
+<li><strong>Espacio aéreo y red, repaso:</strong> ENAIRE presta servicio en el espacio aéreo español, «una extensión aproximada de 2,2 millones de km²», estructurado en <strong>dos zonas</strong> (Península/Baleares y Canarias) y <strong>cinco Regiones de Navegación Aérea</strong> (Centro Norte, Este, Balear, Sur, Canarias), con sedes de ACC en Madrid, Barcelona, Palma de Mallorca, Sevilla y Gran Canaria, además de los <strong>TACC de Valencia y de Santiago de Compostela</strong>. <strong>Tres FIR/UIR</strong>: Madrid (LECM, que incluye el espacio aéreo delegado al ACC de Sevilla), Barcelona (LECB, que incluye la TMA de Baleares controlada desde Palma y el TACC de Levante en Valencia) y Canarias (GCCC). (Coincide con T07a y OM07; se deja breve como contexto de la lista de planes de la sección 5.)</li>
+<li><strong>Servicios enumerados (mismo inventario que el manual, repasado con el enfoque 2030):</strong> servicios ATM en <strong>21 aeropuertos, 5 centros de control y 2 TACC</strong>; ATS (control de tránsito aéreo, asesoramiento e información de vuelo, FIS); ASM de nivel 3; ATFM; CNS en la red de Aena y en otros operadores aeroportuarios; AIS (incluida la AIP como «el manual básico de información aeronáutica»); FPD. <strong>Novedad en el listado propio del PV2030 (no figura en el manual): servicios U-Space</strong>, con ENAIRE como futuro <strong>USSP</strong> (proveedor de servicios U-Space) y <strong>CISP</strong> (proveedor de servicios de información común), y <strong>ADSP</strong> (prestación de servicios de datos), cuyos requisitos de certificación aún se están desarrollando en el marco del SES2+ y «podría demorarse aun unos años».</li>
+<li><strong>Grupo empresarial, repasado con el detalle de 2030:</strong> ENAIRE es accionista mayoritario de Aena S.A. (51 %) y accionista de <strong>EGS, CRIDA, Startical, Ineco, GEAD y ESSP SAS</strong>. Dos adiciones respecto a la lista del manual: <strong>Startical</strong> (constituida en 2021, ENAIRE + Indra al 50 %, constelación de satélites para vigilancia y comunicaciones de voz y datos en zonas remotas y oceánicas) y <strong>ENAIRE Global Services (EGS)</strong>, sociedad mercantil íntegramente estatal («Sociedad Mercantil Estatal 100% de ENAIRE») <strong>constituida en julio de 2025</strong>, con el fin de convertir a ENAIRE en proveedor global de servicios de navegación aérea y asociados. CRIDA se describe con precisión como <em>«el centro de referencia de investigación, desarrollo e innovación»</em>, creado en <strong>2008</strong> por ENAIRE, la <strong>UPM</strong> e <strong>Ineco</strong>; esto confirma y fecha la glosa de OM07. ENAIRE participa en Ineco desde <strong>1993</strong> (entonces como Aena). ENAIRE forma parte de <strong>ESSP SAS</strong> (European Satellite Services Provider, que opera EGNOS) desde <strong>2008</strong>, junto con DSNA, ENAV, DFS, NATS, NAV Portugal y Skyguide. <strong>GroupEAD</strong>: ENAIRE fue socio fundador en <strong>2001</strong> con DFS y Frequentis AG; opera bajo EUROCONTROL desde 2003 y su modelo de gestión evoluciona hacia la plena integración en EUROCONTROL.</li>
+<li><strong>Plantilla, consolidada a 31 de diciembre de 2024</strong> (actualiza la cifra del manual, «31 de octubre de 2024»): <strong>4284 personas</strong>, de las cuales el <strong>51,1 % pertenece al Convenio de Control</strong> (publicado en el BOE el 24 de agosto de 2023) y el <strong>48,9 % al Convenio Grupo</strong> (incluye personal directivo; excluye a los controladores en situación especial LER/RA1 y las duplicidades de personal interino o jubilado parcial). Crecimiento en cinco años (2019→2024): <strong>+6,8 % total</strong> (Control +4,3 %, Grupo +9,6 %). <strong>1193 vuelos gestionados por controlador operativo en 2024</strong>, un +3,5 % respecto a 2023.</li>
+<li><strong>Por sexo:</strong> dos tercios hombres, un tercio mujeres; la proporción de mujeres pasó del 34,5 % (2019) al <strong>35,1 % (2024)</strong>; la plantilla masculina creció un 5,5 % en 5 años frente al 9,3 % de la femenina.</li>
+<li><strong>Por nivel profesional:</strong> el 71,6 % está en los niveles A-B (se exige titulación universitaria; incluye a los controladores); el 28,4 %, en los niveles C-F (personal técnico). La mayor brecha de género se da en el nivel C (54 puntos) y en los niveles E-F (50 puntos); la menor, en A-B (26 puntos).</li>
+<li><strong>Por puesto de estructura:</strong> el 6,5 % de la plantilla ocupa puestos estructurales: dirección (0,4 %), jefatura de división (1,4 %), jefatura de departamento (4,8 %); el 62,4 % de estos puestos está ocupado por hombres.</li>
+<li><strong>Por edad:</strong> el <strong>49 % de la plantilla tiene más de 51 años</strong> a 31/12/2024 (frente al 38 % en 2019); solo el 21 % tiene menos de 41 (frente al 14 % en 2019). El Convenio de Control es algo más joven (21 % de menores de 41) que el Convenio Grupo (11 % de menores de 41, que era el 19 % en 2019).</li>
+<li><strong>Detalle por Convenio</strong>: Convenio de Control, 2190 personas (90 % operativo, 5 % estructura/gestión, 5 % no operativo); Convenio Grupo, 2094 personas (48 % estructura/gestión/apoyo, 41 % ingeniería y mantenimiento, 11 % operaciones).</li>
+</ul>
+<h2 id="3-los-6-objetivos-estrategicos-del-pv2030-texto-completo">3. Los 6 objetivos estratégicos del PV2030 (texto completo)</h2>
+<p>Los objetivos del PV2030 son una <strong>revisión de los seis del PV2025</strong>, impulsada por la Visión y los Valores actualizados y por el análisis ambiental DAFO/CAME (véase §7). Texto literal completo, pp. 50-51:</p>
+<ol>
+<li><strong>SEGURIDAD:</strong> <em>«Reforzar continuamente la seguridad, prestando especial atención a la cultura de seguridad, al factor humano, a la ciberseguridad y a la seguridad física ante los nuevos riesgos emergentes.»</em> — <strong>añade la «seguridad física»</strong> respecto a la redacción del manual y del PV2025.</li>
+<li><strong>CALIDAD Y RESILIENCIA DE SERVICIOS:</strong> <em>«Mejorar la calidad y la resiliencia de los servicios prestados, para afrontar los problemas estructurales de capacidad, dando así respuesta a las expectativas de nuestros clientes.»</em> — elimina la «escalabilidad» y la «digitalización» de la redacción del PV2025 y replantea el objetivo en torno a los problemas estructurales de capacidad.</li>
+<li><strong>MOVILIDAD AÉREA SOSTENIBLE:</strong> <em>«Promover la movilidad aérea sostenible, a través del impulso a la incorporación de nuevos entrantes, la mejora de la eficiencia operativa y la descarbonización de nuestra actividad, minimizando el impacto de ENAIRE en el medioambiente.»</em> — <strong>nombra de forma explícita a los «nuevos entrantes»</strong>, ausentes de la redacción del manual y del PV2025.</li>
+<li><strong>NEGOCIO E INTERNACIONALIZACIÓN:</strong> <em>«Potenciar nuestro posicionamiento y liderazgo estratégico en el ámbito internacional, así como el desarrollo del negocio de ENAIRE, para afianzarnos en un entorno global y competitivo del sector de la navegación aérea.»</em></li>
+<li><strong>COMPETITIVIDAD Y EFICIENCIA:</strong> <em>«Reforzar la competitividad de ENAIRE mediante el incremento de la eficiencia y la productividad, adaptándonos a los cambios estructurales del sector de la aviación.»</em> — abandona por completo el enfoque de «crisis» (COVID) del PV2025.</li>
+<li><strong>TRANSFORMACIÓN Y MODERNIZACIÓN:</strong> <em>«Acelerar la transformación y modernización en todos los ámbitos de ENAIRE, aprovechando la innovación y las nuevas tecnologías para ser más ágiles y eficientes, en línea con la rápida evolución del marco internacional, con nuestras Regiones como motor del cambio y con una cultura de la organización centrada en nuestras personas como principal activo.»</em> — <strong>nombra explícitamente a las Regiones («nuestras Regiones») como motor del cambio</strong>, expresión ausente en el PV2025.</li>
+</ol>
+<h2 id="4-indicadores-del-pv2030-estrategicos-de-seguimiento-y-del-marco-europeo">4. Indicadores del PV2030: estratégicos, de seguimiento y del marco europeo</h2>
+<p>El PV2030 define tres capas de indicadores, todas con sus definiciones en el <strong>Anexo I</strong> (pp. 237-246). pp. 51-55</p>
+<h3 id="41-indicadores-estrategicos-con-metas-2026-2030-por-objetivo">4.1 Indicadores estratégicos (con metas 2026-2030), por objetivo</h3>
+<table>
+<thead>
+<tr>
+<th>Objetivo</th>
+<th>Indicador</th>
+<th>2026</th>
+<th>2027</th>
+<th>2028</th>
+<th>2029</th>
+<th>2030</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seguridad</td>
+<td>NPS operativo (Nivel Ponderado de Seguridad) ≤</td>
+<td>12,8</td>
+<td>12,3</td>
+<td>11,8</td>
+<td>11,4</td>
+<td>11,0</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>IMC — Índice de Madurez de Ciberseguridad ≥</td>
+<td>91 %</td>
+<td>91 %</td>
+<td>91 %</td>
+<td>91 %</td>
+<td>91 %</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>IAC — Indicador Acumulado de Ciberresiliencia ≥</td>
+<td>4,1</td>
+<td>4,2</td>
+<td>4,2</td>
+<td>4,2</td>
+<td>4,2</td>
+</tr>
+<tr>
+<td>Calidad/Resiliencia</td>
+<td>NCP — Nivel de Calidad Percibida ≥</td>
+<td>78,5</td>
+<td>79,0</td>
+<td>79,5</td>
+<td>80,0</td>
+<td>80,0</td>
+</tr>
+<tr>
+<td>Calidad/Resiliencia</td>
+<td>ERD ATR — demora ATFM en ruta atribuible a ENAIRE ≤</td>
+<td>0,60</td>
+<td>0,50</td>
+<td>0,40</td>
+<td>0,30</td>
+<td>0,21</td>
+</tr>
+<tr>
+<td>Calidad/Resiliencia</td>
+<td>TAD ATR — demora ATFM de llegada atribuible a ENAIRE ≤</td>
+<td>0,19</td>
+<td>0,18</td>
+<td>0,17</td>
+<td>0,16</td>
+<td>0,15</td>
+</tr>
+<tr>
+<td>Calidad/Resiliencia</td>
+<td>% de vuelos con demora ATFM inferior a 15 min ≥</td>
+<td>90 %</td>
+<td>90 %</td>
+<td>91 %</td>
+<td>92 %</td>
+<td>93 %</td>
+</tr>
+<tr>
+<td>Calidad/Resiliencia</td>
+<td>Adherencia al slot (Carta de Servicios) &gt;</td>
+<td>90 %</td>
+<td>90 %</td>
+<td>90 %</td>
+<td>90 %</td>
+<td>90 %</td>
+</tr>
+<tr>
+<td>Movilidad sostenible</td>
+<td>KEA ajustado — ineficiencia horizontal de la red de rutas ≤</td>
+<td>3,28 %</td>
+<td>3,27 %</td>
+<td>3,25 %</td>
+<td>3,24 %</td>
+<td>3,23 %</td>
+</tr>
+<tr>
+<td>Movilidad sostenible</td>
+<td>% de reducción de la huella de carbono (alcances 1+2) ≥</td>
+<td>1,00 %</td>
+<td>1,00 %</td>
+<td>2,00 %</td>
+<td>1,00 %</td>
+<td>1,00 %</td>
+</tr>
+<tr>
+<td>Movilidad sostenible</td>
+<td>% de uso de energías renovables =</td>
+<td>100 %</td>
+<td>100 %</td>
+<td>100 %</td>
+<td>100 %</td>
+<td>100 %</td>
+</tr>
+<tr>
+<td>Negocio/internacional</td>
+<td>Número de líneas de negocio de EGS iniciadas ≥</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Competitividad</td>
+<td>Solvencia financiera ≥</td>
+<td>2,00</td>
+<td>2,20</td>
+<td>2,50</td>
+<td>2,75</td>
+<td>3,00</td>
+</tr>
+<tr>
+<td>Competitividad</td>
+<td>% de la tarifa en ruta Península por debajo de la media «Big4» ≥</td>
+<td>15 %</td>
+<td>15 %</td>
+<td>15 %</td>
+<td>15 %</td>
+<td>15 %</td>
+</tr>
+<tr>
+<td>Competitividad</td>
+<td>EBITDA (M€) ≥</td>
+<td>180</td>
+<td>180</td>
+<td>180</td>
+<td>180</td>
+<td>180</td>
+</tr>
+<tr>
+<td>Transformación</td>
+<td>Tasa de rotación de la plantilla ≤</td>
+<td>6 %</td>
+<td>6 %</td>
+<td>—</td>
+<td>6 %</td>
+<td>6 %</td>
+</tr>
+<tr>
+<td>Transformación</td>
+<td>Gasto en I+D+i (M€) ≥</td>
+<td>25,0</td>
+<td>26,0</td>
+<td>27,0</td>
+<td>28,0</td>
+<td>29,0</td>
+</tr>
+</tbody>
+</table>
+<p>(*) Dos indicadores, las líneas de negocio de EGS y la adherencia al slot, llevan una nota al pie según la cual su evolución histórica es limitada y las metas pueden revisarse a mitad del periodo.</p>
+<h3 id="42-indicadores-de-seguimiento-seleccion-con-umbrales-de-alerta-cuando-estan-definidos-pp-52-53">4.2 Indicadores de seguimiento (selección, con umbrales de alerta cuando están definidos) pp. 52-53</h3>
+<ul>
+<li>Tasa de penetraciones sin autorización en el espacio aéreo ≤ 6,3.</li>
+<li>NPS agregado (Net Promoter Score) &gt; 0.</li>
+<li>Cumplimiento de la Carta de Servicios = 100 %.</li>
+<li>Incidentes de seguridad ASM N3 &lt; 0,50 %.</li>
+<li>Disponibilidad de los servicios CNS/ATS ≥ 99 % (con un suelo del 97 % por categoría) y continuidad ≥ 98 %.</li>
+<li>Precisión, integridad y puntualidad del servicio de vigilancia (SCRAD/SCRA/SCRR) ≥ 98 %.</li>
+<li>Reclamaciones del servicio de control ≤ 1 por cada 20 000 vuelos.</li>
+<li>NOTAM con incidencias ≤ 1,2 %; incidencias de la AIP ≤ 15 por enmienda; AIP corregida mediante NOTAM ≤ 1 por enmienda.</li>
+<li>Cumplimiento del plan de ingresos (PAA) ≥ 95 %; cumplimiento del plan de gastos ≤ 103 %; cumplimiento del plan de inversiones ≥ 95 %; inversión/facturación ≤ 15 %.</li>
+<li>Meta de coste unitario del servicio en ruta: 48,99 (2026), que sube a 49,57 (2030), en €.</li>
+<li>Cumplimiento de los hitos del Plan Anual, que sube del <strong>60 % (2026) al 75 % (2030)</strong>.</li>
+<li><strong>Contribución de la inversión al Plan Maestro ATM Europeo ≥ 65 % (2026-2028), que sube al 70 % (2029-2030)</strong>: un vínculo directo y cuantificado entre el plan de inversiones de ENAIRE y el Plan Maestro europeo impulsado por SESAR (véase §7).</li>
+</ul>
+<h3 id="43-indicadores-del-marco-europeo-espp4rp4-resumen-detalle-completo-en-8-pp-53-55">4.3 Indicadores del marco europeo (ESPP4/RP4), resumen (detalle completo en §8) pp. 53-55</h3>
+<p>Cuatro áreas clave de rendimiento (KPA): <strong>Seguridad, Capacidad, Medioambiente y Coste-Eficiencia</strong>, supervisadas conjuntamente por la <strong>Comisión Europea</strong> y la <strong>AESA</strong> (como autoridad nacional de supervisión de ENAIRE). La seguridad usa la escala <strong>EoSM</strong> (Effectiveness of Safety Management; niveles A-D, cuanto más alta la letra, mayor madurez); la capacidad usa la demora ATFM en ruta y de llegada por vuelo; el medioambiente usa <strong>KEA</strong> (ineficiencia de ruta, %); la coste-eficiencia usa <strong>DUC</strong> (coste unitario determinado, €).</p>
+<h2 id="5-la-estructura-de-los-56-planes-estrategicos-4-bloques-17-areas-lista-completa">5. La estructura de los 56 planes estratégicos (4 bloques, 17 áreas): lista completa</h2>
+<p>El PV2030 organiza su ejecución en <strong>56 Planes Estratégicos</strong>, agrupados en <strong>4 bloques</strong> y <strong>17 áreas</strong>. pp. 57-62. Cada plan tiene un código de 2-3 letras más un número de orden. Las descripciones siguientes son resúmenes de una línea derivados de los nombres de los planes, de las descripciones de las áreas y (para el Bloque 1) de las fichas detalladas de los planes, recogidas en el §4.4 de la fuente.</p>
+<p><strong>BLOQUE 1 — Gobernanza y Cumplimiento</strong> — 3 planes, 1 área («vertebrador de la actividad de ENAIRE»):</p>
+<ul>
+<li><strong>GC1 — Buena Gobernanza</strong>: refuerza y da a conocer la práctica de buen gobierno del Consejo Rector; consolida el marco de políticas de ENAIRE.</li>
+<li><strong>GC2 — Ética y Cumplimiento Normativo</strong>: refuerza la formación sobre el Código Ético y el Canal Ético; persigue la certificación de cumplimiento penal <strong>UNE 19601</strong> y una herramienta GRC (gobernanza, riesgos y cumplimiento normativo).</li>
+<li><strong>GC3 — Buenas prácticas tributarias</strong>: refuerza unas relaciones cooperativas y transparentes con la Agencia Tributaria y mitiga el riesgo fiscal.</li>
+</ul>
+<p><strong>BLOQUE 2 — Liderazgo Transformacional</strong> — 17 planes, 6 áreas:</p>
+<ul>
+<li><em>Solidez Financiera</em>: <strong>SF1 — Compite</strong> (posición competitiva de ENAIRE); <strong>SF2 — Agiliza</strong> (excelencia en la contratación pública); <strong>SF3 — Optimiza</strong> (gestión de costes).</li>
+<li><em>Impulso a las Regiones</em>: <strong>IR1 — Adecuación de las estructuras regionales</strong>; <strong>IR2 — Herramientas y procesos</strong>; <strong>IR3 — Enfoque a turnos</strong>.</li>
+<li><em>Nuestras Personas</em>: <strong>PE1 — Hacia nuevas formas de liderar</strong>; <strong>PE2 — Eficiencia y organización</strong>; <strong>PE3 — Compromiso, bienestar y diversidad</strong>.</li>
+<li><em>Calidad y Excelencia en Gestión</em>: <strong>EX1 — Gestión excelente 5.0</strong>; <strong>EX2 — Cultura Organizativa</strong>; <strong>EX3 — Optimización de las previsiones de demanda de tráfico aéreo</strong>.</li>
+<li><em>Relación con Grupos de Interés</em>: <strong>GI1 — Experiencia de Cliente</strong>; <strong>GI2 — Modelo de relación con GI</strong>; <strong>GI3 — Comunicación integral con los GI</strong>.</li>
+<li><em>Cooperación Civil-Militar</em>: <strong>CM1 — Colaboración estratégica con Defensa</strong>; <strong>CM2 — Un futuro en seguridad</strong>.</li>
+</ul>
+<p><strong>BLOQUE 3 — Internacionalización y Desarrollo Empresarial</strong> — 8 planes, 3 áreas («aproximación estratégica orientada a la consecución de la Visión»):</p>
+<ul>
+<li><em>Internacionalización</em>: <strong>IN1 — Posicionamiento y liderazgo estratégico internacional</strong>; <strong>IN2 — Refuerzo de participación de ENAIRE en estructuras de gobierno internacional</strong>.</li>
+<li><em>Desarrollo de Negocio</em>: <strong>DN1 — Desarrollo de Negocio No Regulado (EGS)</strong>; <strong>DN2 — Desarrollo de otras empresas participadas</strong>; <strong>DN3 — Desarrollo comercial y de nuevos servicios</strong>.</li>
+<li><em>Innovación como Motor del Desarrollo</em>: <strong>IO1 — Plan de gestión, coordinación y despliegue de la Innovación</strong>; <strong>IO2 — CRIDA como impulsor de la I+D de ENAIRE</strong>; <strong>IO3 — Estrategia de Inteligencia Artificial (IA) — iANAIRE</strong> (estrategia de IA, «iANAIRE»).</li>
+</ul>
+<p><strong>BLOQUE 4 — Servicios</strong> — 28 planes, 7 áreas (con diferencia, el bloque más grande):</p>
+<ul>
+<li><em>Seguridad</em>: <strong>SG1 — REFUERZA: La Seguridad Operacional</strong>; <strong>SG2 — ANTICIPA: Implantación de un SGS predictivo</strong> (sistema de gestión de la seguridad predictivo); <strong>SG3 — PROTEGE: Seguridad Física — Ciber</strong>.</li>
+<li><em>Servicios ATM</em>: <strong>SA1 — Incremento de la Capacidad</strong>; <strong>SA2 — Reestructuración del Espacio Aéreo</strong>; <strong>SA3 — Evolución de la Gestión de Afluencia</strong>; <strong>SA4 — Mejora de la gestión de la Meteorología Adversa</strong>; <strong>SA5 — Mejora del servicio FIS (MiFIS)</strong> (servicio de información de vuelo mejorado).</li>
+<li><em>Servicios de Red</em>: <strong>SR1 — Plan EYWA</strong>; <strong>SR2 — Plan de Sysred</strong>; <strong>SR3 — Refuerzo de la resiliencia operacional en Servicios ATS/CNS</strong>.</li>
+<li><em>Servicios de Información Aeronáutica</em>: <strong>SI1 — Automatización de los Sistemas Digitales</strong>; <strong>SI2 — Evolución de la gestión de Información Aeronáutica (AIM)</strong>.</li>
+<li><em>Sostenibilidad Medioambiental «Green Sky»</em>: <strong>SM1 — Fly Clean</strong>; <strong>SM2 — Fly Quiet</strong>; <strong>SM3 — Eco ENAIRE</strong>; <strong>SM4 — Compromiso Verde</strong>; <strong>SM5 — Responsabilidad Ambiental</strong>; véase el §10 para su contenido.</li>
+<li><em>Digital Tech</em>: <strong>DT1 — Evolución de Sistemas ATM</strong>; <strong>DT2 — Evolución de Sistemas de Comunicaciones</strong>; <strong>DT3 — Evolución de Sistemas de Navegación</strong>; <strong>DT4 — Evolución de Sistemas de Vigilancia</strong>; <strong>DT5 — Evolución de la Explotación Técnica</strong>; <strong>DT6 — Evolución de las Tecnologías de la Información</strong> (TI); <strong>DT7 — Infraestructuras 2030</strong>.</li>
+<li><em>Servicios a Drones y Nuevos Usuarios</em>: <strong>NU1 — U-Space / Innovative Air Mobility</strong>; <strong>NU2 — Servicios basados en drones</strong>; <strong>NU3 — Gestión del Tráfico Espacial (HAO — STM)</strong> (gestión del tráfico espacial, operaciones a gran altitud).</li>
+</ul>
+<p><strong>Comprobación:</strong> 3 (Bloque 1) + 17 (Bloque 2: 3+3+3+3+3+2) + 8 (Bloque 3: 2+3+3) + 28 (Bloque 4: 3+5+3+2+5+7+3) = <strong>56</strong>. Confirmado.</p>
+<h2 id="6-el-mapa-de-riesgos-13-riesgos-estrategicos">6. El mapa de riesgos: 13 riesgos estratégicos</h2>
+<p>Se rige por la <strong>Política de Control y Gestión integral de Riesgos</strong> de ENAIRE y lo supervisa el <strong>Comité de Riesgos, Resiliencia, Crisis y Recuperación</strong>. De todos los riesgos identificados se seleccionaron <strong>13 riesgos estratégicos (con letras de la A a la M)</strong> por estar vinculados a los objetivos estratégicos del PV2030. pp. 46-48</p>
+<table>
+<thead>
+<tr>
+<th>Letra</th>
+<th>Riesgo</th>
+<th>Descripción en una línea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Marco regulatorio, supervisión y competencia</td>
+<td>Restricciones regulatorias o de competencia a la competitividad de ENAIRE, al nuevo negocio o a la captación de talento; incluye un posible incumplimiento del RP4, la liberalización de servicios y los impuestos medioambientales</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Conflictividad laboral y gestión de personas</td>
+<td>Conflictos laborales y dificultad para retener talento que afectan a la prestación del servicio</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Continuidad de servicio y respuesta a incidencias y crisis</td>
+<td>Interrupción del servicio por incidentes técnicos u operativos, meteorología, lanzamientos espaciales o incidentes de espacio aéreo transfronterizos</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Incertidumbre macroeconómica y geopolítica</td>
+<td>Volatilidad macroeconómica o geopolítica externa que afecta a los ingresos o a los costes</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Contrato de prestación de servicios Aena, S.A.</td>
+<td>Cláusulas de penalización del contrato de servicios ENAIRE-Aena si no se cumplen los compromisos</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Sostenibilidad ambiental y cambio climático</td>
+<td>Presión para cumplir los planes ambientales; reclamaciones de los grupos de interés si no se cumplen</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Incumplimiento plan de inversiones y proyectos estratégicos/subvenciones UE</td>
+<td>Incumplimiento de plazos, importes o calidad del plan de inversiones, incluidas las condiciones de las subvenciones de la UE (PERTE Aeroespacial)</td>
+</tr>
+<tr>
+<td>H</td>
+<td>Ciberseguridad y Seguridad física</td>
+<td>Ciberataques o ataques físicos a las instalaciones de ENAIRE (acceso no autorizado, fraude de datos, suplantación de identidad)</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Evento severo de seguridad</td>
+<td>Evento grave de seguridad operacional con una o varias aeronaves (incluidas las RPA) en el ámbito de responsabilidad de ENAIRE</td>
+</tr>
+<tr>
+<td>J</td>
+<td>Liquidez y gestión de cobros</td>
+<td>Tensión de liquidez, necesidad de financiación externa, fallos en el cobro de la facturación</td>
+</tr>
+<tr>
+<td>K</td>
+<td>Reclamaciones judiciales</td>
+<td>Sentencias adversas con consecuencias económicas o laborales</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Daño reputacional</td>
+<td>Riesgo reputacional derivado de acciones de comunicación propias o de terceros</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Buen Gobierno y cumplimiento normativo</td>
+<td>Incumplimiento de normas legales, códigos de conducta y estándares de buen gobierno y transparencia</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-contexto-internacional-oaci-sesses2-sesar-el-plan-maestro-atm">7. Contexto internacional: OACI, SES/SES2+, SESAR, el Plan Maestro ATM</h2>
+<h3 id="71-oaci">7.1 OACI</h3>
+<ul>
+<li>El <strong>Plan Estratégico de la OACI 2026-2050</strong>, aprobado por el Consejo de la OACI el <strong>1 de noviembre de 2024</strong>, fija <strong>6 objetivos estratégicos</strong> pp. 25-26:
+  1. Cero víctimas mortales por accidentes o incidentes de aviación.
+  2. Cero emisiones netas de carbono de la aviación internacional en 2050.
+  3. Movilidad fluida, accesible y fiable para todos.
+  4. Colaboración y cooperación para que los beneficios lleguen a todos los Estados.
+  5. Adaptación del derecho aeronáutico para responder a los problemas actuales y emergentes.
+  6. Desarrollo económico del transporte aéreo como factor de prosperidad económica y bienestar social.</li>
+<li><strong>España tuvo un papel destacado</strong> en la elaboración de este plan, al haber sido designada <strong>Coordinadora del Grupo Consultivo</strong>.</li>
+<li><strong>GANP</strong> (Plan mundial de navegación aérea): principal instrumento estratégico de la OACI para alcanzar estos objetivos, que además apoya la Agenda 2030 de la ONU. <strong>GASP</strong> (Plan global para la seguridad operacional de la aviación): estrategia mundial para mejorar continuamente la seguridad operacional, reducir accidentes y riesgos y promover programas estatales de seguridad basados en el riesgo. <strong>GASeP</strong> (Plan global para la seguridad de la aviación): marco estratégico para reforzar la protección (<em>security</em>, no <em>safety</em>) frente a las amenazas emergentes. Es la clásica trampa de confundir GASP (seguridad operacional) con GASeP (seguridad contra actos ilícitos), confirmada por el mapa de DL01.</li>
+</ul>
+<h3 id="72-cielo-unico-europeo-ses-y-ses2">7.2 Cielo Único Europeo (SES) y SES2+</h3>
+<ul>
+<li>El SES introduce un cambio estructural en el ATM orientado a mejorar la seguridad, la capacidad, la eficiencia y la sostenibilidad. Elementos clave del <strong>reglamento SES2+</strong> pp. 26-27:</li>
+<li>Los <strong>bloques funcionales de espacio aéreo (FAB)</strong> voluntarios siguen siendo posibles (ENAIRE está en el <strong>FAB Sudoeste</strong> con Portugal, según OM07/DL07).</li>
+<li><strong>Una o varias Autoridades Nacionales de Supervisión</strong>, independientes del proveedor de servicios y designadas por los Estados (en España: la <strong>AESA</strong>).</li>
+<li>Nuevo <strong>concepto de ATSP (proveedor de servicios de tránsito aéreo)</strong>: designado por tiempo ilimitado; certificado; que cumpla los requisitos de seguridad y defensa; ubicado en un Estado miembro; <strong>con más del 50 % de su propiedad y control en manos de un Estado miembro o de sus nacionales</strong>.</li>
+<li>Los Estados pueden permitir que los servicios CNS, AIS, ADS (servicios de datos) o MET se contraten en <strong>condiciones de mercado</strong> con proveedores certificados que cumplan la misma regla de más del 50 % de propiedad (salvo los proveedores de servicios por satélite certificados antes del SES2+).</li>
+<li>Los Estados pueden permitir que los operadores aeroportuarios contraten los servicios ATS de control de aeródromo y de aproximación en condiciones de mercado.</li>
+<li><strong>CIS U-Space (servicio de información común)</strong>: las Autoridades Nacionales de Supervisión aprueban los precios a partir de costes fijos y variables (todos públicos) más un margen de compensación del riesgo.</li>
+<li><strong>Planes nacionales de rendimientos</strong>, elaborados por las ANS, de 3 años como mínimo y 5 como máximo, con metas en ruta y en zona terminal.</li>
+<li>La Comisión puede suspender o adaptar el sistema de rendimientos durante crisis de la red que impidan hacer previsiones de tráfico fiables.</li>
+<li>La <strong>modulación de tarifas</strong> está sujeta a análisis y siempre es «neutra en ingresos» para los ANSP.</li>
+<li><strong>El SES2+ fue adoptado por el Parlamento Europeo y el Consejo y publicado en el DOUE el 11 de noviembre de 2024, y entró parcialmente en vigor el 1 de diciembre de 2024</strong>: es el <strong>Reglamento (UE) 2024/2803</strong>. Confirma y precisa el hallazgo de OM07 (que solo tenía «en negociación», por el manual desactualizado).</li>
+<li><strong>CP1/CP2 (Proyectos Comunes)</strong>: el CP1 (Proyecto Común Uno) es el reglamento de la UE vinculado a SESAR que impone el despliegue sincronizado e interoperable de funcionalidades ATM en toda Europa para mejorar la seguridad, la eficiencia y la capacidad y reducir el impacto ambiental. <strong>El CP2 está próximo</strong> y se vincula a los Objetivos Estratégicos de Implementación (SDO, <em>Strategic Deployment Objectives</em>) del Plan Maestro ATM.</li>
+</ul>
+<h3 id="73-sesar">7.3 SESAR</h3>
+<ul>
+<li><strong>SESAR</strong> (Single European Sky ATM Research) es el <strong>pilar tecnológico de la política SES</strong> y un habilitador clave de la Estrategia de Movilidad Sostenible e Inteligente de la Comisión. Abarca las fases de <strong>I+D+i</strong> y de <strong>Despliegue</strong>, cofinanciadas con <strong>fondos CEF</strong> de la UE (Mecanismo «Conectar Europa», para las redes transeuropeas) y con <strong>fondos de los Programas Marco</strong> (Horizonte 2020, Horizonte Europa).</li>
+<li><strong>Empresa Común SESAR 3 (S3JU)</strong>: la asociación público-privada europea institucional que acelera, mediante I+D+i, la transformación hacia el «<strong>Cielo Digital Europeo</strong>».</li>
+<li><strong>Gestor del Despliegue de SESAR (SDM)</strong>: el organismo designado por la Comisión Europea para coordinar el despliegue sincronizado de las mejoras operativas de SESAR mediante los «Proyectos Comunes» (CP). Desde el <strong>1 de junio de 2022 hasta 2027</strong> lo gestiona un consorcio de los <strong>14 principales ANSP europeos</strong>, operadores aeroportuarios y usuarios del espacio aéreo: la <strong>SDIP</strong> (SESAR Deployment &amp; Infrastructure Partnership). Los ANSP, junto con representantes de aerolíneas, aeropuertos y EUROCONTROL, están definiendo ahora la estrategia común «<strong>SESAR Post 2027</strong>» para el ciclo completo de I+D, industrialización y despliegue.</li>
+<li><strong>Estructura de gestión</strong>: 3 niveles, desde el nivel ejecutivo de la UE hasta la planificación y la implantación en los Estados, con seguimiento mediante informes anuales (p. ej., el Plan e Informe de Implantación 2024).</li>
+</ul>
+<h3 id="74-el-plan-maestro-atm-europeo">7.4 El Plan Maestro ATM Europeo</h3>
+<ul>
+<li>Es la <strong>principal herramienta de planificación de la iniciativa SES</strong> y define la hoja de ruta para modernizar el ATM europeo. Visión: que el espacio aéreo europeo sea <strong>el más eficiente y ecológico del mundo en 2045</strong>. <strong>Última actualización aprobada en diciembre de 2024.</strong></li>
+<li>Esta edición <strong>pone el énfasis en la implantación</strong> porque «la innovación y la implementación de nuevos sistemas de ATM no están avanzando al mismo ritmo que el crecimiento del tráfico aéreo».</li>
+<li><strong>8 áreas de enfoque</strong> citadas en la fuente: (1) Europa como el cielo más seguro, más ecológico y más eficiente; (2) servicios orientados al Cielo Digital Europeo; (3) evolución hacia una infraestructura europea integrada de servicios CNS; (4) servicios U-space avanzados (U3/U4); (5) hoja de ruta de interoperabilidad y coordinación civil-militar; (6) <strong>Objetivos Estratégicos de Implementación (SDO)</strong>; (7) evaluación del impacto en el rendimiento de la red; (8) posición europea para impulsar la agenda mundial de modernización del ATM de la OACI.</li>
+<li><strong>10 Objetivos Estratégicos de Implementación (SDO), que deben alcanzarse entre 2025 y 2035</strong> y definen la visión del Cielo Digital Europeo que se materializará en 2045:
+  1. Alertas para reducir los riesgos de colisión en calles de rodaje y pistas.
+  2. Optimización de la huella ambiental de aeropuertos y TMA.
+  3. Configuración dinámica del espacio aéreo.
+  4. Mayor apoyo de la automatización.
+  5. Transformación hacia operaciones basadas en la trayectoria (TBO).
+  6. Virtualización de las operaciones.
+  7. Transición hacia un alto rendimiento de la conectividad aire-tierra (multienlace).
+  8. Modelo de prestación orientado al servicio (basado en datos y en la nube).
+  9. Optimización, modernización y resiliencia de los CNS.
+  10. Habilitar la movilidad aérea innovadora (IAM) y las operaciones con drones.</li>
+<li>El PV2030 vincula su propia inversión directamente a este Plan Maestro: el indicador de seguimiento «<strong>% Contribución inversión a Plan Maestro ATM Europeo</strong>» fija una meta del <strong>65 % (2026-2028), que sube al 70 % (2029-2030)</strong>.</li>
+<li><strong>Plan Estratégico de la Red (NSP, 2025-2029)</strong>: lo elabora el Gestor de Red europeo (EUROCONTROL); es la hoja de ruta estratégica de la red ATM continental en el marco del SES; <strong>10 objetivos estratégicos</strong> que abarcan el diseño y la operación de la red, la digitalización, la integración de nuevos actores, la seguridad, la gestión de crisis y la sostenibilidad ambiental.</li>
+<li><strong>Plan de Operaciones de la Red (NOP, 2025/2026-2029, aprobado el 29 de abril de 2025)</strong>: perspectiva a corto y medio plazo; fija anualmente los <strong>Perfiles de Capacidad</strong> de cada centro de control a partir de las metas del RP4 y del indicador de referencia (movimientos/hora); se actualizará a <strong>principios de 2026</strong> para 2026-2030. Para los ACC españoles, los aumentos de capacidad que exige el NOP son exigentes, «en especial para centros de control como Barcelona y Sevilla», donde el Gestor de Red prevé niveles de demora superiores a los que exigirían las metas nacionales.</li>
+</ul>
+<h2 id="8-el-marco-europeo-de-rendimientos-en-profundidad-rp4espp4">8. El marco europeo de rendimientos en profundidad: RP4/ESPP4</h2>
+<ul>
+<li><strong>Base jurídica</strong>: el sistema de rendimientos se define en el art. 11 del Reglamento (CE) 549/2004; el <strong>Reglamento (UE) 2019/317</strong> establece el sistema de evaluación de rendimientos y tarifas para el <strong>RP3 y el RP4 (2020-2029)</strong>; el <strong>Reglamento (UE) 2024/3128</strong> modificó los indicadores de seguimiento del 2019/317.</li>
+<li><strong>El RP4 va del 1 de enero de 2025 al 31 de diciembre de 2029.</strong> Las metas para toda la Unión se fijaron mediante la <strong>Decisión de Ejecución (UE) 2024/1688 de la Comisión, de 12 de junio de 2024</strong>. Las metas del ESPP4 (el Plan de Rendimientos de España) fueron revisadas y aprobadas por la Comisión en la <strong>Decisión (UE) 2025/1063, de 19 de mayo de 2025</strong>, publicada en el DOUE el <strong>28 de mayo de 2025</strong>. (Nota: la tabla de OM07 «manual frente a PV2030» citaba el 19 de mayo de 2025 para la decisión; el propio documento del ESPP4 lo confirma y añade la fecha de publicación en el DOUE, el 28 de mayo de 2025.)</li>
+<li><strong>La AESA es la autoridad nacional de supervisión civil</strong> responsable de elaborar el ESPP4, en colaboración con la ANS de MET y la ANS militar para los servicios meteorológicos y militares. <strong>ENAIRE es el ANSP designado para los servicios ATS en ruta y de aproximación en virtud de la Ley 9/2010</strong>, y presta además ATS de aeródromo en los 5 aeropuertos principales (Madrid, Barcelona, Palma, Málaga, Gran Canaria). <strong>ENAIRE es el único ANSP sujeto a la regulación completa (rendimientos + tarifas)</strong>; el ANSP privado <strong>Skyway</strong> presta ATS/AFIS de aeródromo en Alicante-Elche e Ibiza (incluidos en el ámbito tras superar el umbral de 80 000 movimientos IFR), pero está exento de las metas de coste-eficiencia, del reparto de riesgo de tráfico y de costes, de los incentivos financieros de capacidad y medioambiente, del cálculo de tarifas terminales y de los requisitos de consulta, con arreglo al art. 35, apartado 2, del Reglamento 2019/317 (declaración de condiciones de mercado, Decisión (UE) 2019/2174 de la Comisión, de 17 de diciembre de 2019).</li>
+</ul>
+<h3 id="81-metas-del-rp4-para-toda-la-ue-frente-a-las-especificas-de-espana-comparacion-resuelta">8.1 Metas del RP4 para toda la UE frente a las específicas de España (comparación resuelta)</h3>
+<table>
+<thead>
+<tr>
+<th>KPA</th>
+<th>Indicador</th>
+<th>UE 2025</th>
+<th>UE 2029</th>
+<th>España 2025</th>
+<th>España 2029</th>
+<th>Diferencia 2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seguridad</td>
+<td>EoSM (gestión de riesgos de seguridad / otros MO)</td>
+<td>D / C</td>
+<td>D / C</td>
+<td>C (política), C (gestión de riesgos)</td>
+<td>C, D</td>
+<td>— (cualitativo)</td>
+</tr>
+<tr>
+<td>Medioambiente</td>
+<td>KEA (ineficiencia de ruta, %) ≤</td>
+<td>2,80 %</td>
+<td>2,66 %</td>
+<td>2,86 %</td>
+<td>2,74 %</td>
+<td><strong>+0,06 pp</strong> (a España se le permite una eficiencia algo peor que la media de la UE)</td>
+</tr>
+<tr>
+<td>Capacidad</td>
+<td>demora ATFM en ruta (min/vuelo) ≤</td>
+<td>0,90</td>
+<td>0,50</td>
+<td>0,38</td>
+<td>0,21</td>
+<td><strong>-0,52 min</strong> (la meta vinculante de España es mucho <em>más estricta</em> que el techo medio de la UE)</td>
+</tr>
+<tr>
+<td>Capacidad</td>
+<td>demora ATFM de llegada (min/vuelo) ≤</td>
+<td>— (no hay KPI de llegada para toda la UE)</td>
+<td>—</td>
+<td>0,60</td>
+<td>0,50</td>
+<td>KPI solo nacional</td>
+</tr>
+<tr>
+<td>Coste-Eficiencia</td>
+<td>variación interanual del DUC</td>
+<td>-1,2 %/año</td>
+<td>-1,2 %/año</td>
+<td>(específico por zona: en ruta Península/Canarias/Terminal; no recogido por completo en la fuente)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Ejemplo resuelto:</strong> en 2025, la diferencia medioambiental (España 2,86 % frente a UE 2,80 %) es de <strong>+0,06 puntos porcentuales</strong>; en 2029 (España 2,74 % frente a UE 2,66 %) es de <strong>+0,08 puntos</strong>: la diferencia <em>aumenta ligeramente</em> a lo largo del RP4, es decir, el valor de referencia local de España mejora más despacio que la meta para toda la UE. Es una trampa de examen legítima del tipo «por qué la cifra de España parece peor que la de Europa»: <strong>los valores de referencia locales no tienen por qué coincidir con la media de la UE</strong>, sino que son un desglose específico de cada Estado asignado por la Comisión (anexo I, apartado 2, del Reglamento 2019/317), de modo que un Estado puede situarse legítimamente por encima o por debajo de la cifra de la UE.</li>
+<li><strong>Trampa de denominación:</strong> la tabla de indicadores estratégicos del propio PV2030 (§4.1, «ERD ATR — atribuible a ENAIRE») muestra cifras <em>distintas</em> para los mismos años (2026: ≤0,60; 2029: ≤0,30) que la tabla del marco europeo derivada del ESPP4 en el mismo documento (§4.3, «ERD» 2026: ≤0,29; 2029: ≤0,21). Ambas se rotulan como demora ATFM en ruta atribuible a ENAIRE/España, pero llevan cifras diferentes para los mismos años porque parten de columnas de años distintas (indicadores del PV2030 2026-2030: ERD ATR 0,60; 0,50; 0,40; 0,30; 0,21; ESPP4 2025-2029: ERD 0,38; 0,29; 0,24; 0,21; 0,21) y de una meta interna de ENAIRE más prudente frente a la cifra vinculante del ESPP4. Regla de examen: hay que emparejar por rótulo y por columna de año; «ERD ATR» o «atribuible a ENAIRE» dan la secuencia de 0,60 a 0,21; «ERD» con ESPP4/RP4/marco europeo da de 0,38 a 0,21.</li>
+<li><strong>Detalle de coste-eficiencia hallado:</strong> la meta de variación interanual del DUC para toda la Unión es de <strong>-1,2 %/año para 2025-2029</strong> (corto plazo) y de <strong>-1,0 %/año a largo plazo</strong> (RP3+RP4 combinados, según el considerando 22 de la Decisión 2024/1688).</li>
+</ul>
+<h2 id="9-contexto-nacional-ley-de-movilidad-perte-dora-el-contrato-aena-enaire-u-spacepandu">9. Contexto nacional: ley de movilidad, PERTE, DORA, el contrato Aena-ENAIRE, U-Space/PANDU</h2>
+<ul>
+<li><strong>Estrategia de Movilidad Segura, Sostenible y Conectada 2030</strong>: elaborada por el Ministerio de Transportes y Movilidad Sostenible (MITMS) y aprobada por el Consejo de Ministros en <strong>diciembre de 2021</strong>.</li>
+<li><strong>Ley 9/2025, de 3 de diciembre de 2025, de Movilidad Sostenible</strong>: establece las condiciones de un sistema de movilidad sostenible, justo e inclusivo; sus principios incluyen la movilidad como derecho de la ciudadanía, la cohesión social y territorial, la digitalización y una «triple sostenibilidad» de equidad económico-social, eficiencia energética y respeto del entorno natural y urbano; desarrolla medidas de la Estrategia 2030 citada más arriba. <strong>Es una ley recién aprobada (dic. 2025) y una firme candidata a pregunta de «tema 1/7 actualizado»</strong>, en línea con el aviso de actualización del tema 1 de ENAIRE del 20-11-2025.</li>
+<li><strong>Estrategia de Desarrollo Sostenible 2030</strong>: aprobada por el Consejo de Ministros en <strong>junio de 2021</strong> y presentada ante la ONU; marco de recuperación pospandemia alineado con la Agenda 2030.</li>
+<li><strong>PERTE Aeroespacial</strong> (Proyecto Estratégico para la Recuperación y Transformación Económica Aeroespacial): aprobado por el Consejo de Ministros en <strong>marzo de 2022</strong>; movilizó <strong>~4533 M€ entre 2021 y 2025</strong> (~2193 M€ públicos + ~2340 M€ privados); pretende convertir a la industria aeroespacial española en un actor clave ante la transformación del sector.</li>
+<li><strong>DORA (Documento de Regulación Aeroportuaria)</strong>: instrumento de regulación aeroportuaria de Aena en virtud de la Ley 18/2014, aprobado por el Consejo de Ministros. <strong>El DORA II cubre 2022-2026</strong>; <strong>el DORA III (2027-2031) se espera aprobar en 2026</strong> y busca mantener la red de Aena a la cabeza de Europa en calidad, capacidad y eficiencia.</li>
+<li><strong>Contrato de servicios Aena-ENAIRE</strong>: firmado para <strong>2022-2026</strong>, por un importe de <strong>601,2 M€</strong>, para los servicios de navegación aérea en los aeropuertos de Aena; incluye indicadores de calidad de servicio en <strong>46 aeropuertos de la red de Aena</strong> (ATC de aeródromo y CNS), además del diseño y la gestión del espacio aéreo, la información aeronáutica y la gestión de afluencia. <strong>Se describe 2026 como clave para preparar la oferta del contrato 2027-2031.</strong> Es <strong>el mismo contrato señalado como riesgo E («Contrato de prestación de servicios Aena, S.A.»)</strong> en el §6: sus cláusulas de penalización por incumplimiento son un riesgo estratégico explícito.</li>
+<li><strong>U-Space: Plan de Acción Nacional para el Despliegue del U-space (PANDU)</strong>: aprobado en 2022, revisado en 2024, cubre 2022-2025; designa a <strong>ENAIRE para ser certificada/designada como CISP nacional</strong> (proveedor de servicios de información común). Complementa el <strong>nuevo real decreto de drones de junio de 2024 (RD 517/2024)</strong>, que designa oficialmente a <strong>ENAIRE como CISP inicial de todos los volúmenes U-space en España</strong>, una vez completada la certificación.</li>
+<li><strong>Plan de Rendimientos del RP4 de España (ESPP4)</strong>: cubre 2025-2029; revisado y aprobado por la Comisión en la <strong>Decisión (UE) 2025/1063, de 19 de mayo de 2025</strong>, publicada en el DOUE el <strong>28 de mayo de 2025</strong> (véase §8).</li>
+</ul>
+<h2 id="10-sostenibilidad-green-sky-huella-de-carbono-certificaciones">10. Sostenibilidad: Green Sky, huella de carbono, certificaciones</h2>
+<ul>
+<li><strong>«Green Sky»</strong> es el área estratégica de sostenibilidad medioambiental de ENAIRE dentro del Bloque 4 del PV2030, formada por <strong>5 planes/iniciativas estratégicos</strong>: <strong>SM1 Fly Clean, SM2 Fly Quiet, SM3 Eco ENAIRE, SM4 Compromiso Verde, SM5 Responsabilidad Ambiental</strong>. Los mismos nombres aparecen en la Memoria de Sostenibilidad 2024 como las «5 iniciativas estratégicas» del pilar ambiental del plan anterior, lo que muestra continuidad entre el PV2025 y el PV2030 en este tema concreto.</li>
+<li><strong>Cifras de huella de carbono (parcialmente incoherentes entre documentos; se anotan ambas):</strong></li>
+<li>Nota de prensa sobre la aprobación del PV2030 (dic. 2025): en los <strong>últimos cinco años, ENAIRE evitó emitir 300 000 toneladas de CO₂</strong> mediante la optimización del espacio aéreo; el nuevo plan prevé <strong>una reducción adicional de 40 000 toneladas</strong> durante su ejecución.</li>
+<li>Memoria de Sostenibilidad 2024: eficiencia de vuelo del 96,7 %, con <strong>77 000 toneladas de CO₂</strong> evitadas y 21 700 toneladas de combustible ahorradas (una cifra de los destacados ejecutivos), frente a una tabla de otra parte del mismo informe que recoge <strong>68 315 t de CO2 ahorradas en 2024</strong> (frente a 70 216 t en 2023, 53 917 t en 2022 y 58 451 t en 2021) mediante la optimización. <strong>Las dos cifras de 2024 (77 000 frente a 68 315 t) no coinciden; ambas son, pero de secciones o métricas distintas del mismo informe, así que se anotan las dos y se señala la incoherencia.</strong></li>
+<li><strong>Certificación de la huella de carbono (alcances 1+2)</strong>: las emisiones registradas de 2023 usaron la metodología del <strong>GHG Protocol</strong>; la propia meta del PV2030 es <strong>«Cero emisiones en 2030 (por compensación)»</strong> para la huella de carbono corporativa, además de un plan de movilidad de ENAIRE.</li>
+<li><strong>Certificaciones de calidad, medioambiente y seguridad y salud, todas emitidas por AENOR</strong>: Sistema de Gestión Ambiental (GA-2005/0575); Sistema de Gestión de la Calidad (ER-1034/2007); Sistema de Seguridad y Salud en el Trabajo (SST-0156/2014); conformidad con el Esquema Nacional de Seguridad en la <strong>Categoría MEDIA (ENS-2018/0006) y en la Categoría ALTA (ENS-2020/0020)</strong>.</li>
+<li><strong>Sello EFQM 600</strong>, concedido en <strong>2024</strong> por el Club de Excelencia en Gestión (en nombre de la Fundación Europea para la Gestión de la Calidad), basado en el modelo EFQM 2020, código de certificado CEG/24/S600/6, por una «gestión segura, eficiente, innovadora y sostenible».</li>
+<li><strong>17 Objetivos de Desarrollo Sostenible (ODS)</strong> de la ONU, Agenda 2030 firmada por <strong>193 países en 2015</strong>; ENAIRE se compromete con los <strong>10 Principios del Pacto Mundial de la ONU</strong> y mide la contribución del PV2030 a las metas de los ODS (véase la tabla de contribución a los ODS del §5, «Contribución REDUCIDA/RELEVANTE» por plan, que replica la tabla de contribución a los objetivos).</li>
+</ul>
+<h2 id="11-gobernanza-etica-y-cultura-justa-contenido-de-las-politicas">11. Gobernanza, ética y Cultura Justa (contenido de las políticas)</h2>
+<p>(La <em>estructura</em> de gobernanza —composición del Consejo Rector, miembros nombrados— se trata en profundidad en la ampliación T07a; aquí se cubre el <em>contenido</em> de las políticas vinculadas al PV2030.)</p>
+<ul>
+<li><strong>Consejo Rector, situación actual</strong>: <strong>12 consejeros, 11 reuniones</strong> celebradas (según la infografía del Resumen Ejecutivo 2025); coincide con la lectura estructural de T07a del RD 160/2023 (presidencia + 11 vocales = 12). El Consejo Rector <strong>aprobó una Política de Buen Gobierno el 28 de noviembre</strong> (año no confirmado en las fuentes disponibles).</li>
+<li><strong>Política de Cultura Justa</strong>, código <strong>DGL-15-POL-002-2.0, de marzo de 2023</strong>:</li>
+<li><strong>Aprobada originalmente en noviembre de 2015</strong> por el director general, tras presentarla al Comité de Dirección con el apoyo de los sindicatos y las asociaciones profesionales; <strong>actualizada y elevada a la aprobación del Consejo Rector el 27 de marzo de 2023</strong> (entró en vigor ese día), adaptada a la nueva plantilla de políticas de ENAIRE.</li>
+<li><strong>Definición adoptada</strong>: la Cultura Justa es aquella <em>«en la que no se castiga al personal por sus acciones, omisiones o decisiones cuando son acordes con su experiencia y capacitación, si bien no se toleran el dolo, la negligencia flagrante, las infracciones intencionadas ni los actos destructivos»</em>.</li>
+<li><strong>Compromisos</strong>: notificar cuanto antes los eventos relevantes para la seguridad; investigar de forma objetiva y confidencial (con perspectiva individual y organizativa); distinguir el error humano o sistémico del incumplimiento consciente y deliberado de las normas; <strong>garantizar que no habrá medidas disciplinarias contra los trabajadores que notifiquen</strong>, salvo que se demuestre dolo, negligencia flagrante o imprudencia grave; sancionar solo cuando la investigación demuestre una falta o acción deliberada o intencionada, o cometida bajo los efectos de sustancias psicoactivas; se pueden exigir aun así medidas cautelares (verificación de competencias, formación adicional, incluso la retirada del puesto) conforme a los Convenios Colectivos; aprender de cada incidente; difundir las lecciones aprendidas; gestionar el estrés mediante un <strong>programa CISM (Gestión de Estrés por Incidente Crítico)</strong>.</li>
+<li><strong>Construida de forma explícita sobre la normativa europea y nacional y sobre las recomendaciones de CANSO y EUROCONTROL</strong>, así como sobre la práctica de los principales ANSP del mundo.</li>
+<li><strong>Supervisión</strong>: el Comité de Dirección supervisa el despliegue e informa del avance al Consejo Rector cuando procede, dentro del ciclo de revisión del Sistema Integrado de Gestión.</li>
+</ul>
+<h2 id="12-carta-de-servicios-compromisos">12. Carta de Servicios: compromisos</h2>
+<ul>
+<li>La <strong>Carta de Servicios 2025-2027</strong>, publicada en <strong>febrero de 2025</strong>, todavía cita literalmente el Propósito, la Misión y la Visión del <strong>PV2025</strong> (con «rápido»; véase §1), lo que confirma que esa redacción era lenguaje corporativo vigente hasta febrero de 2025.</li>
+<li><strong>La lista tiene siete servicios: los seis del manual más uno adicional</strong> (ATS, ATFM local, ASM de nivel 3 —certificado de forma explícita—, CNS, AIS/AIP y FPD son los seis del manual; SDP [Servicio de Dirección de Plataforma, servicio de gestión de la plataforma] <strong>no figura entre esos seis y es el añadido</strong>).</li>
+<li><strong>Compromisos cuantificados (selección)</strong>:</li>
+<li>Al menos el <strong>90 % de los vuelos</strong> cumplirá su ventana horaria prevista de despegue (ETOT/CTOT), es decir, la adherencia al slot.</li>
+<li><strong>El 99 % de los servicios del Sistema de Navegación Aérea</strong> disponibles por encima del 95 % de tiempo operativo; al menos el <strong>97 %</strong> por encima de un umbral más estricto.</li>
+<li><strong>El 100 % de las enmiendas de la AIP</strong> (actualizaciones) disponibles.</li>
+<li><strong>Índice de calidad percibida superior al 75 %</strong> (un suelo <em>inferior</em> a la meta estratégica propia del PV2030, del 78,5-80 %; la Carta es el mínimo de cara al público, el PV2030 es la ambición interna).</li>
+<li><strong>El 85 % de las reclamaciones/sugerencias, respondidas en 20 días o menos</strong>; un 10 % más, en un plazo mayor; el 5 % restante queda excluido por causas justificadas.</li>
+<li>Participación en la consulta pública de los proyectos de espacio aéreo <strong>≥ 20 %</strong>.</li>
+<li><strong>El 100 % del consumo eléctrico de ENAIRE</strong> procede de fuentes renovables (coincide con el indicador estratégico del PV2030 «% Uso de energías renovables = 100 %»).</li>
+<li>Derechos de los usuarios y de la ciudadanía basados en la <strong>Ley 39/2015</strong> (Procedimiento Administrativo Común) y la <strong>Ley 19/2013</strong> (Transparencia, Acceso a la Información Pública y Buen Gobierno); principio de no discriminación conforme al <strong>Reglamento (UE) 2017/373</strong>.</li>
+<li>Cartera de servicios electrónicos: web (enaire.es), portal de clientes, <strong>portal de la AIP</strong>, <strong>INSIGNIA</strong> (información aeronáutica gráfica), herramientas VFR (Insignia VFR, Guía VFR), <strong>drones.enaire.es</strong> (UAS), <strong>planea.enaire.es</strong> (otros usos del espacio aéreo, cercano al U-space), presentación de planes de vuelo en línea, calculadora de tarifas, sede electrónica.</li>
+</ul>
+<h2 id="13-previsiones-de-trafico-2026-2030">13. Previsiones de tráfico 2026-2030</h2>
+<ul>
+<li><strong>STATFOR (EUROCONTROL)</strong>, actualización de octubre de 2025, ECAC (44 Estados): Europa recuperaría los niveles de tráfico de 2019 en <strong>2026</strong> (escenario «Base»). Crecimiento europeo de 2030 respecto a 2025: <strong>20,6 % (escenario «High») frente a 10,9 % («Base»)</strong>; el escenario «High» es casi el doble que el «Base».</li>
+<li><strong>Previsiones específicas de España (ENAIRE, oct-25)</strong>: <strong>2030 frente a 2025: +18,1 %</strong>, con un factor de recuperación respecto a 2019 del <strong>136 %</strong>. STATFOR «High» para España: +22,1 % (2030 frente a 2025), factor de recuperación del 140 %; STATFOR «Base»: +13,5 %, factor de recuperación del 130 %.</li>
+<li><strong>Comparación de la recuperación entre los grandes Estados europeos por tráfico (2024 frente a 2019):</strong> España <strong>+9,7 %</strong>, Italia +3,5 %, Francia +0,6 %, Reino Unido -0,5 %, Alemania <strong>-16,9 %</strong>. En 2030 («Base»), la recuperación acumulada de España respecto a 2019 podría alcanzar el <strong>+30,2 %</strong>, por delante de Italia (+31,2 %; en realidad algo superior a la de España), Francia (+17,7 %), la media europea (+10,8 %), el Reino Unido (+5,5 %) y Alemania (+0,8 %). En 2030 el tráfico de España podría <strong>superar al del Reino Unido</strong> y quedaría solo por debajo de Francia y Alemania en movimientos absolutos.</li>
+<li><strong>Canarias crece más deprisa que la Península</strong>: crecimiento de 2030 frente a 2025 de <strong>+23 % en Canarias frente a +19 % en la Península</strong> (ENAIRE, oct-25); factores de recuperación respecto a 2019 del <strong>149 % (Canarias) frente al 137 % (Península)</strong>.</li>
+<li><strong>Por centro de control, crecimiento previsto de 2030 frente a 2025:</strong> ACC Madrid <strong>+20,0 %</strong>, ACC Sevilla <strong>+22,6 %</strong>, ACC Canarias <strong>+15,2 %</strong>, ACC Barcelona <strong>+19,5 %</strong>, ACC Palma <strong>+11,7 %</strong>. <strong>Estacionalidad (2024, cociente máx./mín.)</strong>: Sevilla, la más estacional, con un <strong>104 %</strong>; Palma, un <strong>321 %</strong> (el más alto, reflejo de la concentración del turismo); Barcelona, 31 %; Canarias, 39 %; Madrid, 26 %.</li>
+<li><strong>Crecimiento previsto de los aeropuertos, 2030 frente a 2025:</strong> Barcelona +22,3 %, Gran Canaria +20,2 %, Madrid +13,0 %, Palma de Mallorca +11,8 %, Málaga +10,8 %.</li>
+<li><strong>Tráfico VFR</strong>: creció un <strong>+8,5 % en 2024</strong>; España tiene <strong>más de 300 días de sol al año</strong> y de media más de 2500 horas de sol por provincia, lo que favorece el vuelo VFR (ocio, aviación deportiva, escuelas de vuelo, trabajos aéreos). Herramientas de ENAIRE: la <strong>Guía VFR</strong> y la aplicación <strong>Insignia VFR</strong>.</li>
+<li><strong>Una advertencia clave de volatilidad</strong>: las hipótesis de tráfico del ESPP4 (de STATFOR, <strong>febrero de 2024</strong>) ya se superaron en un año: en 2025 la desviación respecto a la referencia del ESPP4 fue del <strong>~4 %</strong> y podría crecer <strong>por encima del 10 % en 2027-2028</strong> en el escenario «High». Es decir, las hipótesis de tráfico <em>vinculantes</em> del plan de rendimientos ya están desfasadas, un riesgo operativo y de plantilla real que el PV2030 nombra de forma explícita (§9, riesgo G).</li>
+<li><strong>Drones</strong>: desde <strong>2018</strong>, ENAIRE coordina las operaciones con drones (Procedimiento de Gestión de Solicitudes de Operaciones con Drones), actualizado tras el <strong>RD 517/2024</strong> (junio de 2024), que permitió operar UAS en ciertas zonas <strong>sin coordinación</strong> y provocó un descenso estimado del <strong>~25 %</strong> en las solicitudes de coordinación desde su aprobación.</li>
+</ul>
+<h2 id="14-manual-frente-a-fuentes-primarias-discrepancias-adicionales-mas-alla-de-la-tabla-de-om07">14. Manual frente a fuentes primarias: discrepancias adicionales (más allá de la tabla de OM07)</h2>
+<p>El archivo de OM07 ya tabula la comparación básica Manual (PV2025) frente a PV2030 (propósito, misión, visión, valores, objetivos, redacción sobre el tamaño, plantilla, cronología del SES, formación). Los puntos siguientes son <strong>adicionales</strong>: los verifiqué con fuentes primarias y la tabla de OM07 no los cubre.</p>
+<table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Manual / afirmación de la época del PV2025</th>
+<th>Hallazgo en la fuente primaria (PV2030 / reglamentos UE)</th>
+<th>Cuál seguirá con más probabilidad el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estructura del PV2030</td>
+<td>El manual no da detalle del PV2030; el PV2025 tenía 12 «Planes Estratégicos de Actuación» en 3 áreas + Gobernanza</td>
+<td>El PV2030 tiene <strong>56 planes estratégicos en 4 bloques / 17 áreas</strong>: un nivel de detalle ~4,7 veces mayor</td>
+<td>PV2030 (vigente)</td>
+</tr>
+<tr>
+<td>Situación del SES2+</td>
+<td>Manual: «SES2+ actualmente en proceso de negociación» (trílogos)</td>
+<td><strong>Reglamento (UE) 2024/2803, publicado en el DOUE el 11 nov. 2024, en vigor parcialmente el 1 dic. 2024</strong>: adoptado, no en negociación</td>
+<td>Fuente primaria (ley vigente)</td>
+</tr>
+<tr>
+<td>Redacción completa del objetivo 6</td>
+<td>El texto del PDF del manual se corta tras «desarrollando una cultura»</td>
+<td>Frase completa recuperada del texto de la actualización de 2023 del PV2025: «...organizativa centrada en nuestras personas como principal activo de la empresa»</td>
+<td>Fuente primaria (resuelve la duda abierta de OM07)</td>
+</tr>
+<tr>
+<td>Plan Maestro ATM / SDO</td>
+<td>No se menciona en absoluto en el manual</td>
+<td>El Plan Maestro ATM Europeo (actualización de dic. 2024) define <strong>10 SDO</strong>, con ventana objetivo 2025-2035 y Cielo Digital Europeo completo en 2045</td>
+<td>Solo fuente primaria: material nuevo relevante para el examen</td>
+</tr>
+<tr>
+<td>Meta de calidad percibida</td>
+<td>El manual no da ninguna cifra meta</td>
+<td>Existen dos suelos distintos: <strong>Carta de Servicios ≥75 %</strong> (compromiso público) y <strong>indicador estratégico del PV2030 78,5→80 % (2026-2030)</strong> (ambición interna)</td>
+<td>Ambos son reales y podrían citarse: no hay que suponer una única cifra</td>
+</tr>
+<tr>
+<td>Fecha de aprobación del ESPP4</td>
+<td>El manual es anterior al ESPP4</td>
+<td><strong>Decisión (UE) 2025/1063 de la Comisión, de 19 de mayo de 2025</strong>, publicada en el DOUE el <strong>28 de mayo de 2025</strong></td>
+<td>Fuente primaria</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-argumentos-para-la-fase-3-conductual-mas-alla-del-resumen-existente">15. Argumentos para la fase 3 (conductual) más allá del resumen existente</h2>
+<p><code>behavioral/flight-plan-2030-summary.md</code> ya cubre cómo convertir los 12 valores en historias STAR. La lectura más a fondo de este archivo respalda estos enfoques adicionales:</p>
+<ul>
+<li><strong>«Reforzar continuamente la seguridad... a la seguridad física ante los nuevos riesgos emergentes»</strong> (objetivo 1) es un buen ancla para una historia en la que se detecta y se notifica un fallo de seguridad física o de la información, y no solo operativo: el PV2030 amplía expresamente la «seguridad» a los riesgos físicos y cibernéticos, un enfoque más amplio que el del PV2025.</li>
+<li><strong>«Con nuestras Regiones como motor del cambio»</strong> (objetivo 6) premia una historia en la que la iniciativa surge de un nivel «regional» o periférico y no del centro; es útil si preguntan por trabajar en una organización distribuida o dispersa.</li>
+<li>El <strong>riesgo B (Conflictividad laboral y gestión de personas)</strong> y el tema de la <strong>«captación y retención del talento»</strong> se repiten en el análisis DAFO/CAME del §2.3 y en el objetivo 6. A un candidato podrían preguntarle con toda verosimilitud «por qué debería ENAIRE contratarte en lugar de perderte por desgaste», y el propio lenguaje del plan («rejuvenecimiento de la plantilla», 49 % del personal del Convenio de Control con más de 51 años) permite presentar a un candidato joven y técnicamente sólido como quien cubre una brecha demográfica que el propio plan nombra.</li>
+<li>La <strong>metodología CAME</strong> (Corregir, Afrontar, Mantener, Explotar) es el marco de análisis estratégico propio del PV2030; nombrarla demuestra que el candidato leyó el plan y no solo un resumen.</li>
+<li>Los resultados del <strong>Sello EFQM 600</strong> y del <strong>Sello EFQM</strong> son un argumento legítimo sobre «qué hace excelente a ENAIRE», ligado a un reconocimiento externo real y fechado (2024).</li>
+</ul>
+<h2 id="16-ejemplos-resueltos">16. Ejemplos resueltos</h2>
+<ol>
+<li><strong>Crecimiento de la plantilla 2019→2024</strong>: plantilla total 4011 → 4284 = <strong>+273 personas, +6,8 %</strong>. Convenio de Control 2100→2190 = +90, <strong>+4,3 %</strong>; Convenio Grupo 1911→2094 = +183, <strong>+9,6 %</strong>. La plantilla del Grupo creció más del doble de deprisa que la de controladores en los cinco años.</li>
+<li><strong>Factor de recuperación del tráfico (FR2019)</strong>: la previsión de ENAIRE de oct-25 implica que el tráfico de España en 2030 será el <strong>136 % del nivel de 2019</strong>, es decir, <strong>un 36 % por encima del tráfico prepandemia</strong>, un planteamiento sensiblemente distinto de «crecimiento respecto a 2025» (+18,1 %). Una pregunta de examen podría pedir cualquiera de los dos años base: hay que leer con cuidado a cuál se refiere.</li>
+<li><strong>Comprobación de los 56 planes por bloques</strong> (ya mostrada en el §5): 3+17+8+28 = 56. Útil si una pregunta da un recuento parcial y pregunta «cuántos planes más tiene el Bloque 4 que los Bloques 1+2+3 juntos» → Bloque 4 (28) frente a Bloques 1+2+3 (3+17+8=28) → <strong>exactamente iguales</strong>, un dato limpio y citable: <strong>el Bloque 4 solo tiene tantos planes como los otros tres bloques juntos</strong>.</li>
+<li><strong>Ensanchamiento de la diferencia del KEA medioambiental</strong> (ya mostrado en el §8.1): la meta local de KEA de España menos la meta de toda la UE crece de <strong>+0,06 pp (2025) a +0,08 pp (2029)</strong>: al techo de eficiencia de ruta de España se le permite quedarse algo más atrás de la media de la UE al final del RP4.</li>
+<li><strong>Ambición de capacidad en ruta del RP4</strong>: el techo local de España de demora ATFM en ruta <strong>baja de 0,38 min/vuelo (2025) a 0,21 min/vuelo (2029)</strong>, una <strong>reducción del 45 %</strong>, mucho más pronunciada que la caída del techo para toda la UE de 0,90 a 0,50 (una reducción del 44,4 %): una ambición <em>proporcional</em> casi idéntica pese a partir de valores absolutos muy distintos, porque España ya rinde bastante mejor que el techo medio de la UE.</li>
+</ol>
+<h2 id="17-trampas-de-examen">17. Trampas de examen</h2>
+<ol>
+<li><strong>PV2025 y PV2030 no son intercambiables.</strong> El manual describe el PV2025 (2021-2025, actualizado en dic. 2023); el plan vigente es el <strong>PV2030 (2026-2030, aprobado el 19 dic. 2025 / Orden del 19 mar. 2026)</strong>. Hay que leer con cuidado la referencia de fecha de la pregunta.</li>
+<li><strong>La estructura del PV2025 (12 planes, 3 áreas + Gobernanza) es completamente distinta de la del PV2030 (56 planes, 4 bloques, 17 áreas).</strong> No hay que mezclar los recuentos de planes de uno y otro.</li>
+<li><strong>«Rápido» en el Propósito</strong> es redacción de la época del PV2025 (confirmada como vigente hasta la Carta de Servicios de febrero de 2025); el PV2030 lo elimina y queda en tres adjetivos (seguro, eficiente, sostenible).</li>
+<li><strong>Bloque 4 (Servicios) solo = 28 planes = los otros tres bloques juntos.</strong> Una trampa natural de «cuántos».</li>
+<li><strong>13 riesgos estratégicos, con letras de la A a la M</strong> (no numerados); no hay que confundirlos con los 6 objetivos estratégicos ni con las 4 KPA.</li>
+<li><strong>Las cuatro KPA (Seguridad, Capacidad, Medioambiente, Coste-Eficiencia) son un concepto europeo del RP4</strong>, distinto de los <strong>6 objetivos estratégicos</strong> propios del PV2030 y de sus <strong>más de 12 indicadores estratégicos</strong>: tres listas distintas que pueden confundirse en un distractor.</li>
+<li><strong>GASP = seguridad operacional</strong> (Plan Global de Seguridad Operacional de la Aviación); <strong>GASeP = seguridad contra actos ilícitos</strong> (Plan Global de Seguridad de la Aviación). Fáciles de intercambiar.</li>
+<li><strong>El SES2+ es ley adoptada, no un borrador</strong>, desde el 11 de noviembre de 2024 (DOUE) / 1 de diciembre de 2024 (entrada en vigor parcial); la redacción del manual, «en negociación/trílogos», está desfasada.</li>
+<li><strong>El Plan Maestro ATM tiene 10 SDO</strong>, con ventana objetivo <strong>2025-2035</strong>; la visión del Cielo Digital Europeo se materializa en <strong>2045</strong>, no en el plazo de los SDO.</li>
+<li><strong>Suelo de calidad percibida del 75 % (Carta de Servicios) ≠ 78,5-80 % (meta estratégica del PV2030)</strong>: ambas son cifras reales para el «mismo» concepto con distintos niveles de ambición; un distractor puede intercambiarlas.</li>
+<li><strong>CRIDA (2008), Startical (2021), participación en ESSP SAS (2008), fundación de GroupEAD (2001), participación en Ineco (1993), EGS (julio de 2025)</strong>: cinco años de fundación o incorporación distintos para cinco participadas distintas; no hay que confundirlos.</li>
+<li><strong>El DORA II (2022-2026) es un documento de Aena, no de ENAIRE</strong>; el contrato propio de ENAIRE con Aena por servicios de navegación (2022-2026, 601,2 M€) es distinto pero está vinculado (el DORA III y el siguiente contrato apuntan ambos a 2027-2031).</li>
+<li><strong>El PANDU (plan nacional de U-Space) cubre 2022-2025</strong>, ya técnicamente vencido en la fecha del examen; hay que comprobar si una pregunta de la época de 2026 se refiere a una actualización.</li>
+<li><strong>KEA (ineficiencia de la red de rutas, medioambiente)</strong> frente a <strong>KEP/KES (submétricas de eficiencia de vuelo de la tabla de seguimiento)</strong>: están relacionados pero son distintos, familias de indicadores europeas frente a internas de ENAIRE; no hay que tratarlos como sinónimos.</li>
+</ol>
+<h2 id="18-imprescindible-memorizar">18. Imprescindible memorizar</h2>
+<ul>
+<li><strong>PV2030</strong>: aprobado por el Consejo Rector el <strong>19-12-2025</strong>; Orden ministerial del <strong>19-03-2026</strong> (v1.1); código <strong>G1-25-PLA-001-1.1</strong>; 251 páginas; <strong>vigencia de 5 años</strong>; base jurídica <strong>Ley 40/2015, arts. 85.1/92.2/92.3</strong>.</li>
+<li><strong>6 objetivos estratégicos</strong>: Seguridad; Calidad y Resiliencia de Servicios; Movilidad Aérea Sostenible; Negocio e Internacionalización; Competitividad y Eficiencia; Transformación y Modernización.</li>
+<li><strong>56 planes estratégicos, 4 bloques (Gobernanza y Cumplimiento 3/1; Liderazgo Transformacional 17/6; Internacionalización y Desarrollo Empresarial 8/3; Servicios 28/7), 17 áreas en total.</strong></li>
+<li><strong>13 riesgos estratégicos, A-M</strong> (A regulatorio, B laboral, C continuidad del servicio, D macroeconómico/geopolítico, E contrato con Aena, F medioambiente, G inversiones/subvenciones UE, H ciber/seguridad física, I evento severo de seguridad, J liquidez, K reclamaciones judiciales, L reputacional, M buen gobierno).</li>
+<li><strong>Plan Estratégico de la OACI 2026-2050</strong> aprobado el <strong>1-11-2024</strong>, <strong>6 objetivos</strong>; España = Coordinadora del Grupo Consultivo.</li>
+<li><strong>SES2+ = Reglamento (UE) 2024/2803</strong>, DOUE <strong>11-11-2024</strong>, entrada en vigor parcial <strong>1-12-2024</strong>.</li>
+<li><strong>RP4 = 2025-2029</strong>; ESPP4 aprobado por la <strong>Decisión (UE) 2025/1063 de la Comisión, 19-05-2025</strong> (DOUE 28-05-2025); <strong>4 KPA: Seguridad, Capacidad, Medioambiente, Coste-Eficiencia</strong>.</li>
+<li><strong>Plan Maestro ATM</strong>: última actualización <strong>dic. 2024</strong>; <strong>10 SDO</strong>, ventana <strong>2025-2035</strong>; visión del Cielo Digital Europeo en <strong>2045</strong>.</li>
+<li><strong>SESAR 3 JU</strong>; <strong>SDM</strong>, consorcio de <strong>14 ANSP</strong> (SDIP), vigente del <strong>1-6-2022 a 2027</strong>.</li>
+<li><strong>Green Sky = 5 planes</strong>: Fly Clean, Fly Quiet, Eco ENAIRE, Compromiso Verde, Responsabilidad Ambiental.</li>
+<li><strong>Plantilla a 31-12-2024: 4284</strong> (51,1 % Convenio de Control, 48,9 % Convenio Grupo); <strong>49 % con más de 51 años</strong>.</li>
+<li><strong>El PV2025 se cerró con 2,5 M de vuelos (2025), +14,9 % frente a 2019, +4,7 % frente a 2024</strong>; récord diario de <strong>8103 vuelos (5 de julio de 2025)</strong>.</li>
+<li><strong>PERTE Aeroespacial</strong>: aprobado en marzo de 2022, ~4533 M€ movilizados en 2021-2025.</li>
+<li><strong>Contrato Aena-ENAIRE 2022-2026, 601,2 M€</strong>; DORA II 2022-2026, DORA III previsto en 2026 para 2027-2031.</li>
+<li><strong>Ley 9/2025 (3 de diciembre de 2025), Ley de Movilidad Sostenible</strong>: la ley más reciente dentro del alcance de este archivo.</li>
+</ul>
+<h2 id="19-glosario-bilingue-es-en">19. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plan Estratégico / Plan de Vuelo</td>
+<td>Strategic Plan / Flight Plan</td>
+</tr>
+<tr>
+<td>Consejo Rector</td>
+<td>Governing Board</td>
+</tr>
+<tr>
+<td>entidad pública empresarial</td>
+<td>public business entity</td>
+</tr>
+<tr>
+<td>propósito / misión / visión / valores</td>
+<td>purpose / mission / vision / values</td>
+</tr>
+<tr>
+<td>objetivos estratégicos</td>
+<td>strategic objectives</td>
+</tr>
+<tr>
+<td>Planes Estratégicos (los 56)</td>
+<td>strategic plans (the 56)</td>
+</tr>
+<tr>
+<td>bloque / área</td>
+<td>block / area</td>
+</tr>
+<tr>
+<td>mapa de riesgos</td>
+<td>risk map</td>
+</tr>
+<tr>
+<td>Comité de Riesgos, Resiliencia, Crisis y Recuperación</td>
+<td>Risk, Resilience, Crisis and Recovery Committee</td>
+</tr>
+<tr>
+<td>Cultura Justa</td>
+<td>Just Culture</td>
+</tr>
+<tr>
+<td>cultura de seguridad</td>
+<td>safety culture</td>
+</tr>
+<tr>
+<td>factor humano</td>
+<td>human factor</td>
+</tr>
+<tr>
+<td>ciberseguridad / seguridad física</td>
+<td>cybersecurity / physical security</td>
+</tr>
+<tr>
+<td>Cielo Único Europeo</td>
+<td>Single European Sky</td>
+</tr>
+<tr>
+<td>refundición</td>
+<td>recast (regulation)</td>
+</tr>
+<tr>
+<td>Autoridad Nacional de Supervisión</td>
+<td>National Supervisory Authority</td>
+</tr>
+<tr>
+<td>Proveedor de Servicios de Tránsito Aéreo (ATSP)</td>
+<td>Air Traffic Service Provider</td>
+</tr>
+<tr>
+<td>Proyecto Común</td>
+<td>Common Project</td>
+</tr>
+<tr>
+<td>Gestor de Red</td>
+<td>Network Manager</td>
+</tr>
+<tr>
+<td>Gestor del Despliegue de SESAR</td>
+<td>SESAR Deployment Manager</td>
+</tr>
+<tr>
+<td>Plan Maestro ATM</td>
+<td>ATM Master Plan</td>
+</tr>
+<tr>
+<td>Objetivo Estratégico de Implementación (SDO)</td>
+<td>Strategic Deployment Objective</td>
+</tr>
+<tr>
+<td>sistema/esquema de rendimientos</td>
+<td>performance scheme</td>
+</tr>
+<tr>
+<td>periodo de referencia</td>
+<td>reference period</td>
+</tr>
+<tr>
+<td>Área clave de rendimiento (KPA)</td>
+<td>Key Performance Area</td>
+</tr>
+<tr>
+<td>coste unitario determinado</td>
+<td>determined unit cost</td>
+</tr>
+<tr>
+<td>ineficiencia de ruta</td>
+<td>route inefficiency</td>
+</tr>
+<tr>
+<td>demora ATFM de ruta / de llegada</td>
+<td>en-route / arrival ATFM delay</td>
+</tr>
+<tr>
+<td>adherencia al slot</td>
+<td>slot adherence</td>
+</tr>
+<tr>
+<td>Plan Estratégico de la Red</td>
+<td>Network Strategy Plan</td>
+</tr>
+<tr>
+<td>Plan de Operaciones de la Red</td>
+<td>Network Operations Plan</td>
+</tr>
+<tr>
+<td>Perfil de Capacidad</td>
+<td>Capacity Profile</td>
+</tr>
+<tr>
+<td>negocio no regulado</td>
+<td>non-regulated business</td>
+</tr>
+<tr>
+<td>empresa participada</td>
+<td>investee company</td>
+</tr>
+<tr>
+<td>Grupo Consultivo</td>
+<td>Advisory Group</td>
+</tr>
+<tr>
+<td>Plan mundial de navegación aérea (GANP)</td>
+<td>Global Air Navigation Plan</td>
+</tr>
+<tr>
+<td>Plan global para la seguridad operacional de la aviación (GASP)</td>
+<td>Global Aviation Safety Plan</td>
+</tr>
+<tr>
+<td>Plan global para la seguridad de la aviación (GASeP)</td>
+<td>Global Aviation Security Plan</td>
+</tr>
+<tr>
+<td>Ley de Movilidad Sostenible</td>
+<td>Sustainable Mobility Act</td>
+</tr>
+<tr>
+<td>Proyecto Estratégico para la Recuperación y Transformación Económica Aeroespacial</td>
+<td>Aerospace Strategic Project (PERTE)</td>
+</tr>
+<tr>
+<td>Documento de Regulación Aeroportuaria (DORA)</td>
+<td>Airport Regulation Document</td>
+</tr>
+<tr>
+<td>Plan de Acción Nacional para el Despliegue del U-space (PANDU)</td>
+<td>U-Space national deployment plan</td>
+</tr>
+<tr>
+<td>Proveedor de Servicios de Información Común (CISP)</td>
+<td>Common Information Service Provider</td>
+</tr>
+<tr>
+<td>huella de carbono</td>
+<td>carbon footprint</td>
+</tr>
+<tr>
+<td>Pacto Verde Europeo</td>
+<td>Green Deal</td>
+</tr>
+<tr>
+<td>Objetivos de Desarrollo Sostenible (ODS)</td>
+<td>Sustainable Development Goals</td>
+</tr>
+<tr>
+<td>Pacto Mundial</td>
+<td>Global Compact</td>
+</tr>
+<tr>
+<td>Carta de Servicios</td>
+<td>Service Charter</td>
+</tr>
+<tr>
+<td>cultura justa y no punitiva</td>
+<td>just and non-punitive culture</td>
+</tr>
+<tr>
+<td>Gestión de Estrés por Incidente Crítico (CISM)</td>
+<td>Critical Incident Stress Management</td>
+</tr>
+<tr>
+<td>Código Ético / Canal Ético</td>
+<td>Ethics Code / Ethics Channel</td>
+</tr>
+<tr>
+<td>Gobernanza, Riesgos y Cumplimiento Normativo (GRC)</td>
+<td>Governance, Risk and Compliance (tool)</td>
+</tr>
+<tr>
+<td>Agencia Tributaria</td>
+<td>Tax Agency</td>
+</tr>
+<tr>
+<td>tasa de rotación de plantilla</td>
+<td>workforce rotation rate</td>
+</tr>
+<tr>
+<td>solvencia financiera</td>
+<td>financial solvency</td>
+</tr>
+<tr>
+<td>análisis CAME (Corregir/Afrontar/Mantener/Explotar)</td>
+<td>CAME analysis (Correct/Confront/Maintain/Exploit)</td>
+</tr>
+<tr>
+<td>análisis DAFO</td>
+<td>SWOT analysis</td>
+</tr>
+<tr>
+<td>megatendencia</td>
+<td>megatrend</td>
+</tr>
+<tr>
+<td>nuevos entrantes</td>
+<td>new entrants</td>
+</tr>
+<tr>
+<td>Movilidad Aérea Urbana (UAM)</td>
+<td>Urban Air Mobility</td>
+</tr>
+<tr>
+<td>Gestión del Tráfico Espacial (STM)</td>
+<td>Space Traffic Management</td>
+</tr>
+</tbody>
+</table>
+<h2 id="20-fuentes">20. Fuentes</h2>
+<ul>
+<li>ENAIRE, <em>Plan de Vuelo 2030</em> (G1-25-PLA-001-1.1, v1.1, 19-03-2026), 251 pp.</li>
+<li>ENAIRE, nota de prensa sobre la aprobación del Plan de Vuelo 2030 por el Consejo Rector, 19-12-2025.</li>
+<li>ENAIRE, <em>Plan de Vuelo 2025 — Grado de Cumplimiento 2021-2025</em>, junio de 2026.</li>
+<li>ENAIRE, <em>Plan de Vuelo 2025 — Actualización Consejo Rector</em>, 21-12-2023.</li>
+<li>ENAIRE, <em>Carta de Servicios 2025-2027</em>, febrero de 2025.</li>
+<li>ENAIRE, <em>Política de Cultura Justa</em>, DGL-15-POL-002-2.0, marzo de 2023.</li>
+<li>ENAIRE, <em>Resumen ejecutivo 2025</em>.</li>
+<li>ENAIRE, <em>Memoria de Sostenibilidad 2024</em>.</li>
+<li>AESA/ENAIRE, <em>ESPP4 — Spain Performance Plan 2025-2029</em>.</li>
+<li>Plan Maestro ATM Europeo (SESAR 3 JU), edición de 2025.</li>
+<li>Reglamento (UE) 2024/2803 (refundición SES2+).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,1864 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Navegación, equipos y sistemas</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Navegación, equipos y sistemas</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-abarca-el-examen">Qué abarca el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual -&gt; sección de esta guía)</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-introduccion-capitulo-1-del-manual-p5">1. Introducción (capítulo 1 del manual, p.5)</a></li>
+<li><a href="#2-el-concepto-de-navegacion-aerea-21-p5-6">2. El concepto de navegación aérea (2.1, p.5-6)</a></li>
+<li><a href="#3-fases-del-vuelo-22-p6-7">3. Fases del vuelo (2.2, p.6-7)</a></li>
+<li><a href="#4-funciones-de-navegacion-23-p7">4. Funciones de navegación (2.3, p.7)</a></li>
+<li><a href="#5-tecnicas-de-navegacion-aerea-capitulo-3-p8-9">5. Técnicas de navegación aérea (capítulo 3, p.8-9)</a></li>
+<li><a href="#6-navegacion-de-area-conceptos-basicos-311-p10-12">6. Navegación de área: conceptos básicos (3.1.1, p.10-12)</a><ul>
+<li><a href="#los-cuatro-parametros-de-performance-de-la-pbn-p11-12">Los cuatro parámetros de performance de la PBN (p.11-12)</a></li>
+</ul>
+</li>
+<li><a href="#7-relacion-rnav-rnp-especificaciones-de-navegacion-312-p12-14">7. Relación RNAV / RNP: especificaciones de navegación (3.1.2, p.12-14)</a></li>
+<li><a href="#8-beneficios-de-la-rnav-la-rnp-y-la-pbn-313-p14">8. Beneficios de la RNAV, la RNP y la PBN (3.1.3, p.14)</a></li>
+<li><a href="#9-sistemas-de-ayuda-a-la-navegacion-generalidades-321-p15">9. Sistemas de ayuda a la navegación: generalidades (3.2.1, p.15)</a></li>
+<li><a href="#10-clasificacion-por-parametros-322-p15">10. Clasificación por parámetros (3.2.2, p.15)</a></li>
+<li><a href="#11-clasificacion-por-tecnicas-y-elementos-323-p16-19">11. Clasificación por técnicas y elementos (3.2.3, p.16-19)</a></li>
+<li><a href="#12-ndb-radiofaro-no-direccional-331-p20-22">12. NDB - radiofaro no direccional (3.3.1, p.20-22)</a></li>
+<li><a href="#13-vor-radiofaro-omnidireccional-vhf-332-p23-29">13. VOR - radiofaro omnidireccional VHF (3.3.2, p.23-29)</a></li>
+<li><a href="#14-dme-equipo-medidor-de-distancia-333-p29-33">14. DME - equipo medidor de distancia (3.3.3, p.29-33)</a></li>
+<li><a href="#15-ils-sistema-de-aterrizaje-por-instrumentos-334-p33-39">15. ILS - sistema de aterrizaje por instrumentos (3.3.4, p.33-39)</a></li>
+<li><a href="#16-sistemas-hiperbolicos-335-p39-40">16. Sistemas hiperbólicos (3.3.5, p.39-40)</a></li>
+<li><a href="#17-ayudas-visuales-34-p40-47">17. Ayudas visuales (3.4, p.40-47)</a><ul>
+<li><a href="#171-papi-y-apapi-3411-p41-43">17.1 PAPI y APAPI (3.4.1.1, p.41-43)</a></li>
+<li><a href="#172-t-vasis-y-at-vasis-3412-p43">17.2 T-VASIS y AT-VASIS (3.4.1.2, p.43)</a></li>
+<li><a href="#173-sistemas-de-luces-de-aproximacion-als-342-p43-47">17.3 Sistemas de luces de aproximación (ALS) (3.4.2, p.43-47)</a></li>
+</ul>
+</li>
+<li><a href="#18-gnss-sistemas-espaciales-35-p47-51">18. GNSS: sistemas espaciales (3.5, p.47-51)</a></li>
+<li><a href="#19-sistemas-autonomos-ins-y-radar-doppler-36-p51-54">19. Sistemas autónomos: INS y radar Doppler (3.6, p.51-54)</a><ul>
+<li><a href="#191-ins-sistema-de-navegacion-inercial-361">19.1 INS - sistema de navegación inercial (3.6.1)</a></li>
+<li><a href="#192-radar-doppler-362-p53-54">19.2 Radar Doppler (3.6.2, p.53-54)</a></li>
+</ul>
+</li>
+<li><a href="#20-funciones-y-sistemas-de-vigilancia-capitulo-4-p55-56">20. Funciones y sistemas de vigilancia (capítulo 4, p.55-56)</a></li>
+<li><a href="#21-vigilancia-no-cooperativa-psr-y-smr-411-p57-61">21. Vigilancia no cooperativa: PSR y SMR (4.1.1, p.57-61)</a><ul>
+<li><a href="#211-radar-primario-de-vigilancia-psr">21.1 Radar primario de vigilancia (PSR)</a></li>
+<li><a href="#212-radar-de-movimiento-en-superficie-smr">21.2 Radar de movimiento en superficie (SMR)</a></li>
+</ul>
+</li>
+<li><a href="#22-vigilancia-cooperativa-ssr-4121-4125-p62-64">22. Vigilancia cooperativa: SSR (4.1.2.1-4.1.2.5, p.62-64)</a></li>
+<li><a href="#23-multilateracion-4126-4127-p64-67">23. Multilateración (4.1.2.6-4.1.2.7, p.64-67)</a></li>
+<li><a href="#24-ads-vigilancia-dependiente-automatica-413-p68-69">24. ADS - vigilancia dependiente automática (4.1.3, p.68-69)</a></li>
+<li><a href="#25-lista-de-acronimos-del-manual-capitulo-5-p70-72">25. Lista de acrónimos del manual (capítulo 5, p.70-72)</a></li>
+<li><a href="#26-bibliografia-del-manual-capitulo-6-p73">26. Bibliografía del manual (capítulo 6, p.73)</a></li>
+<li><a href="#27-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">27. Trampas de examen (confusiones típicas y cómo distinguirlas)</a></li>
+<li><a href="#28-imprescindible-memorizar-lista-corta-y-densa">28. Imprescindible memorizar (lista corta y densa)</a></li>
+<li><a href="#29-glosario-bilingue-es-en">29. Glosario bilingüe (ES -&gt; EN)</a></li>
+<li><a href="#30-fuentes">30. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">75 min de lectura</div><h1 id="om05-manual-oficial-de-enaire-del-tema-5-navegacion-aerea-equipos-y-sistemas-guia-de-estudio-completa">Guía: Navegación, equipos y sistemas</h1>
+<p><strong>Fuente:</strong> ENAIRE, <em>Navegación aérea, equipos y sistemas</em>, 73 páginas, cabecera «Elaborado: agosto 2023» (partes del texto son anteriores a la maquetación de 2023, a juzgar por los pies de página). Los números de página «p.» son los del propio manual (1-73).</p>
+<h2 id="que-abarca-el-examen">Qué abarca el examen</h2>
+<p>Este es el manual que publica ENAIRE para el tema 5 del examen (Navegación aérea, equipos y sistemas). Es un manual descriptivo («qué es, cómo funciona, cuáles son sus características operacionales»), no un manual de procedimientos. Cabe esperar preguntas del tipo: <em>¿qué técnica se basa en la velocidad, el tiempo y el rumbo?</em> (navegación a estima), <em>¿qué tiene la RNP que no tiene la RNAV?</em> (vigilancia y alerta de la performance a bordo), <em>¿qué diferencia hay entre el radar primario y el secundario?</em>, <em>¿de qué color es la luz de la radiobaliza exterior?</em>, <em>¿cuántas luces PAPI son rojas cuando la aeronave está en pendiente?</em>, <em>¿qué banda usa el SMR?</em>, <em>¿qué sistema de aumentación está basado en la aeronave?</em> El manual da relativamente pocas cifras (las que hay están todas recogidas aquí), así que cualquier cifra es candidata a pregunta. El manual tiene tres grandes bloques: técnicas de navegación y RNAV/PBN (capítulos 2-3.1), sistemas de ayuda a la navegación (3.2-3.6: radioayudas, ayudas visuales, sistemas espaciales y autónomos) y vigilancia (capítulo 4). <strong>No</strong> contiene nada sobre ACAS/TCAS, códigos de emergencia del transpondedor, frecuencias del ADS-B, bandas de frecuencia del VOR/ILS ni frecuencias del GNSS: eso está en los apuntes base más antiguos (<code>syllabus/t05-navigation-systems.md</code>), no en el manual.</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual -&gt; sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual (página)</th>
+<th>Sección de esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Introducción (p.5)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2.1 Concepto de navegación aérea (p.5-6)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2.2 Fases del vuelo (p.6-7)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2.3 Funciones de navegación (p.7)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3 Técnicas de navegación aérea: visual, a estima, radioeléctrica convencional, de área (p.8-9)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3.1 Navegación de área: 3.1.1 conceptos básicos (p.10-12), 3.1.2 relación RNAV/RNP (p.12-14), 3.1.3 beneficios (p.14)</td>
+<td>6, 7, 8</td>
+</tr>
+<tr>
+<td>3.2 Sistemas de ayuda a la navegación: 3.2.1 generalidades, 3.2.2 clasificación por parámetros, 3.2.3 clasificación por técnicas y elementos (p.15-20)</td>
+<td>9, 10, 11</td>
+</tr>
+<tr>
+<td>3.3.1 NDB (p.20-22)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3.3.2 VOR (p.23-29)</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3.3.3 DME (p.29-33)</td>
+<td>14</td>
+</tr>
+<tr>
+<td>3.3.4 ILS (p.33-39)</td>
+<td>15</td>
+</tr>
+<tr>
+<td>3.3.5 Sistemas hiperbólicos (p.39-40)</td>
+<td>16</td>
+</tr>
+<tr>
+<td>3.4 Ayudas visuales: PAPI/APAPI, T-VASIS, luces de aproximación (p.40-47)</td>
+<td>17</td>
+</tr>
+<tr>
+<td>3.5 Sistemas espaciales: GNSS y aumentación (p.47-51)</td>
+<td>18</td>
+</tr>
+<tr>
+<td>3.6 Sistemas autónomos: INS, radar Doppler (p.51-54)</td>
+<td>19</td>
+</tr>
+<tr>
+<td>4 Funciones y sistemas de vigilancia: introducción (p.55-56)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>4.1.1 No cooperativos: PSR, SMR (p.57-61)</td>
+<td>21</td>
+</tr>
+<tr>
+<td>4.1.2 Cooperativos: SSR (p.62-64), multilateración (p.64-67)</td>
+<td>22, 23</td>
+</tr>
+<tr>
+<td>4.1.3 ADS (p.68-69)</td>
+<td>24</td>
+</tr>
+<tr>
+<td>5 Acrónimos (p.70-72)</td>
+<td>25</td>
+</tr>
+<tr>
+<td>6 Bibliografía (p.73)</td>
+<td>26</td>
+</tr>
+<tr>
+<td>Trampas de examen / Imprescindible memorizar / Glosario / Fuentes</td>
+<td>27-30</td>
+</tr>
+</tbody>
+</table>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Introducción 2. Concepto de navegación aérea (SNA, CNS-ATM) 3. Fases del vuelo 4. Funciones de navegación 5. Técnicas de navegación 6. Fundamentos de la navegación de área (RNAV, RNP, PBN, parámetros) 7. Relación RNAV/RNP (especificaciones de navegación) 8. Beneficios 9. Sistemas de ayuda a la navegación: generalidades 10. Clasificación por parámetros (medio primario, único, suplementario) 11. Clasificación por técnicas y elementos (autónomos / no autónomos) 12. NDB 13. VOR 14. DME 15. ILS 16. Sistemas hiperbólicos 17. Ayudas visuales 18. GNSS 19. INS y radar Doppler 20. Vigilancia: los tres tipos 21. PSR y SMR 22. SSR y modos del transpondedor 23. Multilateración 24. ADS 25. Lista de acrónimos 26. Bibliografía 27. Trampas de examen 28. Imprescindible memorizar 29. Glosario bilingüe 30. Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-introduccion-capitulo-1-del-manual-p5">1. Introducción (capítulo 1 del manual, p.5)</h2>
+<ul>
+<li>Objeto del tema: ofrecer una visión general de los aspectos técnicos y operativos de la navegación aérea, en los ámbitos de <strong>la propia navegación y la vigilancia de aeronaves</strong>.</li>
+<li>Orden del manual: (1) cómo ha evolucionado el concepto de navegación aérea, (2) una perspectiva general de las funciones de navegación y vigilancia y de los sistemas y técnicas que las llevan a cabo, (3) cada sistema en profundidad: principio de funcionamiento, características operacionales más destacables y aplicaciones más comunes.</li>
+</ul>
+<h2 id="2-el-concepto-de-navegacion-aerea-21-p5-6">2. El concepto de navegación aérea (2.1, p.5-6)</h2>
+<ul>
+<li><strong>Significado original:</strong> en sus inicios, la «navegación aérea» se refería exclusivamente a los métodos que permitían a las aeronaves realizar un vuelo entre un origen y un destino <strong>con un conocimiento permanente de su posición en el espacio</strong>.</li>
+<li><strong>Evolución:</strong> el concepto ha evolucionado paralelamente al desarrollo del transporte aéreo. Factores: más aeronaves, mejores prestaciones de las aeronaves y de las infraestructuras de apoyo, y escenarios operativos más complejos. Todo ello obligó a que la navegación aérea considerase aspectos adicionales, con el fin de lograr «un proceso de convivencia segura de los elementos que conforman el tráfico aéreo».</li>
+<li><strong>Sistema de navegación aérea (SNA)</strong>: «el conjunto de elementos jurídicos, organizativos, técnicos y operativos que permiten llevar a cabo las operaciones aéreas de una manera segura, fluida y eficiente». El éxito solo es posible mediante un <strong>desarrollo equilibrado de todos ellos</strong>.</li>
+<li>a. <strong>Parte jurídica y organizativa</strong>: el marco regulador que establece los principios y normas que rigen las operaciones y los requisitos y responsabilidades exigibles a las personas involucradas.</li>
+<li>b. <strong>Aspectos técnicos y operativos</strong>: se engloban en el <strong>concepto CNS-ATM</strong>, una serie de servicios destinados a optimizar las actuaciones de las aeronaves.</li>
+<li><strong>ATM (<em>Air Traffic Management</em>, Servicios de Gestión de Tránsito Aéreo)</strong>: servicios relacionados con la <strong>organización del espacio aéreo, la gestión de afluencia y el control del tráfico aéreo</strong>, además del <strong>suministro de información y alerta</strong> a las aeronaves.</li>
+<li><strong>CNS (<em>Communications, Navigation and Surveillance</em>, Servicios de Comunicaciones, Navegación y Vigilancia)</strong>: los servicios proporcionados por los medios técnicos que <strong>actúan como soporte del ATM</strong>:</li>
+<li><strong>Comunicaciones</strong>: medios que permiten la difusión de los datos de interés para las operaciones aéreas.</li>
+<li><strong>Navegación</strong>: medios que permiten a las aeronaves conocer su posición y navegar de un lugar a otro del espacio aéreo.</li>
+<li><strong>Vigilancia</strong>: medios que permiten conocer, <strong>en tiempo real</strong>, la posición de todas las aeronaves que operan en un entorno determinado.</li>
+<li>Regla mnemotécnica: <strong>ATM = organización + afluencia + control + información/alerta; CNS = C (difusión de datos) + N (posición propia) + S (posición en tiempo real de todas las aeronaves); el CNS da soporte al ATM.</strong></li>
+</ul>
+<h2 id="3-fases-del-vuelo-22-p6-7">3. Fases del vuelo (2.2, p.6-7)</h2>
+<ul>
+<li>Desde un punto de vista operativo, el principal objetivo de la navegación aérea es <strong>dirigir la aeronave de un lugar geográfico a otro a través de una ruta establecida</strong>. La ruta debe <strong>planificarse antes del vuelo</strong> y se determina mediante una serie de <strong>puntos de recorrido</strong> delimitados entre el origen y el destino. (Una figura, «Esquema de la ruta seguida por una aeronave», muestra una ruta con puntos de recorrido; sin cifras.)</li>
+<li>El manual dice que el vuelo «se puede dividir en <strong>seis fases</strong>», pero la lista de viñetas tiene solo cinco elementos; la figura de la p.7 muestra seis bloques en orden, de derecha (despegue) a izquierda (aterrizaje): <strong>Despegue, Salida (SID), Ruta, Llegada (STAR), Aproximación, Aterrizaje</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Fase (redacción del manual)</th>
+<th>Definición en el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Despegue</td>
+<td>fase en que la aeronave <strong>comienza el ascenso, abandonando el aeropuerto de origen</strong></td>
+</tr>
+<tr>
+<td>Ascenso (salida)</td>
+<td>la aeronave continúa el ascenso <strong>siguiendo las rutas de salida establecidas</strong> hasta alcanzar el punto donde se inicia la fase de ruta (rótulo de la figura: <strong>SID</strong>)</td>
+</tr>
+<tr>
+<td>Ruta</td>
+<td>fase en que la aeronave completa <strong>la mayor parte del trayecto</strong>, realizando el vuelo de manera <strong>estable y nivelada</strong></td>
+</tr>
+<tr>
+<td>Descenso (llegada)</td>
+<td>la aeronave abandona la fase de ruta y comienza el descenso <strong>siguiendo las rutas de llegada establecidas</strong> hasta el punto donde se inician las últimas fases (rótulo de la figura: <strong>STAR</strong>)</td>
+</tr>
+<tr>
+<td>Aproximación y aterrizaje</td>
+<td>las fases en que se realiza el <strong>descenso final hasta la pista de destino</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SID = salida normalizada por instrumentos (<em>Standard Instrument Departure</em>); STAR = llegada normalizada por instrumentos (<em>Standard Instrument Arrival</em>) (lista de acrónimos, p.71).</li>
+</ul>
+<h2 id="4-funciones-de-navegacion-23-p7">4. Funciones de navegación (2.3, p.7)</h2>
+<p>En cada fase del vuelo, la navegación requiere <strong>dos funciones principales</strong>:</p>
+<ol>
+<li><strong>Función de posicionamiento</strong>: el piloto debe conocer <strong>en todo momento la situación de la aeronave respecto a la ruta establecida</strong>.</li>
+<li><strong>Función de guiado</strong>: el piloto debe dirigir convenientemente la aeronave <strong>para mantener la ruta establecida, según los datos de posición</strong>.</li>
+</ol>
+<ul>
+<li>La precisión y la eficacia exigidas dependen de la fase. En las <strong>fases iniciales y finales</strong> (críticas por las condiciones de vuelo y por el riesgo de colisión con <strong>otras aeronaves y obstáculos</strong>) las exigencias son <strong>mayores</strong> que <strong>en ruta</strong>, donde el vuelo es <strong>nivelado, a velocidad constante</strong> y <strong>solo existe potencial conflicto de colisión con otras aeronaves</strong>.</li>
+<li>Trampa: en ruta solo las <em>aeronaves</em> son un riesgo de colisión; en las fases inicial y final, <em>aeronaves y obstáculos</em>.</li>
+</ul>
+<h2 id="5-tecnicas-de-navegacion-aerea-capitulo-3-p8-9">5. Técnicas de navegación aérea (capítulo 3, p.8-9)</h2>
+<p>Definición: las técnicas de navegación son «los métodos y procedimientos que se utilizan en aviación para realizar un vuelo entre su origen y su destino». Los distintos modos han surgido por la necesidad de volar en diferentes entornos geográficos y operativos y por la continua evolución tecnológica. El manual da una tabla de cuatro filas (técnica, definición, procedimientos, observaciones).</p>
+<table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Definición</th>
+<th>Procedimiento</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Navegación visual</strong></td>
+<td>técnica basada en la <strong>observación directa, por parte del piloto, de las referencias externas a la aeronave</strong></td>
+<td>(a) se planifica sobre una carta la ruta, con puntos de recorrido que coinciden con <strong>elementos fácilmente identificables (ríos, carreteras, edificaciones...)</strong>; (b) en vuelo, el piloto usa las referencias del terreno para conocer su posición y guiar la aeronave hacia los puntos de paso</td>
+<td>modo muy <strong>elemental</strong>; su eficacia depende considerablemente de la <strong>pericia del piloto</strong>; muchas limitaciones: volar <strong>próximo al terreno</strong> y alta <strong>dependencia de las condiciones meteorológicas y de visibilidad</strong></td>
+</tr>
+<tr>
+<td><strong>Navegación a estima</strong></td>
+<td>técnica basada en <strong>tres parámetros: velocidad, tiempo y rumbo</strong></td>
+<td>(a) se planifica sobre una carta la ruta, con puntos de recorrido unidos por <strong>tramos rectos caracterizados por su rumbo y su distancia</strong>; (b) tras verificar la posición de partida, el piloto se dirige al siguiente punto de recorrido <strong>manteniendo el rumbo mediante la brújula</strong>; a velocidad constante se puede estimar la posición y el instante en que se alcanza el siguiente punto <strong>midiendo el tiempo transcurrido</strong> (en un movimiento rectilíneo y uniforme el espacio recorrido = velocidad x tiempo); (c) se repite con cada punto hasta llegar al destino</td>
+<td>las posiciones calculadas son solo una <strong>estimación</strong> de la real, porque no se tienen en cuenta <strong>el viento ni los errores de pilotaje e instrumentales</strong>; técnica sometida a <strong>grandes imprecisiones</strong>, pero su principio se utiliza, de manera perfeccionada, en ayudas sofisticadas como la <strong>navegación inercial</strong></td>
+</tr>
+<tr>
+<td><strong>Navegación radioeléctrica convencional</strong></td>
+<td>técnica de navegación <strong>instrumental</strong> basada en el vuelo <strong>hacia o desde radioayudas</strong></td>
+<td>(a) la ruta se establece de forma que los puntos de recorrido <strong>coincidan con estaciones terrestres de radioayudas</strong>; (b) en vuelo, el piloto dirige la aeronave <strong>de estación en estación</strong> con la información de navegación (posición y guiado) que proporcionan las radioayudas; (c) dentro de un espacio aéreo, esta técnica determina una <strong>red de rutas fija</strong> supeditada a la configuración existente de radioayudas, lo que <strong>limita la utilización de la capacidad disponible</strong></td>
+<td>la imposibilidad de determinar <strong>trayectorias de vuelo flexibles</strong> impide una utilización óptima del espacio aéreo, <strong>aumenta la complejidad de las operaciones</strong> y tiene importantes repercusiones en los <strong>costes operativos y medioambientales</strong></td>
+</tr>
+<tr>
+<td><strong>Navegación de área (RNAV)</strong></td>
+<td>técnica de navegación instrumental que permite a la aeronave <strong>desplazarse en cualquier trayectoria deseada</strong></td>
+<td>(a) la ruta se define mediante las <strong>coordenadas de latitud y longitud de los puntos de recorrido</strong>, sin necesidad de que coincidan con <strong>instalaciones terrestres de radioayudas</strong>; (b) el piloto ejecuta las funciones de navegación según las instrucciones de los <strong>equipos RNAV o RNP de a bordo</strong>, que determinan automáticamente los datos de posición y guiado a partir de los dispositivos de ayuda a la navegación de la aeronave, <strong>autónomos o apoyados en radioayudas</strong>, de acuerdo con la ruta programada</td>
+<td>se desarrolla en el punto siguiente (3.1) por su importancia actual</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Trampa: la navegación visual y la navegación a estima <strong>no</strong> son técnicas instrumentales; la radioeléctrica convencional y la RNAV <strong>sí</strong> son «técnica de navegación instrumental». La navegación a estima es la precursora del principio del <strong>INS</strong>.</li>
+<li>Rasgos distintivos para el examen: «velocidad, tiempo, rumbo» -&gt; navegación a estima; «de estación en estación, red de rutas fija» -&gt; radioeléctrica convencional; «puntos de recorrido en latitud/longitud, no ligados a ayudas terrestres» -&gt; RNAV.</li>
+</ul>
+<h2 id="6-navegacion-de-area-conceptos-basicos-311-p10-12">6. Navegación de área: conceptos básicos (3.1.1, p.10-12)</h2>
+<ul>
+<li>La navegación de área es la técnica que permite a la aeronave desplazarse en <strong>cualquier trayectoria deseada</strong>. Con ella se han desarrollado tres conceptos: <strong>especificación RNAV, especificación RNP y concepto PBN, que engloba los dos anteriores</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Definición en el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Especificación RNAV</strong></td>
+<td>especificación para navegación basada en la navegación de área que <strong>NO incluye el requisito de vigilancia y alerta de la performance a bordo</strong></td>
+</tr>
+<tr>
+<td><strong>Especificación RNP</strong></td>
+<td>especificación para navegación basada en la navegación de área que <strong>incluye el requisito de vigilancia y alerta de la performance a bordo</strong></td>
+</tr>
+<tr>
+<td><strong>Concepto PBN (<em>Performance-Based Navigation</em>, navegación basada en la performance)</strong></td>
+<td>concepto <strong>definido por la OACI</strong> que engloba tanto las especificaciones RNAV como las RNP: (1) pretende alcanzar un <strong>nivel óptimo de seguridad y eficiencia</strong>, (2) para los vuelos realizados en un espacio aéreo determinado, (3) <strong>condicionando la operatividad en él al cumplimiento de unas prestaciones definidas para la navegación</strong> (relacionadas con los parámetros de <strong>exactitud, integridad, continuidad y disponibilidad</strong>). Aplicable a <strong>cualquier tipo de operación</strong> en las diversas fases del vuelo dentro de un espacio aéreo</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La RNAV permite operar «en <strong>cualquier región de espacio aéreo y fase de vuelo</strong>, dentro de la cobertura y los límites operacionales de los sistemas de ayuda empleados, siempre que se satisfagan los requerimientos prescritos en el ámbito del concepto RNAV».</li>
+<li><strong>Tipos de RNAV según las prestaciones que puede proporcionar el sistema (tabla)</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Posicionamiento</th>
+<th>Guiado en el plano horizontal</th>
+<th>Guiado en el plano vertical</th>
+<th>Previsiones de tiempo de vuelo entre puntos de la ruta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RNAV 2D</strong></td>
+<td>sí</td>
+<td>sí</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>RNAV 3D</strong></td>
+<td>sí</td>
+<td>sí</td>
+<td>sí</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>RNAV 4D</strong></td>
+<td>sí</td>
+<td>sí</td>
+<td>sí</td>
+<td>sí</td>
+</tr>
+</tbody>
+</table>
+<p>Regla mnemotécnica: 2D = posición + guiado horizontal; 3D añade el <strong>vertical</strong>; 4D añade el <strong>tiempo</strong> (previsiones de tiempo de vuelo entre puntos de la ruta).</p>
+<h3 id="los-cuatro-parametros-de-performance-de-la-pbn-p11-12">Los cuatro parámetros de performance de la PBN (p.11-12)</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Definición (manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exactitud</strong></td>
+<td>la <strong>diferencia entre la posición indicada por el sistema de navegación y la posición real</strong> de la aeronave</td>
+</tr>
+<tr>
+<td><strong>Integridad</strong></td>
+<td>la capacidad del sistema para <strong>desconectarse automáticamente, o advertir al usuario, cuando no deba ser utilizado para la navegación</strong>. Se suele expresar como el <strong>número de veces que el sistema se apaga (o avisa) en un intervalo de tiempo o por operación</strong></td>
+</tr>
+<tr>
+<td><strong>Continuidad</strong></td>
+<td>la capacidad del sistema para <strong>realizar sus funciones durante una determinada operación aérea, sin sufrir interrupciones imprevistas en el servicio</strong>. Se suele expresar como el <strong>número de interrupciones por intervalo de tiempo o por operación</strong></td>
+</tr>
+<tr>
+<td><strong>Disponibilidad</strong></td>
+<td>la capacidad del sistema para <strong>realizar sus funciones al inicio de una operación</strong>. Se expresa como el <strong>porcentaje de tiempo en que el sistema se encuentra operativo, cumpliendo simultáneamente los requerimientos de exactitud, integridad y continuidad</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Trampa: la disponibilidad se juzga <strong>al inicio de la operación</strong>; la continuidad, <strong>durante</strong> ella. La integridad se refiere a <strong>advertir o desconectar</strong>; la exactitud, al <strong>error de posición</strong>. (El manual PBN de la OACI enumera «funcionalidad» en lugar de disponibilidad; el manual de ENAIRE dice disponibilidad.)</li>
+</ul>
+<h2 id="7-relacion-rnav-rnp-especificaciones-de-navegacion-312-p12-14">7. Relación RNAV / RNP: especificaciones de navegación (3.1.2, p.12-14)</h2>
+<ul>
+<li>En ambas designaciones, RNP y RNAV, la expresión <strong>«X»</strong> (cuando está indicada) se refiere a la <strong>precisión de navegación lateral (TSE, <em>Total System Error</em>)</strong> en <strong>millas náuticas</strong> que se espera que se logre <strong>en por lo menos el 95 % del tiempo de vuelo</strong>. Así, <strong>RNAV 5 requiere una precisión de navegación lateral de 5 NM</strong>.</li>
+<li>De acuerdo con el <strong>Doc. 9613 de la OACI, «Manual de Navegación Basada en Prestaciones (PBN)»</strong>, el manual define las siguientes especificaciones de navegación y las fases de vuelo en que se aplican:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Especificación</th>
+<th>Uso según el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RNAV 10</strong></td>
+<td>apoya operaciones RNAV <strong>en ruta</strong>, para mantener <strong>mínimos de separación longitudinal basados en la distancia</strong>, en <strong>espacio aéreo oceánico o dentro de áreas remotas</strong>. Por motivos históricos se la puede designar también a veces «<strong>RNP 10</strong>», aunque <strong>no</strong> cuente con el requisito de vigilancia y alerta de la performance a bordo</td>
+</tr>
+<tr>
+<td><strong>RNAV 5</strong></td>
+<td>apoya operaciones RNAV <strong>en ruta en espacio aéreo continental</strong></td>
+</tr>
+<tr>
+<td><strong>RNAV 1 y 2</strong></td>
+<td>apoyan operaciones RNAV <strong>en ruta, en SID, STAR y en aproximaciones (solo en tramos iniciales, intermedios o de frustrada)</strong>. <strong>En la Unión Europea no está previsto el uso de RNAV 2, ni el de RNAV 1 en fase de ruta</strong></td>
+</tr>
+<tr>
+<td><strong>RNP 4</strong></td>
+<td>apoya operaciones RNP <strong>en ruta</strong>, para mantener mínimos de separación longitudinal basados en la distancia en <strong>espacio aéreo oceánico o de áreas remotas</strong></td>
+</tr>
+<tr>
+<td><strong>RNP 1</strong></td>
+<td>apoya operaciones RNP en <strong>SID, STAR y aproximaciones (solo tramos iniciales, intermedios o de frustrada)</strong>, con <strong>vigilancia ATS limitada o sin ella</strong> y con <strong>tránsito de baja a media densidad</strong>. <strong>Puede utilizar tramos curvos de radio fijo</strong></td>
+</tr>
+<tr>
+<td><strong>RNP APCH</strong></td>
+<td>apoya operaciones de aproximación RNP <strong>de hasta RNP 0,3 NM</strong>, diseñadas con <strong>tramos rectos o curvos de radio fijo</strong> (estos últimos <strong>solo en la aproximación inicial o intermedia, o en algunas partes de la aproximación frustrada</strong>). Se pueden incluir requisitos para capacidades como la función <strong>baro-VNAV</strong> (véase la nota) o la utilización de <strong>sistemas SBAS en aproximación final</strong></td>
+</tr>
+<tr>
+<td><strong>RNP AR APCH</strong></td>
+<td>apoya operaciones de aproximación RNP con tramos de RNP <strong>entre 1 y 0,1 (inicial, intermedia o frustrada)</strong> y <strong>entre RNP 0,3 y 0,1 (aproximación final)</strong>. Está diseñada para tramos rectos y/o curvos de radio fijo <strong>en cualquier parte del procedimiento, incluyendo la aproximación final</strong>. El guiado vertical final utiliza la función <strong>baro-VNAV</strong></td>
+</tr>
+<tr>
+<td><strong>RNP 0,3</strong></td>
+<td>dirigida principalmente a <strong>operaciones de helicópteros</strong>; puede usarse <strong>en ruta, SID, STAR y aproximación (excepto aproximación final)</strong></td>
+</tr>
+<tr>
+<td><strong>A-RNP (RNP avanzada)</strong></td>
+<td><strong>especificación universal</strong> que aplica <strong>valores de RNP diferentes y escalables, entre 2 y 0,3</strong>, según se use en ruta, SID, STAR o aproximación. <strong>No está previsto su uso en la Unión Europea</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Nota 1 del manual: <strong>la baro-VNAV es un sistema que proporciona guiado vertical a través de información baroaltimétrica</strong>.</li>
+<li>El cumplimiento de los requisitos de las especificaciones PBN afecta a todos los aspectos que repercuten en el proceso de navegación. No solo se requieren unas determinadas <strong>prestaciones en los equipos de a bordo</strong>: las especificaciones pueden imponer también <strong>limitaciones operacionales a los sistemas de apoyo</strong> que se utilicen, o un nivel de <strong>precisión en los sistemas de referencia geográficos</strong>.</li>
+<li>Resumen numérico: RNAV 10, RNAV 5, RNAV 2, RNAV 1 (RNAV, sin alerta); RNP 4, RNP 1, RNP APCH (hasta 0,3), RNP AR APCH (1 a 0,1; final 0,3 a 0,1), RNP 0,3, A-RNP (2 a 0,3) (RNP, con alerta). Obsérvese que el manual no incluye «RNP 2» como especificación independiente; la RNP 2 aparece en el Doc. 9613 de la OACI.</li>
+<li>Trampas: (1) «RNP 10» es un nombre histórico de la <strong>RNAV 10</strong>, que <strong>no</strong> tiene alerta; (2) la RNAV 5 es para <strong>ruta continental</strong>, la RNAV 10 y la RNP 4 para <strong>oceánica/remota</strong>; (3) la RNP AR APCH es la única en que la <strong>aproximación final</strong> puede tener tramos curvos de radio fijo; la RNP APCH solo permite curvas de radio fijo en las partes inicial/intermedia/frustrada; (4) UE: ni RNAV 2, ni RNAV 1 en ruta, ni A-RNP (según el manual).</li>
+</ul>
+<h2 id="8-beneficios-de-la-rnav-la-rnp-y-la-pbn-313-p14">8. Beneficios de la RNAV, la RNP y la PBN (3.1.3, p.14)</h2>
+<p>Las técnicas de navegación de área aplicadas en diversas partes del mundo ya han demostrado ventajas respecto a otras formas de navegación más tradicionales:</p>
+<ol>
+<li><strong>Mayor flexibilidad en el diseño de la red de rutas</strong>, que permite optimizar la <strong>capacidad del espacio aéreo</strong> y un uso más eficiente del mismo.</li>
+<li><strong>Reducción de las distancias de vuelo</strong>, con la consiguiente disminución de los <strong>costes operativos y medioambientales</strong>.</li>
+<li><strong>Mejora de la eficiencia y la seguridad operacional</strong> en las diferentes fases del vuelo.</li>
+</ol>
+<h2 id="9-sistemas-de-ayuda-a-la-navegacion-generalidades-321-p15">9. Sistemas de ayuda a la navegación: generalidades (3.2.1, p.15)</h2>
+<ul>
+<li>A lo largo de la historia, las necesidades del transporte aéreo han propiciado métodos que permitieran navegar en todos los escenarios en que se pudiera encontrar una aeronave, <strong>bajo cualquier tipo de condiciones meteorológicas y de visibilidad</strong>. Para cada fase de vuelo se especifican <strong>requerimientos operacionales</strong> relacionados con las <strong>prestaciones</strong> que deben cumplir los sistemas de navegación que actúan en ella.</li>
+</ul>
+<h2 id="10-clasificacion-por-parametros-322-p15">10. Clasificación por parámetros (3.2.2, p.15)</h2>
+<p>En función de los requisitos exigidos para una operación o fase de vuelo, un sistema de ayuda a la navegación podrá ser considerado como:</p>
+<table>
+<thead>
+<tr>
+<th>Medio</th>
+<th>Definición (manual)</th>
+<th>¿Exactitud + integridad?</th>
+<th>¿Disponibilidad + continuidad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Medio principal o primario</strong></td>
+<td>aprobado para una determinada operación o fase de vuelo; debe satisfacer los requisitos establecidos de <strong>precisión e integridad</strong></td>
+<td>sí</td>
+<td><strong>no se exige</strong></td>
+</tr>
+<tr>
+<td><strong>Medio único</strong></td>
+<td>aprobado para una determinada operación o fase; debe cumplir <strong>los cuatro requisitos de prestación</strong></td>
+<td>sí</td>
+<td>sí (los cuatro)</td>
+</tr>
+<tr>
+<td><strong>Medio suplementario</strong></td>
+<td>aprobado para una determinada operación o fase; debe <strong>utilizarse juntamente con un sistema considerado como medio único</strong>; debe satisfacer <strong>precisión e integridad</strong>, sin necesidad de cumplir disponibilidad y continuidad</td>
+<td>sí</td>
+<td><strong>no se exige</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Trampa: el <strong>primario</strong> y el <strong>suplementario</strong> son idénticos en sus requisitos de prestaciones (solo precisión e integridad); la diferencia es que el suplementario debe utilizarse <strong>junto con un sistema de medio único</strong>. Solo el <strong>medio único</strong> debe cumplir los cuatro (exactitud, integridad, continuidad, disponibilidad).</li>
+</ul>
+<h2 id="11-clasificacion-por-tecnicas-y-elementos-323-p16-19">11. Clasificación por técnicas y elementos (3.2.3, p.16-19)</h2>
+<p>El manual presenta una gran tabla en color. Estructura reconstruida:</p>
+<p><strong>A. Sistemas no autónomos</strong>: los que se componen de un <strong>equipo de a bordo capaz de calcular y proporcionar al piloto la información de navegación a partir de los datos suministrados por una infraestructura externa a la aeronave</strong>. Tres familias:</p>
+<ol>
+<li><strong>B. Terrestres</strong>: utilizan una infraestructura auxiliar constituida <strong>exclusivamente por instalaciones fijas terrestres</strong>.
+   - <strong>Por radioayudas</strong>: infraestructura externa constituida <strong>exclusivamente por estaciones terrestres fijas</strong> que suministran la información de navegación <strong>mediante su codificación y emisión en señales de radiofrecuencia</strong>; estas señales son captadas y decodificadas por el equipo de a bordo, que proporciona al piloto los datos de posición y guiado. <strong>Tipos: NDB, VOR, DME, ILS.</strong>
+   - <strong>Visuales</strong>: infraestructura externa constituida por <strong>agrupamientos de luces</strong> que suministran la información de navegación <strong>mediante su disposición sobre el terreno y la utilización de códigos de colores</strong>. <strong>No existe un dispositivo de a bordo específico: el piloto interpreta la información de los elementos luminosos.</strong> <strong>Tipos: sistemas indicadores de pendiente de descenso y luces de aproximación.</strong></li>
+<li><strong>C. Espaciales</strong>: la infraestructura externa incluye <strong>satélites</strong>. Se denominan también sistemas <strong>GNSS (<em>Global Navigation Satellite System</em>)</strong>, en sus diferentes variantes (combinación de sistemas globales básicos y sistemas de aumentación); son <strong>la base de la implantación del concepto PBN</strong>. <strong>Aparte de los satélites, todos los sistemas espaciales (excepto los de aumentación ABAS) incluyen infraestructuras terrestres auxiliares.</strong>
+   - <strong>Constelaciones principales / GNSS básico</strong>: conjuntos de satélites que proporcionan <strong>cobertura global en toda la superficie terrestre</strong>. Cada satélite suministra información de navegación codificándola y emitiéndola en señales de radiofrecuencia; el equipo de a bordo, <strong>cuando las recibe simultáneamente de 4 satélites o más</strong>, puede proporcionar los datos de posición y guiado. <strong>Todos los receptores GNSS certificados en aeronaves incluyen sistemas de aumentación ABAS integrados</strong> para alcanzar los requisitos de prestaciones mínimos exigidos por la OACI. Constelaciones citadas: <strong>GPS (EE. UU.), GLONASS (Rusia), Galileo (Unión Europea), BeiDou / BDS (China)</strong>.
+   - <strong>SBAS</strong> (véase la sección 18): cobertura regional/continental; una <strong>red de estaciones de referencia terrestres</strong> calcula correcciones e información de integridad a partir de los datos GNSS; se envían a las aeronaves mediante <strong>satélites geoestacionarios (GEO)</strong>; el receptor SBAS embarcado combina su posición GNSS con los datos SBAS. Sistemas SBAS destacados: <strong>WAAS (EE. UU.), EGNOS (Unión Europea), MSAS (Japón), GAGAN (India)</strong>.
+   - <strong>GBAS</strong>: una <strong>estación terrestre situada en el aeropuerto al que presta servicio</strong>; monitoriza las señales recibidas de una constelación principal GNSS y transmite <strong>correcciones de pseudodistancia, parámetros de integridad y datos de definición de aproximaciones localmente pertinentes</strong> a las aeronaves en el área terminal mediante <strong>radiodifusión de datos en VHF (VDB)</strong>; el receptor GBAS embarcado combina su posición GNSS con los datos GBAS.</li>
+</ol>
+<p><strong>B. Sistemas autónomos</strong>: los que se componen de un <strong>equipo de a bordo capaz de calcular y proporcionar al piloto la información de posición y guiado de la aeronave basándose en la medición directa de diferentes parámetros de vuelo (velocidad, presión, etc.) y actitud</strong> («actitud» = la posición de una aeronave respecto a sus ejes principales). Sistemas de altas prestaciones que, <strong>al no requerir una infraestructura externa a la aeronave, se suelen utilizar para la navegación en zonas donde no existe cobertura de otro tipo de ayudas</strong>. <strong>Tipos: radar Doppler y equipos inerciales (INS).</strong></p>
+<ul>
+<li>Trampa: «SBAS» dice <strong>basado en satélite</strong>, pero las correcciones suben desde estaciones terrestres y bajan por <strong>satélites GEO</strong>; el «GBAS» difunde por <strong>VHF (VDB)</strong>. El ABAS es el único sistema de aumentación sin infraestructura terrestre.</li>
+<li>Trampa: el manual enumera <strong>NDB, VOR, DME, ILS</strong> como tipos de radioayudas (ni MLS ni TACAN).</li>
+</ul>
+<hr />
+<h2 id="12-ndb-radiofaro-no-direccional-331-p20-22">12. NDB - radiofaro no direccional (3.3.1, p.20-22)</h2>
+<p><strong>Definición.</strong> El NDB (<em>Non-Directional Beacon</em> / radiofaro no direccional) es un sistema de ayuda a la navegación que proporciona a una aeronave debidamente equipada <strong>guiado horizontal, es decir, rumbos</strong>.</p>
+<ul>
+<li><strong>Principio de funcionamiento (p.20):</strong> se basa en la transmisión de una señal desde una estación en tierra, captada por la aeronave mediante un equipo de a bordo; puede obtenerse una <strong>marcación</strong>, <strong>definida por la desviación del eje longitudinal de la aeronave respecto al eje aeronave-estación</strong>.</li>
+<li><strong>Equipo de tierra:</strong> consta esencialmente de un <strong>transmisor convencional</strong> que emite una señal de navegación <strong>omnidireccional</strong> (en todas direcciones). La información se envía a los <strong>360°</strong>, por lo que es posible establecer comunicación con independencia del punto en que se encuentre la aeronave, siempre que esté <strong>dentro de la cobertura de la señal</strong>.</li>
+<li><strong>Equipo de a bordo:</strong> el <strong>ADF (<em>Automatic Direction Finder</em>)</strong> es el componente de a bordo: un equipo <strong>antena/receptor</strong> que procesa la señal NDB y la presenta al piloto mediante un instrumento indicador. (El manual glosa ADF como «Radiofaro no direccional» en el texto corrido; en la lista de acrónimos figura «Equipo radiogoniométrico automático».)</li>
+<li><strong>Navegación NDB (p.21):</strong> con la marcación que proporciona, las aeronaves navegan en aproximación <strong>hacia</strong> la estación NDB o en alejamiento <strong>desde</strong> ella.</li>
+<li><strong>Para volar HACIA la estación:</strong> el piloto debe virar la aeronave <strong>hacia el mismo lado que indica la aguja del ADF</strong>, hasta que la <strong>cabeza de la aguja esté alineada con la proa del símbolo del avión</strong> del indicador.</li>
+<li><strong>Para alejarse de la estación:</strong> debe maniobrar de modo que la <strong>cabeza de la aguja se alinee con la cola</strong> del símbolo del avión.</li>
+<li>A través del ADF el piloto <strong>sintoniza la frecuencia</strong> de transmisión de una determinada estación NDB, que conoce por la <strong>carta de navegación</strong>; tras <strong>confirmar el indicativo de la estación</strong>, la información de guiado se le proporciona por medio de un indicador visual.</li>
+<li><strong>Los dos indicadores más utilizados (p.21-22):</strong></li>
+<li><strong>RBI (<em>Radio Bearing Indicator</em> / Radio Indicador de Rumbo):</strong> una <strong>rosa de rumbos fija</strong> donde el <strong>cero está alineado con el eje longitudinal de un pequeño símbolo del avión situado en el centro</strong>; una <strong>aguja central</strong> se desplaza marcando la <strong>dirección de procedencia de la señal NDB respecto al eje longitudinal del avión</strong>.</li>
+<li><strong>RMI (<em>Radio Magnetic Indicator</em> / Indicador Radiomagnético):</strong> <strong>combina la indicación de rumbo de la aeronave con la de la aguja del ADF</strong>. Dispone de una <strong>rosa de rumbos móvil que gira solidariamente con el movimiento real del avión</strong>, de modo que siempre está centrada para indicar el <strong>rumbo de la aeronave</strong> (ejemplo de la figura del manual: <strong>240°</strong>), mientras que la aguja marca el <strong>rumbo que debería seguir la aeronave para ir a la estación NDB</strong> (ejemplo: <strong>170°</strong>).</li>
+<li><strong>Características operacionales (p.22):</strong></li>
+<li>Como solo proporciona guiado horizontal, su aplicación es muy diversa: desde la <strong>navegación en ruta continental hasta la aproximación de no precisión</strong>.</li>
+<li>Banda de frecuencias: <strong>LF-MF (baja-media frecuencia)</strong>. El alcance depende <strong>principalmente de la frecuencia emitida</strong>; influyen también la <strong>potencia de transmisión</strong> y las <strong>condiciones atmosféricas</strong>.</li>
+<li>En condiciones normales de propagación, el <strong>margen de error del ADF no es superior a ± 5°</strong>.</li>
+<li>Al tratarse de emisiones en LF/MF, la señal se ve fácilmente interferida por las <strong>condiciones atmosféricas, las señales de radio comerciales o las corrientes estáticas</strong>, que afectan sensiblemente a la marcación de a bordo.</li>
+<li>Se emplea en <strong>rutas de llegada y salida instrumentales, aproximaciones instrumentales de no precisión y navegación en ruta</strong>.</li>
+<li>Nota 2: <strong>prácticamente ya no se usa en ruta</strong>; tan solo <strong>en apoyo a procedimientos de aproximación y salida</strong> y <strong>como alternativa a otros sistemas para evitar radioayudas críticas</strong>.</li>
+<li>Trampas de examen: el NDB da <strong>solo marcaciones</strong> (no distancia); emisión <strong>omnidireccional</strong> en tierra; <strong>RBI = rosa fija; RMI = rosa giratoria con el rumbo</strong>; error del ADF de hasta <strong>± 5°</strong>; banda <strong>LF-MF</strong> (no VHF).</li>
+</ul>
+<h2 id="13-vor-radiofaro-omnidireccional-vhf-332-p23-29">13. VOR - radiofaro omnidireccional VHF (3.3.2, p.23-29)</h2>
+<p><strong>Definición.</strong> El VOR (<em>Very High Frequency Omnidirectional Range</em> / Radiofaro Omnidireccional de Muy Alta Frecuencia) es un sistema de ayuda a la navegación aérea capaz de proporcionar a una aeronave debidamente equipada información para el <strong>guiado horizontal (rumbos) respecto a una línea de situación magnética</strong>.</p>
+<ul>
+<li><strong>Principio de funcionamiento (p.23-24):</strong> dos elementos: una <strong>estación terrestre fija</strong> y un <strong>equipo instalado a bordo</strong>. La estación de tierra transmite un conjunto de señales electromagnéticas de navegación que generan un <strong>haz de líneas de situación magnética, los radiales</strong>. El equipo de a bordo las procesa y proporciona: (a) el <strong>radial de posición de la aeronave</strong>, (b) la <strong>posición relativa de la aeronave respecto al radial</strong>, (c) la <strong>posición relativa de la aeronave respecto a la estación</strong>.</li>
+<li><strong>Equipo de tierra (p.24):</strong> una instalación terrestre fija que genera y transmite las señales de navegación, más un <strong>código de identificación formado por un tono de audio de tres letras en Morse</strong>.</li>
+<li><strong>Equipo de a bordo (p.25):</strong> un dispositivo <strong>antena/receptor</strong> y un <strong>indicador</strong> que muestra la información de navegación. El instrumento indicador se compone de:</li>
+<li><strong>CDI (<em>Course Deviation Indicator</em>, indicador de desviación de curso)</strong>: esta información <strong>indica mando</strong>, es decir, lo que debe hacer el piloto para mantener la aeronave <strong>sobre el radial seleccionado (aguja centrada)</strong>.</li>
+<li><strong>Indicador TO/FROM:</strong> muestra si la aeronave vuela <strong>hacia (TO) o desde (FROM)</strong> la estación terrestre.</li>
+<li><strong>Navegación VOR (p.26-29):</strong> el VOR se usa para volar <strong>en acercamiento/alejamiento a/desde</strong> la estación terrestre.</li>
+<li>El piloto <strong>selecciona el radial de vuelo deseado</strong> mediante el <strong>OBS (selector de radiales)</strong>. Al hacerlo, el <strong>plano de situación horizontal se divide en cuatro cuadrantes</strong>.</li>
+<li>El <strong>paso por la estación</strong> queda reflejado por el <strong>cambio en el indicador TO/FROM</strong>.</li>
+<li><strong>La indicación TO/FROM determina el semiplano de situación</strong>: el instrumento marcará <strong>FROM</strong> cuando la aeronave esté situada en el semiplano que <strong>contiene al radial seleccionado</strong>, <strong>independientemente del rumbo de la aeronave</strong>. Cuando el receptor esté situado en cualquier punto del semiplano que contiene la <strong>prolongación del radial seleccionado</strong>, aparecerá <strong>TO</strong>, <strong>independientemente del rumbo</strong>.</li>
+<li><strong>El CDI determina el cuadrante de situación</strong> (dentro del semiplano): proporciona la posición del radial seleccionado (o su prolongación) con relación a la aeronave, <strong>independientemente del rumbo</strong>. El piloto debe maniobrar para mantener el CDI <strong>centrado</strong> («la línea azul» en la figura del manual; indica si vamos desplazados a derecha/izquierda o correctos si está centrada).</li>
+<li><strong>Figura p.28 (radial de referencia 360° seleccionado):</strong> la aeronave (1) tiene el CDI mostrando la prolongación del radial seleccionado <strong>a su derecha</strong>; la (2) está <strong>exactamente sobre</strong> la prolongación; la (3) la tiene <strong>a su izquierda</strong>; todas con TO.</li>
+<li><strong>Relación entre el radial de vuelo y la ruta magnética (Rm):</strong></li>
+<li><strong>Volando HACIA la estación (radiales de acercamiento):</strong> la diferencia entre la ruta magnética y el radial es de <strong>180°: Rm = RDL + 180°</strong>. Ejemplo del manual: la aeronave vuela <strong>con RDL-090 hacia la estación; su ruta magnética es 270°</strong>.</li>
+<li><strong>Volando DESDE la estación (radiales de alejamiento):</strong> ruta magnética y radial <strong>coinciden: Rm = RDL</strong>. Ejemplo: <strong>RDL-342 desde la estación; ruta magnética 342°</strong>.</li>
+<li>(RDL = radial, en la lista de acrónimos.)</li>
+<li><strong>Características operacionales (p.29):</strong></li>
+<li><strong>Sistema de corto y medio alcance (valores nominales de unas 200 NM)</strong>, utilizado en las fases de <strong>ruta, llegada, salida y aproximación</strong>.</li>
+<li>Banda de frecuencias <strong>VHF</strong>: tiene la ventaja de <strong>no estar afectada por interferencias estáticas ni perturbaciones atmosféricas</strong>. Pero la propagación en VHF necesita <strong>línea de vista</strong> entre emisor y receptor.</li>
+<li>Este hecho originó el <strong>DVOR (VOR Doppler)</strong>: variante con el <strong>mismo principio de funcionamiento</strong> pero <strong>diferentes técnicas de transmisión</strong>, que mejora la calidad de la señal de navegación <strong>incluso en presencia de obstáculos</strong>. Respecto al VOR convencional (<strong>CVOR</strong>): <strong>las mismas frecuencias de transmisión, el mismo equipo de a bordo y la misma información de navegación</strong>, pero con una <strong>mejora global de las prestaciones y una reducción considerable de los errores de precisión</strong>.</li>
+<li>Trampas de examen: la señal VOR define radiales <strong>magnéticos</strong> (línea de situación magnética); el TO/FROM refleja el <strong>semiplano</strong>, no el rumbo; CDI = información de <strong>mando</strong>; el manual <strong>no da cifras de frecuencia</strong> (108-117,95 MHz figura solo en los apuntes base); DVOR: mismas frecuencias y mismo equipo de a bordo.</li>
+</ul>
+<h2 id="14-dme-equipo-medidor-de-distancia-333-p29-33">14. DME - equipo medidor de distancia (3.3.3, p.29-33)</h2>
+<p><strong>Definición.</strong> El DME (<em>Distance Measuring Equipment</em> / Equipo Medidor de Distancia) es un sistema de ayuda a la navegación que proporciona la <strong>distancia oblicua</strong> entre una aeronave y una estación en tierra.</p>
+<ul>
+<li><strong>Principio de funcionamiento (p.30):</strong> una <strong>estación en tierra (transpondedor)</strong> y un <strong>sistema de a bordo (interrogador)</strong>.
+  1. el DME de a bordo transmite una serie de señales que recibe el equipo de tierra;
+  2. el equipo de tierra las procesa y las <strong>devuelve al avión que las generó</strong>;
+  3. cuando llegan, el equipo de a bordo calcula la distancia al equipo terrestre;
+  4. el cálculo se realiza con <strong>el tiempo que emplea la señal en hacer el viaje de ida y vuelta</strong>, obteniéndose la información <strong>automáticamente en millas náuticas</strong>.</li>
+<li><strong>Equipo de tierra (p.31):</strong> consta esencialmente de un <strong>transmisor/receptor</strong> que recibe, procesa y envía las señales a las aeronaves. Cada estación DME dispone de su <strong>propia identificación: dos o tres letras codificadas en Morse emitidas mediante un tono de audio</strong>. La estación DME <strong>solo puede servir a un número determinado de usuarios</strong>, según el tipo y las características operacionales de la instalación.</li>
+<li><strong>Navegación DME (p.31):</strong> «<strong>No sirve para la navegación</strong>, no proporciona ni radiales ni rumbos, solo distancias».</li>
+<li><strong>Equipo de a bordo (p.32):</strong> una <strong>antena transmisora/receptora</strong> y un <strong>instrumento indicador</strong> en el que se visualiza la distancia.</li>
+<li><strong>Características operacionales (p.32-33):</strong></li>
+<li>Ventaja como medidor de distancia: <strong>no está influenciado por las interferencias atmosféricas</strong>.</li>
+<li>La banda utilizada exige <strong>línea de vista</strong> entre emisor y receptor, lo que limita <strong>la cobertura a ángulos bajos</strong> y <strong>el alcance a unas 200 NM</strong>.</li>
+<li>El DME es normalmente un <strong>complemento de otras radioayudas</strong>. Puede encontrarse <strong>coemplazado</strong> con:<ul>
+<li><strong>VOR/DME:</strong> la <strong>instalación más típica</strong>; muy adecuada para <strong>materializar puntos en el espacio mediante la intersección de un radial VOR y una distancia DME</strong>.</li>
+<li><strong>NDB/DME:</strong> aplicación similar a la del VOR/DME, aunque con <strong>menores prestaciones</strong>; <strong>menos instalaciones</strong> que la anterior.</li>
+<li><strong>ILS/DME:</strong> en la mayoría de los casos se instala un DME asociado a un ILS para facilitar <strong>información de distancia en la aproximación</strong>.</li>
+</ul>
+</li>
+<li>El DME se utiliza también <strong>de forma individual para la PBN</strong>, para lo que <strong>es necesario sintonizar simultáneamente dos o más estaciones y realizar triangulación con ellas</strong>.</li>
+<li>Trampas: DME = distancia <strong>oblicua</strong>; <strong>dos o tres</strong> letras Morse (VOR: tres); alcance de ~200 NM como el VOR; un solo DME da solo distancia, nunca una posición por sí mismo; DME/DME es el uso para PBN.</li>
+</ul>
+<h2 id="15-ils-sistema-de-aterrizaje-por-instrumentos-334-p33-39">15. ILS - sistema de aterrizaje por instrumentos (3.3.4, p.33-39)</h2>
+<p><strong>Definición.</strong> El ILS (<em>Instrument Landing System</em> / Sistema de Aterrizaje por Instrumentos) proporciona a una aeronave debidamente equipada <strong>información de precisión para el guiado horizontal y vertical en la fase de aproximación y aterrizaje</strong>. La información es de <strong>azimut (dirección) y senda de descenso (trayectoria de planeo)</strong>, hasta los <strong>mínimos de utilización</strong> enmarcados dentro de las <strong>categorías operacionales</strong> del sistema.</p>
+<ul>
+<li><strong>Principio:</strong> el equipo en tierra, con varias estaciones, transmite señales de navegación; un equipo de a bordo las interpreta y las presenta en un indicador.</li>
+<li><strong>Equipo de tierra: tres componentes (p.33):</strong> (a) <strong>Localizador (LOC)</strong>; (b) <strong>Senda de descenso (GP, <em>Glide Path</em>)</strong>; (c) <strong>Radiobalizas (OM, IM, MM)</strong>. El manual dice que el sistema de radiobalizas está <strong>hoy en desuso, sustituido por un DME</strong>.</li>
+<li><strong>Figura de emplazamiento p.33 (dimensiones aproximadas):</strong> antena del LOC situada a <strong>300 m</strong> más allá del extremo de la pista; GP (senda de descenso) a unos <strong>300 m</strong> del umbral, desplazada <strong>120 m</strong> del eje de pista; <strong>radiobaliza interna a 75-450 m</strong> del umbral; <strong>radiobaliza intermedia a 1050 m</strong>; <strong>radiobaliza exterior a 3,9 NM</strong>.</li>
+<li><strong>Objeto de los tres elementos:</strong> guiar al avión en su aproximación a la pista, de forma que se mantenga <strong>lo más alineado posible con su eje</strong> y descienda con una <strong>pendiente aproximada de 3° (pero no necesariamente)</strong>, recibiendo al mismo tiempo <strong>información de la distancia que le resta para completar el aterrizaje</strong>.</li>
+<li><strong>Localizador (LOC):</strong> emite señales que materializan un <strong>plano vertical</strong>; permite a las aeronaves mantenerse alineadas con el <strong>eje de pista</strong>; cualquier desviación hacia la <strong>derecha o la izquierda</strong> se hace notar a bordo mediante el <strong>movimiento de la línea azul</strong>.</li>
+<li><strong>Senda de descenso (GP):</strong> emite señales que materializan un <strong>plano oblicuo que nace de la zona de toma de contacto de la pista</strong>; permite a las aeronaves descender con un ángulo aproximado de <strong>tres grados</strong>; cualquier desviación <strong>hacia arriba o abajo</strong> se hace notar mediante el <strong>movimiento de la línea roja</strong>.</li>
+<li><strong>Radiobalizas:</strong> emiten señales con <strong>información de distancia al umbral</strong> (umbral = «comienzo de la parte de pista utilizable para el aterrizaje»); las aeronaves las reciben <strong>al pasar por su vertical</strong>. Hay tres radiobalizas según la distancia que proporcionan: <strong>Exterior (OM), Intermedia (MM), Interior o Interna (IM)</strong>. Hoy han sido <strong>sustituidas por un DME coemplazado con la senda de descenso, que da información constante de distancia al umbral</strong>.</li>
+<li><strong>Equipo de a bordo (p.35):</strong> equipo antena/receptor que procesa las señales de los componentes terrestres; la información se presenta mediante <strong>indicaciones visuales y acústicas</strong>.</li>
+<li><strong>Indicador del ILS (p.36):</strong> <strong>dos agujas</strong>:</li>
+<li>la <strong>aguja horizontal (raya roja)</strong> indica hacia dónde ha de dirigirse la aeronave para <strong>interceptar la pendiente correcta de descenso</strong>;</li>
+<li>la <strong>aguja vertical (raya azul)</strong> indica hacia dónde ha de dirigirse para <strong>alinearse con el eje de pista</strong>;</li>
+<li>para volar por la trayectoria correcta de descenso, el piloto maniobra hasta que <strong>ambas agujas estén centradas</strong>.</li>
+<li><strong>Figura p.36 (indicación de la senda de descenso):</strong> aeronave <strong>alta</strong> -&gt; la barra horizontal se desplaza y la indicación es «<strong>DESCENDER</strong>»; en la <strong>pendiente correcta</strong> -&gt; barra centrada («pendiente correcta de descenso»); aeronave <strong>baja</strong> -&gt; «<strong>ASCENDER</strong>». Puntos de referencia en la figura: punto teórico de toma de contacto y altura de cruce del umbral.</li>
+<li><strong>Figura p.37 (indicación del localizador):</strong> aguja azul desplazada -&gt; «volar a la derecha» o «volar a la izquierda»; centrada -&gt; alineada con el eje de pista.</li>
+<li><strong>Indicaciones de las radiobalizas (p.37):</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Radiobaliza</th>
+<th>Audio (Morse)</th>
+<th>Luz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exterior (OM)</strong></td>
+<td><strong>rayas continuas</strong></td>
+<td><strong>azul</strong> parpadeante</td>
+</tr>
+<tr>
+<td><strong>Intermedia (MM)</strong></td>
+<td><strong>puntos y rayas alternadas</strong></td>
+<td><strong>ámbar</strong> parpadeante</td>
+</tr>
+<tr>
+<td><strong>Interna (IM)</strong></td>
+<td><strong>puntos continuos</strong></td>
+<td><strong>blanca</strong> parpadeante</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Características operacionales (p.38):</strong></li>
+<li>Bandas de frecuencias: <strong>localizador y radiobalizas = VHF; senda de descenso = UHF</strong>.</li>
+<li>Las frecuencias del LOC y de la GP están <strong>emparejadas</strong>, de modo que <strong>basta seleccionar una sola frecuencia para sintonizar ambos receptores</strong>.</li>
+<li>Se definen <strong>tres «categorías de actuación»</strong> según las necesidades operacionales (el texto dice tres, pero la tabla tiene cinco filas: I, II, IIIA, IIIB, IIIC).</li>
+<li>El manual define: <strong>RVR</strong> (<em>Runway Visual Range</em>): «la distancia hasta la cual el piloto de una aeronave que se encuentra sobre el eje de una pista puede ver las señales de superficie de la pista o las luces que la delimitan o que señalan su eje»; <strong>DH</strong> (<em>Decision Height</em>): el manual escribe «<strong>altura de la base del techo de nubes</strong>»: «la referencia visual requerida se obtendrá cuando el avión vuele por debajo de la base de nubes» (esta no es la definición de la OACI).</li>
+<li><strong>Tabla de categorías:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>RVR (m)</th>
+<th>Altura de decisión DH (m/ft)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I</strong></td>
+<td>x &gt; 550</td>
+<td>&gt; 60 / 200</td>
+</tr>
+<tr>
+<td><strong>II</strong></td>
+<td>x &gt; 300</td>
+<td>&gt; 30 / 100</td>
+</tr>
+<tr>
+<td><strong>IIIA</strong></td>
+<td>x &gt; 175</td>
+<td>0 a 30 / 100</td>
+</tr>
+<tr>
+<td><strong>IIIB</strong></td>
+<td>175 &gt; x &gt; 50</td>
+<td>0 a 15 / 50</td>
+</tr>
+<tr>
+<td><strong>IIIC</strong></td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>El número de radiobalizas depende de la categoría:</strong> las radiobalizas <strong>Intermedia y Exterior</strong> se instalan cuando la pista va a soportar operaciones de <strong>Categoría I</strong>; en operaciones de <strong>Categoría II y III</strong> se instala <strong>además</strong> la radiobaliza <strong>Interna</strong>.</li>
+<li>Los componentes terrestres del ILS pueden estar <strong>coemplazados</strong> con otras instalaciones: <strong>luces de aproximación, luces de pendiente visual de descenso (VASIS, PAPI, etc.)</strong> y <strong>VOR, DME, etc.</strong></li>
+<li>Trampas: LOC = <strong>plano vertical / azimut / línea azul / VHF</strong>; GP = <strong>plano oblicuo / guiado vertical / línea roja / UHF</strong>; radiobalizas: OM azul con <strong>rayas</strong>, MM ámbar con <strong>punto-raya</strong>, IM blanca con <strong>puntos</strong>; la Cat I requiere OM + MM; las Cat II/III añaden IM; los límites de RVR del manual (<strong>550 / 300 / 175 / 50</strong>) y de DH (<strong>200 / 100 / 100 / 50 ft</strong>); la IIIC es <strong>0/0</strong>.</li>
+</ul>
+<h2 id="16-sistemas-hiperbolicos-335-p39-40">16. Sistemas hiperbólicos (3.3.5, p.39-40)</h2>
+<ul>
+<li>Se desarrollaron para buscar una <strong>solución de navegación radioeléctrica de larga distancia</strong> que permitiera operar donde las radioayudas no tenían alcance (especialmente en la <strong>navegación oceánica</strong>). Han quedado <strong>prácticamente en desuso</strong> con la aparición del <strong>sistema inercial y de los sistemas basados en satélite</strong>. Proporcionan <strong>posición, nunca rumbo ni guiado</strong> (si no se dispone de un ordenador de navegación de a bordo).</li>
+<li><strong>Principio:</strong> la posible línea de situación de una aeronave es el conjunto de puntos donde la <strong>diferencia de distancia a dos referencias fijas se mantiene constante</strong>; por definición geométrica es una <strong>hipérbola</strong>. Se componen de una <strong>red fija de estaciones terrestres</strong> que emiten periódicamente una secuencia de <strong>señales radioeléctricas omnidireccionales</strong>. La aeronave calcula su posición por la <strong>intersección de las hipérbolas</strong> calculadas a partir de esas estaciones (figura p.39).</li>
+<li><strong>Cuadro resumen (p.40)</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Técnica</th>
+<th>Banda de frecuencias</th>
+<th>Alcance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DECCA</strong></td>
+<td>medida de fases</td>
+<td><strong>LF</strong> (frecuencias bajas)</td>
+<td><strong>1500 NM</strong></td>
+</tr>
+<tr>
+<td><strong>LORAN-A</strong></td>
+<td>medida de tiempos</td>
+<td><strong>MF</strong> (frecuencias medias)</td>
+<td><strong>1000 km de día, 2500 km de noche</strong></td>
+</tr>
+<tr>
+<td><strong>LORAN-C</strong></td>
+<td>medida de tiempos (y de fases) (el manual escribe «medida de tiempos y ...», truncado)</td>
+<td><strong>LF</strong></td>
+<td><strong>1200 NM - 3400 NM</strong></td>
+</tr>
+<tr>
+<td><strong>OMEGA</strong></td>
+<td>medida de fases</td>
+<td><strong>VLF</strong> (frecuencias muy bajas)</td>
+<td><strong>6000 NM - 10 000 NM</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Trampa: las unidades difieren en el manual (NM para DECCA, LORAN-C y OMEGA; <strong>km</strong> para LORAN-A). Solo OMEGA es VLF; LORAN-A es la única en MF. La figura de la p.40 muestra un <strong>receptor Omega</strong>.</li>
+</ul>
+<h2 id="17-ayudas-visuales-34-p40-47">17. Ayudas visuales (3.4, p.40-47)</h2>
+<ul>
+<li>Proporcionan información visual para la navegación en las fases de <strong>aproximación y aterrizaje</strong>. Dos tipos: <strong>sistemas visuales indicadores de pendiente de aproximación</strong> y <strong>sistemas de luces de aproximación</strong>.</li>
+<li><strong>Convenio de colores (p.41):</strong> <strong>todo rojo = muy cerca de pista o muy bajo</strong>; <strong>todo blanco = muy alto</strong>.</li>
+<li><strong>Sistemas indicadores de pendiente (3.4.1, p.41):</strong> dan al piloto una <strong>guía de descenso visual</strong> para la aproximación; están constituidos por <strong>agrupamientos de luces</strong>; mediante la <strong>presentación de distinto número de luces en rojo</strong> el piloto sabe si el descenso es correcto.</li>
+</ul>
+<h3 id="171-papi-y-apapi-3411-p41-43">17.1 PAPI y APAPI (3.4.1.1, p.41-43)</h3>
+<ul>
+<li><strong>PAPI (<em>Precision Approach Path Indicator</em>)</strong>: <strong>barra de ala con 4 elementos luminosos</strong>. <strong>APAPI (<em>Abbreviated PAPI</em>)</strong>: barra de ala con <strong>2 elementos luminosos</strong>.</li>
+<li>Ambos se sitúan en el <strong>lado izquierdo de la pista</strong>, a menos que sea materialmente imposible. Si la pista es utilizada por aeronaves que necesitan <strong>guía visual de balanceo</strong> y no hay otros medios externos que la proporcionen, puede proporcionarse una <strong>segunda barra de ala en el lado opuesto</strong> de la pista.</li>
+<li><strong>Figura p.42 - lo que ve el piloto (según la figura):</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Posición</th>
+<th>PAPI (4 luces)</th>
+<th>APAPI (2 luces)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Muy alto</strong></td>
+<td>4 blancas</td>
+<td>- (el APAPI solo muestra «alto»)</td>
+</tr>
+<tr>
+<td><strong>Alto</strong></td>
+<td>3 blancas + 1 roja</td>
+<td>2 blancas</td>
+</tr>
+<tr>
+<td><strong>En pendiente</strong></td>
+<td>2 blancas + 2 rojas</td>
+<td>1 blanca + 1 roja</td>
+</tr>
+<tr>
+<td><strong>Bajo</strong></td>
+<td>1 blanca + 3 rojas</td>
+<td>2 rojas</td>
+</tr>
+<tr>
+<td><strong>Muy bajo</strong></td>
+<td>4 rojas</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>(Regla: más rojo = más bajo; todo blanco = demasiado alto; todo rojo = demasiado bajo. La figura del manual muestra las luces rojas en el lado de la barra más próximo a la pista, de modo que, desde el lado de la pista hacia fuera, el blanco queda en el exterior.)</p>
+<ul>
+<li><strong>Características operacionales (p.43):</strong> se instalan para <strong>facilitar la aproximación a una pista cuando el piloto pueda tener dificultades para evaluar la maniobra debido a las condiciones meteorológicas y/o del terreno</strong>. Se utilizan en operaciones <strong>diurnas y nocturnas</strong>; pueden ser la <strong>única ayuda a la aproximación</strong> de la pista o un <strong>medio suplementario</strong> de los sistemas de aproximación instrumental (en ese caso la <strong>pendiente visual se ajusta a la senda de descenso instrumental</strong>). Los alcances visuales dependen de las condiciones meteorológicas y de visibilidad; disponen de <strong>control de intensidad luminosa</strong> de acuerdo con las condiciones predominantes.</li>
+</ul>
+<h3 id="172-t-vasis-y-at-vasis-3412-p43">17.2 T-VASIS y AT-VASIS (3.4.1.2, p.43)</h3>
+<ul>
+<li><strong>No se explican</strong> en el manual por estar <strong>en desuso en los aeródromos civiles: ya no hay ninguno</strong>. En <strong>España</strong> están <strong>en alguna base aérea militar</strong>.</li>
+</ul>
+<h3 id="173-sistemas-de-luces-de-aproximacion-als-342-p43-47">17.3 Sistemas de luces de aproximación (ALS) (3.4.2, p.43-47)</h3>
+<ul>
+<li>Los <strong>ALS (<em>Approach Lighting System</em>)</strong> proporcionan al piloto información visual para la aproximación, relacionada con la <strong>altura de decisión</strong> y la <strong>posición de la aeronave respecto al eje y la cabecera de pista</strong>, ayudándole en el <strong>tramo final antes del umbral</strong>.</li>
+<li>Están constituidos por <strong>agrupamientos de luces</strong> que suministran información mediante su <strong>disposición sobre el terreno</strong>, <strong>códigos de colores</strong> y <strong>barras transversales (barretas)</strong> que, por su disposición, indican al piloto <strong>a cuánto está del umbral</strong>. No se requiere un dispositivo de a bordo específico, pero el piloto <strong>necesita estar en contacto visual con el terreno</strong> para interpretarlos. Los elementos luminosos se emplazan <strong>antes del umbral de la pista, en dirección longitudinal y transversal</strong>.</li>
+<li><strong>Tres tipos</strong>, según las características operacionales requeridas en cada pista (tablas p.45-47):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Línea central</th>
+<th>Longitud máx./mín.</th>
+<th>Barretas</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sencillo</strong></td>
+<td><strong>una sola luz</strong></td>
+<td><strong>como mínimo 420 m</strong> (la tabla dice «Como min 420 M»; figura: 420 m mín., barreta a 300 m)</td>
+<td><strong>1 barreta transversal a 300 m</strong></td>
+<td><strong>aproximaciones visuales y de no precisión</strong></td>
+</tr>
+<tr>
+<td><strong>CAT I</strong></td>
+<td><strong>1 luz los primeros 300 m</strong>, a continuación <strong>2 luces otros 300 m</strong> y por último <strong>300 m con 3 luces</strong></td>
+<td><strong>como máximo 900 m</strong></td>
+<td><strong>obligatoria: 1 barreta cada 300 m</strong>; <strong>recomendable: 1 barreta cada 150 m</strong></td>
+<td><strong>aproximaciones de precisión CAT I</strong></td>
+</tr>
+<tr>
+<td><strong>CAT II/III</strong></td>
+<td><strong>exactamente igual que la CAT I</strong>, con la excepción de que los <strong>300 m más cercanos al umbral tienen barretas rojas a ambos lados de la línea central</strong></td>
+<td>900 m (figura)</td>
+<td>como la CAT I</td>
+<td><strong>aproximaciones de precisión CAT II/III</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Características operacionales (p.47):</strong> facilitan la operación de aproximación, especialmente cuando <strong>la visibilidad es limitada</strong>; constituyen una <strong>parte complementaria de los sistemas de aproximación y aterrizaje (ILS)</strong> y representan una gran ayuda para el piloto durante la <strong>transición del vuelo instrumental al visual</strong>.</li>
+<li>Trampas: <strong>Sencillo = 420 m como mínimo, una barreta a 300 m</strong>; CAT I = <strong>900 m como máximo</strong>; la diferencia entre CAT I y CAT II/III son las <strong>barretas rojas en los últimos 300 m</strong>; el manual dice que la longitud de la CAT I es «como máximo 900 m» y la del sencillo «como mínimo 420 m».</li>
+</ul>
+<h2 id="18-gnss-sistemas-espaciales-35-p47-51">18. GNSS: sistemas espaciales (3.5, p.47-51)</h2>
+<ul>
+<li>Los <strong>GNSS (<em>Global Navigation Satellite System</em> / Sistema Global de Navegación por Satélite)</strong> proporcionan con mucha exactitud la <strong>posición (metros) y el tiempo (nanosegundos)</strong> en todo el mundo.</li>
+<li><strong>Principio de funcionamiento de las constelaciones principales (p.47-48):</strong> se basa en <strong>medir el tiempo que tarda una señal en llegar desde el emisor (satélite) al receptor (aeronave)</strong>, lo que da la <strong>distancia</strong> entre ambos. Midiendo la distancia a <strong>tres satélites</strong> se determina la posición del receptor en el espacio y en el tiempo, conociendo la posición de los satélites, que las <strong>estaciones de tierra controlan en todo momento</strong>. <strong>En la práctica se requiere un cuarto satélite para sincronizar el reloj del receptor</strong> y así medir con precisión las distancias. (Coherente con la sección 11: posición y guiado con <strong>4 satélites o más</strong> simultáneamente.)</li>
+<li><strong>Descripción de las constelaciones principales (p.48-49):</strong> GPS (<em>Global Positioning System</em> / Sistema de Posicionamiento Global), GLONASS (<em>Global Navigation Satellite System</em> / Sistema de Navegación por Satélite), <strong>GALILEO</strong> y <strong>BeiDou/BDS</strong> están constituidas por <strong>tres segmentos operativos</strong>:</li>
+<li><strong>Segmento espacial:</strong> una <strong>constelación de satélites</strong> encargados de transmitir <strong>señales de radiofrecuencia con mensajes de navegación</strong> a partir de los cuales se calcula la posición del receptor.</li>
+<li><strong>Segmento terrestre o de control:</strong> <strong>estaciones terrestres</strong> cuya misión principal es <strong>controlar y supervisar el buen funcionamiento de la constelación de satélites</strong>; también puede proporcionar <strong>servicios de valor añadido como datos de integridad y servicios de búsqueda y rescate</strong>.</li>
+<li><strong>Segmento de usuario:</strong> los <strong>receptores</strong> que captan y procesan las señales de los satélites y proporcionan <strong>posición y tiempo</strong> a los usuarios (aeronaves).</li>
+<li><strong>Características operacionales (p.49):</strong> el principio es similar en todas, pero las <strong>frecuencias de las señales, su modulación y la codificación del mensaje de navegación pueden ser diferentes</strong>. Se utilizan <strong>sistemas de aumentación</strong> para mejorar las prestaciones de navegación de las constelaciones principales y cumplir los requisitos de <strong>integridad, disponibilidad, continuidad y exactitud</strong> exigidos en las diferentes fases de vuelo/operaciones.</li>
+<li><strong>Sistemas de aumentación (3.5.1.4, p.49-51):</strong> suministran <strong>correcciones y/o información de integridad</strong> al receptor (segmento de usuario) para aumentar la <strong>exactitud, integridad, continuidad y disponibilidad</strong>. Cada sistema tiene su <strong>área de servicio</strong>, dentro de la cual se recibe y se puede usar la señal de aumentación. Cada tipo requiere <strong>capacidades específicas en los receptores/equipos de a bordo</strong>. <strong>Tres tipos:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>SBAS</strong></th>
+<th><strong>GBAS</strong></th>
+<th><strong>ABAS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre</td>
+<td>Sistema de aumentación basado en satélite / <em>Satellite-Based Augmentation System</em></td>
+<td>Sistema de aumentación basado en tierra / <em>Ground-Based Augmentation System</em></td>
+<td>Sistema de aumentación basado en la aeronave / <em>Aircraft-Based Augmentation System</em></td>
+</tr>
+<tr>
+<td><strong>Área de servicio</strong></td>
+<td><strong>área amplia (región, continente)</strong></td>
+<td><strong>local</strong> (cerca del aeropuerto en el que se instala)</td>
+<td><strong>global</strong></td>
+</tr>
+<tr>
+<td><strong>Funcionamiento</strong></td>
+<td>envía al usuario <strong>correcciones e información de integridad a través de satélites geoestacionarios</strong>. <strong>EGNOS</strong> es el SBAS desarrollado en Europa y da un servicio de aumentación <strong>sobre toda Europa</strong></td>
+<td><strong>emite la información de aumentación a través de una o varias antenas VHF en tierra</strong></td>
+<td><strong>embarcado en el avión</strong>, se basa en el uso de <strong>datos disponibles en los sistemas autónomos de la aeronave (como el sistema de referencia inercial IRS o el sistema de datos aire)</strong>, o en la <strong>redundancia de las señales recibidas de los satélites de los sistemas básicos</strong> (solo se necesitan señales de 4 satélites, pero se reciben de muchos más la mayor parte del tiempo)</td>
+</tr>
+<tr>
+<td><strong>Fases / operaciones</strong></td>
+<td><strong>compatible, aunque no obligatorio, con la PBN</strong> en <strong>ruta, SID, STAR y aproximaciones de no precisión</strong>. Según dónde nos situemos dentro de su área de servicio, puede llegar a habilitar <strong>aproximaciones con guiado vertical APV SBAS o de precisión CAT I</strong>, para las cuales <strong>sí</strong> resulta necesario</td>
+<td>habilita <strong>aproximaciones de precisión: actualmente CAT I, en el futuro CAT II/III</strong></td>
+<td>habilita <strong>la PBN en todas las fases del vuelo</strong>, pero en aproximación <strong>solo hasta las aproximaciones de no precisión y APV con guiado vertical baro-VNAV</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>En el futuro estos sistemas de aumentación mejorarán las prestaciones del <strong>uso conjunto de más de una constelación principal GNSS, por ejemplo GPS + Galileo</strong>.</li>
+<li>Ejemplos de SBAS (de la p.19): <strong>WAAS (EE. UU.), EGNOS (UE), MSAS (Japón), GAGAN (India)</strong>. El manual dice que «existen varios sistemas SBAS en el mundo, con grados diferentes de desarrollo».</li>
+<li>Trampas: el <strong>ABAS</strong> es el único <strong>sin infraestructura terrestre</strong> y <strong>global</strong>; el <strong>SBAS usa satélites GEO</strong>; el <strong>GBAS usa VHF (VDB)</strong> y es <strong>local</strong>; el SBAS <strong>no es obligatorio</strong> para la PBN pero <strong>es necesario</strong> para las aproximaciones tipo APV SBAS / CAT I; GBAS <strong>CAT I ahora, CAT II/III en el futuro</strong>; el ABAS permite como mucho <strong>no precisión + APV baro-VNAV</strong>.</li>
+</ul>
+<h2 id="19-sistemas-autonomos-ins-y-radar-doppler-36-p51-54">19. Sistemas autónomos: INS y radar Doppler (3.6, p.51-54)</h2>
+<h3 id="191-ins-sistema-de-navegacion-inercial-361">19.1 INS - sistema de navegación inercial (3.6.1)</h3>
+<ul>
+<li>El <strong>INS (<em>Inertial Navigation System</em> / Sistema de Navegación Inercial)</strong> proporciona a una aeronave debidamente equipada <strong>información de posición que permita determinar su situación exacta</strong>. Además de la posición, proporciona <strong>velocidad con respecto a tierra, posición instantánea y distancia a un destino u objeto preestablecido</strong>.</li>
+<li><strong>Principio de funcionamiento (p.51-52):</strong> se basa en la <strong>detección a bordo de las aceleraciones</strong> que sufre la aeronave, mediante una <strong>plataforma estabilizada en dos ejes orientados permanentemente hacia el Norte y el Este geográficos</strong>. <strong>Integrando</strong> la aceleración detectada a lo largo del tiempo se obtiene la <strong>velocidad respecto al suelo (GS)</strong> según esos ejes; <strong>integrando las componentes de la velocidad</strong> se obtiene la <strong>distancia recorrida</strong> según esas direcciones; sumando el incremento a la <strong>coordenada inicial</strong> se obtiene la <strong>nueva posición</strong>. <strong>Deben conocerse las coordenadas del punto inicial</strong>: el piloto introduce la coordenada inicial (<strong>aeropuerto de origen</strong>) antes de empezar a usar el INS para navegar.</li>
+<li><strong>Equipo de a bordo:</strong> calcula la posición a través de una <strong>plataforma inercial</strong> sensible a los movimientos del avión con respecto a la superficie terrestre; la plataforma envía la información a un computador que la presenta en los instrumentos de navegación. <strong>Cuatro componentes básicos de un INS convencional:</strong>
+  1. <strong>Acelerómetros</strong>: dispositivos situados sobre una plataforma inercial, encargados de medir las <strong>componentes del vector aceleración</strong>.
+  2. <strong>Plataforma inercial</strong>: aparato que mantiene los acelerómetros <strong>paralelos a la superficie terrestre</strong>, proporcionando una <strong>referencia direccional</strong>.
+  3. <strong>Integradores</strong>: reciben la señal de salida de los acelerómetros y la transforman sucesivamente en señales de <strong>velocidad y distancia recorrida</strong>.
+  4. <strong>Computador</strong>: recibe las señales de salida de los integradores y las transforma en <strong>datos de posición (coordenadas geográficas: latitud y longitud), velocidad sobre el suelo</strong> y otras informaciones útiles.</li>
+<li><strong>Características operacionales (p.52-53):</strong></li>
+<li>Utiliza vectores de aceleración y gravitación, por lo que la información debe <strong>actualizarse constantemente</strong>.</li>
+<li>Las actualizaciones son necesarias porque el sistema está sujeto a un <strong>error sistemático que crece a medida que aumenta el tiempo desde la última actualización</strong>; de ahí que se haga periódicamente mediante <strong>otro sistema como el VOR, VOR/DME, GPS, etc.</strong></li>
+<li><strong>Los aviones de nueva tecnología van equipados con sistemas inerciales de tipo láser</strong>: los mismos componentes básicos que un INS convencional, pero <strong>miden velocidades angulares</strong>. Constan de <strong>tres giróscopos láser y tres acelerómetros</strong>, orientado cada uno hacia uno de los <strong>tres ejes principales del avión</strong>, de modo que «sienten» tanto la rotación alrededor de cada eje como la aceleración a lo largo del mismo.</li>
+</ul>
+<h3 id="192-radar-doppler-362-p53-54">19.2 Radar Doppler (3.6.2, p.53-54)</h3>
+<ul>
+<li>El <strong>radar Doppler</strong> es un sistema de ayuda a la navegación que proporciona al piloto <strong>la posición del avión respecto a una ruta seleccionada</strong>.</li>
+<li><strong>Principio:</strong> la situación de un avión respecto de la superficie terrestre se determina por el clásico <strong>proceso de la navegación a estima</strong>, es decir, por <strong>sumas sucesivas de los incrementos de espacio recorrido</strong> obtenidos mediante los <strong>productos de las velocidades por los incrementos de tiempo</strong>. El sistema se basa en la <strong>emisión de energía electromagnética generada en la aeronave y recibida por la misma tras su reflexión en la superficie terrestre</strong>.</li>
+<li><strong>Equipo de a bordo:</strong> un <strong>transmisor de señales localizado en el avión que dirige hacia el suelo tres o cuatro haces</strong> de ondas electromagnéticas; las ondas son reflejadas por la superficie de la tierra y una porción de la energía reflejada es recibida por un receptor también situado en el avión. El computador de a bordo procesa la información y, a través de un instrumento visual, proporciona la <strong>distancia transversal a la ruta preseleccionada y la distancia por recorrer a lo largo de la ruta</strong>. Nota 3: la energía reflejada sufre una <strong>variación de frecuencia debida a la velocidad relativa entre el avión y la superficie terrestre (efecto Doppler)</strong>.</li>
+<li><strong>Características operacionales:</strong> por la técnica utilizada (<strong>basada en la variación de frecuencia entre señales emitidas y recibidas</strong>), la <strong>aceleración</strong> (el manual dice «aceleración») solo puede calcularse <strong>sin ambigüedad en un determinado rango de velocidades de la aeronave</strong>, lo que <strong>reduce la distancia máxima de operación</strong> del sistema.</li>
+<li>Trampas: <strong>INS = acelerómetros + plataforma + integradores + computador</strong>; el error <strong>crece con el tiempo</strong>; necesita <strong>coordenadas iniciales</strong>; el INS láser mide <strong>velocidades angulares</strong> con <strong>3 giróscopos láser + 3 acelerómetros</strong>; el radar Doppler usa <strong>3 o 4 haces</strong> y es <strong>navegación a estima</strong> en su principio; ambos son <strong>autónomos</strong> (sin infraestructura externa) y se usan <strong>donde no hay cobertura de otras ayudas</strong>.</li>
+</ul>
+<h2 id="20-funciones-y-sistemas-de-vigilancia-capitulo-4-p55-56">20. Funciones y sistemas de vigilancia (capítulo 4, p.55-56)</h2>
+<ul>
+<li><strong>Objetivo de la función de vigilancia:</strong> obtener un <strong>conocimiento exacto y en tiempo real de la ubicación de las aeronaves</strong> en un determinado entorno operativo. Está estrechamente relacionada con el <strong>control de tránsito aéreo</strong>, al proporcionar un servicio indispensable para mantener la <strong>seguridad y la fluidez</strong> del tránsito de aeronaves. Los <strong>sistemas de vigilancia</strong> son el conjunto de <strong>infraestructuras terrestres y equipos de a bordo</strong> que determinan y proporcionan la información que exige esta función.</li>
+<li><strong>Según cómo se determina la información de posición, tres tipologías:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tipología</th>
+<th>Definición</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Sistemas de vigilancia independiente no cooperativa</strong></td>
+<td>los datos de vigilancia se determinan <strong>en instalaciones terrestres, sin la colaboración de la aeronave</strong></td>
+<td><strong>PSR</strong> (radar primario de vigilancia, <em>Primary Surveillance Radar</em>) y <strong>SMR</strong> (radar de movimiento en superficie, <em>Surface Movement Radar</em>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Sistemas de vigilancia independiente cooperativa</strong></td>
+<td>los datos se determinan <strong>en instalaciones terrestres, con la colaboración de la aeronave</strong>, que debe estar convenientemente equipada</td>
+<td><strong>SSR</strong> (radar secundario de vigilancia, <em>Secondary Surveillance Radar</em>) y <strong>multilateración</strong> (MLAT/WAM)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Sistemas de vigilancia dependiente</strong></td>
+<td>los datos se <strong>generan directamente en los equipos de a bordo de la aeronave</strong></td>
+<td><strong>ADS</strong> (vigilancia dependiente automática, <em>Automatic Dependent Surveillance</em>)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>PSR (definición en la p.55):</strong> <strong>no requiere la colaboración activa</strong> de la aeronave. La instalación terrestre emite ondas electromagnéticas; <strong>una pequeña parte de ellas, reflejada en la aeronave, vuelve</strong> y se procesa en tierra, lo que permite calcular su posición, esencialmente <strong>distancia al radar y acimut</strong>. Aparte de vigilar aeronaves, puede emplearse también para la <strong>detección de movimientos en tierra y de determinados fenómenos meteorológicos</strong>.</li>
+<li><strong>SMR (p.55):</strong> un tipo de radar primario <strong>particularizado para la detección de aeronaves en las superficies de los aeropuertos</strong>.</li>
+<li><strong>Radar meteorológico embarcado:</strong> un tipo de <strong>radar primario</strong> que se emplea para dar indicación de la <strong>intensidad del clima</strong>; es capaz de detectar el <strong>movimiento de las gotas de lluvia</strong> además de la <strong>intensidad de la precipitación</strong>; se suele situar en el <strong>morro</strong> del avión.</li>
+<li><strong>SSR (p.56):</strong> requiere la <strong>colaboración activa</strong> de la aeronave; la instalación terrestre envía una <strong>señal de interrogación</strong> al equipo de a bordo, que devuelve una <strong>señal de respuesta</strong> tratada en tierra para generar la información de vigilancia. Mejora las prestaciones del PSR porque los datos pueden incluir, además de la <strong>posición horizontal calculada en tierra</strong>, el <strong>código de identificación asignado al vuelo, su nivel de vuelo y otra información</strong>, según el <strong>modo</strong> de SSR en uso y la <strong>capacidad de los sistemas embarcados</strong>.</li>
+<li><strong>Multilateración (p.56):</strong> se basa en la <strong>triangulación de las señales recibidas en la frecuencia de respuesta del sistema procedentes de las aeronaves y recibidas en varios receptores en tierra</strong>, lo que permite determinar la posición de la aeronave que las genera. Además de la posición, la información que puede obtenerse es <strong>similar a la de los radares secundarios</strong>. Puede utilizarse para vigilancia <strong>en la superficie de los aeropuertos y su entorno</strong> o para <strong>áreas más amplias del espacio aéreo</strong>, en cuyo caso recibe el nombre de <strong>WAM (<em>Wide Area Multilateration</em>, multilateración de área extensa)</strong>.</li>
+<li><strong>ADS (p.56):</strong> la aeronave determina los datos de vigilancia <strong>a partir de la información extraída de los dispositivos de navegación de a bordo</strong>, <strong>transmitiéndolos automáticamente (sin interrogación externa ni intervención alguna del piloto)</strong>. La información puede incluir <strong>el código de identificación de la aeronave, su posición, altitud y velocidad</strong>, así como otra información relevante. Permite extender la vigilancia a <strong>áreas donde no existe cobertura radar, como las zonas oceánicas</strong>.</li>
+</ul>
+<h2 id="21-vigilancia-no-cooperativa-psr-y-smr-411-p57-61">21. Vigilancia no cooperativa: PSR y SMR (4.1.1, p.57-61)</h2>
+<h3 id="211-radar-primario-de-vigilancia-psr">21.1 Radar primario de vigilancia (PSR)</h3>
+<ul>
+<li><strong>PSR (<em>Primary Surveillance Radar</em> / Radar Primario de Vigilancia):</strong> sistema de vigilancia independiente no cooperativo capaz de proporcionar <strong>la distancia y el acimut al «blanco»</strong>, es decir, a la aeronave.</li>
+<li><strong>Principio (p.57-58):</strong> el PSR <strong>solo consta de componente terrestre</strong>, ya que, al ser un sistema independiente no cooperativo, <strong>no requiere equipos específicos a bordo</strong>. A través de una <strong>antena giratoria</strong>, la instalación terrestre transmite <strong>a intervalos regulares una serie de impulsos de radiofrecuencia (denominados señales de interrogación en el manual)</strong> que, <strong>al ser reflejados en el blanco</strong>, vuelven a ser recibidos y procesados, y proporcionan:</li>
+<li><strong>Distancia del blanco respecto a la estación terrestre:</strong> a partir del <strong>tiempo transcurrido desde que se envía la señal hasta que se recibe la señal reflejada</strong>.</li>
+<li><strong>Marcación angular del blanco:</strong> a partir del <strong>ángulo de posición de la antena en el instante de recepción de la señal reflejada</strong>.</li>
+<li><strong>Tiempo de la detección:</strong> el instante en que se detectó el blanco.</li>
+<li><strong>Equipo de tierra (p.58):</strong> un <strong>sistema antena-transmisor-receptor</strong> que emite y procesa las señales, más el <strong>equipamiento de comunicaciones</strong> necesario para enviar la información de vigilancia adonde sea necesaria su presentación. (Figuras: unidad indicadora PSR y consola de radar primario.)</li>
+<li><strong>Características operacionales (p.59-60):</strong></li>
+<li>Trabaja en las <strong>bandas de frecuencia L (de 1 a 2 GHz) y S (de 2 a 4 GHz)</strong>.</li>
+<li>Utiliza ondas electromagnéticas que <strong>viajan esencialmente en línea recta y son fácilmente reflejadas</strong> por los objetos que encuentran en su trayectoria.</li>
+<li>Los servicios de tránsito aéreo lo utilizan para obtener <strong>información de la situación del tráfico aéreo en ruta y en aproximación</strong> y para la <strong>detección de movimientos en el área de maniobras</strong>.</li>
+<li>Aparte de vigilar aeronaves, se emplea también para <strong>detectar fenómenos meteorológicos</strong>.</li>
+<li><strong>Inconvenientes:</strong> <strong>imprecisiones en la identificación</strong> y <strong>pérdidas de señales como consecuencia de reflejos producidos por el terreno</strong>.</li>
+</ul>
+<h3 id="212-radar-de-movimiento-en-superficie-smr">21.2 Radar de movimiento en superficie (SMR)</h3>
+<ul>
+<li><strong>SMR (<em>Surface Movement Radar</em>):</strong> equipo radar <strong>diseñado específicamente para detectar el tráfico de aeronaves y vehículos en la superficie de un aeropuerto</strong> y presentar la imagen completa en una consola indicadora <strong>en la torre de control</strong>. Se utiliza para <strong>mejorar la observación visual, por parte del personal de la torre, de aeronaves y/o movimientos de vehículos</strong> en <strong>pistas y calles de rodaje</strong>.</li>
+<li><strong>Principio:</strong> el mismo del PSR: emite una señal que se refleja en el objetivo y el eco recibido se utiliza para determinar la <strong>posición (distancia y acimut)</strong>. <strong>Equipo de tierra:</strong> una antena transmisora-receptora más el equipamiento para generar la señal, procesar el eco y presentar la información de vigilancia (figura: antena de un SMR en lo alto de una torre de control).</li>
+<li><strong>Características operacionales (p.61):</strong></li>
+<li>Opera en la <strong>banda de frecuencia X (de 8 a 12 GHz)</strong>.</li>
+<li>En comparación con el PSR, la antena es <strong>mucho más pequeña y liviana</strong>, lo que permite una <strong>rotación más rápida (normalmente 1 revolución por segundo en lugar de 6-15 revoluciones por minuto)</strong> y, por tanto, una <strong>tasa de actualización del dato más rápida</strong>.</li>
+<li>La <strong>resolución de acimut también mejora (precisión de 0,25 grados)</strong> en comparación con el PSR (1-2 grados), debido al <strong>ancho de haz más delgado</strong> (que se logra por la <strong>mayor frecuencia</strong> utilizada).</li>
+<li>El <strong>alcance operativo es considerablemente más pequeño</strong> (no es un inconveniente: el SMR solo necesita cubrir el área de maniobras), lo que permite <strong>pulsos más cortos</strong> y da como resultado una <strong>resolución en distancia mucho mejor (unos 20 m)</strong>.</li>
+<li>Tabla comparativa (todo procede del manual):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PSR</th>
+<th>SMR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Banda</td>
+<td><strong>L (1-2 GHz) y S (2-4 GHz)</strong></td>
+<td><strong>X (8-12 GHz)</strong></td>
+</tr>
+<tr>
+<td>Rotación de la antena</td>
+<td>6-15 revoluciones por minuto</td>
+<td>normalmente 1 revolución por segundo</td>
+</tr>
+<tr>
+<td>Resolución en acimut</td>
+<td>1-2 grados</td>
+<td>0,25 grados</td>
+</tr>
+<tr>
+<td>Resolución en distancia</td>
+<td>no se indica</td>
+<td>unos 20 m</td>
+</tr>
+<tr>
+<td>Cobertura</td>
+<td>en ruta y aproximación (también área de maniobras)</td>
+<td>solo área de maniobras</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-vigilancia-cooperativa-ssr-4121-4125-p62-64">22. Vigilancia cooperativa: SSR (4.1.2.1-4.1.2.5, p.62-64)</h2>
+<ul>
+<li><strong>SSR (<em>Secondary Surveillance Radar</em> / Radar Secundario de Vigilancia):</strong> sistema de vigilancia independiente <strong>cooperativo</strong> capaz de proporcionar la <strong>información de posición</strong> de una aeronave. Se desarrolló para <strong>aumentar las prestaciones de los radares primarios</strong>, pero <strong>no significa que uno sea sustituto del otro: son complementarios</strong>. El radar secundario presenta <strong>mayor inmunidad a los fenómenos atmosféricos</strong>, facilita la vigilancia <strong>en cualquier condición meteorológica</strong> y <strong>mejora la precisión en la marcación angular (mediante la técnica monopulso)</strong>.</li>
+<li><strong>Principio (p.62-63):</strong> un <strong>componente terrestre</strong> y un <strong>equipo de a bordo denominado transpondedor</strong>. Existen distintos <strong>modos de SSR</strong> en función de la información que proporcionan las aeronaves (identificación, altitud, etc.). El blanco <strong>interviene activamente</strong>: una vez que la aeronave recibe la señal emitida desde una estación en tierra, la procesa a bordo y <strong>la envía de vuelta</strong>, proporcionando:</li>
+<li>distancia respecto a la estación terrestre;</li>
+<li>tiempo de la detección;</li>
+<li>marcación angular;</li>
+<li><strong>altitud</strong> de la aeronave;</li>
+<li><strong>situaciones de emergencia</strong> (fallo, secuestro, etc.);</li>
+<li><strong>identificación de la aeronave</strong> (incluyendo compañía y número de vuelo);</li>
+<li>información relativa a la <strong>intención de la aeronave</strong>: <strong>nivel de vuelo seleccionado, reporte de giro, rumbo y velocidad</strong>.</li>
+<li><strong>Equipo de tierra (p.63):</strong> como en el radar primario, un sistema <strong>antena-transmisor-receptor</strong> que emite y procesa las señales y presenta la información de vigilancia al usuario mediante una unidad indicadora. Puede emitir señales que «<strong>interrogan</strong>» a las aeronaves de <strong>diferentes modos</strong>, según la información requerida, <strong>normalmente identificación y altitud</strong>.</li>
+<li><strong>Equipo de a bordo (p.63-64):</strong> un <strong>sistema específico de la aeronave llamado transpondedor o respondedor</strong>, que dota al radar secundario de la capacidad de que el avión sea <strong>seguido e identificado fácilmente desde tierra</strong>. La tabla de modos del transpondedor del manual dice que «<strong>el modo S es el de mayor uso</strong>»:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Aplicación (manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modo 3/A</strong></td>
+<td>el equipo de a bordo transmite una señal de <strong>identificación</strong> que, cuando la requiere el control de tierra, hace que <strong>el «blanco» que representa el avión se ilumine con mayor intensidad en la pantalla radar</strong></td>
+</tr>
+<tr>
+<td><strong>Modo C</strong></td>
+<td>con este modo conectado (y con el <strong>Modo 3/A seleccionado</strong>), el equipo transmite una <strong>señal de altitud (equivalente al nivel de vuelo)</strong>, que aparece en la pantalla radar</td>
+</tr>
+<tr>
+<td><strong>Intermodo</strong></td>
+<td>1. <strong>Interrogación en Modos A, C y S</strong>: se obtienen respuestas para vigilancia de respondedores en <strong>Modos A/C y S</strong>. 2. <strong>Interrogación en Modos A y C solamente</strong>: se obtienen respuestas para vigilancia de respondedores en <strong>Modos A/C</strong></td>
+</tr>
+<tr>
+<td><strong>Modo S</strong></td>
+<td>1. <strong>Interrogación en Modo S general (<em>all-call</em>)</strong>: para obtener respuestas <strong>solo en Modo S</strong>. 2. <strong>Radiodifusión</strong>: para transmitir información a <strong>todos los respondedores en Modo S; no se obtienen respuestas</strong>. 3. <strong>Llamada selectiva</strong>: para vigilancia de <strong>determinados respondedores en Modo S y para la comunicación con ellos</strong>; para cada interrogación, <strong>se obtiene una respuesta solamente del respondedor al que se ha dirigido una interrogación exclusiva</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La operación en Modo S permite controlar <strong>un gran número de aeronaves</strong>, <strong>mejorando la exactitud de la información y la rapidez en las transmisiones tierra-aire-tierra</strong>, y permite el intercambio de <strong>información específica con cada usuario mediante las llamadas selectivas</strong>. El Modo S mejora la capacidad de suministrar <strong>información adicional, como indicadores de emergencia</strong>.</li>
+<li><strong>Características operacionales (p.64):</strong></li>
+<li>El radar secundario establece <strong>mejores intercambios de información</strong> entre el equipo de tierra y el avión, principalmente porque las señales transmitidas por las aeronaves son <strong>claras y potentes</strong>, lo que permite que sean bien captadas en tierra <strong>evitando que se distorsione o pierda información</strong>.</li>
+<li>El <strong>carácter cooperativo del blanco</strong> tiene tres efectos principales: (1) <strong>no se requieren potencias tan elevadas como las del radar primario</strong>; (2) el receptor <strong>no requiere sensibilidades grandes</strong>; (3) puede <strong>intercambiarse información entre los equipos de tierra (interrogador) y a bordo (respondedor)</strong>, y la <strong>comunicación puede ser iniciada desde tierra o desde el aire</strong>.</li>
+<li>Trampas: en el Modo C el manual dice que «<strong>necesita el Modo 3/A seleccionado</strong>»; el Modo S tiene <strong>tres tipos de interrogación: general, radiodifusión y selectiva</strong>; la radiodifusión <strong>no obtiene respuesta</strong>; el SSR <strong>complementa, no sustituye</strong> al PSR; el <strong>monopulso</strong> mejora la precisión de la marcación angular; el SSR necesita <strong>menos potencia</strong> que el PSR.</li>
+</ul>
+<h2 id="23-multilateracion-4126-4127-p64-67">23. Multilateración (4.1.2.6-4.1.2.7, p.64-67)</h2>
+<ul>
+<li><strong>MLAT (multilateración):</strong> sistema de vigilancia independiente <strong>cooperativo</strong> capaz de proporcionar la <strong>posición</strong> de una aeronave. Se puede utilizar para la vigilancia del <strong>tráfico terrestre (entorno del aeródromo)</strong> y del <strong>tráfico aéreo</strong>. Los sensores MLAT (transmisores/receptores) se pueden ubicar: <strong>dentro de los límites del aeropuerto</strong> para vigilancia terrestre; <strong>en y cerca de un aeropuerto</strong> para monitorear el tráfico de llegada y salida; o <strong>sobre un área extensa</strong>, donde un radar convencional (PSR o SSR) <strong>no es práctico o posible</strong>, para monitorear el <strong>tráfico en ruta</strong>.</li>
+<li><strong>Principio:</strong> una metodología conocida como <strong>TDOA (<em>Time Difference of Arrival</em>, diferencia horaria de llegada)</strong> que se puede utilizar de dos maneras: la señal de una <strong>unidad móvil se mide en una serie de ubicaciones fijas conocidas</strong>, o las señales de una <strong>serie de ubicaciones fijas son medidas por un receptor móvil</strong>. La TDOA de las señales permite determinar la posición de la entidad móvil. En respuesta a una señal de interrogación de uno de los transmisores MLAT, el <strong>transpondedor del vehículo o avión transmite una respuesta que es recibida y procesada por todas las estaciones MLAT de su área de cobertura</strong>; la variación de la TDOA en los diversos sitios terrestres permite una <strong>determinación precisa de la posición</strong>.</li>
+<li><strong>Matemáticas (p.65):</strong> conocer el tiempo que tarda la señal en llegar a una estación genera una <strong>esfera</strong> donde podría encontrarse la aeronave. Con <strong>dos estaciones</strong>, la intersección de las dos esferas genera una <strong>curva hiperbólica</strong> sobre la cual la aeronave podría situarse. Una <strong>tercera estación</strong> reduce toda la curva hiperbólica a <strong>dos posibles puntos específicos</strong>, uno de los cuales normalmente puede descartarse como improbable. Un <strong>cuarto punto de recepción</strong> da como resultado una <strong>única posición calculada</strong> del emisor.</li>
+<li><strong>Equipo de tierra:</strong> varias <strong>estaciones distribuidas a lo largo del área de vigilancia</strong>, encargadas de <strong>emitir las señales de interrogación y procesar las respuestas</strong>, más el equipamiento que completa el procesado y permite presentar la información de vigilancia al usuario (figuras: estación de tierra y pantalla de visualización).</li>
+<li><strong>Equipo de a bordo (p.67):</strong> las aeronaves o los vehículos deben llevar <strong>transpondedores</strong>, exactamente igual que en el SSR.</li>
+<li><strong>Características operacionales (p.67):</strong> como en el SSR, el carácter cooperativo permite el <strong>intercambio de información</strong> entre las estaciones de tierra y las aeronaves/vehículos; como las respuestas recibidas son <strong>claras y potentes</strong>, se evita o minimiza la pérdida de información. Además, <strong>las áreas sin cobertura pueden minimizarse añadiendo o modificando la posición de las estaciones de tierra</strong>.</li>
+<li>Trampas: <strong>2 estaciones -&gt; curva hiperbólica; 3 -&gt; dos puntos; 4 -&gt; una posición</strong>; la MLAT también puede seguir <strong>vehículos</strong>; el manual dice que WAM = multilateración de <strong>área extensa</strong>. La numeración del manual repite «4.1.2.6» dos veces.</li>
+</ul>
+<h2 id="24-ads-vigilancia-dependiente-automatica-413-p68-69">24. ADS - vigilancia dependiente automática (4.1.3, p.68-69)</h2>
+<ul>
+<li><strong>ADS:</strong> técnica de vigilancia por la que una aeronave <strong>transmite, a través de un enlace de datos, una serie de parámetros extraídos de los sistemas de navegación y posicionamiento de a bordo</strong>.</li>
+<li><strong>Principio:</strong> requiere <strong>un sistema de posicionamiento y navegación y un enlace de datos a bordo</strong> y, en tierra, <strong>estaciones que reciban la información ADS</strong> para que pueda ser transmitida y utilizada por los sistemas de tratamiento de datos de vigilancia. La ADS proporciona: <strong>la identificación de la aeronave, la posición de la aeronave e información adicional, como la velocidad</strong>.</li>
+<li><strong>Tipos de ADS:</strong></li>
+<li><strong>ADS-C (<em>Automatic Dependent Surveillance - Contract</em> / Contrato):</strong> las aeronaves suministran a los sistemas de tierra (por ejemplo, <strong>centros de control de tránsito aéreo</strong>), mediante un <strong>enlace de datos</strong>, datos como <strong>posición e identificación</strong>, derivados de la aviónica de a bordo. Se establece un <strong>acuerdo («contrato»)</strong> entre la aeronave y el sistema de tierra, que fija <strong>las condiciones bajo las cuales se transmitirá la información: de forma periódica y/o bajo la ocurrencia de una determinada circunstancia, como puede ser el sobrevuelo de fijos establecidos en los sistemas embarcados de la aeronave como parte de su plan de vuelo</strong>. El sistema de tierra también puede obtener información en cualquier momento mediante los denominados <strong>contratos bajo demanda</strong>.</li>
+<li><strong>ADS-B (<em>Automatic Dependent Surveillance - Broadcast</em> / Radiodifusión):</strong> transmisión de parámetros derivados de la aeronave, como <strong>posición e identificación</strong>, a través de un enlace de datos <strong>en modo de radiodifusión</strong>, para ser utilizados por <strong>cualquier usuario convenientemente equipado en el aire y/o en tierra</strong>.</li>
+<li><strong>Características operacionales (p.69):</strong> dos características definitorias fundamentales:</li>
+<li><strong>es automática</strong>: <strong>no necesita la intervención del piloto</strong> para que los datos se envíen a los servicios de tránsito aéreo;</li>
+<li><strong>es dependiente</strong>: la información necesaria <strong>se genera en la propia aeronave</strong>, es decir, <strong>depende de los sistemas de a bordo</strong>.</li>
+<li>Es esencial para mejorar la vigilancia en <strong>zonas oceánicas</strong> (<strong>hoy mediante ADS-C</strong>, aunque se está considerando el uso de <strong>ADS-B vía satélite</strong>) y en <strong>zonas continentales sin cobertura radar</strong>, así como para <strong>mejorar y racionalizar la vigilancia en zonas actualmente cubiertas con radar, mediante el despliegue de estaciones ADS-B</strong>.</li>
+<li>Trampas: <strong>ADS-C = contrato (periódico / por evento / bajo demanda)</strong>; <strong>ADS-B = radiodifusión a cualquiera</strong>; en zona oceánica hoy = <strong>ADS-C</strong>; la ADS es «automática» (sin acción del piloto) y «dependiente» (de los datos de a bordo). El manual no indica las frecuencias del ADS-B (1090 MHz) ni el squitter extendido del Modo S.</li>
+</ul>
+<h2 id="25-lista-de-acronimos-del-manual-capitulo-5-p70-72">25. Lista de acrónimos del manual (capítulo 5, p.70-72)</h2>
+<table>
+<thead>
+<tr>
+<th>Acrónimo</th>
+<th>Significado según el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABAS</td>
+<td>Sistema de aumentación basado en la aeronave / Aircraft-based augmentation system</td>
+</tr>
+<tr>
+<td>ADF</td>
+<td>Equipo radiogoniométrico automático / Automatic direction-finding equipment</td>
+</tr>
+<tr>
+<td>ADS</td>
+<td>Vigilancia dependiente automática / Automatic dependent surveillance</td>
+</tr>
+<tr>
+<td>ALS</td>
+<td>Sistema de iluminación de aproximación / Approach lighting system</td>
+</tr>
+<tr>
+<td>APAPI</td>
+<td>Indicador simplificado de trayectoria de aproximación de precisión / Abbreviated precision approach path indicator</td>
+</tr>
+<tr>
+<td>APV</td>
+<td>Procedimiento de aproximación con guía vertical / Approach procedure with vertical guidance</td>
+</tr>
+<tr>
+<td>ATM</td>
+<td>Gestión del tránsito aéreo / Air traffic management</td>
+</tr>
+<tr>
+<td>BDS</td>
+<td>Sistema BeiDou de Navegación por Satélite / BeiDou Navigation Satellite System</td>
+</tr>
+<tr>
+<td>CDI</td>
+<td>Indicador de desviación de curso</td>
+</tr>
+<tr>
+<td>CNS</td>
+<td>Comunicaciones, navegación y vigilancia / Communications, navigation and surveillance</td>
+</tr>
+<tr>
+<td>DME</td>
+<td>Equipo medidor de distancia / Distance measuring equipment</td>
+</tr>
+<tr>
+<td>EGNOS</td>
+<td>Servicio europeo de complemento geoestacionario de navegación / European Geostationary Navigation Overlay Service</td>
+</tr>
+<tr>
+<td>FAF</td>
+<td>Punto de referencia de aproximación final / Final approach fix (para procedimientos de no precisión como VOR, NDB, LOC)</td>
+</tr>
+<tr>
+<td>FAP</td>
+<td>Punto de aproximación final / Final approach point (para procedimientos de precisión ILS)</td>
+</tr>
+<tr>
+<td>GBAS</td>
+<td>Sistema de aumentación basado en tierra</td>
+</tr>
+<tr>
+<td>GLONASS</td>
+<td>Sistema global de navegación por satélite (Rusia) / Global'naya Navigatsionnaya Sputnikovaya Sistema</td>
+</tr>
+<tr>
+<td>GNSS</td>
+<td>Sistema mundial de navegación por satélite</td>
+</tr>
+<tr>
+<td>GP</td>
+<td>Senda de descenso (el manual escribe «trayectoria de planeo») / Glide path</td>
+</tr>
+<tr>
+<td>GPS</td>
+<td>Sistema mundial de determinación de la posición (EE. UU.)</td>
+</tr>
+<tr>
+<td>GS</td>
+<td>Velocidad respecto al suelo / Ground speed</td>
+</tr>
+<tr>
+<td>HDG</td>
+<td>Rumbo / Heading</td>
+</tr>
+<tr>
+<td>IAS</td>
+<td>Velocidad indicada / Indicated air speed</td>
+</tr>
+<tr>
+<td>ILS</td>
+<td>Sistema de aterrizaje por instrumentos</td>
+</tr>
+<tr>
+<td>IM</td>
+<td>Radiobaliza interna / Inner marker</td>
+</tr>
+<tr>
+<td>INS</td>
+<td>Sistema de navegación inercial</td>
+</tr>
+<tr>
+<td>LOC</td>
+<td>Localizador / Localizer</td>
+</tr>
+<tr>
+<td>MM</td>
+<td>Radiobaliza intermedia / Middle marker</td>
+</tr>
+<tr>
+<td>MSAS</td>
+<td>Sistema de aumentación satelital multifunción (Japón) / Multi-functional Satellite Augmentation System</td>
+</tr>
+<tr>
+<td>NDB</td>
+<td>Radiofaro no direccional</td>
+</tr>
+<tr>
+<td>OBS</td>
+<td>Selector de radial / Omnibearing selector</td>
+</tr>
+<tr>
+<td>OM</td>
+<td>Radiobaliza exterior / Outer marker</td>
+</tr>
+<tr>
+<td>PAPI</td>
+<td>Indicador de trayectoria de aproximación de precisión</td>
+</tr>
+<tr>
+<td>PBN</td>
+<td>Navegación basada en la performance</td>
+</tr>
+<tr>
+<td>PSR</td>
+<td>Radar primario de vigilancia</td>
+</tr>
+<tr>
+<td>RDL</td>
+<td>Radial</td>
+</tr>
+<tr>
+<td>RMI</td>
+<td>Indicador radiomagnético</td>
+</tr>
+<tr>
+<td>RNAV</td>
+<td>Navegación de área</td>
+</tr>
+<tr>
+<td>RNP</td>
+<td>Especificación para performance de navegación requerida / Required navigation performance</td>
+</tr>
+<tr>
+<td>SBAS</td>
+<td>Sistema de aumentación basado en satélite</td>
+</tr>
+<tr>
+<td>SID</td>
+<td>Salida normalizada por instrumentos</td>
+</tr>
+<tr>
+<td>SNA</td>
+<td>Sistema de navegación aérea</td>
+</tr>
+<tr>
+<td>SSR</td>
+<td>Radar secundario de vigilancia</td>
+</tr>
+<tr>
+<td>STAR</td>
+<td>Llegada normalizada por instrumentos</td>
+</tr>
+<tr>
+<td>THDG</td>
+<td>Rumbo verdadero / True heading</td>
+</tr>
+<tr>
+<td>TSE</td>
+<td>Precisión de navegación lateral</td>
+</tr>
+<tr>
+<td>UHF</td>
+<td>Frecuencia ultra alta (<strong>300 a 3000 MHz</strong>)</td>
+</tr>
+<tr>
+<td>VHF</td>
+<td>Muy alta frecuencia (<strong>30 a 300 MHz</strong>)</td>
+</tr>
+<tr>
+<td>VOR</td>
+<td>Radiofaro omnidireccional muy alta frecuencia</td>
+</tr>
+<tr>
+<td>WAAS</td>
+<td>Sistema de aumentación de área amplia (EE. UU.) / Wide Area Augmentation System</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cifras que conviene saber de la lista: <strong>VHF = 30-300 MHz; UHF = 300-3000 MHz</strong>. FAF = punto de referencia para procedimientos de <strong>no precisión</strong> (VOR, NDB, LOC); FAP = punto para procedimientos de <strong>precisión ILS</strong>. THDG, HDG, IAS y GS figuran en la lista pero no se usan en el texto. La lista no contiene MLAT, WAM, ADS-B, ADS-C, TDOA, CVOR/DVOR, RBI ni tipos de ALS, que sí aparecen en el texto.</li>
+</ul>
+<h2 id="26-bibliografia-del-manual-capitulo-6-p73">26. Bibliografía del manual (capítulo 6, p.73)</h2>
+<p>OACI, Anexo 4, Cartas aeronáuticas; <strong>OACI, Anexo 10, Radioayudas para la Navegación</strong>; <strong>OACI, Documento 9613, Manual de navegación basada en la performance (PBN)</strong>; <strong>OACI, Documento 9849, Manual sobre el sistema mundial de navegación por satélite (GNSS)</strong>; Sáez Nieto, Pérez Sanz y Gómez Comendador, <em>La navegación aérea y el aeropuerto</em> (Fundación Aena, 2002); Pérez Sanz et al., <em>Introducción al Sistema de Navegación Aérea</em> (Garceta, 2013); International Airport Review (FAA, 2006, n.º 3); <strong>Real Decreto 57/2002, de 18 de enero, por el que se aprueba el Reglamento de Circulación Aérea</strong>; Sáez Nieto y Portillo Pérez, <em>Descubrir la navegación aérea</em> (Aena, 2003); De Mateo, <em>Descubrir la navegación por satélite</em> (Aena, 2004); Rastrilla, <em>Descubrir las ayudas a la navegación y su calibración</em> (Aena, 2014); Mata Morales López, <em>Sistemas CNS/ATM</em> (Cuadernos Aena n.º 2, 2001); Sáez Nieto y Salamanca Bueno, <em>Sistemas y equipos para la navegación y circulación aérea</em> (UPM, 1995); Hernández Raposo, <em>Sistema de navegación aérea</em> (Paraninfo, 1971); Martínez Vadillo y Belda Valiente, <em>Navegación: sistemas y equipos: maniobras y procedimientos</em> (7.ª ed.); <strong>AIP-España</strong>. Nota: la bibliografía del manual es la guía de qué más podría utilizar el examinador (el Anexo 10 es la fuente de los valores numéricos de la OACI para las ayudas). El Real Decreto 57/2002 (Reglamento de Circulación Aérea) es la norma española de reglas del aire (véase el tema 1/6).</p>
+<h2 id="27-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">27. Trampas de examen (confusiones típicas y cómo distinguirlas)</h2>
+<ol>
+<li><strong>RNAV frente a RNP:</strong> la única diferencia conceptual en el manual es la <strong>vigilancia y alerta de la performance a bordo</strong>: la RNP la tiene, la RNAV no. La PBN es el <strong>concepto paraguas</strong> de la OACI que contiene a ambas. «RNP 10» es solo el apodo histórico de la RNAV 10.</li>
+<li><strong>La «X»:</strong> el número es la <strong>precisión de navegación lateral (TSE) en NM, al menos el 95 % del tiempo de vuelo</strong> (RNAV 5 = 5 NM).</li>
+<li><strong>Dónde se usa cada especificación:</strong> RNAV 10 y RNP 4 = <strong>ruta oceánica/remota</strong> (separación longitudinal basada en la distancia); RNAV 5 = <strong>ruta continental</strong>; RNAV 1/2 = ruta, SID, STAR, aproximación (inicial/intermedia/frustrada); RNP 1 = SID/STAR/aproximación con vigilancia ATS limitada o sin ella y tránsito de baja a media densidad; RNP APCH = hasta 0,3 NM; RNP AR APCH = 1 a 0,1 (final 0,3 a 0,1); RNP 0,3 = helicópteros; A-RNP = 2 a 0,3, <strong>no prevista en la UE</strong> (ni la RNAV 2, ni la RNAV 1 en ruta).</li>
+<li><strong>RNAV 2D/3D/4D:</strong> la 3D añade <strong>guiado vertical</strong>, la 4D añade <strong>previsiones de tiempo de vuelo</strong> entre puntos de la ruta.</li>
+<li><strong>Cuatro parámetros PBN:</strong> exactitud (error de posición), integridad (avisa/desconecta), continuidad (sin interrupción <strong>durante</strong> la operación), disponibilidad (funciona <strong>al inicio</strong>, % de tiempo). No intercambiar continuidad y disponibilidad.</li>
+<li><strong>Medio primario / único / suplementario:</strong> solo el medio <strong>único</strong> necesita los cuatro parámetros; el primario y el suplementario solo exactitud + integridad; el suplementario debe usarse <strong>con un sistema de medio único</strong>.</li>
+<li><strong>Autónomos frente a no autónomos:</strong> los autónomos (INS, radar Doppler) <strong>no necesitan infraestructura externa</strong>; los no autónomos necesitan infraestructura terrestre (radioayudas, visuales) o espacial. El ABAS es el único sistema de aumentación sin infraestructura terrestre.</li>
+<li><strong>Navegación a estima = velocidad + tiempo + rumbo</strong>; la navegación visual depende de la pericia del piloto y de la meteorología; la radioeléctrica convencional da una red de rutas fija; la RNAV permite cualquier trayectoria.</li>
+<li><strong>NDB:</strong> da <strong>solo marcaciones</strong>; transmisor <strong>omnidireccional</strong>; banda <strong>LF-MF</strong>; error del ADF de hasta <strong>± 5°</strong>; RBI (rosa fija) frente a RMI (rosa giratoria con el rumbo). Casi obsoleto en ruta.</li>
+<li><strong>VOR:</strong> <strong>radiales</strong> magnéticos; TO/FROM = <strong>semiplano</strong>; CDI = <strong>cuadrante / información de mando</strong>; Rm = RDL + 180 con TO, Rm = RDL con FROM; el DVOR tiene las mismas frecuencias y el mismo equipo de a bordo que el CVOR; alcance de unas <strong>200 NM</strong> y <strong>línea de vista</strong>.</li>
+<li><strong>DME:</strong> <strong>distancia oblicua</strong>; a bordo = interrogador, en tierra = transpondedor; identificación de <strong>2 o 3</strong> letras Morse; <strong>no sirve por sí solo para navegar</strong> (ni radiales ni rumbos); VOR/DME coemplazados (lo más típico), NDB/DME, ILS/DME.</li>
+<li><strong>ILS:</strong> LOC = plano vertical (azimut, aguja <strong>azul</strong>, VHF); GP = plano oblicuo (aguja <strong>roja</strong>, <strong>UHF</strong>, unos 3 grados); frecuencias emparejadas; OM azul/rayas, MM ámbar/punto-raya, IM blanca/puntos; radiobalizas hoy sustituidas por DME; la Cat I necesita OM+MM, la Cat II/III también IM. Tabla de categorías: <strong>I 550 m / 200 ft; II 300 m / 100 ft; IIIA 175 m / 100 ft; IIIB 175-50 m / 50 ft; IIIC 0/0</strong> (cifras del manual).</li>
+<li><strong>PAPI frente a APAPI:</strong> 4 frente a 2 luces; en pendiente = <strong>mitad rojas, mitad blancas</strong>; todo rojo = demasiado bajo; todo blanco = demasiado alto; situados en el lado <strong>izquierdo</strong> de la pista; el T-VASIS ya no está en aeródromos civiles.</li>
+<li><strong>Tipos de ALS:</strong> Sencillo (&gt;= 420 m, una barreta a 300 m; visual/no precisión), CAT I (&lt;= 900 m; 1/2/3 luces por cada 300 m; barreta cada 300 m obligatoria, cada 150 m recomendable), CAT II/III (como la CAT I + barretas rojas en los últimos 300 m).</li>
+<li><strong>GNSS:</strong> la distancia a 3 satélites da la posición, el <strong>4.º sincroniza el reloj del receptor</strong>; tres segmentos: espacial, terrestre/de control y de usuario; el SBAS usa <strong>satélites GEO</strong>, el GBAS usa <strong>VHF (VDB)</strong> y es local, el ABAS es <strong>de a bordo</strong> y global; GBAS <strong>Cat I ahora, II/III en el futuro</strong>.</li>
+<li><strong>INS:</strong> cuatro componentes (acelerómetros, plataforma inercial, integradores, computador); el error crece con el tiempo; necesita coordenadas iniciales; el INS láser mide <strong>velocidades angulares</strong> (3 giróscopos láser + 3 acelerómetros).</li>
+<li><strong>Bandas de radar:</strong> PSR <strong>L (1-2 GHz) y S (2-4 GHz)</strong>; SMR <strong>X (8-12 GHz)</strong>; el SMR gira <strong>1 rev/s</strong> frente a <strong>6-15 rpm</strong> del PSR; acimut del SMR 0,25 grados frente a 1-2 grados del PSR.</li>
+<li><strong>Tipos de vigilancia:</strong> independiente no cooperativa (PSR, SMR), independiente cooperativa (SSR, MLAT), dependiente (ADS). El radar meteorológico embarcado es un radar <strong>primario</strong> situado en el morro.</li>
+<li><strong>Modos del SSR:</strong> 3/A = identidad; C = altitud (necesita el 3/A conectado); Intermodo; S = llamada general, radiodifusión (sin respuesta), llamada selectiva. El SSR <strong>complementa</strong> al PSR (no lo sustituye) y mejora la precisión angular con <strong>monopulso</strong>.</li>
+<li><strong>MLAT:</strong> TDOA; <strong>2 estaciones = curva hiperbólica, 3 = dos puntos, 4 = una posición</strong>; la MLAT también puede seguir vehículos; WAM = área extensa.</li>
+<li><strong>ADS-C frente a ADS-B:</strong> contrato (periódico/por evento/bajo demanda, hacia un sistema de tierra concreto) frente a radiodifusión (a cualquiera). Zona oceánica hoy = ADS-C.</li>
+<li><strong>Fases:</strong> SID = salida, STAR = llegada; el manual dice seis fases y enumera cinco.</li>
+<li><strong>Incoherencias del propio manual</strong> (no fiarse a ciegas si una opción parece redacción de la OACI): DH definida como «altura de la base de nubes», ADF glosado como «radiofaro no direccional», «tres categorías» pero cinco enumeradas. Si una pregunta usa las cifras del manual, usar las del manual.</li>
+</ol>
+<h2 id="28-imprescindible-memorizar-lista-corta-y-densa">28. Imprescindible memorizar (lista corta y densa)</h2>
+<ul>
+<li><strong>SNA</strong> = jurídico + organizativo + técnico/operativo (CNS-ATM). El <strong>CNS</strong> da soporte al <strong>ATM</strong>. Vigilancia = <strong>posición en tiempo real de todas las aeronaves</strong>.</li>
+<li><strong>Técnicas:</strong> visual; navegación a estima (<strong>velocidad, tiempo, rumbo</strong>); radioeléctrica convencional (<strong>de estación en estación</strong>, red fija); navegación de área (<strong>cualquier trayectoria</strong>, puntos de recorrido en latitud/longitud).</li>
+<li><strong>Funciones de navegación:</strong> <strong>posicionamiento</strong> y <strong>guiado</strong>; las fases inicial y final son las más exigentes.</li>
+<li><strong>PBN</strong> = RNAV + RNP; RNP = RNAV + <strong>vigilancia y alerta a bordo</strong>; X = precisión lateral en NM al <strong>95 %</strong>.</li>
+<li><strong>RNAV 2D / 3D / 4D:</strong> + vertical / + tiempo.</li>
+<li><strong>Parámetros PBN:</strong> exactitud, integridad, continuidad, disponibilidad.</li>
+<li><strong>RNAV 10</strong> oceánica; <strong>RNAV 5</strong> ruta continental; <strong>RNP 4</strong> oceánica; <strong>RNP 1</strong> SID/STAR/aproximación; <strong>RNP APCH</strong> hasta 0,3; <strong>RNP AR APCH</strong> 1 a 0,1 (final 0,3-0,1); <strong>RNP 0,3</strong> helicópteros; <strong>A-RNP</strong> 2 a 0,3 (no en la UE).</li>
+<li><strong>Medios:</strong> primario (exactitud + integridad), único (los cuatro), suplementario (con un medio único).</li>
+<li><strong>Radioayudas:</strong> NDB, VOR, DME, ILS. NDB LF-MF, ± 5°; VOR VHF ~200 NM, Rm = RDL (+180 si TO); DME ~200 NM de distancia oblicua; ILS: LOC VHF, GP UHF, ~3 grados.</li>
+<li><strong>Categorías ILS:</strong> I 550 m/200 ft; II 300 m/100 ft; IIIA 175 m/100 ft (0-30 m); IIIB 175-50 m/50 ft; IIIC 0/0.</li>
+<li><strong>Disposición del ILS:</strong> LOC a 300 m del final de pista, GP a 300 m del umbral (120 m de desplazamiento), IM 75-450 m, MM 1050 m, OM 3,9 NM.</li>
+<li><strong>Radiobalizas:</strong> OM azul con rayas; MM ámbar con punto-raya; IM blanca con puntos.</li>
+<li><strong>Hiperbólicos:</strong> DECCA (LF, fases, 1500 NM); LORAN-A (MF, tiempos, 1000/2500 km día/noche); LORAN-C (LF, 1200-3400 NM); OMEGA (VLF, fases, 6000-10 000 NM).</li>
+<li><strong>PAPI:</strong> 4 luces; APAPI: 2; en pendiente 2B+2R (PAPI) / 1B+1R (APAPI). Todo rojo, bajo; todo blanco, alto; lado izquierdo de la pista.</li>
+<li><strong>ALS:</strong> sencillo 420 m mín. (1 barreta a 300 m); CAT I 900 m máx. (1-2-3 luces por cada 300 m; barreta cada 300 m, recomendable cada 150 m); CAT II/III + barretas rojas en los últimos 300 m.</li>
+<li><strong>GNSS:</strong> 3 satélites + un 4.º para el reloj; 3 segmentos; GPS (EE. UU.), GLONASS (Rusia), Galileo (UE), BeiDou/BDS (China); SBAS: WAAS, EGNOS, MSAS, GAGAN; GBAS por VDB (VHF) local, ABAS de a bordo.</li>
+<li><strong>INS:</strong> acelerómetros, plataforma, integradores, computador; el error crece con el tiempo; INS láser: 3 giróscopos + 3 acelerómetros. <strong>Radar Doppler:</strong> 3 o 4 haces.</li>
+<li><strong>Vigilancia:</strong> PSR (L 1-2 GHz, S 2-4 GHz); SMR (X 8-12 GHz, 1 rev/s, 0,25 grados, ~20 m); SSR (transpondedor, modos 3/A, C, Intermodo, S); MLAT (TDOA, 4 estaciones para una posición única); ADS-C (contrato), ADS-B (radiodifusión).</li>
+<li><strong>VHF 30-300 MHz; UHF 300-3000 MHz.</strong></li>
+</ul>
+<h2 id="29-glosario-bilingue-es-en">29. Glosario bilingüe (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español (término usado en el examen / manual)</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exactitud</td>
+<td>Accuracy</td>
+</tr>
+<tr>
+<td>Acelerómetro</td>
+<td>Accelerometer</td>
+</tr>
+<tr>
+<td>Sistema de aumentación basado en la aeronave</td>
+<td>Aircraft-based augmentation system (ABAS)</td>
+</tr>
+<tr>
+<td>Sistema de navegación aérea (SNA)</td>
+<td>Air navigation system (ANS)</td>
+</tr>
+<tr>
+<td>Gestión de tránsito aéreo</td>
+<td>Air traffic management (ATM)</td>
+</tr>
+<tr>
+<td>Radar meteorológico embarcado</td>
+<td>Airborne weather radar</td>
+</tr>
+<tr>
+<td>Altitud</td>
+<td>Altitude</td>
+</tr>
+<tr>
+<td>Marcación angular</td>
+<td>Angular bearing</td>
+</tr>
+<tr>
+<td>Sistema de luces de aproximación</td>
+<td>Approach lighting system (ALS)</td>
+</tr>
+<tr>
+<td>Procedimiento de aproximación con guía vertical</td>
+<td>Approach with vertical guidance (APV)</td>
+</tr>
+<tr>
+<td>Navegación de área</td>
+<td>Area navigation (RNAV)</td>
+</tr>
+<tr>
+<td>Llegada</td>
+<td>Arrival (STAR)</td>
+</tr>
+<tr>
+<td>Actitud (de una aeronave)</td>
+<td>Attitude (of an aircraft)</td>
+</tr>
+<tr>
+<td>Sistema de aumentación</td>
+<td>Augmentation system</td>
+</tr>
+<tr>
+<td>Vigilancia dependiente automática</td>
+<td>Automatic dependent surveillance (ADS)</td>
+</tr>
+<tr>
+<td>Vigilancia dependiente automática - radiodifusión</td>
+<td>ADS-B (broadcast)</td>
+</tr>
+<tr>
+<td>Vigilancia dependiente automática - contrato</td>
+<td>ADS-C (contract)</td>
+</tr>
+<tr>
+<td>Equipo radiogoniométrico automático</td>
+<td>Automatic direction finder (ADF)</td>
+</tr>
+<tr>
+<td>Disponibilidad</td>
+<td>Availability</td>
+</tr>
+<tr>
+<td>Acimut</td>
+<td>Azimuth</td>
+</tr>
+<tr>
+<td>Navegación vertical barométrica (función baro-VNAV)</td>
+<td>Baro-VNAV</td>
+</tr>
+<tr>
+<td>Marcación</td>
+<td>Bearing</td>
+</tr>
+<tr>
+<td>Haz</td>
+<td>Beam</td>
+</tr>
+<tr>
+<td>Radiodifusión</td>
+<td>Broadcast (Mode S)</td>
+</tr>
+<tr>
+<td>Base de nubes / techo de nubes</td>
+<td>Cloud base / ceiling</td>
+</tr>
+<tr>
+<td>Comunicaciones, navegación y vigilancia</td>
+<td>Communications, navigation and surveillance (CNS)</td>
+</tr>
+<tr>
+<td>Continuidad</td>
+<td>Continuity</td>
+</tr>
+<tr>
+<td>Segmento terrestre o de control</td>
+<td>Control segment (GNSS)</td>
+</tr>
+<tr>
+<td>Indicador de desviación de curso</td>
+<td>Course deviation indicator (CDI)</td>
+</tr>
+<tr>
+<td>Barreta</td>
+<td>Crossbar (light bar)</td>
+</tr>
+<tr>
+<td>Navegación a estima</td>
+<td>Dead reckoning</td>
+</tr>
+<tr>
+<td>Altura de decisión</td>
+<td>Decision height (DH)</td>
+</tr>
+<tr>
+<td>Salida</td>
+<td>Departure (SID)</td>
+</tr>
+<tr>
+<td>Equipo medidor de distancia</td>
+<td>Distance measuring equipment (DME)</td>
+</tr>
+<tr>
+<td>VOR Doppler</td>
+<td>Doppler VOR (DVOR)</td>
+</tr>
+<tr>
+<td>Radar Doppler</td>
+<td>Doppler radar</td>
+</tr>
+<tr>
+<td>En ruta</td>
+<td>En route</td>
+</tr>
+<tr>
+<td>Tramo curvo de radio fijo</td>
+<td>Fixed-radius curved leg</td>
+</tr>
+<tr>
+<td>Fase del vuelo</td>
+<td>Flight phase</td>
+</tr>
+<tr>
+<td>Órbita geoestacionaria</td>
+<td>Geostationary orbit (GEO)</td>
+</tr>
+<tr>
+<td>Senda de descenso</td>
+<td>Glide path (GP)</td>
+</tr>
+<tr>
+<td>Sistema de aumentación basado en tierra</td>
+<td>Ground-based augmentation system (GBAS)</td>
+</tr>
+<tr>
+<td>Velocidad respecto al suelo</td>
+<td>Ground speed (GS)</td>
+</tr>
+<tr>
+<td>Función de guiado</td>
+<td>Guidance function</td>
+</tr>
+<tr>
+<td>Rumbo</td>
+<td>Heading</td>
+</tr>
+<tr>
+<td>Sistema hiperbólico</td>
+<td>Hyperbolic system</td>
+</tr>
+<tr>
+<td>Sistema de navegación inercial</td>
+<td>Inertial navigation system (INS)</td>
+</tr>
+<tr>
+<td>Plataforma inercial</td>
+<td>Inertial platform</td>
+</tr>
+<tr>
+<td>Radiobaliza interior</td>
+<td>Inner marker (IM)</td>
+</tr>
+<tr>
+<td>Sistema de aterrizaje por instrumentos</td>
+<td>Instrument landing system (ILS)</td>
+</tr>
+<tr>
+<td>Integrador</td>
+<td>Integrator</td>
+</tr>
+<tr>
+<td>Integridad</td>
+<td>Integrity</td>
+</tr>
+<tr>
+<td>Intermodo</td>
+<td>Intermode</td>
+</tr>
+<tr>
+<td>Interrogación / interrogador</td>
+<td>Interrogation / interrogator</td>
+</tr>
+<tr>
+<td>Giróscopo láser</td>
+<td>Laser gyroscope</td>
+</tr>
+<tr>
+<td>Línea de situación</td>
+<td>Line of position</td>
+</tr>
+<tr>
+<td>Línea de vista</td>
+<td>Line of sight</td>
+</tr>
+<tr>
+<td>Localizador</td>
+<td>Localizer (LOC)</td>
+</tr>
+<tr>
+<td>Ruta magnética</td>
+<td>Magnetic track</td>
+</tr>
+<tr>
+<td>Radiobaliza</td>
+<td>Marker beacon</td>
+</tr>
+<tr>
+<td>Radiobaliza intermedia</td>
+<td>Middle marker (MM)</td>
+</tr>
+<tr>
+<td>Aproximación frustrada</td>
+<td>Missed approach</td>
+</tr>
+<tr>
+<td>Monopulso</td>
+<td>Monopulse</td>
+</tr>
+<tr>
+<td>Multilateración</td>
+<td>Multilateration (MLAT)</td>
+</tr>
+<tr>
+<td>Vigilancia no cooperativa / cooperativa</td>
+<td>Non-cooperative / cooperative surveillance</td>
+</tr>
+<tr>
+<td>Radiofaro no direccional</td>
+<td>Non-directional beacon (NDB)</td>
+</tr>
+<tr>
+<td>Selector de radiales</td>
+<td>Omnibearing selector (OBS)</td>
+</tr>
+<tr>
+<td>Radiobaliza exterior</td>
+<td>Outer marker (OM)</td>
+</tr>
+<tr>
+<td>Navegación basada en la performance</td>
+<td>Performance-based navigation (PBN)</td>
+</tr>
+<tr>
+<td>Posición / función de posicionamiento</td>
+<td>Position / positioning function</td>
+</tr>
+<tr>
+<td>Indicador de trayectoria de aproximación de precisión</td>
+<td>Precision approach path indicator (PAPI)</td>
+</tr>
+<tr>
+<td>Medio primario / medio único / medio suplementario</td>
+<td>Primary means / sole means / supplementary means</td>
+</tr>
+<tr>
+<td>Radar primario de vigilancia</td>
+<td>Primary surveillance radar (PSR)</td>
+</tr>
+<tr>
+<td>Radial</td>
+<td>Radial</td>
+</tr>
+<tr>
+<td>Radioayuda</td>
+<td>Radio aid</td>
+</tr>
+<tr>
+<td>Radioindicador de rumbo</td>
+<td>Radio bearing indicator (RBI)</td>
+</tr>
+<tr>
+<td>Indicador radiomagnético</td>
+<td>Radio magnetic indicator (RMI)</td>
+</tr>
+<tr>
+<td>Resolución en distancia</td>
+<td>Range resolution</td>
+</tr>
+<tr>
+<td>Especificación para performance de navegación requerida</td>
+<td>Required navigation performance (RNP)</td>
+</tr>
+<tr>
+<td>Alcance visual en pista</td>
+<td>Runway visual range (RVR)</td>
+</tr>
+<tr>
+<td>Sistema de aumentación basado en satélite</td>
+<td>Satellite-based augmentation system (SBAS)</td>
+</tr>
+<tr>
+<td>Radar secundario de vigilancia</td>
+<td>Secondary surveillance radar (SSR)</td>
+</tr>
+<tr>
+<td>Llamada selectiva</td>
+<td>Selective call (Mode S)</td>
+</tr>
+<tr>
+<td>Distancia oblicua</td>
+<td>Slant distance</td>
+</tr>
+<tr>
+<td>Indicador de pendiente</td>
+<td>Slope indicator</td>
+</tr>
+<tr>
+<td>Segmento espacial / segmento de usuario</td>
+<td>Space segment / user segment</td>
+</tr>
+<tr>
+<td>Radar de movimiento en superficie</td>
+<td>Surface movement radar (SMR)</td>
+</tr>
+<tr>
+<td>Umbral</td>
+<td>Threshold</td>
+</tr>
+<tr>
+<td>Diferencia horaria de llegada</td>
+<td>Time difference of arrival (TDOA)</td>
+</tr>
+<tr>
+<td>Error total del sistema / precisión de navegación lateral</td>
+<td>Total system error (TSE)</td>
+</tr>
+<tr>
+<td>Zona de toma de contacto</td>
+<td>Touchdown zone</td>
+</tr>
+<tr>
+<td>Transpondedor / respondedor</td>
+<td>Transponder</td>
+</tr>
+<tr>
+<td>Navegación visual</td>
+<td>Visual navigation</td>
+</tr>
+<tr>
+<td>Punto de recorrido</td>
+<td>Waypoint</td>
+</tr>
+<tr>
+<td>Multilateración de área extensa</td>
+<td>Wide area multilateration (WAM)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="30-fuentes">30. Fuentes</h2>
+<ul>
+<li><strong>ENAIRE, «Navegación aérea, equipos y sistemas», 73 pp., cabecera «Elaborado: agosto 2023».</strong></li>
+<li>No se usa nada ajeno al manual para los hechos de las secciones 1-26; las comparaciones con los apuntes base y con las fuentes primarias están en los archivos T05a y T05b.</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

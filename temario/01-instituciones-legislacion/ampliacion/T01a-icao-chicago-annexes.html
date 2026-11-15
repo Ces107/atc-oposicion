@@ -1,0 +1,743 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>La OACI, el Convenio de Chicago y los Anexos (T01a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Instituciones y legislación aeronáutica</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-se-examina">Qué se examina</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-la-oaci-origenes-e-historia">1. La OACI: orígenes e historia</a></li>
+<li><a href="#2-mision-y-objetivos-articulo-44-del-convenio-frente-al-plan-estrategico-2026-2050">2. Misión y objetivos: artículo 44 del Convenio frente al Plan Estratégico 2026-2050</a></li>
+<li><a href="#3-estructura-de-la-oaci-asamblea-consejo-comision-de-aeronavegacion-secretaria-oficinas-regionales">3. Estructura de la OACI: Asamblea, Consejo, Comisión de Aeronavegación, Secretaría, oficinas regionales</a><ul>
+<li><a href="#31-la-asamblea-articulos-48-49">3.1 La Asamblea (artículos 48-49)</a></li>
+<li><a href="#32-el-consejo-articulos-50-55">3.2 El Consejo (artículos 50-55)</a></li>
+<li><a href="#33-la-comision-de-aeronavegacion-anc-articulos-56-57">3.3 La Comisión de Aeronavegación (ANC) (artículos 56-57)</a></li>
+<li><a href="#34-la-secretaria">3.4 La Secretaría</a></li>
+<li><a href="#35-oficinas-regionales">3.5 Oficinas regionales</a></li>
+</ul>
+</li>
+<li><a href="#4-presupuesto-idiomas-oficiales-cargos-actuales">4. Presupuesto, idiomas oficiales, cargos actuales</a></li>
+<li><a href="#5-documentacion-de-la-oaci-anexos-sarpspanssuppsmaterial-guia-serie-de-documentos">5. Documentación de la OACI: Anexos, SARPs/PANS/SUPPS/material guía, serie de documentos</a><ul>
+<li><a href="#51-normas-metodos-recomendados-pans-supps-material-guia">5.1 Normas, métodos recomendados, PANS, SUPPS, material guía</a></li>
+<li><a href="#52-los-19-anexos">5.2 Los 19 Anexos</a></li>
+<li><a href="#53-series-de-documentos-mencionadas-en-el-alcance-del-examen">5.3 Series de documentos mencionadas en el alcance del examen</a></li>
+</ul>
+</li>
+<li><a href="#6-ganp-gasp-gasep-usoapusap">6. GANP, GASP, GASeP, USOAP/USAP</a></li>
+<li><a href="#7-el-convenio-de-chicago-estructura-y-articulos-clave">7. El Convenio de Chicago: estructura y artículos clave</a></li>
+<li><a href="#8-libertades-del-aire-iasta-el-acuerdo-sobre-transporte-aereo-internacional-y-los-acuerdos-bilaterales-de-servicios-aereos">8. Libertades del aire, IASTA, el Acuerdo sobre transporte aéreo internacional y los acuerdos bilaterales de servicios aéreos</a></li>
+<li><a href="#9-otros-convenios-internacionales-de-derecho-aereo">9. Otros convenios internacionales de derecho aéreo</a></li>
+<li><a href="#10-la-oaci-y-espana-nota-sobre-oaci-frente-a-ceaceurocontrol">10. La OACI y España; nota sobre OACI frente a CEAC/EUROCONTROL</a></li>
+<li><a href="#11-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">11. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#12-ejemplos-resueltos">12. Ejemplos resueltos</a></li>
+<li><a href="#13-trampas-de-examen">13. Trampas de examen</a></li>
+<li><a href="#14-imprescindible-memorizar">14. Imprescindible memorizar</a></li>
+<li><a href="#15-glosario-bilingue-es-en">15. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#16-fuentes">16. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">46 min de lectura</div><h1 id="t01a-la-oaci-el-convenio-de-chicago-y-los-anexos">T01a: la OACI, el Convenio de Chicago y los Anexos</h1>
+<h2 id="que-se-examina">Qué se examina</h2>
+<p>Este archivo va más allá del capítulo 2.1 del manual de ENAIRE sobre la OACI (Organización de Aviación Civil Internacional, <em>International Civil Aviation Organization</em>, ICAO) y se apoya en los textos primarios de la propia Organización: el Convenio de Chicago consolidado (Doc 7300, 9.ª edición), el Plan Estratégico 2026-2050, el Plan mundial para la seguridad operacional de la aviación (GASP, Doc 10004), el Plan mundial de navegación aérea (GANP, Doc 9750), el Plan mundial de seguridad de la aviación (GASeP, Doc 10118), los materiales del enfoque de observación continua del USOAP, las páginas web corporativas de la OACI (Consejo, Asamblea, Comisión de Aeronavegación, Secretaría) y los textos de Tokio 1963, La Haya 1970, Montreal 1971, Roma 1952, Montreal 1999, Pekín 2010 y protocolos afines. Cabe esperar preguntas sobre: el número exacto de miembros de los órganos de la OACI y cómo ha crecido con el tiempo (una trampa favorita de las oposiciones), la diferencia entre una Norma, un método recomendado, unos PANS y unos SUPPS, los números exactos de los artículos del Convenio de Chicago, el contenido y la numeración de los 19 Anexos, las fechas y la materia de los demás convenios de derecho aéreo y las libertades del aire. El manual de ENAIRE (noviembre de 2025) solo enumera los Anexos por su nombre y ofrece una descripción simplificada de la estructura y los objetivos de la OACI; este archivo añade el historial de enmiendas, los artículos exactos del Convenio, las series de documentos, el detalle de los demás convenios y una tabla de discrepancias entre el manual y las fuentes primarias.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>La OACI: orígenes e historia</li>
+<li>Misión y objetivos: el artículo 44 del Convenio frente al Plan Estratégico 2026-2050</li>
+<li>Estructura de la OACI: Asamblea, Consejo, Comisión de Aeronavegación, Secretaría, oficinas regionales</li>
+<li>Presupuesto, idiomas oficiales, cargos actuales</li>
+<li>Documentación de la OACI: Anexos, SARPs/PANS/SUPPS/material guía, serie de documentos</li>
+<li>GANP, GASP, GASeP, USOAP/USAP</li>
+<li>El Convenio de Chicago: estructura y artículos clave</li>
+<li>Libertades del aire, IASTA, el Acuerdo sobre transporte aéreo internacional (no ratificado) y los acuerdos bilaterales de servicios aéreos</li>
+<li>Otros convenios internacionales de derecho aéreo (Tokio, La Haya, Montreal 1971, Roma 1952, Montreal 1999, Pekín 2010, Protocolo de Montreal 2014)</li>
+<li>La OACI y España; nota sobre OACI frente a CEAC/EUROCONTROL</li>
+<li>Manual frente a fuentes primarias (tabla de discrepancias)</li>
+<li>Ejemplos resueltos</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-la-oaci-origenes-e-historia">1. La OACI: orígenes e historia</h2>
+<p>El Convenio sobre Aviación Civil Internacional («Convenio de Chicago», <em>Chicago Convention</em>) fue redactado por delegados de 54 Estados (de 55 invitados) en la Conferencia Internacional de Aviación Civil celebrada en Chicago del 1 de noviembre al 7 de diciembre de 1944; el día de la clausura, 52 de ellos lo habían firmado. Como la ratificación iba a llevar tiempo, la Conferencia firmó también un <strong>Acuerdo Interino</strong> que creaba la <strong>Organización Provisional de Aviación Civil Internacional (PICAO)</strong>, formada por un <strong>Consejo Interino</strong> y una <strong>Asamblea Interina</strong>. Desde junio de 1945 el Consejo Interino se reunió de forma continua en Montreal con representantes de <strong>21 Estados miembros</strong>; la primera Asamblea Interina de la PICAO se celebró en Montreal en junio de <strong>1946</strong>. El <strong>4 de abril de 1947</strong>, al reunirse un número suficiente de ratificaciones del Convenio, el carácter provisional de la PICAO dejó de ser pertinente y el organismo pasó a ser la OACI; la <strong>primera Asamblea oficial de la OACI se celebró en Montreal en mayo de 1947</strong>.</p>
+<p>El propio Convenio entró en vigor el <strong>4 de abril de 1947</strong>, «el trigésimo día después del depósito del vigésimo sexto instrumento de ratificación o notificación de adhesión al Gobierno de los Estados Unidos de América de acuerdo con el Artículo 91 b)». En la lista de situación de la OACI leída para este archivo, el Convenio cuenta con <strong>193 partes</strong> y el depositario es el <strong>Gobierno de los Estados Unidos de América</strong>. (Las fechas de ratificación por país de esa misma tabla presentan una corrupción visible de maquetación por la conversión de PDF a texto: varias filas están desplazadas una línea y dan resultados imposibles, como un Estado del Golfo que «ratifica» antes de su propia independencia. <strong>No</strong> te fíes de las fechas de cada país de esa tabla; los datos del encabezado —193 partes, entrada en vigor el 4 de abril de 1947, depositario estadounidense— son fiables porque no forman parte de las filas corruptas.)</p>
+<p>Hoy la OACI agrupa a <strong>193 Estados miembros</strong> (todos los miembros de la ONU salvo Liechtenstein, más las Islas Cook, que no es miembro de la ONU). Desde su fundación, «los Anexos del Convenio han aumentado en número y han evolucionado hasta incluir más de 12 000 normas y métodos recomendados (SARPs) internacionales» repartidos en los 19 Anexos y, según un artículo corporativo de la OACI de 2025, «más de 12 000 SARPs contenidos en 19 Anexos y cinco PANS».</p>
+<h2 id="2-mision-y-objetivos-articulo-44-del-convenio-frente-al-plan-estrategico-2026-2050">2. Misión y objetivos: artículo 44 del Convenio frente al Plan Estratégico 2026-2050</h2>
+<p>Existen dos enunciados distintos de la finalidad de la OACI, ambos relevantes para el examen, que no deben confundirse:</p>
+<p><strong>A. El artículo 44 del propio Convenio («Objetivos»)</strong>: el texto del tratado, sin cambios desde 1944, establece que los fines y objetivos de la Organización son desarrollar los principios y técnicas de la navegación aérea internacional y fomentar la organización y el desarrollo del transporte aéreo internacional, con el fin de (lista literal, a-i):
+a) lograr el desarrollo seguro y ordenado de la aviación civil internacional en todo el mundo;
+b) fomentar las técnicas de diseño y manejo de aeronaves para fines pacíficos;
+c) estimular el desarrollo de aerovías, aeropuertos e instalaciones y servicios de navegación aérea para la aviación civil internacional;
+d) satisfacer las necesidades de los pueblos del mundo respecto a un transporte aéreo seguro, regular, eficaz y económico;
+e) evitar el despilfarro económico producido por una competencia excesiva;
+f) asegurar que se respeten plenamente los derechos de los Estados contratantes y que cada Estado contratante tenga oportunidad equitativa de explotar empresas de transporte aéreo internacional;
+g) evitar discriminación entre Estados contratantes;
+h) promover la seguridad de vuelo en la navegación aérea internacional;
+i) promover, en general, el desarrollo de todos los aspectos de la aeronáutica civil internacional.</p>
+<p><strong>B. La Visión y Misión corporativas actuales de la OACI y el Plan Estratégico 2026-2050 («Cielos seguros, futuro sostenible», <em>Safe Skies, Sustainable Future</em>)</strong>, adoptado para el nuevo periodo, con una previsión de <strong>12,4 mil millones de pasajeros en 2050</strong>:</p>
+<ul>
+<li><strong>Visión:</strong> «Un sistema de aviación civil internacional seguro, protegido y sostenible que conecte al mundo en beneficio de todas las naciones y todos los pueblos».</li>
+<li><strong>Tres aspiraciones esenciales:</strong> cero emisiones netas de carbono (en 2050), un sistema de transporte conectado (ningún país se queda atrás) y cero víctimas mortales.</li>
+<li><strong>Misión:</strong> liderar la aviación civil internacional como motor clave del desarrollo social y económico, mejorando al mismo tiempo la seguridad operacional, la protección, el desarrollo económico y la sostenibilidad ambiental de la aviación, mediante el avance del derecho aéreo, la elaboración de políticas, planes y normas, la vigilancia y la auditoría, y el apoyo a las capacidades de los Estados.</li>
+<li><strong>Objetivos estratégicos</strong> (seis objetivos principales, parafraseados de la página corporativa): cada vuelo es seguro y protegido; la aviación es ambientalmente sostenible; la aviación ofrece una movilidad fluida, accesible y fiable para todos; ningún país se queda atrás; el Convenio de Aviación Civil Internacional y los demás tratados, leyes y reglamentos responden a todos los desafíos; el desarrollo económico del transporte aéreo garantiza la prosperidad económica y el bienestar social de todos.</li>
+<li><strong>Facilitadores de alta prioridad:</strong> mejora organizativa continua de la OACI; innovación; igualdad de género y atracción de nuevos talentos a la aviación; alianzas, movilización de recursos y sostenibilidad financiera.</li>
+</ul>
+<p>El manual de ENAIRE (OM01 §2.1.4) reproduce, en cambio, el marco anterior de los <strong>«5 objetivos estratégicos hasta 2025»</strong> (seguridad operacional; capacidad y eficiencia de la navegación aérea; seguridad y facilitación; desarrollo económico del transporte aéreo; protección del medio ambiente). Ese marco ha sido <strong>sustituido</strong> para el horizonte relevante para el examen por los seis objetivos estratégicos del Plan 2026-2050 descrito arriba, una actualización importante que conviene señalar (véase §11).</p>
+<h2 id="3-estructura-de-la-oaci-asamblea-consejo-comision-de-aeronavegacion-secretaria-oficinas-regionales">3. Estructura de la OACI: Asamblea, Consejo, Comisión de Aeronavegación, Secretaría, oficinas regionales</h2>
+<h3 id="31-la-asamblea-articulos-48-49">3.1 La Asamblea (artículos 48-49)</h3>
+<p>Es el <strong>órgano soberano</strong>, formado por los 193 Estados miembros, cada uno con un voto; las decisiones se adoptan normalmente por <strong>mayoría de los votos emitidos</strong>. <strong>Debe reunirse al menos una vez cada tres años</strong>, convocada por el Consejo; el Consejo puede convocar un periodo extraordinario de sesiones, o este puede celebrarse a petición de <strong>no menos de una quinta parte del número total de Estados contratantes</strong> dirigida al Secretario General. Esta redacción («una vez cada tres años, una quinta parte para una sesión extraordinaria») es la <strong>vigente (enmienda de 1962, en vigor desde 1975)</strong>; el <strong>texto original de 1944 exigía reuniones anuales</strong> y una <strong>enmienda intermedia de 1954 (en vigor desde 1956)</strong> exigía diez Estados contratantes (y no una quinta parte) para convocar una sesión extraordinaria. Entre sus atribuciones figuran elegir en cada reunión a su Presidente y demás cargos (art. 49 a) y, según el artículo 49 en sentido más amplio, examinar y aprobar el programa de trabajo y el presupuesto, fijar la política de transporte aéreo internacional y mucho más, tal como recoge el manual.</p>
+<h3 id="32-el-consejo-articulos-50-55">3.2 El Consejo (artículos 50-55)</h3>
+<p>Es un <strong>órgano permanente responsable ante la Asamblea</strong>, compuesto actualmente por <strong>36 Estados contratantes elegidos por la Asamblea para un mandato de tres años</strong>. Al elegir a los miembros del Consejo, la Asamblea debe dar «representación adecuada» a tres grupos (art. 50 b): 1) los Estados de mayor importancia en el transporte aéreo; 2) los Estados, no incluidos de otro modo, que más contribuyan al suministro de instalaciones para la navegación aérea civil internacional; 3) los Estados, no incluidos de otro modo, cuya designación asegure la representación de todas las regiones geográficas principales del mundo. <strong>Ningún representante en el Consejo puede estar vinculado activamente con la explotación de un servicio aéreo internacional ni tener intereses financieros en él</strong> (art. 50 c). El Consejo <strong>elige a su propio Presidente por un mandato de tres años (reelegible), que no tiene voto</strong> (art. 51). Las decisiones requieren la aprobación de una <strong>mayoría de los miembros del Consejo</strong> (art. 52). Entre las funciones obligatorias (art. 54) figuran, en primer lugar, presentar informes anuales a la Asamblea; además, adoptar las normas y métodos recomendados internacionales como Anexos del Convenio, actuar como árbitro entre los Estados e investigar cualquier situación que presente obstáculos evitables para el desarrollo de la navegación aérea.</p>
+<p><strong>Historial de enmiendas del tamaño del Consejo</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Tamaño del Consejo</th>
+<th>Enmendado por la Asamblea el</th>
+<th>Entrada en vigor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21 (texto original de 1944)</td>
+<td>—</td>
+<td>4 de abril de 1947 (con el Convenio)</td>
+</tr>
+<tr>
+<td>27</td>
+<td>13.º período de sesiones (extraordinario), 21 de junio de 1961</td>
+<td>17 de julio de 1962</td>
+</tr>
+<tr>
+<td>30</td>
+<td>17.º (A) período de sesiones (extraordinario), 12 de marzo de 1971</td>
+<td>16 de enero de 1973</td>
+</tr>
+<tr>
+<td>33</td>
+<td>21.º período de sesiones, 16 de octubre de 1974</td>
+<td>15 de febrero de 1980</td>
+</tr>
+<tr>
+<td><strong>36 (actual)</strong></td>
+<td>28.º período de sesiones (extraordinario), 26 de octubre de 1990</td>
+<td>28 de noviembre de 2002</td>
+</tr>
+<tr>
+<td>40 (Protocolo adoptado, <strong>aún no en vigor</strong>)</td>
+<td>Doc 10077, 2016</td>
+<td>pendiente: necesita 128 ratificaciones; 120 ratificadas en la fuente leída (30 de enero de 2026)</td>
+</tr>
+</tbody>
+</table>
+<p>El artículo 45 fija la <strong>sede permanente</strong> en el lugar decidido por la Asamblea Interina de la PICAO (es decir, <strong>Montreal</strong>); el Consejo puede trasladarla temporalmente y la Asamblea de forma permanente, con una decisión que exige <strong>al menos tres quintas partes del total de Estados contratantes</strong>.</p>
+<h3 id="33-la-comision-de-aeronavegacion-anc-articulos-56-57">3.3 La Comisión de Aeronavegación (ANC) (artículos 56-57)</h3>
+<p>Tiene actualmente <strong>19 miembros</strong>, nombrados por el Consejo entre personas propuestas por los Estados contratantes por sus «calificaciones y experiencia adecuadas en la ciencia y la práctica de la aeronáutica»; <strong>no representan al Estado que los propone</strong>, sino que actúan con independencia. El Presidente de la ANC lo nombra el Consejo. Funciones (art. 57): recomendar al Consejo las enmiendas de los Anexos para su adopción; crear subcomisiones técnicas; asesorar al Consejo sobre la recopilación y la comunicación de la información útil para el progreso de la navegación aérea. La ANC suele reunirse en <strong>tres periodos de sesiones al año</strong>, de unas nueve semanas cada uno incluido un receso de tres semanas, y, desde su creación, «ha examinado y recomendado los SARPs de 17 de los 19 Anexos del Convenio de Chicago».</p>
+<p><strong>Historial de enmiendas del tamaño de la ANC</strong> (mismo patrón que el Consejo):</p>
+<table>
+<thead>
+<tr>
+<th>Tamaño de la ANC</th>
+<th>Enmendado por la Asamblea el</th>
+<th>Entrada en vigor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 (texto original de 1944)</td>
+<td>—</td>
+<td>4 de abril de 1947</td>
+</tr>
+<tr>
+<td>15</td>
+<td>18.º período de sesiones, 7 de julio de 1971</td>
+<td>19 de diciembre de 1974</td>
+</tr>
+<tr>
+<td><strong>19 (actual)</strong></td>
+<td>27.º período de sesiones, 6 de octubre de 1989</td>
+<td>18 de abril de 2005</td>
+</tr>
+<tr>
+<td>21 (Protocolo adoptado, <strong>aún no en vigor</strong>)</td>
+<td>Doc 10076, 2016</td>
+<td>pendiente: necesita 128 ratificaciones; 120 ratificadas en la fuente leída</td>
+</tr>
+</tbody>
+</table>
+<p>A 23 de febrero de 2026, el Presidente de la ANC era el <strong>Sr. Frédéric Fachinan</strong> (propuesto por Canadá); el <strong>Sr. Ismael Pacheco Serrano, candidato de España, ejercía como Primer Vicepresidente</strong>, y el Sr. Charles Kouadio Kanga (Côte d'Ivoire) como Segundo Vicepresidente; la Sra. Michele Merkle era la Secretaria. <strong>España ocupa actualmente un puesto en la ANC</strong>, un dato que conviene recordar para las preguntas sobre «la OACI y España» (§10).</p>
+<h3 id="34-la-secretaria">3.4 La Secretaría</h3>
+<p>Está encabezada por el <strong>Secretario General</strong> (actualmente el <strong>Sr. Juan Carlos Salazar</strong>) y se compone de <strong>cinco Oficinas</strong>: Oficina de navegación aérea, Oficina de transporte aéreo, Oficina de desarrollo de capacidades e implementación, Oficina de asuntos jurídicos y relaciones externas y Oficina de administración y servicios, lo que coincide con la lista del manual. Los directores de las Oficinas, junto con los altos cargos de Finanzas, Evaluación y Auditoría Interna y Comunicaciones, y los <strong>siete directores de las oficinas regionales</strong>, dependen directamente del Secretario General.</p>
+<h3 id="35-oficinas-regionales">3.5 Oficinas regionales</h3>
+<p>Siete oficinas que atienden a nueve regiones, exactamente como en el manual: Asia y Pacífico (Bangkok, Tailandia); África oriental y meridional (Nairobi, Kenia); África occidental y central (Dakar, Senegal); Oriente Medio (El Cairo, Egipto); Europa y Atlántico Norte (París, Francia); América del Sur (Lima, Perú); América del Norte, América Central y Caribe (Ciudad de México, México).</p>
+<h2 id="4-presupuesto-idiomas-oficiales-cargos-actuales">4. Presupuesto, idiomas oficiales, cargos actuales</h2>
+<ul>
+<li><strong>Idiomas oficiales:</strong> español, inglés, francés, ruso, árabe y chino (seis idiomas; el propio sitio web se sirve en esos seis). Dos protocolos otorgaron plena <strong>autenticidad</strong> al texto del Convenio en árabe (<strong>Doc 9663/9664, 1995</strong>) y en chino (<strong>Doc 9721/9722, 1998</strong>); véase §9.</li>
+<li><strong>Presupuesto:</strong> la OACI se financia principalmente con el <strong>presupuesto ordinario</strong>, un presupuesto <strong>trienal</strong> votado por la Asamblea a propuesta del Consejo (art. 61) y expresado en <strong>dólares canadienses (CAD)</strong>, por ser Montreal la sede. Según la tabla de resultados financieros de 2025 del <strong>Informe anual del Consejo 2025</strong>, el <strong>presupuesto ordinario del año 2025</strong> tuvo <strong>créditos finales revisados de unos 99 millones de CAD</strong>, frente a un <strong>gasto real de unos 98 millones de CAD</strong>. El impago de las obligaciones financieras puede llevar a la <strong>suspensión del derecho de voto de un Estado</strong> en la Asamblea y en el Consejo (art. 62).</li>
+<li><strong>Presidente del Consejo:</strong> el <strong>Sr. Toshiyuki Onuma</strong>, <strong>séptimo</strong> y actual Presidente del Consejo, elegido el <strong>26 de noviembre de 2025</strong> para un mandato de <strong>tres años que comenzó el 1 de enero de 2026</strong>; el Presidente es elegido por los 36 Estados del Consejo y «puede ser reelegido para un mandato adicional».</li>
+</ul>
+<h2 id="5-documentacion-de-la-oaci-anexos-sarpspanssuppsmaterial-guia-serie-de-documentos">5. Documentación de la OACI: Anexos, SARPs/PANS/SUPPS/material guía, serie de documentos</h2>
+<h3 id="51-normas-metodos-recomendados-pans-supps-material-guia">5.1 Normas, métodos recomendados, PANS, SUPPS, material guía</h3>
+<ul>
+<li>Una <strong>Norma</strong> (<em>Standard</em>) es una especificación cuya aplicación uniforme se reconoce como necesaria para la seguridad o la regularidad de la navegación aérea internacional y que los Estados contratantes deben cumplir (las diferencias deben notificarse: art. 38, véase §7).</li>
+<li>Un <strong>método recomendado</strong> (<em>Recommended Practice</em>) es una especificación cuya aplicación uniforme se reconoce como conveniente y a la que los Estados procurarán ajustarse.</li>
+<li><strong>Los Anexos 2, 5, 7 y 8 contienen solo Normas, sin métodos recomendados; los otros 15 Anexos contienen ambos</strong>. Esta asimetría es una trampa clásica de examen.</li>
+<li><strong>PANS (Procedimientos para los servicios de navegación aérea):</strong> procedimientos operacionales más detallados que las Normas, pero que aún no cuentan con el respaldo gubernamental mundial suficiente para adoptarse como tales; complementan los SARPs de los Anexos correspondientes. Ejemplo: el <strong>Doc 4444 (PANS-ATM)</strong> complementa los Anexos 2 y 11; el <strong>Doc 8168 (PANS-OPS)</strong> complementa los Anexos operacionales.</li>
+<li><strong>SUPPS (Procedimientos suplementarios regionales):</strong> procedimientos que se aplican únicamente en regiones concretas de la OACI porque responden a necesidades regionales no cubiertas por las disposiciones mundiales; se publican por región. Por ejemplo, el <strong>Doc 7030</strong> son los <strong>SUPPS de la región EUR (Europa)</strong>, hoy en su <strong>5.ª edición</strong>, y se declara expresamente «suplementario de las disposiciones contenidas en el Anexo 2, el Anexo 6 (Partes I y II), el Anexo 10 (Volúmenes IV y V), el Anexo 11, el Anexo 15, los PANS-ATM (Doc 4444) y los PANS-OPS (Doc 8168)». Hay documentos SUPPS distintos para cada región de la OACI (AFI, ASIA, CAR, EUR, MID, NAM, NAT, PAC, SAM).</li>
+<li><strong>Material guía</strong> (<em>guidance material</em>): material adicional, no vinculante (manuales, circulares, adjuntos), que ayuda a los Estados a aplicar los SARPs y los PANS.</li>
+</ul>
+<h3 id="52-los-19-anexos">5.2 Los 19 Anexos</h3>
+<p>Los números y títulos son los del manual; las descripciones de contenido siguientes van más allá de él:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Título (ES / EN)</th>
+<th>Aspectos destacados del contenido más allá del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Licencias al personal (<em>Personnel Licensing</em>)</td>
+<td>SARPs de licencias para tripulaciones de vuelo, controladores de tránsito aéreo, operadores de estaciones aeronáuticas, técnicos de mantenimiento y despachadores de vuelo; los manuales de formación asociados fijan el alcance del currículo.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Reglamento del aire (<em>Rules of the Air</em>)</td>
+<td>Solo Normas, sin métodos recomendados; contiene las reglas VFR e IFR; se aplica sobre alta mar sin excepción.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Servicio meteorológico para la navegación aérea internacional (<em>Meteorological Service for International Air Navigation</em>)</td>
+<td>Información meteorológica para explotadores, tripulaciones, dependencias ATS, búsqueda y salvamento (SAR) y gestión de aeropuertos.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cartas aeronáuticas (<em>Aeronautical Charts</em>)</td>
+<td>Define la obligación de los Estados de poner a disposición determinados tipos de cartas, su cobertura, simbología y colores.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Unidades de medida que se emplearán en las operaciones aéreas y terrestres (<em>Units of Measurement to be Used in Air and Ground Operations</em>)</td>
+<td>Se remonta a una <strong>resolución de la Conferencia de Chicago de 1944 que pedía el sistema métrico</strong>; unidades del SI, UTC, presentación de fecha y hora totalmente numérica.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Operación de aeronaves (<em>Operation of Aircraft</em>)</td>
+<td>Solo Normas, sin métodos recomendados; <strong>3 Partes</strong>: Parte I, transporte aéreo comercial internacional (aviones); Parte II, aviación general internacional (aviones); Parte III, operaciones internacionales (helicópteros).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Marcas de nacionalidad y de matrícula de las aeronaves (<em>Aircraft Nationality and Registration Marks</em>)</td>
+<td>Solo Normas, sin métodos recomendados; normas sobre las marcas de nacionalidad y matrícula, vinculadas al <strong>artículo 20</strong> del Convenio.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Aeronavegabilidad (<em>Airworthiness of Aircraft</em>)</td>
+<td>Solo Normas, sin métodos recomendados; <strong>4 Partes</strong>: definiciones; procedimientos de certificación y de aeronavegabilidad continuada; requisitos técnicos para aviones grandes; helicópteros.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Facilitación (<em>Facilitation</em>)</td>
+<td>Marco de referencia de las operaciones de despacho en los aeropuertos, que equilibra el cumplimiento normativo con la eficiencia.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Telecomunicaciones aeronáuticas (<em>Aeronautical Telecommunications</em>)</td>
+<td>Abarca CNS (comunicaciones, navegación y vigilancia); <strong>5 volúmenes</strong>: radioayudas para la navegación; procedimientos de comunicaciones; sistemas de comunicaciones (Parte 1, datos digitales; Parte 2, voz); radar de vigilancia y sistemas anticolisión; utilización del espectro de radiofrecuencias aeronáuticas.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Servicios de tránsito aéreo (<em>Air Traffic Services</em>)</td>
+<td>Define los ATS y sus SARPs: prevención de colisiones (en el área de maniobras y en el aire), aceleración y mantenimiento de un flujo ordenado del tránsito, servicio de información de vuelo y servicio de alerta.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Búsqueda y salvamento (<em>Search and Rescue</em>)</td>
+<td>Se complementa con un Manual SAR en tres partes (organización, gestión, procedimientos).</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Investigación de accidentes e incidentes de aviación (<em>Aircraft Accident and Incident Investigation</em>)</td>
+<td>El único objetivo de la investigación es la <strong>prevención</strong>, nunca la atribución de culpas o responsabilidades; la edición actual tiene <strong>8 capítulos, un apéndice y 4 adjuntos</strong>.</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Aeródromos (<em>Aerodromes</em>)</td>
+<td><strong>2 volúmenes</strong>: Vol. I, diseño y operaciones de aeródromos; Vol. II, helipuertos.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Servicios de información aeronáutica (<em>Aeronautical Information Services</em>)</td>
+<td>Funciones del AIS: recibir u originar, recopilar, editar, publicar, almacenar y distribuir datos aeronáuticos.</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Protección del medio ambiente (<em>Environmental Protection</em>)</td>
+<td>Adoptado en <strong>1971</strong>, tras la reunión especial de 1969 sobre el ruido de las aeronaves; <strong>2 volúmenes</strong> (ruido; emisiones de los motores).</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Seguridad. Protección de la aviación civil internacional contra los actos de interferencia ilícita (<em>Security</em>)</td>
+<td>Adoptado por el Consejo el <strong>22 de marzo de 1974</strong>, tras un periodo extraordinario de sesiones de la Asamblea en <strong>junio de 1970</strong> que respondió al aumento de los delitos de interferencia ilícita de finales de los años sesenta; enmendado <strong>diez veces</strong> desde su publicación.</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Transporte sin riesgos de mercancías peligrosas por vía aérea (<em>The Safe Transport of Dangerous Goods by Air</em>)</td>
+<td>Hace vinculantes para los Estados las <strong>Instrucciones técnicas para el transporte sin riesgos de mercancías peligrosas por vía aérea</strong>, muy detalladas.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Gestión de la seguridad operacional (<em>Safety Management</em>)</td>
+<td>El Anexo <strong>más reciente</strong>; contiene las disposiciones generales sobre el Programa estatal de seguridad operacional (SSP) y el sistema de gestión de la seguridad operacional (SMS).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-series-de-documentos-mencionadas-en-el-alcance-del-examen">5.3 Series de documentos mencionadas en el alcance del examen</h3>
+<p>Verificados en la biblioteca de esta tarea: <strong>Doc 4444</strong> PANS-ATM; <strong>Doc 8168</strong> PANS-OPS (Vol. I, procedimientos de vuelo; Vol. II, construcción de procedimientos visuales y por instrumentos); <strong>Doc 8126</strong> Manual de servicios de información aeronáutica; <strong>Doc 7030</strong> SUPPS de la región EUR; <strong>Doc 9750</strong> GANP; <strong>Doc 10004</strong> GASP; <strong>Doc 10118</strong> GASeP; <strong>Doc 9859</strong> Manual de gestión de la seguridad operacional (SMM, citado por el GASP como fuente de las orientaciones sobre el SSP); <strong>Doc 7600</strong> Reglamento interior permanente de la Asamblea; <strong>Doc 7300</strong> el propio Convenio consolidado. Sus títulos son de sobra conocidos por la literatura aeronáutica general; contrástalos con el material del tema 2, dedicado a códigos y designadores: <strong>Doc 9432</strong> Manual de radiotelefonía; <strong>Doc 9613</strong> Manual de navegación basada en la performance (PBN); <strong>Doc 8643</strong> Designadores de tipos de aeronave; <strong>Doc 7910</strong> Indicadores de lugar; <strong>Doc 8585</strong> Designadores de empresas explotadoras de aeronaves, autoridades y servicios aeronáuticos.</p>
+<h2 id="6-ganp-gasp-gasep-usoapusap">6. GANP, GASP, GASeP, USOAP/USAP</h2>
+<ul>
+<li><strong>GANP, Plan mundial de navegación aérea (Doc 9750):</strong> su visión es «la creación de un sistema de navegación aérea interoperable a escala mundial». Su herramienta central es el <strong>marco de mejoras por bloques del sistema de aviación (ASBU)</strong>, un conjunto estructurado de mejoras operacionales y tecnologías agrupadas en módulos que los Estados y las regiones pueden adoptar de forma progresiva; un <strong>equipo de proyecto del Grupo de expertos ASBU (ASBU PPT)</strong> multidisciplinar mantiene el marco actualizado, y las propuestas de cambio se envían a ganp@icao.int. (El manual de ENAIRE data el marco del GANP en «2016-2030»; una nueva edición, el «proyecto de octava edición», se presentó a la 42.ª Asamblea en 2025, de modo que el horizonte se sigue ampliando.)</li>
+<li><strong>GASP, Plan mundial para la seguridad operacional de la aviación (Doc 10004), edición 2026-2028:</strong> su visión es <strong>«cero víctimas mortales en las operaciones comerciales en 2030 y después»</strong>, en coherencia con la Agenda 2030 de la ONU. Se estructura en <strong>seis objetivos</strong>: 1) lograr una reducción continua de los riesgos para la seguridad operacional; 2) reforzar las capacidades de vigilancia de la seguridad operacional de los Estados; 3) establecer y gestionar programas estatales de seguridad operacional (SSP); 4) reforzar la colaboración regional y nacional en materia de seguridad operacional; 5) reforzar la planificación de la seguridad operacional de la aviación mediante planes regionales y nacionales (RASP/NASP); 6) ampliar el uso de los programas de evaluación de la industria y el intercambio de datos de seguridad operacional. Dentro del objetivo 1, la <strong>meta 1.1</strong> pide reducir la tasa de accidentes para <strong>2028</strong>, con una <strong>media móvil de cinco años y el año 2025 como referencia</strong>; los indicadores son la tasa de accidentes, la tasa de accidentes mortales y la tasa de víctimas mortales. Dentro del objetivo 2, una meta derivada fija en el <strong>70 % de los Estados</strong> la puntuación mínima aceptable para contar con «recursos [financieros] suficientes… para cumplir las obligaciones nacionales e internacionales»; se eligió como <strong>mínimo</strong>, y no el 100 %, porque representaba la media mundial en aquel momento. <strong>Cinco G-HRC (categorías mundiales de sucesos de alto riesgo)</strong>, más otras tres categorías de riesgo mundiales (contacto anómalo con la pista; fallo o mal funcionamiento de sistemas o componentes, excepto el grupo motor; encuentro con turbulencia), determinan las metas de seguridad operacional de la nueva edición.</li>
+<li><strong>GASeP, Plan mundial de seguridad de la aviación (Doc 10118), 2.ª edición (2024):</strong> organiza el trabajo en torno a prioridades mundiales, entre ellas «<strong>mejorar la concienciación y la respuesta ante los riesgos</strong>» y «<strong>mantener una cultura de seguridad sólida y eficaz</strong>», con énfasis en medidas de seguridad <strong>basadas en el riesgo</strong> (y no meramente reactivas).</li>
+<li><strong>USOAP, Programa universal de auditoría de la vigilancia de la seguridad operacional, enfoque de observación continua (USOAP CMA):</strong> audita los sistemas de vigilancia de la seguridad operacional de los Estados; los resultados se publican como una <strong>puntuación de implantación efectiva (EI)</strong> por área técnica, consultable en el visor interactivo de la OACI; una <strong>preocupación significativa de seguridad operacional (SSC)</strong> indica que un Estado <strong>no ejerce una vigilancia de la seguridad operacional suficiente</strong>, y no necesariamente una deficiencia concreta de un explotador, un ANSP o un aeródromo. Lleva en marcha <strong>20 años</strong> según un artículo reciente del <em>ICAO Journal</em> citado en esa misma página.</li>
+<li><strong>USAP-CMA, Programa universal de auditoría de la seguridad de la aviación, enfoque de observación continua:</strong> es el equivalente en materia de seguridad de la aviación; comprueba el cumplimiento por los Estados del <strong>Anexo 17 (Seguridad)</strong> y de las <strong>normas relacionadas con la seguridad del Anexo 9 (Facilitación)</strong>, mediante una vigilancia continua en lugar de auditorías de una sola visita. Tanto el USOAP-CMA como el USAP-CMA sustituyeron a programas de auditoría anteriores de ciclo fijo (el manual menciona «USOAP/USAP» sin esta evolución).</li>
+</ul>
+<h2 id="7-el-convenio-de-chicago-estructura-y-articulos-clave">7. El Convenio de Chicago: estructura y artículos clave</h2>
+<p>El Convenio tiene <strong>dos Partes impresas como un solo instrumento, con cuatro Partes en total en la numeración consolidada que usa la OACI</strong>; en concreto: <strong>Parte I «Navegación aérea»</strong> (capítulos I-VI, arts. 1-42), <strong>Parte II «La Organización de Aviación Civil Internacional»</strong> (capítulos VII-XIII, arts. 43-66), <strong>Parte III «Transporte aéreo internacional»</strong> (capítulos XIV-XVI, arts. 67-79) y <strong>Parte IV «Disposiciones finales»</strong> (capítulos XVII-XXII, arts. 80-96). (El resumen del propio manual dice solo que el Convenio «consta de dos partes»: la primera, sobre la navegación internacional, y la segunda, sobre la organización de la OACI. Es una simplificación: el índice de la fuente primaria muestra <strong>cuatro</strong> Partes numeradas, aunque la <em>idea central</em> «primero las normas de navegación, luego la Organización» se conserva en las Partes I-II.)</p>
+<p>Artículos clave:</p>
+<ul>
+<li><strong>Art. 1, Soberanía:</strong> «Los Estados contratantes reconocen que todo Estado tiene soberanía plena y exclusiva en el espacio aéreo situado sobre su territorio».</li>
+<li><strong>Art. 2, Territorio:</strong> las extensiones terrestres y las aguas territoriales adyacentes que se encuentren bajo la soberanía, el dominio, la protección o el mandato de un Estado.</li>
+<li><strong>Art. 3, Aeronaves civiles y de Estado:</strong> el Convenio se aplica <strong>solo a las aeronaves civiles</strong>; las aeronaves utilizadas en servicios militares, de aduanas o de policía son «aeronaves de Estado» y quedan fuera de su ámbito; ninguna aeronave de Estado puede sobrevolar el territorio de otro Estado ni aterrizar en él sin autorización.</li>
+<li><strong>Art. 3 bis (añadido en 1984, en vigor desde 1998):</strong> los Estados deben abstenerse de recurrir al uso de armas contra las aeronaves civiles en vuelo; toda aeronave civil debe cumplir una orden de aterrizar; los Estados deben publicar sus reglamentos de interceptación. (Se añadió tras el <strong>derribo del vuelo KAL 007 en 1983</strong>, aunque el texto del Convenio no menciona el suceso.)</li>
+<li><strong>Arts. 5-7:</strong> derechos de vuelo no regular; los servicios aéreos regulares requieren un permiso especial (art. 6); el <strong>cabotaje</strong> puede ser denegado por cualquier Estado y los Estados se comprometen a no conceder privilegios exclusivos de cabotaje a ningún otro Estado (art. 7).</li>
+<li><strong>Art. 8:</strong> las aeronaves sin piloto necesitan una autorización especial para volar sobre el territorio de un Estado.</li>
+<li><strong>Art. 9, Zonas prohibidas:</strong> un Estado puede restringir o prohibir el vuelo sobre partes de su territorio por necesidad militar o por seguridad pública, aplicándolo <strong>sin discriminación</strong> entre sus propias aeronaves y las de otros Estados que presten servicios regulares; esas zonas deben tener una «extensión y situación razonables».</li>
+<li><strong>Arts. 10 y 11:</strong> aterrizaje en un aeropuerto aduanero designado; aplicabilidad de los reglamentos aéreos de cada Estado a las aeronaves extranjeras, con sujeción al Convenio.</li>
+<li><strong>Art. 12:</strong> las reglas del aire se aplican «sobre alta mar… las reglas en vigor serán las que se establezcan de acuerdo con el presente Convenio», la raíz jurídica de la competencia de la OACI sobre el espacio aéreo internacional y de alta mar.</li>
+<li><strong>Art. 16:</strong> el derecho de las autoridades competentes de un Estado a inspeccionar las aeronaves de otros Estados contratantes a su llegada o salida y a examinar sus documentos, sin demora innecesaria.</li>
+<li><strong>Arts. 17-21, Nacionalidad y matrícula:</strong> las aeronaves tienen la nacionalidad del Estado en que están matriculadas (17); la doble matrícula no es válida (18); la matrícula se rige por la legislación nacional del Estado que la efectúa (19); toda aeronave que participe en la navegación internacional debe llevar sus marcas de nacionalidad y matrícula (20).</li>
+<li><strong>Art. 29, Documentos que se llevan a bordo:</strong> certificado de matrícula, certificado de aeronavegabilidad, licencias apropiadas de cada miembro de la tripulación, diario de a bordo, licencia de la estación de radio de la aeronave (si está provista de aparatos de radio), lista de nombres y lugares de embarco y destino de los pasajeros (si lleva pasajeros), manifiesto y declaraciones detalladas de la carga (si transporta carga).</li>
+<li><strong>Arts. 30-31:</strong> el equipo de radio exige licencias del Estado de matrícula y su uso sobre el territorio de otro Estado se rige por los reglamentos de ese Estado; toda aeronave que opere internacionalmente necesita un <strong>certificado de aeronavegabilidad</strong> expedido o convalidado por su Estado de matrícula.</li>
+<li><strong>Art. 32, Licencias del personal:</strong> el piloto y los demás miembros de la tripulación operativa necesitan certificados de aptitud y licencias expedidos o convalidados por el Estado de matrícula; un Estado puede negarse a reconocer, para el vuelo sobre su propio territorio, las licencias concedidas por otro Estado a sus propios nacionales.</li>
+<li><strong>Art. 33, Reconocimiento de certificados y licencias:</strong> los certificados y licencias del Estado de matrícula son reconocidos por los demás Estados <strong>si se expidieron con requisitos iguales o superiores a las normas mínimas aplicables de la OACI</strong>.</li>
+<li><strong>Art. 37, Adopción de normas y procedimientos internacionales:</strong> el artículo central de los «SARPs». Cada Estado se compromete a colaborar para lograr «el más alto grado de uniformidad posible» y la OACI adoptará y enmendará SARPs sobre: a) sistemas de comunicaciones y ayudas para la navegación aérea, incluida la señalización terrestre; b) características de los aeropuertos y áreas de aterrizaje; c) reglas del aire y métodos de control del tránsito aéreo; d) otorgamiento de licencias del personal operativo y mecánico; e) aeronavegabilidad de las aeronaves; f) matrícula e identificación de las aeronaves; g) compilación e intercambio de información meteorológica; h) diarios de a bordo; i) mapas y cartas aeronáuticos; j) formalidades de aduana e inmigración; k) aeronaves en peligro e investigación de accidentes; además de cualquier otra materia relacionada con la seguridad, regularidad o eficiencia de la navegación aérea.</li>
+<li><strong>Art. 38, Desviaciones respecto de las normas y procedimientos internacionales:</strong> todo Estado que considere impracticable o no desee cumplir plenamente una norma debe <strong>notificar inmediatamente a la OACI</strong> las diferencias; en el caso de las enmiendas de una Norma, el Estado que no modifique su propio reglamento debe notificarlo al <strong>Consejo en un plazo de 60 días</strong> desde la adopción de la enmienda; el Consejo notifica entonces la diferencia a todos los demás Estados.</li>
+<li><strong>Arts. 43-47 (comienzo de la Parte II):</strong> crean «una organización que se denominará Organización de Aviación Civil Internacional», formada por «una Asamblea, un Consejo y los demás órganos que se consideren necesarios» (art. 43); establecen los nueve objetivos del tratado (art. 44, §2 arriba); fijan la sede permanente y el procedimiento para cambiarla (art. 45); y la capacidad jurídica en cada Estado contratante (art. 47).</li>
+<li><strong>Arts. 48-62 (Asamblea, Consejo, ANC, personal, finanzas):</strong> véanse §3-4 para los datos operativos (frecuencia de reuniones, historial de composición del Consejo y de la ANC, presupuesto, suspensión del derecho de voto).</li>
+<li><strong>Art. 83 bis (añadido en 1980, en vigor desde 1997), Transferencia de ciertas funciones y obligaciones:</strong> cuando una aeronave matriculada en un Estado es explotada (arrendamiento, fletamento o intercambio) por un explotador con sede en otro Estado contratante, el Estado de matrícula puede transferir por acuerdo a ese otro Estado la totalidad o parte de sus funciones y obligaciones en virtud de los <strong>artículos 12, 30, 31 y 32 a)</strong>, algo pertinente para las modernas operaciones de arrendamiento con y sin tripulación y de ACMI transfronterizo.</li>
+<li><strong>Arts. 90-93:</strong> procedimiento de adopción y enmienda de los Anexos por el Consejo (voto mayoritario del Consejo; surten efecto salvo que una mayoría de los Estados registre su desaprobación dentro de un plazo determinado).</li>
+<li><strong>Art. 93 bis (añadido por el mecanismo de enmienda de 1947), Expulsión vinculada a la ONU:</strong> el Estado cuyo gobierno la Asamblea General de la ONU recomiende excluir de los organismos vinculados a la ONU deja automáticamente de ser miembro de la OACI; el Estado expulsado de la ONU también deja de serlo, salvo que la ONU adjunte una recomendación en sentido contrario; la readmisión requiere la aprobación de la Asamblea General de la ONU más un voto mayoritario del Consejo.</li>
+<li><strong>Art. 94, Enmiendas del Convenio:</strong> toda propuesta de enmienda necesita un <strong>voto de dos tercios de la Asamblea</strong> y después la ratificación por el número de Estados que la Asamblea especifique antes de que entre en vigor (para esos Estados).</li>
+</ul>
+<h2 id="8-libertades-del-aire-iasta-el-acuerdo-sobre-transporte-aereo-internacional-y-los-acuerdos-bilaterales-de-servicios-aereos">8. Libertades del aire, IASTA, el Acuerdo sobre transporte aéreo internacional y los acuerdos bilaterales de servicios aéreos</h2>
+<p>Las <strong>nueve libertades del aire</strong> <strong>no</strong> están recogidas en el texto del Convenio de Chicago; se definieron en el <strong>Acuerdo de tránsito de los servicios aéreos internacionales (IASTA)</strong> y en el <strong>Acuerdo sobre transporte aéreo internacional</strong> (en gran parte no ratificado), ambos abiertos a la firma en Chicago el <strong>7 de diciembre de 1944</strong>, y la costumbre y la doctrina las ampliaron después con las «libertades» 6.ª a 9.ª, que no figuran en ninguno de los dos tratados originales:</p>
+<ul>
+<li><strong>IASTA («Acuerdo de las dos libertades» / Acuerdo de tránsito):</strong> concede, con carácter recíproco entre sus partes, solo las dos libertades <strong>técnicas</strong>: 1) el privilegio de sobrevolar el territorio sin aterrizar y 2) el privilegio de aterrizar con fines no comerciales (técnicos). <strong>Entró en vigor entre los Países Bajos y Noruega el 30 de enero de 1945</strong>, fecha en que el Gobierno de EE. UU. (depositario) recibió la segunda notificación de aceptación. <strong>España aceptó el IASTA el 30 de noviembre de 1945</strong>, años antes de la entrada en vigor del propio Convenio de Chicago y de la fecha de «1947» que da el manual de ENAIRE para la participación de España a escala OACI, lo que muestra que España se incorporó a los primeros instrumentos de aviación civil internacional de la posguerra antes de lo que sugiere la fecha única de ratificación del manual.</li>
+<li><strong>Acuerdo sobre transporte aéreo internacional («Acuerdo de las cinco libertades»):</strong> habría añadido las tres libertades <strong>comerciales</strong> originales (desembarcar y embarcar tráfico procedente o con destino al Estado de origen: 3.ª y 4.ª; y transportar tráfico hacia un tercer Estado como continuación del vuelo: 5.ª), pero lo ratificaron relativamente pocos Estados y nunca logró una adopción amplia; la mayoría de los derechos de tráfico comerciales se intercambian, en cambio, mediante <strong>acuerdos bilaterales de servicios aéreos (ASA)</strong>.</li>
+<li><strong>Las libertades 6.ª a 9.ª</strong> no son libertades de tratado, sino ampliaciones doctrinales usadas en la economía y la regulación del transporte aéreo: 6.ª (transportar tráfico entre otros dos Estados a través del propio territorio), 7.ª (transportar tráfico enteramente fuera del propio territorio), 8.ª y 9.ª (cabotaje: transportar tráfico interno dentro de un Estado extranjero, como parte de un servicio internacional o con independencia de él). Con arreglo al <strong>artículo 7</strong> del Convenio de Chicago, un Estado puede <strong>negarse</strong> a conceder derechos de cabotaje a las compañías aéreas de otros Estados, y los Estados se comprometen a no conceder derechos de cabotaje <strong>exclusivos</strong> a ningún otro Estado.</li>
+<li><strong>Acuerdos bilaterales de servicios aéreos (ASA):</strong> el vehículo jurídico habitual de los derechos de tráfico comerciales (libertades 3.ª a 9.ª) entre dos Estados, negociado de Estado a Estado; dentro de la UE, la competencia negociadora sobre los elementos que la UE ha asumido (por ejemplo, las tarifas) se ve afectada por el <strong>Reglamento (CE) n.º 847/2004</strong> (ya señalado en el manual de ENAIRE, §4.2.1).</li>
+</ul>
+<h2 id="9-otros-convenios-internacionales-de-derecho-aereo">9. Otros convenios internacionales de derecho aéreo</h2>
+<p>Todas las entradas se han verificado con los textos de situación de los tratados de la propia OACI, salvo indicación en contrario:</p>
+<table>
+<thead>
+<tr>
+<th>Convenio / Protocolo</th>
+<th>Firma / adopción</th>
+<th>Entrada en vigor</th>
+<th>Materia</th>
+<th>Partes (según lo leído)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Convenio de Chicago</strong></td>
+<td>Chicago, 7 dic. 1944</td>
+<td>4 abr. 1947</td>
+<td>Derecho aéreo público internacional; crea la OACI</td>
+<td>193</td>
+</tr>
+<tr>
+<td><strong>IASTA</strong> (Acuerdo de tránsito)</td>
+<td>Chicago, 7 dic. 1944</td>
+<td>30 ene. 1945 (NL-NO)</td>
+<td>1.ª y 2.ª libertades</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Convenio de Tokio de 1963</strong></td>
+<td>Tokio, 14 sep. 1963</td>
+<td>4 dic. 1969 (90 días después de la 12.ª ratificación, art. 21)</td>
+<td>Infracciones y ciertos otros actos cometidos a bordo de las aeronaves; facultades del comandante de la aeronave</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Convenio de La Haya de 1970</strong></td>
+<td><strong>La Haya, 16 dic. 1970</strong></td>
+<td>14 oct. 1971</td>
+<td>Represión del apoderamiento ilícito de aeronaves (secuestro aéreo)</td>
+<td>187</td>
+</tr>
+<tr>
+<td><strong>Convenio de Montreal de 1971</strong></td>
+<td>Montreal, 23 sep. 1971</td>
+<td>26 ene. 1973</td>
+<td>Represión de actos ilícitos contra la seguridad de la aviación civil (sabotaje, ataques contra aeronaves e instalaciones)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Convenio de Roma de 1952</strong></td>
+<td>Roma, 7 oct. 1952</td>
+<td>4 feb. 1958</td>
+<td>Daños causados por aeronaves extranjeras a terceros <strong>en la superficie</strong>; sustituye al Convenio de Roma de 1933 (enmendado en Bruselas en 1938); enmendado después por el <strong>Protocolo de Montreal de 1978</strong> (pocas ratificaciones)</td>
+<td>51</td>
+</tr>
+<tr>
+<td><strong>Convenio de Montreal de 1999</strong> (Doc 9740)</td>
+<td>Montreal, 1999</td>
+<td><strong>4 nov. 2003</strong></td>
+<td>Unificación de ciertas reglas para el transporte aéreo internacional; moderniza y sustituye el sistema de Varsovia (1929 + La Haya 1955 + Guadalajara 1961 + enmiendas de Montreal 1975)</td>
+<td>142 Estados + 1 REIO (UE); <strong>faltan al menos 51 Estados miembros de la OACI</strong></td>
+</tr>
+<tr>
+<td><strong>Convenio de Pekín de 2010</strong> (Doc 9960)</td>
+<td>Pekín, 10 sep. 2010</td>
+<td><strong>1 jul. 2018</strong></td>
+<td>Represión de actos ilícitos relacionados con la aviación civil internacional; moderniza el Convenio de Montreal de 1971 y su Protocolo suplementario de 1988; tipifica como delito el uso de aeronaves civiles como arma y los ataques BQN (biológicos, químicos, nucleares), además de los <strong>ciberataques contra instalaciones de navegación aérea</strong></td>
+<td>56</td>
+</tr>
+<tr>
+<td><strong>Protocolo de Pekín de 2010</strong> (Doc 9959)</td>
+<td>Pekín, 2010</td>
+<td>—</td>
+<td>Complementa el Convenio de La Haya de 1970 para abarcar los métodos modernos de secuestro aéreo, incluidos los ciberataques</td>
+<td>57</td>
+</tr>
+<tr>
+<td><strong>Protocolo de Montreal de 2014</strong> (Doc 10034)</td>
+<td>Montreal, 2014</td>
+<td>—</td>
+<td>Enmienda el Convenio de Tokio de 1963: jurisdicción obligatoria del <strong>Estado de aterrizaje</strong> y del <strong>Estado del explotador</strong> sobre las infracciones de pasajeros insubordinados</td>
+<td>58</td>
+</tr>
+<tr>
+<td><strong>Protocolo del texto en cinco idiomas de 1995</strong> (Doc 9663/9664)</td>
+<td>—</td>
+<td>entradas vinculadas</td>
+<td>Otorga igual autenticidad al texto del Convenio en <strong>árabe</strong></td>
+<td>77 / 71</td>
+</tr>
+<tr>
+<td><strong>Protocolo del texto en seis idiomas de 1998</strong> (Doc 9721/9722)</td>
+<td>—</td>
+<td>entradas vinculadas</td>
+<td>Otorga igual autenticidad al texto del Convenio en <strong>chino</strong></td>
+<td>58 / 57</td>
+</tr>
+</tbody>
+</table>
+<p>Notas adicionales a la tabla:</p>
+<ul>
+<li><strong>Cifras de responsabilidad de Montreal 1999</strong> (se revisan cada 5 años con arreglo a su art. 24; la <strong>cuarta revisión fue en 2024</strong>, así que estos son los importes vigentes): responsabilidad objetiva hasta <strong>151 880 DEG</strong> por pasajero en caso de muerte o lesión (por encima se aplica un régimen de presunción de culpa sin límite, pero el transportista puede exonerarse probando que no hubo negligencia); <strong>1519 DEG</strong> por pasajero por pérdida o destrucción del equipaje; <strong>6303 DEG</strong> por pasajero por retraso; <strong>26 DEG por kilogramo</strong> por pérdida, destrucción o retraso de la carga.</li>
+<li>El <strong>Convenio de Pekín de 2010</strong> se adoptó específicamente para responder a las amenazas posteriores al <strong>11-S (2001)</strong> y a los riesgos tecnológicos nuevos que no previeron los textos de 1971; también afirma el <strong>trato equitativo y la no discriminación</strong>, impide negar la extradición únicamente porque un delito sea «político» y amplía los motivos de jurisdicción a la nacionalidad del autor o de la víctima.</li>
+<li>El <strong>Convenio de Tokio de 1963</strong>, a diferencia de los tratados posteriores sobre «actos ilícitos», trata de las <strong>infracciones a bordo y de las facultades del comandante de la aeronave</strong> (inmovilización, desembarco, entrega a las autoridades) y no del secuestro ni del sabotaje como tales; el <strong>Protocolo de Montreal de 2014</strong> corrigió su principal debilidad, la jurisdicción casi exclusiva del Estado de matrícula, al hacer <strong>obligatoria</strong> la jurisdicción del <strong>Estado de aterrizaje o del explotador</strong> cuando se cumplen los criterios legales, con la mira puesta directamente en el aumento de los incidentes con <strong>pasajeros insubordinados</strong>.</li>
+</ul>
+<h2 id="10-la-oaci-y-espana-nota-sobre-oaci-frente-a-ceaceurocontrol">10. La OACI y España; nota sobre OACI frente a CEAC/EUROCONTROL</h2>
+<ul>
+<li><strong>Consejo:</strong> España ocupa un puesto entre los 36 Estados del Consejo (lo confirma el manual OM01 y es coherente con la propuesta española del actual Primer Vicepresidente de la ANC; véase el punto siguiente).</li>
+<li><strong>Comisión de Aeronavegación:</strong> el <strong>Sr. Ismael Pacheco Serrano</strong>, propuesto por España, es el <strong>Primer Vicepresidente</strong> de la ANC a 23 de febrero de 2026, un dato concreto, comprobable y del estilo de examen que va más allá del genérico «España forma parte del Consejo» del manual.</li>
+<li>La <strong>CEAC (Conferencia Europea de Aviación Civil, <em>European Civil Aviation Conference</em>, ECAC)</strong> y <strong>EUROCONTROL</strong> <strong>no</strong> son órganos de la OACI: la CEAC es un organismo intergubernamental de Estados europeos (con más miembros que la UE) que coordina las posiciones de política de aviación civil europea y suele alimentar el trabajo de la oficina regional europea de la OACI; EUROCONTROL ejerce funciones paneuropeas de navegación aérea (Gestor de Red, MUAC, tasas de ruta). Ambas interactúan con la <strong>oficina de Europa y Atlántico Norte (EUR/NAT) de la OACI en París</strong>, pero la estructura y las funciones detalladas de EUROCONTROL, la UE y EASA corresponden a la <strong>tarea T01b</strong>, no a este archivo, para evitar duplicidades.</li>
+<li>El <strong>plan estratégico propio de ENAIRE, «Plan de Vuelo 2030»</strong>, es un documento de estrategia corporativa interno del ANSP español, sin relación con el Plan Estratégico de la OACI; se trata en el material del tema 7 (Entorno profesional) (<code>behavioral/flight-plan-2030-summary.md</code>), no aquí.</li>
+</ul>
+<h2 id="11-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">11. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (OM01, §2.1)</th>
+<th>Fuente primaria (este archivo)</th>
+<th>Cuál es la más probable en el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Enumera «5 objetivos estratégicos» (seguridad operacional, capacidad y eficiencia, seguridad y facilitación, desarrollo económico, protección del medio ambiente) como los objetivos actuales de la OACI.</td>
+<td>El marco corporativo actual de la OACI para 2026-2050 usa una <strong>Visión, 3 aspiraciones esenciales, una Misión y 6 objetivos estratégicos</strong> (redacción y número distintos). El <strong>artículo 44</strong> del propio Convenio da una lista de <strong>9 puntos (a-i)</strong> de objetivos del tratado, sin relación de redacción con ninguno de los dos.</td>
+<td>El manual (nov. 2025) es la bibliografía declarada del examen y se redactó antes o hacia la misma época que el nuevo Plan; <strong>cabe esperar que ambos marcos sean examinables</strong>, pero lo más probable es que el examen cite directamente la lista de 5 objetivos del manual, por ser lo que dice el manual oficial de estudio. Conviene conocer <strong>ambos</strong>.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>«El Convenio de La Haya para la represión del apoderamiento ilícito de aeronaves, 16 de diciembre de <strong>1971</strong>.»</td>
+<td>El texto de situación del tratado de la propia OACI: «SIGNED AT THE HAGUE ON 16 DECEMBER <strong>1970</strong>».</td>
+<td>La <strong>fuente primaria (1970) es la correcta</strong>; el «1971» del manual es muy probablemente una errata (puede confundir el año de la firma con el de publicación en el BOE, 1973, o con un «1» suelto del año de entrada en vigor, 1971). Memoriza <strong>1970</strong> para la firma y recuerda la cifra del manual solo para reconocer la trampa si aparece como distractor.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Describe el Convenio como formado por «dos partes: la primera regula la navegación internacional, la segunda se ocupa de… la OACI».</td>
+<td>El propio índice del Doc 7300 muestra <strong>cuatro</strong> Partes numeradas (I Navegación aérea, II La OACI, III Transporte aéreo internacional, IV Disposiciones finales), agrupadas en 22 capítulos.</td>
+<td>La descripción en dos partes del manual es una simplificación de la misma idea (Partes I-II frente a III-IV); <strong>memoriza la estructura de cuatro Partes y 22 capítulos</strong> de la fuente primaria para las preguntas sobre estructura exacta, pero reconoce el planteamiento de las «dos mitades» del manual como compatible en líneas generales, no contradictorio.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Presenta el Convenio de Roma de 1952 como una «enmienda», junto con Bruselas 1938 y Montreal 1978, al Convenio de Roma de 1933.</td>
+<td>El Convenio de Roma de 1952 es un <strong>tratado independiente que sustituye</strong> al anterior (Roma, 7 oct. 1952, en vigor el 4 feb. 1958, 51 partes) y que reemplazó al texto de 1933 (que a su vez se había enmendado en Bruselas en 1938); el <strong>Protocolo de Montreal de 1978</strong> enmendó después específicamente el texto de <strong>1952</strong>.</td>
+<td>La <strong>secuencia de la fuente primaria (1933 → enmienda de Bruselas de 1938 → tratado sustitutivo de 1952 → Protocolo de Montreal de 1978 que enmienda el de 1952) es técnicamente correcta</strong>; la fórmula más simple del manual, «enmendado por…», es una simplificación útil para el nivel de detalle probable del examen, pero no debe leerse como un linaje literalmente exacto.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Da el Consejo como «36 Estados contratantes» y la ANC como «19 miembros» sin matices.</td>
+<td>Ambas cifras son correctas <strong>hoy</strong>, pero los Protocolos adoptados en <strong>2016</strong> (Doc 10077 para el Consejo → 40; Doc 10076 para la ANC → 21) <strong>aún no están en vigor</strong> (necesitan 128 ratificaciones cada uno; se llegó a 120 en la fecha de la fuente).</td>
+<td>Las cifras actuales (36 / 19) son las correctas para el examen; los protocolos pendientes de 40/21 son un buen detalle de «trampa» para un distractor bien informado, no la clave de respuesta.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-ejemplos-resueltos">12. Ejemplos resueltos</h2>
+<ol>
+<li><strong>Ratio de ampliación del Consejo.</strong> El Consejo ha pasado de 21 miembros (1944) a 36 (2002): 36/21 = <strong>1,71</strong>, es decir, ha crecido un <strong>71 %</strong> en miembros, mientras que los miembros de la OACI pasaron de los 52 firmantes originales a 193 Estados, un aumento del <strong>271 %</strong> (193/52 ≈ 3,71, es decir, +271 %). El crecimiento de los puestos del Consejo se ha quedado por detrás del de los miembros, que es precisamente la razón declarada de la ampliación pendiente (aún no en vigor) a 40 puestos.</li>
+<li><strong>Ratificaciones que aún faltan para los Protocolos de 2016.</strong> Se exigen 128 ratificaciones; se han depositado 120 (según lo leído). <strong>128 − 120 = 8</strong> ratificaciones más para que cada Protocolo entre en vigor.</li>
+<li><strong>Responsabilidad de Montreal 1999 por carga para un bulto de 20 kg.</strong> A 26 DEG/kg, la responsabilidad máxima es 20 × 26 = <strong>520 DEG</strong>. (El DEG, derecho especial de giro, es una unidad definida por el FMI a partir de una cesta de monedas; es poco probable que el examen exija convertir DEG a EUR/USD, pero hay que saber que el DEG <em>no</em> es un importe monetario fijo.)</li>
+<li><strong>Umbral para una sesión extraordinaria de la Asamblea.</strong> Con 193 Estados miembros, «no menos de una quinta parte» (art. 48 a) significa que al menos ⌈193/5⌉ = <strong>39</strong> Estados deben pedir conjuntamente un periodo extraordinario de sesiones.</li>
+<li><strong>Ratio de ampliación de la ANC.</strong> De 12 (1944) a 19 (2005) hay +7 miembros, un <strong>aumento del 58 %</strong> (19/12 ≈ 1,58); el Protocolo pendiente a 21 supondría <strong>+2 puestos (+10,5 %)</strong> más sobre los 19 actuales.</li>
+</ol>
+<h2 id="13-trampas-de-examen">13. Trampas de examen</h2>
+<ul>
+<li><strong>«La OACI tiene 193 Estados miembros»</strong> es correcto para el <strong>Convenio de Chicago/OACI</strong>; no lo confundas con los <strong>42 Estados miembros de EUROCONTROL + 2 Estados del Acuerdo Global</strong> ni con los <strong>27 Estados miembros de la UE</strong>: tres cifras distintas, tres organizaciones distintas, que aparecen juntas en los materiales del tema 1.</li>
+<li><strong>Consejo (36) frente a ANC (19)</strong>: se confunden con facilidad; tampoco los confundas con el <strong>Consejo de Seguridad de la ONU (15)</strong> ni con el <strong>Consejo de Administración de EASA</strong> (un miembro por Estado de la UE + la Comisión).</li>
+<li><strong>Los Anexos 2, 5, 7 y 8</strong> son los <strong>únicos</strong> con <strong>Normas pero sin métodos recomendados</strong>: un dato concreto y citable que a los examinadores les gusta.</li>
+<li><strong>Numeración de Anexos frente a numeración de documentos</strong>: los Anexos son los SARPs; los PANS, SUPPS y manuales son Documentos numerados aparte que <em>apoyan</em> Anexos concretos; no respondas «Anexo 4444» ni combinaciones mixtas similares.</li>
+<li><strong>El año del Convenio de La Haya</strong>: <strong>1970</strong>, no 1971 (véase la tabla de discrepancias, §11); 1971 es, en cambio, el año del <strong>Convenio de Montreal</strong> (sabotaje y ataques contra la aviación civil) <strong>y</strong> de la propia <strong>entrada en vigor</strong> del Convenio de La Haya. Es fácil mezclar tres «1971» distintos: a) Convenio de Montreal <em>firmado</em> en 1971; b) Convenio de La Haya <em>en vigor</em> en 1971; c) el «firmado en 1971» (probablemente erróneo) del manual para La Haya.</li>
+<li><strong>PICAO frente a OACI</strong>: la PICAO (1944-1947) fue <strong>provisional</strong>; la OACI existe formalmente solo desde el <strong>4 de abril de 1947</strong>. La <strong>primera Asamblea oficial (mayo de 1947)</strong> no es la <strong>Asamblea Interina</strong> de la propia PICAO (que se reunió por primera vez en junio de 1946).</li>
+<li><strong>Las libertades del aire no están en el texto del Convenio de Chicago</strong>; proceden del <strong>IASTA</strong> (1.ª y 2.ª), que es un acuerdo aparte, y del Acuerdo de las cinco libertades, en gran parte no ratificado (3.ª a 5.ª); la 6.ª a la 9.ª son doctrinales, no basadas en tratados.</li>
+<li><strong>Montreal 1999 frente a Montreal 1971</strong>: misma ciudad, materias muy distintas: 1971 es un convenio penal y de seguridad (sabotaje); 1999 es un convenio de <strong>responsabilidad civil</strong> (indemnización por pasajeros, carga y equipaje) que sustituye al sistema de Varsovia.</li>
+<li><strong>Convenio de Pekín (2010) frente a Protocolo de Pekín (2010)</strong>: el Convenio moderniza el <strong>Convenio de Montreal de 1971 y su Protocolo suplementario de 1988</strong>; el Protocolo moderniza el <strong>Convenio de La Haya de 1970</strong>. Tratados base distintos, misma conferencia diplomática de Pekín, mismo año.</li>
+</ul>
+<h2 id="14-imprescindible-memorizar">14. Imprescindible memorizar</h2>
+<ul>
+<li>OACI: <strong>193</strong> Estados miembros; creada en <strong>1944</strong> (Chicago), operativa desde el <strong>4 de abril de 1947</strong>; sede en <strong>Montreal</strong>; 6 idiomas oficiales (ES/EN/FR/RU/AR/ZH); Secretario General <strong>Juan Carlos Salazar</strong>; Presidente del Consejo <strong>Toshiyuki Onuma</strong> (7.º Presidente, mandato desde el 1 de enero de 2026).</li>
+<li>Asamblea: se reúne <strong>al menos una vez cada 3 años</strong>; sesión extraordinaria por convocatoria del Consejo o a petición de <strong>≥ 1/5 de los Estados</strong>.</li>
+<li>Consejo: <strong>36</strong> Estados, mandatos de 3 años, <strong>el Presidente no tiene voto</strong>; creció 21→27→30→33→36 (1947→1962→1973→1980→2002); protocolo pendiente → 40.</li>
+<li>ANC: <strong>19</strong> miembros, nombrados por el Consejo, <strong>no representan a su Estado</strong>; creció 12→15→19 (1947→1974→2005); protocolo pendiente → 21; <strong>3 periodos de sesiones al año</strong>, de unas 9 semanas cada uno.</li>
+<li>Secretaría: <strong>5 Oficinas</strong>; <strong>7 oficinas regionales</strong> que cubren <strong>9 regiones</strong>.</li>
+<li>19 Anexos; <strong>solo los Anexos 2, 5, 7 y 8 = solo Normas, sin métodos recomendados</strong>; SARPs = Normas + métodos recomendados; los PANS complementan los Anexos; los SUPPS son regionales.</li>
+<li>Visión del GASP: <strong>cero víctimas mortales en las operaciones comerciales en 2030 y después</strong>; <strong>6 objetivos</strong>. Herramienta del GANP: <strong>marco ASBU</strong>. GASeP: seguridad de la aviación, enfoque basado en el riesgo.</li>
+<li>Convenios clave: Chicago <strong>1944/1947</strong>; IASTA <strong>1944/1945</strong>; Tokio <strong>1963/1969</strong>; <strong>La Haya 1970/1971</strong>; Montreal (sabotaje) <strong>1971/1973</strong>; Roma <strong>1952/1958</strong>; Montreal (responsabilidad) <strong>1999/2003</strong>; Convenio de Pekín <strong>2010/2018</strong>.</li>
+<li>Límites de Montreal 1999: <strong>151 880 DEG</strong> (umbral de responsabilidad objetiva por muerte o lesión), <strong>1519 DEG</strong> (equipaje), <strong>6303 DEG</strong> (retraso), <strong>26 DEG/kg</strong> (carga).</li>
+<li>Artículo 3 bis añadido en <strong>1984/1998</strong> (prohibición de armas contra aeronaves civiles); artículo 83 bis añadido en <strong>1980/1997</strong> (transferencia de funciones del Estado de matrícula en arrendamiento y fletamento); artículo 94 = <strong>voto de 2/3 de la Asamblea</strong> para enmendar el Convenio.</li>
+</ul>
+<h2 id="15-glosario-bilingue-es-en">15. Glosario bilingüe (ES → EN)</h2>
+<ul>
+<li>Organización de Aviación Civil Internacional (OACI) → International Civil Aviation Organization (ICAO)</li>
+<li>Convenio de Chicago → Chicago Convention</li>
+<li>Organización Provisional de Aviación Civil Internacional (PICAO) → Provisional International Civil Aviation Organization (PICAO)</li>
+<li>Asamblea → Assembly</li>
+<li>Consejo → Council</li>
+<li>Comisión de Aeronavegación (ANC) → Air Navigation Commission (ANC)</li>
+<li>Secretaría / Secretario General → Secretariat / Secretary General</li>
+<li>Norma → Standard</li>
+<li>Método recomendado → Recommended Practice</li>
+<li>Normas y métodos recomendados (SARPs) → Standards and Recommended Practices (SARPs)</li>
+<li>Procedimientos para los servicios de navegación aérea (PANS) → Procedures for Air Navigation Services (PANS)</li>
+<li>Procedimientos suplementarios regionales (SUPPS) → Regional Supplementary Procedures (SUPPS)</li>
+<li>Material guía → Guidance material</li>
+<li>Anexo → Annex</li>
+<li>Soberanía → Sovereignty</li>
+<li>Zona prohibida → Prohibited area</li>
+<li>Cabotaje → Cabotage</li>
+<li>Libertades del aire → Freedoms of the Air</li>
+<li>Acuerdo de Tránsito de los Servicios Aéreos Internacionales (IASTA) → International Air Services Transit Agreement (IASTA)</li>
+<li>Acuerdo bilateral de servicios aéreos (ASA) → Bilateral Air Services Agreement (ASA)</li>
+<li>Apoderamiento ilícito de aeronaves → Unlawful seizure of aircraft (hijacking)</li>
+<li>Interferencia ilícita → Unlawful interference</li>
+<li>Certificado de aeronavegabilidad → Certificate of airworthiness</li>
+<li>Certificado de matrícula → Certificate of registration</li>
+<li>Diario de a bordo → Journey log book</li>
+<li>Derecho especial de giro (DEG) → Special Drawing Right (SDR)</li>
+<li>Plan mundial de navegación aérea (GANP) → Global Air Navigation Plan (GANP)</li>
+<li>Plan mundial para la seguridad operacional de la aviación (GASP) → Global Aviation Safety Plan (GASP)</li>
+<li>Plan mundial de seguridad de la aviación (GASeP) → Global Aviation Security Plan (GASeP)</li>
+<li>Programa universal de auditoría de la vigilancia de la seguridad operacional (USOAP) → Universal Safety Oversight Audit Programme (USOAP)</li>
+<li>Programa universal de auditoría de la seguridad de la aviación (USAP) → Universal Security Audit Programme (USAP)</li>
+<li>Puntuación de implantación efectiva (EI) → Effective Implementation (EI) score</li>
+<li>Preocupación significativa de seguridad operacional (SSC) → Significant Safety Concern (SSC)</li>
+<li>Programa estatal de seguridad operacional (SSP) → State Safety Programme (SSP)</li>
+<li>Sistema de gestión de la seguridad operacional (SMS) → Safety Management System (SMS)</li>
+<li>Mejora por bloques del sistema de aviación (ASBU) → Aviation System Block Upgrade (ASBU)</li>
+<li>Oficina regional → Regional Office</li>
+<li>Presupuesto trienal → Triennial budget</li>
+</ul>
+<h2 id="16-fuentes">16. Fuentes</h2>
+<ul>
+<li>Convenio de Chicago, texto consolidado, 9.ª edición (Doc 7300).</li>
+<li>Lista de partes y situación del Convenio de Chicago de la OACI.</li>
+<li>Páginas corporativas de la OACI: Asamblea, Consejo, Comisión de Aeronavegación, Secretaría, Estados miembros, USOAP, USAP, Plan Estratégico 2026-2050.</li>
+<li>Plan Estratégico de la OACI 2026-2050 (texto completo).</li>
+<li>GASP (Doc 10004, edición 2026-2028), GANP (Doc 9750, borrador A42), GASeP (Doc 10118, 2.ª ed.).</li>
+<li>Doc 7030 (SUPPS región EUR, 5.ª ed.) y Doc 7600 (Reglamento interior de la Asamblea).</li>
+<li>Informe anual del Consejo de la OACI 2025.</li>
+<li>Textos y listas de partes de los convenios de Tokio 1963, La Haya 1970, Montreal 1971, Roma 1952, Montreal 1999, Pekín 2010 y el IASTA.</li>
+<li>Manual de ENAIRE «Instituciones y Legislación Aeronáutica» (nov. 2025).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

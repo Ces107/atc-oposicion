@@ -1,0 +1,404 @@
+C1 word (verb): to make something happen faster or earlier (starts with "acc")	accelerate (acelerar). Example: "The new radar system should accelerate the handover between sectors."	ATC::EN02
+C1 word (adj): responsible for your actions and expected to explain them (starts with "acc")	accountable (responsable ante alguien). Example: "Controllers are accountable for the safety of every aircraft in their sector."	ATC::EN02
+C1 word (verb): to gradually get more and more of something over time (starts with "acc")	accumulate (acumular). Example: "Ice can accumulate on the wings during a long descent through cloud."	ATC::EN02
+C1 word (verb): to stick to a rule, belief or plan (starts with "adh")	adhere (to) (adherirse, cumplir). Example: "All pilots must adhere to the published departure procedure."	ATC::EN02
+C1 word (adj): next to or very near something else (starts with "adj")	adjacent (adyacente, contiguo). Example: "The two adjacent sectors share a common frequency."	ATC::EN02
+C1 word (adj): harmful or unfavourable (starts with "adv")	adverse (adverso). Example: "Adverse weather forced the airport to close for two hours."	ATC::EN02
+C1 word (conj): formal word meaning "although" or "even though" (starts with "alb")	albeit (aunque, si bien). Example: "The delay was short, albeit costly."	ATC::EN02
+C1 word (verb): to give something officially to a person or purpose (resources, time, money) (starts with "all")	allocate (asignar, destinar). Example: "The supervisor will allocate the new slots to the busiest routes."	ATC::EN02
+C1 word (verb): to change the words of a text or law slightly to improve it (starts with "ame")	amend (modificar, enmendar). Example: "The regulation was amended to include drones."	ATC::EN02
+C1 word (prep): in the middle of something, usually a difficult situation (starts with "ami")	amid (en medio de). Example: "Amid growing concern about noise, the airport changed its routes."	ATC::EN02
+C1 word (noun): the equipment or tools needed for a particular purpose (starts with "app")	apparatus (aparato, equipo). Example: "The breathing apparatus was checked before the drill."	ATC::EN02
+C1 word (adj): decided by chance or personal whim rather than by a system or reason (starts with "arb")	arbitrary (arbitrario). Example: "The choice of runway was not arbitrary; it depended on the wind."	ATC::EN02
+C1 word (verb): to express ideas or feelings clearly in words (starts with "art")	articulate (articular, expresar con claridad). Example: "She could articulate complex ideas under pressure."	ATC::EN02
+C1 word (verb): to state something firmly and confidently (starts with "ass")	assert (afirmar, sostener). Example: "He asserted that the report was accurate."	ATC::EN02
+C1 word (verb): to succeed in getting something, usually after effort (starts with "att")	attain (alcanzar, lograr). Example: "The aircraft attained its cruising level after 20 minutes."	ATC::EN02
+C1 word (verb): to give official permission for something (starts with "aut")	authorize (autorizar). Example: "Only the duty manager can authorize a change of runway."	ATC::EN02
+C1 word (verb, formal): to wait for something (starts with "awa")	await (esperar, aguardar). Example: "The crew awaited clearance to push back."	ATC::EN02
+C1 word (noun): a failure to obey a rule or law; also a gap in a wall or defence (starts with "bre")	breach (incumplimiento, brecha). Example: "Flying without clearance is a serious breach of regulations."	ATC::EN02
+C1 word (noun): the main or largest part of something (starts with "bul")	bulk (la mayor parte, volumen). Example: "The bulk of the traffic arrives between 07:00 and 09:00."	ATC::EN02
+C1 word (noun): a heavy responsibility, load or duty (starts with "bur")	burden (carga, peso). Example: "Automation reduced the burden on the controllers."	ATC::EN02
+C1 word (noun): the ability to do something (starts with "cap")	capability (capacidad, aptitud). Example: "The airport has the capability to handle wide-body aircraft."	ATC::EN02
+C1 word (noun): great care to avoid danger or mistakes (starts with "cau")	caution (precaución, cautela). Example: "Proceed with caution; the runway may be wet."	ATC::EN02
+C1 word (verb, formal): to stop or come to an end (starts with "cea")	cease (cesar). Example: "All flights ceased when the volcanic ash reached the coast."	ATC::EN02
+C1 word (noun): the quality of being clear and easy to understand (starts with "cla")	clarity (claridad). Example: "Clarity is more important than speed on the radio."	ATC::EN02
+C1 word (verb): to happen at the same time as something else (starts with "coi")	coincide (coincidir). Example: "The strike coincided with the busiest weekend of the year."	ATC::EN02
+C1 word (verb): to work together with someone to produce something (starts with "col")	collaborate (colaborar). Example: "Pilots and controllers must collaborate closely during a diversion."	ATC::EN02
+C1 word (verb, formal): to begin (starts with "com")	commence (comenzar). Example: "The exercise will commence at 09:00."	ATC::EN02
+C1 word (verb): to force someone to do something (starts with "com")	compel (obligar, forzar). Example: "Bad weather compelled the crew to divert."	ATC::EN02
+C1 word (verb): to give someone money or something to balance a loss or injury (starts with "com")	compensate (compensar, indemnizar). Example: "Airlines must compensate passengers for long delays."	ATC::EN02
+C1 word (verb): to obey a rule, order or request (starts with "com")	comply (with) (cumplir con). Example: "Aircraft must comply with air traffic instructions."	ATC::EN02
+C1 word (verb): to hide something or keep it secret (starts with "con")	conceal (ocultar). Example: "He tried to conceal his mistake from the supervisor."	ATC::EN02
+C1 word (verb): to admit that something is true, often reluctantly (starts with "con")	concede (admitir, conceder). Example: "The airline conceded that the delay was avoidable."	ATC::EN02
+C1 word (adj): following one after another without a break (starts with "con")	consecutive (consecutivo, seguido). Example: "She worked five consecutive night shifts."	ATC::EN02
+C1 word (noun): a general agreement among a group (starts with "con")	consensus (consenso). Example: "There is a consensus that the procedure needs revising."	ATC::EN02
+C1 word (noun): something that limits what you can do (starts with "con")	constraint (restricción, limitación). Example: "Budget constraints delayed the new tower."	ATC::EN02
+C1 word (verb): to argue or claim that something is true (starts with "con")	contend (sostener, afirmar; also: competir). Example: "The union contends that the rosters are unsafe."	ATC::EN02
+C1 word (noun): a statement or fact that is the opposite of, or inconsistent with, another (starts with "con")	contradiction (contradicción). Example: "There is a contradiction between the two reports."	ATC::EN02
+C1 word (verb): to match, be similar to, or be equal to something; also to exchange letters (starts with "cor")	correspond (corresponder; escribirse). Example: "The figures on the chart do not correspond to the data table."	ATC::EN02
+C1 word (adj): able to be believed or trusted (starts with "cre")	credible (creíble). Example: "The controller gave a credible explanation of the event."	ATC::EN02
+C1 word (verb, formal): to consider or judge something in a particular way (starts with "dee")	deem (considerar, juzgar). Example: "The runway was deemed unsafe after the inspection."	ATC::EN02
+C1 word (noun): a lack of something that is needed (starts with "def")	deficiency (deficiencia, carencia). Example: "The audit found a deficiency in the training records."	ATC::EN02
+C1 word (adj): easily damaged or broken; needing careful handling (starts with "del")	delicate (delicado). Example: "Negotiations over the airspace change were delicate."	ATC::EN02
+C1 word (verb): to move troops, equipment or resources into position for use (starts with "dep")	deploy (desplegar). Example: "Emergency crews were deployed along the runway."	ATC::EN02
+C1 word (verb): to become worse (starts with "det")	deteriorate (deteriorarse, empeorar). Example: "Visibility deteriorated rapidly after midday."	ATC::EN02
+C1 word (verb): to invent or plan a method or system (starts with "dev")	devise (idear, concebir). Example: "The team devised a new way to sequence arrivals."	ATC::EN02
+C1 word (verb): to become or make smaller, weaker or less important (starts with "dim")	diminish (disminuir). Example: "Fatigue can diminish a controller's alertness."	ATC::EN02
+C1 word (verb): to throw away something you no longer need (starts with "dis")	discard (desechar, descartar). Example: "Discard any charts that are out of date."	ATC::EN02
+C1 word (noun): the freedom or right to decide what to do; also tact (starts with "dis")	discretion (discreción; libertad de decisión). Example: "The supervisor may use their discretion in exceptional cases."	ATC::EN02
+C1 word (verb): to interrupt or stop the normal course of something (starts with "dis")	disrupt (interrumpir, perturbar). Example: "A power cut disrupted all radar displays."	ATC::EN02
+C1 word (verb): to change the shape, sound or meaning of something so that it is not accurate (starts with "dis")	distort (distorsionar, deformar). Example: "Interference can distort the audio signal."	ATC::EN02
+C1 word (verb): to change the direction or use of something (starts with "div")	divert (desviar). Example: "Three flights were diverted to Valencia."	ATC::EN02
+C1 word (adj): consisting of two parts or having two purposes (starts with "dua")	dual (doble, dual). Example: "The airport has a dual role as a civil and military base."	ATC::EN02
+C1 word (adj): very detailed and complicated (starts with "ela")	elaborate (elaborado, complejo). Example: "The airline had an elaborate contingency plan."	ATC::EN02
+C1 word (adj): qualified or allowed to do or receive something (starts with "eli")	eligible (apto, con derecho a). Example: "Candidates must be eligible to work in the EU."	ATC::EN02
+C1 word (verb): to begin a journey or a new venture (starts with "emb")	embark (embarcar; emprender). Example: "She embarked on a career in air traffic control."	ATC::EN02
+C1 word (verb): to include a wide range of things (starts with "enc")	encompass (abarcar, englobar). Example: "The course encompasses navigation, meteorology and law."	ATC::EN02
+C1 word (verb): to make people obey a law or rule (starts with "enf")	enforce (hacer cumplir). Example: "The authority enforces safety regulations."	ATC::EN02
+C1 word (verb, formal): to happen afterwards, especially as a result (starts with "ens")	ensue (sobrevenir, derivarse). Example: "Chaos ensued when the system crashed."	ATC::EN02
+C1 word (verb): to increase in intensity or seriousness (starts with "esc")	escalate (intensificarse, escalar). Example: "The dispute escalated into a full strike."	ATC::EN02
+C1 word (verb): to move people from a dangerous place to a safe one (starts with "eva")	evacuate (evacuar). Example: "The terminal was evacuated after the alarm."	ATC::EN02
+C1 word (verb): to use effort, force or influence (starts with "exe")	exert (ejercer). Example: "The passengers exerted pressure on the airline to compensate them."	ATC::EN02
+C1 word (adj): stated clearly and in detail, leaving no doubt (starts with "exp")	explicit (explícito). Example: "The clearance was explicit: hold short of runway 24."	ATC::EN02
+C1 word (verb): to make an action or process easier (starts with "fac")	facilitate (facilitar). Example: "New software facilitates the flow of traffic."	ATC::EN02
+C1 word (noun): a fault or mistake that makes something less good (starts with "fla")	flaw (defecto, fallo). Example: "A flaw in the design caused the crack."	ATC::EN02
+C1 word (verb): to be successful, grow or develop well (starts with "flo")	flourish (florecer, prosperar). Example: "Regional airports flourished after the reform."	ATC::EN02
+C1 word (verb): to develop and prepare a plan or idea in detail (starts with "for")	formulate (formular). Example: "The ministry is formulating a new aviation strategy."	ATC::EN02
+C1 word (verb): to encourage the development of something (starts with "fos")	foster (fomentar, promover). Example: "The programme fosters cooperation between agencies."	ATC::EN02
+C1 word (adj): easily broken or damaged (starts with "fra")	fragile (frágil). Example: "The recovery of air traffic remains fragile."	ATC::EN02
+C1 word (noun): help, advice or direction given to someone (starts with "gui")	guidance (orientación, guía). Example: "The pilot followed the controller's guidance to the gate."	ATC::EN02
+C1 word (verb): to stop; to make something stop (starts with "hal")	halt (detener, parar). Example: "All departures were halted because of the lightning."	ATC::EN02
+C1 word (noun): something that may cause danger or harm (starts with "haz")	hazard (peligro, riesgo). Example: "Birds are a serious hazard near the runway."	ATC::EN02
+C1 word (verb): to make something stronger or more intense (starts with "hei")	heighten (aumentar, intensificar). Example: "The accident heightened concerns about fatigue."	ATC::EN02
+C1 word (noun): a system of ranks, from top to bottom, in an organization (starts with "hie")	hierarchy (jerarquía). Example: "The flat hierarchy in the cockpit encourages challenge and feedback."	ATC::EN02
+C1 word (adj): about to happen very soon, usually something unpleasant (starts with "imm")	imminent (inminente). Example: "A thunderstorm was imminent."	ATC::EN02
+C1 word (noun): the process of putting a plan or decision into action (starts with "imp")	implementation (implantación, puesta en práctica). Example: "The implementation of the new procedure begins in March."	ATC::EN02
+C1 word (adj): not enough in quantity or quality (starts with "ina")	inadequate (inadecuado, insuficiente). Example: "Their preparation was inadequate for such weather."	ATC::EN02
+C1 word (verb): to make someone or something responsible for a cost, or to suffer something unpleasant as a result of your actions (starts with "inc")	incur (incurrir en, acarrear). Example: "The airline incurred heavy costs during the strike."	ATC::EN02
+C1 word (adj): belonging naturally to something as a permanent part (starts with "inh")	inherent (inherente). Example: "Some risk is inherent in every flight."	ATC::EN02
+C1 word (verb): to make something begin (starts with "ini")	initiate (iniciar, dar comienzo a). Example: "The captain initiated a go-around."	ATC::EN02
+C1 word (verb): to get involved in a situation in order to change or help (starts with "int")	intervene (intervenir). Example: "The supervisor intervened to resolve the conflict."	ATC::EN02
+C1 word (adj): not damaged or complete (starts with "int")	intact (intacto). Example: "The black box was found intact."	ATC::EN02
+C1 word (adj): essential and forming a necessary part of a whole (starts with "int")	integral (integral, fundamental). Example: "Teamwork is integral to safe air traffic control."	ATC::EN02
+C1 word (noun): being honest and having strong moral principles (starts with "int")	integrity (integridad). Example: "The investigation was conducted with complete integrity."	ATC::EN02
+C1 word (verb): to get involved and prevent something from happening or spoil it (starts with "int")	interfere (interferir; entrometerse). Example: "Radio noise interfered with the transmission."	ATC::EN02
+C1 word (adj): happening between two events or periods; temporary (starts with "int")	interim (provisional, interino). Example: "An interim report was published in June."	ATC::EN02
+C1 word (verb): to ask for or use a law or authority to justify or support an action (starts with "inv")	invoke (invocar). Example: "The captain invoked emergency authority."	ATC::EN02
+C1 word (adj): not connected with what is being discussed (starts with "irr")	irrelevant (irrelevante). Example: "Information that is irrelevant to the task should be ignored."	ATC::EN02
+C1 word (noun): the power or right to make legal decisions over a particular area (starts with "jur")	jurisdiction (jurisdicción). Example: "Each state has jurisdiction over its own airspace."	ATC::EN02
+C1 word (noun): the possibility that something will happen (starts with "lik")	likelihood (probabilidad). Example: "The likelihood of a collision is extremely small."	ATC::EN02
+C1 word (adj): legally allowed or based on good reasons (starts with "leg")	legitimate (legítimo). Example: "There were legitimate reasons for the delay."	ATC::EN02
+C1 word (adj): legally responsible for something (starts with "lia")	liable (responsable; propenso). Example: "The operator is liable for damage to the airport."	ATC::EN02
+C1 word (adj): required by law or rules; compulsory (starts with "man")	mandatory (obligatorio). Example: "It is mandatory to read back runway clearances."	ATC::EN02
+C1 word (noun): the size or importance of something (starts with "mag")	magnitude (magnitud). Example: "Nobody expected the magnitude of the disruption."	ATC::EN02
+C1 word (noun): the work of keeping a machine or building in good condition (starts with "mai")	maintenance (mantenimiento). Example: "The aircraft is undergoing scheduled maintenance."	ATC::EN02
+C1 word (verb): to join together to form a bigger organization (starts with "mer")	merge (fusionar, confluir). Example: "The two companies merged last year."	ATC::EN02
+C1 word (adj): very small in amount; the least possible (starts with "min")	minimal (mínimo). Example: "Delays were minimal despite the snow."	ATC::EN02
+C1 word (adj): giving a wrong or false idea (starts with "mis")	misleading (engañoso). Example: "The label was misleading."	ATC::EN02
+C1 word (adj): felt or done by two or more people in the same way (starts with "mut")	mutual (mutuo). Example: "Trust must be mutual between pilot and controller."	ATC::EN02
+C1 word (adv): that is to say (starts with "nam")	namely (a saber, es decir). Example: "Two runways are affected, namely 06 and 24."	ATC::EN02
+C1 word (adv): despite what has just been said (starts with "non")	nonetheless (no obstante, sin embargo). Example: "The forecast was poor; nonetheless, the flight departed."	ATC::EN02
+C1 word (verb): to formally tell someone about something (starts with "not")	notify (notificar). Example: "The pilot notified the tower of a bird strike."	ATC::EN02
+C1 word (verb): to make someone legally or morally obliged to do something (starts with "obl")	oblige (obligar). Example: "Airlines are obliged to publish delay statistics."	ATC::EN02
+C1 word (noun): an event or something that happens (starts with "occ")	occurrence (suceso, ocurrencia). Example: "Every occurrence must be reported."	ATC::EN02
+C1 word (adj): relating to how something works; in use (starts with "ope")	operational (operativo, en funcionamiento). Example: "The new radar is fully operational."	ATC::EN02
+C1 word (verb): to watch and manage a situation or group of workers (starts with "ove")	oversee (supervisar). Example: "A senior controller oversees the training."	ATC::EN02
+C1 word (verb): to not notice something, or to ignore it (starts with "ove")	overlook (pasar por alto). Example: "It is easy to overlook a small detail in a long checklist."	ATC::EN02
+C1 word (verb): to persist or continue to exist (starts with "per")	persist (persistir). Example: "The fog is expected to persist until noon."	ATC::EN02
+C1 word (noun): the people who work for an organization (starts with "per")	personnel (personal, plantilla). Example: "Only authorized personnel may enter the tower."	ATC::EN02
+C1 word (verb): to arrange for something to take place at a later time (starts with "pos")	postpone (aplazar). Example: "The flight was postponed until the storm passed."	ATC::EN02
+C1 word (noun): an earlier example that can be used to justify a later decision (starts with "pre")	precedent (precedente). Example: "The ruling set a precedent for later cases."	ATC::EN02
+C1 word (noun): the quality of being exact and accurate (starts with "pre")	precision (precisión). Example: "The approach requires precision."	ATC::EN02
+C1 word (adj): coming before the main event; introductory (starts with "pre")	preliminary (preliminar). Example: "Preliminary results suggest a technical fault."	ATC::EN02
+C1 word (verb): to suppose that something is true without proof (starts with "pre")	presume (suponer, presumir). Example: "I presume you have checked the weather."	ATC::EN02
+C1 word (verb, formal): to be the most common or widespread; also to win (starts with "pre")	prevail (prevalecer, predominar). Example: "Calm conditions prevailed all week."	ATC::EN02
+C1 word (adj): important, well known (starts with "pro")	prominent (destacado, prominente). Example: "A prominent landmark helps VFR pilots navigate."	ATC::EN02
+C1 word (adj): very great, deep or intense (starts with "pro")	profound (profundo). Example: "The accident had a profound effect on safety culture."	ATC::EN02
+C1 word (verb): to deliberately cause a reaction, often anger (starts with "pro")	provoke (provocar). Example: "The announcement provoked a strike."	ATC::EN02
+C1 word (noun): a set of rules for correct procedure or behaviour (starts with "pro")	protocol (protocolo). Example: "The emergency protocol was followed to the letter."	ATC::EN02
+C1 word (noun): the act of supplying something; a condition in an agreement (starts with "pro")	provision (provisión; cláusula). Example: "The contract makes provision for overtime."	ATC::EN02
+C1 word (verb): to continue after a pause (starts with "res")	resume (reanudar). Example: "Normal operations will resume at 14:00."	ATC::EN02
+C1 word (adj): unwilling and therefore slow to do something (starts with "rel")	reluctant (reacio, reticente). Example: "The captain was reluctant to accept a tailwind landing."	ATC::EN02
+C1 word (adj): strong and unlikely to fail (starts with "rob")	robust (robusto, sólido). Example: "The system needs robust backup procedures."	ATC::EN02
+C1 word (noun): the range of things that a subject or activity covers (starts with "sco")	scope (alcance, ámbito). Example: "The scope of the review is limited to en-route control."	ATC::EN02
+C1 word (noun): careful and detailed examination (starts with "scr")	scrutiny (escrutinio). Example: "The incident came under intense scrutiny."	ATC::EN02
+C1 word (verb): to take hold of something suddenly and with force; also to take by legal authority (starts with "sei")	seize (agarrar; incautar). Example: "The authorities seized the documents."	ATC::EN02
+C1 word (adj): important and large in amount (starts with "sub")	substantial (sustancial, considerable). Example: "A substantial number of flights were cancelled."	ATC::EN02
+C1 word (adj): not obvious; delicate and hard to notice (starts with "sub")	subtle (sutil). Example: "A subtle change in engine noise alerted the pilot."	ATC::EN02
+C1 word (verb): to be in charge of and watch over a person or activity (starts with "sup")	supervise (supervisar). Example: "Trainee controllers are supervised by an instructor."	ATC::EN02
+C1 word (verb): to stop something from continuing or being seen (starts with "sup")	suppress (suprimir, reprimir). Example: "The fire suppression system activated automatically."	ATC::EN02
+C1 word (adj): direct and easy to understand or do (starts with "str")	straightforward (sencillo, directo). Example: "The procedure is straightforward."	ATC::EN02
+C1 word (noun): pressure or worry caused by too much work or difficulty (starts with "str")	strain (tensión, presión). Example: "Night shifts put a strain on the body."	ATC::EN02
+C1 word (adj): relating to a plan for achieving a long-term goal (starts with "str")	strategic (estratégico). Example: "The strategic plan covers the next ten years."	ATC::EN02
+C1 word (noun): the state of being steady and not likely to change (starts with "sta")	stability (estabilidad). Example: "The aircraft's stability was affected by turbulence."	ATC::EN02
+C1 word (noun): a large number or amount that is more than needed (starts with "sur")	surplus (excedente). Example: "The airline had a surplus of pilots."	ATC::EN02
+C1 word (verb): to give up or hand over control (starts with "sur")	surrender (rendirse, ceder). Example: "The aircraft surrendered its slot."	ATC::EN02
+C1 word (adv): according to what people believe or say, although it may not be true (starts with "sup")	supposedly (supuestamente). Example: "The runway was supposedly closed for repairs."	ATC::EN02
+C1 word (adj): easily hurt, attacked or damaged (starts with "vul")	vulnerable (vulnerable). Example: "Small aircraft are vulnerable to wake turbulence."	ATC::EN02
+C1 word (noun): the quality of being trustworthy and performing consistently well (starts with "rel")	reliability (fiabilidad). Example: "The reliability of the engines is well documented."	ATC::EN02
+Collocation: "to ___ a decision" (take/make/do)? Which verb is preferred in standard British English?	make a decision (tomar una decisión). Also "take a decision" is common in British English. Not "do a decision".	ATC::EN02
+Collocation: "to ___ a risk"	take a risk (correr un riesgo). Not "make a risk".	ATC::EN02
+Collocation: "to ___ progress"	make progress (hacer progresos). Not "do progress".	ATC::EN02
+Collocation: "to ___ an effort"	make an effort (hacer un esfuerzo). Not "do an effort".	ATC::EN02
+Collocation: "to ___ a mistake"	make a mistake (cometer un error). Not "do a mistake".	ATC::EN02
+Collocation: "to ___ damage"	do damage (causar daño): "The storm did serious damage." Also "cause damage".	ATC::EN02
+Collocation: "to ___ somebody a favour"	do somebody a favour (hacerle un favor a alguien).	ATC::EN02
+Collocation: "to ___ research"	do research / carry out research (investigar). Not "make research".	ATC::EN02
+Collocation: "to ___ a conclusion"	draw a conclusion / reach a conclusion (llegar a una conclusión). Not "make a conclusion".	ATC::EN02
+Collocation: "to ___ attention to" something	pay attention to (prestar atención a). Not "give" or "put" attention.	ATC::EN02
+Collocation: "to ___ a lesson"	learn a lesson (aprender la lección) / teach somebody a lesson (darle una lección a alguien).	ATC::EN02
+Collocation: "a ___ deadline" (adjective for a date that cannot be moved)	tight deadline (plazo ajustado). Also "meet a deadline" (cumplir un plazo).	ATC::EN02
+Collocation: "to ___ a deadline"	meet a deadline (cumplir un plazo). Also: miss a deadline (no cumplirlo).	ATC::EN02
+Collocation: "a ___ rain" (very heavy)	heavy rain (lluvia intensa). Not "strong rain".	ATC::EN02
+Collocation: "a ___ wind" (very powerful)	strong wind (viento fuerte). Not "heavy wind". Note: heavy rain, strong wind.	ATC::EN02
+Collocation: "___ traffic" (a lot of vehicles or aircraft)	heavy traffic (tráfico denso). Also "light traffic" (poco tráfico).	ATC::EN02
+Collocation: "a ___ chance" (very small)	slim chance / faint chance (una posibilidad remota).	ATC::EN02
+Collocation: "to ___ a complaint"	lodge / file / make a complaint (presentar una queja).	ATC::EN02
+Collocation: "to ___ an opportunity"	seize / take / miss an opportunity (aprovechar / perder una oportunidad).	ATC::EN02
+Collocation: "to ___ a role"	play a role (desempeñar un papel). Also "play a part".	ATC::EN02
+Collocation: "to ___ a stand" (take a position)	take a stand (adoptar una postura firme).	ATC::EN02
+Collocation: "to ___ a toll" (cause harm or loss)	take a toll (on): "Night shifts take a toll on your health." (pasar factura)	ATC::EN02
+Collocation: "to ___ to a halt"	come to a halt / grind to a halt (detenerse por completo).	ATC::EN02
+Collocation: "to ___ a matter of urgency" (adverb-noun pair): "This is a ___ priority."	top priority (máxima prioridad). Also "high priority" (alta prioridad).	ATC::EN02
+Collocation: "___ evidence" (facts that prove something)	compelling / strong / conclusive evidence (pruebas contundentes). Not "big evidence".	ATC::EN02
+Collocation: "___ awareness" (a good understanding of a situation)	situational awareness (conciencia situacional): a key term in aviation human factors.	ATC::EN02
+Collocation: "to raise ___" (make people notice a problem)	raise awareness (concienciar, sensibilizar). Also "raise concerns", "raise a question".	ATC::EN02
+Collocation: "to ___ a problem" (deal with it)	tackle / address / solve / resolve a problem (abordar / resolver un problema).	ATC::EN02
+Collocation: "to ___ a concern" (feel worried)	have / express / share a concern (about); "voice concerns" (expresar preocupación).	ATC::EN02
+Collocation: "a ___ of evidence" (some pieces of evidence)	piece of evidence (una prueba). "Evidence" is uncountable: never "an evidence" or "evidences".	ATC::EN02
+Collocation: "a ___ of advice"	piece of advice (un consejo). "Advice" is uncountable: never "an advice" or "advices".	ATC::EN02
+Collocation: "a ___ of information"	piece / item of information (un dato). "Information" is uncountable: never "informations".	ATC::EN02
+Collocation: "a ___ of news"	piece of news / a news item (una noticia). "News" is uncountable and takes a singular verb.	ATC::EN02
+Collocation: "to ___ a speech / a presentation"	give / deliver a speech or presentation (dar un discurso / una presentación). Not "do a speech".	ATC::EN02
+Collocation: "to ___ a bill" (pay)	settle / pay a bill (saldar una factura). Also "foot the bill".	ATC::EN02
+Collocation: "to ___ a gap"	bridge / fill / close a gap (salvar / cubrir una brecha).	ATC::EN02
+Collocation: "to ___ a limit"	set / impose / exceed a limit (fijar / imponer / superar un límite).	ATC::EN02
+Collocation: "to ___ a point" (make people understand)	make a point / get the point across (dejar claro un argumento).	ATC::EN02
+Collocation: "to ___ to a conclusion" (jump to it too quickly)	jump to conclusions (sacar conclusiones precipitadas).	ATC::EN02
+Collocation: "on a ___ basis" (each week)	weekly basis / regular basis / daily basis (con periodicidad semanal / regular / diaria).	ATC::EN02
+Collocation: "to be ___ of the fact" (know about something)	aware of the fact / fully aware (ser plenamente consciente). Adjective "aware" takes "of".	ATC::EN02
+Collocation: "___ efforts" (very hard)	concerted / strenuous / considerable efforts (esfuerzos coordinados / enérgicos).	ATC::EN02
+Collocation: "a ___ decision" (very difficult)	tough / difficult decision, "informed decision" (decisión fundada), "snap decision" (decisión precipitada).	ATC::EN02
+Collocation: "to ___ the bar" (make a standard higher)	raise the bar (elevar el listón).	ATC::EN02
+Collocation: "___ a sigh of relief"	breathe / heave a sigh of relief (respirar aliviado).	ATC::EN02
+Collocation: "to ___ light on" something	shed / throw light on (arrojar luz sobre): "The report sheds light on the causes of the crash."	ATC::EN02
+Collocation: "to ___ the ground" (start a project fast)	hit the ground running (empezar con fuerza). Also "get off the ground" (despegar, ponerse en marcha).	ATC::EN02
+Collocation: "a ___ of thought" (a way of thinking)	train of thought (hilo del pensamiento). Also "school of thought" (corriente de pensamiento).	ATC::EN02
+Collocation: "a ___ margin" (very small)	narrow / slim / tight margin (margen estrecho). "Safety margin" (margen de seguridad).	ATC::EN02
+Collocation: "to ___ compliance with" a rule	ensure / achieve / demonstrate compliance (with) (garantizar / demostrar el cumplimiento).	ATC::EN02
+Collocation: "to ___ a ban" (start it)	impose / lift / enforce a ban (imponer / levantar una prohibición).	ATC::EN02
+Collocation: "to ___ suspicion" (cause it)	arouse / raise suspicion (levantar sospechas).	ATC::EN02
+Collocation: "to reach a ___" (agreement)	reach a consensus / an agreement / a compromise (alcanzar un consenso).	ATC::EN02
+Collocation: "to ___ the odds" (be successful although it seems unlikely)	beat the odds (superar las expectativas): "Against all odds..." (contra todo pronóstico).	ATC::EN02
+Collocation: "to ___ to good use"	put to good use (aprovechar bien): "She put her training to good use."	ATC::EN02
+Collocation: "a ___ of responsibility"	sense of responsibility (sentido de la responsabilidad). Also "heavy responsibility".	ATC::EN02
+Phrasal verb: "call off" (an event or plan)	to cancel: "The flight was called off because of fog." (cancelar, suspender)	ATC::EN02
+Phrasal verb: "carry out"	to perform or complete a task: "The engineers carried out an inspection." (llevar a cabo)	ATC::EN02
+Phrasal verb: "come up with"	to think of an idea or solution: "She came up with a new procedure." (idear, se le ocurre)	ATC::EN02
+Phrasal verb: "cut back on"	to reduce: "The airline cut back on short-haul flights." (reducir)	ATC::EN02
+Phrasal verb: "deal with"	to handle or take action about: "Controllers must deal with unexpected events." (ocuparse de, hacer frente a)	ATC::EN02
+Phrasal verb: "drop off" (two meanings)	1) to fall asleep; 2) to decrease: "Demand drops off in winter." (1: quedarse dormido; 2: disminuir)	ATC::EN02
+Phrasal verb: "end up"	to finally be in a situation or place: "We ended up landing at a different airport." (acabar, terminar)	ATC::EN02
+Phrasal verb: "figure out"	to understand or solve after thinking: "It took an hour to figure out the fault." (averiguar, descifrar)	ATC::EN02
+Phrasal verb: "follow up (on)"	to take further action about something: "Please follow up on the incident report." (hacer un seguimiento)	ATC::EN02
+Phrasal verb: "get across"	to make something understood: "He could not get his point across." (hacerse entender)	ATC::EN02
+Phrasal verb: "get away with"	to avoid punishment for something wrong: "You cannot get away with ignoring clearances." (salir impune)	ATC::EN02
+Phrasal verb: "give in"	to stop resisting and accept: "The airline gave in to union demands." (ceder, rendirse)	ATC::EN02
+Phrasal verb: "go through" (a process or experience)	to experience or examine carefully: "He went through a difficult period." / "Go through the checklist." (pasar por; repasar)	ATC::EN02
+Phrasal verb: "hand over"	to give control or responsibility to someone else: "She handed over the position at 14:00." (traspasar, entregar el relevo)	ATC::EN02
+Phrasal verb: "hold up"	to delay: "The storm held up all departures." (retrasar)	ATC::EN02
+Phrasal verb: "keep up with"	to stay at the same level or pace as: "It is hard to keep up with new regulations." (mantenerse al día)	ATC::EN02
+Phrasal verb: "look into"	to investigate: "The authority is looking into the incident." (investigar)	ATC::EN02
+Phrasal verb: "make up for"	to compensate for: "Extra staff made up for the shortage." (compensar)	ATC::EN02
+Phrasal verb: "pick up" (speed, or a skill)	to increase: "Traffic picks up after 07:00." / to learn casually: "pick up a language" (aumentar; aprender sin esfuerzo)	ATC::EN02
+Phrasal verb: "point out"	to draw attention to a fact: "She pointed out an error in the plan." (señalar)	ATC::EN02
+Phrasal verb: "pull off"	to succeed in doing something difficult: "They pulled off a perfect landing in crosswinds." (lograr, conseguir)	ATC::EN02
+Phrasal verb: "put off"	to postpone; or to discourage: "Do not put off the maintenance." (aplazar; desanimar)	ATC::EN02
+Phrasal verb: "put up with"	to tolerate: "Controllers must put up with noise and pressure." (soportar, aguantar)	ATC::EN02
+Phrasal verb: "run out of"	to have no more of something: "The aircraft ran out of fuel." (quedarse sin)	ATC::EN02
+Phrasal verb: "set off"	to start a journey; or to cause an alarm to start: "The smoke set off the alarm." (partir; activar)	ATC::EN02
+Phrasal verb: "set up"	to establish or arrange: "A crisis team was set up." (establecer, montar)	ATC::EN02
+Phrasal verb: "sort out"	to solve a problem or arrange something: "We sorted out the confusion." (solucionar, arreglar)	ATC::EN02
+Phrasal verb: "stand for"	to represent or mean; or to tolerate: "ATC stands for air traffic control." / "I won't stand for it." (significar; tolerar)	ATC::EN02
+Phrasal verb: "stand out"	to be easily noticeable or better than others: "Her calm voice stood out." (destacar)	ATC::EN02
+Phrasal verb: "take on"	to accept a task or employ people: "The company took on 50 controllers." (asumir; contratar)	ATC::EN02
+Phrasal verb: "take over"	to gain control from someone: "The new team takes over next week." (asumir el control, relevar)	ATC::EN02
+Phrasal verb: "turn down"	to reject an offer or request; also to reduce volume: "He turned down the job." (rechazar; bajar)	ATC::EN02
+Phrasal verb: "turn out"	to happen in a particular way, or to prove to be: "It turned out to be a false alarm." (resultar)	ATC::EN02
+Phrasal verb: "wear off"	to gradually disappear: "The effects of the medication wore off." (pasarse, desaparecer)	ATC::EN02
+Phrasal verb: "work out"	to calculate or solve; to exercise: "Work out the fuel needed." (calcular; entrenar)	ATC::EN02
+Phrasal verb: "back up"	to support or copy data: "Back up your files. His data backed up the claim." (respaldar; hacer copia)	ATC::EN02
+Phrasal verb: "break down"	to stop working; to divide into parts: "The radar broke down." (averiarse; desglosar)	ATC::EN02
+Phrasal verb: "bring about"	to cause something to happen: "The reform brought about major change." (provocar, ocasionar)	ATC::EN02
+Phrasal verb: "carry on"	to continue: "Carry on with the checklist." (continuar, seguir)	ATC::EN02
+Phrasal verb: "check in / check out"	to register on arrival / to leave a hotel or verify something: "The passengers checked in at 06:00." (facturar; salir del hotel)	ATC::EN02
+Phrasal verb: "come across"	to find by chance, or to give an impression: "He comes across as calm." (encontrarse con; dar la impresión)	ATC::EN02
+Phrasal verb: "fall through"	to fail to happen: "The merger fell through." (fracasar, quedar en nada)	ATC::EN02
+Phrasal verb: "look up to"	to admire or respect someone: "Trainees look up to their instructors." (admirar)	ATC::EN02
+Phrasal verb: "phase out"	to stop using something gradually: "Old radar systems are being phased out." (retirar progresivamente)	ATC::EN02
+Phrasal verb: "rule out"	to exclude as a possibility: "Investigators ruled out sabotage." (descartar)	ATC::EN02
+Phrasal verb: "touch down"	to land: "The aircraft touched down at 11:04." (aterrizar, tomar tierra)	ATC::EN02
+Phrasal verb: "take off"	1) leave the ground; 2) become successful; 3) remove: "Sales took off." (despegar; despuntar; quitarse)	ATC::EN02
+Phrasal verb: "go around" (aviation)	to abort a landing and climb away: "The aircraft went around because of a vehicle on the runway." (frustrar la aproximación, "ir y al aire")	ATC::EN02
+Idiom: "the tip of the iceberg"	only a small visible part of a much bigger problem (la punta del iceberg).	ATC::EN02
+Idiom: "a blessing in disguise"	something that seems bad but has a good result (una bendición disfrazada).	ATC::EN02
+Idiom: "to bite the bullet"	to accept an unpleasant necessity and deal with it bravely (hacer de tripas corazón).	ATC::EN02
+Idiom: "to cut corners"	to do something in the quickest or cheapest way, ignoring rules or quality (escatimar; saltarse pasos). Never acceptable in safety-critical work.	ATC::EN02
+Idiom: "to be on the same page"	to share the same understanding or plan (estar de acuerdo, entenderse).	ATC::EN02
+Idiom: "the ball is in your court"	it is your turn to decide or act (te toca actuar a ti).	ATC::EN02
+Idiom: "to call it a day"	to stop working for the day (dar por terminado el trabajo).	ATC::EN02
+Idiom: "a piece of cake"	something very easy (pan comido).	ATC::EN02
+Idiom: "under the weather"	slightly ill (indispuesto, pachucho).	ATC::EN02
+Idiom: "once in a blue moon"	very rarely (de uvas a peras, muy de vez en cuando).	ATC::EN02
+Idiom: "to hit the nail on the head"	to describe exactly what is causing a situation or problem (dar en el clavo).	ATC::EN02
+Idiom: "to go the extra mile"	to make more effort than is expected (hacer un esfuerzo extra).	ATC::EN02
+Idiom: "to keep someone in the loop"	to keep someone informed (mantener a alguien al corriente).	ATC::EN02
+Idiom: "back to square one"	back at the beginning after a failed attempt (volver a empezar desde cero).	ATC::EN02
+Idiom: "to get cold feet"	to become nervous and hesitate before an important action (echarse atrás por miedo).	ATC::EN02
+Idiom: "to jump on the bandwagon"	to join an activity that has become popular (subirse al carro).	ATC::EN02
+Idiom: "the last straw"	the final problem in a series that makes a situation unbearable (la gota que colma el vaso).	ATC::EN02
+Idiom: "to pull someone's leg"	to joke by telling someone something untrue (tomar el pelo).	ATC::EN02
+Idiom: "to see eye to eye"	to agree completely (estar totalmente de acuerdo).	ATC::EN02
+Idiom: "to take something with a pinch of salt"	to not completely believe something (tomar con cautela / con pinzas).	ATC::EN02
+Idiom: "in the nick of time"	just before it is too late (justo a tiempo, en el último momento).	ATC::EN02
+Idiom: "to burn the midnight oil"	to work late into the night (trabajar hasta altas horas de la noche).	ATC::EN02
+Idiom: "at the drop of a hat"	immediately, without thinking (sin pensárselo dos veces).	ATC::EN02
+Idiom: "to be in hot water"	to be in trouble (estar en un aprieto).	ATC::EN02
+Idiom: "to miss the boat"	to lose an opportunity (perder la oportunidad, "perder el tren").	ATC::EN02
+Idiom: "by the book"	strictly following the rules (al pie de la letra, según el reglamento). Very positive in aviation.	ATC::EN02
+Idiom: "to play it by ear"	to improvise without a fixed plan (improvisar sobre la marcha).	ATC::EN02
+Idiom: "a hot potato"	a controversial topic that is difficult to handle (un asunto espinoso).	ATC::EN02
+Idiom: "to spill the beans"	to reveal a secret (irse de la lengua, destapar el pastel).	ATC::EN02
+Idiom: "to get the ball rolling"	to start an activity or process (poner en marcha, echar a rodar).	ATC::EN02
+Idiom: "in a nutshell"	in the fewest possible words (en pocas palabras, en resumen).	ATC::EN02
+Idiom: "to keep a low profile"	to avoid attracting attention (pasar desapercibido).	ATC::EN02
+Idiom: "to be up in the air"	not yet decided, uncertain (estar en el aire, sin decidir).	ATC::EN02
+Linking device: express CONTRAST between two facts, formal, at the start of a clause ("The plan is cheap. ___, it is risky.")	However / Nevertheless / Nonetheless (sin embargo, no obstante). "Nevertheless" and "nonetheless" are more formal than "however".	ATC::EN02
+Linking device: "whereas" and "while" used to contrast	whereas / while (mientras que): "Some airports are busy, whereas others are almost empty." Compares two things in one sentence.	ATC::EN02
+Linking device: "on the one hand ... on the other hand" vs "by contrast"	Both present opposite points of view. "On the one hand / on the other hand" gives two sides of one issue; "by contrast" (en cambio) highlights a difference between two separate things.	ATC::EN02
+Linking device: "in spite of" / "despite": what follows them?	A noun, a pronoun or an -ing form (not a full clause): "Despite the fog, the flight departed." / "In spite of being tired, she finished." With a clause: "despite the fact that ...".	ATC::EN02
+Linking device: "although" / "even though" / "though": what follows them?	A full clause (subject + verb): "Although it was foggy, the flight departed." "Even though" is stronger than "although". "Though" can also come at the end: "It was cold, though."	ATC::EN02
+Linking device: ADDITION, formal: "In ___, the airport needs a new tower."	In addition (además) / Moreover / Furthermore (asimismo, por otra parte). "Moreover" and "furthermore" are formal.	ATC::EN02
+Linking device: RESULT, formal: "The engine failed; ___, the crew diverted."	consequently / therefore / as a result / hence / thus (por lo tanto, en consecuencia). "Hence" and "thus" are very formal.	ATC::EN02
+Linking device: "hence" (meaning and position)	"Therefore / for this reason": "The wind rose; hence the delay." Usually followed by a noun phrase (not a full clause).	ATC::EN02
+Linking device: "whereby"	"By which / according to which": "a system whereby all flights are tracked." (mediante el cual). Formal.	ATC::EN02
+Linking device: "thereby" + -ing	"By that means, as a result": "Controllers reduced the speed, thereby increasing separation." (con lo cual)	ATC::EN02
+Linking device: REASON, formal: "___ the storm, the airport closed."	Owing to / Due to / Because of / In view of (debido a, en vista de). "Owing to" and "due to" are often interchangeable; "due to" also follows "be".	ATC::EN02
+Linking device: "given that" / "in view of the fact that"	Because of a known fact: "Given that the runway is wet, we shall reduce the load." (dado que)	ATC::EN02
+Linking device: "provided (that)" / "as long as" / "providing"	On condition that: "You may proceed provided that you report established." (siempre que)	ATC::EN02
+Linking device: "unless" (meaning)	"If ... not / except if": "Unless you hear from us, proceed as planned." (a menos que). It is already negative: do not add "not".	ATC::EN02
+Linking device: "otherwise" (two uses)	1) "if not, or else": "Report now; otherwise we will assume you are unable." 2) "in other ways": "The plan was otherwise perfect." (de lo contrario; por lo demás)	ATC::EN02
+Linking device: "so as to" / "in order to" / "so that": which introduces a purpose clause with a subject?	"so that" + subject + verb: "She spoke slowly so that everybody could understand." "So as to / in order to" + infinitive (para).	ATC::EN02
+Linking device: "lest"	Formal/literary: "in order to prevent": "He checked the list lest he forget anything." (por temor a que, no fuera a). Followed by subjunctive or "should".	ATC::EN02
+Linking device: "admittedly" and "granted"	They concede a point before arguing the opposite: "Admittedly, the delay was short; still, it was avoidable." (es cierto que, sin duda)	ATC::EN02
+Linking device: "that said" / "having said that"	Introduces a contrast after a concession: "The system is expensive. That said, it saves lives." (dicho esto, aun así)	ATC::EN02
+Linking device: "insofar as" / "in so far as"	To the extent that: "The plan is sound insofar as it reduces risk." (en la medida en que)	ATC::EN02
+Linking device: "as opposed to"	In contrast with: "Radar control, as opposed to procedural control, uses surveillance data." (a diferencia de, frente a)	ATC::EN02
+Linking device: "with regard to" / "with reference to" / "as regards"	Formal ways to introduce a topic: "With regard to your request, ..." (en cuanto a, con respecto a)	ATC::EN02
+Linking device: "notwithstanding"	Formal: "despite, in spite of": "Notwithstanding the fog, the flights departed." Can follow the noun: "the fog notwithstanding". (a pesar de)	ATC::EN02
+Linking device: "on the grounds that" / "on the basis that"	Giving the reason for an action or claim: "The licence was refused on the grounds that the test was failed." (basándose en que)	ATC::EN02
+Linking device: "to sum up" / "in conclusion" / "all things considered"	Signal the end of a text: (en resumen, en conclusión, considerándolo todo). Use them at the end of an essay.	ATC::EN02
+Linking device: "no sooner ... than" (structure and word order)	"No sooner had the aircraft landed than the alarm sounded." After "No sooner" use inversion (had + subject + past participle). Meaning: as soon as (apenas ... cuando).	ATC::EN02
+Linking device: "hardly ... when" / "scarcely ... when" (structure)	"Hardly had he sat down when the phone rang." Inversion after a negative adverb at the start. (apenas ... cuando)	ATC::EN02
+Linking device: "not only ... but also" with inversion	"Not only did the pilot land safely, but he also saved the aircraft." After "Not only" at the start use auxiliary + subject.	ATC::EN02
+Linking device: "by the same token"	In the same way; for the same reason: "Pilots must be alert; by the same token, controllers must be too." (del mismo modo)	ATC::EN02
+Linking device: "whilst" vs "while"	"Whilst" is a formal British variant of "while" (mientras que; mientras).	ATC::EN02
+Register pair: formal equivalent of "buy"	purchase (adquirir, comprar). "buy" is neutral/informal.	ATC::EN02
+Register pair: formal equivalent of "start"	commence (comenzar) / initiate. "start" and "begin" are neutral.	ATC::EN02
+Register pair: formal equivalent of "find out"	ascertain (determinar, cerciorarse): "The investigators sought to ascertain the cause."	ATC::EN02
+Register pair: formal equivalent of "ask" (for information)	enquire / inquire (informarse, preguntar). "Enquire" is British; "inquire" is US and also used in Britain.	ATC::EN02
+Register pair: formal equivalent of "help"	assist (asistir, ayudar). Note: "assist" in English does not mean "asistir a un lugar" (that is "attend").	ATC::EN02
+Register pair: formal equivalent of "need"	require (requerir).	ATC::EN02
+Register pair: formal equivalent of "end / stop"	terminate (terminar, poner fin a).	ATC::EN02
+Register pair: formal equivalent of "show"	demonstrate (demostrar).	ATC::EN02
+Register pair: formal equivalent of "enough"	sufficient (suficiente).	ATC::EN02
+Register pair: formal equivalent of "get" (obtain)	obtain (obtener).	ATC::EN02
+Register pair: formal equivalent of "about" (topic)	regarding / concerning (con respecto a). "I am writing regarding your application."	ATC::EN02
+Register pair: formal equivalent of "try"	endeavour (esforzarse, procurar; British spelling; US: endeavor).	ATC::EN02
+Register pair: formal equivalent of "first"	initial (inicial).	ATC::EN02
+Register pair: formal equivalent of "later / next"	subsequent (posterior, subsiguiente).	ATC::EN02
+Register pair: formal equivalent of "keep"	retain (conservar, retener).	ATC::EN02
+Register pair: formal equivalent of "before"	prior to (con anterioridad a, antes de).	ATC::EN02
+Register pair: formal equivalent of "after"	following (tras, a raíz de): "Following the incident, the runway was closed."	ATC::EN02
+Register pair: formal equivalent of "tell (inform)"	inform / notify (comunicar, informar). "I regret to inform you that ..." vs "Sorry to tell you that ..."	ATC::EN02
+Register pair: formal equivalent of "kids"	children (niños). "Kids" is informal, "offspring" very formal.	ATC::EN02
+Register pair: formal equivalent of "get in touch"	contact (ponerse en contacto): "Please contact us if you require further information."	ATC::EN02
+Register pair: formal equivalent of "look at" (examine)	examine / review (examinar, revisar).	ATC::EN02
+Register pair: formal equivalent of "go up" (increase)	increase / rise (aumentar). "go up" is neutral; "soar" is stronger.	ATC::EN02
+Register pair: formal opening of a letter when you do not know the name	"Dear Sir or Madam," (Estimado/a señor/a) ... closing "Yours faithfully". Informal: "Hi," / "Cheers".	ATC::EN02
+Register pair: formal closing when you know the name	"Dear Ms Green," ... "Yours sincerely,". US usage: "Sincerely,".	ATC::EN02
+Register pair: informal equivalent of "children" or "mother" in speech	kids; mum (UK) / mom (US). Formal: children; mother.	ATC::EN02
+Register pair: informal equivalent of "purchase"	buy (comprar). Formal: purchase.	ATC::EN02
+False friend (Spanish speakers): "actually" is NOT "actualmente". What does it mean?	"Actually" = "de hecho / en realidad". "Actualmente" = currently / nowadays / at present.	ATC::EN02
+False friend: "eventually" is NOT "eventualmente".	"Eventually" = "finalmente, al final". "Eventualmente" (posiblemente) = possibly / occasionally.	ATC::EN02
+False friend: "sensible" is NOT "sensible".	"Sensible" = "sensato, razonable". "Sensible" (Spanish) = sensitive.	ATC::EN02
+False friend: "sympathetic" is NOT "simpático".	"Sympathetic" = "comprensivo, compasivo". "Simpático" = nice / friendly / likeable.	ATC::EN02
+False friend: "to assist" vs "asistir".	"To assist" = ayudar. "Asistir a" (attend) = to attend. "Attend" does not mean "atender" (= to serve / to deal with).	ATC::EN02
+False friend: "library" is NOT "librería".	"Library" = biblioteca. "Librería" = bookshop / bookstore.	ATC::EN02
+False friend: "embarrassed" is NOT "embarazada".	"Embarrassed" = avergonzado. "Embarazada" = pregnant.	ATC::EN02
+False friend: "to realize" vs "realizar".	"To realize" = darse cuenta. "Realizar" (carry out) = to carry out / to perform.	ATC::EN02
+False friend: "carpet" is NOT "carpeta".	"Carpet" = alfombra, moqueta. "Carpeta" = folder.	ATC::EN02
+False friend: "exit" is NOT "éxito".	"Exit" = salida. "Éxito" = success.	ATC::EN02
+False friend: "large" is NOT "largo".	"Large" = grande. "Largo" = long.	ATC::EN02
+False friend: "lecture" is NOT "lectura".	"Lecture" = conferencia, clase magistral. "Lectura" = reading.	ATC::EN02
+False friend: "to pretend" is NOT "pretender".	"To pretend" = fingir. "Pretender" = to intend / to aim to.	ATC::EN02
+False friend: "to resume" is NOT "resumir".	"To resume" = reanudar. "Resumir" = to summarize.	ATC::EN02
+False friend: "constipated" is NOT "constipado".	"Constipated" = estreñido. "Constipado" (Spanish) = to have a cold.	ATC::EN02
+False friend: "educated" is NOT "educado".	"Educated" = culto, con estudios. "Educado" (polite) = polite / well-mannered.	ATC::EN02
+False friend: "fabric" is NOT "fábrica".	"Fabric" = tela, tejido. "Fábrica" = factory.	ATC::EN02
+False friend: "notice" is NOT "noticia".	"Notice" = aviso, anuncio; also "to notice" = darse cuenta. "Noticia" = a piece of news.	ATC::EN02
+False friend: "parents" is NOT "parientes".	"Parents" = padres. "Parientes" = relatives.	ATC::EN02
+False friend: "petrol" is NOT "petróleo".	"Petrol" (UK) / "gas" (US) = gasolina. "Petróleo" = oil / crude oil.	ATC::EN02
+False friend: "to record" is NOT "recordar".	"To record" = grabar, registrar. "Recordar" = to remember (or "to remind").	ATC::EN02
+False friend: "to support" is NOT "soportar" in the sense of "tolerate".	"To support" = apoyar, respaldar, sostener. "Soportar" (tolerate) = to bear / to put up with.	ATC::EN02
+False friend: "injury" is NOT "injuria".	"Injury" = lesión, herida. "Injuria" = insult.	ATC::EN02
+False friend: "to attend" is NOT "atender".	"To attend" = asistir a. "Atender" = to serve, to deal with, to look after.	ATC::EN02
+False friend: "disgust" is NOT "disgusto".	"Disgust" = asco, repugnancia. "Disgusto" = upset / displeasure / annoyance.	ATC::EN02
+False friend: "compromise" vs "compromiso".	"Compromise" = acuerdo mutuo con concesiones. "Compromiso" = commitment / obligation / engagement.	ATC::EN02
+False friend: "argument" vs "argumento".	"Argument" = discusión (a quarrel) or razonamiento (a reasoned case). "Argumento" of a film or book = the plot.	ATC::EN02
+False friend: "to introduce" and "presentar".	"To introduce" = presentar a alguien (people); also "introducir". "Presentar un informe" = to submit a report; "to present" = to give a talk.	ATC::EN02
+False friend: "rope" is NOT "ropa".	"Rope" = cuerda. "Ropa" = clothes.	ATC::EN02
+False friend: "journey" is NOT "jornada".	"Journey" = viaje (a trip). "Jornada" = working day; "shift" (turno).	ATC::EN02
+False friend: "physician" is NOT "físico".	"Physician" = médico. "Físico" = physicist / physical.	ATC::EN02
+False friend: "to retire" is NOT "retirar".	"To retire" = jubilarse (or retirarse a descansar). "Retirar" (withdraw) = to withdraw / to remove.	ATC::EN02
+False friend: "to demand" is NOT "demandar".	"To demand" = exigir. "Demandar" (sue) = to sue.	ATC::EN02
+False friend: "success" vs "suceso".	"Success" = éxito. "Suceso" = event / incident / occurrence.	ATC::EN02
+False friend: "to molest" is NOT "molestar".	"To molest" = acosar sexualmente / abusar. "Molestar" (annoy) = to bother / to annoy.	ATC::EN02
+False friend: "audience" is NOT "audiencia" (court).	"Audience" = público. "Audiencia" (court hearing) = hearing / court.	ATC::EN02
+False friend: "assume" and "asumir".	"To assume" = suponer. "Asumir" (take on responsibility) = to take on / to accept.	ATC::EN02
+False friend: "commodity" is NOT "comodidad".	"Commodity" = materia prima, producto básico. "Comodidad" = comfort.	ATC::EN02
+Preposition: "depend ___" (Spanish "depender de")	depend on: "It depends on the weather." (depender de) Not "depend of".	ATC::EN02
+Preposition: "consist ___"	consist of: "The exam consists of two parts." (consistir en)	ATC::EN02
+Preposition: "responsible ___ safety"	responsible for (responsable de): "He is responsible for the runway."	ATC::EN02
+Preposition: "interested ___"	interested in (interesado en).	ATC::EN02
+Preposition: "good ___ maths"	good at (bueno en): "She is good at mental arithmetic."	ATC::EN02
+Preposition: "afraid ___"	afraid of (miedo de): "He is afraid of heights."	ATC::EN02
+Preposition: "different ___"	different from (British: also "different to"; US also "different than"): (distinto de).	ATC::EN02
+Preposition: "capable ___"	capable of (capaz de) + -ing: "capable of landing in fog."	ATC::EN02
+Preposition: "insist ___"	insist on (insistir en) + noun/-ing: "He insisted on reading it back."	ATC::EN02
+Preposition: "result ___" (cause an effect) vs "result ___" (be the effect)	result in (dar lugar a): "The error resulted in a delay." Result from (deberse a): "The delay resulted from the error."	ATC::EN02
+Preposition: "contribute ___"	contribute to (contribuir a): "Fatigue contributed to the accident."	ATC::EN02
+Preposition: "in charge ___"	in charge of (a cargo de): "He is in charge of the shift."	ATC::EN02
+Preposition: "at the age ___"	at the age of (a la edad de).	ATC::EN02
+Preposition: "by ___ / on ___" (not deliberately vs deliberately)	by mistake (por error) / on purpose (a propósito, adrede).	ATC::EN02
+Preposition: "in time" vs "on time"	"In time" = with enough time to spare: "in time to catch the flight". "On time" = at the scheduled time (puntual): "The flight departed on time."	ATC::EN02
+Preposition: "at the end" vs "in the end"	"At the end (of)" = at the last point: "at the end of the runway". "In the end" = finally (al final): "In the end, they diverted."	ATC::EN02
+Preposition: "arrive ___" a city / a small place	arrive in a city or country; arrive at a small place or building: "arrive in Madrid", "arrive at the airport". (llegar a)	ATC::EN02
+Preposition: "at ___ / on ___ / in ___" with days, dates, months	on Monday, on 5 May; in May, in 2027; at 06:00. (a los días: on; a los meses y años: in; a las horas: at)	ATC::EN02
+Preposition: "in / at / on" with the place of a flight	on a plane / on a bus / on a train (a bordo), but in a car / in a taxi.	ATC::EN02
+Preposition: "agree ___ someone / agree ___ a plan"	agree with someone; agree on a plan (or "agree to" a proposal): "I agree with you." (estar de acuerdo con)	ATC::EN02
+Preposition: "apologize ___ something"	apologize for something / to someone: "He apologized for the delay." (disculparse por)	ATC::EN02
+Preposition: "accuse someone ___"	accuse someone of: "She was accused of negligence." (acusar de)	ATC::EN02
+Preposition: "believe ___" (trust) vs "believe" (accept that it is true)	believe in (creer en: have faith in); believe someone / something (creer que lo que dice es verdad).	ATC::EN02
+Preposition: "look forward ___"	look forward to + -ing / noun (tener ganas de): "I look forward to hearing from you."	ATC::EN02
+Preposition: "according ___"	according to (según): "According to the forecast, the wind will drop." Not "according with".	ATC::EN02
+Preposition: "prefer X ___ Y"	prefer X to Y: "I prefer flying to driving." (preferir X a Y). Not "than".	ATC::EN02
+Preposition: "suffer ___ an illness"	suffer from: "He suffers from hay fever." (padecer)	ATC::EN02
+Preposition: "the reason ___ the delay"	the reason for (la razón de): "the reason for the delay."	ATC::EN02
+Preposition: "worried ___ / anxious ___"	worried about (preocupado por); anxious about / for.	ATC::EN02
+Preposition: "the difference ___ two things"	the difference between two things: "the difference between QNH and QFE." (la diferencia entre)	ATC::EN02
+Preposition: "the solution ___ a problem"	the solution to a problem (la solución a). Not "of".	ATC::EN02
+Preposition: "increase ___ 5%" vs "increase ___ 5%"	increase by 5% (the amount of change); increase to 5% (the final level). Also "an increase of 5%".	ATC::EN02
+Preposition: "aware ___ / conscious ___"	aware of / conscious of (consciente de).	ATC::EN02
+Preposition: "similar ___"	similar to (parecido a).	ATC::EN02
+Preposition: "involved ___" (participating in)	involved in (implicado en, participar en): "involved in an incident".	ATC::EN02

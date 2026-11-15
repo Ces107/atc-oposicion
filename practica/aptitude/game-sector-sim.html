@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sector</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8l8-4.5L20 8v8l-8 4.5L4 16z'/%3E%3Cpath d='M4 16L20 8'/%3E%3Cpath d='M12 12h.01' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onacc:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a6c8f0; --onacc:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans)}
+.top{display:flex;align-items:center;gap:10px;margin:0 auto;padding:14px 16px 10px}
+.top .logo{width:30px;height:30px;color:var(--accent);flex:none}
+.top .brand{font:700 20px/1 var(--serif);letter-spacing:.01em}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.logo{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 28px/1.2 var(--serif);margin:.3em 0 .5em}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:1.6em 0 .6em}
+h3{font:700 17px var(--serif);margin:1em 0 .3em}
+p{margin:.4rem 0}
+.soft{color:var(--muted)} .small{font-size:14px}
+.good{color:var(--ok)} .bad{color:var(--err)} .warn{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;min-height:40px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.4;cursor:default}
+.link{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0;min-height:40px;margin-bottom:6px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;min-height:40px;width:100%;max-width:420px}
+input[type=range]{width:100%;max-width:420px;min-height:32px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;vertical-align:-3px;margin-right:8px}
+label.lb{display:block;margin:1rem 0 .3rem;font-weight:600}
+label.lb.inline{font-weight:400}
+kbd,.key{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.head{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;color:var(--muted);font-size:15px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.head b{color:var(--text)}
+.head .ic{margin-right:4px}
+.bar{height:3px;background:var(--rule);margin:0 0 12px}
+.bar>div{height:100%;background:var(--accent);width:0}
+.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.fig{padding:10px 26px 10px 0}
+.fig b{display:block;font:700 28px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.fig span{color:var(--muted);font-size:13px}
+.tbl,.tbl-box,.tab-box,.tabla-caja{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 12px 6px 0;white-space:nowrap}
+td{padding:6px 12px 6px 0;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top}
+.list{border-top:1px solid var(--text);margin:8px 0 16px}
+.card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 4px;cursor:pointer;color:var(--text)}
+.card:hover{background:var(--stripe)}
+.card .ic{width:30px;height:30px;color:var(--accent);stroke-width:1.5}
+.card .nm{display:block;font:700 20px/1.2 var(--serif)}
+.card .dt{display:block;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.hintbox{border-top:1px solid var(--rule);padding-top:8px;margin-top:10px}
+@media (max-width:640px){.fig{padding-right:18px}.fig b{font-size:24px}h1{font-size:25px}}
+
+#app{max-width:1560px;margin:0 auto;padding:8px 16px 48px}
+.top{max-width:1560px}
+.suave{color:var(--muted)} .peq{font-size:14px}
+.bien{color:var(--ok)} .mal{color:var(--err)} .aviso{color:var(--warn)}
+.tecla{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.btn.primario{background:var(--accent);color:var(--onacc)}
+.btn.primario:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.peligro{color:var(--err);border-color:var(--err)}
+.btn.mini{padding:3px 10px;min-height:40px}
+.fila{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cifras{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.cifra{padding:10px 24px 10px 0}
+.cifra b{display:block;font:700 26px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.cifra span{color:var(--muted);font-size:13px}
+.seg{display:flex;flex-wrap:wrap}
+.seg .btn{border-radius:0;margin-right:-1px}
+.seg .btn:first-child{border-radius:2px 0 0 2px}
+.seg .btn:last-child{border-radius:0 2px 2px 0;margin-right:0}
+.btn.sel{background:var(--accent);color:var(--onacc)}
+.lvls{border-top:1px solid var(--text);margin:8px 0 4px}
+.lv{display:grid;grid-template-columns:28px 1fr auto 20px;gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:7px 4px;min-height:40px;cursor:pointer;color:var(--text)}
+.lv:hover:not(:disabled){background:var(--stripe)}
+.lv.sel{background:var(--stripe);font-weight:600}
+.lv:disabled{cursor:default;opacity:.55}
+.lv .n{font:700 18px var(--serif)}
+.lv .m{color:var(--muted);font-size:13px;font-weight:400}
+.lv .ic{width:16px;height:16px}
+.rejilla2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 32px}
+.run{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}
+#radar{width:min(100%, max(520px, calc((100vh - 230px) * 1.3939)));height:auto;background:#09110c;border:1px solid #2b3a30;border-radius:0;display:block;cursor:crosshair}
+.hud{display:flex;flex-wrap:wrap;align-items:center;gap:4px 20px;color:var(--muted);font-size:14px;margin-bottom:6px}
+.hud b{color:var(--text)}
+.lado{display:flex;flex-direction:column;gap:12px;min-width:0}
+.caja{border-top:1px solid var(--text);padding-top:4px}
+.caja h4{margin:0 0 4px;font:600 13px var(--sans);color:var(--muted)}
+.strips{max-height:250px;overflow:auto;font-size:13px}
+.strip{display:grid;grid-template-columns:20px 62px 44px 52px 1fr;gap:4px;padding:2px 4px;align-items:center;min-height:30px;border-bottom:1px solid var(--rule);cursor:pointer;white-space:nowrap}
+.strip.sel{background:var(--stripe);font-weight:600}
+.strip.emg{color:var(--warn)}
+.strip.conf{color:var(--err)}
+.strip.inb{color:var(--muted);cursor:default}
+.tarea{padding:4px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.tarea.urg{color:var(--err);font-weight:600}
+.kv{font-size:13px}
+.kv td{padding:2px 8px 2px 0;border-bottom:1px solid var(--rule)}
+.kv td:first-child{color:var(--muted)}
+.cmds{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.cmds .btn{justify-content:center;padding:6px 4px;min-height:44px;font-size:14px;gap:4px}
+.cmds .ic{width:16px;height:16px}
+.msg{min-height:1.4rem;font-size:15px;margin-top:4px}
+.log{font-size:12.5px;color:var(--muted);max-height:96px;overflow:auto}
+.hintbox:empty{display:none}
+@media (max-width:1100px){.run{grid-template-columns:1fr}.strips{max-height:170px}}
+@media (max-width:560px){.cmds{grid-template-columns:repeat(3,1fr)}}
+@media (pointer:coarse){.strip{min-height:40px}#tasks .tecla{display:inline-block;min-width:40px;min-height:40px;line-height:34px;text-align:center;font-size:14px;cursor:pointer}.tarea{line-height:2}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.5L20 9"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4.5L4 15"/><path d="M4 20v-5h5"/></symbol><symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-dash" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 3h5"/></symbol><symbol id="i-turnl" viewBox="0 0 24 24"><path d="M9 5L4 10l5 5"/><path d="M4 10h10a6 6 0 0 1 6 6v3"/></symbol><symbol id="i-turnr" viewBox="0 0 24 24"><path d="M15 5l5 5-5 5"/><path d="M20 10H10a6 6 0 0 0-6 6v3"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-direct" viewBox="0 0 24 24"><path d="M4 19L19 5"/><path d="M11 5h8v8"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><path d="M4 8l8-4.5L20 8v8l-8 4.5L4 16z"/><path d="M4 16L20 8"/><path d="M12 12h.01" stroke-width="3"/></symbol><symbol id="i-conflict" viewBox="0 0 24 24"><path d="M4 18L20 6"/><path d="M4 6l16 12"/><circle cx="12" cy="12" r="3.5"/></symbol></defs></svg>
+<header class="top"><svg class="logo" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand">Sector</span></header>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Simulador de sector</h1>
+<main id="app"></main>
+<script>
+'use strict';
+// ==== PURE LOGIC START ====
+/* Everything between the START and END markers is DOM-free and deterministic; it is tested with node.
+   Units: distance NM, speed kt (velocities in NM/s), level FL (1 FL = 100 ft), heading degrees true (0 = north, clockwise), time = 1 s ticks. */
+const SEP_LAT = 5;          // NM
+const SEP_VERT = 10;        // FL = 1000 ft
+const VEPS = 1e-6;
+const BOUND = { x0:-40, x1:40, y0:-28, y1:28 };
+const WP = {
+  ROSAS:{x:-40,y:14}, LUNAR:{x:-40,y:-14}, MIRLO:{x:-14,y:28}, TAJO:{x:16,y:28},
+  BRAVA:{x:40,y:12}, ONDAS:{x:40,y:-16}, SIRIO:{x:-12,y:-28}, PLAYA:{x:18,y:-28},
+  MIDAS:{x:0,y:0}, ALTEA:{x:-20,y:5}, CUMBRE:{x:19,y:-5}, NIMBO:{x:-6,y:14}, OASIS:{x:-12,y:-9}
+};
+const BOUNDARY_FIXES = ['ROSAS','LUNAR','MIRLO','TAJO','BRAVA','ONDAS','SIRIO','PLAYA'];
+const ROUTES = {
+  R1:['ROSAS','ALTEA','MIDAS','CUMBRE','ONDAS'],
+  R2:['LUNAR','OASIS','MIDAS','BRAVA'],
+  R3:['MIRLO','NIMBO','MIDAS','PLAYA'],
+  R4:['TAJO','CUMBRE','SIRIO']
+};
+// every boundary fix is the entry of exactly one directed route
+const ENTRY_ROUTE = (function(){
+  const m = {};
+  Object.keys(ROUTES).forEach(function(k){
+    const r = ROUTES[k];
+    m[r[0]] = r.slice();
+    m[r[r.length - 1]] = r.slice().reverse();
+  });
+  return m;
+})();
+// speeds kt (min/max/cruise), vertical rates FL/s (2000 fpm = 0.333 FL/s), acceleration kt/s
+const TYPES = {
+  A320:{ min:300, max:480, cruise:440, climb:0.30, desc:0.35, acc:0.7, cat:'M', lo:240, hi:380 },
+  B738:{ min:300, max:480, cruise:430, climb:0.30, desc:0.35, acc:0.7, cat:'M', lo:240, hi:380 },
+  E190:{ min:280, max:450, cruise:410, climb:0.30, desc:0.33, acc:0.7, cat:'M', lo:240, hi:380 },
+  A333:{ min:300, max:490, cruise:450, climb:0.25, desc:0.33, acc:0.6, cat:'H', lo:260, hi:380 },
+  AT72:{ min:200, max:290, cruise:260, climb:0.17, desc:0.20, acc:0.4, cat:'M', lo:200, hi:280 }
+};
+const TYPE_LIST = ['A320','A320','B738','B738','E190','A333','AT72'];
+const CALLS = ['IBE','VLG','RYR','AEA','EZY','TAP','AFR','DLH','BAW','KLM','SAS','NAX'];
+const LEVEL_MIN = 200, LEVEL_MAX = 400;
+
+function clamp(x, a, b){ return x < a ? a : (x > b ? b : x); }
+function norm360(a){ a = a % 360; if (a < 0) a += 360; return a; }
+function angDiff(a, b){ let d = norm360(b - a); if (d > 180) d -= 360; return d; }   // signed shortest turn from a to b, (-180,180]
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function pad3(n){ n = Math.round(n); return (n < 10 ? '00' : (n < 100 ? '0' : '')) + n; }
+function fmt(x, d){ if (x === null || x === undefined || !isFinite(x)) return '—'; return Number(x).toFixed(d === undefined ? 1 : d); }
+
+/* ---- seeded random numbers (mulberry32) ---- */
+function makeRng(seed){
+  let s = (seed >>> 0) || 1;
+  const r = function(){
+    s = (s + 0x6D2B79F5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  return r;
+}
+function rInt(r, a, b){ return a + Math.floor(r() * (b - a + 1)); }
+function rPick(r, arr){ return arr[Math.floor(r() * arr.length)]; }
+
+/* ---- geometry ---- */
+function hdgVec(h){ const q = h * Math.PI / 180; return { x:Math.sin(q), y:Math.cos(q) }; }
+// ground velocity in NM/s from air heading, true airspeed and wind ({from:deg, spd:kt}; wind blows FROM "from")
+function groundVel(hdg, tas, wind){
+  const u = hdgVec(hdg), w = hdgVec(wind.from + 180);
+  return { x:(u.x * tas + w.x * wind.spd) / 3600, y:(u.y * tas + w.y * wind.spd) / 3600 };
+}
+function bearingTo(p, q){ return norm360(Math.atan2(q.x - p.x, q.y - p.y) * 180 / Math.PI); }
+// air heading needed to make good a ground course in the given wind
+function headingForCourse(course, tas, wind){
+  const rel = (wind.from + 180 - course) * Math.PI / 180;
+  const s = clamp(wind.spd * Math.sin(rel) / Math.max(tas, 1), -1, 1);
+  return norm360(course - Math.asin(s) * 180 / Math.PI);
+}
+// Closest point of approach of two constant-velocity points (velocities in NM/s): time t >= 0 and distance d
+function cpa(p1, v1, p2, v2){
+  const rx = p2.x - p1.x, ry = p2.y - p1.y, vx = v2.x - v1.x, vy = v2.y - v1.y;
+  const vv = vx * vx + vy * vy;
+  let t = vv < 1e-12 ? 0 : -(rx * vx + ry * vy) / vv;
+  if (t < 0) t = 0;
+  return { t:t, d:Math.hypot(rx + vx * t, ry + vy * t) };
+}
+// Times when the relative distance is below R: returns [t1,t2] (t1 may be negative) or null
+function sepWindowRel(rx, ry, vx, vy, R){
+  const a = vx * vx + vy * vy, b = 2 * (rx * vx + ry * vy), c = rx * rx + ry * ry - R * R;
+  if (a < 1e-12) return c < 0 ? [-Infinity, Infinity] : null;
+  const disc = b * b - 4 * a * c;
+  if (disc <= 0) return null;
+  const sq = Math.sqrt(disc);
+  return [(-b - sq) / (2 * a), (-b + sq) / (2 * a)];
+}
+// Same, for two aircraft, restricted to t >= 0 (window of horizontal separation loss)
+function sepLossWindow(p1, v1, p2, v2, R){
+  const w = sepWindowRel(p2.x - p1.x, p2.y - p1.y, v2.x - v1.x, v2.y - v1.y, R);
+  if (!w || w[1] < 0) return null;
+  return [Math.max(w[0], 0), w[1]];
+}
+// Where do two straight tracks cross, and when does each aircraft reach that point? (null if parallel or already past)
+function crossingInfo(pa, va, pb, vb){
+  const dx = pb.x - pa.x, dy = pb.y - pa.y;
+  const det = -va.x * vb.y + vb.x * va.y;
+  if (Math.abs(det) < 1e-12) return null;
+  const t = (dx * (-vb.y) + vb.x * dy) / det;
+  const s = (va.x * dy - va.y * dx) / det;
+  if (t <= 0 || s <= 0) return null;
+  return { x:pa.x + va.x * t, y:pa.y + va.y * t, tA:t, tB:s };
+}
+// Rate of change of the bearing from A to B in degrees per second, and range rate (NM/s, negative = closing).
+function bearingRate(pa, va, pb, vb){
+  const rx = pb.x - pa.x, ry = pb.y - pa.y, vx = vb.x - va.x, vy = vb.y - va.y;
+  const r2 = rx * rx + ry * ry;
+  if (r2 < 1e-12) return { rate:0, range:0, rangeRate:0 };
+  return { rate:((rx * vy - ry * vx) / r2) * 180 / Math.PI, range:Math.sqrt(r2), rangeRate:(rx * vx + ry * vy) / Math.sqrt(r2) };
+}
+function segSeg(p, p2, q, q2){
+  const rx = p2.x - p.x, ry = p2.y - p.y, sx = q2.x - q.x, sy = q2.y - q.y;
+  const den = rx * sy - ry * sx;
+  if (Math.abs(den) < 1e-12) return null;
+  const t = ((q.x - p.x) * sy - (q.y - p.y) * sx) / den;
+  const u = ((q.x - p.x) * ry - (q.y - p.y) * rx) / den;
+  if (t < 0 || t > 1 || u < 0 || u > 1) return null;
+  return { x:p.x + rx * t, y:p.y + ry * t, ta:t, tb:u };
+}
+function routePts(names){ return names.map(function(n){ return WP[n]; }); }
+function routeLen(names){
+  let d = 0; const p = routePts(names);
+  for (let i = 1; i < p.length; i++) d += Math.hypot(p[i].x - p[i - 1].x, p[i].y - p[i - 1].y);
+  return d;
+}
+function distAlong(names, pt){ // distance from the start of the route to the point pt (assumed on the route)
+  const p = routePts(names); let acc = 0;
+  for (let i = 1; i < p.length; i++){
+    const L = Math.hypot(p[i].x - p[i - 1].x, p[i].y - p[i - 1].y);
+    const s = segSeg(p[i - 1], p[i], { x:pt.x - 1e-6, y:pt.y - 1e-6 }, { x:pt.x + 1e-6, y:pt.y + 1e-6 });
+    const ex = Math.abs((pt.x - p[i - 1].x) * (p[i].y - p[i - 1].y) - (pt.y - p[i - 1].y) * (p[i].x - p[i - 1].x)) / (L || 1);
+    const along = ((pt.x - p[i - 1].x) * (p[i].x - p[i - 1].x) + (pt.y - p[i - 1].y) * (p[i].y - p[i - 1].y)) / (L || 1);
+    if (ex < 1e-3 && along >= -1e-3 && along <= L + 1e-3 && s !== undefined) return acc + along;
+    acc += L;
+  }
+  return null;
+}
+// First place where two routes cross (or share the named waypoint "via"), with the distance flown along each route.
+function routeCross(rA, rB, via){
+  if (via && rA.indexOf(via) >= 0 && rB.indexOf(via) >= 0){
+    const pt = WP[via];
+    return { x:pt.x, y:pt.y, dA:distAlong(rA, pt), dB:distAlong(rB, pt) };
+  }
+  const a = routePts(rA), b = routePts(rB); let accA = 0, best = null;
+  for (let i = 1; i < a.length; i++){
+    const La = Math.hypot(a[i].x - a[i - 1].x, a[i].y - a[i - 1].y); let accB = 0;
+    for (let j = 1; j < b.length; j++){
+      const Lb = Math.hypot(b[j].x - b[j - 1].x, b[j].y - b[j - 1].y);
+      const s = segSeg(a[i - 1], a[i], b[j - 1], b[j]);
+      if (s){ const c = { x:s.x, y:s.y, dA:accA + s.ta * La, dB:accB + s.tb * Lb }; if (!best || c.dA < best.dA) best = c; }
+      accB += Lb;
+    }
+    accA += La;
+  }
+  return best;
+}
+
+/* ---- aircraft dynamics ---- */
+function turnRate(tas){ return Math.min(3, 1091 * Math.tan(25 * Math.PI / 180) / Math.max(tas, 1)); }  // deg/s at 25 deg bank, capped at rate one (3 deg/s)
+function stepHeading(cur, tgt, rate, dt){
+  const d = angDiff(cur, tgt), m = rate * dt;
+  if (Math.abs(d) <= m) return norm360(tgt);
+  return norm360(cur + (d > 0 ? m : -m));
+}
+function approach(cur, tgt, m){ return Math.abs(tgt - cur) <= m ? tgt : cur + (tgt > cur ? m : -m); }
+function cloneAc(a){
+  return { id:a.id, cs:a.cs, type:a.type, x:a.x, y:a.y, hdg:a.hdg, tas:a.tas, tgtSpd:a.tgtSpd, fl:a.fl, tgtFl:a.tgtFl,
+    mode:a.mode, tgtHdg:a.tgtHdg, route:a.route, wp:a.wp, lastD:a.lastD, closing:a.closing, exitFl:a.exitFl, emg:a.emg };
+}
+function outside(a){ return a.x < BOUND.x0 - 1e-9 || a.x > BOUND.x1 + 1e-9 || a.y < BOUND.y0 - 1e-9 || a.y > BOUND.y1 + 1e-9; }
+function chooseWp(a){ // "resume own navigation": first waypoint ahead (within 90 deg of the heading), else the exit fix
+  for (let j = a.wp; j < a.route.length; j++){
+    if (Math.abs(angDiff(a.hdg, bearingTo(a, WP[a.route[j]]))) <= 90) return j;
+  }
+  return a.route.length - 1;
+}
+function stepAc(a, wind, dt){
+  let tgt = a.tgtHdg;
+  if (a.mode === 'NAV'){
+    let w = WP[a.route[a.wp]];
+    let d = Math.hypot(w.x - a.x, w.y - a.y);
+    while (a.wp < a.route.length - 1){
+      let passed = false;
+      if (d < 2) passed = true;
+      else if (a.lastD !== null){
+        if (d < a.lastD - 1e-9) a.closing = true;
+        else if (d > a.lastD && a.closing && d < 10) passed = true;
+      }
+      if (!passed) break;
+      a.wp++; a.lastD = null; a.closing = false;
+      w = WP[a.route[a.wp]]; d = Math.hypot(w.x - a.x, w.y - a.y);
+    }
+    a.lastD = d;
+    tgt = headingForCourse(bearingTo(a, w), a.tas, wind);
+    a.tgtHdg = tgt;
+  }
+  a.hdg = stepHeading(a.hdg, tgt, turnRate(a.tas), dt);
+  const T = TYPES[a.type];
+  a.tas = approach(a.tas, a.tgtSpd, T.acc * dt);
+  a.fl = approach(a.fl, a.tgtFl, (a.tgtFl > a.fl ? T.climb : T.desc) * dt);
+  const v = groundVel(a.hdg, a.tas, wind);
+  a.x += v.x * dt; a.y += v.y * dt;
+}
+// Forward simulation under the current clearance; stops when the aircraft leaves the sector.
+function predictTrack(a, wind, horizon, step){
+  const pts = [], c = cloneAc(a);
+  for (let t = 0; t <= horizon + 1e-9; t += step){
+    pts.push({ t:t, x:c.x, y:c.y, fl:c.fl });
+    stepAc(c, wind, step);
+    if (outside(c)) break;
+  }
+  return pts;
+}
+// Compare two predicted tracks (same time grid): first time of separation loss (lateral < 5 NM AND vertical < 1000 ft).
+function detectPair(tA, tB, step){
+  const n = Math.min(tA.length, tB.length);
+  let loss = false, tLoss = null, minLat = Infinity;
+  for (let i = 0; i < n - 1; i++){
+    const a0 = tA[i], a1 = tA[i + 1], b0 = tB[i], b1 = tB[i + 1];
+    const rx = b0.x - a0.x, ry = b0.y - a0.y;
+    const vx = ((b1.x - a1.x) - rx) / step, vy = ((b1.y - a1.y) - ry) / step;
+    const f0 = b0.fl - a0.fl, vf = ((b1.fl - a1.fl) - f0) / step;
+    // vertical window (in segment seconds) where |dfl| < SEP_VERT
+    let v1 = 0, v2 = step;
+    if (Math.abs(vf) < 1e-9){ if (Math.abs(f0) >= SEP_VERT - VEPS) continue; }
+    else {
+      const q1 = (-SEP_VERT - f0) / vf, q2 = (SEP_VERT - f0) / vf;
+      v1 = Math.max(0, Math.min(q1, q2)); v2 = Math.min(step, Math.max(q1, q2));
+      if (v1 >= v2 - 1e-9) continue;
+    }
+    // lateral minimum inside the vertical window
+    const vv = vx * vx + vy * vy;
+    let tc = vv < 1e-12 ? v1 : -(rx * vx + ry * vy) / vv;
+    tc = clamp(tc, v1, v2);
+    const d = Math.hypot(rx + vx * tc, ry + vy * tc);
+    if (d < minLat) minLat = d;
+    const w = sepWindowRel(rx, ry, vx, vy, SEP_LAT);
+    if (!w) continue;
+    const lo = Math.max(w[0], v1), hi = Math.min(w[1], v2);
+    if (lo < hi - 1e-9 || (w[0] === -Infinity && v1 < v2)){
+      const tt = tA[i].t + lo;
+      if (!loss || tt < tLoss){ loss = true; tLoss = tt; }
+    }
+  }
+  return { loss:loss, t:tLoss, minLat:minLat };
+}
+// Smallest single heading change (10..90 deg, either aircraft, either direction) that removes the conflict with a margin.
+function minResolvingTurn(order, wind, horizon){
+  const step = 5, margin = 5.5;
+  const other = {};
+  const base = order.map(function(a){ return predictTrack(a, wind, horizon, step); });
+  for (let deg = 10; deg <= 90; deg += 10){
+    for (let k = 0; k < order.length; k++){
+      for (let dir = 1; dir >= -1; dir -= 2){
+        const m = cloneAc(order[k]);
+        m.mode = 'HDG'; m.tgtHdg = norm360(Math.round(m.hdg) + dir * deg);
+        const tm = predictTrack(m, wind, horizon, step);
+        const r = k === 0 ? detectPair(tm, base[1], step) : detectPair(base[0], tm, step);
+        if (!r.loss && r.minLat >= margin) return { deg:deg, ac:order[k].id, cs:order[k].cs, dir:dir, hdg:m.tgtHdg, minLat:r.minLat };
+      }
+    }
+  }
+  return null;
+}
+// Smallest level change (10..30 FL, either aircraft) that gives vertical separation
+function minResolvingLevel(order, wind, horizon){
+  const step = 5;
+  const base = order.map(function(a){ return predictTrack(a, wind, horizon, step); });
+  for (let d = 10; d <= 30; d += 10){
+    for (let k = 0; k < order.length; k++){
+      for (let dir = 1; dir >= -1; dir -= 2){
+        const m = cloneAc(order[k]);
+        m.tgtFl = clamp(Math.round(m.fl / 10) * 10 + dir * d, LEVEL_MIN, LEVEL_MAX);
+        if (m.tgtFl === Math.round(order[k].tgtFl)) continue;
+        const tm = predictTrack(m, wind, horizon, step);
+        const r = k === 0 ? detectPair(tm, base[1], step) : detectPair(base[0], tm, step);
+        if (!r.loss) return { fl:m.tgtFl, ac:order[k].id, cs:order[k].cs, dir:dir };
+      }
+    }
+  }
+  return null;
+}
+// Order a conflicting pair as [aircraft that reaches the crossing point second, the one that reaches it first]
+function orderByCrossing(a, b, wind){
+  const va = groundVel(a.hdg, a.tas, wind), vb = groundVel(b.hdg, b.tas, wind);
+  const ci = crossingInfo(a, va, b, vb);
+  if (!ci) return { order:[a, b], ci:null };
+  return { order: ci.tA > ci.tB ? [a, b] : [b, a], ci:ci };
+}
+
+/* ---- handoff logic ---- */
+function checkHandoff(a, exitPos){
+  const offset = Math.hypot(a.x - exitPos.x, a.y - exitPos.y);
+  const lvlErr = Math.abs(a.fl - a.exitFl);
+  const ok = lvlErr <= 1 && offset <= 5;
+  const score = clamp(100 - 8 * Math.max(0, offset - 1) - 5 * Math.max(0, lvlErr - 0.5), 0, 100);
+  return { ok:ok, offset:offset, lvlErr:lvlErr, score:score };
+}
+
+/* ---- difficulty ladder ---- */
+// count = aircraft in the run, dur = seconds (sim) over which they enter, ts = simulated seconds per real second,
+// wind kt, entries = entry points in use, bias = share of aircraft placed on a collision course with an earlier one,
+// late = share of unannounced aircraft, notice = seconds of advance notice on the strips, reqProb = level requests per aircraft,
+// rate = interrupting tasks per real minute, readback = read-back prompt probability per instruction, fuel = fuel emergencies,
+// aid 3 = 6-min predicted tracks + conflict alert + 5 NM ring, 2 = 4-min tracks + alert + ring, 1 = 2-min tracks + ring, 0 = nothing,
+// hint = highest hint level available (0-3), pause = pausing allowed.
+const LEVELS = [null,
+  { n:1,  name:'Calentamiento',      count:3,  dur:150, ts:2.5, wind:0,  entries:2, bias:1.0,  late:0,   notice:240, reqProb:0,    rate:0,   readback:0,   fuel:0, aid:3, hint:3, pause:true },
+  { n:2,  name:'Fácil',         count:5,  dur:240, ts:3.0, wind:0,  entries:3, bias:0.8,  late:0,   notice:180, reqProb:0,    rate:1,   readback:0,   fuel:0, aid:3, hint:3, pause:true },
+  { n:3,  name:'Constante',       count:7,  dur:300, ts:3.5, wind:5,  entries:4, bias:0.7,  late:0.1, notice:150, reqProb:0,    rate:1.5, readback:0,   fuel:0, aid:2, hint:2, pause:true },
+  { n:4,  name:'Estándar',     count:10, dur:400, ts:4.0, wind:10, entries:5, bias:0.65, late:0.2, notice:120, reqProb:0.1,  rate:2,   readback:0.3, fuel:0, aid:2, hint:2, pause:false },
+  { n:5,  name:'Competitivo',  count:14, dur:500, ts:5.0, wind:15, entries:6, bias:0.6,  late:0.3, notice:90,  reqProb:0.15, rate:3,   readback:0.4, fuel:1, aid:1, hint:1, pause:false },
+  { n:6,  name:'Difícil',         count:18, dur:540, ts:6.0, wind:20, entries:7, bias:0.6,  late:0.4, notice:60,  reqProb:0.2,  rate:3.5, readback:0.5, fuel:1, aid:1, hint:1, pause:false },
+  { n:7,  name:'Élite',        count:24, dur:600, ts:7.0, wind:25, entries:8, bias:0.6,  late:0.5, notice:30,  reqProb:0.25, rate:4,   readback:0.5, fuel:2, aid:0, hint:0, pause:false },
+  { n:8,  name:'Extremo',      count:30, dur:600, ts:8.0, wind:30, entries:8, bias:0.65, late:0.6, notice:15,  reqProb:0.3,  rate:5,   readback:0.6, fuel:2, aid:0, hint:0, pause:false },
+  { n:9,  name:'Sobrehumano',   count:38, dur:600, ts:9.0, wind:38, entries:8, bias:0.65, late:0.7, notice:0,   reqProb:0.35, rate:6,   readback:0.6, fuel:3, aid:0, hint:0, pause:false },
+  { n:10, name:'Imposible',   count:48, dur:600, ts:10.0,wind:45, entries:8, bias:0.7,  late:0.8, notice:0,   reqProb:0.4,  rate:7,   readback:0.7, fuel:3, aid:0, hint:0, pause:false }
+];
+LEVELS.forEach(function(L, i){ if (L){ L.kinds = i >= 4 ? ['alert','freq'] : (i === 3 ? ['alert','freq'] : (i === 2 ? ['alert'] : [])); L.loadThr = 12; } });
+const AID_HORIZON = [0, 120, 240, 360];
+const ALERT_HORIZON = 300;
+const TRACK_HORIZON = 360;
+const MIN_ACCURACY = 96;
+const TASK_WALL_DEADLINE = { alert:6, freq:10, readback:8, req:20, fuel:15 };  // real seconds
+const TASK_KEYS = { alert:['SPACE'], freq:['Z','X','C'], readback:['Y','N'], req:['A','D'] };
+const TASKNAME = { alert:'Alerta', freq:'Frecuencia', readback:'Colacionado', req:'Petición', fuel:'Combustible' };
+const STATUSNAME = { active:'activo', resolved:'resuelto', lost:'pérdida' };
+function levelStatement(n){
+  if (n <= 4) return 'El nivel ' + n + ' está por debajo del objetivo: úsalo para ganar precisión. Nivel 5 = objetivo de la Fase 2 (FEAST / PDEA); 7+ = más allá de la oposición.';
+  if (n === 5) return 'Nivel 5 = objetivo de la Fase 2: un candidato bien preparado debería dominarlo con un 96 % o más. 7+ = más allá de la oposición.';
+  if (n === 6) return 'El nivel 6 está por encima del objetivo. Nivel 5 = objetivo de la Fase 2; 7+ = más allá de la oposición.';
+  if (n < 10) return 'El nivel ' + n + ' está más allá de la oposición (7+): un margen de entrenamiento, no un requisito. Nivel 5 = objetivo de la Fase 2.';
+  return 'El nivel 10 es casi imposible a propósito; úsalo para practicar la calma y la estabilidad, no para esperar una partida limpia. Nivel 5 = objetivo de la Fase 2; 7+ = más allá de la oposición.';
+}
+function customToP(c){
+  const dual = !!c.dual, rate = dual ? c.rate : 0;
+  const count = clamp(Math.round(c.count), 1, 60);
+  return { n:0, name:'Personalizado', count:count, dur:clamp(count * 20, 120, 600), ts:clamp(c.ts, 1, 12), wind:clamp(c.wind, 0, 50),
+    entries:clamp(Math.round(c.entries), 1, 8), bias:clamp(c.bias, 0, 1), late:clamp(c.late, 0, 1), notice:Math.round(240 * (1 - clamp(c.late, 0, 1))),
+    reqProb:dual ? Math.min(0.4, rate * 0.06) : 0, rate:rate, readback:dual ? Math.min(0.7, rate * 0.1) : 0,
+    fuel:dual ? (rate >= 3 ? 1 : 0) + (rate >= 5 ? 1 : 0) + (rate >= 6.5 ? 1 : 0) : 0,
+    aid:clamp(Math.round(c.aid), 0, 3), hint:clamp(Math.round(c.hint), 0, 3), pause:c.aid >= 2,
+    kinds:dual ? ['alert','freq'] : [], loadThr:12 };
+}
+
+/* ---- traffic generation ---- */
+function windFromSeed(seed, kt){
+  const r = makeRng((seed ^ 0x51ED270B) >>> 0);
+  return { from:rInt(r, 0, 35) * 10, spd:kt };
+}
+function makeCallsign(r, used){
+  for (let k = 0; k < 200; k++){
+    const cs = rPick(r, CALLS) + rInt(r, 10, 999);
+    if (!used[cs]){ used[cs] = 1; return cs; }
+  }
+  return 'ZZZ' + Object.keys(used).length;
+}
+function speedFor(type, r){ const T = TYPES[type]; return clamp(T.cruise + rInt(r, -25, 25), T.min + 20, T.max - 20); }
+function flChoices(type){ const T = TYPES[type], o = []; for (let f = T.lo; f <= T.hi; f += 10) o.push(f); return o; }
+function pickExitFl(fl, type, r){
+  if (r() < 0.45) return fl;
+  const opts = [-30,-20,-10,10,20,30].map(function(d){ return fl + d; }).filter(function(f){ return f >= TYPES[type].lo && f <= TYPES[type].hi; });
+  return opts.length ? rPick(r, opts) : fl;
+}
+// Time (s) an aircraft needs to reach the point at route distance d (straight ground speed, wind ignored for the synchronisation).
+function timeToDist(d, spd){ return d / spd * 3600; }
+/* Fairness: with no instruction at all, the first separation loss between two generated aircraft must come at least minLead simulated
+   seconds after the LATER of the two appears (about 10 s of real time), otherwise no player could have seen it coming (a head-on pair spawning
+   on the same airway was measured at 0-20 s). Idle tracks do not depend on other aircraft, so they are computed once per aircraft. */
+function idleTrack(spec, wind){
+  const a = makeAircraft(spec, 0, wind), pts = [];
+  for (let k = 0; k < 3200; k++){ pts.push({ x:a.x, y:a.y, fl:a.fl }); stepAc(a, wind, 1); if (outside(a)) break; }
+  return pts;
+}
+function firstIdleLoss(A, B){   // A, B: { t, tr } -> first absolute time of loss or null
+  const t0 = Math.max(A.t, B.t), t1 = Math.min(A.t + A.tr.length, B.t + B.tr.length);
+  for (let T = t0; T < t1; T++){
+    const p = A.tr[T - A.t], q = B.tr[T - B.t];
+    const dx = p.x - q.x, dy = p.y - q.y;
+    if (dx * dx + dy * dy < SEP_LAT * SEP_LAT && Math.abs(p.fl - q.fl) < SEP_VERT - VEPS) return T;
+  }
+  return null;
+}
+function enforceFairness(list, wind, minLead){
+  const order = list.slice().sort(function(a, b){ return a.t - b.t; }), placed = [], lastOn = {};
+  order.forEach(function(spec){
+    for (let tries = 0; tries < 16; tries++){
+      const lo = lastOn[spec.entry];
+      if (lo !== undefined){ const gap = Math.max(75, Math.ceil(6.5 / lo.spd * 3600)); if (spec.t < lo.t + gap) spec.t = lo.t + gap; }
+      const me = { t:spec.t, tr:idleTrack(spec, wind) };
+      let bad = false;
+      for (let i = 0; i < placed.length && !bad; i++){
+        const T = firstIdleLoss(placed[i], me);
+        if (T !== null && T - Math.max(placed[i].t, me.t) < minLead) bad = true;
+      }
+      if (!bad){ placed.push(me); break; }
+      spec.t += 30;
+      if (tries === 15) placed.push(me);
+    }
+    lastOn[spec.entry] = { t:spec.t, spd:spec.spd };
+  });
+}
+// Traffic list [{t,cs,type,entry,fl,exitFl,spd,notice}] sorted by t. opts.hub forces the crossing point to be MIDAS.
+function genTraffic(seed, P, opts){
+  opts = opts || {};
+  const r = makeRng(seed >>> 0), used = {};
+  const ent = BOUNDARY_FIXES.slice();
+  for (let i = ent.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); const t = ent[i]; ent[i] = ent[j]; ent[j] = t; }
+  let entries = ent.slice(0, clamp(P.entries, 1, 8));
+  if (opts.hub){
+    const hubEntries = ['ROSAS','LUNAR','MIRLO','ONDAS','BRAVA','PLAYA'];
+    entries = ent.filter(function(e){ return hubEntries.indexOf(e) >= 0; }).slice(0, Math.max(2, Math.min(P.entries, 6)));
+  }
+  const list = [];
+  const n = P.count;
+  for (let i = 0; i < n; i++){
+    const type = rPick(r, TYPE_LIST);
+    let entry = rPick(r, entries);
+    let fl = rPick(r, flChoices(type));
+    let t = Math.round(P.dur * (i + r()) / n);
+    if (i > 0 && r() < P.bias){
+      const partner = list[rInt(r, Math.max(0, i - 6), i - 1)];
+      const cand = entries.filter(function(e){ return e !== partner.entry; });
+      const e2 = rPick(r, cand.length ? cand : entries);
+      const rA = ENTRY_ROUTE[partner.entry], rB = ENTRY_ROUTE[e2];
+      const cx = routeCross(rA, rB, opts.hub ? 'MIDAS' : null);
+      if (cx && cx.dA !== null && cx.dB !== null){
+        const spd = speedFor(type, r);
+        const tt = Math.round(partner.t + timeToDist(cx.dA, partner.spd) - timeToDist(cx.dB, spd) + rInt(r, -25, 25));
+        if (tt >= 0 && tt <= P.dur + 200){
+          entry = e2; t = tt;
+          const f2 = partner.fl + (r() < 0.75 ? 0 : (r() < 0.5 ? 10 : -10));
+          if (f2 >= TYPES[type].lo && f2 <= TYPES[type].hi) fl = f2;
+          list.push({ t:t, cs:makeCallsign(r, used), type:type, entry:entry, fl:fl, exitFl:pickExitFl(fl, type, r), spd:spd, notice:0 });
+          continue;
+        }
+      }
+    }
+    list.push({ t:t, cs:makeCallsign(r, used), type:type, entry:entry, fl:fl, exitFl:pickExitFl(fl, type, r), spd:speedFor(type, r), notice:0 });
+  }
+  // Two aircraft on the same entry must not start closer than 6.5 NM (else a loss can exist at the very moment the follower appears,
+  // which no player could have prevented): at least 75 s, and long enough for the leader to be 6.5 NM ahead at its own speed.
+  const byEntry = {};
+  list.slice().sort(function(a, b){ return a.t - b.t; }).forEach(function(a){
+    const p = byEntry[a.entry];
+    if (p !== undefined){
+      const gap = Math.max(75, Math.ceil(6.5 / p.spd * 3600));
+      if (a.t < p.t + gap) a.t = p.t + gap;
+    }
+    byEntry[a.entry] = { t:a.t, spd:a.spd };
+  });
+  enforceFairness(list, opts.wind || windFromSeed(seed, P.wind), 45 + 6 * P.ts);
+  list.forEach(function(a){ a.notice = r() < P.late ? 0 : P.notice; });
+  list.sort(function(a, b){ return a.t - b.t || a.cs.localeCompare(b.cs); });
+  return list;
+}
+function genTasks(seed, P){
+  const r = makeRng(((seed ^ 0x5bd1e995) >>> 0) || 7), plan = [];
+  const wallMin = (P.dur + 600) / P.ts / 60;
+  const n = Math.round(P.rate * wallMin), kinds = P.kinds || [];
+  if (kinds.length) for (let i = 0; i < n; i++) plan.push({ t:rInt(r, 40, P.dur + 400), kind:rPick(r, kinds) });
+  const nreq = Math.round(P.reqProb * P.count);
+  for (let i = 0; i < nreq; i++) plan.push({ t:rInt(r, 60, P.dur + 300), kind:'req' });
+  for (let i = 0; i < P.fuel; i++) plan.push({ t:rInt(r, 90, P.dur + 250), kind:'fuel' });
+  plan.sort(function(a, b){ return a.t - b.t; });
+  return plan;
+}
+function sync(entryA, tA, spdA, entryB, spdB, offset, via){
+  const cx = routeCross(ENTRY_ROUTE[entryA], ENTRY_ROUTE[entryB], via || null);
+  return Math.round(tA + timeToDist(cx.dA, spdA) - timeToDist(cx.dB, spdB) + offset);
+}
+// Ten scripted scenarios. 1-4 are hand-built; 5-10 use fixed seeds with the hub option (all crossings at MIDAS).
+const SCENARIOS = [null,
+  { n:1, name:'Un cruce', wind:{ from:270, spd:0 }, learn:'Un solo cruce en MIDAS: localiza el punto de cruce, aparta pronto a la aeronave que llega después con un viraje de 10-20 grados y luego reanuda la navegación.',
+    build:function(){
+      const a = { t:0, cs:'IBE101', type:'A320', entry:'ROSAS', fl:330, exitFl:330, spd:440, notice:240 };
+      const b = { t:sync('ROSAS', 0, 440, 'MIRLO', 430, 25, 'MIDAS'), cs:'VLG202', type:'B738', entry:'MIRLO', fl:330, exitFl:330, spd:430, notice:240 };
+      const c = { t:260, cs:'RYR303', type:'E190', entry:'LUNAR', fl:310, exitFl:310, spd:410, notice:240 };
+      return [a, b, c];
+    } },
+  { n:2, name:'Dos cruces', wind:{ from:250, spd:0 }, learn:'Dos conflictos separados en lugares distintos: ordénalos por tiempo y resuelve primero el más cercano.',
+    build:function(){
+      const a = { t:0, cs:'IBE111', type:'A320', entry:'ROSAS', fl:330, exitFl:330, spd:440, notice:180 };
+      const b = { t:sync('ROSAS', 0, 440, 'MIRLO', 430, 0, 'MIDAS'), cs:'VLG212', type:'B738', entry:'MIRLO', fl:330, exitFl:330, spd:430, notice:180 };
+      const c = { t:150, cs:'AEA313', type:'A320', entry:'ROSAS', fl:350, exitFl:350, spd:440, notice:180 };
+      const d = { t:sync('ROSAS', 150, 440, 'TAJO', 410, -10, 'CUMBRE'), cs:'TAP414', type:'E190', entry:'TAJO', fl:350, exitFl:350, spd:410, notice:180 };
+      const e = { t:230, cs:'AFR515', type:'A333', entry:'LUNAR', fl:290, exitFl:290, spd:450, notice:180 };
+      return [a, b, c, d, e];
+    } },
+  { n:3, name:'Alcance y niveles de salida', wind:{ from:300, spd:5 }, learn:'Una aeronave rápida alcanza a otra lenta en la misma ruta, mientras que dos aeronaves necesitan otro nivel de salida.',
+    build:function(){
+      const a = { t:0, cs:'IBE121', type:'AT72', entry:'ROSAS', fl:270, exitFl:270, spd:250, notice:150 };
+      const b = { t:110, cs:'VLG222', type:'A320', entry:'ROSAS', fl:270, exitFl:270, spd:470, notice:150 };
+      const c = { t:sync('ROSAS', 0, 250, 'PLAYA', 440, 0, 'MIDAS') + 30, cs:'RYR323', type:'A320', entry:'PLAYA', fl:340, exitFl:300, spd:440, notice:150 };
+      const d = { t:60, cs:'TAP424', type:'B738', entry:'LUNAR', fl:320, exitFl:340, spd:430, notice:150 };
+      const e = { t:200, cs:'DLH525', type:'A333', entry:'ONDAS', fl:350, exitFl:350, spd:450, notice:150 };
+      const f = { t:260, cs:'BAW626', type:'E190', entry:'SIRIO', fl:330, exitFl:330, spd:410, notice:150 };
+      const g = { t:290, cs:'KLM727', type:'A320', entry:'BRAVA', fl:310, exitFl:310, spd:440, notice:150 };
+      return [a, b, c, d, e, f, g];
+    } },
+  { n:4, name:'Ascenso a través de tráfico', wind:{ from:200, spd:10 }, learn:'Una aeronave en ascenso debe atravesar el nivel de otra: comprueba el cruce antes de autorizar el nivel.',
+    build:function(){
+      const L = [];
+      L.push({ t:0, cs:'IBE131', type:'A320', entry:'ROSAS', fl:300, exitFl:340, spd:440, notice:120 });
+      L.push({ t:sync('ROSAS', 0, 440, 'MIRLO', 430, 0, 'MIDAS'), cs:'VLG232', type:'B738', entry:'MIRLO', fl:320, exitFl:320, spd:430, notice:120 });
+      L.push({ t:sync('ROSAS', 0, 440, 'PLAYA', 440, 20, 'MIDAS'), cs:'RYR333', type:'A320', entry:'PLAYA', fl:340, exitFl:300, spd:440, notice:120 });
+      L.push({ t:70, cs:'AEA434', type:'E190', entry:'LUNAR', fl:280, exitFl:280, spd:410, notice:120 });
+      L.push({ t:sync('LUNAR', 70, 410, 'BRAVA', 440, 15, 'MIDAS'), cs:'TAP535', type:'A333', entry:'BRAVA', fl:280, exitFl:280, spd:450, notice:120 });
+      L.push({ t:180, cs:'AFR636', type:'B738', entry:'TAJO', fl:330, exitFl:330, spd:430, notice:120 });
+      L.push({ t:sync('TAJO', 180, 430, 'ONDAS', 420, 0, 'CUMBRE'), cs:'DLH737', type:'B738', entry:'ONDAS', fl:330, exitFl:330, spd:420, notice:120 });
+      L.push({ t:250, cs:'BAW838', type:'A320', entry:'SIRIO', fl:360, exitFl:340, spd:440, notice:120 });
+      L.push({ t:330, cs:'KLM939', type:'AT72', entry:'ROSAS', fl:260, exitFl:260, spd:250, notice:120 });
+      L.push({ t:380, cs:'SAS040', type:'A320', entry:'BRAVA', fl:350, exitFl:350, spd:440, notice:120 });
+      return L.sort(function(a, b){ return a.t - b.t; });
+    } },
+  { n:5, name:'Nudo en MIDAS', wind:{ from:230, spd:15 }, seed:5005, hub:true, learn:'Tres rutas se cruzan en MIDAS y llega una emergencia de combustible. Dale prioridad y luego vuelve a estabilizar el nudo.' },
+  { n:6, name:'Día de viento', wind:{ from:315, spd:20 }, seed:6006, hub:true, learn:'Un viento cruzado aparta las trazas de las rutas: fíate de la traza prevista, no del rumbo.' },
+  { n:7, name:'Entradas tardías', wind:{ from:90, spd:25 }, seed:7007, hub:true, learn:'Las aeronaves aparecen casi sin aviso y sin ayudas: guarda margen de sobra y vigila los bordes.' },
+  { n:8, name:'Dos oleadas', wind:{ from:140, spd:30 }, seed:8008, hub:true, learn:'Dos oleadas densas; aprovecha la calma entre ambas para recomponer tu imagen mental.' },
+  { n:9, name:'Muro de tráfico', wind:{ from:20, spd:38 }, seed:9009, hub:true, learn:'Demasiado tráfico: elige qué proteger primero y acepta pequeños retrasos.' },
+  { n:10, name:'Todo a la vez', wind:{ from:180, spd:45 }, seed:10010, hub:true, learn:'Sobrecarga a propósito. Mantén la calma, da pocas instrucciones y minimiza los daños.' }
+];
+function buildScenario(n){
+  const sc = SCENARIOS[n], base = LEVELS[n];
+  const traffic = sc.build ? sc.build() : genTraffic(sc.seed, base, { hub:true, wind:sc.wind });
+  const P = Object.assign({}, base, { count:traffic.length });
+  return { P:P, wind:sc.wind, traffic:traffic, seed:sc.seed || (1000 + n), scenario:n, taskPlan:genTasks(sc.seed || (1000 + n), P) };
+}
+
+/* ---- the simulated world ---- */
+function makeAircraft(spec, id, wind){
+  const route = ENTRY_ROUTE[spec.entry];
+  const p = WP[route[0]];
+  const a = { id:id, cs:spec.cs, type:spec.type, x:p.x, y:p.y, hdg:0, tas:spec.spd, tgtSpd:spec.spd, fl:spec.fl, tgtFl:spec.fl,
+    mode:'NAV', tgtHdg:0, route:route, wp:1, lastD:null, closing:false, exitFl:spec.exitFl, emg:false,
+    spawnT:spec.t, entry:spec.entry, exit:route[route.length - 1], trail:[], hadLoss:false, cmds:0, lastLead:null };
+  a.hdg = headingForCourse(bearingTo(a, WP[route[1]]), a.tas, wind);
+  a.tgtHdg = a.hdg;
+  const gv = groundVel(a.hdg, a.tas, wind);
+  a.gs0 = Math.hypot(gv.x, gv.y) * 3600;
+  a.ideal = routeLen(route) / a.gs0 * 3600;
+  return a;
+}
+function newWorld(cfg){
+  const P = cfg.P;
+  return { t:0, P:P, ts:P.ts, wind:cfg.wind, rng:makeRng(((cfg.seed ^ 0x9E3779B9) >>> 0) || 3), seed:cfg.seed,
+    plan:cfg.traffic, planIdx:0, taskPlan:cfg.taskPlan, taskIdx:0, tasks:[], taskLog:[], nextTaskId:1,
+    ac:[], nextId:1, done:[], events:[], cmds:[], confs:{}, alerts:[], tracks:{}, alertSet:{},
+    lossActive:{}, losses:[], clearCount:{}, bursts:0, burstOn:false, wl:{ eps:0, on:false, max:0, ticks:0 },
+    log:[], over:false, maxT:P.dur + 2000,   /* an AT72 entering late on the longest route needs ~1240 s: the old dur+900 cap made some aircraft impossible to hand off */ hints:[], unnecessary:0, redundant:0, pausedCount:0 };
+}
+function logMsg(w, txt, cls){ w.log.push({ t:w.t, txt:txt, cls:cls || '' }); if (w.log.length > 60) w.log.shift(); }
+function findAc(w, id){ for (let i = 0; i < w.ac.length; i++) if (w.ac[i].id === id) return w.ac[i]; return null; }
+
+function computeAlerts(w){
+  // 2 s prediction grid: with 5 s the alert time was off by up to minutes for grazing pairs and ~1 % of real conflicts were missed (verified against the 1 s simulation)
+  const S = 2, tr = w.ac.map(function(a){ return predictTrack(a, w.wind, TRACK_HORIZON, S); });
+  w.tracks = {};
+  for (let i = 0; i < w.ac.length; i++) w.tracks[w.ac[i].id] = tr[i];
+  const res = [], set = {};
+  for (let i = 0; i < w.ac.length; i++){
+    for (let j = i + 1; j < w.ac.length; j++){
+      if (Math.abs(w.ac[i].x - w.ac[j].x) > 90 && Math.abs(w.ac[i].y - w.ac[j].y) > 90) continue;
+      const r = detectPair(tr[i], tr[j], S);
+      if (r.loss && r.t <= ALERT_HORIZON){
+        res.push({ a:w.ac[i].id, b:w.ac[j].id, t:r.t, minLat:r.minLat });
+        set[w.ac[i].id] = 1; set[w.ac[j].id] = 1;
+      }
+    }
+  }
+  res.sort(function(x, y){ return x.t - y.t; });
+  w.alerts = res; w.alertSet = set;
+}
+function pairKey(a, b){ return a < b ? a + '-' + b : b + '-' + a; }
+function updateConfs(w){
+  const seen = {};
+  w.alerts.forEach(function(al){
+    const k = pairKey(al.a, al.b); seen[k] = 1;
+    let rec = w.confs[k];
+    const A = findAc(w, al.a), B = findAc(w, al.b);
+    if (!rec){
+      rec = w.confs[k] = { key:k, a:al.a, b:al.b, csA:A.cs, csB:B.cs, firstT:w.t, firstLead:al.t, snapA:cloneAc(A), snapB:cloneAc(B),
+        actions:[], status:'active', lastLead:al.t, lost:false, minLat:null, minVert:null, actSnap:null, actLead:null };
+    } else if (rec.status === 'resolved'){ rec.status = 'active'; }
+    rec.lastLead = al.t;
+    w.clearCount[k] = 0;
+  });
+  Object.keys(w.confs).forEach(function(k){
+    const rec = w.confs[k];
+    if (rec.status === 'active' && !seen[k]){
+      w.clearCount[k] = (w.clearCount[k] || 0) + 1;
+      if (w.clearCount[k] >= 2) rec.status = rec.lost ? 'lost' : 'resolved';
+    }
+  });
+}
+function endEpisode(w, k){
+  const ep = w.lossActive[k];
+  if (ep){ ep.t1 = w.t; w.losses.push(ep); delete w.lossActive[k]; }
+}
+function checkSeparation(w){
+  const now = {};
+  for (let i = 0; i < w.ac.length; i++){
+    for (let j = i + 1; j < w.ac.length; j++){
+      const A = w.ac[i], B = w.ac[j];
+      const dx = A.x - B.x, dy = A.y - B.y;
+      if (dx * dx + dy * dy >= SEP_LAT * SEP_LAT) continue;
+      const dv = Math.abs(A.fl - B.fl);
+      if (dv >= SEP_VERT - VEPS) continue;
+      const k = pairKey(A.id, B.id), d = Math.sqrt(dx * dx + dy * dy);
+      now[k] = 1;
+      let ep = w.lossActive[k];
+      if (!ep){
+        ep = w.lossActive[k] = { key:k, a:A.id, b:B.id, csA:A.cs, csB:B.cs, t0:w.t, t1:null, minLat:d, minVert:dv };
+        A.hadLoss = true; B.hadLoss = true;
+        logMsg(w, 'PÉRDIDA DE SEPARACIÓN ' + A.cs + ' / ' + B.cs, 'mal');
+        const rec = w.confs[k];
+        if (rec){ rec.lost = true; rec.status = 'lost'; }
+        else w.confs[k] = { key:k, a:A.id, b:B.id, csA:A.cs, csB:B.cs, firstT:w.t, firstLead:0, snapA:cloneAc(A), snapB:cloneAc(B), actions:[], status:'lost', lastLead:0, lost:true, minLat:null, minVert:null, actSnap:null, actLead:null, unseen:true };
+      }
+      if (d < ep.minLat) ep.minLat = d;
+      if (dv < ep.minVert) ep.minVert = dv;
+      const rc = w.confs[k];
+      if (rc){ rc.minLat = ep.minLat; rc.minVert = ep.minVert; }
+    }
+  }
+  Object.keys(w.lossActive).forEach(function(k){ if (!now[k]) endEpisode(w, k); });
+}
+function resolveTask(w, task, outcome, resp){
+  task.outcome = outcome; task.resp = resp === undefined ? null : resp;
+  w.taskLog.push(task);
+  w.tasks = w.tasks.filter(function(x){ return x !== task; });
+}
+function freqDistractors(f, r){
+  const parts = f.split('.'), s = parts[1];
+  const c = {}; c[f] = 1;
+  const out = [];
+  const tries = [
+    parts[0] + '.' + s[1] + s[0],
+    (parseInt(parts[0], 10) + (r() < 0.5 ? 1 : -1)) + '.' + s,
+    parts[0] + '.' + pad2((parseInt(s, 10) + 15) % 100),
+    (parseInt(parts[0], 10) + 10) + '.' + s,
+    parts[0] + '.' + pad2((parseInt(s, 10) + 5) % 100)
+  ];
+  for (let i = 0; i < tries.length && out.length < 2; i++){ if (!c[tries[i]]){ c[tries[i]] = 1; out.push(tries[i]); } }
+  return out;
+}
+function misheard(c, v, r){
+  const cands = [];
+  if (c === 'hdg'){ [10, -10, 20, -20, 30].forEach(function(d){ cands.push(Math.round(norm360(v + d))); }); const s = pad3(v); cands.push(parseInt(s[0] + s[2] + s[1], 10)); }
+  else if (c === 'lvl'){ [10, -10, 20, -20].forEach(function(d){ cands.push(v + d); }); }
+  else { [10, -10, 20, -20].forEach(function(d){ cands.push(v + d); }); }
+  const f = cands.filter(function(x){ return x !== v && x >= 0; });
+  return rPick(r, f);
+}
+function readbackCorrect(issued, heard){ return issued.c === heard.c && issued.v === heard.v; }
+function spawnTask(w, pl){
+  const P = w.P, ts = w.ts, r = w.rng;
+  const dl = function(kind){ return Math.max(3, Math.ceil(TASK_WALL_DEADLINE[kind] * ts)); };
+  const task = { id:w.nextTaskId++, kind:pl.kind, t0:w.t, deadline:0, data:{}, outcome:null, resp:null };
+  if (pl.kind === 'alert'){
+    task.deadline = w.t + dl('alert'); task.data = { code:rInt(r, 10, 99) };
+  } else if (pl.kind === 'freq'){
+    const f = rInt(r, 119, 135) + '.' + pad2(rInt(r, 0, 19) * 5);
+    const opts = [f].concat(freqDistractors(f, r));
+    for (let i = opts.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); const t = opts[i]; opts[i] = opts[j]; opts[j] = t; }
+    task.deadline = w.t + dl('freq'); task.data = { target:f, options:opts, sector:rPick(r, BOUNDARY_FIXES) + ' CTL' };
+  } else if (pl.kind === 'req'){
+    const cand = w.ac.filter(function(a){ return !a.emg && !a.reqPending && Math.abs(a.fl - a.tgtFl) < 0.5; });
+    if (!cand.length) return false;
+    const a = rPick(r, cand);
+    const opts = [-30,-20,-10,10,20,30].map(function(d){ return Math.round(a.exitFl) + d; }).filter(function(f){ return f >= TYPES[a.type].lo && f <= TYPES[a.type].hi; });
+    if (!opts.length) return false;
+    a.reqPending = true;
+    task.deadline = w.t + dl('req'); task.data = { id:a.id, cs:a.cs, fl:rPick(r, opts) };
+  } else if (pl.kind === 'fuel'){
+    const far = w.ac.filter(function(a){ return !a.emg; });
+    if (!far.length) return false;
+    const a = rPick(r, far);
+    a.emg = true;
+    const remaining = Math.hypot(a.x - WP[a.exit].x, a.y - WP[a.exit].y);
+    task.deadline = w.t + dl('fuel'); task.data = { id:a.id, cs:a.cs, acked:false, limit:w.t + Math.ceil(remaining / Math.max(a.gs0, 100) * 3600 * 1.25 + 40 + 20) };
+    a.fuelTask = task;
+    logMsg(w, a.cs + ' declara MINIMUM FUEL - prioridad', 'aviso');
+  }
+  w.tasks.push(task);
+  return true;
+}
+function requestSafe(w, a, fl){
+  const S = 5, H = 420;
+  const others = w.ac.filter(function(x){ return x.id !== a.id; });
+  const base = predictTrack(a, w.wind, H, S);
+  const mod = cloneAc(a); mod.tgtFl = fl;
+  const tm = predictTrack(mod, w.wind, H, S);
+  for (let i = 0; i < others.length; i++){
+    const to = predictTrack(others[i], w.wind, H, S);
+    const before = detectPair(base, to, S), after = detectPair(tm, to, S);
+    if (after.loss && !before.loss) return false;
+  }
+  return true;
+}
+function noteCommandForConfs(w, a, text, turn){
+  Object.keys(w.confs).forEach(function(k){
+    const rec = w.confs[k];
+    if (rec.status !== 'active' || (rec.a !== a.id && rec.b !== a.id)) return;
+    if (!rec.actions.length){
+      rec.actSnap = [cloneAc(findAc(w, rec.a) || rec.snapA), cloneAc(findAc(w, rec.b) || rec.snapB)];
+      rec.actLead = rec.lastLead;
+    }
+    rec.actions.push({ t:w.t, cs:a.cs, text:text, lead:rec.lastLead, turn:turn });
+  });
+}
+function applyCmd(w, id, c, v){
+  const a = findAc(w, id);
+  if (!a) return { ok:false, msg:'No existe esa aeronave' };
+  const T = TYPES[a.type];
+  let text = '', redundant = false, turn = null, necessary;
+  const inConf = !!w.alertSet[a.id];
+  if (c === 'hdg'){
+    v = norm360(Math.round(v));
+    const before = a.mode === 'HDG' ? a.tgtHdg : a.hdg;
+    turn = Math.abs(angDiff(before, v));
+    redundant = a.mode === 'HDG' && Math.round(a.tgtHdg) === v;
+    a.mode = 'HDG'; a.tgtHdg = v; a.lastD = null; a.closing = false;
+    text = a.cs + ' heading ' + pad3(v);
+    necessary = inConf;
+  } else if (c === 'lvl'){
+    v = clamp(Math.round(v / 10) * 10, LEVEL_MIN, LEVEL_MAX);
+    redundant = v === Math.round(a.tgtFl);
+    a.tgtFl = v;
+    text = a.cs + (v > a.fl ? ' climb FL' : ' descend FL') + v;
+    necessary = inConf || v === Math.round(a.exitFl) || Math.abs(a.fl - a.exitFl) > 0.5 || !!a.emg;
+  } else if (c === 'spd'){
+    v = clamp(Math.round(v), T.min, T.max);
+    redundant = v === Math.round(a.tgtSpd);
+    a.tgtSpd = v;
+    text = a.cs + ' speed ' + v;
+    necessary = inConf;
+  } else {
+    redundant = a.mode === 'NAV';
+    a.mode = 'NAV'; a.wp = chooseWp(a); a.lastD = null; a.closing = false;
+    text = a.cs + ' resume own navigation';
+    necessary = inConf || !redundant;
+  }
+  if (redundant) necessary = false;
+  if (a.emg && a.fuelTask && !a.fuelTask.data.acked){
+    const tk = a.fuelTask;
+    tk.data.acked = true; tk.data.ackT = w.t; tk.ackResp = (w.t - tk.t0) / w.ts;
+  }
+  if (!necessary){ w.unnecessary++; }
+  if (redundant) w.redundant++;
+  noteCommandForConfs(w, a, text, turn);
+  a.cmds++;
+  w.cmds.push({ t:w.t, id:a.id, cs:a.cs, c:c, v:v, text:text, necessary:necessary, redundant:redundant, turn:turn });
+  w.cmdTicks = (w.cmdTicks || []); w.cmdTicks.push(w.t);
+  const win = Math.round(12 * w.ts), cnt = w.cmdTicks.filter(function(t){ return t > w.t - win; }).length;
+  if (cnt >= 6 && !w.burstOn){ w.bursts++; w.burstOn = true; }
+  // read-back prompt
+  if (w.P.readback > 0 && c !== 'dct' && !redundant && w.rng() < w.P.readback && w.tasks.filter(function(x){ return x.kind === 'readback'; }).length < 2){
+    const wrong = w.rng() < 0.3;
+    const heardV = wrong ? misheard(c, v, w.rng) : v;
+    w.tasks.push({ id:w.nextTaskId++, kind:'readback', t0:w.t, deadline:w.t + Math.max(3, Math.ceil(TASK_WALL_DEADLINE.readback * w.ts)), outcome:null, resp:null,
+      data:{ cs:a.cs, issued:{ c:c, v:v }, heard:{ c:c, v:heardV } } });
+  }
+  computeAlerts(w);
+  return { ok:true, msg:text + (redundant ? ' (ya fijado)' : ''), redundant:redundant };
+}
+function answerTask(w, key){
+  const cand = w.tasks.filter(function(t){ return TASK_KEYS[t.kind] && TASK_KEYS[t.kind].indexOf(key) >= 0; }).sort(function(a, b){ return a.id - b.id; });
+  if (!cand.length) return { ok:false, msg:'Ninguna tarea espera esa tecla' };
+  const t = cand[0], resp = (w.t - t.t0) / w.ts;
+  let good = false;
+  if (t.kind === 'alert') good = true;
+  else if (t.kind === 'freq') good = t.data.options.indexOf(t.data.target) === ['Z','X','C'].indexOf(key);
+  else if (t.kind === 'readback') good = (key === 'Y') === readbackCorrect(t.data.issued, t.data.heard);
+  else if (t.kind === 'req'){
+    const a = findAc(w, t.data.id);
+    if (!a){ resolveTask(w, t, 'missed'); return { ok:true, msg:'La aeronave ya ha salido' }; }
+    a.reqPending = false;
+    const safe = requestSafe(w, a, t.data.fl);
+    good = (key === 'A') === safe;
+    t.data.safe = safe;
+    if (key === 'A'){ a.tgtFl = t.data.fl; a.exitFl = t.data.fl; computeAlerts(w); }
+  }
+  resolveTask(w, t, good ? 'correct' : 'wrong', resp);
+  return { ok:true, msg:(TASKNAME[t.kind] + ': ' + (good ? 'correcto' : 'incorrecto')), good:good };
+}
+// events: {t, k:'cmd', id, c, v} | {t, k:'ans', key} | {t, k:'hint', lvl}
+function applyEvent(w, ev){
+  if (ev.k === 'cmd') return applyCmd(w, ev.id, ev.c, ev.v);
+  if (ev.k === 'ans') return answerTask(w, ev.key);
+  if (ev.k === 'hint'){ w.hints.push({ t:w.t, lvl:ev.lvl }); return { ok:true }; }
+  if (ev.k === 'pause'){ w.pausedCount++; return { ok:true }; }
+  return { ok:false };
+}
+function inputEvent(w, ev){ ev.t = w.t; w.events.push(ev); return applyEvent(w, ev); }
+
+function handleExit(w, a){
+  const ex = WP[a.exit];
+  const h = checkHandoff(a, ex);
+  const transit = w.t - a.spawnT;
+  const rec = { id:a.id, cs:a.cs, t:w.t, offset:h.offset, lvlErr:h.lvlErr, okHand:h.ok, score:h.score, delay:Math.max(0, transit - a.ideal), ideal:a.ideal, transit:transit,
+    hadLoss:a.hadLoss, correct:h.ok && !a.hadLoss, exit:a.exit, cmds:a.cmds };
+  w.done.push(rec);
+  logMsg(w, a.cs + ' transferido: ' + fmt(h.offset, 1) + ' NM de ' + a.exit + ', FL' + Math.round(a.fl) + (h.ok ? ' CORRECTO' : ' INCORRECTO'), h.ok ? 'bien' : 'mal');
+  if (a.fuelTask && a.fuelTask.outcome === null && w.tasks.indexOf(a.fuelTask) < 0 && a.fuelTask.data.acked){
+    // already logged? (only unresolved fuel tasks are kept in w.tasks until the exit)
+  }
+  if (a.fuelTask && w.tasks.indexOf(a.fuelTask) >= 0){
+    const tk = a.fuelTask;
+    if (tk.data.acked) resolveTask(w, tk, (h.ok && w.t <= tk.data.limit) ? 'correct' : 'wrong', tk.ackResp);
+    else resolveTask(w, tk, 'missed');
+    tk.data.exitT = w.t;
+  }
+}
+function stepWorld(w){
+  if (w.over) return;
+  const P = w.P;
+  // 1. spawn planned aircraft
+  while (w.planIdx < w.plan.length && w.plan[w.planIdx].t <= w.t){
+    const a = makeAircraft(w.plan[w.planIdx], w.nextId++, w.wind);
+    w.ac.push(a); w.planIdx++;
+  }
+  // 2. tasks due
+  while (w.taskIdx < w.taskPlan.length && w.taskPlan[w.taskIdx].t <= w.t){
+    const ok = spawnTask(w, w.taskPlan[w.taskIdx]);
+    if (ok || w.t > w.taskPlan[w.taskIdx].t + 300 || (w.planIdx >= w.plan.length && !w.ac.length)) w.taskIdx++;
+    else break;
+  }
+  // 3. move aircraft
+  for (let i = 0; i < w.ac.length; i++){
+    const a = w.ac[i];
+    stepAc(a, w.wind, 1);
+    if (w.t % 8 === 0){ a.trail.push({ x:a.x, y:a.y }); if (a.trail.length > 6) a.trail.shift(); }
+  }
+  // 4. exits
+  const stay = [];
+  for (let i = 0; i < w.ac.length; i++){
+    const a = w.ac[i];
+    if (outside(a)) handleExit(w, a); else stay.push(a);
+  }
+  w.ac = stay;
+  // 5. separation
+  checkSeparation(w);
+  // 6. predictions
+  if (w.t % 2 === 0){ computeAlerts(w); updateConfs(w); }
+  // 7. task expiry
+  w.tasks.slice().forEach(function(t){
+    if (t.kind === 'fuel'){
+      if (!t.data.acked && w.t > t.deadline) resolveTask(w, t, 'missed');
+    } else if (w.t > t.deadline){
+      if (t.kind === 'req'){ const a = findAc(w, t.data.id); if (a) a.reqPending = false; }
+      resolveTask(w, t, 'missed');
+    }
+  });
+  // 8. workload and bursts
+  const load = w.ac.length + 3 * w.tasks.length + 2 * w.alerts.length;
+  if (load > w.wl.max) w.wl.max = load;
+  if (!w.wl.on && load >= P.loadThr){ w.wl.on = true; w.wl.eps++; }
+  else if (w.wl.on && load < P.loadThr - 3) w.wl.on = false;
+  if (w.wl.on) w.wl.ticks++;
+  if (w.burstOn){
+    const win = Math.round(12 * w.ts);
+    if ((w.cmdTicks || []).filter(function(t){ return t > w.t - win; }).length < 3) w.burstOn = false;
+  }
+  w.t++;
+  if ((w.planIdx >= w.plan.length && !w.ac.length) || w.t >= w.maxT) finish(w);
+}
+function finish(w){
+  Object.keys(w.lossActive).forEach(function(k){ endEpisode(w, k); });
+  w.tasks.slice().forEach(function(t){ resolveTask(w, t, 'missed'); });
+  w.remaining = w.ac.slice();
+  w.over = true;
+}
+function runHeadless(cfg, events, maxTicks){
+  const w = newWorld(cfg); let ei = 0;
+  const evs = (events || []).slice().sort(function(a, b){ return a.t - b.t; });
+  while (!w.over && w.t < (maxTicks || 1e6)){
+    while (ei < evs.length && evs[ei].t <= w.t){ w.events.push(evs[ei]); applyEvent(w, evs[ei]); ei++; }
+    stepWorld(w);
+  }
+  return w;
+}
+
+/* ---------- Endurance (wave 5, schema coord/SCHEMA-thirds.md): identical copy in every game ---------- */
+function atcThirds(results, durationSec){
+  var N = results ? results.length : 0; if (N < 9) return null;
+  var g = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  for (var i = 0; i < N; i++){ var r = results[i]; var k = durationSec > 0 ? Math.min(2, Math.floor(Math.max(0, +r.t || 0) * 3 / durationSec)) : Math.min(2, Math.floor(i * 3 / N));
+    g[k].n++; if (r.blank) g[k].b++; else if (r.ok) g[k].c++; g[k].s += (isFinite(+r.sec) ? +r.sec : 0); }
+  for (var j = 0; j < 3; j++) g[j].s = Math.round(g[j].s * 100) / 100;
+  return g;
+}
+function atcEnduranceLine(th){
+  if (!th) return 'Resistencia: hacen falta 9 o más elementos para comparar los tercios de la sesión.';
+  if (th[0].n < 8 || th[2].n < 8) return 'Resistencia: hay muy pocos elementos en el primer o el último tercio (se necesitan 8 o más en cada uno) para señalar una caída.';
+  var f = 100 * th[2].c / th[2].n - 100 * th[0].c / th[0].n;
+  return 'Resistencia: precisión del último tercio ' + (f >= 0 ? '+' : '') + Math.round(f) + ' puntos respecto al primer tercio (' + th[0].n + ' / ' + th[2].n + ' elementos)' + (f <= -5 ? ' - caída: acorta las sesiones o descansa antes.' : (f <= -3 ? ' - ligera bajada.' : ' - estable.'));
+}
+/* ---- scoring, accuracy, goals, adaptive mode, CSV ---- */
+function summarize(w){
+  const done = w.done, P = w.P;
+  const s = { level:P.n, aircraft:w.plan.length, handled:done.length, unhandled:w.remaining ? w.remaining.length : 0, spawnedNotHandled:0 };
+  const unspawned = w.plan.length - w.planIdx;
+  s.unhandled += unspawned;
+  let correct = 0, wrong = 0, blank = s.unhandled;
+  done.forEach(function(d){ if (d.correct) correct++; else wrong++; });
+  const tk = {};
+  ['alert','freq','readback','req','fuel'].forEach(function(k){ tk[k] = { n:0, correct:0, wrong:0, missed:0, resp:[] }; });
+  w.taskLog.forEach(function(t){
+    const o = tk[t.kind]; o.n++;
+    o[t.outcome]++;
+    if (t.resp !== null && t.resp !== undefined) o.resp.push(t.resp);
+    if (t.outcome === 'correct') correct++; else if (t.outcome === 'wrong') wrong++; else blank++;
+  });
+  s.tasks = tk;
+  s.tasksTotal = w.taskLog.length;
+  s.correct = correct; s.wrong = wrong; s.blank = blank;
+  const items = correct + wrong + blank;
+  s.items = items;
+  s.accuracy = items ? correct / items * 100 : 0;
+  s.lossEpisodes = w.losses.length;
+  s.lossList = w.losses;
+  s.unnecessary = w.unnecessary; s.redundant = w.redundant; s.cmdCount = w.cmds.length; s.bursts = w.bursts;
+  s.workload = { peaks:w.wl.eps, max:w.wl.max, ticks:w.wl.ticks };
+  const hs = done.map(function(d){ return d.score; });
+  const handoffSum = hs.reduce(function(a, b){ return a + b; }, 0);
+  s.handoffMean = w.plan.length ? handoffSum / w.plan.length : 0;   // unhandled aircraft count as zero
+  const dl = done.filter(function(d){ return d.ideal > 0; }).map(function(d){ return d.delay / d.ideal; });
+  s.delayRatio = dl.length ? dl.reduce(function(a, b){ return a + b; }, 0) / dl.length : 0;
+  s.delaySecMean = done.length ? done.reduce(function(a, d){ return a + d.delay; }, 0) / done.length : 0;
+  let slow = 0;
+  w.taskLog.forEach(function(t){ if (t.resp !== null && t.resp !== undefined && t.outcome !== 'missed' && t.resp > 0.7 * TASK_WALL_DEADLINE[t.kind]) slow++; });
+  const sepPen = w.losses.reduce(function(a, e){ return a + 12 + 13 * (1 - Math.min(e.minLat, SEP_LAT) / SEP_LAT); }, 0);
+  const handPen = (1 - s.handoffMean / 100) * 30;
+  const delayPen = Math.min(10, 40 * s.delayRatio);
+  const unnPen = Math.min(10, w.unnecessary);
+  const burstPen = Math.min(5, w.bursts);
+  const taskPen = Math.min(15, 1.5 * (tk.alert.missed + tk.freq.missed + tk.readback.missed + tk.req.missed + tk.fuel.missed + tk.alert.wrong + tk.freq.wrong + tk.readback.wrong + tk.req.wrong + tk.fuel.wrong) + 0.5 * slow);
+  s.penalties = { separation:sepPen, handoff:handPen, delay:delayPen, unnecessary:unnPen, bursts:burstPen, tasks:taskPen };
+  s.score = clamp(100 - sepPen - handPen - delayPen - unnPen - burstPen - taskPen, 0, 100);
+  s.success = s.accuracy >= MIN_ACCURACY && s.lossEpisodes === 0;
+  s.wallSeconds = w.t / w.ts;
+  s.spi = items ? s.wallSeconds / items : null;
+  { // endurance: time thirds of the run (schema-thirds); items = handed-off aircraft, tasks, and aircraft never handled (blank, last third)
+    const tl = [], dur = Math.max(1, w.t);
+    done.forEach(function(d){ tl.push({ ok:!!d.correct, blank:false, sec:(d.transit || 0) / w.ts, t:d.t }); });
+    w.taskLog.forEach(function(t){ tl.push({ ok:t.outcome === 'correct', blank:t.outcome !== 'correct' && t.outcome !== 'wrong', sec:(t.resp === null || t.resp === undefined) ? 0 : t.resp, t:t.t0 || 0 }); });
+    for (let i = 0; i < s.unhandled; i++) tl.push({ ok:false, blank:true, sec:0, t:dur });
+    tl.sort(function(x, y){ return x.t - y.t; });
+    s.thirds = atcThirds(tl, dur);
+  }
+  s.hintsUsed = w.hints.length;
+  s.hintMax = w.hints.reduce(function(m, h){ return Math.max(m, h.lvl); }, 0);
+  return s;
+}
+function parseGoal(text){
+  const t = String(text || '').replace(/\s+/g, ' '), num = function(x){ return parseFloat(x.replace(',', '.')); }, out = [];
+  let m = t.match(/(\d+(?:[.,]\d+)?)\s*%/); if (m) out.push({ type:'acc', v:num(m[1]) });
+  m = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-z])/i); if (m) out.push({ type:'spi', v:num(m[1]) });
+  m = t.match(/(\d+)\s*(?:correct|hits|aciertos|acierto|correctas|correcta)/i); if (m) out.push({ type:'correct', v:parseInt(m[1], 10) });
+  m = t.match(/(\d+)\s*(?:losses|loss|conflicts|pérdidas|pérdida|perdidas|perdida|conflictos|conflicto)/i); if (m) out.push({ type:'loss', v:parseInt(m[1], 10) });
+  m = t.match(/(?:score|puntuaci[oó]n|puntos)\s*(?:de\s*|of\s*)?(\d+(?:[.,]\d+)?)/i); if (m) out.push({ type:'score', v:num(m[1]) });
+  return out;
+}
+function evalGoal(text, r){
+  const conds = parseGoal(text);
+  if (!conds.length) return null;
+  return conds.every(function(c){
+    if (c.type === 'acc') return r.accuracy >= c.v;
+    if (c.type === 'spi') return r.spi !== null && r.spi <= c.v;
+    if (c.type === 'correct') return r.correct >= c.v;
+    if (c.type === 'loss') return r.lossEpisodes <= c.v;
+    return r.score >= c.v;
+  });
+}
+function canRaiseSpeed(accuracy){ return accuracy >= MIN_ACCURACY; }
+// Adaptive mode. State {level, up, down}. Up after N consecutive successes (accuracy >= 96 % and no separation loss), down after 2 failures in a row.
+function adaptiveNeed(level){ return level <= 4 ? 2 : 3; }
+function adaptiveNext(st, res){
+  const ok = res.accuracy >= MIN_ACCURACY && res.lossEpisodes === 0;
+  const n = { level:st.level, up:st.up, down:st.down, advice:'' };
+  if (ok){
+    n.up = st.up + 1; n.down = 0;
+    if (n.up >= adaptiveNeed(st.level) && st.level < 10){ n.level = st.level + 1; n.up = 0; n.advice = 'Éxitos consecutivos alcanzados: subes al nivel ' + n.level + '.'; }
+    else if (st.level >= 10) n.advice = 'Nivel máximo alcanzado. Repítelo solo para entrenar la serenidad.';
+    else n.advice = 'Éxito (' + n.up + ' de ' + adaptiveNeed(st.level) + ' necesarios). Repite el nivel ' + st.level + '.';
+  } else {
+    n.up = 0; n.down = st.down + 1;
+    if (n.down >= 2 && st.level > 1){ n.level = st.level - 1; n.down = 0; n.advice = 'Dos fallos seguidos: bajas al nivel ' + n.level + '.'; }
+    else n.advice = 'No es un éxito (precisión ' + fmt(res.accuracy, 1) + ' %, ' + res.lossEpisodes + ' pérdidas de separación). Repite el nivel ' + st.level + '; no subas la velocidad hasta que la precisión sea al menos del ' + MIN_ACCURACY + ' %.';
+  }
+  return n;
+}
+function speedAdvice(res){
+  if (canRaiseSpeed(res.accuracy) && res.lossEpisodes === 0) return 'Precisión igual o superior al ' + MIN_ACCURACY + ' % sin pérdida de separación: puedes subir la dificultad.';
+  return 'Precisión inferior al ' + MIN_ACCURACY + ' % (o hubo una pérdida de separación): NO subas la velocidad. Repite este nivel y busca primero una partida limpia.';
+}
+function csvCampo(v){ const s = (v === null || v === undefined) ? '' : String(v); return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function fechaES(iso){ const d = new Date(iso); return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function aCSV(sesiones){
+  const cab = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
+  const filas = sesiones.map(function(s){
+    return [fechaES(s.ts), s.modulo, s.level, s.correct, s.wrong, s.blank, (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
+      s.met === true ? 'Sí' : (s.met === false ? 'No' : '')].map(csvCampo).join(';');
+  });
+  return '﻿' + [cab.join(';')].concat(filas).join('\r\n') + '\r\n';
+}
+// Where does the player stand at a level (personal bests)?
+function betterRun(prev, r){ return !prev || r.score > prev.score; }
+
+/* ---- hints (0 none, 1 nudge, 2 method, 3 full worked solution) ---- */
+function currentConflict(w){
+  for (let i = 0; i < w.alerts.length; i++){
+    const al = w.alerts[i], A = findAc(w, al.a), B = findAc(w, al.b);
+    if (A && B) return { al:al, A:A, B:B };
+  }
+  return null;
+}
+function hintFor(w, lvl){
+  const c = currentConflict(w);
+  if (!c) return { key:'none', text:'No se prevé ningún conflicto en los próximos ' + ALERT_HORIZON + ' s. Comprueba los niveles de salida y las rutas y luego vigila los bordes por si llegan aeronaves nuevas.' };
+  const A = c.A, B = c.B, key = pairKey(A.id, B.id);
+  const o = orderByCrossing(A, B, w.wind), second = o.order[0], first = o.order[1];
+  if (lvl <= 1) return { key:key, text:'Indicio: mira ' + A.cs + ' y ' + B.cs + '. Van en trazas convergentes a niveles parecidos; pérdida en unos ' + Math.round(c.al.t) + ' s.' };
+  const va = groundVel(A.hdg, A.tas, w.wind), vb = groundVel(B.hdg, B.tas, w.wind);
+  const br = bearingRate(A, va, B, vb);
+  const cbdr = Math.abs(br.rate) < 0.15 && br.rangeRate < 0;
+  if (lvl === 2){
+    let t = 'Método: ';
+    if (o.ci) t += 'las trazas se cruzan en torno a ' + Math.round(o.ci.x) + ' / ' + Math.round(o.ci.y) + ' NM; ' + first.cs + ' llega primero a ese punto (' + Math.round(Math.min(o.ci.tA, o.ci.tB)) + ' s) y ' + second.cs + ' después (' + Math.round(Math.max(o.ci.tA, o.ci.tB)) + ' s). Mantén ' + first.cs + ' y aparta a ' + second.cs + ' para que pase por detrás. ';
+    else t += 'las trazas no se cruzan pero convergen (alcance o de frente); mueve la aeronave que sea más fácil de mover. ';
+    t += 'Variación de demora ' + fmt(br.rate, 2) + ' grados/s con distancia ' + (br.rangeRate < 0 ? 'decreciente' : 'creciente') + (cbdr ? ': demora constante y distancia decreciente = rumbo de colisión. ' : '. ');
+    t += 'Un viraje pequeño ahora es mejor que uno grande después.';
+    return { key:key, text:t };
+  }
+  const mr = minResolvingTurn(o.order, w.wind, TRACK_HORIZON + 240);
+  if (mr) return { key:key, text:'Solución: vira ' + mr.cs + ' a la ' + (mr.dir > 0 ? 'derecha' : 'izquierda') + ' ' + mr.deg + ' grados ahora (rumbo ' + pad3(mr.hdg) + '), separación mínima prevista ' + fmt(mr.minLat, 1) + ' NM. Después reanuda la navegación propia (R) solo cuando ' + (mr.ac === first.id ? second.cs : first.cs) + ' haya pasado el punto de cruce: si reanudas demasiado pronto, el conflicto vuelve.' };
+  const ml = minResolvingLevel(o.order, w.wind, TRACK_HORIZON + 240);
+  if (ml) return { key:key, text:'Solución: un solo viraje no basta; dale a ' + ml.cs + ' FL' + ml.fl + ' (separación vertical) y restablece su nivel de salida tras el paso.' };
+  return { key:key, text:'Solución: ninguna instrucción suelta resuelve esta pareja; combina un viraje y un cambio de velocidad, y empieza ya.' };
+}
+// Report analysis for one conflict record: how big a turn was needed at first alert versus when the player acted.
+function analyzeConf(rec, wind){
+  const o1 = orderByCrossing(rec.snapA, rec.snapB, wind);
+  const atAlert = minResolvingTurn(o1.order, wind, 600);
+  let atAct = null;
+  if (rec.actSnap){
+    const o2 = orderByCrossing(rec.actSnap[0], rec.actSnap[1], wind);
+    atAct = minResolvingTurn(o2.order, wind, 600);
+  }
+  return { atAlert:atAlert, atAct:atAct };
+}
+// ==== PURE LOGIC END ====
+
+// ==================== USER INTERFACE ====================
+const KEY_STORE = 'atc_sectorsim_v1';
+let memoria = null, almacenOk = true;
+const app = document.getElementById('app');
+function $(id){ return document.getElementById(id); }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function esc(s){ return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function cargar(){
+  if (memoria) return memoria;
+  let d = null;
+  try { const r = localStorage.getItem(KEY_STORE); if (r) d = JSON.parse(r); } catch (e) { almacenOk = false; }
+  if (!d || !Array.isArray(d.sesiones)) d = { sesiones:[], pb:{}, adaptive:{ level:1, up:0, down:0 }, streak:0, menu:null };
+  if (!d.pb) d.pb = {};
+  if (!d.adaptive) d.adaptive = { level:1, up:0, down:0 };
+  memoria = d; return d;
+}
+function guardar(){
+  try { localStorage.setItem(KEY_STORE, JSON.stringify(memoria)); return true; }
+  catch (e) { almacenOk = false; return false; }
+}
+
+/* ---------------- menu ---------------- */
+let menu = null, menuFresh = true;
+function defaultMenu(){
+  return { mode:'ladder', level:1, source:(cargar().sesiones.length ? 'random' : 'script'), seed:Math.floor(Math.random() * 900000) + 100000, goal:'96 %', hint:3,
+    custom:{ count:8, ts:3, wind:10, entries:4, bias:0.6, late:0.2, rate:2, dual:true, aid:2, hint:1 }, ack:false };
+}
+function lastRunFor(level){
+  const s = cargar().sesiones.filter(function(x){ return x.level === level; });
+  return s.length ? s[s.length - 1] : null;
+}
+function showMenu(){
+  cargar();
+  if (!menu) menu = defaultMenu();
+  const m = menu, d = memoria;
+  if (m.mode === 'adaptive') m.level = d.adaptive.level;
+  const L = LEVELS[m.level];
+  const hintCap = m.mode === 'custom' ? 3 : L.hint;
+  if (m.hint > hintCap) m.hint = hintCap;
+  const cards = [];
+  for (let i = 1; i <= 10; i++){
+    const q = LEVELS[i], pb = d.pb[i];
+    cards.push('<button class="lv' + (m.level === i ? ' sel' : '') + '" data-lv="' + i + '"' + (m.mode === 'adaptive' || m.mode === 'custom' ? ' disabled' : '') + '><span class="n">' + i + '</span><span>' + q.name + ' <span class="m">· ' + q.count + ' · ' + q.ts + '×</span></span><span class="m">' + (pb ? fmt(pb.score, 0) : '') + '</span>' + (m.level === i ? ic('check') : '<span></span>') + '</button>');
+  }
+  const c = m.custom;
+  const slider = function(id, label, min, max, step, val){ return '<label class="lb" for="' + id + '">' + label + ' <b id="' + id + '_v">' + val + '</b></label><input type="range" id="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '">'; };
+  let html = '<div class="seg">' +
+    ['ladder:Manual', 'adaptive:Adaptativo', 'custom:Personalizado'].map(function(x){ const p = x.split(':'); return '<button class="btn' + (m.mode === p[0] ? ' sel' : '') + '" data-mode="' + p[0] + '">' + p[1] + '</button>'; }).join('') + '</div>';
+  if (m.mode === 'adaptive') html += '<p class="fila" style="margin-top:12px"><span>L<b>' + d.adaptive.level + '</b> · ' + d.adaptive.up + ' / ' + adaptiveNeed(d.adaptive.level) + ' · ' + d.adaptive.down + ' / 2</span><button class="btn mini" id="adreset">' + ic('repeat') + 'Reiniciar</button></p>';
+  if (m.mode !== 'custom') html += '<div class="lvls">' + cards.join('') + '</div>';
+  if (m.mode === 'ladder'){
+    html += '<div class="fila" style="margin-top:12px"><div class="seg"><button class="btn' + (m.source === 'random' ? ' sel' : '') + '" data-src="random">Aleatorio</button><button class="btn' + (m.source === 'script' ? ' sel' : '') + '" data-src="script">Guion · ' + esc(SCENARIOS[m.level].name) + '</button></div>' +
+      (m.source === 'random' ? '<label for="seed">Semilla</label><input type="number" id="seed" value="' + m.seed + '" style="width:130px"><button class="btn mini" id="newseed">' + ic('repeat') + 'Nueva</button>' : '') + '</div>';
+  } else if (m.mode === 'custom'){
+    html += '<div class="rejilla2"><div>' + slider('c_count', 'Aeronaves', 1, 60, 1, c.count) + slider('c_ts', 'Velocidad ×', 1, 12, 0.5, c.ts) + slider('c_wind', 'Viento, kt', 0, 50, 5, c.wind) + slider('c_entries', 'Entradas', 1, 8, 1, c.entries) + '</div>' +
+      '<div>' + slider('c_bias', 'Conflictos', 0, 1, 0.05, c.bias) + slider('c_late', 'Entradas tardías', 0, 1, 0.1, c.late) + slider('c_rate', 'Tareas / min', 0, 8, 0.5, c.rate) +
+      '<label class="lb inline"><input type="checkbox" id="c_dual"' + (c.dual ? ' checked' : '') + '>Doble tarea</label>' + slider('c_aid', 'Ayudas', 0, 3, 1, c.aid) + '</div></div>' +
+      '<p class="fila" style="margin-top:12px"><label for="seed">Semilla</label><input type="number" id="seed" value="' + m.seed + '" style="width:130px"><button class="btn mini" id="newseed">' + ic('repeat') + 'Nueva</button></p>';
+  }
+  const P = m.mode === 'custom' ? customToP(c) : L;
+  html += '<div class="rejilla2"><div><label class="lb" for="hint">Pistas</label>' +
+    '<select id="hint"' + (P.hint === 0 && m.mode !== 'custom' ? ' disabled' : '') + '>' + [0,1,2,3].filter(function(h){ return m.mode === 'custom' ? true : h <= P.hint; }).map(function(h){ return '<option value="' + h + '"' + (m.hint === h ? ' selected' : '') + '>' + (h === 0 ? 'No' : h + ' ' + ['', 'Indicio', 'Método', 'Solución'][h]) + '</option>'; }).join('') + '</select></div>' +
+    '<div><label class="lb" for="goal">Objetivo</label>' +
+    '<input type="text" id="goal" value="' + esc(m.goal) + '" autocomplete="off"><span id="goalmsg" class="peq"></span></div></div>';
+  // anti-acceleration
+  const lr = m.mode === 'custom' ? (d.sesiones.filter(function(x){ return (x.modulo === 'Sector sim (custom)' || x.modulo === 'Simulador de sector (personalizado)'); }).slice(-1)[0] || null) : lastRunFor(m.level);
+  let warn = '';
+  const prevLvl = m.mode === 'ladder' && m.level > 1 ? lastRunFor(m.level - 1) : null;
+  if (m.mode === 'custom' && lr && lr.accuracy < MIN_ACCURACY && P.ts > lr.ts){
+    warn = 'Última partida ' + fmt(lr.accuracy, 1) + ' % · ' + lr.ts + '× → ' + P.ts + '×';
+  } else if (m.mode === 'ladder' && prevLvl && prevLvl.accuracy < MIN_ACCURACY && !d.sesiones.some(function(x){ return x.level === m.level; })){
+    warn = 'Nivel ' + (m.level - 1) + ': ' + fmt(prevLvl.accuracy, 1) + ' %';
+  }
+  html += (warn ? '<p class="aviso" style="margin-top:12px"><b>' + warn + '</b> <label class="inline" style="margin-left:12px"><input type="checkbox" id="ack"' + (m.ack ? ' checked' : '') + '>Continuar</label></p>' : '') +
+    '<p class="fila" style="margin-top:18px"><button class="btn primario" id="start">' + ic('play') + 'Empezar</button><button class="btn" id="hist">' + ic('history') + 'Historial <kbd>H</kbd></button></p>';
+  const keepY = window.scrollY;   // re-rendering after a click on the same page must not jump; a fresh screen starts at the top
+  app.innerHTML = html;
+  window.scrollTo(0, menuFresh ? 0 : keepY); menuFresh = false;
+  const rebind = function(){ showMenu(); };
+  document.querySelectorAll('[data-mode]').forEach(function(b){ b.addEventListener('click', function(){ m.mode = b.getAttribute('data-mode'); m.ack = false; rebind(); }); });
+  document.querySelectorAll('[data-lv]').forEach(function(b){ b.addEventListener('click', function(){ m.level = parseInt(b.getAttribute('data-lv'), 10); m.hint = LEVELS[m.level].hint; m.ack = false; rebind(); }); });
+  document.querySelectorAll('[data-src]').forEach(function(b){ b.addEventListener('click', function(){ m.source = b.getAttribute('data-src'); rebind(); }); });
+  if ($('seed')) $('seed').addEventListener('change', function(){ m.seed = Math.abs(parseInt($('seed').value, 10)) || 1; });
+  if ($('newseed')) $('newseed').addEventListener('click', function(){ m.seed = Math.floor(Math.random() * 900000) + 100000; rebind(); });
+  if ($('adreset')) $('adreset').addEventListener('click', function(){ memoria.adaptive = { level:1, up:0, down:0 }; guardar(); rebind(); });
+  if ($('ack')) $('ack').addEventListener('change', function(){ m.ack = $('ack').checked; });
+  if ($('hint')) $('hint').addEventListener('change', function(){ m.hint = parseInt($('hint').value, 10); });
+  $('goal').addEventListener('input', function(){ m.goal = $('goal').value; $('goalmsg').textContent = parseGoal(m.goal).length ? '' : ' Falta un número'; });
+  ['count','ts','wind','entries','bias','late','rate','aid'].forEach(function(k){
+    const el = $('c_' + k); if (!el) return;
+    el.addEventListener('input', function(){ c[k] = parseFloat(el.value); $('c_' + k + '_v').textContent = el.value; });
+    el.addEventListener('change', function(){ rebind(); });
+  });
+  if ($('c_dual')) $('c_dual').addEventListener('change', function(){ c.dual = $('c_dual').checked; rebind(); });
+  $('hist').addEventListener('click', showHistory);
+  $('start').addEventListener('click', function(){
+    if (!parseGoal(m.goal).length){ $('goalmsg').textContent = ' Falta el objetivo'; $('goal').focus(); return; }
+    if (warn && !m.ack){ return; }
+    startFromMenu();
+  });
+  window.onkeydown = function(e){
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) { if (e.key === 'Enter' && e.target.type === 'text') $('start').click(); return; }
+    if (e.target && e.target.tagName === 'BUTTON' && e.key === 'Enter') return;   // let the focused button do its own thing
+    if (e.key === 'Enter') $('start').click();
+    else if (e.key === 'h' || e.key === 'H') showHistory();
+  };
+}
+function buildConfig(){
+  const m = menu, d = cargar();
+  let cfg;
+  if (m.mode === 'custom'){
+    const P = customToP(m.custom);
+    const seed = m.seed;
+    cfg = { P:P, wind:windFromSeed(seed, P.wind), traffic:genTraffic(seed, P), seed:seed, scenario:0 };
+    cfg.taskPlan = genTasks(seed, cfg.P);
+    cfg.label = 'Personalizado, semilla ' + seed; cfg.modulo = 'Simulador de sector (personalizado)';
+    cfg.P.hint = m.hint;
+  } else if (m.mode === 'adaptive'){
+    const lv = d.adaptive.level, seed = Math.floor(Math.random() * 900000) + 100000;
+    const P = Object.assign({}, LEVELS[lv]);
+    cfg = { P:P, wind:windFromSeed(seed, P.wind), traffic:genTraffic(seed, P), seed:seed, scenario:0, label:'Adaptativo nivel ' + lv + ', semilla ' + seed, modulo:'Simulador de sector (adaptativo)' };
+    cfg.taskPlan = genTasks(seed, P);
+    cfg.P.hint = Math.min(m.hint, LEVELS[lv].hint);
+  } else if (m.source === 'script'){
+    cfg = buildScenario(m.level);
+    cfg.label = 'Escenario ' + m.level + ': ' + SCENARIOS[m.level].name; cfg.modulo = 'Simulador de sector (guiado)';
+    cfg.P = Object.assign({}, cfg.P, { hint:Math.min(m.hint, LEVELS[m.level].hint) });
+  } else {
+    const P = Object.assign({}, LEVELS[m.level], { hint:Math.min(m.hint, LEVELS[m.level].hint) });
+    cfg = { P:P, wind:windFromSeed(m.seed, P.wind), traffic:genTraffic(m.seed, P), seed:m.seed, scenario:0, label:'Nivel ' + m.level + ', semilla ' + m.seed, modulo:'Simulador de sector' };
+    cfg.taskPlan = genTasks(m.seed, P);
+  }
+  cfg.goal = m.goal; cfg.mode = m.mode;
+  return cfg;
+}
+function startFromMenu(){ startRun(buildConfig(), false); }
+
+/* ---------------- run ---------------- */
+let run = null, raf = 0;
+const VX0 = -46, VY1 = 33, SC = 12, CW = 1104, CH = 792;
+function wx(x){ return (x - VX0) * SC; }
+function wy(y){ return (VY1 - y) * SC; }
+function stopLoop(){ if (raf){ cancelAnimationFrame(raf); raf = 0; } }
+function startRun(cfg, replay){
+  stopLoop();
+  const w = newWorld(cfg);
+  run = { cfg:cfg, w:w, sel:null, acc:0, last:0, paused:false, buf:null, msg:'', hintLvl:0, hintKey:null, hintText:'', replay:!!replay,
+    evs:replay ? cfg.replayEvents.slice().sort(function(a, b){ return a.t - b.t; }) : [], ei:0, escOnce:0, flash:0 };
+  const P = cfg.P;
+  app.innerHTML = '<div class="hud" id="hud"></div><div class="run"><div><canvas id="radar" width="' + CW + '" height="' + CH + '"></canvas>' +
+    '<div class="msg" id="msg"></div><div id="hintbox" class="hintbox"></div>' +
+    '<div class="cmds"><button class="btn" data-c="L10">' + ic('turnl') + '10</button><button class="btn" data-c="L20">' + ic('turnl') + '20</button><button class="btn" data-c="R20">' + ic('turnr') + '20</button><button class="btn" data-c="R10">' + ic('turnr') + '10</button>' +
+    '<button class="btn" data-c="C+">' + ic('up') + 'FL 10</button><button class="btn" data-c="C-">' + ic('down') + 'FL 10</button><button class="btn" data-c="S+">' + ic('plus') + 'kt 10</button><button class="btn" data-c="S-">' + ic('dash') + 'kt 10</button>' +
+    '<button class="btn" data-c="DCT">' + ic('direct') + 'Ruta</button><button class="btn" data-c="HINT">' + ic('hint') + 'Pista</button>' + (P.pause ? '<button class="btn" data-c="PAUSE">' + ic('pause') + 'Pausa</button>' : '<span></span>') + '<button class="btn peligro" data-c="ABORT">' + ic('x') + 'Abortar</button></div></div>' +
+    '<div class="lado"><div class="caja"><h4>Seleccionada</h4><div id="selbox"></div></div>' +
+    '<div class="caja"><h4>Tareas</h4><div id="tasks"></div></div>' +
+    '<div class="caja"><h4>Tiras</h4><div class="strips" id="strips"></div></div>' +
+    '<div class="caja"><h4>Alertas</h4><div id="alerts" class="peq"></div></div>' +
+    '<div class="caja"><h4>Eventos</h4><div class="log" id="log"></div></div></div></div>';
+  const cv = $('radar');
+  cv.addEventListener('pointerdown', function(e){
+    const r = cv.getBoundingClientRect(), px = (e.clientX - r.left) * CW / r.width, py = (e.clientY - r.top) * CH / r.height;
+    let best = null, bd = 22;
+    run.w.ac.forEach(function(a){ const d = Math.hypot(wx(a.x) - px, wy(a.y) - py); if (d < bd){ bd = d; best = a; } });
+    run.sel = best ? best.id : null;
+  });
+  // The strip list is re-rendered ~20 times per second: a click needs mousedown and mouseup on the same node, so select on mousedown by delegation.
+  $('strips').addEventListener('pointerdown', function(e){ const el = e.target.closest ? e.target.closest('.strip[data-id]') : null; if (el) run.sel = parseInt(el.getAttribute('data-id'), 10); });
+  // The task list is re-rendered continuously: answer by delegation, so the key caps shown there also work by touch.
+  $('tasks').addEventListener('pointerdown', function(e){ const el = e.target.closest ? e.target.closest('.tecla') : null; if (el && !run.replay){ e.preventDefault(); answer((function(t){ return t === 'ESPACIO' ? 'SPACE' : t; })(el.textContent.trim().toUpperCase())); } });
+  document.querySelectorAll('.cmds [data-c]').forEach(function(b){ b.addEventListener('click', function(){ uiCommand(b.getAttribute('data-c')); b.blur(); }); });
+  window.scrollTo(0, 0); menuFresh = true;
+  window.onkeydown = runKey;
+  say('', 'aviso');
+  run.last = performance.now();
+  raf = requestAnimationFrame(loop);
+}
+function selAc(){ return run.sel === null ? null : findAc(run.w, run.sel); }
+function say(t, cls){ run.msg = '<span class="' + (cls || '') + '">' + esc(t) + '</span>'; }
+function issue(c, v){
+  if (run.replay) return;
+  const a = selAc();
+  if (!a){ say('Selecciona una aeronave', 'aviso'); return; }
+  const res = inputEvent(run.w, { k:'cmd', id:a.id, c:c, v:v });
+  say(res.msg, res.redundant ? 'aviso' : 'bien');
+}
+function turnBase(a){ return a.mode === 'HDG' ? a.tgtHdg : Math.round(a.hdg); }
+function uiCommand(code){
+  const w = run.w, a = selAc();
+  if (code === 'HINT') return doHint();
+  if (code === 'PAUSE') return togglePause();
+  if (code === 'ABORT') return abortRun();
+  if (code === 'DCT') return issue('dct', 0);
+  if (!a){ say('Selecciona una aeronave', 'aviso'); return; }
+  if (code[0] === 'L') issue('hdg', turnBase(a) - parseInt(code.slice(1), 10));
+  else if (code[0] === 'R') issue('hdg', turnBase(a) + parseInt(code.slice(1), 10));
+  else if (code === 'C+') issue('lvl', a.tgtFl + 10);
+  else if (code === 'C-') issue('lvl', a.tgtFl - 10);
+  else if (code === 'S+') issue('spd', a.tgtSpd + 10);
+  else if (code === 'S-') issue('spd', a.tgtSpd - 10);
+}
+function togglePause(){
+  if (run.replay) return;
+  if (!run.cfg.P.pause){ say('Sin pausa', 'aviso'); return; }
+  run.paused = !run.paused;
+  if (run.paused) inputEvent(run.w, { k:'pause' });
+  say(run.paused ? 'En pausa' : '', 'aviso');
+  run.last = performance.now();
+  draw();
+}
+function doHint(){
+  if (run.replay) return;
+  const P = run.cfg.P;
+  if (P.hint <= 0){ say('Sin pistas', 'aviso'); return; }
+  const cc = currentConflict(run.w), key = cc ? pairKey(cc.A.id, cc.B.id) : 'none';
+  if (key !== run.hintKey){ run.hintKey = key; run.hintLvl = 0; }
+  if (run.hintLvl < P.hint) run.hintLvl++;
+  const h = hintFor(run.w, run.hintLvl);
+  run.hintKey = h.key;
+  run.hintText = run.hintLvl + ' / ' + P.hint + ' · ' + h.text;
+  inputEvent(run.w, { k:'hint', lvl:run.hintLvl });
+}
+function abortRun(){
+  if (run.escOnce){ stopLoop(); window.onkeydown = null; showMenu(); return; }
+  run.escOnce = 1; say('Esc otra vez para abandonar', 'aviso');
+  setTimeout(function(){ if (run) run.escOnce = 0; }, 2500);
+}
+function cycleSel(dir){
+  const list = run.w.ac.slice().sort(function(a, b){ return a.id - b.id; });
+  if (!list.length) return;
+  let i = list.findIndex(function(a){ return a.id === run.sel; });
+  i = i < 0 ? (dir > 0 ? 0 : list.length - 1) : (i + dir + list.length) % list.length;
+  run.sel = list[i].id;
+}
+function runKey(e){
+  if (!run) return;
+  const k = e.key;
+  if (e.ctrlKey && (k === 'ArrowLeft' || k === 'ArrowRight')){ /* handled below */ }
+  else if (e.ctrlKey || e.altKey || e.metaKey) return;
+  const inputs = ['Tab','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','Enter','Escape','Backspace'];
+  if (inputs.indexOf(k) >= 0 || /^[a-zA-Z0-9?+\-=]$/.test(k)) e.preventDefault();
+  if (k === 'Escape'){ if (run.buf){ run.buf = null; say('Cancelado'); } else abortRun(); return; }
+  if (run.replay) return;
+  if (run.buf){
+    if (/^[0-9]$/.test(k)){ if (run.buf.s.length < 3) run.buf.s += k; }
+    else if (k === 'Backspace') run.buf.s = run.buf.s.slice(0, -1);
+    else if (k === 'Enter'){
+      const v = parseInt(run.buf.s, 10), c = run.buf.c; run.buf = null;
+      if (!isNaN(v)) issue(c, v); else say('Vacío', 'aviso');
+    }
+    return;
+  }
+  const up = k.length === 1 ? k.toUpperCase() : k;
+  if (k === 'Tab'){ cycleSel(e.shiftKey ? -1 : 1); return; }
+  if (k === 'ArrowLeft' || k === 'ArrowRight'){
+    const a = selAc(); if (!a){ say('Selecciona una aeronave', 'aviso'); return; }
+    const amt = e.ctrlKey ? 30 : (e.shiftKey ? 20 : 10);
+    issue('hdg', turnBase(a) + (k === 'ArrowLeft' ? -amt : amt)); return;
+  }
+  if (k === 'ArrowUp' || k === 'ArrowDown'){
+    const a = selAc(); if (!a){ say('Selecciona una aeronave', 'aviso'); return; }
+    issue('lvl', a.tgtFl + (k === 'ArrowUp' ? 1 : -1) * (e.shiftKey ? 20 : 10)); return;
+  }
+  if (k === '+' || k === '=' || k === '-' || k === '_'){
+    const a = selAc(); if (!a){ say('Selecciona una aeronave', 'aviso'); return; }
+    issue('spd', a.tgtSpd + ((k === '+' || k === '=') ? 1 : -1) * (e.shiftKey && k !== '+' && k !== '_' ? 20 : 10)); return;
+  }
+  if (up === 'R'){ issue('dct', 0); return; }
+  if (up === 'H' || up === 'L' || up === 'S'){
+    if (!selAc()){ say('Selecciona una aeronave', 'aviso'); return; }
+    run.buf = { c:up === 'H' ? 'hdg' : (up === 'L' ? 'lvl' : 'spd'), s:'' }; return;
+  }
+  if (up === 'P'){ togglePause(); return; }
+  if (k === '?' || k === '/'){ doHint(); return; }
+  if (k === ' '){ answer('SPACE'); return; }
+  if (['Y','N','A','D','Z','X','C'].indexOf(up) >= 0){ answer(up); return; }
+  if (/^[0-9]$/.test(k)){
+    const list = run.w.ac.slice().sort(function(a, b){ return a.id - b.id; });
+    const i = k === '0' ? 9 : parseInt(k, 10) - 1;
+    if (list[i]) run.sel = list[i].id; return;
+  }
+}
+function answer(key){
+  const res = inputEvent(run.w, { k:'ans', key:key });
+  say(res.msg, res.good === false ? 'mal' : (res.ok ? 'bien' : 'aviso'));
+}
+function loop(now){
+  raf = requestAnimationFrame(loop);
+  if (!run) return;
+  const w = run.w;
+  if (run.paused){ run.last = now; draw(); return; }   // keep the screen live while paused (selection, messages, hints)
+  const dt = Math.min(0.1, (now - run.last) / 1000); run.last = now;
+  run.acc += dt * w.ts * (run.replay ? (run.rspeed || 1) : 1);
+  let n = 0;
+  while (run.acc >= 1 && n < 12 && !w.over){
+    if (run.replay){
+      while (run.ei < run.evs.length && run.evs[run.ei].t <= w.t){ w.events.push(run.evs[run.ei]); applyEvent(w, run.evs[run.ei]); run.ei++; }
+    }
+    stepWorld(w); run.acc -= 1; n++;
+  }
+  if (n >= 12) run.acc = 0;
+  draw();
+  if (w.over){ stopLoop(); window.onkeydown = null; finishRun(); }
+}
+function pad(n){ return pad2(n); }
+function draw(){
+  const w = run.w, P = w.P, cv = $('radar'); if (!cv) return;
+  const g = cv.getContext('2d');
+  const MONO = 'ui-monospace,Consolas,monospace';
+  // the canvas is drawn at 1104 px and shown smaller on small screens: scale text and symbols so they stay readable
+  const k = Math.max(1, Math.min(1.7, CW / (cv.getBoundingClientRect().width || CW)));
+  g.fillStyle = '#09110c'; g.fillRect(0, 0, CW, CH);
+  // sector
+  g.strokeStyle = '#2f5a3e'; g.lineWidth = 2; g.setLineDash([]);
+  g.strokeRect(wx(BOUND.x0), wy(BOUND.y1), (BOUND.x1 - BOUND.x0) * SC, (BOUND.y1 - BOUND.y0) * SC);
+  g.strokeStyle = '#14261b'; g.lineWidth = 1;
+  for (let x = -40; x <= 40; x += 10){ g.beginPath(); g.moveTo(wx(x), wy(BOUND.y1)); g.lineTo(wx(x), wy(BOUND.y0)); g.stroke(); }
+  for (let y = -20; y <= 20; y += 10){ g.beginPath(); g.moveTo(wx(BOUND.x0), wy(y)); g.lineTo(wx(BOUND.x1), wy(y)); g.stroke(); }
+  // routes
+  g.strokeStyle = '#2b4a37'; g.setLineDash([6, 6]); g.lineWidth = 1.2;
+  Object.keys(ROUTES).forEach(function(k){
+    g.beginPath(); ROUTES[k].forEach(function(n, i){ const p = WP[n]; if (i) g.lineTo(wx(p.x), wy(p.y)); else g.moveTo(wx(p.x), wy(p.y)); }); g.stroke();
+  });
+  g.setLineDash([]);
+  g.font = Math.round(11 * k) + 'px ' + MONO; g.textBaseline = 'middle';
+  Object.keys(WP).forEach(function(n){
+    const p = WP[n], b = BOUNDARY_FIXES.indexOf(n) >= 0;
+    g.fillStyle = b ? '#6fae7c' : '#4d7a5a';
+    g.beginPath(); g.moveTo(wx(p.x), wy(p.y) - 5 * k); g.lineTo(wx(p.x) + 5 * k, wy(p.y) + 4 * k); g.lineTo(wx(p.x) - 5 * k, wy(p.y) + 4 * k); g.closePath(); g.fill();
+    g.fillText(n, wx(p.x) + 8 * k, wy(p.y) + (p.y >= BOUND.y1 ? 10 * k : -8 * k));
+  });
+  const aid = P.aid, hor = AID_HORIZON[aid];
+  const sel = selAc();
+  const inConf = {};
+  if (aid >= 2) w.alerts.forEach(function(al){ inConf[al.a] = al; inConf[al.b] = al; });
+  // predicted tracks
+  if (aid >= 1){
+    w.ac.forEach(function(a){
+      const tr = w.tracks[a.id]; if (!tr || tr.length < 2) return;
+      g.strokeStyle = inConf[a.id] ? '#e0704c' : '#3f7a55'; g.lineWidth = 1.2; g.setLineDash([4, 4]);
+      g.beginPath();
+      for (let i = 0; i < tr.length && tr[i].t <= hor; i++){ if (i) g.lineTo(wx(tr[i].x), wy(tr[i].y)); else g.moveTo(wx(tr[i].x), wy(tr[i].y)); }
+      g.stroke(); g.setLineDash([]);
+    });
+  }
+  // conflict lines and ring
+  if (aid >= 2){
+    w.alerts.forEach(function(al){
+      const A = findAc(w, al.a), B = findAc(w, al.b); if (!A || !B) return;
+      g.strokeStyle = 'rgba(224,112,76,.65)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(wx(A.x), wy(A.y)); g.lineTo(wx(B.x), wy(B.y)); g.stroke();
+    });
+  }
+  if (sel && aid >= 1){
+    g.strokeStyle = 'rgba(242,184,75,.6)'; g.lineWidth = 1; g.beginPath(); g.arc(wx(sel.x), wy(sel.y), SEP_LAT * SC, 0, Math.PI * 2); g.stroke();
+  }
+  // aircraft
+  w.ac.forEach(function(a){
+    const px = wx(a.x), py = wy(a.y);
+    const lossNow = a.hadLoss && Object.keys(w.lossActive).some(function(k){ const e = w.lossActive[k]; return e.a === a.id || e.b === a.id; });
+    let col = '#b6f2c0';
+    if (a.emg) col = '#f2b84b';
+    if (inConf[a.id]) col = '#ffab8a';
+    if (lossNow) col = (Math.floor(Date.now() / 250) % 2) ? '#ff4a3a' : '#ffffff';
+    if (a.id === run.sel) col = '#ffe27a';
+    // trail
+    g.fillStyle = 'rgba(120,180,140,.45)';
+    (a.trail || []).forEach(function(p, i){ g.fillRect(wx(p.x) - 1.5, wy(p.y) - 1.5, 3, 3); });
+    g.strokeStyle = col; g.fillStyle = col; g.lineWidth = 2;
+    g.strokeRect(px - 5 * k, py - 5 * k, 10 * k, 10 * k);
+    // heading line
+    const hv = hdgVec(a.hdg);
+    g.beginPath(); g.moveTo(px, py); g.lineTo(px + hv.x * 16 * k, py - hv.y * 16 * k); g.stroke();
+    const arrow = Math.abs(a.tgtFl - a.fl) > 0.5 ? (a.tgtFl > a.fl ? '↑' : '↓') + Math.round(a.tgtFl) : '';
+    g.font = Math.round(12 * k) + 'px ' + MONO; g.textBaseline = 'alphabetic';
+    g.fillText(a.cs + (a.emg ? ' EMG' : ''), px + 10 * k, py - 10 * k);
+    g.fillText(Math.round(a.fl) + ' ' + arrow + ' ' + Math.round(a.tas), px + 10 * k, py + 3 * k);
+    if (a.id === run.sel){ g.fillText('> ' + a.exit + ' FL' + Math.round(a.exitFl), px + 10 * k, py + 16 * k); }
+    g.textBaseline = 'middle';
+  });
+  if (run.paused){ g.fillStyle = 'rgba(0,0,0,.45)'; g.fillRect(0, 0, CW, CH); g.fillStyle = '#f2b84b'; g.font = Math.round(36 * k) + 'px ' + MONO; g.textAlign = 'center'; g.fillText('PAUSA', CW / 2, CH / 2); g.textAlign = 'left'; }
+  // wind
+  g.fillStyle = '#6fae7c'; g.font = Math.round(13 * k) + 'px ' + MONO; g.textBaseline = 'alphabetic';
+  g.fillText('VIENTO ' + pad3(w.wind.from) + '/' + w.wind.spd, 12, 18 * k);
+  updateSide();
+}
+let sideTick = 0;
+function updateSide(){
+  const w = run.w, P = w.P;
+  if (sideTick++ % 3) return;
+  const wall = w.t / w.ts;
+  const nloss = w.losses.length + Object.keys(w.lossActive).length;
+  $('hud').innerHTML = '<span>' + esc(run.cfg.label) + (run.replay ? ' · repetición' : '') + '</span><span>' + ic('timer') + '<b>' + Math.floor(wall / 60) + ':' + pad2(Math.floor(wall % 60)) + '</b> · ' + P.ts + '×</span><span>' + ic('check') + '<b>' + w.done.length + '</b> / ' + w.plan.length + '</span><span>' + ic('conflict') + '<b class="' + (nloss ? 'mal' : 'bien') + '">' + nloss + '</b></span>' +
+    (run.buf ? '<span class="aviso">' + run.buf.c + ' <b>' + esc(run.buf.s) + '_</b></span>' : '');
+  $('msg').innerHTML = run.msg || '&nbsp;';
+  $('hintbox').innerHTML = run.hintText ? '<p>' + esc(run.hintText) + '</p>' : '';
+  const a = selAc();
+  if (a){
+    const T = TYPES[a.type];
+    $('selbox').innerHTML = '<p style="margin:0 0 4px"><b>' + esc(a.cs) + '</b> ' + a.type + (a.emg ? ' <b class="aviso">EMG</b>' : '') + '</p><table class="kv"><tbody>' +
+      '<tr><td>HDG</td><td>' + pad3(a.hdg) + (a.mode === 'HDG' ? ' → ' + pad3(a.tgtHdg) : ' nav') + '</td></tr>' +
+      '<tr><td>FL</td><td>' + Math.round(a.fl) + (Math.abs(a.tgtFl - a.fl) > 0.5 ? ' → ' + Math.round(a.tgtFl) : '') + ' · salida ' + Math.round(a.exitFl) + '</td></tr>' +
+      '<tr><td>kt</td><td>' + Math.round(a.tas) + (Math.abs(a.tgtSpd - a.tas) > 0.5 ? ' → ' + Math.round(a.tgtSpd) : '') + ' · ' + T.min + '–' + T.max + '</td></tr>' +
+      '<tr><td>Salida</td><td>' + a.exit + ' · ' + a.cmds + '</td></tr></tbody></table>';
+  } else $('selbox').textContent = '';
+  // strips
+  const list = w.ac.slice().sort(function(x, y){ return x.id - y.id; });
+  let sh = list.map(function(x, i){
+    const conflict = P.aid >= 2 && w.alertSet[x.id];
+    return '<div class="strip' + (x.id === run.sel ? ' sel' : '') + (x.emg ? ' emg' : '') + (conflict ? ' conf' : '') + '" data-id="' + x.id + '"><span>' + (i < 10 ? (i + 1) % 10 : '') + '</span><span>' + esc(x.cs) + '</span><span>' + x.type + '</span><span>' + x.exit + '</span><span>FL' + Math.round(x.fl) + (Math.abs(x.exitFl - x.fl) > 0.5 ? '→' + Math.round(x.exitFl) : '') + ' ' + Math.round(x.tas) + '</span></div>';
+  }).join('');
+  w.plan.slice(w.planIdx).forEach(function(p){
+    if (p.notice > 0 && p.t - p.notice <= w.t) sh += '<div class="strip inb"><span></span><span>' + esc(p.cs) + '</span><span>' + p.type + '</span><span>' + p.entry + '</span><span>' + Math.max(0, Math.round((p.t - w.t) / w.ts)) + ' s → ' + ENTRY_ROUTE[p.entry][ENTRY_ROUTE[p.entry].length - 1] + '</span></div>';
+  });
+  $('strips').innerHTML = sh;
+  // tasks
+  $('tasks').innerHTML = w.tasks.map(function(t){
+    const left = Math.max(0, (t.deadline - w.t) / w.ts), urg = left < 3;
+    let txt = '';
+    if (t.kind === 'alert') txt = 'Alerta ' + t.data.code + ' <span class="tecla">Espacio</span>';
+    else if (t.kind === 'freq') txt = esc(t.data.sector) + ' <b>' + t.data.target + '</b> ' + t.data.options.map(function(o, i){ return '<span class="tecla">' + 'ZXC'[i] + '</span> ' + o; }).join(' &nbsp; ');
+    else if (t.kind === 'readback') txt = esc(t.data.cs) + ' ' + (t.data.heard.c === 'hdg' ? 'hdg ' + pad3(t.data.heard.v) : (t.data.heard.c === 'lvl' ? 'FL ' + t.data.heard.v : 'kt ' + t.data.heard.v)) + ' <span class="tecla">Y</span> ' + ic('check') + ' <span class="tecla">N</span> ' + ic('x');
+    else if (t.kind === 'req') txt = esc(t.data.cs) + ' FL' + t.data.fl + ' <span class="tecla">A</span> ' + ic('check') + ' <span class="tecla">D</span> ' + ic('x');
+    else if (t.kind === 'fuel') txt = 'Combustible ' + esc(t.data.cs) + (t.data.acked ? '' : ' !');
+    return '<div class="tarea' + (urg ? ' urg' : '') + '">' + txt + ' <span class="suave">' + Math.ceil(left) + ' s</span></div>';
+  }).join('');
+  // alerts
+  $('alerts').innerHTML = P.aid >= 2 ? w.alerts.slice(0, 5).map(function(al){
+    const A = findAc(w, al.a), B = findAc(w, al.b);
+    return '<div class="mal">' + esc(A ? A.cs : '?') + ' / ' + esc(B ? B.cs : '?') + ' · ' + Math.round(al.t / w.ts) + ' s</div>';
+  }).join('') : '';
+  $('log').innerHTML = w.log.slice(-8).reverse().map(function(l){ return '<div class="' + l.cls + '">' + Math.floor(l.t / w.ts) + ' s · ' + esc(l.txt) + '</div>'; }).join('');
+}
+
+/* ---------------- report ---------------- */
+function finishRun(){
+  const w = run.w, cfg = run.cfg;
+  const sum = summarize(w);
+  run.summary = sum;
+  if (run.replay){ showReport(sum, cfg, true); return; }
+  const met = evalGoal(cfg.goal, sum);
+  const d = cargar();
+  const level = cfg.P.n;
+  const rec = { ts:new Date().toISOString(), modulo:cfg.modulo, level:level, mode:cfg.mode, seed:cfg.seed, speed:cfg.P.ts,
+    correct:sum.correct, wrong:sum.wrong, blank:sum.blank, spi:sum.spi, accuracy:sum.accuracy, score:sum.score,
+    goal:cfg.goal, met:met, losses:sum.lossEpisodes, label:cfg.label, hint:sum.hintMax, thirds:sum.thirds };
+  d.sesiones.push(rec);
+  if (d.sesiones.length > 500) d.sesiones.shift();
+  const prevBest = d.pb[level];
+  let newRecord = false;
+  if (level > 0 && sum.success && betterRun(prevBest, sum)){ d.pb[level] = { score:sum.score, accuracy:sum.accuracy, spi:sum.spi, losses:sum.lossEpisodes }; newRecord = !!prevBest || true; }
+  else if (level > 0 && !prevBest) d.pb[level] = { score:sum.score, accuracy:sum.accuracy, spi:sum.spi, losses:sum.lossEpisodes, unclean:true };
+  else if (level > 0 && prevBest && prevBest.unclean && sum.score > prevBest.score) d.pb[level] = { score:sum.score, accuracy:sum.accuracy, spi:sum.spi, losses:sum.lossEpisodes, unclean:!sum.success };
+  d.streak = sum.success ? (d.streak || 0) + 1 : 0;
+  let adv = '';
+  if (cfg.mode === 'adaptive'){
+    const nx = adaptiveNext(d.adaptive, sum); d.adaptive = { level:nx.level, up:nx.up, down:nx.down }; adv = nx.advice;
+  }
+  guardar();
+  run.rec = rec; run.met = met; run.newRecord = newRecord && sum.success; run.adv = adv;
+  run.cfgSaved = cfg;
+  showReport(sum, cfg, false);
+}
+function taskRow(name, o){
+  if (!o.n) return '';
+  const avg = o.resp.length ? o.resp.reduce(function(a, b){ return a + b; }, 0) / o.resp.length : null, mx = o.resp.length ? Math.max.apply(null, o.resp) : null;
+  return '<tr><td>' + name + '</td><td>' + o.n + '</td><td>' + o.correct + '</td><td>' + o.wrong + '</td><td>' + o.missed + '</td><td>' + (avg === null ? '–' : fmt(avg, 1) + ' s') + '</td><td>' + (mx === null ? '–' : fmt(mx, 1) + ' s') + '</td></tr>';
+}
+function showReport(sum, cfg, isReplay){
+  const w = run.w, d = cargar(), P = cfg.P;
+  const level = P.n;
+  const met = run.met;
+  const pb = level > 0 ? d.pb[level] : null;
+  const conf = Object.keys(w.confs).map(function(k){ return w.confs[k]; }).sort(function(a, b){ return a.firstT - b.firstT; });
+  const wall = function(t){ return fmt(t / w.ts, 0) + ' s'; };
+  const deg = function(x){ return x ? x.deg + '°' : '>90°'; };
+  let html = '<h1>' + (isReplay ? 'Repetición' : 'Informe') + '</h1><p class="suave">' + esc(cfg.label) + ' · ' + P.count + ' · ' + P.ts + '×</p>';
+  html += '<p><b class="' + (sum.success ? 'bien' : 'mal') + '">' + (sum.success ? 'Partida limpia' : 'No limpia') + '</b>' +
+    (isReplay ? '' : ' · ' + (met === true ? '<b class="bien">Objetivo cumplido</b>' : (met === false ? '<b class="aviso">Objetivo no cumplido</b> ' : '') ) + (met === null ? '–' : '') + ' ' + esc(cfg.goal)) + '</p>';
+  html += '<div class="cifras"><div class="cifra"><b>' + fmt(sum.score, 0) + '</b><span>Puntuación</span></div><div class="cifra"><b>' + fmt(sum.accuracy, 1) + ' %</b><span>' + sum.correct + ' / ' + sum.wrong + ' / ' + sum.blank + '</span></div>' +
+    '<div class="cifra"><b class="' + (sum.lossEpisodes ? 'mal' : 'bien') + '">' + sum.lossEpisodes + '</b><span>Pérdidas</span></div><div class="cifra"><b>' + fmt(sum.handoffMean, 0) + '</b><span>Transferencia</span></div>' +
+    '<div class="cifra"><b>' + fmt(sum.spi, 1) + ' s</b><span>por elemento</span></div><div class="cifra"><b>' + sum.unnecessary + ' / ' + sum.cmdCount + '</b><span>Órdenes extra</span></div>' +
+    '<div class="cifra"><b>' + sum.workload.peaks + '</b><span>Picos</span></div><div class="cifra"><b>' + fmt(sum.delaySecMean, 0) + ' s</b><span>Retraso</span></div>' +
+    (isReplay ? '' : '<div class="cifra"><b>' + (d.streak || 0) + '</b><span>Racha</span></div>') + '</div>';
+  if (!isReplay){
+    if (pb) html += '<p class="suave">Mejor · ' + fmt(pb.score, 0) + ' · ' + fmt(pb.accuracy, 1) + ' %' + (run.newRecord ? ' <b class="bien">' + ic('check') + 'Récord</b>' : '') + '</p>';
+    if (cfg.mode === 'adaptive') html += '<p class="suave">Adaptativo → L' + d.adaptive.level + '</p>';
+  }
+  if (sum.thirds && sum.thirds[0].n >= 8 && sum.thirds[2].n >= 8){
+    html += '<p class="suave">' + sum.thirds.map(function(x){ return x.n ? Math.round(100 * x.c / x.n) : '–'; }).join(' / ') + ' %</p>';
+  }
+  html += '<h2>Puntuación</h2><div class="tabla-caja"><table><thead><tr><th>Inicio</th><th>Separación</th><th>Transferencia</th><th>Retraso</th><th>Órdenes extra</th><th>Ráfagas</th><th>Tareas</th></tr></thead><tbody><tr><td>100</td><td>' + fmt(sum.penalties.separation, 1) + '</td><td>' + fmt(sum.penalties.handoff, 1) + '</td><td>' + fmt(sum.penalties.delay, 1) + '</td><td>' + fmt(sum.penalties.unnecessary, 1) + '</td><td>' + fmt(sum.penalties.bursts, 1) + ' (' + sum.bursts + ')</td><td>' + fmt(sum.penalties.tasks, 1) + '</td></tr></tbody></table></div>';
+  // conflicts
+  if (conf.length){
+    html += '<h2>Conflictos</h2><div class="tabla-caja"><table><thead><tr><th>Pareja</th><th>Alerta</th><th>Acciones</th><th>Resultado</th><th>Viraje en la alerta</th><th>Viraje al actuar</th></tr></thead><tbody>';
+    conf.forEach(function(rec){
+      const an = rec.unseen ? { atAlert:null, atAct:null } : analyzeConf(rec, w.wind);
+      const acts = rec.actions.length ? rec.actions.map(function(x){ return wall(x.t) + ' ' + esc(x.text) + (x.turn !== null && x.turn !== undefined ? ' ' + Math.round(x.turn) + '°' : '') + ' · ' + (x.lead === null || x.lead === undefined ? '?' : Math.round(x.lead)) + ' s'; }).join('<br>') : '<span class="mal">–</span>';
+      const out = rec.lost ? '<span class="mal">Pérdida · ' + fmt(rec.minLat, 1) + ' NM · ' + fmt(rec.minVert * 100, 0) + ' ft</span>' : (rec.status === 'resolved' ? '<span class="bien">Resuelto</span>' : '<span class="aviso">' + esc(STATUSNAME[rec.status] || rec.status) + '</span>');
+      html += '<tr><td>' + esc(rec.csA) + ' / ' + esc(rec.csB) + '</td><td>' + wall(rec.firstT) + '</td><td>' + acts + '</td><td>' + out + '</td><td>' + (rec.unseen ? 'no vista' : deg(an.atAlert)) + '</td><td>' + (rec.unseen || !rec.actSnap ? '–' : deg(an.atAct)) + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+  // tasks
+  const tk = sum.tasks;
+  const rows = taskRow(TASKNAME.alert, tk.alert) + taskRow(TASKNAME.freq, tk.freq) + taskRow(TASKNAME.readback, tk.readback) + taskRow(TASKNAME.req, tk.req) + taskRow(TASKNAME.fuel, tk.fuel);
+  if (rows) html += '<h2>Tareas</h2><div class="tabla-caja"><table><thead><tr><th>Tarea</th><th>Nº</th><th>Aciertos</th><th>Fallos</th><th>Perdidas</th><th>Media</th><th>Más lenta</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  // handoffs
+  html += '<h2>Transferencias</h2><div class="tabla-caja"><table><thead><tr><th>Aeronave</th><th>Salida</th><th>Desvío</th><th>Nivel</th><th></th><th>Retraso</th><th>Órdenes</th></tr></thead><tbody>' +
+    w.done.map(function(x){ return '<tr><td>' + esc(x.cs) + '</td><td>' + x.exit + '</td><td>' + fmt(x.offset, 1) + ' NM</td><td>' + fmt(x.lvlErr * 100, 0) + ' ft</td><td class="' + (x.correct ? 'bien' : 'mal') + '">' + (x.okHand ? (x.hadLoss ? 'ok · pérdida' : 'ok') : 'mal') + '</td><td>' + fmt(x.delay, 0) + ' s</td><td>' + x.cmds + '</td></tr>'; }).join('') +
+    (sum.unhandled ? '<tr><td colspan="7" class="mal">' + sum.unhandled + ' sin transferir</td></tr>' : '') + '</tbody></table></div>';
+  html += '<p class="fila" style="margin-top:18px">' + (isReplay ? '<button class="btn primario" id="back">' + ic('back') + 'Menú</button>' : '<button class="btn primario" id="again">' + ic('repeat') + 'Repetir <kbd>R</kbd></button><button class="btn" id="menu">' + ic('back') + 'Menú <kbd>M</kbd></button><button class="btn" id="watch">' + ic('play') + 'Repetición</button><button class="btn" id="hist">' + ic('history') + 'Historial</button>') + '</p>';
+  app.innerHTML = html; window.scrollTo(0, 0); menuFresh = true;
+  const kd = function(e){
+    if (e.target && (e.target.tagName === 'INPUT' || (e.target.tagName === 'BUTTON' && e.key === 'Enter'))) return;
+    const k = e.key.toLowerCase();
+    if (k === 'm' || (k === 'enter' && isReplay)) $('menu') ? $('menu').click() : $('back').click();
+    else if (k === 'r' && !isReplay) $('again').click();
+    else if (k === 'h' && !isReplay) $('hist').click();
+  };
+  window.onkeydown = kd;
+  if ($('again')) $('again').addEventListener('click', function(){
+    const c = run.cfgSaved || cfg;
+    const c2 = { P:c.P, wind:c.wind, traffic:c.traffic, seed:c.seed, scenario:c.scenario, taskPlan:c.taskPlan, label:c.label, modulo:c.modulo, goal:c.goal, mode:c.mode };
+    startRun(c2, false);
+  });
+  if ($('menu')) $('menu').addEventListener('click', function(){ showMenu(); });
+  if ($('back')) $('back').addEventListener('click', function(){ showMenu(); });
+  if ($('hist')) $('hist').addEventListener('click', showHistory);
+  if ($('watch')) $('watch').addEventListener('click', function(){
+    const c = run.cfgSaved || cfg;
+    const c2 = { P:Object.assign({}, c.P, { pause:false }), wind:c.wind, traffic:c.traffic, seed:c.seed, scenario:c.scenario, taskPlan:c.taskPlan, label:c.label, modulo:c.modulo, goal:c.goal, mode:c.mode, replayEvents:run.w.events.slice() };
+    startRun(c2, true); run.rspeed = 2;
+  });
+}
+
+/* ---------------- history ---------------- */
+function showHistory(){
+  const d = cargar();
+  const s = d.sesiones.slice().reverse().slice(0, 60);
+  const pbs = Object.keys(d.pb).sort(function(a, b){ return a - b; });
+  let html = '<button class="link" id="volver">' + ic('back') + 'Menú</button><h1>Historial</h1>' + (s.length ? '<div class="tabla-caja"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Puntuación</th><th>Aciertos</th><th>Fallos</th><th>Blanco</th><th>Precisión %</th><th>Pérdidas</th><th>Objetivo</th><th>Cumplido</th></tr></thead><tbody>' +
+    s.map(function(x){ return '<tr><td>' + fechaES(x.ts) + '</td><td>' + esc(x.modulo) + '</td><td>' + x.level + '</td><td>' + fmt(x.score, 0) + '</td><td>' + x.correct + '</td><td>' + x.wrong + '</td><td>' + x.blank + '</td><td>' + fmt(x.accuracy, 1) + '</td><td>' + (x.losses === undefined ? '' : x.losses) + '</td><td>' + esc(x.goal) + '</td><td>' + (x.met === true ? 'Sí' : (x.met === false ? 'No' : '')) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<p class="suave">Sin sesiones</p>') +
+    (pbs.length ? '<h2>Mejores</h2><div class="tabla-caja"><table><thead><tr><th>Nivel</th><th>Puntuación</th><th>Precisión %</th></tr></thead><tbody>' + pbs.map(function(k){ const p = d.pb[k]; return '<tr><td>' + k + ' ' + LEVELS[k].name + '</td><td>' + fmt(p.score, 0) + '</td><td>' + fmt(p.accuracy, 1) + (p.unclean ? ' *' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '') +
+    '<p class="fila" style="margin-top:18px"><button class="btn primario" id="csv">' + ic('download') + 'CSV</button><button class="btn peligro" id="borrar">' + ic('trash') + 'Borrar</button><span id="conf"></span></p>';
+  app.innerHTML = html; window.scrollTo(0, 0); menuFresh = true;
+  $('volver').addEventListener('click', showMenu);
+  window.onkeydown = function(e){ if (e.key === 'Escape') showMenu(); };
+  $('csv').addEventListener('click', function(){
+    try {
+      const blob = new Blob([aCSV(d.sesiones)], { type:'text/csv;charset=utf-8' });
+      const a = document.createElement('a'), f = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'simulador-sector-' + f.getFullYear() + pad2(f.getMonth() + 1) + pad2(f.getDate()) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+      $('conf').textContent = '';
+    } catch (e) { $('conf').textContent = ' Error'; }
+  });
+  $('borrar').addEventListener('click', function(){
+    if (!confirm('¿Borrar el historial?')) return;
+    memoria.sesiones = []; memoria.pb = {}; memoria.streak = 0; guardar(); showHistory();
+  });
+}
+showMenu();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

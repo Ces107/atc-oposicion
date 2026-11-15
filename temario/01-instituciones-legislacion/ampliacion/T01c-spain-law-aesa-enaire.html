@@ -1,0 +1,953 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>España — legislación aeronáutica, AESA, ENAIRE, la CIAIAC y su sucesora (T01c)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Instituciones y legislación aeronáutica</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-base-constitucional-de-la-competencia-del-estado">1. Base constitucional de la competencia del Estado</a></li>
+<li><a href="#2-ley-481960-de-navegacion-aerea">2. Ley 48/1960, de Navegación Aérea</a><ul>
+<li><a href="#21-articulos-clave-capitulo-i-soberania-y-reglas-generales">2.1 Artículos clave (capítulo I, soberanía y reglas generales)</a></li>
+<li><a href="#22-lo-que-hoy-esta-derogado-una-trampa-de-examen-importante">2.2 Lo que hoy está derogado: una trampa de examen importante</a></li>
+</ul>
+</li>
+<li><a href="#3-ley-212003-de-seguridad-aerea">3. Ley 21/2003, de Seguridad Aérea</a><ul>
+<li><a href="#31-titulo-i-distribucion-de-competencias-y-reparto-entre-la-dgac-y-aesa">3.1 Título I: distribución de competencias y reparto entre la DGAC y AESA</a></li>
+<li><a href="#32-titulo-ii-capitulo-i-el-programa-estatal-de-seguridad-operacional-y-la-cultura-justa">3.2 Título II, capítulo I: el Programa Estatal de Seguridad Operacional y la «cultura justa»</a></li>
+<li><a href="#33-titulo-ii-capitulo-ii-los-articulos-derogados-de-la-ciaiac-arts-13-17">3.3 Título II, capítulo II: los artículos derogados de la CIAIAC (arts. 13-17)</a></li>
+<li><a href="#34-titulo-iii-la-inspeccion-aeronautica">3.4 Título III: la inspección aeronáutica</a></li>
+<li><a href="#35-titulo-v-infracciones-y-sanciones-las-cifras-que-quiere-el-examen">3.5 Título V: infracciones y sanciones, las cifras que quiere el examen</a></li>
+<li><a href="#36-titulo-vi-ingresos-de-los-gestores-aeroportuarios">3.6 Título VI: ingresos de los gestores aeroportuarios</a></li>
+</ul>
+</li>
+<li><a href="#4-tres-reglamentaciones-distintas-de-la-circulacion-aerea-no-las-confundas">4. Tres reglamentaciones distintas de la circulación aérea: no las confundas</a></li>
+<li><a href="#5-ley-92010-prestacion-de-los-servicios-de-transito-aereo-y-regimen-de-los-controladores">5. Ley 9/2010: prestación de los servicios de tránsito aéreo y régimen de los controladores</a><ul>
+<li><a href="#51-origenes-preambulo">5.1 Orígenes (preámbulo)</a></li>
+<li><a href="#52-articulo-1-designacion-de-los-proveedores-civiles-de-servicios-de-transito-aereo">5.2 Artículo 1: designación de los proveedores civiles de servicios de tránsito aéreo</a></li>
+<li><a href="#53-articulo-2-facultades-indisponibles-del-proveedor-de-servicios-de-transito-aereo">5.3 Artículo 2: facultades indisponibles del proveedor de servicios de tránsito aéreo</a></li>
+<li><a href="#54-articulo-3-tiempo-de-actividad-y-descanso-de-los-controladores-cifras-exactas">5.4 Artículo 3: tiempo de actividad y descanso de los controladores: cifras exactas</a></li>
+<li><a href="#55-articulo-4-incumplimientos-y-sanciones">5.5 Artículo 4: incumplimientos y sanciones</a></li>
+<li><a href="#56-disposicion-adicional-primera-medidas-extraordinarias-la-clausula-de-militarizacion">5.6 Disposición adicional primera: medidas extraordinarias, la cláusula de «militarización»</a></li>
+</ul>
+</li>
+<li><a href="#6-la-ciaiac-y-su-sucesora-ley-22024-y-rd-1412026">6. La CIAIAC y su sucesora: Ley 2/2024 y RD 141/2026</a><ul>
+<li><a href="#61-que-era-la-ciaiac">6.1 Qué era la CIAIAC</a></li>
+<li><a href="#62-ley-22024-creacion-de-una-autoridad-independiente-unica-para-tres-modos-de-transporte">6.2 Ley 2/2024: creación de una autoridad independiente única para tres modos de transporte</a></li>
+<li><a href="#63-rd-1412026-el-estatuto-organico-y-la-sustitucion-efectiva-de-la-ciaiac">6.3 RD 141/2026: el Estatuto orgánico y la sustitución efectiva de la CIAIAC</a></li>
+</ul>
+</li>
+<li><a href="#7-rd-1842008-el-estatuto-de-aesa-el-gobierno-al-detalle">7. RD 184/2008: el Estatuto de AESA, el gobierno al detalle</a><ul>
+<li><a href="#71-naturaleza-y-regimen">7.1 Naturaleza y régimen</a></li>
+<li><a href="#72-organos-de-gobierno">7.2 Órganos de gobierno</a></li>
+</ul>
+</li>
+<li><a href="#8-ley-182014-y-rd-1602023-el-cambio-de-denominacion-y-el-estatuto-de-enaire">8. Ley 18/2014 y RD 160/2023: el cambio de denominación y el Estatuto de ENAIRE</a><ul>
+<li><a href="#81-ley-182014-art-18-el-articulo-del-cambio-de-denominacion">8.1 Ley 18/2014, art. 18: el artículo del cambio de denominación</a></li>
+<li><a href="#82-rd-1602023-el-estatuto-vigente-de-enaire-epe">8.2 RD 160/2023: el Estatuto vigente de ENAIRE E.P.E.</a></li>
+</ul>
+</li>
+<li><a href="#9-enaire-aena-ministerio-de-transportes-ministerio-de-defensa-quien-hace-que">9. ENAIRE ↔ Aena ↔ Ministerio de Transportes ↔ Ministerio de Defensa: quién hace qué</a></li>
+<li><a href="#10-clases-de-espacio-aereo-y-su-base-juridica">10. Clases de espacio aéreo y su base jurídica</a></li>
+<li><a href="#11-licencias-certificados-y-el-procedimiento-de-licencia-de-controlador">11. Licencias, certificados y el procedimiento de licencia de controlador</a></li>
+<li><a href="#12-la-cultura-justa-en-el-derecho-espanol">12. La «cultura justa» en el derecho español</a></li>
+<li><a href="#13-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">13. Manual frente a fuentes primarias: tabla de discrepancias</a></li>
+<li><a href="#14-trampas-de-examen">14. Trampas de examen</a></li>
+<li><a href="#15-imprescindible-memorizar">15. Imprescindible memorizar</a></li>
+<li><a href="#16-glosario-bilingue-es-en">16. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#17-fuentes">17. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">48 min de lectura</div><h1 id="t01c-espana-legislacion-aeronautica-aesa-enaire-la-ciaiac-y-su-sucesora-fuentes-primarias-mas-alla-del-manual">T01c: España — legislación aeronáutica, AESA, ENAIRE, la CIAIAC y su sucesora (fuentes primarias, más allá del manual)</h1>
+<p>Este archivo va <strong>más allá</strong> del manual de ENAIRE «Instituciones y Legislación Aeronáutica» (que <code>syllabus/manual/OM01-institutions-legislation-study-guide.md</code> recoge por completo). Lee los textos consolidados de las leyes españolas (BOE, texto consolidado) que el manual solo resume, de modo que añade los artículos exactos, las cifras, las fechas y la estructura interna que un examinador puede citar directamente. No repases aquí el material del manual sobre OACI, EUROCONTROL, UE y EASA: OM01 ya lo cubre con fidelidad. Este archivo trata de derecho español, AESA, ENAIRE, Aena y la nueva autoridad de investigación de accidentes.</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El tema 1 abarca las instituciones aeronáuticas de España <strong>y su legislación</strong>. El manual da el esqueleto institucional (quién hace qué); las fuentes primarias dan el esqueleto jurídico (qué ley, qué artículo, qué cifra). Cabe esperar preguntas sobre: qué ley del BOE creó cada organismo, los importes exactos de las sanciones y su clasificación (leve/grave/muy grave), la base constitucional de la competencia del Estado sobre la navegación aérea, qué capítulos o artículos de leyes antiguas están hoy derogados (una trampa clásica: el capítulo de sanciones de la Ley 48/1960 y los artículos de la CIAIAC de la Ley 21/2003 están ambos derogados), los órganos de gobierno de AESA y ENAIRE (quién preside cada uno, cuántos miembros tiene el consejo), los porcentajes exactos de descanso del controlador y la sustitución de la CIAIAC en 2024-2026. Todos los datos que siguen se leyeron en el texto consolidado del BOE, salvo indicación en contrario.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Base constitucional de la competencia del Estado</li>
+<li>Ley 48/1960, de Navegación Aérea</li>
+<li>Ley 21/2003, de Seguridad Aérea (estructura, AESA, sanciones con cifras, inspección)</li>
+<li>Reglamentación de la circulación aérea: RD 57/2002 (RCA/CAG), RD 1180/2018 (SERA en España) y RD 601/2016 (RCAO/CAO): tres cosas distintas</li>
+<li>Ley 9/2010: prestación de los servicios de tránsito aéreo y régimen de los controladores</li>
+<li>La CIAIAC y su sucesora: Ley 2/2024 y RD 141/2026</li>
+<li>RD 184/2008: el Estatuto de AESA</li>
+<li>Ley 18/2014 y RD 160/2023: el cambio de denominación y el Estatuto de ENAIRE</li>
+<li>ENAIRE ↔ Aena ↔ Ministerio de Transportes ↔ Ministerio de Defensa: quién hace qué</li>
+<li>Clases de espacio aéreo y su base jurídica</li>
+<li>Licencias, certificados y el procedimiento de licencia de controlador</li>
+<li>La «cultura justa» en el derecho español</li>
+<li>Manual frente a fuentes primarias: tabla de discrepancias</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-base-constitucional-de-la-competencia-del-estado">1. Base constitucional de la competencia del Estado</h2>
+<p>El artículo 149.1 de la <strong>Constitución Española (CE) de 1978</strong> enumera las materias en las que el Estado tiene <strong>competencia exclusiva</strong>. Dos números de ese artículo son los que las leyes aeronáuticas citan como fundamento jurídico:</p>
+<ul>
+<li><strong>Artículo 149.1.4.ª CE:</strong> defensa y Fuerzas Armadas.</li>
+<li><strong>Artículo 149.1.20.ª CE:</strong> aeropuertos de interés general, control del espacio aéreo, tránsito y transporte aéreo, servicio meteorológico y matriculación de aeronaves.</li>
+</ul>
+<p>Las propias leyes establecen esta pareja exacta: el preámbulo de la Ley 21/2003 dice que su título I distribuye entre los órganos de la Administración General del Estado «de forma completa y sistemática» las competencias que «el artículo 149.1.20.ª de la Constitución encomienda con carácter exclusivo al Estado» sobre aeropuertos de interés general, control del espacio aéreo, tránsito y transporte aéreo, servicio meteorológico y matriculación de aeronaves; su disposición final primera invoca <strong>ambos</strong> números, el 149.1.4.ª y el 149.1.20.ª, como «títulos competenciales». El RD 601/2016 (el reglamento militar RCAO, véase el apartado 4) cita explícitamente los mismos dos números: «apartados 4 y 20 del artículo 149.1 de la Constitución... defensa y fuerzas armadas y control del espacio aéreo, tránsito y transporte aéreo, respectivamente». Es la confirmación más clara de que la aviación civil es el 20.ª y la militar el 4.ª, y de que ambos concurren siempre que está en juego la coordinación del espacio aéreo civil y militar.</p>
+<p><strong>Trampa de examen:</strong> el manual no menciona en absoluto el artículo 149.1 CE; es una aportación genuina. Recuerda los dos números juntos (4.ª defensa, 20.ª aviación), porque un distractor de examen podría ofrecer solo uno.</p>
+<h2 id="2-ley-481960-de-navegacion-aerea">2. Ley 48/1960, de Navegación Aérea</h2>
+<p>Fechada el <strong>21 de julio de 1960</strong> («Dada en el Palacio de El Pardo a veintiuno de julio de mil novecientos sesenta»; BOE n.º 176, de 23 de julio de 1960), desarrolló la Ley de Bases de 1947. Estructura: <strong>19 capítulos</strong>, más disposiciones adicionales, finales y transitorias:</p>
+<table>
+<thead>
+<tr>
+<th>Capítulo</th>
+<th>Materia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Disposiciones generales (soberanía, derecho aplicable, reglas generales)</td>
+</tr>
+<tr>
+<td>II</td>
+<td>De la organización administrativa</td>
+</tr>
+<tr>
+<td>III</td>
+<td>De las aeronaves: definición, clasificación y nacionalidad</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>De los documentos de a bordo</td>
+</tr>
+<tr>
+<td>V</td>
+<td>Del registro de matrícula de aeronaves</td>
+</tr>
+<tr>
+<td>VI</td>
+<td>De los prototipos y certificados de aeronavegabilidad</td>
+</tr>
+<tr>
+<td>VII</td>
+<td>De los aeropuertos y aeródromos</td>
+</tr>
+<tr>
+<td>VIII</td>
+<td>Requisas, incautaciones y movilización</td>
+</tr>
+<tr>
+<td>IX</td>
+<td>Planificación aeroportuaria y del sistema de navegación aérea y servidumbres aeronáuticas</td>
+</tr>
+<tr>
+<td>X</td>
+<td>Del personal aeronáutico</td>
+</tr>
+<tr>
+<td>XI</td>
+<td>Del tránsito aéreo</td>
+</tr>
+<tr>
+<td>XII</td>
+<td>Del contrato de transporte</td>
+</tr>
+<tr>
+<td>XIII</td>
+<td>De la responsabilidad en caso de accidente</td>
+</tr>
+<tr>
+<td>XIV</td>
+<td>De los seguros aéreos</td>
+</tr>
+<tr>
+<td>XV</td>
+<td>De los gravámenes y de los créditos privilegiados</td>
+</tr>
+<tr>
+<td>XVI</td>
+<td>De los accidentes, de la asistencia y salvamento y de los hallazgos</td>
+</tr>
+<tr>
+<td>XVII</td>
+<td>De la policía de la circulación aérea</td>
+</tr>
+<tr>
+<td>XVIII</td>
+<td>De la aviación general y deportiva y de los trabajos técnicos o científicos</td>
+</tr>
+<tr>
+<td>XIX</td>
+<td>De las sanciones</td>
+</tr>
+</tbody>
+</table>
+<h3 id="21-articulos-clave-capitulo-i-soberania-y-reglas-generales">2.1 Artículos clave (capítulo I, soberanía y reglas generales)</h3>
+<ul>
+<li><strong>Art. 1.º:</strong> «El espacio aéreo situado sobre el territorio español y su mar territorial está sujeto a la soberanía del Estado español». El espacio aéreo sobre el territorio español <strong>y su mar territorial</strong> está sometido a la soberanía del Estado español. Ojo: se extiende expresamente al mar territorial, no solo a la tierra firme.</li>
+<li><strong>Art. 2.º:</strong> las aeronaves nacionales pueden usar el espacio aéreo español para la navegación; el Estado, mediante tratados, convenios o permiso especial, puede autorizar el tránsito inocuo de aeronaves extranjeras.</li>
+<li><strong>Art. 3.º:</strong> el Gobierno puede fijar las zonas en que se prohíba o restrinja el tránsito de aeronaves, los canales de entrada y salida y los aeropuertos aduaneros, y puede suspender las actividades aéreas por causas graves.</li>
+<li><strong>Art. 4.º:</strong> reconoce el derecho de los propietarios u ocupantes de los inmuebles subyacentes a ser resarcidos de los daños que provoque el soportar la navegación aérea (se desarrolla junto con los capítulos IX y XIII, la Ley 37/2003 del Ruido, los tratados internacionales y el derecho de la UE); impone la obligación de un «justo equilibrio» entre los intereses de la economía nacional y los derechos de los residentes afectados, con objetivos de calidad acústica, planes de acción y comisiones ambientales obligatorias en los aeropuertos de competencia estatal.</li>
+<li><strong>Art. 5.º:</strong> la Ley regula siempre la navegación aérea nacional y la internacional sobre territorio de soberanía española, sin perjuicio de los tratados; se aplica a la navegación aérea militar solo cuando se disponga expresamente.</li>
+</ul>
+<h3 id="22-lo-que-hoy-esta-derogado-una-trampa-de-examen-importante">2.2 Lo que hoy está derogado: una trampa de examen importante</h3>
+<ul>
+<li><strong>El art. 8.º está derogado</strong> (fijaba la organización administrativa y las demarcaciones aéreas bajo el Ministerio del Aire, un ministerio que ya no existe).</li>
+<li><strong>El capítulo XIX «De las sanciones» está derogado por completo</strong>: <strong>los artículos 152 a 159 figuran todos como «(Derogado)»</strong> en el texto consolidado, igual que la única disposición adicional. <strong>El régimen sancionador de la aviación española vive hoy en la Ley 21/2003, no en la Ley 48/1960.</strong> Es la corrección más clara de fuente primaria que hay que tener presente: quien «recuerde» artículos de multas de la Ley de 1960 se equivoca, porque están vacíos.</li>
+<li>El capítulo X (personal aeronáutico, arts. 55-61 y siguientes) sigue en vigor: el personal es <strong>personal de vuelo</strong> o <strong>personal de tierra</strong> (art. 55); el <strong>art. 58</strong> exige un <strong>título, licencia, autorización o certificado</strong> para cualquier función (en vuelo o en tierra) que afecte al control del espacio aéreo, al tránsito o al transporte aéreo, con arreglo al derecho de la UE, los tratados y esta Ley; quienes ejerzan funciones vinculadas al control del espacio aéreo y a la seguridad del tránsito y del transporte aéreos <strong>no podrán, sin causa justificada, abandonarlas o renunciar a su ejercicio en tanto no sean debidamente relevados o sustituidos</strong>. Es una base textual directa de las obligaciones de continuidad del servicio de los controladores, distinta de la cláusula de continuidad propia de la Ley 9/2010 (apdo. 5) y anterior a ella.</li>
+<li><strong>Disposición final cuarta:</strong> quedan derogadas las disposiciones contrarias a la Ley; se autorizaba al (hoy obsoleto) Ministro del Aire a proponer las normas de desarrollo.</li>
+</ul>
+<p><strong>Trampa de examen:</strong> la Ley 48/1960 es de <strong>1960</strong>, tiene más de sesenta años y sigue en vigor en parte («última modificación: 30 de septiembre de 2025» figura en la cabecera del texto consolidado, lo que indica que se sigue modificando por retazos). No des por sentado que una ley antigua esté derogada por completo ni vigente por completo: compruébalo artículo por artículo.</p>
+<h2 id="3-ley-212003-de-seguridad-aerea">3. Ley 21/2003, de Seguridad Aérea</h2>
+<p>Fechada el <strong>7 de julio de 2003</strong> («Ley 21/2003, de 7 de julio, de Seguridad Aérea»). Su preámbulo explica el origen: un <strong>debate parlamentario de junio de 2001 sobre el estado de la Nación</strong> instó al Gobierno a complementar la Ley 48/1960 con una ley que regulase las potestades públicas de ordenación y supervisión de la aviación civil. Estructura: <strong>6 títulos</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Título</th>
+<th>Materia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Disposiciones generales</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Gestión en materia de seguridad operacional (Programa Estatal de Seguridad Operacional, artículos de la CIAIAC hoy derogados, protección de la información)</td>
+</tr>
+<tr>
+<td>III</td>
+<td>De la inspección aeronáutica</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>De las obligaciones por razones de seguridad</td>
+</tr>
+<tr>
+<td>V</td>
+<td>De las infracciones y sanciones</td>
+</tr>
+<tr>
+<td>VI</td>
+<td>Ingresos de los gestores de aeropuertos (incluidas las tarifas)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-titulo-i-distribucion-de-competencias-y-reparto-entre-la-dgac-y-aesa">3.1 Título I: distribución de competencias y reparto entre la DGAC y AESA</h3>
+<p>El título I distribuye entre los órganos de la Administración General del Estado las competencias exclusivas del art. 149.1.20.ª CE (apdo. 1). Se apoya en el <strong>Real Decreto-ley 12/1978, de 27 de abril</strong>, y lo perfecciona; este había fijado y delimitado las competencias de los Ministerios de Defensa y de Transportes y Comunicaciones en materia de aviación (en virtud del RDL 12/1978, el entonces Ministerio de Transportes y Comunicaciones asumió las competencias de la Subsecretaría de Aviación Civil, originalmente dependiente del Ministerio del Aire, y, por delegación de Defensa, el control de la circulación aérea general). <strong>El artículo 10 «Consejo Asesor de Aviación Civil» está derogado</strong>: el Consejo Asesor de Aviación Civil ya no existe en la Ley (una omisión que el manual no menciona).</p>
+<h3 id="32-titulo-ii-capitulo-i-el-programa-estatal-de-seguridad-operacional-y-la-cultura-justa">3.2 Título II, capítulo I: el Programa Estatal de Seguridad Operacional y la «cultura justa»</h3>
+<p>El <strong>art. 11</strong> crea el <strong>Programa Estatal de Seguridad Operacional para la Aviación Civil</strong>, alineado con los requisitos del Convenio de la OACI y las directrices de la UE, aprobado por el Consejo de Ministros a propuesta conjunta de los Ministros de (entonces) Fomento y de Defensa. Fija la política y los objetivos de seguridad mediante la gestión de riesgos, el aseguramiento de la seguridad, la promoción de la seguridad y los indicadores de seguridad. Punto crucial: <strong>«la información sobre seguridad operacional facilitada voluntariamente en la que no se aprecie dolo o negligencia grave no podrá utilizarse como medio de prueba válido para cualquier tipo de procedimiento administrativo, ni podrá revelarse al público»</strong>. Es decir, la información de seguridad notificada voluntariamente, si no hay dolo ni negligencia grave, <strong>no puede usarse como prueba en procedimientos administrativos ni revelarse al público</strong>. Es la base legal de la <strong>«cultura justa»</strong> de España en seguridad aérea (véase el apdo. 12).</p>
+<h3 id="33-titulo-ii-capitulo-ii-los-articulos-derogados-de-la-ciaiac-arts-13-17">3.3 Título II, capítulo II: los artículos derogados de la CIAIAC (arts. 13-17)</h3>
+<p><strong>Los artículos 13, 14, 15, 16 y 17, sin excepción, figuran como «(Derogado)»</strong> en el texto consolidado (definían la CIAIAC, su composición y funciones, el régimen jurídico de la investigación técnica, la publicidad de los informes y el coste de la búsqueda y recuperación de restos). <strong>Esto contradice directamente el manual</strong>, que (en las pp. 25 y 43) considera la Ley 21/2003 la ley «que regula la investigación técnica» de los accidentes y presenta la CIAIAC como el órgano vigente. En la fuente primaria esta función se ha trasladado: hoy es la Ley 2/2024 y el RD 141/2026 (apdo. 6). <strong>El artículo 18 (título II, cap. III, protección de la información) sigue en vigor</strong>: carácter reservado de los datos, registros, grabaciones, declaraciones, comunicaciones, indicadores e informes elaborados en el marco del Programa Estatal de Seguridad Operacional.</p>
+<h3 id="34-titulo-iii-la-inspeccion-aeronautica">3.4 Título III: la inspección aeronáutica</h3>
+<p>Establece el régimen jurídico de la inspección aeronáutica: quién puede inspeccionar, las atribuciones de los inspectores, las entidades colaboradoras.</p>
+<h3 id="35-titulo-v-infracciones-y-sanciones-las-cifras-que-quiere-el-examen">3.5 Título V: infracciones y sanciones, las cifras que quiere el examen</h3>
+<p>El <strong>capítulo I</strong> clasifica las infracciones en <strong>leves, graves o muy graves</strong>. El <strong>capítulo II, art. 55 «Sanciones»</strong> da dos escalas paralelas:</p>
+<p><strong>Régimen general (art. 55.1):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Multa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leve</td>
+<td>apercibimiento o multa de <strong>60 a 45 000 euros</strong></td>
+</tr>
+<tr>
+<td>Grave</td>
+<td>multa de <strong>45 001 a 90 000 euros</strong></td>
+</tr>
+<tr>
+<td>Muy grave</td>
+<td>multa de <strong>90 001 a 225 000 euros</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Régimen agravado para los agentes comerciales o profesionales (art. 55.2)</strong>: se aplica a las entidades colaboradoras de inspección, las compañías de transporte aéreo comercial, las organizaciones de diseño, fabricación o mantenimiento de aeronaves, los proveedores de servicios de navegación aérea, los agentes de servicios aeroportuarios, los gestores de aeropuertos, aeródromos o instalaciones aeroportuarias y cualquier persona física o jurídica que desarrolle actividades incluidas en el ámbito de aplicación de la Ley con carácter comercial o a cambio de una contraprestación económica no salarial:</p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Multa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leve</td>
+<td>apercibimiento o multa de <strong>4500 a 70 000 euros</strong></td>
+</tr>
+<tr>
+<td>Grave</td>
+<td>multa de <strong>70 001 a 250 000 euros</strong></td>
+</tr>
+<tr>
+<td>Muy grave</td>
+<td>multa de <strong>250 001 a 4 500 000 euros</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Art. 55.3:</strong> cuando exista y pueda conocerse el beneficio bruto obtenido con la infracción, las multas graves y muy graves pueden incrementarse, si resultan superiores a la escala normal, hasta el <strong>doble</strong> o el <strong>triple</strong>, respectivamente, de ese beneficio.</p>
+<p><strong>Art. 55.4:</strong> multas especiales por infracciones relativas a las franjas horarias (slots) (arts. 49.1.1.ª-3.ª, etc.): de 6000 a 90 000 euros por cada serie de franjas no devueltas; de 3000 a 12 000 euros por cada vuelo operado sin la franja correspondiente; de 3000 a 30 000 euros por cada vuelo efectuado fuera de las franjas autorizadas; de 18 000 a 60 000 euros por cada serie de franjas indebidamente intercambiadas.</p>
+<p><strong>Art. 56.2:</strong> la comisión de <strong>dos o más infracciones muy graves en el plazo de un año</strong> conlleva, en todo caso, la <strong>inhabilitación</strong> durante 3 años para ser titular de cualquier derecho o título administrativo que faculte para el desempeño de funciones, la realización de actividades o la prestación de servicios aeronáuticos, y para formar parte del consejo de administración de una persona jurídica titular de tales títulos.</p>
+<p><strong>Art. 58 «Órgano competente para la imposición de las sanciones»:</strong> dentro de las competencias del Ministerio de Transportes y Movilidad Sostenible, <strong>la persona titular de la Dirección de la Agencia Estatal de Seguridad Aérea</strong> tiene la competencia para imponer las sanciones de esta Ley. <strong>Trampa de examen:</strong> la autoridad sancionadora es el <strong>Director</strong> de AESA, no su Presidente (el Presidente preside el Consejo Rector, pero la Ley atribuye la potestad sancionadora específicamente al Director).</p>
+<p><strong>Art. 59:</strong> los criterios de graduación de las multas deben guardar «la debida adecuación entre la gravedad del hecho y la sanción aplicada» (principio de proporcionalidad, que se desarrolla con otros criterios no transcritos aquí).</p>
+<h3 id="36-titulo-vi-ingresos-de-los-gestores-aeroportuarios">3.6 Título VI: ingresos de los gestores aeroportuarios</h3>
+<p>Regula las tarifas aeroportuarias como «prestaciones patrimoniales de carácter público», que el apdo. 4.4.8 del manual detalla después para las tasas que interesan a ENAIRE (tasas de ruta y de aproximación, fuera del alcance de T01c, pues se trata de regulación aeroportuaria y económica, no de instituciones).</p>
+<h2 id="4-tres-reglamentaciones-distintas-de-la-circulacion-aerea-no-las-confundas">4. Tres reglamentaciones distintas de la circulación aérea: no las confundas</h2>
+<p>El «RD 57/2002» y el «RD 601/2016» suelen confundirse con SERA; la lectura de las fuentes primarias muestra que son <strong>tres reglamentos distintos</strong> para <strong>tres tipos distintos de tránsito</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Reglamento</th>
+<th>Nombre completo</th>
+<th>Regula</th>
+<th>Lo administra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RD 57/2002, de 18 de enero</strong></td>
+<td>Reglamento de Circulación Aérea (RCA)</td>
+<td><strong>Circulación Aérea General (CAG)</strong>: reglas del aire civiles. Siete «Libros»: I Definiciones y abreviaturas, II Reglas del aire, III Servicios de tránsito aéreo, IV Procedimientos para los servicios de navegación aérea, V Normas para helicópteros, VI Comandante de la aeronave, VII Requisitos de operación de aeronaves</td>
+<td>Ministerio de Transportes (civil)</td>
+</tr>
+<tr>
+<td><strong>RD 1180/2018, de 21 de septiembre</strong></td>
+<td>Desarrolla las reglas del aire y las disposiciones operativas comunes para los servicios de navegación aérea (aplica en España el <strong>Reglamento (UE) 923/2012, SERA</strong>)</td>
+<td><strong>Es el real decreto español que aplica SERA.</strong> Modifica el RCA del RD 57/2002 (reescribiéndolo por completo, p. ej., el Libro X sobre las enmiendas del Anexo 10, vol. II) y el RD 552/2014; fija el procedimiento para solicitar exenciones de franja de salida ATFM (Reglamento 255/2010) y el régimen de las reservas y restricciones de espacio aéreo para el uso flexible (FUA)</td>
+<td>Ministerio de Transportes, junto con Defensa en los asuntos civiles y militares</td>
+</tr>
+<tr>
+<td><strong>RD 601/2016, de 2 de diciembre</strong></td>
+<td>Reglamento de la Circulación Aérea Operativa (RCAO)</td>
+<td><strong>Circulación Aérea Operativa (CAO)</strong>: esencialmente vuelos <strong>militares</strong> que, «por la naturaleza de su misión», no pueden seguir el RCA ni las normas de la UE: p. ej., reabastecimiento en vuelo, patrulla y reconocimiento, vuelos de prueba. También puede abarcar aeronaves de Estado o civiles cuando lo autorice la Autoridad Aeronáutica Militar competente</td>
+<td><strong>Ejército del Aire</strong>, Ministerio de Defensa. Deroga y sustituye al RD 1489/1994</td>
+</tr>
+</tbody>
+</table>
+<p>RD 601/2016, art. 2.1.1: los vuelos de aeronaves militares pertenecen a uno de dos tipos de tránsito: <strong>CAG</strong> (reglas del RCA y de la normativa de la UE) o <strong>CAO</strong> (reglas desarrolladas en el propio RCAO). Su disposición final primera cita los <strong>apartados 4 y 20</strong> del art. 149.1 CE (apdo. 1) como base jurídica: la prueba textual más clara de que el CAO/RCAO es un reglamento de competencia de defensa, superpuesto al marco general de competencia en aviación.</p>
+<p><strong>Trampa de examen:</strong> llamar al RD 601/2016 «SERA en España» es <strong>inexacto frente a la fuente primaria</strong>: el RD 601/2016 es el reglamento <em>militar/operativo</em>, no el real decreto de aplicación de SERA. <strong>El RD 1180/2018 es el real decreto correcto de aplicación de SERA en España.</strong> Recuerda: RCA (civil, RD 57/2002) + RD 1180/2018 (SERA) = <strong>CAG</strong>; RCAO (RD 601/2016) = <strong>CAO</strong> (militar).</p>
+<h2 id="5-ley-92010-prestacion-de-los-servicios-de-transito-aereo-y-regimen-de-los-controladores">5. Ley 9/2010: prestación de los servicios de tránsito aéreo y régimen de los controladores</h2>
+<p>«Ley 9/2010, de 14 de abril, por la que se regula la prestación de servicios de tránsito aéreo, se establecen las obligaciones de los proveedores civiles de dichos servicios y se fijan determinadas condiciones laborales para los controladores civiles de tránsito aéreo». Solo <strong>4 artículos</strong> más disposiciones adicionales y finales: corta pero densa.</p>
+<h3 id="51-origenes-preambulo">5.1 Orígenes (preámbulo)</h3>
+<p>El preámbulo explica que el Cielo Único de la UE exige una separación clara entre: 1) un <strong>órgano regulador</strong> que fije la política aeroportuaria y de servicios de navegación aérea y represente al Estado en el ámbito internacional (en España, la <strong>DGAC</strong>); 2) una <strong>Autoridad supervisora</strong> que vigile el cumplimiento de la seguridad (en España, <strong>AESA</strong>, como Autoridad Nacional de Supervisión con potestad sancionadora); 3) los <strong>proveedores de servicios</strong>, sometidos a la supervisión, inspección y sanción de la Autoridad. También documenta los <strong>antecedentes fallidos de la negociación colectiva</strong>: desde que el convenio colectivo de los controladores expiró el <strong>31 de diciembre de 2004</strong>, AENA había intentado reiteradamente, mediante la negociación colectiva, recuperar capacidad de organización, aumentar la productividad y alinear los costes con el entorno europeo, sin éxito; es la motivación política directa de la Ley.</p>
+<h3 id="52-articulo-1-designacion-de-los-proveedores-civiles-de-servicios-de-transito-aereo">5.2 Artículo 1: designación de los proveedores civiles de servicios de tránsito aéreo</h3>
+<ul>
+<li><strong>Los servicios de control de área, control de aproximación y los de información de vuelo, alerta y asesoramiento asociados continúan prestándose directamente por AENA</strong> (la entidad designada para esa función); el texto sigue diciendo «AENA» (nombre anterior a 2014; hoy, ENAIRE).</li>
+<li>El Ministerio (entonces Fomento, hoy Transportes) designa, dentro de bloques específicos de espacio aéreo, a los proveedores civiles de servicios de tránsito aéreo de <strong>aeródromo</strong>, a propuesta del gestor aeroportuario, entre los proveedores certificados en la UE; antes de que un proveedor designado empiece a operar se exige siempre la supervisión y el informe favorable previos de AESA.</li>
+<li>Las tareas que no sean propiamente de tránsito aéreo, como la dirección de plataforma (SDP), puede realizarlas directamente el gestor aeroportuario o encomendarlas a los proveedores civiles de servicios de tránsito aéreo de aeródromo.</li>
+</ul>
+<h3 id="53-articulo-2-facultades-indisponibles-del-proveedor-de-servicios-de-transito-aereo">5.3 Artículo 2: facultades indisponibles del proveedor de servicios de tránsito aéreo</h3>
+<p>El proveedor civil de servicios de tránsito aéreo tiene competencia <strong>exclusiva</strong> sobre la organización, planificación, dirección, gestión, supervisión y control de la prestación del servicio, y está facultado en concreto para (art. 2.2, seis facultades, todas <strong>indisponibles</strong> según el art. 2.3):</p>
+<ul>
+<li><strong>a)</strong> determinar la <strong>configuración operativa</strong> conforme a la demanda de tráfico y a los condicionantes técnicos y meteorológicos;</li>
+<li><strong>b)</strong> determinar las <strong>instalaciones, servicios técnicos y personal</strong> necesarios;</li>
+<li><strong>c)</strong> determinar su <strong>organización directiva</strong> (identificar y valorar los puestos encargados de las funciones de seguridad, calidad, protección y recursos financieros y humanos);</li>
+<li><strong>d)</strong> efectuar la <strong>selección y la formación de unidad y continuada</strong> de los controladores;</li>
+<li><strong>e)</strong> organizar los <strong>turnos, horarios y descansos</strong> del personal;</li>
+<li><strong>f)</strong> <strong>vigilar y controlar</strong> el trabajo de su personal e <strong>imponer las sanciones</strong> adecuadas en caso de incumplimiento.</li>
+</ul>
+<p><strong>Art. 2.3:</strong> estas facultades son <strong>indisponibles</strong>: ningún puesto de trabajo u órgano podrá tener atribuida o desempeñar ninguna función que limite o menoscabe su ejercicio, sin perjuicio de las atribuciones inherentes a las licencias de controlador de tránsito aéreo según el RD 1516/2009. <strong>La disposición voluntaria de estas facultades por el proveedor determina la revocación de su designación.</strong></p>
+<h3 id="54-articulo-3-tiempo-de-actividad-y-descanso-de-los-controladores-cifras-exactas">5.4 Artículo 3: tiempo de actividad y descanso de los controladores: cifras exactas</h3>
+<p>Para garantizar la prestación segura del servicio y el necesario descanso de los controladores civiles de tránsito aéreo:</p>
+<ol>
+<li><strong>Duración de la jornada: no superior a doce horas por servicio (jornada a turnos).</strong></li>
+<li><strong>Horas extraordinarias: no más de 80 al año</strong>, conforme al Estatuto de los Trabajadores.</li>
+<li><strong>Descanso durante la jornada: el 25 % de la duración de la jornada diurna y el 33 % de la duración de la jornada nocturna.</strong> En las <strong>torres de control monoposición</strong>, los controladores tienen <strong>una hora de descanso por servicio</strong>, con independencia de los porcentajes anteriores.</li>
+</ol>
+<h3 id="55-articulo-4-incumplimientos-y-sanciones">5.5 Artículo 4: incumplimientos y sanciones</h3>
+<ul>
+<li>Las obligaciones impuestas a los proveedores de servicios de tránsito aéreo se consideran «obligaciones específicas de los proveedores de servicios de navegación aérea» a los efectos de los arts. 37 y 44 de la Ley 21/2003; <strong>las infracciones se consideran muy graves cuando el incumplimiento haya impedido o menoscabado la seguridad o la continuidad</strong> de los servicios de tránsito aéreo.</li>
+<li>Los incumplimientos del personal se califican como <strong>muy graves</strong> en las mismas condiciones, con las sanciones de la Ley 21/2003 <strong>y las responsabilidades civiles</strong> que procedan, y son además causa de <strong>despido disciplinario</strong>; el expediente previo puede acordar la <strong>suspensión provisional de empleo y sueldo</strong>.</li>
+</ul>
+<h3 id="56-disposicion-adicional-primera-medidas-extraordinarias-la-clausula-de-militarizacion">5.6 Disposición adicional primera: medidas extraordinarias, la cláusula de «militarización»</h3>
+<p>Para garantizar la prestación segura y continuada de los servicios de navegación aérea, <strong>AESA puede adoptar medidas extraordinarias</strong>: aprobar de inmediato los planes de formación para las licencias y habilitaciones de controlador; certificar con un procedimiento preferente a nuevos proveedores de servicios de tránsito aéreo; certificar como proveedores de formación AFIS a los actuales proveedores de formación de control. Lo más notable: con arreglo al art. 4.4.a) de la Ley 21/2003, <strong>los controladores de tránsito aéreo de ENAIRE (entonces AENA) pueden ser puestos bajo la dirección del Ministerio de Defensa</strong>, que asume entonces su organización, planificación, supervisión y control; ningún trabajador, órgano directivo u organización puede obstaculizar esta medida, bajo pena de sanción. Es el mecanismo legal que subyace a la conocida <strong>crisis de los controladores aéreos de diciembre de 2010</strong>, en la que el Gobierno declaró el estado de alarma y militarizó a los controladores: su base jurídica es precisamente esta disposición adicional primera, fechada <strong>meses antes</strong> de la crisis (la Ley 9/2010 es de abril de 2010). Las medidas deben tener especialmente en cuenta las necesidades de seguridad y continuidad de <strong>Canarias, Baleares, Ceuta y Melilla</strong> (tradicionalmente las rutas más expuestas a las huelgas por su insularidad).</p>
+<h2 id="6-la-ciaiac-y-su-sucesora-ley-22024-y-rd-1412026">6. La CIAIAC y su sucesora: Ley 2/2024 y RD 141/2026</h2>
+<h3 id="61-que-era-la-ciaiac">6.1 Qué era la CIAIAC</h3>
+<p><strong>Comisión de Investigación de Accidentes e Incidentes de Aviación Civil (CIAIAC)</strong>: según el manual, adscrita a la Subsecretaría del Ministerio de Transportes, encargada de la investigación exclusivamente técnica (sin culpa ni responsabilidad) de los accidentes e incidentes de aviación civil en territorio español, con informes que recogen información factual, análisis, conclusiones y recomendaciones de seguridad. <strong>Sus propios artículos de creación, composición y funciones en la Ley 21/2003 (arts. 13-17) están hoy derogados por completo</strong> (apdo. 3.3): la base legal de la CIAIAC ya se había trasladado a otro lugar antes de que se la sustituyera por completo.</p>
+<h3 id="62-ley-22024-creacion-de-una-autoridad-independiente-unica-para-tres-modos-de-transporte">6.2 Ley 2/2024: creación de una autoridad independiente única para tres modos de transporte</h3>
+<p>«Ley 2/2024, de 1 de agosto, de creación de la Autoridad Administrativa Independiente para la Investigación Técnica de Accidentes e Incidentes ferroviarios, marítimos y de aviación civil» (BOE núm. 186, <strong>2 de agosto de 2024</strong>). Estructura: título preliminar (naturaleza, funciones y régimen jurídico), título I (investigación técnica de accidentes e incidentes), título II (organización y funcionamiento), título III (contratación, financiación, presupuestación y control).</p>
+<p><strong>Art. 1:</strong> crea la <strong>«Autoridad Administrativa Independiente para la Investigación Técnica de Accidentes e Incidentes ferroviarios, marítimos y de aviación civil»</strong> (en adelante, «la Autoridad») como <strong>Autoridad Administrativa Independiente</strong> de las previstas en el art. 109 de la Ley 40/2015 (LRJSP), con la función de mejorar la seguridad previniendo futuros accidentes e incidentes mediante investigaciones técnicas que determinen las causas y establezcan medidas correctoras. Tiene <strong>personalidad jurídica propia</strong>, plena capacidad pública y privada, <strong>autonomía orgánica y funcional y plena independencia del Gobierno y de las Administraciones Públicas</strong>, con sujeción al control parlamentario y judicial. Se relaciona con el Gobierno a través del ministerio competente en transporte ferroviario, marítimo y de aviación civil. Se rige por esta Ley, su <strong>Estatuto orgánico</strong> y, supletoriamente (como los organismos autónomos), la Ley 40/2015, la Ley 39/2015, la Ley 47/2003 (General Presupuestaria), la Ley 9/2017 (de Contratos del Sector Público) y la Ley 33/2003 (del Patrimonio de las Administraciones Públicas); está sujeta al principio de sostenibilidad financiera de la Ley Orgánica 2/2012.</p>
+<p><strong>Punto clave: a diferencia de la CIAIAC (adscrita a una Subsecretaría), la nueva Autoridad investiga los tres modos de transporte, ferroviario, marítimo Y de aviación civil, bajo un único órgano independiente</strong>, y es expresamente una <strong>Autoridad Administrativa Independiente</strong>, con un grado de autonomía superior a la adscripción de la CIAIAC a la Subsecretaría del Ministerio.</p>
+<h3 id="63-rd-1412026-el-estatuto-organico-y-la-sustitucion-efectiva-de-la-ciaiac">6.3 RD 141/2026: el Estatuto orgánico y la sustitución efectiva de la CIAIAC</h3>
+<p>«Real Decreto 141/2026, de 25 de febrero, por el que se aprueba el Estatuto orgánico de la Autoridad Administrativa Independiente...» (BOE núm. 52, <strong>27 de febrero de 2026</strong>). Aprueba el Estatuto orgánico de la Autoridad.</p>
+<p><strong>Disposición adicional primera: calendario de constitución:</strong></p>
+<ol>
+<li>El ministro competente (transporte: ferroviario, marítimo y de aviación civil) propone a una persona candidata de reconocido prestigio para la Presidencia y el Consejo con arreglo al art. 32.1 de la Ley 2/2024, <strong>en el plazo de 2 meses desde la entrada en vigor de este RD</strong>.</li>
+<li>La <strong>constitución y el inicio efectivo de las actividades</strong> de la Autoridad se producen con la <strong>sesión constitutiva de su Consejo</strong>, que se celebra <strong>en el plazo de 1 mes desde el nombramiento de los miembros del Consejo</strong>. En esa sesión constitutiva, un <strong>sorteo</strong> determina <strong>cuáles 3 de los miembros del Consejo</strong> ejercerán un mandato reducido de 3 años en lugar del mandato general de 6 años (disposición adicional cuarta de la Ley 2/2024): un mecanismo de renovación escalonada.</li>
+<li>Desde su constitución efectiva, la Autoridad se subroga en los derechos y obligaciones de los contratos y convenios suscritos previamente por el Ministerio de Transportes en el ejercicio de las competencias que ahora se le asignan.</li>
+</ol>
+<p><strong>Disposición adicional segunda: supresión de los tres órganos predecesores</strong>, en la fecha de constitución de la Autoridad, según la disposición adicional primera de la Ley 2/2024:</p>
+<ul>
+<li><strong>a) Comisión de Investigación de Accidentes Ferroviarios (CIAF)</strong>: ferroviaria.</li>
+<li><strong>b) Comisión Permanente de Investigación de Accidentes e Incidentes Marítimos (CIAIM)</strong>: marítima.</li>
+<li><strong>c) Comisión de Investigación de Accidentes e Incidentes de Aviación Civil (CIAIAC)</strong>: aviación civil.</li>
+</ul>
+<p>Todas las referencias legales a estas tres comisiones se entienden desde entonces hechas a la nueva Autoridad.</p>
+<p><strong>Disposición adicional tercera:</strong> el personal funcionario y laboral de las secretarías de las tres comisiones se integra en la Autoridad, con conservación de la antigüedad, el grado y las retribuciones consolidadas.</p>
+<p><strong>Disposición adicional quinta:</strong> calendario de puesta en marcha de la Autoridad: en los <strong>6 meses</strong> siguientes a su constitución, su relación de puestos de trabajo; en los <strong>12 meses</strong>, su Plan Estratégico y su primer Plan de Actuación, el inventario de bienes, el sistema interno de información, el Delegado de Protección de Datos, la Unidad de Transparencia y el calendario laboral; en los <strong>18 meses</strong>, los sistemas de gestión y un Código de Conducta Ética.</p>
+<p><strong>Disposición adicional sexta:</strong> la sede principal de la Autoridad se fijará según el procedimiento del RD 209/2022 (una regla general para la ubicación de los órganos del sector público estatal); es decir, todavía no la fija el propio RD 141/2026.</p>
+<p><strong>Reconstrucción cronológica:</strong> la Ley 2/2024 creó legalmente la Autoridad (1 de agosto de 2024), pero esta no empezó a funcionar hasta que se aprobó su Estatuto orgánico (RD 141/2026, 27 de febrero de 2026) y, según la regla transitoria del propio Estatuto, su Consejo celebró efectivamente su sesión constitutiva hacia <strong>julio de 2026</strong>, es decir, unos dos años después de la Ley habilitante y unos 4-5 meses después del Estatuto. <strong>Esto significa que la CIAIAC existió formalmente sobre el papel hasta mediados de 2026</strong>, razón por la cual el manual (elaborado en noviembre de 2025, antes de que se constituyera la Autoridad) seguía describiendo con acierto a la CIAIAC como el órgano vigente cuando se redactó: un matiz importante que suele pasarse por alto. El manual no estaba «equivocado» cuando se escribió; solo está desfasado respecto a hoy (24 de septiembre de 2026).</p>
+<h2 id="7-rd-1842008-el-estatuto-de-aesa-el-gobierno-al-detalle">7. RD 184/2008: el Estatuto de AESA, el gobierno al detalle</h2>
+<p>Aprueba el «Estatuto de la Agencia Estatal de Seguridad Aérea (AESA)». El Consejo Rector de AESA celebró su <strong>sesión constitutiva el 2 de junio de 2008</strong> (según las disposiciones transitorias del Estatuto).</p>
+<h3 id="71-naturaleza-y-regimen">7.1 Naturaleza y régimen</h3>
+<ul>
+<li><strong>Art. 1:</strong> AESA es un <strong>organismo público</strong> de los previstos en el art. 108 bis de la Ley 40/2015 (LRJSP), con <strong>personalidad jurídica pública, patrimonio y tesorería propios, y autonomía funcional y de gestión</strong>; ejerce todas las potestades administrativas necesarias para sus fines <strong>salvo la potestad expropiatoria</strong>.</li>
+<li><strong>Art. 2:</strong> se rige por la Ley 40/2015, este Estatuto y demás derecho administrativo aplicable; actúa con arreglo a un plan de acción anual y a un contrato plurianual de gestión. <strong>AESA asume las potestades sancionadora y de inspección que la Ley 21/2003 atribuye al Ministerio.</strong></li>
+<li><strong>Art. 6 «Adscripción» (tal como figura en el texto consolidado):</strong> «La Agencia se adscribe al Ministerio de Transportes, Movilidad y Agenda Urbana». Este texto conserva todavía un nombre de ministerio anterior (previo al cambio de 2023); véase el apdo. 13 para la discrepancia con la redacción más reciente del RD 253/2024 que usa el manual.</li>
+<li><strong>Art. 7:</strong> sede en <strong>Madrid</strong>.</li>
+<li><strong>Asistencia jurídica:</strong> la presta la <strong>Abogacía General del Estado</strong>, mediante convenio conforme a la Ley 52/1997.</li>
+</ul>
+<h3 id="72-organos-de-gobierno">7.2 Órganos de gobierno</h3>
+<ul>
+<li><strong>Art. 13:</strong> los órganos de gobierno de AESA son la <strong>Presidencia</strong> y el <strong>Consejo Rector</strong>. Los nombramientos del Consejo deben respetar criterios de paridad de género.</li>
+<li><strong>Art. 14 «La Presidencia»:</strong> <em>en su redacción consolidada actual</em>, «La Presidencia de la Agencia corresponde a la persona titular de la Secretaría General de Transportes Aéreo y Marítimo»; el Presidente es el titular de la <strong>Secretaría General de Transporte Aéreo y Marítimo</strong> (el puesto creado por la reorganización ministerial posterior a 2024, RD 253/2024). <strong>El preámbulo original de 2008</strong> (que sigue impreso en el mismo documento y describe el diseño de 2008) dice que AESA «se caracteriza por un Presidente no ejecutivo, que a su vez es el Director General de Aviación Civil», es decir, históricamente <strong>el Presidente de AESA = el Director General de la DGAC</strong>. Ambas afirmaciones coexisten en el mismo texto consolidado porque el artículo se fue actualizando con el tiempo mientras que la narrativa del preámbulo no se reescribió; la regla operativa de hoy es el art. 14, no el preámbulo de 2008.</li>
+<li><strong>Art. 15:</strong> el Presidente ostenta la representación del Consejo Rector, dirige y preside sus reuniones y, además: ostenta la máxima representación institucional e internacional de AESA; <strong>propone al Consejo Rector el nombramiento o la separación del Director de AESA</strong> y de los miembros de la Comisión de Control; confiere poderes; presenta las propuestas de contrato de gestión plurianual y de plan de acción anual; informa a los Ministerios de Transportes, para la Transformación Digital y la Función Pública, y de Hacienda sobre la ejecución del contrato; remite las cuentas anuales al Tribunal de Cuentas; <strong>comparece ante el Congreso y el Senado a requerimiento de estos</strong> y remite a las Cortes Generales el informe general de actividad del Consejo Rector.</li>
+<li><strong>Art. 16 «Composición del Consejo Rector»:</strong> el <strong>Consejo Rector</strong> es el <strong>órgano de gobierno colegiado</strong> de AESA. Su Pleno lo integran el Presidente, las <strong>vocalías</strong> y el Secretario. Su composición total coincide con la del manual: «Presidente, once Consejeros y Secretario (con voz pero sin voto)». <strong>Miembros natos</strong>: la persona titular de la <strong>Dirección</strong> de AESA y la persona titular de la <strong>Dirección General de Aviación Civil</strong>. Las demás vocalías las nombra y separa el Ministro de Transportes de este modo: <strong>3</strong> a propuesta del propio Ministerio de Transportes (entre personal funcionario con rango mínimo de Subdirección General y profesionales independientes con experiencia en aviación civil o gestión pública); <strong>1</strong> a propuesta del Ministerio de Hacienda; <strong>1</strong> del Ministerio para la Transición Ecológica; <strong>1</strong> del Ministerio de Defensa; <strong>1</strong> del Ministerio para la Transformación Digital y de la Función Pública; más <strong>2 representantes de los trabajadores</strong> designados por las organizaciones sindicales más representativas. El Secretario asiste con voz pero sin voto y lo designa el Consejo Rector a propuesta del Presidente.</li>
+<li><strong>Art. 4:</strong> AESA puede dictar: (a) resoluciones del Presidente; (b) resoluciones del Consejo Rector; (c) resoluciones, instrucciones y protocolos del Director. Los actos dictados en ejercicio de funciones públicas agotan la vía administrativa, salvo en materia tributaria (vía económico-administrativa), con acceso posterior siempre a la jurisdicción contencioso-administrativa.</li>
+</ul>
+<p><strong>Trampa de examen:</strong> el <strong>Director</strong> de AESA es un puesto distinto del de <strong>Presidente</strong>: el Director lo propone el Presidente y lo nombra el Consejo Rector, dirige la gestión diaria y (según el art. 58 de la Ley 21/2003) es quien <strong>firma realmente las sanciones</strong>, mientras que el Presidente preside el gobierno y representa a AESA hacia el exterior.</p>
+<h2 id="8-ley-182014-y-rd-1602023-el-cambio-de-denominacion-y-el-estatuto-de-enaire">8. Ley 18/2014 y RD 160/2023: el cambio de denominación y el Estatuto de ENAIRE</h2>
+<h3 id="81-ley-182014-art-18-el-articulo-del-cambio-de-denominacion">8.1 Ley 18/2014, art. 18: el artículo del cambio de denominación</h3>
+<p>«Ley 18/2014, de 15 de octubre, de aprobación de medidas urgentes para el crecimiento, la competitividad y la eficiencia»: una ley ómnibus grande y heterogénea. El <strong>artículo 18 «Cambio de denominación»</strong> es la fuente legal precisa de dos cambios de nombre en la misma fecha:</p>
+<ol>
+<li>La sociedad mercantil estatal «<strong>Aena Aeropuertos S.A.</strong>» (creada en virtud del art. 7 del RDL 13/2010) pasa a denominarse «<strong>Aena, S.A.</strong>».</li>
+<li>La entidad pública empresarial «<strong>Aeropuertos Españoles y Navegación Aérea (Aena)</strong>», creada por el <strong>art. 82 de la Ley 4/1990</strong> (Presupuestos Generales del Estado para 1990), pasa a denominarse «<strong>Enaire E.P.E.</strong>». <strong>ENAIRE conserva la misma naturaleza y régimen jurídico</strong> que tenía con arreglo al art. 82 de la Ley 4/1990, y ejerce exclusivamente las competencias que ostenta en materia de navegación aérea y espacio aéreo, además de: la <strong>coordinación operativa nacional e internacional de la red nacional de gestión del tránsito aéreo</strong> y otras relacionadas con los usos para la gestión eficiente del espacio aéreo; <strong>y</strong>, curiosamente, la <strong>conservación, defensa, gestión y explotación de su patrimonio histórico, cultural y artístico</strong>, sin perjuicio de lo que establezca para el Ministerio de Cultura la Ley 16/1985 del Patrimonio Histórico Español: una pequeña curiosidad genuina de fuente primaria que el manual no recoge (ENAIRE heredó la cartera de bienes históricos de AENA, p. ej., antiguos edificios aeronáuticos).</li>
+</ol>
+<h3 id="82-rd-1602023-el-estatuto-vigente-de-enaire-epe">8.2 RD 160/2023: el Estatuto vigente de ENAIRE E.P.E.</h3>
+<p>«Real Decreto 160/2023, de 7 de marzo, por el que se aprueba el Estatuto de la entidad pública empresarial Enaire». Estructura: 8 capítulos (I Disposiciones generales; II Objeto y funciones; III Órganos de gobierno y ejecutivos; IV Régimen patrimonial; V Régimen económico financiero; VI Presupuestos, endeudamiento y régimen fiscal; VII Recursos humanos; VIII Contratación).</p>
+<ul>
+<li><strong>Art. 1:</strong> confirma que ENAIRE, creada por el art. 82 de la Ley 4/1990, es un organismo público de los previstos en el art. 84.1.a).2.º de la Ley 40/2015; <strong>adscrita al Ministerio de Transportes, Movilidad y Agenda Urbana</strong>, que ejerce la dirección estratégica, la evaluación de resultados y el control de eficacia (art. 103 de la Ley 40/2015).</li>
+<li><strong>Art. 2:</strong> ENAIRE tiene personalidad jurídica propia, plena capacidad, patrimonio propio y autonomía de gestión; se rige por el art. 82 de la Ley 4/1990 (salvo el régimen de contratación), por la <strong>Ley 9/2010</strong> y sus normas de desarrollo, por este Estatuto y por el derecho nacional y de la UE aplicable. Actúa con sujeción al <strong>derecho privado</strong>, salvo en la formación de la voluntad de sus órganos, el ejercicio de potestades administrativas y los aspectos que regulan específicamente la Ley 39/2015 y la Ley 40/2015.</li>
+<li><strong>Gobierno (cap. III, sección 1.ª, art. 7):</strong> los órganos de gobierno son el <strong>Consejo Rector</strong> y la <strong>Presidencia</strong>; los órganos ejecutivos son la <strong>Dirección General</strong> y las direcciones que dependen de ella.</li>
+<li><strong>Arts. 8-9 «Consejo Rector»:</strong> ENAIRE se rige por un Consejo Rector encargado de dirigir su administración y gestión. Lo forman el <strong>Presidente</strong> y <strong>11 Consejeros</strong>, nombrados y separados por el Ministro de Transportes, con respeto a la paridad de género. El Consejo Rector lo preside el Presidente; en caso de ausencia, enfermedad o vacante, lo preside con carácter interino el Consejero de mayor antigüedad (y, en su defecto, de mayor edad).</li>
+<li><strong>Art. 7 «Presidencia»:</strong> la <strong>Presidencia de ENAIRE la ostenta la persona titular de la Secretaría de Estado con competencias en transporte</strong>; es decir, el Presidente de ENAIRE está <strong>un nivel por encima</strong> (Secretaría de Estado) del Presidente de AESA (Secretaría General). <strong>Trampa de examen:</strong> no los intercambies: Presidente de ENAIRE = nivel de Secretaría de Estado; Presidente de AESA = nivel de Secretaría General.</li>
+<li><strong>Estructura ejecutiva:</strong> por debajo de la Dirección General, el Estatuto de ENAIRE nombra expresamente, entre otras: la <strong>Secretaría General</strong> (asesoramiento y representación jurídicos); la <strong>Dirección de Comunicación</strong> (estrategia de comunicación, marca) y la <strong>Dirección de Coordinación Civil-Militar</strong>, cuya misión es <strong>representar los intereses de ENAIRE y asegurar una coordinación ágil con el Ministerio de Defensa, actuar en el ámbito del Uso Flexible del Espacio Aéreo (FUA) y coordinarse con EUROCONTROL</strong>.</li>
+<li><strong>Arts. 18-19 (régimen patrimonial):</strong> ENAIRE tiene un patrimonio propio, separado del del Estado; los bienes que se le adscriben son bienes de dominio público según la Ley 33/2003; <strong>los bienes afectados actualmente al Ministerio de Defensa pueden adscribirse a ENAIRE</strong> conforme al art. 71 de la Ley 33/2003: otro vínculo textual explícito entre ENAIRE y los bienes e infraestructuras de Defensa.</li>
+</ul>
+<h2 id="9-enaire-aena-ministerio-de-transportes-ministerio-de-defensa-quien-hace-que">9. ENAIRE ↔ Aena ↔ Ministerio de Transportes ↔ Ministerio de Defensa: quién hace qué</h2>
+<table>
+<thead>
+<tr>
+<th>Organismo</th>
+<th>Naturaleza</th>
+<th>Gestiona</th>
+<th>Presidente</th>
+<th>Adscrito a</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AESA</strong></td>
+<td>Organismo público (art. 108 bis de la Ley 40/2015)</td>
+<td>Supervisión de la seguridad, licencias, sanciones, inspección</td>
+<td>Titular de la Secretaría General de Transportes Aéreo y Marítimo</td>
+<td>Ministerio de Transportes (a través de esa Secretaría General)</td>
+</tr>
+<tr>
+<td><strong>ENAIRE</strong></td>
+<td>Entidad pública empresarial (E.P.E., art. 84.1.a.2.º de la Ley 40/2015)</td>
+<td>Proveedor de servicios de navegación aérea (control de área y de aproximación, AIS, CNS); coordinación civil-militar del espacio aéreo (FUA); posee acciones de Aena</td>
+<td>Titular de la Secretaría de Estado con competencias en transporte</td>
+<td>Ministerio de Transportes</td>
+</tr>
+<tr>
+<td><strong>Aena, S.A.</strong></td>
+<td>Sociedad mercantil estatal cotizada</td>
+<td>Gestión de aeropuertos (46+2, más 32 en el extranjero)</td>
+<td>Consejo de administración (gobierno de una empresa privada, no una «Presidencia» de Estatuto como AESA o ENAIRE)</td>
+<td>Su accionista mayoritario es el Estado (a través de la participación de la SEPI o de ENAIRE, según el reparto del RDL 13/2010)</td>
+</tr>
+<tr>
+<td><strong>Ministerio de Defensa</strong></td>
+<td>—</td>
+<td>Aviación militar, OAT/RCAO, necesidades de espacio aéreo de la defensa nacional; aporta representantes a los consejos de AESA y ENAIRE; algunos bienes de Defensa pueden adscribirse a ENAIRE</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>FUA (Flexible Use of Airspace, utilización flexible del espacio aéreo):</strong> se aplica en España mediante el mecanismo conjunto de coordinación civil-militar, que en ENAIRE gestiona operativamente su <strong>Dirección de Coordinación Civil-Militar</strong> (apdo. 8.2) y que sustentan jurídicamente el Reglamento (CE) 2150/2005 (normas comunes para la FUA, apdo. 4.3.3 del manual) y las disposiciones del RD 1180/2018 sobre reservas y restricciones del espacio aéreo (apdo. 4). Los órganos de coordinación civil-militar denominados históricamente <strong>CIDETRA/CIDEFO/CIDETMA</strong> (apdos. 3.7-3.8 del manual) también intervienen en el plano político, con independencia de la dirección operativa de coordinación de ENAIRE.</p>
+<h2 id="10-clases-de-espacio-aereo-y-su-base-juridica">10. Clases de espacio aéreo y su base jurídica</h2>
+<p>España aplica la <strong>clasificación del espacio aéreo (A a G) del Anexo 11 de la OACI</strong>, adoptada en el ámbito de la UE mediante el <strong>Reglamento (UE) 923/2012 (SERA), apéndice 4 «Clasificación del espacio aéreo ATS: servicios prestados y requisitos de vuelo»</strong> (ya recogido en el apdo. 4.3.3 del manual) y aplicada en el derecho interno mediante el <strong>RD 1180/2018</strong> (apdo. 4), que desarrolla SERA en España y modifica en consecuencia el RCA (RD 57/2002). <strong>El RCAO (RD 601/2016)</strong> opera como régimen paralelo, específico de defensa, para el tránsito CAO/OAT, que no se clasifica del mismo modo con arreglo a las clases de espacio aéreo de SERA. Históricamente, la <strong>comisión CIDETRA/CIDEFO</strong> (apdo. 3.8 del manual) tuvo (y, según el preámbulo del RD 1180/2018, en un momento dado la tuvo específicamente la <strong>CIDEFO</strong>) la competencia sobre la <strong>clasificación del espacio aéreo</strong> en España, en coherencia con las funciones que le atribuye la Ley 21/2003: un vínculo textual directo entre una institución (tema 1) y un concepto técnico (temas 4/5), útil porque el examen puede combinar instituciones con datos técnicos.</p>
+<h2 id="11-licencias-certificados-y-el-procedimiento-de-licencia-de-controlador">11. Licencias, certificados y el procedimiento de licencia de controlador</h2>
+<ul>
+<li><strong>Ley 48/1960, art. 58:</strong> el requisito legal básico: cualquier función que afecte al control del espacio aéreo, al tránsito o al transporte aéreo (en vuelo o en tierra) requiere un <strong>título, licencia, autorización o certificado</strong>, con arreglo al derecho de la UE, los tratados y esta Ley.</li>
+<li><strong>Reglamento (UE) 2015/340</strong> (apdo. 4.3.4 del manual): fija los requisitos técnicos y procedimientos administrativos de la UE para las <strong>licencias, habilitaciones y anotaciones de controlador</strong>, y para los <strong>alumnos controladores</strong>.</li>
+<li><strong>RD 1516/2009</strong> (apdo. 4.4.4 del manual): complementa en el derecho interno el Reglamento 2015/340 para la obtención de la licencia y el ejercicio de la actividad de controlador, y para la certificación de los proveedores civiles de formación; su <strong>disposición transitoria primera</strong> mantiene en vigor las atribuciones de las licencias, habilitaciones y anotaciones que se poseyeran previamente.</li>
+<li><strong>Resolución de 11 de octubre de 2011 (Dirección de AESA)</strong> (apdo. 4.4.4 del manual): fijó el <strong>procedimiento de canje</strong> de las licencias existentes por las nuevas de formato de la UE: AESA debía completar el canje de oficio <strong>antes del 15 de enero de 2012</strong>, solicitando a ENAIRE los datos de sus controladores y entregándole las nuevas licencias para que las hiciera llegar a los controladores.</li>
+<li><strong>Ley 9/2010, art. 2.3:</strong> las facultades indisponibles del proveedor (apdo. 5.3) lo son «sin perjuicio de las atribuciones inherentes a las licencias de controlador de tránsito aéreo» según el RD 1516/2009; es decir, la propia licencia otorga prerrogativas técnicas personales que ni siquiera las facultades de organización del empleador pueden anular.</li>
+<li><strong>Sección médica:</strong> el manual menciona la «Dirección de Gestión de la Seguridad y Personal de Vuelo» de AESA como competente en personal de vuelo, escuelas de vuelo y <strong>medicina aeronáutica</strong>; el Reglamento (UE) 2015/340 fija el régimen detallado de evaluación médica por parte de médicos y centros aeromédicos (no se detalla más aquí; véanse los materiales del tema 8 y de factores humanos para la aptitud médica).</li>
+</ul>
+<h2 id="12-la-cultura-justa-en-el-derecho-espanol">12. La «cultura justa» en el derecho español</h2>
+<p>El núcleo legal de la «cultura justa» (notificación de seguridad no punitiva) en el derecho aeronáutico español es el <strong>art. 11.1 de la Ley 21/2003</strong>, in fine (apdo. 3.2): la información de seguridad notificada voluntariamente no puede utilizarse como prueba en procedimientos administrativos ni revelarse públicamente, <strong>salvo que hubiera dolo o negligencia grave</strong>; la misma salvedad que figura en el derecho de la UE sobre notificación de sucesos (Reglamento (UE) 376/2014, apdo. 4.3.6 del manual). <strong>El art. 18 de la Ley 21/2003</strong> lo refuerza con el «carácter reservado» general de los datos, registros, grabaciones, declaraciones, comunicaciones, indicadores e informes elaborados en el marco del Programa Estatal de Seguridad Operacional. <strong>Vínculo práctico:</strong> es la razón jurídica por la que están protegidas las «notificaciones voluntarias de sucesos» del ATC, y por la que la ESARR 2 del manual (notificación y evaluación de sucesos de seguridad, apdo. 2.2.6) y el Reglamento 376/2014 existen en el ámbito de la UE con un anclaje legal español.</p>
+<h2 id="13-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">13. Manual frente a fuentes primarias: tabla de discrepancias</h2>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Manual (nov. 2025)</th>
+<th>Fuente primaria (leída directamente)</th>
+<th>Cuál es más probable que siga el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Situación de la CIAIAC</td>
+<td>Se presenta como el órgano vigente (pp. 25, 43); dice que la Ley 21/2003 «regula la investigación técnica»</td>
+<td>Los arts. 13-17 de la Ley 21/2003 (la base propia de la CIAIAC) están <strong>derogados por completo</strong>; la función pasó a la Ley 2/2024 (1 ago. 2024) y al RD 141/2026 (25 feb. 2026, Estatuto orgánico), que crea una Autoridad única que abarca también los accidentes ferroviarios y marítimos y suprime la CIAF, la CIAIM <strong>y</strong> la CIAIAC</td>
+<td><strong>El manual</strong>, porque era exacto cuando se redactó (nov. 2025, antes de la constitución efectiva de la Autoridad hacia mediados de 2026) y el examen parece construido a partir del texto del manual; pero un candidato bien preparado debe conocer también la realidad actual, como nota de actualidad</td>
+</tr>
+<tr>
+<td>Adscripción y Presidente de AESA</td>
+<td>El apdo. 3.4 dice que AESA está adscrita a la «Secretaría de Estado de Transporte»; el apdo. 4.4.2 (RD 253/2024) dice que está adscrita «a través de la Secretaría General de Transporte Aéreo y Marítimo»: dos afirmaciones en el mismo manual</td>
+<td>El RD 184/2008, art. 14 (consolidado), <strong>confirma</strong> que el Presidente es el titular de la <strong>Secretaría General de Transportes Aéreo y Marítimo</strong>, lo que resuelve la duda interna del manual a favor de la redacción de la Secretaría General; el preámbulo de 2008 (también en el mismo texto consolidado) dice aparte que el Presidente del diseño original de 2008 «es el Director General de Aviación Civil», una descripción histórica superada por el art. 14 vigente</td>
+<td>La fuente primaria (art. 14): Secretaría General de Transportes Aéreo y Marítimo</td>
+</tr>
+<tr>
+<td>RD 601/2016</td>
+<td>El manual no lo analiza (fuera de su alcance)</td>
+<td>Es el <strong>RCAO</strong> (reglamento militar de la Circulación Aérea Operativa), <strong>no</strong> una norma de aplicación de SERA; el RD 1180/2018 es el real decreto que aplica SERA</td>
+<td>Conoce ambos: RD 1180/2018 = SERA/CAG; RD 601/2016 = RCAO/CAO</td>
+</tr>
+<tr>
+<td>Sanciones de la Ley 48/1960</td>
+<td>El manual no las analiza</td>
+<td>El capítulo XIX (arts. 152-159) está <strong>derogado por completo</strong>; las sanciones actuales son las de la Ley 21/2003</td>
+<td>La Ley 21/2003 rige hoy las sanciones</td>
+</tr>
+<tr>
+<td>Denominación de ENAIRE</td>
+<td>El apdo. 4.4.2 del manual (resumen del RD 253/2024) menciona la adscripción de ENAIRE, pero no el artículo exacto del cambio de nombre</td>
+<td><strong>El art. 18 de la Ley 18/2014</strong> es el artículo preciso del cambio de nombre (AENA→ENAIRE, Aena Aeropuertos S.A.→Aena S.A.), el mismo artículo para ambos</td>
+<td>Ambos coinciden; la fuente primaria añade el número del artículo y la función heredada de patrimonio histórico de ENAIRE</td>
+</tr>
+<tr>
+<td>Base constitucional</td>
+<td>El manual no la menciona en absoluto</td>
+<td>Art. 149.1.4.ª (defensa) y 20.ª (aviación) CE, citados explícitamente por la Ley 21/2003 y el RD 601/2016</td>
+<td>Solo la fuente primaria; aportación genuina</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-trampas-de-examen">14. Trampas de examen</h2>
+<ol>
+<li><strong>Las sanciones están en la Ley 21/2003, no en la Ley 48/1960.</strong> El capítulo XIX de la Ley 48/1960 (arts. 152-159) está derogado por completo.</li>
+<li><strong>Los artículos propios de la CIAIAC en la Ley 21/2003 (13-17) están derogados.</strong> El manual sigue tratando la CIAIAC como vigente (correcto a noviembre de 2025); el órgano actual o entrante es la Autoridad de la Ley 2/2024 + RD 141/2026, que sustituye conjuntamente a la CIAF, la CIAIM <strong>y</strong> la CIAIAC.</li>
+<li><strong>Dos escalas de sanciones en el art. 55 de la Ley 21/2003:</strong> el público general (de 60 a 225 000 euros entre leve/grave/muy grave) frente a los agentes comerciales o profesionales (de 4500 a 4 500 000 euros). No mezcles las cifras.</li>
+<li><strong>La autoridad sancionadora de AESA es su Director, no su Presidente</strong> (Ley 21/2003, art. 58).</li>
+<li><strong>Presidente de AESA = Secretaría General de Transportes Aéreo y Marítimo; Presidente de ENAIRE = Secretaría de Estado</strong> (un nivel por encima). Ambos Consejos Rectores tienen Presidente + 11 Consejeros (+ un Secretario sin voto en AESA).</li>
+<li><strong>RD 601/2016 = RCAO (militar/OAT), no SERA.</strong> RD 1180/2018 = el real decreto que aplica SERA en España. RD 57/2002 = el RCA base (CAG, civil).</li>
+<li><strong>Cifras de descanso de la Ley 9/2010 para los controladores:</strong> máximo 12 h por turno, máximo 80 h extraordinarias al año, 25 % de descanso en jornada diurna y 33 % en nocturna, 1 h por servicio en torres monoposición.</li>
+<li><strong>Las seis facultades indisponibles del proveedor en la Ley 9/2010 (a-f):</strong> configuración operativa; instalaciones y personal; organización directiva; selección y formación; turnos, horarios y descansos; vigilancia y sanción. La disposición voluntaria de cualquiera de ellas → revocación de la designación.</li>
+<li><strong>La cláusula de «militarización» de la Ley 9/2010</strong> (disposición adicional primera): base legal para poner a los controladores bajo la dirección del Ministerio de Defensa en una emergencia; es el mecanismo legal real de la crisis de diciembre de 2010, aunque la Ley es anterior a ella (abril de 2010).</li>
+<li><strong>El art. 18 de la Ley 18/2014</strong> es el único artículo que cambió el nombre tanto de AENA→ENAIRE como de Aena Aeropuertos S.A.→Aena S.A. ENAIRE heredó además la función de gestión del patrimonio histórico de AENA.</li>
+<li><strong>Base constitucional: art. 149.1.4.ª (defensa) + 20.ª (aeropuertos de interés general, control del espacio aéreo, tránsito y transporte aéreo, servicio meteorológico, matriculación de aeronaves) CE</strong>, citados juntos por la Ley 21/2003 y el RD 601/2016.</li>
+<li><strong>Base textual de la «cultura justa»: art. 11.1 de la Ley 21/2003</strong> (la información de seguridad voluntaria no es utilizable como prueba ni puede revelarse, salvo dolo o negligencia grave) <strong>y art. 18</strong> (carácter reservado de los datos del Programa).</li>
+<li><strong>La CIDEFO/CIDETRA tuvo la competencia sobre la clasificación del espacio aéreo</strong>, según el preámbulo del RD 1180/2018, lo que enlaza las instituciones del tema 1 con contenido técnico de los temas 4/5.</li>
+</ol>
+<h2 id="15-imprescindible-memorizar">15. Imprescindible memorizar</h2>
+<ul>
+<li>CE <strong>149.1.4.ª</strong> defensa, <strong>149.1.20.ª</strong> aviación: citados juntos por la Ley 21/2003 y el RD 601/2016.</li>
+<li><strong>Ley 48/1960</strong> (27 dic. 1960): 19 capítulos; el cap. XIX (sanciones, arts. 152-159) y el art. 8 están <strong>derogados</strong>; art. 1 soberanía sobre el espacio aéreo + mar territorial; art. 58 requisito de licencia + deber de no abandonar el puesto.</li>
+<li><strong>Ley 21/2003</strong> (7 jul. 2003): 6 títulos; art. 10 (Consejo Asesor) derogado; arts. 13-17 (CIAIAC) derogados; art. 11 Programa Estatal de Seguridad Operacional + salvedad de la cultura justa; art. 55 sanciones (general de 60 a 225 000 euros / comercial de 4500 a 4 500 000 euros, multiplicador ×2/×3 del beneficio); art. 56.2 dos muy graves en un año → inhabilitación de 3 años; art. 58 el Director de AESA impone las sanciones.</li>
+<li><strong>RD 57/2002</strong> RCA (CAG, 7 Libros) + <strong>RD 1180/2018</strong> (aplica SERA en España) frente a <strong>RD 601/2016</strong> RCAO (CAO, militar, deroga el RD 1489/1994, gestionado por el Ejército del Aire).</li>
+<li><strong>Ley 9/2010</strong> (14 abr. 2010): 4 artículos; art. 1 AENA/ENAIRE conserva control de área + aproximación + información de vuelo/alerta; art. 2 seis facultades indisponibles a-f; art. 3 cifras de descanso (12 h/80 h/25 %/33 %/1 h); art. 4 calificación de muy grave + despido; disp. adic. 1.ª cláusula de militarización.</li>
+<li><strong>Ley 2/2024</strong> (1 ago. 2024) crea la Autoridad (ferroviaria + marítima + aviación); <strong>RD 141/2026</strong> (25 feb. 2026) aprueba su Estatuto orgánico y suprime la <strong>CIAF, la CIAIM y la CIAIAC</strong>; constitución = sesión constitutiva del Consejo, 3 de los 9(?) miembros del Consejo sorteados para un primer mandato de 3 años (frente a 6).</li>
+<li><strong>RD 184/2008</strong> Estatuto de AESA: organismo público, sede en Madrid, Presidente = Secretaría General de Transportes Aéreo y Marítimo, Consejo Rector = Presidente + 11 Consejeros + Secretario sin voto, Director propuesto por el Presidente y nombrado por el Consejo, constituida el 2 de junio de 2008.</li>
+<li><strong>Ley 18/2014, art. 18</strong>: AENA→ENAIRE, Aena Aeropuertos S.A.→Aena S.A., misma fecha, ENAIRE mantiene la naturaleza del art. 82 de la Ley 4/1990 + hereda la función de patrimonio histórico.</li>
+<li><strong>RD 160/2023</strong> Estatuto de ENAIRE: E.P.E., Presidente = Secretaría de Estado (transporte), Consejo Rector = Presidente + 11 Consejeros; Dirección de Coordinación Civil-Militar = FUA + enlace con EUROCONTROL.</li>
+</ul>
+<h2 id="16-glosario-bilingue-es-en">16. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ley de Navegación Aérea (Ley 48/1960)</td>
+<td>Air Navigation Act</td>
+</tr>
+<tr>
+<td>Ley de Seguridad Aérea (Ley 21/2003)</td>
+<td>Air Safety Act</td>
+</tr>
+<tr>
+<td>Reserva/restricción de espacio aéreo</td>
+<td>Airspace reservation/restriction</td>
+</tr>
+<tr>
+<td>Comandante de la aeronave</td>
+<td>Aircraft commander</td>
+</tr>
+<tr>
+<td>Registro de matrícula de aeronaves</td>
+<td>Aircraft registry</td>
+</tr>
+<tr>
+<td>Matriculación de aeronaves</td>
+<td>Aircraft register entry</td>
+</tr>
+<tr>
+<td>Torre de control monoposición</td>
+<td>Air traffic control tower (monoposition)</td>
+</tr>
+<tr>
+<td>Consejo Asesor de Aviación Civil</td>
+<td>Civil Aviation Advisory Council</td>
+</tr>
+<tr>
+<td>Entidad colaboradora (de inspección)</td>
+<td>Collaborating (inspection) entity</td>
+</tr>
+<tr>
+<td>Resarcimiento / indemnización</td>
+<td>Compensation (for damages)</td>
+</tr>
+<tr>
+<td>Constitución Española (CE)</td>
+<td>Constitution (Spanish)</td>
+</tr>
+<tr>
+<td>Consejo Rector</td>
+<td>Council (governing body, ENAIRE/AESA)</td>
+</tr>
+<tr>
+<td>Consejero/a; vocalía</td>
+<td>Council member</td>
+</tr>
+<tr>
+<td>Derogado</td>
+<td>Derogated / repealed</td>
+</tr>
+<tr>
+<td>Organización directiva</td>
+<td>Directive powers/organization</td>
+</tr>
+<tr>
+<td>Despido disciplinario</td>
+<td>Disciplinary dismissal</td>
+</tr>
+<tr>
+<td>Inhabilitación</td>
+<td>Disqualification (administrative)</td>
+</tr>
+<tr>
+<td>Competencia exclusiva del Estado</td>
+<td>Exclusive State competence</td>
+</tr>
+<tr>
+<td>Utilización flexible del espacio aéreo</td>
+<td>Flexible Use of Airspace (FUA)</td>
+</tr>
+<tr>
+<td>Multa</td>
+<td>Fine / penalty</td>
+</tr>
+<tr>
+<td>Circulación Aérea General (CAG)</td>
+<td>General Air Traffic (GAT)</td>
+</tr>
+<tr>
+<td>Negligencia grave</td>
+<td>Gross negligence</td>
+</tr>
+<tr>
+<td>Autoridad Administrativa Independiente</td>
+<td>Independent Administrative Authority</td>
+</tr>
+<tr>
+<td>Tránsito inocuo</td>
+<td>Innocent transit</td>
+</tr>
+<tr>
+<td>Inspección aeronáutica</td>
+<td>Inspection, aeronautical</td>
+</tr>
+<tr>
+<td>Cultura justa</td>
+<td>Just culture</td>
+</tr>
+<tr>
+<td>Personalidad jurídica</td>
+<td>Legal personality</td>
+</tr>
+<tr>
+<td>Canje de licencias</td>
+<td>Licence exchange</td>
+</tr>
+<tr>
+<td>Ministerio de Transportes y Movilidad Sostenible</td>
+<td>Ministry of Transport and Sustainable Mobility</td>
+</tr>
+<tr>
+<td>Contrato plurianual de gestión</td>
+<td>Multiannual management contract</td>
+</tr>
+<tr>
+<td>Facultad indisponible</td>
+<td>Non-delegable / inalienable power</td>
+</tr>
+<tr>
+<td>Circulación Aérea Operativa (CAO)</td>
+<td>Operational Air Traffic (OAT)</td>
+</tr>
+<tr>
+<td>Configuración operativa</td>
+<td>Operational configuration</td>
+</tr>
+<tr>
+<td>Horas extraordinarias</td>
+<td>Overtime</td>
+</tr>
+<tr>
+<td>Presidencia</td>
+<td>Presidency</td>
+</tr>
+<tr>
+<td>Entidad pública empresarial (E.P.E.)</td>
+<td>Public business entity</td>
+</tr>
+<tr>
+<td>Organismo público</td>
+<td>Public body</td>
+</tr>
+<tr>
+<td>Reglamento de Circulación Aérea (RCA)</td>
+<td>Air Traffic Regulation</td>
+</tr>
+<tr>
+<td>Reglamento de la Circulación Aérea Operativa (RCAO)</td>
+<td>Operational Air Traffic Regulation</td>
+</tr>
+<tr>
+<td>Potestad sancionadora</td>
+<td>Sanctioning power</td>
+</tr>
+<tr>
+<td>Secretaría de Estado</td>
+<td>Secretariat of State</td>
+</tr>
+<tr>
+<td>Secretaría General</td>
+<td>Secretary-General</td>
+</tr>
+<tr>
+<td>Infracción grave</td>
+<td>Serious infraction</td>
+</tr>
+<tr>
+<td>Franja horaria</td>
+<td>Slot (airport)</td>
+</tr>
+<tr>
+<td>Soberanía</td>
+<td>Sovereignty</td>
+</tr>
+<tr>
+<td>Programa Estatal de Seguridad Operacional</td>
+<td>State Safety Programme</td>
+</tr>
+<tr>
+<td>Estatuto (orgánico)</td>
+<td>Statute (organic instrument of a public body)</td>
+</tr>
+<tr>
+<td>Mar territorial</td>
+<td>Territorial sea</td>
+</tr>
+<tr>
+<td>Infracción muy grave</td>
+<td>Very serious infraction</td>
+</tr>
+<tr>
+<td>Notificación voluntaria</td>
+<td>Voluntary report (safety)</td>
+</tr>
+<tr>
+<td>Apercibimiento</td>
+<td>Warning (sanction)</td>
+</tr>
+<tr>
+<td>Dolo</td>
+<td>Wilful misconduct</td>
+</tr>
+<tr>
+<td>Restos (búsqueda y recuperación de)</td>
+<td>Wreckage (search and recovery of)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-fuentes">17. Fuentes</h2>
+<ul>
+<li>Ley 48/1960, de Navegación Aérea (texto consolidado, última modificación 30-9-2025).</li>
+<li>Ley 21/2003, de Seguridad Aérea (texto consolidado).</li>
+<li>Ley 2/2024, de creación de la Autoridad Administrativa Independiente para la Investigación Técnica de Accidentes, y su Estatuto orgánico (RD 141/2026).</li>
+<li>RD 184/2008 (Estatuto de AESA) y RD 160/2023 (Estatuto de ENAIRE).</li>
+<li>Ley 18/2014, art. 18 (cambio de denominación AENA→ENAIRE) y Ley 9/2010 (servicios de tránsito aéreo).</li>
+<li>RD 57/2002 (RCA), RD 601/2016 (RCAO) y RD 1180/2018 (aplicación de SERA en España).</li>
+<li>Manual de ENAIRE «Instituciones y Legislación Aeronáutica» (nov. 2025), usado para contrastar.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

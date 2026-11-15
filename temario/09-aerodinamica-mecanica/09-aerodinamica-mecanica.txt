@@ -1,0 +1,178 @@
+Aerodinámica: ¿qué es, según el manual de ENAIRE?	La rama de la mecánica de fluidos especializada en el cálculo de las acciones que aparecen sobre los cuerpos sólidos cuando existe un movimiento relativo entre ellos y el fluido en el que se desplazan.	ATC::OM09
+Mecánica de vuelo: definición en el manual	Ciencia aplicada que se ocupa del estudio del movimiento de los vehículos voladores; el manual se centra únicamente en el movimiento atmosférico de los aviones.	ATC::OM09
+Teorema de Bernoulli: enunciado	La presión interna de un fluido decrece en la medida en que la velocidad del fluido se incrementa; P + 1/2 rho V^2 = constante.	ATC::OM09
+Fórmula del principio de Bernoulli en el manual	P + 1/2 * rho * V^2 = k (la presión más la mitad del producto de la densidad por el cuadrado de la velocidad es constante).	ATC::OM09
+Aplicación práctica del principio de Bernoulli citada en el manual	El tubo Venturi.	ATC::OM09
+En el tubo Venturi, la sección S2 es más estrecha que S1. ¿Qué ocurre?	La velocidad es mayor (V2 > V1) y la presión menor (P2 < P1); la densidad se considera constante.	ATC::OM09
+¿Qué proporciona la Atmósfera Estándar Internacional (ISA, del inglés International Standard Atmosphere)?	Los valores de presión, temperatura, densidad y viscosidad del aire en función de la altitud.	ATC::OM09
+Función de la ISA según el manual	Proporcionar un marco de referencia invariante para la navegación aérea y para la realización de cálculos aerodinámicos consistentes.	ATC::OM09
+Definición de la OACI de la ISA al nivel del mar (manual)	15 °C de temperatura y 1013 hectopascales de presión.	ATC::OM09
+Gradiente de temperatura de la ISA en el manual	Disminuye 2° cada 1000 pies (6,5 °C por km).	ATC::OM09
+¿Hasta qué altitud disminuye la temperatura ISA a razón de 2 °C cada 1000 pies (manual)?	Hasta 36 000 pies.	ATC::OM09
+Temperatura ISA por encima de 36 000 pies (manual)	Constante, -56 °C.	ATC::OM09
+¿Hasta qué altitud mantiene el manual la temperatura constante en -56 °C?	Hasta los 80 000 pies.	ATC::OM09
+¿Por qué están todos los instrumentos de las aeronaves calibrados para la atmósfera estándar?	Porque las performances de las aeronaves se comparan y evalúan con respecto a la atmósfera estándar.	ATC::OM09
+Tabla ISA del manual: ¿qué muestran las columnas 4, 6 y 7?	Los datos de la densidad, presión y temperatura relativas (sigma, delta y theta).	ATC::OM09
+Tabla ISA del manual: unidad de presión y valor al nivel del mar	Pulgadas de mercurio; 29,92 in Hg a 0 pies.	ATC::OM09
+Tabla ISA del manual: velocidad del sonido al nivel del mar	661,5 kt.	ATC::OM09
+Tabla ISA del manual: velocidad del sonido a partir de 38 000 pies	573,6 kt (constante, porque la temperatura es constante).	ATC::OM09
+Tabla ISA del manual: temperatura a 36 000 pies y por encima de 38 000 pies	-56,3 °C a 36 000 pies; -56,5 °C a partir de 38 000 pies.	ATC::OM09
+Tabla ISA del manual: ¿hasta qué altitud llega?	Hasta 64 000 pies.	ATC::OM09
+Tabla ISA del manual: temperatura a 10 000 pies	-4,8 °C (presión 20,58 in Hg).	ATC::OM09
+Altitud de presión: definición	Altura sobre un plano de referencia estándar, que es un nivel teórico donde el peso de la atmósfera es de 1013 hectopascales, medido por el barómetro.	ATC::OM09
+¿Cuándo es la indicación del altímetro igual a la altitud de presión?	Cuando el altímetro está ajustado a 1013 hectopascales.	ATC::OM09
+¿Qué es un altímetro según el manual?	Básicamente, un barómetro sensible calibrado para indicar la altitud en la atmósfera estándar.	ATC::OM09
+Posición del nivel de referencia de la altitud de presión respecto al nivel del mar	Puede estar por debajo, en o sobre el nivel del mar, a medida que la presión atmosférica cambia.	ATC::OM09
+Dos usos de la altitud de presión citados en el manual	Base para determinar la performance del avión; asignación de niveles de vuelo a los aviones que operan por encima de un determinado nivel (nivel de transición).	ATC::OM09
+Altitud densidad: definición	Distancia vertical sobre el nivel del mar, en la atmósfera estándar, a la cual se encuentra una determinada densidad; la altitud que correspondería en la ISA a una determinada densidad del aire.	ATC::OM09
+¿Qué hace decrecer la densidad del aire (manual)?	El aumento de la temperatura, la altitud y la humedad.	ATC::OM09
+¿Qué implica una altitud densidad alta para las actuaciones?	Densidad del aire baja y disminución de las actuaciones de la aeronave; una altitud densidad baja las aumenta.	ATC::OM09
+Factor más importante que afecta a las actuaciones de la aeronave (manual)	La altitud densidad.	ATC::OM09
+Tres aspectos relacionados con la altitud densidad (en el orden del manual)	La potencia del motor; el empuje (eficiencia de la hélice); la capacidad de sustentación.	ATC::OM09
+¿Por qué afecta la altitud densidad a la potencia del motor?	Porque el motor toma menos aire.	ATC::OM09
+¿Por qué afecta la altitud densidad al empuje?	Porque una hélice es menos eficiente en el aire menos denso.	ATC::OM09
+Combinación que hace crítica la maniobra de despegue (manual)	Alta temperatura, alta altitud y alta humedad.	ATC::OM09
+Velocidad verdadera (TAS): definición del manual	Velocidad del avión respecto al aire en el que vuela.	ATC::OM09
+Velocidad indicada (IAS): definición del manual	Velocidad que marca el anemómetro (ASI); es la velocidad sin corrección por errores del indicador, de posición o de compresibilidad.	ATC::OM09
+Velocidad calibrada (CAS): definición del manual	La IAS corregida por errores de posición y del instrumento.	ATC::OM09
+Velocidad equivalente (EAS): definición del manual	La velocidad que marca el anemómetro (ASI) una vez corregidos los errores de instrumento, posición y compresibilidad.	ATC::OM09
+Velocidad sobre el suelo (GS): definición del manual	Velocidad del avión respecto al suelo; resultado de la suma vectorial de la velocidad verdadera y la velocidad del viento.	ATC::OM09
+¿Cuándo es la CAS igual a la TAS (manual)?	A nivel del mar en atmósfera estándar.	ATC::OM09
+¿Cuándo es la EAS igual a la CAS (manual)?	A nivel del mar en atmósfera estándar.	ATC::OM09
+¿Qué velocidad corrige el error de compresibilidad: la CAS o la EAS?	La EAS (la CAS corrige solo los errores de instrumento y de posición).	ATC::OM09
+Número de Mach en el manual	Relación entre la velocidad verdadera del avión (TAS) y la velocidad del sonido (c): M = V/c.	ATC::OM09
+Dos errores de anemómetro en el manual	Errores de instrumento y de posición; error de compresibilidad.	ATC::OM09
+Causa de los errores de instrumento y de posición	La falta de precisión en su fabricación y la dificultad de ubicación en un lugar donde la afectación de la presión estática sea mínima.	ATC::OM09
+¿Por encima de qué velocidad es apreciable el error de compresibilidad (manual)?	Por encima de 250 kt (la variación de la densidad es apreciable).	ATC::OM09
+Completa la lista: acrónimos del manual (ASI, CAS, EAS, ...)	ASI, CAS, EAS, GS, IAS, ISA, Kts, P, TAS, V.	ATC::OM09
+Completa la lista: las cuatro fuerzas en vuelo recto y nivelado (en el orden del manual)	Empuje (thrust), peso (weight), resistencia (drag), sustentación (lift).	ATC::OM09
+En vuelo recto y nivelado las cuatro fuerzas están...	Equilibradas entre ellas.	ATC::OM09
+Sustentación: dirección según el manual	La componente perpendicular a la corriente de aire.	ATC::OM09
+Fórmula de la sustentación en el manual	L = C_L * q * S.	ATC::OM09
+Presión dinámica q en el manual	q = 1/2 * rho * V^2.	ATC::OM09
+¿De qué depende el coeficiente de sustentación C_L, para cada perfil?	Del ángulo de ataque.	ATC::OM09
+Peso: dirección y punto de aplicación	Verticalmente hacia abajo, a través del centro de gravedad (CG); se opone a la sustentación.	ATC::OM09
+Resistencia: definición del manual	Fuerza hacia atrás, que retarda, causada por la interrupción del flujo de aire por las alas, el fuselaje y otros objetos que sobresalgan; se opone al empuje y actúa hacia atrás, paralela al viento relativo.	ATC::OM09
+Fórmula de la resistencia en el manual	D = C_D * q * S.	ATC::OM09
+El coeficiente de resistencia C_D es la suma de qué dos coeficientes (manual)?	El coeficiente de resistencia parásita y el coeficiente de resistencia inducida.	ATC::OM09
+Empuje: definición del manual	Fuerza de avance producida por el motor/hélice o rotor; se opone o supera la fuerza de resistencia; como regla general, actúa en paralelo al eje longitudinal.	ATC::OM09
+¿Qué ocurre si el empuje excede a la resistencia (manual)?	La velocidad aumenta, el avión acelera horizontalmente, la sustentación aumenta y el avión sube.	ATC::OM09
+¿Qué ocurre si la resistencia excede al empuje (manual)?	El avión decelera horizontalmente, la sustentación disminuye y el avión baja.	ATC::OM09
+Origen de la sustentación según el manual	La diferencia de presión entre el intradós (superficie inferior) y el extradós (superficie superior), donde la presión es mucho menor.	ATC::OM09
+¿Cómo se forman los torbellinos de punta de ala (manual, apartado 4.3)?	Las diferencias de presión en las puntas de las alas crean corrientes transversales de abajo hacia arriba que se suman a la corriente del extradós.	ATC::OM09
+Torbellino o vórtice de punta de ala: ¿de qué es resultado?	Es el resultado de la sustentación.	ATC::OM09
+Presión sobre y bajo el ala con ángulo de ataque positivo (manual)	Sobre el ala: menor que la presión atmosférica. Debajo: igual o mayor que la presión atmosférica.	ATC::OM09
+Dirección del movimiento del aire bajo el ala que crea el vórtice	De alta presión hacia baja presión, hacia las puntas alares, con un «derrame» sobre ellas.	ATC::OM09
+Intensidad del vórtice: dependencia del peso (manual)	Directamente proporcional al peso de la aeronave.	ATC::OM09
+Intensidad del vórtice: dependencia de la envergadura y la velocidad (manual)	Inversamente proporcional a la envergadura y a la velocidad.	ATC::OM09
+Tipo de aeronave en el que los vórtices son especialmente violentos (manual)	Los reactores de gran tamaño.	ATC::OM09
+Peligro más grave para una aeronave que penetre en la estela turbulenta	El balanceo inducido, cuando su violencia sobrepasa la eficacia de sus mandos para contrarrestarlo.	ATC::OM09
+¿Cuándo empieza a formarse el vórtice?	En el momento de la rotación, cuando las ruedas de proa dejan de hacer contacto con la pista.	ATC::OM09
+¿Cuándo termina el vórtice?	Cuando las ruedas de proa hacen contacto con el suelo en el momento del aterrizaje.	ATC::OM09
+Condiciones de máxima intensidad del vórtice (manual)	Aeronave generadora PESADA, en configuración limpia y lenta.	ATC::OM09
+Situación extrema de estela mostrada en la Figura 4 del manual	Envergadura del avión afectado de dimensión similar al diámetro del torbellino.	ATC::OM09
+Efecto suelo: definición del manual	Zona muy próxima al suelo en la que el vórtice se destruye contra la superficie; disminuye la resistencia al avance y aumenta la sustentación.	ATC::OM09
+Efecto del efecto suelo sobre la resistencia y la sustentación	Disminución de la resistencia al avance y aumento de la sustentación.	ATC::OM09
+El efecto suelo es mayor cuando...	El avión está más cerca del suelo y su envergadura es mayor.	ATC::OM09
+Factor de carga: definición del manual	Proporción entre la sustentación y el peso (relación trigonométrica), medida en Gs.	ATC::OM09
+En viraje, ¿qué componente de fuerza equilibra el peso?	La componente vertical de la sustentación.	ATC::OM09
+Para hacer un viraje manteniendo la altura, la sustentación total debe...	Aumentar hasta que la componente efectiva (vertical) iguale al peso.	ATC::OM09
+Figura 5 del manual: valores de gravedad, fuerza centrífuga y factor de carga	Gravedad 1 G, fuerza centrífuga 1,73 Gs, factor de carga 2 Gs (corresponde a 60 grados de alabeo).	ATC::OM09
+Pérdida: definición del manual	Rápida disminución de la sustentación causada por la separación del flujo de aire de la superficie superior del ala, provocada por exceder el ángulo de ataque crítico.	ATC::OM09
+¿Qué le ocurre al C_L al aumentar el ángulo de ataque, hasta la pérdida?	Aumenta progresivamente hasta que se alcanza el coeficiente de sustentación máximo (C_Lmax).	ATC::OM09
+El perfil entra en pérdida a un ángulo; el avión completo, a una...	Perfil: ángulo de ataque crítico. Avión completo: velocidad de pérdida.	ATC::OM09
+Velocidad de pérdida Vs y altitud (manual)	Vs depende de la densidad del aire; a mayor altitud la densidad disminuye, por lo que la velocidad de pérdida es mayor.	ATC::OM09
+Ecuación de equilibrio en vuelo estacionario del manual	M * g = L = 1/2 * rho * V^2 * S * C_L.	ATC::OM09
+C_L típico en crucero (manual)	C_L = 0,4.	ATC::OM09
+¿Cómo debe cambiar el ángulo de ataque cuando disminuye la velocidad (p. ej., en la aproximación)?	Debe aumentar para conseguir un mayor C_L.	ATC::OM09
+Velocidad de pérdida: formulación del manual sobre su significado	La velocidad mínima de vuelo a la que se puede tener control sobre el avión.	ATC::OM09
+Buffet o bataneo: definición del manual	Una fuerte vibración que se produce antes de entrar en pérdida, porque no todas las zonas del ala entran en pérdida a la vez.	ATC::OM09
+¿Qué es el stick shaker?	Un dispositivo que hace vibrar la palanca de control para avisar al piloto de que se acerca la pérdida.	ATC::OM09
+¿A qué velocidad debe experimentarse el aviso de pérdida (manual)?	Un 7 % por encima de la velocidad de pérdida.	ATC::OM09
+Coffin corner: definición del manual	El punto donde coinciden la velocidad de pérdida por alta velocidad y la velocidad de pérdida por baja velocidad.	ATC::OM09
+Coffin corner: ¿quién se ve afectado y dónde?	Los reactores comerciales que vuelan a gran altura, en función de su peso.	ATC::OM09
+Coffin corner: ¿qué debe hacer el piloto?	Descender, para ampliar el margen entre las velocidades de pérdida.	ATC::OM09
+Número de Mach a partir del cual puede alcanzarse la velocidad del sonido en el extradós (manual)	Mach 0,82 y superiores (algunos reactores comerciales).	ATC::OM09
+Mach crítico: definición del manual	El número de Mach que hace que en un punto del extradós se alcance Mach 1; da lugar a una onda de choque.	ATC::OM09
+Consecuencia de la onda de choque sobre la resistencia	Aparece una nueva resistencia, tanto mayor cuanto mayor es el número de Mach; puede provocar la entrada en pérdida de alta velocidad.	ATC::OM09
+Mejor forma de evitar la pérdida de alta velocidad (manual)	Reducir el número de Mach si es posible.	ATC::OM09
+Perfil alar: definición	El corte del ala por un plano vertical paralelo al eje longitudinal.	ATC::OM09
+Partes superior e inferior del ala: nombres	Superior = extradós; inferior = intradós.	ATC::OM09
+Cuerda: definición	La línea que une el borde de ataque y el borde de salida.	ATC::OM09
+Línea de curvatura media: definición	La línea equidistante del intradós y del extradós.	ATC::OM09
+Perfil simétrico: ¿cuerda y línea de curvatura media? ¿Sustentación con ángulo de ataque cero?	Coinciden; con ángulo de ataque cero no se genera sustentación.	ATC::OM09
+Perfil asimétrico autosustentador	La línea de curvatura media está por encima de la cuerda; con ángulo de ataque cero se genera sustentación.	ATC::OM09
+Cuerda media: definición	La cuerda que, multiplicada por la envergadura, es igual a la superficie alar.	ATC::OM09
+Envergadura: definición	Distancia entre los dos extremos de las alas; envergadura por cuerda media da la superficie alar.	ATC::OM09
+Estrechamiento: definición	Cociente entre la cuerda del perfil en el encastre y la cuerda del perfil en la punta del ala.	ATC::OM09
+Alargamiento: definición del manual	Cociente entre la envergadura y la cuerda media.	ATC::OM09
+Valores típicos del alargamiento en el manual	Del orden de 3-4 en aviones muy rápidos a 25-30 en los planeadores.	ATC::OM09
+Un alargamiento mayor significa que el ala es...	Más larga y estrecha.	ATC::OM09
+Flecha: definición del manual	El ángulo que forman las alas respecto del eje transversal del avión.	ATC::OM09
+Tipos de flecha en el manual	Positiva/progresiva (extremos hacia atrás), neutra, negativa/regresiva (extremos adelantados).	ATC::OM09
+Diedro: definición del manual	Visto el avión de frente, el ángulo en forma de «V» que forman las alas con el eje lateral; positivo, neutro o negativo.	ATC::OM09
+Ángulo de ataque: definición del manual	El ángulo agudo formado por la cuerda del ala y la dirección del viento relativo (corriente libre de aire).	ATC::OM09
+¿Por qué es variable el ángulo de ataque?	Depende de la dirección del viento relativo y de la posición de las alas con respecto a este.	ATC::OM09
+Los tres ejes de un avión: ¿cómo se definen?	Tres líneas imaginarias que pasan a través del centro de gravedad, perpendiculares entre sí.	ATC::OM09
+Eje longitudinal: dirección, movimiento, control	Hacia el morro, en el plano de simetría; balanceo o alabeo (roll); alerones.	ATC::OM09
+Eje lateral: dirección, movimiento, control	Perpendicular al plano de simetría, sentido positivo hacia el ala derecha; cabeceo (pitch); elevadores o timones de profundidad.	ATC::OM09
+Eje vertical: dirección, movimiento, control	En el plano de simetría, sentido positivo hacia abajo; dirección o guiñada (yaw); timón de dirección.	ATC::OM09
+Sentido positivo del eje lateral (manual)	Hacia el ala derecha.	ATC::OM09
+Sentido positivo del eje vertical (manual)	Hacia abajo.	ATC::OM09
+Completa la lista: las tres superficies de control primarias del manual (en orden)	Timones de profundidad (elevators), alerones, timón de dirección (rudder).	ATC::OM09
+Timones de profundidad: ubicación y accionamiento	Borde de salida del estabilizador horizontal; se accionan empujando y tirando sobre el mando de vuelo o palanca.	ATC::OM09
+Alerones: ubicación y accionamiento	Borde de salida de las alas; se activan girando la palanca o mando a izquierda y derecha.	ATC::OM09
+Timón de dirección: ubicación y accionamiento	En el estabilizador vertical, cerca del borde de salida; se acciona pisando los pedales del timón a derecha e izquierda.	ATC::OM09
+Slats y flaps: tipo de dispositivo y efecto (manual)	Dispositivos hipersustentadores que varían la curvatura aumentándola, consiguiendo un aumento del valor de C_Lmax.	ATC::OM09
+¿Dónde están los slats y dónde los flaps?	Slats: borde de ataque. Flaps: borde de salida.	ATC::OM09
+¿Por qué se usan hipersustentadores en el despegue y el aterrizaje?	Reducen las velocidades de despegue y aterrizaje y, consiguientemente, las longitudes de pista necesarias.	ATC::OM09
+Spoilers o aerofrenos: efecto y ubicación	Reducen la sustentación y aumentan la resistencia; están situados en el extradós.	ATC::OM09
+Spoilers deflectados simétrica frente a asimétricamente	Simétricamente: funcionan como aerofrenos. Asimétricamente: funcionan como mandos de alabeo a altas velocidades.	ATC::OM09
+Trim tabs: ¿dónde están situados?	Cerca del borde de salida del timón de profundidad, del timón de dirección y de los alerones.	ATC::OM09
+Trim tab: dirección de deflexión	Opuesta al control primario del cual forma parte.	ATC::OM09
+Trim tab: finalidad	Anular el momento de charnela en el eje y, por tanto, la fuerza en la palanca o mando de vuelo.	ATC::OM09
+Eje de charnela: definición	El eje de rotación del mando primario (p. ej., el timón de profundidad).	ATC::OM09
+Factores que influyen en las actuaciones del avión enumerados en el apartado 11	El empuje de los motores, la temperatura, la altitud de presión, la posición de los flaps, el peso, el viento, la posición del centro de gravedad y la velocidad.	ATC::OM09
+Tres factores sobre los que se puede actuar para influir en las actuaciones	Escogiendo la posición de flaps más adecuada, limitando el peso y llevando una determinada velocidad en cada momento.	ATC::OM09
+V_S en la lista de despegue del manual	Velocidad de pérdida o la velocidad mínima a la que la aeronave es controlable.	ATC::OM09
+V_MCG: definición	Velocidad mínima de control en el suelo, con un motor inoperativo (motor crítico en aviones bimotores).	ATC::OM09
+Dos efectos de un fallo de motor en el suelo (VMCG)	Una pérdida de aceleración (mayor distancia en pista) y un momento de giro (potencia por brazo) que tenderá a sacar el avión de la pista por el lado del motor fallado.	ATC::OM09
+¿Cómo debe controlarse la guiñada en VMCG si se continúa el despegue?	Haciendo uso únicamente de los controles aerodinámicos, es decir, del timón de dirección.	ATC::OM09
+Guiñada por fallo de motor: ¿cómo depende de la posición del motor?	Es tanto mayor cuanto más alejado esté el motor (crítico) del eje longitudinal.	ATC::OM09
+V_MCA: definición	Velocidad mínima de control en el aire, con un motor inoperativo.	ATC::OM09
+Fórmula de V_MCA en el manual	V_MCA >= 1,2 V_S.	ATC::OM09
+Fórmula que relaciona V1 y V_MCG en el manual	V1 >= V_MCG.	ATC::OM09
+V1 (velocidad de decisión): definición del manual	Velocidad en la que el piloto tiene que continuar el despegue o abortarlo; antes abortará y después de esa velocidad continuará el despegue.	ATC::OM09
+V_R (velocidad de rotación): definición del manual	Velocidad a la que se inicia la rotación de la aeronave a la actitud de despegue.	ATC::OM09
+Condiciones mínimas de V_R en el manual	V_R >= V1 y V_R >= 1,05 V_MC.	ATC::OM09
+Con un fallo de motor, V_R debe permitir...	La aceleración hasta V2 a una altura de 35 pies al final de la pista.	ATC::OM09
+V_LOF: definición	Velocidad de despegue: la velocidad a la que, inicialmente, el avión se va al aire.	ATC::OM09
+V2: definición del manual	Velocidad de seguridad al despegue, que se debe alcanzar a 35 pies al final de la distancia de pista requerida; es esencialmente la velocidad de mejor ángulo de ascenso con un motor operativo.	ATC::OM09
+¿Hasta cuándo debe mantenerse V2 (manual)?	Hasta después de franquear los obstáculos, o hasta por lo menos 400 pies por encima del suelo.	ATC::OM09
+Altura a la que debe alcanzarse V2	35 pies (10,7 m).	ATC::OM09
+Completa la lista: velocidades de la Figura 12 del manual (despegue), de izquierda a derecha	V0, VS, V1, VR, VLOF, VTR, V2.	ATC::OM09
+Completa la lista: factores que afectan a los requerimientos de pista para el despegue (manual)	Altitud de presión, temperatura, componente de viento de frente, gradiente o pendiente de pista, peso del avión.	ATC::OM09
+¿En qué punto es más crítica la pérdida de un motor para la pista de despegue?	A V1 (velocidad de decisión).	ATC::OM09
+El peso de despegue debe adaptarse a la ... de tres distancias	La más larga de las tres distancias.	ATC::OM09
+Completa la lista: las tres distancias de despegue	Distancia de aceleración-despegue, distancia de aceleración-parada, distancia de despegue con todos los motores operativos.	ATC::OM09
+Distancia de aceleración-despegue: definición	Distancia requerida para acelerar a V1 con todos los motores, experimentar un fallo de motor a V1 y continuar el despegue con el motor restante; incluye la distancia necesaria para ascender a 35 pies, momento en el cual se debe haber llegado a V2.	ATC::OM09
+Distancia de aceleración-parada: definición	Distancia requerida para acelerar a V1 con todos los motores, experimentar un fallo de motor a V1, abortar el despegue y detener el avión utilizando solo la acción de los frenos (no se considera el uso de la inversión de empuje).	ATC::OM09
+Distancia de despegue: definición del manual	Distancia requerida para completar un despegue hasta 35 pies de altura con todos los motores operativos.	ATC::OM09
+Manual: relación entre la distancia de despegue con todos los motores y la distancia con un motor inoperativo	Debe ser por lo menos un 15 por ciento menos que la distancia requerida para un despegue con un motor inoperativo.	ATC::OM09
+¿Por qué la distancia de despegue con todos los motores no es normalmente limitante?	Es generalmente menor que la distancia de despegue con un motor inoperativo.	ATC::OM09
+¿Varían las velocidades de despegue con el peso?	Sí; el piloto primero debe determinar el peso máximo permitido al despegue antes de calcularlas.	ATC::OM09
+Stopway o zona de parada: definición del manual	Área en la prolongación de la pista, al menos de su misma anchura, que puede soportar el peso del avión sin causarle daños estructurales; longitud adicional para deceleración y frenado en caso de despegue abortado.	ATC::OM09
+Clearway: definición del manual	Zona en la prolongación del eje de la pista libre de obstáculos, que proporciona espacio adicional utilizable solo para la subida (p. ej., el agua del mar); se considera que empieza al final de la pista, tanto si hay stopway como si no.	ATC::OM09
+Stopway frente a clearway: ¿cuál sirve solo para la subida?	El clearway; el stopway sirve para el frenado.	ATC::OM09
+V_SO en el aterrizaje (manual)	Velocidad de pérdida o velocidad mínima de vuelo estable en configuración de aterrizaje.	ATC::OM09
+V_REF (manual): valor y altura	1,3 veces la velocidad de pérdida en configuración de aterrizaje; es la velocidad requerida a 50 pies (15,2 m) de altura sobre el umbral de la pista.	ATC::OM09
+V_TD (velocidad de toma, touchdown) en el manual	1,15 veces la velocidad de pérdida en configuración de aterrizaje.	ATC::OM09
+Ascenso en aproximación: definición	La velocidad que proporciona el mejor rendimiento de ascenso en configuración de aproximación con un motor inoperativo y con la máxima potencia de despegue en el motor operativo(s).	ATC::OM09
+Ascenso en aterrizaje: definición	La velocidad que da la mejor performance en configuración de aterrizaje con máxima potencia de despegue en todos los motores.	ATC::OM09
+Completa la lista: factores para el peso de aterrizaje permitido (manual, en orden)	Altitud de presión del aeródromo, temperatura, componente de viento en contra, longitud de pista, gradiente o pendiente de pista, condición de la superficie de la pista.	ATC::OM09
+¿Qué dos requisitos dictan el peso máximo de aterrizaje permitido (el menor de los dos pesos)?	Los requisitos de pista de aterrizaje y los requisitos de ascenso en aproximación.	ATC::OM09
+Categoría de avión para la que el manual calcula el peso de aterrizaje	Categoría de transporte.	ATC::OM09
+Hidroplaneo: ¿cuándo se produce (manual)?	Con pista mojada o contaminada, en el momento en que las ruedas del tren dejan de girar y deslizan, perdiendo toda su eficacia la acción de frenado.	ATC::OM09
+El hidroplaneo depende de...	Los neumáticos, la contaminación de la pista y el espesor de la capa de agua o nieve, entre otros factores.	ATC::OM09
+Método más efectivo para parar el avión con hidroplaneo (manual)	El uso de la reversa.	ATC::OM09
+Fecha del manual de ENAIRE del tema 9	Elaborado: agosto 2023 (23 páginas).	ATC::OM09

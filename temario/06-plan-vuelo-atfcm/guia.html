@@ -1,0 +1,1689 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Plan de vuelo y gestión de afluencia (ATFCM)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Plan de vuelo y gestión de afluencia (ATFCM)</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</a></li>
+<li><a href="#0-introduccion-m-p4">0. Introducción [M p.4]</a></li>
+<li><a href="#1-plan-de-vuelo-conceptos-previos">1. Plan de vuelo. Conceptos previos</a><ul>
+<li><a href="#11-definicion-de-plan-de-vuelo-pln-m-p4">1.1 Definición de plan de vuelo (PLN) [M p.4]</a></li>
+<li><a href="#12-tipos-de-planes-de-vuelo-m-p5">1.2 Tipos de planes de vuelo [M p.5]</a></li>
+<li><a href="#13-que-vuelos-requieren-presentacion-de-un-plan-de-vuelo-m-p5">1.3 Qué vuelos requieren presentación de un plan de vuelo [M p.5]</a></li>
+<li><a href="#14-donde-hay-que-presentarlo-direccionamiento-m-p5">1.4 Dónde hay que presentarlo. Direccionamiento [M p.5]</a></li>
+<li><a href="#15-cuando-hay-que-presentarlo-tiempo-de-presentacion-m-p5">1.5 Cuándo hay que presentarlo. Tiempo de presentación [M p.5]</a></li>
+<li><a href="#16-contenido-del-plan-de-vuelo-y-plan-de-vuelo-que-reemplaza-rfp-m-p6-7">1.6 Contenido del plan de vuelo y plan de vuelo que reemplaza (RFP) [M p.6-7]</a></li>
+<li><a href="#17-formulario-de-plan-de-vuelo-fpl-m-p7-8">1.7 Formulario de plan de vuelo (FPL) [M p.7-8]</a></li>
+</ul>
+</li>
+<li><a href="#2-mensajes-relacionados-con-el-plan-de-vuelo">2. Mensajes relacionados con el plan de vuelo</a><ul>
+<li><a href="#21-normas-generales-m-p9">2.1 Normas generales [M p.9]</a></li>
+<li><a href="#22-prioridades-de-los-mensajes-aftn-m-p9-10">2.2 Prioridades de los mensajes AFTN [M p.9-10]</a></li>
+<li><a href="#23-mensajes-de-emergencia-m-p10-11">2.3 Mensajes de emergencia [M p.10-11]</a></li>
+<li><a href="#24-mensajes-de-movimiento-y-control-m-p12">2.4 Mensajes de movimiento y control [M p.12]</a></li>
+<li><a href="#25-mensaje-de-demora-dla-m-p13">2.5 Mensaje de demora (DLA) [M p.13]</a></li>
+<li><a href="#26-mensaje-de-modificacion-chg-m-p13">2.6 Mensaje de modificación (CHG) [M p.13]</a></li>
+<li><a href="#27-mensaje-de-cancelacion-de-plan-de-vuelo-cnl-m-p13">2.7 Mensaje de cancelación de plan de vuelo (CNL) [M p.13]</a></li>
+<li><a href="#28-mensaje-de-salida-dep-m-p13">2.8 Mensaje de salida (DEP) [M p.13]</a></li>
+<li><a href="#29-mensaje-de-llegada-arr-m-p14">2.9 Mensaje de llegada (ARR) [M p.14]</a></li>
+<li><a href="#210-mensajes-suplementarios-m-p15">2.10 Mensajes suplementarios [M p.15]</a></li>
+</ul>
+</li>
+<li><a href="#3-gestion-de-la-capacidad-y-afluencia-de-trafico-atfcm-air-traffic-flow-and-capacity-management">3. Gestión de la Capacidad y Afluencia de tráfico; ATFCM (Air Traffic Flow and Capacity Management)</a><ul>
+<li><a href="#31-generalidades-m-p15">3.1 Generalidades [M p.15]</a></li>
+<li><a href="#32-nm-gestor-de-red-network-manager-m-p16">3.2 NM (Gestor de Red / Network Manager) [M p.16]</a></li>
+<li><a href="#33-unidad-central-de-gestion-de-transito-aereo-ucatm-m-p17">3.3 Unidad Central de Gestión de Tránsito Aéreo (UCATM) [M p.17]</a></li>
+<li><a href="#34-fases-de-la-actividad-atfcm-m-p18-19-la-pagina-18-tiene-una-infografia-con-cuatro-pasos-numerados">3.4 Fases de la actividad ATFCM [M p.18-19] (la página 18 tiene una infografía con cuatro pasos numerados)</a></li>
+<li><a href="#35-tratamiento-de-los-planes-de-vuelo-dentro-del-proceso-atfcm-m-p19-21">3.5 Tratamiento de los planes de vuelo dentro del proceso ATFCM [M p.19-21]</a></li>
+<li><a href="#36-demanda-y-capacidad-definiciones-m-p21">3.6 Demanda y capacidad: definiciones [M p.21]</a></li>
+<li><a href="#37-tipos-de-capacidad-m-p21-22-la-tabla-de-las-paginas-21-22-se-reviso-como-imagen">3.7 Tipos de capacidad [M p.21-22] (la tabla de las páginas 21-22 se revisó como imagen)</a></li>
+<li><a href="#38-determinacion-de-la-capacidad-m-p22-23">3.8 Determinación de la capacidad [M p.22-23]</a></li>
+<li><a href="#39-monitorizacion-de-la-demanda-m-p23-24">3.9 Monitorización de la demanda [M p.23-24]</a></li>
+<li><a href="#310-acciones-a-realizar-cuando-se-prevea-que-la-demanda-vaya-a-ser-superior-a-la-capacidad-m-p24">3.10 Acciones a realizar cuando se prevea que la demanda vaya a ser superior a la capacidad [M p.24]</a></li>
+<li><a href="#311-tecnicas-para-evitar-sobrecargas-sin-tener-que-regular-m-p24-27">3.11 Técnicas para evitar sobrecargas sin tener que regular [M p.24-27]</a></li>
+<li><a href="#312-regulaciones-m-p27-28">3.12 Regulaciones [M p.27-28]</a></li>
+<li><a href="#313-asignacion-de-ctot-m-p29">3.13 Asignación de CTOT [M p.29]</a></li>
+<li><a href="#314-vuelos-exentos-o-vuelos-excluidos-m-p29-30">3.14 Vuelos exentos o vuelos excluidos [M p.29-30]</a></li>
+<li><a href="#315-modificacion-o-cancelacion-de-la-regulacion-m-p30-figura-revisada">3.15 Modificación o cancelación de la regulación [M p.30] (figura revisada)</a></li>
+</ul>
+</li>
+<li><a href="#4-fua-uso-flexible-del-espacio-aereo-flexible-use-of-airspace-m-p30-32">4. FUA: uso flexible del espacio aéreo (Flexible Use of Airspace) [M p.30-32]</a><ul>
+<li><a href="#41-introduccion">4.1 Introducción</a></li>
+<li><a href="#42-estructuras-flexibles-del-espacio-aereo">4.2 Estructuras flexibles del espacio aéreo</a></li>
+<li><a href="#421-unidades-de-gestion-de-espacio-aereo-celula-de-gestion-de-espacio-aereo-amc">4.2.1 Unidades de gestión de espacio aéreo: Célula de Gestión de Espacio Aéreo (AMC)</a></li>
+<li><a href="#422-publicacion-de-informacion-sobre-disponibilidad-de-estructuras-flexibles-aup-y-uup">4.2.2 Publicación de información sobre disponibilidad de estructuras flexibles: AUP y UUP</a></li>
+</ul>
+</li>
+<li><a href="#5-acronimos-del-manual-m-p33-35">5. Acrónimos del manual [M p.33-35]</a></li>
+<li><a href="#6-bibliografia-del-manual-m-p36">6. Bibliografía del manual [M p.36]</a></li>
+<li><a href="#7-manual-frente-a-fuentes-primarias-diferencias-y-puntos-de-atencion">7. Manual frente a fuentes primarias (diferencias y puntos de atención)</a></li>
+<li><a href="#trampas-de-examen">Trampas de examen</a></li>
+<li><a href="#imprescindible-memorizar">Imprescindible memorizar</a></li>
+<li><a href="#glosario-bilingue-es-en">Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">65 min de lectura</div><h1 id="om06-manual-oficial-de-enaire-no-6-plan-de-vuelo-y-gestion-de-la-capacidad-y-afluencia-de-trafico-guia-de-estudio-fiel-al-manual">Guía: Plan de vuelo y gestión de afluencia (ATFCM)</h1>
+<p><strong>Fuente de todo lo que sigue:</strong> el manual oficial de ENAIRE para el tema 6 del Anexo I, «Elaborado: Noviembre 2024», 36 páginas y unas 8969 palabras en español. Las referencias «[M p.N]» remiten a las páginas impresas del manual («Página: N/36»). Se leyó el texto completo; las páginas 2, 8, 12, 18, 21-22, 26, 30 y 34 se renderizaron y se revisaron como imágenes. Los datos marcados se contrastaron con una fuente primaria de la biblioteca (AIP España, SERA, RD 57/2002, Reglamento (UE) 2020/469, manuales ATFCM e IFPS de EUROCONTROL de 2026); la referencia es el manual y, cuando una fuente primaria difiere, la diferencia se anota en la sección 7 («Manual frente a fuentes primarias»).</p>
+<p><strong>Aviso sobre la fecha:</strong> el manual es de noviembre de 2024. ENAIRE reeditó el tema 1 en noviembre de 2025; el tema 6 puede reeditarse antes de la convocatoria 2026-27. Conviene volver a comprobar la página de Ocupaciones cuando se abra la convocatoria.</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El test de 50 preguntas se nutre de un manual con solo cuatro bloques reales: (1) el plan de vuelo (definición, quién debe presentarlo, dónde, cuándo, qué contiene, el plan de vuelo que reemplaza, RFP); (2) los mensajes ATS asociados al plan de vuelo (prioridades AFTN, fases de emergencia, DLA, CHG, CNL, DEP, ARR, RQP, RQS, SPL y la lista de mensajes de coordinación y de control); (3) la gestión de la afluencia y de la capacidad del tránsito aéreo, ATFCM (Gestor de Red, UCATM, las cuatro fases, IFPS, demanda y capacidad, los cuatro tipos de capacidad, monitorización con HEC y OCC, técnicas para evitar regulaciones, regulaciones, CTOT, exenciones); (4) el uso flexible del espacio aéreo, FUA (tres niveles, TSA, TRA, CDR, AMC, AUP y UUP). Cabe esperar preguntas con datos exactos: 120 h, 3 h, 60 min, 10 min; 30 min y 5 min en las fases de emergencia; 7 días y 6 días en las fases ATFCM; 60 minutos y 10 % en las reglas de capacidad; 5 minutos y 30 minutos en el MDI; 14:00 UTC y 06:00 UTC en el AUP. Toda esta guía sigue el orden de capítulos del manual.</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual (página)</th>
+<th>Sección de esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Introducción [M p.4]</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1.1 Definición de plan de vuelo [M p.4]</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>1.2 / 1.2.1 Plan de vuelo presentado (FPL): qué vuelos, dónde, cuándo, contenido, RFP [M p.5-7]</td>
+<td>1.2 a 1.6</td>
+</tr>
+<tr>
+<td>Formulario de plan de vuelo (FPL) [M p.7-8]</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>2.1 Normas generales [M p.9]</td>
+<td>2.1</td>
+</tr>
+<tr>
+<td>2.2 Prioridades de los mensajes AFTN [M p.9-10]</td>
+<td>2.2</td>
+</tr>
+<tr>
+<td>2.3 Mensajes de emergencia (incertidumbre, alerta, peligro) [M p.10-11]</td>
+<td>2.3</td>
+</tr>
+<tr>
+<td>2.4 Mensajes de movimiento y control [M p.12]</td>
+<td>2.4</td>
+</tr>
+<tr>
+<td>2.5 DLA, 2.6 CHG, 2.7 CNL, 2.8 DEP [M p.13]</td>
+<td>2.5 a 2.8</td>
+</tr>
+<tr>
+<td>2.9 ARR [M p.14]</td>
+<td>2.9</td>
+</tr>
+<tr>
+<td>2.10 Mensajes suplementarios (RQP, RQS, SPL) [M p.15]</td>
+<td>2.10</td>
+</tr>
+<tr>
+<td>3.1 Generalidades, 3.2 NM [M p.15-16]</td>
+<td>3.1, 3.2</td>
+</tr>
+<tr>
+<td>3.3 UCATM, 3.3.1 Fases ATFCM, análisis post-operacional [M p.17-19]</td>
+<td>3.3, 3.4</td>
+</tr>
+<tr>
+<td>3.4 Tratamiento de los planes de vuelo (IFPS, ENV, REJ, ACK, FLS) [M p.19-21]</td>
+<td>3.5</td>
+</tr>
+<tr>
+<td>3.5.1 Definiciones (demanda, capacidad), 3.5.2 Tipos de capacidad [M p.21-22]</td>
+<td>3.6, 3.7</td>
+</tr>
+<tr>
+<td>3.5.3 Determinación de la capacidad [M p.22-23]</td>
+<td>3.8</td>
+</tr>
+<tr>
+<td>3.5.4 Monitorización de la demanda [M p.23-24]</td>
+<td>3.9</td>
+</tr>
+<tr>
+<td>3.5.5 Acciones ante una demanda superior a la capacidad [M p.24]</td>
+<td>3.10</td>
+</tr>
+<tr>
+<td>3.5.5.1 Técnicas sin regular (configuración dinámica, level capping, rerouting, MDI, MIT, cherry picking) [M p.24-27]</td>
+<td>3.11</td>
+</tr>
+<tr>
+<td>3.5.5.2 Regulaciones (cadena de aprobación, regla del +10 %, OTMV) [M p.27-28]</td>
+<td>3.12</td>
+</tr>
+<tr>
+<td>3.5.5.3 Asignación de CTOT [M p.29]</td>
+<td>3.13</td>
+</tr>
+<tr>
+<td>3.5.5.4 Vuelos exentos o excluidos [M p.29-30]</td>
+<td>3.14</td>
+</tr>
+<tr>
+<td>3.5.5.5 Modificación o cancelación de la regulación [M p.30]</td>
+<td>3.15</td>
+</tr>
+<tr>
+<td>4 FUA: 4.1, 4.2 (TSA, TRA, CDR), 4.2.1 AMC, 4.2.2 AUP/UUP [M p.30-32]</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5 Acrónimos [M p.33-35]</td>
+<td>5 (y glosario)</td>
+</tr>
+<tr>
+<td>6 Bibliografía [M p.36]</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Diferencias con las fuentes primarias, dudas</td>
+<td>7, 8</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="0-introduccion-m-p4">0. Introducción [M p.4]</h2>
+<ul>
+<li>La información sobre un vuelo proyectado (o una parte de él) que debe suministrarse a las dependencias de los servicios de tránsito aéreo (ATS) se da en forma de <strong>plan de vuelo</strong>.</li>
+<li>El plan de vuelo es una <strong>«declaración de intenciones»</strong>. Con él, el piloto al mando presenta el manifiesto de una acción proyectada y la <strong>solicitud de servicios ATS</strong> para garantizar la seguridad de pasajeros y aeronaves.</li>
+<li>La expresión «plan de vuelo» se aplica a la información sobre la totalidad o una parte de la ruta de un vuelo y, en casos excepcionales, a la información que se exige para obtener autorización para una <strong>parte secundaria de un vuelo</strong>, por ejemplo cruzar una aerovía, despegar de un aeródromo controlado o aterrizar en él.</li>
+<li>En la actualidad, la información del plan de vuelo es <strong>uno de los instrumentos básicos que se utilizan para regular el tránsito a través de los espacios aéreos</strong>.</li>
+<li>El aumento del tránsito, sobre todo en el área <strong>ECAC</strong> (<em>European Civil Aviation Conference</em>, Conferencia Europea de Aviación Civil), ha hecho necesario crear mecanismos que equilibren la <strong>demanda de tráfico</strong> y la <strong>capacidad disponible</strong>, optimicen el uso de esta última y permitan medidas que adapten la demanda para prevenir sobredemandas o sobrecargas en los sectores del espacio aéreo.</li>
+<li>Las funciones centrales de <strong>tratamiento de planes de vuelo y de datos del espacio aéreo</strong>, y de <strong>gestión de afluencia del tránsito aéreo (ATFM)</strong>, las desempeña el <strong>Centro de Operaciones del Gestor de Red (NMOC, <em>Network Manager Operations Centre</em>)</strong> de <strong>EUROCONTROL</strong>.</li>
+</ul>
+<hr />
+<h2 id="1-plan-de-vuelo-conceptos-previos">1. Plan de vuelo. Conceptos previos</h2>
+<h3 id="11-definicion-de-plan-de-vuelo-pln-m-p4">1.1 Definición de plan de vuelo (PLN) [M p.4]</h3>
+<ul>
+<li>Según <strong>SERA</strong> (<em>Standardised European Rules of the Air</em>, Reglas del Aire Europeas Normalizadas), el plan de vuelo es <strong>información especificada que, respecto a un vuelo proyectado o a parte del mismo, se somete a las dependencias de los Servicios de Tránsito Aéreo</strong>.</li>
+<li>Se presenta <strong>para su aceptación y tramitación</strong>, con el fin de que las dependencias de <strong>control, alerta e información de vuelo</strong> dispongan de los datos necesarios para proporcionar los servicios que requiera la aeronave.</li>
+<li>El manual abrevia «plan de vuelo» como <strong>PLN</strong> en el encabezado; el tipo de mensaje es <strong>FPL</strong>.</li>
+</ul>
+<h3 id="12-tipos-de-planes-de-vuelo-m-p5">1.2 Tipos de planes de vuelo [M p.5]</h3>
+<p>El manual solo recoge un tipo: <strong>1.2.1 Plan de vuelo presentado (FPL, <em>Filed Flight Plan</em>)</strong>. Se describe en cuatro bloques: qué vuelos deben presentarlo, dónde se presenta (direccionamiento), cuándo se presenta y cuál es su contenido (con el plan de vuelo que reemplaza, RFP).</p>
+<h3 id="13-que-vuelos-requieren-presentacion-de-un-plan-de-vuelo-m-p5">1.3 Qué vuelos requieren presentación de un plan de vuelo [M p.5]</h3>
+<p>Se requiere un plan de vuelo (FPL) para:</p>
+<ol>
+<li><strong>Cualquier vuelo, o parte del mismo, al que tenga que prestarse servicio de control de tránsito aéreo.</strong></li>
+<li><strong>Cualquier vuelo IFR.</strong></li>
+<li><strong>Cualquier vuelo VFR a través de fronteras internacionales.</strong></li>
+<li><strong>Cualquier vuelo VFR nocturno</strong> que abandone las proximidades del aeródromo de despegue.</li>
+<li><strong>Cualquier vuelo VFR en espacios aéreos controlados de clases B, C, D y E.</strong></li>
+<li><strong>Cualquier vuelo VFR con origen, destino o alternativo en aeródromos controlados o con servicio AFIS</strong> (<em>Aerodrome Flight Information Service</em>, servicio de información de vuelo de aeródromo).</li>
+<li><strong>Cualquier vuelo VFR que, procedente del territorio nacional, vaya a operar en espacio aéreo de jurisdicción española sobre aguas internacionales.</strong></li>
+<li><strong>La aplicación del Convenio Schengen no exime</strong> de presentar un FPL cuando se atraviesan fronteras internacionales.</li>
+</ol>
+<p><strong>Exentos</strong> de presentación:</p>
+<ul>
+<li><strong>Los vuelos militares en misiones tácticas o de defensa aérea.</strong></li>
+<li><strong>Los vuelos de búsqueda y salvamento en misiones de urgencia.</strong></li>
+<li><strong>Los vuelos expresamente autorizados por la autoridad competente.</strong></li>
+</ul>
+<h3 id="14-donde-hay-que-presentarlo-direccionamiento-m-p5">1.4 Dónde hay que presentarlo. Direccionamiento [M p.5]</h3>
+<ul>
+<li>A través de la <strong>página web de ICARO</strong> (https://notampib.enaire.es) o de la <strong>App de ICARO</strong> para dispositivos móviles Android e iOS, o en la <strong>oficina ARO</strong> (Oficina de Notificación de los Servicios de Tránsito Aéreo) <strong>centralizada</strong>, por teléfono, vía <strong>SITA</strong> u otros medios que prescriba la autoridad ATS competente.</li>
+<li><strong>Directamente al IFPS (EUROCONTROL)</strong>, cuando se trate de vuelos <strong>IFR y GAT</strong> (GAT = <em>General Air Traffic</em>, circulación aérea general).</li>
+<li>A los <strong>aeródromos y helipuertos para uso restringido</strong> autorizados por la Dirección General de Aviación Civil (DGAC) se les asigna una <strong>zona geográfica de la oficina ARO centralizada</strong>, que asume las tareas propias de la oficina de notificación ATS. Si no se dispone de medios establecidos para la presentación del plan de vuelo en la dependencia designada, se presenta <strong>por radio a la primera dependencia ATS que preste servicio en la ruta proyectada</strong>.</li>
+<li>Las zonas geográficas designadas figuran en <strong>AIP-España, ENR 1.10</strong>. Ejemplo del manual: el aeródromo de <strong>La Cuesta (Córdoba)</strong> tiene asignada la zona <strong>10</strong>.</li>
+<li><strong>Caso excepcional:</strong> una aeronave en vuelo puede transmitir un plan de vuelo (<strong>AFIL</strong>, plan de vuelo presentado en vuelo) a una estación de telecomunicaciones aeronáuticas que sirva a una dependencia ATS.</li>
+<li>El plan de vuelo se <strong>transmite a todas las dependencias ATS afectadas</strong>; la autoridad competente de cada país puede determinar el envío a otros destinatarios.</li>
+<li>La <strong>oficina ARO centralizada</strong> (o, en el caso de un plan AFIL, la <strong>estación de telecomunicaciones aeronáuticas</strong> que sirve a la dependencia ATS) es la <strong>responsable de aceptar el plan y retransmitirlo a los destinatarios correspondientes</strong>.</li>
+<li><strong>El piloto o su representante autorizado</strong> es el responsable de enviar, <strong>a la misma dependencia donde presentó el FPL</strong>, <strong>todos los mensajes asociados al plan de vuelo</strong>.</li>
+</ul>
+<h3 id="15-cuando-hay-que-presentarlo-tiempo-de-presentacion-m-p5">1.5 Cuándo hay que presentarlo. Tiempo de presentación [M p.5]</h3>
+<p>Salvo que la autoridad competente haya prescrito un <strong>plazo más corto para los vuelos VFR domésticos</strong>, el plan de vuelo de cualquier vuelo que vaya a atravesar fronteras internacionales, o al que haya que suministrar servicio de control o de asesoramiento de tránsito aéreo, se presenta como sigue:</p>
+<ol>
+<li><strong>No más de 120 horas antes de la hora prevista de fuera calzos (EOBT).</strong></li>
+<li><strong>Al menos 3 horas antes de la EOBT</strong> para los vuelos que puedan estar sujetos a <strong>medidas de gestión de afluencia del tránsito aéreo (ATFM)</strong>.</li>
+<li><strong>Al menos 60 minutos antes de la salida</strong> para todos los demás vuelos no contemplados en el punto 2.</li>
+<li><strong>Si se presenta durante el vuelo</strong>, en un momento en el que se garantice su recepción por la dependencia ATS adecuada <strong>al menos 10 minutos antes de la hora estimada de llegada de la aeronave</strong>: (i) al <strong>punto previsto de entrada en un área de control o en un área con servicio de asesoramiento</strong>, o (ii) al <strong>punto de cruce con una aerovía o con una ruta con servicio de asesoramiento</strong>.</li>
+</ol>
+<p>Regla mnemotécnica: <strong>120 h / 3 h / 60 min / 10 min</strong>. Ojo con la redacción: «no más de 120 h» (un tope) frente a «al menos» 3 h, 60 min y 10 min (mínimos).</p>
+<h3 id="16-contenido-del-plan-de-vuelo-y-plan-de-vuelo-que-reemplaza-rfp-m-p6-7">1.6 Contenido del plan de vuelo y plan de vuelo que reemplaza (RFP) [M p.6-7]</h3>
+<p><strong>El plan de vuelo contiene toda la información relativa a las condiciones en las que se proyecta realizar un vuelo o parte del mismo, respecto a los siguientes datos:</strong></p>
+<ol>
+<li>Identificación de aeronave.</li>
+<li>Reglas de vuelo y tipo de vuelo.</li>
+<li>Número y tipo o tipos de aeronaves y <strong>categoría de estela turbulenta</strong>.</li>
+<li><strong>Equipos y capacidades</strong> de la aeronave.</li>
+<li>Aeródromo o lugar de operación de salida.</li>
+<li>Hora prevista de fuera calzos (<strong>fecha y hora</strong>).</li>
+<li>Velocidades de crucero.</li>
+<li>Niveles de crucero.</li>
+<li>Ruta que ha de seguirse.</li>
+<li>Aeródromo o lugar de operación de destino y <strong>duración total prevista del vuelo</strong>.</li>
+<li>Aeródromo(s) o lugar(es) de operación de alternativa.</li>
+<li>Autonomía.</li>
+<li>Número total de personas a bordo.</li>
+<li><strong>Equipo de emergencia y de supervivencia</strong>, incluido el <strong>sistema de recuperación por paracaídas balístico</strong>.</li>
+<li>Otros datos.</li>
+</ol>
+<p><strong>RFP (<em>Replacement Flight Plan</em>, plan de vuelo que reemplaza):</strong></p>
+<ul>
+<li><strong>A quién afecta:</strong> a todos los vuelos <strong>sujetos a gestión de afluencia</strong> (con aplicación de medidas ATFCM) que, <strong>en la etapa previa al vuelo, para evitar demoras, decidan tomar una ruta alternativa distinta a la original</strong>, <strong>entre los mismos aeródromos de salida y destino</strong>.</li>
+<li><strong>Etapa previa al vuelo</strong> (definida para evitar un uso excesivo del procedimiento): <strong>EOBT menos 4 horas</strong>. <strong>El último RFP se presentará por lo menos 30 minutos antes de la EOBT.</strong></li>
+<li><strong>Contenido del plan que reemplaza:</strong> entre otros, el <strong>indicativo de vuelo original</strong>, la <strong>nueva ruta completa en la casilla 15</strong> y, <strong>como último elemento de la casilla 18, la indicación «RFP/Qn»</strong>, donde <strong>n</strong> es el número de RFP que se presenta (RFP/Q1, RFP/Q2...). [M p.6] (Discrepa del Manual de usuario del IFPS, que dice «primer elemento»: véase 7.)</li>
+<li><strong>Cuando ya se ha presentado un FPL individual</strong> y, en la etapa previa al vuelo, se elige una ruta alternativa entre los mismos aeródromos:</li>
+<li><strong>originar un mensaje de cancelación (CNL)</strong>, que se transmitirá <strong>inmediatamente</strong> y <strong>de manera excepcional con prioridad «DD»</strong> a todas las direcciones afectadas según el plan de vuelo original;</li>
+<li><strong>rellenar un plan de vuelo que reemplace, en formato FPL</strong>, que se transmitirá <strong>después de la cancelación (CNL) con un breve intervalo de no menos de 5 minutos</strong>.</li>
+</ul>
+<h3 id="17-formulario-de-plan-de-vuelo-fpl-m-p7-8">1.7 Formulario de plan de vuelo (FPL) [M p.7-8]</h3>
+<ul>
+<li>Se utiliza el <strong>formulario de plan de vuelo normalizado por la OACI</strong>, en español y en inglés. Hay un ejemplo en el <strong>Apéndice 6 de SERA</strong> y en <strong>AIP ENR 1.10</strong>.</li>
+<li>Con un plan de vuelo, el responsable del vuelo manifiesta su intención de volar y solicita servicios ATS; las dependencias ATS extraen la información del formulario.</li>
+<li><strong>Descripción del formulario de la página 8 (figura):</strong> la página reproduce el formulario bilingüe «FLIGHT PLAN / PLAN DE VUELO». Zona superior: <strong>PRIORITY (Prioridad)</strong> con «&lt;&lt;≡ FF» preimpreso, <strong>ADDRESSEE(S) (Destinatario(s))</strong>, <strong>FILING TIME (Hora de depósito)</strong>, <strong>ORIGINATOR (Remitente)</strong> y «SPECIFIC IDENTIFICATION OF ADDRESSEE(S) AND/OR ORIGINATOR». Después, casillas numeradas: <strong>3 MESSAGE TYPE (Tipo de mensaje)</strong> con «(FPL» preimpreso; <strong>7 AIRCRAFT IDENTIFICATION (Identificación de aeronave)</strong>; <strong>8 FLIGHT RULES (Reglas de vuelo)</strong> y <strong>TYPE OF FLIGHT (Tipo de vuelo)</strong>; <strong>9 NUMBER (Número)</strong>, <strong>TYPE OF AIRCRAFT (Tipo de aeronave)</strong>, <strong>WAKE TURBULENCE CAT. (Cat. de estela turbulenta)</strong>; <strong>10 EQUIPMENT (Equipo)</strong>; <strong>13 DEPARTURE AERODROME (Aeródromo de salida)</strong> y <strong>TIME (Hora)</strong>; <strong>15 CRUISING SPEED (Velocidad de crucero)</strong>, <strong>LEVEL (Nivel)</strong>, <strong>ROUTE (Ruta)</strong>; <strong>16 DESTINATION AERODROME (Aeródromo de destino)</strong>, <strong>TOTAL EET (Total EET, HR. MIN.)</strong>, <strong>ALTN AERODROME (Aeródromo alt.)</strong>, <strong>2ND ALTN AERODROME (2º aeródromo alt.)</strong>; <strong>18 OTHER INFORMATION (Otros datos)</strong>; y la parte inferior, <strong>19 SUPPLEMENTARY INFORMATION (NOT TO BE TRANSMITTED IN FPL MESSAGES) / Información suplementaria (En los mensajes FPL no hay que transmitir estos datos)</strong>: <strong>ENDURANCE (Autonomía)</strong> E/ horas y minutos; <strong>PERSONS ON BOARD (Personas a bordo)</strong> P/; <strong>EMERGENCY RADIO (Equipo radio de emergencia)</strong> R/ con casillas <strong>UHF, VHF, ELBA</strong>; <strong>SURVIVAL EQUIPMENT (Equipo de supervivencia)</strong> S/ con casillas <strong>POLAR, DESERT (Desértico), MARITIME (Marítimo), JUNGLE (Selva)</strong>; <strong>JACKETS (Chalecos)</strong> J/ con <strong>LIGHT (Luz), FLUORES (Fluor), UHF, VHF</strong>; <strong>DINGHIES (Botes neumáticos)</strong> D/ con <strong>NUMBER, CAPACITY (Capacidad), COVER (Cubierta), COLOUR (Color)</strong>; <strong>A/ AIRCRAFT COLOUR AND MARKINGS (Color y marcas de las aeronaves)</strong>; <strong>N/ REMARKS (Observaciones)</strong>; <strong>C/ PILOT IN COMMAND (Piloto al mando)</strong>; <strong>FILED BY (Presentado por)</strong>; y una casilla «SPACE RESERVED FOR ADDITIONAL REQUIREMENTS (Espacio reservado para requisitos adicionales)».</li>
+<li>El <strong>manual no explica cada casilla por separado</strong> (7, 8, 9, 10, 13, 15, 16, 18, 19). Su contenido detallado está en AIP ENR 1.10 y en las notas base <code>syllabus/t06-flight-plan-atfcm.md</code> (que no forman parte del manual).</li>
+</ul>
+<hr />
+<h2 id="2-mensajes-relacionados-con-el-plan-de-vuelo">2. Mensajes relacionados con el plan de vuelo</h2>
+<h3 id="21-normas-generales-m-p9">2.1 Normas generales [M p.9]</h3>
+<ul>
+<li>Los mensajes relativos a un FPL que más se utilizan son los de <strong>actuación y notificación de cambios</strong>.</li>
+<li>Se nombran dos familias: los <strong>mensajes de emergencia</strong>, entre los que se incluyen los <strong>mensajes de alerta</strong>; y los <strong>mensajes de movimiento y control</strong>.</li>
+</ul>
+<h3 id="22-prioridades-de-los-mensajes-aftn-m-p9-10">2.2 Prioridades de los mensajes AFTN [M p.9-10]</h3>
+<ul>
+<li><strong>AFTN (<em>Aeronautical Fixed Telecommunication Network</em>, Red de Telecomunicaciones Fijas Aeronáuticas)</strong>, explicada en el manual de códigos OACI/IATA (tema 2, punto 1): «un sistema completo y mundial de circuitos fijos aeronáuticos dispuestos como parte del servicio fijo aeronáutico, para el intercambio de mensajes o de datos numéricos entre estaciones fijas aeronáuticas que posean características de comunicación idénticas o compatibles».</li>
+<li>Para organizar la mensajería, unas <strong>letras al inicio de cada mensaje, llamadas prioridad</strong>, determinan el <strong>orden de transmisión</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Indicador de prioridad</th>
+<th>Tipo de mensaje (tabla del manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SS</strong></td>
+<td>Mensajes de socorro</td>
+</tr>
+<tr>
+<td><strong>DD</strong></td>
+<td>Mensajes de urgencia</td>
+</tr>
+<tr>
+<td><strong>FF</strong></td>
+<td>Mensajes de plan de vuelo; mensajes de movimiento y control; mensajes originados por una empresa explotadora de aeronaves, de interés inmediato para las aeronaves en vuelo o para las que se preparan para la salida; mensajes meteorológicos que se limiten a información SIGMET, aeronotificaciones especiales y pronósticos enmendados</td>
+</tr>
+<tr>
+<td><strong>GG</strong></td>
+<td>Mensajes meteorológicos relativos a pronósticos, pronósticos de área y pronósticos de ruta; mensajes relativos a observaciones e informes; mensajes relativos a la regularidad de vuelo; mensajes de los <strong>servicios de información aeronáutica (AIS)</strong></td>
+</tr>
+<tr>
+<td><strong>KK</strong></td>
+<td>Mensajes aeronáuticos administrativos</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Los mensajes con el <strong>mismo indicador de prioridad</strong> se transmiten <strong>según el orden en que se reciban para su transmisión</strong>.</li>
+<li><strong>Orden de prioridad («Prioridad de transmisión»):</strong> <strong>1 = SS; 2 = DD y FF; 3 = GG y KK.</strong> Hay, pues, <strong>tres niveles</strong>: DD y FF comparten el nivel 2, y GG y KK, el nivel 3. [M p.10]</li>
+<li>Nota de lectura: en el texto extraído de la tabla, las letras de prioridad y las descripciones aparecen en columnas separadas; la asignación anterior sigue el esquema AFTN de la OACI y concuerda con la lista de comprobación PANS-ATM.</li>
+</ul>
+<h3 id="23-mensajes-de-emergencia-m-p10-11">2.3 Mensajes de emergencia [M p.10-11]</h3>
+<p>Esta categoría comprende:</p>
+<ul>
+<li><strong>Mensajes de socorro y tráfico de socorro</strong>, incluidos los relacionados con una <strong>fase de peligro</strong>, con <strong>prioridad SS</strong>.</li>
+<li><strong>Mensajes de urgencia</strong>, incluidos los <strong>mensajes de alerta y los relacionados con una fase de incertidumbre</strong>, con <strong>prioridad DD</strong>.</li>
+</ul>
+<p><strong>1. Fase de incertidumbre</strong> cuando se da alguna de las siguientes situaciones:
+   i. <strong>no se ha recibido ninguna comunicación de una aeronave en el transcurso de 30 minutos</strong> desde el momento en que debería haberse recibido una comunicación, o desde el momento en que se realizó un intento infructuoso de establecer comunicación con la aeronave, <strong>según cual sea anterior</strong>; o
+   ii. una aeronave <strong>no ha llegado 30 minutos después de la última hora prevista de llegada</strong>, notificada o estimada por las dependencias de los servicios de tránsito aéreo, <strong>según cual sea posterior</strong>.
+   La fase de incertidumbre <strong>no se aplica cuando no existe duda alguna sobre la seguridad de la aeronave y sus ocupantes</strong>.</p>
+<p><strong>2. Fase de alerta</strong> cuando se da alguna de las siguientes situaciones:
+   i. <strong>tras la fase de incertidumbre</strong>, los intentos posteriores de establecer comunicación con la aeronave o de investigar otras fuentes pertinentes <strong>no han revelado ninguna noticia</strong> de la aeronave;
+   ii. la aeronave ha sido <strong>autorizada a aterrizar y no ha aterrizado 5 minutos después de la hora prevista de aterrizaje</strong>, y <strong>no se ha restablecido la comunicación</strong>;
+   iii. <strong>en aeródromos AFIS</strong>, en las circunstancias prescritas por la autoridad competente;
+   iv. se ha recibido información que indica que la <strong>eficiencia operativa de la aeronave se ha visto afectada, pero no en la medida en que sea probable un aterrizaje forzoso</strong>;
+   v. se sabe o se cree que una aeronave <strong>está siendo objeto de interferencia ilícita</strong>.
+   Los incisos i) a iv) <strong>no se aplican cuando existen pruebas que disipan los temores</strong> sobre la seguridad de la aeronave y sus ocupantes.</p>
+<p><strong>3. Fase de peligro</strong> cuando se da alguna de las siguientes situaciones:
+   i. <strong>tras la fase de alerta</strong>, los nuevos intentos infructuosos de establecer comunicación y otras investigaciones más amplias apuntan a la <strong>probabilidad de que la aeronave se encuentre en peligro</strong>;
+   ii. el <strong>combustible a bordo se considera agotado o insuficiente</strong> para permitir que la aeronave llegue a un lugar seguro;
+   iii. se recibe información que indica que la <strong>eficiencia operativa de la aeronave se ha visto afectada en una medida tal que es probable un aterrizaje forzoso</strong>;
+   iv. se recibe información o hay una certeza razonable de que la aeronave <strong>está a punto de realizar o ha realizado un aterrizaje forzoso</strong>.
+   La fase de peligro <strong>no se aplica cuando hay una certeza razonable de que la aeronave y sus ocupantes no están amenazados por un peligro grave e inminente ni necesitan asistencia inmediata</strong>.</p>
+<p>Tabla comparativa (mía, a partir del texto anterior):</p>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Palabra clave</th>
+<th>Prioridad</th>
+<th>Cifras clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Incertidumbre</td>
+<td>INCERFA</td>
+<td>DD</td>
+<td>30 min sin comunicación; 30 min después de la última hora prevista de llegada</td>
+</tr>
+<tr>
+<td>Alerta</td>
+<td>ALERFA</td>
+<td>DD</td>
+<td>tras la incertidumbre; 5 min después de la hora prevista de aterrizaje con autorización para aterrizar; eficiencia afectada sin aterrizaje forzoso probable; interferencia ilícita</td>
+</tr>
+<tr>
+<td>Peligro</td>
+<td>DETRESFA</td>
+<td>SS</td>
+<td>tras la alerta; combustible agotado; aterrizaje forzoso probable o efectuado</td>
+</tr>
+</tbody>
+</table>
+<p>Las palabras clave INCERFA/ALERFA/DETRESFA no figuran en el manual; están en AIP GEN 2.2 y en la lista de comprobación PANS-ATM.</p>
+<h3 id="24-mensajes-de-movimiento-y-control-m-p12">2.4 Mensajes de movimiento y control [M p.12]</h3>
+<p>La tabla de la página 12 (revisada como imagen) agrupa los mensajes en <strong>cuatro familias</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Familia (Mensajes de...)</th>
+<th>Mensajes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plan de vuelo presentado</strong></td>
+<td>Demora <strong>DLA</strong>; Cambio <strong>CHG</strong>; Cancelación <strong>CNL</strong>; Salida <strong>DEP</strong>; Llegada <strong>ARR</strong></td>
+</tr>
+<tr>
+<td><strong>Coordinación</strong></td>
+<td>Plan de vuelo actualizado <strong>CPL</strong>; Estimadas sobre un determinado punto <strong>EST</strong>; Coordinación <strong>CDN</strong>; Aceptación <strong>ACP</strong>; Acuse de recibo lógico <strong>LAM</strong></td>
+</tr>
+<tr>
+<td><strong>Plan de vuelo suplementario</strong></td>
+<td>Solicitud de plan de vuelo <strong>RQP</strong>; Solicitud de plan de vuelo suplementario <strong>RQS</strong>; Plan de vuelo suplementario <strong>SPL</strong></td>
+</tr>
+<tr>
+<td><strong>Control</strong></td>
+<td>Autorización; Transferencia de control; Control de afluencia; Informe de posición y aeronotificaciones</td>
+</tr>
+</tbody>
+</table>
+<p>Las siglas RQP, RQS y SPL no figuran impresas en la tabla de la página 12, pero se definen en 2.10. El manual no da sigla para los cuatro mensajes de control. Rareza del texto extraído: la misma tabla sale desordenada en texto plano (LAM aparece bajo «Mensajes de plan de vuelo suplementario»); la imagen muestra LAM bajo <strong>coordinación</strong>.</p>
+<h3 id="25-mensaje-de-demora-dla-m-p13">2.5 Mensaje de demora (DLA) [M p.13]</h3>
+<ul>
+<li>Cuando la salida de una aeronave para la cual se hayan enviado datos del plan de vuelo sufre una <strong>demora respecto a la EOBT</strong> indicada en el plan de vuelo, se transmite un <strong>DLA</strong>, de acuerdo con los procedimientos de <strong>AIP-España ENR 1.10</strong>.</li>
+<li>El manual <strong>no da ningún umbral de tiempo</strong>. (AIP ENR 1.10: más de 15 min en IFR sin slot; 30 min en VFR controlado; 60 min en VFR no controlado; véase 7.)</li>
+</ul>
+<h3 id="26-mensaje-de-modificacion-chg-m-p13">2.6 Mensaje de modificación (CHG) [M p.13]</h3>
+<ul>
+<li>En general, cuando haya de efectuarse un cambio de los <strong>datos básicos de plan de vuelo de un FPL transmitido con anterioridad</strong>, se transmite un <strong>CHG</strong>.</li>
+<li><strong>Campos que no se pueden modificar con un CHG (tres):</strong> <strong>identificación de la aeronave</strong>, <strong>aeródromo de salida</strong>, <strong>aeródromo de destino</strong>.</li>
+<li>Para modificar cualquiera de ellos, hay que <strong>cancelar el FPL y presentar uno nuevo</strong>.</li>
+</ul>
+<h3 id="27-mensaje-de-cancelacion-de-plan-de-vuelo-cnl-m-p13">2.7 Mensaje de cancelación de plan de vuelo (CNL) [M p.13]</h3>
+<ul>
+<li>Se envía cuando se ha <strong>cancelado un vuelo con respecto al cual se hayan distribuido anteriormente datos básicos de plan de vuelo</strong>. La <strong>dependencia ATS que sirve al aeródromo de salida</strong> transmite el CNL a las dependencias ATS que hayan recibido los datos básicos de plan de vuelo.</li>
+<li>Cuando se determine que, para modificar ciertos datos básicos de plan de vuelo, es necesario <strong>cancelar el FPL para un día determinado y presentar un nuevo plan de vuelo para ese día</strong>, la dependencia ATS que sirve al aeródromo de salida transmite un mensaje de cancelación, <strong>con el indicador de prioridad «DD»</strong>, a todas las dependencias ATS interesadas, <strong>seguido de la transmisión del correspondiente mensaje de plan de vuelo presentado (FPL)</strong>.</li>
+</ul>
+<h3 id="28-mensaje-de-salida-dep-m-p13">2.8 Mensaje de salida (DEP) [M p.13]</h3>
+<ul>
+<li>A menos que se prescriba otra cosa en virtud de un <strong>acuerdo regional de navegación aérea</strong>, los mensajes DEP se transmiten <strong>inmediatamente después de la salida</strong> de una aeronave con respecto a la cual se hayan distribuido anteriormente datos básicos de plan de vuelo.</li>
+<li>La dependencia de los servicios de tránsito aéreo <strong>del aeródromo de salida</strong> transmite el DEP <strong>a todos los destinatarios de los datos básicos de plan de vuelo</strong>.</li>
+<li><strong>En la región EUR</strong>, a condición de que existan <strong>circuitos radiotelefónicos ATS confiables</strong> entre las sucesivas dependencias ATS afectadas, para los <strong>vuelos IFR que operen dentro de áreas o a lo largo de rutas designadas</strong>, los mensajes de salida <strong>deben omitirse por mutuo acuerdo entre los Estados interesados</strong>.</li>
+</ul>
+<h3 id="29-mensaje-de-llegada-arr-m-p14">2.9 Mensaje de llegada (ARR) [M p.14]</h3>
+<p>Cuando la dependencia ATS del aeródromo de llegada recibe el <strong>informe de llegada</strong>, transmite un ARR:</p>
+<p><strong>Aterrizaje en el aeródromo de destino:</strong></p>
+<ul>
+<li>al <strong>centro de control de área o al centro de información de vuelo</strong> en cuya área esté situado el aeródromo de llegada, <strong>si así lo exige dicha dependencia</strong>;</li>
+<li>a la dependencia ATS <strong>del aeródromo de salida que inició el mensaje de plan de vuelo, si en este se había solicitado un mensaje ARR</strong>;</li>
+<li>El ARR se transmite <strong>para los vuelos que operen bajo reglas de vuelo visual y, previa petición, para los vuelos que operen bajo reglas de vuelo instrumental</strong>.</li>
+</ul>
+<p><strong>Aterrizaje en un aeródromo de alternativa o en otro distinto al de destino:</strong></p>
+<ul>
+<li>al <strong>centro de control de área o al centro de información de vuelo</strong> en cuya área esté situado el aeródromo de llegada;</li>
+<li>a la <strong>torre de control del aeródromo de destino</strong>;</li>
+<li>a la <strong>oficina de notificación de los servicios de tránsito aéreo (ARO) del aeródromo de salida</strong>; y</li>
+<li>al <strong>centro de control de área o al centro de información de vuelo encargado de cada región de información de vuelo (FIR) o región superior de información de vuelo (UIR)</strong> que, de acuerdo con el plan de vuelo, la aeronave <strong>habría cruzado de no haber sido desviada</strong>.</li>
+</ul>
+<p><strong>Aeronave que ha sufrido fallo de comunicaciones en ambos sentidos durante un vuelo controlado y ha aterrizado:</strong> la <strong>torre de control del aeródromo de llegada</strong> transmite un ARR:</p>
+<ul>
+<li><em>Si aterriza en el aeródromo de destino:</em> <strong>a todas las dependencias de los servicios de tránsito aéreo interesadas en el vuelo durante el período del fallo de las comunicaciones</strong>; y a <strong>todas las demás dependencias de los servicios de tránsito aéreo que puedan haber sido alertadas</strong>.</li>
+<li><em>Si aterriza en un aeródromo distinto al de destino:</em> <strong>a la dependencia ATS del aeródromo de destino</strong>; esta dependencia transmite entonces un ARR a <strong>todas las demás dependencias ATS interesadas o que hayan sido alertadas</strong>, como en el caso anterior.</li>
+</ul>
+<h3 id="210-mensajes-suplementarios-m-p15">2.10 Mensajes suplementarios [M p.15]</h3>
+<p><strong>RQP (<em>Request Filed Flight Plan Message</em>, mensaje de solicitud de plan de vuelo):</strong></p>
+<ul>
+<li>Se transmite cuando una dependencia ATS desea obtener datos de plan de vuelo. Puede ocurrir al recibirse un mensaje relativo a una aeronave para la cual <strong>no se hayan recibido los datos básicos de plan de vuelo correspondientes</strong>.</li>
+<li>Se transmite a la <strong>dependencia ATS transferidora que originó un mensaje EST (estimación)</strong>, o al centro que originó <strong>un mensaje de actualización para el cual no se dispone de datos básicos de vuelo correspondientes</strong>.</li>
+<li>Si no se ha recibido mensaje alguno, pero una aeronave <strong>establece comunicaciones radiotelefónicas y requiere los servicios de tránsito aéreo</strong>, se transmite un RQP <strong>a la dependencia ATS anterior a lo largo de la ruta</strong>.</li>
+</ul>
+<p><strong>RQS (<em>Request Supplementary Information</em>, mensaje de solicitud de plan de vuelo suplementario):</strong></p>
+<ul>
+<li>Se transmite cuando una dependencia de los servicios de tránsito aéreo desea obtener <strong>datos de plan de vuelo suplementario</strong>.</li>
+<li>Se transmite a la <strong>oficina de notificación de los servicios de tránsito aéreo del aeródromo de salida</strong> o, en el caso de un plan de vuelo presentado durante el vuelo, a la <strong>dependencia de los servicios de tránsito aéreo especificada en dicho mensaje de plan de vuelo</strong>.</li>
+</ul>
+<p><strong>SPL (<em>Supplementary Flight Plan Message</em>, mensaje de plan de vuelo suplementario)</strong> (el manual escribe «Fligth»):</p>
+<ul>
+<li>La <strong>oficina de notificación de los servicios de tránsito aéreo del aeródromo de salida</strong> transmite un SPL a las dependencias de los servicios de tránsito aéreo que hayan solicitado <strong>información adicional a la ya transmitida en un mensaje CPL o FPL</strong>.</li>
+</ul>
+<hr />
+<h2 id="3-gestion-de-la-capacidad-y-afluencia-de-trafico-atfcm-air-traffic-flow-and-capacity-management">3. Gestión de la Capacidad y Afluencia de tráfico; ATFCM (<em>Air Traffic Flow and Capacity Management</em>)</h2>
+<h3 id="31-generalidades-m-p15">3.1 Generalidades [M p.15]</h3>
+<ul>
+<li>En la <strong>región EUR de la OACI</strong>, <strong>EUROCONTROL ha creado una unidad central única ATFM</strong> encargada de <strong>planificar, coordinar y ejecutar las medidas ATFM</strong>, teniendo en cuenta las recomendaciones de la OACI, para <strong>optimizar el uso del espacio aéreo y de su capacidad, evitando sobredemandas</strong>.</li>
+<li>En la actualidad, las funciones de control de afluencia se encuadran en el <strong>Gestor de Red (NM, <em>Network Manager</em>)</strong>, a instancias de la <strong>Comisión Europea</strong>.</li>
+</ul>
+<h3 id="32-nm-gestor-de-red-network-manager-m-p16">3.2 NM (Gestor de Red / <em>Network Manager</em>) [M p.16]</h3>
+<ul>
+<li>El NM está gobernado por un comité, el <strong>Network Manager Board (NMB)</strong>, en el que están representadas las diversas ramas de la aviación, incluidas las autoridades aeronáuticas reguladoras y los proveedores de servicios de navegación aérea.</li>
+<li>Las <strong>funciones estratégicas</strong> las define el NM a través del <strong>Plan estratégico operativo</strong>, que abarca un período de <strong>cinco años</strong>. Estos planes se refieren a objetivos definidos por la <strong>Comisión Europea</strong> para mejorar la eficiencia del servicio. La Comisión marca estos objetivos a través del <strong>PRB (<em>Performance Review Body</em>)</strong>, encuadrado en el <strong>SES (Cielo Único Europeo, <em>Single European Sky</em>)</strong>.</li>
+<li><strong>En lo que respecta a España</strong>, las actividades de coordinación de las medidas estratégicas y pretácticas, así como la ejecución táctica de las medidas de regulación, las realiza el <strong>NM en coordinación con:</strong>
+  1. la <strong>Dirección de Operaciones ATM</strong>, a través de la <strong>Unidad Central ATM (UATM)</strong> [el manual escribe «UATM» aquí y «UCATM» en 3.3];
+  2. las <strong>Posiciones de Gestión de Afluencia (FMP)</strong> establecidas en los centros de control;
+  3. la <strong>Célula de Gestión de Espacio Aéreo (AMC España)</strong>: una <strong>unidad nacional mixta civil/militar</strong> que gestiona <strong>diariamente (en fase pretáctica)</strong> la asignación temporal del espacio aéreo en función de las peticiones de los usuarios (ACC, FMP, unidades gestoras de zonas militares y otras agencias acreditadas). <strong>El día anterior a las operaciones confecciona el Plan de Utilización del Espacio Aéreo (AUP/UUP).</strong></li>
+<li><strong>Sistemas dentro del NM:</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Función (con las palabras del manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NMOC</strong></td>
+<td><em>Network Management Operations Centre</em> (Centro de Operaciones del Network Management)</td>
+</tr>
+<tr>
+<td><strong>ETFMS</strong></td>
+<td>el sistema que <strong>monitoriza datos de tráfico y permite la implementación de medidas ATFCM</strong> (<em>Enhanced Tactical Flow Management System</em>)</td>
+</tr>
+<tr>
+<td><strong>TACT</strong></td>
+<td>el sistema que <strong>gestiona las medidas en la fase táctica</strong> (el glosario indica que es la <strong>antigua denominación del actual ETFMS</strong>)</td>
+</tr>
+<tr>
+<td><strong>CASA</strong></td>
+<td>sistema de <strong>asignación de slots</strong> (<em>Computer Assisted Slot Allocation</em>)</td>
+</tr>
+<tr>
+<td><strong>ENV</strong></td>
+<td><strong>base de datos</strong> que contiene los detalles del <strong>área de operaciones de la red</strong> (<em>environment</em>)</td>
+</tr>
+<tr>
+<td><strong>IFPS</strong></td>
+<td>sistema para la <strong>validación y distribución de los planes de vuelo</strong></td>
+</tr>
+<tr>
+<td><strong>FMP</strong></td>
+<td>Posiciones de gestión de afluencia situadas en los <strong>centros de control</strong>, <strong>gestionadas por los técnicos de control de afluencia (TCA)</strong>, siempre bajo la responsabilidad del <strong>Jefe de Sala del ACC</strong> al que están adscritas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-unidad-central-de-gestion-de-transito-aereo-ucatm-m-p17">3.3 Unidad Central de Gestión de Tránsito Aéreo (UCATM) [M p.17]</h3>
+<p>Funciones, en dos grupos:</p>
+<p><strong>Relativas a ATFM</strong> (ATFM = <em>Air Traffic Flow Management</em>, «Organización de la Afluencia de Tránsito Aéreo»):</p>
+<ul>
+<li><strong>Gestionar y coordinar las actividades correspondientes a la fase estratégica</strong>, en coordinación con los organismos nacionales e internacionales correspondientes (OACI, NM, ACC, etc.).</li>
+<li><strong>Supervisar las actividades pretácticas y tácticas.</strong></li>
+<li><strong>Centralizar a nivel nacional las funciones de las FMP cuando estas no estén operativas</strong> o siempre que así se determine.</li>
+<li><strong>Actuar como célula de crisis</strong> en situaciones excepcionales que afecten al tránsito aéreo.</li>
+<li><strong>Asesorar en todo momento al usuario (AO/ATS)</strong> en lo relativo a Gestión de Control de Afluencia.</li>
+</ul>
+<p><strong>Relativas al FUA</strong> (<em>Flexible Use of Airspace</em>, uso flexible del espacio aéreo):</p>
+<ul>
+<li><strong>Participar en la gestión de la parte civil de la AMC</strong> (Célula de Gestión del Espacio Aéreo).</li>
+</ul>
+<h3 id="34-fases-de-la-actividad-atfcm-m-p18-19-la-pagina-18-tiene-una-infografia-con-cuatro-pasos-numerados">3.4 Fases de la actividad ATFCM [M p.18-19] (la página 18 tiene una infografía con cuatro pasos numerados)</h3>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Cuándo</th>
+<th>Finalidad</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 Estratégica</strong></td>
+<td>hasta <strong>siete días antes</strong> del día de la operación</td>
+<td>analizar la evolución de la demanda prevista, identificar problemas potenciales y evaluar las medidas necesarias para equilibrar la demanda con la capacidad; tarea cooperativa en la que EUROCONTROL involucra a todas las partes implicadas en ATM (proveedores de servicios de navegación aérea, aeropuertos, usuarios del espacio aéreo, militares)</td>
+<td>el <strong>NOP (<em>Network Operational Plan</em>)</strong>, un plan de ámbito europeo</td>
+</tr>
+<tr>
+<td><strong>2 Pretáctica</strong></td>
+<td>durante los <strong>seis días anteriores</strong> al día de la operación</td>
+<td>afinar los detalles de la previsión original; preparar y promulgar un <strong>plan optimizado y detallado</strong>; decidir la mejor manera de gestionar los recursos de capacidad y si hay que aplicar un amplio conjunto de medidas ATFCM</td>
+<td>el <strong>Plan Diario ATFCM (ADP)</strong></td>
+</tr>
+<tr>
+<td><strong>3 Táctica</strong></td>
+<td><strong>el día de la operación</strong></td>
+<td>tiempo real; adaptar las medidas previstas a las necesidades inmediatas (tormentas, fallos de radioayudas, cualquier circunstancia que pueda alterar el tráfico); <strong>actualizar el Plan Diario</strong> conforme a la demanda real y la capacidad disponible; gran importancia de los <strong>Jefes de Sala y Supervisores</strong> y de su coordinación con los <strong>técnicos de control de afluencia (TCA)</strong></td>
+<td>Plan Diario actualizado</td>
+</tr>
+<tr>
+<td><strong>4 Análisis post-operacional</strong></td>
+<td><strong>desde el día siguiente</strong> a la operación</td>
+<td>analiza el día de la operación y <strong>realimenta a las tres fases anteriores</strong>; etapa final del proceso ATFCM, a continuación de la fase táctica; proceso que <strong>mide, investiga y elabora informes</strong> sobre las actividades operacionales; <strong>todos los participantes aportan «feedback»</strong> sobre la eficiencia de las medidas y las demoras aplicadas, el uso de escenarios, la planificación de los vuelos o los incidentes</td>
+<td>desarrollo de <strong>mejores prácticas</strong> para optimizar el sistema</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La infografía de la p. 18 resume: 1 «Hasta 7 días antes de la operación; elaboración del Network Operational Plan (NOP)»; 2 «Durante los 6 días antes de la operación; afinar previsión; detectar necesidad de aplicar medidas ATFCM»; 3 «El día de la operación; trabajo en tiempo real; adaptar previsión a las circunstancias»; 4 «Después del día de la operación; análisis eficiencia medidas; emisión de informes».</li>
+<li>Rareza de numeración: el manual numera el análisis post-operacional como «1.3.2» (errata; corresponde a 3.3.x).</li>
+<li>Trampa: <strong>estratégica = NOP; pretáctica = ADP</strong>. No hay que intercambiarlos.</li>
+</ul>
+<h3 id="35-tratamiento-de-los-planes-de-vuelo-dentro-del-proceso-atfcm-m-p19-21">3.5 Tratamiento de los planes de vuelo dentro del proceso ATFCM [M p.19-21]</h3>
+<ul>
+<li>Los planes de vuelo los trata el <strong>IFPS (<em>Integrated Initial Flight Plan Processing System</em>, Sistema Integrado para el Tratamiento Inicial de Planes de Vuelo)</strong>, una unidad englobada dentro del <strong>Gestor de Red (NM)</strong>, que consta de <strong>dos centros redundantes: Bruselas y Bretigny (París)</strong>. <strong>«España depende de la sede francesa, generalmente»</strong> [M p.19].</li>
+<li><strong>El IFPS se encarga de:</strong>
+  1. <strong>recepcionar</strong> los planes de vuelo;
+  2. el <strong>procesado inicial (validación)</strong>;
+  3. la <strong>distribución</strong> de los datos de plan de vuelo, en el área ECAC, a las unidades ATC para que puedan ser tratados automáticamente por los sistemas de cada <strong>ANSP</strong> (<em>Air Navigation Service Provider</em>);
+  4. <strong>proporcionar a operaciones del NM</strong> información sobre datos de plan de vuelo (FPL) para la <strong>planificación ATFCM, la monitorización y la asignación de slots</strong>.</li>
+<li>La centralización de la información en una <strong>única base de datos</strong> permite garantizar la <strong>coherencia, homogeneidad y compatibilidad</strong> de los datos utilizados por todos los sistemas del NM. La fiabilidad y efectividad de todos estos sistemas se asienta en la <strong>exactitud de los datos aportados a la base de datos (ENV)</strong>.</li>
+<li>Los planes de vuelo recibidos por el IFPS se <strong>contrastan automáticamente con la base de datos ENV</strong>.</li>
+</ul>
+<p><strong>FPL rechazado (REJ):</strong> si el plan de vuelo incluye información <strong>contraria a la contenida en la base de datos ENV</strong>, el sistema lo <strong>rechaza (REJ)</strong>. <strong>Los planes rechazados no llegan a ATC</strong>; es tarea del <strong>operador o del originador del mensaje</strong> tomar medidas al respecto.</p>
+<p><strong>FPL aceptado (ACK):</strong> si la información es correcta, <strong>o permite que el error se corrija manualmente</strong>, el sistema lo <strong>acepta (ACK)</strong> y lo envía a los ANSP correspondientes.</p>
+<p>[A continuación el manual contiene una frase aislada: «La solución al problema pasa por detectar cuál de las modificaciones que entran en vigor ese día es la que afecta a estos planes de vuelo» (p. 20); es un fragmento fuera de contexto, probablemente de un texto de formación sobre rechazos en el día AIRAC. No conviene basar preguntas en él.]</p>
+<p><strong>Plan de vuelo suspendido (FLS):</strong> en ocasiones un plan, pese a haber sido aceptado con anterioridad, <strong>se suspende por alguna causa mediante el envío de un mensaje de suspensión del vuelo (FLS, <em>Flight Suspension message</em>)</strong>. Este mensaje <strong>se recibe en la dependencia ATS e inicialmente implica que NO se autoriza la salida del vuelo</strong> [M p.21].</p>
+<h3 id="36-demanda-y-capacidad-definiciones-m-p21">3.6 Demanda y capacidad: definiciones [M p.21]</h3>
+<ul>
+<li><strong>Demanda</strong> = el <strong>número de vuelos que notifican su intención de volar en un espacio aéreo en un determinado período de tiempo</strong>. El valor de la demanda que maneja el sistema ATFCM se basa en los <strong>planes de vuelo presentados, sin incluir los vuelos VFR ni los operacionales (OAT)</strong>.</li>
+<li>Para <strong>evaluar la demanda frente a la capacidad del ATC</strong> se tienen en cuenta <strong>todos los vuelos IFR</strong>, <strong>incluyendo la parte IFR de los vuelos mixtos IFR/VFR, independientemente de su estatus</strong>.</li>
+<li><strong>Capacidad</strong> = el <strong>volumen o cantidad de tránsito aéreo operacionalmente aceptable</strong>. Se expresa en función del <strong>número de aeronaves que entran en una parte especificada de espacio aéreo (sector), sobrevuelan un punto, despegan o aterrizan en un aeródromo (o grupo de aeródromos) en un determinado período de tiempo</strong>. La capacidad <strong>puede variar durante las horas del día y entre los días de la semana</strong>.</li>
+</ul>
+<h3 id="37-tipos-de-capacidad-m-p21-22-la-tabla-de-las-paginas-21-22-se-reviso-como-imagen">3.7 Tipos de capacidad [M p.21-22] (la tabla de las páginas 21-22 se revisó como imagen)</h3>
+<p>Cuatro tipos, en el orden del manual: <strong>sostenible, máxima, declarada (o publicada), disponible</strong>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>SOSTENIBLE</strong></th>
+<th><strong>MÁXIMA</strong></th>
+<th><strong>DECLARADA</strong> (también «publicada»)</th>
+<th><strong>DISPONIBLE</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Afluencia</strong></td>
+<td>la máxima afluencia de tránsito <strong>alcanzable</strong></td>
+<td>la máxima afluencia de tránsito que <strong>puede alcanzarse solamente</strong> (durante períodos cortos)</td>
+<td>la capacidad <strong>notificada a los organismos apropiados, basada en la capacidad sostenible</strong></td>
+<td>la máxima afluencia de tránsito <strong>alcanzable</strong></td>
+</tr>
+<tr>
+<td><strong>Tiempo</strong></td>
+<td>en una <strong>unidad de tiempo específica</strong></td>
+<td>en la <strong>unidad de tiempo especificada, normalmente una hora</strong></td>
+<td>(columna vacía en la figura)</td>
+<td>en una unidad de tiempo específica <strong>en función de las condiciones reales del sistema ATS en cada momento</strong></td>
+</tr>
+<tr>
+<td><strong>Duración</strong></td>
+<td>que cabe <strong>mantener a lo largo de un tiempo</strong></td>
+<td>pero <strong>no se mantiene durante un largo período</strong></td>
+<td>(vacía)</td>
+<td>que cabe mantener a lo largo de un tiempo</td>
+</tr>
+<tr>
+<td><strong>Requisitos</strong></td>
+<td>de conformidad con los <strong>requisitos en materia de seguridad y el factor medio de demora aceptable</strong></td>
+<td><strong>cumpliéndose los requisitos en materia de seguridad y sin que se produzca ningún incremento excesivo en el factor medio de demora</strong></td>
+<td>(vacía)</td>
+<td>de conformidad con los requisitos en materia de seguridad y el factor medio de demora aceptable</td>
+</tr>
+<tr>
+<td><strong>Observaciones</strong></td>
+<td>deberá constituir el <strong>factor principal a efectos de planificación</strong></td>
+<td><strong>durante períodos cortos podría ser bastante mayor que los valores de capacidad sostenible</strong></td>
+<td>(vacía)</td>
+<td><strong>en condiciones óptimas, la capacidad disponible se corresponde con la capacidad declarada</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La columna DECLARADA de la tabla solo tiene texto en la primera fila de la figura de la página 21; no hay que esperar más del manual.</li>
+<li>Los colores de la figura (azul, rojo, verde, naranja) son decorativos. La figura muestra además cuatro trayectorias de aeronave rotuladas «Capacidad sostenible, Capacidad máxima, Capacidad declarada (o publicada), Capacidad disponible».</li>
+</ul>
+<h3 id="38-determinacion-de-la-capacidad-m-p22-23">3.8 Determinación de la capacidad [M p.22-23]</h3>
+<ul>
+<li>El <strong>proveedor de servicios de tránsito aéreo</strong>, <strong>basándose en un funcionamiento óptimo del sistema</strong>, determina la capacidad y <strong>calcula el nivel de la demanda por encima del cual deberán aplicarse medidas de gestión de afluencia de tránsito</strong>.</li>
+<li><strong>a. Capacidad declarada:</strong> dentro de la estructura de ENAIRE, la <strong>Dirección de Operaciones</strong> la determina en el documento <strong>«Sectores, configuraciones operativas y capacidades declaradas»</strong> y, para cada Torre, en el documento <strong>«Capacidad ATC. Valores de referencia»</strong>. <strong>Ambos documentos se publican para cada región.</strong></li>
+<li><strong>b. Capacidad disponible:</strong> en condiciones normales <strong>coincidirá con la declarada</strong>, pero por <strong>circunstancias técnicas, meteorológicas, operativas u otras causas justificadas</strong> podría ser distinta. En fase táctica <strong>la determina cada unidad ATS</strong>; si la circunstancia que origina un cambio se conoce con mayor antelación, la <strong>Dirección de Operaciones podrá participar</strong> en la determinación del valor. En <strong>situaciones sobrevenidas, en fase táctica</strong>, el responsable de determinar el valor es:</li>
+<li>en las unidades <strong>con Jefe de Sala</strong>: el <strong>Jefe de Sala</strong>;</li>
+<li>donde <strong>no haya Jefe de Sala o este se encuentre ausente</strong>: el <strong>Supervisor de servicio</strong>;</li>
+<li>donde <strong>no haya Supervisor</strong>: el <strong>controlador de tránsito aéreo (CTA) con habilitación más antigua en la dependencia, de los que se encuentren de servicio</strong>.</li>
+<li><strong>c. Capacidad máxima:</strong> también la determina la <strong>Dirección de Operaciones</strong>; podrá ser <strong>sensiblemente superior a la capacidad sostenible durante un período de tiempo no superior a sesenta (60) minutos</strong>.</li>
+</ul>
+<h3 id="39-monitorizacion-de-la-demanda-m-p23-24">3.9 Monitorización de la demanda [M p.23-24]</h3>
+<ul>
+<li>La <strong>detección de los desequilibrios</strong> entre capacidad y demanda la realiza el <strong>TCA</strong>, a partir de la monitorización de los <strong>traffic load</strong> de todos los <strong>volúmenes de tráfico (TV)</strong> de su jurisdicción, incluidos:</li>
+<li><strong>HEC</strong>;</li>
+<li><strong>OCC Peak</strong> (en TV con umbrales <strong>OTMV</strong> definidos);</li>
+<li>
+<p><strong>OCC Sustained (Occurrence / Elapse)</strong> (en TV con umbrales OTMV definidos).
+  [El manual no desarrolla las siglas HEC ni OTMV. HEC = <em>hourly entry count</em> y OTMV = <em>Occupancy Traffic Monitoring Values</em>: véase el manual de operaciones ATFCM.]</p>
+</li>
+<li>
+<p>Debido al <strong>ámbito temporal</strong> de fiabilidad de las gráficas de ocupación, que tienden a ser <strong>más estables cuanto más corto es el horizonte temporal</strong>, <strong>solo se tiene en cuenta el valor de HEC</strong> para detectar sobredemandas y establecer medidas ATFCM:</p>
+</li>
+<li>en la <strong>fase pretáctica</strong> de la operación;</li>
+<li>cuando sea necesario tomar medidas con una <strong>antelación superior a 3 h</strong> antes de la operación, según las características del sector y la composición del tráfico.</li>
+<li>Se considera que <strong>existe una sobredemanda siempre que el traffic load sobrepase todos los parámetros de monitorización aplicables</strong>, en cuyo caso <strong>será necesario establecer medidas ATFCM</strong>.</li>
+</ul>
+<h3 id="310-acciones-a-realizar-cuando-se-prevea-que-la-demanda-vaya-a-ser-superior-a-la-capacidad-m-p24">3.10 Acciones a realizar cuando se prevea que la demanda vaya a ser superior a la capacidad [M p.24]</h3>
+<p>Orden de actuación:</p>
+<ol>
+<li><strong>En primer lugar</strong>, analizar si <strong>se puede adaptar la capacidad a la demanda prevista</strong>.</li>
+<li><strong>En segundo lugar</strong>, estudiar y aplicar <strong>medidas que no impliquen regulaciones (STAM, <em>Short Term Affluence Measures</em>)</strong> [el manual escribe «Short Term Affluence Measures»; el nombre de EUROCONTROL es <em>Short Term ATFCM Measures</em>].</li>
+<li><strong>Como último recurso</strong>, <strong>regular la demanda</strong> mediante la <strong>asignación de horas de salida (CTOT)</strong> y <strong>actuando sobre el tráfico en vuelo, si no queda otra opción</strong>.</li>
+</ol>
+<h3 id="311-tecnicas-para-evitar-sobrecargas-sin-tener-que-regular-m-p24-27">3.11 Técnicas para evitar sobrecargas sin tener que regular [M p.24-27]</h3>
+<ul>
+<li>Estas medidas <strong>permiten equilibrar la demanda y la capacidad disponible, logrando disminuir o evitar las demoras asociadas a las regulaciones de tráfico</strong>.</li>
+<li><strong>Quién decide:</strong> la idoneidad de aplicar una o varias de estas técnicas la <strong>estudia generalmente el TCA</strong>, la <strong>analiza con el supervisor</strong> y la <strong>propone al Jefe de Sala para su adopción</strong>. Cada uno tiene su rol, pero <strong>cualquiera de los tres puede tomar la iniciativa</strong> de proponer la medida; <strong>siempre será el Jefe de Sala quien decida</strong> si se aplica o no.</li>
+</ul>
+<p>Seis técnicas (en el orden del manual):</p>
+<p><strong>1. Configuración dinámica:</strong></p>
+<ul>
+<li><strong>Optimización del número de sectores/posiciones en táctica</strong>, para adaptarlo a la demanda prevista.</li>
+<li><strong>Permite reservar los recursos disponibles durante los períodos de baja demanda para utilizarlos cuando esta aumente</strong>, proveyendo así al sistema de una mayor capacidad.</li>
+</ul>
+<p><strong>2. Level capping («LEVEL CAPPING»; limitación de nivel):</strong></p>
+<ul>
+<li>Medida que <strong>restringe los niveles de vuelo utilizables dentro de un ACC o entre dos ACC adyacentes</strong>.</li>
+<li>Objetivo: <strong>reducir la demanda de tráfico en el espacio aéreo por encima o por debajo</strong>, según el caso, <strong>de un nivel de vuelo determinado</strong>, aliviando así una posible sobrecarga.</li>
+<li><strong>Su aplicación mediante escenarios predefinidos implica que el cambio se refleje en el plan de vuelo.</strong></li>
+</ul>
+<p><strong>3. Rerouting («REROUTING»; reencaminamiento):</strong></p>
+<ul>
+<li>Medida <strong>ATFCM que requiere una modificación de la ruta presentada en el plan de vuelo por un operador de aeronave</strong>, para solventar los problemas de capacidad y minimizar las demoras. Se aplica en los ACC para lograr una <strong>mejor distribución del tráfico</strong> y <strong>reducir la complejidad y la ocupación del sector que se prevé que va a estar sobrecargado</strong>.</li>
+<li><strong>Si la necesidad se detecta en la fase pretáctica</strong>: el encargado de gestionarla es el <strong>FMP Manager de la región</strong> e implica la <strong>presentación de un nuevo plan de vuelo por parte del operador de aeronave</strong>.</li>
+<li><strong>Si se aplica en fase táctica</strong>: la coordinación se hace <strong>desde la FMP, directamente con el operador de aeronave o a través del NMOC</strong>, y <strong>podría requerir un nuevo plan de vuelo</strong>. Dependerá de factores como la <strong>antelación con que se toma la medida, si el tráfico ha despegado o no, si la nueva ruta afecta a otros sectores dentro de nuestro espacio aéreo o si afecta a dependencias colaterales</strong>.</li>
+<li><strong>«Rerouting táctico»:</strong> una <strong>medida ATC</strong> que consiste en <strong>modificar la ruta de un tráfico en vuelo para evitar que atraviese el sector sobrecargado</strong>. Se comunica al piloto la causa y se le <strong>reincorpora a su ruta original lo antes posible</strong>, procurando evitar que la modificación afecte a los sectores siguientes o a los colaterales y, si esto no fuera posible, <strong>coordinando la ruta con ellos</strong>.</li>
+<li><strong>Cuando la medida requiera la presentación de un nuevo plan de vuelo, es recomendable plantearla a los AO (operadores de aeronave) con una antelación mínima de tres horas.</strong></li>
+</ul>
+<p><strong>4. MDI (<em>Minimum Departure Interval</em>, intervalo mínimo de salida):</strong></p>
+<ul>
+<li>Consiste en <strong>espaciar los despegues de un aeródromo en intervalos regulares</strong>, para evitar cargar al sector saturado con una acumulación de salidas o para <strong>aliviar una situación de saturación en el propio aeródromo</strong>.</li>
+<li><strong>Antes de aplicarlo hay que informar a la FMP</strong>, que a su vez coordinará con el <strong>NMOC</strong>.</li>
+<li><strong>Guía para la aplicación del MDI</strong> (página 26, revisada como imagen):
+  a) El MDI <strong>no es de aplicación en fase estratégica ni pretáctica</strong>.
+  b) <strong>Aplicación táctica solo si</strong>: <strong>se satura un determinado sector</strong> o <strong>se reduce repentinamente la capacidad</strong>.
+  c) El intervalo de despegue entre salidas consecutivas será <strong>como máximo de 5 minutos, durante un período no superior a aproximadamente 30 minutos</strong>. Si después de ese tiempo no se soluciona la sobredemanda, <strong>deberían tomarse otro tipo de medidas ATFCM</strong>.
+  d) El <strong>controlador de Torre</strong> autorizará el despegue de tal forma que el vuelo <strong>respete su CTOT (incluido el tiempo de MDI establecido)</strong>. Si en la etapa de planificación el controlador de aeródromo determina que el vuelo <strong>es incapaz de cumplir su CTOT/MDI</strong>, <strong>requerirá la orientación de la FMP</strong>.</li>
+</ul>
+<p><strong>5. Miles in Trail (MIT):</strong></p>
+<ul>
+<li><strong>Coordinar la transferencia de un flujo de tráfico de manera que las aeronaves dentro de dicho flujo mantengan entre sí una determinada separación en millas</strong>, para lo cual <strong>recibirán las instrucciones necesarias desde Control</strong>.</li>
+</ul>
+<p><strong>6. Cherry picking:</strong></p>
+<ul>
+<li>Medida <strong>aplicada a corto plazo entre unidades ATC adyacentes</strong> para <strong>conseguir una disminución de la complejidad del sector, reduciendo la necesidad de poner regulaciones</strong>.</li>
+<li>La <strong>regulación Cherry Pick</strong> se utiliza para resolver <strong>picos cortos (por ejemplo, 1 h o 1 h 30 min) de un número limitado de vuelos en zonas congestionadas</strong>. Consiste en <strong>seleccionar vuelos y aplicar medidas ATFCM solo a esos vuelos</strong>. <strong>Puede utilizarse en combinación con otras medidas.</strong></li>
+</ul>
+<h3 id="312-regulaciones-m-p27-28">3.12 Regulaciones [M p.27-28]</h3>
+<ul>
+<li>Si las medidas anteriores <strong>no son suficientes y la sobredemanda persiste</strong>, o bien las condiciones operativas lo justifican, <strong>se podrán adoptar medidas de regulación de tráfico</strong>.</li>
+<li><strong>Una regulación</strong> es una medida cuyo objetivo es <strong>adecuar la demanda de tráfico a la capacidad disponible</strong>. Consiste en <strong>limitar el número de vuelos con entrada prevista a un espacio aéreo o aeródromo mediante la asignación de CTOT</strong>, que <strong>suponen la demora del despegue de determinados tráficos para que entren más tarde en el sector o aeródromo regulado</strong>.</li>
+</ul>
+<p><strong>Cadena de responsabilidad:</strong></p>
+<ul>
+<li>a. La <strong>FMP correspondiente</strong> coordina esta medida con el <strong>NMOC</strong>.</li>
+<li>b. Sobre la toma de estas decisiones desde las FMP, corresponde al <strong>Jefe de Sala del ACC</strong> la <strong>aprobación de las medidas de control de afluencia para todas las dependencias que se encuentren dentro del espacio aéreo que gestiona dicho ACC y en las que ENAIRE presta el servicio ATS</strong>. Estas medidas <strong>deberán estar siempre debidamente justificadas y se dejará constancia escrita de ellas</strong>.</li>
+<li>c. En las <strong>dependencias sin Jefe de Sala</strong> que se encuentren dentro del espacio aéreo que gestiona dicho ACC, <strong>y en las que exista supervisor o supervisor jefe</strong>, estos <strong>determinarán las medidas tácticas de control de afluencia y las remitirán al Jefe de Sala para su aprobación</strong>.</li>
+<li>d. Las <strong>dependencias en las que ENAIRE no es proveedor de servicios</strong> <strong>coordinan directamente con la FMP</strong> y <strong>no necesitan la aprobación</strong> del Jefe de Sala.</li>
+</ul>
+<p><strong>Mecánica de establecimiento de regulaciones</strong>, según que el volumen de tráfico (TV) <strong>disponga o no de valores de OCC definidos</strong>:</p>
+<p><strong>En sectores SIN OTMV definidos</strong> (solo con base en HEC):</p>
+<ul>
+<li>a. <strong>Se aplica como capacidad de monitorización el resultado de incrementar un 10 % la capacidad declarada HEC durante los primeros 60 minutos</strong>, siempre que en los <strong>ciento veinte (120) minutos posteriores no se rebase la capacidad declarada</strong>. <strong>Se aplica en todos los sectores de control excepto los correspondientes a los TMA de Barcelona y Madrid.</strong></li>
+<li>b. Si en la <strong>primera hora la demanda (LOAD) es superior a la capacidad declarada, pero inferior a la capacidad declarada incrementada un 10 %</strong>, <strong>no se aplica regulación siempre que en los 120 minutos posteriores la demanda no supere la capacidad declarada</strong>.</li>
+<li>c. Si en la <strong>primera hora la demanda es superior a la capacidad declarada incrementada un 10 %</strong> y en los <strong>120 minutos siguientes no sobrepasa la capacidad declarada</strong>, <strong>se regula la primera hora a ese valor (declarada +10 %) y las horas siguientes, si es preciso, a la capacidad declarada</strong>.</li>
+<li>d. Cuando en la <strong>primera hora la demanda sea superior a la capacidad declarada y en los 120 minutos siguientes también la sobrepase</strong>, <strong>se regula a la capacidad declarada desde el comienzo de la regulación</strong>.</li>
+</ul>
+<p>Ejemplo resuelto (cifras mías, no están en el manual): HEC declarada = 30/h. Valor de monitorización de los primeros 60 min = 33. Caso b: carga de la primera hora 32, los 120 min siguientes como máximo a 30 → no se regula. Caso c: carga de la primera hora 38, después como máximo 30 → se regula la primera hora a 33 y, si es necesario, después a 30. Caso d: carga de la primera hora 32 y una hora posterior a 34 → se regula a 30 desde el comienzo.</p>
+<p><strong>En sectores CON OTMV definidos:</strong></p>
+<ul>
+<li>a. Se aplica un <strong>rate de regulación igual o superior a la capacidad declarada</strong> del sector que permita <strong>bajar el OCC Peak y controlar el OCC Sustained</strong>. Este rate se puede determinar con las herramientas <strong>ASIM, IMPACT, SIMEX u otras</strong> que permitan hacer simulaciones con datos de EUROCONTROL.</li>
+<li>
+<p>b. Cuando sea necesario tomar medidas <strong>con una antelación superior al ámbito temporal estimado de uso de la ocupación</strong>, se puede optar por el procedimiento <strong>para sectores sin OTMV definidos (solo HEC)</strong>.</p>
+</li>
+<li>
+<p><strong>El TCA solicita al NM la implantación de las medidas acordadas.</strong> Independientemente de las coordinaciones que se hagan con el NM, <strong>la decisión final de implantar, modificar o cancelar cualquier medida ATFCM pertenece a la FMP.</strong></p>
+</li>
+</ul>
+<h3 id="313-asignacion-de-ctot-m-p29">3.13 Asignación de CTOT [M p.29]</h3>
+<p>El <strong>controlador de tránsito aéreo (CTA)</strong> es el responsable de la <strong>vigilancia de los turnos de salida en el aeródromo de despegue</strong>. Los procedimientos exactos dependen de cómo esté organizado el servicio en cada aeródromo; seguirán estas pautas:</p>
+<ul>
+<li>a. <strong>Los Estados se asegurarán de que el CTOT, cuando aplique, se incluya como parte de la autorización ATC.</strong> Al emitir la autorización, ATC tendrá en cuenta, si es de aplicación, <strong>tanto el turno de salida como la suspensión de un vuelo</strong>.</li>
+<li>b. Si aparece un <strong>plan de vuelo suspendido</strong>, el <strong>CTA de TWR</strong> se comunica con la <strong>FMP</strong>.</li>
+<li>c. <strong>ATC proporciona la asistencia necesaria a los AO</strong> para cumplir con el CTOT <strong>o para coordinar una revisión del mismo</strong>.</li>
+<li>d. <strong>Los explotadores de aeronaves deben informarse y cumplir con los procedimientos y medidas ATFCM generales.</strong></li>
+</ul>
+<h3 id="314-vuelos-exentos-o-vuelos-excluidos-m-p29-30">3.14 Vuelos exentos o vuelos excluidos [M p.29-30]</h3>
+<ul>
+<li><strong>Vuelos exentos</strong>: lo son <strong>de todas las regulaciones</strong> y los <strong>autorizan los Estados</strong>.</li>
+<li><strong>Vuelos excluidos</strong>: lo están <strong>solo de alguna regulación o volumen específico</strong> y los <strong>autorizan los proveedores de servicio</strong>.</li>
+<li><strong>Son vuelos exentos:</strong>
+  1. los vuelos que <strong>transporten Jefes de Estado o equivalentes</strong>;
+  2. los vuelos en misiones de <strong>búsqueda y salvamento</strong>;
+  3. los vuelos <strong>autorizados por autoridades relevantes de los Estados para incluir en su plan de vuelo</strong> (según la redacción del manual);
+  4. los <strong>vuelos médicos/ambulancias cuando estén en juego vidas humanas</strong>;
+  5. los servicios de <strong>extinción de incendios</strong>.</li>
+<li>Trampa: el par «exento = Estado, todas las regulaciones; excluido = proveedor, una regulación» es un contraste clásico de examen.</li>
+</ul>
+<h3 id="315-modificacion-o-cancelacion-de-la-regulacion-m-p30-figura-revisada">3.15 Modificación o cancelación de la regulación [M p.30] (figura revisada)</h3>
+<ul>
+<li>Una regulación <strong>se cancela cuando deja de ser necesaria</strong>. La decisión se toma <strong>en la FMP correspondiente</strong> y <strong>el Jefe de Sala es el responsable último de tomarla</strong>.</li>
+<li>Para <strong>modificar o cancelar</strong> una regulación, el personal de la FMP debe seguir un <strong>procedimiento de tres pasos</strong> (infografía de la p. 30):
+  1. <strong>Contactar con el personal del NM lo antes posible para informar del cambio y adoptar las medidas necesarias tras la coordinación entre el Jefe de Sala y el NMOC.</strong>
+  2. <strong>Monitorizar el impacto de la actualización en el traffic load.</strong>
+  3. <strong>Adoptar las medidas necesarias para evitar que la modificación de la regulación provoque una nueva sobrecarga.</strong></li>
+<li><strong>La cancelación de una regulación puede ocasionar un incremento repentino en la carga de tráfico y también puede producir un impacto negativo para otros ACC.</strong></li>
+</ul>
+<hr />
+<h2 id="4-fua-uso-flexible-del-espacio-aereo-flexible-use-of-airspace-m-p30-32">4. FUA: uso flexible del espacio aéreo (<em>Flexible Use of Airspace</em>) [M p.30-32]</h2>
+<h3 id="41-introduccion">4.1 Introducción</h3>
+<ul>
+<li>El concepto FUA se basa en que <strong>el espacio aéreo no se considera civil o militar, sino único y continuo</strong>, y su uso es <strong>flexible según las necesidades</strong>. Por tanto, <strong>cualquier segregación del espacio aéreo que se precise deberá ser de naturaleza temporal</strong>.</li>
+<li><strong>Tres niveles de gestión del espacio aéreo:</strong></li>
+<li><strong>Nivel 1, estratégico:</strong> <strong>planificación a largo plazo</strong> de la política nacional de gestión del espacio aéreo y de sus estructuras, mediante un <strong>proceso conjunto civil/militar</strong>.</li>
+<li><strong>Nivel 2, pretáctico:</strong> <strong>gestión día a día, en el día anterior a las operaciones</strong>, y <strong>asignación temporal de espacio aéreo a través de la AMC</strong>, que <strong>recoge, analiza, negocia con las partes interesadas y decide diariamente su asignación</strong>.</li>
+<li><strong>Nivel 3, táctico:</strong> en el que se <strong>gestiona el uso del espacio aéreo en tiempo real</strong>.</li>
+</ul>
+<h3 id="42-estructuras-flexibles-del-espacio-aereo">4.2 Estructuras flexibles del espacio aéreo</h3>
+<p>El concepto FUA complementa la organización del espacio aéreo con una serie de estructuras flexibles:</p>
+<ul>
+<li><strong>a. TSA, Áreas Temporalmente Segregadas (<em>Temporarily Segregated Areas</em>):</strong> áreas de <strong>dimensiones predefinidas</strong> que se establecen para responder a las <strong>necesidades civiles y militares que requieran una reserva temporal de espacio aéreo</strong>, <strong>a través de las cuales no se puede permitir el tránsito de otros tráficos</strong>.</li>
+<li><strong>b. TRA, Áreas Temporalmente Restringidas (<em>Temporarily Restricted Areas</em>)</strong> [el glosario dice «Espacio aéreo temporalmente reservado / <em>Temporary reserved airspace</em>»]: el <strong>volumen definido de espacio aéreo para uso específico de una actividad aeronáutica</strong>, <strong>a través del cual se puede permitir el tránsito de otro tráfico bajo autorización ATC</strong>.</li>
+<li><strong>c. CDR, Rutas Condicionales (<em>Conditional Routes</em>):</strong> <strong>rutas o tramos de rutas ATS de carácter no permanente</strong>, que <strong>solo se pueden planificar y utilizar bajo ciertas condiciones específicas dentro de los períodos que aparecen publicados en la descripción de la Ruta Condicional</strong>. <strong>Cada CDR que se publica en la sección ENR 3.5-1 lleva asociada una ruta alternativa.</strong></li>
+<li><strong>Actualmente se han eliminado dos de las tres categorías de rutas condicionales existentes y solo se dispone de la categoría CDR 1</strong>, que se establece en la <strong>fase estratégica (Nivel 1)</strong>. Están <strong>disponibles la mayor parte del tiempo</strong>, por lo que se pueden <strong>planificar permanentemente en los planes de vuelo (FPL)</strong>.</li>
+<li><strong>A diario se distribuye el AUP (<em>Airspace Use Plan</em>) con las rutas CDR1 que se cierran.</strong></li>
+<li><strong>Los FPL afectados por rutas cerradas temporalmente deberán cancelarse</strong>, y se presentará un <strong>nuevo FPL</strong> que incluya en la <strong>casilla 15 la ruta alternativa publicada</strong> que corresponda a cada CDR1 no disponible.</li>
+<li>Cuando una <strong>CDR1 se deba cerrar al tráfico con poco tiempo de preaviso, el ATC dará instrucciones a los vuelos para utilizar rutas alternativas en la fase táctica</strong>.</li>
+</ul>
+<h3 id="421-unidades-de-gestion-de-espacio-aereo-celula-de-gestion-de-espacio-aereo-amc">4.2.1 Unidades de gestión de espacio aéreo: Célula de Gestión de Espacio Aéreo (AMC)</h3>
+<ul>
+<li>Unidad nacional <strong>mixta civil/militar</strong> que <strong>coordina diariamente (en fase pretáctica)</strong> la <strong>asignación temporal del espacio aéreo</strong> en función de las peticiones de los usuarios (<strong>ACC, FMP y otras agencias acreditadas</strong>). <strong>El día anterior a las operaciones confecciona el Plan de Utilización del Espacio Aéreo (AUP).</strong></li>
+</ul>
+<h3 id="422-publicacion-de-informacion-sobre-disponibilidad-de-estructuras-flexibles-aup-y-uup">4.2.2 Publicación de información sobre disponibilidad de estructuras flexibles: AUP y UUP</h3>
+<ul>
+<li>La AMC confecciona y distribuye el AUP <strong>a EUROCONTROL, a los ACC/FMP y a las AMC adyacentes</strong>, <strong>antes de las 14:00 UTC del día anterior a las operaciones</strong>, con un <strong>período de validez de 24 horas a partir de las 06:00 UTC del día siguiente</strong>.</li>
+<li><strong>Contenido del AUP:</strong> (a) <strong>lista de rutas ATS permanentes y de rutas CDR 1 cerradas temporalmente</strong>; (b) <strong>lista de TSA y TRA activadas</strong>.</li>
+<li>La información contenida en el AUP <strong>puede actualizarse mediante el UUP (<em>Updated Use Plan</em> / Plan de Utilización de Espacio Aéreo actualizado)</strong>.</li>
+</ul>
+<hr />
+<h2 id="5-acronimos-del-manual-m-p33-35">5. Acrónimos del manual [M p.33-35]</h2>
+<p>Se conservan tal como los recoge el manual (español / inglés). Las notas entre corchetes son mías.</p>
+<table>
+<thead>
+<tr>
+<th>Sigla</th>
+<th>Español (manual) / inglés</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADP</td>
+<td>Plan diario de ATFCM / ATFCM daily plan</td>
+</tr>
+<tr>
+<td>AFIS</td>
+<td>Servicio de información de vuelo de aeródromo / Aerodrome flight information service</td>
+</tr>
+<tr>
+<td>AFTN</td>
+<td>Red de telecomunicaciones fijas aeronáuticas / Aeronautical fixed telecommunication network</td>
+</tr>
+<tr>
+<td>AIO</td>
+<td>Oficina de información aeronáutica / Aeronautical information office</td>
+</tr>
+<tr>
+<td>AIRAC</td>
+<td>Reglamentación y control de la información aeronáutica / Aeronautical information regulation and control</td>
+</tr>
+<tr>
+<td>AMC</td>
+<td>Célula de Gestión de Espacio Aéreo civil/militar</td>
+</tr>
+<tr>
+<td>ANSP</td>
+<td>Proveedor de servicios de navegación aérea / Air Navigation Service Provider</td>
+</tr>
+<tr>
+<td>ARO</td>
+<td>Oficina de notificación de los servicios de tránsito aéreo / Air traffic services reporting office</td>
+</tr>
+<tr>
+<td>ARR</td>
+<td>Llegada (designador de tipo de mensaje) / Arrival</td>
+</tr>
+<tr>
+<td>ATC</td>
+<td>Control de tránsito aéreo (en general) / Air traffic control (in general)</td>
+</tr>
+<tr>
+<td>ATFCM</td>
+<td>Gestión de capacidad y afluencia de tráfico aéreo / Air traffic flow and capacity management</td>
+</tr>
+<tr>
+<td>ATFM</td>
+<td>Organización de la Afluencia de Tránsito Aéreo / Air Traffic Flow Management</td>
+</tr>
+<tr>
+<td>ATM</td>
+<td>Gestión del tránsito aéreo / Air traffic management</td>
+</tr>
+<tr>
+<td>ATS</td>
+<td>Servicio de tránsito aéreo / Air traffic service</td>
+</tr>
+<tr>
+<td>AUP</td>
+<td>Plan de Utilización de Espacio Aéreo</td>
+</tr>
+<tr>
+<td>CAG</td>
+<td>Circulación aérea general / General air traffic</td>
+</tr>
+<tr>
+<td>CAO</td>
+<td>Circulación aérea operativa / Operational air traffic</td>
+</tr>
+<tr>
+<td>CASA</td>
+<td>Sistema de asignación de slot por ordenador / Computer Assisted Slot Allocation system</td>
+</tr>
+<tr>
+<td>CDR</td>
+<td>Ruta condicional / Conditional route</td>
+</tr>
+<tr>
+<td>CHG</td>
+<td>Modificación (designador de tipo de mensaje) / Modification</td>
+</tr>
+<tr>
+<td>CNL</td>
+<td>Cancelación de plan de vuelo / Flight plan cancellation</td>
+</tr>
+<tr>
+<td>CTA</td>
+<td>Controlador de tránsito aéreo / Air traffic controller</td>
+</tr>
+<tr>
+<td>CTOT</td>
+<td>Hora calculada de despegue / Calculated take-off time</td>
+</tr>
+<tr>
+<td>DEP</td>
+<td>Salida (designador de tipo de mensaje) / Departure</td>
+</tr>
+<tr>
+<td>DLA</td>
+<td>Demora (designador de tipo de mensaje) / Delay</td>
+</tr>
+<tr>
+<td>EOBT</td>
+<td>Hora prevista de fuera calzos / Estimated off-block time</td>
+</tr>
+<tr>
+<td>ETFMS</td>
+<td>Sistema de Gestión del Flujo Táctico Reforzado / Enhanced Tactical Flow Management System</td>
+</tr>
+<tr>
+<td>ETOT</td>
+<td>Hora estimada de despegue / Estimated take-off time</td>
+</tr>
+<tr>
+<td>FMP</td>
+<td>Posición de gestión de afluencia / Flow management position</td>
+</tr>
+<tr>
+<td>FPL</td>
+<td>Plan de vuelo presentado o Plan de vuelo / Filed flight plan or Flight plan</td>
+</tr>
+<tr>
+<td>FUA</td>
+<td>Uso flexible del espacio aéreo / Flexible use of airspace</td>
+</tr>
+<tr>
+<td>IFPS</td>
+<td>Sistema integrado para el tratamiento inicial de planes de vuelo / Integrated initial flight plan processing system (figura dos veces en el manual)</td>
+</tr>
+<tr>
+<td>IFR</td>
+<td>Reglas de vuelo por instrumentos / Instrument flight rules</td>
+</tr>
+<tr>
+<td>MDI</td>
+<td>Intervalo mínimo de salida / Minimum departure interval</td>
+</tr>
+<tr>
+<td>NM</td>
+<td>Gestor de red / Network manager</td>
+</tr>
+<tr>
+<td>NMOC</td>
+<td>Centro de operaciones del gestor de red / Network manager operation center</td>
+</tr>
+<tr>
+<td>OCC</td>
+<td>Occupancy (Ocupación)</td>
+</tr>
+<tr>
+<td>PCA</td>
+<td>Espacio aéreo de coordinación previa / Prior coordination airspace</td>
+</tr>
+<tr>
+<td>RCA</td>
+<td>(1) Reglamento de Circulación Aérea / Air traffic regulations; (2) Espacio Aéreo de coordinación reducida / Reduced coordination airspace</td>
+</tr>
+<tr>
+<td>RFP</td>
+<td>Plan de vuelo que reemplaza / Replacement flight plan</td>
+</tr>
+<tr>
+<td>RPL</td>
+<td>Plan de vuelo repetitivo / Repetitive flight plan</td>
+</tr>
+<tr>
+<td>SES</td>
+<td>Cielo único Europeo / Single European Sky</td>
+</tr>
+<tr>
+<td>TACT</td>
+<td>Sistema táctico (antigua denominación del actual ETFMS) / Tactical system (former denomination of the current ETFMS)</td>
+</tr>
+<tr>
+<td>TCA</td>
+<td>Técnico de control de afluencia</td>
+</tr>
+<tr>
+<td>TRA</td>
+<td>Espacio aéreo temporalmente reservado / Temporary reserved airspace</td>
+</tr>
+<tr>
+<td>TSA</td>
+<td>Espacio aéreo temporalmente segregado / Temporary segregated area</td>
+</tr>
+<tr>
+<td>UCATM</td>
+<td>Unidad central de gestión de tránsito aéreo / Central Air Traffic Management Unit</td>
+</tr>
+<tr>
+<td>UUP</td>
+<td>Plan de Utilización de Espacio Aéreo actualizado</td>
+</tr>
+<tr>
+<td>VFR</td>
+<td>Reglas de vuelo visual / Visual flight rules</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Siglas del glosario que <strong>nunca se usan en el cuerpo</strong> del manual: AIO, AIRAC, CAG, CAO, ETOT, PCA, RCA, RPL. No conviene dedicarles tiempo más allá de la definición. (RPL y ETOT no se desarrollan en ninguna parte.)</li>
+<li>Los nombres en español de ATFCM y ATFM en el glosario son distintos: ATFCM = «Gestión de capacidad y afluencia de tráfico aéreo»; ATFM = «Organización de la Afluencia de Tránsito Aéreo» (redacción propia del manual).</li>
+</ul>
+<h2 id="6-bibliografia-del-manual-m-p36">6. Bibliografía del manual [M p.36]</h2>
+<ul>
+<li><strong>AIP-ESPAÑA</strong>; <strong>IFPS handbook</strong>; <strong>Reglamento UE 923/2012 (SERA)</strong>; <strong>OACI, Anexo 2, Reglamento del Aire</strong>; <strong>OACI, Anexo 11, Servicios de Tránsito Aéreo</strong>; <strong>OACI, Doc 4444, Gestión del Tránsito Aéreo</strong>; <strong>OACI, Doc 8400, Abreviaturas y Códigos de la OACI</strong>; <strong>OACI, Doc 9613, Manual de navegación basada en la performance (PBN)</strong>; <strong>www.EUROCONTROL.int</strong>.</li>
+<li>Es la única bibliografía oficial del tema. Confirma qué fuentes primarias puede consultar un examinador: AIP-España (ENR 1.10), el Manual de usuario del IFPS, SERA, los Anexos 2 y 11 y el Doc 4444.</li>
+</ul>
+<hr />
+<h2 id="7-manual-frente-a-fuentes-primarias-diferencias-y-puntos-de-atencion">7. Manual frente a fuentes primarias (diferencias y puntos de atención)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Punto</th>
+<th>Dice el manual</th>
+<th>Dice la fuente primaria</th>
+<th>Cómo responder en el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Indicación RFP en la casilla 18</td>
+<td><strong>Último elemento</strong> de la casilla 18: «RFP/Qn» [M p.6]</td>
+<td>El párrafo del plan de reemplazo de AIP ENR 1.10 dice «<strong>como último elemento</strong> de la casilla 18» (igual que el manual), pero la propia lista de la casilla 18 del AIP pone RFP/ el primero; el Manual de usuario del IFPS 2026 (línea 1828) dice «<strong>como primer elemento</strong> de la casilla 18»</td>
+<td>Seguir el manual («último») si la pregunta está redactada a partir del manual; si nombra el manual del IFPS, «primero». Señalar como ambiguo</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Campos que no se modifican con CHG</td>
+<td>3: ARCID, salida, destino [M p.13]</td>
+<td>AIP ENR 1.10 / Manual de usuario del IFPS añaden la fecha del vuelo (EOBD) y una EOBT adelantada</td>
+<td>La lista de tres del manual es la del examen; los elementos adicionales de las notas base son ciertos, pero exceden el manual</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Umbral de tiempo del DLA</td>
+<td>ninguno, remite al AIP</td>
+<td>AIP ENR 1.10: &gt;15 min IFR (sin slot), &gt;30 min VFR controlado, &gt;60 min VFR no controlado; con slot: &gt;30 min DLA, 15-30 min SRR</td>
+<td>No está en el manual; aprenderlo como material adicional</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Vuelos VFR que requieren plan</td>
+<td>Lista larga (clases B-E, aeródromos controlados/AFIS, nocturno, fronteras, mar) [M p.5]</td>
+<td>La lista de AIP ENR 1.10 es más corta y con otra redacción (servicio ATC, IFR en espacio aéreo con servicio de asesoramiento, áreas FIS/SAR, áreas de coordinación, fronteras, nocturno que abandona las proximidades)</td>
+<td>Usar la lista del manual; la del AIP es complementaria</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Tiempos de presentación</td>
+<td>120 h / 3 h / 60 min / 10 min</td>
+<td>SERA.4005(d) idéntico</td>
+<td>Coherente</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Fases de emergencia</td>
+<td>30 min / 30 min; 5 min; SS/DD</td>
+<td>RD 57/2002 (artículo sobre las fases) y Reglamento (UE) 2020/469 idénticos</td>
+<td>Coherente</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Fase estratégica</td>
+<td>«hasta siete días antes» [M p.18]</td>
+<td>Manual de operaciones ATFCM 2026, sec. 2.4: «seven days or more prior to the day of operations»</td>
+<td>Coherente (misma idea, redactada «hasta 7 días antes» frente a «7 días o más»)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Vuelos exentos</td>
+<td>Jefe de Estado, SAR, autorizados por el Estado, médicos con vidas en juego, extinción de incendios</td>
+<td>Manual de usuario ATFCM 2026, sec. 6.2.1: HEAD, SAR, ATFMX, MEDEVAC (evacuación de emergencia crítica para la vida), FFR</td>
+<td>Coherente; el elemento «autorizado por el Estado» del manual = STS/ATFMX</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Exentos frente a excluidos</td>
+<td>exento = todas las regulaciones, autorizado por los Estados; excluido = una regulación, autorizado por los proveedores de servicio</td>
+<td>Manual de operaciones ATFCM 2026: los vuelos exentos lo están de todas las regulaciones; los excluidos, solo de una regulación especificada, en el área de la FMP solicitante</td>
+<td>Coherente</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Categorías de CDR</td>
+<td>solo queda CDR1; publicadas en <strong>ENR 3.5-1</strong></td>
+<td>AIP ENR 1.9 (2026) confirma que solo existen CDR1; los horarios de CDR1 se publican en <strong>ENR 3.2</strong></td>
+<td>Coherente en el contenido; el número de sección del manual es antiguo</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Horario del AUP</td>
+<td>la AMC distribuye el AUP <strong>antes de las 14:00 UTC</strong> del día anterior; válido 24 h desde las <strong>06:00 UTC</strong> del día siguiente</td>
+<td>AIP ENR 1.9: el EAUP se publica en el NOP Portal a las <strong>16:00 UTC (15:00 en verano)</strong> y es válido 24 h desde las 06:00 UTC del día siguiente</td>
+<td>Son documentos distintos (AUP nacional frente a EAUP publicado); coinciden en el inicio a las 06:00 UTC</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Sede del IFPS para España</td>
+<td>«España depende de la sede francesa, generalmente» (Bretigny)</td>
+<td>Manual de usuario del IFPS 2026: IFPS 1 Haren es la unidad responsable por defecto e IFPS 2 Bretigny la de respaldo; el procesado manual, exclusivamente en Haren</td>
+<td>Usar la frase del manual solo si se pregunta literalmente; no está verificada</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Orden de prioridad AFTN</td>
+<td>SS; DD y FF; GG y KK (tres niveles)</td>
+<td>Coherente con el Anexo 10 de la OACI según la lista de comprobación PANS-ATM (SS socorro, DD urgencia, FF movimiento)</td>
+<td>Coherente; ojo con la expresión «tres niveles»</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Nombre del STAM</td>
+<td>«Short Term Affluence Measures»</td>
+<td>EUROCONTROL: Short Term ATFCM Measures</td>
+<td>Usar la grafía del manual si la pregunta la cita</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Palabras clave de las fases de emergencia</td>
+<td>no figuran en el manual</td>
+<td>INCERFA / ALERFA / DETRESFA (AIP GEN 2.2, PANS-ATM)</td>
+<td>Material adicional</td>
+</tr>
+</tbody>
+</table>
+<h2 id="trampas-de-examen">Trampas de examen</h2>
+<ol>
+<li><strong>120 h es un máximo; 3 h / 60 min / 10 min son mínimos.</strong> Las opciones suelen intercambiarlos («al menos 120 horas»).</li>
+<li><strong>Las tres horas se aplican a los vuelos que puedan estar sujetos a medidas ATFM; los 60 minutos, a todos los demás.</strong> En vuelo: 10 minutos antes del punto de entrada o del cruce de aerovía.</li>
+<li><strong>RFP:</strong> etapa previa al vuelo = EOBT menos <strong>4 h</strong>; último RFP al menos <strong>30 min</strong> antes de la EOBT; CNL con prioridad <strong>DD</strong>; FPL que reemplaza al menos <strong>5 min</strong> después del CNL; «RFP/Qn» con n = número de orden.</li>
+<li><strong>CHG no puede cambiar tres campos</strong> en el manual: identificación de la aeronave, aeródromo de salida, aeródromo de destino. Cambiarlos supone CNL + nuevo FPL.</li>
+<li><strong>Prioridades:</strong> SS socorro; DD urgencia; FF plan de vuelo y mensajes de movimiento; GG pronósticos y observaciones meteorológicos, regularidad y AIS; KK administrativos. <strong>La precedencia de transmisión tiene tres niveles: SS / DD-FF / GG-KK.</strong> Los mensajes de incertidumbre y de alerta son DD; los de la fase de peligro son SS.</li>
+<li><strong>Fases de emergencia:</strong> incertidumbre = <strong>30 min</strong> (sin comunicación, o hora prevista de llegada + 30 min); alerta = tras la incertidumbre, <strong>5 min</strong> después de la autorización para aterrizar sin haber aterrizado, eficiencia afectada sin aterrizaje forzoso probable, interferencia ilícita; peligro = tras la alerta, combustible agotado, aterrizaje forzoso probable o efectuado. No hay que mezclar las dos redacciones de «eficiencia afectada» (alerta: aterrizaje forzoso no probable; peligro: aterrizaje forzoso probable).</li>
+<li><strong>Fases del ATFCM: estratégica = hasta 7 días, NOP; pretáctica = los 6 días anteriores, ADP; táctica = el día; post-operacional = desde el día siguiente.</strong> Cuatro fases (tres operativas más el análisis).</li>
+<li><strong>El CTOT es el último recurso.</strong> Orden: adaptar la capacidad, luego medidas sin regulación (STAM) y, por último, regulación.</li>
+<li><strong>Tipos de capacidad:</strong> la sostenible es el factor de planificación; la máxima puede superar a la sostenible <strong>hasta 60 minutos</strong>; la declarada se basa en la sostenible y la publica la Dirección de Operaciones; la disponible es igual a la declarada en condiciones óptimas y la fija en táctica el Jefe de Sala, si no el Supervisor y, si no, el CTA con la habilitación más antigua.</li>
+<li><strong>Regla del +10 % de HEC:</strong> primeros 60 minutos a la declarada +10 %, siempre que los <strong>120 minutos</strong> siguientes se mantengan dentro de la declarada; <strong>no se aplica a los sectores de los TMA de Barcelona y Madrid</strong>.</li>
+<li><strong>MDI:</strong> nunca en estratégica ni pretáctica; máximo <strong>5 minutos</strong> entre salidas, durante unos <strong>30 minutos</strong>; la torre respeta el CTOT incluido el MDI.</li>
+<li><strong>Rerouting:</strong> preaviso de al menos <strong>3 horas</strong> cuando hace falta un nuevo plan de vuelo; en pretáctica lo gestiona el FMP Manager; el rerouting táctico es una medida ATC (devolver el vuelo a su ruta lo antes posible).</li>
+<li><strong>Level capping:</strong> medida que se aplica mediante escenarios predefinidos y que <strong>se refleja en el plan de vuelo</strong>.</li>
+<li><strong>Cherry picking</strong> = solo vuelos seleccionados, para picos cortos (de 1 h a 1 h 30 min). No confundir con MDI ni con MIT.</li>
+<li><strong>Exentos frente a excluidos:</strong> exento = todas las regulaciones, autorizado por los Estados; excluido = regulación o volumen específico, autorizado por los proveedores de servicio.</li>
+<li><strong>REJ frente a ACK frente a FLS:</strong> los planes rechazados nunca llegan a ATC; los aceptados (ACK) van a los ANSP; el FLS suspende un plan ya aceptado e inicialmente significa <strong>no autorizar la salida</strong>.</li>
+<li><strong>Quién decide en la cadena de la FMP:</strong> el TCA propone y solicita al NM; la <strong>FMP tiene la decisión final de implantar, modificar o cancelar</strong>; el <strong>Jefe de Sala aprueba</strong> las medidas en el espacio aéreo del ACC (y es el responsable último de cancelar una regulación).</li>
+<li><strong>FUA:</strong> el espacio aéreo civil y el militar son un continuo; toda segregación es temporal; TSA = no transita otro tráfico; TRA = puede cruzar otro tráfico con autorización ATC; hoy solo existe CDR1.</li>
+<li><strong>AUP:</strong> antes de las <strong>14:00 UTC</strong> del día anterior, válido <strong>24 h desde las 06:00 UTC</strong> del día siguiente; contenido = rutas ATS permanentes y CDR1 cerradas, más TSA/TRA activadas; el UUP lo actualiza.</li>
+<li><strong>Donde el manual calla, el examen puede recurrir a AIP ENR 1.10</strong> (umbrales del DLA, DEP no enviado para IFR dentro de EUR, etc.). Los datos adicionales están en <code>syllabus/t06-flight-plan-atfcm.md</code>.</li>
+</ol>
+<h2 id="imprescindible-memorizar">Imprescindible memorizar</h2>
+<ul>
+<li>Plan de vuelo = <strong>declaración de intenciones</strong>; FPL = plan de vuelo presentado; <strong>120 h máx. / 3 h (ATFM) / 60 min / 10 min en vuelo</strong>.</li>
+<li><strong>Presentación:</strong> web/app de ICARO, ARO centralizada, SITA; IFPS directamente para IFR/GAT; <strong>AFIL</strong> en vuelo; zona de ejemplo: <strong>La Cuesta (Córdoba) = zona 10</strong>.</li>
+<li><strong>RFP:</strong> EOBT-4 h; último RFP 30 min antes de la EOBT; CNL con <strong>DD</strong>; nuevo FPL tras <strong>5 min</strong>; RFP/Qn.</li>
+<li><strong>CHG no puede cambiar:</strong> ARCID, ADEP, ADES.</li>
+<li><strong>Prioridades AFTN:</strong> SS socorro; DD urgencia; FF plan de vuelo/movimiento/control; GG meteorología (pronósticos, observaciones), regularidad, AIS; KK administrativos. Precedencia 1 SS, 2 DD+FF, 3 GG+KK.</li>
+<li><strong>Fases:</strong> incertidumbre 30 min / 30 min después de la hora prevista de llegada (DD); alerta (DD): 5 min después de la autorización para aterrizar; peligro (SS).</li>
+<li><strong>Familias de mensajes:</strong> plan de vuelo presentado (DLA, CHG, CNL, DEP, ARR); coordinación (CPL, EST, CDN, ACP, LAM); suplementarios (RQP, RQS, SPL); control (autorización, transferencia, control de afluencia, informes de posición).</li>
+<li><strong>ARR:</strong> siempre para VFR, previa petición para IFR; listas de destinatarios distintas para destino y alternativa; el caso de fallo de comunicaciones lo notifica la torre.</li>
+<li><strong>RQP</strong> a la dependencia transferidora que envió un EST; <strong>RQS</strong> al ARO de salida; <strong>SPL</strong> desde el ARO de salida.</li>
+<li><strong>NM:</strong> lo gobierna el <strong>Network Manager Board (NMB)</strong>; Plan estratégico operativo a cinco años; objetivos a través del <strong>PRB</strong> dentro del <strong>SES</strong>.</li>
+<li><strong>En España el NM coordina con:</strong> Dirección de Operaciones ATM (UATM), FMP, AMC España.</li>
+<li><strong>Sistemas del NM:</strong> NMOC, ETFMS (antes TACT), CASA, ENV, IFPS, FMP.</li>
+<li><strong>UCATM:</strong> gestiona la estratégica, supervisa la pretáctica y la táctica, centraliza las funciones de las FMP, célula de crisis, asesora a AO/ATS, participa en la parte civil de la AMC.</li>
+<li><strong>Fases ATFCM:</strong> estratégica (hasta 7 días, NOP), pretáctica (6 días, ADP), táctica (el día), post-operacional (desde el día siguiente).</li>
+<li><strong>IFPS:</strong> dos centros, Bruselas y Bretigny; recibe, valida, distribuye, alimenta al NM; base de datos ENV; REJ/ACK/FLS.</li>
+<li><strong>Tipos de capacidad:</strong> sostenible, máxima (hasta 60 min por encima de la sostenible), declarada, disponible.</li>
+<li><strong>Responsable de la capacidad disponible:</strong> Jefe de Sala; si no, Supervisor; si no, CTA con la habilitación más antigua.</li>
+<li><strong>Monitorización:</strong> HEC, OCC Peak, OCC Sustained; solo HEC en pretáctica o con más de 3 h de antelación; sobredemanda = se superan todos los parámetros aplicables.</li>
+<li><strong>Orden de actuación:</strong> adaptar la capacidad, STAM, regulación (CTOT).</li>
+<li><strong>Seis técnicas sin regulación:</strong> configuración dinámica, level capping, rerouting, MDI, MIT, cherry picking.</li>
+<li><strong>MDI:</strong> máx. 5 min, unos 30 min, solo táctico; <strong>preaviso de rerouting: 3 h</strong>.</li>
+<li><strong>Regla de regulación:</strong> declarada +10 % durante 60 min si los 120 min siguientes se mantienen dentro de la declarada; excepto TMA de Barcelona y Madrid; con OTMV: rate &gt;= declarada; herramientas ASIM, IMPACT, SIMEX.</li>
+<li><strong>Cadena:</strong> el TCA propone; la FMP decide en última instancia; el Jefe de Sala aprueba; dependencias sin Jefe de Sala: el supervisor determina y remite al Jefe de Sala; dependencias no ENAIRE: coordinan directamente con la FMP.</li>
+<li><strong>CTOT:</strong> forma parte de la autorización ATC; si aparece un plan suspendido, el CTA de TWR contacta con la FMP; ATC ayuda a los AO a cumplir o a revisar.</li>
+<li><strong>Exentos (5):</strong> Jefes de Estado, SAR, autorizados por el Estado, ambulancia con vidas en juego, extinción de incendios.</li>
+<li><strong>Cancelar una regulación (3 pasos):</strong> informar al NM y coordinar Jefe de Sala + NMOC; monitorizar el impacto; adoptar medidas para evitar una nueva sobrecarga.</li>
+<li><strong>Niveles FUA:</strong> 1 estratégico, 2 pretáctico (AMC), 3 táctico; TSA, TRA, CDR1; AUP antes de las 14:00 UTC, válido 24 h desde las 06:00 UTC.</li>
+</ul>
+<h2 id="glosario-bilingue-es-en">Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español (término del manual / del examen)</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mensaje de aceptación (ACP)</td>
+<td>Acceptance message (ACP)</td>
+</tr>
+<tr>
+<td>Plan de vuelo aceptado (ACK)</td>
+<td>Accepted flight plan (ACK)</td>
+</tr>
+<tr>
+<td>Proveedor de servicios de navegación aérea (ANSP)</td>
+<td>Air Navigation Service Provider (ANSP)</td>
+</tr>
+<tr>
+<td>Gestión de la capacidad y afluencia de tráfico aéreo (ATFCM)</td>
+<td>Air Traffic Flow and Capacity Management (ATFCM)</td>
+</tr>
+<tr>
+<td>Organización de la afluencia de tránsito aéreo (ATFM)</td>
+<td>Air Traffic Flow Management (ATFM)</td>
+</tr>
+<tr>
+<td>Controlador de tránsito aéreo (CTA)</td>
+<td>Air traffic controller (CTA)</td>
+</tr>
+<tr>
+<td>Oficina de notificación de los servicios de tránsito aéreo (ARO)</td>
+<td>Air traffic services reporting office (ARO)</td>
+</tr>
+<tr>
+<td>Operador de aeronave / explotador (AO)</td>
+<td>Aircraft operator (AO)</td>
+</tr>
+<tr>
+<td>Célula de Gestión de Espacio Aéreo (AMC)</td>
+<td>Airspace Management Cell (AMC)</td>
+</tr>
+<tr>
+<td>Plan de Utilización del Espacio Aéreo (AUP)</td>
+<td>Airspace Use Plan (AUP)</td>
+</tr>
+<tr>
+<td>Fase de alerta</td>
+<td>Alert phase</td>
+</tr>
+<tr>
+<td>Mensaje de llegada (ARR)</td>
+<td>Arrival message (ARR)</td>
+</tr>
+<tr>
+<td>Capacidad disponible</td>
+<td>Available capacity</td>
+</tr>
+<tr>
+<td>Hora calculada de despegue (CTOT)</td>
+<td>Calculated take-off time (CTOT)</td>
+</tr>
+<tr>
+<td>Mensaje de cancelación (CNL)</td>
+<td>Cancellation message (CNL)</td>
+</tr>
+<tr>
+<td>Capacidad</td>
+<td>Capacity</td>
+</tr>
+<tr>
+<td>Mensaje de modificación (CHG)</td>
+<td>Change message (CHG)</td>
+</tr>
+<tr>
+<td>Selección de vuelos (cherry picking)</td>
+<td>Cherry picking</td>
+</tr>
+<tr>
+<td>Autorización</td>
+<td>Clearance</td>
+</tr>
+<tr>
+<td>Ruta condicional (CDR)</td>
+<td>Conditional route (CDR)</td>
+</tr>
+<tr>
+<td>Mensaje de coordinación (CDN)</td>
+<td>Coordination message (CDN)</td>
+</tr>
+<tr>
+<td>Plan de vuelo actualizado (CPL)</td>
+<td>Current flight plan (CPL)</td>
+</tr>
+<tr>
+<td>Capacidad declarada</td>
+<td>Declared capacity</td>
+</tr>
+<tr>
+<td>Mensaje de demora (DLA)</td>
+<td>Delay message (DLA)</td>
+</tr>
+<tr>
+<td>Demanda</td>
+<td>Demand</td>
+</tr>
+<tr>
+<td>Mensaje de salida (DEP)</td>
+<td>Departure message (DEP)</td>
+</tr>
+<tr>
+<td>Fase de peligro</td>
+<td>Distress phase</td>
+</tr>
+<tr>
+<td>Configuración dinámica</td>
+<td>Dynamic configuration</td>
+</tr>
+<tr>
+<td>Sistema de Gestión del Flujo Táctico Reforzado (ETFMS)</td>
+<td>Enhanced Tactical Flow Management System (ETFMS)</td>
+</tr>
+<tr>
+<td>Mensaje de estimadas sobre un punto (EST)</td>
+<td>Estimate message (EST)</td>
+</tr>
+<tr>
+<td>Hora prevista de fuera calzos (EOBT)</td>
+<td>Estimated off-block time (EOBT)</td>
+</tr>
+<tr>
+<td>Vuelo exento</td>
+<td>Exempt flight</td>
+</tr>
+<tr>
+<td>Vuelo excluido</td>
+<td>Excluded flight</td>
+</tr>
+<tr>
+<td>Plan de vuelo presentado (FPL)</td>
+<td>Filed flight plan (FPL)</td>
+</tr>
+<tr>
+<td>Uso flexible del espacio aéreo (FUA)</td>
+<td>Flexible use of airspace (FUA)</td>
+</tr>
+<tr>
+<td>Mensaje de suspensión del vuelo (FLS)</td>
+<td>Flight suspension message (FLS)</td>
+</tr>
+<tr>
+<td>Posición de gestión de afluencia (FMP)</td>
+<td>Flow management position (FMP)</td>
+</tr>
+<tr>
+<td>Técnico de control de afluencia (TCA)</td>
+<td>Flow control technician (TCA)</td>
+</tr>
+<tr>
+<td>Sistema integrado para el tratamiento inicial de planes de vuelo (IFPS)</td>
+<td>Integrated Initial Flight Plan Processing System (IFPS)</td>
+</tr>
+<tr>
+<td>Limitación de nivel (level capping)</td>
+<td>Level capping</td>
+</tr>
+<tr>
+<td>Mensaje de acuse de recibo lógico (LAM)</td>
+<td>Logical acknowledgement message (LAM)</td>
+</tr>
+<tr>
+<td>Capacidad máxima</td>
+<td>Maximum capacity</td>
+</tr>
+<tr>
+<td>Separación en millas (MIT, <em>Miles in Trail</em>)</td>
+<td>Miles in trail (MIT)</td>
+</tr>
+<tr>
+<td>Intervalo mínimo de salida (MDI)</td>
+<td>Minimum departure interval (MDI)</td>
+</tr>
+<tr>
+<td>Gestor de red (NM)</td>
+<td>Network Manager (NM)</td>
+</tr>
+<tr>
+<td>Consejo de Administración de la Red (NMB)</td>
+<td>Network Manager Board (NMB)</td>
+</tr>
+<tr>
+<td>Centro de operaciones del gestor de red (NMOC)</td>
+<td>Network Manager Operations Centre (NMOC)</td>
+</tr>
+<tr>
+<td>Plan operativo de la red (NOP)</td>
+<td>Network Operational Plan (NOP)</td>
+</tr>
+<tr>
+<td>Ocupación (OCC)</td>
+<td>Occupancy (OCC)</td>
+</tr>
+<tr>
+<td>Órgano de Evaluación del Rendimiento (PRB)</td>
+<td>Performance Review Body (PRB)</td>
+</tr>
+<tr>
+<td>Análisis post-operacional</td>
+<td>Post-operational analysis</td>
+</tr>
+<tr>
+<td>Fase pretáctica</td>
+<td>Pre-tactical phase</td>
+</tr>
+<tr>
+<td>Indicador de prioridad</td>
+<td>Priority indicator</td>
+</tr>
+<tr>
+<td>Plan de vuelo rechazado (REJ)</td>
+<td>Rejected flight plan (REJ)</td>
+</tr>
+<tr>
+<td>Plan de vuelo repetitivo (RPL)</td>
+<td>Repetitive flight plan (RPL)</td>
+</tr>
+<tr>
+<td>Plan de vuelo que reemplaza (RFP)</td>
+<td>Replacement flight plan (RFP)</td>
+</tr>
+<tr>
+<td>Solicitud de plan de vuelo suplementario (RQS)</td>
+<td>Request supplementary flight plan (RQS)</td>
+</tr>
+<tr>
+<td>Solicitud de plan de vuelo (RQP)</td>
+<td>Request flight plan (RQP)</td>
+</tr>
+<tr>
+<td>Regulación</td>
+<td>Regulation</td>
+</tr>
+<tr>
+<td>Reencaminamiento (rerouting)</td>
+<td>Rerouting</td>
+</tr>
+<tr>
+<td>Jefe de Sala</td>
+<td>Shift/room chief</td>
+</tr>
+<tr>
+<td>Cielo Único Europeo (SES)</td>
+<td>Single European Sky (SES)</td>
+</tr>
+<tr>
+<td>Fase estratégica</td>
+<td>Strategic phase</td>
+</tr>
+<tr>
+<td>Supervisor</td>
+<td>Supervisor</td>
+</tr>
+<tr>
+<td>Mensaje de plan de vuelo suplementario (SPL)</td>
+<td>Supplementary flight plan message (SPL)</td>
+</tr>
+<tr>
+<td>Capacidad sostenible</td>
+<td>Sustainable capacity</td>
+</tr>
+<tr>
+<td>Fase táctica</td>
+<td>Tactical phase</td>
+</tr>
+<tr>
+<td>Área/espacio aéreo temporalmente restringido (reservado) (TRA)</td>
+<td>Temporarily Restricted Area (TRA)</td>
+</tr>
+<tr>
+<td>Área/espacio aéreo temporalmente segregado (TSA)</td>
+<td>Temporarily Segregated Area (TSA)</td>
+</tr>
+<tr>
+<td>Volumen de tráfico (TV)</td>
+<td>Traffic volume (TV)</td>
+</tr>
+<tr>
+<td>Fase de incertidumbre</td>
+<td>Uncertainty phase</td>
+</tr>
+<tr>
+<td>Interferencia ilícita</td>
+<td>Unlawful interference</td>
+</tr>
+<tr>
+<td>Plan de Utilización del Espacio Aéreo actualizado (UUP)</td>
+<td>Updated Airspace Use Plan (UUP)</td>
+</tr>
+<tr>
+<td>Categoría de estela turbulenta</td>
+<td>Wake turbulence category</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fuentes">Fuentes</h2>
+<ul>
+<li><strong>Manual oficial de ENAIRE n.º 6</strong>, «Plan de vuelo y Gestión de la capacidad y afluencia de tráfico», Elaborado Noviembre 2024, 36 pp. Páginas revisadas como imagen: 2, 8, 12, 18, 21, 22, 26, 30, 34.</li>
+<li><strong>Contrastes:</strong> AIP España ENR 1.10 y ENR 1.9 (presentación, DLA, DEP, ARR, RFP, casilla 18, CDR1, AMC, EAUP), EASA Easy Access Rules SERA (SERA.4005(d)), RD 57/2002 y Reglamento (UE) 2020/469 (fases de emergencia), PANS-ATM (prioridades, palabras clave), Manual de Operaciones ATFCM y Manual de Usuario ATFCM de EUROCONTROL (Wave 2.3, fases, exentos/excluidos, cherry pick, vuelos exentos), Manual de Operaciones ATFCM 2024 archivado (definiciones de OTMV), Manual de Usuario del IFPS de EUROCONTROL (Wave 2.3, RFP, unidades del IFPS).</li>
+<li><strong>Marcas usadas para contenido que no está en el manual:</strong> INCERFA/ALERFA/DETRESFA AIP GEN 2.2; desarrollo de HEC.</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,1843 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Meteorología</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Meteorología</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-se-examina">Qué se examina</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</a></li>
+<li><a href="#1-la-meteorologia-en-el-contexto-aeronautico-cap-1-del-manual-pp-4-10">1. La meteorología en el contexto aeronáutico (cap. 1 del manual, pp. 4-10)</a><ul>
+<li><a href="#11-meteorologia-y-aviacion-manual-11-pp-4-5">1.1 Meteorología y aviación (manual 1.1, pp. 4-5)</a></li>
+<li><a href="#12-organizacion-del-servicio-meteorologico-para-la-navegacion-aerea-internacional-manual-12-pp-5-8">1.2 Organización del servicio meteorológico para la navegación aérea internacional (manual 1.2, pp. 5-8)</a></li>
+<li><a href="#13-obtencion-de-datos-meteorologicos-manual-13-pp-8-10">1.3 Obtención de datos meteorológicos (manual 1.3, pp. 8-10)</a></li>
+</ul>
+</li>
+<li><a href="#2-conceptos-basicos-de-la-atmosfera-cap-2-del-manual-pp-10-27">2. Conceptos básicos de la atmósfera (cap. 2 del manual, pp. 10-27)</a><ul>
+<li><a href="#21-composicion-quimica-manual-21-pp-10-11">2.1 Composición química (manual 2.1, pp. 10-11)</a></li>
+<li><a href="#22-el-agua-en-la-atmosfera-manual-22-pp-11-12">2.2 El agua en la atmósfera (manual 2.2, pp. 11-12)</a></li>
+<li><a href="#23-24-propiedades-fisicas-presion-atmosferica-manual-23-24-pp-12-14">2.3-2.4 Propiedades físicas: presión atmosférica (manual 2.3-2.4, pp. 12-14)</a></li>
+<li><a href="#25-temperatura-manual-25-pp-15-16">2.5 Temperatura (manual 2.5, pp. 15-16)</a></li>
+<li><a href="#26-densidad-manual-26-pp-16-17">2.6 Densidad (manual 2.6, pp. 16-17)</a></li>
+<li><a href="#27-humedad-manual-27-pp-17-18">2.7 Humedad (manual 2.7, pp. 17-18)</a></li>
+<li><a href="#28-estructura-fisica-de-la-atmosfera-capas-manual-28-pp-18-20">2.8 Estructura física de la atmósfera: capas (manual 2.8, pp. 18-20)</a></li>
+<li><a href="#29-estabilidad-e-inestabilidad-manual-29-p-21">2.9 Estabilidad e inestabilidad (manual 2.9, p. 21)</a></li>
+<li><a href="#210-anexo-la-atmosfera-en-la-aviacion-manual-210-pp-21-26">2.10 Anexo: la atmósfera en la aviación (manual 2.10, pp. 21-26)</a></li>
+</ul>
+</li>
+<li><a href="#3-radiacion-en-la-atmosfera-cap-3-del-manual-pp-27-31">3. Radiación en la atmósfera (cap. 3 del manual, pp. 27-31)</a><ul>
+<li><a href="#31-tipos-de-radiacion-manual-31-pp-27-28">3.1 Tipos de radiación (manual 3.1, pp. 27-28)</a></li>
+<li><a href="#32-balance-radiactivo-manual-32-pp-28-29">3.2 Balance radiactivo (manual 3.2, pp. 28-29)</a></li>
+<li><a href="#33-intercambio-de-calor-en-la-atmosfera-manual-33-pp-29-31">3.3 Intercambio de calor en la atmósfera (manual 3.3, pp. 29-31)</a></li>
+</ul>
+</li>
+<li><a href="#4-circulacion-general-atmosferica-cap-4-del-manual-pp-31-34">4. Circulación general atmosférica (cap. 4 del manual, pp. 31-34)</a><ul>
+<li><a href="#41-modelos">4.1 Modelos</a></li>
+<li><a href="#42-fuerza-de-coriolis">4.2 Fuerza de Coriolis</a></li>
+</ul>
+</li>
+<li><a href="#5-viento-conceptos-basicos-cap-5-del-manual-pp-34-36">5. Viento: conceptos básicos (cap. 5 del manual, pp. 34-36)</a></li>
+<li><a href="#6-anticiclones-y-depresiones-cap-6-del-manual-pp-36-38">6. Anticiclones y depresiones (cap. 6 del manual, pp. 36-38)</a></li>
+<li><a href="#7-masas-de-aire-y-frentes-cap-7-del-manual-pp-38-41">7. Masas de aire y frentes (cap. 7 del manual, pp. 38-41)</a><ul>
+<li><a href="#71-masas-de-aire">7.1 Masas de aire</a></li>
+<li><a href="#72-frentes">7.2 Frentes</a></li>
+</ul>
+</li>
+<li><a href="#8-variables-meteorologicas-cap-8-del-manual-pp-41-53">8. Variables meteorológicas (cap. 8 del manual, pp. 41-53)</a><ul>
+<li><a href="#81-nubosidad-manual-81-pp-41-47">8.1 Nubosidad (manual 8.1, pp. 41-47)</a></li>
+<li><a href="#82-visibilidad-manual-82-pp-47-49">8.2 Visibilidad (manual 8.2, pp. 47-49)</a></li>
+<li><a href="#83-precipitacion-manual-83-pp-49-50">8.3 Precipitación (manual 8.3, pp. 49-50)</a></li>
+<li><a href="#84-viento-manual-84-pp-50-53">8.4 Viento (manual 8.4, pp. 50-53)</a></li>
+</ul>
+</li>
+<li><a href="#9-fenomenos-meteorologicos-peligrosos-para-el-vuelo-cap-9-del-manual-pp-53-70">9. Fenómenos meteorológicos peligrosos para el vuelo (cap. 9 del manual, pp. 53-70)</a><ul>
+<li><a href="#91-visibilidad-reducida-manual-91-pp-53-55">9.1 Visibilidad reducida (manual 9.1, pp. 53-55)</a></li>
+<li><a href="#92-ilusiones-opticas-manual-92-p-56">9.2 Ilusiones ópticas (manual 9.2, p. 56)</a></li>
+<li><a href="#93-engelamiento-manual-93-pp-56-59">9.3 Engelamiento (manual 9.3, pp. 56-59)</a></li>
+<li><a href="#94-cizalladura-manual-94-p-59">9.4 Cizalladura (manual 9.4, p. 59)</a></li>
+<li><a href="#95-turbulencia-manual-95-pp-60-64">9.5 Turbulencia (manual 9.5, pp. 60-64)</a></li>
+<li><a href="#96-tormentas-manual-96-pp-64-69">9.6 Tormentas (manual 9.6, pp. 64-69)</a></li>
+<li><a href="#97-ciclones-tropicales-manual-97-pp-69-70">9.7 Ciclones tropicales (manual 9.7, pp. 69-70)</a></li>
+<li><a href="#98-corrientes-convectivas-manual-98-p-70">9.8 Corrientes convectivas (manual 9.8, p. 70)</a></li>
+<li><a href="#99-temperaturas-elevadas-manual-99-p-70">9.9 Temperaturas elevadas (manual 9.9, p. 70)</a></li>
+</ul>
+</li>
+<li><a href="#10-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">10. Trampas de examen (confusiones típicas y cómo distinguirlas)</a></li>
+<li><a href="#11-imprescindible-memorizar-lista-corta-y-densa">11. Imprescindible memorizar (lista corta y densa)</a></li>
+<li><a href="#12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#13-fuentes">13. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">86 min de lectura</div><h1 id="om03-manual-oficial-de-enaire-3-conceptos-basicos-de-meteorologia-aeronautica-guia-de-estudio-completa">Guía: Meteorología</h1>
+<p><em>Documento fuente: «Conceptos básicos de Meteorología Aeronáutica» (tema 3, «Meteorología»), ENAIRE, </em><em>Elaborado: noviembre/2024</em><em>, 70 páginas, unas 19 459 palabras en español.</em></p>
+<h2 id="que-se-examina">Qué se examina</h2>
+<p>El examen es en español, con 50 preguntas en total repartidas en nueve temas; el tema 3 es «Conceptos básicos de meteorología». Este manual es lo más parecido a su bibliografía. Cabe esperar preguntas de memoria con datos concretos: la composición del aire, las alturas de las capas y la evolución de la temperatura, los valores ISA, las definiciones de QNH/QFE/QNE y de altitud, nivel y capa de transición, los géneros de nubes por piso, los códigos de octas (FEW/SCT/BKN/OVC), las definiciones de niebla, neblina, techo de nubes y RVR, los tipos de engelamiento, los tipos de turbulencia, las condiciones de la onda de montaña, las fases de una tormenta, las cifras de microrreventones y tornados, los umbrales de los ciclones tropicales y la organización del servicio meteorológico (WAFC/VAAC/TCAC/CMRE/MWO/OMAe/EMAe y las cifras de España). El manual no es un tratado general de meteorología: es un texto cerrado, así que <strong>hay que aprenderlo tal como está escrito</strong>, y donde difiera de otras fuentes conviene anotar ambas versiones (véanse las notas y la tabla de discrepancias en <code>T03a-general-meteorology.md</code> y <code>T03b-aeronautical-met-products.md</code>).</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual</th>
+<th>Páginas</th>
+<th>Sección de esta guía</th>
+<th>Contenido principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. La Meteorología en el contexto aeronáutico (1.1, 1.2, 1.3)</td>
+<td>4-10</td>
+<td>Sección 1</td>
+<td>Tiempo frente a clima; observado frente a previsto; servicio del Anexo 3 de la OACI; WAFC/VAAC/TCAC/CMRE/MWO/OMAe/EMAe; cifras de España; obtención de datos</td>
+</tr>
+<tr>
+<td>2. Conceptos básicos de la atmósfera (2.1-2.10)</td>
+<td>10-27</td>
+<td>Sección 2</td>
+<td>Composición; agua; presión; temperatura; densidad; humedad; cinco capas; estabilidad; ISA; altimetría; QNH/QFE/QNE; niveles de vuelo; altitud, nivel y capa de transición</td>
+</tr>
+<tr>
+<td>3. Radiación en la atmósfera (3.1-3.3)</td>
+<td>27-31</td>
+<td>Sección 3</td>
+<td>Radiación solar y terrestre; balance; efecto invernadero; conducción/convección/advección/turbulencia</td>
+</tr>
+<tr>
+<td>4. Circulación general atmosférica (4.1, 4.2)</td>
+<td>31-34</td>
+<td>Sección 4</td>
+<td>Modelo simple; modelo de tres células; Coriolis</td>
+</tr>
+<tr>
+<td>5. Viento: conceptos básicos (5.1-5.4)</td>
+<td>34-36</td>
+<td>Sección 5</td>
+<td>Convergencia/divergencia; subsidencia; alisios, vientos del oeste; corriente en chorro</td>
+</tr>
+<tr>
+<td>6. Anticiclones y depresiones</td>
+<td>36-38</td>
+<td>Sección 6</td>
+<td>Tipos de anticiclones; depresiones; ciclón tropical; DANA; depresiones del frente polar</td>
+</tr>
+<tr>
+<td>7. Masas de aire y frentes (7.1, 7.2)</td>
+<td>38-41</td>
+<td>Sección 7</td>
+<td>Clasificación en 8 tipos; frentes fríos/cálidos/estacionarios/ocluidos</td>
+</tr>
+<tr>
+<td>8. Variables meteorológicas (8.1-8.4)</td>
+<td>41-53</td>
+<td>Sección 8</td>
+<td>Formación y clasificación de las nubes; octas; techo de nubes; visibilidad; precipitación; viento; brisas; efecto Foehn</td>
+</tr>
+<tr>
+<td>9. Fenómenos meteorológicos peligrosos para el vuelo (9.1-9.9)</td>
+<td>53-70</td>
+<td>Sección 9</td>
+<td>Visibilidad reducida; niebla; ilusiones ópticas; engelamiento; cizalladura; turbulencia; tormentas; líneas de turbonada; microrreventón; tornado; ciclones tropicales; corrientes convectivas; temperaturas elevadas</td>
+</tr>
+<tr>
+<td>(final)</td>
+<td></td>
+<td>Secciones 10-13</td>
+<td>Trampas de examen, imprescindible memorizar, glosario ES → EN, fuentes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-la-meteorologia-en-el-contexto-aeronautico-cap-1-del-manual-pp-4-10">1. La meteorología en el contexto aeronáutico (cap. 1 del manual, pp. 4-10)</h2>
+<h3 id="11-meteorologia-y-aviacion-manual-11-pp-4-5">1.1 Meteorología y aviación (manual 1.1, pp. 4-5)</h3>
+<ul>
+<li>La <strong>meteorología (<em>Meteorología</em>)</strong> es «la ciencia interdisciplinaria, basada fundamentalmente en la Física de la Atmósfera, que estudia el estado del tiempo, el medio atmosférico, los fenómenos allí producidos y las leyes que lo rigen» (manual p. 4).</li>
+<li><strong>Tiempo</strong> frente a <strong>clima</strong>, ambos según la definición de la <strong>Organización Meteorológica Mundial (OMM, en inglés WMO)</strong>:</li>
+<li>El <em>tiempo</em> es el estado de la atmósfera en un instante dado, definido por los diversos elementos meteorológicos.</li>
+<li>El <em>clima</em> es la síntesis de las condiciones meteorológicas en un lugar determinado, caracterizadas por estadísticas a largo plazo de los elementos meteorológicos en dicho lugar.</li>
+<li><strong>Meteorología aeronáutica</strong>: la meteorología que se ocupa de los fenómenos y variables meteorológicos que afectan a las operaciones de las aeronaves, <strong>tanto en tierra como en vuelo</strong>.</li>
+<li>La información meteorológica suministrada presenta siempre una <strong>doble vertiente</strong>:
+  1. Situación <strong>observada</strong>, en un momento relativamente reciente: es necesaria para la prestación de los servicios aeroportuarios y de tránsito aéreo y puede afectar tanto a las distintas fases del vuelo como a los movimientos de las aeronaves en plataforma.
+  2. Situación <strong>prevista</strong>: permite anticiparse y adoptar decisiones para optimizar las operaciones o mitigar los efectos negativos. Debido a la inexactitud e incertidumbre inherentes al desarrollo de los fenómenos atmosféricos, el valor especificado del pronóstico debe entenderse como <strong>el valor más probable</strong> que pueda tener el elemento durante el periodo del pronóstico.</li>
+<li>La información debe estar disponible para cuatro destinatarios: (1) los operadores y los miembros de la tripulación de vuelo (planificación previa al vuelo y durante el vuelo); (2) los proveedores de servicios de tránsito aéreo (ATS) y de servicios de información de vuelo; (3) las unidades de servicio de búsqueda y salvamento (SAR); (4) los aeropuertos.</li>
+</ul>
+<h3 id="12-organizacion-del-servicio-meteorologico-para-la-navegacion-aerea-internacional-manual-12-pp-5-8">1.2 Organización del servicio meteorológico para la navegación aérea internacional (manual 1.2, pp. 5-8)</h3>
+<ul>
+<li>
+<p>El servicio está regulado por el <strong>Anexo 3 de la OACI</strong>. Dos principios fundamentales:
+  a. Finalidad: contribuir a la <strong>seguridad operacional, regularidad y eficiencia</strong> de la navegación aérea internacional.
+  b. Cada Estado miembro determina el servicio meteorológico que presta en el espacio aéreo situado sobre su territorio y, si fuera el caso, sobre aguas internacionales u otras áreas situadas fuera de su territorio, teniendo en cuenta los <strong>acuerdos regionales de navegación aérea</strong> establecidos para las regiones de la OACI a las que pertenezca su espacio aéreo.</p>
+</li>
+<li>
+<p>La OACI trabaja en estrecha cooperación con la <strong>OMM</strong>, organismo especializado de las Naciones Unidas.</p>
+</li>
+<li>Centros y oficinas, según el ámbito en que se presta el servicio (tabla p. 6):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Ámbito</th>
+<th>Oficina responsable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mundial</td>
+<td><strong>WAFC</strong> - Centros Mundiales de Pronóstico de Área (<em>World Area Forecast Centres</em>)</td>
+</tr>
+<tr>
+<td>Regional</td>
+<td><strong>VAAC</strong> - Centros de Avisos de Cenizas Volcánicas (<em>Volcanic Ash Advisory Centres</em>); <strong>TCAC</strong> - Centros de Avisos de Ciclones Tropicales (<em>Tropical Cyclone Advisory Centres</em>); <strong>CMRE</strong> - Centros Meteorológicos Regionales Especializados para el Transporte y Dispersión de Materiales Radiactivos en la Atmósfera</td>
+</tr>
+<tr>
+<td><strong>FIR</strong> (región de información de vuelo)</td>
+<td><strong>Oficinas de Vigilancia Meteorológica (<em>Meteorological Watch Offices</em>, MWO)</strong></td>
+</tr>
+<tr>
+<td>Aeródromo</td>
+<td><strong>Estaciones Meteorológicas Aeronáuticas (EMAe)</strong> y oficinas meteorológicas de aeródromo</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: la tabla del manual recoge los WAFC como «mundial» y sitúa los VAAC, TCAC y CMRE en «regional». El manual no define «OPMET» (= datos meteorológicos operacionales), que aparece en el texto.</p>
+<p><strong>Detalle por centro (manual pp. 7-8)</strong>:</p>
+<ul>
+<li><strong>WAFC</strong></li>
+<li>Función: centro meteorológico designado para preparar y expedir <strong>pronósticos del tiempo significativo (SIGWX) y en altitud en forma digital a escala mundial</strong>, directamente a los Estados, utilizando los servicios basados en Internet del servicio fijo aeronáutico.</li>
+<li>Composición: <strong>dos centros, el WAFC de Londres y el WAFC de Washington</strong>. Si uno interrumpe sus actividades, el otro asume sus funciones.</li>
+<li>Elaboran: pronósticos mundiales reticulares a diferentes niveles de viento, temperatura, humedad, etc.; pronósticos mundiales sobre fenómenos de tiempo significativo.</li>
+<li>Reciben información: de los Centros Meteorológicos Regionales Especializados, sobre la liberación accidental de materiales radiactivos a la atmósfera (y pronósticos de su evolución); de los VAAC, sobre cenizas volcánicas; de los TCAC, sobre ciclones tropicales, para incluirla en sus pronósticos.</li>
+<li><strong>VAAC</strong></li>
+<li>Función: centro meteorológico designado en virtud de un acuerdo regional de navegación aérea para proporcionar <strong>información de asesoramiento sobre la extensión lateral y vertical y el movimiento pronosticado de las cenizas volcánicas en la atmósfera</strong> a: las oficinas de vigilancia meteorológica, los centros de control de área, los centros de información de vuelo, los centros mundiales de pronósticos de área y los <strong>bancos internacionales de datos OPMET</strong>.</li>
+<li>Existen <strong>nueve VAAC</strong>, establecidos por la OACI en estrecha cooperación con la OMM y la <strong>Unión Internacional de Geodesia y Geofísica (UIGG)</strong>.</li>
+<li>Gestión: están a cargo de algunos Miembros de la OMM que han aceptado esa responsabilidad y proporcionan información meteorológica en apoyo del sistema de vigilancia de los volcanes en las aerovías internacionales; <strong>mantienen la vigilancia 24 horas al día</strong>; si un VAAC interrumpe su funcionamiento, <strong>otro VAAC lleva a cabo sus funciones</strong>.</li>
+<li><strong>TCAC</strong></li>
+<li>Función: centro designado en virtud de un acuerdo regional de navegación aérea para proporcionar a las MWO, a los WAFC y a los bancos internacionales de datos OPMET información sobre la <strong>posición, la dirección y la velocidad de movimiento pronosticadas, la presión central y el viento máximo en la superficie</strong> de los ciclones tropicales.</li>
+<li>Existen <strong>siete TCAC</strong>, que asumen la responsabilidad regional de suministrar avisos y comunicados sobre todos los ciclones tropicales, huracanes o tifones en todo el mundo.</li>
+<li><strong>CMRE (centros meteorológicos regionales especializados, OMM)</strong></li>
+<li>Función: designados por la OMM para proporcionar mapas de pronósticos (productos) para la <strong>trayectoria y los depósitos</strong> de materiales radiactivos liberados a la atmósfera.</li>
+<li>Son <strong>ocho</strong>: <strong>Beijing, Exeter, Melbourne, Montreal, Obninsk, Tokio, Toulouse y Washington</strong>.</li>
+<li><strong>Oficina de Vigilancia Meteorológica (MWO)</strong></li>
+<li>Función: mantiene la <strong>vigilancia continua</strong> de las condiciones meteorológicas que afecten a las operaciones de vuelo dentro de la región o regiones de información de vuelo asignadas; prepara y difunde información sobre la <strong>presencia prevista de fenómenos meteorológicos en ruta especificados</strong> que puedan afectar a la seguridad de las operaciones dentro de esas regiones; proporciona la información recibida sobre <strong>actividad precursora de erupciones volcánicas, erupciones volcánicas y nubes de cenizas volcánicas</strong>, así como sobre la <strong>liberación accidental de materiales radiactivos</strong> a la atmósfera en el área sobre la que mantiene vigilancia.</li>
+<li><strong>España: dos oficinas, a cargo de la Agencia Estatal de Meteorología (AEMET)</strong>: una en <strong>Valencia</strong> (para el <strong>FIR Madrid y el FIR Barcelona</strong>) y otra en <strong>Las Palmas de Gran Canaria</strong> (para el <strong>FIR Canarias</strong>).</li>
+<li><strong>Oficinas meteorológicas de aeródromo (OMAe)</strong></li>
+<li>Cada Estado contratante establece una o más oficinas meteorológicas de aeródromo para el suministro del servicio meteorológico necesario que permita atender las necesidades de la navegación aérea internacional.</li>
+<li>Funciones: preparar <strong>pronósticos de las condiciones meteorológicas locales</strong> del aeródromo o aeródromos; mantener una vigilancia meteorológica continua en los aeródromos para los que hayan sido designadas; suministrar <strong>exposiciones verbales, consultas y documentación de vuelo</strong> a los miembros de las tripulaciones de vuelo y a otro personal de operaciones de vuelo; proporcionar otros tipos de información meteorológica a los usuarios aeronáuticos; pasar la información recibida sobre <strong>cenizas volcánicas</strong> a la dependencia de servicios de tránsito aéreo, a la dependencia de servicios de información aeronáutica (AIS) y a la MWO asociadas.</li>
+<li>En España realizan la vigilancia meteorológica y las predicciones de aeródromo (principalmente <strong>TAF, TREND y avisos de aeródromo</strong>). <strong>Existen 5: Las Palmas, Madrid, Santander, Sevilla y Valencia.</strong></li>
+<li><strong>Estaciones meteorológicas aeronáuticas (EMAe)</strong></li>
+<li>Realizan las <strong>observaciones meteorológicas ordinarias y especiales</strong> del aeródromo y la vigilancia del tiempo presente (principalmente informes <strong>METAR/SPECI</strong>).</li>
+<li>Las observaciones ordinarias se efectúan a <strong>intervalos fijos de cada media hora o cada hora (para el METAR)</strong> y se completan con <strong>observaciones especiales</strong> cuando ocurren cambios especificados con respecto al viento, la visibilidad, etc.</li>
+<li>En España están asociadas a las oficinas meteorológicas de aeródromo; su equipamiento de medida depende del <strong>número de pistas, de las categorías de las operaciones de aproximación y aterrizaje</strong> de esas pistas y de las <strong>características climatológicas</strong> del aeródromo.</li>
+<li><strong>AEMET tiene oficinas meteorológicas en los 40 aeropuertos de la red de AENA y en 8 bases aéreas abiertas al tráfico civil</strong>.</li>
+</ul>
+<h3 id="13-obtencion-de-datos-meteorologicos-manual-13-pp-8-10">1.3 Obtención de datos meteorológicos (manual 1.3, pp. 8-10)</h3>
+<p>El objetivo de la observación meteorológica es determinar o estimar el valor de diferentes variables y parámetros físicos que permiten conocer el estado de la atmósfera y preparar análisis, predicciones y avisos meteorológicos, así como realizar la vigilancia del clima. Los ocho puntos del manual:</p>
+<ol>
+<li>Gran parte de las variables se miden mediante <strong>sensores electrónicos</strong> incorporados a equipos automáticos de medida (presión, temperatura, etc.).</li>
+<li>Algunas necesitan la <strong>participación experta de un observador de meteorología</strong> para su estimación (visibilidad, nubosidad, etc.).</li>
+<li>Además de las mediciones dentro del aeródromo, se necesitan datos de otros puntos de la atmósfera para conocer su estado en ruta y para que los predictores realicen pronósticos de aeródromo y de área.</li>
+<li>Las <strong>observaciones meteorológicas en altitud</strong> se realizan mediante <strong>sondeos, radar, red de descargas eléctricas, satélites meteorológicos y aeronaves</strong>.</li>
+<li>Los <strong>sondeos aerológicos</strong> realizados en algunos aeródromos miden sobre la vertical de un lugar los valores de <strong>presión, temperatura y humedad</strong>, lanzando <strong>globos sonda</strong> desde la estación de sondeo <strong>a las 00 y 12 UTC</strong>.</li>
+<li>Las observaciones con <strong>radar de superficie y de a bordo</strong>, así como la <strong>red de descargas eléctricas</strong>, permiten determinar la posición de <strong>cumulonimbos y tormentas</strong> y relacionar las características de las imágenes obtenidas en la pantalla del radar con fenómenos adversos para el vuelo.</li>
+<li>Los <strong>satélites meteorológicos</strong> aportan datos de altitud, medidas de temperatura y humedad y <strong>contenido de ozono</strong>, entre otros; su aportación es fundamental para localizar los sistemas nubosos, su naturaleza, extensión, desarrollo y movimiento.</li>
+<li>Todo el ingente volumen de datos a nivel mundial necesario para monitorizar el estado de la atmósfera y alimentar los <strong>modelos numéricos</strong> se obtiene mediante el <strong>Sistema Mundial de Observación de la OMM</strong>.</li>
+</ol>
+<p><em>Trampas de examen del capítulo 1</em></p>
+<ul>
+<li>Dos MWO de AEMET (Valencia para el FIR Madrid y el FIR Barcelona; Las Palmas para el FIR Canarias) frente a cinco OMAe (Las Palmas, Madrid, Santander, Sevilla, Valencia) frente a 40 aeropuertos y 8 bases aéreas con oficinas de EMAe. No mezclar las cifras.</li>
+<li><strong>WAFC = 2</strong> (Londres, Washington); <strong>VAAC = 9</strong>; <strong>TCAC = 7</strong>; <strong>CMRE = 8</strong>.</li>
+<li>Sondeos a las <strong>00 y 12 UTC</strong>; METAR cada <strong>media hora o cada hora</strong>.</li>
+<li>El WAFC elabora pronósticos mundiales reticulares y de tiempo significativo; el VAAC, solo cenizas; el TCAC, solo ciclones tropicales; el CMRE, solo materiales radiactivos.</li>
+</ul>
+<hr />
+<h2 id="2-conceptos-basicos-de-la-atmosfera-cap-2-del-manual-pp-10-27">2. Conceptos básicos de la atmósfera (cap. 2 del manual, pp. 10-27)</h2>
+<h3 id="21-composicion-quimica-manual-21-pp-10-11">2.1 Composición química (manual 2.1, pp. 10-11)</h3>
+<ul>
+<li>La <strong>atmósfera</strong> es la cubierta gaseosa que rodea la Tierra; además de gases contiene, en menor grado, <strong>partículas sólidas en suspensión</strong> (polvo, humo, aerosoles y hielo) y <strong>partículas líquidas</strong> (gotas de agua).</li>
+<li>Composición cerca del nivel del mar: <strong>78 % de nitrógeno (N2)</strong>, <strong>21 % de oxígeno (O2)</strong>, <strong>1 % de otros gases</strong> (Ar, Ne, CO2, H2, O3...). Esta mezcla de gases es el <strong>aire seco</strong>.</li>
+<li>El <strong>vapor de agua</strong>, H2O en estado gaseoso, varía entre el <strong>0,2 % y el 3 %</strong>.</li>
+<li>El <strong>aire húmedo</strong> es la mezcla de dos gases: <strong>aire seco + vapor de agua</strong>.</li>
+</ul>
+<h3 id="22-el-agua-en-la-atmosfera-manual-22-pp-11-12">2.2 El agua en la atmósfera (manual 2.2, pp. 11-12)</h3>
+<ul>
+<li>Tres estados: <strong>sólido</strong> (nieve, granizo o cristales de hielo en algunas nubes); <strong>líquido</strong> (lluvia, rocío, gotas en algunas nubes); <strong>gaseoso</strong> (vapor de agua, presente casi por completo en la <strong>troposfera</strong>, entre el 0,2 % y el 3 %, variable).</li>
+<li>Cambios de estado: <strong>evaporación, condensación, congelación, fusión y sublimación</strong> (figura p. 11).</li>
+<li><strong>Ciclo hidrológico</strong>, con los procesos principales de <strong>evaporación, condensación y precipitación</strong>:
+  1. El agua líquida de mares y océanos se evapora, al igual que el líquido que reside en la vegetación y otras superficies (<strong>evapotranspiración</strong>).
+  2. El vapor permanece en la atmósfera hasta que, a través de distintos procesos, <strong>se condensa y forma las nubes</strong>.
+  3. Las gotitas de las nubes crecen hasta que se produce la <strong>precipitación</strong>; una parte del agua vuelve a la tierra y otra a los mares y océanos.</li>
+</ul>
+<h3 id="23-24-propiedades-fisicas-presion-atmosferica-manual-23-24-pp-12-14">2.3-2.4 Propiedades físicas: presión atmosférica (manual 2.3-2.4, pp. 12-14)</h3>
+<ul>
+<li>La atmósfera ejerce sobre los objetos una presión debida al <strong>peso de los gases</strong> que la componen, <strong>ejercida por igual en todas las direcciones</strong>.</li>
+<li>La presión sobre una superficie es el peso que ejerce sobre ella la columna de aire que se extiende desde esa superficie hasta el límite exterior de la atmósfera: <strong>P = F/S = m·g/S</strong>.</li>
+<li><strong>Factores que afectan a la presión</strong>:
+  1. <strong>Altura/altitud</strong>: la presión <strong>disminuye al aumentar la altitud</strong> (la columna de aire situada encima es más corta y pesa menos). Al sustituir m = d·V = d·S·h se obtiene <strong>P = d·g·h</strong> (d densidad, S sección, V volumen, h altura, g constante gravitatoria). El descenso <strong>no es lineal</strong>: en los primeros metros la presión baja aproximadamente <strong>1 mb por cada 9 metros (30 ft)</strong>, de forma más o menos lineal, y después adquiere forma <strong>exponencial</strong> (gráfica p. 13).
+  2. <strong>Temperatura</strong>: la presión varía con la temperatura de la columna de aire, y por tanto en función de:
+     a. <strong>El momento del día</strong>: variación <strong>menor de 1 hPa en las zonas templadas</strong>, prácticamente nula en los polos; <strong>dos máximos hacia las 10:00 y las 22:00 y dos mínimos hacia las 04:00 y las 16:00</strong>.
+     b. <strong>La época del año</strong>.
+     c. <strong>El movimiento de las masas de aire</strong>: un cambio de masa de aire suele llevar asociado un cambio de temperatura, que produce perturbaciones irregulares en la presión.
+     En general, <strong>cuanto mayor es la temperatura del aire, menor es su densidad y, por tanto, su presión; cuanto más fría, mayor es la densidad y la presión</strong>.</li>
+</ul>
+<ol start="3">
+<li><strong>Orografía</strong>: el relieve puede provocar acumulaciones o déficits de masa de aire que hacen aumentar o disminuir localmente la presión.
+- <strong>Unidades</strong>: una <strong>atmósfera (atm) = 1013,25 hPa</strong> = el peso de una <strong>columna de mercurio de 1 cm² de sección y 76 cm de altura</strong> (<strong>experimento de Torricelli</strong>: un tubo de vidrio de 1 m de largo y 1 cm² de sección, lleno de mercurio, se invirtió sobre una cubeta con el mismo líquido; el mercurio descendió hasta los 76 cm porque la fuerza que ejercía la atmósfera fuera del tubo se equilibraba con la del mercurio dentro).
+  Tabla de equivalencias: <strong>1 atm = 760 mm Hg = 1013,25 mb/hPa</strong>.</li>
+</ol>
+<h3 id="25-temperatura-manual-25-pp-15-16">2.5 Temperatura (manual 2.5, pp. 15-16)</h3>
+<ul>
+<li>La <strong>temperatura del aire</strong> es la medida de la <strong>energía cinética promediada de las moléculas</strong> que lo componen, que se hallan en continuo movimiento y experimentan infinitos choques entre sí.</li>
+<li><strong>Factores</strong>:
+  1. <strong>Altura</strong>. <strong>Gradiente térmico vertical</strong> = variación de la temperatura con la altura. <strong>Ojo: el manual lo define con el signo contrario al habitual</strong>: «gradiente térmico positivo: la temperatura <em>desciende</em> con la altura; gradiente térmico negativo: la temperatura <em>aumenta</em> con la altura».
+  2. <strong>Variación a lo largo del día</strong>: normalmente presenta un <strong>máximo aproximadamente dos horas después del mediodía</strong> y un <strong>mínimo poco después del amanecer</strong>; el retraso se debe al tiempo que tarda el aire en calentarse o enfriarse al recibir la radiación solar (<strong>inercia térmica</strong>).
+  3. <strong>Nubosidad</strong>: suaviza los máximos y mínimos al reflejar parte de la radiación solar y absorber parte de la radiación terrestre; la <strong>amplitud térmica</strong> (diferencia entre la máxima y la mínima) es menor.
+  4. <strong>Viento</strong>: remueve el aire y mezcla capas a distinta temperatura, por lo que la variación diurna es menos marcada.
+  5. <strong>Naturaleza de la superficie</strong> en la que se mide la temperatura y de la superficie circundante: la variación diaria es <strong>mayor en la superficie terrestre que en el mar y las zonas costeras</strong>, porque el agua tiene un <strong>calor específico más bajo</strong> que las zonas terrestres (así lo redacta el manual; véase la trampa n.º 9 de la sección 10, donde se señala que esto contradice al propio manual en el apartado 3.1, que da el calor específico del agua como el más alto). También influye el flujo de aire caliente o frío procedente de los alrededores.</li>
+<li><strong>Escalas</strong> (tabla p. 16):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Escala</th>
+<th>Punto de fusión del hielo</th>
+<th>Punto de ebullición del agua</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Centígrada</td>
+<td>0 ºC</td>
+<td>100 ºC</td>
+</tr>
+<tr>
+<td>Kelvin</td>
+<td>273,16 K</td>
+<td>373,16 K</td>
+</tr>
+<tr>
+<td>Fahrenheit</td>
+<td>32 ºF</td>
+<td>212 ºF</td>
+</tr>
+</tbody>
+</table>
+<p>Conversiones: <strong>C = 5/9 · (F - 32)</strong>; <strong>K = C + 273</strong>.</p>
+<h3 id="26-densidad-manual-26-pp-16-17">2.6 Densidad (manual 2.6, pp. 16-17)</h3>
+<ul>
+<li>La <strong>densidad</strong> es la masa de un gas por unidad de volumen: <strong>d (ρ) = m/V</strong>, con <strong>V = S·h</strong>.</li>
+<li>Ecuación de estado de los gases perfectos: <strong>P = d·R·T</strong>, con R = <strong>2870 hPa·cm³/(kg·K)</strong>, tal como figura en el manual (P presión, d densidad, R constante de los gases, T temperatura).</li>
+<li>A presión constante, el aire es <strong>menos denso cuanto mayor es su temperatura</strong>, y viceversa; la columna más caliente es menos densa y, por tanto, <strong>más alta</strong>: la columna de aire <strong>se expande</strong> al aumentar la temperatura.</li>
+</ul>
+<h3 id="27-humedad-manual-27-pp-17-18">2.7 Humedad (manual 2.7, pp. 17-18)</h3>
+<ul>
+<li>La <strong>humedad ambiental</strong> es la cantidad de vapor de agua que contiene la atmósfera.</li>
+<li>La <strong>temperatura</strong> determina la cantidad de vapor que puede almacenar un volumen de aire: <strong>a mayor temperatura, más vapor puede almacenar</strong>. El aire que contiene la cantidad máxima está <strong>saturado</strong>.</li>
+<li><strong>Dos mecanismos para saturar aire no saturado</strong>: (1) <strong>disminuir su temperatura</strong>; (2) <strong>inyectarle vapor de agua</strong>. Una vez saturado, si se añade más vapor o se enfría todavía más, una parte del vapor <strong>se condensa</strong> y pasa a agua líquida.</li>
+<li><strong>Humedad relativa</strong> = cociente entre la cantidad de vapor de agua que un volumen de aire <strong>contiene realmente</strong> a una temperatura dada y la cantidad <strong>máxima</strong> que puede almacenar a la misma temperatura. El aire saturado tiene el <strong>100 %</strong>.</li>
+<li><strong>Punto de rocío</strong> = temperatura a la que hay que enfriar un volumen de aire, <strong>manteniéndolo a presión constante</strong>, para saturarlo (humedad relativa del 100 %). Conocer el punto de rocío en superficie ayuda a predecir la posible presencia de <strong>nieblas</strong>, que aparecen en ocasiones cuando la temperatura del aire se aproxima a la del punto de rocío o la alcanza.</li>
+</ul>
+<h3 id="28-estructura-fisica-de-la-atmosfera-capas-manual-28-pp-18-20">2.8 Estructura física de la atmósfera: capas (manual 2.8, pp. 18-20)</h3>
+<p>La atmósfera se divide verticalmente en <strong>cinco capas</strong>, que no son uniformes alrededor del globo: dependen de la latitud.</p>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Extensión</th>
+<th>Temperatura</th>
+<th>Presión / densidad</th>
+<th>Vapor de agua</th>
+<th>Límite superior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Troposfera</strong></td>
+<td>Desde la superficie hasta una altitud promedio de <strong>8 km en latitudes altas (tropopausa polar)</strong>, <strong>18 km en latitudes bajas (tropopausa tropical)</strong> y hasta <strong>12 km en latitudes medias</strong></td>
+<td><strong>Desciende con la altitud</strong> hasta los <strong>-56,5 ºC</strong></td>
+<td>Ambas disminuyen con la altitud</td>
+<td>Contiene casi todo el vapor de agua y la mayor parte de la masa de la atmósfera; los movimientos verticales son muy marcados, por lo que <strong>la mayor parte de los fenómenos meteorológicos se producen aquí</strong></td>
+<td><strong>Tropopausa</strong>: superficie de discontinuidad donde la temperatura se mantiene constante en torno a los <strong>-56 ºC</strong>. No es continua alrededor del globo: las «roturas» entre las tropopausas de distintas latitudes originan vientos muy fuertes, las <strong>corrientes en chorro</strong></td>
+</tr>
+<tr>
+<td><strong>Estratosfera</strong></td>
+<td>Desde la tropopausa hasta unos <strong>50 o 55 km</strong></td>
+<td><strong>Aumenta con la altitud</strong>, fundamentalmente por la abundancia de <strong>ozono</strong></td>
+<td>La presión sigue descendiendo exponencialmente; solo alrededor del <strong>0,1 %</strong> de la que hay a nivel del mar</td>
+<td>Poco vapor y apenas nubes: solo <strong>nubes nacaradas</strong> a 20-30 km y los topes de los cumulonimbos que perforan la tropopausa por inercia</td>
+<td><strong>Estratopausa</strong>, hacia los <strong>50 km</strong>; a partir de ella la temperatura vuelve a disminuir</td>
+</tr>
+<tr>
+<td><strong>Mesosfera</strong></td>
+<td>Desde la estratopausa hasta unos <strong>80 km</strong></td>
+<td><strong>Disminuye</strong> con la altitud hasta unos <strong>-95 ºC</strong></td>
+<td>Ambas disminuyen</td>
+<td>Apenas se forman nubes, salvo en latitudes altas, donde, cuando el Sol se sitúa entre <strong>5º y 13º</strong> (el manual no indica a qué se refiere el ángulo), pueden observarse <strong>nubes noctilucentes</strong> (cristales y polvo de meteorito que se ven en el crepúsculo con tonos azulados)</td>
+<td><strong>Mesopausa</strong>: el <strong>nivel más frío de toda la atmósfera</strong>; en él termina la atmósfera de composición gaseosa homogénea. La zona de composición homogénea (troposfera + estratosfera + mesosfera) es la <strong>homosfera</strong></td>
+</tr>
+<tr>
+<td><strong>Termosfera o ionosfera</strong></td>
+<td>Desde la mesopausa hasta unos <strong>500 km</strong></td>
+<td><strong>Aumenta</strong> con la altitud por la radiación solar, hasta los <strong>1100 ºC</strong></td>
+<td>La presión disminuye</td>
+<td>No se forma ninguna nube</td>
+<td><strong>Termopausa</strong></td>
+</tr>
+<tr>
+<td><strong>Exosfera</strong></td>
+<td>Sobre la termosfera; espesor muy elevado, hasta confundirse con el gas interplanetario</td>
+<td>no consta</td>
+<td>no consta</td>
+<td>no consta</td>
+<td>no consta</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>En la termosfera las moléculas de gas están ampliamente separadas, los átomos quedan libres y los iones permanecen libres durante largos periodos, por lo que la ionización es importante y da lugar a fenómenos como la <strong>aurora boreal</strong>; en el ámbito de las <strong>radiocomunicaciones</strong>, los iones de esta capa pueden <strong>reflejar las ondas de radio</strong> y permitir la comunicación entre lugares distantes del globo.</li>
+<li>Las figuras de la p. 20 del manual (renderizadas y leídas): (a) un esquema de las capas y sus grosores; (b) un gráfico en color, «Capas de la atmósfera», con los principales fenómenos de cada capa y las altitudes límite marcadas: <strong>12 km (techo de la troposfera), 50 km (techo de la estratosfera), 80 km (techo de la mesosfera), 500 km (techo de la termosfera)</strong>, y una escala de temperatura con valores como <strong>-60, -5, -95 y 1000 ºC</strong> (troposfera -60, estratosfera -5 [lectura de la letra pequeña], mesosfera -95, termosfera 1000); fenómenos dibujados: el monte Everest (8848 m) y aviones a reacción, cumulonimbos/precipitación y globos en la troposfera; capa de ozono, globos meteorológicos, aviones supersónicos, estrellas fugaces y nubes de explosiones atómicas en la estratosfera; el comienzo de la ionosfera, ondas de radio y rayos cósmicos en la mesosfera; auroras polares, nubes luminosas y naves espaciales en órbita en la termosfera; (c) el perfil vertical de la temperatura, una curva en diente de sierra con la tropopausa, la estratopausa y la mesopausa marcadas y la temperatura de la termosfera subiendo bruscamente.</li>
+</ul>
+<h3 id="29-estabilidad-e-inestabilidad-manual-29-p-21">2.9 Estabilidad e inestabilidad (manual 2.9, p. 21)</h3>
+<ul>
+<li>
+<p>La <strong>estabilidad</strong> es la capacidad que tiene una masa de aire de <strong>resistirse al desplazamiento vertical</strong> desde su posición inicial o nivel de equilibrio.
+  A. La atmósfera es tanto más estable cuanto más difícil es que se den los movimientos verticales en ella, e inestable en caso contrario.
+  B. La intensidad de los movimientos verticales depende de cuánto más o menos inestable sea la atmósfera.
+  C. La <strong>inestabilidad</strong> se origina cuando una burbuja de aire está <strong>más caliente (es menos densa)</strong> que el aire que la rodea y <strong>asciende</strong>. La <strong>estabilidad</strong> es la situación contraria: la burbuja está <strong>más fría</strong> que su entorno.</p>
+</li>
+<li>
+<p>Tiempo asociado (tabla):</p>
+</li>
+<li><strong>Aire estable</strong>: cielo despejado o con <strong>nubes estratiformes</strong>; en las capas bajas, si hay humedad suficiente y sobre todo en <strong>invierno, pueden formarse nieblas</strong>; <strong>el humo y los contaminantes no pueden elevarse</strong>, por lo que <strong>reducen la visibilidad</strong> y disminuyen la calidad del aire.</li>
+<li><strong>Aire inestable</strong>: nubes a veces <strong>muy desarrolladas</strong>, <strong>chubascos</strong> y <strong>turbulencia</strong>; <strong>buena visibilidad, salvo dentro de las nubes y en caso de chubascos</strong>.</li>
+</ul>
+<h3 id="210-anexo-la-atmosfera-en-la-aviacion-manual-210-pp-21-26">2.10 Anexo: la atmósfera en la aviación (manual 2.10, pp. 21-26)</h3>
+<p><strong>2.10.1 La atmósfera estándar (ISA)</strong></p>
+<ul>
+<li>La altitud se determina a partir de una <strong>atmósfera ideal, no real</strong>, en la que la distribución de la presión, la densidad y la temperatura es independiente de la latitud y de la época del año. La definió la <strong>OACI: ISA, atmósfera estándar internacional (<em>International Standard Atmosphere</em>)</strong>.</li>
+<li>Características (los cuatro puntos del manual):
+  1. Está formada por <strong>aire seco</strong>, considerado un gas perfecto que obedece a la ley de los gases perfectos, con una masa molecular media de <strong>0,02896442 kg/mol</strong>.
+  2. A <strong>nivel del mar</strong> tiene una temperatura de <strong>15 ºC (288,15 K)</strong>, una presión de <strong>1013,25 hPa (760 mm Hg)</strong> y una densidad de <strong>1,2250 kg/m³</strong>.
+  3. La temperatura absoluta del <strong>punto de fusión del hielo es de 273,15 K</strong> (obsérvese que el manual imprime 273,16 K en la tabla de escalas de la p. 16 y «K = C + 273» en la misma página).
+  4. <strong>Gradiente térmico en la troposfera: 2 ºC por cada 1000 ft (6,5 ºC por cada 1000 m)</strong> desde el suelo hasta la altitud de la tropopausa, donde la temperatura ronda los <strong>-56,5 ºC</strong>. (Perfil vertical del resto de las capas: figura p. 22, renderizada y leída: gráfico «ISA Temperature Distribution» con <strong>15 ºC en la superficie, gradiente de -6,5 ºC/km hasta los 11 km, donde la temperatura es de -56 ºC, isotermia hasta los 25 km, aumento hasta los 47 km, donde llega a 10 ºC, isotermia de los 47 a los 53 km y descenso de nuevo</strong>. Obsérvese que el gráfico sitúa la tropopausa ISA a 11 km; el texto no indica esa cifra.)</li>
+<li>La ISA fija para cada valor de presión una altitud y una temperatura. Tabla de la p. 23 (renderizada y leída):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Altitud (ft)</th>
+<th>Presión (mb)</th>
+<th>Temperatura (ºC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1013,2</td>
+<td>15</td>
+</tr>
+<tr>
+<td>1700 (tal como está impreso)</td>
+<td>782</td>
+<td>1,1</td>
+</tr>
+<tr>
+<td>8000</td>
+<td>752</td>
+<td>-0,8</td>
+</tr>
+<tr>
+<td>9000</td>
+<td>724</td>
+<td>-2,8</td>
+</tr>
+<tr>
+<td>10 000</td>
+<td>697</td>
+<td>-4,8</td>
+</tr>
+<tr>
+<td>20 000</td>
+<td>466</td>
+<td>-24,6</td>
+</tr>
+<tr>
+<td>22 000</td>
+<td>428</td>
+<td>-28,5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aviso</strong>: la fila «1700 ft - 782 mb - 1,1 ºC» es incoherente con el resto (782 mb y 1,1 ºC corresponden a unos 7000 ft: 15 - 2x7 = 1 ºC). Es muy probable que sea una errata de <strong>7000 ft</strong>, aunque el manual no lo indica expresamente. Además, en 0 ft la tabla imprime 1013,2 (no 1013,25).</p>
+<ul>
+<li>La atmósfera estándar se utiliza <strong>solo para aplicaciones aeronáuticas</strong>; la atmósfera real puede diferir significativamente de la ISA por las constantes fluctuaciones de la presión y la temperatura y por las diferencias entre latitudes.</li>
+</ul>
+<p><strong>2.10.2 Altimetría</strong> = determinación de la altitud de vuelo de la aeronave a partir del valor de presión medido.</p>
+<ul>
+<li><strong>Altura</strong> = distancia vertical entre un punto en el seno del aire y una superficie horizontal de referencia, generalmente el suelo.</li>
+<li><strong>Altitud</strong> = distancia vertical entre un punto en el seno del aire y el <strong>nivel medio del mar (MSL)</strong>.</li>
+<li><strong>Elevación</strong> = distancia vertical entre un punto <strong>del terreno</strong> y el nivel medio del mar.</li>
+</ul>
+<p><strong>2.10.3 Altímetro y su calado</strong></p>
+<ul>
+<li>Los <strong>altímetros</strong> indican la altitud de la aeronave en función de la presión: miden la presión atmosférica y, mediante las reglas de la altimetría y según la atmósfera ISA, la convierten en altitud. <strong>Los altímetros son barómetros aneroides graduados para leer altitudes</strong>.</li>
+<li>En la atmósfera real la presión a nivel del mar no suele ser de 1013,25 hPa, por lo que las indicaciones obtenidas con la ISA pueden diferir de las altitudes reales. Es necesario <strong>ajustar o calar</strong> el altímetro a la presión real existente a nivel del mar o a la de un punto de altitud conocida. Primero se ajusta a cero metros (o a la altitud conocida) y, a partir de esa referencia, convierte la presión en altitud.</li>
+<li><strong>QNH</strong>: presión atmosférica del aeródromo <strong>reducida al nivel del mar en condiciones ISA</strong>. El altímetro indica la <strong>altitud</strong> con relación al nivel medio del mar; en tierra, el altímetro indica la <strong>altitud del aeródromo</strong>.</li>
+<li><strong>QFE</strong>: presión atmosférica del aeródromo <strong>medida por el barómetro de la oficina meteorológica del aeródromo</strong>. El altímetro indica la <strong>altura</strong>; en tierra indica <strong>cero</strong>.</li>
+<li><strong>QNE</strong>: <strong>presión estándar a nivel del mar</strong>. La ventanilla del altímetro se ajusta a <strong>1013,25 hPa</strong> y la indicación es la distancia a la <strong>superficie de presión de 1013,25 hPa</strong>. Los reglamentos aéreos establecen que todos los aviones vuelen en ruta con la misma presión de referencia (QNE), de modo que vuelan a <strong>niveles de vuelo</strong>.</li>
+<li>Los valores de QNH y QFE no son fijos: varían con el tiempo y con el lugar de medición, y hay que actualizarlos a partir de la estación meteorológica más cercana.</li>
+<li><strong>QNH frente a QFE según la elevación del aeródromo</strong>: a nivel del mar <strong>QNH = QFE</strong>; aeródromo <strong>por debajo</strong> del nivel del mar, <strong>QNH &lt; QFE</strong>; <strong>por encima</strong>, <strong>QNH &gt; QFE</strong>.</li>
+</ul>
+<p><strong>2.10.4 Niveles de vuelo</strong></p>
+<ul>
+<li>Superficies de <strong>presión atmosférica constante</strong> situadas a una distancia determinada de la <strong>superficie de 1013,25 hPa</strong>, calculadas a partir de la atmósfera estándar de la OACI. Son <strong>niveles de crucero que siempre quedan por encima de la altitud de transición</strong>. Se expresan en <strong>centenares de pies</strong> y su separación la establece el <strong>Reglamento de Circulación Aérea</strong>, véase el manual 1.</li>
+</ul>
+<p><strong>2.10.5 Altitud, nivel y capa de transición</strong></p>
+<ul>
+<li>Hay dos puntos en los que cambia la referencia del reglaje del altímetro:</li>
+<li><strong>Altitud de transición</strong>: <strong>por debajo</strong> de ella la posición vertical se controla en referencia a <strong>altitudes</strong>, con el altímetro calado a <strong>QNH</strong>; <strong>por encima</strong> se controla con <strong>niveles de vuelo</strong>, con el altímetro calado a <strong>QNE</strong>. La aeronave la tiene en cuenta <strong>en el despegue</strong>. Es un valor fijado para cada aeropuerto. <strong>En España existen tres: TMA de Madrid, 13 000 ft; CTA de Granada, 7000 ft; resto, 6000 ft</strong>.</li>
+<li><strong>Nivel de transición</strong>: el <strong>nivel de vuelo más bajo disponible por encima de la altitud de transición</strong>. Por debajo se opera en altitudes, con QNH; por encima, en niveles de vuelo, con QNE. La aeronave lo tiene en cuenta <strong>en la aproximación para el aterrizaje</strong>. Su valor depende de las condiciones meteorológicas (presión), pero por lo general debe estar <strong>como mínimo 1000 ft por encima de la altitud de transición</strong>.</li>
+<li><strong>Capa de transición</strong>: capa situada entre el nivel de transición y la altitud de transición; de espesor variable, <strong>siempre ≥ 1000 ft</strong>.</li>
+</ul>
+<p><em>Trampas de examen del capítulo 2</em></p>
+<ul>
+<li>Composición <strong>78 / 21 / 1</strong>; vapor de agua <strong>0,2-3 %</strong>.</li>
+<li>Alturas de la tropopausa <strong>8 / 12 / 18 km</strong> (polar / latitudes medias / tropical); temperatura de la tropopausa, unos -56 ºC (<strong>-56,5 ºC</strong> en la tabla de capas y en el texto de la ISA).</li>
+<li>Evolución de la temperatura por capas: <strong>troposfera ↓, estratosfera ↑, mesosfera ↓, termosfera ↑</strong>; nivel más frío = <strong>mesopausa</strong> (unos -95 ºC); más caliente = termosfera (1100 ºC).</li>
+<li><strong>QNH = altitud (en tierra: elevación del aeródromo); QFE = altura (en tierra: cero); QNE = 1013,25 (niveles de vuelo)</strong>.</li>
+<li><strong>Altitud</strong> de transición (ascenso, QNH→QNE, fija) frente a <strong>nivel</strong> de transición (descenso, QNE→QNH, variable).</li>
+<li><strong>1 mb por cada 9 m (30 ft)</strong> cerca de la superficie; <strong>2 ºC/1000 ft = 6,5 ºC/1000 m</strong> en la troposfera ISA.</li>
+<li>Máximos diarios de presión a las 10:00 y las 22:00, mínimos a las 04:00 y las 16:00; máximo de temperatura unas 2 horas después del mediodía.</li>
+</ul>
+<hr />
+<h2 id="3-radiacion-en-la-atmosfera-cap-3-del-manual-pp-27-31">3. Radiación en la atmósfera (cap. 3 del manual, pp. 27-31)</h2>
+<p>La atmósfera está compuesta por gases que interaccionan con la radiación solar y la radiación terrestre; además, por estar a una temperatura determinada, esos gases emiten una radiación propia en todas las direcciones.</p>
+<h3 id="31-tipos-de-radiacion-manual-31-pp-27-28">3.1 Tipos de radiación (manual 3.1, pp. 27-28)</h3>
+<p><strong>Radiación solar</strong></p>
+<ul>
+<li>Definición: <strong>radiación electromagnética de onda corta</strong> procedente del Sol.</li>
+<li>Absorción de la radiación emitida por el Sol (porcentajes):</li>
+<li>aproximadamente el <strong>36 %</strong> es absorbido por las nubes o reflejado por sus cimas;</li>
+<li>el <strong>20 %</strong> es absorbido por los gases atmosféricos (<strong>5 % ozono O3 y 15 % dióxido de carbono CO2</strong>, tal como figura en el manual);</li>
+<li>el <strong>4 %</strong> es reflejado por la superficie terrestre;</li>
+<li>
+<p>solo el <strong>40 %</strong> es absorbido por la corteza terrestre (tierra y océanos).
+  (36 + 20 + 4 + 40 = 100.)</p>
+</li>
+<li>
+<p>Efectos: calienta la corteza terrestre y eleva su temperatura. Algunos materiales se calientan más que otros con la misma radiación; la diferencia depende de las propiedades del material, que determinan sus valores de <strong>reflectancia, absorbancia y transmitancia</strong>. El <strong>calor específico</strong> es la capacidad de un cuerpo para almacenar calor; <strong>el agua es la sustancia con mayor calor específico de la naturaleza</strong>, por lo que <strong>los mares se calientan y se enfrían más lentamente que las zonas terrestres</strong>.</p>
+</li>
+</ul>
+<p><strong>Radiación terrestre</strong></p>
+<ul>
+<li>Definición: <strong>radiación de onda larga</strong> emitida por la superficie de la Tierra y por los gases, los aerosoles y las nubes de la atmósfera. Es parcialmente reabsorbida dentro de la atmósfera.</li>
+<li>Los gases son <strong>absorbentes selectivos</strong> de la radiación terrestre para determinadas longitudes de onda: algunos absorben grandes cantidades de la radiación de onda larga que la Tierra emite al espacio, pero son <strong>transparentes a la radiación de onda corta que proviene del Sol</strong>.</li>
+<li><strong>Efecto invernadero</strong>: fenómeno debido a la absorción selectiva por parte de los gases de efecto invernadero, que induce un aumento de la temperatura de la atmósfera y de la superficie terrestre. (El manual lo redacta como «absorción selectiva de la radiación solar».)</li>
+<li>La radiación terrestre que reflejan las nubes no es muy alta, en general; pero cuando el <strong>cielo está totalmente cubierto</strong>, las nubes absorben gran cantidad de radiación terrestre y luego la reemiten con una longitud de onda propia.</li>
+</ul>
+<h3 id="32-balance-radiactivo-manual-32-pp-28-29">3.2 Balance radiactivo (manual 3.2, pp. 28-29)</h3>
+<ul>
+<li>Balance entre los flujos de radiación solar y terrestre en la superficie de la Tierra.</li>
+<li>La radiación solar recibida no es uniforme: depende de la <strong>latitud, la época del año y la hora del día</strong>. El <strong>hemisferio norte recibe la máxima radiación alrededor del solsticio de junio y el hemisferio sur, alrededor del solsticio de diciembre</strong>.</li>
+<li>La radiación que llega a la superficie no es la misma que se emite al espacio en todas las latitudes: en algunas se absorbe más de lo que se emite y en otras sucede lo contrario. Sin embargo, la temperatura anual media de la Tierra y de la atmósfera varía muy poco, porque <strong>cada año el sistema atmósfera-Tierra envía al espacio tanta energía como recibe del Sol</strong>.</li>
+</ul>
+<h3 id="33-intercambio-de-calor-en-la-atmosfera-manual-33-pp-29-31">3.3 Intercambio de calor en la atmósfera (manual 3.3, pp. 29-31)</h3>
+<ul>
+<li>El Sol es la principal fuente de calor. El intercambio de calor entre los distintos elementos de la Tierra y las capas de la atmósfera mantiene el sistema Tierra-atmósfera en <strong>equilibrio térmico</strong>. Este equilibrio puede romperse por distintos procesos, uno de los cuales es el <strong>efecto invernadero</strong>: una mayor concentración, en el sistema Tierra-atmósfera, de gases <strong>transparentes a la longitud de onda corta entrante y absorbentes de la longitud de onda larga reemitida por la Tierra</strong>.</li>
+<li>Además de la radiación, el calor se intercambia mediante cuatro procesos:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Proceso</th>
+<th>Definición</th>
+<th>Efecto / ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conducción</strong></td>
+<td>Transmisión de calor <strong>por contacto entre dos cuerpos a distinta temperatura</strong></td>
+<td>El calor pasa de un punto a otro por <strong>colisión molecular</strong>, con lo que aumenta el movimiento de las moléculas adyacentes. Sucede en las <strong>pistas de los aeropuertos</strong>: el calor se conduce desde la superficie de la pista a las capas de aire en contacto con ella; el material de la pista es distinto del que suele haber a su alrededor, por lo que <strong>se calienta con más facilidad</strong></td>
+</tr>
+<tr>
+<td><strong>Convección</strong></td>
+<td>Transmisión de calor por medio de un <strong>fluido que transporta calor entre regiones con diferente temperatura</strong></td>
+<td>En meteorología origina con frecuencia los <strong>movimientos verticales de las masas de aire</strong></td>
+</tr>
+<tr>
+<td><strong>Advección</strong></td>
+<td>Transmisión de calor por medio de <strong>movimientos horizontales de masas de aire</strong></td>
+<td>Es muy importante en la formación de <strong>nubes orográficas</strong> y tiene un papel primordial en el <strong>ciclo del agua</strong></td>
+</tr>
+<tr>
+<td><strong>Turbulencia</strong></td>
+<td>Transmisión de calor por medio de <strong>corrientes desordenadas y desiguales que dan lugar a remolinos turbulentos</strong></td>
+<td>Consecuencias: aceleraciones verticales u horizontales que pueden modificar los parámetros de vuelo, cambios de altitud y de actitud e incluso pérdida momentánea de la gobernabilidad de la aeronave. La sensibilidad depende del <strong>peso, la superficie alar, la actitud y la velocidad</strong> de la aeronave</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>El calor fluye siempre <strong>de las zonas más calientes a las más frías</strong>; cuanto mayor es la diferencia de temperatura, más rápida es la transferencia.</li>
+<li>Intercambio entre latitudes: (1) los <strong>gradientes térmicos entre latitudes</strong> desarrollan <strong>corrientes de convección</strong>, que transfieren el exceso de energía a las zonas donde hay defecto; (2) las <strong>corrientes oceánicas</strong> que van de los trópicos a los polos también transfieren energía. Ambos mecanismos contribuyen a mantener el equilibrio térmico.</li>
+</ul>
+<p><em>Trampas de examen del capítulo 3</em></p>
+<ul>
+<li>Solar = <strong>onda corta</strong>; terrestre = <strong>onda larga</strong>. Los gases de efecto invernadero son transparentes a la onda corta y absorbentes de la onda larga.</li>
+<li>36 / 20 (5 O3 + 15 CO2) / 4 / 40.</li>
+<li>Conducción = contacto (pistas); convección = vertical; advección = horizontal (nubes orográficas); turbulencia = remolinos.</li>
+<li>El agua tiene el calor específico <strong>más alto</strong>: el mar se calienta y se enfría despacio.</li>
+</ul>
+<hr />
+<h2 id="4-circulacion-general-atmosferica-cap-4-del-manual-pp-31-34">4. Circulación general atmosférica (cap. 4 del manual, pp. 31-34)</h2>
+<ul>
+<li><strong>Circulación general atmosférica</strong> = flujo de aire alrededor del globo terráqueo por medio del cual se <strong>redistribuye el calor</strong> sobre la superficie de la Tierra; abarca todo el planeta y ayuda a comprender sistemas de menor escala. Se origina porque la radiación recibida en las zonas ecuatoriales es mucho mayor que en los polos.</li>
+</ul>
+<h3 id="41-modelos">4.1 Modelos</h3>
+<p><strong>4.1.1 Modelo simple con una Tierra inmóvil</strong>: superficie uniforme, sin fricción, sin calentamiento diferencial entre océano y continente y con vientos debidos solo a causas térmicas.</p>
+<ol>
+<li>El exceso de radiación en el ecuador hace que el aire <strong>ascienda</strong>; en altura se desplaza desde la latitud más cálida a la más fría, es decir, <strong>del ecuador a los polos</strong>.</li>
+<li>En el <strong>polo el aire desciende</strong> y se desplaza por la superficie hasta el ecuador para reemplazar el aire ascendente. Este movimiento es una <strong>célula de circulación</strong>.</li>
+</ol>
+<p><strong>4.1.2 Modelo realista con la rotación de la Tierra</strong>: tres células:</p>
+<ul>
+<li><strong>a. Célula de Hadley</strong>: entre el ecuador y unos <strong>30º</strong> de latitud;</li>
+<li><strong>b. Célula de Ferrel</strong>: entre unos <strong>30º y 60º</strong>;</li>
+<li>
+<p><strong>c. Célula Polar</strong>: desde unos <strong>60º hasta el polo</strong>.
+Esto se refleja en la presión a nivel del mar:</p>
+</li>
+<li>
+<p>un cinturón de bajas presiones hacia los <strong>60º</strong>: <strong>zona de baja presión subpolar</strong>;</p>
+</li>
+<li>un cinturón de altas presiones en los <strong>30º</strong>: <strong>zona de alta presión subtropical</strong>;</li>
+<li>una zona de baja presión en el ecuador: <strong>vaguada ecuatorial</strong>.</li>
+</ul>
+<h3 id="42-fuerza-de-coriolis">4.2 Fuerza de Coriolis</h3>
+<ul>
+<li>Fuerza debida a la <strong>rotación de la Tierra en el espacio</strong> que desvía la trayectoria de los objetos en movimiento sobre su superficie: <strong>hacia la derecha en el hemisferio norte y hacia la izquierda en el hemisferio sur</strong>.</li>
+<li><strong>4.2.1</strong> Como consecuencia del gradiente de presión entre latitudes, se originan vientos que llevan el aire <strong>de las altas presiones a las bajas</strong> y que están afectados por la fuerza de Coriolis (figura p. 34).</li>
+</ul>
+<hr />
+<h2 id="5-viento-conceptos-basicos-cap-5-del-manual-pp-34-36">5. Viento: conceptos básicos (cap. 5 del manual, pp. 34-36)</h2>
+<ul>
+<li><strong>Viento</strong>: corriente de aire que se produce en la atmósfera al variar la presión.</li>
+<li><strong>5.1 Convergencia / divergencia</strong>: <strong>convergencia</strong> = el campo de viento comprime la masa de aire al encontrarse dos corrientes en una zona; <strong>divergencia</strong> = el campo de viento separa la masa de aire.</li>
+<li><strong>5.2 Subsidencia</strong>: <strong>descenso del aire hacia el suelo en la troposfera</strong>. Normalmente está causada por el desplazamiento hacia el suelo de <strong>aire frío y denso</strong> desde las capas medias y altas hacia las bajas, lo que a su vez hace que el aire menos denso de la superficie se desplace hacia arriba.</li>
+<li>
+<p><strong>5.3 Vientos debidos a las zonas de alta o baja presión</strong>:
+  a. Los vientos que surgen entre la <strong>vaguada ecuatorial</strong> (baja presión) y la <strong>zona de alta presión subtropical</strong> son los <strong>vientos alisios</strong>, que soplan del <strong>NE en el hemisferio norte y del SE en el hemisferio sur</strong> y convergen en el ecuador en la <strong>Zona de Convergencia Intertropical (ZCIT, en inglés ITCZ)</strong>.
+  b. Los <strong>vientos del oeste</strong>: vientos con esa componente que surgen entre la <strong>zona de baja presión subpolar</strong> y la <strong>zona de alta presión subtropical</strong>.
+  c. Entre los polos y la zona de baja presión subpolar se originan vientos que soplan <strong>del NE hacia el sur en el hemisferio norte y del SE hacia el norte en el hemisferio sur</strong>, siempre ligeramente desviados por efecto de la fuerza de Coriolis. (Son los vientos polares del este; el manual no les da nombre.)</p>
+</li>
+<li>
+<p><strong>5.4 Corriente en chorro (<em>jet stream</em>)</strong>: «una fuerte y estrecha corriente concentrada a lo largo de un eje casi horizontal en la <strong>alta troposfera o en la estratosfera</strong>, caracterizada por fuerte <strong>cizalladura horizontal y vertical del viento</strong>, y que presenta uno o varios máximos de velocidad». Es un flujo de aire que circula: <strong>en altura y a gran velocidad; alrededor del planeta; de oeste a este; de manera ocasionalmente discontinua, con ondulaciones tanto en el plano vertical como en el horizontal (ondas de Rossby)</strong>. Las más intensas son las corrientes en chorro <strong>polares</strong>, pero existen también corrientes en chorro <strong>subtropicales</strong> en ambos hemisferios (figura p. 36, corrientes en chorro polar y subtropical del hemisferio norte).
+  Uso en vuelo: por lo general, las aeronaves tratan de fijar sus trayectorias con <strong>viento en cola</strong> para ahorrar combustible; es particularmente útil con las corrientes en chorro, que, además de ser intensas, soplan aproximadamente a la <strong>altura habitual de vuelo en ruta</strong>.</p>
+</li>
+</ul>
+<p><em>Trampas de examen</em></p>
+<ul>
+<li>Coriolis: derecha en el norte, izquierda en el sur. Alisios: NE (norte) / SE (sur). ZCIT = donde convergen los alisios.</li>
+<li>Hadley 0-30, Ferrel 30-60, Polar 60-90 (aproximado).</li>
+<li>Corriente en chorro: de oeste a este, alta troposfera/estratosfera, ondas de Rossby; la polar es más intensa que la subtropical.</li>
+</ul>
+<hr />
+<h2 id="6-anticiclones-y-depresiones-cap-6-del-manual-pp-36-38">6. Anticiclones y depresiones (cap. 6 del manual, pp. 36-38)</h2>
+<p>Debido a la circulación general atmosférica se desarrollan zonas de alta y baja presión en grandes extensiones de la superficie terrestre, que se denominan <strong>anticiclones</strong> y <strong>depresiones</strong> respectivamente.</p>
+<p><strong>Anticiclón</strong></p>
+<ul>
+<li>Definición: región de la atmósfera donde la presión es <strong>más alta que en las áreas circundantes</strong>.</li>
+<li>Circulación: <strong>horaria en el hemisferio norte y antihoraria en el hemisferio sur</strong>. Los vientos son <strong>flojos en el centro y más fuertes en el exterior</strong>.</li>
+<li>Tipos:</li>
+<li><strong>Anticiclones fríos</strong>: de naturaleza <strong>térmica</strong>; deben su formación a las bajas temperaturas y a la alta densidad, que dan lugar a áreas de alta presión.</li>
+<li><strong>Anticiclones cálidos</strong>: de naturaleza <strong>dinámica</strong>; se caracterizan por <strong>convergencia de aire en altura, subsidencia y corrientes descendentes del aire</strong>, que originan altas presiones y <strong>divergencia de aire en superficie</strong>.</li>
+<li>Tiempo: generalmente <strong>estable</strong>, con vientos flojos en superficie y cielo despejado. Su estabilidad facilita la <strong>formación de nieblas en invierno</strong>, por lo que es probable que en los aeródromos se den condiciones de baja visibilidad.</li>
+</ul>
+<p><strong>Depresión (también borrasca)</strong></p>
+<ul>
+<li>Definición: región donde la presión es <strong>mucho más baja que en las áreas circundantes</strong>; su extensión horizontal es muy variable.</li>
+<li>Circulación: <strong>antihoraria en el hemisferio norte y horaria en el hemisferio sur</strong>; los vientos suelen ser <strong>fuertes en el centro y más débiles en el exterior</strong>.</li>
+<li>Tipos (tabla pp. 37-38):</li>
+<li><strong>Ciclón tropical</strong>: llamado <strong>huracán</strong> en el Atlántico y en el Pacífico nororiental y <strong>tifón</strong> en el Pacífico noroccidental. Es un tipo particular de borrasca que se forma en <strong>océanos y mares calientes, generalmente tropicales</strong>. Lleva asociado un centro aislado de <strong>bajas presiones en superficie, a veces muy profundo, y altas presiones en altura</strong>. En superficie genera fuertes vientos y lluvias fuertes, ocasionalmente torrenciales. <strong>A diferencia de los ciclones extratropicales, los vientos en altura suelen ser flojos.</strong></li>
+<li><strong>Borrascas de latitudes medias</strong>, de dos clases:<ul>
+<li><strong>Depresión aislada en niveles altos (DANA)</strong>, antiguamente conocida como <strong>gota fría</strong>. Se forma cuando, en la <strong>circulación del oeste</strong>, se produce una ondulación de gran amplitud que se rompe y se separa del flujo, creando un <strong>embolsamiento de aire frío en altura</strong> con reflejo difuso en superficie. La zona de bajas presiones relativas resultante suele tener un diámetro de <strong>200 km o más</strong> y una <strong>trayectoria difícil de predecir</strong>. En su seno el aire es <strong>inestable</strong> y habitualmente genera <strong>intensas precipitaciones</strong>.</li>
+<li><strong>Depresiones asociadas a los frentes polares</strong> de ambos hemisferios: pueden ser de gran extensión y afectar a muchas regiones; en ocasiones son profundas y generan fuertes vientos y lluvias que complican las operaciones.</li>
+</ul>
+</li>
+</ul>
+<p><em>Trampas de examen</em>: anticiclón horario en el norte / antihorario en el sur; la depresión, al revés. Vientos flojos en el centro del anticiclón, fuertes en el centro de la depresión. Anticiclón frío = térmico; anticiclón cálido = dinámico. DANA = gota fría; 200 km o más.</p>
+<hr />
+<h2 id="7-masas-de-aire-y-frentes-cap-7-del-manual-pp-38-41">7. Masas de aire y frentes (cap. 7 del manual, pp. 38-41)</h2>
+<h3 id="71-masas-de-aire">7.1 Masas de aire</h3>
+<ul>
+<li><strong>Definición</strong>: un volumen de aire de grandes dimensiones (<strong>miles de kilómetros</strong>) que posee propiedades físicas (presión, temperatura, humedad...) <strong>homogéneas horizontalmente</strong>. Las principales características que la identifican son la <strong>temperatura y la humedad</strong>.</li>
+<li>Las adquiere paulatinamente al permanecer sobre una gran superficie terrestre o marítima, la <strong>región manantial o fuente</strong>. Si la superficie es fría, la masa tiende a enfriarse; si es marítima, tiende a adquirir humedad.</li>
+<li>Clasificación:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Tipos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Según la temperatura, dependiendo de la latitud donde se genera</td>
+<td><strong>Ártica, Polar, Tropical, Ecuatorial</strong></td>
+</tr>
+<tr>
+<td>Según la humedad</td>
+<td><strong>Seca</strong> si la región fuente es <strong>continental</strong>; <strong>Húmeda</strong> si la región manantial es <strong>marítima</strong></td>
+</tr>
+</tbody>
+</table>
+<p>La combinación de ambas da <strong>8 tipos posibles</strong> de masas de aire según su origen (4 x 2).</p>
+<ul>
+<li>Las propiedades cambian con el tiempo a medida que la masa se desplaza sobre distintas superficies; los cambios dependen de las propiedades iniciales de la masa, de su velocidad de desplazamiento y de la naturaleza de la superficie sobre la que se desplaza.</li>
+</ul>
+<h3 id="72-frentes">7.2 Frentes</h3>
+<ul>
+<li><strong>Frente</strong> = la <strong>frontera entre dos masas de aire de diferentes temperaturas y densidades</strong>. No pueden mezclarse de forma inmediata por sus distintas densidades; en lugar de mezclarse, la <strong>masa más ligera y caliente empieza a ascender por encima de la masa fría y densa</strong>. El frente es la franja de transición entre ambas masas.</li>
+<li>Los frentes están <strong>asociados a depresiones</strong> y se clasifican en función de <strong>la masa de aire que empuja</strong> (pp. 40-41):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Frente</th>
+<th>Definición y tiempo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frente frío</strong></td>
+<td>Una <strong>masa de aire frío desplaza a una caliente</strong> y ocupa su lugar, avanzando como una <strong>cuña</strong> y obligando al aire caliente a ascender. Si en el aire que asciende se produce la condensación del vapor de agua, aparecen <strong>nubes de desarrollo vertical y precipitaciones</strong></td>
+</tr>
+<tr>
+<td><strong>Frente cálido</strong></td>
+<td>Una <strong>masa de aire caliente desplaza a la fría</strong>. El aire caliente asciende por encima del frío, lo que puede provocar un enfriamiento y la posterior condensación, con la consiguiente formación de <strong>nubosidad y precipitaciones</strong>. Al igual que en los frentes fríos, las características del tiempo dependen del grado de <strong>humedad y estabilidad</strong> de la masa de aire</td>
+</tr>
+<tr>
+<td><strong>Frente estacionario</strong></td>
+<td>Las dos masas se encuentran, pero <strong>no hay desplazamiento</strong>, por lo que ninguna prevalece sobre la otra. El viento tiende a soplar <strong>paralelo al frente y en sentidos opuestos</strong>. Puede provocar <strong>periodos de precipitaciones prolongados</strong> si las masas son muy húmedas</td>
+</tr>
+<tr>
+<td><strong>Frente ocluido</strong></td>
+<td>Un <strong>frente frío, que por regla general se mueve más rápido que uno cálido, alcanza el frente cálido y eleva el sector cálido en altura</strong>. El frente resultante en superficie es una combinación de los dos. Dos tipos: <strong>oclusión de tipo frío y oclusión de tipo caliente</strong>, según que el aire <strong>detrás</strong> de la oclusión sea más frío o más caliente que el aire situado <strong>delante</strong> de ella</td>
+</tr>
+</tbody>
+</table>
+<p><em>Trampas de examen</em>: 4 tipos por temperatura x 2 por humedad = 8; seca = continental, húmeda = marítima. Frente = frontera entre masas de distinta <strong>temperatura y densidad</strong>; la masa cálida asciende. Oclusión: el frente frío alcanza al cálido.</p>
+<hr />
+<h2 id="8-variables-meteorologicas-cap-8-del-manual-pp-41-53">8. Variables meteorológicas (cap. 8 del manual, pp. 41-53)</h2>
+<h3 id="81-nubosidad-manual-81-pp-41-47">8.1 Nubosidad (manual 8.1, pp. 41-47)</h3>
+<p><strong>Definición</strong>: las nubes están formadas por un conjunto de partículas minúsculas de <strong>agua líquida y/o de hielo</strong> en suspensión en la atmósfera.</p>
+<p><strong>8.1.1 Formación de las nubes</strong>. Tres requisitos:</p>
+<ol>
+<li>El volumen de aire tiene una <strong>alta humedad relativa</strong> (cantidad de vapor de agua suficiente).</li>
+<li>Se activa un mecanismo por el que el aire llega a la <strong>saturación</strong>, como el <strong>enfriamiento</strong>.</li>
+<li>Existen <strong>núcleos de condensación</strong>: <strong>partículas higroscópicas</strong> que facilitan el proceso de condensación.</li>
+</ol>
+<p><strong>El enfriamiento es el mecanismo más común.</strong> La masa de aire puede enfriarse cuando:</p>
+<ul>
+<li>a. entra en contacto con una <strong>superficie muy fría</strong> (casos de <strong>advección y radiación</strong>);</li>
+<li>b. sufre una <strong>expansión adiabática</strong>, denominada así porque el enfriamiento se produce sin que haya apenas intercambio de calor entre la masa de aire y el aire circundante. Sucede en casos como: <strong>expansión en una columna de aire ascendente (enfriamiento convectivo)</strong>; <strong>ascenso forzado del aire en una ladera</strong>; <strong>convergencia del aire en superficie que origina su ascenso (enfriamiento frontal)</strong>; <strong>turbulencia del aire en las capas bajas</strong> que transporta calor y humedad a niveles distantes del suelo.</li>
+</ul>
+<p><strong>8.1.2 Clasificación de las nubes</strong></p>
+<ul>
+<li>La mayor parte de las nubes se encuentran entre el nivel del mar y el nivel de la tropopausa (<strong>0-13 km en latitudes medias</strong>). Por convención, esta parte se divide en <strong>tres pisos: alto, medio y bajo</strong>. Tabla de la p. 42 (renderizada y leída):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Piso</th>
+<th>Región polar</th>
+<th>Región templada</th>
+<th>Región tropical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alto</td>
+<td>3-8 km (10 000-25 000 ft)</td>
+<td>5-13 km (16 500-45 000 ft)</td>
+<td>6-18 km (20 000-60 000 ft)</td>
+</tr>
+<tr>
+<td>Medio</td>
+<td>2-4 km (6500-13 000 ft)</td>
+<td>2-7 km (6500-23 000 ft)</td>
+<td>2-8 km (6500-25 000 ft)</td>
+</tr>
+<tr>
+<td>Bajo</td>
+<td>0-2 km (0-6500 ft)</td>
+<td>0-2 km (0-6500 ft)</td>
+<td>0-2 km (0-6500 ft)</td>
+</tr>
+</tbody>
+</table>
+<p>Fuente impresa en el manual: «Compendio de apuntes para la formación del personal meteorológico de la clase IV (B.J. Retallack)». (El pie de la figura del manual enumera las regiones en el orden «tropical, templada y polar», pero las cabeceras de las columnas van de polar a tropical.)</p>
+<ul>
+<li>Según el piso, las nubes se clasifican en <strong>cuatro familias: bajas, medias, altas y de desarrollo vertical</strong>.</li>
+<li>El <strong>Atlas Internacional de Nubes, Volumen I, OMM n.º 407, 1993</strong>, clasifica las nubes en <strong>10 géneros</strong> según su forma y características. Cada género se subdivide en <strong>especies</strong> (peculiaridades y estructura interna) y <strong>variedades</strong> (disposición de los elementos macroscópicos y grado de transparencia).</li>
+<li><strong>Tabla de géneros con las alturas medias de base y tope (p. 43, renderizada)</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Familia</th>
+<th>Géneros (símbolo)</th>
+<th>Base media (m)</th>
+<th>Tope medio (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nubes altas</td>
+<td>Cirros (Ci), Cirrostratos (Cs), Cirrocúmulos (Cc)</td>
+<td>6000</td>
+<td>12 000</td>
+</tr>
+<tr>
+<td>Nubes medias</td>
+<td>Altocúmulos (Ac), Nimbostratos (Ns)*, Altoestratos (As)</td>
+<td>2500</td>
+<td>6000</td>
+</tr>
+<tr>
+<td>Nubes bajas</td>
+<td>Estratos (St)</td>
+<td>150-600</td>
+<td>750</td>
+</tr>
+<tr>
+<td></td>
+<td>Estratocúmulos (Sc)</td>
+<td>600-1500</td>
+<td>2400</td>
+</tr>
+<tr>
+<td>Nubes de desarrollo vertical</td>
+<td>Cúmulos (Cu)</td>
+<td>300-2400</td>
+<td>6000</td>
+</tr>
+<tr>
+<td></td>
+<td>Cumulonimbos (Cb)</td>
+<td>600-2400</td>
+<td>12 000</td>
+</tr>
+</tbody>
+</table>
+<p>* Nota 5: la base de los Ns puede llegar hasta la superficie terrestre y considerarse nube baja. Nota 6: la extensión vertical de los Cu y Cb es tan grande que puede alcanzar el piso medio y el alto. (Las filas de las familias bajas y de desarrollo vertical se han emparejado por orden de aparición en la imagen; la maquetación de la tabla impresa es ambigua.)</p>
+<p><strong>Los diez géneros, descritos (pp. 44-46)</strong></p>
+<ul>
+<li><strong>ALTAS</strong>: formadas por <strong>cristales de hielo</strong>.</li>
+<li><strong>Cirros (Ci)</strong>: largos, finos y etéreos <strong>filamentos blancos y delicados de cristales de hielo</strong>; a esas altitudes los vientos muy fuertes alargan los filamentos; normalmente blancos; en ocasiones <strong>indican la aproximación de una perturbación</strong>.</li>
+<li><strong>Cirrostratos (Cs)</strong>: velo nuboso, transparente y blanquecino, de aspecto fibroso (como cabellos), que cubre total o parcialmente el cielo; <strong>el Sol o la Luna pueden brillar a través de él y producir halos</strong>, formados por la <strong>refracción y reflexión de la luz en los cristales de hielo</strong>.</li>
+<li><strong>Cirrocúmulos (Cc)</strong>: banco, manto o capa delgada de nubes generalmente <strong>blancas y sin sombras</strong>, compuesta por elementos muy pequeños en forma de granos, rizos, grumos, ondulaciones, etc.</li>
+<li><strong>MEDIAS</strong>: formadas por <strong>gotas de agua, muchas de ellas superenfriadas o en subfusión</strong>, a veces también por cristales de hielo.</li>
+<li><strong>Altocúmulos (Ac)</strong>: banco o capa de nubes blancas o grises, que tienen <strong>sombras</strong>, compuesta por losetas, masas redondeadas, rodillos, etc. Si se ven en una <strong>mañana húmeda y templada</strong>, indican que <strong>por la tarde pueden aparecer tormentas</strong>.</li>
+<li><strong>Nimbostratos (Ns)</strong>: capa nubosa gris con la base rasgada y con un aspecto velado por la <strong>precipitación de lluvia o nieve que cae más o menos continuadamente</strong>; frecuentemente aparecen nubes debajo de ella; su espesor es suficiente para <strong>ocultar completamente el Sol</strong>; pueden llegar a extenderse hasta la superficie terrestre y considerarse nubes bajas con lluvia; <strong>se incluyen dentro del grupo de nubes medias</strong>, aunque en ocasiones pueden alcanzar el nivel bajo y el alto.</li>
+<li><strong>Altoestratos (As)</strong>: manto o capa que habitualmente cubre el cielo completamente, de color <strong>gris o azul grisáceo</strong>; tiene partes suficientemente delgadas que permiten distinguir vagamente el Sol, como a través de un <strong>vidrio deslustrado</strong>. <strong>A diferencia de los cirrostratos, los altoestratos no producen halos</strong>.</li>
+<li><strong>BAJAS</strong>: formadas, generalmente, <strong>solo por gotas de agua líquida</strong>.</li>
+<li><strong>Estratos (St)</strong>: capa nubosa generalmente gris que suele cubrir todo el cielo; <strong>normalmente parecen niebla que no llega al suelo</strong>.</li>
+<li><strong>Estratocúmulos (Sc)</strong>: nubes en forma de banco, manto o capa, grumosas y grises o blanquecinas, a veces con ambos colores; suelen formar hileras con <strong>trozos de cielo azul visible entre ellas</strong>.</li>
+<li><strong>DE DESARROLLO VERTICAL</strong>: pueden alcanzar <strong>los tres pisos</strong> y presentan una combinación de partículas características de las nubes altas, medias y bajas.</li>
+<li><strong>Cúmulos (Cu)</strong>: nubes aisladas, densas y blancas; parecen <strong>enormes bolas de algodón</strong> con bordes bien definidos, la <strong>base plana y relativamente oscura</strong> y las zonas más altas con <strong>forma de coliflor</strong>.</li>
+<li><strong>Cumulonimbos (Cb)</strong>: nube densa y potente, con una dimensión vertical considerable, en forma de <strong>montaña o enormes torres</strong>; da lugar a <strong>precipitaciones como tormenta o chubascos</strong>; puede crecer hasta la <strong>tropopausa</strong>, donde comienza un estrato estable que impide la flotabilidad, y llegar a crecer algo más allá si las corrientes convectivas son muy fuertes; la <strong>base es oscura</strong> y pueden aparecer nubes desgarradas.</li>
+</ul>
+<p><strong>8.1.3 Nubosidad y techo de nubes</strong></p>
+<ul>
+<li>Una descripción completa de la nubosidad incluye la <strong>altura, la cantidad de cielo cubierto y los tipos de nubes</strong> de cada capa observada.</li>
+<li>Para estimarla, el cielo se divide en <strong>ocho partes; cada una de ellas es una octa</strong>; se cuenta el número de octas que cubre cada capa, de la más baja a la más alta.</li>
+<li><strong>Abreviaturas OACI</strong> utilizadas en los mensajes aeronáuticos:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FEW</strong></td>
+<td>algunas nubes: <strong>de 1 a 2 octas</strong></td>
+</tr>
+<tr>
+<td><strong>SCT</strong></td>
+<td>nubosidad dispersa: <strong>de 3 a 4 octas</strong></td>
+</tr>
+<tr>
+<td><strong>BKN</strong></td>
+<td>nuboso: <strong>de 5 a 7 octas</strong></td>
+</tr>
+<tr>
+<td><strong>OVC</strong></td>
+<td>cielo cubierto: <strong>8 octas</strong> (el manual dice solo «cielo cubierto»)</td>
+</tr>
+<tr>
+<td><strong>NSC</strong></td>
+<td>sin nubes de importancia para las operaciones</td>
+</tr>
+<tr>
+<td><strong>CAVOK</strong></td>
+<td>sin nubes, sin fenómenos significativos y con visibilidad <strong>mayor que 10 kilómetros</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nota: la entrada de CAVOK del manual dice «Sin nubes» y no repite la fórmula habitual de la OACI («ninguna nube por debajo de 5000 ft o de la altitud mínima de sector más alta, si esta es mayor, y ningún Cb/TCU»); se anota tal como está impreso.</p>
+<ul>
+<li><strong>Techo de nubes</strong> = altura sobre el suelo (tierra o agua) de la <strong>base de la capa de nubes más baja que cubra más de la mitad del cielo (BKN/OVC)</strong> y se halle <strong>por debajo de 20 000 ft (6000 m)</strong>.</li>
+<li><strong>Nube de importancia para las operaciones</strong> = nube cuya <strong>base está a una altura inferior al valor más elevado entre 1500 m (5000 ft) y la altitud mínima de sector más alta</strong>, o <strong>un cumulonimbo o un cúmulo de desarrollo vertical a cualquier altura</strong>.</li>
+</ul>
+<h3 id="82-visibilidad-manual-82-pp-47-49">8.2 Visibilidad (manual 8.2, pp. 47-49)</h3>
+<ul>
+<li>Según el <strong>Anexo 3 de la OACI</strong>, en sentido aeronáutico se entiende por <strong>visibilidad horizontal</strong> el valor <strong>más elevado</strong> entre los siguientes:</li>
+<li>la <strong>distancia máxima a la que pueda verse y reconocerse un objeto de color negro de dimensiones convenientes, situado cerca del suelo, al ser observado ante un fondo brillante</strong>. Este valor está representado por el <strong>alcance óptico meteorológico (MOR, <em>Meteorological Optical Range</em>)</strong>. Generalmente se determina así <strong>durante el día</strong>;</li>
+<li>la <strong>distancia máxima a la que puedan verse e identificarse las luces de aproximadamente 1000 candelas ante un fondo no iluminado</strong>; puede variar con la iluminación del fondo. Generalmente se determina así <strong>durante la noche</strong>.</li>
+<li><strong>Visibilidad vertical</strong>: la visibilidad máxima a la cual se puede ver un <strong>globo que asciende</strong>; aeronáuticamente, la distancia vertical a partir de la cual el piloto tiene visión de la pista.</li>
+<li><strong>Visibilidad oblicua</strong>: distancia desde la cual un piloto, mirando a lo largo de la senda de descenso, puede ver la pista; en una aproximación, la distancia desde la cual ve las ayudas para el aterrizaje del umbral de la pista. Como el segmento entre el avión y un objeto situado en superficie es normalmente superior a sus proyecciones horizontal y vertical, <strong>la visibilidad oblicua es normalmente inferior a la vertical y a la horizontal</strong>.</li>
+<li><strong>RVR (alcance visual en pista, <em>Runway Visual Range</em>)</strong>: se utiliza en relación con la visibilidad oblicua; es la distancia hasta la cual el piloto de una aeronave que se encuentra <strong>sobre el eje de una pista</strong> puede ver las señales de superficie de la pista o las luces que la delimitan o que señalan su eje.</li>
+<li>La visibilidad se mide normalmente en <strong>metros</strong>. Su estimación puede variar según las condiciones y la dirección. Los principales factores que influyen en ella son la <strong>humedad relativa, la posición del Sol y la dirección en la que sopla el viento</strong>. Otros factores: el tamaño y el color del objeto, la iluminación (artificial, del Sol o de la Luna), la agudeza visual del observador y la posición desde la que se estima.</li>
+<li><strong>Visibilidad reinante</strong>, en los informes <strong>METAR/SPECI</strong>: el <strong>valor máximo de la visibilidad</strong>, observado de conformidad con la definición aeronáutica, <strong>al que se llega dentro de un círculo que cubre por lo menos la mitad del horizonte o por lo menos la mitad de la superficie del aeródromo</strong>, de forma continua o discontinua. Cuando la visibilidad fluctúe rápidamente y no pueda determinarse la predominante, se cifra la <strong>visibilidad mínima</strong>.</li>
+<li>El manual afirma que la visibilidad es un parámetro de importancia esencial; las nuevas tecnologías permiten operar con visibilidades bajas, pero es muy importante proporcionar un valor lo más ajustado posible.</li>
+</ul>
+<h3 id="83-precipitacion-manual-83-pp-49-50">8.3 Precipitación (manual 8.3, pp. 49-50)</h3>
+<ul>
+<li><strong>Precipitación</strong> = el conjunto de <strong>partículas líquidas o sólidas que, procedentes de las nubes, alcanzan el suelo</strong>.</li>
+<li>Las gotas de agua o los cristales de hielo deben alcanzar un tamaño adecuado para vencer las corrientes ascendentes y caer libremente por efecto de la gravedad.</li>
+<li>Según la altura a la que ha comenzado la caída y la distribución de temperaturas del aire que atraviesa en su descenso, la precipitación es de <strong>agua (lluvia), nieve, aguanieve, lluvia helada (gotas que se congelan en el momento del contacto) o granizo</strong>.</li>
+<li>Tipo de nube frente a tipo de precipitación:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tipo de nube</th>
+<th>Precipitación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>De desarrollo vertical: <strong>Cb</strong> y, ocasionalmente, <strong>Cu</strong> cuando el desarrollo vertical es de gran extensión</td>
+<td><strong>Intensa</strong>, en forma de <strong>chubasco</strong>, con frecuencia en forma de <strong>tormenta</strong></td>
+</tr>
+<tr>
+<td>Nubes estratiformes, sobre todo <strong>As y Ns</strong></td>
+<td>De carácter <strong>continuado</strong> e intensidad <strong>moderada</strong></td>
+</tr>
+<tr>
+<td>Altoestratos</td>
+<td><strong>Débil o moderada y continua</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Tipos (8.3.1)</strong>:</li>
+<li><strong>Chubascos</strong>: se inician y cesan <strong>bruscamente</strong>, son relativamente <strong>intensos</strong> y de no mucha duración; pueden ser de agua, de nieve o de ambas mezcladas; las gotas son relativamente <strong>grandes</strong>; proceden de <strong>nubes convectivas</strong>.</li>
+<li><strong>Precipitaciones intermitentes</strong>: no son necesariamente continuas en la superficie, aunque las nubes que las originan forman un manto más o menos continuo; su principio y su final <strong>no suelen ser bruscos</strong>; no están asociadas normalmente a nubosidad de tipo convectivo, de modo que la observación del tipo de precipitación permite inducir el tipo de nubosidad que la produce.</li>
+<li><strong>Virgas</strong>: cuando la precipitación <strong>se evapora antes de llegar al suelo</strong> (especialmente si la humedad relativa es baja y/o la temperatura elevada), con lo que se crean <strong>estructuras filamentosas bajo la nube</strong>.</li>
+<li><strong>Efectos en las operaciones</strong>: en vuelo, <strong>reducción de la visibilidad</strong>; <strong>cizalladura vertical y horizontal</strong> por las corrientes de aire originadas por la caída de las gotas; <strong>engelamiento</strong> (por debajo de 0 ºC); en el <strong>aterrizaje</strong>, disminuye la eficacia de frenado y puede producir <strong>aquaplaning</strong> si hay charcos de agua o placas de hielo (después de una nevada hay que limpiar las pistas, porque por debajo de 0 ºC, si no se limpian, se forma hielo); en el <strong>rodaje</strong>, las placas de hielo o los depósitos de nieve en las calles de rodaje reducen la velocidad de la aeronave y aumentan los tiempos de ocupación de las calles de rodaje y de la pista.</li>
+</ul>
+<h3 id="84-viento-manual-84-pp-50-53">8.4 Viento (manual 8.4, pp. 50-53)</h3>
+<ul>
+<li>Viento = <strong>flujo de aire en la atmósfera</strong>. El movimiento del aire lo origina principalmente la fuerza que resulta de la <strong>diferencia o gradiente de presión entre dos masas de aire, y es proporcional a él</strong>. También influyen otras fuerzas: la <strong>fuerza de Coriolis (rotación de la Tierra), la fuerza centrífuga y el rozamiento con la superficie terrestre (fuerza de rozamiento)</strong>.</li>
+<li>El viento es un <strong>vector</strong> con dos magnitudes, <strong>intensidad y dirección</strong>, y se expresa por su velocidad. La intensidad se expresa en <strong>nudos</strong> (el manual escribe «millas/hora (nudos)», aunque el nudo es la medida aeronáutica estándar); también en m/s o km/h en otros contextos. <strong>La dirección se expresa por su procedencia, en grados sexagesimales; se toma como 0º el norte verdadero (geográfico) y se mide en el sentido de giro de las agujas del reloj</strong> el ángulo formado entre la dirección de donde procede el viento y el norte geográfico.</li>
+<li>El viento es uno de los fenómenos más críticos en las maniobras de aterrizaje y despegue en pista. Los aviones deben aterrizar y despegar <strong>en contra del viento</strong>; es posible hacerlo con ligero viento en cola, y el valor máximo admisible de la componente de viento en cola depende del <strong>tipo de avión y de la longitud de la pista</strong>. La <strong>componente transversal</strong> del viento limita la posibilidad de aterrizar o despegar con seguridad; el límite máximo de componente transversal que toleran las aeronaves <strong>varía entre 15 y 35 kt</strong>, según el tipo de aeronave y las condiciones de la pista.</li>
+</ul>
+<p><strong>8.4.1 Vientos locales: brisas</strong></p>
+<ul>
+<li>Vientos a escala local que soplan <strong>de día del mar hacia tierra (brisa de mar)</strong> y <strong>durante la noche al revés (brisa de tierra)</strong>.</li>
+<li>Causa principal: el <strong>diferente calentamiento de la superficie del mar y de la tierra por la radiación solar</strong>, debido a la diferencia de <strong>calores específicos</strong> de la tierra y del mar.</li>
+<li><strong>Día</strong>: la tierra se calienta más que el mar; la columna de aire sobre la tierra <strong>se dilata y tiende a elevarse</strong>; la presión en tierra es <strong>menor</strong> que a la misma altura sobre el mar; el aire en superficie se desplaza del mar a tierra (<strong>brisa de mar</strong>); el aire que asciende se enfría y se expande hacia el mar, con lo que cierra el circuito.</li>
+<li><strong>Noche</strong>: la tierra se enfría más rápidamente que el mar; se produce un <strong>área de alta presión sobre la tierra</strong> y otra de baja presión al mismo nivel sobre el mar; el aire se desplaza de la tierra al mar (<strong>brisa de tierra</strong>).</li>
+<li>En ausencia de vientos no locales, las brisas predominan en las zonas de costa y siguen un ciclo diario idéntico y repetitivo y, por tanto, <strong>predecible</strong>, de modo que los aeropuertos costeros pueden adaptar los <strong>ejes de sus pistas y sus configuraciones</strong> al patrón de brisas.</li>
+</ul>
+<p><strong>8.4.2 Vientos locales: efecto Foehn</strong></p>
+<ul>
+<li>Fenómeno que se produce en el <strong>lado de sotavento</strong> de una cadena montañosa y se caracteriza por <strong>el aumento de temperatura y la disminución de la humedad relativa</strong> del aire en un punto de ese lado, en relación con un punto a la misma altura en el lado de <strong>barlovento</strong>.</li>
+<li>Una masa de aire asciende por la zona montañosa en el lado de barlovento; este ascenso, y por tanto enfriamiento, se supone <strong>adiabático</strong>. Si contiene suficiente vapor de agua, puede condensarse al llegar a una cierta altura, formar nubes y originar precipitación en forma de agua o nieve, con lo que <strong>pierde parte de su humedad</strong> y asciende según el <strong>gradiente adiabático saturado, que es menor que el seco</strong>. Posteriormente desciende por la ladera opuesta <strong>calentándose por compresión adiabática, según el gradiente adiabático seco</strong>. Por este recalentamiento más rápido en la ladera de sotavento, la temperatura de este aire seco al llegar al valle es <strong>significativamente superior</strong> a la que tenía inicialmente cuando ascendía por la cadena montañosa desde la misma altitud. Este fenómeno de recalentamiento y resecamiento es el efecto Foehn.</li>
+</ul>
+<p><em>Trampas de examen del capítulo 8</em></p>
+<ul>
+<li>FEW 1-2, SCT 3-4, BKN 5-7, OVC 8 (octas). CAVOK: visibilidad &gt; 10 km.</li>
+<li>Techo de nubes: capa más baja BKN/OVC (más de la mitad del cielo) y por debajo de 20 000 ft (6000 m).</li>
+<li>Dirección del viento = de dónde procede; brisa de mar de día (del mar a tierra); brisa de tierra de noche.</li>
+<li>El Ns es una nube <strong>media</strong> en la tabla del manual, aunque puede llegar al suelo.</li>
+<li>Los cirrostratos producen halos; los altoestratos, no.</li>
+<li>Virga = precipitación que no llega al suelo.</li>
+<li>El tope del Cb puede llegar a la tropopausa (tope medio de 12 000 m); el del Cu, 6000 m.</li>
+<li>Visibilidad: objeto negro de día (MOR) frente a luces de 1000 cd de noche; la visibilidad oblicua es menor que la vertical y la horizontal.</li>
+</ul>
+<hr />
+<h2 id="9-fenomenos-meteorologicos-peligrosos-para-el-vuelo-cap-9-del-manual-pp-53-70">9. Fenómenos meteorológicos peligrosos para el vuelo (cap. 9 del manual, pp. 53-70)</h2>
+<h3 id="91-visibilidad-reducida-manual-91-pp-53-55">9.1 Visibilidad reducida (manual 9.1, pp. 53-55)</h3>
+<ul>
+<li>La visibilidad que percibe el piloto desde el aire <strong>no es la misma que la medida en el suelo</strong>, porque pueden darse fenómenos meteorológicos locales, como la niebla, que afectan a la visibilidad en superficie; puede ocurrir que el piloto inicie la aproximación con buena visibilidad y después se encuentre con una densa niebla en la pista.</li>
+<li>Cuando la visibilidad es <strong>inferior a 1500 m, se debe cifrar el RVR</strong>. El RVR mide la distancia hasta la cual el piloto de una aeronave que se encuentra <strong>a 5 m de altura sobre el eje de la pista</strong> puede ver las señales de superficie o las luces de la pista. En los informes meteorológicos corresponde al <strong>valor promedio de los 10 minutos anteriores a la hora de observación</strong>. Se obtiene de <strong>transmisómetros (o visibilímetros)</strong> colocados <strong>a 2,5 m sobre el suelo, a unos 100 m del eje de la pista, en la zona de toma de contacto</strong>.</li>
+<li>Fenómenos que reducen la visibilidad en superficie (lista del manual): <strong>nieblas y neblinas; ventiscas; calimas (partículas de polvo en suspensión); contaminación del aire y/o humo; smog; torbellinos de polvo o arena; nubes bajas; precipitaciones intensas (lluvia, llovizna, nieve y/o granizo)</strong>.</li>
+<li>Cuando la visibilidad se reduce por niebla o neblina, o por partículas de contaminación o de humo, la <strong>estabilidad de la atmósfera</strong> es muy importante para valorar cuánto puede prolongarse la reducción: la <strong>inestabilidad</strong> favorece la aparición de chubascos o corrientes verticales que arrastran polvo y arena; la <strong>estabilidad</strong>, por ejemplo la asociada a una <strong>inversión térmica</strong>, puede dificultar la disipación de un estrato de niebla. De todos los factores, <strong>la niebla es el que normalmente reduce más la visibilidad</strong>.</li>
+</ul>
+<p><strong>9.1.1 Nieblas y neblinas</strong></p>
+<ul>
+<li>Formación: <strong>condensación del vapor de agua</strong>, por <strong>enfriamiento o por adición de vapor de agua</strong>.</li>
+<li><strong>Niebla</strong> = <strong>nube estratiforme en contacto con el suelo o a muy poca altura, que restringe la visibilidad a valores inferiores a 1000 metros</strong>.</li>
+<li>Si la reducción de la visibilidad es <strong>superior a 1000 m con una humedad relativa superior al 70 %</strong>, la nube se llama <strong>neblina</strong>. Un caso particular de neblina es la <strong>bruma</strong>: reducción causada por partículas de agua y otras <strong>partículas higroscópicas en suspensión, mayormente de sal</strong>; se puede considerar un tipo de neblina típica de <strong>zonas costeras</strong>. (El manual dice «reducción de la visibilidad superior a 1000 m».)</li>
+<li>La extensión vertical varía de <strong>unos pocos metros a unos cientos de metros</strong>. Si no supera los <strong>2 m</strong> de altura, es <strong>niebla baja</strong>. En horizontal puede formar un manto continuo o discontinuo (<strong>en bancos</strong>).</li>
+<li>Cuando las nieblas son delgadas, es corriente que los aviones que sobrevuelan el aeródromo vean la pista, pero la pierdan al iniciar la aproximación o perciban al menos una disminución muy sensible de la visibilidad; cuando la niebla es baja y densa, las marcas y las luces de la pista pueden llegar a quedar ocultas.</li>
+</ul>
+<h3 id="92-ilusiones-opticas-manual-92-p-56">9.2 Ilusiones ópticas (manual 9.2, p. 56)</h3>
+<ul>
+<li>Pueden llevar al piloto a creer que vuela a una <strong>altura y/o distancia diferente</strong> de la real. Factores: características y condiciones de la pista (<strong>pendiente ascendente o descendente, anchura</strong>), <strong>inclinación del terreno</strong>, <strong>agua en el parabrisas</strong>, <strong>falta de contraste de las luces de balizaje de la pista con el terreno</strong>, fenómenos meteorológicos y <strong>condiciones de luminosidad</strong> en el momento de la maniobra.</li>
+</ul>
+<h3 id="93-engelamiento-manual-93-pp-56-59">9.3 Engelamiento (manual 9.3, pp. 56-59)</h3>
+<ul>
+<li><strong>Engelamiento</strong> = formación de hielo sobre la <strong>estructura del avión y/o en el motor</strong>, tanto en tierra como en vuelo, cuando el <strong>agua líquida subfundida (gotas de agua con temperatura igual o menor que 0 ºC)</strong> se congela al impactar con la aeronave.</li>
+<li>El engelamiento en vuelo se forma cuando el avión penetra en una zona donde hay <strong>gotas de agua en forma visible (gotas de nube o lluvia)</strong> y la temperatura del aire en el punto de encuentro es <strong>≤ 0 ºC</strong>, aunque en ocasiones puede haber engelamiento <strong>incluso con temperaturas ligeramente superiores</strong>.</li>
+<li>El hielo se adhiere principalmente a las zonas que <strong>más sobresalen</strong> de la célula del avión y a los elementos expuestos al viento relativo. El engelamiento constituye <strong>uno de los mayores riesgos meteorológicos en aviación</strong>.</li>
+<li><strong>Efectos</strong> (lista en orden): aumento de peso y de resistencia al avance; falsas indicaciones de los instrumentos e interferencias en las comunicaciones; reducción de visibilidad; alteraciones en las propiedades aerodinámicas (<strong>disminución de la sustentación</strong> y <strong>reducción de la maniobrabilidad</strong> por el agarrotamiento de las superficies de control); pérdida de efectividad de los frenos y de todo el tren de aterrizaje; pérdida de potencia; vibraciones que provocan fatiga estructural; mal funcionamiento y daños estructurales en los motores.</li>
+<li>
+<p><strong>Intensidad</strong> (según la velocidad de acumulación del hielo y los efectos que produce):
+  a. <strong>Ligero</strong>: el crecimiento del depósito de hielo no crea problemas al vuelo, salvo si es muy prolongado.
+  b. <strong>Moderado</strong>: el crecimiento es rápido incluso en periodos muy cortos; puede crear problemas al vuelo, aunque los <strong>equipos de defensa de a bordo son capaces de deshacer el depósito</strong>.
+  c. <strong>Fuerte</strong>: el crecimiento es tan rápido que los equipos de a bordo no pueden resolver el problema por sí solos; <strong>se requiere un cambio de altitud inmediato</strong>.</p>
+</li>
+<li>
+<p><strong>Cuatro procesos</strong> de engelamiento en vuelo: <strong>hielo claro o transparente; hielo granulado; lluvia engelante; depósito de nieve húmeda o escarcha</strong>.</p>
+</li>
+<li><strong>Tipos</strong>:
+  1. <strong>Hielo claro (<em>clear icing</em>)</strong>: depósito de hielo homogéneo, casi <strong>transparente</strong>, de aspecto vidrioso y superficie exterior lisa, con <strong>gran adherencia</strong>; la congelación de las gotas subfundidas es <strong>lenta</strong>; <strong>muy peligroso</strong>. Condiciones más favorables: <strong>temperatura del aire entre 0 ºC y -10 ºC</strong>; temperatura del avión ligeramente por debajo de 0 ºC.
+  2. <strong>Hielo granulado (<em>rime icing</em>)</strong>: depósito de color <strong>blanco y opaco</strong>, de aspecto áspero, rugoso y granular, con <strong>mala adherencia</strong>; la congelación de las gotas subfundidas es <strong>rápida</strong>; <strong>no presenta grandes problemas</strong> para las operaciones. Condiciones más favorables: <strong>temperatura del aire entre 0 ºC y -40 ºC (habitualmente entre -10 ºC y -20 ºC)</strong>; temperatura del avión ligeramente por debajo de 0 ºC.
+  3. <strong>Lluvia engelante</strong>: se forma cuando las gotas de precipitación líquida procedentes de una capa <strong>con temperatura superior a 0 ºC</strong> se <strong>sobreenfrían al atravesar capas por debajo de 0 ºC</strong>. <strong>Es el engelamiento más peligroso para las aeronaves</strong>: además de ser hielo transparente, cuando las gotas subfundidas impactan sobre el avión <strong>se congelan uniformemente por todas sus partes</strong>.
+  4. <strong>Engelamiento por escarcha o nieve húmeda</strong>: nieve húmeda compuesta por <strong>cristales de hielo que coexisten con gotas de agua subfundidas</strong>; puede generarse <strong>tanto en tierra como en vuelo</strong>. En aviones aparcados a la intemperie, el depósito de hielo que se forma es altamente peligroso si se inicia el vuelo sin haberlo retirado: al estar muy adherido a la superficie metálica, altera el perfil aerodinámico, <strong>disminuyendo la sustentación y aumentando la resistencia</strong>, y puede obligar a <strong>cancelar el despegue</strong>.</li>
+</ul>
+<h3 id="94-cizalladura-manual-94-p-59">9.4 Cizalladura (manual 9.4, p. 59)</h3>
+<ul>
+<li><strong>Cizalladura del viento</strong> (<em>wind shear</em>) = un cambio en la velocidad y/o la dirección del viento entre dos puntos próximos; puede ser <strong>horizontal, vertical o la combinación de ambas</strong>. <strong>Cuanto menor es la distancia en la que se produce el cambio y mayor la velocidad a la que ocurre, más fuerte es la cizalladura.</strong></li>
+<li>En <strong>niveles altos</strong> favorece la aparición de <strong>turbulencia</strong>. En <strong>niveles bajos</strong> representa un peligro para las operaciones de <strong>aterrizaje y despegue</strong>; es de especial importancia <strong>por debajo de la capa de fricción</strong>, donde afecta a la <strong>senda de descenso</strong> y obliga al piloto a tomar una acción correctora sobre los mandos.</li>
+<li>Fenómenos que pueden dar lugar a cizalladura: <strong>tormentas</strong> (por ejemplo, los <strong>microrreventones</strong> y los <strong>frentes de racha</strong>: ráfagas fuertes en la frontera entre el aire frío de la tormenta y el aire más cálido del entorno, que forman parte del ciclo normal de formación de las tormentas); <strong>tornados</strong>; <strong>frentes fríos o cálidos</strong> (cuando dos masas de aire de diferente velocidad entran en contacto se produce una capa de turbulencia por cizalladura, en el plano horizontal o en el vertical); <strong>vientos fuertes perturbados por el relieve local</strong>; <strong>inversiones térmicas cerca del suelo</strong> asociadas a zonas frontales, <strong>brisas (sobre todo marinas)</strong> y <strong>vientos catabáticos</strong>.</li>
+<li>(El manual remite al «apartado 8.7» para los microrreventones; en realidad el microrreventón es el apartado 9.6.2.)</li>
+</ul>
+<h3 id="95-turbulencia-manual-95-pp-60-64">9.5 Turbulencia (manual 9.5, pp. 60-64)</h3>
+<ul>
+<li><strong>Turbulencia</strong> = estado del flujo de aire en el cual las velocidades muestran <strong>fluctuaciones irregulares</strong>; los <strong>vórtices o remolinos</strong> viajan inmersos en la corriente y dan lugar a variaciones en la intensidad y la dirección del viento. En aviación se considera que existe turbulencia cuando sus efectos <strong>afectan al movimiento del avión</strong>, en forma de <strong>aceleraciones generalmente verticales</strong> que se experimentan como violentos y abruptos ascensos y descensos.</li>
+<li><strong>Clasificación por intensidad</strong>: a. <strong>Ligera</strong>: pequeñas variaciones en la altitud del avión. b. <strong>Moderada</strong>: variaciones de mayor envergadura; suele <strong>exigir la intervención del piloto</strong>. c. <strong>Fuerte</strong>: variaciones amplias y violentas en <strong>altura y en el ángulo de ataque</strong>. d. <strong>Extrema</strong>: el avión es <strong>zarandeado violentamente</strong> y es prácticamente <strong>ingobernable</strong>.</li>
+<li><strong>Clasificación por causa</strong>:
+  1. <strong>Turbulencia convectiva</strong>: típica de los <strong>días calurosos del verano</strong> o cuando una <strong>masa de aire frío se mueve por encima de una superficie más cálida</strong>. La tierra se calienta y transmite calor por conducción a las capas bajas más próximas, con lo que se originan corrientes convectivas verticales. Las corrientes ascendentes tienen intensidades muy variables; si hay humedad e inestabilidad en capas medias y altas, pueden ir acompañadas de <strong>grandes nubes de desarrollo vertical</strong>. Si la atmósfera es <strong>estable</strong>, la convección afecta solo a las capas bajas y, solo si el contenido de humedad es suficientemente elevado, se desarrollan <strong>cúmulos de poco desarrollo</strong>, con una capa estable por encima. Por cada corriente ascendente hay una descendente, pero <strong>en aeronáutica solo se considera el efecto de las ascendentes por ser más violento</strong>.
+  2. <strong>Turbulencia mecánica</strong>: la que se forma por la presencia de un <strong>obstáculo material</strong> en la marcha del viento. Su intensidad depende del <strong>tamaño de los obstáculos, de la velocidad del viento y de la rugosidad del terreno</strong>. Los obstáculos van desde grupos de árboles o edificios hasta cadenas de montañas. La turbulencia debida a montañas es la <strong>turbulencia por ondas de montaña</strong>, una de las más peligrosas. <strong>Aire inestable</strong>: remolinos grandes, turbulencia que afecta a un <strong>espesor mayor</strong>. <strong>Aire estable</strong>: remolinos más pequeños, que afectan a un <strong>espesor menor</strong>.
+  3. <strong>Turbulencia de estela (<em>wake turbulence</em>)</strong>: la producen los <strong>aviones en vuelo, en el aterrizaje y en el despegue</strong> al dejar tras de sí remolinos de aire que se desplazan con el viento y tardan en disiparse. Su intensidad depende del <strong>tamaño del avión, de su velocidad y de la configuración de las alas</strong>. Es especialmente crítica en el <strong>despegue</strong>: tras el despegue de un <strong>avión pesado</strong> el aire encima de la pista queda revuelto y puede ser peligroso <strong>autorizar en seguida otro despegue</strong> (el manual se dirige aquí directamente al controlador).
+  4. <strong>Turbulencia asociada a frentes</strong>: el cambio de presión que origina el paso de un frente se traduce en un cambio de dirección y de intensidad del viento; la intensidad de la turbulencia depende de la violencia del cambio. Generalmente, <strong>la turbulencia es mayor en los frentes fríos que en los cálidos</strong>. Si, además del frente, existe convección y vientos sinópticos fuertes, la intensidad aumenta.
+  5. <strong>Turbulencia por onda de montaña</strong>: se origina cuando el flujo de aire choca con una cadena montañosa y da lugar a un <strong>comportamiento ondulatorio</strong> del flujo, con ascensos y descensos una vez pasado el obstáculo. Es muy peligrosa y ha causado numerosos accidentes. Afecta a <strong>todas las aeronaves en el ascenso, pero especialmente a las ligeras en el descenso</strong>. Suele desaparecer en niveles muy altos; cuando hay una <strong>corriente en chorro más o menos perpendicular a la montaña</strong>, la cizalladura que genera refuerza la acción de la onda. En niveles bajos, la onda de montaña más peligrosa se produce asociada a <strong>rotores</strong>: torbellinos que se forman <strong>bajo las crestas de las ondas; el más peligroso es el que se forma debajo de la primera onda</strong>.
+     <strong>Condiciones que favorecen las ondas de montaña</strong>: (i) intensidad del viento en la cima <strong>superior a 15 nudos</strong> (puede ser superior si la montaña es muy alta) y <strong>creciente con la altura</strong>; (ii) dirección del viento <strong>a menos de 30º de la perpendicular al eje de la montaña</strong> y constante (cuanto menor es el ángulo, más intensa suele ser la onda); (iii) una <strong>capa estable por encima de la cima</strong>.
+     <strong>Nubes cuando hay humedad</strong> (en los tramos de ascenso): <strong>nubes lenticulares</strong> (el manual dice altocúmulos y altoestratos); peligrosas <strong>nubes rotor</strong>, con aire que gira sobre el eje horizontal (fractocúmulos y fractostratos); <strong>nubes de ladera y cresta</strong> (cumulonimbos y nimbostratos); <strong>nubes orográficas de tipo bonete o sombrero</strong> (estratiformes).</li>
+</ul>
+<ol start="6">
+<li>
+<p><strong>Turbulencia en aire claro (TAC; en inglés CAT)</strong>: aparece en <strong>vuelos de alta cota</strong> y muchas veces fuera de nubes. En general es <strong>ligera</strong> y solo en algunos casos severa. Generalmente se presenta: (i) en <strong>estratos de poco espesor y, con mayor frecuencia, en capas estables de niveles altos con fuerte cizalladura vertical del viento</strong>: la parte superior de la capa estable se desliza con respecto a la inferior, genera cizalladura y, a continuación, ondulaciones; conforme la cizalladura vertical aumenta, las ondulaciones se rompen y dan lugar a remolinos turbulentos; (ii) <strong>en lugares cercanos a la corriente en chorro</strong>, por la intensísima cizalladura vertical que origina; también puede aparecer asociada a <strong>ondas de montaña</strong> o a <strong>dorsales y vaguadas en niveles altos</strong>.
+     Se presenta <strong>intermitentemente</strong> en forma de repentinos <strong>baches</strong> y <strong>meneos</strong> intensos y frecuentes. Con los baches, el avión sufre un cambio de altitud; con los meneos, no experimenta grandes variaciones de altitud, sino sacudidas hacia arriba y hacia abajo que producen un ruido similar a un <strong>martilleo</strong>. <strong>Para la gestión del tráfico aéreo es importante conocer la presencia de corrientes en chorro en el área de gestión</strong>, ya que el piloto que experimente una TAC intensa y persistente solicitará <strong>cambios de ruta o de nivel</strong> para evitarla.</p>
+</li>
+<li>
+<p><strong>Turbulencia por tormenta</strong>: se genera en el interior de la nube convectiva y en sus alrededores; la producen las intensas corrientes convectivas que se desarrollan y los vientos fuertes en altura que contribuyen a la cizalladura.</p>
+</li>
+</ol>
+<h3 id="96-tormentas-manual-96-pp-64-69">9.6 Tormentas (manual 9.6, pp. 64-69)</h3>
+<ul>
+<li>Una <strong>tormenta</strong> se produce cuando existen <strong>nubes de tipo cumulonimbo acompañadas de aparato eléctrico (rayos y truenos)</strong>.</li>
+<li>Condiciones para que se forme: <strong>energía en forma de calor (sobre todo en superficie)</strong>, <strong>atmósfera inestable</strong>, <strong>humedad suficiente</strong> y, en algunos casos, un <strong>mecanismo de elevación</strong> que genere intensas corrientes ascendentes (<strong>convergencia de vientos a baja cota, ascendencia orográfica del terreno</strong>, etc.).</li>
+<li>Suelen ir acompañadas de chubascos (en climas secos puede haber <strong>tormentas secas</strong>, sin precipitación o con precipitación que no llega al suelo) e incluso de <strong>granizo</strong>; producen <strong>turbulencias fuertes o extremas</strong> con viento fuerte y racheado; también pueden presentarse engelamiento y cizalladura. <strong>Una tormenta reúne todos los elementos capaces de dañar a un avión en vuelo</strong>.</li>
+<li>
+<p><strong>Clasificación según el origen de la formación de los cumulonimbos</strong>:
+  a. <strong>Tormentas frontales</strong>: se deben a que el aire cálido asciende por encima de la superficie frontal. Con un <strong>frente frío</strong> se extienden a lo largo de él durante <strong>varios centenares de kilómetros</strong>. Con un <strong>frente cálido</strong> abarcan un área de grandes dimensiones, en general <strong>con menor desarrollo que en los fríos</strong>, y quedan <strong>inmersas en los nimbostratos</strong> característicos del frente cálido. Las tormentas frontales aparecen encadenadas unas a otras, por lo que en general son <strong>más duraderas que las células tormentosas aisladas</strong>; las líneas tormentosas suelen desplazarse con el avance del frente, aunque a veces son estacionarias.
+  b. <strong>Tormentas de masa de aire</strong>: se producen en una atmósfera inestable, generalmente por el <strong>calentamiento diurno</strong>; normalmente tienen dimensiones de <strong>decenas de kilómetros cuadrados</strong>; pueden ser de <strong>origen térmico, orográfico o de mezcla turbulenta</strong>. En las zonas <strong>ecuatoriales</strong> se dan en cualquier época del año; en <strong>latitudes medias, preferentemente en las tardes de verano y primavera</strong>; en latitudes superiores, donde el calentamiento solar prácticamente no existe, son <strong>muy raras</strong>.</p>
+</li>
+<li>
+<p><strong>Ciclo de vida</strong>: relativamente corto, de <strong>dos a tres horas</strong>; <strong>tres fases</strong>:
+  1. <strong>Formación</strong>: corrientes ascendentes elevan el aire húmedo y lo enfrían hasta alcanzar la condensación, que da lugar a los cumulonimbos; la condensación <strong>libera suficiente energía</strong> para que el aire húmedo siga subiendo; comienzan a generarse corrientes descendentes fuera de la nube, pero <strong>mucho menos intensas que las ascendentes</strong>.
+  2. <strong>Madurez</strong>: comienza cuando las gotas de agua líquida o de hielo empiezan a caer (chubascos y granizo) por su peso. La precipitación genera <strong>corrientes descendentes que, al llegar al suelo, forman el frente de racha</strong>. Los fuertes torbellinos dan lugar a <strong>cizalladura y turbulencia</strong>. Las corrientes descendentes coexisten con las ascendentes, que alcanzan su <strong>máxima intensidad</strong>; la nube puede presentar forma de <strong>yunque</strong> en su parte superior; se dan frecuentes <strong>descargas eléctricas</strong>.
+  3. <strong>Disipación</strong>: comienza cuando <strong>desaparecen las corrientes ascendentes</strong>. Las corrientes descendentes se extienden por todo el nivel inferior de la nube y se van suavizando; las precipitaciones disminuyen y la nube comienza a disiparse.</p>
+</li>
+</ul>
+<p><strong>9.6.1 Líneas de turbonada</strong>: línea de tormentas muy activas que puede alcanzar <strong>cientos de kilómetros de longitud y de 20 a 50 km de anchura</strong>; velocidad de desplazamiento variable, <strong>de unos 25 kt en promedio</strong>. Está asociada a condiciones de tiempo severo: <strong>vientos fuertes y destructivos, turbulencia severa, granizo fuerte, tornados</strong>.</p>
+<p><strong>9.6.2 Microrreventón</strong></p>
+<ul>
+<li>Fuerte <strong>corriente descendente de aire frío y denso</strong> originada en una nube convectiva; las corrientes descendentes pueden llegar a los <strong>60 kt</strong>, velocidad que <strong>supera el régimen de descenso de un avión</strong>.</li>
+<li>Cuando el aire descendente alcanza el suelo, se extiende horizontalmente con violencia y forma uno o más <strong>torbellinos horizontales que se curvan alrededor de la columna descendente (vórtices anulares)</strong>; pueden alcanzar <strong>hasta 1 km de altura sobre el suelo</strong> y no siempre son simétricos.</li>
+<li>Escala espacial y temporal muy pequeña: suelen abarcar <strong>hasta 5 km</strong> y durar <strong>entre 1 y 5 minutos, nunca más de 15 minutos</strong> desde que llega al suelo hasta que desaparece.</li>
+<li>Genera vientos de hasta <strong>150 kt</strong>, con variaciones de velocidad de <strong>más de 50 kt</strong>, lo que da lugar a una fortísima cizalladura; también genera variaciones de presión que pueden alterar el funcionamiento de los instrumentos de vuelo.</li>
+<li>Con precipitación = <strong>microrreventón húmedo</strong>; sin ella = <strong>microrreventón seco</strong>.</li>
+</ul>
+<p><strong>9.6.3 Tornado / tromba marina</strong></p>
+<ul>
+<li><strong>Tornado</strong>: columna de aire que rota violentamente; se origina en la base de un cumulonimbo y se extiende hasta el suelo; su giro ciclónico produce una succión del aire de su interior y genera una <strong>caída de presión</strong> en él.</li>
+<li>Diámetro desde <strong>menos de 10 m hasta 1 km</strong>; se desplaza sobre el suelo a una velocidad media de unos <strong>25 kt</strong>; puede provocar vientos en superficie <strong>superiores a 270 kt</strong>.</li>
+<li>Si el torbellino <strong>no alcanza la superficie</strong> terrestre se llama <strong>tuba (<em>funnel cloud</em>)</strong>; si el tornado se forma <strong>sobre el mar</strong>, se forma la <strong>tromba marina</strong>, en la que el agua es aspirada hasta centenares de metros de altura.</li>
+</ul>
+<h3 id="97-ciclones-tropicales-manual-97-pp-69-70">9.7 Ciclones tropicales (manual 9.7, pp. 69-70)</h3>
+<ul>
+<li>«Ciclón, huracán o tifón» son términos utilizados para designar un ciclón tropical según la zona: <strong>«huracán»</strong> en el <strong>Atlántico norte occidental, la parte central y oriental del Pacífico norte, el mar Caribe y el golfo de México</strong>; <strong>«ciclón»</strong> en la <strong>bahía de Bengala y el mar Arábigo</strong>; <strong>«tifón»</strong> en las <strong>islas Filipinas, Taiwán, China y Japón</strong>.</li>
+<li>Las <strong>depresiones tropicales</strong> son depresiones <strong>no frontales</strong> que se forman <strong>aproximadamente entre los 25ºN y los 25ºS</strong> cuando el agua del mar está muy caliente (<strong>aproximadamente por encima de 27 ºC</strong>). El sistema de bajas presiones empieza a ganar energía, que se manifiesta en forma de energía cinética mediante el aumento de velocidad en el giro del viento a su alrededor.</li>
+<li>Denominaciones según aumenta la intensidad del viento máximo en superficie:</li>
+<li><strong>Perturbación tropical</strong>: vientos en superficie ligeros;</li>
+<li><strong>Depresión tropical</strong>: vientos máximos en superficie <strong>de hasta 33 kt</strong>;</li>
+<li><strong>Tormenta tropical</strong>: vientos máximos <strong>de 34 a 63 kt</strong>;</li>
+<li><strong>Huracán, ciclón o tifón</strong>: vientos máximos en superficie <strong>mayores de 64 kt</strong>.</li>
+<li>«La presencia de un ciclón, tifón o huracán es razón suficiente para suspender toda actividad aérea.»</li>
+</ul>
+<h3 id="98-corrientes-convectivas-manual-98-p-70">9.8 Corrientes convectivas (manual 9.8, p. 70)</h3>
+<ul>
+<li>El calentamiento del suelo provoca movimientos verticales o corrientes convectivas: el aire que se encuentra inmediatamente por encima del suelo caliente se calienta igualmente <strong>por conducción</strong>, se hace menos denso y asciende; <strong>al ascender, se expande y se enfría, por lo que en algún momento volverá a descender</strong>. Las corrientes convectivas pueden provocar <strong>turbulencia</strong> y a veces <strong>súbitos y bruscos ascensos y descensos de las aeronaves</strong>.</li>
+</ul>
+<h3 id="99-temperaturas-elevadas-manual-99-p-70">9.9 Temperaturas elevadas (manual 9.9, p. 70)</h3>
+<ul>
+<li>En los aeródromos donde se alcanzan temperaturas superiores a los <strong>30 ºC</strong>, <strong>disminuye la densidad del aire</strong>, lo que puede condicionar el <strong>recorrido de despegue</strong>; por ello es necesario que tengan <strong>pistas lo suficientemente largas</strong> o que se <strong>reduzca el peso máximo autorizado</strong> para que el avión pueda despegar.</li>
+</ul>
+<p><em>Trampas de examen del capítulo 9</em></p>
+<ul>
+<li><strong>Niebla &lt; 1000 m; neblina &gt; 1000 m con HR &gt; 70 %</strong>; el RVR se cifra por debajo de <strong>1500 m</strong>.</li>
+<li>Engelamiento: <strong>hielo claro de 0 a -10 ºC (congelación lenta, adherente, peligroso)</strong>; <strong>hielo granulado de 0 a -40 ºC (habitualmente de -10 a -20), congelación rápida, opaco, mala adherencia</strong>; <strong>la lluvia engelante es la más peligrosa</strong>.</li>
+<li>Intensidad del engelamiento: ligero / moderado / fuerte; el fuerte requiere un <strong>cambio de altitud inmediato</strong>.</li>
+<li>Intensidad de la turbulencia: ligera / moderada / fuerte / extrema (4 niveles).</li>
+<li>Condiciones de la onda de montaña: <strong>&gt; 15 kt</strong>, <strong>&lt; 30º</strong> respecto a la perpendicular, <strong>capa estable</strong> sobre la cima.</li>
+<li>Tormenta: 3 fases (formación, madurez, disipación); 2-3 horas; el frente de racha se forma en la madurez; el yunque aparece en la madurez.</li>
+<li>Microrreventón: corriente descendente de <strong>60 kt</strong>; <strong>1-5 min (nunca &gt; 15 min)</strong>; hasta <strong>5 km</strong>; vientos de <strong>150 kt</strong>; variación de velocidad <strong>&gt; 50 kt</strong>. Tornado: <strong>&lt; 10 m a 1 km</strong>, <strong>25 kt</strong>, <strong>&gt; 270 kt</strong>. Línea de turbonada: <strong>20-50 km de anchura</strong>, <strong>25 kt</strong>.</li>
+<li>Tropicales: <strong>25ºN-25ºS</strong>, <strong>&gt; 27 ºC</strong>; <strong>≤ 33 / 34-63 / &gt; 64 kt</strong>.</li>
+<li>Calor: <strong>&gt; 30 ºC</strong> reduce la densidad y alarga el recorrido de despegue.</li>
+</ul>
+<hr />
+<h2 id="10-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">10. Trampas de examen (confusiones típicas y cómo distinguirlas)</h2>
+<ol>
+<li><strong>Número de centros</strong>: WAFC 2 (Londres, Washington) · VAAC 9 · TCAC 7 · CMRE 8 (Beijing, Exeter, Melbourne, Montreal, Obninsk, Tokio, Toulouse, Washington) · España: 2 MWO (Valencia, Las Palmas), 5 OMAe (Las Palmas, Madrid, Santander, Sevilla, Valencia), 40 aeropuertos + 8 bases aéreas con oficinas de AEMET.</li>
+<li><strong>Qué hace cada centro</strong>: WAFC = pronósticos mundiales reticulares + SIGWX; VAAC = cenizas; TCAC = ciclones tropicales (posición, dirección, velocidad, presión central, viento máximo); CMRE = material radiactivo (trayectoria, depósitos); MWO = vigilancia de la FIR; OMAe = TAF/TREND/avisos; EMAe = METAR/SPECI.</li>
+<li><strong>Evolución de la temperatura por capas</strong>: troposfera ↓, estratosfera ↑ (ozono), mesosfera ↓ (más fría = mesopausa, unos -95 ºC), termosfera ↑ (1100 ºC). Tropopausa -56 ºC; estratopausa, unos 50 km; mesopausa, unos 80 km; termopausa, unos 500 km.</li>
+<li><strong>Alturas de la tropopausa</strong>: polar 8 km, latitudes medias 12 km, tropical 18 km (¡latitudes bajas = tropopausa alta!).</li>
+<li><strong>QNH / QFE / QNE</strong>: QNH = altitud (en tierra marca la elevación del aeródromo); QFE = altura (marca 0 en tierra); QNE = 1013,25 hPa (niveles de vuelo). Por encima del nivel del mar QNH &gt; QFE; por debajo, QNH &lt; QFE.</li>
+<li><strong>Altitud, nivel y capa de transición</strong>: altitud (fija, QNH por debajo) y nivel (variable, el nivel de vuelo más bajo por encima de la altitud, ≥ 1000 ft por encima de ella); la capa entre ambos, ≥ 1000 ft. La altitud se usa en el despegue y el nivel en la aproximación. España: TMA de Madrid 13 000 ft, CTA de Granada 7000 ft, resto 6000 ft.</li>
+<li><strong>Altura / altitud / elevación</strong>: altura sobre el suelo; altitud sobre el MSL; elevación = un punto del terreno sobre el MSL.</li>
+<li><strong>Conducción / convección / advección / turbulencia</strong>: contacto (pistas) / vertical / horizontal (nubes orográficas) / remolinos.</li>
+<li><strong>Solar = onda corta; terrestre = onda larga.</strong> El agua tiene el calor específico más alto (el mar se calienta y se enfría despacio), pero en una frase de la lista de factores de la temperatura el manual dice lo contrario (apartado 2.5, punto 5).</li>
+<li><strong>Circulación</strong>: Hadley 0-30º, Ferrel 30-60º, Polar 60-90º; ZCIT = convergencia de los alisios; alisios del NE (N) y del SE (S); Coriolis hacia la derecha en el hemisferio norte.</li>
+<li><strong>Anticiclón frente a depresión</strong>: horario en el N / antihorario en el S para los anticiclones; al revés para las depresiones. Vientos flojos en el centro del anticiclón; vientos fuertes en el centro de la depresión. Anticiclón frío = térmico; cálido = dinámico.</li>
+<li><strong>Tipos de frente</strong>: frente frío = empuja el aire frío (cuña, nubes de desarrollo vertical); frente cálido = empuja el aire caliente; estacionario = sin desplazamiento, viento paralelo y en sentidos opuestos; ocluido = el frío alcanza al cálido y eleva el sector cálido.</li>
+<li><strong>Clases de masas de aire</strong>: 4 por temperatura (Ártica, Polar, Tropical, Ecuatorial) x 2 por humedad (seca = fuente continental, húmeda = fuente marítima) = <strong>8</strong> tipos.</li>
+<li><strong>Pisos y alturas de las nubes</strong> distintos según la región (polar / templada / tropical). Ns = familia media aunque pueda llegar al suelo. Los cirrostratos dan halos; los altoestratos, no. El tope del Cb puede llegar a la tropopausa.</li>
+<li><strong>Octas</strong>: FEW 1-2, SCT 3-4, BKN 5-7, OVC 8. Techo = capa BKN/OVC y por debajo de 20 000 ft (6000 m).</li>
+<li><strong>Definiciones de visibilidad</strong>: día = objeto negro (MOR); noche = luces de 1000 cd; la visibilidad oblicua &lt; horizontal y vertical; el RVR se cifra por debajo de 1500 m (5 m sobre el eje, promedio de 10 minutos, transmisómetro a 2,5 m, a unos 100 m del eje).</li>
+<li><strong>Niebla frente a neblina</strong>: niebla &lt; 1000 m; neblina &gt; 1000 m con HR &gt; 70 %; bruma = neblina salina (costera); niebla baja ≤ 2 m.</li>
+<li><strong>Tipos de engelamiento</strong>: hielo claro (0 a -10 ºC, lento, vidrioso, adherente, peligroso), hielo granulado (0 a -40 ºC, habitualmente de -10 a -20, rápido, opaco, mala adherencia), lluvia engelante (el más peligroso), escarcha/nieve húmeda. Intensidad ligera/moderada/fuerte (fuerte = cambio de altitud inmediato).</li>
+<li><strong>Intensidad de la turbulencia</strong>: ligera / moderada / fuerte / extrema. Tipos: convectiva, mecánica, de estela, frontal (peor en frío que en cálido), onda de montaña, TAC, por tormenta.</li>
+<li><strong>Condiciones de la onda de montaña</strong>: viento en la cima &gt; 15 kt y creciente con la altura; dirección a menos de 30º de la perpendicular; capa estable sobre la cima. El rotor más peligroso: bajo la primera onda.</li>
+<li><strong>TAC</strong>: baches (cambio de altitud) frente a meneos (ruido de martilleo).</li>
+<li><strong>Fases de la tormenta</strong>: formación (solo corrientes ascendentes), madurez (frente de racha, yunque, ascendente máxima, descargas), disipación (desaparecen las ascendentes). Duración 2-3 horas.</li>
+<li><strong>Cifras</strong>: microrreventón 60 kt / 150 kt / variación &gt;50 kt / 1-5 min (máx. 15) / hasta 5 km / 1 km de altura de los vórtices; tornado &lt;10 m-1 km / 25 kt / &gt;270 kt; línea de turbonada cientos de km x 20-50 km / 25 kt; ciclón tropical 25ºN-25ºS / &gt;27 ºC; viento ≤33 / 34-63 / &gt;64 kt.</li>
+<li><strong>Nombres de los ciclones tropicales por zona</strong>: huracán (Atlántico norte occidental, Pacífico norte central y oriental, Caribe, golfo de México), ciclón (bahía de Bengala, mar Arábigo), tifón (Filipinas, Taiwán, China, Japón).</li>
+<li><strong>Calor</strong>: por encima de 30 ºC, menor densidad, mayor recorrido de despegue o peso reducido.</li>
+</ol>
+<h2 id="11-imprescindible-memorizar-lista-corta-y-densa">11. Imprescindible memorizar (lista corta y densa)</h2>
+<ul>
+<li>Aire: 78 % N2, 21 % O2, 1 % otros; vapor 0,2-3 %. Aire seco frente a aire húmedo.</li>
+<li>Presión: 1 atm = 760 mm Hg = 1013,25 hPa; ~1 hPa por cada 9 m (30 ft) cerca de la superficie; máximos diarios a las 10 h y 22 h, mínimos a las 4 h y 16 h.</li>
+<li>Temperatura: máx. ~2 h después del mediodía, mín. poco después del amanecer; C = 5/9 (F-32); K = C + 273; el hielo se funde a 0 ºC / 32 ºF / 273,16 K; el agua hierve a 100 ºC / 212 ºF / 373,16 K.</li>
+<li>Ley de los gases: P = d·R·T (R = 2870 hPa cm³/kg K en el manual); más caliente = menos denso, columna más alta.</li>
+<li>Capas: troposfera 8/12/18 km → -56,5 ºC; estratosfera → 50-55 km; mesosfera → 80 km (-95 ºC); termosfera → 500 km (1100 ºC); exosfera. Tropopausa, estratopausa, mesopausa (la más fría), termopausa. Homosfera = troposfera + estratosfera + mesosfera. Nubes nacaradas a 20-30 km; noctilucentes en la mesosfera.</li>
+<li>ISA: 15 ºC / 288,15 K / 1013,25 hPa / 760 mm Hg / 1,2250 kg/m³ a nivel del mar; gradiente de 2 ºC/1000 ft = 6,5 ºC/1000 m hasta la tropopausa (-56,5 ºC); tabla: 10 000 ft = 697 mb, -4,8 ºC; 20 000 ft = 466 mb, -24,6 ºC; 22 000 ft = 428 mb, -28,5 ºC.</li>
+<li>QNH, QFE, QNE; altitud de transición (España 13 000 / 7000 / 6000 ft), nivel, capa (≥ 1000 ft).</li>
+<li>Radiación: solar, 36 % nubes, 20 % gases (5 O3 + 15 CO2), 4 % reflejado por la superficie, 40 % absorbido; máximo del hemisferio norte en el solsticio de junio.</li>
+<li>Células: Hadley, Ferrel, Polar; vaguada ecuatorial, alta subtropical (30º), baja subpolar (60º); Coriolis derecha/izquierda; alisios; vientos del oeste; ZCIT; corriente en chorro (alta troposfera / estratosfera, O→E, ondas de Rossby).</li>
+<li>Anticiclón (frío térmico, cálido dinámico); depresión; DANA (200 km o más); 8 tipos de masas de aire; cuatro tipos de frente.</li>
+<li>Formación de nubes: alta humedad + mecanismo de saturación + núcleos de condensación; 10 géneros; 3 pisos; 4 familias; OMM n.º 407 (1993).</li>
+<li>Octas / FEW SCT BKN OVC NSC CAVOK; techo de nubes; nube de importancia para las operaciones.</li>
+<li>Visibilidad: MOR (objeto negro), luces de 1000 cd, vertical, oblicua, RVR (&lt; 1500 m); visibilidad reinante (la mitad del horizonte).</li>
+<li>Brisas (de mar de día, de tierra de noche); Foehn (calentamiento y resecamiento a sotavento; gradiente saturado &lt; gradiente seco).</li>
+<li>Engelamiento (4 tipos, 3 intensidades); turbulencia (4 intensidades, 7 clases); condiciones de la onda de montaña (15 kt, 30º, capa estable); tormenta (2-3 h, 3 fases); línea de turbonada; microrreventón; tornado; umbrales de los ciclones tropicales; corrientes convectivas; 30 ºC.</li>
+</ul>
+<h2 id="12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español (término usado en el manual / examen)</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meteorología</td>
+<td>Meteorology</td>
+</tr>
+<tr>
+<td>tiempo (estado de la atmósfera en un instante)</td>
+<td>Weather</td>
+</tr>
+<tr>
+<td>clima</td>
+<td>Climate</td>
+</tr>
+<tr>
+<td>Meteorología Aeronáutica</td>
+<td>Aeronautical meteorology</td>
+</tr>
+<tr>
+<td>Organización Meteorológica Mundial (OMM)</td>
+<td>World Meteorological Organization (WMO)</td>
+</tr>
+<tr>
+<td>Centro Mundial de Pronóstico de Área</td>
+<td>World Area Forecast Centre (WAFC)</td>
+</tr>
+<tr>
+<td>Centro de Avisos de Cenizas Volcánicas</td>
+<td>Volcanic Ash Advisory Centre (VAAC)</td>
+</tr>
+<tr>
+<td>Centro de Avisos de Ciclones Tropicales</td>
+<td>Tropical Cyclone Advisory Centre (TCAC)</td>
+</tr>
+<tr>
+<td>Centro Meteorológico Regional Especializado</td>
+<td>Specialised regional meteorological centre (CMRE)</td>
+</tr>
+<tr>
+<td>Oficina de Vigilancia Meteorológica</td>
+<td>Meteorological watch office (MWO)</td>
+</tr>
+<tr>
+<td>Oficina Meteorológica de Aeródromo</td>
+<td>Aerodrome meteorological office (OMAe)</td>
+</tr>
+<tr>
+<td>Estación Meteorológica Aeronáutica</td>
+<td>Aeronautical meteorological station (EMAe)</td>
+</tr>
+<tr>
+<td>Agencia Estatal de Meteorología (AEMET)</td>
+<td>State Meteorological Agency (AEMET)</td>
+</tr>
+<tr>
+<td>Región de Información de Vuelo</td>
+<td>Flight information region (FIR)</td>
+</tr>
+<tr>
+<td>sondeo (aerológico) / globo sonda</td>
+<td>Sounding / sounding balloon</td>
+</tr>
+<tr>
+<td>Sistema Mundial de Observación</td>
+<td>Global Observing System</td>
+</tr>
+<tr>
+<td>aire seco / aire húmedo</td>
+<td>Dry air / moist air</td>
+</tr>
+<tr>
+<td>vapor de agua</td>
+<td>Water vapour</td>
+</tr>
+<tr>
+<td>evaporación, condensación, congelación, fusión, sublimación</td>
+<td>Evaporation, condensation, freezing, melting, sublimation</td>
+</tr>
+<tr>
+<td>ciclo hidrológico</td>
+<td>Hydrological cycle</td>
+</tr>
+<tr>
+<td>presión atmosférica</td>
+<td>Atmospheric pressure</td>
+</tr>
+<tr>
+<td>inercia térmica</td>
+<td>Thermal inertia</td>
+</tr>
+<tr>
+<td>amplitud térmica</td>
+<td>Thermal amplitude</td>
+</tr>
+<tr>
+<td>gradiente térmico vertical</td>
+<td>Vertical thermal gradient</td>
+</tr>
+<tr>
+<td>calor específico</td>
+<td>Specific heat</td>
+</tr>
+<tr>
+<td>densidad</td>
+<td>Density</td>
+</tr>
+<tr>
+<td>humedad relativa</td>
+<td>Relative humidity</td>
+</tr>
+<tr>
+<td>saturado</td>
+<td>Saturated</td>
+</tr>
+<tr>
+<td>punto de rocío</td>
+<td>Dew point</td>
+</tr>
+<tr>
+<td>troposfera / tropopausa</td>
+<td>Troposphere / tropopause</td>
+</tr>
+<tr>
+<td>estratosfera / estratopausa</td>
+<td>Stratosphere / stratopause</td>
+</tr>
+<tr>
+<td>mesosfera / mesopausa</td>
+<td>Mesosphere / mesopause</td>
+</tr>
+<tr>
+<td>termosfera (ionosfera) / termopausa</td>
+<td>Thermosphere (ionosphere) / thermopause</td>
+</tr>
+<tr>
+<td>exosfera</td>
+<td>Exosphere</td>
+</tr>
+<tr>
+<td>homosfera</td>
+<td>Homosphere</td>
+</tr>
+<tr>
+<td>nubes nacaradas / nubes noctilucentes</td>
+<td>Nacreous clouds / noctilucent clouds</td>
+</tr>
+<tr>
+<td>estabilidad / inestabilidad</td>
+<td>Stability / instability</td>
+</tr>
+<tr>
+<td>atmósfera estándar (ISA)</td>
+<td>Standard atmosphere (ISA)</td>
+</tr>
+<tr>
+<td>altimetría</td>
+<td>Altimetry</td>
+</tr>
+<tr>
+<td>altura / altitud / elevación</td>
+<td>Height / altitude / elevation</td>
+</tr>
+<tr>
+<td>nivel medio del mar</td>
+<td>Mean sea level (MSL)</td>
+</tr>
+<tr>
+<td>calado (reglaje) del altímetro</td>
+<td>Altimeter setting</td>
+</tr>
+<tr>
+<td>barómetro aneroide</td>
+<td>Aneroid barometer</td>
+</tr>
+<tr>
+<td>nivel de vuelo</td>
+<td>Flight level</td>
+</tr>
+<tr>
+<td>altitud / nivel / capa de transición</td>
+<td>Transition altitude / level / layer</td>
+</tr>
+<tr>
+<td>Reglamento de la Circulación Aérea</td>
+<td>Air Traffic Regulation</td>
+</tr>
+<tr>
+<td>radiación solar / radiación terrestre</td>
+<td>Solar radiation / terrestrial radiation</td>
+</tr>
+<tr>
+<td>balance radiactivo</td>
+<td>Radiation balance</td>
+</tr>
+<tr>
+<td>efecto invernadero</td>
+<td>Greenhouse effect</td>
+</tr>
+<tr>
+<td>reflectancia / absorbancia / transmitancia</td>
+<td>Reflectance / absorbance / transmittance</td>
+</tr>
+<tr>
+<td>conducción / convección / advección</td>
+<td>Conduction / convection / advection</td>
+</tr>
+<tr>
+<td>circulación general atmosférica</td>
+<td>General atmospheric circulation</td>
+</tr>
+<tr>
+<td>célula de circulación</td>
+<td>Circulation cell</td>
+</tr>
+<tr>
+<td>célula de Hadley / de Ferrel / Polar</td>
+<td>Hadley / Ferrel / Polar cell</td>
+</tr>
+<tr>
+<td>vaguada ecuatorial</td>
+<td>Equatorial trough</td>
+</tr>
+<tr>
+<td>alta presión subtropical / baja presión subpolar</td>
+<td>Subtropical high / subpolar low</td>
+</tr>
+<tr>
+<td>fuerza de Coriolis</td>
+<td>Coriolis force</td>
+</tr>
+<tr>
+<td>viento</td>
+<td>Wind</td>
+</tr>
+<tr>
+<td>convergencia / divergencia</td>
+<td>Convergence / divergence</td>
+</tr>
+<tr>
+<td>subsidencia</td>
+<td>Subsidence</td>
+</tr>
+<tr>
+<td>vientos alisios</td>
+<td>Trade winds</td>
+</tr>
+<tr>
+<td>Zona de Convergencia Intertropical</td>
+<td>Intertropical Convergence Zone</td>
+</tr>
+<tr>
+<td>vientos del oeste</td>
+<td>Westerlies</td>
+</tr>
+<tr>
+<td>corriente en chorro</td>
+<td>Jet stream</td>
+</tr>
+<tr>
+<td>ondas de Rossby</td>
+<td>Rossby waves</td>
+</tr>
+<tr>
+<td>viento en cola / en contra / transversal</td>
+<td>Tailwind / headwind / crosswind</td>
+</tr>
+<tr>
+<td>anticiclón</td>
+<td>Anticyclone</td>
+</tr>
+<tr>
+<td>depresión / borrasca</td>
+<td>Depression</td>
+</tr>
+<tr>
+<td>ciclón tropical / huracán / tifón</td>
+<td>Tropical cyclone / hurricane / typhoon</td>
+</tr>
+<tr>
+<td>Depresión Aislada en Niveles Altos (DANA), antes «gota fría»</td>
+<td>Isolated depression at high levels (cut-off low)</td>
+</tr>
+<tr>
+<td>frente polar</td>
+<td>Polar front</td>
+</tr>
+<tr>
+<td>masa de aire</td>
+<td>Air mass</td>
+</tr>
+<tr>
+<td>región manantial (fuente)</td>
+<td>Source region</td>
+</tr>
+<tr>
+<td>frente / frío / cálido / estacionario / ocluido</td>
+<td>Front / cold / warm / stationary / occluded</td>
+</tr>
+<tr>
+<td>nubosidad</td>
+<td>Cloudiness</td>
+</tr>
+<tr>
+<td>núcleos de condensación</td>
+<td>Condensation nuclei</td>
+</tr>
+<tr>
+<td>expansión adiabática</td>
+<td>Adiabatic expansion</td>
+</tr>
+<tr>
+<td>cirros / cirrostratos / cirrocúmulos</td>
+<td>Cirrus / cirrostratus / cirrocumulus</td>
+</tr>
+<tr>
+<td>altocúmulos / altoestratos / nimbostratos</td>
+<td>Altocumulus / altostratus / nimbostratus</td>
+</tr>
+<tr>
+<td>estratos / estratocúmulos</td>
+<td>Stratus / stratocumulus</td>
+</tr>
+<tr>
+<td>cúmulos / cumulonimbos</td>
+<td>Cumulus / cumulonimbus</td>
+</tr>
+<tr>
+<td>género / especie / variedad</td>
+<td>Genus / species / variety (of clouds)</td>
+</tr>
+<tr>
+<td>Atlas Internacional de Nubes</td>
+<td>International Cloud Atlas</td>
+</tr>
+<tr>
+<td>octa</td>
+<td>Octa</td>
+</tr>
+<tr>
+<td>FEW / SCT / BKN / OVC (algunas nubes / dispersas / nuboso / cielo cubierto)</td>
+<td>Few / scattered / broken / overcast</td>
+</tr>
+<tr>
+<td>sin nubes de importancia para las operaciones</td>
+<td>No significant cloud (NSC)</td>
+</tr>
+<tr>
+<td>techo de nubes</td>
+<td>Cloud ceiling</td>
+</tr>
+<tr>
+<td>nube de importancia para las operaciones</td>
+<td>Cloud of operational significance</td>
+</tr>
+<tr>
+<td>visibilidad (horizontal, vertical, oblicua)</td>
+<td>Visibility (horizontal, vertical, slant)</td>
+</tr>
+<tr>
+<td>alcance óptico meteorológico</td>
+<td>Meteorological optical range (MOR)</td>
+</tr>
+<tr>
+<td>alcance visual en pista</td>
+<td>Runway visual range (RVR)</td>
+</tr>
+<tr>
+<td>visibilidad reinante</td>
+<td>Prevailing visibility</td>
+</tr>
+<tr>
+<td>transmisómetro (visibilímetro)</td>
+<td>Transmissometer</td>
+</tr>
+<tr>
+<td>precipitación</td>
+<td>Precipitation</td>
+</tr>
+<tr>
+<td>chubascos</td>
+<td>Showers</td>
+</tr>
+<tr>
+<td>precipitaciones intermitentes</td>
+<td>Intermittent precipitation</td>
+</tr>
+<tr>
+<td>virgas</td>
+<td>Virga</td>
+</tr>
+<tr>
+<td>lluvia / nieve / aguanieve / lluvia helada / granizo</td>
+<td>Rain / snow / sleet / freezing rain / hail</td>
+</tr>
+<tr>
+<td>aquaplaning</td>
+<td>Aquaplaning</td>
+</tr>
+<tr>
+<td>brisa de mar / brisa de tierra</td>
+<td>Sea breeze / land breeze</td>
+</tr>
+<tr>
+<td>efecto Foehn</td>
+<td>Foehn effect</td>
+</tr>
+<tr>
+<td>sotavento / barlovento</td>
+<td>Leeward / windward</td>
+</tr>
+<tr>
+<td>niebla / neblina / bruma / niebla baja</td>
+<td>Fog / mist / haze (bruma) / shallow fog</td>
+</tr>
+<tr>
+<td>calima / ventisca / smog</td>
+<td>Haze (dust) / blizzard / smog</td>
+</tr>
+<tr>
+<td>inversión térmica</td>
+<td>Thermal inversion</td>
+</tr>
+<tr>
+<td>ilusiones ópticas</td>
+<td>Optical illusions</td>
+</tr>
+<tr>
+<td>engelamiento</td>
+<td>Icing</td>
+</tr>
+<tr>
+<td>agua subfundida (superenfriada)</td>
+<td>Supercooled water</td>
+</tr>
+<tr>
+<td>hielo claro / hielo granulado</td>
+<td>Clear ice / rime ice</td>
+</tr>
+<tr>
+<td>lluvia engelante</td>
+<td>Freezing rain (icing)</td>
+</tr>
+<tr>
+<td>escarcha / nieve húmeda</td>
+<td>Frost / wet snow</td>
+</tr>
+<tr>
+<td>cizalladura del viento</td>
+<td>Wind shear</td>
+</tr>
+<tr>
+<td>frente de racha</td>
+<td>Gust front</td>
+</tr>
+<tr>
+<td>viento catabático</td>
+<td>Katabatic wind</td>
+</tr>
+<tr>
+<td>capa de fricción</td>
+<td>Friction layer</td>
+</tr>
+<tr>
+<td>turbulencia</td>
+<td>Turbulence</td>
+</tr>
+<tr>
+<td>turbulencia convectiva / mecánica / de estela</td>
+<td>Convective / mechanical / wake turbulence</td>
+</tr>
+<tr>
+<td>onda de montaña / rotor</td>
+<td>Mountain wave / rotor</td>
+</tr>
+<tr>
+<td>nubes lenticulares</td>
+<td>Lenticular clouds</td>
+</tr>
+<tr>
+<td>turbulencia en aire claro (TAC)</td>
+<td>Clear air turbulence (CAT)</td>
+</tr>
+<tr>
+<td>tormenta</td>
+<td>Thunderstorm</td>
+</tr>
+<tr>
+<td>tormenta frontal / de masa de aire</td>
+<td>Frontal / air-mass thunderstorm</td>
+</tr>
+<tr>
+<td>yunque</td>
+<td>Anvil</td>
+</tr>
+<tr>
+<td>línea de turbonada</td>
+<td>Squall line</td>
+</tr>
+<tr>
+<td>microrreventón (húmedo / seco)</td>
+<td>Microburst (wet / dry)</td>
+</tr>
+<tr>
+<td>vórtice anular</td>
+<td>Annular vortex</td>
+</tr>
+<tr>
+<td>tornado / tuba / tromba marina</td>
+<td>Tornado / funnel cloud / waterspout</td>
+</tr>
+<tr>
+<td>corrientes convectivas</td>
+<td>Convective currents</td>
+</tr>
+<tr>
+<td>recorrido de despegue</td>
+<td>Take-off run</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-fuentes">13. Fuentes</h2>
+<ul>
+<li>ENAIRE, «Conceptos básicos de Meteorología Aeronáutica» (Manual 3), Elaborado noviembre/2024, 70 pp.; leídas todas las páginas; las pp. 6-7 (tablas), 20, 22, 23, 27, 42 y 43 se renderizaron y se examinaron.</li>
+<li>No se ha utilizado ninguna otra fuente para enunciar hechos en esta guía. El manual cita: las definiciones de tiempo y clima de la OMM; el Anexo 3 de la OACI; el Atlas Internacional de Nubes de la OMM, vol. I (OMM n.º 407, 1993); y el «Compendio de apuntes para la formación del personal meteorológico de la clase IV (B.J. Retallack)» para la tabla de pisos de nubes.</li>
+<li>Comparación con notas anteriores del proyecto (Guía MET de AEMET, Wikipedia/SKYbrary) y con la auditoría interna del manual.</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

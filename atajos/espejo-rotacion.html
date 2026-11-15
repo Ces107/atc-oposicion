@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Espejo o giro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='5.5'/%3E%3Cpath d='M12 12L19 5'/%3E%3Ccircle cx='16.4' cy='16.6' r='1.1'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light dark;
+--bg:#f4f2ec;--stripe:#ebe8df;--surface:#ffffff;--text:#1b1b1b;--muted:#5f5b53;--rule:#cfcabd;
+--accent:#1a4d8f;--accent-h:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--err:#a3241c;
+--serif:Georgia,"Iowan Old Style",serif;--sans:system-ui,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+--bg:#161615;--stripe:#262624;--surface:#1e1e1c;--text:#e7e4dc;--muted:#a19c90;--rule:#3a3935;
+--accent:#7fb0e8;--accent-h:#a6c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--err:#e5766d}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans);overflow-x:hidden}
+a{color:var(--accent)}a:hover{color:var(--accent-h)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+svg.logo{width:28px;height:28px;flex:none;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+header.top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+header.top h1{font:700 26px/1.15 var(--serif);margin:0;letter-spacing:-.005em}
+header.top a.back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:6px 0}
+header.top a.back:hover{text-decoration:underline}
+header.top a.back svg{transform:scaleX(-1)}
+main{max-width:1100px;margin:0 auto;padding:16px 16px 40px}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:26px 0 10px}
+button,input,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;min-height:40px}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.on{background:var(--accent);color:var(--onacc)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.sm{padding:5px 10px;min-height:32px}
+.seg{display:inline-flex}
+.seg .btn{border-radius:0;margin-left:-1px}
+.seg .btn:first-child{border-radius:2px 0 0 2px;margin-left:0}
+.seg .btn:last-child{border-radius:0 2px 2px 0}
+.seg .btn:focus-visible{position:relative;z-index:1}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number]{background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:7px 9px;min-height:36px;max-width:100%}
+input[type=range]{accent-color:var(--accent);width:100%}
+.muted{color:var(--muted)}.small{font-size:14px}
+.ok{color:var(--ok)}.bad{color:var(--err)}.warn{color:var(--warn)}
+.mono{font-family:var(--mono);font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 10px 6px 0}
+td{padding:6px 10px 6px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.tblw{overflow-x:auto}
+.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--rule);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.foot a{display:inline-flex;align-items:center;gap:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg text{font-family:var(--sans)}
+.cv{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.top2{justify-content:space-between;margin-bottom:12px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:6px 0}
+@media (max-width:480px){.pair{grid-template-columns:minmax(0,1fr);gap:14px}}
+.pair figure{margin:0}
+svg.fg{display:block;width:100%;height:auto;max-width:480px;aspect-ratio:1;margin:0 auto;border:1px solid var(--rule);background:var(--surface);border-radius:2px;overflow:hidden}
+figcaption{text-align:center;margin-top:4px}
+figcaption span:first-child{font:700 18px var(--serif);color:var(--text)}
+.fg .bg{fill:var(--surface)}
+.fg .gl{stroke:var(--rule);stroke-width:1;vector-effect:non-scaling-stroke;fill:none;opacity:.7}
+.fg .fill{fill:var(--stripe);stroke:var(--text);stroke-width:1.6;vector-effect:non-scaling-stroke}
+.fg .cell{cursor:default;outline:none}
+.fg .cell:focus-visible .fill{stroke:var(--accent);stroke-width:3}
+.fg .mk{fill:var(--text)}
+.fg .tri{fill:none;stroke:var(--accent);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.fg .arc{fill:none;stroke:var(--accent);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.fg .lm circle{fill:none;stroke:var(--accent);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.fg .lm text{fill:var(--accent);font-size:.34px;font-weight:700;text-anchor:middle;dominant-baseline:central;font-family:var(--sans)}
+.fg .ghost rect{fill:var(--warn);fill-opacity:.28;stroke:var(--warn);stroke-width:1.4;vector-effect:non-scaling-stroke;stroke-dasharray:4 3}
+.fg .gtri{fill:none;stroke:var(--warn);stroke-width:2;vector-effect:non-scaling-stroke}
+body.man .fg .cell{cursor:pointer}
+.out{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.res{font:700 32px/1.1 var(--serif);min-width:7em}
+.res.ok{color:var(--ok)}.res.warn{color:var(--warn)}.res.bad{color:var(--err)}.res.muted{color:var(--muted)}
+.formula{font:14px/1.7 var(--mono);color:var(--muted);flex:1 1 220px;min-height:5.2em}
+.formula b{color:var(--text);font-weight:600}
+[hidden]{display:none!important}
+
+</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M6 5l8 7-8 7M18 5v14"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 6L4 11l5 5M4 11h9a6 6 0 0 1 0 8"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></symbol><symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15l-3-3M20 16H5l3 3"/></symbol><symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M8 7L3 18h5zM16 7l5 11h-5z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol></svg>
+
+<header class="top"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg><h1>Espejo o giro</h1><a class="back" href="index.html"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>Atajos</a></header>
+<main>
+<div class="row top2">
+<div class="seg" role="group" aria-label="Puntos"><button class="btn" id="m-auto" type="button">Auto</button><button class="btn" id="m-man" type="button">Manual</button></div>
+<button class="btn" id="clr" type="button" hidden><svg class="ic"><use href="#i-reset"/></svg>Borrar</button>
+<span class="row" id="pres">
+<button class="btn sm" id="p0" type="button">Giro</button><button class="btn sm" id="p1" type="button">Espejo</button><button class="btn sm" id="p2" type="button">Distinta</button><button class="btn sm" id="p3" type="button">Simétrica</button>
+<button class="btn sm" id="rnd" type="button"><svg class="ic"><use href="#i-dice"/></svg>Azar</button>
+</span>
+</div>
+<div class="pair">
+<figure><svg id="fa" class="cv fg" viewBox="-0.1 -0.1 6.2 6.2" role="group" aria-label="Figura izquierda"></svg><figcaption class="muted small"><span>A</span> <span id="ca"></span></figcaption></figure>
+<figure><svg id="fb" class="cv fg" viewBox="-0.1 -0.1 6.2 6.2" role="group" aria-label="Figura derecha"></svg><figcaption class="muted small"><span>B</span> <span id="cb"></span></figcaption></figure>
+</div>
+<div class="out">
+<div class="res muted" id="res" aria-live="polite">&nbsp;</div>
+<div class="formula" id="formula"></div>
+<button class="btn primary" id="anim" type="button"><svg class="ic"><use href="#i-play"/></svg>Animar</button>
+</div>
+
+<div class="foot"><a href="../practica/aptitude/trainer-spatial.html"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Practicar</a><span class="muted small">Método de ayuda; no garantiza mejora de nota.</span></div>
+</main>
+<script>
+// ==== LOGIC START ====
+// Figure: {cells:[[x,y],...], marks:{"x,y":"o"|"s"|"t"}}; screen coordinates (x right, y down), grid cell centre = (x+.5,y+.5)
+const GR=6;
+const ck=(x,y)=>x+','+y;
+function cellsOf(F){return F.cells.map(c=>[c[0],c[1]])}
+// transform: optional mirror (x -> -x) first, then r quarter turns clockwise ((x,y)->(-y,x) on screen)
+function tPoint(p,m,r){let x=p[0],y=p[1];if(m)x=-x;for(let i=0;i<r;i++){const nx=-y,ny=x;x=nx;y=ny}return[x,y]}
+function normalize(F){let mx=1e9,my=1e9;for(const c of F.cells){mx=Math.min(mx,c[0]);my=Math.min(my,c[1])}
+  const cells=F.cells.map(c=>[c[0]-mx,c[1]-my]).sort((a,b)=>a[1]-b[1]||a[0]-b[0]),marks={};
+  for(const c of F.cells){const k=ck(c[0],c[1]);if(F.marks[k])marks[ck(c[0]-mx,c[1]-my)]=F.marks[k]}return{cells,marks}}
+function canon(F){const n=normalize(F);return n.cells.map(c=>{const k=ck(c[0],c[1]);return k+(n.marks[k]||'')}).join(';')}
+function transformFig(F,m,r){const cells=[],marks={};for(const c of F.cells){const q=tPoint(c,m,r);cells.push(q);const k=ck(c[0],c[1]);if(F.marks[k])marks[ck(q[0],q[1])]=F.marks[k]}return{cells,marks}}
+// brute force over the 4 rotations x 2 mirror states
+function matches(F1,F2){const t=canon(F2),o=[];for(const m of[0,1])for(let r=0;r<4;r++)if(canon(transformFig(F1,m,r))===t)o.push({m,r});return o}
+function classify(F1,F2){const ms=matches(F1,F2);if(!ms.length)return'distinta';const rot=ms.some(x=>!x.m),mir=ms.some(x=>x.m);return rot&&mir?'ambos':rot?'giro':'espejo'}
+function orient(A,B,C){const v=(B[0]-A[0])*(C[1]-A[1])-(B[1]-A[1])*(C[0]-A[0]);return Math.abs(v)<1e-9?0:v>0?1:-1} // +1 = clockwise on screen
+function crossABC(A,B,C){return(B[0]-A[0])*(C[1]-A[1])-(B[1]-A[1])*(C[0]-A[0])}
+// analytic decision from three landmarks (A,B,C in figure 1; A',B',C' in figure 2)
+function decide(P,Q){const d=(U,V)=>Math.hypot(U[0]-V[0],U[1]-V[1]);
+  for(const[i,j]of[[0,1],[0,2],[1,2]])if(Math.abs(d(P[i],P[j])-d(Q[i],Q[j]))>1e-9)return'incoherente';
+  const s1=orient(P[0],P[1],P[2]),s2=orient(Q[0],Q[1],Q[2]);if(!s1||!s2)return'colineal';return s1===s2?'giro':'espejo'}
+// rotation angle (degrees, clockwise) taking AB of figure 1 onto A'B' of figure 2; with mirror, after flipping x first
+function alignAngle(P,Q,mirror){let u=[P[1][0]-P[0][0],P[1][1]-P[0][1]];if(mirror)u=[-u[0],u[1]];const v=[Q[1][0]-Q[0][0],Q[1][1]-Q[0][1]];
+  return Math.atan2(u[0]*v[1]-u[1]*v[0],u[0]*v[0]+u[1]*v[1])*180/Math.PI}
+// invariant descriptor of a cell: mark, degree and sorted graph distances to the others
+function descriptors(F){const S=new Set(F.cells.map(c=>ck(c[0],c[1]))),out={};
+  for(const c of F.cells){const dist={},q=[c];dist[ck(c[0],c[1])]=0;for(let i=0;i<q.length;i++){const p=q[i],dp=dist[ck(p[0],p[1])];for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const n=[p[0]+dx,p[1]+dy],kk=ck(n[0],n[1]);if(S.has(kk)&&dist[kk]===undefined){dist[kk]=dp+1;q.push(n)}}}
+    let deg=0;for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])if(S.has(ck(c[0]+dx,c[1]+dy)))deg++;
+    out[ck(c[0],c[1])]=(F.marks[ck(c[0],c[1])]||'-')+deg+':'+Object.values(dist).sort((a,b)=>a-b).join('')}return out}
+// three landmarks with unique, matching descriptors (marked cells first), non-collinear in both figures
+function autoLandmarks(F1,F2){const d1=descriptors(F1),d2=descriptors(F2),cnt=d=>{const o={};for(const k in d)o[d[k]]=(o[d[k]]||0)+1;return o},c1=cnt(d1),c2=cnt(d2);
+  const cand=[];for(const k in d1)if(c1[d1[k]]===1&&c2[d1[k]]===1){const k2=Object.keys(d2).find(x=>d2[x]===d1[k]);cand.push({k1:k,k2,d:d1[k]})}
+  cand.sort((a,b)=>(b.d[0]!=='-')-(a.d[0]!=='-')||(a.d<b.d?-1:a.d>b.d?1:0));
+  const pt=k=>{const s=k.split(',');return[+s[0]+.5,+s[1]+.5]};
+  for(let i=0;i<cand.length;i++)for(let j=i+1;j<cand.length;j++)for(let l=j+1;l<cand.length;l++){const P=[cand[i],cand[j],cand[l]].map(c=>pt(c.k1)),Q=[cand[i],cand[j],cand[l]].map(c=>pt(c.k2));
+    if(orient(P[0],P[1],P[2])&&orient(Q[0],Q[1],Q[2]))return{P,Q}}
+  return null}
+// does the rigid map defined by the landmarks (rotation, or mirror then rotation) send figure 1 exactly onto figure 2?
+function consistent(F1,F2,P,Q,mirror){const th=alignAngle(P,Q,mirror)*Math.PI/180,c=Math.cos(th),s=Math.sin(th),map=p=>{let x=p[0]-P[0][0],y=p[1]-P[0][1];if(mirror)x=-x;return[Q[0][0]+c*x-s*y,Q[0][1]+s*x+c*y]};
+  const want=new Map(F2.cells.map(q=>[ck(q[0],q[1]),F2.marks[ck(q[0],q[1])]||'']));if(want.size!==F1.cells.length)return false;
+  for(const q of F1.cells){const r=map([q[0]+.5,q[1]+.5]),gx=Math.round(r[0]-.5),gy=Math.round(r[1]-.5);if(Math.abs(r[0]-.5-gx)>1e-6||Math.abs(r[1]-.5-gy)>1e-6)return false;const k=ck(gx,gy);if(!want.has(k)||want.get(k)!==(F1.marks[ck(q[0],q[1])]||''))return false}return true}
+function figEq(A,B){return canon(A)===canon(B)}
+function growFig(R,n){const S=[[2,2]],has=k=>S.some(c=>ck(c[0],c[1])===k);let g=0;
+  while(S.length<n&&g++<500){const b=S[Math.floor(R()*S.length)],d=[[1,0],[-1,0],[0,1],[0,-1]][Math.floor(R()*4)],c=[b[0]+d[0],b[1]+d[1]];if(c[0]<0||c[1]<0||c[0]>4||c[1]>4||has(ck(c[0],c[1])))continue;S.push(c)}
+  return S}
+function place(F,R){const n=normalize(F);let w=0,h=0;for(const c of n.cells){w=Math.max(w,c[0]+1);h=Math.max(h,c[1]+1)}const ox=Math.floor(R()*(GR-w+1)),oy=Math.floor(R()*(GR-h+1));
+  const cells=n.cells.map(c=>[c[0]+ox,c[1]+oy]),marks={};for(const k in n.marks){const s=k.split(',');marks[ck(+s[0]+ox,+s[1]+oy)]=n.marks[k]}return{cells,marks}}
+// random pair; rel: 'giro'|'espejo'|'distinta'
+function genPair(R,rel){
+  for(let tries=0;tries<400;tries++){
+    const cells=growFig(R,5+Math.floor(R()*3));if(cells.length<5)continue;
+    const marks={},ks=cells.map(c=>ck(c[0],c[1])),nm=2+Math.floor(R()*2),types=['o','s','t'];
+    for(let i=0;i<nm;i++){const k=ks[Math.floor(R()*ks.length)];if(!marks[k])marks[k]=types[i]}
+    const base={cells,marks};
+    if(matches(base,base).length!==1)continue;           // asymmetric figure only
+    let F2;
+    if(rel==='distinta'){const k=Math.floor(R()*cells.length),c=cells[k],opts=[[1,0],[-1,0],[0,1],[0,-1]].map(d=>[c[0]+d[0],c[1]+d[1]]).filter(p=>p[0]>=0&&p[1]>=0&&p[0]<=4&&p[1]<=4&&!ks.includes(ck(p[0],p[1])));
+      if(!opts.length)continue;const p=opts[Math.floor(R()*opts.length)],c2=cells.map((x,i)=>i===k?p:x),m2={};for(const kk in marks){m2[kk===ck(c[0],c[1])?ck(p[0],p[1]):kk]=marks[kk]}
+      F2=transformFig({cells:c2,marks:m2},R()<.5?1:0,Math.floor(R()*4));
+      // must really be different from every rotation/mirror of F1
+      if(matches(base,F2).length)continue;
+      if(!cells.length)continue}
+    else F2=transformFig(base,rel==='espejo'?1:0,Math.floor(R()*4));
+    const A=place(base,R),B=place(F2,R);
+    if(!autoLandmarks(A,B)&&rel!=='distinta')continue;
+    return{F1:A,F2:B,rel}}
+  return null}
+// ==== LOGIC END ====
+
+(function(){
+if(typeof document==='undefined')return;
+const $=s=>document.querySelector(s);
+const KEY='atc_aid_espejo_v1';
+const NS='http://www.w3.org/2000/svg';
+function mk(cells,marks){return{cells,marks}}
+const PRESETS=[
+ {id:'giro',F1:mk([[1,1],[1,2],[1,3],[2,3],[3,3],[2,1]],{'1,1':'o','3,3':'s'}),T:[0,1]},
+ {id:'espejo',F1:mk([[1,1],[1,2],[1,3],[2,3],[3,3],[2,1]],{'1,1':'o','3,3':'s'}),T:[1,2]},
+ {id:'distinta',F1:mk([[1,1],[1,2],[1,3],[2,3],[3,3],[2,1]],{'1,1':'o','3,3':'s'}),T:'x'},
+ {id:'simetrica',F1:mk([[1,1],[2,1],[3,1],[2,2],[2,3]],{'2,3':'o'}),T:[0,1]}];
+PRESETS[0].T=[0,1];
+const LABEL={giro:'Giro',espejo:'Espejo',distinta:'Distinta',simetrica:'Simétrica'};
+const S={F1:null,F2:null,mode:'auto',man:{P:[],Q:[]},t:0,flip:0,ghost:false,seed:1,lab:'giro'};
+function shiftFig(F,dx,dy){return{cells:F.cells.map(c=>[c[0]+dx,c[1]+dy]),marks:Object.fromEntries(Object.entries(F.marks).map(([k,v])=>{const s=k.split(',');return[ck(+s[0]+dx,+s[1]+dy),v]}))}}
+function loadPreset(i){const p=PRESETS[i];S.lab=p.id;S.F1=p.F1;
+  if(p.T==='x'){const c=p.F1.cells.map(x=>x.slice());c[5]=[0,2];const m=Object.assign({},p.F1.marks);S.F2=shiftFig(transformFig({cells:c,marks:m},0,1),1,1)}
+  else{const q=transformFig(p.F1,p.T[0],p.T[1]);const n=normalize(q);S.F2=shiftFig(n,1,1)}
+  after()}
+function after(){S.man={P:[],Q:[]};S.t=0;S.flip=0;S.ghost=false;tok++;try{localStorage.setItem(KEY,JSON.stringify({lab:S.lab,seed:S.seed,mode:S.mode}))}catch(e){}render()}
+function random(){S.seed=(S.seed*48271+Math.floor(Math.random()*1e6))%2147483647;const R=rng(S.seed),rel=['giro','espejo','giro','espejo','distinta'][Math.floor(R()*5)];const g=genPair(R,rel);if(!g)return random();S.F1=g.F1;S.F2=g.F2;S.lab='azar';after()}
+function rng(seed){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+// landmarks in use
+function marks3(){
+  if(S.mode==='auto'){const L=autoLandmarks(S.F1,S.F2);return L?{P:L.P,Q:L.Q}:null}
+  if(S.man.P.length===3&&S.man.Q.length===3)return{P:S.man.P,Q:S.man.Q};return null}
+function verdict(){
+  const cls=classify(S.F1,S.F2),L=marks3();
+  if(cls==='distinta')return{cls,L,txt:'Distinta',kind:'bad'};
+  if(!L)return{cls,L:null,txt:S.mode==='auto'?(cls==='ambos'?'Simétrica':'Elige puntos'):'Elige 3+3',kind:'muted'};
+  const d=decide(L.P,L.Q);
+  if(d==='incoherente')return{cls,L,txt:'No coinciden',kind:'bad',d};
+  if(d==='colineal')return{cls,L,txt:'En línea',kind:'bad',d};
+  if(!consistent(S.F1,S.F2,L.P,L.Q,d==='espejo'))return{cls,L,txt:'No coinciden',kind:'bad',d:'incoherente'};
+  if(cls==='ambos')return{cls,L,txt:'Simétrica: ambos',kind:'muted',d};
+  return{cls,L,txt:d==='giro'?'Giro':'Espejo',kind:d==='giro'?'ok':'warn',d}}
+function fmt(n){return(Math.round(n*10)/10).toString().replace('.',',').replace('-','−')}
+const glyph=s=>s>0?'↻':s<0?'↺':'·';
+function figSVG(F,which,L,ghost){
+  let s=`<rect class="bg" x="0" y="0" width="${GR}" height="${GR}"/>`;
+  for(let i=1;i<GR;i++)s+=`<path class="gl" d="M${i} 0V${GR}M0 ${i}H${GR}"/>`;
+  const P=L?L[which==='a'?'P':'Q']:(S.mode==='man'?S.man[which==='a'?'P':'Q']:[]);
+  for(const c of F.cells){const k=ck(c[0],c[1]),m=F.marks[k];
+    s+=`<g class="cell" tabindex="${S.mode==='man'?0:-1}" role="${S.mode==='man'?'button':'img'}" aria-label="Celda ${c[0]+1},${c[1]+1}" data-w="${which}" data-x="${c[0]}" data-y="${c[1]}"><rect class="fill" x="${c[0]}" y="${c[1]}" width="1" height="1"/>`;
+    if(m==='o')s+=`<circle class="mk" cx="${c[0]+.5}" cy="${c[1]+.5}" r=".22"/>`;
+    if(m==='s')s+=`<rect class="mk" x="${c[0]+.3}" y="${c[1]+.3}" width=".4" height=".4"/>`;
+    if(m==='t')s+=`<path class="mk" d="M${c[0]+.5} ${c[1]+.25}L${c[0]+.76} ${c[1]+.72}H${c[0]+.24}z"/>`;
+    s+='</g>'}
+  // landmark triangle
+  if(P.length===3){const d=P.map(p=>p.join(' ')),sg=orient(P[0],P[1],P[2]);
+    s+=`<path class="tri" d="M${P[0][0]} ${P[0][1]}L${P[1][0]} ${P[1][1]}L${P[2][0]} ${P[2][1]}z"/>`;
+    if(sg){const cx=(P[0][0]+P[1][0]+P[2][0])/3,cy=(P[0][1]+P[1][1]+P[2][1])/3,r=.34,a0=sg>0?-150:-30,a1=sg>0?100:-280,rad=x=>x*Math.PI/180;
+      const p0=[cx+r*Math.cos(rad(a0)),cy+r*Math.sin(rad(a0))],p1=[cx+r*Math.cos(rad(a1)),cy+r*Math.sin(rad(a1))];
+      s+=`<path class="arc" d="M${p0[0].toFixed(3)} ${p0[1].toFixed(3)}A${r} ${r} 0 1 ${sg>0?1:0} ${p1[0].toFixed(3)} ${p1[1].toFixed(3)}"/>`;
+      const tg=sg>0?[-Math.sin(rad(a1)),Math.cos(rad(a1))]:[Math.sin(rad(a1)),-Math.cos(rad(a1))],nx=[Math.cos(rad(a1)),Math.sin(rad(a1))];
+      const tip=p1,b1=[tip[0]-.14*tg[0]+.07*nx[0],tip[1]-.14*tg[1]+.07*nx[1]],b2=[tip[0]-.14*tg[0]-.07*nx[0],tip[1]-.14*tg[1]-.07*nx[1]];
+      s+=`<path class="arc" d="M${b1[0].toFixed(3)} ${b1[1].toFixed(3)}L${tip[0].toFixed(3)} ${tip[1].toFixed(3)}L${b2[0].toFixed(3)} ${b2[1].toFixed(3)}"/>`}
+  }
+  P.forEach((p,i)=>{s+=`<g class="lm"><circle cx="${p[0]}" cy="${p[1]}" r=".32"/><text x="${p[0]-.36}" y="${p[1]-.36}">${i+1}</text></g>`});
+  if(ghost)s+=ghost;
+  return s}
+function ghostSVG(V){
+  if(!S.ghost||!V.L)return'';
+  const P=V.L.P,Q=V.L.Q,mir=V.d==='espejo';
+  const th=alignAngle(P,Q,mir);let deg=th;
+  // animation state S.t in [0,1]
+  let rot,sx=1;
+  if(mir){const turn=S.t<.62?S.t/.62:1;rot=turn*(th+360);sx=S.t<.7?1:1-2*Math.min(1,(S.t-.7)/.3)}else rot=S.t*(th)
+  const pts=S.F1.cells.map(c=>`<rect x="${c[0]}" y="${c[1]}" width="1" height="1"/>`).join('');
+  const tp=P.map(p=>p.join(',')).join(' ');
+  return `<g class="ghost" transform="translate(${Q[0][0]} ${Q[0][1]}) rotate(${rot.toFixed(2)}) scale(${sx.toFixed(3)} 1) translate(${-P[0][0]} ${-P[0][1]})">${pts}<polyline class="gtri" points="${tp} ${P[0].join(',')}"/></g>`}
+function render(){
+  const V=verdict(),L=V.L;document.body.classList.toggle('man',S.mode==='man');
+  $('#fa').innerHTML=figSVG(S.F1,'a',L&&L.P?L:L,'');
+  $('#fb').innerHTML=figSVG(S.F2,'b',L,ghostSVG(V));
+  $('#res').textContent=V.txt;$('#res').className='res '+V.kind;
+  let F='';
+  if(L&&V.d!=='incoherente'){const c1=crossABC(...L.P),c2=crossABC(...L.Q),s1=orient(...L.P),s2=orient(...L.Q);
+    F=`(B−A)×(C−A)<br>izq: <b>${fmt(c1)}</b> ${glyph(s1)}<br>der: <b>${fmt(c2)}</b> ${glyph(s2)}<br>${s1&&s2?(s1===s2?'mismo signo: giro':'signo opuesto: espejo'):''}`}
+  else if(V.d==='incoherente')F='distancias distintas: los puntos no se corresponden';
+  $('#formula').innerHTML=F;
+  const cls=V.cls;
+  $('#anim').disabled=!(L&&(V.d==='giro'||V.d==='espejo')&&cls!=='distinta');
+  for(const m of['auto','man'])$('#m-'+m).classList.toggle('on',S.mode===m);
+  $('#clr').hidden=S.mode!=='man';
+  $('#ca').textContent=S.mode==='man'?S.man.P.length+'/3':'';$('#cb').textContent=S.mode==='man'?S.man.Q.length+'/3':'';
+  PRESETS.forEach((p,i)=>$('#p'+i).classList.toggle('on',S.lab===p.id))
+}
+let tok=0;const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function animate(){const my=++tok;S.ghost=true;S.t=0;const V=verdict(),dur=V.d==='espejo'?3600:1600;const t0=performance.now();
+  if(reduce){S.t=1;render();return}
+  (function f(t){if(my!==tok)return;let u=Math.min(1,(t-t0)/dur);S.t=u<.5&&V.d!=='espejo'?2*u*u:V.d==='espejo'?u:1-Math.pow(-2*u+2,2)/2;render();if(u<1)requestAnimationFrame(f)})(t0)}
+$('#anim').onclick=animate;
+$('#m-auto').onclick=()=>{S.mode='auto';S.ghost=false;tok++;after()};
+$('#m-man').onclick=()=>{S.mode='man';S.ghost=false;tok++;S.man={P:[],Q:[]};after()};
+$('#clr').onclick=()=>{S.man={P:[],Q:[]};S.ghost=false;tok++;render()};
+$('#rnd').onclick=random;
+PRESETS.forEach((p,i)=>{$('#p'+i).onclick=()=>loadPreset(i)});
+function cellTap(e){const g=e.target.closest('.cell');if(!g)return;if(S.mode!=='man')return;const w=g.dataset.w,pt=[+g.dataset.x+.5,+g.dataset.y+.5],arr=S.man[w==='a'?'P':'Q'];
+  const ix=arr.findIndex(p=>p[0]===pt[0]&&p[1]===pt[1]);if(ix>=0)arr.splice(ix,1);else if(arr.length<3)arr.push(pt);S.ghost=false;tok++;const fx=g.dataset.x,fy=g.dataset.y;render();const nf=$('#f'+w).querySelector(`.cell[data-x="${fx}"][data-y="${fy}"]`);if(nf&&e.type==='keydown')nf.focus()}
+for(const id of['#fa','#fb']){$(id).addEventListener('click',cellTap);$(id).addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cellTap(e)}})}
+let mode0='auto',lab0=0;
+try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j){if(j.mode==='man')mode0='man';if(j.lab==='azar'&&j.seed){S.seed=j.seed}const ix=PRESETS.findIndex(p=>p.id===j.lab);if(ix>=0)lab0=ix}}catch(e){}
+S.mode=mode0;loadPreset(lab0);
+window.__esp={S,render,verdict,animate};
+})();
+
+</script>
+<script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

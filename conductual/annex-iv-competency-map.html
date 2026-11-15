@@ -1,0 +1,567 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Las 7 competencias oficiales (Anexo IV)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Conductual</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#1-la-lista-oficial">1. La lista oficial</a></li>
+<li><a href="#2-reglas-para-superarla-literalmente">2. Reglas para superarla, literalmente</a></li>
+<li><a href="#3-como-describe-oficialmente-la-prueba-b">3. Cómo describe oficialmente la prueba B</a></li>
+<li><a href="#4-equivalencia-de-las-etiquetas-antiguas-con-las-competencias-oficiales">4. Equivalencia de las etiquetas antiguas con las competencias oficiales</a><ul>
+<li><a href="#41-las-11-etiquetas-inferidas-de-la-seccion-4-de-star-bank-and-competenciesmd">4.1 Las 11 etiquetas inferidas de la sección 4 de star-bank-and-competencies.md</a></li>
+<li><a href="#42-los-12-valores-del-pv2030-usados-en-interview-frameworksmd">4.2 Los 12 valores del PV2030 usados en interview-frameworks.md</a></li>
+</ul>
+</li>
+<li><a href="#5-donde-se-ejercita-cada-competencia-recuento-de-etiquetas-por-archivo">5. Dónde se ejercita cada competencia: recuento de etiquetas por archivo</a></li>
+<li><a href="#trampas-del-examen">Trampas del examen</a></li>
+<li><a href="#hay-que-memorizar">Hay que memorizar</a></li>
+<li><a href="#glosario-bilingue-ingles-espanol">Glosario bilingüe (inglés → español)</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">10 min de lectura</div><h1 id="mapa-del-anexo-iv-las-competencias-oficiales-de-la-fase-3b-evaluacion-conductual-las-reglas-para-superarla-y-su-equivalencia-con-el-material">Mapa del Anexo IV: las competencias oficiales de la Fase 3B (evaluación conductual), las reglas para superarla y su equivalencia con el material</h1>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>La Fase 3 de la convocatoria de ENAIRE tiene tres pruebas eliminatorias que se hacen el mismo día: A) inglés oral, B) «Evaluación conductual y adaptación al entorno profesional» y C) evaluación clínica de la personalidad. La prueba B es el principal cuello de botella del embudo de 2024 (la superaron 159 de 525, alrededor del 30%). ENAIRE publica siete competencias, sus máximos y las reglas para superar la prueba; no publica los indicadores conductuales de cada competencia ni qué ejercicio alimenta cada una.</p>
+<h2 id="1-la-lista-oficial">1. La lista oficial</h2>
+<p>Fuente: <code>ANEXO IV_CRITERIOS CORRECCIÓN, VALORACIÓN Y SUPERACIÓN PRUEBA B FASE 3.pdf</code>, Anexo IV de la resolución de la Directora de Personas de ENAIRE de 31 de marzo de 2026 (1 página).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Código</th>
+<th>Competencia</th>
+<th>Máx. puntos</th>
+<th>Suelo del 50%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TW</td>
+<td>Trabajo en equipo</td>
+<td>18</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RO</td>
+<td>Orientación a resultados</td>
+<td>18</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DM</td>
+<td>Toma de decisiones</td>
+<td>18</td>
+<td>9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>FL</td>
+<td>Flexibilidad y adaptación al cambio</td>
+<td>18</td>
+<td>9</td>
+</tr>
+<tr>
+<td>5</td>
+<td>OC</td>
+<td>Compromiso organizacional</td>
+<td>18</td>
+<td>9</td>
+</tr>
+<tr>
+<td>6</td>
+<td>RS</td>
+<td>Resiliencia</td>
+<td>15</td>
+<td>7,5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ST</td>
+<td>Gestión del estrés y tolerancia a la presión</td>
+<td>15</td>
+<td>7,5</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Total</td>
+<td>120</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p>Los códigos (TW, RO, DM, FL, OC, RS, ST) son las siglas inglesas que usamos en este material para etiquetar; ENAIRE solo publica los nombres en español.</p>
+<p>Aritmética: 5 x 18 + 2 x 15 = 120. Los siete suelos suman 5 x 9 + 2 x 7,5 = 60, exactamente la nota mínima total. Por tanto, quien supera todos los suelos ya tiene 60 en total; la regla del total solo podría morder si no se alcanzaran los suelos. En la práctica, la regla que manda son los suelos. En ningún sitio se dice si ENAIRE concede de verdad puntos fraccionarios (7,5).</p>
+<h2 id="2-reglas-para-superarla-literalmente">2. Reglas para superarla, literalmente</h2>
+<p>Anexo IV: «Esta prueba será puntuada con un máximo de 120 puntos y para superarla los candidatos deberán obtener, al menos, 60 puntos, requiriéndose que los candidatos alcancen en cada una de las competencias anteriormente indicadas, al menos, el 50% de la puntuación máxima atribuida a cada una de ellas. Respetando lo anterior, la puntuación total del candidato en esta prueba vendrá determinada por la resultante de la suma obtenida en cada una de las competencias establecidas.»</p>
+<p>En claro: la prueba se puntúa sobre 120; para superarla hay que obtener al menos 60 puntos Y al menos el 50% del máximo en CADA competencia; la nota final es la suma de las siete puntuaciones.</p>
+<p>Consecuencias: (a) una sola competencia por debajo de su suelo suspende toda la prueba, aunque el total sea alto; (b) la nota conductual es además el primer criterio de desempate y supone 120 de los 390 puntos totales del proceso (30,8%), así que, una vez a salvo los suelos, cada punto extra sigue contando; (c) superarla es un estándar absoluto con suelos, no un corte por ranking.</p>
+<h2 id="3-como-describe-oficialmente-la-prueba-b">3. Cómo describe oficialmente la prueba B</h2>
+<p>Fuente: <code>BASES CONVOCATORIA 2025.pdf</code>, Base 8, Fase 3, página 13 de 20. Texto literal de B):
+«Consistirá en la realización de varias pruebas orientadas a valorar el grado de adecuación de la persona candidata al perfil de controlador de tránsito aéreo, compuesto por competencias conductuales y estratégicas requeridas por ENAIRE, basadas en el Propósito, Misión, Visión, Valores y Objetivos Estratégicos definidos en el Plan Estratégico de ENAIRE 2021-2025 (Plan de Vuelo 2025). Esta prueba será puntuada con un máximo de 120 puntos y para superarla los candidatos deberán obtener, al menos, 60 puntos.»</p>
+<p>En claro: consiste en «varias pruebas» para juzgar cuánto encaja la persona candidata con el perfil de controlador de tránsito aéreo, formado por competencias conductuales y estratégicas que exige ENAIRE, basadas en el Propósito, la Misión, la Visión, los Valores y los Objetivos Estratégicos del plan estratégico 2021-2025 (Plan de Vuelo 2025).</p>
+<p>El Anexo IV repite la misma descripción («varias pruebas orientadas a valorar el grado de adecuación...») y añade: «La adecuación del candidato se determinará mediante la valoración de las competencias que a continuación se enumeran, con una puntuación para cada una de ellas.»</p>
+<p>Lo que el texto oficial no dice: el número y el tipo de pruebas (la dinámica de grupo, la entrevista, las pruebas escritas y el videojuego los nombran solo las descripciones de las academias, no ENAIRE), qué prueba alimenta qué competencia, los indicadores conductuales, el número de evaluadores y el tamaño del grupo. No presentes nada de esto como un hecho de ENAIRE.</p>
+<p>Aviso de versión: las bases citan el Plan de Vuelo 2025 (2021-2025). El material conductual de esta carpeta usa los 12 valores del Plan de Vuelo 2030 (<a href="flight-plan-2030-summary.html">el Plan de Vuelo 2030</a>). Se desconoce qué plan usarán los evaluadores en la próxima convocatoria; las siete competencias son las mismas en ambos casos. Aprende los valores de 2030 (más recientes), pero no te sorprendas si ves la redacción de 2025.</p>
+<h2 id="4-equivalencia-de-las-etiquetas-antiguas-con-las-competencias-oficiales">4. Equivalencia de las etiquetas antiguas con las competencias oficiales</h2>
+<p>Todas las correspondencias de esta sección son inferencia mía. ENAIRE no publica qué valor o conducta alimenta qué competencia. «Encaje»: fuerte = el ejercicio practica directamente la competencia; parcial = relacionado; ninguno = sin equivalente oficial.</p>
+<h3 id="41-las-11-etiquetas-inferidas-de-la-seccion-4-de-star-bank-and-competenciesmd">4.1 Las 11 etiquetas inferidas de la sección 4 de <code>star-bank-and-competencies.md</code></h3>
+<table>
+<thead>
+<tr>
+<th>Etiqueta antigua</th>
+<th>Competencia oficial</th>
+<th>Encaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seguridad y responsabilidad</td>
+<td>OC + DM</td>
+<td>parcial: no hay una competencia de «seguridad»; entra por el compromiso y las decisiones</td>
+</tr>
+<tr>
+<td>Toma de decisiones</td>
+<td>DM</td>
+<td>fuerte</td>
+</tr>
+<tr>
+<td>Gestión de la presión</td>
+<td>ST</td>
+<td>fuerte</td>
+</tr>
+<tr>
+<td>Trabajo en equipo</td>
+<td>TW</td>
+<td>fuerte</td>
+</tr>
+<tr>
+<td>Comunicación clara y asertiva</td>
+<td>TW</td>
+<td>parcial; la comunicación NO es una competencia oficial</td>
+</tr>
+<tr>
+<td>Adaptabilidad</td>
+<td>FL</td>
+<td>fuerte</td>
+</tr>
+<tr>
+<td>Autocontrol emocional</td>
+<td>ST + RS</td>
+<td>parcial</td>
+</tr>
+<tr>
+<td>Atención y planificación</td>
+<td>RO</td>
+<td>parcial</td>
+</tr>
+<tr>
+<td>Aprendizaje continuo</td>
+<td>FL (+ RO)</td>
+<td>parcial, débil</td>
+</tr>
+<tr>
+<td>Orientación al servicio</td>
+<td>ninguna clara (lo más cercano, RO u OC)</td>
+<td>ninguno/débil</td>
+</tr>
+<tr>
+<td>Compromiso con la organización</td>
+<td>OC</td>
+<td>fuerte</td>
+</tr>
+</tbody>
+</table>
+<p>Competencia oficial SIN etiqueta antigua: <strong>Resiliencia (RS)</strong>. Etiquetas antiguas sin un hueco oficial claro: la seguridad como tal, la comunicación, la orientación al servicio y el aprendizaje continuo. Los elementos marcados como «encaje débil» o «ninguno» en los archivos son estos.</p>
+<h3 id="42-los-12-valores-del-pv2030-usados-en-interview-frameworksmd">4.2 Los 12 valores del PV2030 usados en <code>interview-frameworks.md</code></h3>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Competencia oficial (mi correspondencia)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 En nuestro ADN (seguridad)</td>
+<td>DM, OC</td>
+</tr>
+<tr>
+<td>2 Actitud de confianza y cultura justa</td>
+<td>OC, RS (asumir y notificar errores), TW</td>
+</tr>
+<tr>
+<td>3 Refuerzo e impulso de la seguridad</td>
+<td>RO, OC</td>
+</tr>
+<tr>
+<td>4 Somos profesionales</td>
+<td>RO, ST</td>
+</tr>
+<tr>
+<td>5 Somos empáticos</td>
+<td>TW</td>
+</tr>
+<tr>
+<td>6 Protegemos el medioambiente</td>
+<td>OC, DM</td>
+</tr>
+<tr>
+<td>7 Somos ENAIRE</td>
+<td>OC</td>
+</tr>
+<tr>
+<td>8 La integridad es nuestro carácter</td>
+<td>OC</td>
+</tr>
+<tr>
+<td>9 Respetamos y confiamos</td>
+<td>TW</td>
+</tr>
+<tr>
+<td>10 Somos innovadores</td>
+<td>FL, RO</td>
+</tr>
+<tr>
+<td>11 Flexibles ante los cambios</td>
+<td>FL</td>
+</tr>
+<tr>
+<td>12 Lideramos desde la excelencia</td>
+<td>RO, TW</td>
+</tr>
+</tbody>
+</table>
+<p>Los valores no se corresponden uno a uno: las etiquetas de cada pregunta de <code>interview-frameworks.md</code> se asignaron por pregunta, no por valor.</p>
+<h2 id="5-donde-se-ejercita-cada-competencia-recuento-de-etiquetas-por-archivo">5. Dónde se ejercita cada competencia: recuento de etiquetas por archivo</h2>
+<p>Cada elemento de los archivos conductuales lleva ahora 1-2 etiquetas oficiales (una etiqueta de encaje débil cuenta igualmente una vez aquí). Los recuentos son el número de elementos etiquetados con esa competencia.</p>
+<table>
+<thead>
+<tr>
+<th>Competencia</th>
+<th>25 casos de grupo</th>
+<th>30 casos de juicio situacional</th>
+<th>60 preguntas de entrevista (<code>interview-frameworks.md</code>)</th>
+<th>40 preguntas (<code>star-bank</code>)</th>
+<th>15 huecos de historia (<code>star-bank</code>)</th>
+<th>50 preguntas del cuestionario de historias (A-J)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TW Trabajo en equipo</td>
+<td>8</td>
+<td>10</td>
+<td>19</td>
+<td>9</td>
+<td>5</td>
+<td>24</td>
+</tr>
+<tr>
+<td>RO Orientación a resultados</td>
+<td>3</td>
+<td>2</td>
+<td>16</td>
+<td>6</td>
+<td>5</td>
+<td>11</td>
+</tr>
+<tr>
+<td>DM Toma de decisiones</td>
+<td>18</td>
+<td>12</td>
+<td>10</td>
+<td>3</td>
+<td>2</td>
+<td>14</td>
+</tr>
+<tr>
+<td>FL Flexibilidad y cambio</td>
+<td>2</td>
+<td>2</td>
+<td>13</td>
+<td>9</td>
+<td>3</td>
+<td>8</td>
+</tr>
+<tr>
+<td>OC Compromiso organizacional</td>
+<td>11</td>
+<td>13</td>
+<td>31</td>
+<td>15</td>
+<td>4</td>
+<td>16</td>
+</tr>
+<tr>
+<td>RS Resiliencia</td>
+<td>1</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>4</td>
+<td>14</td>
+</tr>
+<tr>
+<td>ST Estrés y presión</td>
+<td>4</td>
+<td>7</td>
+<td>6</td>
+<td>9</td>
+<td>5</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p>Dos elementos de <code>star-bank</code> (las preguntas 36 y 38, sobre personalidad y consumo de sustancias) no corresponden a ninguna competencia de la 3B: pertenecen a la prueba C, clínica y de personalidad. Las preguntas de motivación (conocimiento de ENAIRE, «por qué ENAIRE», «por qué controlador», «dentro de diez años») se etiquetan como OC con encaje débil.</p>
+<p>Cómo leer la tabla: el material se inclina hacia DM y OC (consecuencia de haber construido los casos y las preguntas a partir de los valores de seguridad y ética). Es más escaso en RS y FL en los casos de grupo (1 y 2 casos), en RO y FL en los casos de juicio situacional (2 cada una) y en DM en los huecos de historia (2); si hay tiempo, conviene escribir algunos casos más para ellas.</p>
+<p>Nota: la cabecera de <code>story-discovery-questionnaire.md</code> dice 45 preguntas, pero las secciones A-J suman 10 x 5 = 50; las 50 están etiquetadas, el número de la cabecera simplemente está desfasado.</p>
+<h2 id="trampas-del-examen">Trampas del examen</h2>
+<ul>
+<li>Creer que la 3B es un corte por ranking frente a otros candidatos. La regla oficial es 60 de 120 más el 50% en cada competencia; el ranking entra después, mediante la nota total y los desempates.</li>
+<li>Fiarse de un total alto. Un 118 de 120 no puede incumplir un suelo, pero un 100 con una competencia al 40% sí suspende.</li>
+<li>Tomar nuestras etiquetas por las de ENAIRE. Qué conducta alimenta qué competencia no está publicado.</li>
+<li>Tratar la «comunicación» o el «servicio» como competencias puntuadas. No están en la lista oficial; solo ayudan a través del trabajo en equipo o el compromiso.</li>
+<li>Usar la redacción del PV2030 como si la citaran las bases. La Base 8 cita el PV2025.</li>
+</ul>
+<h2 id="hay-que-memorizar">Hay que memorizar</h2>
+<ul>
+<li>Siete competencias, en este orden de máximos: Trabajo en equipo, Orientación a resultados, Toma de decisiones, Flexibilidad y adaptación al cambio, Compromiso organizacional (18 cada una); Resiliencia, Gestión del estrés y tolerancia a la presión (15 cada una).</li>
+<li>Máximo 120; 60 para superarla; al menos el 50% en cada competencia (9 en las cinco primeras, 7,5 en las dos últimas).</li>
+<li>La descripción de la prueba: «varias pruebas», competencias conductuales y estratégicas, basadas en el Propósito, la Misión, la Visión, los Valores y los Objetivos Estratégicos del Plan de Vuelo 2025.</li>
+</ul>
+<h2 id="glosario-bilingue-ingles-espanol">Glosario bilingüe (inglés → español)</h2>
+<p>Útil para leer material en inglés sobre evaluación conductual.</p>
+<table>
+<thead>
+<tr>
+<th>Inglés</th>
+<th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>behavioural assessment</td>
+<td>evaluación conductual</td>
+</tr>
+<tr>
+<td>behavioural and strategic competencies</td>
+<td>competencias conductuales y estratégicas</td>
+</tr>
+<tr>
+<td>teamwork</td>
+<td>trabajo en equipo</td>
+</tr>
+<tr>
+<td>results orientation</td>
+<td>orientación a resultados</td>
+</tr>
+<tr>
+<td>decision making</td>
+<td>toma de decisiones</td>
+</tr>
+<tr>
+<td>flexibility and adaptation to change</td>
+<td>flexibilidad y adaptación al cambio</td>
+</tr>
+<tr>
+<td>organisational commitment</td>
+<td>compromiso organizacional</td>
+</tr>
+<tr>
+<td>resilience</td>
+<td>resiliencia</td>
+</tr>
+<tr>
+<td>stress management and pressure tolerance</td>
+<td>gestión del estrés y tolerancia a la presión</td>
+</tr>
+<tr>
+<td>maximum score</td>
+<td>puntuación máxima</td>
+</tr>
+<tr>
+<td>to pass (a test)</td>
+<td>superar</td>
+</tr>
+<tr>
+<td>at least 50% of the maximum</td>
+<td>al menos el 50% de la puntuación máxima</td>
+</tr>
+<tr>
+<td>Purpose, Mission, Vision, Values, Strategic Objectives</td>
+<td>Propósito, Misión, Visión, Valores, Objetivos Estratégicos</td>
+</tr>
+<tr>
+<td>Flight Plan 2025 (strategic plan 2021-2025)</td>
+<td>Plan de Vuelo 2025 (Plan Estratégico 2021-2025)</td>
+</tr>
+<tr>
+<td>Director of People</td>
+<td>Directora de Personas</td>
+</tr>
+</tbody>
+</table>
+<p>Fuentes: el Anexo IV (criterios de corrección, valoración y superación de la prueba B, Fase 3, 31 de marzo de 2026), las Bases de la convocatoria de 2025 (Base 8, Fase 3 B, 20 de noviembre de 2025) y las descripciones que hacen las academias de los componentes de la prueba (entrevista, dinámica de grupo, pruebas escritas, videojuego; nada de esa estructura está confirmado por ENAIRE). Ni las bases ni el Anexo IV indican los indicadores conductuales de cada competencia, qué ejercicio alimenta cada una ni si de verdad se conceden puntos fraccionarios. Se desconoce si la próxima convocatoria mantendrá las mismas siete competencias y la redacción del Plan de Vuelo 2025; la de 2026 podría ser distinta.</p></main></div><script src="../assets/search.js" defer></script><script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

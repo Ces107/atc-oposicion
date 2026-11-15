@@ -1,0 +1,904 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aerodinámica del vuelo (T09a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Aerodinámica y mecánica del vuelo</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-leyes-fundamentales-y-flujo-de-aire">1. Leyes fundamentales y flujo de aire</a><ul>
+<li><a href="#11-las-tres-leyes-del-movimiento-de-newton">1.1 Las tres leyes del movimiento de Newton</a></li>
+<li><a href="#12-la-ecuacion-de-continuidad">1.2 La ecuación de continuidad</a></li>
+<li><a href="#13-capa-limite-laminar-y-turbulenta">1.3 Capa límite: laminar y turbulenta</a></li>
+</ul>
+</li>
+<li><a href="#2-sustentacion-coeficientes-y-curva-de-sustentacion">2. Sustentación, coeficientes y curva de sustentación</a></li>
+<li><a href="#3-perdida-aerodinamica-frente-a-acelerada">3. Pérdida: aerodinámica frente a acelerada</a></li>
+<li><a href="#4-geometria-del-ala-y-forma-del-perfil-mas-alla-de-la-lista-del-manual">4. Geometría del ala y forma del perfil (más allá de la lista del manual)</a></li>
+<li><a href="#5-hipersustentadores-spoilers-y-efecto-suelo-mas-alla-del-manual">5. Hipersustentadores, spoilers y efecto suelo (más allá del manual)</a><ul>
+<li><a href="#51-tipos-de-flaps-de-borde-de-salida">5.1 Tipos de flaps de borde de salida</a></li>
+<li><a href="#52-hipersustentadores-de-borde-de-ataque">5.2 Hipersustentadores de borde de ataque</a></li>
+<li><a href="#53-spoilers-aerofrenos">5.3 Spoilers (aerofrenos)</a></li>
+<li><a href="#54-efecto-suelo-el-mecanismo-fisico-que-el-manual-omite">5.4 Efecto suelo: el mecanismo físico que el manual omite</a></li>
+</ul>
+</li>
+<li><a href="#6-la-resistencia-en-profundidad-parasita-inducida-de-onda-polar-y-ld">6. La resistencia en profundidad: parásita, inducida, de onda; polar y L/D</a></li>
+<li><a href="#7-empujepotencia-necesarios-y-disponibles-regimen-de-mando-invertido">7. Empuje/potencia necesarios y disponibles; régimen de mando invertido</a></li>
+<li><a href="#8-estabilidad-y-control">8. Estabilidad y control</a><ul>
+<li><a href="#81-estabilidad-estatica-y-dinamica">8.1 Estabilidad estática y dinámica</a></li>
+<li><a href="#82-estabilidad-longitudinal-cabeceo-alrededor-del-eje-lateral">8.2 Estabilidad longitudinal (cabeceo, alrededor del eje lateral)</a></li>
+<li><a href="#83-estabilidad-lateral-alabeo-alrededor-del-eje-longitudinal-diedro-flecha-efecto-quilla">8.3 Estabilidad lateral (alabeo, alrededor del eje longitudinal): diedro, flecha, efecto quilla</a></li>
+<li><a href="#84-estabilidad-direccional-guinada-alrededor-del-eje-vertical">8.4 Estabilidad direccional (guiñada, alrededor del eje vertical)</a></li>
+<li><a href="#85-modos-acopladosdinamicos-balanceo-holandes-inestabilidad-de-espiral-fugoide">8.5 Modos acoplados/dinámicos: balanceo holandés, inestabilidad de espiral, fugoide</a></li>
+<li><a href="#86-cola-en-t-estabilizador-de-una-pieza-stabilator-canard-cola-en-v-configuraciones-que-el-manual-no-menciona">8.6 Cola en T, estabilizador de una pieza (stabilator), canard, cola en V: configuraciones que el manual no menciona</a></li>
+<li><a href="#87-protecciones-de-la-envolvente-de-vuelo-en-fly-by-wire">8.7 Protecciones de la envolvente de vuelo en fly-by-wire</a></li>
+</ul>
+</li>
+<li><a href="#9-virajes-factor-de-carga-y-diagrama-v-n">9. Virajes, factor de carga y diagrama V-n</a><ul>
+<li><a href="#91-factores-de-carga-limite-por-categoria-no-figuran-en-el-manual">9.1 Factores de carga límite por categoría (no figuran en el manual)</a></li>
+<li><a href="#92-factor-de-carga-en-virajes-y-efecto-sobre-la-velocidad-de-perdida">9.2 Factor de carga en virajes y efecto sobre la velocidad de pérdida</a></li>
+<li><a href="#93-velocidad-de-maniobra-de-diseno-va-y-el-diagrama-v-n">9.3 Velocidad de maniobra de diseño VA y el diagrama V-n</a></li>
+</ul>
+</li>
+<li><a href="#10-vuelo-a-alta-velocidad">10. Vuelo a alta velocidad</a><ul>
+<li><a href="#101-regimenes-de-velocidad-y-numero-de-mach">10.1 Regímenes de velocidad y número de Mach</a></li>
+<li><a href="#102-mach-critico-ondas-de-choque-resistencia-de-onda-efecto-tuck">10.2 Mach crítico, ondas de choque, resistencia de onda, efecto tuck</a></li>
+<li><a href="#103-coffin-corner">10.3 Coffin corner</a></li>
+<li><a href="#104-regla-del-area-no-figura-en-absoluto-en-el-manual">10.4 Regla del área — no figura en absoluto en el manual</a></li>
+</ul>
+</li>
+<li><a href="#11-fisica-de-la-estela-turbulenta-y-minimas-de-separacion">11. Física de la estela turbulenta y mínimas de separación</a><ul>
+<li><a href="#111-categorias-oaci-heredadas-de-estela-turbulenta-y-minimas-de-separacion-radar">11.1 Categorías OACI heredadas de estela turbulenta y mínimas de separación radar</a></li>
+<li><a href="#112-recat-eu-seis-categorias-y-la-matriz-completa-de-separacion">11.2 RECAT-EU: seis categorías y la matriz completa de separación</a></li>
+</ul>
+</li>
+<li><a href="#12-ejemplos-numericos-resueltos-todos-comprobados-dos-veces">12. Ejemplos numéricos resueltos (todos comprobados dos veces)</a></li>
+<li><a href="#manual-frente-a-fuentes-primarias-adicional-a-la-tabla-de-om09-no-duplicar-sus-entradas">Manual frente a fuentes primarias (adicional a la tabla de OM09; no duplicar sus entradas)</a></li>
+<li><a href="#trampas-de-examen">Trampas de examen</a></li>
+<li><a href="#imprescindible-memorizar">Imprescindible memorizar</a></li>
+<li><a href="#glosario-es-en">Glosario (ES -&gt; EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">53 min de lectura</div><h1 id="t09a-aerodinamica-del-vuelo-mas-alla-del-manual-fuentes-primarias">T09a: Aerodinámica del vuelo — más allá del manual (fuentes primarias)</h1>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El tema 9 «Aerodinámica y mecánica de vuelo» se examina sobre todo a través del breve manual de ENAIRE (23 páginas, fechado en 2023). Pero el título del tema («aerodinámica <strong>y mecánica de vuelo</strong>») es lo bastante amplio como para que las preguntas puedan salir razonablemente de los conocimientos habituales de los manuales de aviación civil que el manual solo roza o deja fuera: la explicación física de la sustentación y la resistencia (subtipos de resistencia parásita, capa límite, física del efecto suelo), la estabilidad de la aeronave (estática/dinámica, los tres ejes de estabilidad, balanceo holandés, inestabilidad de espiral, fugoide), el diagrama V-n y las velocidades de diseño (Va, Vc, Vd), el vuelo a alta velocidad (Mach crítico, ondas de choque, efecto tuck, regla del área, coffin corner) y las mínimas de separación por estela turbulenta (categorías OACI heredadas y RECAT-EU). Este archivo desarrolla todo ello con números y fórmulas tomados de textos de certificación (CS-25) y de referencias de la FAA, la NASA, Airbus y EUROCONTROL, y señala cada punto en que una fuente primaria discrepa de la redacción del manual o es más precisa que ella; incluida la frase del manual sobre la distancia de despegue «15 % más corta», que es una paráfrasis imprecisa del «115 % de la distancia con todos los motores» de la CS 25.113 (véase «Manual frente a fuentes primarias» más abajo; no son el mismo porcentaje).</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Leyes fundamentales y flujo de aire (Newton, Bernoulli, continuidad, capa límite) · 2. Sustentación, coeficientes y curva de sustentación · 3. Pérdida: aerodinámica frente a acelerada · 4. Geometría del ala y forma del perfil · 5. Hipersustentadores, spoilers y efecto suelo · 6. La resistencia en profundidad: parásita, inducida, de onda; polar y L/D · 7. Empuje/potencia necesarios y disponibles; régimen de mando invertido · 8. Estabilidad y control · 9. Virajes, factor de carga y diagrama V-n · 10. Vuelo a alta velocidad · 11. Física de la estela turbulenta y mínimas de separación · 12. Ejemplos numéricos resueltos · Manual frente a fuentes primarias · Trampas de examen · Imprescindible memorizar · Glosario · Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-leyes-fundamentales-y-flujo-de-aire">1. Leyes fundamentales y flujo de aire</h2>
+<h3 id="11-las-tres-leyes-del-movimiento-de-newton">1.1 Las tres leyes del movimiento de Newton</h3>
+<p>Las notas base (<code>t09-...md</code>) ya citan la tercera ley de Newton para el equilibrio de fuerzas y el debate Bernoulli/Newton sobre la sustentación; aquí van las <strong>tres</strong> leyes de forma expresa, tal como las enuncia la Beginner's Guide to Aeronautics de la NASA:</p>
+<ol>
+<li><strong>Primera ley (inercia):</strong> «Un objeto en reposo permanece en reposo, y un objeto en movimiento permanece en movimiento a velocidad constante y en línea recta, salvo que actúe sobre él una fuerza no equilibrada». Aplicada a una aeronave: si el empuje, la resistencia, la sustentación y el peso se anulan, la aeronave mantiene una velocidad constante (vuelo recto y nivelado sin aceleración).</li>
+<li><strong>Segunda ley (fuerza):</strong> la fuerza es igual a la variación de la cantidad de movimiento; para masa constante, <strong>F = m·a</strong>. Aplicada a una aeronave: una fuerza no equilibrada (p. ej., un empuje mayor que la resistencia) produce una aceleración proporcional a la fuerza e inversamente proporcional a la masa.</li>
+<li><strong>Tercera ley (acción y reacción):</strong> «Siempre que un objeto ejerce una fuerza sobre un segundo objeto, el segundo objeto ejerce sobre el primero una fuerza igual y de sentido contrario». Aplicada a la sustentación: el ala desvía el aire hacia abajo (la acción, que origina la corriente descendente o <em>downwash</em>) y, por reacción, el aire empuja el ala hacia arriba; esta es la explicación de la sustentación del «bando de Newton». Aplicada a un motor a reacción: los gases de escape se aceleran hacia atrás y, por reacción, el motor (y la aeronave) es empujado hacia delante (empuje).</li>
+</ol>
+<p>Tanto la explicación de Bernoulli (diferencia de presión) como la de Newton (desviación del flujo) de la sustentación son correctas y complementarias; ninguna por sí sola da la imagen completa. Esto coincide con lo que las notas base ya recogen de la misma fuente de la NASA, por lo que no se repite aquí como dato nuevo.</p>
+<h3 id="12-la-ecuacion-de-continuidad">1.2 La ecuación de continuidad</h3>
+<p>La ecuación de continuidad expresa la <strong>conservación de la masa</strong> en un flujo. En un conducto (p. ej., un tubo Venturi) con dos secciones de área A₁ y A₂ y velocidades medias del flujo V₁ y V₂, el caudal másico ha de ser el mismo en todas las secciones: <strong>ρ₁A₁V₁ = ρ₂A₂V₂</strong>. Para un flujo que puede tratarse como incompresible (densidad ρ constante, válido a baja velocidad subsónica), se reduce a <strong>A₁V₁ = A₂V₂</strong>. Consecuencia: donde disminuye el área de la sección, la velocidad del flujo tiene que aumentar (y a la inversa) para mantener constante el caudal másico. Esta es la razón física por la que el aire se acelera en la garganta de un tubo Venturi y, por extensión, sobre el extradós curvo de un perfil, que se comporta como una de las paredes de un conducto convergente-divergente. La sección de Bernoulli del manual solo enuncia la relación presión-velocidad (P + ½ρV² = k) sin explicar por qué cambia la velocidad en primer lugar; la ecuación de continuidad es el eslabón que falta. Una pregunta de examen podría plantear con verosimilitud «el principio que explica por qué el aire se acelera en la garganta de un tubo Venturi», con la continuidad (no Bernoulli) como respuesta correcta, ya que Bernoulli solo relaciona la presión y la velocidad resultantes una vez conocido el cambio de velocidad.</p>
+<h3 id="13-capa-limite-laminar-y-turbulenta">1.3 Capa límite: laminar y turbulenta</h3>
+<p>La <strong>capa límite</strong> es la fina capa de aire junto a la superficie del ala en la que la viscosidad frena el flujo desde la velocidad de la corriente libre hasta casi cero en la propia superficie; el PHAK la describe como «de un ancho aproximado al de una carta de la baraja». Hay dos regímenes de flujo en la capa límite:</p>
+<ul>
+<li><strong>Capa límite laminar:</strong> un flujo muy suave; produce <strong>menos resistencia por fricción</strong> que el flujo turbulento, pero es <strong>menos estable</strong> (se rompe de forma más brusca).</li>
+<li><strong>Capa límite turbulenta:</strong> contiene remolinos y torbellinos; es más estable (resiste mejor el desprendimiento) pero produce más resistencia por fricción.</li>
+</ul>
+<p>El flujo de la capa límite sobre un ala empieza siendo laminar cerca del borde de ataque y <strong>transiciona</strong> a turbulento más atrás. Desde el punto de vista de la resistencia, conviene retrasar lo más posible el punto de transición (más flujo laminar = menos fricción), que es el objetivo del diseño de perfiles «de flujo laminar».</p>
+<p><strong>Desprendimiento de la capa límite:</strong> ocurre cuando el flujo de aire se separa de la superficie del perfil, siguiendo la secuencia laminar → turbulento → desprendimiento. El desprendimiento produce mucha resistencia y acaba destruyendo la sustentación: esto <strong>es</strong> la pérdida descrita en términos de dinámica de fluidos: «el punto de desprendimiento de la capa límite avanza hacia delante en el ala a medida que aumenta el AOA». Los <strong>generadores de vórtices</strong> (pequeños perfiles de bajo alargamiento con 12°–15° de AOA respecto al flujo local, separados unas pulgadas entre sí, delante de los alerones) se usan para retrasar el desprendimiento de la capa límite inducido por ondas de choque en vuelo transónico, mezclando en ella aire de alta energía procedente del exterior de la capa límite. Es un nivel de detalle físico que el manual omite por completo (define la pérdida solo como «exceder el ángulo de ataque crítico», sin el mecanismo de la capa límite).</p>
+<hr />
+<h2 id="2-sustentacion-coeficientes-y-curva-de-sustentacion">2. Sustentación, coeficientes y curva de sustentación</h2>
+<p>El manual da la fórmula escueta de la sustentación L = C_L·q·S. Dos añadidos de fuentes primarias:</p>
+<ul>
+<li><strong>La sustentación varía con el cuadrado de la velocidad:</strong> duplicar la velocidad con AOA y configuración constantes produce <strong>cuatro veces la sustentación</strong>. Es una consecuencia directa, muy de examen, del término V².</li>
+<li><strong>La curva de sustentación (C_L frente a α):</strong> C_L crece aproximadamente de forma lineal con el ángulo de ataque (AOA) hasta un valor máximo, <strong>C_Lmax</strong>, que se alcanza en el <strong>AOA crítico</strong>; a partir de ahí C_L cae con rapidez: es la pérdida aerodinámica (§3). Una curva complementaria, <strong>C_D frente a α</strong>, sube despacio con AOA bajos y con fuerte pendiente cerca del AOA crítico; el cociente C_L/C_D (la relación sustentación/resistencia, L/D) alcanza un máximo, <strong>L/D_MAX</strong>, para un AOA concreto: normalmente de 4° a 6° en un ala de referencia del PHAK (la cifra exacta depende del perfil). Volar a L/D_MAX significa que la <strong>resistencia total es mínima</strong> para la sustentación producida; cualquier AOA por encima o por debajo aumenta la resistencia para la misma sustentación.</li>
+</ul>
+<hr />
+<h2 id="3-perdida-aerodinamica-frente-a-acelerada">3. Pérdida: aerodinámica frente a acelerada</h2>
+<p>El manual (y las notas base) ya definen la pérdida básica (exceder el AOA crítico) y la relación entre el factor de carga y la velocidad de pérdida. Precisiones de fuentes primarias:</p>
+<ul>
+<li><strong>El ala no deja de producir sustentación cuando entra en pérdida.</strong> Error muy extendido; el PHAK es explícito: «En una pérdida, el ala no deja de producir sustentación por completo. Lo que ocurre es que no puede generar sustentación suficiente para mantener el vuelo nivelado».</li>
+<li><strong>El AOA crítico es una propiedad geométrica fija del perfil/configuración</strong> y <strong>no</strong> cambia con el peso, el ángulo de alabeo, la temperatura, la altitud densidad ni la posición del centro de gravedad. Lo que cambia con esas variables es la <strong>velocidad</strong> (o el factor de carga) a la que se alcanza el AOA crítico; por eso «el ángulo de ataque, no la velocidad» es la respuesta de fondo a «qué causa una pérdida».</li>
+<li><strong>Pérdida aerodinámica (1G) frente a pérdida acelerada:</strong> la velocidad de pérdida publicada en el manual de vuelo solo es válida bajo tres condiciones a la vez: vuelo sin aceleración (factor de carga 1G), vuelo coordinado (sin derrape) y un peso concreto. Una <strong>pérdida acelerada</strong> es cualquier pérdida producida con un factor de carga superior a 1G (p. ej., al recuperar de una picada o en un viraje muy inclinado), en la que el AOA crítico se alcanza a una velocidad mucho mayor que la velocidad de pérdida a 1G, porque el ala debe generar una sustentación igual a n veces el peso (véase §9). Ejemplo del propio PHAK: una aeronave con una pérdida a 1G de 100 kt, que pica a 100 kt, si el piloto tira bruscamente de la palanca puede entrar en pérdida muy por encima de 100 kt, porque el AOA salta de forma abrupta mientras la gravedad y la inercia mantienen brevemente inalterada la trayectoria de vuelo.</li>
+<li><strong>Diseño con pérdida primero en el encastre:</strong> la mayoría de las alas rectas (sin flecha) se diseñan para entrar en pérdida <strong>primero por el encastre</strong> (mediante torsión geométrica o «washout», o con listones de pérdida en el 20–25 % inicial del borde de ataque junto al encastre), de modo que los alerones, cerca de las puntas, sigan siendo eficaces durante la pérdida, se conserve el control de alabeo y el piloto reciba un aviso de pérdida más temprano y suave (bataneo por el flujo desprendido de la zona del encastre que llega a la cola). Contrasta con las <strong>alas en flecha</strong>, que tienden a entrar en pérdida <strong>primero por las puntas</strong> (§10), un modo de fallo estructuralmente distinto y más peligroso.</li>
+<li><strong>Hielo y pérdida:</strong> basta <strong>0,8 mm de hielo</strong> en la superficie superior del ala para reducir la sustentación en un <strong>25 %</strong> y aumentar la resistencia, al alterar la capa límite y provocar el desprendimiento con un AOA menor que el AOA crítico del ala limpia.</li>
+<li><strong>Indicadores de ángulo de ataque:</strong> dispositivos promovidos por la FAA que muestran al piloto directamente el AOA actual y su cercanía al AOA crítico (a diferencia de la velocidad, el AOA es de otro modo «invisible» para el piloto); más del 25 % de los accidentes mortales de aviación general ocurren durante la maniobra, y cerca de la mitad de ellos están relacionados con la pérdida o la barrena, lo que justifica los indicadores de AOA.</li>
+</ul>
+<hr />
+<h2 id="4-geometria-del-ala-y-forma-del-perfil-mas-alla-de-la-lista-del-manual">4. Geometría del ala y forma del perfil (más allá de la lista del manual)</h2>
+<p>El manual define la cuerda, la envergadura, la cuerda media, el estrechamiento, el alargamiento, la flecha, el diedro y el AOA. Añadidos de fuentes primarias:</p>
+<ul>
+<li><strong>Torsión del ala (alabeo geométrico o <em>washout</em>):</strong> «una característica de diseño incorporada a algunas alas para mejorar la eficacia del control de los alerones con ángulos de ataque altos durante la aproximación a una pérdida». En la práctica, el ala se construye con un <strong>AOA menor en la punta que en el encastre</strong>, de modo que el encastre alcanza antes el AOA crítico (véase §3), lo que retrasa la pérdida de punta y conserva la autoridad de los alerones. El manual de ENAIRE no lo nombra en absoluto.</li>
+<li><strong>Compromiso del alargamiento:</strong> un ala de <strong>mayor alargamiento</strong> (larga y estrecha: planeadores, 25–30 según el manual) tiene <strong>menor resistencia inducida</strong> para un C_L dado, pero la mayor envergadura cuesta peso estructural; un ala de <strong>menor alargamiento</strong> (corta y ancha: reactores rápidos, 3–4 según el manual) tiene <strong>mayor resistencia inducida</strong>, pero es más ligera y rígida, lo que permite mayores velocidades que no deben rebasarse. Los alargamientos muy bajos dan <strong>cargas alares altas y velocidades de pérdida altas</strong>.</li>
+<li><strong>Formas en planta del ala y su comportamiento en pérdida:</strong> el <strong>ala elíptica</strong> es aerodinámicamente ideal (mínima resistencia inducida para un alargamiento dado, distribución uniforme de la sustentación a lo largo de la envergadura), pero da <strong>poco aviso previo de pérdida</strong> y es difícil de construir; el <strong>ala rectangular</strong> entra en pérdida primero por el encastre (buen aviso de pérdida, buena eficacia de los alerones, aunque algo más de resistencia inducida) y se prefiere para entrenadores baratos y lentos; las <strong>alas trapezoidales</strong> son un compromiso entre ambas.</li>
+<li><strong>La flecha (ya en el manual) también contribuye a la estabilidad lateral (diedro):</strong> como regla práctica aproximada, <strong>10° de flecha ≈ 1° de diedro efectivo</strong>, y una <strong>configuración de ala alta añade ≈ 5° de diedro efectivo</strong> respecto a un ala baja; no está en el manual, que solo presenta la flecha como una característica del vuelo a alta velocidad.</li>
+<li><strong>Efecto quilla:</strong> una aeronave de ala alta es lateralmente estable en parte porque el fuselaje cuelga bajo el ala como la quilla de un barco: cuando la aeronave derrapa hacia un lado, la combinación del peso de la aeronave y de la presión del flujo de aire sobre la parte superior del «área de quilla» (el área lateral por encima del CG) la hace volver a alas niveladas.</li>
+</ul>
+<hr />
+<h2 id="5-hipersustentadores-spoilers-y-efecto-suelo-mas-alla-del-manual">5. Hipersustentadores, spoilers y efecto suelo (más allá del manual)</h2>
+<h3 id="51-tipos-de-flaps-de-borde-de-salida">5.1 Tipos de flaps de borde de salida</h3>
+<p>El manual solo dice «los flaps están en el borde de salida, aumentan C_Lmax». El PHAK enumera <strong>cuatro tipos habituales</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de flap</th>
+<th>Mecanismo</th>
+<th>Efecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Flap simple (<em>plain</em>)</strong></td>
+<td>Se articula hacia abajo, aumentando la curvatura</td>
+<td>Aumento notable de C_L; también aumenta la resistencia y desplaza el centro de presiones hacia atrás (momento de cabeceo a picar)</td>
+</tr>
+<tr>
+<td><strong>Flap de intradós (<em>split</em>)</strong></td>
+<td>Deflecta solo la superficie inferior</td>
+<td>Algo más de sustentación que el simple, pero más resistencia (estela turbulenta)</td>
+</tr>
+<tr>
+<td><strong>Flap ranurado (<em>slotted</em>)</strong></td>
+<td>Un conducto o ranura canaliza aire de alta energía desde la superficie inferior sobre la superficie superior del flap</td>
+<td>El tipo más común; C_Lmax notablemente mayor que el simple o el de intradós; las aeronaves grandes suelen usar flaps de doble o triple ranura</td>
+</tr>
+<tr>
+<td><strong>Flap Fowler</strong></td>
+<td>Se desliza hacia atrás sobre carriles (aumentando la <strong>superficie</strong> alar) y después se deflecta hacia abajo (aumentando la <strong>curvatura</strong>)</td>
+<td>Poco aumento de resistencia al principio (sobre todo aumento de superficie), gran aumento de sustentación; la mayor parte de la resistencia llega al final del recorrido</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-hipersustentadores-de-borde-de-ataque">5.2 Hipersustentadores de borde de ataque</h3>
+<p>Más allá de la simple mención de los «slats» en el manual, el PHAK enumera <strong>cuatro tipos</strong> de dispositivos de borde de ataque:</p>
+<ul>
+<li><strong>Ranuras fijas (<em>fixed slots</em>):</strong> una abertura fija que canaliza el aire hacia la superficie superior, retrasando el desprendimiento con AOA mayores; no cambia la curvatura.</li>
+<li><strong>Slats móviles:</strong> segmentos del borde de ataque sobre carriles; con AOA bajos los mantiene a ras la zona de alta presión del borde de ataque y, con AOA mayores (o por orden del piloto), avanzan y abren una ranura que reenergiza la capa límite de la superficie superior.</li>
+<li><strong>Flaps de borde de ataque:</strong> aumentan tanto C_Lmax como la curvatura; a menudo se combinan con flaps de borde de salida y pueden reducir el momento de cabeceo a picar que estos causarían por sí solos.</li>
+<li><strong>Cuffs de borde de ataque:</strong> un borde de ataque caído fijo (sin movimiento); aumenta C_Lmax y baja la velocidad de pérdida, pero cuesta algo de velocidad de crucero.</li>
+</ul>
+<h3 id="53-spoilers-aerofrenos">5.3 Spoilers (aerofrenos)</h3>
+<p>Los spoilers «estropean» (perturban) el flujo suave de aire para reducir la sustentación y aumentar la resistencia. Usos: (1) despliegue simétrico en ambas alas para controlar el régimen de descenso sin ganar velocidad, o como aerofreno; (2) despliegue asimétrico (en un ala) para el <strong>control de alabeo</strong>, con la ventaja de <strong>eliminar la guiñada adversa</strong> (elevar el spoiler del ala que debe bajar destruye sustentación y añade resistencia en ese lado, inclinando la aeronave hacia él sin la tendencia a guiñar en sentido contrario que crean los alerones); (3) en la carrera de aterrizaje, los spoilers destruyen la sustentación y transfieren peso a las ruedas, con lo que mejora la eficacia de los frenos.</p>
+<h3 id="54-efecto-suelo-el-mecanismo-fisico-que-el-manual-omite">5.4 Efecto suelo: el mecanismo físico que el manual omite</h3>
+<p>El manual explica el efecto suelo solo como «el vórtice de punta de ala se destruye contra la superficie» (§5.1 del manual). Las fuentes primarias dan una imagen física más completa y en parte distinta; véase la discrepancia registrada en «Manual frente a fuentes primarias» más abajo. En resumen:</p>
+<ul>
+<li>El efecto suelo se debe sobre todo a una <strong>reducción de la resistencia inducida</strong>: la proximidad al suelo restringe la componente vertical del flujo de aire alrededor del ala, lo que reduce la <strong>corriente ascendente (<em>upwash</em>), la corriente descendente (<em>downwash</em>) y el tamaño y la intensidad de los torbellinos de punta de ala</strong>. Como los vórtices se aplanan y se hacen elípticos cerca del suelo (en vez de redondos), el <strong>alargamiento efectivo</strong> del ala aumenta, y eso es lo que reduce la resistencia inducida.</li>
+<li>En cifras, la reducción de la resistencia inducida (a C_L constante) depende de la <strong>altura sobre el suelo expresada como fracción de la envergadura</strong>: a una altura igual a la <strong>envergadura completa</strong>, la resistencia inducida se reduce solo un <strong>1,4 %</strong>; a <strong>¼ de la envergadura</strong>, la reducción es del <strong>23,5 %</strong>; a <strong>1/10 de la envergadura</strong>, del <strong>47,6 %</strong>. SKYbrary da una cifra equivalente (de origen independiente): la «bonificación de sustentación» cae a la <strong>mitad</strong> de su máximo a una altura del <strong>10 % de la envergadura</strong>, a una <strong>cuarta parte</strong> al <strong>25 % de la envergadura</strong> y al <strong>10 %</strong> de su máximo hacia el <strong>90 % de la envergadura</strong>. Ambas fuentes coinciden en que el efecto solo es fuerte muy cerca del suelo y decae con rapidez al aumentar la altura; por eso importa sobre todo en la rotación/despegue y justo antes del contacto con la pista, en coherencia con la cronología del propio manual (de la rotación a la toma), aunque el <em>mecanismo</em> del manual sea distinto.</li>
+<li><strong>Consecuencias directas para el piloto</strong>: salir del efecto suelo tras el despegue exige <strong>aumentar el AOA</strong> para mantener el mismo C_L, y produce un <strong>aumento de la resistencia inducida y del empuje necesario</strong>; una aeronave que se hizo al aire «demasiado lenta» aún dentro del efecto suelo puede volver a posarse en la pista al salir de él en la subida. Entrar en el efecto suelo durante el aterrizaje produce lo contrario: menor empuje necesario y un posible <strong>«flote»</strong> si la aeronave lleva exceso de velocidad a la recogida.</li>
+<li>El AOA de pérdida es <strong>menor</strong> en efecto suelo que en aire libre (para una misma sustentación); esto ha causado incidentes reales (p. ej., un accidente de un Gulfstream G650 durante una prueba de despegue con un motor inoperativo en 2011) en los que el margen real de pérdida cerca del suelo era menor de lo esperado.</li>
+</ul>
+<hr />
+<h2 id="6-la-resistencia-en-profundidad-parasita-inducida-de-onda-polar-y-ld">6. La resistencia en profundidad: parásita, inducida, de onda; polar y L/D</h2>
+<p>Las notas base ya recogen la ecuación de la resistencia, los tres subtipos de resistencia parásita que nombra la NASA (de forma y de fricción; ni el manual ni las notas existentes nombran la «interferencia») y la fórmula del coeficiente de resistencia inducida. Añadidos:</p>
+<ul>
+<li><strong>Resistencia de interferencia</strong>, el tercer subtipo de resistencia parásita: la causa la intersección de flujos de aire (p. ej., en la unión ala-fuselaje), que crea torbellinos y turbulencia por encima de lo que generaría cada superficie por separado; <strong>es peor cuando dos superficies se encuentran en ángulo recto</strong>; se reduce con <strong>carenados</strong>. Ejemplo: un caza a reacción con dos depósitos externos idénticos en las alas tiene <strong>más</strong> resistencia total que el doble de la de un depósito solo, por la interferencia entre los campos de flujo de ambos depósitos.</li>
+<li><strong>Corriente descendente y resistencia inducida, el mecanismo completo:</strong> un perfil con AOA positivo tiene menor presión arriba que abajo; cerca de las puntas, esta diferencia de presión provoca un flujo hacia la punta desde la superficie inferior de alta presión, alrededor de la punta, hasta la superficie superior de baja presión, y crea el torbellino de punta de ala y una <strong>corriente descendente</strong> detrás del borde de salida. Como la sustentación es siempre perpendicular al viento relativo <em>local</em>, y la corriente descendente inclina el viento relativo local hacia abajo, el propio vector de sustentación se inclina un poco hacia atrás; esta componente de la sustentación inclinada hacia atrás <strong>es</strong> la resistencia inducida. Más corriente descendente → más resistencia inducida; la resistencia inducida aumenta con el AOA y <strong>varía inversamente con el cuadrado de la velocidad</strong> (por lo que domina a baja velocidad).</li>
+<li><strong>Resistencia de onda:</strong> el aumento de resistencia en la región transónica «debido a la formación de ondas de choque y al desprendimiento del flujo de aire», distinto de la pequeña pérdida de calor a través de la propia onda de choque y mucho mayor que ella; cuando la velocidad excede el Mach crítico en un 10 % aproximadamente, la resistencia de onda «aumenta bruscamente». Véase §10.</li>
+<li><strong>Polar de resistencia y L/D máximo:</strong> al representar C_D frente a C_L (o frente al AOA) se traza la polar de resistencia; el punto de L/D máximo es aquel en que una recta desde el origen es tangente a la polar. <strong>Volar a L/D_MAX minimiza la resistencia total para la sustentación producida</strong> y es, por tanto, la velocidad de <strong>mejor planeo</strong> (máxima distancia de planeo sin motor para una pérdida de altitud dada) y de crucero de máximo alcance en un reactor (ajustada en la práctica según el «índice de coste», el compromiso entre combustible y tiempo).</li>
+</ul>
+<hr />
+<h2 id="7-empujepotencia-necesarios-y-disponibles-regimen-de-mando-invertido">7. Empuje/potencia necesarios y disponibles; régimen de mando invertido</h2>
+<p>No figura en absoluto en el manual; es contenido estándar del PHAK, directamente relevante para «por qué se aplica potencia de motor y al aire (<em>go-around</em>) en la aproximación» y para preguntas de factores humanos sobre la carga de trabajo cerca de la pérdida.</p>
+<ul>
+<li><strong>Curva de potencia necesaria:</strong> la potencia necesaria para mantener el vuelo nivelado a una velocidad dada, manteniendo la altitud constante. A velocidades muy bajas (cerca de la pérdida), el ajuste de potencia necesario es <strong>alto</strong> (un AOA grande produce mucha resistencia inducida). A velocidades de crucero es mínimo en torno a L/D_MAX; a alta velocidad vuelve a subir (domina la resistencia parásita, que crece con V³ en términos de potencia).</li>
+<li><strong>Régimen de mando normal:</strong> la mayor parte del vuelo (ascenso, crucero, maniobra): una <strong>velocidad mayor exige un ajuste de potencia mayor</strong> para mantener la altitud, y viceversa. Es el régimen intuitivo.</li>
+<li><strong>Régimen de mando invertido:</strong> el régimen de baja velocidad, entre la velocidad de potencia necesaria mínima (velocidad de máxima autonomía, el fondo de la curva de potencia necesaria) y la velocidad de pérdida o de control mínimo. Aquí <strong>una velocidad menor exige un ajuste de potencia mayor</strong> para mantener la altitud. Por eso, en final y a baja velocidad, hay que añadir potencia (y no solo levantar el morro) para frenar el régimen de descenso, y por eso es peligroso «ir lento y bajo» en la aproximación: menos velocidad exige más potencia y puede que ya no quede ninguna («detrás de la curva de potencia»). En lenguaje operativo este concepto suele llamarse volar «en la parte trasera de la curva de potencia».</li>
+<li><strong>Velocidad de máxima autonomía:</strong> la velocidad en el fondo de la curva de potencia necesaria, donde la menor potencia sostiene el vuelo nivelado; se usa para el máximo tiempo de espera o de merodeo, a diferencia de la velocidad de máximo alcance (cerca de L/D_MAX, para la máxima distancia).</li>
+</ul>
+<hr />
+<h2 id="8-estabilidad-y-control">8. Estabilidad y control</h2>
+<h3 id="81-estabilidad-estatica-y-dinamica">8.1 Estabilidad estática y dinámica</h3>
+<p>La <strong>estabilidad</strong> es «la cualidad inherente de una aeronave para corregir las condiciones que pueden perturbar su equilibrio y volver a la trayectoria de vuelo original, o continuar en ella»; es una característica de diseño, distinta de la <strong>controlabilidad</strong> (la respuesta de la aeronave a las órdenes de control del piloto, con independencia de su estabilidad) y de la <strong>maniobrabilidad</strong> (determinada por el peso, la inercia, el tamaño y la ubicación de las superficies de control, la resistencia estructural y el grupo motopropulsor).</p>
+<ul>
+<li><strong>Estabilidad estática:</strong> la <em>tendencia inicial</em> tras una perturbación. <strong>Positiva</strong> = tiende a volver hacia el equilibrio; <strong>neutra</strong> = tiende a permanecer en la nueva condición desplazada; <strong>negativa</strong> = tiende a seguir alejándose del equilibrio.</li>
+<li><strong>Estabilidad dinámica:</strong> el <em>comportamiento a lo largo del tiempo</em> tras la respuesta inicial. <strong>Positiva</strong> = la amplitud de la oscilación disminuye con el tiempo (amortiguada) y la aeronave vuelve al equilibrio; <strong>neutra</strong> = la amplitud ni crece ni decae (como un amortiguador gastado); <strong>negativa</strong> = la amplitud crece con el tiempo (divergente). Una trampa de examen clave: una aeronave puede tener <strong>estabilidad estática positiva pero estabilidad dinámica negativa</strong> (al principio se mueve de vuelta hacia el equilibrio, pero la oscilación posterior crece); la estabilidad estática y la dinámica son ejes independientes, no la misma propiedad medida dos veces.</li>
+</ul>
+<h3 id="82-estabilidad-longitudinal-cabeceo-alrededor-del-eje-lateral">8.2 Estabilidad longitudinal (cabeceo, alrededor del eje lateral)</h3>
+<p>Depende de tres factores: la posición del ala respecto al CG, la posición de la cola horizontal respecto al CG y el tamaño o superficie de las superficies de cola. La mayoría de las aeronaves se diseñan «pesadas de morro» (el centro de sustentación/presiones del ala queda por detrás del CG), lo que requiere una <strong>ligera carga hacia abajo en el estabilizador horizontal</strong> para equilibrarlas; esta carga disminuye a baja velocidad y aumenta a alta velocidad (más corriente descendente a mayor AOA/menor velocidad actúa sobre la cola). Los diseñadores sitúan el CG cerca del <strong>20 % de la cuerda aerodinámica media (MAC)</strong>; un valor que el manual no da en absoluto.</p>
+<h3 id="83-estabilidad-lateral-alabeo-alrededor-del-eje-longitudinal-diedro-flecha-efecto-quilla">8.3 Estabilidad lateral (alabeo, alrededor del eje longitudinal): diedro, flecha, efecto quilla</h3>
+<p>Ya cubierta en el §4 (el diedro restablece el alabeo mediante la sustentación diferencial que provoca el derrape, la regla de la flecha de 10° ≈ 1°, el efecto quilla). La ubicación del ala (alta/baja) y la flecha contribuyen ambas al «diedro efectivo» más allá del ángulo de diedro geométrico.</p>
+<h3 id="84-estabilidad-direccional-guinada-alrededor-del-eje-vertical">8.4 Estabilidad direccional (guiñada, alrededor del eje vertical)</h3>
+<p>Se consigue sobre todo con la <strong>deriva vertical más el área lateral del fuselaje por detrás del CG</strong>, que debe exceder el área lateral por delante del CG (como una veleta o las plumas de una flecha). La flecha da una pequeña contribución adicional a la estabilidad direccional, incluida sobre todo para retrasar los efectos de la compresibilidad y no por razones de estabilidad.</p>
+<h3 id="85-modos-acopladosdinamicos-balanceo-holandes-inestabilidad-de-espiral-fugoide">8.5 Modos acoplados/dinámicos: balanceo holandés, inestabilidad de espiral, fugoide</h3>
+<ul>
+<li><strong>Balanceo holandés (<em>Dutch roll</em>):</strong> una <strong>oscilación lateral-direccional acoplada</strong>: el morro traza un ocho en el horizonte al oscilar el alabeo y la guiñada desfasados, pero con amplitud similar. Es «normalmente estable de forma dinámica pero inseguro... por su naturaleza oscilatoria»; en la mayoría de las aeronaves se amortigua en pocos ciclos salvo que el aire siga racheado, pero las aeronaves de ala en flecha de alta velocidad con tendencia persistente al balanceo holandés llevan <strong>amortiguadores de guiñada</strong> (estabilizados con giróscopos). Los fabricantes aceptan a propósito cierta tendencia al balanceo holandés porque es preferible a la <strong>inestabilidad de espiral</strong>.</li>
+<li><strong>Inestabilidad de espiral:</strong> existe cuando la estabilidad direccional es <strong>muy fuerte en comparación con</strong> la estabilidad de diedro (lateral). Una ráfaga que inclina la aeronave e induce derrape hace que la fuerte estabilidad direccional oriente el morro hacia el viento, pero el diedro débil tarda en nivelar las alas; el ala exterior (en el viraje resultante) se mueve más rápido y genera más sustentación, lo que produce una <strong>tendencia a sobreinclinarse</strong> que, si no se corrige, se agrava hasta una espiral descendente. La divergencia suele ser lo bastante gradual como para que el piloto la controle, pero <strong>la recuperación incorrecta de una inestabilidad de espiral (tirar de la palanca en lugar de nivelar primero las alas) ha contribuido probablemente a más muertes de aviación general que cualquier otro factor aislado</strong>; tirar de la palanca solo «cierra el viraje» y aumenta aún más el factor de carga y la velocidad.</li>
+<li><strong>Fugoide:</strong> una oscilación de cabeceo de periodo largo (la velocidad y la altitud se intercambian, con AOA aproximadamente constante). Es terminología aerodinámica estándar y entra dentro del alcance del examen aunque el PHAK no la nombra explícitamente en la sección correspondiente.</li>
+</ul>
+<h3 id="86-cola-en-t-estabilizador-de-una-pieza-stabilator-canard-cola-en-v-configuraciones-que-el-manual-no-menciona">8.6 Cola en T, estabilizador de una pieza (<em>stabilator</em>), canard, cola en V: configuraciones que el manual no menciona</h3>
+<ul>
+<li><strong>Cola en T:</strong> el timón de profundidad queda por encima de la estela del ala y (en aeronaves de hélice) por encima de la corriente de la hélice, con lo que las fuerzas de control son más constantes, pero exige una deflexión del timón de profundidad <strong>mayor</strong> a baja velocidad que una cola convencional (sin corriente de la hélice que ayude a la autoridad a picar). <strong>Riesgo de pérdida profunda:</strong> con un AOA muy alto y un CG retrasado, la estela del ala puede envolver una cola en T, reduciendo mucho o eliminando la eficacia del timón de profundidad y dificultando la recuperación de la pérdida; un riesgo mayor en aeronaves de <strong>transporte</strong> con cola en T que en aeronaves ligeras de aviación general.</li>
+<li><strong>Estabilizador de una pieza (<em>stabilator</em>):</strong> una cola horizontal de una sola pieza que gira sobre una charnela central; muy sensible a la entrada de control, por lo que se añade un <strong>tab antiservo</strong> (que deflecta en el mismo sentido que el estabilizador) para aumentar la fuerza de control del piloto y evitar el exceso de control.</li>
+<li><strong>Canard:</strong> una superficie horizontal delantera que <strong>produce sustentación y mantiene el morro arriba</strong> (a diferencia de una cola trasera convencional, que empuja la cola hacia <em>abajo</em> para equilibrar la aeronave); en teoría es más eficiente porque la sustentación del canard contribuye a sostener el peso de la aeronave en lugar de restarle.</li>
+<li><strong>Cola en V:</strong> dos superficies inclinadas («ruddervators») que combinan la función de timón de profundidad y de dirección; más susceptible al balanceo holandés y con poca reducción total de resistencia frente a una cola convencional.</li>
+</ul>
+<h3 id="87-protecciones-de-la-envolvente-de-vuelo-en-fly-by-wire">8.7 Protecciones de la envolvente de vuelo en fly-by-wire</h3>
+<p>La <strong>protección alpha floor</strong> (una protección que ordena automáticamente la potencia TOGA, propia de la maniobra de motor y al aire, si el ángulo de ataque se acerca a un valor crítico) puede activarse durante una maniobra de motor y al aire con CG retrasado y <strong>limitar la capacidad del piloto para aumentar más el cabeceo</strong>. La familia más amplia de protecciones de la ley normal fly-by-wire de Airbus (protección de alto AOA/alpha floor, del factor de carga, de la actitud de cabeceo, del ángulo de alabeo y de alta velocidad, VMO/MMO) es conocimiento estándar del sector.</p>
+<hr />
+<h2 id="9-virajes-factor-de-carga-y-diagrama-v-n">9. Virajes, factor de carga y diagrama V-n</h2>
+<h3 id="91-factores-de-carga-limite-por-categoria-no-figuran-en-el-manual">9.1 Factores de carga límite por categoría (no figuran en el manual)</h3>
+<p>El PHAK da los <strong>factores de carga límite</strong> por categoría de aeronave según CFR/EASA:</p>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Factor de carga límite positivo</th>
+<th>Factor de carga límite negativo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal</td>
+<td>3,8</td>
+<td>−1,52</td>
+</tr>
+<tr>
+<td>Utilitaria (acrobacia suave, incluidas las barrenas)</td>
+<td>4,4</td>
+<td>−1,76</td>
+</tr>
+<tr>
+<td>Acrobática</td>
+<td>6,0</td>
+<td>−3,00</td>
+</tr>
+</tbody>
+</table>
+<p>A estas cargas límite se añade un <strong>factor de seguridad de 1,5</strong> para obtener el <strong>factor de carga último</strong>, en el que se espera el fallo estructural (se acepta cierta flexión o deformación entre el límite y el último, pero no por debajo del límite en uso normal). Para los aviones de categoría transporte CS-25, la CS 25.337(b) exige que el <strong>factor de carga límite de maniobra positivo</strong> sea <strong>no menor de 2,5 y no necesita exceder de 3,8</strong> (con el valor exacto en función de la masa máxima al despegue mediante la fórmula n = 2,1 + 24 000/(W+10 000), con W en libras), y la CS 25.337(c) exige que el <strong>factor de carga límite negativo</strong> sea <strong>no menor de −1,0 hasta VC</strong>, variando linealmente hasta cero en VD. Esto confirma y fundamenta numéricamente la cifra «+2,5/−1,0» que las notas base llevaban como; ahora es.</p>
+<h3 id="92-factor-de-carga-en-virajes-y-efecto-sobre-la-velocidad-de-perdida">9.2 Factor de carga en virajes y efecto sobre la velocidad de pérdida</h3>
+<ul>
+<li><strong>n = 1/cos(ángulo de alabeo)</strong> en un viraje coordinado a altitud constante (ya en las notas base y en el manual). Valores de referencia adicionales de la propia figura del PHAK: <strong>n = 2 g con 60° de alabeo; n = 5,76 g con 80° de alabeo</strong>. El factor de carga «aumenta a un ritmo terrible» pasados los 45°–50° de alabeo, y un viraje coordinado a altitud constante con 90° de alabeo es <strong>matemáticamente imposible</strong> (cos 90° = 0).</li>
+<li><strong>La velocidad de pérdida aumenta con la raíz cuadrada del factor de carga:</strong> V_s(viraje) = V_s · √n (ya conocida por las notas base); el PHAK plantea la misma relación desde el lado estructural: una aeronave con una pérdida normal a 50 kt podría entrar en pérdida a 100 kt con un factor de carga de 4 g, o a 150 kt con un factor de carga de 9 g.</li>
+<li><strong>Referencias prácticas de ángulo de alabeo</strong>: el límite elástico de una aeronave ligera media se alcanza normalmente hacia los <strong>70°–75°</strong> de alabeo; la velocidad de pérdida aumenta en torno a un <strong>41 %</strong> con 60° de alabeo (ya conocido) y en torno a un <strong>50 %</strong> con unos <strong>63°</strong> de alabeo; un viraje de más de <strong>72°</strong> produce un factor de carga de unos 3 g.</li>
+</ul>
+<h3 id="93-velocidad-de-maniobra-de-diseno-va-y-el-diagrama-v-n">9.3 Velocidad de maniobra de diseño VA y el diagrama V-n</h3>
+<ul>
+<li><strong>VA (velocidad de maniobra de diseño):</strong> «la velocidad por debajo de la cual se puede mover un único mando de vuelo, una sola vez, hasta su deflexión completa, para un solo eje de rotación del avión (cabeceo, alabeo o guiñada), en aire en calma, sin riesgo de daños para el avión». <strong>No</strong> protege frente a varias deflexiones completas de mando en un mismo eje, ni frente a deflexiones completas en más de un eje a la vez: una trampa de examen y operativa importante, porque los pilotos creen a menudo (erróneamente) que VA es un margen de seguridad absoluto.</li>
+<li>Formalmente, según la CS 25.335(c): <strong>VA no debe ser menor que V_S1·√n</strong>, donde n es el factor de carga límite de maniobra positivo en VC y V_S1 es la velocidad de pérdida con flaps arriba. Para aeronaves de aviación general más antiguas sin VA publicada, el PHAK da la regla práctica <strong>VA ≈ 1,7 × la velocidad de pérdida normal (1g)</strong>.</li>
+<li><strong>El diagrama V-n (envolvente de maniobra)</strong> representa el factor de carga n (eje vertical) frente a la velocidad calibrada/equivalente V (eje horizontal); su contorno lo define la CS 25.333(b) con las velocidades de diseño de la CS 25.335: <strong>VS</strong> (pérdida), <strong>VA</strong> (maniobra), <strong>VC</strong> (velocidad de crucero de diseño) y <strong>VD</strong> (velocidad de picado de diseño). La resistencia de la estructura de la aeronave debe ser adecuada en cada combinación de velocidad y factor de carga sobre esta envolvente o dentro de ella (CS 25.333(a)). No se menciona en absoluto en el manual de ENAIRE.</li>
+<li><strong>Cargas de ráfaga:</strong> la CS-25 exige que la aeronave resista una ráfaga vertical discreta con una velocidad de ráfaga de referencia de <strong>15,2 m/s (50 ft/s) EAS hasta 20 000 ft</strong>, que se reduce linealmente hasta <strong>7,6 m/s (25 ft/s) EAS a 50 000 ft</strong> y es constante por encima. <strong>VB</strong>, la velocidad de diseño para la máxima intensidad de ráfaga, se fija de modo que la carga por ráfaga no exceda el factor de carga límite estructural a esa velocidad.</li>
+</ul>
+<hr />
+<h2 id="10-vuelo-a-alta-velocidad">10. Vuelo a alta velocidad</h2>
+<h3 id="101-regimenes-de-velocidad-y-numero-de-mach">10.1 Regímenes de velocidad y número de Mach</h3>
+<ul>
+<li><strong>Regímenes de velocidad (bandas numéricas del propio PHAK, más precisas que la mayoría de los resúmenes):</strong> subsónico por debajo de <strong>Mach 0,75</strong>; transónico <strong>0,75–1,20</strong>; supersónico <strong>1,20–5,00</strong>; hipersónico por encima de <strong>Mach 5,00</strong>. Los reactores civiles suelen cruzar a <strong>Mach 0,70–0,90</strong>.</li>
+<li><strong>Fórmula de la velocidad del sonido (de uso operativo):</strong> en nudos, <strong>a(kt) ≈ 39·√SAT(K)</strong>, donde SAT es la temperatura estática (ambiente) del aire en kelvin; de forma equivalente, <strong>a(kt) ≈ 39·√(273 + SAT(°C))</strong>. El número de Mach <strong>M = TAS/a</strong>, de modo que <strong>TAS(kt) ≈ 39·M·√(273 + SAT(°C))</strong>. Es la fórmula que hay detrás de la columna de velocidad del sonido de la tabla ISA del manual y permite al candidato calcular la TAS a partir del Mach y la temperatura (o a la inversa) en lugar de limitarse a leer una tabla.</li>
+<li><strong>Número de Mach frente a altitud con IAS/CAS constante:</strong> un ejemplo resuelto del PHAK: un reactor que entra en pérdida a 152 KCAS a nivel del mar (Mach 0,23, ya que allí a = 661 kt) entra en pérdida a <strong>las mismas 152 KCAS</strong> en FL380, pero eso corresponde ahora a <strong>287 KTAS y Mach 0,50</strong>, porque la velocidad del sonido ha bajado a 574 kt a los −55 °C de esa altitud. Esto muestra en cifras por qué los reactores de gran altitud gestionan la velocidad en Mach y no en IAS: un ascenso a KCAS constante se acerca a la pérdida (en términos de Mach) al aumentar la altitud, mientras que un ascenso a Mach constante tiene KCAS/KIAS decrecientes, que se acercan al <strong>coffin corner</strong> si se sigue subiendo demasiado (§10.3).</li>
+</ul>
+<h3 id="102-mach-critico-ondas-de-choque-resistencia-de-onda-efecto-tuck">10.2 Mach crítico, ondas de choque, resistencia de onda, efecto tuck</h3>
+<ul>
+<li><strong>Número de Mach crítico (M_crit):</strong> «el menor número de Mach al que el flujo de aire sobre cualquier parte de la aeronave alcanza la velocidad del sonido»; de forma equivalente, según el PHAK, la propia velocidad (subsónica) de la aeronave a la que el flujo local <strong>en algún punto</strong> de la estructura (normalmente la zona de máxima curvatura del ala) <strong>alcanza por primera vez, sin superarlo,</strong> Mach 1,0. Por encima de M_crit se forman ondas de choque, que causan desprendimiento del flujo, bataneo y dificultades de control.</li>
+<li><strong>Número de Mach de divergencia de fuerzas:</strong> el número de Mach al que el coeficiente de resistencia sube bruscamente; suele estar <strong>un 5–10 % por encima</strong> del Mach crítico. La flecha (§4) retrasa tanto M_crit como el Mach de divergencia de fuerzas, y «suaviza» la magnitud de los cambios de resistencia, sustentación y momento de cabeceo en la divergencia de la resistencia.</li>
+<li><strong>Ondas de choque:</strong> una <strong>onda de choque normal</strong> (perpendicular al flujo) frena la corriente de aire de supersónica a subsónica, aumentando bruscamente la presión estática y la densidad y reduciendo la energía total (dinámica + estática); esta pérdida de energía (convertida en parte en calor) contribuye poco a la <strong>resistencia de onda</strong>; el contribuyente mucho mayor es la <strong>resistencia del desprendimiento del flujo</strong> que provoca la onda de choque. La resistencia de onda «aumenta bruscamente» cuando la velocidad excede el M_crit en un 10 % aproximadamente.</li>
+<li><strong>Efecto tuck (picado por Mach):</strong> a medida que la onda de choque de la superficie superior del ala se desplaza hacia atrás al aumentar la velocidad, el <strong>centro de presiones se desplaza hacia atrás</strong> y produce un <strong>momento de cabeceo a picar</strong>; si se permite que la velocidad siga aumentando, la autoridad del timón de profundidad puede resultar insuficiente para contrarrestarlo, con riesgo de una picada irrecuperable. Es el mecanismo subyacente a los límites VMO/MMO y al desarrollo histórico de los sistemas de compensación de Mach.</li>
+<li><strong>Pérdida de punta en ala en flecha:</strong> las alas en flecha tienden a entrar en pérdida por las <strong>puntas</strong>, no por el encastre (lo contrario que un ala recta, §3); como en un ala en flecha las puntas quedan por detrás del centro de sustentación del ala, una pérdida de punta desplaza el centro de sustentación <strong>hacia delante</strong>, lo que produce un momento de cabeceo a encabritar que puede profundizar la pérdida; la tendencia es peor cuando se combinan flecha y estrechamiento, y se agrava en aeronaves con <strong>cola en T</strong>, que reciben poco bataneo de aviso previo a la pérdida porque la cola queda sobre la estela del ala.</li>
+<li><strong>Bataneo de Mach: versiones de alta y de baja velocidad:</strong> el bataneo de Mach clásico («de alta velocidad») es el bataneo inducido por ondas de choque descrito arriba; el PHAK describe también un <strong>bataneo de Mach de baja velocidad</strong>: con un AOA muy alto y baja velocidad, el flujo <em>local</em> que se acelera sobre la superficie superior del ala puede alcanzar por sí mismo la velocidad sónica y producir los mismos efectos de onda de choque, desprendimiento y bataneo que en el caso de alta velocidad, aunque la velocidad de la propia aeronave sea baja. Factores que aumentan la probabilidad de bataneo de Mach en cualquiera de los dos límites: <strong>gran altitud</strong> (el aire poco denso necesita un AOA mayor para la misma sustentación), <strong>peso elevado</strong> (hace falta más sustentación → mayor AOA) y <strong>carga G</strong> (virajes, turbulencia, uso brusco de los mandos; mismo efecto que un peso añadido).</li>
+</ul>
+<h3 id="103-coffin-corner">10.3 Coffin corner</h3>
+<p>Definición del propio PHAK, coherente con la del manual y con la de SKYbrary, pero formulada de otra manera: el coffin corner se alcanza cuando, al ascender a MMO constante, la <strong>velocidad de pérdida (en Mach) sube hasta alcanzar el límite MMO</strong>; «el piloto no podría ni reducir la velocidad (sin entrar en pérdida) ni aumentarla (sin exceder la velocidad máxima de operación)». SKYbrary lo plantea como el punto en que se cruzan el <strong>límite de baja velocidad (pérdida) y el de alta velocidad (bataneo por Mach crítico)</strong> de la envolvente de vuelo para un peso y un factor de carga dados, y añade un detalle operativo que el manual omite por completo: <strong>en un viraje cerca del coffin corner, el ala interior se frena mientras el ala exterior se acelera</strong>, de modo que el mero viraje (y no solo encontrar turbulencia) puede exceder a la vez los límites de baja y de alta velocidad. El remedio en ambas fuentes es el mismo que el del manual: reducir la altitud (o reducir el peso o la carga G) para ampliar el margen; nunca perseguir el problema cambiando solo la velocidad.</p>
+<h3 id="104-regla-del-area-no-figura-en-absoluto-en-el-manual">10.4 Regla del área — no figura en absoluto en el manual</h3>
+<p>Desarrollada por Richard T. Whitcomb (NASA Langley) a comienzos de la década de 1950: <strong>la resistencia transónica/supersónica mínima se obtiene cuando el área total de la sección transversal de la aeronave, representada frente a la posición a lo largo del eje longitudinal, forma una curva suave sin cambios bruscos</strong>, que idealmente se ajusta a la distribución de áreas de un cuerpo de revolución suave. El ejemplo clásico es el <strong>Convair F-102A</strong>: el diseño original (una célula de ala delta ampliada) no podía alcanzar la velocidad supersónica por el exceso de resistencia transónica debido al aumento brusco de área donde las alas se unían al fuselaje; al añadir un fuselaje con «cintura de botella de cola» y abultamientos por detrás del ala (para mantener suave la curva de sección total), el F-102A alcanzó la velocidad supersónica y entró en servicio. Junto con la regla del área, la tecnología del <strong>perfil supercrítico</strong> (también de Whitcomb) eleva aún más el Mach de divergencia de la resistencia.</p>
+<hr />
+<h2 id="11-fisica-de-la-estela-turbulenta-y-minimas-de-separacion">11. Física de la estela turbulenta y mínimas de separación</h2>
+<p>El manual y las notas base cubren la generación del vórtice, los factores de intensidad (peso, envergadura, velocidad: «pesada, limpia, lenta») y la cronología de rotación y toma; esta sección añade las mínimas de separación certificadas con cifras de fuentes primarias.</p>
+<h3 id="111-categorias-oaci-heredadas-de-estela-turbulenta-y-minimas-de-separacion-radar">11.1 Categorías OACI heredadas de estela turbulenta y mínimas de separación radar</h3>
+<p>Verificadas directamente (no en un resumen secundario tipo Wikipedia) en el propio documento RECAT-EU de EUROCONTROL, que cita el esquema OACI/PANS-ATM heredado que se diseñó para mejorar:</p>
+<table>
+<thead>
+<tr>
+<th>MTOM (masa máxima al despegue)</th>
+<th>Categoría</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≥ 136 000 kg</td>
+<td>PESADA (HEAVY)</td>
+</tr>
+<tr>
+<td>7000 kg ≤ MTOM &lt; 136 000 kg</td>
+<td>MEDIA (MEDIUM)</td>
+</tr>
+<tr>
+<td>&lt; 7000 kg</td>
+<td>LIGERA (LIGHT)</td>
+</tr>
+<tr>
+<td>A380-800</td>
+<td>tratado por separado (aumento recomendado sobre las mínimas estándar de PESADA)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mínimas de separación radar OACI heredadas</strong> (precedente → siguiente): A380 → Pesada <strong>6 NM</strong>, A380 → Media <strong>7 NM</strong>, A380 → Ligera <strong>8 NM</strong>; Pesada → Pesada <strong>4 NM</strong>, Pesada → Media <strong>5 NM</strong>, Pesada → Ligera <strong>6 NM</strong>; Media → Ligera <strong>5 NM</strong>. EUROCONTROL confirma estas cifras citando el Doc 4444 de la OACI (véase «Manual frente a fuentes primarias»).</p>
+<h3 id="112-recat-eu-seis-categorias-y-la-matriz-completa-de-separacion">11.2 RECAT-EU: seis categorías y la matriz completa de separación</h3>
+<p>RECAT-EU sustituye las 3 categorías heredadas (más el A380) por <strong>6 categorías</strong>, dividiendo PESADA en Pesada superior/inferior y MEDIA en Media superior/inferior, y añadiendo SUPER PESADA para el A380:</p>
+<table>
+<thead>
+<tr>
+<th>Categoría RECAT-EU</th>
+<th>Letra</th>
+<th>Aeronaves de ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Super Pesada (<em>Super Heavy</em>)</td>
+<td>A</td>
+<td>A380</td>
+</tr>
+<tr>
+<td>Pesada superior (<em>Upper Heavy</em>)</td>
+<td>B</td>
+<td>A330, A340, B747, B777, B787</td>
+</tr>
+<tr>
+<td>Pesada inferior (<em>Lower Heavy</em>)</td>
+<td>C</td>
+<td>A300/A310, B757, B767, MD-11</td>
+</tr>
+<tr>
+<td>Media superior (<em>Upper Medium</em>)</td>
+<td>D</td>
+<td>familia A320, B737</td>
+</tr>
+<tr>
+<td>Media inferior (<em>Lower Medium</em>)</td>
+<td>E</td>
+<td>ATR, E-Jets, CRJ</td>
+</tr>
+<tr>
+<td>Ligera (<em>Light</em>)</td>
+<td>F</td>
+<td>Reactores ejecutivos, turbohélices</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mínimas de separación por distancia de RECAT-EU (NM), precedente → siguiente</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Precedente \ Siguiente</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A (Super Pesada)</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr>
+<td>B (Pesada superior)</td>
+<td>—</td>
+<td>3</td>
+<td>4</td>
+<td>4</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr>
+<td>C (Pesada inferior)</td>
+<td>—</td>
+<td>—</td>
+<td>(MRS 2,5*)</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+</tr>
+<tr>
+<td>D (Media superior)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>5</td>
+</tr>
+<tr>
+<td>E (Media inferior)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>4</td>
+</tr>
+<tr>
+<td>F (Ligera)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>(<em>) MRS = separación radar mínima, 2,5 NM en las condiciones indicadas del Doc 4444 de la OACI. RECAT-EU define también separaciones basadas en tiempo para la salida (p. ej., Super Pesada → Pesada superior 100 s, → Pesada inferior 120 s, → Media superior 140 s, → Media inferior 160 s, → Ligera 180 s). En general, RECAT-EU </em><em>reduce</em>* la separación respecto al esquema OACI heredado para las aeronaves que estaban «sobreclasificadas» por el sistema grueso de 3 categorías (p. ej., un A340-600 tras un B767-300 pasa de 4 NM con el esquema OACI heredado a 2,5 NM con RECAT-EU), que es la justificación operativa de su adopción en los aeropuertos europeos más cargados.</p>
+<hr />
+<h2 id="12-ejemplos-numericos-resueltos-todos-comprobados-dos-veces">12. Ejemplos numéricos resueltos (todos comprobados dos veces)</h2>
+<ol>
+<li><strong>Sustentación, unidades SI:</strong> ρ = 1,225 kg/m³ (ISA a nivel del mar), V = 60 m/s, S = 20 m², C_L = 0,6. q = ½ρV² = 0,5×1,225×60² = 2205 Pa. L = C_L·q·S = 0,6×2205×20 = <strong>26 460 N ≈ 2698 kgf</strong>.</li>
+<li><strong>Duplicar la velocidad cuadruplica la sustentación (regla del PHAK, verificada):</strong> la misma aeronave a V = 120 m/s (el doble), con el mismo C_L y S: q = 0,5×1,225×120² = 8820 Pa; L = 0,6×8820×20 = 105 840 N; exactamente <strong>4 veces los 26 460 N</strong> obtenidos a 60 m/s. ✓.</li>
+<li><strong>Coeficiente de resistencia inducida y punto de la polar:</strong> C_L = 0,6, AR = 9, e = 0,75. C_Di = C_L²/(π·AR·e) = 0,36/(π×9×0,75) = 0,36/21,21 = <strong>0,01698</strong>. Si C_D0 (parásita) = 0,02, el <strong>C_D total = 0,0370</strong>; <strong>L/D = C_L/C_D = 0,6/0,0370 ≈ 16,2</strong>.</li>
+<li><strong>Factor de carga y ángulo de alabeo:</strong> con 45° de alabeo, n = 1/cos45° = 1/0,7071 = <strong>1,414 g</strong>; con 75° de alabeo, n = 1/cos75° = 1/0,2588 = <strong>3,86 g</strong> (coincide con la cifra del propio PHAK para 75°, comprobación cruzada ✓).</li>
+<li><strong>Velocidad de pérdida en viraje:</strong> V_s (1g) = 120 kt; con 45° de alabeo (n = 1,414): V_s(viraje) = 120×√1,414 = 120×1,189 = <strong>142,7 kt</strong>; con 75° de alabeo (n = 3,86): V_s(viraje) = 120×√3,86 = 120×1,965 = <strong>235,8 kt</strong> (casi el doble de la velocidad de pérdida a 1g; ilustra por qué es peligroso un viraje muy inclinado, bajo y lento).</li>
+<li><strong>Velocidad de maniobra de diseño VA (regla práctica):</strong> V_s1 (pérdida a 1g con flaps arriba) = 90 kt. VA ≈ 90×1,7 = <strong>153 kt</strong> (regla práctica del PHAK para aeronaves más antiguas); con la relación formal de la CS-25 VA ≥ V_S1·√n y el n mínimo de la CS 25.337(b), 2,5: VA ≥ 90×√2,5 = 90×1,581 = <strong>142,3 kt</strong>; los dos enfoques dan resultados distintos pero del mismo orden, lo que ilustra que la regla práctica «×1,7» corresponde a suponer un factor de carga algo mayor (1,7² = 2,89 g) que el mínimo de 2,5 g de la CS-25.</li>
+<li><strong>Velocidad del sonido y Mach en altitud:</strong> SAT en FL350 (ISA) ≈ −54,3 °C (con el gradiente ISA: 15 − 2×35 = −55 °C, suficientemente cercano para este ejemplo). a(kt) = 39×√(273 + (−55)) = 39×√218 = 39×14,76 = <strong>575,6 kt</strong> (coincide con la cifra de la tabla ISA del manual, ≈573,6–573,8 kt en la misma región; pequeñas diferencias de redondeo por el gradiente exacto utilizado). Con TAS = 480 kt: M = 480/575,6 = <strong>0,834</strong>.</li>
+<li><strong>CS 25.113 «115 %» frente al «15 % más corta» del manual: la discrepancia numérica que oculta la redacción del manual:</strong> supongamos que la distancia de despegue certificada la fija la distancia con un motor inoperativo (OEI), D_OEI = 2000 m, y que esta es (por definición de «la que fija») ≥ 115 % de la distancia con todos los motores (AE) D_AE. Resolviendo el caso límite 1,15×D_AE = D_OEI: D_AE = 2000/1,15 = <strong>1739 m</strong>, que es <strong>(2000 − 1739)/2000 = 13,04 % más corta</strong> que D_OEI, <strong>no 15 % más corta</strong> como afirma el manual. El «por lo menos 15 % menos» del manual parece un redondeo de la relación recíproca (100 − 100/1,15 ≈ 13,04, que suele redondearse mal hacia arriba, hacia el «15 %» más memorable de la propia cifra del 115 %).</li>
+<li><strong>Reducción de la resistencia inducida por efecto suelo, aplicada:</strong> una aeronave de 30 m de envergadura en final, con una altura de las ruedas de 3 m (= 1/10 de la envergadura), experimenta, según las cifras del PHAK, una <strong>reducción de la resistencia inducida de alrededor del 47,6 %</strong> respecto al mismo C_L fuera del efecto suelo; coherente con la tendencia al «flote» descrita de forma cualitativa en el §5.4.</li>
+</ol>
+<hr />
+<h2 id="manual-frente-a-fuentes-primarias-adicional-a-la-tabla-de-om09-no-duplicar-sus-entradas">Manual frente a fuentes primarias (adicional a la tabla de OM09; no duplicar sus entradas)</h2>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Dice el manual (ENAIRE)</th>
+<th>Dice la fuente primaria</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mecanismo del efecto suelo</strong></td>
+<td>Efecto suelo = el vórtice de punta de ala «se destruye contra la superficie» cerca del suelo (§5.1 del manual)</td>
+<td>PHAK y SKYbrary: el efecto suelo es una <strong>reducción de la resistencia inducida</strong>, porque la proximidad al suelo restringe la corriente ascendente/descendente y aplana el vórtice de punta de ala hasta darle forma elíptica, lo que eleva el <strong>alargamiento efectivo</strong> del ala; ambas fuentes dan curvas de decaimiento cuantitativas coincidentes (≈50 % del efecto máximo perdido a una altura del 10 % de la envergadura según SKYbrary; PHAK: reducción de resistencia del 1,4 %/23,5 %/47,6 % a alturas de 1/1, 1/4, 1/10 de la envergadura)</td>
+<td>La redacción del manual («vórtice destruido») es una descripción simplificada e informal del mismo fenómeno de fondo (menor intensidad del vórtice cerca del suelo), no una contradicción de la física; pero <strong>no es la explicación estándar de los manuales</strong> (reducción de la resistencia inducida por aumento del alargamiento efectivo) y no da cifras; una pregunta de examen formulada con la «reducción de la resistencia inducida» como mecanismo sería correcta según los manuales y no debería marcarse como errónea frente a la redacción más simple del manual</td>
+</tr>
+<tr>
+<td><strong>Distancia de despegue «15 % más corta»</strong></td>
+<td>«Por lo menos 15 por ciento menos que la distancia requerida para un despegue con un motor inoperativo» (manual §11.2, «Distancia de despegue»)</td>
+<td>CS 25.113(a): distancia de despegue = la <strong>mayor</strong> entre la distancia OEI y el <strong>115 %</strong> de la distancia con todos los motores hasta 35 ft</td>
+<td>Numéricamente son operaciones distintas: invertir «115 % de X» da «X es ≈13,04 % menos», no 15 % (resuelto en el §12.8 anterior); la tabla de comprobación de OM09 ya lo señala desde el lado de la CS-25; este archivo añade la aritmética exacta para que el candidato pueda mostrar por qué «13 %», y no «15 %», es la cifra precisa según los manuales, aunque se espere que el examen siga la redacción del manual, «15 %»</td>
+</tr>
+<tr>
+<td><strong>Mínimas OACI por estela turbulenta</strong></td>
+<td>El manual no las cubre en absoluto</td>
+<td>RECAT-EU 2015 de EUROCONTROL (§11.1 anterior) cita y confirma directamente las mínimas OACI/PANS-ATM heredadas: A380→Pesada/Media/Ligera 6/7/8 NM; Pesada→Pesada/Media/Ligera 4/5/6 NM; Media→Ligera 5 NM</td>
+<td>Confirmadas dentro de un documento oficial de EUROCONTROL que cita el Doc 4444 de la OACI</td>
+</tr>
+<tr>
+<td><strong>VA / velocidad de maniobra de diseño</strong></td>
+<td>El manual no la define en absoluto</td>
+<td>CS 25.335(c): VA ≥ V_S1·√n (n = factor de carga límite positivo en VC); regla práctica del PHAK para aeronaves de aviación general más antiguas sin VA publicada: VA ≈ 1,7×V_s</td>
+<td>Ambas son legítimas, pero dan respuestas numéricas distintas para la misma aeronave (§12.6 anterior); una pregunta de examen sobre VA debería especificar qué definición o contexto quiere</td>
+</tr>
+<tr>
+<td><strong>Límites del factor de carga, categoría transporte</strong></td>
+<td>El manual no los da (la tabla de OM09 ya señala la CS 25.337(b): 2,5–3,8; (c): ≥ −1,0)</td>
+<td>Este archivo añade la <strong>fórmula explícita</strong> n = 2,1 + 24 000/(W + 10 000) lb, mínimo 2,5, máximo 3,8</td>
+<td>Afina la entrada de OM09 con la propia fórmula y no solo con los límites</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="trampas-de-examen">Trampas de examen</h2>
+<ol>
+<li><strong>Mecanismo del efecto suelo:</strong> «vórtice destruido contra la superficie» (manual, informal) frente a «reducción de la resistencia inducida por aumento del alargamiento efectivo» (manuales/PHAK/SKYbrary, la formulación estándar que un examen tiene más probabilidades de usar si pregunta «por qué»).</li>
+<li><strong>El desprendimiento de la capa límite <em>es</em> la pérdida</strong>, descrita en términos de mecánica de fluidos; no confundir «desprendimiento» (un fenómeno de la capa límite) con «pérdida» (la consecuencia para toda la aeronave); son el mismo suceso visto en dos niveles.</li>
+<li><strong>El AOA crítico es invariable</strong> (no cambia con el peso, el alabeo, la temperatura, la altitud densidad ni el CG); lo que cambia con esas variables es la <strong>velocidad</strong> o el <strong>factor de carga</strong> a los que se alcanza ese AOA fijo.</li>
+<li><strong>Las alas rectas entran en pérdida primero por el encastre (buen aviso, se conserva el control de los alerones); las alas en flecha, primero por la punta (peor aviso, pueden encabritar más el morro).</strong> No confundirlas.</li>
+<li><strong>La estabilidad estática y la dinámica son independientes:</strong> es posible estática positiva + dinámica negativa (corrige al principio y luego la oscilación crece); un patrón clásico de distractor.</li>
+<li><strong>Balanceo holandés (oscilación lateral-direccional, normalmente tolerada con un amortiguador de guiñada) frente a inestabilidad de espiral (una espiral divergente lenta, históricamente más peligrosa si se maneja mal):</strong> los fabricantes prefieren a propósito la inestabilidad de espiral a las tendencias al balanceo holandés; no suponer que «inestabilidad» significa siempre que se evita sin más la opción más peligrosa.</li>
+<li><strong>VA protege frente a UNA sola deflexión completa de mando en UN solo eje</strong>; no frente a varias deflexiones ni a ejes combinados; un error habitual que el examen podría preguntar directamente.</li>
+<li><strong>La regla práctica de VA (×1,7 la velocidad de pérdida) ≠ la VA formal de la CS-25 (≥ V_S1·√n con el mínimo n = 2,5 de la CS-25, es decir, ×1,58):</strong> respuestas numéricas distintas para «el mismo» concepto según la definición que se invoque.</li>
+<li><strong>«115 % de la distancia con todos los motores» (CS-25) no es el mismo número que «15 % más corta» (paráfrasis del manual):</strong> la cifra recíproca correcta es de alrededor del 13 %; cabe esperar que el examen siga la redacción del manual (15 %) aunque sea numéricamente imprecisa.</li>
+<li><strong>Régimen de mando invertido: menos velocidad exige MÁS potencia</strong> (no menos) para mantener la altitud; lo contrario de la intuición del mando normal; es la zona de peligro, baja, lenta y «detrás de la curva de potencia», en la aproximación.</li>
+<li><strong>El coffin corner es un doble estrangulamiento (límite de pérdida a baja velocidad frente a límite de bataneo de Mach a alta velocidad), y un viraje por sí solo (ala interior más lenta, ala exterior más rápida) puede empujar ambos límites a la vez;</strong> no es solo un problema en línea recta de «no puedo ir más rápido, no puedo ir más lento».</li>
+<li><strong>RECAT-EU tiene 6 categorías (A–F, de Super Pesada a Ligera); la OACI heredada solo 3 (+A380 tratado por separado):</strong> no mezclar sus cifras de separación (p. ej., OACI Pesada→Media es 5 NM; RECAT-EU Pesada superior→Media superior es 4 NM; no son intercambiables).</li>
+<li><strong>La resistencia de onda la causa sobre todo el desprendimiento del flujo que provoca la onda de choque, no la pérdida de calor (comparativamente pequeña) a través de la propia onda.</strong></li>
+<li><strong>Efecto tuck = morro a picar</strong> (el centro de presiones se desplaza hacia atrás al desplazarse la onda de choque hacia atrás); no confundir con la tendencia a encabritar de la pérdida de punta de un ala en flecha (§10.2), que es el sentido de cabeceo contrario por otra causa.</li>
+</ol>
+<h2 id="imprescindible-memorizar">Imprescindible memorizar</h2>
+<ul>
+<li>Las 3 leyes de Newton (inercia; F=ma; acción-reacción: sustentación = el ala desvía el aire hacia abajo, la reacción empuja el ala hacia arriba).</li>
+<li>Continuidad: ρ₁A₁V₁ = ρ₂A₂V₂ (→A₁V₁=A₂V₂ incompresible); explica <em>por qué</em> cambia la velocidad en un Venturi o sobre un ala, algo que Bernoulli por sí solo no explica.</li>
+<li>Capa límite: laminar (suave, menos fricción, menos estable) → turbulenta (más fricción, más estable) → desprendimiento = pérdida.</li>
+<li>Tipos de flap: simple, de intradós (<em>split</em>), ranurado (el más común), Fowler (se desliza y luego deflecta). Dispositivos de borde de ataque: ranuras fijas, slats móviles, flaps de borde de ataque, cuffs de borde de ataque.</li>
+<li>Mecanismo del efecto suelo (según los manuales): ↓resistencia inducida por ↑alargamiento efectivo de los vórtices de punta aplanados; cifras del PHAK: reducción de resistencia del 1,4 %/23,5 %/47,6 % a una altura de 1/¼/1∕10 de la envergadura.</li>
+<li>Límites del factor de carga: Normal 3,8/−1,52; Utilitaria 4,4/−1,76; Acrobática 6,0/−3,0; transporte CS-25 2,5–3,8/−1,0 (factor de seguridad ×1,5 hasta el último).</li>
+<li>n=2 g con 60° de alabeo; n=5,76 g con 80°; V_s(viraje)=V_s·√n.</li>
+<li>VA ≥ V_S1·√n (CS-25); regla práctica VA≈1,7×V_s (aviación general antigua).</li>
+<li>Regímenes de velocidad (PHAK): subsónico &lt;0,75 M; transónico 0,75–1,20 M; supersónico 1,20–5,00 M; hipersónico &gt;5,00 M.</li>
+<li>a(kt) ≈ 39√(273+SAT°C); M=TAS/a.</li>
+<li>Mach crítico = primer punto que alcanza localmente M1,0; Mach de divergencia de fuerzas ≈ M_crit + 5–10 %; la resistencia de onda sube bruscamente pasado M_crit+10 %.</li>
+<li>Coffin corner = el límite de pérdida a baja velocidad se cruza con el límite de bataneo/MMO a alta velocidad; un viraje por sí solo puede rebasar ambos.</li>
+<li>Regla del área (Whitcomb): una curva suave de sección total a lo largo del fuselaje minimiza la resistencia transónica/supersónica (solución «cintura de botella» del F-102A).</li>
+<li>Categorías OACI heredadas de estela turbulenta: Pesada ≥136 000 kg; Media 7000–136 000 kg; Ligera &lt;7000 kg; mínimas 4/5/6 NM (precedente Pesada) y A380 6/7/8 NM.</li>
+<li>RECAT-EU: 6 categorías A(Super Pesada)–F(Ligera); separación de hasta 3 NM (misma categoría F, o precedente A/siguiente A).</li>
+<li>Balanceo holandés = oscilación acoplada lateral-direccional (amortiguador de guiñada); inestabilidad de espiral = estabilidad direccional fuerte frente a estabilidad de diedro débil, históricamente más mortal si se maneja mal.</li>
+<li>CS 25.113: distancia de despegue = la mayor entre la distancia OEI y el 115 % de la distancia con todos los motores (≈13 % más corta, no el «15 %» del manual).</li>
+</ul>
+<h2 id="glosario-es-en">Glosario (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ecuación de continuidad</td>
+<td>continuity equation</td>
+</tr>
+<tr>
+<td>caudal másico</td>
+<td>mass flow rate</td>
+</tr>
+<tr>
+<td>capa límite</td>
+<td>boundary layer</td>
+</tr>
+<tr>
+<td>flujo laminar / turbulento</td>
+<td>laminar / turbulent flow</td>
+</tr>
+<tr>
+<td>desprendimiento de la capa límite</td>
+<td>boundary-layer separation</td>
+</tr>
+<tr>
+<td>generador de vórtices</td>
+<td>vortex generator</td>
+</tr>
+<tr>
+<td>curva de sustentación</td>
+<td>lift curve</td>
+</tr>
+<tr>
+<td>pérdida acelerada</td>
+<td>accelerated stall</td>
+</tr>
+<tr>
+<td>pérdida por el encastre / por la punta</td>
+<td>wing root / wingtip stall</td>
+</tr>
+<tr>
+<td>torsión de ala (alabeo geométrico)</td>
+<td>washout (wing twist)</td>
+</tr>
+<tr>
+<td>listón de pérdida</td>
+<td>stall strip</td>
+</tr>
+<tr>
+<td>flap simple / de intradós (split) / ranurado / Fowler</td>
+<td>plain / split / slotted / Fowler flap</td>
+</tr>
+<tr>
+<td>ranura fija / slat / cuff de borde de ataque</td>
+<td>leading-edge slot / slat / cuff</td>
+</tr>
+<tr>
+<td>spoiler / destructor de sustentación</td>
+<td>spoiler</td>
+</tr>
+<tr>
+<td>resistencia de interferencia</td>
+<td>interference drag</td>
+</tr>
+<tr>
+<td>curva polar de resistencia</td>
+<td>drag polar</td>
+</tr>
+<tr>
+<td>velocidad de mejor planeo</td>
+<td>best glide speed</td>
+</tr>
+<tr>
+<td>potencia requerida / potencia disponible</td>
+<td>power required / power available</td>
+</tr>
+<tr>
+<td>régimen de mando invertido</td>
+<td>region of reversed command</td>
+</tr>
+<tr>
+<td>velocidad de máxima autonomía</td>
+<td>best endurance speed</td>
+</tr>
+<tr>
+<td>estabilidad estática</td>
+<td>static stability</td>
+</tr>
+<tr>
+<td>estabilidad dinámica</td>
+<td>dynamic stability</td>
+</tr>
+<tr>
+<td>estabilidad longitudinal / lateral / direccional</td>
+<td>longitudinal / lateral / directional stability</td>
+</tr>
+<tr>
+<td>cuerda aerodinámica media (MAC)</td>
+<td>mean aerodynamic chord (MAC)</td>
+</tr>
+<tr>
+<td>efecto quilla</td>
+<td>keel effect</td>
+</tr>
+<tr>
+<td>balanceo holandés</td>
+<td>Dutch roll</td>
+</tr>
+<tr>
+<td>inestabilidad de espiral</td>
+<td>spiral instability</td>
+</tr>
+<tr>
+<td>fugoide</td>
+<td>phugoid</td>
+</tr>
+<tr>
+<td>cola en T / estabilizador de una pieza / canard / cola en V</td>
+<td>T-tail / stabilator / canard / V-tail</td>
+</tr>
+<tr>
+<td>tab antiservo</td>
+<td>antiservo tab</td>
+</tr>
+<tr>
+<td>pérdida profunda</td>
+<td>deep stall</td>
+</tr>
+<tr>
+<td>protección alpha floor</td>
+<td>alpha floor protection</td>
+</tr>
+<tr>
+<td>protección de la envolvente de vuelo</td>
+<td>flight envelope protection</td>
+</tr>
+<tr>
+<td>factor de carga límite / factor de carga último</td>
+<td>limit load factor / ultimate load factor</td>
+</tr>
+<tr>
+<td>factor de seguridad</td>
+<td>safety factor</td>
+</tr>
+<tr>
+<td>velocidad de maniobra de diseño (VA)</td>
+<td>design manoeuvring speed (VA)</td>
+</tr>
+<tr>
+<td>velocidad de crucero / de picado de diseño (VC/VD)</td>
+<td>design cruising / dive speed (VC/VD)</td>
+</tr>
+<tr>
+<td>diagrama V-n / envolvente de maniobra</td>
+<td>V-n diagram / manoeuvring envelope</td>
+</tr>
+<tr>
+<td>carga de ráfaga</td>
+<td>gust load</td>
+</tr>
+<tr>
+<td>número de Mach crítico</td>
+<td>critical Mach number</td>
+</tr>
+<tr>
+<td>Mach de divergencia de resistencia</td>
+<td>force-divergence Mach number</td>
+</tr>
+<tr>
+<td>onda de choque</td>
+<td>shock wave</td>
+</tr>
+<tr>
+<td>resistencia de onda</td>
+<td>wave drag</td>
+</tr>
+<tr>
+<td>efecto tuck (picado por Mach)</td>
+<td>Mach tuck</td>
+</tr>
+<tr>
+<td>bataneo por Mach</td>
+<td>Mach buffet</td>
+</tr>
+<tr>
+<td>regla del área</td>
+<td>area rule</td>
+</tr>
+<tr>
+<td>perfil supercrítico</td>
+<td>supercritical airfoil</td>
+</tr>
+<tr>
+<td>RECAT-EU (recategorización europea de estela)</td>
+<td>RECAT-EU</td>
+</tr>
+<tr>
+<td>separación radar mínima</td>
+<td>minimum radar separation (MRS)</td>
+</tr>
+<tr>
+<td>indicador de ángulo de ataque</td>
+<td>angle-of-attack indicator</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fuentes">Fuentes</h2>
+<ul>
+<li>FAA, <em>Pilot's Handbook of Aeronautical Knowledge</em> (PHAK), FAA-H-8083-25C, capítulos 5 (Aerodynamics of Flight) y 6 (Flight Controls).</li>
+<li>EASA, <em>CS-25 Amendment 28</em>, apartados CS 25.333, 25.335, 25.337, 25.341 y su texto AMC.</li>
+<li>NASA, <em>SP-367, Introduction to the Aerodynamics of Flight</em> (ecuación de continuidad, regla del área, perfil supercrítico).</li>
+<li>EUROCONTROL, <em>RECAT-EU European Wake Turbulence Categorisation and Separation Minima on Approach and Departure</em>, Edition 2.0 (2015).</li>
+<li>SKYbrary Aviation Safety, artículos «Ground Effect», «Coffin Corner», «Critical Mach Number», «Mach Tuck».</li>
+<li>Airbus, <em>Getting to Grips with Aircraft Performance</em> (2002), §3.5-3.6 (número de Mach, TAS).</li>
+<li>Airbus, <em>Safety First</em> #19 (enero de 2015), «Understanding Weight &amp; Balance» (mención del alpha floor).</li>
+<li>NASA, Beginner's Guide to Aeronautics, «Newton's Laws of Motion».</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

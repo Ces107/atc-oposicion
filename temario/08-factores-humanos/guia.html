@@ -1,0 +1,1661 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Factores humanos</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Factores humanos</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual -&gt; sección de esta guía)</a></li>
+<li><a href="#capitulo-1-introduccion-a-los-factores-humanos">Capítulo 1. Introducción a los Factores Humanos</a><ul>
+<li><a href="#11-definicion-de-factores-humanos">1.1 Definición de Factores Humanos</a></li>
+<li><a href="#12-modelo-de-reason">1.2 Modelo de Reason</a></li>
+<li><a href="#13-modelo-de-rasmussen">1.3 Modelo de Rasmussen</a></li>
+<li><a href="#14-modelo-shell-o">1.4 Modelo SHELL-O</a></li>
+<li><a href="#15-vision-sistemica-de-la-seguridad-operacional">1.5 Visión sistémica de la Seguridad Operacional</a></li>
+<li><a href="#16-systems-thinking-for-safety-los-10-principios-de-eurocontrol">1.6 Systems Thinking for Safety: los 10 principios de EUROCONTROL</a></li>
+<li><a href="#17-safety-i-frente-a-safety-ii">1.7 Safety-I frente a Safety-II</a></li>
+<li><a href="#18-work-as-done-frente-a-work-as-imagined">1.8 Work-as-Done frente a Work-as-Imagined</a></li>
+<li><a href="#19-reglamentacion-sobre-fatiga-estres-y-sustancias-psicoactivas">1.9 Reglamentación sobre fatiga, estrés y sustancias psicoactivas</a></li>
+<li><a href="#110-normativa-sobre-competencias-en-ffhh-para-atco">1.10 Normativa sobre competencias en FFHH para ATCO</a></li>
+<li><a href="#111-integracion-transversal-de-los-ffhh-en-la-organizacion">1.11 Integración transversal de los FFHH en la organización</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-2-factores-organizacionales-y-sociales">Capítulo 2. Factores organizacionales y sociales</a><ul>
+<li><a href="#21-trabajo-en-equipo-y-funciones-del-equipo">2.1 Trabajo en equipo y funciones del equipo</a></li>
+<li><a href="#22-gestion-de-los-recursos-del-equipo-trm">2.2 Gestión de los recursos del equipo (TRM)</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-3-factores-psicologicos">Capítulo 3. Factores psicológicos</a><ul>
+<li><a href="#31-cognicion-capacidades-y-limitaciones-del-ser-humano">3.1 Cognición: capacidades y limitaciones del ser humano</a></li>
+<li><a href="#32-conciencia-situacional-sa">3.2 Conciencia situacional (SA)</a></li>
+<li><a href="#33-carga-de-trabajo-mental">3.3 Carga de trabajo mental</a></li>
+<li><a href="#34-grado-de-complejidad-y-su-impacto-en-el-individuo-y-el-sistema">3.4 Grado de complejidad y su impacto en el individuo y el sistema</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-4-la-comunicacion-humana">Capítulo 4. La comunicación humana</a><ul>
+<li><a href="#41-el-proceso-humano-de-comunicacion">4.1 El proceso humano de comunicación</a></li>
+<li><a href="#42-factores-que-afectan-a-la-comunicacion-verbal">4.2 Factores que afectan a la comunicación verbal</a></li>
+<li><a href="#43-la-comunicacion-no-verbal">4.3 La comunicación no verbal</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-5-la-fatiga">Capítulo 5. La fatiga</a><ul>
+<li><a href="#51-principios-relativos-al-sueno">5.1 Principios relativos al sueño</a></li>
+<li><a href="#52-necesidad-de-dormir">5.2 Necesidad de dormir</a></li>
+<li><a href="#53-perdida-y-recuperacion-del-sueno">5.3 Pérdida y recuperación del sueño</a></li>
+<li><a href="#54-procesos-del-sueno-e-influencia-en-las-capacidades-de-la-persona">5.4 Procesos del sueño e influencia en las capacidades de la persona</a></li>
+<li><a href="#55-carga-de-trabajo-fatiga-y-nivel-de-desempeno">5.5 Carga de trabajo, fatiga y nivel de desempeño</a></li>
+<li><a href="#56-el-reglamento-ue-2017373-y-las-sarps-de-la-oaci-sobre-la-gestion-de-la-fatiga">5.6 El Reglamento (UE) 2017/373 y las SARPS de la OACI sobre la gestión de la fatiga</a></li>
+<li><a href="#57-aptitud-fisica">5.7 Aptitud física</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-6-estres">Capítulo 6. Estrés</a><ul>
+<li><a href="#61-explicacion-del-proceso-del-estres-de-forma-sencilla">6.1 Explicación del proceso del estrés de forma sencilla</a></li>
+<li><a href="#62-relacion-de-los-sintomas-del-estres-en-el-individuo">6.2 Relación de los síntomas del estrés en el individuo</a></li>
+<li><a href="#63-el-estres-de-los-cta">6.3 El estrés de los CTA</a></li>
+<li><a href="#64-efectos-del-estres-en-el-desempeno-mental-y-fisico">6.4 Efectos del estrés en el desempeño mental y físico</a></li>
+<li><a href="#65-gestion-del-estres-ante-incidente-critico-programa-cism">6.5 Gestión del estrés ante incidente crítico: programa CISM</a></li>
+</ul>
+</li>
+<li><a href="#capitulo-7-error-humano">Capítulo 7. Error humano</a><ul>
+<li><a href="#71-modelo-gems-de-reason">7.1 Modelo GEMS de Reason</a></li>
+<li><a href="#72-modelo-tem-threat-and-error-management">7.2 Modelo TEM (Threat and Error Management)</a></li>
+<li><a href="#trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">Trampas de examen (confusiones típicas y cómo distinguirlas)</a></li>
+<li><a href="#imprescindible-memorizar-breve-y-denso">Imprescindible memorizar (breve y denso)</a></li>
+<li><a href="#glosario-bilingue-es-en">Glosario bilingüe (ES -&gt; EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">80 min de lectura</div><h1 id="om08-factores-humanos-en-atm-guia-de-estudio-elaborada-a-partir-del-manual-oficial-8-de-enaire">Guía: Factores humanos</h1>
+<p>Fuente: ENAIRE, <em>Factores Humanos en ATM</em> (65 páginas, julio 2023). Es el manual oficial del tema 8 del examen (Factores humanos). Todo lo que sigue viene del texto completo del manual salvo que se indique lo contrario.</p>
+<p>El examen real es en español, así que el término oficial español va en primer lugar y el inglés, entre paréntesis, en la primera mención; el glosario final recoge cada término ES -&gt; EN.</p>
+<h3 id="que-cubre-el-examen">Qué cubre el examen</h3>
+<p>El tema 8 «Factores humanos» ocupa una parte de la prueba de la Fase 1, de 50 preguntas. El manual es el segundo más largo de los nueve (unas 22 000 palabras) y lo más parecido a una bibliografía. Enseña: la definición de factores humanos y los modelos (Reason, Rasmussen, SHELL-O); la visión sistémica de la seguridad (los 10 principios de EUROCONTROL, Safety-I frente a Safety-II, trabajo como se hace frente a trabajo como se imagina); la normativa de la UE sobre fatiga, estrés y sustancias psicoactivas (Reglamento (UE) 2017/373, ATS.OR.300 a 320); trabajo en equipo y TRM; cognición, conciencia situacional (Endsley), carga de trabajo mental, complejidad; comunicación humana; fatiga y sueño; estrés y CISM; error humano (GEMS) y TEM. Cabe esperar preguntas de dato exacto: listas numeradas en su orden, nombres de autores, niveles de los modelos, porcentajes y plazos.</p>
+<h3 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual -&gt; sección de esta guía)</h3>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual (páginas)</th>
+<th>Sección de esta guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1 Definición de Factores Humanos (p.4)</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>1.2.1 Modelo de Reason (p.5-6)</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>1.2.2 Modelo de Rasmussen (p.6-7)</td>
+<td>1.3</td>
+</tr>
+<tr>
+<td>1.2.3 Modelo SHELL-O (p.7-8)</td>
+<td>1.4</td>
+</tr>
+<tr>
+<td>1.3 Visión sistémica de la Seguridad Operacional, factores organizacionales (p.9-11)</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>1.3.1 Systems Thinking for Safety, 10 principios (p.11-12)</td>
+<td>1.6</td>
+</tr>
+<tr>
+<td>1.3.2 Safety-I frente a Safety-II (p.13-14)</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>1.3.3 Work-as-Done frente a Work-as-Imagined (p.14-15)</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>1.4 Reglamentación sobre fatiga, estrés y sustancias psicoactivas (p.15-17)</td>
+<td>1.9</td>
+</tr>
+<tr>
+<td>1.5 Normativa sobre competencias en FFHH para ATCO (p.18-19)</td>
+<td>1.10</td>
+</tr>
+<tr>
+<td>1.6 Integración transversal de los FFHH en la organización (p.19-21)</td>
+<td>1.11</td>
+</tr>
+<tr>
+<td>2.1 Trabajo en equipo y funciones del equipo (p.22-23)</td>
+<td>2.1</td>
+</tr>
+<tr>
+<td>2.2 Gestión de los recursos del equipo, TRM (p.23-24)</td>
+<td>2.2</td>
+</tr>
+<tr>
+<td>3.1 Cognición (p.24)</td>
+<td>3.1</td>
+</tr>
+<tr>
+<td>3.2 Conciencia situacional (p.25-27)</td>
+<td>3.2</td>
+</tr>
+<tr>
+<td>3.3 Carga de trabajo mental (p.28-29)</td>
+<td>3.3</td>
+</tr>
+<tr>
+<td>3.4 Complejidad (p.29-31)</td>
+<td>3.4</td>
+</tr>
+<tr>
+<td>4 Comunicación humana (p.31-37)</td>
+<td>4.1 a 4.3</td>
+</tr>
+<tr>
+<td>5 Fatiga (p.38-47)</td>
+<td>5.1 a 5.7</td>
+</tr>
+<tr>
+<td>6 Estrés (p.48-57)</td>
+<td>6.1 a 6.5</td>
+</tr>
+<tr>
+<td>7 Error humano (p.58-62)</td>
+<td>7.1 y 7.2</td>
+</tr>
+<tr>
+<td>8 Bibliografía (p.63-65)</td>
+<td>Fuentes</td>
+</tr>
+</tbody>
+</table>
+<p>Nota sobre la fecha del manual: los pies de página dicen «julio 2023», de modo que este manual es anterior al manual del tema 1, de noviembre de 2025. Cita los Reglamentos (UE) 2017/373 y 2015/340 como vigentes; conviene consultar las versiones consolidadas actuales por si hay modificaciones posteriores.</p>
+<hr />
+<h2 id="capitulo-1-introduccion-a-los-factores-humanos">Capítulo 1. Introducción a los Factores Humanos</h2>
+<h3 id="11-definicion-de-factores-humanos">1.1 Definición de Factores Humanos</h3>
+<ul>
+<li>Tres términos se confunden a menudo, incluso en textos de base normativa: <strong>factores humanos</strong> (<em>human factors</em>), <strong>actuaciones humanas</strong> (<em>human performance</em>) y <strong>ergonomía</strong>. El manual cita el <strong>Doc. 10151 de la OACI</strong> para la distinción:</li>
+<li><strong>Actuaciones humanas</strong> (<em>human performance</em>): cómo realizan las personas sus actividades; representan la contribución humana al funcionamiento del sistema.</li>
+<li><strong>Factores humanos</strong> (<em>human factors</em>): la aplicación del conocimiento que tenemos sobre los seres humanos, sus capacidades, características y limitaciones, al diseño del equipamiento que utilizan, a los entornos en los que operan y a las actividades que desempeñan.</li>
+<li>Suelen emplearse de forma indistinta, pero hay un matiz. Fuera del ámbito de la aviación, factores humanos y ergonomía son términos intercambiables, aunque se usan para dar más énfasis a aspectos concretos: <strong>los factores humanos se asocian más a menudo con los aspectos psicológicos, la ergonomía con los aspectos físicos o fisiológicos</strong>.</li>
+<li>Las actuaciones humanas no pueden disociarse de los factores humanos y la ergonomía. Los factores humanos aportan una comprensión de las actuaciones humanas desde muchas disciplinas: psicología (cognitiva, organizacional y del trabajo, y social), psicología conductual, sociología, antropología, ciencias médicas (medicina de aviación y ocupacional), diseño e ingeniería, informática y estadística.</li>
+<li>Por qué importa en ATM: el estudio de los FFHH en un entorno ATM es esencial para saber si el impacto del diseño de la tecnología, la selección del personal, la formación, los procedimientos, los roles, tareas y responsabilidades y la propia gestión organizacional garantiza un rendimiento óptimo del sistema y una gestión de riesgos eficiente.</li>
+</ul>
+<h3 id="12-modelo-de-reason">1.2 Modelo de Reason</h3>
+<ul>
+<li>James Reason introdujo, a <strong>mediados de 1990</strong>, una visión sistémica de la gestión de la seguridad operacional: los accidentes son el resultado de la acción humana <strong>en combinación con otras fallas del sistema</strong>. Hoy la aviación estudia el sistema como fuente de información sobre lo que ha podido salir mal (y puede volver a ocurrir si no se corrige), más allá de centrarse solo en el error individual.</li>
+<li>El <strong>modelo del queso suizo</strong> introdujo en cualquier industria el concepto de <strong>accidente organizacional</strong>: el impacto de la cultura y las políticas de la organización en los controles de riesgos de la seguridad operacional. Obliga a abordar los factores organizativos además de los humanos y los técnicos.</li>
+<li>Mecanismo: cada capa de protección (porción de queso) tiene debilidades (agujeros); el suceso ocurre cuando los agujeros se <strong>alinean</strong>. El modelo permite comprender cómo los factores de una organización pueden crear <strong>condiciones latentes</strong> que determinen una falla de las defensas, y cómo esos mismos factores pueden contribuir también a la solidez de dichas defensas. (La figura 1 del manual es el esquema del modelo; no añade texto.)</li>
+<li>La «mayor y menos conocida» aportación de Reason: su labor investigadora sobre el error humano, que dio el modelo de clasificación <strong>GEMS (<em>General Error Modelling System</em>)</strong>, todavía en uso. Está libre de juicios de valor y centrado en los procesos cognitivos y los contextos que hacen emerger un tipo de error (detalles en la sección 7.1).</li>
+<li>Reason trabajó también en las <strong>actuaciones sobresalientes</strong>: qué hace que los sistemas funcionen y qué permite a las personas salvar, a veces, situaciones críticas.</li>
+</ul>
+<h3 id="13-modelo-de-rasmussen">1.3 Modelo de Rasmussen</h3>
+<p>Explica la conducta humana mediante <strong>tres modos de rendimiento</strong>, según el grado de control de la situación; cada uno genera un tipo de conducta y, por tanto, un tipo de error:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Qué ocurre</th>
+<th>Tipo de situación</th>
+<th>Ejemplo del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basada en habilidades</strong> (<em>skill-based</em>)</td>
+<td>Las acciones no son conscientes; intervienen procesos automatizados de control cognitivo</td>
+<td>Tarea muy conocida y rutinaria; no hace falta pensar</td>
+<td>Conducir un coche con experiencia como conductor</td>
+</tr>
+<tr>
+<td><strong>Basada en reglas</strong> (<em>rule-based</em>)</td>
+<td>Intervienen procesos conscientes de toma de decisiones para seleccionar las reglas que se aplican y cómo se ejecutan</td>
+<td>Situaciones conocidas pero no frecuentes</td>
+<td>Aplicar de forma rutinaria los procedimientos operativos al ejercer como controlador en frecuencia</td>
+</tr>
+<tr>
+<td><strong>Basada en conocimiento</strong> (<em>knowledge-based</em>)</td>
+<td>No hay reglas ni secuencias de acciones almacenadas; hace falta un gran esfuerzo consciente para analizar la situación y elegir entre alternativas y trazar un plan de acción</td>
+<td>Aprendizaje de habilidades nuevas; situaciones inusuales</td>
+<td>Decidir ante una emergencia o una situación inusual en frecuencia, activando el conocimiento para aplicarlo de forma novedosa</td>
+</tr>
+</tbody>
+</table>
+<p>Orden de esfuerzo consciente creciente: habilidades, reglas, conocimiento.</p>
+<h3 id="14-modelo-shell-o">1.4 Modelo SHELL-O</h3>
+<ul>
+<li>El modelo SHELL (<strong>Edwards 1972, Hawkins 1993</strong>) fue propuesto formalmente por la OACI como modelo conceptual de Factores Humanos en su <strong>Circular 216-AN31</strong>, para evaluar las interacciones complejas entre el componente humano de un sistema y su entorno operacional. Una versión actualizada añade la <strong>organización</strong> (SHELL-O). También ayuda a identificar los precursores y los contextos en los que ocurren los errores.</li>
+<li>Componentes:</li>
+<li><strong>S = Software (soporte lógico)</strong>: procedimientos.</li>
+<li><strong>H = Hardware (soporte físico)</strong>: sistemas técnicos.</li>
+<li><strong>E = Environment (entorno)</strong>.</li>
+<li><strong>L = Liveware (elemento humano)</strong>.</li>
+<li><strong>O = Organization (organización)</strong>.</li>
+<li>El ser humano (L) está en el centro; es aplicable a cualquier operador de primera línea (controlador aéreo, ATSEP, piloto). L es el componente central y <strong>más flexible</strong>; el resto de componentes deben ajustarse a él para evitar que el sistema se vea afectado.</li>
+<li>Factores que afectan al desempeño humano: físicos y fisiológicos (visión, audición, luz, ruido, estrés, ritmos circadianos...) y psicológicos (conocimiento y experiencia, idoneidad de la formación, motivación, confianza, toma de decisiones, fatiga, carga de trabajo, trabajo en equipo...). Los <strong>factores psicosociales</strong> son los factores externos del sistema social de la persona, dentro y fuera del trabajo; suponen presiones adicionales y pueden influir en el enfoque personal de la situación laboral y en la capacidad de manejar el estrés y las situaciones anómalas (el manual cita a la OACI, 2002).</li>
+<li>Interfaces:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Interfaz</th>
+<th>Representa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L-S</strong></td>
+<td>Relación entre el controlador y todos los sistemas de apoyo: reglamentos, manuales, listas de verificación, procedimientos operacionales normalizados</td>
+</tr>
+<tr>
+<td><strong>L-H</strong></td>
+<td>Interfaz entre el ser humano y «la máquina»; si el diseño del equipo se ajusta a las características del individuo (consolas, pantallas, alarmas, ergonomía)</td>
+</tr>
+<tr>
+<td><strong>L-E</strong></td>
+<td>Individuo y entorno de trabajo, interno (temperatura, ruido, ambiente empresarial) y externo (por ejemplo, condiciones meteorológicas)</td>
+</tr>
+<tr>
+<td><strong>L-L</strong></td>
+<td>Individuo y resto de personas en el lugar de trabajo: liderazgo, cooperación, trabajo en equipo (TRM), relaciones entre personal operativo y de gestión y cultura empresarial</td>
+</tr>
+<tr>
+<td><strong>O</strong></td>
+<td>Los factores organizacionales tienen un <strong>mayor peso específico</strong> en el sistema: políticas sobre cómo se gestionan los procedimientos y sus cambios, los sistemas técnicos y las políticas de gestión de las personas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-vision-sistemica-de-la-seguridad-operacional">1.5 Visión sistémica de la Seguridad Operacional</h3>
+<p>El manual abre el apartado 1.3 con los <strong>ocho factores organizacionales</strong>, en este orden:</p>
+<ol>
+<li>La adecuación de los recursos humanos</li>
+<li>La selección del personal adecuado</li>
+<li>La formación recibida</li>
+<li>La atención al bienestar laboral de los profesionales</li>
+<li>La propia eficiencia de la compañía en la gestión de procesos y proyectos</li>
+<li>La planificación y organización del personal</li>
+<li>La gestión de riesgos</li>
+<li>La cultura de la organización y la comunicación</li>
+</ol>
+<p>Ideas clave (paráfrasis):</p>
+<ul>
+<li>La aviación es un <strong>sistema complejo sociotécnico</strong>: de gran envergadura y alta tecnología, que requiere interacciones complejas entre sus componentes humanos y tecnológicos. La complejidad conlleva incertidumbre en las interacciones internas, por lo que el comportamiento es <strong>no lineal</strong> y en cierto grado impredecible; también confiere una elevada capacidad de adaptación.</li>
+<li>El ser humano es el componente <strong>más flexible, adaptable y valioso</strong> del sistema, y también el <strong>más vulnerable</strong>. La expresión «error humano» no ayuda a gestionar el riesgo; debería ser el <strong>punto de partida</strong> que indique dónde se produce un colapso del sistema. Las investigaciones demuestran que muy rara vez el error de un individuo que opera aisladamente precipita un accidente; varios factores causales y contribuyentes convergen en el tiempo y el espacio. La mayoría de ellos están relacionados con la falta de consideraciones de FFHH durante el diseño y la implantación operacional del sistema.</li>
+<li>El «error humano» se hereda de las <strong>concepciones jurídicas</strong> de la responsabilidad y de métodos de investigación derivados de los <strong>procedimientos de investigación criminal de principios del siglo XX</strong>. Palabras como transgresión, negligencia o error buscan a un responsable. En las concepciones modernas, error = una actuación humana que no consigue sus objetivos, despojada de todo juicio de valor. Es un <strong>constructo social</strong>: una instrucción de control errónea que se corrige a tiempo y no provoca un incidente rara vez se considera un error, aunque no se diferencia de otra que acaba en incidente. Así, la clasificación depende más de las consecuencias que de la actuación.</li>
+<li>Visión contemporánea: poner el foco en las deficiencias de seguridad de todo el sistema. Todo accidente o incidente, aunque sea menor, es un <strong>fallo del sistema</strong>, no solo de una persona o grupo, porque el rendimiento humano no opera en el vacío. Este enfoque sistémico en la investigación de sucesos fue adoptado formalmente por la <strong>OACI (1994) en su Anexo 13</strong>.</li>
+<li>En ATM, la prevención y la gestión de riesgos deben contemplar que los principales problemas no corresponden exclusivamente al factor humano, sino a <strong>interacciones mal comprendidas dentro de la propia organización</strong>. El personal operacional actúa en el marco de una organización con una jerarquía de autoridad. La seguridad debe considerarse de forma sistémica, no fragmentada.</li>
+</ul>
+<h3 id="16-systems-thinking-for-safety-los-10-principios-de-eurocontrol">1.6 Systems Thinking for Safety: los 10 principios de EUROCONTROL</h3>
+<p>EUROCONTROL (<strong>2014</strong>) propone una visión sistémica basada en <strong>10 principios básicos</strong> (figura 3; el manual mantiene los nombres originales en inglés):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Principio</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Field expert involvement</strong> (Implicación de los expertos en la materia)</td>
+<td>Para diseñar un sistema hay que entender sus operaciones; los especialistas son decisivos; entender cómo se opera realmente (Work-as-Done) requiere la implicación de quienes realizan el trabajo</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Local rationality</strong> (Racionalidad local)</td>
+<td>La aportación de cada experto debe entenderse desde su propia perspectiva: cada persona actúa en función de sus propios objetivos, limitaciones y contexto</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Just culture</strong> (Cultura justa)</td>
+<td>Organizaciones e individuos asumen una mentalidad abierta, justa y de confianza, aceptando que los profesionales actúan de la mejor forma posible para obtener un buen resultado; empatizar, entender las acciones según su contexto y adoptar un lenguaje que evite juicios de valor</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Demand and pressure</strong> (Demanda y presión)</td>
+<td>Entender la demanda es crucial para comprender las operaciones; el binomio demanda-presión, en relación con eficiencia y capacidad, afecta de forma directa al desempeño</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Resources and constraints</strong> (Recursos y limitaciones)</td>
+<td>El éxito depende de equilibrar recursos adecuados y limitaciones: efectivos humanos, información, competencia, equipos, procedimientos y otros recursos frente a reglas y otras limitaciones del sistema</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Interactions and flows</strong> (Interacciones y flujos)</td>
+<td>Las operaciones dependen de actividades interrelacionadas; gestionar los flujos «end-to-end», diseñar los procesos según su objetivo pero, sobre todo, entender las interacciones que conforman el resultado final</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Trade-offs</strong> (Contrapartidas)</td>
+<td>Para hacer frente al conflicto, la complejidad y la incertidumbre, los profesionales asumen contrapartidas que resuelven objetivos contrapuestos; entender desde su punto de vista cómo compensan <strong>eficiencia y precisión</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Performance variability</strong> (Variabilidad del rendimiento)</td>
+<td>La mejora continua es crucial para afrontar la variabilidad; identificar la variabilidad <strong>deseada y no deseada</strong> para comprender y mejorar el desempeño y la tolerancia del sistema a la variabilidad</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Emergence</strong> (Emergencia del sistema)</td>
+<td>En sistemas sociotécnicos complejos el comportamiento suele ser emergente y no se reduce al de cada componente; una pequeña acción puede tener grandes efectos; los resultados inesperados exigen un enfoque proactivo</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Equivalence</strong> (Equivalencia)</td>
+<td>El éxito y el fracaso se originan en los mismos procesos; el resultado no está ligado necesariamente a las acciones que lo desencadenan; investigar no solo las fallas, sino la variabilidad cotidiana y cómo el sistema se anticipa, reconoce y responde a los eventos</td>
+</tr>
+</tbody>
+</table>
+<p>Consejo de examen: los tres primeros por número son la implicación de los expertos en la materia (1), la racionalidad local (2) y la cultura justa (3); las contrapartidas son el número 7, la variabilidad del rendimiento el 8, la emergencia el 9 y la equivalencia el 10.</p>
+<h3 id="17-safety-i-frente-a-safety-ii">1.7 Safety-I frente a Safety-II</h3>
+<ul>
+<li><strong>Safety-I</strong> (EUROCONTROL 2013): la seguridad entendida como existencia o ausencia de accidentes o incidentes; se desarrolló sobre todo entre los <strong>años 60 y 80</strong>, cuando la demanda de tráfico era menor y los sistemas eran más simples e independientes. Tradicionalmente, las situaciones inseguras se atribuían a la variabilidad y la poca fiabilidad del desempeño individual, en lugar de investigar cómo fallan los sistemas (Woods y Cook 1999).</li>
+<li><strong>Rasmussen (1985, 1986)</strong>: el error humano resulta del desequilibrio entre las exigencias del trabajo y los recursos mentales disponibles; las raíces del éxito y del fracaso son <strong>las mismas</strong>. Una misma decisión puede desembocar en resultados muy distintos según el contexto.</li>
+<li><strong>Simon (1957)</strong> describe la <strong>racionalidad limitada</strong> (<em>bounded rationality</em>): los profesionales operativos están restringidos en sus decisiones por la información limitada de ese momento, la capacidad limitada de la mente humana y el tiempo limitado. De ahí que los controladores afronten continuas <strong>contrapartidas</strong> (<em>trade-offs</em>, Hollnagel 2009), por ejemplo, ser más seguros o más eficientes. EUROCONTROL denomina principio de <strong>Local Rationality</strong> la necesidad de mantener un diálogo constante con el personal.</li>
+<li>En el día a día, el desempeño humano prácticamente siempre transcurre con normalidad, por la capacidad de adaptación de los profesionales. <strong>Safety-II</strong> (EUROCONTROL 2013, Hollnagel 2014): la habilidad de las personas para ajustar su rendimiento al entorno explica por qué los sistemas funcionan. Los profesionales son una fuente necesaria de flexibilidad y resiliencia y están continuamente «creando seguridad». Objetivo: investigar «cómo las cosas normalmente van bien» como base para explicar por qué ocasionalmente «pueden ir mal».</li>
+</ul>
+<p><strong>Tabla 1. Safety-I frente a Safety-II (EUROCONTROL 2013)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Safety-I</th>
+<th>Safety-II</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Definición de seguridad</td>
+<td>Que el mínimo posible de cosas salgan mal</td>
+<td>Que el máximo posible de cosas salgan bien</td>
+</tr>
+<tr>
+<td>Principio de gestión de la seguridad operacional</td>
+<td><strong>Reactivo</strong>: responder cuando algo sucede o cuando un riesgo se categoriza como inaceptable</td>
+<td><strong>Proactivo</strong>: tratar continuamente de anticiparse a los eventos</td>
+</tr>
+<tr>
+<td>Visión del factor humano</td>
+<td>El ser humano se considera predominantemente como una <strong>amenaza</strong></td>
+<td>El ser humano se considera un <strong>recurso necesario para la resiliencia y la flexibilidad</strong> del sistema</td>
+</tr>
+<tr>
+<td>Investigación de accidentes</td>
+<td>Los accidentes ocurren por causa de fallos y mal funcionamiento; el propósito es identificar las causas</td>
+<td>Todos los eventos suceden de la misma forma, con independencia del resultado final; el propósito es entender cómo las cosas normalmente salen bien como base para explicar cómo a veces salen mal</td>
+</tr>
+<tr>
+<td>Evaluación del riesgo</td>
+<td>Los accidentes ocurren por causa de fallos y mal funcionamiento; el propósito es identificar las causas y los factores contribuyentes</td>
+<td>Entender las condiciones en las que la variabilidad de las acciones puede resultar difícil de controlar y de monitorizar debido a la complejidad de los sistemas</td>
+</tr>
+</tbody>
+</table>
+<p>(Nota: la tabla del manual repite la frase «los accidentes ocurren por causa de fallos y mal funcionamiento» en las filas de investigación de accidentes y de evaluación del riesgo de Safety-I; así está impresa.)</p>
+<h3 id="18-work-as-done-frente-a-work-as-imagined">1.8 Work-as-Done frente a Work-as-Imagined</h3>
+<ul>
+<li>La experiencia operacional muestra con frecuencia una brecha entre el sistema tal como se conceptualiza y diseña y el sistema como se opera realmente (Dekker 2006, Hollnagel 2014): el <strong>trabajo como se imagina</strong> (<em>Work-As-Imagined</em>, WAI) es lo que debería ocurrir; el <strong>trabajo como se hace</strong> (<em>Work-As-Done</em>, WAD) es lo que realmente sucede en el día a día. Donde el diseñador ve «aparente simplicidad», el profesional operativo ve «complejidad real».</li>
+<li>Ejemplo del manual: la <strong>implementación prematura de nuevos sistemas</strong> en ATM provoca un comportamiento inesperado, consecuencias no deseadas y alteraciones operativas, y obliga a revisar cómo se opera realmente el sistema, pero en una fase táctica. Entender «cómo se opera realmente» en una sala de control o en un fanal significa entender las estrategias formales e informales que se ajustan a la práctica cotidiana.</li>
+<li><strong>Woods y Dekker (2002)</strong>: los conceptos de diseño son solo <strong>hipótesis</strong> sobre la relación futura entre la tecnología y lo humano; la automatización transforma realmente las prácticas cotidianas.</li>
+<li><strong>Steven Shorrock</strong> plantea más variedades del trabajo humano (URL de la fuente: humanisticsystems.com, 2016): trabajo <strong>prescrito, divulgado, analizado, observado, simulado, instruido, medido y juzgado</strong> (ocho variedades, además del imaginado y el hecho).</li>
+<li>Conclusión del manual: el estudio de los FFHH es esencial para una mayor eficiencia en la gestión de proyectos clave de innovación tecnológica, en las operaciones y en la operación actual.</li>
+</ul>
+<h3 id="19-reglamentacion-sobre-fatiga-estres-y-sustancias-psicoactivas">1.9 Reglamentación sobre fatiga, estrés y sustancias psicoactivas</h3>
+<ul>
+<li><strong>Reglamento (UE) 2017/373</strong>: requisitos comunes para los proveedores de servicios de gestión del tránsito aéreo/navegación aérea y otras funciones de la red de gestión del tránsito aéreo, y para su supervisión. Dentro de los requisitos de organización adicionales, establece la <strong>obligatoriedad de realizar evaluaciones de seguridad operacional ante cambios en el sistema funcional</strong>, con el <strong>impacto en el factor humano como uno de los elementos clave</strong>. Además, el proveedor debe:</li>
+<li>Desarrollar y mantener una <strong>política relativa a la gestión del estrés</strong>, incluido un programa específico para el estrés generado por un <strong>incidente crítico</strong>.</li>
+<li>Desarrollar y mantener una <strong>política relativa a la gestión de la fatiga</strong>, teniendo en cuenta la privación del sueño, la alteración de ritmos circadianos, los horarios nocturnos, el tiempo de actividad acumulado y el reparto de tareas.</li>
+<li>Desarrollar y aplicar un <strong>procedimiento objetivo, transparente y no discriminador</strong> para detectar casos de <strong>uso problemático de sustancias psicoactivas</strong> por parte de los controladores.</li>
+<li>Publicado textualmente en el manual: <strong>Anexo IV, Sección 3 del Reglamento (UE) 2017/373</strong> (requisitos para los proveedores de servicios de control del tránsito aéreo, subparte «ATS.OR», sección 3 sobre desempeño humano):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ATS.OR.300</strong> Ámbito de aplicación</td>
+<td>Requisitos que debe cumplir el proveedor respecto al desempeño humano para: a) prevenir y limitar el riesgo de que el servicio de control lo presten controladores con uso problemático de sustancias psicoactivas; b) prevenir y limitar los efectos negativos del <strong>estrés</strong> sobre los controladores; c) prevenir y limitar los efectos negativos de la <strong>fatiga</strong> sobre los controladores</td>
+</tr>
+<tr>
+<td><strong>ATS.OR.305</strong> Sustancias psicoactivas</td>
+<td>a) desarrollar y aplicar una política y procedimientos para que el uso problemático no afecte a la prestación del servicio de control; b) sin perjuicio de la Directiva 95/46/CE y de la legislación nacional en materia de pruebas, desarrollar y aplicar un procedimiento objetivo, transparente y no discriminador para detectar el uso problemático por parte de los controladores, teniendo en cuenta el punto <strong>ATCO.A.015 del Reglamento (UE) 2015/340</strong>; c) el procedimiento de la letra b) deberá ser <strong>aprobado por la autoridad competente</strong></td>
+</tr>
+<tr>
+<td><strong>ATS.OR.310</strong> Estrés</td>
+<td>De conformidad con ATS.OR.200: a) desarrollar y mantener una <strong>política relativa a la gestión del estrés</strong> de los controladores, que incluya un <strong>programa de gestión del estrés en incidentes críticos</strong>; b) facilitar a los controladores <strong>programas de formación e información</strong> sobre la prevención del estrés, incluido el estrés en incidentes críticos, que complementen la formación sobre FFHH de conformidad con las <strong>secciones 3 y 4 de la subparte D del anexo I del Reglamento (UE) 2015/340</strong></td>
+</tr>
+<tr>
+<td><strong>ATS.OR.315</strong> Fatiga</td>
+<td>De conformidad con ATS.OR.200: a) desarrollar y mantener una <strong>política relativa a la gestión de la fatiga</strong> de los controladores; b) facilitar <strong>programas de información</strong> sobre la prevención de la fatiga, que complementen la misma formación sobre FFHH</td>
+</tr>
+<tr>
+<td><strong>ATS.OR.320</strong> Sistemas de turnos</td>
+<td>a) desarrollar, aplicar y supervisar un sistema de turnos para gestionar los riesgos de la fatiga ocupacional, alternando de forma segura los periodos de servicio y descanso. En el sistema de turnos, el proveedor especifica <strong>ocho elementos</strong> (véase más abajo); b) consultar a los controladores sujetos al sistema de turnos, o a sus representantes, durante su desarrollo y aplicación, para identificar y mitigar los riesgos relacionados con la fatiga que pudieran deberse al propio sistema de turnos</td>
+</tr>
+</tbody>
+</table>
+<p>Los <strong>ocho elementos de ATS.OR.320 a)</strong>, por orden:</p>
+<ol>
+<li>número máximo de <strong>días hábiles consecutivos</strong> de servicio;</li>
+<li>número máximo de <strong>horas por periodo de servicio</strong>;</li>
+<li>duración máxima del servicio de control del tránsito aéreo <strong>sin descansos</strong>;</li>
+<li><strong>relación entre los periodos de servicio y los descansos</strong> sin prestar servicios de control del tránsito aéreo;</li>
+<li><strong>periodos de descanso mínimos</strong>;</li>
+<li>número máximo de <strong>periodos de servicio consecutivos que incluyan la noche</strong>, si procede, dependiendo del número de horas de operaciones de la dependencia de control;</li>
+<li><strong>número mínimo de periodos de descanso tras un periodo de servicio que incluya horas nocturnas</strong>;</li>
+<li><strong>número mínimo de periodos de descanso en un mismo ciclo de turnos</strong>.</li>
+</ol>
+<p>Consejo de examen: los ocho elementos no dan cifras; las cifras las decide el proveedor. El manual tampoco incluye aquí ningún máximo de «X horas» para nada.</p>
+<h3 id="110-normativa-sobre-competencias-en-ffhh-para-atco">1.10 Normativa sobre competencias en FFHH para ATCO</h3>
+<ul>
+<li>Los requisitos de FFHH del Reglamento (UE) 2017/373 <strong>complementan</strong> los ya dispuestos en el <strong>Reglamento (UE) 2015/340 de la Comisión, de 20 de febrero de 2015</strong>, por el que se establecen requisitos técnicos y procedimientos administrativos relativos a las <strong>licencias y los certificados de los controladores de tránsito aéreo</strong>. El Reglamento 2015/340 especifica los conocimientos en materia de FFHH que deben tener los controladores.</li>
+<li>La <strong>formación básica</strong> debe tratar (lista tal como está impresa):</li>
+<li><strong>Introducción a los factores humanos</strong>: técnicas de aprendizaje, relevancia de los FFHH para el ATC, los factores humanos y el ATC.</li>
+<li><strong>Actuaciones humanas</strong>: conducta individual, cultura de seguridad y conducta profesional, salud y bienestar, trabajo en equipo, necesidades básicas de las personas en el trabajo y estrés.</li>
+<li><strong>Error humano</strong>: peligros de los errores, definición de error humano, clasificación de errores, análisis y gestión de riesgos.</li>
+<li><strong>Comunicación</strong>: importancia de una buena comunicación en ATC, procesos y modos de comunicación.</li>
+<li><strong>El entorno de trabajo</strong>: ergonomía y necesidad de un buen diseño, equipamiento y herramientas, automatización.</li>
+<li>Los <strong>cursos de formación de habilitación</strong> deben incluir:</li>
+<li>Factores psicológicos y cognitivos.</li>
+<li>Factores médicos y fisiológicos: <strong>fatiga y fitness</strong>.</li>
+<li>Factores sociales y organizacionales: <strong>TRM, trabajo en equipo y roles, conducta responsable</strong>.</li>
+<li>Estrés.</li>
+<li>Error humano: <strong>errores humanos y transgresiones</strong>.</li>
+<li>Trabajo colaborativo: comunicación, trabajo colaborativo dentro de la misma área de responsabilidad y con otras áreas de responsabilidad, <strong>cooperación controlador/piloto</strong>.</li>
+</ul>
+<h3 id="111-integracion-transversal-de-los-ffhh-en-la-organizacion">1.11 Integración transversal de los FFHH en la organización</h3>
+<ul>
+<li>Integrar los FFHH mejora el sistema en su conjunto y sitúa a las personas como eje central. Una integración efectiva tiene un impacto positivo directo y medible en: <strong>la mejora de la seguridad, la optimización de la organización y de su personal, la mejora de la capacidad y de la eficiencia, la reducción de costes y el cumplimiento de la normativa</strong>.</li>
+<li>Si los FFHH no se gestionan adecuadamente, la organización paga la factura en varias áreas: <strong>compromiso de los empleados, rendimiento y productividad de la plantilla, incidentes causados por error humano, absentismo laboral, satisfacción del cliente, posible daño a la imagen y reputación</strong>.</li>
+<li>Los FFHH llevan años influyendo en la productividad del entorno aeronáutico y demuestran que los objetivos productivos pueden alcanzarse sin comprometer la <strong>salud, la seguridad y el bienestar</strong> del personal. Incrementan el compromiso y la motivación, mejoran la comunicación, el diálogo social y las relaciones laborales, y mejoran la planificación y la eficiencia de la formación.</li>
+<li>El sistema ATM es un sistema sociotécnico. Frase del manual: <strong>«el ser humano siempre es el porqué, y la tecnología el cómo»</strong>.</li>
+<li>Gestión de riesgos: detección proactiva de las amenazas y de su probabilidad, y del grado de impacto humano en la gestión del cambio; un análisis adecuado asegura que el cambio se identifica, evalúa y gestiona, fomentando la participación del personal operativo; asegura que los sistemas se adaptan a las personas. Las técnicas de FFHH permiten fijar <strong>KPI</strong> específicos que vinculan los objetivos de calidad con el comportamiento y el rendimiento humano.</li>
+<li>La integración en el <strong>Sistema de Gestión de la Seguridad (SMS)</strong> permite identificar y entender la variabilidad del desempeño (humano y del sistema), mejora la investigación de sucesos y hace más efectivas las recomendaciones de seguridad; incrementa los márgenes de seguridad y reduce el error humano. La <strong>cultura de seguridad</strong> desempeña un papel determinante: un personal mejor informado y más motivado asume como propios los valores de la organización. En un clima de <strong>cultura justa</strong>, los controladores notifican con confianza las incidencias de seguridad, lo que saca a la luz debilidades y produce un sistema más robusto y resiliente.</li>
+<li><strong>SESAR</strong>: su concepto operacional básico se desarrolló bajo la premisa de que el factor humano es un <strong>pilar fundamental</strong> de los futuros sistemas ATM. Un proveedor necesita una integración sistemática de los FFHH en la implantación de tecnología, mediante procesos que incorporen el análisis del impacto sobre los FFHH <strong>desde la fase de conceptualización</strong> del proyecto, para optimizar costes.</li>
+<li><strong>Dato de la figura 4</strong>: aproximadamente el <strong>70 % del coste final de un proyecto viene fijado por el desarrollo en el primer 10 % de su ciclo de vida</strong> (EUROCONTROL-FAA 2010). Cambiar el diseño en las fases iniciales es mucho más efectivo que hacerlo cuando el sistema ya es operativo; por eso la intervención de FFHH es crítica al principio. (La figura 4 muestra escenarios de costes según 3 estrategias de integración de los FFHH.)</li>
+<li>La organización debe fijar objetivos en materia de FFHH y contar con el personal operativo para la mejora continua, para <strong>validar nuevos conceptos operacionales</strong> y para <strong>determinar la capacidad de los sectores</strong>, con una metodología y herramientas adecuadas y, sobre todo, con la dotación de <strong>recursos humanos y técnicos</strong> de las unidades productivas.</li>
+<li>La normativa europea ha aumentado las exigencias a los proveedores de navegación aérea; su espíritu es garantizar políticas y procedimientos que aseguren la salud y el bienestar del personal y una gestión de riesgos que tenga en cuenta el impacto en los FFHH. Razones empresariales para detectar, controlar, evitar y monitorizar dicho impacto: <strong>prevenir daños; anticiparse a nuevos requerimientos legislativos; evitar sanciones; favorecer la buena imagen pública e interna de la compañía</strong>.</li>
+</ul>
+<hr />
+<h2 id="capitulo-2-factores-organizacionales-y-sociales">Capítulo 2. Factores organizacionales y sociales</h2>
+<h3 id="21-trabajo-en-equipo-y-funciones-del-equipo">2.1 Trabajo en equipo y funciones del equipo</h3>
+<ul>
+<li><strong>Equipo</strong>: grupo de personas que interactúan dinámicamente entre sí, cuyos miembros son <strong>interdependientes</strong> y tienen un <strong>objetivo común</strong>. Hay diferentes tareas, y cada miembro desempeña distintas funciones y roles.</li>
+<li><strong>Grupo frente a equipo</strong> (el manual subraya la diferencia):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Grupo</th>
+<th>Equipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control</td>
+<td>Alto grado de <strong>control externo</strong></td>
+<td>Alto grado de <strong>autonomía</strong></td>
+</tr>
+<tr>
+<td>Énfasis</td>
+<td>En el <strong>resultado</strong></td>
+<td>Tanto en el <strong>resultado como en el proceso</strong></td>
+</tr>
+<tr>
+<td>Comunicación</td>
+<td>Limitada al superior inmediato</td>
+<td><strong>Comunicación abierta y participación</strong></td>
+</tr>
+<tr>
+<td>Esfuerzo</td>
+<td>Individual</td>
+<td>Esfuerzo colectivo para resolver problemas</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Finalidad de la formación de equipos: reforzar la <strong>seguridad de la operación</strong> como propósito fundamental y, además:</li>
+<li>Mejorar la gestión y la distribución del trabajo (agrupar funciones, deberes y tareas y asignarlas a los miembros, que responden de ellas).</li>
+<li>Que cada miembro conozca y acepte sus funciones y las de los demás y las ejecute con precisión y responsabilidad; es imprescindible un grado elevado de <strong>flexibilidad</strong>.</li>
+<li>Un <strong>sistema de monitorización mutua</strong>: los miembros alertan a los demás de que se está alcanzando un límite operativo o de que la actuación individual se desvía.</li>
+<li>Una constante <strong>comunicación en bucle cerrado</strong> de toda la información relevante a todos los afectados, tanto al emitirla como al escuchar.</li>
+<li>Sentido de <strong>interdependencia</strong> con objetivos compartidos: se reconoce a cada miembro como portador de las habilidades necesarias para el objetivo común.</li>
+<li>Crear <strong>sinergias</strong> para mejorar la resolución de problemas mediante una coordinación eficiente.</li>
+</ul>
+<h3 id="22-gestion-de-los-recursos-del-equipo-trm">2.2 Gestión de los recursos del equipo (TRM)</h3>
+<ul>
+<li><strong>TRM = <em>Team Resource Management</em> (Gestión de Recursos de Equipo)</strong>. Deriva del <strong>CRM (<em>Cockpit/Crew Resource Management</em>)</strong> de la aviación, trasladado al ámbito del control; la terminología se usa también en la sanidad, la energía nuclear y las operaciones militares.</li>
+<li>Conceptualmente, TRM es una <strong>filosofía de trabajo</strong> que trata de maximizar la eficiencia en las interacciones interpersonales y en el uso de los recursos personales; emerge del reconocimiento de que los seres humanos somos <strong>proclives a cometer errores y estos no se pueden eliminar en su totalidad</strong>.</li>
+<li>En la práctica, comprende una batería de <strong>habilidades de gestión intrapersonal e interpersonal</strong> para hacer un uso efectivo de todos los recursos dentro de un equipo.</li>
+<li><strong>Categorías de habilidades TRM (6, por orden)</strong>:
+  1. Trabajo en equipo
+  2. Gestión de roles dentro de un equipo
+  3. Comunicación interpersonal
+  4. Conciencia situacional
+  5. Resolución de problemas y toma de decisiones
+  6. Gestión del estrés</li>
+<li>Cada habilidad se divide en habilidades y estrategias más concretas, todas de naturaleza <strong>conductual</strong> (trazables a aspectos concretos del funcionamiento humano). TRM es una <strong>aplicación práctica y adaptada de los factores humanos a un ámbito profesional particular</strong>, en este caso el ATM.</li>
+<li><strong>Principales beneficios</strong>:</li>
+<li>Programas de instrucción que aumentan la cooperación y la comunicación entre los miembros del grupo y reducen la probabilidad de error.</li>
+<li>Mayor eficiencia en las actuaciones individuales y de grupo.</li>
+<li>Mejor utilización de los recursos humanos disponibles: una distribución bien planificada de las cargas de trabajo y responsabilidades evita saturar la capacidad de un individuo y produce <strong>redundancia</strong>.</li>
+<li>Continuidad y estabilidad en la forma de trabajar del equipo.</li>
+<li>Mayor flexibilidad y capacidad de adaptación a situaciones nuevas.</li>
+<li>Mayor sentido de organización, con todos los equipos recibiendo la misma formación sobre temas clave de la operación ATM.</li>
+<li>Mayor motivación.</li>
+</ul>
+<hr />
+<h2 id="capitulo-3-factores-psicologicos">Capítulo 3. Factores psicológicos</h2>
+<h3 id="31-cognicion-capacidades-y-limitaciones-del-ser-humano">3.1 Cognición: capacidades y limitaciones del ser humano</h3>
+<ul>
+<li>Los sentidos perciben estímulos (visuales, sonoros, olfativos...) mediante el <strong>registro sensorial</strong>; les damos significado y los almacenamos en la memoria gracias a procesos cognitivos.</li>
+<li><strong>Memoria a corto plazo</strong>: solo permite guardar un espacio limitado de información durante un breve espacio de tiempo, de <strong>20 a 30 segundos</strong>; funciona como la <strong>memoria de trabajo</strong> de un ordenador.</li>
+<li><strong>Memoria a largo plazo</strong>: sirve para «salvar la información» para el futuro; tiene <strong>capacidad ilimitada</strong>, pero necesita <strong>más tiempo</strong>.</li>
+<li>Las capacidades conviven con limitaciones cognitivas, psicológicas y fisiológicas. Dos actividades que requieren los <strong>mismos recursos de atención</strong> pueden confluir y aumentar la carga de trabajo. La atención es limitada; gracias a la formación, el aprendizaje y la experiencia almacenamos múltiples patrones que conforman <strong>modelos mentales</strong>, representaciones de la realidad.</li>
+<li>Un método para consolidar la información a largo plazo es el <strong>ensayo repetitivo</strong> de una actividad: cuanto más se recurre a la información almacenada, más fácil resulta utilizarla de nuevo.</li>
+<li>A continuación el manual desarrolla dos aspectos del procesamiento humano de la información en ATM: la conciencia situacional y la carga de trabajo mental.</li>
+</ul>
+<h3 id="32-conciencia-situacional-sa">3.2 Conciencia situacional (SA)</h3>
+<ul>
+<li>Objetivo final del ATC: un flujo de tránsito aéreo seguro, ordenado y expedito. Funciones básicas: <strong>prevención de colisiones, supervisión del tráfico, gestión del espacio aéreo, comunicaciones y toma de decisiones</strong>. En un entorno de radar, el espacio aéreo se divide en sectores, administrados por un <strong>controlador ejecutivo y un controlador planificador</strong>. En sectores de alta densidad, el controlador trabaja bajo alta presión, interna y externa, en un marco temporal reducido; debe detectar, reconocer y diagnosticar problemas potenciales, determinar las alternativas disponibles y evaluar cuánto riesgo es aceptable.</li>
+<li><strong>Definición de Endsley</strong> (cita): «la percepción de los elementos en el entorno dentro de un volumen de tiempo y espacio, la comprensión de su significado y la proyección de su estado en un futuro próximo». <strong>Tres niveles de SA</strong>:
+  1. <strong>Percepción</strong> de la situación
+  2. <strong>Comprensión</strong> de la situación
+  3. <strong>Proyección</strong> de esa situación en el futuro</li>
+<li>Figura 5: modelo de conciencia situacional de Endsley y su relación con los procesos de toma de decisión y de ejecución, y con los factores externos e individuales.</li>
+<li><strong>Isaac y Ruitenberg</strong> describen la SA como un estado o proceso cognitivo asociado con la evaluación de <strong>señales pasadas y presentes</strong> en una situación dinámica. Para un piloto puede ser el conocimiento de una persona y su estado dentro de un espacio y tiempo continuos; para el controlador, una predicción individual dentro de un continuo de espacio/tiempo conocido y especificado.</li>
+<li>La mayoría de los controladores no sabe dar una definición formal de la SA; de manera informal dicen <strong>«ver el tráfico»</strong> o <strong>«adelantarse al tráfico»</strong>. Las dificultades para mantener la SA se expresan como <strong>«ir por detrás del tráfico»</strong> o <strong>«perder el control»</strong>. Perder el control está directamente relacionado con la falta de tiempo, conocimiento, competencia y recursos cognitivos, específicamente en <strong>eventos inesperados</strong>.</li>
+<li>Factores que afectan a la SA: Endsley distingue <strong>factores individuales</strong> (límites de la atención humana y de la memoria de trabajo), <strong>factores ambientales</strong> y <strong>factores del sistema</strong> (factores estresantes físicos y psicológicos). La figura 6 recoge los elementos con impacto en la SA del controlador según <strong>Isaac y Ruitenberg (1997)</strong>.</li>
+<li>Lo más relevante en la práctica: la SA <strong>no es una foto fija</strong>, sino un <strong>modelo mental dinámico</strong>; un conjunto de procesos que modelan la información percibida para construir una imagen mental. Sobre este modelo se construyen posibles cursos de acción, la mente imagina situaciones y proyecta el estado futuro; una vez que actuamos, el sistema cambia, así que la monitorización y la captura de información siguen alimentando el modelo mental dinámico.</li>
+<li>En TRM se trabaja mucho la SA: <strong>cuando al modelo mental le falta información, la mente lo rellena con asunciones</strong> basadas en la experiencia pasada o en lo más probable. Dos consecuencias vitales para la seguridad: (1) <strong>el equipo es también una fuente de información vital</strong> que hace robusta la SA; (2) <strong>la mayoría de los incidentes de tránsito aéreo presentan alguna asunción</strong>. Esto permite desarrollar estrategias prácticas de captura, monitorización y verificación de la información, y estrategias defensivas, sabiendo que nuestra mente, por su funcionamiento natural (y no defectuoso), necesita a veces realizar asunciones.</li>
+</ul>
+<h3 id="33-carga-de-trabajo-mental">3.3 Carga de trabajo mental</h3>
+<ul>
+<li>Investigada en aviación, ATC, operaciones militares y conducción de vehículos. Los estudios señalan <strong>3 dimensiones fundamentales</strong> que afectan a la carga de trabajo mental:
+  1. <strong>Presión temporal de la tarea</strong> (tiempo disponible frente a tiempo necesario)
+  2. <strong>Recursos cognitivos de procesamiento que demanda la tarea</strong>
+  3. <strong>Aspectos emocionales</strong></li>
+<li><strong>Definición (Sebastian y del Hoyo, 2002)</strong>: el conjunto de requerimientos mentales, cognitivos o intelectuales a los que se ve sometido el trabajador a lo largo de su jornada laboral, es decir, el nivel de esfuerzo intelectual necesario para desempeñar sus tareas.</li>
+<li><strong>UNE-EN ISO 10075-2</strong>: orientaciones técnicas y organizativas para diseñar sistemas de trabajo que prevengan el riesgo de la carga de trabajo mental. Distingue entre <strong>presión mental</strong> (<em>stress</em>), «el conjunto de todas las influencias apreciables ejercidas por factores externos que afectan mentalmente al ser humano», y <strong>tensión mental</strong> (<em>strain</em>), «el efecto inmediato de la presión mental en el individuo». (Presión = <em>stress</em>, tensión = <em>strain</em>.)</li>
+<li><strong>Ley de Yerkes-Dodson</strong>: la relación entre estrés (activación) y rendimiento tiene forma de <strong>U invertida</strong>: el rendimiento es óptimo cuando el nivel de activación es <strong>moderadamente elevado</strong>; si es demasiado alto o demasiado bajo, repercute negativamente en la tarea. El mejor modo de potenciar el rendimiento es aumentar la motivación, pero la carga de trabajo no debe llegar a ser difícil de manejar, porque interfiere con el desarrollo natural de la actividad y genera sentimientos desagradables.</li>
+<li>Figura 7: ley de Yerkes-Dodson y cómo varía según la complejidad de la tarea: <strong>cuando la tarea es compleja, el umbral de rendimiento máximo se alcanza antes que cuando la tarea es sencilla</strong>.</li>
+<li>Se piensa erróneamente que los periodos de baja densidad de tráfico no son un problema de FFHH: <strong>mantener una atención continuada en tareas de monitorización o de atención vigilante</strong> en entornos en los que aparentemente no hace falta puede ocasionar una fatiga tan alta o más que en periodos de alta carga de trabajo mental. En el ATC, los profesionales saben que <strong>después de «una vara de tráfico»</strong> hay muchas probabilidades de cometer un error o de no detectar un problema, porque los recursos mentales están saturados por una atención sostenida en el tiempo. La comunidad científica enumera características de los entornos proclives a una pérdida de rendimiento en la detección de señales, como el <strong>tiempo que hay que mantener la atención vigilante</strong> y el <strong>nivel de atención sostenida necesario</strong>.</li>
+</ul>
+<h3 id="34-grado-de-complejidad-y-su-impacto-en-el-individuo-y-el-sistema">3.4 Grado de complejidad y su impacto en el individuo y el sistema</h3>
+<ul>
+<li>Opinión de consenso: <strong>la complejidad impulsa la carga de trabajo mental del controlador, lo que limita en última instancia la capacidad ATC</strong>.</li>
+<li>Factores que influyen en la complejidad del tráfico aéreo (tal como figuran, en orden):</li>
+<li>Características del espacio aéreo (complejidad del sector, flujos de tráfico, áreas de espacio aéreo restringidas, proximidad a otro sector o FIR...).</li>
+<li>Volumen y tipo de tráfico a gestionar (número de tráficos, plan de sector, tráficos en evolución, tráficos en vectorización, IFR frente a VFR, tráficos en espera...).</li>
+<li>Situaciones de tráfico, como conflictos a gestionar o flujos que requieren monitorización continua.</li>
+<li>Congestión de la frecuencia.</li>
+<li>Gestión de emergencias y situaciones especiales.</li>
+<li>Tiempo disponible para detectar y solucionar conflictos.</li>
+<li>Tiempo de ocupación de un tráfico en el sector.</li>
+<li>Número de cartas de acuerdo asociadas a un sector.</li>
+<li>Número de aeropuertos y fijos asociados a un sector.</li>
+<li>Procedimientos.</li>
+<li>Meteorología.</li>
+<li>Estado de los sistemas (radioayudas, radiotelefonía...).</li>
+<li>Coordinaciones necesarias para completar tareas.</li>
+<li>Trabajo en equipo.</li>
+<li>Herramientas tecnológicas de soporte para el controlador.</li>
+<li>Factores personales: experiencia del controlador, habilidades, nivel de estrés y fatiga.</li>
+<li><strong>Kontogiannis y Malakis (2013)</strong> desarrollaron un prototipo de <strong>taxonomía de las estrategias de mitigación de la complejidad</strong> de los controladores, que especifica funciones cognitivas, estrategias y marcadores conductuales. Ejemplo del manual (función «Ajustar la monitorización y anticipación»): estrategias (1) identificar flujos de tráfico y posibles conflictos gracias a la experiencia; (2) simplificar la presentación radar; (3) anticipación. Marcadores: (1) agrupar los tráficos según necesidades (autorizados a ILS frente a tráficos en espera); (2) «limpia la bahía y la pantalla»; (3) visualiza y anota posibles conflictos.</li>
+<li>Al aumentar la complejidad, aumentan el número de tareas que <strong>compiten</strong> por los recursos mentales, el ritmo de trabajo y el número de <strong>interrupciones debidas al trabajo en equipo</strong>. En situaciones complejas los controladores recurren a tácticas: elegir soluciones que requieran <strong>menos coordinaciones</strong>, usar <strong>separación vertical</strong> para los conflictos más complejos, dar más autorizaciones iniciales <strong>«seguras»</strong> y revisarlas después.</li>
+<li>Otro efecto: <strong>se reduce la calidad del servicio en favor de una mayor seguridad</strong>, priorizando las tareas más importantes, simplificando los problemas y anticipándose a las amenazas. Pero este esfuerzo cognitivo requiere tiempo adicional, lo que aumenta la carga de trabajo mental y afecta a las actividades rutinarias, <strong>facilitando el error humano</strong>. Bajo presión extrema, el controlador tiende a actuar <strong>de la forma que normalmente funciona</strong> y en ocasiones a <strong>omitir acciones</strong>.</li>
+</ul>
+<hr />
+<h2 id="capitulo-4-la-comunicacion-humana">Capítulo 4. La comunicación humana</h2>
+<p>Idea de apertura: un fallo de comunicación entre torres (los controladores no pueden hablarse para transferir aeronaves ni iniciar una aproximación) es una urgencia; en términos de FFHH, la comunicación tiene una importancia similar para la eficacia de nuestro trabajo: un fallo puede anular la ventaja de la experiencia, disminuir la capacidad del equipo humano o contribuir a gestar un conflicto innecesario.</p>
+<h3 id="41-el-proceso-humano-de-comunicacion">4.1 El proceso humano de comunicación</h3>
+<ul>
+<li><strong>Definición</strong>: proceso mediante el cual un <strong>emisor</strong> transmite un <strong>mensaje</strong>, de manera verbal o no verbal, a un <strong>receptor</strong> mediante un <strong>canal</strong> concreto y con un <strong>código</strong> común a ambos, con el fin de difundir, intercambiar o compartir información, ideas o sentimientos.</li>
+<li>Componentes:</li>
+<li><strong>Emisor</strong>: el que emite el mensaje.</li>
+<li><strong>Receptor</strong>: aquel que recibe el mensaje.</li>
+<li><strong>Mensaje</strong>: la información que el emisor quiere transmitir.</li>
+<li><strong>Canal</strong>: medio físico por el que se transmite el mensaje (por ejemplo, el hilo telefónico o la frecuencia de radio).</li>
+<li><strong>Mismo código</strong>: conjunto de códigos para codificar y descodificar adecuadamente la información (por ejemplo, la jerga técnica o los códigos de un entorno compartido).</li>
+<li><strong>Barreras</strong>: para luchar contra ellas y ser buenos comunicadores hay que entender que (i) con independencia de nuestra voluntad de actuar de forma coordinada y de lo correctamente que nos expresemos, pueden producirse distorsiones que no son «culpa de nadie» pero desembocan en un malentendido y, por tanto, en un incidente; (ii) <strong>quien mejor comunica es quien mejor escucha</strong>; (iii) <strong>quien comunica tiene la responsabilidad de asegurarse de que el mensaje ha llegado adecuadamente</strong>; si no es así, debe buscar vías alternativas.</li>
+<li><strong>Interferencias o ruido</strong>: hacen que la comunicación no sea eficaz. Ejemplo: «por favor, pásame el destornillador» con ruido; la otra persona no reacciona: mi comunicación fue <strong>correcta, pero no eficaz</strong>. Aquí el manual introduce el concepto de <strong>«colación»</strong> (comprobación de lo recibido: colacionar), que busca comprobar que las interferencias no merman la ejecución del mensaje.</li>
+<li>Interferencias propias del ser humano: interpretamos los mensajes según nuestros conocimientos y experiencia. Ejemplo: «date prisa» puede significar «inmediatamente» para uno y «un par de días» para otro.</li>
+<li><strong>Feedback o retroalimentación</strong>: la respuesta que da el receptor sobre la información del emisor. No tiene por qué ser explícita: <strong>el silencio como respuesta es, en sí mismo, un mensaje</strong>.</li>
+<li><strong>Propósito de la comunicación en las organizaciones</strong>: no es que alguien te entienda, sino <strong>generar una acción común</strong>, conseguir que el receptor actúe en un sentido u otro. Por tanto, la comunicación en la organización es <strong>persuasiva</strong>. En el ejemplo del destornillador, sabes que tu comunicación ha sido <strong>eficaz cuando te lo proporciona</strong>.</li>
+</ul>
+<h4 id="escucha-activa">Escucha activa</h4>
+<ul>
+<li>Escuchar combina: <strong>oír</strong> (la recepción real de sonidos), <strong>comprender los sonidos</strong>, <strong>comprender la interpretación</strong>, <strong>retener y recordar</strong> lo oído y <strong>actuar o responder</strong> de algún modo a lo oído.</li>
+<li>Escuchar es, ante todo, una muestra de <strong>respeto</strong>. Es una conducta que se aprende, una habilidad que hay que desarrollar. Escuchar activamente es una de las habilidades más importantes y difíciles del proceso comunicativo; significa escuchar y entender la comunicación desde el punto de vista del <strong>receptor</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Factores que favorecen la escucha activa</th>
+<th>Factores que dificultan la escucha activa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mantener el contacto visual</td>
+<td>Utilizar un lenguaje corporal inhibidor</td>
+</tr>
+<tr>
+<td>Hacer pequeños resúmenes de lo que dice y siente la otra persona</td>
+<td>Abusar de distracciones</td>
+</tr>
+<tr>
+<td>Hacer preguntas abiertas</td>
+<td>Dejar los temas a medias</td>
+</tr>
+<tr>
+<td></td>
+<td>Hacer interrupciones constantes</td>
+</tr>
+<tr>
+<td></td>
+<td>Hacer comentarios cortantes o gratuitos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-factores-que-afectan-a-la-comunicacion-verbal">4.2 Factores que afectan a la comunicación verbal</h3>
+<p>Sobre todo en situaciones de tensión, conviene valorar los malentendidos como normales, ya que no obedecen necesariamente a la «voluntad de no entender» ni a la «cabezonería» de una de las partes.</p>
+<p><strong>Barreras ambientales</strong>: barreras físicas del entorno, impersonales, que dificultan una buena comunicación (ruidos, iluminación...). Ejemplos: incomodidad física (calor en la sala, una silla incómoda), distracciones visuales, interrupciones y ruidos (timbre, teléfono, alguien con tos).</p>
+<p><strong>Barreras inherentes al ser humano</strong>: limitaciones propias de las personas, <strong>de tres tipos: cognitivas, fisiológicas y psicológicas</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Causa</th>
+<th>Ejemplos del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>a. Cognitivas</strong></td>
+<td>Dificultades en el procesamiento cognitivo</td>
+<td><strong>Barreras verbales</strong>: relacionadas con la forma de hablar, por ejemplo, personas que hablan muy rápido o cuya lengua materna es diferente de la del receptor. <strong>Barreras semánticas</strong>: una parte utiliza palabras con un significado y la otra las interpreta de manera diferente (el manual escribe «el emisor ... el emisor», errata por receptor). <strong>Falta de conocimiento de los procedimientos o de términos técnicos</strong>: cualquiera de las dos partes puede tener conocimientos obsoletos sin ser consciente de ello. <strong>Carga de trabajo</strong>: la fatiga puede impedir procesar bien la información aunque haya capacidad y la información esté bien formulada. <strong>Pocas referencias sobre el receptor</strong>: lleva a no adaptar convenientemente el mensaje, al suponer códigos o conocimientos que el receptor no posee</td>
+</tr>
+<tr>
+<td><strong>b. Fisiológicas</strong></td>
+<td>Limitaciones fisiológicas de la persona</td>
+<td>En el emisor: voz débil, pronunciación defectuosa. En el receptor: sordera, problemas visuales</td>
+</tr>
+<tr>
+<td><strong>c. Psicológicas</strong></td>
+<td>Estados emocionales del emisor o del receptor</td>
+<td>El miedo, la tristeza o la ira pueden condicionar las respuestas. Circunstancias como el estrés pueden llevar a una comunicación excesivamente agresiva que provoque una reacción negativa en la otra parte</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Los dos grandes antídotos para salvar las barreras</strong>:</p>
+<ol>
+<li><strong>La empatía</strong>: el término tiene su origen en un vocablo griego que hace referencia a la capacidad de percibir los sentimientos ajenos como propios. Hoy se entiende como un sentimiento de participación afectiva en la realidad que afecta a otra persona, saber «leer» al otro. Es una actitud positiva que permite establecer relaciones saludables: ponerse en el lugar del otro, respetar sus derechos, atribuir una intención o explicación razonable a su conducta. Debe acompañarse de la segunda habilidad, para evitar reacciones agresivas o la sensación de que no se respetan los derechos propios.</li>
+<li><strong>La asertividad</strong>: la capacidad de comunicar a quienes nos rodean nuestros sentimientos y necesidades, evitando herirlos u ofenderlos. Se suele definir como la capacidad de decir «no», de defender la postura propia <strong>sin atacar a la otra parte</strong>.</li>
+</ol>
+<p><strong>Tres formas básicas de reaccionar ante una situación (figura de la p. 37)</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Estilo</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pasividad</strong></td>
+<td>Pensar que los demás tienen más derechos que nosotros; ser incapaces de expresar con honestidad nuestras ideas y sentimientos y, por tanto, dejar que prevalezcan otros, que no respetan nuestras ideas</td>
+</tr>
+<tr>
+<td><strong>Asertividad</strong></td>
+<td>Expresión directa de los propios sentimientos, necesidades, derechos u opiniones legítimos, <strong>sin amenazar ni castigar a los demás y respetándolos</strong></td>
+</tr>
+<tr>
+<td><strong>Agresividad</strong></td>
+<td>Defensa de los derechos personales y expresión de los propios pensamientos de forma deshonesta, normalmente inadecuada, <strong>sin respetar los derechos de la otra persona</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Texto al pie de la figura: la asertividad implica <strong>respeto hacia los demás, respeto hacia nuestras opiniones y respeto hacia los derechos y necesidades de la otra persona</strong>. El manual concluye: la comunicación asertiva ayuda notablemente a mejorar la actuación de un equipo.</p>
+<h3 id="43-la-comunicacion-no-verbal">4.3 La comunicación no verbal</h3>
+<ul>
+<li>Según <strong>Allan Pease</strong> («El lenguaje del cuerpo»), un mensaje entre personas emplea <strong>tres recursos</strong>:</li>
+<li><strong>Lenguaje verbal</strong>: las palabras (lo que podría transcribirse en papel).</li>
+<li><strong>Lenguaje no verbal</strong>: el lenguaje corporal: gestos, posturas.</li>
+<li><strong>Lenguaje paraverbal</strong>: volumen, tono de voz...</li>
+<li>Según este autor, el lenguaje no verbal puede suponer <strong>más del 50 %</strong> de la comunicación entre personas; con el paraverbal, el <strong>80 %</strong>.</li>
+<li>Significado: nuestra interpretación de una misma información varía con la expresión facial de quien habla o con el tono de voz (firme, vacilante...). La comunicación no verbal y paraverbal se relaciona con el impacto de las <strong>emociones</strong> en la comunicación interpersonal. (El manual escribe «expresión facial (lenguaje verbal)»; la expresión facial es en realidad no verbal.)</li>
+<li><strong>Emociones básicas del ser humano</strong> (6, en el orden del manual) y el comentario del manual:
+  1. <strong>Tristeza</strong>: dejarme llevar por ella no ayuda; al superarla, acepto una pérdida o tomo conciencia de una situación.
+  2. <strong>Asco</strong>: adaptativamente positivo; ayuda a rechazar algo que no es bueno para mi salud.
+  3. <strong>Sorpresa</strong>: ayuda a reconocer la novedad, siempre que no conduzca a una alarma constante.
+  4. <strong>Ira</strong>: mal gestionada es una pérdida de energía; bien gestionada me lleva a rebelarme contra una situación no deseada y aporta las fuerzas para afrontarla.
+  5. <strong>Alegría</strong>: necesaria para «recargar pilas» y facilitar la interacción.
+  6. <strong>Miedo</strong>: lado positivo: nos hace más responsables y cautos; lado negativo: puede paralizarnos.</li>
+</ul>
+<hr />
+<h2 id="capitulo-5-la-fatiga">Capítulo 5. La fatiga</h2>
+<p>Datos de introducción:</p>
+<ul>
+<li>La fatiga es un <strong>estado natural</strong> del individuo que forma parte de su condición humana y que en la mayor parte de los casos no tiene un impacto significativo. Pero si no se presta atención a este estado, el impacto en las capacidades físicas y mentales puede ser muy importante. Es un <strong>mecanismo biológico que no puede suprimirse de forma natural</strong> y que impulsa al individuo a descansar para recuperarse. Ignorar ese impulso interno degrada el <strong>rendimiento cognitivo</strong>, con consecuencias importantes en una actividad profesional relacionada con la seguridad.</li>
+<li>La aviación desarrolla tareas relacionadas con la seguridad y exige un sistema de trabajo con <strong>rotación por distintos turnos, incluidos los nocturnos</strong>. Trabajar de noche es <strong>inherente a la ocupación de CTA</strong>; se diferencia del trabajo diurno en las condiciones del entorno (físicas, como la falta de luz; propias del tráfico, como la reducción de la afluencia) y en las del propio individuo (fisiológicas). Otros factores inductores de fatiga <strong>no relacionados con los procesos circadianos</strong> están vinculados con la <strong>carga de trabajo mental sostenida en el tiempo</strong> y pueden combinarse con factores circadianos, con el estrés y con otros factores personales.</li>
+</ul>
+<h3 id="51-principios-relativos-al-sueno">5.1 Principios relativos al sueño</h3>
+<ul>
+<li><strong>Nadie es inmune a la fatiga</strong>. Las necesidades operacionales de la aviación evolucionan a la par que los avances tecnológicos, pero la fisiología humana no varía; por ello la única respuesta posible ante los efectos de la fatiga es una <strong>adecuada gestión de la fatiga</strong>, apoyada en los avances científicos de la fisiología humana.</li>
+</ul>
+<h3 id="52-necesidad-de-dormir">5.2 Necesidad de dormir</h3>
+<ul>
+<li>Dormir es una de las necesidades primordiales del ser humano; el cuerpo atiende a <strong>ciclos de sueño y vigilia</strong>, acordes con la noche y el día. Limitar los periodos de vigilia y dormir lo suficiente es fundamental para que el cerebro ordene y almacene las experiencias del día y recupere la capacidad de los sistemas esenciales.</li>
+<li>Según la <strong>OMS</strong> y la <strong>National Sleep Foundation (EE. UU.)</strong>, un adulto <strong>de entre 18 y 64 años</strong> debe dormir un promedio diario de <strong>8 horas</strong> para recuperarse de una actividad diaria normal. Es una media; las necesidades individuales varían.</li>
+<li>No solo cuenta la cantidad, sino la <strong>calidad</strong>: lo ideal es un sueño profundo y sin interrupciones, que incluya ciclos ininterrumpidos de los dos tipos de sueño: <strong>no-REM</strong> (sin movimientos rápidos del ojo) y <strong>REM</strong> (<em>Rapid Eye Movements</em>, con movimientos rápidos del ojo).</li>
+<li><strong>El sueño no-REM (fase de sueño lento) tiene cuatro fases; con la REM son cinco fases</strong> que se alternan cíclicamente. <strong>Cada 90/100 minutos, aproximadamente, comienza un nuevo ciclo de sueño; los últimos 20 o 30 minutos de cada ciclo corresponden a la fase REM</strong>.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I</strong></td>
+<td><strong>Sueño ligero</strong>; la persona todavía es capaz de percibir la mayoría de los estímulos (auditivos y táctiles). El tono muscular disminuye respecto al estado de vigilia y aparecen <strong>movimientos oculares lentos</strong>. Poco o nada reparador</td>
+</tr>
+<tr>
+<td><strong>II</strong></td>
+<td>El sistema nervioso <strong>bloquea las vías de acceso de la información sensorial</strong>, lo que origina una desconexión con el entorno y facilita dormir. <strong>Ocupa el 50 % del tiempo de sueño de un adulto</strong>. Tono muscular menor que en la fase I; desaparecen los movimientos oculares. <strong>Parcialmente reparador</strong>, no suficiente para que el descanso se considere completo</td>
+</tr>
+<tr>
+<td><strong>III</strong></td>
+<td><strong>Sueño más profundo («DELTA»)</strong>, con un bloqueo sensorial que se intensifica. Despertar en esta fase produce <strong>confusión y desorientación</strong>. No se sueña; <strong>disminución del 10 al 30 por ciento de la tensión arterial y del ritmo respiratorio</strong>; <strong>aumenta la producción de la hormona del crecimiento</strong>. Tono muscular aún más reducido que en la II; tampoco hay movimientos oculares</td>
+</tr>
+<tr>
+<td><strong>IV</strong></td>
+<td><strong>Sueño de mayor profundidad</strong>, con actividad cerebral más lenta (predominio de actividad delta). Como la III, <strong>esencial para la recuperación física y, especialmente, psíquica</strong> (los déficits de las fases III y IV causan <strong>somnolencia diurna</strong>). Tono muscular muy reducido. No es la fase típica de los sueños, pero pueden aparecer en forma de imágenes, luces, figuras... sin línea argumental</td>
+</tr>
+<tr>
+<td><strong>REM</strong></td>
+<td><strong>Sueños en forma de narración</strong>, con hilo argumental, aunque sea absurdo. <strong>Actividad eléctrica cerebral rápida</strong>. <strong>El tono muscular es nulo (atonía muscular o parálisis)</strong>, lo que impide que la persona dormida materialice sus alucinaciones oníricas y se haga daño</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Además de la interrupción de los ciclos no-REM y REM, la calidad del sueño se ve afectada negativamente por el <strong>envejecimiento, los síntomas de trastornos del sueño (por ejemplo, la apnea), los factores medioambientales (iluminación o temperatura inadecuadas) y la ingesta de cafeína, alcohol o nicotina</strong>.</li>
+<li>Los estudios demuestran que el descanso de los CTA <strong>durante el turno de noche en su lugar de trabajo</strong> es <strong>más ligero y con frecuencia interrumpido (de tipo no-REM)</strong> y no puede compararse con el sueño en el domicilio.</li>
+</ul>
+<h3 id="53-perdida-y-recuperacion-del-sueno">5.3 Pérdida y recuperación del sueño</h3>
+<ul>
+<li>Reducir la cantidad y/o la duración, <strong>aunque sea por una sola noche</strong>, reduce la capacidad para desempeñar las tareas y aumenta la somnolencia. El efecto varía entre individuos según su tolerancia a la privación de sueño.</li>
+<li>Esta restricción es la <strong>«deuda de sueño»</strong>; si se prolonga durante varias noches, <strong>se acumula</strong> y contribuye a disminuir progresivamente el nivel de atención y la capacidad de trabajo: a menos horas descansadas, mayor degradación. Recuperar un nivel óptimo de las capacidades cognitivas requiere <strong>un periodo de descanso mayor que el del sueño nocturno habitual</strong>.</li>
+<li><strong>Microsueños</strong>: duran <strong>solo unos segundos</strong>, en los que el cerebro «desconecta» y el individuo se duerme; son tan cortos que pueden pasar desapercibidos, pero el cerebro pierde la conexión con cualquier estímulo exterior, lo que es especialmente peligroso en tareas relacionadas con la seguridad.</li>
+<li>Privar al organismo de descanso de forma continuada aumenta el riesgo de <strong>obesidad, diabetes tipo 2 y afecciones cardiovasculares</strong>. Para estar saludable, dormir adecuadamente es tan importante como comer de forma equilibrada o hacer deporte.</li>
+</ul>
+<h3 id="54-procesos-del-sueno-e-influencia-en-las-capacidades-de-la-persona">5.4 Procesos del sueño e influencia en las capacidades de la persona</h3>
+<p>El sueño y la vigilia están regulados principalmente por <strong>tres procesos</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Proceso</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Proceso circadiano (C)</strong></td>
+<td>El <strong>reloj corporal</strong> interno que regula la temperatura, la producción hormonal, etc., y se rige por un patrón de unas <strong>24 horas</strong>. Su pico más bajo de actividad ocurre en la segunda parte de la noche (aprox. <strong>entre las 3 y las 6 a. m.</strong>). Este mínimo es el <strong>mínimo de la ventana circadiana (WOCL, <em>Window Of Circadian Low</em>)</strong>, que coincide con la <strong>temperatura basal mínima corporal</strong>, cuando se producen la mayor somnolencia y la menor capacidad de desempeño</td>
+</tr>
+<tr>
+<td><strong>Proceso homeostático (S)</strong></td>
+<td>Responsable del <strong>impulso de dormir</strong> tras cierta cantidad de horas de vigilia; <strong>cuanto más tiempo despierto, mayor es el impulso</strong>. En un trabajo normal diurno con sueño nocturno, C y S están <strong>sincronizados</strong>; con el trabajo nocturno se <strong>desajustan</strong>. Durante la noche, a medida que el reloj corporal se acerca a su punto más bajo, crece la necesidad de dormir; de día los dos procesos cambian de tendencia, por lo que también cuesta conciliar el sueño. Por este desajuste, a los controladores les puede costar adaptarse a un turno que obligue a despertarse temprano y, por tanto, a acostarse muy pronto el día anterior. El rendimiento cognitivo es menor en la madrugada y aumenta en las horas siguientes</td>
+</tr>
+<tr>
+<td><strong>Proceso de vigilia (W)</strong></td>
+<td>Refleja la <strong>inercia del sueño</strong>: un «estado de transición» entre la disminución de actividad que sucede inmediatamente después de despertar (con menor rendimiento) y el estado de máxima vigilancia y atención cuando el individuo se ha despertado por completo. Recomendación: dejar pasar un <strong>tiempo prudencial</strong> antes de retomar las tareas, especialmente las que requieren un alto nivel de vigilancia y alerta</td>
+</tr>
+</tbody>
+</table>
+<h3 id="55-carga-de-trabajo-fatiga-y-nivel-de-desempeno">5.5 Carga de trabajo, fatiga y nivel de desempeño</h3>
+<ul>
+<li>El <strong>Documento 9966 de la OACI</strong> (<em>Manual para la supervisión de los enfoques de gestión de la fatiga</em>, 2016) define la <strong>fatiga</strong> como un <strong>estado fisiológico que se caracteriza por una reducción de la capacidad de desempeño mental o físico debido a la falta de sueño o a periodos prolongados de vigilia, fase circadiana, y/o carga de trabajo (actividad mental y/o física)</strong> y que puede <strong>menoscabar el estado de alerta de una persona y su capacidad para desempeñar sus funciones relacionadas con la seguridad operacional</strong>.</li>
+<li>Incluir la «carga de trabajo» en la definición muestra su relación con la fatiga, pero <strong>no existe una definición universal de carga de trabajo</strong>; para evaluarla hay que recurrir a los aspectos que habitualmente se relacionan con ella:</li>
+<li><strong>El tipo y la naturaleza del trabajo</strong> (en particular la duración, la dificultad y la complejidad de la tarea, así como la laboriosidad del trabajo).</li>
+<li><strong>Las limitaciones de tiempo</strong> (en particular si los horarios vienen dados por las exigencias de las tareas, por factores externos o por cada persona).</li>
+<li>Los factores relativos a la <strong>capacidad de desempeño de cada persona</strong> (en particular <strong>su experiencia, capacitación, esfuerzo, historial de sueño y fase circadiana</strong>).</li>
+<li>Estudios: el mejor nivel de desempeño se obtiene con <strong>niveles medios de carga de trabajo</strong>. Una carga baja puede dificultar la motivación y provocar <strong>monotonía y aburrimiento</strong>, lo que podría revelar una somnolencia fisiológica subyacente y reducir el desempeño. Una carga elevada puede <strong>rebasar la capacidad de una persona fatigada</strong> y disminuir el desempeño.</li>
+<li><strong>De nuevo la ley de Yerkes-Dodson</strong> (figura 8): U invertida entre el nivel de activación y el rendimiento.</li>
+<li><strong>Baja activación</strong> = bajo rendimiento. Puede responder a una relajación deseada; pero cuando, por fatiga o falta de motivación, el rendimiento alcanzado no coincide con el requerido, se puede <strong>perder información, omitir acciones, ser menos vigilante, escanear insuficientemente, cometer errores y reaccionar mucho más lentamente a los cambios</strong>.</li>
+<li><strong>Activación demasiado alta</strong>: más errores, más dificultad para tomar decisiones, <strong>mayor tiempo de reacción</strong>; también tendencia a <strong>reducir la atención y el enfoque, omitir información e incapacidad para evaluar el riesgo y asignar prioridades</strong>.</li>
+</ul>
+<h3 id="56-el-reglamento-ue-2017373-y-las-sarps-de-la-oaci-sobre-la-gestion-de-la-fatiga">5.6 El Reglamento (UE) 2017/373 y las SARPS de la OACI sobre la gestión de la fatiga</h3>
+<ul>
+<li>Tanto la UE como la OACI han establecido reglamentos y normas sobre la gestión de la fatiga; la UE también sobre la gestión del estrés.</li>
+<li><strong>Reglamento de Ejecución (UE) 2017/373 de la Comisión, de 1 de marzo de 2017</strong>: requisitos comunes para los proveedores de servicios de gestión del tránsito aéreo/navegación aérea y otras funciones de la red de gestión del tránsito aéreo, y su supervisión. Los requisitos sobre fatiga figuran en el <strong>Anexo IV, Sección 3 (Requisitos sobre Factores Humanos)</strong>. El Reglamento, según el manual, <strong>entra en vigor el 02/01/2020</strong> (esa es en realidad su fecha de aplicación, no la de entrada en vigor). Se complementa con las <strong>Easy Rules</strong> de EASA, que para cada requisito o <em>Implementing Rule</em> describen los <strong>AMC (medios aceptables de cumplimiento)</strong> y el <strong>GM (material guía)</strong>.</li>
+<li><strong>Reglamento de Ejecución (UE) 2015/1018 de la Comisión, de 29 de junio de 2015</strong>, por el que se establece una lista de clasificación de los <strong>sucesos en la aviación civil de notificación obligatoria</strong>. Su <strong>anexo III</strong>, sobre sucesos relacionados con los servicios e instalaciones de navegación aérea, establece la obligatoriedad de notificación, tanto para el proveedor de servicios de tránsito aéreo como para el CTA, de «<strong>la fatiga que repercuta, o pueda repercutir, en la capacidad de ejercer de forma segura las funciones de navegación aérea o tránsito aéreo</strong>» (cita).</li>
+<li>Las notificaciones de fatiga son una fuente de información esencial para entender, analizar y evaluar los riesgos asociados a la fatiga, <strong>tanto si esta se gestiona mediante un FRMS (<em>Fatigue Risk Management System</em>) como de acuerdo con límites prescriptivos</strong>.</li>
+<li><strong>ENAIRE cuenta con un sistema integrado de gestión de riesgos de fatiga y estrés, el FSRMS (<em>Fatigue and Stress Risk Management System</em>)</strong>.</li>
+</ul>
+<h3 id="57-aptitud-fisica">5.7 Aptitud física</h3>
+<p><strong>Fatiga frente a cansancio</strong>:</p>
+<ul>
+<li><strong>Cansancio</strong> es el elemento <strong>subjetivo</strong> de la fatiga; puede estar presente o no según la motivación, el clima, el interés por el trabajo y las experiencias vividas.</li>
+<li><strong>Fatiga</strong> es algo <strong>objetivo</strong>: un estado fisiológico que se manifiesta en una disminución de la capacidad de la persona para realizar su trabajo.</li>
+<li>La fatiga se produce a consecuencia de una <strong>vigilia prolongada y una acumulación de falta de sueño</strong>; la sensación de cansancio aparece tras realizar un trabajo intenso. Fatiga = agotamiento de la mente o del cuerpo como resultado del trabajo o de la falta de descanso; cansancio = la sensación del individuo en relación con su nivel de fatiga.</li>
+<li>De forma general se habla de fatiga <strong>mental, visual y física</strong>.</li>
+</ul>
+<p><strong>Síntomas de la fatiga (en dos columnas, como figuran)</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Síntomas psicológicos</th>
+<th>Síntomas fisiológicos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alteración de la capacidad cognitiva (atención, vigilancia, nivel de alerta)</td>
+<td>Dificultad para enfocar / visión borrosa</td>
+</tr>
+<tr>
+<td>Afección a la memoria</td>
+<td>Sensación de irritación, dolor o picor en los ojos</td>
+</tr>
+<tr>
+<td>Alteración de la capacidad para hacer planes y/o ejecutarlos; lentitud en las tareas</td>
+<td>Ojos llorosos</td>
+</tr>
+<tr>
+<td>Alteración de estados de ánimo</td>
+<td>Enrojecimiento de los ojos</td>
+</tr>
+<tr>
+<td>Irritabilidad</td>
+<td>Dolores de cabeza, confusión o mareo</td>
+</tr>
+<tr>
+<td>Alteración de la percepción del riesgo</td>
+<td>Trastornos asociados al sueño</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Figura 9 (relación entre la fatiga y la seguridad operacional)</strong>: Fatiga -&gt; «¿CTA consciente de la fatiga?» <strong>NO -&gt; incidente de seguridad</strong>; <strong>SÍ -&gt; estrategias de primer nivel</strong> (previenen o reducen la fatiga, p. ej. <strong>siesta, cafeína</strong>) y <strong>estrategias de segundo nivel</strong> (mitigan los efectos de la fatiga). El impacto de la fatiga en la seguridad no es sencillo de establecer, porque depende de la conciencia del individuo sobre su estado y de su habilidad para desarrollar estrategias de mitigación.</p>
+<p><strong>Rasgos que diferencian al ATC de otras industrias (5)</strong>:</p>
+<ol>
+<li>La seguridad en las operaciones es siempre un factor crítico.</li>
+<li>Muchas dependencias requieren un servicio <strong>H24</strong>.</li>
+<li>Grado de complejidad y dinamismo de las situaciones muy alto.</li>
+<li>El escenario de trabajo es muy variable y puede fluctuar diaria, semanal y/o estacionalmente.</li>
+<li>Los individuos necesitan mantener un alto nivel de rendimiento.</li>
+</ol>
+<p><strong>Trabajo a turnos y salud</strong>: el organismo se adapta mal a los continuos cambios de horario. Los aspectos afectados se clasifican en <strong>tres grandes grupos</strong>: a) <strong>alteraciones del sueño</strong>; b) <strong>problemas de salud, tanto física como psicológica</strong>; c) <strong>dificultades en la vida familiar y social</strong>.</p>
+<ul>
+<li>La falta de horas de sueño conlleva patrones diferentes de actividad cerebral y una disminución de la capacidad en la toma de decisiones, <strong>la tarea principal del controlador</strong>. <strong>La calidad del sueño diurno no es la misma que la del nocturno; el nocturno es el auténticamente reparador</strong> y su ausencia produce <strong>fatiga crónica</strong>. (Es la redacción del manual.)</li>
+<li>Los controladores con horarios no adaptados a los ritmos circadianos pueden sufrir alteraciones del sueño y de los hábitos de alimentación, debilidad, ansiedad, irritabilidad y depresión; y hay evidencias objetivas de una reducción del estado de alerta y de la atención, un aumento de los <strong>tiempos de reacción y de toma de decisiones</strong>, <strong>pérdida de memoria a corto plazo</strong>, <strong>errores de cálculo</strong> y un menor rendimiento operativo.</li>
+<li>La perturbación de las variaciones circadianas, por tener que permanecer despierto y trabajando en horas biológicamente anómalas y dormir de día, es <strong>uno de los rasgos más estresantes del trabajo a turnos</strong>. La tolerancia varía según la <strong>edad, el sexo, la condición física, la flexibilidad para conciliar el sueño y la capacidad para superar la somnolencia</strong>. Los efectos negativos también se deben a <strong>condiciones de trabajo adversas, como ruidos, iluminación deficiente o vibraciones</strong>.</li>
+<li>El trabajo a turnos afecta a la vida familiar y social (interfiere en los horarios de las actividades cotidianas y en la conciliación familiar); los problemas <strong>aumentan con la edad, el tiempo sometido a trabajo a turnos, el tipo de turnos y la carga de trabajo</strong>.</li>
+</ul>
+<hr />
+<h2 id="capitulo-6-estres">Capítulo 6. Estrés</h2>
+<h3 id="61-explicacion-del-proceso-del-estres-de-forma-sencilla">6.1 Explicación del proceso del estrés de forma sencilla</h3>
+<ul>
+<li>El <strong>estrés</strong> es una <strong>respuesta psicofisiológica ante un estímulo, externo o interno</strong>, que emerge cuando el organismo interpreta que <strong>los recursos disponibles para hacer frente al estímulo no son suficientes para adaptarse a él</strong>; ante estos estímulos se dispara una respuesta.</li>
+<li>En los seres humanos: un estado causado por una situación que <strong>reduce la eficacia en el trabajo, produce modificaciones en la conducta y es causa de problemas de salud</strong>.</li>
+<li>Tabla resumen del manual:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Componentes (tipos de respuesta)</strong></td>
+<td>a) <strong>Endocrina</strong> (cambio en el equilibrio hormonal, neurotransmisores y neuromoduladores); b) <strong>Autónoma</strong> (el sistema nervioso autónomo prepara al organismo para hacer frente al estímulo, afectando fundamentalmente a la musculatura lisa); c) <strong>Conductual</strong> (normalmente a través de la musculatura facial o tensando la musculatura motora)</td>
+</tr>
+<tr>
+<td><strong>Tipos</strong></td>
+<td>a) <strong>Agudo</strong>, debido a factores que causan estrés de modo puntual; b) <strong>Crónico</strong>, resultado de presiones mantenidas durante mucho tiempo y de naturaleza habitualmente <strong>emocional</strong></td>
+</tr>
+<tr>
+<td><strong>Variables que determinan cómo afecta al individuo</strong></td>
+<td>a) El <strong>tipo de factor estresante</strong>, según el modelo de <strong>Lazarus y Folkman</strong>: si la persona tiene expectativas de poder gestionar el estímulo se genera <strong>eustrés</strong>; si no, <strong>distrés</strong>; b) el <strong>tipo de individuo y los recursos</strong> que tenga para hacerle frente</td>
+</tr>
+<tr>
+<td><strong>Atención</strong></td>
+<td>a) Cuando hay pocos estímulos, la atención puede centrarse y mejora el desempeño del controlador; b) si la situación se vuelve compleja, con muchos estímulos (<strong>sobrecarga</strong>), disminuye el desempeño del controlador</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Modelo transaccional del estrés de Cox-Mackay</strong>, muy empleado, fuente «Managing Stress in ATM» (EUROCONTROL), figura 10: tiene en cuenta no solo la demanda y la capacidad reales, sino también la <strong>autopercepción del individuo</strong>. Diagrama: <strong>demanda real</strong> -&gt; <strong>demanda percibida</strong>; <strong>capacidad real</strong> -&gt; <strong>capacidad percibida</strong>; ambas alimentan la <strong>valoración cognitiva</strong>; <strong>desequilibrio = estrés</strong>; conduce a la <strong>experiencia emocional</strong> y a la <strong>respuesta de estrés</strong> (respuesta fisiológica y psicológica, luego <strong>defensa cognitiva</strong> y <strong>respuesta conductual</strong>); los bucles de <strong>retroalimentación</strong> vuelven a los recuadros de demanda y de capacidad/valoración.</li>
+</ul>
+<h3 id="62-relacion-de-los-sintomas-del-estres-en-el-individuo">6.2 Relación de los síntomas del estrés en el individuo</h3>
+<p>(El manual numera los subapartados 6.1.1 a 6.1.3, lo cual es una errata de numeración.)</p>
+<ul>
+<li><strong>Fisiológicos</strong>: trastornos cardiovasculares (palpitaciones, aumento de la presión arterial, aumento de la frecuencia cardiaca); trastornos respiratorios; sudoración; trastornos del sueño; trastornos gastrointestinales (náuseas, diarrea, estreñimiento, síndrome de intestino irritable); problemas musculares (rigidez de espalda, cuello, contracturas); trastornos psicosomáticos; dolores de cabeza, migrañas; otros.</li>
+<li><strong>Psicológicos</strong>: <strong>afectivos/emocionales</strong> (alteración de estados de ánimo, irritabilidad, impaciencia, frustración, pesimismo, sensación de pánico o miedo, ansiedad, depresión causada por el estrés) y <strong>cognitivos</strong> (afectación de la atención, la vigilancia, el nivel de alerta; afectación de la capacidad para hacer planes y/o ejecutarlos; <strong>realizar acciones no deliberadas</strong>, es decir, activación de funciones de forma no intencionada).</li>
+<li><strong>Conductuales</strong>: problemas de autocontrol, confianza o autoestima; <strong>automedicación, consumo de alcohol o drogas</strong>; fatiga, problemas del sueño; <strong>absentismo</strong>; <strong>aislamiento social</strong>; afectación del desempeño laboral.</li>
+</ul>
+<h3 id="63-el-estres-de-los-cta">6.3 El estrés de los CTA</h3>
+<ul>
+<li>El control del tránsito aéreo requiere adaptarse a un entorno de trabajo en constante evolución, dentro de limitaciones de tiempo restringidas, con potencial para inducir altos niveles de estrés. El estrés que experimentan los controladores es <strong>siempre único para el individuo y su interacción con el entorno</strong>. El trabajo es muy exigente por la gran responsabilidad y por las numerosas habilidades y el nivel de conocimiento que requiere.</li>
+<li><strong>Principales habilidades requeridas en el control de tránsito aéreo (11, en orden)</strong>: habilidades espaciales visuales; percepción; proceso de la información; reconocimiento de imágenes y patrones; priorización adecuada; resolución lógica de problemas; aplicación de reglas y procedimientos; toma de decisiones; comunicación interpersonal; trabajo en equipo; uso de vocabulario técnico.</li>
+<li>El entorno ATC es particularmente rico en factores potenciales de tensión; uno por uno no tienen por qué causar estrés, pero la <strong>acumulación de varios</strong> puede llevar a una situación inmanejable.</li>
+<li><strong>Cuatro estados del estrés en relación con las tareas de control</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hipoestrés</strong></td>
+<td>El controlador se aburre o desempeña una tarea rutinaria, siente poco interés y tensión; su desempeño puede ser pobre y las posibilidades de cometer errores, altas</td>
+</tr>
+<tr>
+<td><strong>Eustrés</strong></td>
+<td>Si la tarea se hace más interesante o urgente, se produce más tensión (positiva); entramos en la <strong>zona de mejor rendimiento</strong>; ocurre cuando podemos concentrarnos en la tarea sin que la presión nos desborde</td>
+</tr>
+<tr>
+<td><strong>Hiperestrés</strong></td>
+<td>La capacidad de atención humana es limitada; <strong>la memoria de trabajo no puede manejar más de seis o siete ítems</strong>; el cerebro no puede resolver varios conflictos al mismo tiempo. Si la tarea nos sobrepasa por sobrecarga o por un nivel de conflictividad muy alto, la calidad disminuye: ansiedad, distracciones, demora en las decisiones, más errores. Hiperestrés = sensación de <strong>pérdida de control</strong> sobre la situación, inseguridad e incertidumbre, sentirse sobrepasado por el tráfico, <strong>ir por detrás del tráfico</strong>, gestión poco eficiente, dificultad para comunicar; bajo tensión tendemos a concentrarnos en <strong>los aspectos centrales o en las señales más frecuentes y reconocibles y a rechazar las fuentes menos probables de información</strong></td>
+</tr>
+<tr>
+<td><strong>Distrés</strong></td>
+<td>Cuando <strong>los procedimientos que empleamos para controlar son nuevos y todavía no estamos familiarizados con ellos</strong>, y se resiente la calidad de la gestión y resolución de conflictos</td>
+</tr>
+</tbody>
+</table>
+<p>(Compárese con la sección 6.1: allí el distrés se define por la expectativa de Lazarus y Folkman de no poder gestionar el estímulo.)</p>
+<ul>
+<li>En términos generales, el estrés que experimenta un controlador en el trabajo es función de sus <strong>niveles subyacentes de estrés</strong> (relacionados con el <strong>estilo de vida, la salud y el bienestar, la personalidad, el entorno organizativo/laboral y los niveles de satisfacción vital</strong>) más el <strong>estrés agudo impuesto por las condiciones operativas</strong>.</li>
+<li>Según <strong>EASA (GM1 ATS.OR.310 <em>Stress</em>, del Reglamento (UE) 2017/373)</strong> hay <strong>tres fuentes principales de estrés</strong> en el ámbito del control aéreo: <strong>estresores ambientales/físicos, estresores relacionados con la tarea y estresores relativos al individuo</strong>.</li>
+</ul>
+<p><strong>Estresores ambientales/físicos</strong>: condiciones subyacentes internas del cuerpo (<strong>hambre, dolor, falta de sueño</strong>) o factores ambientales externos (<strong>contaminación acústica, calor</strong>). El estrés no depende únicamente de la intensidad del estímulo, sino de la <strong>duración de la exposición</strong>: un ruido agudo pero persistente puede causar tanto estrés como un ruido fuerte repentino. En la sala de control o el fanal de la torre: temperatura inadecuada, espacio de trabajo incómodo, calidad del aire, condiciones de iluminación, ruido o vibración intrusivos.</p>
+<p><strong>Estresores relacionados con la tarea</strong>: alta carga de trabajo sostenida; tráfico muy heterogéneo; equipos inadecuados o poco fiables; procedimientos inapropiados e imprecisos; equipos complejos que no favorecen su uso o entendimiento; <strong>supervisión de personal en instrucción o menos experimentado</strong>; desfase entre la carga de trabajo y las habilidades técnicas del controlador; <strong>ambigüedad de roles</strong>, que afecta a la definición de responsabilidades; <strong>conflicto interpersonal</strong> entre profesionales; problemas socio-laborales; situaciones inusuales, incidentes, emergencias o accidentes, que pueden conducir a la experiencia de <strong>estrés por incidente crítico</strong>.</p>
+<p><strong>Estresores relativos al individuo</strong>: eventos que ocurren a lo largo de la vida, no necesariamente relacionados con la profesión. <strong>La creencia de que esos factores estresantes se pueden dejar en casa es un mito</strong>. Cuestiones personales como la salud, la vida personal y los grandes eventos vitales (<strong>muerte de un ser querido, nacimientos, matrimonio, divorcio</strong>...). Cuando el estrés es excesivo, afecta al trabajo por la distracción que causa y por el esfuerzo mental que exige resolver esas situaciones.</p>
+<p><strong>Factores estresantes reconocidos por los controladores en varios estudios (tal como figuran)</strong>: caída de equipos; condiciones de tráfico muy elevadas; miedo a causar accidentes; falta de tiempo; falta de conocimiento; incertidumbre; cambios en los procedimientos; evaluaciones continuas de la competencia; incertidumbres en la carrera profesional; trabajo a turnos; temas laborales.</p>
+<h3 id="64-efectos-del-estres-en-el-desempeno-mental-y-fisico">6.4 Efectos del estrés en el desempeño mental y físico</h3>
+<ul>
+<li>El estrés alto perjudica la <strong>percepción, la conciencia situacional y la toma de decisiones</strong>. Efectos que pueden estar relacionados con el estrés y tener implicación directa en la seguridad:</li>
+<li>Dificultades de concentración y problemas para mantener la vigilancia activa.</li>
+<li>Errores, omisiones, equivocaciones, acciones incorrectas; afección a la memoria y al buen juicio.</li>
+<li>Tendencia a proceder «de la manera más rápida» o «de la manera más fácil».</li>
+<li>Tendencia a pasar la responsabilidad a otros y no asumir la propia.</li>
+<li><strong>Fijación mental</strong>.</li>
+<li>Evitar tomar decisiones, que tienden a posponerse.</li>
+<li>No disponer de <strong>«plan B»</strong>.</li>
+<li>Propensión a asumir más riesgos.</li>
+<li>Precipitarse al tomar decisiones por el efecto de la <strong>adrenalina</strong>; la precipitación puede incrementar el número de errores.</li>
+<li>Con niveles de estrés significativos, el controlador a menudo tiende a utilizar <strong>procedimientos que ya no están operativos</strong>, a olvidar el uso de la <strong>fraseología normalizada</strong>, a utilizar su <strong>lengua materna</strong>, etc.</li>
+<li>La gestión de riesgos relativos al estrés debe considerarse un componente vital de la organización. La normativa europea sugiere <strong>medidas de mitigación</strong>:</li>
+<li>Adoptar una <strong>política de estrés y un programa de gestión del estrés por incidente crítico</strong>.</li>
+<li><strong>Monitorizar y gestionar de forma proactiva y sistemática los riesgos asociados al estrés</strong>.</li>
+<li><strong>Mitigar el impacto operacional del estrés</strong> en los controladores.</li>
+<li>Proveer la <strong>formación/información y educación</strong> pertinentes en materia de estrés.</li>
+<li>Establecer <strong>mecanismos de actuación</strong> para el caso de que se manifieste un nivel de estrés que impida llevar a cabo tareas críticas de seguridad.</li>
+<li><strong>Promover actividades que ayuden a mitigar el estrés</strong>.</li>
+</ul>
+<h3 id="65-gestion-del-estres-ante-incidente-critico-programa-cism">6.5 Gestión del estrés ante incidente crítico: programa CISM</h3>
+<ul>
+<li><strong>CISM = <em>Critical Incident Stress Management</em> (Gestión del Estrés por Incidente Crítico)</strong>: protocolo de intervención desarrollado específicamente para cubrir el <strong>apoyo psicológico del personal operativo</strong> y evitar reacciones de <strong>estrés postraumático</strong> derivadas de un incidente crítico. Proceso formal, muy estructurado y profesionalmente reconocido para ayudar a los controladores a compartir sus experiencias, descargar emociones y aprender sobre los síntomas y reacciones del estrés tras un suceso traumático. <strong>El programa CISM es confidencial, voluntario y educativo</strong>, y se suele conocer como <strong>«primeros auxilios psicológicos»</strong>.</li>
+<li><strong>Incidente crítico</strong>: evento que sucede <strong>repentina o inesperadamente</strong> y que, según cada persona, tiene el potencial de crear <strong>distrés severo</strong>, que causa molestia o <strong>inhabilitación para el ejercicio de sus funciones</strong> en ese momento o posteriormente. CISM es el conjunto de medidas y estrategias para afrontar estos sucesos y prevenir consecuencias negativas para la salud.</li>
+<li>Un incidente crítico puede evocar reacciones de estrés fisiológicas o psicológicas muy acusadas (síntomas físicos, cognitivos, emocionales y conductuales): por ejemplo, ansiedad, dificultad en la toma de decisiones, problemas para conciliar el sueño, <strong>comportamiento antisocial</strong>.</li>
+<li><strong>Ejemplos de incidentes críticos en ATC (9, tal como figuran)</strong>: accidentes; desastres que supongan daños devastadores; gestión de aeronaves en emergencia; sucesos que desemboquen en fallecimiento; situaciones relacionadas con incidentes de vulneración de las mínimas de separación; fallecimiento de familiares o compañeros de trabajo; situaciones potenciales cercanas a incidentes o accidentes; situaciones de violencia (experimentada o presenciada); hechos delictivos, agresión o amenazas.</li>
+<li><strong>ENAIRE decidió implantar un programa CISM</strong> como ayuda estructurada a la reacción humana ante incidencias ATC de carácter traumático, con el objeto de moderar su impacto sobre el controlador y acelerar su regreso a la normalidad laboral.</li>
+<li><strong>Metodología: un modelo «Peers».</strong> Un <em>peer</em> es un controlador de apoyo <strong>formado específicamente para atender psicológicamente a otros controladores</strong> tras un incidente crítico. Se complementa con <strong>asistencia psicológica profesional</strong> cuando se estime necesario. El programa debe disponer de un grupo de <em>peers</em> voluntarios, seleccionados y formados específicamente en CISM siguiendo las recomendaciones y estándares de la <strong>International Critical Incident Stress Foundation (ICISF)</strong>. Los <em>peers</em> deben ser controladores con <strong>amplia experiencia</strong> en la profesión, que se ofrecen voluntarios.</li>
+<li><strong>Principales tareas de los <em>peers</em> (3)</strong>: proporcionar <strong>intervención inmediata a la crisis</strong>; proporcionar <strong>asesoramiento psicológico a los compañeros afectados</strong>; <strong>organizar el apoyo profesional a la salud mental</strong> del controlador afectado cuando sea necesario.</li>
+<li><strong>Perfil idóneo del controlador de apoyo (EUROCONTROL 1997, 2008; 11 puntos)</strong>: ser emocionalmente estable; ser sensible a los problemas y saber escuchar a los demás; actitud abierta al aprendizaje; aceptar estar disponible para sus compañeros en su tiempo libre si fuera necesario; ser fiable (una persona en la que uno sienta que puede depositar su confianza); ser una persona respetada por el resto, tanto por sus cualidades profesionales como humanas; entender la importancia de la <strong>confidencialidad</strong>; tener habilidades sociales y capacidad de empatizar; <strong>conocer las limitaciones del CISM: ser consciente de que su labor es proporcionar primeros auxilios, no asistencia psicológica profesional</strong>; tener experiencia en la gestión de situaciones inusuales; tener conocimiento operacional adecuado del entorno ATC.</li>
+<li><strong>El programa en cinco fases</strong>:
+  1. <strong>Comunicación y divulgación</strong>: comunicación y divulgación iniciales del programa CISM a todo el colectivo de control.
+  2. <strong>Selección y formación de los peers y grupos de interés</strong>: valoración y selección de los candidatos y formación de los seleccionados según estándares reconocidos internacionalmente. En ENAIRE, la selección se basa en los requisitos del documento de EUROCONTROL (2008) <em>Human Factors - Critical Incident Stress Management: User Implementation Guidelines</em>, edición 2.0.
+  3. <strong>Intervención del peer</strong> con el controlador que ha experimentado un incidente crítico e intervenciones posteriores si fuera necesario.
+  4. <strong>Derivación a un profesional médico cuando proceda</strong>: intervención de psicólogos profesionales en los casos más graves de estrés postraumático en que la intervención del <em>peer</em> no ha sido suficiente, o en los que el <em>peer</em> valore directamente que quedan fuera de su ámbito de actuación.
+  5. <strong>Evaluación periódica del programa</strong>: para medir la efectividad y buscar posibles mejoras; normalmente mediante <strong>cuestionarios totalmente anónimos</strong> a los usuarios; se recoge en un <strong>informe anual del programa CISM</strong>. A efectos estadísticos, se controla el número de activaciones del programa respecto al número de incidencias y cuántas activaciones requieren la intervención de psicólogos profesionales.</li>
+</ul>
+<hr />
+<h2 id="capitulo-7-error-humano">Capítulo 7. Error humano</h2>
+<ul>
+<li>El error humano es <strong>inevitable y también necesario para promover el aprendizaje</strong> y entender las debilidades de los sistemas. <strong>No puede eliminarse por completo</strong> de la aviación, pero sí podemos identificar los contextos operacionales y las condiciones que lo facilitan. Bajo presión extrema tendemos a actuar de la forma que sabemos que normalmente funciona y en ocasiones a omitir acciones. La organización debe estar preparada para minimizar el impacto de los errores, actuando de forma preventiva. Los <strong>factores subyacentes a la naturaleza del error</strong> son la parte esencial que hay que integrar en el SMS, porque ahí se puede mitigar el riesgo y fortalecer el sistema; así se evita una presión innecesaria sobre el componente más valioso y flexible, el ser humano.</li>
+<li><strong>Definición operativa de error</strong>: «una situación en la que una secuencia planificada de acciones no consigue lograr el objetivo». En el sistema ATC, «error» se refiere a <strong>toda la organización</strong>, no solo a los errores cometidos por los controladores en el desempeño de su profesión.</li>
+</ul>
+<h3 id="71-modelo-gems-de-reason">7.1 Modelo GEMS de Reason</h3>
+<ul>
+<li>El <strong>General Error Modelling System (GEMS)</strong> de Reason es una de las clasificaciones de tipos de error más sencillas y extendidas. Clasifica los errores como consecuencia de un <strong>comportamiento intencional o no intencional</strong>, que se subdivide en <strong>deslices, lapsus y equivocaciones</strong> según el grado de intencionalidad que los preceda y el proceso cognitivo más relevante en su aparición.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>¿Intencional?</th>
+<th>Definición en el manual</th>
+<th>Proceso cognitivo</th>
+<th>Mitigación típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Desliz</strong> (<em>slip</em>)</td>
+<td><strong>No intencional</strong></td>
+<td>Resultado de un fallo o laguna en la <strong>atención</strong>: una <strong>omisión, una inversión o una alteración en el orden o el tiempo</strong> de una secuencia</td>
+<td>Control de los procesos atencionales</td>
+<td><strong>Entrenamiento procedimental</strong> (para automatizar respuestas robustas), entrenamiento atencional, <strong>monitorización mutua</strong>, procedimientos y <em>checklists</em></td>
+</tr>
+<tr>
+<td><strong>Lapsus</strong> (<em>lapse</em>)</td>
+<td><strong>No intencional</strong></td>
+<td>Resultado de fallos de <strong>memoria</strong>: olvido de una intención u omisión de aspectos previstos</td>
+<td>Control de los procesos mnemónicos y de gestión de la información en la memoria de trabajo. Ejemplos: olvidos de información reciente, fallo de la <strong>memoria prospectiva</strong> (recordar qué iba a hacer más adelante), simplemente no almacenar algo de información</td>
+<td><strong>El tipo de error más frecuente</strong>; se mitiga con refrescos frecuentes de la información y <strong>ayudas cognitivas externas</strong> (anotar en la etiqueta, en la ficha o en un papel, cualquier «muleta cognitiva»). Principal dificultad: no reconocer que todos somos vulnerables</td>
+</tr>
+<tr>
+<td><strong>Equivocación</strong> (<em>mistake</em>)</td>
+<td><strong>Intencional</strong></td>
+<td>Resultado de errores de <strong>planificación</strong>: <strong>aplicación incorrecta de una regla correcta</strong>, o <strong>aplicación correcta de una regla en una situación para la que no es adecuada</strong></td>
+<td>Procesos de mantenimiento de la conciencia situacional y de <strong>toma de decisiones</strong>. Una conciencia situacional no actualizada o un modelo mental incorrecto llevan a decisiones incorrectas; también los <strong>sesgos cognitivos</strong></td>
+<td>Procedimientos y estandarización de los métodos de trabajo, más el estado mental (<em>mindset</em>) de cada profesional, consciente de que todos somos vulnerables a los sesgos</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Los deslices y los lapsus son esencialmente <strong>respuestas automáticas sin decisión consciente</strong>; las equivocaciones parten de decisiones basadas en conocimiento, experiencia y modelos mentales que han funcionado bien en el pasado.</li>
+<li><strong>Sesgos cognitivos</strong>: procesos <strong>heurísticos</strong> que generan una tendencia natural hacia cierto tipo de decisiones; pueden condicionar una decisión y llevar a aplicar la regla equivocada o a aplicar mal la regla correcta. Ejemplos citados: <strong>sesgo de continuidad de plan, sesgo de expectativa, sesgo de familiaridad</strong>. Los sesgos tienen su origen en <strong>procesos mentales heurísticos</strong>: capturan información del entorno y generan reglas rápidas del tipo «si A, entonces B»; son útiles desde el punto de vista adaptativo, pero en un entorno complejo como el ATM pueden interferir.</li>
+<li><strong>Cuatro grandes familias de sesgos</strong>: (1) los que deciden <strong>qué debo recordar</strong>; (2) los que <strong>filtran la información cuando hay demasiada</strong> y orientan la atención hacia determinados estímulos; (3) los que aparecen <strong>cuando necesito actuar rápido</strong>; (4) los que surgen <strong>cuando la información que manejamos no tiene suficiente significado</strong>.</li>
+</ul>
+<h3 id="72-modelo-tem-threat-and-error-management">7.2 Modelo TEM (<em>Threat and Error Management</em>)</h3>
+<ul>
+<li>TEM es un concepto <strong>desarrollado por la OACI</strong> que busca identificar el origen y la gestión de los errores en la interacción entre los controladores y su contexto operacional (organización, procedimientos, condiciones ambientales). Permite establecer cómo se originan los errores, cómo se responde a ellos, cómo se detectan y cuáles son las consecuencias. La clave es el análisis de las acciones u omisiones que generan un <strong>estado inseguro</strong> (que no desemboca en un suceso), para <strong>detectar y capturar</strong> posibles errores, individuales y de equipo, como mecanismo para <strong>crear seguridad</strong>.</li>
+<li>Figura 11 (modelo TEM de la OACI): <strong>AMENAZAS -&gt; Estrategias -&gt; ERRORES -&gt; RESISTIR / RESOLVER -&gt; CONSECUENCIA</strong> (diagrama en embudo).</li>
+<li><strong>Tres componentes básicos en función del riesgo</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Definición</th>
+<th>Ejemplos y notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Amenazas</strong></td>
+<td><strong>Errores externos o incidencias</strong> que aumentan la complejidad de la situación operacional y tienen lugar <strong>sin que las haya propiciado el controlador</strong>; el controlador deberá ingeniárselas para que no se reduzcan los márgenes de seguridad</td>
+<td><strong>Indicativos de llamada similares</strong>, procedimientos locales no normalizados, restricciones del espacio aéreo, condiciones meteorológicas adversas, congestión del espacio aéreo, contingencias y equivocaciones cometidas por personas que no trabajan en el entorno operativo. <strong>Amenazas previsibles</strong>: el controlador puede prever su aparición (p. ej., meteorología adversa). <strong>Amenazas imprevistas</strong>: surgen inesperadamente (p. ej., <strong>un piloto copia las instrucciones transmitidas a otro</strong>); el controlador debe aplicar toda su pericia, entrenamiento y experiencia</td>
+</tr>
+<tr>
+<td><strong>Errores</strong></td>
+<td>Se materializan en <strong>decisiones u omisiones del controlador</strong> que hacen que no se cumplan los objetivos planificados y se comprometan los márgenes de seguridad; no afrontar adecuadamente los errores puede llevar a situaciones no deseadas</td>
+<td>Los errores pueden ser <strong>espontáneos, estar ligados a amenazas o formar parte de una cadena de errores</strong></td>
+</tr>
+<tr>
+<td><strong>Estados no deseados</strong> (<em>undesired states</em>)</td>
+<td>Situaciones en las que <strong>ha fallado la planificación prevista</strong>, por lo que se reducen los límites de seguridad</td>
+<td>Ejemplos: una aeronave que <strong>asciende a un nivel de vuelo no autorizado</strong> o que <strong>vira a un rumbo no planificado</strong>. Si el controlador los gestiona bien, restaura los márgenes de seguridad reglamentarios; si no, podría desencadenarse un incidente o accidente</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Un factor esencial para resolver las amenazas es detectarlas a tiempo. TEM parte de la premisa de que <strong>los errores y las amenazas no son eliminables</strong>, por lo que hay que saber idear estrategias para afrontarlos. <strong>No siempre hay una relación directa y lineal Amenaza -&gt; Error -&gt; Estado no deseado</strong>: las amenazas pueden llevar a estados no deseados sin haber cometido errores, y los controladores pueden cometer errores sin que haya amenazas.</li>
+<li>Es importante distinguir un <strong>estado no deseado</strong> del <strong>resultado o consecuencia</strong>: mientras estamos en un estado no deseado, la situación puede resolverse con medidas oportunas; una vez que se produce un desenlace, <strong>ya no se puede volver atrás</strong>.</li>
+<li><strong>De forma implícita, el control de tránsito aéreo consiste en la detección de estados no deseados</strong>, tanto los que aparecen de forma natural por la evolución del tráfico y del contexto como los que genera la propia actuación ATC. Entrenar la detección de estados no deseados es esencial para consolidar estrategias de trabajo seguras; el conocimiento en FFHH permite adelantarse a las amenazas internas y a los estados no deseados.</li>
+</ul>
+<hr />
+<h3 id="trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">Trampas de examen (confusiones típicas y cómo distinguirlas)</h3>
+<ol>
+<li><strong>Factores humanos frente a actuaciones humanas frente a ergonomía.</strong> FFHH = aplicación del conocimiento sobre las capacidades y limitaciones humanas al diseño del equipamiento, el entorno y las actividades; actuaciones humanas = cómo realizan las personas sus actividades (contribución humana al sistema). La ergonomía se inclina hacia lo físico/fisiológico; los FFHH, hacia lo psicológico.</li>
+<li><strong>Rasmussen (habilidades/reglas/conocimiento, 3 niveles de conducta) no es GEMS (deslices/lapsus/equivocaciones).</strong> El manual los mantiene separados: Rasmussen en 1.2.2, el GEMS de Reason en 7.1. Reason dio también el modelo del queso suizo; Reason no creó SHELL (Edwards 1972, Hawkins 1993).</li>
+<li><strong>Desliz, lapsus y equivocación</strong>: desliz = atención, no intencional; lapsus = memoria, no intencional (el más frecuente); equivocación = planificación/decisión, intencional (regla correcta mal aplicada, o regla correcta en una situación inadecuada).</li>
+<li><strong>Letras de SHELL</strong>: S = Software (procedimientos), H = Hardware, E = Environment, L = Liveware, O = Organization. <strong>El software no son programas informáticos</strong>: son procedimientos, manuales, listas de verificación.</li>
+<li><strong>Fatiga frente a cansancio</strong>: la fatiga es objetiva y fisiológica; el cansancio es la sensación subjetiva.</li>
+<li><strong>Cifras de la pérdida de sueño</strong>: 8 horas (OMS, National Sleep Foundation) para adultos de <strong>18 a 64 años</strong>; ciclo de 90/100 min; <strong>los últimos 20-30 min, REM</strong>; la fase II ocupa el <strong>50 %</strong> del sueño; <strong>WOCL de 3 a 6 a. m.</strong>; memoria a corto plazo de <strong>20 a 30 segundos</strong>; memoria de trabajo de <strong>6 o 7</strong> ítems.</li>
+<li><strong>Circadiano (C), homeostático (S) y de vigilia (W)</strong>: C = reloj de 24 horas con WOCL; S = la presión de sueño crece con el tiempo despierto; W = inercia del sueño tras despertar.</li>
+<li><strong>Presión frente a tensión (ISO 10075)</strong>: presión mental (<em>stress</em>) = influencias externas; tensión mental (<em>strain</em>) = efecto inmediato sobre el individuo.</li>
+<li><strong>Eustrés y distrés</strong> se definen dos veces en el manual: por la expectativa de poder afrontar el estímulo (Lazarus y Folkman, 6.1) y, en los estados del ATC (6.3), eustrés = tarea interesante o urgente con el mejor rendimiento, distrés = procedimientos nuevos no familiares. Los cuatro estados en el ATC son <strong>hipoestrés, eustrés, hiperestrés y distrés</strong>.</li>
+<li><strong>Yerkes-Dodson</strong>: U invertida; en una <strong>tarea compleja el pico llega antes (con menor activación)</strong> que en una tarea sencilla.</li>
+<li><strong>Safety-I frente a Safety-II</strong>: Safety-I es reactivo, con el ser humano como amenaza; Safety-II es proactivo, con el ser humano como recurso. Safety-I data de los años 60-80. No se atribuyen WAI/WAD a Reason.</li>
+<li><strong>Los 8 elementos de ATS.OR.320 no son cifras</strong>; son los puntos que el proveedor debe especificar. No confundirlos con las cinco fases del CISM ni con las seis habilidades TRM.</li>
+<li><strong>TRM tiene 6 categorías de habilidades; Endsley, 3 niveles de SA; la carga de trabajo mental, 3 dimensiones; el CISM, 5 fases; el <em>peer</em>, 3 tareas; SHELL-O, 5 componentes; EUROCONTROL, 10 principios; hay 4 estados de estrés y 6 emociones básicas; los puntos sobre sustancias psicoactivas, estrés y fatiga son ATS.OR.305/310/315 y los turnos, ATS.OR.320.</strong></li>
+<li><strong>TEM</strong>: las amenazas son externas y no las causa el controlador; los errores son decisiones u omisiones del controlador; los estados no deseados son consecuencia de amenazas o errores mal gestionados y todavía son recuperables, mientras que un desenlace no lo es.</li>
+<li><strong>Grupo frente a equipo</strong>: el equipo tiene autonomía y se preocupa del resultado y del proceso; el grupo tiene control externo y pone el énfasis en el resultado.</li>
+<li><strong>Comunicación correcta frente a eficaz</strong>: correcta = bien expresada; eficaz = el receptor actúa.</li>
+<li><strong>No verbal</strong>: más del 50 %; con el paraverbal, el 80 % (Pease).</li>
+<li><strong>El CISM es confidencial, voluntario y educativo; «primeros auxilios psicológicos»</strong>; los <em>peers</em> son controladores, no psicólogos.</li>
+<li><strong>Fechas de la normativa</strong>: 2017/373 de 1 de marzo de 2017 (manual: en vigor el 02/01/2020); 2015/340 de 20 de febrero de 2015; 2015/1018 de 29 de junio de 2015; enfoque sistémico del Anexo 13 de la OACI, 1994; Doc. 9966 de la OACI (2016).</li>
+<li><strong>El «error» es un constructo social</strong> y depende de las consecuencias más que de la acción (manual 1.3).</li>
+</ol>
+<h3 id="imprescindible-memorizar-breve-y-denso">Imprescindible memorizar (breve y denso)</h3>
+<ul>
+<li>FFHH (Doc. 10151 de la OACI): conocimiento de los humanos aplicado al equipamiento, los entornos y las actividades. Actuaciones humanas: cómo realizan las personas sus actividades.</li>
+<li>Reason: mediados de 1990, queso suizo, condiciones latentes, accidente organizacional, GEMS. Rasmussen: habilidades/reglas/conocimiento. SHELL: Edwards 1972, Hawkins 1993, Circ. 216-AN31 de la OACI; SHELL-O añade Organización; L en el centro, el más flexible.</li>
+<li>Interfaces: L-S, L-H, L-E, L-L; O tiene el mayor peso.</li>
+<li>Ocho factores organizacionales (recursos, selección, formación, bienestar, eficiencia de procesos/proyectos, planificación del personal, gestión de riesgos, cultura/comunicación).</li>
+<li>EUROCONTROL 2014, 10 principios: 1 Implicación de los expertos en la materia, 2 Racionalidad local, 3 Cultura justa, 4 Demanda y presión, 5 Recursos y limitaciones, 6 Interacciones y flujos, 7 Contrapartidas, 8 Variabilidad del rendimiento, 9 Emergencia, 10 Equivalencia.</li>
+<li>Safety-I (años 60-80, reactivo, humano = amenaza) frente a Safety-II (proactivo, humano = recurso). Racionalidad limitada: Simon 1957. WAI frente a WAD: Dekker 2006, Hollnagel 2014. Shorrock: 8 variedades más.</li>
+<li>ATS.OR.300 ámbito; .305 sustancias psicoactivas; .310 estrés; .315 fatiga; .320 sistemas de turnos con 8 elementos. Anexo IV, Sección 3 del Reglamento 2017/373.</li>
+<li>El 70 % del coste de un proyecto se fija en el primer 10 % de su ciclo de vida (EUROCONTROL-FAA 2010).</li>
+<li>Equipo: miembros interdependientes, objetivo común. TRM: procede del CRM; 6 habilidades; beneficios, entre ellos la redundancia.</li>
+<li>Memoria a corto plazo, 20-30 s; a largo plazo, ilimitada. SA de Endsley: percepción, comprensión, proyección. Isaac y Ruitenberg 1997. La mayoría de los incidentes ATC implican una asunción.</li>
+<li>Carga de trabajo: 3 dimensiones (presión temporal, demanda cognitiva, aspectos emocionales); Sebastian y del Hoyo 2002; ISO 10075-2 (presión/tensión). Yerkes-Dodson en U invertida.</li>
+<li>La complejidad impulsa la carga de trabajo mental, que limita la capacidad. Kontogiannis y Malakis 2013.</li>
+<li>Comunicación: emisor, receptor, mensaje, canal, código, barreras, ruido, feedback; eficaz = el receptor actúa; antídotos: empatía y asertividad; pasivo/asertivo/agresivo.</li>
+<li>Pease: no verbal más del 50 %, con paraverbal 80 %. Seis emociones básicas.</li>
+<li>Sueño: 8 h (18-64); fases I, II (50 %), III delta, IV, REM; ciclo de 90/100 min, los últimos 20-30 min REM; microsueños; procesos C, S, W; WOCL de 3 a 6 a. m.</li>
+<li>Definición de fatiga del Doc. 9966 de la OACI; FRMS frente a límites prescriptivos; FSRMS de ENAIRE; Reglamento 2015/1018, anexo III.</li>
+<li>Estrés: respuesta psicofisiológica cuando los recursos parecen insuficientes; agudo/crónico; Lazarus y Folkman; Cox-Mackay; 4 estados; 3 fuentes (GM1 ATS.OR.310 de EASA); memoria de trabajo de 6-7 ítems.</li>
+<li>CISM: confidencial, voluntario, educativo; <em>peers</em>; ICISF; 5 fases; directrices de EUROCONTROL 2008, ed. 2.0.</li>
+<li>GEMS: deslices (atención), lapsus (memoria, el más frecuente), equivocaciones (planificación). Familias de sesgos: 4. TEM: amenazas, errores, estados no deseados (Circ. 314 de la OACI, 2005).</li>
+</ul>
+<h3 id="glosario-bilingue-es-en">Glosario bilingüe (ES -&gt; EN)</h3>
+<table>
+<thead>
+<tr>
+<th>Español (como en el manual y el examen)</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>factores humanos</td>
+<td>human factors</td>
+</tr>
+<tr>
+<td>actuaciones humanas / rendimiento humano</td>
+<td>human performance</td>
+</tr>
+<tr>
+<td>ergonomía</td>
+<td>ergonomics</td>
+</tr>
+<tr>
+<td>modelo del queso suizo</td>
+<td>Swiss cheese model</td>
+</tr>
+<tr>
+<td>condiciones latentes</td>
+<td>latent conditions</td>
+</tr>
+<tr>
+<td>accidente organizacional</td>
+<td>organisational accident</td>
+</tr>
+<tr>
+<td>Sistema General de Modelado de Errores</td>
+<td>Generic (General) Error Modelling System, GEMS</td>
+</tr>
+<tr>
+<td>conducta basada en habilidades / reglas / conocimiento</td>
+<td>skill-based / rule-based / knowledge-based behaviour</td>
+</tr>
+<tr>
+<td>modelo SHELL-O</td>
+<td>SHELL-O model</td>
+</tr>
+<tr>
+<td>soporte lógico / soporte físico / entorno / elemento humano / organización</td>
+<td>software / hardware / environment / liveware / organization</td>
+</tr>
+<tr>
+<td>factores psicosociales</td>
+<td>psychosocial factors</td>
+</tr>
+<tr>
+<td>sistema sociotécnico</td>
+<td>socio-technical system</td>
+</tr>
+<tr>
+<td>pensamiento sistémico</td>
+<td>systems thinking</td>
+</tr>
+<tr>
+<td>implicación de los expertos en la materia</td>
+<td>field expert involvement</td>
+</tr>
+<tr>
+<td>racionalidad local</td>
+<td>local rationality</td>
+</tr>
+<tr>
+<td>cultura justa</td>
+<td>just culture</td>
+</tr>
+<tr>
+<td>demanda y presión</td>
+<td>demand and pressure</td>
+</tr>
+<tr>
+<td>recursos y limitaciones</td>
+<td>resources and constraints</td>
+</tr>
+<tr>
+<td>interacciones y flujos</td>
+<td>interactions and flows</td>
+</tr>
+<tr>
+<td>contrapartidas</td>
+<td>trade-offs</td>
+</tr>
+<tr>
+<td>variabilidad del rendimiento</td>
+<td>performance variability</td>
+</tr>
+<tr>
+<td>emergencia del sistema</td>
+<td>emergence</td>
+</tr>
+<tr>
+<td>equivalencia</td>
+<td>equivalence</td>
+</tr>
+<tr>
+<td>racionalidad limitada</td>
+<td>bounded rationality</td>
+</tr>
+<tr>
+<td>trabajo como se imagina / trabajo como se hace</td>
+<td>Work-as-Imagined / Work-as-Done</td>
+</tr>
+<tr>
+<td>sistema de gestión de la seguridad operacional</td>
+<td>safety management system (SMS)</td>
+</tr>
+<tr>
+<td>cultura de seguridad</td>
+<td>safety culture</td>
+</tr>
+<tr>
+<td>sustancias psicoactivas (uso problemático)</td>
+<td>psychoactive substances (problematic use)</td>
+</tr>
+<tr>
+<td>sistema de turnos</td>
+<td>shift system</td>
+</tr>
+<tr>
+<td>controlador de tránsito aéreo (CTA)</td>
+<td>air traffic controller (ATCO)</td>
+</tr>
+<tr>
+<td>equipo</td>
+<td>team</td>
+</tr>
+<tr>
+<td>gestión de los recursos del equipo</td>
+<td>team resource management (TRM)</td>
+</tr>
+<tr>
+<td>gestión de recursos de la tripulación</td>
+<td>crew resource management (CRM)</td>
+</tr>
+<tr>
+<td>comunicación en bucle cerrado</td>
+<td>closed-loop communication</td>
+</tr>
+<tr>
+<td>monitorización mutua</td>
+<td>mutual monitoring</td>
+</tr>
+<tr>
+<td>memoria a corto plazo / de trabajo / a largo plazo</td>
+<td>short-term / working / long-term memory</td>
+</tr>
+<tr>
+<td>modelo mental</td>
+<td>mental model</td>
+</tr>
+<tr>
+<td>conciencia situacional (SA)</td>
+<td>situational awareness (SA)</td>
+</tr>
+<tr>
+<td>percepción / comprensión / proyección</td>
+<td>perception / comprehension / projection</td>
+</tr>
+<tr>
+<td>controlador ejecutivo / planificador</td>
+<td>executive / planner controller</td>
+</tr>
+<tr>
+<td>carga de trabajo mental</td>
+<td>mental workload</td>
+</tr>
+<tr>
+<td>presión mental / tensión mental</td>
+<td>mental stress / mental strain</td>
+</tr>
+<tr>
+<td>ley de Yerkes-Dodson</td>
+<td>Yerkes-Dodson law</td>
+</tr>
+<tr>
+<td>atención vigilante / sostenida</td>
+<td>vigilance / sustained attention</td>
+</tr>
+<tr>
+<td>complejidad</td>
+<td>complexity</td>
+</tr>
+<tr>
+<td>carta de acuerdo</td>
+<td>letter of agreement</td>
+</tr>
+<tr>
+<td>emisor / receptor / mensaje / canal / código</td>
+<td>sender / receiver / message / channel / code</td>
+</tr>
+<tr>
+<td>ruido, interferencia</td>
+<td>noise, interference</td>
+</tr>
+<tr>
+<td>retroalimentación</td>
+<td>feedback</td>
+</tr>
+<tr>
+<td>colación</td>
+<td>read-back / collation</td>
+</tr>
+<tr>
+<td>escucha activa</td>
+<td>active listening</td>
+</tr>
+<tr>
+<td>empatía / asertividad</td>
+<td>empathy / assertiveness</td>
+</tr>
+<tr>
+<td>pasividad / agresividad</td>
+<td>passivity / aggressiveness</td>
+</tr>
+<tr>
+<td>lenguaje no verbal / paraverbal</td>
+<td>non-verbal / paraverbal language</td>
+</tr>
+<tr>
+<td>fatiga / cansancio</td>
+<td>fatigue / tiredness</td>
+</tr>
+<tr>
+<td>deuda de sueño</td>
+<td>sleep debt</td>
+</tr>
+<tr>
+<td>microsueño</td>
+<td>microsleep</td>
+</tr>
+<tr>
+<td>sueño REM / no-REM</td>
+<td>REM / non-REM sleep</td>
+</tr>
+<tr>
+<td>proceso circadiano / homeostático</td>
+<td>circadian process / homeostatic process</td>
+</tr>
+<tr>
+<td>inercia del sueño</td>
+<td>sleep inertia</td>
+</tr>
+<tr>
+<td>mínimo de la ventana circadiana (WOCL)</td>
+<td>window of circadian low (WOCL)</td>
+</tr>
+<tr>
+<td>sistema de gestión de riesgos de fatiga</td>
+<td>fatigue risk management system (FRMS)</td>
+</tr>
+<tr>
+<td>límites prescriptivos</td>
+<td>prescriptive limits</td>
+</tr>
+<tr>
+<td>medios aceptables de cumplimiento / material guía</td>
+<td>acceptable means of compliance / guidance material</td>
+</tr>
+<tr>
+<td>estrés</td>
+<td>stress</td>
+</tr>
+<tr>
+<td>eustrés / distrés / hipoestrés / hiperestrés</td>
+<td>eustress / distress / hypostress / hyperstress</td>
+</tr>
+<tr>
+<td>estrés agudo / crónico</td>
+<td>acute / chronic stress</td>
+</tr>
+<tr>
+<td>modelo transaccional</td>
+<td>transactional model</td>
+</tr>
+<tr>
+<td>factor de estrés / estresor</td>
+<td>stressor</td>
+</tr>
+<tr>
+<td>incidente crítico</td>
+<td>critical incident</td>
+</tr>
+<tr>
+<td>gestión del estrés por incidente crítico</td>
+<td>critical incident stress management (CISM)</td>
+</tr>
+<tr>
+<td>controlador de apoyo (<em>peer</em>)</td>
+<td>peer</td>
+</tr>
+<tr>
+<td>primeros auxilios psicológicos</td>
+<td>psychological first aid</td>
+</tr>
+<tr>
+<td>error humano</td>
+<td>human error</td>
+</tr>
+<tr>
+<td>desliz / lapsus / equivocación</td>
+<td>slip / lapse / mistake</td>
+</tr>
+<tr>
+<td>memoria prospectiva</td>
+<td>prospective memory</td>
+</tr>
+<tr>
+<td>sesgo cognitivo / heurístico</td>
+<td>cognitive bias / heuristic</td>
+</tr>
+<tr>
+<td>sesgo de continuidad de plan / de expectativa / de familiaridad</td>
+<td>plan continuation / expectation / familiarity bias</td>
+</tr>
+<tr>
+<td>gestión de amenazas y errores</td>
+<td>threat and error management (TEM)</td>
+</tr>
+<tr>
+<td>amenaza / error / estado no deseado</td>
+<td>threat / error / undesired state</td>
+</tr>
+<tr>
+<td>transgresión</td>
+<td>violation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fuentes">Fuentes</h3>
+<ul>
+<li>ENAIRE, <em>Factores Humanos en ATM</em>, julio de 2023, 65 pp.</li>
+<li>Citados por el manual: Reglamentos (UE) 2017/373, 2015/340, 2015/1018, 376/2014; Doc. 10151, Circ. 216-AN31, Doc. 9966, Circ. 314 y Anexo 13 de la OACI; UNE-EN ISO 10075; libros blancos de EUROCONTROL (2013, 2014), directrices CISM (2008).</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

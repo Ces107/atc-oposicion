@@ -1,0 +1,627 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vigilancia, comunicaciones y sistemas ATC (ampliado) - Tema 5 (T05b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Navegación, equipos y sistemas</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-vigilancia-en-profundidad-detalle-operacional-del-psrssr-solapamiento-spi-elsehs-del-modo-s">1. Vigilancia en profundidad: detalle operacional del PSR/SSR, solapamiento, SPI, ELS/EHS del Modo S</a></li>
+<li><a href="#2-ads-b-1090es-uat-indicadores-de-calidad-nicnacsdasil-ads-b-inout">2. ADS-B: 1090ES, UAT, indicadores de calidad (NIC/NAC/SDA/SIL), ADS-B In/Out</a></li>
+<li><a href="#3-ads-c-multilateracionwam-a-smgcs">3. ADS-C, multilateración/WAM, A-SMGCS</a></li>
+<li><a href="#4-tipos-de-radar-arsrasrparsmr-radar-meteorologico-pantallas-radar-y-simbologia-de-blancos">4. Tipos de radar (ARSR/ASR/PAR/SMR), radar meteorológico, pantallas radar y simbología de blancos</a></li>
+<li><a href="#5-separacion-minima-con-vigilancia-ats-espana-cifras-reales">5. Separación mínima con vigilancia ATS (España, cifras reales)</a></li>
+<li><a href="#6-acastcas-versiones-tara-inhibiciones-acas-x">6. ACAS/TCAS: versiones, TA/RA, inhibiciones, ACAS X</a></li>
+<li><a href="#7-coordinacion-acas-responsabilidades-del-controlador-fraseologia">7. Coordinación ACAS, responsabilidades del controlador, fraseología</a></li>
+<li><a href="#8-redes-de-seguridad-en-tierra-stca-msaw-apw-daiw">8. Redes de seguridad en tierra: STCA, MSAW, APW, DAIW</a></li>
+<li><a href="#9-comunicaciones-bandas-vhfuhfhf-833-khz-frecuencias-de-emergencia-selcal">9. Comunicaciones: bandas VHF/UHF/HF, 8,33 kHz, frecuencias de emergencia, SELCAL</a></li>
+<li><a href="#10-enlace-de-datos-cpdlc-acars-vdl-modo-2-ads-c-aftnamhs-atn">10. Enlace de datos: CPDLC, ACARS, VDL Modo 2, ADS-C, AFTN/AMHS, ATN</a></li>
+<li><a href="#11-paquete-reglamentario-de-la-ue-de-los-292009-12072011-10792012-al-20231770">11. Paquete reglamentario de la UE: de los 29/2009, 1207/2011, 1079/2012 al 2023/1770</a></li>
+<li><a href="#12-sistemas-atc-en-espana-sacta-scv-icaro">12. Sistemas ATC en España: SACTA, SCV, ICARO</a></li>
+<li><a href="#13-red-de-radarads-bradioayudas-de-enaire-tabla-de-estaciones-del-aip-enr-16">13. Red de radar/ADS-B/radioayudas de ENAIRE (tabla de estaciones del AIP ENR 1.6)</a></li>
+<li><a href="#14-aireon-itec-skynex-contexto-coopans">14. Aireon, iTEC SkyNex, contexto COOPANS</a></li>
+<li><a href="#15-herramientas-de-automatizacion-fdpsrdps-mtcd-amandman-swim-operaciones-basadas-en-trayectoria">15. Herramientas de automatización: FDPS/RDPS, MTCD, AMAN/DMAN, SWIM, operaciones basadas en trayectoria</a></li>
+<li><a href="#16-servicios-cnsatm-lista-de-servicios-ats-clases-de-espacio-aereo-a-g">16. Servicios CNS/ATM: lista de servicios ATS, clases de espacio aéreo A-G</a></li>
+<li><a href="#17-firuirtmactratz-reglaje-del-altimetro-rvsm">17. FIR/UIR/TMA/CTR/ATZ, reglaje del altímetro, RVSM</a></li>
+<li><a href="#18-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">18. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#19-ejemplos-resueltos">19. Ejemplos resueltos</a></li>
+<li><a href="#20-trampas-de-examen">20. Trampas de examen</a></li>
+<li><a href="#21-imprescindible-memorizar">21. Imprescindible memorizar</a></li>
+<li><a href="#22-glosario-bilingue-es-en">22. Glosario bilingüe (ES -&gt; EN)</a></li>
+<li><a href="#23-fuentes">23. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">63 min de lectura</div><h1 id="t05b-vigilancia-comunicaciones-y-sistemas-atc-ampliado-tema-5-mas-alla-del-manual">T05b - Vigilancia, comunicaciones y sistemas ATC (ampliado) - Tema 5 más allá del manual</h1>
+<p><strong>Nota de alcance.</strong> El manual oficial de ENAIRE para el tema 5 (<code>Navegación aérea, equipos y sistemas</code>, leído entero y reproducido en <code>syllabus/manual/OM05-navigation-systems-study-guide.md</code>) abarca las técnicas de navegación, la PBN/RNAV/RNP, las radioayudas clásicas (NDB/VOR/DME/ILS), las ayudas visuales, el GNSS, el INS/Doppler y una descripción de primer nivel del PSR, el SMR, el SSR (modos 3/A, C, Intermodo, S), la multilateración y el ADS-C/ADS-B. <strong>No contiene nada</strong> sobre ACAS/TCAS, los códigos de emergencia del transpondedor, las frecuencias e indicadores de calidad del ADS-B, las comunicaciones VHF/UHF, el CPDLC/enlace de datos, SACTA, las mínimas de separación con SSR/ADS-B, el STCA/MSAW ni las clases de espacio aéreo. Este archivo va <strong>más allá</strong> del manual justo en esas lagunas, con fuentes primarias: la Guía ACAS v5.0 de EUROCONTROL (2025), el Concepto de Operaciones del Modo S (1996), el manual de usuario de VCS de 8,33 kHz, el Reglamento de Ejecución (UE) 2023/1770 (Part-COM/Part-SUR), el AIP español (ENR 1.6, GEN 3.4), la descripción web del propio ENAIRE sobre SACTA/SCV/ICARO e iTEC SkyNex, y el texto CS-ACNS/ATM-ANS de la EASA. No repite lo que OM05 o el archivo base anterior <code>syllabus/t05-navigation-systems.md</code> ya dicen correctamente (solo se señalan las correcciones genuinas).</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>Las preguntas del Tema 5 que van más allá de los capítulos del propio manual sobre radioayudas se construirán probablemente a partir de tres familias de textos primarios: (1) el <strong>paquete reglamentario de la UE sobre CNS</strong> (Reglamento 2023/1770, que sustituye a los 29/2009, 1206/2011, 1207/2011 y 1079/2012), que fija umbrales exactos de equipamiento (5700 kg, 250 kt, fechas) que parecen preguntas de examen ya hechas; (2) el <strong>AIP español</strong> (ENR 1.6, GEN 3.4), único lugar que da cifras específicas de España (zonas de transpondedor obligatorio, mínimas de separación que usan realmente los ACC españoles, qué servicios de enlace de datos están activos en cada FIR); (3) la <strong>Guía ACAS de EUROCONTROL</strong>, documento de referencia para las preguntas sobre TCAS/ACAS (umbrales de obligatoriedad, altitudes de inhibición de RA, fraseología, diferencias con el STCA). Una cuarta familia, más pequeña, son las descripciones que hace ENAIRE de sus propios sistemas (SACTA, SCV, ICARO, iTEC SkyNex), que se leen como un banco de preguntas de «qué hace ENAIRE» para el tema 7, pero que son igualmente materia de examen para el epígrafe «sistemas ATC en España» del tema 5.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Vigilancia en profundidad: detalle operacional del PSR/SSR, solapamiento, SPI, ELS/EHS del Modo S</li>
+<li>ADS-B: 1090ES, UAT, indicadores de calidad (NIC/NAC/SDA/SIL), ADS-B In/Out</li>
+<li>ADS-C, multilateración/WAM, A-SMGCS</li>
+<li>Tipos de radar (ARSR/ASR/PAR/SMR), radar meteorológico, pantallas radar y simbología de blancos</li>
+<li>Separación mínima con vigilancia ATS (España, cifras reales)</li>
+<li>ACAS/TCAS: versiones, TA/RA, inhibiciones, ACAS X</li>
+<li>Coordinación ACAS, responsabilidades del controlador, fraseología</li>
+<li>Redes de seguridad en tierra: STCA, MSAW, APW, DAIW</li>
+<li>Comunicaciones: bandas VHF/UHF/HF, 8,33 kHz, frecuencias de emergencia, SELCAL</li>
+<li>Enlace de datos: CPDLC, ACARS, VDL Modo 2, ADS-C, AFTN/AMHS, ATN</li>
+<li>Paquete reglamentario de la UE: de los 29/2009, 1207/2011, 1079/2012 al 2023/1770</li>
+<li>Sistemas ATC en España: SACTA, SCV, ICARO</li>
+<li>Red de radar/ADS-B/radioayudas de ENAIRE (tabla de estaciones del AIP ENR 1.6)</li>
+<li>Aireon, iTEC SkyNex, contexto COOPANS</li>
+<li>Herramientas de automatización: FDPS/RDPS, MTCD, AMAN/DMAN, SWIM, operaciones basadas en trayectoria</li>
+<li>Servicios CNS/ATM: lista de servicios ATS, clases de espacio aéreo A-G</li>
+<li>FIR/UIR/TMA/CTR/ATZ, reglaje del altímetro, RVSM</li>
+<li>Manual frente a fuentes primarias (tabla de discrepancias)</li>
+<li>Ejemplos resueltos</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES -&gt; EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-vigilancia-en-profundidad-detalle-operacional-del-psrssr-solapamiento-spi-elsehs-del-modo-s">1. Vigilancia en profundidad: detalle operacional del PSR/SSR, solapamiento, SPI, ELS/EHS del Modo S</h2>
+<p>El manual (OM05 sección 22) ya da el principio de funcionamiento del SSR, los equipos de tierra y de a bordo y la tabla de modos (3/A, C, Intermodo, S general/radiodifusión/selectivo). Esta sección añade el detalle operacional que necesitaría una pregunta del tipo «qué frecuencia / qué umbral».</p>
+<ul>
+<li><strong>Frecuencias de interrogación y de respuesta.</strong> El SSR (y el Modo S, que reutiliza el mismo canal) interroga en <strong>1030 MHz</strong> y el transpondedor responde en <strong>1090 MHz</strong>; el Modo S conservó esas frecuencias exactas «para facilitar una transición fluida desde los sistemas SSR existentes» EUROCONTROL, Concepto de Operaciones del Modo S 1996, sección 2.1. La modulación del enlace ascendente es <strong>modulación binaria por desplazamiento diferencial de fase (DPSK)</strong>; la del enlace descendente (respuesta del transpondedor) es <strong>modulación por posición de pulso (PPM)</strong>; ambas se protegen con bits de paridad de código cíclico.</li>
+<li><strong>Dirección de aeronave OACI de 24 bits.</strong> A cada transpondedor Modo S se le asigna una <strong>dirección de aeronave de 24 bits</strong> individual, que permite a un interrogador terrestre dirigirse a una sola aeronave de forma selectiva y que las respuestas se identifiquen sin ambigüedad; «absorberá el crecimiento del tráfico... sin que se produzcan direcciones duplicadas» (Concepto de Operaciones del Modo S, secciones 1.3 y 2.2). El Reglamento (UE) 2023/1770 convierte esto en norma vinculante: «todo transpondedor Modo S funciona con una dirección de aeronave OACI de 24 bits que corresponde a la matrícula... asignada por el Estado en el que está matriculada la aeronave» (AUR.SUR.2015).</li>
+<li><strong>Códigos identificadores de interrogador (II).</strong> La operación multisitio del Modo S se coordina mediante un conjunto limitado de <strong>15 códigos identificadores de interrogador (II) de uso operacional</strong>; cuando un interrogador «adquiere» la dirección de una aeronave, aplica <strong>protocolos de bloqueo (<em>lock-out</em>)</strong> para que el transpondedor no siga respondiendo a la llamada general de cada interrogador, lo que reduce el FRUIT (respuestas falsas no sincronizadas en el tiempo; véase más abajo) y la sobreinterrogación. Se previeron además <strong>códigos identificadores de vigilancia (SI)</strong> suplementarios para superar la escasez de códigos II. Concepto de Operaciones del Modo S 1996, sección 1.4.</li>
+<li><strong>Alcance y fiabilidad.</strong> Un interrogador Modo S vigila todas las aeronaves Modo 3/A/C y Modo S dentro de la cobertura en línea de vista; <strong>alcance máximo nominal de 256 NM</strong>; como un blanco puede interrogarse en un único ciclo de interrogación, «la fiabilidad global de la vigilancia del Modo S será de al menos el <strong>99 por ciento</strong>». Concepto de Operaciones del Modo S 1996, sección 3.1.</li>
+<li><strong>Monopulso y exactitud.</strong> La técnica monopulso que emplea el Modo S «permite una mejor determinación de la posición de los blancos SSR a la vez que reduce el número de interrogaciones necesarias», lo que a su vez reduce la interferencia de RF. misma fuente, sección 1.2. (OM05 ya dice que el monopulso mejora en general la exactitud de la marcación angular; aquí se añade que además reduce el número de interrogaciones.)</li>
+<li><strong>Solapamiento (<em>garbling</em>) y FRUIT.</strong> Dos problemas clásicos del SSR que el manual no nombra: el <strong>solapamiento</strong> (<em>garbling</em>: superposición de las respuestas de dos aeronaves recibidas casi a la vez porque están próximas en distancia o acimut respecto al radar, lo que corrompe los datos decodificados) y el <strong>FRUIT</strong> (<em>False Replies Unsynchronised In Time</em>, respuestas falsas no sincronizadas en el tiempo: respuestas a las interrogaciones de otro radar que otro interrogador capta como ruido). El Modo S reduce ambos problemas porque las interrogaciones y el bloqueo son selectivos y no se difunden a todas las aeronaves del haz.</li>
+<li><strong>SPI (<em>Special Position Identification</em>, identificación especial de posición).</strong> Pulso de Modo A/C que activa el piloto (el botón «IDENT») y que hace que el eco SSR se ilumine de forma distintiva en la pantalla del controlador durante unos barridos, para que este pueda identificar con certeza una aeronave entre varios ecos radar.</li>
+<li><strong>Vigilancia elemental (ELS) y vigilancia mejorada (EHS) del Modo S.</strong> Estos dos niveles de servicio se nombran directamente (no solo se sobreentienden) en el Reglamento (UE) 2023/1770, Part-SUR: la <strong>ELS</strong> es la capacidad básica del Modo S que se exige a prácticamente todas las aeronaves IFR de tránsito aéreo general en la región EUR de la OACI; la <strong>EHS</strong>, exigida solo a aeronaves de ala fija de más de 5700 kg de MTOW o que crucen a más de 250 kt TAS (véase la sección 11), añade la extracción de parámetros adicionales de a bordo mediante el enlace descendente <strong>Comm-B</strong> (altitud seleccionada, ángulo de alabeo, ángulo de derrota, velocidad respecto al suelo, rumbo magnético, velocidad indicada/verdadera, número de Mach, velocidad vertical, entre otros) con <strong>registros BDS (<em>Comm-B Data Selector</em>)</strong> específicos (AUR.SUR.2005 para la obligación ELS/EHS; el manual DAP/ADD de EUROCONTROL, de parámetros de aeronave descendidos, para la lista de parámetros y el código de colores «azul = exigido por la ELS, verde = exigido por la EHS» que se usa en todas sus tablas, p.30). El Concepto de Operaciones del Modo S de 1996 ya usaba los términos «Elementary Surveillance» y «Enhanced Surveillance» (como niveles de capacidad de parámetros derivados del enlace de datos) muchos años antes del reglamento actual.</li>
+</ul>
+<h2 id="2-ads-b-1090es-uat-indicadores-de-calidad-nicnacsdasil-ads-b-inout">2. ADS-B: 1090ES, UAT, indicadores de calidad (NIC/NAC/SDA/SIL), ADS-B In/Out</h2>
+<ul>
+<li><strong>1090ES.</strong> En Europa (y en general en la región EUR de la OACI) el ADS-B se implementa como <strong>squitter extendido de 1090 MHz (1090ES)</strong>: el transpondedor transmite espontáneamente (sin ser interrogado) un mensaje de «squitter extendido» en la misma frecuencia de respuesta de 1090 MHz que usan el SSR/Modo S, con datos de posición, velocidad e identificación. El Reglamento (UE) 2023/1770 exige a las aeronaves de más de 5700 kg de MTOW o que crucen a más de 250 kt «las capacidades para el ADS-B Out de squitter extendido (ES) de 1090 MHz» (AUR.SUR.2005(1)(b)).</li>
+<li><strong>UAT (<em>Universal Access Transceiver</em>, transceptor de acceso universal).</strong> Enlace de datos ADS-B alternativo que se usa en <strong>EE. UU.</strong>, en <strong>978 MHz</strong>, obligatorio solo por debajo del <strong>FL180 (18 000 ft)</strong>; no se usa en Europa.</li>
+<li><strong>ADS-B Out / ADS-B In.</strong> «Out» = la difusión por la propia aeronave de su vector de estado e identidad; «In» = una aeronave (o estación terrestre) que recibe y presenta las difusiones ADS-B Out de otras aeronaves, usada en las pantallas de tráfico de cabina y para la conciencia situacional en el movimiento en superficie. El AIP español separa expresamente el uso que hace el ATC de los datos recibidos («los mensajes ADS-B... serán procesados por los sensores ADS-B e integrados en el sistema de vigilancia ATS») de la responsabilidad del propio piloto de «asegurarse de que la integridad y precisión de la información ADS-B es la adecuada» (ADS-B Out). AIP España ENR 1.6 §3.</li>
+<li><strong>Indicadores de calidad: NIC, NAC, SDA, SIL.</strong> El manual DAP/ADD enumera los «indicadores de calidad de la posición horizontal en vuelo: <strong>NIC, NACp, SDA y SIL</strong>» como parámetros que se transmiten junto con el informe de posición/velocidad ADS-B (tabla p.29-30). Desarrollo (conocimiento general del ADS-B, coherente con la tabla del manual pero no citado literalmente de ella): el <strong>NIC (<em>Navigation Integrity Category</em>, categoría de integridad de navegación)</strong> acota el radio de contención de la posición notificada (con qué probabilidad está la posición real dentro de una distancia dada de la notificada); el <strong>NAC (<em>Navigation Accuracy Category</em>, categoría de exactitud de navegación; NACp para posición, NACv para velocidad)</strong> indica la exactitud de la estimación de posición/velocidad; la <strong>SDA (<em>System Design Assurance</em>, garantía de diseño del sistema)</strong> valora la probabilidad de que falle todo el sistema (no solo la fuente de posición); el <strong>SIL (<em>Source Integrity Level</em>, nivel de integridad de la fuente)</strong> valora la probabilidad de que se supere el radio de contención NIC notificado sin que se avise. La tabla del manual confirma los cuatro nombres y que se transmiten juntos como «indicadores de calidad»; las definiciones individuales que se dan aquí son vocabulario estándar ADS-B/DO-260, no texto literal del manual.</li>
+<li><strong>La categoría de emisor ADS-B y otros elementos difundidos</strong> (longitud y anchura de la aeronave en tierra, desplazamiento de la antena GNSS, desplazamiento de la antena del transpondedor, monitores de tasa de interrogación/respuesta IRM) forman también parte del conjunto de mensajes ADS-B v2/v3 según la misma tabla del manual.</li>
+<li><strong>Caso de seguridad del ADS-B (entornos sin radar).</strong> EUROCONTROL ha publicado un caso de seguridad específico para usar el ADS-B como único medio de vigilancia en zonas sin cobertura radar.</li>
+</ul>
+<h2 id="3-ads-c-multilateracionwam-a-smgcs">3. ADS-C, multilateración/WAM, A-SMGCS</h2>
+<ul>
+<li><strong>ADS-C en la práctica (España).</strong> OM05 explica el ADS-C en abstracto (basado en contrato, periódico/por evento/bajo demanda). El AIP español muestra cómo funciona realmente en la <strong>FIR oceánica de Canarias</strong>: «la aplicación ADS-C en CANARIAS ACC incluye el seguimiento de pistas ADS-C, la monitorización de conformidad lateral y vertical, la monitorización de conformidad de ruta embarcada, la monitorización de la integridad de navegación y la gestión automática de contratos ADS». Al establecerse la conexión FANS inicial se configura un <strong>contrato ADS-C periódico</strong> con un intervalo de notificación predeterminado, que permanece en vigor hasta su modificación o cancelación; <strong>en una emergencia ADS-C el intervalo pasa automáticamente a 64 segundos</strong> y se restablece el previo al cesar la emergencia; los contratos se terminan automáticamente un tiempo después de que la aeronave abandone la FIR o tras el aterrizaje, o manualmente por el controlador. AIP España GEN 3.4 §3.5.2.1.</li>
+<li><strong>Multilateración en la práctica (España).</strong> El AIP España ENR 1.6 enumera tres tecnologías de pistas de vigilancia junto al PSR/SSR: <strong>(S)</strong> SSR monopulso, <strong>(SM)</strong> Modo-S, <strong>(MLAT)</strong> multilateración, <strong>(A)</strong> ADS-B; y dos tipos de estación de sabor multilateración: <strong>WAM (<em>Wide Area Multilateration</em>, multilateración extendida)</strong> para cobertura en ruta o de área amplia y <strong>SMMS (<em>Surface Movement Multilateration System</em>, multilateración de movimiento en superficie)</strong> para la superficie del aeropuerto, junto al <strong>SMR (radar de movimiento en superficie)</strong> propiamente dicho. AIP España ENR 1.6 §7 (leyenda previa a la tabla de estaciones).</li>
+<li><strong>A-SMGCS (<em>Advanced Surface Movement Guidance and Control System</em>, sistema avanzado de guiado y control del movimiento en superficie).</strong> Se nombra como una de las herramientas que ofrece una suite de automatización de control de aproximación/torre, junto con el MTCD, el AMAN y el DMAN, en el texto del programa de formación de ATSEP de la EASA incluido en el reglamento CS-ACNS/ATM-ANS («Herramientas: MTCD, AMAN, DMAN, A-SMGCS»), en la tabla de competencias de ATSEP. El A-SMGCS fusiona los datos de superficie del SMR, el MLAT/SMMS y el ADS-B en una única imagen de conciencia situacional para el controlador de torre, con alertas automáticas de conflicto o incursión en los niveles más avanzados; el párrafo del AIP sobre vigilancia de superficie con SMR/MLAT (ENR 1.6 §5.4) describe el predecesor funcional sin nombrar expresamente el «A-SMGCS». síntesis de las dos fuentes.</li>
+</ul>
+<h2 id="4-tipos-de-radar-arsrasrparsmr-radar-meteorologico-pantallas-radar-y-simbologia-de-blancos">4. Tipos de radar (ARSR/ASR/PAR/SMR), radar meteorológico, pantallas radar y simbología de blancos</h2>
+<ul>
+<li>OM05 ya define en detalle el PSR (banda L/S, en ruta/aproximación) y el SMR (banda X, superficie del aeropuerto), además del radar meteorológico embarcado como tipo de radar primario en el morro de la aeronave. Este archivo añade los acrónimos clásicos de tipos de radar que podría usar una pregunta de estilo EE. UU./OACI, contrastados cuando ha sido posible:</li>
+<li><strong>ARSR (<em>Air Route Surveillance Radar</em>, radar de vigilancia de rutas aéreas)</strong>: PSR de largo alcance en ruta, funcionalmente equivalente a lo que el manual llama simplemente «PSR» para el uso en ruta.</li>
+<li><strong>ASR (<em>Airport Surveillance Radar</em>, radar de vigilancia de aeropuerto)</strong>: PSR de área terminal de menor alcance (el «PSR... aproximación» del manual).</li>
+<li><strong>PAR (<em>Precision Approach Radar</em>, radar para aproximación de precisión)</strong>: radar de aproximación de precisión específico que da al controlador tanto el acimut como la elevación de una aeronave en aproximación final, empleado para una aproximación «guiada por radar» (<em>radar-talkdown</em>); figura como tipo de servicio de radionavegación disponible en el AIP España GEN 3.4 §3.1 («Radar para aproximación de precisión (PAR)»). AIP España GEN 3.4. El AIP España ENR 1.6 §5.2(f) enumera también la «aproximación de precisión por radar (PAR)» como función que admite el sistema de vigilancia ATS en el control de aproximación. ENR 1.6.</li>
+<li><strong>SMR</strong>: como en OM05, banda X, solo superficie del aeropuerto.</li>
+<li><strong>Radar meteorológico y uso meteorológico del PSR.</strong> Tanto OM05 (§20) como el AIP España GEN 3.4/ENR 1.6 señalan que el radar primario (terrestre) puede servir también como detector de fenómenos meteorológicos, además del radar meteorológico propio de la aeronave, montado en el morro, que describe OM05 §20. OM05 p.55-58 (referencia cruzada, no duplicada aquí).</li>
+<li><strong>Pantallas radar, seguimiento y símbolos de blancos.</strong> No los cubre el manual. El AIP España ENR 1.6 describe el uso operacional de la pantalla (no el conjunto de símbolos en sí): el controlador usa la imagen de vigilancia para seguir las trayectorias de vuelo, detectar desviaciones respecto a la ruta o el nivel autorizados y (para SMR/MLAT) determinar si una pista está libre de tránsito antes de dar una autorización de aterrizaje o despegue (ENR 1.6 §5.4(b)). Los símbolos de blanco normalizados por la OACI (eco solo primario, pista SSR correlada/no correlada, pista en extrapolación, etc.) no se han encontrado en las fuentes consultadas; pertenecen a un apéndice del Doc 4444 (PANS-ATM), de acceso restringido.</li>
+</ul>
+<h2 id="5-separacion-minima-con-vigilancia-ats-espana-cifras-reales">5. Separación mínima con vigilancia ATS (España, cifras reales)</h2>
+<p>Es material genuinamente nuevo respecto a OM05 y al archivo base t05: el AIP España ENR 1.6 §6 da las <strong>mínimas de separación reales vigentes que usan unidades ACC/APP/TWR españolas concretas</strong>, no cifras genéricas de manual.</p>
+<ul>
+<li><strong>Separación basada en PSR (ENR 1.6 §6.1), espacios TMA/APP/TWR:</strong> PSR&lt;-&gt;PSR = <strong>5 NM</strong>; PSR&lt;-&gt;SSR = <strong>5 NM</strong>; PSR&lt;-&gt;ADS(-B) = <strong>5 NM</strong>.</li>
+<li><strong>Separación en ruta con SSR/MLAT/ADS-B (§6.2):</strong> varía según la unidad y la disponibilidad de sensores: <strong>Barcelona ACC (SSR, multirradar) = 5 NM</strong>; <strong>Canarias ACC (ADS) = 10 NM</strong>; <strong>Madrid ACC / Sevilla ACC</strong>, con monoradar civil = <strong>15 NM</strong>, con monoradar militar = <strong>5 NM</strong> (la estructura de la tabla implica que la mínima más estricta de 5 NM se aplica al caso de monoradar militar y la más laxa de 15 NM al de monoradar civil en esos centros). La nota al pie aclara: «la separación mínima entre una pista de vigilancia de secundario y una pista de vigilancia ADS-B (SSR&lt;-&gt;ADS) será la mayor separación mínima de las aplicables para las pistas de vigilancia SSR y ADS-B».</li>
+<li><strong>Separación a nivel APP (§6.3):</strong> normalmente <strong>3 NM</strong> cuando hay imagen multirradar (con o sin PSR principal) cerca del ARP (0-30 NM, p. ej. Barcelona APP, Madrid APP), que pasa a <strong>5 NM</strong> más allá de ese alcance o cuando solo hay imagen monorradar (p. ej. Málaga APP/Sevilla TMA área 3, Palma TACC, Santiago TACC, Valencia TACC). Se aplica una mínima especial de <strong>2,5 NM</strong> entre aeronaves sucesivas en la <em>misma</em> derrota de aproximación final a menos de 10 NM del umbral en Barcelona APP (LEBL) en condiciones HIRO (<em>High Intensity Runway Operations</em>, operaciones de alta intensidad en pista). ENR 1.6 §6.3 y nota (e). Bilbao APP y Alicante APP usan <strong>3 NM</strong> dentro de un radio de ARP menor (10 NM y 30 NM, respectivamente), que pasa a 5 NM más allá.</li>
+<li><strong>Separación a nivel TWR (§6.4):</strong> en general <strong>3 NM</strong> con imagen principal (multirradar o monorradar), o <strong>5 NM</strong> con imagen no principal de radar, en torres como Alicante, Barcelona, Bilbao, Cuatro Vientos, Gran Canaria, Madrid, Málaga, Palma, Sevilla, Tenerife Sur y Valencia; la misma mínima de 2,5 NM entre aproximaciones sucesivas se aplica en condiciones HIRO que lo permitan. Otras torres (Almería, Asturias, Ibiza, Jerez, La Palma, Lanzarote, Melilla, Menorca, Santander, Tenerife Norte) usan un valor único de <strong>5 NM</strong>. ENR 1.6 §6.4.</li>
+<li><strong>Leyenda de tecnología de las estaciones (§7):</strong> <strong>(S)</strong> = SSR monopulso; <strong>(P)</strong> = PSR primario; <strong>(MLAT)</strong> = multilateración; <strong>(SM)</strong> = Modo-S; <strong>(A)</strong> = ADS-B. Códigos de «tipo» de estación: <strong>LRR</strong> = en ruta (radar de largo alcance); <strong>TAR</strong> = radar de área terminal; <strong>WAM</strong> = multilateración extendida; <strong>SMR</strong> = radar de movimiento en superficie; <strong>SMMS</strong> = multilateración de movimiento en superficie. ENR 1.6 §7.</li>
+<li><strong>Trampa frente a la regla práctica OACI/de manual de «5 NM en ruta, 3 NM en terminal»</strong>: las cifras reales de España <strong>no</strong> son uniformemente 5/3. Algunos sectores en ruta usan 15 NM (monorradar civil) o 10 NM (ADS-B de Canarias), y algunos sectores terminales usan 3 NM cerca del ARP pero pasan a 5 NM más lejos; la generalización segura para el examen es «imagen multirradar/ADS-B moderna cerca de una TMA con mucho tráfico = 3 NM; monosensor o en ruta de largo alcance = 5-15 NM», no una única cifra fija. síntesis.</li>
+</ul>
+<h2 id="6-acastcas-versiones-tara-inhibiciones-acas-x">6. ACAS/TCAS: versiones, TA/RA, inhibiciones, ACAS X</h2>
+<p>OM05 no dice nada sobre el ACAS. El archivo base <code>syllabus/t05-navigation-systems.md</code> §6.4 ya cubre los fundamentos (ACAS I/II, tiempos TA/RA, separación vertical de las RA de 300-700 ft) a partir de fuentes de SKYbrary/AIM de la FAA; esta sección profundiza con la Guía ACAS v5.0 de EUROCONTROL (abril de 2025), el documento de referencia actual de EUROCONTROL, y <strong>corrige una cifra</strong>.</p>
+<ul>
+<li><strong>Historial de versiones.</strong> El TCAS II evolucionó a través de las versiones <strong>6.04a -&gt; 7.0 -&gt; 7.1</strong>. La versión 7.0 «mejoró aún más la compatibilidad del TCAS II con el sistema ATC». Guía ACAS v5.0, §3.2. <strong>La versión 7.1 del TCAS II es obligatoria en Europa desde el 1 de diciembre de 2015</strong> para todas las aeronaves civiles de ala fija con motor de turbina y MTOW <strong>superior a 5700 kg</strong> o con una configuración máxima aprobada de <strong>más de 19</strong> asientos de pasajeros. Guía ACAS v5.0, p.23 (Introducción). Desde marzo de 2025, también se aprobó la operación en el espacio aéreo europeo del <strong>ACAS Xa/Xo</strong> como sistema alternativo conforme a la OACI (enmienda 91 del Anexo 10 de la OACI, Vol IV), de modo que la obligación europea actual reconoce <strong>dos</strong> implementaciones conformes: el TCAS II v7.1 y el ACAS Xa/Xo. Guía ACAS v5.0, §3.1.</li>
+<li><strong>Familia ACAS más allá del TCAS II.</strong> <strong>ACAS Xa/Xo</strong> (sustituto del TCAS II en aeronaves grandes, con la misma filosofía de alertas pero con una lógica bayesiana/optimizada en lugar de las tablas deterministas del TCAS); <strong>ACAS Xu</strong> (para aeronaves pilotadas por control remoto o no tripuladas, RPAS; añade guiado de maniobra horizontal además del vertical, una capacidad que no tienen el TCAS II ni el Xa); <strong>ACAS sXu</strong> (aeronaves no tripuladas pequeñas). Guía ACAS v5.0, §1, §3.3, §13. MOPS (normas de rendimiento operacional mínimo): TCAS II v7.1 = RTCA DO-185B / EUROCAE ED-143 (2008); ACAS Xa/Xo = DO-385A / ED-256A (2023); ACAS Xu = DO-386 / ED-275 (2020). Guía ACAS v5.0, tabla p.20 (zona del §3.1).</li>
+<li><strong>Mecánica de TA/RA (añade detalle al archivo base).</strong> Un TA (<em>Traffic Advisory</em>, aviso de tránsito) alerta a la tripulación de una amenaza potencial y de que debe «estar preparada para un posible aviso de resolución»; cuando el intruso también lleva ACAS II, <strong>ambos sistemas coordinan sus RA</strong> (mediante un «complemento de aviso de resolución», RAC, en Modo S) para elegir sentidos complementarios. Guía ACAS v5.0, §3.1. <strong>Se puede generar una RA contra cualquier aeronave con un transpondedor que notifique altitud (Modo S o Modo A/C), aunque esa aeronave no lleve ACAS II</strong>; es decir, el ACAS II protege también frente a tráfico sin ACAS, siempre que ese tráfico emita altitud en Modo C/S.</li>
+<li><strong>Tipos de RA.</strong> Además de los simples «Climb»/«Descend», el sistema emite <strong>«Increase Climb»</strong>/<strong>«Increase Descent»</strong> (refuerzan una RA existente hasta una velocidad vertical mayor, desde al menos 1500 ft/min hasta 2500 ft/min en el caso de Increase Descent, según las cifras de ejemplo de la guía), <strong>«Level Off»</strong> y <strong>«Monitor Vertical Speed»</strong> (una RA <em>preventiva</em>, no correctiva, que impide a la aeronave ascender o descender hacia el conflicto, anunciada de forma sonora como «Monitor Vertical Speed» para lo que la lógica llama internamente una RA «Do Not Climb»/«Do Not Descend»). Guía ACAS v5.0, zona del §6 (descripciones de las RA, p.61-70 aprox.) y Glosario. El «Level Off» fue, según una estadística que cita la guía, la RA inicial más frecuente (64,0 %) en un conjunto de datos monitorizado, seguida de Monitor Vertical Speed y Climb. Guía ACAS v5.0, §16 (sección de estadísticas).</li>
+<li><strong>Altitudes de inhibición de las RA - cifra CORREGIDA.</strong> La Guía ACAS v5.0 vigente afirma: <strong>«Las RA Increase Descent se inhiben por debajo de 1550 pies (±100 pies) AGL»</strong>; <strong>«las RA Descend se inhiben por debajo de 1100 pies AGL»</strong>; <strong>«todas las RA se inhiben por debajo de 1000 pies (±100 pies) AGL»</strong>; <strong>«las alertas sonoras de TA se inhiben por debajo de 500 pies (±100 pies) AGL»</strong>. Guía ACAS v5.0, §8.2. <strong>Esto corrige el archivo base</strong> <code>syllabus/t05-navigation-systems.md</code> §6.4, que dice actualmente «Increase Descent inhibida por debajo de <strong>1450</strong> ft AGL», marcado allí expresamente como no verificado («corregido 1550 -&gt; 1450 ft a partir de conocimiento general... aún sin verificar en una página abierta»). <strong>La cifra correcta, según la fuente primaria, es 1550 ft, no 1450 ft.</strong> El archivo base debería actualizarse con este dato.</li>
+<li><strong>Inhibiciones de Climb/Increase Climb.</strong> El TCAS II puede inhibir también una RA Climb o Increase Climb «en algunos casos por limitaciones de las prestaciones de ascenso de la aeronave», y inhibe las RA Climb/Increase Climb por encima de ciertas altitudes (altas) y en algunos casos de configuración de aterrizaje, sustituyéndolas por una RA «Do Not Climb» (Monitor Vertical Speed). Guía ACAS v5.0, §8.2.3.</li>
+<li><strong>Inhibición de alertas sonoras, TCAS I.</strong> Todas las anunciaciones sonoras se inhiben por debajo de <strong>500 ft (±100 ft) AGL</strong> en aeronaves con radioaltímetro (o con el tren de aterrizaje extendido, si no hay radioaltímetro); en una aeronave TCAS I de tren fijo sin radioaltímetro, las alertas sonoras no se inhiben nunca. Guía ACAS v5.0, §3.1 (párrafo del TCAS I). El <strong>TCAS I</strong> da solo TA (sin RA ni coordinación con el ACAS II) y no es obligatorio en Europa, aunque sigue permitido o exigido para algunas categorías de aeronaves de EE. UU.</li>
+<li><strong>Contexto de flota y fabricantes.</strong> Hay al menos <strong>25 000 aeronaves equipadas con TCAS II</strong> en todo el mundo (cifra de 2025); el TCAS II lo fabrican cuatro proveedores con sede en EE. UU. cuya «lógica» (algoritmo de evitación de colisiones y de coordinación) está normalizada y es interoperable entre proveedores. Guía ACAS v5.0, §3.1.</li>
+</ul>
+<h2 id="7-coordinacion-acas-responsabilidades-del-controlador-fraseologia">7. Coordinación ACAS, responsabilidades del controlador, fraseología</h2>
+<ul>
+<li><strong>Reparto de responsabilidades.</strong> Cuando un piloto sigue una RA (desviándose de la autorización ATC si es preciso, «salvo que hacerlo ponga en peligro a la aeronave»), <strong>«el controlador deja de ser responsable de la separación de las aeronaves implicadas en la RA»</strong>. Fundamentalmente, <strong>no se puede suponer que el ATC conoce la RA hasta que el piloto la notifica</strong>; una vez notificada, «el controlador no debe intentar modificar la trayectoria de vuelo de las aeronaves implicadas en el encuentro». Guía ACAS v5.0, §9.3.1 (p.80).</li>
+<li><strong>Fraseología normalizada (literal de la disposición de los PANS-ATM de la OACI que cita la guía):</strong></li>
+<li>Notificación de una RA: <strong>«[indicativo] TCAS RA»</strong> (se pronuncia «Tee-Cas-Ar-Ay»); el piloto <strong>no</strong> notifica el sentido (ascender/descender), porque puede cambiar durante el encuentro; el controlador debe acusar recibo con <strong>«Roger»</strong>. Guía ACAS v5.0, §9.3.2.</li>
+<li>Fin de un encuentro: <strong>«[indicativo] CLEAR OF CONFLICT (assigned clearance) RESUMED»</strong> o <strong>«[indicativo] CLEAR OF CONFLICT, RETURNING TO (assigned clearance)»</strong>. misma sección.</li>
+<li>Si el ATC da una instrucción que contradice la RA (p. ej. «descend» cuando la RA pide ascender), el piloto <strong>debe seguir la RA</strong> y responder: <strong>«[indicativo] UNABLE, TCAS RA.»</strong> misma sección.</li>
+<li>La fraseología normalizada dice siempre <strong>«TCAS»</strong>, nunca «ACAS», incluso para las RA del ACAS Xa. Guía ACAS v5.0, nota bajo el §9.3.2.</li>
+<li>Si la tripulación lo solicita, los controladores deben dar <strong>información de tránsito</strong> durante la RA; algunos Estados tienen una «<strong>visualización al controlador del enlace descendente de la RA</strong>» automática (mediante Modo S), pero esto <strong>no</strong> elimina el deber del piloto de notificar con la fraseología, y la OACI no ha publicado disposiciones sobre su uso operacional. misma sección.</li>
+<li><strong>Los procedimientos nacionales españoles lo reflejan.</strong> El AIP España ENR 1.6 §4.1 confirma de forma independiente que, en una emergencia, el piloto selecciona el <strong>código Modo A/3 7700</strong> y «podrá emitir el mensaje ADS-B de emergencia general... salvo que reciba otras instrucciones de la dependencia ATS»; también «podrá transmitir el mensaje de emergencia mediante» <strong>CPDLC</strong>. ENR 1.6 §4.1.</li>
+</ul>
+<h2 id="8-redes-de-seguridad-en-tierra-stca-msaw-apw-daiw">8. Redes de seguridad en tierra: STCA, MSAW, APW, DAIW</h2>
+<ul>
+<li><strong>STCA (<em>Short Term Conflict Alert</em>, aviso de conflicto a corto plazo).</strong> «Red de seguridad en tierra destinada a ayudar al controlador a prevenir colisiones entre aeronaves generando, con la antelación adecuada, una alerta de infracción potencial o real de las mínimas de separación.» Guía ACAS v5.0, Glosario, zona del §22.</li>
+<li><strong>STCA frente a ACAS II: diferencias clave</strong> (Tabla 14 de la Guía ACAS): el STCA usa <strong>vigilancia en tierra con una tasa de actualización de 4-10 segundos</strong> y pistas que suelen construirse con <strong>varias fuentes de datos</strong>; el ACAS II usa una <strong>tasa de actualización de 1 segundo</strong> con una <strong>única fuente de datos</strong> (sus propias interrogaciones), pero con una resolución en acimut potencialmente peor. El seguimiento vertical del STCA usa la <strong>altitud notificada con precisión de 25 ft o 100 ft</strong>; el ACAS II conoce su <strong>propia</strong> altitud con <strong>precisión de 1 pie</strong>. El STCA <strong>detecta</strong> una pérdida de separación inminente o real, pero <strong>no da consejo de resolución</strong>: «la acción adecuada debe determinarla el controlador»; el ACAS II <strong>presupone</strong> un riesgo de colisión y <strong>da</strong> consejo de resolución. El STCA «no está normalizado» (cada ANSP lo ajusta a su propio entorno); el ACAS II está totalmente normalizado. <strong>El comportamiento deseado es que el STCA alerte al menos 30 segundos antes de la primera RA</strong>, pero como los dos sistemas son independientes y solo comparten los datos de altitud del transpondedor, el STCA puede activarse más tarde, incluso en ocasiones después de la RA. Guía ACAS v5.0, §9.22 y Tabla 14.</li>
+<li><strong>MSAW (<em>Minimum Safe Altitude Warning</em>, aviso de altitud mínima de seguridad)</strong> y <strong>APW (<em>Area Proximity Warning</em>, aviso de proximidad de área)</strong>: ambos acrónimos figuran formalmente (con estas expansiones) en la lista de acrónimos del reglamento ATM-ANS/CS-ACNS de la EASA y aparecen juntos como ejemplos de «herramientas de monitorización» o de cosas cuyas alertas y mensajes de error debe saber interpretar un controlador, junto con el MTCD y la alerta de conflicto (lista de acrónimos y tabla de competencias de ATSEP del reglamento ATM-ANS/CS-ACNS). El MSAW avisa al controlador de que la altitud de una aeronave, dada su posición, ha descendido (o descenderá) por debajo de un mínimo seguro respecto al terreno u obstáculos; el APW avisa de la proximidad no autorizada a un volumen de espacio aéreo definido (p. ej. un área restringida/prohibida/peligrosa o el límite de otro sector), o de su penetración (definiciones estándar coherentes con las expansiones de los acrónimos; las frases descriptivas operacionales no son citas literales de una fuente primaria).</li>
+<li><strong>DAIW (<em>Danger Area Infringement Warning</em>, aviso de infracción de zona peligrosa).</strong> Vocabulario estándar de redes de seguridad de EUROCONTROL: un caso especializado del APW (aviso de proximidad de área) para zonas peligrosas.</li>
+</ul>
+<h2 id="9-comunicaciones-bandas-vhfuhfhf-833-khz-frecuencias-de-emergencia-selcal">9. Comunicaciones: bandas VHF/UHF/HF, 8,33 kHz, frecuencias de emergencia, SELCAL</h2>
+<ul>
+<li><strong>Banda VHF aire-tierra y separación entre canales de 8,33 kHz (España/Europa).</strong> El Reglamento (UE) 2023/1770, Part-COM Título 2, se aplica a los «servicios de radiocomunicaciones de voz aire-tierra y tierra-tierra en la banda de frecuencias de <strong>117,975-137 MHz</strong>» dentro de la región EUR de la OACI (con exclusión de la FIR/UIR de Canarias para este título en concreto). El Reglamento (UE) n.º 1079/2012, predecesor (derogado por el 2023/1770, pero todavía referencia histórica), exigía que «<strong>a partir del 1 de enero de 2018</strong> un operador usuario del espacio aéreo no opere una aeronave [en el espacio aéreo ATS de la UE]... salvo que la radio de la aeronave... tenga capacidad de separación entre canales de 8,33 kHz», y que los Estados miembros convirtieran esencialmente todas las asignaciones de frecuencias VHF a 8,33 kHz <strong>antes del 31 de diciembre de 2018</strong>, con excepción de las asignaciones que se mantienen a 25 kHz para <strong>emergencia (121,5 MHz)</strong>, <strong>búsqueda y salvamento (123,1 MHz)</strong>, <strong>ACARS y VDL</strong>, y las frecuencias de aeronaves de Estado.</li>
+<li><strong>Ejemplo resuelto: denominación de canales de 8,33 kHz.</strong> El 8,33 kHz introdujo un <strong>esquema de numeración de canales de 6 dígitos</strong> en el que el <em>designador</em> del canal puede diferir de la <em>frecuencia</em> realmente sintonizada: <strong>«el canal de 8,33 kHz 132,035 sintoniza la frecuencia 132,0333 MHz».</strong> El Anexo 10 de la OACI Vol II prescribe la pronunciación de 6 dígitos en RTF, salvo cuando los dígitos 5.º y 6.º son ambos cero, en cuyo caso solo se dicen 4 dígitos: p. ej. <strong>118,000 (25 kHz) se transmite «ONE ONE EIGHT DECIMAL ZERO»</strong>; <strong>118,005 (8,33 kHz) es «ONE ONE EIGHT DECIMAL ZERO ZERO FIVE»</strong>; <strong>118,025 (25 kHz) es «ONE ONE EIGHT DECIMAL ZERO TWO FIVE»</strong> (se mantiene con 5 dígitos porque es un valor real con separación de 25 kHz, no por la regla del cero; la guía lo da como ejemplo de contraste). Es un buen ejercicio de cálculo de estilo examen: el desfase entre el designador y la frecuencia real (132,035 -&gt; 132,0333, una diferencia de 0,0017 MHz / 1,7 kHz) se deriva de cómo la trama de 8,33 kHz subdivide cada canal de 25 kHz en tres.</li>
+<li><strong>UHF (<em>Ultra High Frequency</em>, frecuencia ultra alta).</strong> La propia lista de acrónimos de OM05 da la definición de banda de la OACI: <strong>UHF = 300-3000 MHz</strong>, <strong>VHF = 30-300 MHz</strong> (OM05 §25). Las comunicaciones aire-tierra militares usan habitualmente la banda UHF (subbanda de 225-400 MHz) en paralelo con la VHF civil.</li>
+<li><strong>HF (<em>High Frequency</em>, alta frecuencia).</strong> Se usa para las comunicaciones aire-tierra de largo alcance u oceánicas más allá del alcance en línea de vista de la VHF (p. ej. sobre el Atlántico antes de que hubiera plena cobertura de enlace de datos).</li>
+<li><strong>Frecuencias de emergencia y SAR.</strong> <strong>121,5 MHz</strong> = frecuencia VHF internacional de emergencia/socorro; <strong>123,1 MHz</strong> = frecuencia VHF de búsqueda y salvamento en la zona de operaciones; ambas se nombran expresamente como las dos asignaciones VHF que el reglamento VCS <strong>mantiene a 25 kHz</strong> (sin convertirlas a 8,33 kHz). <strong>243,0 MHz</strong> es la frecuencia UHF militar de emergencia equivalente (armónico de 121,5 MHz).</li>
+<li><strong>SELCAL (<em>Selective Calling</em>, llamada selectiva).</strong> Sistema que permite a una estación de tierra llamar a una aeronave concreta (principalmente por HF, históricamente, para evitar la escucha continua en cabina de un canal ruidoso) transmitiendo una combinación de tonos única que activa un timbre o luz en cabina solo en la aeronave llamada.</li>
+</ul>
+<h2 id="10-enlace-de-datos-cpdlc-acars-vdl-modo-2-ads-c-aftnamhs-atn">10. Enlace de datos: CPDLC, ACARS, VDL Modo 2, ADS-C, AFTN/AMHS, ATN</h2>
+<ul>
+<li><strong>CPDLC en España: áreas de servicio concretas.</strong> El AIP España GEN 3.4 §3.5 distingue dos «mundos» de CPDLC que funcionan realmente en España:</li>
+<li><strong>Enlace de datos ATN B1 (<em>Aeronautical Telecommunication Network</em>, Baseline 1)</strong>, basado en el <strong>Reglamento (CE) n.º 29/2009 de la Comisión</strong>, que comprende cuatro servicios CPDLC: <strong>DLIC (<em>Data Link Initiation Capability</em>)</strong>, <strong>ACL (<em>ATC Clearances and instructions</em>)</strong>, <strong>ACM (<em>ATC Communications Management</em>)</strong>, <strong>AMC (<em>ATC Microphone check</em>)</strong>. Disponible en la <strong>UIR Madrid</strong> (Madrid ACC y Sevilla ACC) y en la <strong>UIR Barcelona</strong> (Barcelona ACC) desde el <strong>FL285</strong>, y además por debajo del FL285 en TMA concretos (Barcelona, Palma, Sevilla, Valencia) según la cobertura de las estaciones VDL Modo 2; disponible también en la <strong>UIR/FIR Canarias</strong> al norte del paralelo 26N y al este del meridiano 19W, desde el FL285 (y por debajo, sujeto a cobertura). Requiere aviónica <strong>CPDLC ATN VDL Modo 2</strong>; <strong>no</strong> está disponible para aeronaves que solo tengan equipamiento FANS-1/A. AIP España GEN 3.4 §3.5.1.</li>
+<li><strong>Enlace de datos FANS</strong> (ADS-C + CPDLC), disponible en el área de servicio ATS <strong>oceánica</strong> de la FIR/UIR Canarias, basado en el estándar <strong>Global Operational Data Link Document (GOLD)</strong> de la OACI. AIP España GEN 3.4 §3.5.2.</li>
+<li>Ambos requieren un <strong>procedimiento de conexión (LOG-ON)</strong> establecido, según el AIP ENR 1.3, antes de su uso.</li>
+<li><strong>Base reglamentaria.</strong> El CPDLC ATN B1 en la UE se impuso originalmente mediante el <strong>Reglamento (CE) n.º 29/2009 de la Comisión</strong> (el reglamento de «servicios de enlace de datos» o DLS), integrado después en el <strong>Reglamento (UE) 2023/1770 Part-COM Título 1</strong>, que exige a los operadores dar soporte a <strong>DLIC, gestión de comunicaciones ATC, autorizaciones e información ATC y comprobación de micrófono ATC</strong> en vuelos IFR GAT por encima del FL285 en el espacio aéreo SES aplicable, con exenciones para las aeronaves certificadas por primera vez antes del 1 de enero de 1995, las aeronaves adaptadas con enlace de datos <strong>basado en ACARS</strong> antes del 1 de enero de 2018 (interoperable con aplicaciones ATS «usadas principalmente donde la vigilancia radar no es práctica», es decir, aeronaves heredadas FANS/oceánicas) y las aeronaves pequeñas (&lt;=19 asientos, &lt;=45 359 kg / 100 000 lb) certificadas por primera vez antes del 5 de febrero de 2020.</li>
+<li><strong>ACARS (<em>Aircraft Communications Addressing and Reporting System</em>, sistema de direccionamiento e informe de comunicaciones de aeronaves).</strong> Enlace de datos digital anterior a la era del CPDLC (portadora VHF, HF o SATCOM) que se usa para mensajes de compañía/operacionales y que, históricamente, fue la portadora ATS «interoperable» de las aeronaves FANS-1/A oceánicas que menciona por su nombre la cláusula de exención del Reglamento 2023/1770.</li>
+<li><strong>VDL Modo 2 (<em>VHF Digital Link Mode 2</em>, enlace digital VHF modo 2).</strong> Portadora de enlace de datos VHF que transporta el CPDLC ATN B1 en España; el AIP España GEN 3.4 condiciona expresamente la disponibilidad del CPDLC por debajo del FL285 a «la cobertura y/o disponibilidad de <strong>estaciones VDL2</strong>» y exige aviónica «<strong>CPDLC ATN VDL Modo 2</strong>».</li>
+<li><strong>AFTN/AMHS (<em>Aeronautical Fixed Telecommunication Network</em> / <em>ATS Message Handling System</em>).</strong> Red de mensajería tierra-tierra que se usa para NOTAM, planes de vuelo y otros mensajes del servicio fijo ATS. El bloque postal/de contacto de ENAIRE para su División de Comunicaciones en el AIP GEN 3.4 enumera una <strong>dirección AFTN</strong> tanto para el contacto general de Enaire (<strong>LEANYANX</strong>) como para la División de Comunicaciones (<strong>LEANZXIC</strong>), lo que confirma que la AFTN sigue siendo el esquema de direccionamiento para la correspondencia formal con las dependencias ATS españolas. El AMHS es el sucesor/capa superpuesta moderno de la AFTN, basado en X.400, que transporta los mismos tipos de mensajes sobre la ATN.</li>
+<li><strong>ATN (<em>Aeronautical Telecommunication Network</em>, red de telecomunicaciones aeronáuticas).</strong> Arquitectura de red global (tierra-tierra y aire-tierra) sobre la que se apoyan el CPDLC ATN B1 y, con el tiempo, el AMHS; se nombra explícitamente en el epígrafe «DLS ATN B1» del AIP de España (GEN 3.4 §3.5.1) y en el Concepto de Operaciones del Modo S como el futuro hogar de los datos de vigilancia mejorada derivados del Modo S («incorporación posterior en la red de telecomunicaciones aeronáuticas (ATN)»).</li>
+<li><strong>Voz tierra-tierra (ATS/DS - <em>ATS Direct Speech</em>).</strong> Coordinación telefónica de controlador a controlador; la describe funcionalmente (no con el acrónimo «ATS/DS») la propia descripción de ENAIRE de los SCV (Sistemas de Comunicaciones de Voz): el SCV debe dar soporte a las «comunicaciones de voz tierra-tierra (T/T), o comunicaciones telefónicas entre los propios controladores para coordinación de las operaciones, y entre éstos y personal de apoyo para aspectos de gestión» (véase la sección 12 más abajo).</li>
+</ul>
+<h2 id="11-paquete-reglamentario-de-la-ue-de-los-292009-12072011-10792012-al-20231770">11. Paquete reglamentario de la UE: de los 29/2009, 1207/2011, 1079/2012 al 2023/1770</h2>
+<p>Una tabla limpia de historia reglamentaria que un examen podría plantear con toda verosimilitud («qué reglamento fue derogado por cuál»):</p>
+<table>
+<thead>
+<tr>
+<th>Reglamento</th>
+<th>Materia</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(CE) n.º 29/2009</strong></td>
+<td>Requisitos de los servicios de enlace de datos (CPDLC ATN B1)</td>
+<td>Derogado por el (UE) 2023/1770</td>
+</tr>
+<tr>
+<td><strong>(UE) n.º 1206/2011</strong></td>
+<td>Identificación de aeronaves para la vigilancia (uso de la dirección de 24 bits)</td>
+<td>Derogado por el (UE) 2023/1770</td>
+</tr>
+<tr>
+<td><strong>(UE) n.º 1207/2011</strong></td>
+<td>Requisitos de rendimiento e interoperabilidad de la vigilancia del cielo único europeo</td>
+<td>Derogado por el (UE) 2023/1770</td>
+</tr>
+<tr>
+<td><strong>(UE) n.º 1079/2012</strong></td>
+<td>Separación entre canales de voz de 8,33 kHz (VCS)</td>
+<td>Derogado por el (UE) 2023/1770</td>
+</tr>
+<tr>
+<td><strong>(UE) 2023/1770</strong></td>
+<td>Consolida los cuatro en «Part-COM» (enlace de datos + separación entre canales de voz) y «Part-SUR» (ELS, EHS, ADS-B Out, dirección de 24 bits)</td>
+<td><strong>Vigente</strong>; entró en vigor a los 20 días de su publicación; hecho en Bruselas el <strong>12 de septiembre de 2023</strong>, publicado en el <strong>DO L 228, de 15 de septiembre de 2023</strong></td>
+</tr>
+</tbody>
+</table>
+<p>El artículo 5 («Derogación») del Reglamento (UE) 2023/1770 enumera exactamente estos cuatro instrumentos derogados; las fechas y la referencia del DO se leen directamente del pie o encabezado del propio documento.</p>
+<ul>
+<li><strong>Umbrales clave de Part-SUR (ya usados en parte en las secciones 1-2, consolidados aquí):</strong></li>
+<li><strong>ELS</strong>: obligatoria para prácticamente todas las aeronaves que vuelen IFR GAT en el espacio aéreo SES/región EUR aplicable, «con continuidad suficiente para evitar que presente un riesgo operacional». AUR.SUR.2005(1)(a).</li>
+<li><strong>ADS-B Out (1090ES)</strong> y <strong>EHS</strong>: obligatorios para aeronaves con <strong>MTOW &gt; 5700 kg</strong> o <strong>TAS máxima de crucero &gt; 250 kt</strong>, certificadas por primera vez <strong>el 7 de junio de 1995 o después</strong>; la EHS se limita además a aeronaves de <strong>ala fija</strong>. AUR.SUR.2005(1)(b)-(c).</li>
+<li><strong>Exenciones</strong>: aeronaves que vuelan por mantenimiento o exportación, y aeronaves cuya operación cesará antes del <strong>31 de octubre de 2025</strong>. AUR.SUR.2005(2).</li>
+<li><strong>Mantenimiento de derechos adquiridos en la adaptación</strong>: los operadores de aeronaves certificadas por primera vez antes del <strong>7 de diciembre de 2020</strong> pueden seguir cumpliendo si tenían un programa de adaptación establecido antes de esa fecha y no recibieron financiación de la UE para él. AUR.SUR.2005(3).</li>
+<li><strong>Diversidad de antenas</strong> (dos antenas de transpondedor, superior e inferior): exigida para la categoría de aeronaves mayores/más rápidas de arriba. AUR.SUR.2005(4).</li>
+<li><strong>Tolerancia de transpondedor inoperativo</strong>: una aeronave puede seguir volando un <strong>máximo de 3 días consecutivos</strong> con la capacidad ADS-B Out/EHS temporalmente inoperativa. AUR.SUR.2010.</li>
+<li><strong>Norma de la dirección de 24 bits</strong>: se aplica a <strong>todos</strong> los vuelos GAT (no solo a la categoría de aeronaves mayores), según AUR.SUR.2015.</li>
+<li><strong>Umbrales clave de Part-COM:</strong></li>
+<li><strong>Obligación de enlace de datos (CPDLC)</strong>: IFR GAT por encima del <strong>FL285</strong> en el espacio aéreo SES aplicable (excluye el espacio aéreo fuera de la región EUR de la OACI y las UIR de Finlandia/Suecia al norte de 61°30'). AUR.COM.2001.</li>
+<li><strong>Obligación de separación entre canales de voz (8,33 kHz)</strong>: se aplica a la banda de <strong>117,975-137 MHz</strong> dentro de la región EUR de la OACI, <strong>excluida la FIR/UIR de Canarias</strong> para este título concreto. AUR.COM.3001.</li>
+</ul>
+<h2 id="12-sistemas-atc-en-espana-sacta-scv-icaro">12. Sistemas ATC en España: SACTA, SCV, ICARO</h2>
+<p>La descripción web del propio ENAIRE (leída entera) da un resumen limpio y citable que OM05 no cubre en absoluto:</p>
+<ul>
+<li><strong>SCV (Sistemas de Comunicaciones de Voz).</strong> Los sistemas de comunicaciones de voz para el control del tráfico aéreo «proporcionan el enlace voz con los pilotos y entre controladores»; se ubican en los centros de control de tráfico aéreo (de ruta y de área terminal) y en las torres de control de los aeropuertos. Deben dar soporte a las comunicaciones de voz <strong>tierra-aire (T/A)</strong>, o comunicaciones radio, entre controladores y pilotos, y a las comunicaciones de voz <strong>tierra-tierra (T/T)</strong>, o comunicaciones telefónicas entre los propios controladores para la coordinación de las operaciones y entre estos y el personal de apoyo para aspectos de gestión. Características técnicas: <strong>tecnología VoIP, según el estándar internacional de interoperabilidad EUROCAE ED-137</strong>; <strong>sistema dual</strong> (dos sistemas con idéntica funcionalidad, pero software crítico diferente por razones de seguridad); <strong>integración con SACTA</strong>; <strong>arquitectura distribuida en red de área extensa</strong>; interfaz hombre-máquina avanzado. La interconexión del SCV con los equipos radio y con otros SCV se realiza a través de la <strong>red de voz y datos de navegación aérea (REDAN)</strong>, medios propios y líneas alquiladas a proveedores de telecomunicaciones.</li>
+<li><strong>SACTA (Sistema Automatizado de Control de Tránsito Aéreo).</strong> Plataforma central de automatización ATC de ENAIRE: «su misión es facilitar la prestación de los servicios ATS de los que ENAIRE es responsable». Integra <strong>todos</strong> los centros españoles de control en ruta, de aproximación y de aeródromo, de modo que la gestión funcione con datos coherentes y coordinados, lo que permite la operación ininterrumpida en todas las dependencias de control; a escala internacional, SACTA permite la comunicación automática entre centros de control españoles y extranjeros mediante estándares internacionales de intercambio de datos, minimiza las acciones manuales, detecta automáticamente posibles conflictos y da flexibilidad para reconfigurar el espacio aéreo operativo, lo que ayuda a minimizar el efecto de los picos de tráfico. SACTA evoluciona continuamente a través de versiones que se despliegan progresivamente. <strong>Funciones principales que enumera ENAIRE</strong>: (1) procesamiento de toda la información de planes de vuelo mediante un <strong>tratamiento central de planes de vuelo (TCPV)</strong> y varias unidades de <strong>tratamiento local de planes de vuelo (TLPV)</strong>; (2) herramientas de apoyo a la planificación del tráfico; (3) procesamiento de la información radar para el seguimiento e identificación de aeronaves y para mantener la separación; (4) <strong>asociación de los datos radar con los planes de vuelo</strong> para que el controlador pueda identificar las aeronaves de forma automática e inequívoca; (5) <strong>presentación de información meteorológica</strong> para ayudar a la navegación en condiciones adversas; (6) <strong>alertas al controlador de las desviaciones de las aeronaves</strong> respecto al plan o a las autorizaciones recibidas, en tiempo real; (7) <strong>comunicación de datos entre la aeronave y el controlador</strong> (es decir, intercambio de tipo CPDLC), para evitar las comunicaciones de voz; (8) presentación de la información aeronáutica necesaria para el ATC; (9) supervisión, configuración, grabación y operación técnica de todo el sistema de forma distribuida.</li>
+<li><strong>ICARO (<em>Integrated COM/AIS/AIP &amp; Reporting Office Automated System</em>).</strong> Automatiza las tareas de la <strong>Oficina NOTAM (NOF)</strong> de España y los <strong>proyectos NOTAM</strong> de los aeropuertos, junto con la tramitación inicial del plan de vuelo y su seguimiento en las oficinas de reserva de los aeropuertos (<strong>oficinas ARO</strong>; la web de ENAIRE las glosa como «oficinas de reserva de los aeropuertos», <em>Airport Reservation Office</em>, pero el AIP ENR 1.10 las llama «Oficina de Notificación de los Servicios de Tránsito Aéreo (ARO)»). Es accesible mediante terminales cliente de ICARO en las instalaciones de los aeropuertos y a través del sitio web de ENAIRE. <strong>Alimenta a SACTA</strong> con información aeronáutica y meteorológica (en particular la activación/desactivación de áreas de uso especial). Los servicios se prestan mediante «<strong>ICARO XXI</strong>»: distribución de información aeronáutica (como NOF designada internacionalmente, que garantiza la calidad y el tratamiento oportuno); <strong>boletines de información previa al vuelo (PIB)</strong>; información meteorológica (datos de AEMET accesibles a través de ICARO); tramitación de planes de vuelo (presentación inicial, estado de seguimiento); interfaces con SACTA y con los sistemas de Aena (datos de plan de vuelo/franja/progreso) y con la mensajería de <strong>toma de decisiones colaborativa en aeropuertos (A-CDM)</strong> de EUROCONTROL.</li>
+</ul>
+<h2 id="13-red-de-radarads-bradioayudas-de-enaire-tabla-de-estaciones-del-aip-enr-16">13. Red de radar/ADS-B/radioayudas de ENAIRE (tabla de estaciones del AIP ENR 1.6)</h2>
+<p>El AIP España ENR 1.6 §7 enumera decenas de estaciones de vigilancia con nombre (p. ej. <strong>Aitana</strong>, <strong>Alcalá de los Gazules</strong>, <strong>Begas</strong>, <strong>Paracuellos-1/2</strong>, <strong>Randa</strong>, <strong>Peñas del Chache</strong>) con su tecnología (S/P/MLAT/SM/A), <strong>alcance nominal en NM</strong>, <strong>periodo en segundos</strong> (tasa de actualización de los datos) y qué unidades ACC/APP/TWR atienden como sensor principal o de contingencia. Cifras representativas realmente leídas en la tabla: <strong>Aitana</strong> (Modo-S, tipo LRR, alcance 108 NM, periodo 10 s) atiende a Barcelona ACC, Palma TACC, Sevilla ACC y Valencia TACC como principal/contingencia y a varias TWR; <strong>Alcalá de los Gazules</strong> (Modo-S, LRR, alcance 195 NM, periodo 10 s) atiende a Sevilla ACC; una estación de tipo marcado <strong>(A)</strong> con alcance de 200 NM y periodo de 2 s atiende a las TWR del área de Barcelona ACC (tasa de actualización típica de una estación terrestre <strong>ADS-B</strong>); <strong>Barajas-MLAT</strong> (marcador de tipo ADS-B, alcance 100 NM, periodo 1 s) atiende a Madrid ACC/APP y a las TWR del área de Madrid: la tasa de actualización más rápida (1 s) que se ve en el extracto, coherente con una estación <strong>MLAT de superficie/terminal</strong> y no con una en ruta; <strong>Peñas del Chache</strong> (Modo-S, LRR, alcance 195 NM, periodo 10 s) atiende a Canarias ACC. <strong>Trampa</strong>: el <strong>periodo</strong> de actualización guarda relación inversa con lo «local» que es el sensor: las estaciones Modo-S/PSR de largo alcance en ruta (LRR) suelen actualizar cada <strong>4-10 segundos</strong>; las de área terminal (TAR) y, sobre todo, las de superficie/MLAT actualizan mucho más deprisa, hasta <strong>1-2 segundos</strong>, en coherencia con el contraste general de velocidad de rotación PSR frente a SMR que ya da el manual (OM05 §21) a nivel de tipo de sensor.</p>
+<h2 id="14-aireon-itec-skynex-contexto-coopans">14. Aireon, iTEC SkyNex, contexto COOPANS</h2>
+<ul>
+<li><strong>Aireon (ADS-B desde el espacio).</strong> Carga útil comercial de receptores ADS-B espaciales alojada en la constelación de satélites <strong>Iridium</strong>, que ofrece recepción global de mensajes ADS-B 1090ES, incluso sobre océanos y otras zonas sin vigilancia en tierra. Prestaciones esperadas (época de 2018) una vez desplegada la constelación completa: <strong>latencia inferior a 2 segundos</strong>, actualización cada «octavo segundo» (aproximadamente, según la redacción imprecisa de la propia fuente), además de una verificación independiente de los datos de posición ADS-B basada en triangulación, «totalmente independiente del GNSS». Se esperaba la constelación completa para el <strong>T3 de 2018</strong>, con 50 satélites ya lanzados con fines de prueba en el momento de redactarse la fuente. Relacionado: el concepto <strong>GADSS (<em>Global Aeronautical Distress and Safety System</em>)</strong> de la OACI (la fuente de 2018 escribe «Safety System» a secas; el nombre oficial completo es el indicado) pide actualizaciones de posición de aeronaves en peligro tan frecuentes como <strong>cada 1 minuto</strong>, y <strong>cada 15 minutos</strong> en condiciones normales de vuelo; Aireon estaba posicionada para ofrecer esa capacidad de seguimiento global. En el momento de la fuente de 2018, <strong>NATS y NAV Canada</strong> planeaban desplegar los datos de Aireon sobre el <strong>Atlántico Norte y Canadá en el periodo 2019-2020</strong>. Estas cifras son de 2018; en 2026 la constelación lleva mucho tiempo operativa, así que trátalas como históricas/ilustrativas, no como el estado actual del sistema.</li>
+<li><strong>iTEC SkyNex.</strong> Alianza de sistemas ATM de nueva generación cuyos miembros son los proveedores de servicios de navegación aérea de <strong>Alemania (DFS Deutsche Flugsicherung)</strong>, <strong>Noruega (Avinor)</strong>, <strong>Lituania (Oro Navigacija)</strong>, <strong>Polonia (PANSA)</strong>, <strong>los Países Bajos (LVNL)</strong>, <strong>España (ENAIRE)</strong>, <strong>el Reino Unido (NATS)</strong> y <strong>Canadá (NAV Canada)</strong>, con <strong>Indra</strong> como socio tecnológico; los miembros lanzaron el programa <strong>iTEC SkyNex</strong> en <strong>2021</strong>. La alianza «supervisa más de <strong>26 millones de kilómetros cuadrados</strong> de espacio aéreo... y gestiona más de <strong>12 millones de vuelos al año</strong> desde <strong>27 centros de control</strong>», y da soporte a los vuelos transoceánicos con una tecnología unificada de extremo a extremo.</li>
+<li><strong>COOPANS.</strong> La <em>otra</em> gran alianza europea de sistemas ATM (Austro Control, IAA Irlanda, LFV Suecia, Naviair Dinamarca, Croatia Control, con Thales como socio tecnológico). Según fuentes de ENAIRE, ENAIRE es miembro de iTEC, no de COOPANS.</li>
+</ul>
+<h2 id="15-herramientas-de-automatizacion-fdpsrdps-mtcd-amandman-swim-operaciones-basadas-en-trayectoria">15. Herramientas de automatización: FDPS/RDPS, MTCD, AMAN/DMAN, SWIM, operaciones basadas en trayectoria</h2>
+<ul>
+<li><strong>FDPS (<em>Flight Data Processing System</em>, sistema de procesamiento de datos de vuelo) / RDPS (<em>Radar Data Processing System</em>, sistema de procesamiento de datos radar).</strong> No se nombran explícitamente con estos acrónimos en la descripción de SACTA de ENAIRE, pero son funcionalmente idénticos a lo que ENAIRE llama, respectivamente, <strong>TCPV/TLPV</strong> (tratamiento central/local de planes de vuelo, es decir, FDPS) y la función de <strong>procesamiento de la información radar</strong> (es decir, RDPS) que se describe en la sección 12 más arriba.</li>
+<li><strong>MTCD (<em>Medium-Term Conflict Detection</em>, detección de conflictos a medio plazo).</strong> Figura por su nombre (con esta expansión) en la lista de acrónimos y en el programa de formación del reglamento ATM-ANS/CS-ACNS de la EASA como una de las «herramientas de monitorización» estándar junto con el AMAN, el DMAN y el A-SMGCS, y por separado como ejemplo de «herramientas de secuenciación y dosificación» junto con el AMAN/DMAN. El MTCD mira más lejos en el tiempo que el STCA (que es de corto plazo/táctico) para señalar posibles conflictos antes, en la fase de planificación.</li>
+<li><strong>AMAN (<em>Arrival Manager</em>, gestor de llegadas) / DMAN (<em>Departure Manager</em>, gestor de salidas).</strong> También confirmados por su nombre y expansión en la misma lista de acrónimos de la EASA («AMAN Arrival Manager», «DMAN Departure Manager»), usados para secuenciar y dosificar el tráfico de llegada/salida.</li>
+<li><strong>SWIM (<em>System Wide Information Management</em>, gestión de la información a escala del sistema).</strong> Confirmado por su nombre y expansión en la misma fuente («SWIM System Wide Information Management»), descrito en el programa de formación como dotado de un «marco institucional y aplicaciones... proveedores y usuarios de SWIM», y su descripción de arquitectura hace referencia a «principales estándares SWIM, perfiles SWIM... topología, oportunidades potenciales». SWIM es el concepto troncal de intercambio de información de la ATM moderna (sustituye las interfaces punto a punto por una capa común de intercambio de datos orientada a servicios); el material propio de ENAIRE lista SWIM entre los servicios modernos.</li>
+<li><strong>Operaciones basadas en trayectoria (TBO) y trayectoria 4D.</strong> Mencionadas por su nombre en el mismo texto del programa de formación de la EASA como ejemplo de área de competencia: «aproximación continua, trayectoria 4D, trayectoria de negocio, SWIM» se agrupan como cosas que un ATSEP debe saber describir. La TBO es el concepto SESAR/OACI de gestionar el tráfico en torno a la trayectoria cuatridimensional negociada de cada aeronave (tres dimensiones espaciales más el tiempo) y no en torno a autorizaciones fijas de ruta/nivel.</li>
+<li><strong>iTEC/Coflight/SESAR como familias competidoras de sistemas ATM</strong>: el mismo texto formativo de la EASA nombra «<strong>Coflight, iTEC, SESAR</strong>, seguimiento multisensor, SWIM, objeto de vuelo» juntos en una sola viñeta de competencia, lo que confirma que iTEC (la familia de sistemas de ENAIRE, sección 14) se sitúa junto a Coflight (usado por otros ANSP europeos, p. ej. el programa conjunto de Francia/Italia/Suiza) como uno de los programas paralelos de sistemas ATM de nueva generación en Europa.</li>
+</ul>
+<h2 id="16-servicios-cnsatm-lista-de-servicios-ats-clases-de-espacio-aereo-a-g">16. Servicios CNS/ATM: lista de servicios ATS, clases de espacio aéreo A-G</h2>
+<ul>
+<li><strong>Servicios ATS (del propio planteamiento CNS-ATM de OM05, con referencia cruzada, no duplicado por entero):</strong> OM05 §2 ya dice que la ATM abarca la «organización del espacio aéreo, la gestión de afluencia y el control del tráfico aéreo, así como el suministro de información y alerta a las aeronaves», es decir, los cuatro servicios ATS clásicos de la OACI: <strong>servicio de control de tránsito aéreo (ATC)</strong>, <strong>servicio de información de vuelo (FIS)</strong>, <strong>servicio de alerta (ALRS)</strong> y (implícitamente, como «asesoramiento» en la Clase F) <strong>servicio de asesoramiento de tránsito aéreo (AS)</strong>: agrupación estándar del Anexo 11 de la OACI, coherente con el texto de OM05.</li>
+<li><strong>Clases de espacio aéreo A-G: tabla completa de servicios (el manual no lo cubre en absoluto).</strong> Según el <strong>Reglamento (UE) n.º 923/2012 (SERA)</strong>, SERA.6001 «Clasificación del espacio aéreo»:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>IFR/VFR permitidos</th>
+<th>Servicio ATC</th>
+<th>Separación</th>
+<th>Límite de velocidad por debajo del FL100/3050 m</th>
+<th>Autorización ATC requerida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>Solo IFR</td>
+<td>Sí, todos los vuelos</td>
+<td>Todos los vuelos separados entre sí</td>
+<td>-</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>IFR y VFR</td>
+<td>Sí, todos los vuelos</td>
+<td>Todos los vuelos separados entre sí</td>
+<td>-</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>IFR y VFR</td>
+<td>Sí, todos los vuelos</td>
+<td>IFR&lt;-&gt;IFR e IFR&lt;-&gt;VFR separados; VFR&lt;-&gt;VFR solo información de tránsito y asesoramiento anticolisión si se solicita</td>
+<td><strong>250 kt IAS</strong> (solo vuelos VFR)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>IFR y VFR</td>
+<td>Sí, todos los vuelos</td>
+<td>IFR&lt;-&gt;IFR separados; el IFR recibe información de tránsito VFR; el VFR recibe información de tránsito sobre todos los demás</td>
+<td><strong>250 kt IAS</strong> (todos los vuelos)</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>IFR y VFR</td>
+<td>Solo IFR</td>
+<td>IFR&lt;-&gt;IFR separados; todos los vuelos reciben información de tránsito «en la medida de lo posible»</td>
+<td><strong>250 kt IAS</strong> (todos los vuelos)</td>
+<td>Solo IFR (la Clase E no puede usarse para zonas de control)</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>IFR y VFR</td>
+<td>Solo asesoramiento (IFR participante)</td>
+<td>Ninguna garantizada; FIS si se solicita</td>
+<td><strong>250 kt IAS</strong> (todos los vuelos)</td>
+<td>No requerida</td>
+</tr>
+<tr>
+<td><strong>G</strong></td>
+<td>IFR y VFR</td>
+<td>Ninguno (FIS si se solicita)</td>
+<td>Ninguna</td>
+<td><strong>250 kt IAS</strong> (todos los vuelos)</td>
+<td>No requerida</td>
+</tr>
+</tbody>
+</table>
+<p>Tabla condensada a partir de SERA.6001 (a)(1)-(8).</p>
+<ul>
+<li><strong>Regla clave para la columna de la tabla:</strong> «la designación de la clasificación del espacio aéreo será adecuada a las necesidades de los Estados miembros, <strong>salvo que todo el espacio aéreo por encima del FL 195 se clasificará como espacio aéreo de Clase C</strong>». SERA.6001(b). Es un dato firme, concreto y muy apto para el examen.</li>
+<li>Se afirma expresamente que la <strong>Clase F</strong> es una <strong>medida temporal</strong> «hasta que pueda sustituirse por una clasificación alternativa», es decir, ni la OACI ni la EASA consideran la Clase F una categoría permanente. SERA.6001(a)(8).</li>
+<li><strong>Trampa</strong>: la Clase E es la <strong>única</strong> clase en la que los vuelos VFR <strong>no</strong> reciben ningún servicio ATC (solo «información de tránsito en la medida de lo posible»), mientras que los vuelos IFR <strong>sí</strong> reciben servicio ATC completo y separación respecto a otros IFR, y la Clase E <strong>no puede usarse para zonas de control (CTR)</strong>. Las Clases F y G son las únicas en las que <strong>no</strong> se requiere autorización ATC. Solo la Clase A es exclusivamente IFR; todas las demás clases, de la A a la G, mezclan IFR/VFR salvo la A. síntesis de la tabla.</li>
+</ul>
+<h2 id="17-firuirtmactratz-reglaje-del-altimetro-rvsm">17. FIR/UIR/TMA/CTR/ATZ, reglaje del altímetro, RVSM</h2>
+<ul>
+<li><strong>FIR/UIR (región de información de vuelo / región superior de información de vuelo).</strong> El propio AIP España GEN 3.4 se organiza por FIR/UIR: <strong>FIR/UIR Madrid</strong>, <strong>FIR/UIR Barcelona</strong> y <strong>FIR/UIR Canarias</strong> se nombran repetidamente como las áreas donde ENAIRE presta servicios de comunicaciones y de vigilancia ATS. AIP España GEN 3.4 §2 y ENR 1.6 en todo su contenido.</li>
+<li><strong>TMA/CTR/ATZ.</strong> Las tablas de mínimas de separación del ENR 1.6 (sección 5 más arriba) están organizadas ellas mismas por estos tipos de espacio aéreo: p. ej. «<strong>TMA Madrid</strong>», «<strong>TMA Barcelona</strong>» para áreas de control terminal; «<strong>CTR Sevilla</strong>» para una zona de control; «<strong>ATZ Bilbao</strong>», «<strong>ATZ Alicante</strong>» para zonas de tránsito de aeródromo. AIP España ENR 1.6 §6.3-6.4 (encabezados de tabla). TMA = área de control terminal (área de control que normalmente se establece en la confluencia de rutas en las inmediaciones de uno o más aeródromos importantes); CTR = zona de control (espacio aéreo controlado que se extiende hacia arriba desde la superficie hasta un límite superior especificado alrededor de un aeródromo); ATZ = zona de tránsito de aeródromo (espacio aéreo definido alrededor de un aeródromo para la protección del tránsito de aeródromo, en aeródromos más pequeños o no controlados). definiciones estándar del Anexo 11 de la OACI, coherentes con el texto del AIP leído, pero no citadas literalmente de él (el AIP usa los términos como nombres propios de espacios aéreos concretos, no como definiciones genéricas).</li>
+<li><strong>Procedimientos de reglaje del altímetro.</strong> Se cubren en el tema 6, no aquí.</li>
+</ul>
+<h2 id="18-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">18. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (OM05)</th>
+<th>Afirmación de la fuente primaria</th>
+<th>Cuál sigue con más probabilidad el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>El manual guarda silencio total sobre el ACAS/TCAS</td>
+<td>Guía ACAS v5.0 de EUROCONTROL: TCAS II v7.1 obligatorio en Europa desde el 1 de dic. de 2015 para aeronaves de &gt;5700 kg o &gt;19 asientos; ACAS Xa/Xo añadido en marzo de 2025</td>
+<td>Fuente primaria (el manual <strong>no</strong> tiene contenido que contradecir; es una pura adición, no un conflicto)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>El manual no da cifras de mínimas de separación SSR/ADS-B</td>
+<td>AIP España ENR 1.6: las mínimas reales van de 2,5 NM (aproximación sucesiva HIRO) a 15 NM (monorradar civil en ruta), no una única cifra de manual «5 NM/3 NM»</td>
+<td>Fuente primaria (AIP), por ser el texto vigente, específico de España y jurídicamente vinculante</td>
+</tr>
+<tr>
+<td>3</td>
+<td>El manual nombra solo NDB, VOR, DME e ILS como «radioayudas» (3.2.3, p.16-19) y no menciona el PAR</td>
+<td>El AIP España GEN 3.4 §3.1 enumera el <strong>PAR (radar para aproximación de precisión)</strong> como tipo adicional de servicio de radionavegación disponible en España</td>
+<td>Ambas; la lista del manual es una taxonomía didáctica simplificada y el AIP es la realidad operativa: una pregunta del tipo «qué radioayudas enumera el AIP de ENAIRE» debe seguir el AIP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>El archivo base <code>t05-navigation-systems.md</code> §6.4 (no el manual, sino un archivo existente del proyecto) dice que la RA «Increase Descent» del TCAS se inhibe por debajo de <strong>1450 ft AGL</strong>, señalado por él mismo como corrección no verificada</td>
+<td>La Guía ACAS v5.0 de EUROCONTROL afirma expresamente <strong>1550 ft (±100 ft) AGL</strong></td>
+<td><strong>Fuente primaria (1550 ft)</strong>: es una corrección factual del archivo base existente, señalada aquí para que se actualice</td>
+</tr>
+<tr>
+<td>5</td>
+<td>La tabla de modos SSR del manual (p.63-64) no usa los términos «ELS»/«EHS»</td>
+<td>El Reglamento (UE) 2023/1770 y el Concepto de Operaciones del Modo S usan «Elementary Surveillance (ELS)» y «Enhanced Surveillance (EHS)» como términos estándar actuales para exactamente la distinción entre «Modo S básico» y «parámetros Comm-B adicionales» que el manual solo sobreentiende</td>
+<td>Fuente primaria; ELS/EHS es el término que usaría una pregunta basada en el reglamento de la UE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="19-ejemplos-resueltos">19. Ejemplos resueltos</h2>
+<ol>
+<li><strong>Desfase entre canal de 8,33 kHz y frecuencia.</strong> El designador de canal <strong>132,035</strong> sintoniza en realidad <strong>132,0333 MHz</strong>: una diferencia de <strong>0,0017 MHz = 1,7 kHz</strong>, a partir del ejemplo resuelto del manual de 8,33 kHz.</li>
+<li><strong>Comprobación de sensatez del alcance/fiabilidad del Modo S.</strong> Un alcance máximo nominal del Modo S de <strong>256 NM</strong> con una fiabilidad de vigilancia de al menos el <strong>99 %</strong> significa que, en una TMA con mucho tráfico y separaciones típicas en ruta de, p. ej., 5 NM, un solo interrogador podría en principio seguir del orden de <strong>256 / 5 ≈ 51</strong> aeronaves alineadas en un mismo radial antes de agotar el alcance nominal; ilustra por qué la afirmación de «gran número de aeronaves» para el Modo S (que el manual hace de forma cualitativa) es numéricamente plausible; es solo ilustrativo, no una afirmación de ninguna fuente sobre la capacidad real.</li>
+<li><strong>Margen de tiempo de aviso del STCA.</strong> Si el STCA está diseñado para alertar <strong>&gt;=30 s</strong> antes de la primera RA posible, y una RA típica del TCAS II se emite hasta <strong>35 s</strong> antes del CPA (punto de máxima aproximación, según la propia cifra del archivo base), entonces, en el <em>mejor</em> caso, el controlador tiene unos <strong>30 s</strong> de aviso del STCA antes de que se dispare la RA a T-35 s del CPA; es decir, el STCA debería idealmente saltar hacia <strong>T-65 s del CPA</strong>; es una combinación aritmética de dos cifras de fuente (el margen de 30 s entre STCA y RA de la Guía ACAS, y las cifras de tiempos TA/RA del archivo base, contrastadas con SKYbrary); hay que tratarlo como ilustrativo, no como un hecho declarado por una única fuente.</li>
+<li><strong>Ventana de transpondedor inoperativo.</strong> Una aeronave con la capacidad ADS-B Out/EHS temporalmente inoperativa puede volar <strong>3 días consecutivos</strong> según el AUR.SUR.2010 del Reglamento 2023/1770 antes de que deba repararse o quedar excluida del espacio aéreo que exige esa capacidad: una cifra concreta y comprobable.</li>
+<li><strong>Orden de magnitud de la tasa de actualización de Aireon.</strong> Si la latencia objetivo de Aireon en la época de 2018 era «inferior a 2 segundos» con un intervalo de actualización del «octavo segundo», entonces en un tránsito oceánico de 1 hora la posición de una sola aeronave podría en principio refrescarse unas <strong>3600 / 8 = 450 veces</strong>, frente a la pérdida de vigilancia efectivamente continua en la era anterior al ADS-B espacial en ese mismo cruce oceánico; es un contraste ilustrativo, no un hecho declarado.</li>
+</ol>
+<h2 id="20-trampas-de-examen">20. Trampas de examen</h2>
+<ol>
+<li><strong>Los umbrales de ELS/EHS no son los mismos que el umbral de obligatoriedad del ACAS, aunque las cifras parezcan idénticas.</strong> Tanto el Reglamento 2023/1770 (ADS-B Out/EHS) como la Guía ACAS (obligación del TCAS II) usan <strong>«MTOW &gt; 5700 kg o un umbral de asientos/velocidad»</strong>, pero la <em>segunda</em> mitad de la condición difiere: el ACAS usa <strong>«&gt;19 asientos de pasajeros»</strong>; el ADS-B Out/EHS usa <strong>«&gt;250 kt de TAS máxima de crucero»</strong>. No hay que intercambiarlos.</li>
+<li><strong>«TCAS» frente a «ACAS» en la fraseología.</strong> El piloto dice siempre <strong>«TCAS RA»</strong>, nunca «ACAS RA», incluso cuando el sistema instalado es el ACAS Xa. Una pregunta que ofrezca «ACAS RA» como distractor de la fraseología radiotelefónica correcta comprueba exactamente esta trampa.</li>
+<li><strong>El STCA no da consejo de resolución; el ACAS II sí.</strong> No hay que confundir la «red de seguridad en tierra que detecta» (STCA, MSAW, APW) con el «sistema de a bordo que además resuelve» (ACAS II). Solo el ACAS II/TCAS emite una instrucción de velocidad vertical al piloto.</li>
+<li><strong>Una vez notificada una RA, el ATC deja de ser responsable de la separación de ese encuentro, pero solo respecto a la(s) aeronave(s) implicada(s) en la RA, y solo una vez notificada.</strong> Antes de la notificación, el ATC sigue siéndolo; una pregunta que describa una RA «recién presentada en la cabina» (aún no notificada) comprueba si el candidato supone erróneamente una transferencia inmediata de responsabilidad.</li>
+<li><strong>Las excepciones de los 8,33 kHz son una lista corta y fija: 121,5 (emergencia), 123,1 (SAR), ACARS/VDL y las asignaciones de aeronaves de Estado (militares).</strong> Todas las demás asignaciones VHF aire-tierra/tierra-tierra dentro del alcance tuvieron que convertirse antes del 31 de diciembre de 2018.</li>
+<li><strong>La Clase E es controlada para IFR pero no controlada para VFR</strong>, y <strong>no puede</strong> usarse para una CTR. Una pregunta que describa «una zona de control en Clase E» describe algo que el SERA prohíbe expresamente.</li>
+<li><strong>Por encima del FL195, el espacio aéreo español (y el de toda la UE) es siempre de Clase C</strong>, con independencia de lo que pueda sugerir una carta de niveles inferiores al asociar por patrón las clasificaciones de las TMA/CTA cercanas.</li>
+<li><strong>Las mínimas reales de separación SSR/ADS-B de España no son una única cifra.</strong> No hay que suponer por defecto «5 NM en ruta, 3 NM en terminal» como regla universal para España; el AIP muestra cifras de 2,5 NM (HIRO) a 15 NM (monorradar civil en ruta) según la unidad concreta y la imagen de sensores.</li>
+<li><strong>El CPDLC ATN B1 requiere aviónica VDL Modo 2; el CPDLC/ADS-C FANS no (suele apoyarse en ACARS/SATCOM).</strong> Una aeronave con solo equipamiento FANS-1/A no puede usar el servicio CPDLC ATN B1 de España, ni siquiera dentro de su cobertura publicada.</li>
+<li><strong>La norma de la dirección de aeronave OACI de 24 bits (AUR.SUR.2015) se aplica a <em>todos</em> los vuelos GAT</strong>, no solo a las aeronaves mayores o más rápidas sujetas al ADS-B Out/EHS: una opción de respuesta más estrecha del tipo «solo las aeronaves grandes necesitan una dirección de 24 bits» sería errónea.</li>
+</ol>
+<h2 id="21-imprescindible-memorizar">21. Imprescindible memorizar</h2>
+<ul>
+<li>SSR/Modo S: interrogación <strong>1030 MHz</strong>, respuesta <strong>1090 MHz</strong>; <strong>dirección OACI de 24 bits</strong>; <strong>15 códigos II</strong>; alcance nominal del Modo S <strong>256 NM</strong>, fiabilidad <strong>&gt;=99 %</strong>.</li>
+<li><strong>ELS</strong> (básica, prácticamente todo IFR GAT) frente a <strong>EHS</strong> (parámetros Comm-B adicionales; obligatoria solo con &gt;5700 kg o &gt;250 kt TAS, ala fija).</li>
+<li><strong>ADS-B Out (1090ES)</strong> obligatorio con el mismo umbral de &gt;5700 kg/&gt;250 kt que la EHS; indicadores de calidad <strong>NIC, NAC(p/v), SDA, SIL</strong>.</li>
+<li>El Reglamento <strong>(UE) 2023/1770</strong> deroga los <strong>29/2009, 1206/2011, 1207/2011, 1079/2012</strong>; Part-COM = enlace de datos + 8,33 kHz; Part-SUR = ELS/EHS/ADS-B/dirección de 24 bits. Diversidad de antenas exigida; tolerancia de capacidad inoperativa <strong>3 días</strong>.</li>
+<li>8,33 kHz: equipamiento obligatorio de las aeronaves desde el <strong>1 de ene. de 2018</strong>; conversión en tierra antes del <strong>31 de dic. de 2018</strong>; excepciones <strong>121,5, 123,1, ACARS/VDL, aeronaves de Estado</strong>; denominación de canales de 6 dígitos (p. ej. <strong>132,035 -&gt; 132,0333 MHz</strong>).</li>
+<li>Banda de voz en el alcance: <strong>117,975-137 MHz</strong>; obligación de CPDLC: IFR GAT por encima del <strong>FL285</strong>.</li>
+<li>CPDLC en España: <strong>ATN B1</strong> (DLIC/ACL/ACM/AMC, requiere VDL Modo 2) en las UIR de Madrid/Barcelona desde el FL285 y TMA seleccionadas; <strong>FANS</strong> (ADS-C+CPDLC, estándar GOLD) solo en la FIR oceánica de Canarias. Intervalo ADS-C en emergencia = <strong>64 segundos</strong>.</li>
+<li>Obligación del TCAS II v7.1: Europa desde el <strong>1 de dic. de 2015</strong>, <strong>&gt;5700 kg o &gt;19 asientos</strong>; <strong>ACAS Xa/Xo</strong> añadido en <strong>marzo de 2025</strong>. Inhibiciones de RA: Increase Descent <strong>&lt;1550 ft AGL</strong>; Descend <strong>&lt;1100 ft AGL</strong>; todas las RA <strong>&lt;1000 ft AGL</strong>; alertas sonoras de TA <strong>&lt;500 ft AGL</strong>.</li>
+<li>Fraseología: <strong>«[indicativo] TCAS RA»</strong>; <strong>«Roger»</strong>; <strong>«CLEAR OF CONFLICT... RESUMED/RETURNING TO»</strong>; <strong>«UNABLE, TCAS RA»</strong>.</li>
+<li>STCA: en tierra, solo detecta (sin consejo de resolución), <strong>&gt;=30 s</strong> de aviso deseado antes de la primera RA, contraste de tasa de actualización de 1 segundo frente a 4-10 segundos con el ACAS II.</li>
+<li>MSAW = aviso de altitud mínima de seguridad (<em>Minimum Safe Altitude Warning</em>); APW = aviso de proximidad de área (<em>Area Proximity Warning</em>); DAIW = aviso de infracción de zona peligrosa (<em>Danger Area Infringement Warning</em>) (no verificado en las fuentes consultadas).</li>
+<li>Funciones de SACTA: procesamiento de planes de vuelo <strong>TCPV/TLPV</strong>, procesamiento radar, correlación radar-plan de vuelo, información meteorológica, alertas de desviación, <strong>comunicación por enlace de datos</strong>, presentación de información aeronáutica, supervisión y grabación distribuidas. SCV = <strong>VoIP, ED-137, sistema dual, REDAN</strong>. ICARO = automatización de NOTAM/AIS/AIP + ARO/AFTN, alimenta a SACTA, boletines PIB, mensajería A-CDM a EUROCONTROL.</li>
+<li>iTEC SkyNex: 8 miembros ANSP + Indra, lanzada en <strong>2021</strong>, <strong>26 millones de km²</strong>, <strong>12 millones de vuelos/año</strong>, <strong>27 centros de control</strong>. ENAIRE <strong>no</strong> está en COOPANS.</li>
+<li>Clases de espacio aéreo A-G (SERA.6001): solo la <strong>A</strong> es exclusivamente IFR; la <strong>E</strong> no tiene servicio ATC para VFR y <strong>no puede</strong> ser una CTR; las <strong>F y G</strong> no necesitan autorización ATC; <strong>por encima del FL195 = siempre Clase C</strong> en la UE.</li>
+</ul>
+<h2 id="22-glosario-bilingue-es-en">22. Glosario bilingüe (ES -&gt; EN)</h2>
+<ul>
+<li>Vigilancia elemental (ELS) -&gt; Elementary Surveillance</li>
+<li>Vigilancia mejorada (EHS) -&gt; Enhanced Surveillance</li>
+<li>Dirección de aeronave OACI de 24 bits -&gt; 24-bit ICAO aircraft address</li>
+<li>Código identificador de interrogador (código II) -&gt; Interrogator Identifier (II code)</li>
+<li>Squitter extendido (1090ES) -&gt; Extended squitter</li>
+<li>Transceptor de acceso universal (UAT) -&gt; Universal Access Transceiver</li>
+<li>Categoría de integridad de navegación (NIC) -&gt; Navigation Integrity Category</li>
+<li>Categoría de exactitud de navegación (NAC) -&gt; Navigation Accuracy Category</li>
+<li>Garantía de diseño del sistema (SDA) -&gt; System Design Assurance</li>
+<li>Nivel de integridad de la fuente (SIL) -&gt; Source Integrity Level</li>
+<li>Multilateración extendida (WAM) -&gt; Wide Area Multilateration</li>
+<li>Multilateración de movimiento en superficie (SMMS) -&gt; Surface Movement Multilateration System</li>
+<li>Sistema avanzado de guiado y control del movimiento en superficie (A-SMGCS) -&gt; Advanced Surface Movement Guidance and Control System</li>
+<li>Radar para aproximación de precisión (PAR) -&gt; Precision Approach Radar</li>
+<li>Aviso de tránsito (TA) -&gt; Traffic Advisory</li>
+<li>Aviso de resolución (RA) -&gt; Resolution Advisory</li>
+<li>Complemento del aviso de resolución (RAC) -&gt; Resolution Advisory Complement</li>
+<li>Aviso de conflicto a corto plazo (STCA) -&gt; Short Term Conflict Alert</li>
+<li>Aviso de altitud mínima de seguridad (MSAW) -&gt; Minimum Safe Altitude Warning</li>
+<li>Aviso de proximidad de área (APW) -&gt; Area Proximity Warning</li>
+<li>Aviso de infracción de zona peligrosa (DAIW) -&gt; Danger Area Infringement Warning</li>
+<li>Separación entre canales de voz (VCS) -&gt; Voice Channel Spacing</li>
+<li>Comunicaciones por enlace de datos controlador-piloto (CPDLC) -&gt; Controller-Pilot Data Link Communications</li>
+<li>Capacidad de inicio de enlace de datos (DLIC) -&gt; Data Link Initiation Capability</li>
+<li>Autorizaciones e instrucciones ATC (ACL) -&gt; ATC Clearances and Instructions</li>
+<li>Gestión de comunicaciones ATC (ACM) -&gt; ATC Communications Management</li>
+<li>Comprobación de micrófono ATC (AMC) -&gt; ATC Microphone Check</li>
+<li>Sistema de direccionamiento e informe de comunicaciones de aeronaves (ACARS) -&gt; Aircraft Communications Addressing and Reporting System</li>
+<li>Enlace digital VHF modo 2 (VDL Modo 2) -&gt; VHF Digital Link Mode 2</li>
+<li>Red fija de telecomunicaciones aeronáuticas (AFTN) -&gt; Aeronautical Fixed Telecommunication Network</li>
+<li>Sistema de tratamiento de mensajes ATS (AMHS) -&gt; ATS Message Handling System</li>
+<li>Red de telecomunicaciones aeronáuticas (ATN) -&gt; Aeronautical Telecommunication Network</li>
+<li>Sistema Automatizado de Control de Tránsito Aéreo (SACTA) -&gt; Automated Air Traffic Control System</li>
+<li>Sistemas de Comunicaciones de Voz (SCV) -&gt; Voice Communication Systems</li>
+<li>Red de voz y datos de navegación aérea (REDAN) -&gt; Air navigation voice and data network</li>
+<li>Tratamiento Central/Local de Planes de Vuelo (TCPV/TLPV) -&gt; Central/Local Flight-Plan Processing</li>
+<li>Gestor de llegadas (AMAN) -&gt; Arrival Manager</li>
+<li>Gestor de salidas (DMAN) -&gt; Departure Manager</li>
+<li>Detección de conflictos a medio plazo (MTCD) -&gt; Medium-Term Conflict Detection</li>
+<li>Gestión de la información a escala del sistema (SWIM) -&gt; System Wide Information Management</li>
+<li>Operaciones basadas en trayectoria (TBO) -&gt; Trajectory-Based Operations</li>
+<li>Toma de decisiones colaborativa en aeropuertos (A-CDM) -&gt; Airport Collaborative Decision Making</li>
+<li>Separación vertical mínima reducida (RVSM) -&gt; Reduced Vertical Separation Minima</li>
+<li>Región de información de vuelo / Región superior de información de vuelo (FIR/UIR) -&gt; Flight Information Region / Upper Information Region</li>
+<li>Área de control terminal (TMA) -&gt; Terminal Manoeuvring Area</li>
+<li>Zona de control (CTR) -&gt; Control Zone</li>
+<li>Zona de tránsito de aeródromo (ATZ) -&gt; Aerodrome Traffic Zone</li>
+<li>Llamada selectiva (SELCAL) -&gt; Selective Calling</li>
+</ul>
+<h2 id="23-fuentes">23. Fuentes</h2>
+<ul>
+<li>Manual oficial de ENAIRE OM05 (tema 5).</li>
+<li>EUROCONTROL: Guía ACAS v5.0 (2025), Concepto de Operaciones del Modo S (1996), Manual de usuario de VCS de 8,33 kHz v1.1 (2017), Manual DAP/ADD ed. 1.0 (2024), estado de implantación del ADS-B (2018).</li>
+<li>Reglamento (UE) 2023/1770 (Part-COM y Part-SUR).</li>
+<li>AIP España: ENR 1.6 (servicios y procedimientos de vigilancia ATS), GEN 3.4 (servicios de comunicaciones y navegación).</li>
+<li>EASA Easy Access Rules: SERA (ago. 2025) y ATM/ANS (Reglamento 2017/373).</li>
+<li>Web de ENAIRE: «Sistemas de gestión del tránsito aéreo (ATM)» y «iTEC SkyNex».</li>
+<li>Archivo base <code>t05-navigation-systems.md</code>: §6.4 contrastado y una cifra corregida (véase la sección 18).</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

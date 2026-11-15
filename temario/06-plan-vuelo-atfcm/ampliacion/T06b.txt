@@ -1,0 +1,145 @@
+¿Qué es DCB en ATFCM?	Equilibrio entre demanda y capacidad (Demand and Capacity Balancing): ajustar el tráfico que quiere volar por un espacio aéreo a su volumen operacionalmente aceptable.	ATC::T06b
+¿Qué es un volumen de tráfico (TV, Traffic Volume) en ATFCM?	Una porción definida de espacio aéreo (sector, grupo de sectores, aeropuerto) cuya capacidad y demanda se monitorizan; cada TV tiene un valor de monitorización (MV).	ATC::T06b
+¿Qué es el valor de monitorización (MV) de un volumen de tráfico?	El número acordado de vuelos por periodo deslizante por encima del cual se considera que el traffic load supera el nivel aceptable.	ATC::T06b
+¿Qué mide el HEC, frente a la ocupación (OCC)?	El HEC (Hourly Entry Count, recuento horario de entradas) mide las aeronaves que entran en un TV por periodo; la ocupación mide las aeronaves estimadas dentro del TV en un instante muestreado.	ATC::T06b
+¿Por qué se usa solo el HEC en la fase pretáctica o con más de 3 horas de antelación?	Porque las gráficas de ocupación solo son fiables en horizontes temporales cortos; a más largo plazo son demasiado sensibles a pequeños cambios de perfil.	ATC::T06b
+¿Qué reglamento de la UE creó la función de Gestor de Red y sus normas detalladas?	El Reglamento de Ejecución (UE) 2019/123 de la Comisión, Reglamento de Funciones de Red, aplicable desde 2020, que derogó el Reglamento (UE) n.º 677/2011.	ATC::T06b
+¿Qué reglamento derogó el Reglamento (UE) 2019/123?	El Reglamento (UE) n.º 677/2011.	ATC::T06b
+¿Quién está designado Gestor de Red y por qué periodo (en el contexto del Reglamento 2019/123)?	EUROCONTROL, designado por la Comisión Europea, actualmente hasta 2029.	ATC::T06b
+¿Qué cuatro funciones de red enumera el Reglamento 2019/123?	Diseño de la red europea de rutas (ERND); ATFM; coordinación de recursos escasos (radiofrecuencias y códigos SSR); Plan de Operaciones de la Red (NOP).	ATC::T06b
+¿Qué entidad certifica y supervisa al Gestor de Red?	La EASA (Agencia de la Unión Europea para la Seguridad Aérea), como autoridad competente para la certificación y la supervisión.	ATC::T06b
+El artículo 1, apartado 3, del Reglamento 2019/123 incluye en su ámbito de aplicación, además de los ANSP y los aeropuertos, a qué entidad?	Los coordinadores de slots aeroportuarios.	ATC::T06b
+¿Qué hace el Consejo de Administración de la Red (NMB, Network Management Board)?	Supervisa y orienta la ejecución de las funciones de red, incluido el desempeño de las tareas del Gestor de Red (Reglamento 2019/123, art. 18).	ATC::T06b
+¿Cuántos miembros con voto tiene el NMB y cómo se reparten?	12: 4 votos de los ANSP (uno por bloque funcional de espacio aéreo); 4 de usuarios civiles del espacio aéreo; 2 de gestores aeroportuarios; 2 de ANSP o usuarios militares del espacio aéreo.	ATC::T06b
+¿Cuántos votos tiene el representante del propio EUROCONTROL en el NMB?	Ninguno: el representante de EUROCONTROL en el NMB no tiene voto.	ATC::T06b
+Enumera los miembros sin voto del NMB (6 categorías del art. 18.4, 7 personas en total).	Presidente; un representante de la Comisión; el director del Gestor de Red; el presidente del grupo de trabajo de operaciones; 2 representantes de los ANSP de países asociados; un representante de EUROCONTROL.	ATC::T06b
+¿Quién nombra al presidente del NMB y con qué criterio?	La Comisión, por su competencia técnica y experiencia, a propuesta de los miembros con voto.	ATC::T06b
+¿Cuántas reuniones ordinarias al año debe celebrar como mínimo el NMB?	Al menos tres.	ATC::T06b
+¿Con qué mayoría se adopta la mayoría de las decisiones del NMB?	Mayoría simple de sus miembros con voto.	ATC::T06b
+¿Quién presta la secretaría del NMB?	El Gestor de Red.	ATC::T06b
+¿Qué es la EACCC?	La Célula Europea de Coordinación de Crisis de Aviación (European Aviation Crisis Coordination Cell), que coordina la respuesta a las crisis de la red (Reglamento 2019/123, art. 19).	ATC::T06b
+¿Quién aprueba el reglamento interno de la EACCC?	El Consejo de Administración de la Red (NMB).	ATC::T06b
+¿Qué designa cada Estado miembro ante la EACCC?	Un «punto focal del Estado» y un suplente, para el enlace con las estructuras nacionales de gestión de crisis.	ATC::T06b
+¿Qué es NM B2B?	Business-to-Business: la interfaz de servicios web de máquina a máquina para que los sistemas propios de aerolíneas y ANSP consulten y actualicen directamente datos de vuelos, slots y regulaciones.	ATC::T06b
+¿Qué es el NOP Portal?	La aplicación web donde las FMP, los AO y otras partes interesadas consultan la situación ATFCM en tiempo real (regulaciones, demoras, el ADP, el NOP).	ATC::T06b
+¿Qué es CHMI en el contexto del NM?	Common Human-Machine Interface (interfaz hombre-máquina común): el software cliente con el que el personal de las FMP y del NM interactúa con el ETFMS (regulaciones, escenarios, el editor de regulaciones).	ATC::T06b
+¿Qué es PREDICT?	La herramienta de previsión de demanda de tráfico del NM, usada para la previsión de las fases estratégica y pretáctica.	ATC::T06b
+¿Qué tres herramientas pueden usarse para determinar el rate de una regulación en TV con OTMV definidos?	ASIM, IMPACT y SIMEX (herramientas de simulación con datos de EUROCONTROL).	ATC::T06b
+¿Qué es la CADF?	Centralised Airspace Data Function (función centralizada de datos del espacio aéreo): la función del NM que consolida los datos AUP/UUP nacionales en el AUP/UUP europeo (EAUP/EUUP).	ATC::T06b
+En CASA, ¿qué constituye en la práctica la presentación del plan de vuelo?	Una solicitud de slot: CASA funciona en modo pasivo desde el punto de vista del AO.	ATC::T06b
+¿Qué pretende minimizar el algoritmo de priorización de CASA?	La demora global (de toda la red), no la de cada vuelo individual.	ATC::T06b
+¿Cuál es el principio básico de asignación de slots que usa CASA?	«Primero planificado, primero servido» (FCFS aplicado al orden de ETO planificado).	ATC::T06b
+Ejemplo resuelto: un subperiodo de regulación dura 4 horas con un rate de 28 vuelos/hora. ¿Cuántos slots y con qué espaciado?	112 slots, espaciados aproximadamente 2 minutos.	ATC::T06b
+¿Qué muestra la columna del factor de prioridad en la Slot List del operador del NM?	Qué vuelos pueden recibir prioridad por encima del principio básico FCFS.	ATC::T06b
+En la fase de preasignación, ¿qué determina el orden provisional de slots de un vuelo?	El orden de su ETO (Estimated Time Over, hora estimada de paso) sobre el punto regulado.	ATC::T06b
+¿Qué es la Slot Allocation List (SAL)?	La lista interna del ETFMS de asignaciones provisionales de slots, recalculada constantemente según llegan nuevos planes de vuelo.	ATC::T06b
+¿Quién se beneficia del rate pendiente (pending rate) reservado en una regulación?	Solo los vuelos modificados después de emitirse su SAM (mediante FCM, DLA o CHG), nunca los que presentan tarde.	ATC::T06b
+¿Cuál es la regla por defecto del rate pendiente cuando el rate de la regulación es de 20/h o más?	El 5 % del rate total.	ATC::T06b
+Da la conversión de slots pendientes para un rate global de 30-49 vuelos/hora.	2 slots pendientes (28-47 slots normales).	ATC::T06b
+Da la conversión de slots pendientes para un rate global de 50-69 vuelos/hora.	3 slots pendientes (47-66 slots normales).	ATC::T06b
+¿Cuándo pasan los slots pendientes a ser slots normales?	2 h 15 min antes de la Slot Reference Time.	ATC::T06b
+¿Cuándo NO se usan los slots pendientes?	Durante la activación de una regulación, un cambio de tiempo de rodaje o una «rectificación profunda» (deep rectification).	ATC::T06b
+¿Qué hace el proceso de modificación de slots y a qué vuelos se aplica?	Reasigna los slots liberados por cancelaciones; solo se aplica a vuelos preasignados (aún no asignados definitivamente).	ATC::T06b
+¿Qué es SIT1?	Slot Issue Time 1: la hora fija antes de la EOBT (EOBT-2 h) a la que el slot se asigna definitivamente y se envía un SAM.	ATC::T06b
+¿Puede normalmente otro vuelo ocupar un slot ya asignado?	No, salvo que la regulación se rectifique en profundidad y el CTOT no se haya forzado, o mediante el verdadero proceso de revisión.	ATC::T06b
+¿Qué anchura de ventana (Window Width) se aplica con un rate de regulación de 1-2 vuelos/hora?	30 minutos.	ATC::T06b
+¿Qué anchura de ventana se aplica con un rate de regulación de 12-29 vuelos/hora?	10 minutos.	ATC::T06b
+¿Qué anchura de ventana se aplica con un rate de regulación de 30 vuelos/hora o más?	6 minutos.	ATC::T06b
+¿Qué efecto tiene una anchura de ventana menor sobre las demoras?	Reparte demoras pequeñas entre más vuelos y suaviza los picos de ocupación, en lugar de concentrar unas pocas demoras mayores.	ATC::T06b
+¿Quién puede modificar los valores estándar de anchura de ventana?	El NMOC, por razones operativas o a petición justificada de la FMP.	ATC::T06b
+¿Cuándo se usa el mecanismo del umbral de confirmación de demora (Delay Confirmation Threshold)?	En regulaciones excepcionales (huelgas, escenarios, codificadas XCD/FCM), en las que los vuelos afectados se suspenden.	ATC::T06b
+¿Qué mensaje y qué campo transportan la demora provisional de un vuelo por encima del umbral de confirmación de demora?	Un FLS (mensaje de suspensión de vuelo) en SIT1, con un PTOT (Provisional Take-Off Time, hora provisional de despegue).	ATC::T06b
+¿Cuánto dura el periodo RESPBY (responder antes de) para que un vuelo confirme por encima del umbral de confirmación de demora?	20 minutos.	ATC::T06b
+¿Qué ocurre si el AO confirma dentro del periodo RESPBY?	El PTOT pasa a ser el CTOT y se asigna un slot al vuelo.	ATC::T06b
+¿Qué ocurre si el AO NO confirma dentro del periodo RESPBY?	Se pierde la reserva, el vuelo sigue suspendido y el slot se libera para otros vuelos.	ATC::T06b
+¿De qué protege el TIS (Time to Insert in the Sequence)?	De enviar una mejora de CTOT demasiado tarde para que el aeródromo pueda aprovecharla realmente en la secuencia de salida.	ATC::T06b
+¿Qué especifica el TRS (Time to Remove from the Sequence)?	El momento antes del cual ya no puede modificarse el CTOT porque el vuelo está en la secuencia de salida (CTOT - tiempo de rodaje - TRS).	ATC::T06b
+¿Qué es un mensaje E-DPI?	El primer DPI que se envía al NM una vez contrastados y coherentes el plan de vuelo ATC, el slot aeroportuario y los datos de vuelo del aeropuerto (hito 1 del A-CDM).	ATC::T06b
+¿Qué es un mensaje T-DPI-t?	Target DPI - Target (objetivo puntual): se envía en puntos de disparo fijos (p. ej. EOBT-2 h) para actualizar la estimación de TTOT del NM.	ATC::T06b
+¿Qué es un mensaje T-DPI-s?	Target DPI - sequenced (secuenciado): se envía una vez emitido el TSAT y confirma la posición del vuelo en la secuencia de presalida.	ATC::T06b
+¿Qué es un mensaje A-DPI?	Actual DPI: confirma que ha ocurrido un evento real (p. ej. fuera calzos real, despegue real).	ATC::T06b
+¿Qué es un mensaje C-DPI y cuándo se dispara normalmente?	Cancel DPI; por ejemplo, cuando se supera el número máximo permitido de actualizaciones del TOBT tras el TSAT, descartando los datos T-DPI anteriores.	ATC::T06b
+¿Qué es API (frente a DPI)?	Arrival Planning Information: la familia de mensajes equivalente para el lado de las llegadas (actualizaciones del EIBT).	ATC::T06b
+¿Qué tres partes forman el campo REGCAUSE?	Una letra de causa de la regulación; una letra de ubicación (D/E/A); y, tras un espacio, el código numérico IATA de demora (o 00).	ATC::T06b
+En REGCAUSE, ¿qué significan las letras D, E y A?	Departure (salida), En-route (en ruta) y Arrival (llegada): la fase del vuelo afectada por la regulación más penalizadora.	ATC::T06b
+¿Qué mensajes llevan el campo REGCAUSE?	SAM y SRM.	ATC::T06b
+¿Qué significa el código C de motivo de regulación del NM?	ATC Capacity (capacidad ATC): la demanda supera, o la complejidad reduce, la capacidad ATC declarada o esperada.	ATC::T06b
+¿Qué significa el código I de motivo de regulación del NM?	ATC Industrial Action (huelga ATC): reducción de capacidad por acción laboral del personal ATC.	ATC::T06b
+¿Qué significa el código R de motivo de regulación del NM?	ATC Routeings (encaminamientos ATC): soluciones o escenarios de red usados para equilibrar demanda y capacidad.	ATC::T06b
+¿Qué significa el código S de motivo de regulación del NM?	ATC Staffing (dotación ATC): falta imprevista de personal que reduce la capacidad esperada.	ATC::T06b
+¿Qué significa el código T de motivo de regulación del NM?	ATC Equipment (equipos ATC): reducción por indisponibilidad o degradación de equipos ATC.	ATC::T06b
+¿Qué significa el código A de motivo de regulación del NM?	Accident/Incident (accidente/incidente): reducción de la capacidad ATC esperada por un accidente o incidente de aeronave.	ATC::T06b
+¿Qué significa el código G de motivo de regulación del NM?	Aerodrome Capacity (capacidad del aeródromo): degradación o indisponibilidad de la infraestructura aeroportuaria, o demanda que supera la capacidad esperada del aeródromo.	ATC::T06b
+¿Qué significa el código E de motivo de regulación del NM?	Aerodrome Services (servicios del aeródromo): degradación o indisponibilidad de equipos de apoyo (servicio contraincendios, deshielo, handling).	ATC::T06b
+¿Qué significa el código N de motivo de regulación del NM?	Industrial Action (Non-ATC) (huelga no ATC): reducción por acción laboral de personal ajeno al ATC.	ATC::T06b
+¿Qué significa el código M de motivo de regulación del NM?	Airspace Management (gestión del espacio aéreo): reducción tras cambios en la disponibilidad de espacio aéreo o rutas por actividad militar de pequeña escala.	ATC::T06b
+¿Qué significa el código P de motivo de regulación del NM?	Special Event (evento especial): gran evento deportivo, gubernamental o social, mejoras de sistemas ATM o grandes ejercicios militares multinacionales; requiere aprobación previa de la planificación.	ATC::T06b
+¿Qué significa el código W de motivo de regulación del NM?	Weather (meteorología): reducción por fenómenos meteorológicos, también cuando afectan a la capacidad de la infraestructura aeroportuaria.	ATC::T06b
+¿Qué significa el código V de motivo de regulación del NM?	Environmental Issues (cuestiones medioambientales): reducción por procedimientos locales acordados de ruido, uso de pistas o similares; requiere acuerdo previo de planificación.	ATC::T06b
+¿Qué significa el código O de motivo de regulación del NM?	Other (otros): se usa solo cuando no se aplica ningún otro código de motivo.	ATC::T06b
+¿Cuántos códigos de motivo de regulación del NM hay en la lista completa de EUROCONTROL, frente al subconjunto de indicadores propio de ENAIRE?	14 en la lista completa del NM (C, I, R, S, T, A, G, E, N, M, P, W, V, O); los indicadores del Plan de Vuelo 2030 de ENAIRE usan solo un subconjunto de 6 códigos (C, R, S, T, M, P).	ATC::T06b
+¿Qué es una restricción UE (EU Restriction), frente a una regulación de rate cero?	Una herramienta que se usa cuando un aeródromo o espacio aéreo está realmente indisponible: hace que el IFPS rechace (invalide) los planes de vuelo afectados, en lugar de dejarlos pasar y demorarlos.	ATC::T06b
+¿Qué antelación mínima se exige para que una restricción UE sea plenamente eficaz?	Al menos 2 horas antes de la hora de entrada en vigor.	ATC::T06b
+¿Qué duración mínima se considera necesaria para una restricción UE?	1 hora.	ATC::T06b
+¿Qué debe respaldar la publicación de una restricción UE?	Información oficial (NOTAM, suplemento AIP, etc.).	ATC::T06b
+¿Qué es el «Área adyacente» en ATFCM, frente al «Área ATFCM»?	Estados que reciben solo un servicio limitado del NM según su acuerdo con el NM, frente a los Estados (España incluida) a los que atiende directamente el NM.	ATC::T06b
+¿Puede el NMOC aplicar medidas ATFCM a vuelos de un Área adyacente que entran en el Área del NM?	Sí: una medida excepcional para resolver problemas de la red (p. ej. reencaminamientos desde Egipto para evitar Chipre).	ATC::T06b
+Según el Manual de Operaciones ATFCM, ¿requiere el level capping interno entre un ACC y su ACC adyacente coordinación con el NMOC?	No, no se requiere coordinación individual con el NMOC para esta medida interna.	ATC::T06b
+Según el Manual de Operaciones ATFCM, ¿qué deben hacer los vuelos afectados cuando se aplica level capping interno por debajo o junto a un ACC?	Se les debe pedir que vuelvan a presentar el plan de vuelo al IFPS.	ATC::T06b
+¿Requiere la aplicación de rerouting táctico interno dentro de un ACC mensajes AFP?	No, esas medidas no requieren mensajes AFP.	ATC::T06b
+¿Elimina la aplicación del MDI la exigencia de cumplir la EOBT/CTOT?	No: un vuelo sujeto a MDI debe respetar igualmente su slot.	ATC::T06b
+¿Es obligatoria la coordinación previa con el NMOC para el MDI aplicado internamente entre un ACC y aeropuertos o FMP adyacentes?	No, no es obligatoria.	ATC::T06b
+¿Qué abarca el nivel 1 de ASM (estratégico), según el manual FUA/AMC/CADF?	Definir y revisar la política nacional del espacio aéreo, teniendo en cuenta los requisitos nacionales e internacionales; la activación de un RSA de nivel 1 viene determinada por su disponibilidad.	ATC::T06b
+¿Qué abarca el nivel 2 de ASM (pretáctico)?	La gestión operativa dentro del marco del nivel 1, con acuerdo civil/militar; un RSA de nivel 2 se activa mediante su asignación en el AUP/UUP.	ATC::T06b
+¿Qué abarca el nivel 3 de ASM (táctico)?	La activación, desactivación o reasignación en tiempo real del espacio aéreo de nivel 2 y la resolución de situaciones OAT/GAT en tiempo real; puede que el NM no las conozca de antemano.	ATC::T06b
+¿Qué tipo de RSA es gestionable por FUA solo en el nivel 1 (nunca en el 2 ni el 3), según la tabla de parámetros del manual FUA?	TSA (Temporarily Segregated Area, área temporalmente segregada).	ATC::T06b
+¿Qué tipos de RSA son obligatorios tanto en el nivel 1 como en el 2 según la tabla de parámetros FUA?	CBA (Cross Border Area, área transfronteriza) y MRA.	ATC::T06b
+¿Qué debe elaborar cada AMC diariamente, aunque no tenga aperturas ni restricciones que declarar?	Un AUP «READY».	ATC::T06b
+¿Qué debe hacer una AMC si no está dotada de personal durante un fin de semana o festivo?	Preparar los AUP de ese periodo antes de cerrar por el descanso.	ATC::T06b
+¿Qué es el concepto de «AMC líder» (Lead AMC)?	Una AMC asume la responsabilidad de coordinar y promulgar el estado de una estructura compartida transfronteriza, en lugar de que cada AMC gestione su parte por separado.	ATC::T06b
+¿Qué es el TOBT?	Target Off-Block Time: la estimación del AO o del agente de handling de cuándo estará lista la aeronave para poner en marcha o iniciar el empuje inmediatamente al recibir autorización.	ATC::T06b
+¿Qué es el TSAT?	Target Start-Up Approval Time: la hora a la que el secuenciador de presalida del ATC espera conceder la autorización de puesta en marcha o empuje, a partir del TOBT y otras restricciones.	ATC::T06b
+¿Qué es el TTOT?	Target Take-Off Time: la hora objetivo de despegue local del A-CDM, que alimenta al NM en tiempo real mediante DPI.	ATC::T06b
+Da la fórmula del TTOT autocalculado antes de que exista un TOBT manual.	TTOT = EIBT + MTTT + EXOT.	ATC::T06b
+Da la fórmula del TTOT cuando hay un TOBT manual disponible.	TTOT = TOBT + EXOT (el TOBT manual prevalece sobre la estimación autocalculada).	ATC::T06b
+Da la fórmula alternativa del TTOT cuando no está disponible ni EIBT+MTTT ni el TOBT.	TTOT = EOBT + EXOT.	ATC::T06b
+¿Qué significa EIBT y cómo se obtiene?	Estimated In-Block Time = ELDT (Estimated Landing Time, hora estimada de aterrizaje) + EXIT (tiempo estimado de rodaje de llegada).	ATC::T06b
+¿Cómo trata el NM el TTOT en relación con el CTOT?	Como una hora de «ningún slot antes de»: no se emitirá un CTOT anterior al TTOT.	ATC::T06b
+¿Cuántos hitos componen el proceso A-CDM?	16.	ATC::T06b
+¿Qué es el hito 1 del A-CDM?	ATC Flight Plan Activated (plan de vuelo ATC activado): comprueba la coherencia entre el plan de vuelo ATC, el slot aeroportuario y los datos de vuelo del aeropuerto; genera el primer E-DPI si son coherentes.	ATC::T06b
+¿A qué hora, como pronto, puede dispararse el hito 1 del A-CDM (plan de vuelo ATC activado)?	EOBT - 3 horas.	ATC::T06b
+¿Qué es el hito 2 del A-CDM?	EOBT-2 h: comprueba si EIBT+MTTT (o el TOBT manual) está dentro de EOBT+15 min; envía el primer T-DPI-t si es coherente.	ATC::T06b
+¿Puede ocurrir el hito 3 del A-CDM (despegue del aeropuerto de origen) antes del hito 2?	Sí, si el vuelo de entrada despega antes de EOBT-2 h.	ATC::T06b
+¿Qué es el hito 9 del A-CDM?	Confirmación del TOBT antes de la emisión del TSAT; requiere haber completado como mínimo los hitos 1-3.	ATC::T06b
+¿Qué dos comprobaciones realiza el hito 10 del A-CDM (TSAT emitido)?	Si las actualizaciones del TOBT tras el TSAT superan un máximo definido localmente (p. ej. 3, lo que genera un C-DPI o alerta); y si el TTOT o el estado han cambiado 5 minutos o más (lo que dispara un T-DPI-t).	ATC::T06b
+¿Qué es el hito 15 del A-CDM y cómo se llama también?	Off-Block (fuera calzos): la aeronave abandona el puesto de estacionamiento; hora real de fuera calzos (AOBT).	ATC::T06b
+¿Qué es el hito 16 del A-CDM?	Take-Off (despegue): la aeronave despega; hora real de despegue (ATOT).	ATC::T06b
+¿Qué umbral dispara una alerta de discrepancia EOBT/TOBT (CDM08)?	Un TOBT confirmado fuera de la ventana de tolerancia de la EOBT, de EOBT más o menos 15 minutos (las comprobaciones del hito lo enuncian como «¿TOBT dentro de EOBT+15 min?»); el AO/GH debe actualizar la EOBT del plan de vuelo ATC.	ATC::T06b
+¿Cuál es el cambio mínimo de TTOT que dispara un nuevo mensaje DPI (comprobación de discrepancia del TTOT)?	5 minutos.	ATC::T06b
+¿Quién es normalmente la persona responsable del TOBT y quién puede asumir ese papel?	Normalmente el operador de aeronave; el agente de handling puede pasar a ser el responsable del TOBT si las circunstancias de la rotación afectan al TOBT.	ATC::T06b
+¿Cuántas Posiciones de Gestión de Afluencia (FMP) regionales presta ENAIRE en España?	Cinco: Madrid, Barcelona, Sevilla, Palma y Canarias.	ATC::T06b
+¿Qué FMP cubre la FIR/UIR Madrid al norte del paralelo y a qué ACC atiende?	La FMP Madrid, que atiende al ACC Madrid.	ATC::T06b
+¿Qué FMP cubre la FIR/UIR Madrid al sur del paralelo 39°00'00"N y a qué ACC atiende?	La FMP Sevilla, que atiende al ACC Sevilla.	ATC::T06b
+¿Qué FMP cubre la FIR/UIR Barcelona salvo el TMA Palma?	La FMP Barcelona, que atiende al ACC Barcelona.	ATC::T06b
+¿Qué FMP atiende al TMA Palma?	La FMP Palma.	ATC::T06b
+¿Qué FMP cubre la FIR/UIR Canarias y cuál es el indicador AFTN de su ACC?	La FMP Canarias, que atiende al ACC Canarias (GCCC).	ATC::T06b
+¿Qué FMP española respalda a la FMP Sevilla y a la FMP Canarias cuando no están operativas?	La FMP Madrid.	ATC::T06b
+¿Qué FMP española respalda a la FMP Palma cuando no está operativa?	La FMP Barcelona.	ATC::T06b
+¿Cuál es la dirección AFTN de la FMP Madrid?	LECMZDZX.	ATC::T06b
+¿Cuál es la dirección AFTN de la FMP Barcelona?	LECBZDZX.	ATC::T06b
+¿Qué significa STS/HEAD en la casilla 18 de un plan de vuelo español?	Vuelos que transportan jefes de Estado o equivalentes.	ATC::T06b
+¿Qué significa STS/ATFMX?	Vuelos autorizados por las autoridades estatales competentes para quedar exentos de las medidas ATFM.	ATC::T06b
+¿Qué significa STS/STATE, según AIP ENR 1.9?	Vuelos de Estado, una de las categorías autorizadas dentro de la exención ATFMX/Estado.	ATC::T06b
+¿Qué significa STS/MEDEVAC?	Vuelos que transportan una evacuación de emergencia con riesgo vital.	ATC::T06b
+¿Qué significa STS/FFR?	Vuelos dedicados a servicios de extinción de incendios.	ATC::T06b
+¿Qué observación adicional señala un vuelo que transporta vacunas críticas cuya demora podría ponerlas en riesgo?	RMK/VACCINE.	ATC::T06b
+¿Qué procedimiento debe seguir un AO para usar la exención STS/ATFMX por motivos médicos o humanitarios?	Cumplimentar el formulario o procedimiento propio de ENAIRE «Exenciones ATFM» a través de su sede electrónica, justificando la urgencia.	ATC::T06b
+¿Cuál es la diferencia fundamental entre un slot aeroportuario (Aena/coordinador) y un slot ATFM (CTOT del NM)?	El slot aeroportuario es un permiso de programación por temporada fijado por el coordinador de slots del aeropuerto; el slot ATFM (CTOT) es una hora de salida táctica emitida por el NM para gestionar la capacidad ATC el propio día.	ATC::T06b
+¿Qué artículo del Reglamento 2019/123 incluye expresamente a los coordinadores de slots aeroportuarios en su ámbito de aplicación?	El artículo 1, apartado 3.	ATC::T06b
+Ejemplo resuelto: capacidad declarada HEC = 40/h, sin OTMV definidos. ¿Cuál es el valor de monitorización de los primeros 60 minutos con la regla del +10 %?	44 (40 x 1,10).	ATC::T06b
+Ejemplo resuelto: carga de la primera hora = 47 (por encima de la declarada +10 % = 44) y los 120 min siguientes se mantienen en 40 o menos. ¿Cuál es el resultado?	La primera hora se regula a 44 y las horas siguientes a 40 si aún es necesario.	ATC::T06b
+Ejemplo resuelto: un subperiodo de regulación dura 3 horas a 24 vuelos/hora. ¿Cuántos slots y qué anchura de ventana se aplica?	72 slots; anchura de ventana = 10 minutos (el rate cae en la banda de 12-29).	ATC::T06b
+Ejemplo resuelto: EOBT = 14:00 UTC, CTOT = 14:35 UTC. ¿Cuál es la ventana de cumplimiento del slot resultante?	14:30-14:45 UTC (-5/+10 minutos en torno al CTOT).	ATC::T06b
+Ejemplo resuelto: EIBT = 09:18, MTTT = 45 min, EXOT = 12 min. ¿Cuál es el TTOT autocalculado?	10:15 (09:18 + 0:45 + 0:12).	ATC::T06b
+Ejemplo resuelto: se introduce un TOBT manual = 10:05, EXOT = 12 min. ¿Cuál es el TTOT resultante y mejora o sustituye al autocalculado de 10:15?	TTOT = 10:17; el TOBT manual prevalece (no se promedia) sobre la estimación autocalculada, aunque aquí el resultado sea posterior.	ATC::T06b
+¿Qué es un bloque funcional de espacio aéreo (FAB) en el contexto de las votaciones del NMB?	Una agrupación de ANSP cuyos representantes suman 4 de los votos del NMB (un representante por FAB).	ATC::T06b

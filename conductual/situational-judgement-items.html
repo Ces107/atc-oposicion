@@ -1,0 +1,537 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>30 casos de juicio situacional</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Conductual</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-la-prueba">Qué cubre la prueba</a></li>
+<li><a href="#como-usar-este-archivo">Cómo usar este archivo</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-items-de-seguridad-primero">1. Ítems de seguridad primero</a><ul>
+<li><a href="#item-1">Ítem 1</a></li>
+<li><a href="#item-2">Ítem 2</a></li>
+<li><a href="#item-3">Ítem 3</a></li>
+<li><a href="#item-4">Ítem 4</a></li>
+<li><a href="#item-5">Ítem 5</a></li>
+<li><a href="#item-6">Ítem 6</a></li>
+<li><a href="#item-7">Ítem 7</a></li>
+<li><a href="#item-8">Ítem 8</a></li>
+</ul>
+</li>
+<li><a href="#2-items-de-cultura-justa-y-comunicacion-de-errores">2. Ítems de cultura justa y comunicación de errores</a><ul>
+<li><a href="#item-9">Ítem 9</a></li>
+<li><a href="#item-10">Ítem 10</a></li>
+<li><a href="#item-11">Ítem 11</a></li>
+<li><a href="#item-12">Ítem 12</a></li>
+<li><a href="#item-13">Ítem 13</a></li>
+<li><a href="#item-14">Ítem 14</a></li>
+</ul>
+</li>
+<li><a href="#3-items-de-equipo-y-relaciones-interpersonales">3. Ítems de equipo y relaciones interpersonales</a><ul>
+<li><a href="#item-15">Ítem 15</a></li>
+<li><a href="#item-16">Ítem 16</a></li>
+<li><a href="#item-17">Ítem 17</a></li>
+<li><a href="#item-18">Ítem 18</a></li>
+<li><a href="#item-19">Ítem 19</a></li>
+<li><a href="#item-20">Ítem 20</a></li>
+<li><a href="#item-21">Ítem 21</a></li>
+</ul>
+</li>
+<li><a href="#4-items-de-integridad-y-conflicto-de-interes">4. Ítems de integridad y conflicto de interés</a><ul>
+<li><a href="#item-22">Ítem 22</a></li>
+<li><a href="#item-23">Ítem 23</a></li>
+<li><a href="#item-24">Ítem 24</a></li>
+<li><a href="#item-25">Ítem 25</a></li>
+<li><a href="#item-26">Ítem 26</a></li>
+</ul>
+</li>
+<li><a href="#5-items-de-servicio-empatia-y-profesionalidad">5. Ítems de servicio, empatía y profesionalidad</a><ul>
+<li><a href="#item-27">Ítem 27</a></li>
+<li><a href="#item-28">Ítem 28</a></li>
+<li><a href="#item-29">Ítem 29</a></li>
+<li><a href="#item-30">Ítem 30</a></li>
+</ul>
+</li>
+<li><a href="#6-trampas-del-examen">6. Trampas del examen</a></li>
+<li><a href="#7-para-memorizar">7. Para memorizar</a></li>
+<li><a href="#8-glosario-bilingue-es-en">8. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#9-que-esta-confirmado-y-que-no">9. Qué está confirmado y qué no</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">26 min de lectura</div><h1 id="items-de-juicio-situacional-30-casos-breves-con-mejor-y-peor-respuesta">Ítems de juicio situacional: 30 casos breves con mejor y peor respuesta</h1>
+<h2 id="que-cubre-la-prueba">Qué cubre la prueba</h2>
+<p>Un ítem o prueba de juicio situacional (SJT, prueba de juicio situacional) presenta un escenario laboral breve y pide al candidato que juzgue unas opciones de respuesta, en lugar de construir una respuesta libre. Las Directrices del ITF para Assessment Centers clasifican expresamente los SJT como <strong>no</strong> una simulación conductual (solo exigen una elección cerrada entre opciones predeterminadas), pero son un componente estándar y bien validado de un programa más amplio de selección o de assessment center, y el CIPD los incluye expresamente entre las "tareas de evaluación basadas en habilidades", junto con las tareas de muestra de trabajo y las simulaciones. La Fase 3 de ENAIRE puede incluir ítems de tipo SJT directamente, o bien los evaluadores de la entrevista o de la dinámica de grupo pueden plantear preguntas situacionales de forma verbal en el mismo espíritu. Este archivo ofrece 30 casos breves, cada uno con una mejor respuesta, una peor respuesta y el razonamiento; su formato es distinto del de los 25 casos completos de dinámica de grupo de <code>group-dynamics-cases.md</code> (pensados para un ejercicio grupal en vivo) y del de las 60 preguntas de entrevista de <code>interview-frameworks.md</code> (que piden tu propio comportamiento pasado, no un juicio entre opciones).</p>
+<p><strong>Nunca inventes una experiencia personal que no sea tuya.</strong> Estos son ítems de juicio con una mejor y una peor respuesta defendibles, basadas en los valores publicados de ENAIRE y en su Código Ético, no historias; aquí no hacen falta marcadores de posición, porque para responder bien a un SJT no se necesita ninguna anécdota personal.</p>
+<h2 id="como-usar-este-archivo">Cómo usar este archivo</h2>
+<p>Cada ítem da un escenario breve y 3-4 opciones de respuesta realistas (no siempre detalladas una a una: algunos ítems dan directamente la mejor y la peor respuesta con 1-2 alternativas intermedias nombradas), con el razonamiento de la mejor y de la peor. Lee el escenario, decide primero tu propia respuesta y luego compárala con el razonamiento: el valor de un SJT está en el <em>razonamiento</em>, que se generaliza a los ítems que ENAIRE pueda usar realmente, no en memorizar estos 30. Cada ítem lleva además una línea de <strong>Competencias</strong> que lo asigna a una o dos de las siete competencias oficiales de la Fase 3B (Anexo IV); esa asignación es una inferencia propia de este archivo, no algo publicado por ENAIRE, y se indica aquí una sola vez en lugar de repetirlo en cada ítem. "(encaje débil)" marca un ítem que trata realmente de comunicación o de honestidad y no encaja limpiamente en una competencia de la lista.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Ítems de seguridad primero (1-8)</li>
+<li>Ítems de cultura justa y comunicación de errores (9-14)</li>
+<li>Ítems de equipo y relaciones interpersonales (15-21)</li>
+<li>Ítems de integridad y conflicto de interés (22-26)</li>
+<li>Ítems de servicio, empatía y profesionalidad (27-30)</li>
+<li>Trampas del examen</li>
+<li>Para memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Qué está confirmado y qué no</li>
+</ol>
+<hr />
+<h2 id="1-items-de-seguridad-primero">1. Ítems de seguridad primero</h2>
+<h3 id="item-1">Ítem 1</h3>
+<p><strong>Escenario:</strong> Estás moderadamente seguro de que es seguro saltarse un procedimiento "solo esta vez" porque vas con retraso y nadie lo notaría.
+<strong>Mejor respuesta:</strong> Seguir el procedimiento sin importar el coste en tiempo y señalar después (a ti mismo o a un supervisor, según el caso) que la presión del horario creó la tentación de saltárselo: la propia presión es información útil para la organización.
+<strong>Peor respuesta:</strong> Saltárselo en silencio, razonando que "moderadamente seguro" es suficiente y que nadie se enterará.
+<strong>Por qué:</strong> "La seguridad es lo primero" es expresamente el valor de máxima prioridad, no uno que deba sopesarse contra el horario; el manual dice "máxima prioridad". Estar seguro no es tener certeza, y saltárselo en silencio además priva a la organización de la posibilidad de aprender que el procedimiento genera una presión de tiempo innecesaria.
+<strong>Fuente:</strong> <a href="flight-plan-2030-summary.html">el Plan de Vuelo 2030</a> §4; <a href="../temario/07-entorno-profesional/guia.html">la guía del tema 7</a> §7.4.
+<strong>Competencias:</strong> DM, ST</p>
+<h3 id="item-2">Ítem 2</h3>
+<p><strong>Escenario:</strong> Un supervisor, presionado para alcanzar un objetivo de puntualidad, sugiere agilizar una comprobación de seguridad secundaria durante un pico de tráfico (como en el Caso 11 de <code>group-dynamics-cases.md</code>).
+<strong>Mejor respuesta:</strong> Negarte a saltar la comprobación, plantear la presión de forma explícita al supervisor en una conversación directa y escalarlo por el canal adecuado si continúa.
+<strong>Peor respuesta:</strong> Acatar porque es una petición directa de un supervisor y "seguramente no pasa nada por esta vez".
+<strong>Por qué:</strong> Ningún nivel jerárquico anula una comprobación de seguridad; el Canal Ético del Código Ético existe precisamente para que este tipo de presión pueda comunicarse de forma segura y confidencial.
+<strong>Fuente:</strong> el Código Ético de ENAIRE.
+<strong>Competencias:</strong> DM, ST</p>
+<h3 id="item-3">Ítem 3</h3>
+<p><strong>Escenario:</strong> Notas que un compañero parece fatigado o posiblemente no apto poco antes de ocupar su posición.
+<strong>Mejor respuesta:</strong> Hacer que se retire de la posición de inmediato por el canal adecuado y después hacerle un seguimiento de apoyo.
+<strong>Peor respuesta:</strong> No decir nada y "vigilarlo" en su lugar, para evitar avergonzarlo.
+<strong>Por qué:</strong> Vigilar en lugar de actuar no mitiga realmente el riesgo si algo sale mal entretanto; retirarlo de forma respetuosa y rápida y apoyarlo después es más seguro y más genuinamente atento que la vigilancia silenciosa. Véase el Caso 22 de <code>group-dynamics-cases.md</code> para el razonamiento completo.
+<strong>Fuente:</strong> contenidos de EUROCONTROL sobre rendimiento humano, fatiga y falta de aptitud (como fundamento, no una afirmación concreta); compromisos de salud del Código Ético de ENAIRE.
+<strong>Competencias:</strong> TW, DM</p>
+<h3 id="item-4">Ítem 4</h3>
+<p><strong>Escenario:</strong> La meteorología está en el límite de los mínimos; retrasar protegería un margen cómodo, pero incumpliría un objetivo de puntualidad.
+<strong>Mejor respuesta:</strong> Retrasar y estar preparado para explicar el razonamiento (el margen protege la seguridad; el objetivo se mide dentro de un entorno ya seguro, no en contra de él).
+<strong>Peor respuesta:</strong> Seguir adelante a la hora porque "seguimos dentro del mínimo legal".
+<strong>Por qué:</strong> El mínimo legal es un suelo, no un objetivo operativo; el margen existe precisamente porque trabajar en el suelo aumenta el riesgo. Véase el Caso 19/20 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> razonamiento general sobre márgenes de seguridad, basado en la prioridad de seguridad declarada en el manual.
+<strong>Competencias:</strong> DM, ST</p>
+<h3 id="item-5">Ítem 5</h3>
+<p><strong>Escenario:</strong> Te piden que ayudes a una familia que se ha quedado tirada a cumplir una conexión ajustada saltándote una norma menor, puramente administrativa (no de seguridad).
+<strong>Mejor respuesta:</strong> Usar el criterio para ayudar dentro de los límites de una norma que no tiene nada que ver con la seguridad, y aplicar la misma flexibilidad de forma coherente si la misma situación se repite.
+<strong>Peor respuesta:</strong> Saltarte una norma próxima a la seguridad "solo esta vez" porque la petición parece comprensible y de bajo riesgo.
+<strong>Por qué:</strong> Distinguir la flexibilidad administrativa (se puede flexibilizar, con criterio y coherencia) de las normas de seguridad (nunca flexibles) es todo el sentido de este tipo de ítem; véase el Caso 21 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> deducido del par de valores general seguridad primero / empatía; ningún documento de ENAIRE enuncia esta distinción de forma explícita, pero se desprende directamente de los valores publicados.
+<strong>Competencias:</strong> OC, DM</p>
+<h3 id="item-6">Ítem 6</h3>
+<p><strong>Escenario:</strong> Surge una situación nueva y desconocida que ningún procedimiento escrito cubre exactamente, y hace falta decidir deprisa.
+<strong>Mejor respuesta:</strong> Aplicar de forma conservadora el principio de seguridad pertinente más cercano, actuar y comunicar después la laguna del procedimiento para que se pueda corregir.
+<strong>Peor respuesta:</strong> Improvisar libremente sin apoyar la decisión en ningún principio declarado, razonando que "no hay ninguna norma que lo prohíba".
+<strong>Por qué:</strong> "No hay norma en contra" no es lo mismo que "es seguro"; es la misma trampa lógica que el "seguimos dentro del mínimo legal" del Ítem 4, aplicada a situaciones realmente nuevas.
+<strong>Fuente:</strong> deducido del razonamiento sobre márgenes de seguridad usado en todo este archivo.
+<strong>Competencias:</strong> DM, FL</p>
+<h3 id="item-7">Ítem 7</h3>
+<p><strong>Escenario:</strong> Eres el único de un grupo que ha advertido un riesgo pequeño y fácil de pasar por alto en un plan que el resto del grupo ya ha acordado.
+<strong>Mejor respuesta:</strong> Plantearlo con claridad y sin demora, aunque suponga reabrir una discusión ya cerrada, y estar dispuesto a aceptar el criterio del grupo si dispone de información que tú no tienes.
+<strong>Peor respuesta:</strong> Callarte para no parecer difícil o para no retrasar una decisión que el grupo ya ha tomado.
+<strong>Por qué:</strong> Negarse a plantear una preocupación real de seguridad por comodidad social es uno de los comportamientos descalificadores más claros tanto en la entrevista como en la dinámica de grupo; véanse el Caso 12 de la orientación general sobre dinámica de grupo de <code>star-bank-and-competencies.md</code> y los Casos 12/17 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> principio general de assessment center de observación del comportamiento por encima de la comodidad social (Directrices del ITF §III.1).
+<strong>Competencias:</strong> DM, TW</p>
+<h3 id="item-8">Ítem 8</h3>
+<p><strong>Escenario:</strong> Una tarea repetitiva lleva mucho tiempo yendo bien y los compañeros han empezado a relajar, de manera informal, las comprobaciones estándar.
+<strong>Mejor respuesta:</strong> Seguir aplicando tú la comprobación completa y nombrar la deriva (sin acusar a nadie) como un patrón digno de plantearse.
+<strong>Peor respuesta:</strong> Dejarte llevar por la relajación informal porque "todos los demás han dejado de hacerlo y no ha pasado nada".
+<strong>Por qué:</strong> Es la descripción de manual del riesgo de complacencia, nombrado expresamente en el contenido de rendimiento humano del ATCO Common Core de EUROCONTROL ("peligros del exceso de confianza y la complacencia"). La deriva de la norma de grupo es exactamente cómo se erosionan poco a poco los márgenes de seguridad.
+<strong>Fuente:</strong> <code>EUROCONTROL-Guidelines-ATCO-CCC-initial-training.txt</code> §2.1.3.
+<strong>Competencias:</strong> RO, OC</p>
+<hr />
+<h2 id="2-items-de-cultura-justa-y-comunicacion-de-errores">2. Ítems de cultura justa y comunicación de errores</h2>
+<h3 id="item-9">Ítem 9</h3>
+<p><strong>Escenario:</strong> Cometes un error de planificación que, por lo que puedes ver, no ha tenido ningún efecto medible y del que nadie se ha dado cuenta.
+<strong>Mejor respuesta:</strong> Comunicarlo de todos modos, por el canal normal, en cuanto lo adviertas.
+<strong>Peor respuesta:</strong> Dejarlo pasar porque no hubo consecuencias y comunicarlo solo generaría papeleo innecesario.
+<strong>Por qué:</strong> La "cultura justa" existe para detectar el riesgo sistémico antes de que cause consecuencias, no para gestionar las consecuencias a posteriori; "no hubo daño" es expresamente el razonamiento descalificador más frecuente en todo este ámbito; véase el Caso 10 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> <a href="../temario/07-entorno-profesional/guia.html">la guía del tema 7</a> §7.4 (definición de cultura justa).
+<strong>Competencias:</strong> OC, RS</p>
+<h3 id="item-10">Ítem 10</h3>
+<p><strong>Escenario:</strong> Un compañero te cuenta en privado que cometió un error que nadie más conoce y te pide que no lo menciones.
+<strong>Mejor respuesta:</strong> Animarle directamente a que lo comunique él mismo (planteándolo como algo protector, no punitivo) y, si aun así se niega y el asunto es relevante para la seguridad, escalarlo tú mismo por el canal adecuado.
+<strong>Peor respuesta:</strong> Aceptar guardar silencio porque es "decisión suya" y no es responsabilidad tuya.
+<strong>Por qué:</strong> El deber de comunicar la conducta irregular de la que uno tiene conocimiento figura de forma explícita en el Código Ético, y la "cultura justa" protege la autonotificación honesta, no el encubrimiento por terceros.
+<strong>Fuente:</strong> el Código Ético de ENAIRE p. 6.
+<strong>Competencias:</strong> OC, TW</p>
+<h3 id="item-11">Ítem 11</h3>
+<p><strong>Escenario:</strong> Investigas un informe de casi incidente y descubres que la persona implicada es un compañero veterano muy respetado que insiste en que no fue nada.
+<strong>Mejor respuesta:</strong> Investigarlo con el mismo rigor que cualquier otro informe, sin importar la antigüedad de la persona ni su propia valoración del hecho.
+<strong>Peor respuesta:</strong> Hacer una revisión más ligera de lo habitual por deferencia a la antigüedad y la experiencia del compañero.
+<strong>Por qué:</strong> El principio de objetividad del Código Ético ("máxima objetividad, imparcialidad y transparencia") se aplica precisamente cuando aplicarlo resulta socialmente incómodo; véase el Caso 5 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> el Código Ético de ENAIRE.
+<strong>Competencias:</strong> OC, DM</p>
+<h3 id="item-12">Ítem 12</h3>
+<p><strong>Escenario:</strong> En una pregunta de estilo entrevista te piden que describas un error tuyo, y el ejemplo más a mano es pequeño y no fue realmente culpa tuya.
+<strong>Mejor respuesta:</strong> Elegir un ejemplo genuino, de más trascendencia, en el que fueras realmente responsable, aunque resulte menos cómodo de contar.
+<strong>Peor respuesta:</strong> Presentar el ejemplo pequeño y de baja responsabilidad como si fuera un error significativo, esperando que el entrevistador no profundice.
+<strong>Por qué:</strong> Los evaluadores entrenados sondean específicamente las respuestas sobre errores ("¿qué habría pasado si no lo hubieras detectado?") para comprobar justamente esta evasión; véase la respuesta completa desarrollada para esta pregunta en <code>interview-frameworks.md</code> §3.
+<strong>Fuente:</strong> <code>interview-frameworks.md</code> y principios generales de diseño de entrevistas por competencias (CIPD).
+<strong>Competencias:</strong> OC (encaje débil)</p>
+<h3 id="item-13">Ítem 13</h3>
+<p><strong>Escenario:</strong> Llega un informe de seguridad anónimo y vago, con muy poco detalle para actuar de inmediato.
+<strong>Mejor respuesta:</strong> Tratarlo como una pista genuina: intentar recabar más información (por el mismo canal anónimo si es posible) en lugar de descartarlo por falta de detalle.
+<strong>Peor respuesta:</strong> Relegarlo indefinidamente porque "no hay suficiente de dónde tirar", descartándolo en la práctica.
+<strong>Por qué:</strong> La notificación anónima existe precisamente porque algunos riesgos reales nunca saldrían a la luz de otro modo; descartar un informe por falta de pulido socava el propósito entero de un canal confidencial como el Canal Ético de ENAIRE. Véase el Caso 5 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> el Código Ético de ENAIRE (Canal Ético, Ley 2/2023 de protección de los informantes).
+<strong>Competencias:</strong> DM, OC</p>
+<h3 id="item-14">Ítem 14</h3>
+<p><strong>Escenario:</strong> Tras un error genuino, la respuesta de tu organización se plantea íntegramente en torno a la formación de refresco y a correcciones de proceso, sin acción disciplinaria para una primera ocasión comunicada con honestidad.
+<strong>Mejor respuesta:</strong> Reconocerlo como la "cultura justa" funcionando según lo previsto y seguir comunicando futuros problemas con la misma apertura.
+<strong>Peor respuesta:</strong> Concluir que los errores no tienen consecuencias reales y empezar a ser menos cuidadoso, porque "total, no pasa nada".
+<strong>Por qué:</strong> Este ítem evalúa la comprensión, no solo la memoria: la "cultura justa" cambia disciplina por transparencia precisamente <em>porque</em> la transparencia evita la repetición; tomar la ausencia de castigo como licencia para el descuido malinterpreta todo el mecanismo.
+<strong>Fuente:</strong> deducido directamente de la propia definición de "cultura justa" del manual.
+<strong>Competencias:</strong> OC, RS</p>
+<hr />
+<h2 id="3-items-de-equipo-y-relaciones-interpersonales">3. Ítems de equipo y relaciones interpersonales</h2>
+<h3 id="item-15">Ítem 15</h3>
+<p><strong>Escenario:</strong> En una discusión de equipo, estás seguro de que tu propuesta es correcta y el grupo parece derivar hacia una opción peor.
+<strong>Mejor respuesta:</strong> Exponer tu punto de vista con claridad y con su razonamiento una sola vez, escuchar de verdad los contraargumentos y estar dispuesto a rectificar si aparece uno bueno, sin repetir ni volver a litigar el punto una vez que el grupo lo ha escuchado y ha decidido.
+<strong>Peor respuesta:</strong> Seguir insistiendo en el mismo punto después de que el grupo ya lo ha escuchado y ha pasado a otra cosa, porque estás seguro de tener razón.
+<strong>Por qué:</strong> "Ganar a toda costa" es uno de los comportamientos descalificadores nombrados en un entorno de grupo (<code>group-dynamics-cases.md</code> §1.4); la seguridad en tener razón no da licencia para reabrir repetidamente una discusión ya cerrada.
+<strong>Fuente:</strong> <code>group-dynamics-cases.md</code> §1.4.
+<strong>Competencias:</strong> TW, DM</p>
+<h3 id="item-16">Ítem 16</h3>
+<p><strong>Escenario:</strong> Un miembro más callado del equipo lleva un rato sin hablar en una reunión y la discusión avanza hacia una decisión.
+<strong>Mejor respuesta:</strong> Hacerle una pregunta directa y concreta que invite a dar su opinión antes de cerrar la decisión.
+<strong>Peor respuesta:</strong> Pasar a la decisión sin comprobar si todos han tenido una oportunidad real de opinar.
+<strong>Por qué:</strong> Los evaluadores no pueden valorar un comportamiento que nunca observan, y un equipo que toma decisiones sin escuchar a todos sus miembros pierde información además de equidad; véase la técnica de "integrar a un miembro callado" en <code>group-dynamics-cases.md</code> §1.2.
+<strong>Fuente:</strong> <code>group-dynamics-cases.md</code> §1.2.
+<strong>Competencias:</strong> TW</p>
+<h3 id="item-17">Ítem 17</h3>
+<p><strong>Escenario:</strong> Un compañero te interrumpe repetidamente mientras expones un punto en una discusión de grupo.
+<strong>Mejor respuesta:</strong> Mantener la postura con calma sin competir en volumen: "Déjame terminar este punto y luego te cedo la palabra", y retomar donde lo dejaste.
+<strong>Peor respuesta:</strong> Quedarte en silencio y abandonar el punto, o escalar a una lucha de poder visible por quién tiene la palabra.
+<strong>Por qué:</strong> Ambos extremos fallan; el camino intermedio, asertivo pero no combativo, es exactamente la frase ya modelada en <code>star-bank-and-competencies.md</code> §5 ("Sorry, let me finish and then I will hand over to you").
+<strong>Fuente:</strong> <code>star-bank-and-competencies.md</code> §5.
+<strong>Competencias:</strong> TW, ST</p>
+<h3 id="item-18">Ítem 18</h3>
+<p><strong>Escenario:</strong> No estás de acuerdo con el planteamiento de un compañero, pero tiene más rango o más experiencia en esa materia concreta.
+<strong>Mejor respuesta:</strong> Plantear la preocupación con respeto y de forma específica ("Entiendo tu punto, y me preocupa que... ¿qué ocurre si...?") y aceptar su decisión final si ha considerado tu punto y sigue sin estar de acuerdo.
+<strong>Peor respuesta:</strong> Callarte por la diferencia de rango o experiencia, o desdeñar su experiencia porque crees tener razón.
+<strong>Por qué:</strong> Respetar y dar deferencia a la experiencia no es lo mismo que callar; "Respetamos y confiamos" valora expresamente la colaboración y el reconocimiento del mérito ajeno, sin exigir un acuerdo acrítico.
+<strong>Fuente:</strong> <a href="flight-plan-2030-summary.html">el Plan de Vuelo 2030</a> §4 (grupo de valores 3).
+<strong>Competencias:</strong> TW, DM</p>
+<h3 id="item-19">Ítem 19</h3>
+<p><strong>Escenario:</strong> Un compañero recién cualificado comete un error de novato delante del equipo.
+<strong>Mejor respuesta:</strong> Abordarlo en privado y de forma constructiva, centrándote en el comportamiento concreto y en qué hacer de otra manera, no en la persona.
+<strong>Peor respuesta:</strong> Corregirle en público de una forma que le avergüence, aunque la corrección en sí sea acertada.
+<strong>Por qué:</strong> La forma de dar el feedback forma parte de lo que evalúa "Somos empáticos": el contenido puede ser exactamente correcto y, aun así, la forma puede hacer fallar la competencia.
+<strong>Fuente:</strong> deducido del valor de la empatía y de las buenas prácticas habituales de entrega de feedback.
+<strong>Competencias:</strong> TW</p>
+<h3 id="item-20">Ítem 20</h3>
+<p><strong>Escenario:</strong> Te asignan trabajar con alguien cuyo estilo de trabajo es muy distinto del tuyo (por ejemplo, un ritmo mucho más rápido o más lento, otras preferencias de comunicación).
+<strong>Mejor respuesta:</strong> Ajustar tu propio enfoque cuando sea razonable (estilo de comunicación, puntos de control del ritmo) manteniendo los estándares que exige la tarea.
+<strong>Peor respuesta:</strong> Insistir en que la otra persona se adapte a tu estilo porque te parece más eficiente.
+<strong>Por qué:</strong> "Flexibles ante los cambios" se aplica a las personas, no solo a los planes y a la tecnología; lo que evalúa el valor es una adaptación genuina, no solo la tolerancia.
+<strong>Fuente:</strong> <a href="flight-plan-2030-summary.html">el Plan de Vuelo 2030</a> §4 (grupo de valores 4).
+<strong>Competencias:</strong> TW, FL</p>
+<h3 id="item-21">Ítem 21</h3>
+<p><strong>Escenario:</strong> Eres quien ha asumido la mayor parte de una carga compartida (turnos extra, tareas extra) con el tiempo porque seguías diciendo que sí cuando te lo pedían, y empieza a afectarte.
+<strong>Mejor respuesta:</strong> Plantearlo de forma directa y objetiva a quien sea responsable del reparto, proponiendo un sistema continuo más justo, sin presentarlo como una queja contra compañeros concretos.
+<strong>Peor respuesta:</strong> Seguir diciendo que sí mientras lo llevas en silencio con resentimiento, o negarte de golpe sin explicación.
+<strong>Por qué:</strong> Ni la sobrecarga silenciosa ni una negativa sin explicar sirven al equipo; nombrar el problema sistémico y proponer una solución es la respuesta profesional, y refleja el razonamiento del Caso 15 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> <code>group-dynamics-cases.md</code> Caso 15.
+<strong>Competencias:</strong> RS, ST</p>
+<hr />
+<h2 id="4-items-de-integridad-y-conflicto-de-interes">4. Ítems de integridad y conflicto de interés</h2>
+<h3 id="item-22">Ítem 22</h3>
+<p><strong>Escenario:</strong> Un proveedor que concurre a un contrato que tu equipo está evaluando te envía un regalo personal poco antes de la decisión, presentado como "sin compromiso alguno".
+<strong>Mejor respuesta:</strong> Rechazarlo con educación, documentar el regalo y el momento en que llegó y, en caso de duda, consultar al contacto o canal de ética.
+<strong>Peor respuesta:</strong> Aceptarlo porque es de poco valor y el remitente dijo que no había compromiso alguno.
+<strong>Por qué:</strong> El Código Ético de ENAIRE prohíbe los regalos que puedan generar "ventaja, diferencia de trato... u obligación (directa o indirecta)" con independencia de la intención declarada de quien los da: la norma atiende a la apariencia y al momento, no al tamaño del regalo ni a la sinceridad del remitente. Véase el Caso 8 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> el Código Ético de ENAIRE p. 7.
+<strong>Competencias:</strong> OC</p>
+<h3 id="item-23">Ítem 23</h3>
+<p><strong>Escenario:</strong> Un amigo íntimo que trabaja para una aerolínea te pide información temprana y no pública relevante para su empresa, "solo entre nosotros".
+<strong>Mejor respuesta:</strong> Negarte con claridad y explicar brevemente por qué (el secreto profesional se aplica con independencia de la relación), sin tratar la amistad como una excepción especial.
+<strong>Peor respuesta:</strong> Compartir "solo la idea general, no los detalles", razonando que una revelación parcial no es realmente un incumplimiento.
+<strong>Por qué:</strong> El deber de secreto profesional sobre la información no pública no admite una excepción por amistad, y la revelación parcial de información no pública y relevante para decisiones sigue siendo una revelación. Véase el Caso 9 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> el Código Ético de ENAIRE p. 7.
+<strong>Competencias:</strong> OC</p>
+<h3 id="item-24">Ítem 24</h3>
+<p><strong>Escenario:</strong> Descubres, a mitad de un proceso, que tienes un vínculo personal (amistad, familia) con un candidato al que se está evaluando en un proceso de selección en el que participas.
+<strong>Mejor respuesta:</strong> Declarar de inmediato el conflicto de interés y apartarte de esa decisión concreta, aunque creas que podrías mantener la objetividad.
+<strong>Peor respuesta:</strong> Seguir participando sin declararlo, razonando que personalmente puedes mantener la objetividad.
+<strong>Por qué:</strong> El Código Ético exige abstenerse de las decisiones en las que exista un conflicto de interés; la norma no depende de que la persona crea poder ser objetiva, precisamente porque esa creencia no es verificable de forma independiente. Véase el Caso 12 de <code>group-dynamics-cases.md</code>.
+<strong>Fuente:</strong> el Código Ético de ENAIRE p. 7.
+<strong>Competencias:</strong> OC, DM</p>
+<h3 id="item-25">Ítem 25</h3>
+<p><strong>Escenario:</strong> Presencias que un compañero se comporta con deshonestidad de un modo que no es crítico para la seguridad de forma inmediata (por ejemplo, falseando un detalle administrativo menor).
+<strong>Mejor respuesta:</strong> Hablarlo directamente primero con el compañero si la situación y la relación lo permiten, y escalarlo por el canal adecuado si no se resuelve o si se repite.
+<strong>Peor respuesta:</strong> Ignorarlo porque "no es asunto tuyo", o denunciarlo de inmediato sin conversación previa, algo desproporcionado para una primera ocasión ambigua.
+<strong>Por qué:</strong> Una respuesta gradual (conversación directa y después escalado si hace falta) concuerda tanto con el deber de comunicación del Código Ético como con la proporcionalidad ordinaria; véanse el Caso 7 y la P40 de <code>interview-frameworks.md</code> para la misma lógica en dos pasos aplicada a un contexto de seguridad.
+<strong>Fuente:</strong> el Código Ético de ENAIRE; <code>group-dynamics-cases.md</code> Caso 7.
+<strong>Competencias:</strong> OC</p>
+<h3 id="item-26">Ítem 26</h3>
+<p><strong>Escenario:</strong> En una entrevista te piden, como ejemplo de "cómo gestionas la confidencialidad", que hables de información confidencial de un empleador anterior.
+<strong>Mejor respuesta:</strong> Describir tu práctica general (no hablar de detalles ni siquiera con gente cercana, separar canales) sin revelar realmente ningún contenido confidencial.
+<strong>Peor respuesta:</strong> Ilustrar el punto compartiendo un dato confidencial real del empleador anterior, razonando que así el ejemplo es más concreto.
+<strong>Por qué:</strong> Revelar información realmente confidencial como "prueba" de confidencialidad es una contradicción directa y una señal de alarma grave para un evaluador, porque muestra exactamente el comportamiento que la pregunta pone a prueba; véase la P38 de <code>interview-frameworks.md</code>.
+<strong>Fuente:</strong> <code>interview-frameworks.md</code> P38.
+<strong>Competencias:</strong> OC</p>
+<hr />
+<h2 id="5-items-de-servicio-empatia-y-profesionalidad">5. Ítems de servicio, empatía y profesionalidad</h2>
+<h3 id="item-27">Ítem 27</h3>
+<p><strong>Escenario:</strong> Tienes que explicar una decisión técnica a alguien sin formación técnica, y parece frustrado por no entender.
+<strong>Mejor respuesta:</strong> Ajustar tu explicación (analogía, lenguaje llano) y comprobar directamente la comprensión, en lugar de repetir la misma explicación más despacio o más alto.
+<strong>Peor respuesta:</strong> Repetir la misma explicación técnica, dando por hecho que el problema es que no escuchaba con suficiente atención.
+<strong>Por qué:</strong> "Somos empáticos" trata expresamente de ponerse en el lugar del otro para entender su necesidad real y responder a ella, lo que exige adaptar el mensaje, no solo repetirlo.
+<strong>Fuente:</strong> <a href="../temario/07-entorno-profesional/guia.html">la guía del tema 7</a> §7.4.
+<strong>Competencias:</strong> TW (encaje débil)</p>
+<h3 id="item-28">Ítem 28</h3>
+<p><strong>Escenario:</strong> Una tarea es repetitiva y poco vistosa, y notas que tu atención empieza a dispersarse.
+<strong>Mejor respuesta:</strong> Usar una estructura externa concreta (lista de comprobación, pausa deliberada, comprobación cruzada) para mantener la calidad, en lugar de confiar en la fuerza de voluntad para "concentrarte más".
+<strong>Peor respuesta:</strong> Seguir adelante confiando solo en el esfuerzo y aceptar un mayor riesgo de error como un coste inevitable de una tarea aburrida.
+<strong>Por qué:</strong> Es una respuesta de estándar profesional, de aplicación general, y además coincide con el planteamiento de lista de comprobación y comprobación cruzada ya recomendado en la historia n.º 15 de <code>star-bank-and-competencies.md</code> como una forma sólida y neutra de demostrar una gestión sistemática de la atención.
+<strong>Fuente:</strong> <code>star-bank-and-competencies.md</code> historia n.º 15.
+<strong>Competencias:</strong> RO, RS</p>
+<h3 id="item-29">Ítem 29</h3>
+<p><strong>Escenario:</strong> Te preguntan qué harías si una dificultad personal (de salud, familiar o de otro tipo) empezara a afectar a tu trabajo.
+<strong>Mejor respuesta:</strong> Comunicarlo de forma proactiva al canal o a la persona adecuados antes de que cause un problema operativo, y aprovechar cualquier apoyo que te ofrezcan.
+<strong>Peor respuesta:</strong> Intentar ocultarlo y gestionarlo solo, razonando que plantearlo parecería una debilidad.
+<strong>Por qué:</strong> En un puesto crítico para la seguridad, comunicar por propia iniciativa una duda sobre la aptitud para el puesto es la respuesta profesional y alineada con la seguridad; refleja la misma lógica de "cultura justa" usada para los errores operativos, aplicada a la aptitud personal para el servicio. Véanse el Caso 22 de <code>group-dynamics-cases.md</code> y la P40 de <code>star-bank-and-competencies.md</code> §3.
+<strong>Fuente:</strong> deducido del razonamiento de cultura justa y aptitud para el puesto usado de forma coherente en todo este archivo.
+<strong>Competencias:</strong> RS, ST</p>
+<h3 id="item-30">Ítem 30</h3>
+<p><strong>Escenario:</strong> Un miembro del público o un compañero de otra organización te trata de forma poco profesional o grosera durante una interacción por lo demás rutinaria.
+<strong>Mejor respuesta:</strong> Mantener la profesionalidad y rebajar la tensión, atender al fondo de la interacción y plantear después la conducta por el canal adecuado si fue lo bastante grave como para justificarlo.
+<strong>Peor respuesta:</strong> Responder con la misma moneda, igualando su tono, para "no dejar que se salga con la suya".
+<strong>Por qué:</strong> "Somos profesionales" y el compromiso del Código Ético con un trato respetuoso y no discriminatorio a las partes interesadas se aplican con independencia de cómo se comporte la otra parte; la profesionalidad se pone a prueba precisamente en los momentos en que es más difícil mantenerla.
+<strong>Fuente:</strong> el Código Ético de ENAIRE (principios de trato respetuoso); <a href="flight-plan-2030-summary.html">el Plan de Vuelo 2030</a> §4 (Somos profesionales).
+<strong>Competencias:</strong> ST, RS</p>
+<hr />
+<h2 id="6-trampas-del-examen">6. Trampas del examen</h2>
+<ol>
+<li><strong>"Sin consecuencias" / "nadie se dio cuenta" nunca es una razón válida para omitir la comunicación</strong> (Ítems 1, 9, 12): la trampa más repetida de todo este archivo.</li>
+<li><strong>"Seguimos dentro del mínimo legal" no es lo mismo que "es seguro"</strong> (Ítems 4, 6): el suelo legal y el margen operativo son cosas distintas.</li>
+<li><strong>El tamaño de un regalo o de un favor, o la intención declarada de quien lo da, no cambia la norma</strong> (Ítem 22): al Código Ético le preocupan la apariencia y el momento, no la sinceridad ni el valor.</li>
+<li><strong>Una amistad o una relación personal nunca crea una excepción a las normas de confidencialidad u objetividad</strong> (Ítems 23, 24): se evalúa desde dos direcciones (dar información y evaluar a alguien que conoces).</li>
+<li><strong>La deferencia a la antigüedad no es lo mismo que callar ante una preocupación genuina</strong> (Ítems 7, 11, 18): respetar y plantear un problema son compatibles, no opuestos.</li>
+<li><strong>Los dos extremos del fallo son simétricos</strong>: silencio o evitación por un lado, escalada o confrontación desproporcionadas por el otro (Ítems 17, 25); una buena respuesta está calibrada, no es solo "segura".</li>
+<li><strong>Revelar información confidencial real para demostrar que entiendes la confidencialidad es una contradicción directa</strong> (Ítem 26): un fallo sorprendentemente común bajo la presión de la entrevista.</li>
+<li><strong>La complacencia derivada de un largo historial de "no pasa nada" es en sí misma un riesgo nombrado</strong>, no una prueba de que una comprobación sea innecesaria (Ítem 8).</li>
+</ol>
+<h2 id="7-para-memorizar">7. Para memorizar</h2>
+<ul>
+<li>30 ítems en 5 grupos: seguridad primero (1-8), cultura justa y comunicación de errores (9-14), equipo e interpersonales (15-21), integridad y conflicto de interés (22-26), servicio, empatía y profesionalidad (27-30).</li>
+<li>Los SJT evalúan un juicio cerrado entre opciones (según las Directrices del ITF, no una simulación conductual por sí solos), pero reflejan los mismos valores que se evalúan en vivo en la entrevista y en la dinámica de grupo: el razonamiento se generaliza a los tres componentes de la evaluación conductual.</li>
+<li>El patrón de respuesta correcta recurrente: nombrar la tensión de forma explícita, aplicar sin excepción el principio innegociable (seguridad, confidencialidad, abstención por conflicto de interés) y tomar la acción proporcionada, no la extrema, en los ítems que dependen realmente del juicio.</li>
+<li>El patrón de trampa recurrente: lenguaje que resta importancia ("no hubo daño", "pequeño", "sin compromiso", "solo esta vez", "sigue siendo legal") y que reformula una infracción de la norma como una excepción razonable.</li>
+</ul>
+<h2 id="8-glosario-bilingue-es-en">8. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prueba de juicio situacional</td>
+<td>situational judgement item/test</td>
+</tr>
+<tr>
+<td>mejor / peor respuesta</td>
+<td>best / worst response</td>
+</tr>
+<tr>
+<td>cultura justa</td>
+<td>just culture</td>
+</tr>
+<tr>
+<td>Canal Ético</td>
+<td>whistleblowing / ethics channel</td>
+</tr>
+<tr>
+<td>conflicto de interés</td>
+<td>conflict of interest</td>
+</tr>
+<tr>
+<td>secreto profesional</td>
+<td>professional secrecy</td>
+</tr>
+<tr>
+<td>aptitud para el puesto</td>
+<td>fitness for duty</td>
+</tr>
+<tr>
+<td>complacencia</td>
+<td>complacency</td>
+</tr>
+<tr>
+<td>escalado</td>
+<td>escalation (reporting upward)</td>
+</tr>
+<tr>
+<td>respuesta proporcionada</td>
+<td>proportionate response</td>
+</tr>
+<tr>
+<td>rebajar la tensión</td>
+<td>de-escalate</td>
+</tr>
+<tr>
+<td>política de regalos y hospitalidades</td>
+<td>gift and hospitality policy</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-que-esta-confirmado-y-que-no">9. Qué está confirmado y qué no</h2>
+<p>Las 7 competencias oficiales de la Fase 3B están publicadas (<code>annex-iv-competency-map.md</code>); la asignación de cada ítem a ellas es una inferencia propia de este archivo, no de ENAIRE. ENAIRE no ha publicado un banco oficial de ítems SJT ni ha confirmado que la Fase 3 incluya un componente SJT formal, frente a formatos puramente en vivo de entrevista o dinámica de grupo; los 30 ítems de aquí están construidos a partir de los valores publicados de ENAIRE y de su Código Ético, junto con la práctica estándar de diseño de SJT, no a partir de un banco de ítems filtrado u oficial. Los Ítems 5, 6, 14, 19, 21 y 29 se siguen lógicamente de los valores y principios publicados, pero no son literales de un único documento fuente.</p></main></div><script src="../assets/search.js" defer></script><script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

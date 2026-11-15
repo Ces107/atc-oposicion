@@ -1,0 +1,784 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ENAIRE: organización, infraestructura, servicios y cifras (T07a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Entorno profesional</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-gobierno-consejo-rector-presidencia-recursos-legales">1. Gobierno: Consejo Rector, Presidencia, recursos legales</a></li>
+<li><a href="#2-infraestructura-por-region-la-lista-de-aeropuertos-segun-fuentes-primarias-ats-frente-a-solo-cns">2. Infraestructura por región: la lista de aeropuertos según fuentes primarias (ATS frente a solo CNS)</a></li>
+<li><a href="#3-otros-ansp-en-espana-saerco-y-skyway-antes-ferronats">3. Otros ANSP en España: SAERCO y Skyway (antes FerroNATS)</a></li>
+<li><a href="#4-numero-de-equipos-cnsatm-2024">4. Número de equipos CNS/ATM (2024)</a></li>
+<li><a href="#5-sistema-tarifario-tarifas-de-ruta-y-de-aproximacion">5. Sistema tarifario (tarifas de ruta y de aproximación)</a><ul>
+<li><a href="#51-esquema-basico">5.1 Esquema básico</a></li>
+<li><a href="#52-tarifas-de-ruta">5.2 Tarifas de ruta</a></li>
+<li><a href="#53-tarifas-de-aproximacion">5.3 Tarifas de aproximación</a></li>
+</ul>
+</li>
+<li><a href="#6-presupuesto-ingresos-y-finanzas">6. Presupuesto, ingresos y finanzas</a></li>
+<li><a href="#7-filiales-y-participadas-comprobadas-y-de-que-no-forma-parte-enaire">7. Filiales y participadas comprobadas, y de qué NO forma parte ENAIRE</a></li>
+<li><a href="#8-servicios-mas-alla-de-los-seis-del-manual-sdp-certificaciones-compromisos-de-la-carta-de-servicios">8. Servicios más allá de los seis del manual: SDP, certificaciones, compromisos de la Carta de Servicios</a><ul>
+<li><a href="#81-servicio-de-direccion-de-plataforma-sdp">8.1 Servicio de Dirección de Plataforma (SDP)</a></li>
+<li><a href="#82-certificaciones-sellos-de-sistemas-de-gestion">8.2 Certificaciones (sellos de sistemas de gestión)</a></li>
+<li><a href="#83-carta-de-servicios-2025-2027-compromisos-cuantificados-compromisos-e-indicadores">8.3 Carta de Servicios 2025-2027: compromisos cuantificados (compromisos e indicadores)</a></li>
+</ul>
+</li>
+<li><a href="#9-cifras-clave-y-records-anos-complementarios">9. Cifras clave y récords, años complementarios</a></li>
+<li><a href="#10-entorno-profesional-iii-convenio-colectivo-carrera-retribuciones-turnos-licencias">10. Entorno profesional: III Convenio Colectivo (carrera, retribuciones, turnos, licencias)</a><ul>
+<li><a href="#101-estructura-salarial">10.1 Estructura salarial</a></li>
+<li><a href="#102-jornada-y-turnos">10.2 Jornada y turnos</a></li>
+<li><a href="#103-licencia-habilitaciones-y-anotaciones-de-unidad-las-definiciones-juridicas-del-propio-convenio">10.3 Licencia, habilitaciones y anotaciones de unidad: las definiciones jurídicas del propio convenio</a></li>
+<li><a href="#104-dos-convenios-colectivos-confirmados-y-contrastados">10.4 Dos convenios colectivos, confirmados y contrastados</a></li>
+</ul>
+</li>
+<li><a href="#11-manual-frente-a-fuentes-primarias-discrepancias-adicionales">11. Manual frente a fuentes primarias: discrepancias adicionales</a></li>
+<li><a href="#12-trampas-de-examen">12. Trampas de examen</a></li>
+<li><a href="#13-imprescindible-memorizar">13. Imprescindible memorizar</a></li>
+<li><a href="#14-glosario-bilingue-es-en">14. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#15-fuentes">15. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">43 min de lectura</div><h1 id="t07a-enaire-organizacion-infraestructura-servicios-y-cifras-mas-alla-del-manual">T07a — ENAIRE: organización, infraestructura, servicios y cifras (más allá del manual)</h1>
+<p>Apuntes de ampliación (24-09-2026), más allá del manual oficial 7 de ENAIRE (<code>syllabus/manual/OM07-professional-environment-study-guide.md</code>) y de las notas base centradas en el PV2030 (<code>syllabus/t07-professional-environment.md</code>), que no se repiten aquí salvo lo necesario para el contexto. El foco está en: el detalle del gobierno de la entidad, la lista de aeropuertos y de ANSP terceros según fuentes primarias, el número de equipos CNS/ATM, el sistema tarifario, el presupuesto y los ingresos, las filiales comprobadas una a una, los servicios que el manual omite y el III Convenio Colectivo (carrera, retribuciones, turnos, licencias, habilitaciones).</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El tema 7 «Entorno profesional» no tiene más epígrafes oficiales que el manual de 15 páginas, así que cualquier dato de ENAIRE procedente de una fuente oficial es materia posible. Este archivo añade la capa que omiten el manual y el resumen del PV2030: <strong>quién gobierna ENAIRE y cómo</strong> (composición del Consejo Rector, recursos legales), <strong>qué aeropuertos controla exactamente ENAIRE frente a SAERCO/Skyway</strong>, <strong>cuántos radares/VOR/DME/ILS opera ENAIRE</strong>, <strong>cómo se calculan las tarifas de ruta y de aproximación</strong> (fórmulas, tarifas unitarias de 2025, categorías de aeropuerto), <strong>cómo son los ingresos y el EBITDA de ENAIRE</strong>, <strong>qué empresas son y cuáles NO son participadas de ENAIRE</strong> (una trampa clásica de «distractor»: Aireon y Searidge NO son de ENAIRE) y <strong>el detalle laboral de la carrera del controlador</strong> (fórmula salarial, tipos de turno, horas máximas, definiciones de licencia y habilitación tomadas directamente del convenio colectivo). Las cifras de aquí son de las que un examen de oposición de 50 preguntas saca en una sola línea.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Gobierno: Consejo Rector, Presidencia, recursos legales</li>
+<li>Infraestructura por región: la lista de aeropuertos según fuentes primarias (ATS frente a solo CNS)</li>
+<li>Otros ANSP en España: SAERCO y Skyway (antes FerroNATS)</li>
+<li>Número de equipos CNS/ATM (2024)</li>
+<li>Sistema tarifario (tarifas de ruta y de aproximación)</li>
+<li>Presupuesto, ingresos y finanzas</li>
+<li>Filiales y participadas comprobadas, y de qué NO forma parte ENAIRE</li>
+<li>Servicios más allá de los seis del manual: SDP, certificaciones, compromisos de la Carta de Servicios</li>
+<li>Cifras clave y récords, años complementarios</li>
+<li>Entorno profesional: III Convenio Colectivo (carrera, retribuciones, turnos, licencias)</li>
+<li>Manual frente a fuentes primarias: discrepancias adicionales</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-gobierno-consejo-rector-presidencia-recursos-legales">1. Gobierno: Consejo Rector, Presidencia, recursos legales</h2>
+<ul>
+<li>Los órganos de gobierno de ENAIRE son el <strong>Consejo Rector</strong> y la <strong>Presidencia</strong>, ambos un nivel por encima de la Dirección General (arts. 1 y 7 del RD 160/2023). La Presidencia la ostenta <strong>por razón del cargo</strong> quien ocupe la <strong>Secretaría de Estado de Transportes y Movilidad Sostenible</strong>: el Presidente no es un nombramiento político distinto, viene unido a ese puesto de la Secretaría de Estado. RD 160/2023, art. 7 y la página web de gobernanza de ENAIRE.</li>
+<li><strong>Composición del Consejo Rector (art. 9 RD 160/2023):</strong> la persona titular de la Presidencia + <strong>once Consejeros</strong>, nombrados y separados por el Ministro de Transportes, «atendiendo al principio de presencia equilibrada de mujeres y hombres». <strong>Total: 12 personas</strong> (esto confirma los «12 miembros» del mapa DL07). RD 160/2023, art. 9.1.</li>
+<li><strong>Composición nominal (actual, leída en la página web de gobernanza de ENAIRE):</strong></li>
+<li><strong>Presidente:</strong> José Antonio Santano Clavero.</li>
+<li><strong>Secretaria General y Directora de Cumplimiento Normativo</strong> (asiste con voz, aunque el perfil del manual/PV2030 la llama «Secretaría General»): Elena Sáenz Guillén.</li>
+<li><strong>9 Consejeros/Consejeras nombrados:</strong> Ángel Soret Lafraya, Aurelio Lozano Serra, Cristina Tello Blasco, David Benito Astudillo, Estrella Gutiérrez Marco, José Ignacio Caro Eisman, Juan Antonio López Aragón, Luis Cebrián Carbonell, María Sobrino Ruíz, Mario Díaz Millán, Pilar Suárez Morales — <strong>11 si se cuenta la fila de la Secretaria General en la página, aunque su función formal es la de secretaria, no la de Consejera con voto; el artículo sobre las funciones del Consejo Rector distingue entre los Consejeros con voto y el personal que asiste «con voz, pero sin voto»</strong>. No memorices los nombres para el examen (cambian con los nombramientos); memoriza la <strong>estructura: Presidente + 11 Consejeros = 12</strong>.</li>
+<li><strong>Retribución de los Consejeros:</strong> perciben las indemnizaciones por razón del servicio del art. 28.1 del RD 462/2002, con un tope de <strong>11 735,24 EUR/año por un máximo de 11 sesiones</strong>, reducido proporcionalmente si se celebran menos sesiones; los Consejeros que son <strong>altos cargos</strong> no las cobran, porque van al Tesoro, y están sujetos a la Ley 3/2015 (declaración de bienes publicada en el BOE). página web de gobernanza.</li>
+<li><strong>Funciones del Consejo Rector (art. 10 RD 160/2023):</strong> entre otras, conferir/revocar apoderamientos, aprobar la organización de ENAIRE, las cuentas anuales, el plan estratégico, el mapa de riesgos, los objetivos de la empresa y la delegación de facultades; puede delegar parte de sus funciones en el Director General y crear <strong>comisiones delegadas</strong>. RD 160/2023, art. 10. Según el resumen de la web de ENAIRE, el Consejo Rector aprueba en concreto: <strong>el Plan Estratégico (Plan de Vuelo)</strong>, el <strong>Código Ético</strong>, las <strong>Políticas</strong>, el <strong>Plan de Actuación Plurianual (PAP)</strong>, el <strong>Presupuesto Operativo</strong>, el <strong>Plan Empresarial</strong>, el mapa de riesgos estratégicos, los objetivos de la empresa, la delegación de facultades, las <strong>Cuentas Anuales</strong> y los informes clave (información financiera y no financiera, informe del Sistema de Gestión de Ética y Cumplimiento Normativo e informe del Sistema Interno de Información). página web de gobernanza.</li>
+<li><strong>Funcionamiento:</strong> puede reunirse de forma presencial o a distancia; los acuerdos se adoptan por mayoría; se levanta acta de cada sesión. El Consejo Rector puede crear y disolver comisiones delegadas en cualquier momento. RD 160/2023, arts. 11-12.</li>
+<li><strong>Recursos económicos de ENAIRE (art. 27 RD 160/2023):</strong> (a) productos, rentas e incrementos de su patrimonio propio; (b) ingresos ordinarios y extraordinarios de su actividad; (c) empréstitos y operaciones de crédito (dentro de los límites anuales fijados por la Ley de Presupuestos Generales del Estado, con posible aval del Estado conforme a la Ley 47/2003); (d) subvenciones que puedan consignarse en los Presupuestos Generales del Estado; (e) fondos de la UE, aportaciones de otras administraciones públicas, organismos públicos o particulares; (f) cualquier otro recurso atribuido por ley, convenio o donación. RD 160/2023, art. 27.</li>
+<li><strong>Naturaleza jurídica de las tarifas de ruta y de aproximación (art. 28.2):</strong> se califican expresamente como <strong>«ingresos de derecho público»</strong>, que se cobran por el procedimiento administrativo de apremio del Ministerio de Hacienda si no se pagan. RD 160/2023, art. 28.</li>
+<li><strong>Excedente (art. 29):</strong> el 100 % de los dividendos recibidos de filiales <strong>ajenas al negocio de la navegación aérea</strong> debe ingresarse en el Tesoro Público; el resto del excedente lo destina el Consejo Rector (a propuesta de la Presidencia) a compensar pérdidas de ejercicios anteriores, a reservas o al Tesoro. RD 160/2023, art. 29. Es un dato útil para preguntas sobre «cómo se emplean los beneficios de ENAIRE».</li>
+</ul>
+<h2 id="2-infraestructura-por-region-la-lista-de-aeropuertos-segun-fuentes-primarias-ats-frente-a-solo-cns">2. Infraestructura por región: la lista de aeropuertos según fuentes primarias (ATS frente a solo CNS)</h2>
+<p>El manual y el PV2030 dan los <strong>totales</strong> (5 ACC, 2 TACC, «21 aeropuertos/torres»). La página web «Red ENAIRE» de la propia ENAIRE da la <strong>lista completa de aeropuertos por región con el servicio exacto que ENAIRE presta en cada uno</strong>, un nivel de detalle que no incluyen ni el manual ni las notas base. Leyenda que usa ENAIRE: <strong>ACC</strong> (Centro de Control de Área, con ATS + CNS) · <strong>TACC</strong> (Centro de Control de Área Terminal, con ATS + CNS) · <strong>TWR</strong> (control de aeródromo, con CNS) · <strong>solo CNS</strong> (ENAIRE presta únicamente los equipos de comunicaciones, navegación y vigilancia; el ATS lo presta otro, SAERCO o Skyway, véase §3).</p>
+<table>
+<thead>
+<tr>
+<th>Región</th>
+<th>ACC/TACC</th>
+<th>Aeropuertos donde ENAIRE presta ATS (torre de control o aproximación)</th>
+<th>Aeropuertos donde ENAIRE presta solo CNS (sin ATC de ENAIRE)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Centro-Norte</td>
+<td><strong>ACC Madrid-Torrejón</strong></td>
+<td>Asturias, Bilbao, Logroño, Pamplona, Santander, Santiago (TACC), Vitoria</td>
+<td>A Coruña, Burgos, Huesca-Pirineos, León, Madrid-Cuatro Vientos, Salamanca, Valladolid, Vigo, Zaragoza</td>
+</tr>
+<tr>
+<td>Sur</td>
+<td><strong>ACC Sevilla</strong></td>
+<td>Almería, Granada, Málaga, Melilla</td>
+<td>Badajoz, Ceuta (helipuerto), Córdoba, Jerez</td>
+</tr>
+<tr>
+<td>Este</td>
+<td><strong>ACC Barcelona</strong></td>
+<td>Girona, Reus, Valencia (TACC)</td>
+<td>Albacete, Alicante/Alacant, Murcia, Sabadell</td>
+</tr>
+<tr>
+<td>Balear</td>
+<td><strong>ACC Palma</strong></td>
+<td>Menorca</td>
+<td>Ibiza</td>
+</tr>
+<tr>
+<td>Canaria</td>
+<td><strong>ACC Gran Canaria</strong></td>
+<td>Tenerife Norte, Tenerife Sur</td>
+<td>Fuerteventura, La Gomera, El Hierro, Lanzarote, La Palma</td>
+</tr>
+</tbody>
+</table>
+<p>Todos los nombres y códigos, de la página Red ENAIRE. <strong>Comprobación del recuento:</strong> aeropuertos con ATS (bases de ACC/TACC + torres) = Madrid-Torrejón, Asturias, Bilbao, Logroño, Pamplona, Santander, Santiago, Vitoria (8, Centro-Norte) + Sevilla, Almería, Granada, Málaga, Melilla (5, Sur) + Barcelona, Girona, Reus, Valencia (4, Este) + Palma, Menorca (2, Balear) + Gran Canaria, Tenerife Norte, Tenerife Sur (3, Canaria) = <strong>22 ubicaciones ATS</strong>, una más que la cifra de «21» impresa en el manual y en el PV2030. Causas posibles: que el «21» excluya Madrid-Torrejón por ser un ACC y no una «torre», o que la página web sea algo más reciente que los recuentos del manual/PV2030 (véase §11).</p>
+<ul>
+<li>Nótese el nombre de la ubicación de los ACC que figura en esta página: el <strong>ACC de Madrid está físicamente en Madrid-Torrejón</strong>, no en el propio aeropuerto de Barajas; <strong>los ACC de Sevilla, Barcelona, Palma y Gran Canaria están en el mismo emplazamiento que el aeropuerto principal de la región</strong>.</li>
+<li><strong>Los aeropuertos solo CNS suman 22</strong> en las cinco regiones (9 Centro-Norte + 4 Sur + 4 Este + 1 Balear + 5 Canaria, menos el helipuerto de Ceuta, contado aparte). Recuento exacto: Centro-Norte 9, Sur 3 aeropuertos + 1 helipuerto, Este 4, Balear 1, Canaria 5 = 22 puntos solo CNS sin contar el helipuerto, todos ellos aeropuertos donde el servicio de torre de control lo presta <strong>SAERCO o Skyway</strong>, no ENAIRE (§3).</li>
+<li>Detalle de la región Balear: ENAIRE atiende las ayudas a la navegación en 3 de las 5 islas Baleares con aeropuerto (Mallorca/Palma, Menorca, Ibiza); Formentera y Cabrera no tienen aeropuerto ni ayudas a la navegación.</li>
+</ul>
+<h2 id="3-otros-ansp-en-espana-saerco-y-skyway-antes-ferronats">3. Otros ANSP en España: SAERCO y Skyway (antes FerroNATS)</h2>
+<p>Las notas base (t07) ya mencionan «SAERCO y Skyway ANS» a partir de un resumen del AIP; el <strong>texto completo de AIP GEN 3.3</strong> (AMDT 401/25, de fecha 25-DIC-25) da la <strong>lista completa, vigente y por aeropuerto</strong>:</p>
+<ul>
+<li><strong>Base jurídica:</strong> conforme al Reglamento (CE) 550/2004 y al Reglamento de Ejecución (UE) 2017/373, <strong>AESA ha certificado</strong>, además de a ENAIRE, a dos organizaciones privadas para prestar el <strong>servicio de control de tránsito aéreo de aeródromo (torre)</strong>.</li>
+<li><strong>SERVICIOS AERONÁUTICOS CONTROL Y NAVEGACIÓN, S.L. (SAERCO)</strong>, con sede en Madrid:</li>
+<li><strong>Servicio de control de aeródromo (ATC)</strong> en: <strong>A Coruña, El Hierro, Fuerteventura, Jerez, La Palma, Lanzarote/César Manrique Lanzarote, Madrid/Cuatro Vientos, Sevilla, Vigo</strong> (9 aeropuertos).</li>
+<li><strong>Servicio de información de vuelo de aeródromo (AFIS)</strong> en: <strong>Burgos/Villafría, Córdoba, El Hierro, Huesca/Pirineos, La Gomera</strong> (5 aeródromos; nótese que El Hierro figura en las listas de ATC y de AFIS en el texto del AIP tal como está impreso, posiblemente una incoherencia de redacción; se recoge exactamente como figura en el AIP).</li>
+<li><strong>SKYWAY AIR NAVIGATION SERVICES</strong>, con sede en Madrid:</li>
+<li><strong>Servicio de control de aeródromo (ATC)</strong> en: <strong>Alicante/Alicante-Elche Miguel Hernández, Castellón, Ibiza, Lleida/Alguaire, Murcia/Aeropuerto de la Región de Murcia, Sabadell, Valencia</strong> (7 aeropuertos).</li>
+<li><strong>AFIS</strong> en el aeropuerto de <strong>Andorra-La Seu d'Urgell</strong>, «durante su operación de uso público».</li>
+<li><strong>Skyway = FerroNATS con otro nombre.</strong> FerroNATS se creó en <strong>2011</strong> como una <strong>empresa conjunta al 50 % entre Ferrovial Servicios (hoy Serveo) y el ANSP británico NATS Ltd</strong>, para concurrir a los contratos de torres de ATS de aeródromo licitados por Aena después de que la <strong>Ley 9/2010</strong> liberalizara los ATS de aeródromo en España. En <strong>febrero de 2023</strong>, Serveo compró el 50 % de NATS y <strong>rebautizó la empresa como «Skyway»</strong> (según eleconomista.es, actualidadaeroespacial.com y el blog de nats.aero, «Adiós FerroNATS, thanks for the memories», feb. 2023). Esto explica que el ESPP3 (Plan de Rendimientos español del RP3, presentado cuando aún era FerroNATS) nombre a <strong>«FerroNATS»</strong> como proveedor privado en <strong>Alicante-Elche e Ibiza</strong>, mientras que el AIP actual (dic. 2025) nombra a <strong>Skyway</strong> en esos dos aeródromos y en cinco más (Castellón, Lleida, Murcia, Sabadell, Valencia). <strong>Trampa de examen:</strong> un documento o pregunta antiguos pueden seguir diciendo «FerroNATS»; trátese como la misma empresa que «Skyway».</li>
+<li>El ESPP3 explica <strong>por qué</strong> estos dos aeropuertos importaban para la regulación europea de rendimientos: Alicante-Elche superó el umbral de <strong>80 000 movimientos IFR/año</strong> que somete a un aeródromo al Reglamento de rendimientos y tarifación del SES, e Ibiza se incluyó con él; ambos están certificados en <strong>«condiciones de mercado»</strong> (es decir, sus tarifas de ATS de aeródromo las fija el mercado/la licitación, no el esquema de incentivos del RP que se aplica a ENAIRE). ESPP3, apartado «Evaluation Report of SES Market Conditions in Spain».</li>
+<li><strong>No confundir Skyway (ANSP privado español, antes FerroNATS) con SkyNex (el programa de la alianza iTEC de ENAIRE, véase §11 de las notas base): nombres que suenan igual, organizaciones sin relación.</strong></li>
+</ul>
+<h2 id="4-numero-de-equipos-cnsatm-2024">4. Número de equipos CNS/ATM (2024)</h2>
+<p>El manual y el PV2030 no dan recuentos de equipos. La <strong>Memoria de Sostenibilidad 2024</strong> tiene una infografía («Instalaciones y equipos») con los recuentos exactos de 2024 (, pp. 15-16):</p>
+<table>
+<thead>
+<tr>
+<th>Equipo</th>
+<th>Recuento 2024</th>
+<th>Descripción tal como está impresa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radioayudas</strong></td>
+<td><strong>301</strong></td>
+<td>DME, GBAS, ILS, NDB y VOR que apoyan el guiado en ruta/TMA y las aproximaciones a aeropuertos</td>
+</tr>
+<tr>
+<td><strong>Sistemas de vigilancia</strong></td>
+<td><strong>92</strong></td>
+<td>ADS-B, MLAT, PSR, SSR y SMR, para ruta, TMA y superficie</td>
+</tr>
+<tr>
+<td><strong>Centros de comunicaciones</strong></td>
+<td><strong>168</strong></td>
+<td>para comunicaciones orales tierra/aire en los servicios de ruta, TMA, aproximación y torre</td>
+</tr>
+<tr>
+<td><strong>Nodos REDAN</strong></td>
+<td><strong>122</strong></td>
+<td>para comunicaciones de voz y datos de las aplicaciones de navegación aérea (REDAN = la red de comunicaciones de ENAIRE)</td>
+</tr>
+<tr>
+<td><strong>Posiciones de control de torre</strong></td>
+<td><strong>135</strong></td>
+<td>«5 posiciones de torre remota» (5 de las 135 son posiciones de torre remota)</td>
+</tr>
+<tr>
+<td><strong>Posiciones de control de sector</strong></td>
+<td><strong>200</strong></td>
+<td>incluyen posiciones de ruta, TMA, CAO (Circulación Aérea Operativa / militar), simulación y CATS</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Otros datos de modernización de equipos del mismo documento (aspectos destacados de 2024, mezclados con una tabla de la época de 2023, ambos marcados cuando son claramente atribuibles): <strong>integración en SACTA (el sistema ATM de ENAIRE) de las señales ADS-B de Yeste, Vejer, Menorca, Cabo Higuer, San Sebastián, Bilbao, Monte del Perdón, Valencia, Lanzarote</strong>; <strong>actualización a modo S de los radares de Valencia y Madrid-Barajas</strong>; <strong>renovación del radar de movimientos en superficie (SMR) de Barcelona</strong> y de los <strong>sistemas de multilateración (MLAT) de Málaga y Palma</strong>; <strong>modernización de la red de radioayudas convencionales (VOR/DME/ILS) y de sus sistemas de monitorización SIRA/SCADA</strong>; <strong>actualización a tecnología 3D de los radares primarios</strong>; <strong>traslado del radar de superficie SMMS del aeropuerto de Palma</strong>.</li>
+<li><strong>SACTA</strong> = Sistema Automatizado de Control del Tráfico Aéreo (el sistema automatizado de ATC de ENAIRE, en servicio desde los años noventa; esta fuente no lo define más).</li>
+<li><strong>REDAN</strong> = Red de Datos de Navegación Aérea, la red de telecomunicaciones dedicada de ENAIRE, citada pero no desarrollada en la fuente.</li>
+</ul>
+<h2 id="5-sistema-tarifario-tarifas-de-ruta-y-de-aproximacion">5. Sistema tarifario (tarifas de ruta y de aproximación)</h2>
+<p>La guía de tarifas de 2025 es un documento oficial breve, exacto y rico en fórmulas, muy citable en el examen. La leí completa.</p>
+<h3 id="51-esquema-basico">5.1 Esquema básico</h3>
+<ul>
+<li>ENAIRE es el <strong>proveedor exclusivo de servicios de navegación aérea en ruta y de aproximación en el espacio aéreo español</strong> y el principal proveedor de CNS. España distingue <strong>dos zonas tarifarias de ruta: Península y Canarias</strong>, y <strong>tres categorías tarifarias de aproximación</strong> según el volumen de tráfico.</li>
+<li><strong>España ha delegado en EUROCONTROL la facturación y el cobro de las tarifas de ruta y de aproximación</strong> (la CRCO, Central Route Charges Office; la guía no imprime el nombre, pero es la terminología habitual de EUROCONTROL).</li>
+</ul>
+<h3 id="52-tarifas-de-ruta">5.2 Tarifas de ruta</h3>
+<ul>
+<li><strong>Finalidad:</strong> financiar los servicios de ENAIRE <strong>y</strong> de los demás organismos del sistema de navegación aérea español: <strong>AESA, AEMET, el Ministerio de Defensa y EUROCONTROL</strong>, «entre otros». Es una lista explícita y citable de a quién financian las tarifas de ruta, además de a la propia ENAIRE.</li>
+<li><strong>Tarifas unitarias de 2025, en vigor desde el 1 de enero de 2025, sin impuestos:</strong> <strong>Península: 66,31 EUR</strong>; <strong>Canarias: 51,89 EUR</strong>.</li>
+<li><strong>Fórmula:</strong> <code>Tarifa de ruta = (MTOW/50)^0,5 × (distancia ortodrómica en km/100) × tarifa unitaria</code> (MTOW = peso máximo al despegue, <em>Maximum Take-Off Weight</em>; «distancia ortodrómica» = distancia sobre el círculo máximo).</li>
+<li><strong>Exenciones de las tarifas de ruta</strong> (lista completa tal como está impresa): aeronaves con MTOW &lt; 2 toneladas métricas; vuelos íntegramente VFR en las FIR españolas; vuelos que transporten a un monarca reinante y su familia inmediata, a jefes de Estado o de Gobierno o a ministros del Gobierno en misión oficial (si se indica en el plan de vuelo); vuelos de búsqueda y salvamento autorizados; vuelos militares españoles; vuelos militares no españoles con reciprocidad; vuelos de instrucción realizados únicamente para obtener licencias/habilitaciones (si se indica); vuelos realizados únicamente para probar o calibrar ayudas terrestres a la navegación; vuelos circulares que aterrizan de nuevo en el aeropuerto de salida sin aterrizaje intermedio.</li>
+</ul>
+<h3 id="53-tarifas-de-aproximacion">5.3 Tarifas de aproximación</h3>
+<ul>
+<li>Se aplican en <strong>todos los aeródromos civiles y bases aéreas donde ENAIRE presta el servicio de aproximación</strong>; la aproximación y el despegue se tratan como <strong>un único servicio tarifable</strong>.</li>
+<li><strong>Tres categorías de aeropuerto, tarifas unitarias de 2025 (sin impuestos):</strong></li>
+<li><strong>Categoría 1 — 25,78 EUR:</strong> Alicante-Elche, Barcelona-El Prat (Josep Tarradellas), Bilbao, Fuerteventura, Gran Canaria, Ibiza, Lanzarote (César Manrique), Madrid-Barajas (Adolfo Suárez), Málaga-Costa del Sol, Menorca, Palma de Mallorca, Sevilla, Tenerife Norte, Tenerife Sur, Valencia (15 aeropuertos).</li>
+<li><strong>Categoría 2 — 23,20 EUR:</strong> A Coruña, Almería, Asturias, Girona, Granada (Federico García Lorca), Jerez, La Palma, Reus, Santiago, Vigo (10 aeropuertos).</li>
+<li><strong>Categoría 3 — 19,33 EUR:</strong> Badajoz-Talavera la Real, Madrid-Cuatro Vientos, Melilla, Murcia-Región de Murcia, Pamplona, Sabadell, Salamanca-Matacán, San Sebastián, Seve Ballesteros-Santander, Valladolid-Villanubla, Vitoria, León, Logroño-Agoncillo, Albacete, Lleida-Alguaire y «otros aeropuertos donde [ENAIRE] preste servicio de aproximación» (cualquier otro aeropuerto donde ENAIRE preste el servicio de aproximación).</li>
+<li><strong>Fórmula:</strong> <code>Tarifa de aproximación = (MTOW/50)^0,70 × tarifa unitaria</code>. (Nótese el exponente distinto del de la fórmula de ruta: 0,70 frente a 0,50, un distractor plausible en el examen.)</li>
+<li><strong>Exenciones de las tarifas de aproximación:</strong> aeronaves con MTOW &lt; 2 toneladas; vuelos oficiales de monarca/jefe de Estado/ministro del Gobierno; búsqueda y salvamento autorizados; <strong>vuelos de aduanas y de policía</strong> (categoría que no figura en la lista de exenciones de ruta); vuelos militares españoles; vuelos militares extranjeros con reciprocidad. (Nótese que las exenciones de instrucción, calibración y vuelos circulares figuran solo en la lista de ruta, no en la de aproximación: otra trampa plausible del tipo «qué exención se aplica a qué tarifa».)</li>
+<li>ENAIRE ofrece un <strong>simulador/calculadora de tasas</strong> en línea (<code>https://www.enaire.es/servicios/otros_servicios/calculo_de_tasas</code>), que utiliza el aeropuerto de salida, la distancia volada y el peso de la aeronave.</li>
+<li><strong>Evolución tarifaria de 2024 (de la Memoria de Sostenibilidad 2024):</strong> las tarifas de ruta subieron un <strong>14,7 % en Península y un 9,6 % en Canarias</strong> en 2024 respecto a 2023; pero una vez superados los niveles de tráfico de 2019, «siguiendo la estrategia del PV2025 y el Plan de Rendimientos RP3», las tarifas de ruta de 2024 se situaron aproximadamente de nuevo en los <strong>niveles de 2019, con una subida de solo el 2,3 % en Península y el 0,8 % en Canarias respecto a 2019</strong>., p. 16.</li>
+<li><strong>Base jurídica (leyes anteriores de la biblioteca, leídas solo por su alcance, no su texto literal):</strong> Decreto 1675/1972 (decreto original de las tarifas de ruta; escaneado, sin texto extraíble: «de pago/ilegible» solo en el sentido de que el PDF es un escaneo sin capa de texto OCR), el acuerdo multilateral de EUROCONTROL de 1981 sobre tarifas de ruta, la Ley 25/1998 de Tasas (actualiza el marco jurídico de las tasas), la Ley 24/2001 de Medidas Fiscales (base jurídica de la tarifa de aproximación).</li>
+<li><strong>Nota sobre regulador y supervisión:</strong> la Ley 3/2013 (creación de la CNMC) no contiene ninguna mención explícita de las tarifas de navegación aérea: la lista sectorial de la CNMC (zona del art. 5) abarca energía, telecomunicaciones, ferrocarril, postal y un mandato general de competencia, sin nombrar específicamente las tarifas de navegación aérea. La afirmación del mapa DL07 de que «la CNMC supervisa las tarifas de navegación aérea» debe tratarse como <strong>no confirmada</strong> hasta que se encuentre un artículo concreto; el carácter de ingreso de derecho público de las tarifas y su ejecución corresponden en cambio al <strong>Ministerio de Hacienda</strong> según el art. 28 del RD 160/2023 (§1 arriba). El esquema de rendimientos y tarifación del RP4 del Cielo Único Europeo (Reglamento (UE) 2019/317) lo supervisan la <strong>Comisión Europea y AESA</strong> como autoridad nacional de supervisión (ya en las notas base t07, §3.9).</li>
+</ul>
+<h2 id="6-presupuesto-ingresos-y-finanzas">6. Presupuesto, ingresos y finanzas</h2>
+<p>Cifras del <strong>Informe de Gestión ENAIRE 2025</strong> (informe de gestión; la extracción de tablas del PDF es imperfecta, así que cito solo las filas claramente etiquetadas) y del <strong>Resumen ejecutivo 2022</strong> como año anterior complementario, además de las cifras de inversión del PV2030 ya incluidas en las notas base (§2, no repetidas aquí).</p>
+<ul>
+<li><strong>2025 (Informe de Gestión ENAIRE 2025), segmento «Navegación Aérea» (casi todo el negocio de ENAIRE) frente a «Unidad Corporativa»:</strong></li>
+<li><strong>Importe neto de la cifra de negocios: 1192,1 M EUR (Navegación Aérea) + 0,1 M EUR (Corporativa) = 1192,2 M EUR en total.</strong></li>
+<li><strong>Otros ingresos de explotación: 25,1 M EUR</strong>, todos en el segmento Navegación Aérea; <strong>ingresos de explotación totales, unos 1217,3 M EUR</strong>.</li>
+<li><strong>Resultado de la explotación: 127,4 M EUR</strong> (2025, segmento Navegación Aérea).</li>
+<li><strong>Total activos: 991,3 M EUR</strong>; <strong>total pasivos: 226,0 M EUR</strong> (ambos segmentos combinados, tal como figura en la tabla de segmentos). Son las filas claramente etiquetadas; otras filas de la misma tabla (amortización, 55,8 M EUR; «pérdidas, deterioros y otros resultados», 684,4 M EUR) proceden de una tabla cuya alineación de columnas está desordenada por la extracción del PDF, por lo que las indico con menor confianza.</li>
+<li><strong>EBITDA (2024 frente a 2023, de la Memoria de Sostenibilidad 2024):</strong> <strong>353,5 M EUR en 2024 frente a 272,6 M EUR en 2023, un aumento de 80,8 M EUR (+29,7 %).</strong>. Es coherente con el objetivo mínimo de EBITDA del PV2030, «≥ 180 M EUR» (§3.7 de las notas base), y muy superior a él; esa cifra es un suelo/objetivo, no el resultado real.</li>
+<li><strong>Cifras principales de 2022 (Resumen ejecutivo 2022)</strong>: <strong>243 millones de pasajeros transportados; unos 2 millones de vuelos al año; menos de 54 000 toneladas de CO2 (planteado como evitado/reducido; el punto de partida exacto no se indica en la fuente); 169 M EUR de inversión (+36 % respecto al año anterior); +281,6 M EUR de aumento de ingresos (+60 %); 218 M EUR de «tráfico aéreo de bienes y servicios» (redacción tal como está impresa, probablemente una etiqueta confusa de una línea de ingresos concreta); el tráfico se recuperó hasta el 92 % de los niveles de 2019.</strong></li>
+<li><strong>Recursos delegados:</strong> ya se confirmó (§1) que los ingresos de ENAIRE incluyen legalmente las tarifas de ruta/aproximación (ingresos de derecho público), las subvenciones de la UE y del Estado, los empréstitos (dentro de los límites de la Ley de Presupuestos Generales del Estado) y, aparte, que los dividendos de filiales <strong>ajenas</strong> al negocio de la navegación aérea van al 100 % al Tesoro (art. 29 RD 160/2023).</li>
+<li><strong>Relación con Aena (financiación):</strong> las notas base ya recogen el contrato de servicios de navegación aérea ENAIRE-Aena 2022-2026 de 601,2 M EUR (§1.4 de <code>t07-professional-environment.md</code>); añado aquí solo que es el <strong>principal contrato comercial</strong> que financia el servicio de ENAIRE a los aeropuertos de la red Aena, separado de las tarifas de ruta/aproximación de derecho público que pagan los usuarios del espacio aéreo.</li>
+</ul>
+<h2 id="7-filiales-y-participadas-comprobadas-y-de-que-no-forma-parte-enaire">7. Filiales y participadas comprobadas, y de qué NO forma parte ENAIRE</h2>
+<p><strong>Aireon</strong> y <strong>Searidge</strong> no son participadas ni socios de ENAIRE, y ENAIRE tampoco está en <strong>COOPANS</strong>, aunque los tres nombres se prestan a confusión con socios reales de ENAIRE porque pertenecen a <strong>otros</strong> ANSP europeos:</p>
+<ul>
+<li><strong>Aireon:</strong> empresa estadounidense de vigilancia ADS-B por satélite. Sus accionistas son <strong>NAV CANADA, ENAV S.p.A. (Italia; obsérvese «ENAV», no «ENAIRE»), la Irish Aviation Authority, Naviair (Dinamarca) y NATS (Reino Unido)</strong>; en 2026 Iridium Communications está adquiriendo a estos ANSP el 61 % restante. <strong>ENAIRE no es, ni ha sido nunca, accionista de Aireon.</strong> <strong>Trampa de examen: ENAV (Italia) ≠ ENAIRE (España)</strong>, una pareja de distractores muy plausible por lo casi idéntico del nombre.</li>
+<li><strong>Searidge Technologies:</strong> proveedor canadiense de tecnología de torres remotas/digitales. Su trabajo confirmado en España es con <strong>Aena (el operador aeroportuario) y FerroNATS/Skyway</strong> para la <strong>torre de control digital del aeropuerto de Vigo</strong>, no con ENAIRE. <strong>El trabajo de ENAIRE en torres digitales/remotas se describe (en el PV2030, ya en las notas base) como realizado con Indra como socio tecnológico, y su propia Memoria de Sostenibilidad 2024 recoge «5 posiciones de torre remota» entre sus 135 posiciones de torre (§4) sin nombrar al proveedor.</strong> Ninguna fuente nombra a Searidge como proveedor o socio de ENAIRE.</li>
+<li><strong>COOPANS:</strong> no se menciona en ninguna fuente de ENAIRE leída (manual, PV2030, páginas web, notas de prensa). COOPANS es una alianza tecnológica de ANSP europeos distinta (Austro Control, Croatia Control, la Irish Aviation Authority, LFV Suecia, Naviair Dinamarca y DFS Alemania, construida en torno al sistema TopSky de Thales). <strong>La alianza tecnológica confirmada de ENAIRE es iTEC SkyNex</strong> (§11 abajo), un grupo distinto y con otra tecnología de base (construida con Indra). <strong>Confirma la nota del mapa DL07: «ENAIRE no está en COOPANS».</strong></li>
+<li><strong>iTEC SkyNex, leído completo</strong>: <strong>8 miembros</strong>, los ANSP de <strong>Alemania (DFS), Noruega (Avinor), Lituania (Oro Navigacija), Polonia (PANSA), Países Bajos (LVNL), España (ENAIRE), Reino Unido (NATS) y Canadá (NAV Canada)</strong>, con <strong>Indra como socio tecnológico</strong>; los miembros pusieron en marcha el <strong>programa iTEC SkyNex en 2021</strong>. La alianza abarca <strong>más de 26 millones de km² de espacio aéreo, más de 12 millones de vuelos al año, desde 27 centros de control</strong>, y permite una tecnología unificada de extremo a extremo para los vuelos transoceánicos. <strong>No confundir «Skyway» (el ANSP privado español, antes FerroNATS, §3) con «SkyNex» (el programa tecnológico iTEC de ENAIRE): suenan parecido, no tienen relación.</strong></li>
+<li><strong>Participadas confirmadas (contrastadas, coherentes con el manual y el PV2030, sin porcentajes nuevos más allá de los que ya dan esas dos fuentes):</strong> Aena S.A. (51 %), CRIDA (66,66 %), Startical (50 %, empresa conjunta con Indra, creada en 2021), Ineco (45,85 %, accionista desde 1993), GroupEAD (36 %, proveedor de AIS, socio fundador en 2001 con DFS y Frequentis), ESSP SAS (operador de EGNOS, desde 2008, con DSNA, ENAV, DFS, NATS, NAV Portugal y Skyguide), EGS/ENAIRE Global Services (100 %, creada en julio de 2025), Fundación ENAIRE (patrimonio artístico y cultura aeronáutica). Todas ya documentadas con fuentes en las notas base t07 §1.2; no se ha encontrado ninguna participación adicional que no estuviera ya listada allí.</li>
+</ul>
+<h2 id="8-servicios-mas-alla-de-los-seis-del-manual-sdp-certificaciones-compromisos-de-la-carta-de-servicios">8. Servicios más allá de los seis del manual: SDP, certificaciones, compromisos de la Carta de Servicios</h2>
+<p>El manual oficial enumera seis servicios (ATS, CNS, AIS, ATFM, ASM nivel 3, FPD; notas base §6). Dos fuentes primarias dan <strong>más</strong>:</p>
+<h3 id="81-servicio-de-direccion-de-plataforma-sdp">8.1 Servicio de Dirección de Plataforma (SDP)</h3>
+<ul>
+<li>La <strong>Carta de Servicios 2025-2027</strong> enumera un <strong>séptimo servicio que omite el manual</strong>: el <strong>«Servicio de Dirección de Plataforma (SDP)»</strong>, «servicio prestado para dirigir las actividades y el movimiento de las aeronaves y vehículos en una plataforma aeroportuaria». Es el mismo concepto jurídico de «SDP» del <strong>RD 1238/2011</strong> que recoge la tabla del marco legal del mapa DL07 (temas 1/6), y que queda ahora confirmado como uno de los <strong>servicios propios</strong> de ENAIRE, no solo una categoría legal.</li>
+<li>La Carta de Servicios confirma también, casi literalmente, la <strong>descripción de las tres funciones del ATS</strong> del manual (prevenir colisiones/acelerar el tránsito; asesoramiento e información; notificación/auxilio para búsqueda y salvamento), y la <strong>redacción de la ASM de nivel 3</strong> casi literalmente (activación/desactivación/reasignación en tiempo real del espacio aéreo de nivel 2, resolución en tiempo real de conflictos concretos CAG/CAO entre unidades/controladores civiles y militares; CAG = Circulación Aérea General, CAO = Circulación Aérea Operativa).</li>
+</ul>
+<h3 id="82-certificaciones-sellos-de-sistemas-de-gestion">8.2 Certificaciones (sellos de sistemas de gestión)</h3>
+<p>ENAIRE posee las siguientes certificaciones, todas leídas directamente en la Carta de Servicios:</p>
+<ul>
+<li><strong>ISO 14001 (gestión ambiental), certificado GA-2005/0575, de AENOR.</strong></li>
+<li><strong>ISO 9001 (gestión de la calidad), certificado ER-1034/2007, de AENOR.</strong></li>
+<li><strong>ISO 45001 (seguridad y salud en el trabajo), certificado SST-0156/2014, de AENOR.</strong></li>
+<li><strong>Conformidad con el Esquema Nacional de Seguridad (ENS): categoría MEDIA (ENS-2018/0006) y categoría ALTA (ENS-2020/0020), de AENOR.</strong></li>
+<li><strong>Sello EFQM 600</strong>, concedido en <strong>2024</strong> por el Club de Excelencia en Gestión (ya en las notas base t07, aquí con el código de certificado exacto <strong>CEG/24/S600/6</strong>, basado en el modelo EFQM 2020).</li>
+<li><strong>Certificado de Organización de Formación de Controladores de Tránsito Aéreo (PFTAC-10)</strong>, emitido por AESA conforme al Reglamento (UE) 2015/340, que abarca: <strong>Formación de Unidad ATCO</strong>, <strong>Formación Continua ATCO</strong>, <strong>Formación de Instructor práctico</strong> y <strong>Formación de Evaluador</strong>; es el certificado que permite legalmente a ENAIRE impartir la formación de controladores descrita en el §10 de las notas base y en el §10 de este archivo.</li>
+</ul>
+<h3 id="83-carta-de-servicios-2025-2027-compromisos-cuantificados-compromisos-e-indicadores">8.3 Carta de Servicios 2025-2027: compromisos cuantificados (compromisos e indicadores)</h3>
+<p>Son justo el tipo de datos numéricos y respaldados por fuente que prefiere un examen de oposición:</p>
+<ul>
+<li><strong>Seguridad — Nivel Ponderado de Seguridad (NPS), cuanto más bajo mejor, objetivos: ≤13,30 (2025), ≤12,15 (2026), ≤11,00 (2027).</strong> Se calcula a partir de los incidentes de gravedad <strong>A, B, C-Tierra</strong> en relación con las horas de vuelo IFR controladas en España. (Compárese con el objetivo propio del PV2030 para 2026, ≤12,8, notas base §3.7: el objetivo de la Carta de Servicios para 2026, ≤12,15, es algo más exigente que el ≤12,8 del PV2030; ambos documentos están vigentes y simplemente fijan hitos intermedios distintos.)</li>
+<li><strong>Puntualidad — retraso medio ATFM en ruta por vuelo IFR atribuible a ENAIRE: ≤0,38 min (2025), ≤0,28 (2026), ≤0,23 (2027).</strong></li>
+<li><strong>Al menos el 90 % de los vuelos de los cinco principales aeropuertos de España cumplirá su ventana horaria de despegue prevista (ETOT/CTOT).</strong></li>
+<li><strong>Disponibilidad y continuidad:</strong> al menos el <strong>99 % de los servicios del Sistema de Navegación Aérea tendrá una disponibilidad superior al 95 %</strong>; al menos el <strong>97 % de los servicios tendrá una continuidad superior a 1000 horas (MTBO, tiempo medio entre indisponibilidades)</strong>; el <strong>100 % de las enmiendas del AIP se publicará en las fechas fijadas anualmente por la OACI.</strong></li>
+<li><strong>Calidad:</strong> índice de calidad percibida por los clientes <strong>superior al 75 %</strong> (compárense los objetivos propios del PV2030, ≥78,5 % en 2026 y 80 % en 2030, notas base §3.7: el suelo de «superior al 75 %» de la Carta de Servicios es el compromiso mínimo de la carta, inferior al objetivo interno más ambicioso del PV2030).</li>
+<li><strong>Servicios electrónicos:</strong> los canales digitales públicos de ENAIRE son <strong>www.enaire.es</strong> (sitio web), <strong>clientes.enaire.es</strong> (portal de clientes), <strong>aip.enaire.es/AIP</strong> (AIP), <strong>insignia.enaire.es</strong> (INSIGNIA, información aeronáutica gráfica), <strong>insigniavfr.enaire.es</strong> y <strong>guiavfr.enaire.es</strong> (información VFR), <strong>drones.enaire.es</strong> (UAS), <strong>planea.enaire.es</strong> (otros usos del espacio aéreo/ENAIRE Planea), el servicio de presentación de planes de vuelo en línea, la calculadora de tasas (§5.3) y la <strong>Sede Electrónica</strong> (<code>enaire.sede.gob.es</code>), que requiere la plataforma <strong>Cl@ve</strong> para abrir un expediente y <strong>AutoFirma</strong> para firmar electrónicamente.</li>
+</ul>
+<h2 id="9-cifras-clave-y-records-anos-complementarios">9. Cifras clave y récords, años complementarios</h2>
+<p>Las notas base t07 ya dan un conjunto detallado de cifras de 2024-2026 (tráfico, plantilla, récords diarios, finanzas del PV2030). Para no duplicar, añado aquí solo el <strong>dato de 2022</strong>, útil para una línea de tendencia más larga, y una comprobación cruzada de la evolución tarifaria de 2024 ya recogida en el §5.3:</p>
+<ul>
+<li><strong>2022: 243 millones de pasajeros; unos 2 millones de vuelos; inversión de 169 M EUR (+36 %); ingresos +281,6 M EUR (+60 % respecto a 2021, el año de recuperación pos-COVID más fuerte); el tráfico se recuperó hasta el 92 % de los niveles de 2019.</strong>.</li>
+<li><strong>Comprobación de tendencia:</strong> 2022 (~2,0 M de vuelos, 92 % de 2019) → 2024 (2,36 M de vuelos, notas base del PV2030) → 2025 (2,47 M de vuelos, +14,9 % respecto a 2019) muestra la curva de recuperación: 2022 aún por debajo de 2019, 2024 ya por encima (+9,8 %), 2025 más por encima (+14,9 %). Coherente en los tres documentos.</li>
+<li><strong>El crecimiento del EBITDA de 2023 a 2024, +29,7 % (272,6 M EUR → 353,5 M EUR),</strong> es en sí un dato de estilo «récord» que conviene memorizar junto a los récords de tráfico ya recogidos en las notas base (§9 arriba, §6).</li>
+</ul>
+<h2 id="10-entorno-profesional-iii-convenio-colectivo-carrera-retribuciones-turnos-licencias">10. Entorno profesional: III Convenio Colectivo (carrera, retribuciones, turnos, licencias)</h2>
+<p>Las notas base (t07) apenas tocan el III Convenio; esta es la sección que el manual, demasiado breve, no cubre. Todos los datos siguientes están leídos directamente en el texto del convenio colectivo (BOE-A-2023-18633, publicado el 24 de agosto de 2023), que usa en todo el texto <strong>«CTA»</strong> como abreviatura de <strong>Controlador de Tránsito Aéreo</strong>.</p>
+<h3 id="101-estructura-salarial">10.1 Estructura salarial</h3>
+<ul>
+<li><strong>Fórmula del valor de la hora ordinaria (art. 136):</strong> <code>HO = (SB + CPT-o-CPO + CA + CAFP + CNP + CPAF) / CCE</code>, donde <strong>CCE (Coeficiente de Cálculo Estimado) = 1470</strong> (un divisor fijo de horas anuales). Los componentes: <strong>SB</strong> = Sueldo Base; <strong>CPT</strong> = <strong>Complemento de Puesto de Trabajo</strong> (<strong>no</strong> una categoría de personal sino un <strong>complemento retributivo que varía según el grupo de dependencias y el puesto específico</strong>, véase §10.2); <strong>CPO</strong> = Complemento Personal de Origen (alternativa al CPT para cierto personal); <strong>CA</strong> = Complemento de Antigüedad; <strong>CAFP</strong> = Complemento de Antigüedad en la Función Pública; <strong>CNP</strong> = Complemento de Nivel Profesional; <strong>CPAF</strong> = Complemento Personal de Adaptación Fijo.</li>
+<li><strong>Valor de la hora extraordinaria = hora ordinaria × 1,75</strong>, abonada en la nómina del segundo mes posterior al de su realización.</li>
+<li><strong>Dos pagas extraordinarias al año</strong>, cada una = SB + CAFP + CA del mes anterior, abonadas en <strong>junio y diciembre</strong> (la de diciembre antes del día 15).</li>
+<li><strong>Los importes del CPT se fijan por «Grupo de Dependencias» (grupos 1 a 8, clasificados por demanda de tráfico/movimientos) y por puesto específico</strong>; por ejemplo, <strong>Grupo 8 de Dependencias: 10 564,08 EUR/año</strong> (las más pequeñas, dependencias de una sola posición). La clasificación del convenio va del <strong>Grupo 1</strong> (las dependencias más cargadas, como los ACC de Madrid y Barcelona, deducido del contexto, no enumerado explícitamente en la fuente consultada) al <strong>Grupo 8</strong> (dependencias de una única posición operacional integrada, nombradas explícitamente en el artículo «posición operacional integrada (Grupo 8)»).</li>
+<li><strong>Retribución adicional de Jefe de Sala, Jefe de Torre, Coordinador Jefe de Instrucción-Supervisión, Jefe de Instrucción (Grupos 6-8), Jefe de Supervisión (Grupos 6-8) y Supervisor Jefe</strong> (puestos de jefe de sala/torre/instrucción/supervisión) como variantes del CPT para funciones de mando/coordinación.</li>
+</ul>
+<h3 id="102-jornada-y-turnos">10.2 Jornada y turnos</h3>
+<ul>
+<li><strong>Calendario de turnos (jornada a turnos):</strong> <strong>máximo 1595 horas/año</strong>, ampliables en <strong>20 horas por formación</strong>, además del tope legal del Estatuto de los Trabajadores de <strong>80 horas extraordinarias/año</strong>. <strong>Límite mensual de actividad aeronáutica: 170 horas.</strong></li>
+<li><strong>Jornada ordinaria (para CTA que no trabajan a turnos):</strong> <strong>1711 horas/año</strong>, <strong>37,5 horas/semana</strong>, continuada, de mañana y/o tarde, de lunes a viernes, <strong>7,5 horas/día con una pausa de 20 minutos computada como trabajo efectivo</strong>.</li>
+<li><strong>Jornada mixta:</strong> para puestos que alternan turnos y jornada ordinaria al desempeñar funciones fuera de la sala de operaciones; la duración mensual es igual a la media de los compañeros a turnos en un puesto similar, en general de lunes a viernes por la mañana, con un tope de 37,5 h/semana.</li>
+<li><strong>Tipos de servicio en turnos (art. 32): Mañana, Tarde, Día, Noche, Imaginaria y Refuerzo.</strong></li>
+<li><strong>Servicio de Imaginaria (art. 37):</strong> los controladores fuera de servicio pueden programarse en imaginaria, disponibles desde <strong>1 hora antes hasta 30 minutos después</strong> de la hora de comienzo del turno; en las dependencias de los Grupos 1-5 cubre cualquier circunstancia; en los Grupos 6-8 cubre solo incidencias imprevistas desconocidas en el momento de publicar la programación. <strong>Máximo 5 servicios de Imaginaria al mes por CTA en dependencias de los Grupos 1-5</strong>, y los centros de control limitan la programación de imaginarias al <strong>50 % de los servicios efectivos necesarios para la configuración de referencia</strong>. Existe un <strong>servicio de guardia localizada de «urgencia vital» (SGL)</strong> para el transporte de órganos, la evacuación de heridos o enfermos y otras emergencias en dependencias abiertas menos de 24 h al día; el controlador debe presentarse <strong>en un plazo de 45 minutos</strong> desde que se le localiza.</li>
+<li><strong>Límite de servicios de noche y festivos (art. 40): los servicios de noche y festivos juntos no pueden superar el 33 % del total anual de servicios.</strong> Un servicio se considera «festivo» si la mayor parte cae entre las <strong>14:00 del sábado y las 23:59 del domingo</strong>.</li>
+<li><strong>Publicación de la programación (art. 41):</strong> las programaciones mensuales se publican <strong>con al menos 30 días de antelación</strong>; no se consideran definitivas hasta 30 días antes del inicio del mes; los cambios requieren la aceptación de ENAIRE y del CTA, salvo fuerza mayor.</li>
+<li><strong>Continuación forzosa sin relevo (art. 36.3):</strong> si no llega el relevo y la posición no puede cerrarse con seguridad, el CTA debe permanecer <strong>hasta 2 horas más</strong>, abonadas como horas extraordinarias de fuerza mayor.</li>
+<li><strong>Torres de una sola posición (art. 36.1):</strong> las torres de aeródromo con una única posición operacional pueden ampliar los periodos continuados de actividad aeronáutica <strong>hasta 12 horas</strong>, conforme al RD 1001/2010.</li>
+</ul>
+<h3 id="103-licencia-habilitaciones-y-anotaciones-de-unidad-las-definiciones-juridicas-del-propio-convenio">10.3 Licencia, habilitaciones y anotaciones de unidad: las definiciones jurídicas del propio convenio</h3>
+<p>El artículo de «Definiciones» del convenio da definiciones jurídicas precisas que complementan (y, para el examen, pueden citarse con más literalidad que) el material general de EASA/tema 1:</p>
+<ul>
+<li><strong>«Licencia de Controlador de Tránsito Aéreo»</strong>: documento expedido y anotado conforme al <strong>Reglamento (UE) 2015/340</strong> (o el que lo sustituya), que faculta a su titular para ejercer las atribuciones de las habilitaciones y anotaciones que contiene.</li>
+<li><strong>«Habilitación»:</strong> autorización incorporada a una licencia que establece condiciones, atribuciones o restricciones específicas. <strong>«Anotación de habilitación»:</strong> la anotación en la licencia que detalla esas condiciones.</li>
+<li><strong>«Anotación de Unidad»:</strong> anotación que indica el <strong>indicador de lugar OACI y el sector/grupo de sectores/puestos</strong> en los que el titular de la licencia es competente para trabajar.</li>
+<li><strong>«Anotación de competencia lingüística»</strong>: indica el nivel de competencia lingüística del titular.</li>
+<li><strong>«Anotación de instructor para la formación en puesto de trabajo (OJTI)»</strong>: certifica la competencia para impartir <strong>formación en el puesto de trabajo</strong> y en dispositivos sintéticos de entrenamiento.</li>
+<li><strong>«Anotación de instructor para dispositivos sintéticos de entrenamiento (STDI)»</strong>: certifica la competencia para impartir formación específicamente en <strong>dispositivos sintéticos de entrenamiento</strong> (simuladores).</li>
+<li><strong>«Anotación de evaluador»:</strong> certifica la competencia para <strong>evaluar las habilidades prácticas de un controlador alumno y de un controlador</strong>.</li>
+<li><strong>«CTA operativo»</strong> = posee un <strong>certificado de aptitud psicofísica</strong> en vigor; <strong>«CTA no operativo»</strong> = carece de él. (Es la redacción del convenio para lo que las normas de certificado médico del tema 1 llaman «médicamente apto»; el convenio no indica periodos de validez en la fuente consultada.)</li>
+<li><strong>«Cualificación para un puesto de trabajo»</strong>: un CTA está cualificado para un puesto cuando supera la <strong>evaluación de competencia</strong> y, en su caso, el <strong>curso de formación</strong> exigido; es decir, la expresión propia del convenio para lo que el manual llama finalización de la formación de unidad (notas base §7, Formación de Unidad).</li>
+<li><strong>«Núcleo»:</strong> agrupación definida de sectores dentro de una dependencia, asociada a la obtención de una <strong>Anotación de Unidad</strong>; un <strong>«Núcleo TMA»</strong> son principalmente sectores de aproximación (opcionalmente con sectores de ruta), un <strong>«Núcleo ruta»</strong> son exclusivamente sectores de ruta.</li>
+<li><strong>«Escalafón»:</strong> lista ordenada de los CTA por <strong>Nivel Profesional, antigüedad como CTA y número de controlador</strong>, por ese orden de prioridad.</li>
+<li><strong>«Funciones superiores/iguales/inferiores»</strong>: definidas por el <strong>tamaño relativo del CPT</strong> entre puestos; una definición puramente retributiva, no basada en las tareas, según la redacción propia de este convenio.</li>
+</ul>
+<h3 id="104-dos-convenios-colectivos-confirmados-y-contrastados">10.4 Dos convenios colectivos, confirmados y contrastados</h3>
+<p>El manual ya indica que hay dos convenios (el III Convenio para los controladores, el I Convenio del Grupo Aena para el resto); confirmo aquí que en la biblioteca existe ya un <strong>II Convenio del Grupo AENA-ENAIRE (BOE-A-2025-15819, 230 páginas)</strong>, que sustituye al «I Convenio» que cita el manual: <strong>una discrepancia vigente</strong>: el manual (nov. 2024) sigue llamándolo «I Convenio Colectivo del Grupo Aena»; el texto vigente actual (publicado en 2025) es el <strong>II Convenio</strong>.</p>
+<h2 id="11-manual-frente-a-fuentes-primarias-discrepancias-adicionales">11. Manual frente a fuentes primarias: discrepancias adicionales</h2>
+<p>(Se suman a la gran tabla «Manual frente al Plan de Vuelo 2030» de <code>syllabus/manual/OM07-professional-environment-study-guide.md</code> §11, sin repetirla.)</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Manual / PV2030 (ya documentado)</th>
+<th>Hallazgo de fuente primaria de este archivo</th>
+<th>Cuál es más probable que se examine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Número de aeropuertos</td>
+<td>Manual: «21 torres»; PV2030: «21 aeropuertos»</td>
+<td>La lista por regiones de la página web Red ENAIRE suma <strong>22 ubicaciones ATS</strong></td>
+<td>El «21» redondo (manual/PV2030, ambos documentos estratégicos oficiales) es la cifra más segura de memorizar; el 22 es un recuento mío a partir de una lista web y puede reflejar una actualización posterior o un criterio de recuento distinto (por ejemplo, si Madrid-Torrejón se cuenta como «torre»)</td>
+</tr>
+<tr>
+<td>Servicios prestados</td>
+<td>Manual: 6 servicios (ATS, CNS, AIS, ATFM, ASM, FPD)</td>
+<td>La Carta de Servicios 2025-2027 enumera explícitamente un <strong>7.º, el SDP</strong> (§8.1)</td>
+<td>Ambos son documentos oficiales vigentes de ENAIRE (manual de nov. 2024, Carta de feb. 2025); <strong>el SDP está confirmado y debe añadirse a la lista de «servicios» para el examen</strong>, ya que la Carta es posterior al manual</td>
+</tr>
+<tr>
+<td>Nombre del ANSP privado</td>
+<td>No lo cubre el manual</td>
+<td>El ESPP3 (anterior) dice <strong>FerroNATS</strong>; el AIP vigente (dic. 2025) dice <strong>Skyway</strong> en los mismos aeropuertos y en más (§3)</td>
+<td>Si una pregunta cita una fuente antigua puede decir FerroNATS; si cita algo de 2023 en adelante, lo correcto es Skyway: <strong>tratarlas como la misma empresa</strong></td>
+</tr>
+<tr>
+<td>Dos convenios colectivos</td>
+<td>Manual: «I Convenio Colectivo del Grupo Aena» (nov. 2024)</td>
+<td>La biblioteca contiene un <strong>II Convenio del Grupo AENA-ENAIRE, BOE-A-2025-15819</strong> (2025) (§10.4)</td>
+<td>El manual está desfasado en este punto; el II Convenio es el vigente desde 2025</td>
+</tr>
+<tr>
+<td>La CNMC y las tarifas de navegación aérea</td>
+<td>El mapa DL07 lo señaló como de probabilidad MEDIA, sin confirmar</td>
+<td>La Ley 3/2013 (creación de la CNMC) <strong>no</strong> menciona las tarifas de navegación aérea/aeronáuticas entre los sectores de la CNMC (§5.3)</td>
+<td>Tratar «la CNMC regula las tarifas de ENAIRE» como <strong>no confirmado/probablemente falso</strong> salvo que se halle una fuente más concreta; el RD 160/2023 vincula en cambio la ejecución de las tarifas al Ministerio de Hacienda</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-trampas-de-examen">12. Trampas de examen</h2>
+<ol>
+<li><strong>Consejo Rector = Presidente + 11 Consejeros = 12 personas en total.</strong> El puesto de Presidente va unido a la Secretaría de Estado de Transportes, no es un nombramiento aparte.</li>
+<li><strong>ENAV (Italia) ≠ ENAIRE (España).</strong> Entre los accionistas ANSP de Aireon está ENAV, no ENAIRE: un clásico distractor por proximidad.</li>
+<li><strong>Aireon y Searidge NO son participadas ni socios confirmados de ENAIRE</strong>: no las añadas a la lista CRIDA/Startical/Ineco/EAD/ESSP/EGS.</li>
+<li><strong>ENAIRE está en iTEC SkyNex (8 miembros, lanzada en 2021, socio tecnológico Indra), NO en COOPANS.</strong> No confundir «Skyway» (ANSP privado español de torres) con «SkyNex» (el programa de alianza tecnológica propio de ENAIRE).</li>
+<li><strong>FerroNATS = Skyway</strong> (renombrada en feb. 2023 tras comprar Serveo el 50 % de NATS Ltd). Un examen que cite un documento antiguo puede seguir diciendo FerroNATS.</li>
+<li><strong>Torres de SAERCO frente a torres de Skyway: no intercambiar las listas.</strong> SAERCO: A Coruña, El Hierro, Fuerteventura, Jerez, La Palma, Lanzarote, Madrid-Cuatro Vientos, Sevilla, Vigo. Skyway: Alicante-Elche, Castellón, Ibiza, Lleida-Alguaire, Murcia, Sabadell, Valencia.</li>
+<li><strong>La fórmula de la tarifa de ruta usa el exponente 0,50; la de aproximación, el 0,70</strong> sobre (MTOW/50). No los intercambies.</li>
+<li><strong>Tarifas unitarias de ruta de 2025: Península 66,31 EUR, Canarias 51,89 EUR.</strong> Tarifas unitarias de aproximación: Categoría 1, 25,78 EUR; Categoría 2, 23,20 EUR; Categoría 3, 19,33 EUR.</li>
+<li><strong>Los «vuelos de aduanas y de policía» están exentos de la tarifa de aproximación, pero no figuran explícitamente entre las exenciones de la tarifa de ruta</strong> (las exenciones de instrucción, calibración y vuelos circulares, al revés, figuran solo para la de ruta).</li>
+<li><strong>CPT = Complemento de Puesto de Trabajo</strong>, un <strong>complemento salarial</strong>, no una categoría de personal: no confundir con «categoría profesional». Varía según el Grupo de Dependencias (1 a 8) y el puesto específico.</li>
+<li><strong>Tope de la jornada a turnos: 1595 h/año (+20 h de formación); jornada ordinaria (sin turnos): 1711 h/año, 37,5 h/semana.</strong> Los servicios de noche y festivos juntos tienen un tope del <strong>33 %</strong> de los servicios anuales.</li>
+<li><strong>Recuento de equipos CNS/ATM (2024): 301 radioayudas, 92 sistemas de vigilancia, 168 centros de comunicaciones, 122 nodos REDAN, 135 posiciones de torre (5 remotas), 200 posiciones de sector.</strong></li>
+<li><strong>El Consejo Rector aprueba el Plan de Vuelo, el Código Ético, las Políticas, el PAP, el Presupuesto Operativo, el Plan Empresarial, el mapa de riesgos, los objetivos de la empresa, la delegación de facultades, las Cuentas Anuales y los informes del sistema de ética/cumplimiento y del sistema interno de información</strong>: una lista concreta y citable.</li>
+<li><strong>El 100 % de los dividendos de filiales ajenas a la navegación aérea va al Tesoro</strong>; el resto del excedente anual de ENAIRE lo destina el Consejo Rector a compensar pérdidas, a reservas o al Tesoro.</li>
+<li><strong>Las tarifas de ruta y de aproximación son legalmente «ingresos de derecho público»</strong>, exigibles por los órganos de recaudación del Ministerio de Hacienda, no una tarifa comercial privada.</li>
+</ol>
+<h2 id="13-imprescindible-memorizar">13. Imprescindible memorizar</h2>
+<ul>
+<li>Consejo Rector: Presidente (por razón del cargo, Secretaría de Estado de Transportes) + 11 Consejeros = 12; aprueba el Plan de Vuelo, el Código Ético, las Políticas, el PAP, el Presupuesto, el Plan Empresarial, el mapa de riesgos y las Cuentas Anuales.</li>
+<li>Aeropuertos por región (ATS): Centro-Norte 8 (ACC Madrid-Torrejón + Asturias, Bilbao, Logroño, Pamplona, Santander, Santiago-TACC, Vitoria); Sur 5 (ACC Sevilla + Almería, Granada, Málaga, Melilla); Este 4 (ACC Barcelona + Girona, Reus, Valencia-TACC); Balear 2 (ACC Palma + Menorca); Canaria 3 (ACC Gran Canaria + Tenerife Norte, Tenerife Sur).</li>
+<li>SAERCO (9 torres, +5 AFIS) y Skyway/antes FerroNATS (7 torres, +1 AFIS Andorra) son los dos ANSP privados certificados por AESA en España.</li>
+<li>Equipos CNS/ATM (2024): 301 radioayudas, 92 sistemas de vigilancia, 168 centros de comunicaciones, 122 nodos REDAN, 135 posiciones de torre (5 remotas), 200 posiciones de sector.</li>
+<li>Tarifas unitarias de ruta de 2025: Península 66,31 €, Canarias 51,89 €; fórmula (MTOW/50)^0,5 × (km/100) × tarifa. Aproximación: 3 categorías 25,78/23,20/19,33 €; fórmula (MTOW/50)^0,7 × tarifa.</li>
+<li>Importe neto de la cifra de negocios de 2025 ≈ 1192,2 M EUR; EBITDA de 2024, 353,5 M EUR (+29,7 % respecto a los 272,6 M EUR de 2023).</li>
+<li>Participadas confirmadas: Aena 51 %, CRIDA 66,66 %, Startical 50 %, Ineco 45,85 %, GroupEAD 36 %, ESSP SAS, EGS 100 % (jul-2025), Fundación ENAIRE. NO son participadas: Aireon, Searidge. NO es miembro de: COOPANS.</li>
+<li>iTEC SkyNex: 8 ANSP (DFS, Avinor, Oro Navigacija, PANSA, LVNL, ENAIRE, NATS, NAV Canada) + Indra, lanzada en 2021, &gt;26 M km², &gt;12 M vuelos/año, 27 centros.</li>
+<li>7 servicios de ENAIRE (Carta de Servicios): ATS, ATFM-local, ASM (nivel 3), SDP, CNS, AIS, FPD.</li>
+<li>Certificaciones: ISO 9001 (ER-1034/2007), ISO 14001 (GA-2005/0575), ISO 45001 (SST-0156/2014), ENS Media/Alta, EFQM 600 (2024, CEG/24/S600/6), certificado de formación PFTAC-10.</li>
+<li>III Convenio: HO = (SB+CPT+CA+CAFP+CNP+CPAF)/1470; 2 pagas extraordinarias (junio, diciembre); jornada a turnos ≤1595 h/año (+20 h de formación), jornada ordinaria 1711 h/año (37,5 h/semana); servicios de noche+festivos ≤33 % del total; programación publicada con ≥30 días de antelación; Imaginaria = disponibilidad (1 h antes a 30 min después del inicio del turno; máx. 5/mes en Grupos 1-5).</li>
+<li>Definiciones de licencia (convenio): Habilitación, Anotación de Unidad (indicador OACI + sector), Anotación de competencia lingüística, OJTI, STDI, Anotación de evaluador, CTA operativo/no operativo (certificado psicofísico válido/no válido).</li>
+</ul>
+<h2 id="14-glosario-bilingue-es-en">14. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consejero / Consejera</td>
+<td>Governing Board member</td>
+</tr>
+<tr>
+<td>alto cargo</td>
+<td>senior public official</td>
+</tr>
+<tr>
+<td>presencia equilibrada de mujeres y hombres</td>
+<td>balanced presence of women and men</td>
+</tr>
+<tr>
+<td>comisión delegada</td>
+<td>delegated committee</td>
+</tr>
+<tr>
+<td>recursos económicos</td>
+<td>economic resources (of the entity)</td>
+</tr>
+<tr>
+<td>empréstito</td>
+<td>loan / borrowing</td>
+</tr>
+<tr>
+<td>ingresos de derecho público</td>
+<td>public-law revenue</td>
+</tr>
+<tr>
+<td>procedimiento administrativo de apremio</td>
+<td>collection by administrative enforcement</td>
+</tr>
+<tr>
+<td>excedente</td>
+<td>surplus</td>
+</tr>
+<tr>
+<td>servicio de control de aeródromo</td>
+<td>aerodrome control service</td>
+</tr>
+<tr>
+<td>servicio de información de vuelo de aeródromo (AFIS)</td>
+<td>aerodrome flight information service</td>
+</tr>
+<tr>
+<td>empresa conjunta / joint venture</td>
+<td>joint venture</td>
+</tr>
+<tr>
+<td>condiciones de mercado</td>
+<td>market conditions (charging)</td>
+</tr>
+<tr>
+<td>radioayuda</td>
+<td>radio aid</td>
+</tr>
+<tr>
+<td>sistema de vigilancia</td>
+<td>surveillance system</td>
+</tr>
+<tr>
+<td>centro de comunicaciones</td>
+<td>communication centre</td>
+</tr>
+<tr>
+<td>torre remota</td>
+<td>remote tower</td>
+</tr>
+<tr>
+<td>posición de control de sector</td>
+<td>sector control position</td>
+</tr>
+<tr>
+<td>tarifa / tasa de ruta</td>
+<td>route charge</td>
+</tr>
+<tr>
+<td>tarifa / tasa de aproximación</td>
+<td>approach charge</td>
+</tr>
+<tr>
+<td>tarifa unitaria</td>
+<td>unit rate</td>
+</tr>
+<tr>
+<td>peso máximo al despegue (MTOW)</td>
+<td>maximum take-off weight</td>
+</tr>
+<tr>
+<td>distancia ortodrómica</td>
+<td>great-circle (orthodromic) distance</td>
+</tr>
+<tr>
+<td>exoneración</td>
+<td>exemption (from a charge)</td>
+</tr>
+<tr>
+<td>Servicio de Dirección de Plataforma</td>
+<td>Apron Management Service (SDP)</td>
+</tr>
+<tr>
+<td>Circulación Aérea General (CAG) / Circulación Aérea Operativa (CAO)</td>
+<td>General Air Traffic / Operational Air Traffic</td>
+</tr>
+<tr>
+<td>tiempo medio entre indisponibilidades</td>
+<td>Mean Time Between Outages (MTBO)</td>
+</tr>
+<tr>
+<td>importe neto de la cifra de negocios</td>
+<td>net turnover</td>
+</tr>
+<tr>
+<td>resultado de la explotación</td>
+<td>operating result</td>
+</tr>
+<tr>
+<td>total activos / total pasivos</td>
+<td>total assets / total liabilities</td>
+</tr>
+<tr>
+<td>Sueldo Base (SB)</td>
+<td>base salary</td>
+</tr>
+<tr>
+<td>Complemento de Puesto de Trabajo (CPT)</td>
+<td>workplace/post supplement</td>
+</tr>
+<tr>
+<td>Complemento de Antigüedad (CA)</td>
+<td>seniority supplement</td>
+</tr>
+<tr>
+<td>Complemento de Nivel Profesional (CNP)</td>
+<td>professional-level supplement</td>
+</tr>
+<tr>
+<td>paga extraordinaria</td>
+<td>extraordinary (13th/14th month) payment</td>
+</tr>
+<tr>
+<td>jornada a turnos / jornada ordinaria / jornada mixta</td>
+<td>shift schedule / ordinary schedule / mixed schedule</td>
+</tr>
+<tr>
+<td>Servicio de Imaginaria</td>
+<td>standby duty</td>
+</tr>
+<tr>
+<td>Servicio de Guardia Localizada (SGL)</td>
+<td>located-standby duty (vital emergency)</td>
+</tr>
+<tr>
+<td>Servicio de Refuerzo</td>
+<td>reinforcement duty</td>
+</tr>
+<tr>
+<td>programación de turnos</td>
+<td>roster / shift schedule (published)</td>
+</tr>
+<tr>
+<td>escalafón</td>
+<td>seniority roster</td>
+</tr>
+<tr>
+<td>Grupo de Dependencias</td>
+<td>dependency group (by traffic volume)</td>
+</tr>
+<tr>
+<td>núcleo</td>
+<td>nucleus (group of sectors)</td>
+</tr>
+<tr>
+<td>cualificación para un puesto de trabajo</td>
+<td>qualification for a post</td>
+</tr>
+<tr>
+<td>certificado de aptitud psicofísica</td>
+<td>psychophysical fitness certificate</td>
+</tr>
+<tr>
+<td>CTA operativo / CTA no operativo</td>
+<td>operational / non-operational controller</td>
+</tr>
+<tr>
+<td>Anotación de Unidad</td>
+<td>unit endorsement</td>
+</tr>
+<tr>
+<td>Anotación de competencia lingüística</td>
+<td>language-proficiency endorsement</td>
+</tr>
+<tr>
+<td>Anotación de instructor OJTI</td>
+<td>on-the-job training instructor endorsement (OJTI)</td>
+</tr>
+<tr>
+<td>Anotación de instructor STDI</td>
+<td>synthetic training device instructor endorsement (STDI)</td>
+</tr>
+<tr>
+<td>Anotación de evaluador</td>
+<td>assessor endorsement</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-fuentes">15. Fuentes</h2>
+<ul>
+<li>Página web de gobernanza de ENAIRE, «Consejo Rector».</li>
+<li>Real Decreto 160/2023, Estatuto de Enaire E.P.E. (BOE-A-2023-6084), arts. 7-12 (Consejo Rector) y 27-29 (recursos, débitos, excedente).</li>
+<li>Página web «Red ENAIRE» de ENAIRE.</li>
+<li>AIP España GEN 3.3, AMDT 401/25 (25-DIC-25), apartados de SAERCO/Skyway.</li>
+<li>Guía de Tasas de Navegación Aérea 2025 (9 páginas).</li>
+<li>Memoria de Sostenibilidad 2024, «Instalaciones y equipos» pp. 15-16 y cifras de EBITDA.</li>
+<li>Carta de Servicios 2025-2027 (14 páginas).</li>
+<li>III Convenio Colectivo profesional de Controladores de Tránsito Aéreo (BOE-A-2023-18633), artículo de Definiciones, arts. 29-43 (jornada, turnos, Imaginaria, formación) y 136-137 (fórmula salarial).</li>
+<li>Ley 3/2013, de 4 de junio, de creación de la CNMC (no menciona las tarifas de navegación aérea).</li>
+<li>Informe de Gestión ENAIRE 2025, tabla financiera por segmentos.</li>
+<li>Resumen ejecutivo 2022.</li>
+<li>ESPP3 (Plan de Rendimientos español del RP3), apartados sobre FerroNATS.</li>
+<li>Página web iTEC SkyNex.</li>
+<li>Eleconomista.es, actualidadaeroespacial.com y el blog de nats.aero, sobre el cambio de nombre de FerroNATS a Skyway (feb. 2023).</li>
+<li>Evertiq.com, ainonline.com, navcanada.ca, marketscreener.com, aviationtoday.com, canso.org y searidgetech.com, sobre los accionistas de Aireon y el trabajo de Searidge en España.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

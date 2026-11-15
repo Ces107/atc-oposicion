@@ -1,0 +1,676 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rendimiento humano y psicología en ATM (T08a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Factores humanos</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-modelos-de-factores-humanos-mas-alla-del-manual">1. Modelos de factores humanos más allá del manual</a><ul>
+<li><a href="#11-el-modelo-shel-en-su-fuente-original-de-la-oaci-no-el-relato-del-shell-o-del-manual">1.1 El modelo SHEL en su fuente original de la OACI (no el relato del SHELL-O del manual)</a></li>
+<li><a href="#12-modelo-pear-no-figura-en-el-manual">1.2 Modelo PEAR (no figura en el manual)</a></li>
+<li><a href="#13-los-doce-sucios-dirty-dozen-y-los-quince-sucios-filthy-fifteen-no-figuran-en-el-manual">1.3 Los «doce sucios» (Dirty Dozen) y los «quince sucios» (Filthy Fifteen) (no figuran en el manual)</a></li>
+<li><a href="#14-hfacs-solo-se-menciona-de-pasada-en-el-mapa-dl08-no-figura-en-el-manual">1.4 HFACS (solo se menciona de pasada en el mapa DL08; no figura en el manual)</a></li>
+<li><a href="#15-la-critica-de-la-complacencia-una-trampa-de-examen-genuina-ausente-del-manual">1.5 La crítica de la «complacencia» (una trampa de examen genuina, ausente del manual)</a></li>
+</ul>
+</li>
+<li><a href="#2-cognicion-memoria-atencion-percepcion-toma-de-decisiones-y-sesgos">2. Cognición: memoria, atención, percepción, toma de decisiones y sesgos</a><ul>
+<li><a href="#21-modelos-de-memoria-mas-profundos-que-el-relato-de-dos-lineas-del-manual-sobre-la-mcpmlp">2.1 Modelos de memoria: más profundos que el relato de dos líneas del manual sobre la MCP/MLP</a></li>
+<li><a href="#22-atencion-tipos-que-el-manual-no-distingue">2.2 Atención: tipos que el manual no distingue</a></li>
+<li><a href="#23-percepcion-e-ilusiones-en-atc-el-manual-no-da-nada-de-esto">2.3 Percepción e ilusiones en ATC (el manual no da nada de esto)</a></li>
+<li><a href="#24-toma-de-decisiones-y-sesgos-cognitivos-la-cobertura-del-manual-es-escasa-solo-el-apartado-31">2.4 Toma de decisiones y sesgos cognitivos (la cobertura del manual es escasa: solo el apartado 3.1)</a></li>
+</ul>
+</li>
+<li><a href="#3-conciencia-situacional-y-carga-de-trabajo-herramientas-de-medicion-que-el-manual-omite">3. Conciencia situacional y carga de trabajo: herramientas de medición que el manual omite</a></li>
+<li><a href="#4-automatizacion-el-propio-compendio-de-la-oaci-el-manual-no-cubre-la-automatizacion-en-absoluto">4. Automatización: el propio Compendio de la OACI (el manual no cubre la automatización en absoluto)</a></li>
+<li><a href="#5-la-comunicacion-humana-mas-alla-del-manual-colacion-y-escucha-de-la-colacion-y-confusion-de-indicativos">5. La comunicación humana más allá del manual: colación y escucha de la colación, y confusión de indicativos</a></li>
+<li><a href="#6-el-trabajo-en-equipo-mas-alla-del-manual-relevo-de-posicion-y-la-definicion-actual-de-trm">6. El trabajo en equipo más allá del manual: relevo de posición y la definición actual de TRM</a><ul>
+<li><a href="#61-relevo-de-posiciones-operativas-de-atc-handover-takeover-hoto-ausente-del-manual">6.1 Relevo de posiciones operativas de ATC (handover-takeover, HOTO; ausente del manual)</a></li>
+<li><a href="#62-trm-la-definicion-actual-de-eurocontrol-2021-frente-a-la-parafrasis-del-manual">6.2 TRM: la definición actual de EUROCONTROL (2021) frente a la paráfrasis del manual</a></li>
+</ul>
+</li>
+<li><a href="#7-cultura-justa-y-notificacion-de-sucesos-los-textos-legales-exactos-mucho-mas-detallados-que-el-manual">7. Cultura justa y notificación de sucesos: los textos legales exactos (mucho más detallados que el manual)</a></li>
+<li><a href="#8-limitaciones-del-rendimiento-humano-relevantes-para-un-controlador-todo-un-ambito-que-el-manual-omite">8. Limitaciones del rendimiento humano relevantes para un controlador (todo un ámbito que el manual omite)</a></li>
+<li><a href="#9-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">9. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">Trampas de examen (confusiones típicas y cómo distinguirlas)</a></li>
+<li><a href="#imprescindible-memorizar-breve-y-denso">Imprescindible memorizar (breve y denso)</a></li>
+<li><a href="#glosario-bilingue-es-en">Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">41 min de lectura</div><h1 id="t08a-rendimiento-humano-y-psicologia-en-atm-mas-alla-del-manual-de-enaire">T08a: Rendimiento humano y psicología en ATM, más allá del manual de ENAIRE</h1>
+<p>Este archivo no repite lo que ya enseña el manual de ENAIRE «8. FFHH en ATM.pdf» (esa materia está en <code>syllabus/manual/OM08-human-factors-study-guide.md</code>). Este archivo va <strong>más allá del manual</strong> con fuentes primarias (compendios de la OACI, guías de EUROCONTROL, SKYbrary, el texto de la normativa de EASA y de la UE, la ley española y casos reales de accidentes e incidentes) para profundizar en modelos que el manual solo esboza (SHELL, automatización, TEM) y para añadir áreas enteras que el manual apenas toca (modelos de memoria y atención, sesgos en la toma de decisiones, colación y escucha de la colación y confusión de indicativos, relevo de posición, PEAR, los «doce sucios», HFACS, el detalle jurídico de la cultura justa, la fisiología de la visión y la audición).</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El tema 8 «Factores humanos» se nutre sobre todo del manual de ENAIRE, pero el autor de un examen de oposición también puede extraer datos de una línea de los textos primarios que el propio manual cita o del material de EUROCONTROL, la OACI y SKYbrary que cualquier instructor español de FH usaría para preparar a los ATCO: nombres exactos de los modelos y su autoría (SHEL frente a SHELL-O, niveles del HFACS, letras de PEAR), la lista de los «doce sucios», detalles de los modelos de memoria (componentes de Baddeley, duración de la memoria sensorial), tipos de atención, las seis subescalas del NASA-TLX, el bucle de colación y escucha de la colación y su definición de la OACI, estadísticas reales de incumplimientos de nivel e incursiones en pista vinculadas a fallos de comunicación, y los artículos legales exactos que sustentan la «cultura justa» en España (Ley 21/2003, RD 995/2013) y en la UE (Reglamento 376/2014, art. 16). Cabe esperar preguntas de cifras y nombres exactos extraídos de listas (12 elementos, 4 niveles del HFACS, seis subescalas del TLX, tres tipos de visión).</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Modelos de factores humanos más allá del manual (fuente primaria del SHEL, PEAR, «doce sucios»/«quince sucios», HFACS, crítica de la complacencia)</li>
+<li>Cognición: memoria, atención, percepción, toma de decisiones y sesgos</li>
+<li>Conciencia situacional y herramientas de medición de la carga de trabajo (SASHA, NASA-TLX)</li>
+<li>Automatización: la visión del Compendio 5 de la OACI (complacencia, cambio de habilidades, intimidación)</li>
+<li>La comunicación humana más allá del manual: colación y escucha de la colación, confusión de indicativos, casos reales</li>
+<li>Trabajo en equipo: relevo de posición, la definición actual de TRM de EUROCONTROL</li>
+<li>Cultura justa y notificación de sucesos: los textos legales exactos (España y UE)</li>
+<li>Limitaciones del rendimiento humano: visión, audición y el puesto de trabajo del controlador</li>
+<li>Manual frente a fuentes primarias (tabla de discrepancias)</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-modelos-de-factores-humanos-mas-alla-del-manual">1. Modelos de factores humanos más allá del manual</h2>
+<h3 id="11-el-modelo-shel-en-su-fuente-original-de-la-oaci-no-el-relato-del-shell-o-del-manual">1.1 El modelo SHEL en su fuente original de la OACI (no el relato del SHELL-O del manual)</h3>
+<p>El manual afirma que la OACI propuso formalmente el modelo SHELL-O en la Circular 216-AN/131 y atribuye su autoría a «Edwards 1972, Hawkins 1993». El documento original, publicado en inglés como <strong>CAP 719 «Fundamental Human Factors Concepts»</strong> (UK CAA, 15 de febrero de 2002), dice expresamente que <strong>es</strong> la reimpresión de la Circular 216-AN/131 de la OACI, Compendio de Factores Humanos n.º 1. Su propio texto declara: «El concepto SHEL... fue desarrollado por primera vez por Edwards en <strong>1972</strong>, con un diagrama modificado para ilustrar el modelo elaborado por Hawkins en <strong>1975</strong>». Es decir, la fuente primaria da <strong>1975</strong>, no 1993; véase la tabla de discrepancias de la sección 9. La principal obra de referencia del compendio es <em>Human Factors in Flight</em>, de Frank Hawkins (1987).</p>
+<p>El compendio describe el modelo <strong>SHEL</strong> (cuatro letras, sin «O» de Organización; la «O» la añadieron después otros autores, p. ej. la FAA), con los mismos cuatro componentes que el manual (Software, Hardware, Environment, Liveware), pero añade detalles que el manual omite:</p>
+<ul>
+<li><strong>Características del Liveware que hay que ajustar</strong>: tamaño y forma físicos (antropometría/biomecánica), necesidades físicas (alimento, agua, oxígeno), características de entrada (los sentidos, todos susceptibles de degradación), procesamiento de la información (memoria a corto y largo plazo, motivación, estrés), características de salida (músculos, movimientos de control), tolerancias ambientales (temperatura, presión, humedad, ruido, luz/oscuridad).</li>
+<li><strong>Interfaz L-H</strong>: el usuario puede no advertir una falta de adecuación porque «la característica humana natural de adaptarse a los desajustes L-H enmascarará tal deficiencia, pero no eliminará su existencia»: un peligro real para los diseñadores.</li>
+<li><strong>Interfaz L-E</strong>: cita las ilusiones y la desorientación como «origen de muchos accidentes de aviación», por errores de percepción inducidos por las condiciones ambientales, p. ej. las ilusiones durante la aproximación y el aterrizaje.</li>
+<li>Accidentes reales que el compendio usa como ejemplos de interfaces SHEL, con tres de cada cuatro accidentes atribuidos históricamente a un «rendimiento humano inferior al óptimo»: Tenerife 1977 (583 víctimas, ruptura de los procedimientos normales de comunicación e interpretación errónea de mensajes verbales), Pago Pago 1974 (B-707, ilusión de agujero negro, 96 víctimas), Mount Weather 1974 (B-727, falta de claridad en los procedimientos y la terminología ATC, 92 víctimas), JFK 1984 con un DC-10 y un incidente de pérdida de control de un B-747 en 1985 (ambos con «dependencia excesiva de la automatización»).</li>
+</ul>
+<h3 id="12-modelo-pear-no-figura-en-el-manual">1.2 Modelo PEAR (no figura en el manual)</h3>
+<p><strong>PEAR</strong> (SKYbrary, categoría «Human Performance Modelling») es una regla mnemotécnica de las cuatro cosas que hay que comprobar al evaluar o mitigar el riesgo de factores humanos en una tarea; nació para el mantenimiento pero es transferible a cualquier función operativa:</p>
+<ul>
+<li><strong>P</strong>eople (personas que hacen el trabajo): factores físicos (tamaño, sexo, edad, fuerza, límites sensoriales); fisiológicos (nutrición, salud, estilo de vida, fatiga, dependencia química); psicológicos (carga de trabajo, experiencia, conocimientos, formación, actitud, estado mental y emocional); <strong>psicosociales</strong> (conflictos interpersonales, pérdidas personales, dificultades económicas, divorcio).</li>
+<li><strong>E</strong>nvironment (entorno): físico (meteorología, interior/exterior, espacio de trabajo, turno, iluminación, sonido, seguridad); organizativo (personal, supervisión, relaciones laborales, presiones, tamaño/rentabilidad/moral/cultura corporativa).</li>
+<li><strong>A</strong>ctions (acciones): pasos, secuencia, número de personas, requisitos de comunicación y control de la información, requisitos de conocimientos/habilidades/actitud/certificación/inspección.</li>
+<li><strong>R</strong>esources (recursos): procedimientos/tarjetas de trabajo, manuales, otras personas, equipos de prueba, herramientas, software, conformidades de firma, equipos de elevación, materiales, iluminación, formación, sistemas de calidad.</li>
+</ul>
+<h3 id="13-los-doce-sucios-dirty-dozen-y-los-quince-sucios-filthy-fifteen-no-figuran-en-el-manual">1.3 Los «doce sucios» (<em>Dirty Dozen</em>) y los «quince sucios» (<em>Filthy Fifteen</em>) (no figuran en el manual)</h3>
+<p>Los desarrolló <strong>Gordon Dupont</strong>, en 1993, en Transport Canada, inicialmente para la formación en factores humanos del mantenimiento de aeronaves; después se adoptaron en toda la aviación, incluidas versiones específicas para ATC. El manual no los menciona en absoluto, pero son una lista mnemotécnica estándar que un instructor español de FH probablemente enseñará. <strong>Los 12 elementos (sin orden de prioridad)</strong>: (1) falta de comunicación, (2) distracción, (3) falta de recursos, (4) estrés, (5) complacencia, (6) falta de trabajo en equipo, (7) presión, (8) falta de conciencia, (9) falta de conocimientos, (10) fatiga, (11) falta de asertividad, (12) normas.</p>
+<ul>
+<li><strong>Normas</strong>: prácticas locales no escritas («así se hacen aquí las cosas»), no necesariamente contrastadas en todas las circunstancias, que se imponen por presión de los compañeros: un buen distractor de examen frente a la «cultura justa» o a los «procedimientos».</li>
+<li>La <strong>comunicación</strong> encabeza la mayoría de las listas de factores contribuyentes; el artículo señala que la comunicación verbal «solo se recibe y se entiende en un 30 %» a menudo, de ahí la recomendación de dejar por escrito los mensajes complejos y de mantener breves los verbales, repitiendo los elementos clave.</li>
+<li>Los <strong>«quince sucios»</strong> son una lista ampliada o alternativa específica del mantenimiento (solo se ha confirmado el título; no se leyó el contenido).</li>
+<li><strong>Ejemplos de contramedidas que da la fuente</strong>: contra la complacencia, «esperar siempre encontrar un fallo»; evitar trabajar de memoria o firmar trabajo sin comprobar; contra la distracción, «bloquear» el trabajo incompleto y repasar al menos tres pasos al reanudarlo tras una interrupción.</li>
+</ul>
+<h3 id="14-hfacs-solo-se-menciona-de-pasada-en-el-mapa-dl08-no-figura-en-el-manual">1.4 HFACS (solo se menciona de pasada en el mapa DL08; no figura en el manual)</h3>
+<p><strong>Human Factors Analysis and Classification System</strong> (Sistema de Análisis y Clasificación de Factores Humanos), desarrollado por el <strong>Dr. Scott Shappell y el Dr. Doug Wiegmann</strong> para la Armada de EE. UU., construido de forma explícita sobre el <strong>modelo del queso suizo de Reason</strong>. Cuatro niveles, cada uno con subcategorías; la teoría sostiene que antes de un suceso adverso falla al menos algo en cada nivel, de modo que corregir cualquiera de ellos lo evita:</p>
+<ol>
+<li><strong>Actos inseguros</strong> (errores: basados en habilidades, de decisión, perceptuales; transgresiones: rutinarias, excepcionales).</li>
+<li><strong>Precondiciones de los actos inseguros</strong> (factores ambientales: físicos/tecnológicos; condición de los operadores: estado mental adverso, estado fisiológico adverso, limitaciones físicas/mentales; factores de personal: CRM, preparación personal).</li>
+<li><strong>Supervisión insegura</strong> (supervisión inadecuada; operación planificada de forma inadecuada; no corregir un problema conocido; transgresión de la supervisión).</li>
+<li><strong>Influencias organizacionales</strong> (gestión de recursos; clima organizacional; proceso operativo).</li>
+</ol>
+<p>Objetivo: <strong>no</strong> atribuir culpas, sino hallar los factores causales de fondo (compárese con el espíritu de la cultura justa de la sección 7). Se usa tanto de forma reactiva (investigación de accidentes) como proactiva (análisis de tendencias de sucesos históricos); la Armada de EE. UU. comprobó que aproximadamente <strong>un tercio de los accidentes estaba vinculado a transgresiones rutinarias</strong> y que las intervenciones dirigidas mantuvieron una reducción a lo largo del tiempo.</p>
+<h3 id="15-la-critica-de-la-complacencia-una-trampa-de-examen-genuina-ausente-del-manual">1.5 La crítica de la «complacencia» (una trampa de examen genuina, ausente del manual)</h3>
+<p>El propio artículo «Complacency» de SKYbrary sostiene que el término es científicamente débil: es un <strong>«modelo popular»</strong> (<em>folk model</em>), una etiqueta que sustituye a una explicación real, difícil de refutar y propensa a la generalización excesiva (una vez que se busca «complacencia», se tiende a verla en todas partes). La bibliografía la ha equiparado a exceso de confianza, autosatisfacción, bajo índice de sospecha, suposición injustificada de que el sistema está en un estado satisfactorio o pérdida de conciencia situacional; ninguna de estas es una definición rigurosa de un mecanismo psicológico observable. Punto práctico para el examen: un examinador que pruebe el pensamiento crítico sobre conceptos de FH podría usarlo para construir un distractor del tipo «cuál de estas afirmaciones sobre la complacencia es FALSA/VERDADERA».</p>
+<hr />
+<h2 id="2-cognicion-memoria-atencion-percepcion-toma-de-decisiones-y-sesgos">2. Cognición: memoria, atención, percepción, toma de decisiones y sesgos</h2>
+<h3 id="21-modelos-de-memoria-mas-profundos-que-el-relato-de-dos-lineas-del-manual-sobre-la-mcpmlp">2.1 Modelos de memoria: más profundos que el relato de dos líneas del manual sobre la MCP/MLP</h3>
+<p>El manual solo dice que la memoria a corto plazo (MCP) dura 20-30 s y la memoria a largo plazo (MLP) es ilimitada. El artículo «Memory in ATC» de SKYbrary (basado en la bibliografía de ergonomía cognitiva de EUROCONTROL) ofrece un modelo mucho más rico y específico de ATC:</p>
+<ul>
+<li><strong>Memoria sensorial</strong>: muy breve (<strong>&lt; 0,5 s</strong>; la memoria sensorial visual, unos <strong>250 ms</strong>), de gran capacidad y precisa. La selección hacia la etapa siguiente es <strong>activa</strong> (guiada por la atención, p. ej. un piloto que capta su propio indicativo) o <strong>pasiva</strong> (guiada por los datos, p. ej. una alarma sonora del STCA lo bastante fuerte como para eludir la atención selectiva).</li>
+<li><strong>Memoria a corto plazo</strong>: unos <strong>7 elementos no relacionados</strong> como máximo con repaso atencional completo, duración de <strong>15-30 s</strong> de media (el «20-30 s» del manual es un redondeo del mismo intervalo). Se pierde por <strong>interferencia</strong> (información nueva o similar) o por <strong>decaimiento de la huella mnémica</strong>. Es más fuerte para la información <strong>visual</strong> que para la <strong>acústica</strong>: <strong>la similitud acústica de los indicativos es un factor documentado en la confusión de indicativos</strong>.</li>
+<li><strong>Agrupación en bloques</strong> (<em>chunking</em>): agrupar elementos relacionados (p. ej., 0032 como un solo «bloque» en lugar de cuatro dígitos) amplía la capacidad efectiva de la MCP; la forma de agrupar un mensaje difiere entre controlador y piloto (una frecuencia de sector es un bloque para el controlador, no para el piloto; un indicativo es lo contrario). Recomendación práctica: <strong>limitar los mensajes RTF a unos dos elementos</strong> y no combinar un cambio de frecuencia con otra instrucción.</li>
+<li><strong>Memoria a largo plazo</strong>: tamaño y duración ilimitados; tres etapas: <strong>codificación, almacenamiento</strong> (se desvanece si no se consolida, sobre todo durante el sueño o el repaso), <strong>recuperación/evocación</strong> (dependiente del contexto; p. ej., ordenar las tiras por claves geográficas del flujo de tráfico ayuda a recordar). Dos tipos: <strong>declarativa</strong> (semántica = significado y hechos, que se cree que nunca se pierde del todo, solo se «extravía»; episódica = sucesos concretos recordados, distorsionados por la expectativa) y <strong>procedimental</strong> (implícita, basada en lo motor y en automatismos).</li>
+<li><strong>Memoria de trabajo (modelo de Baddeley)</strong>: vinculada a los objetivos, no limitada solo por el tiempo. Componentes: <strong>ejecutivo central</strong> (supervisa y controla el flujo); <strong>bucle fonológico</strong> (almacén fonológico a corto plazo + repaso articulatorio: un bucle de «oído interno»/«voz interna»); <strong>agenda visoespacial</strong> (información visual y espacial, p. ej. comparar un parámetro de vuelo autorizado con el real); <strong>búfer episódico</strong> (integra lo visual, lo espacial y lo verbal con una secuencia temporal). La carga de la memoria de trabajo aumenta con las tareas <strong>en paralelo</strong>: el SYSCO (coordinación automatizada que permite varias solicitudes abiertas simultáneas) carga más la memoria de trabajo del controlador planificador que la coordinación telefónica secuencial.</li>
+<li><strong>Memoria prospectiva frente a retrospectiva</strong>: la prospectiva es «recordar que hay que recordar» acciones futuras (apoyada en ayudas de memoria o herramientas del sistema, como las pantallas gráficas de conflictos del MTCD, que convierten una tarea de proyección en una de percepción); la retrospectiva es recordar el pasado.</li>
+<li>Hábito práctico que se enseña en la formación de TRM y de escucha activa: <strong>WAYSRAYL — «Write what you say As You Speak, Read what you hear As You Listen»</strong> (escribe lo que dices mientras lo dices, lee lo que oyes mientras escuchas).</li>
+<li><strong>REST</strong> se cita como lista de comprobación mnemotécnica usada en el relevo de posición (véase la sección 6.1).</li>
+<li><strong>Miller (1956)</strong>, <em>«The Magical Number Seven, Plus or Minus Two»</em> (Psychological Review, 63, 81-97, Universidad de Harvard): elaborado a partir de experimentos de teoría de la información sobre el juicio absoluto; el «número mágico siete» es el límite hallado en varias tareas unidimensionales de juicio y de amplitud de memoria inmediata, y luego se refinó con la idea de <strong>agrupación en bloques</strong> en el mismo artículo. El manual nunca cita a Miller por su nombre, aunque usa la cifra de «seis o siete ítems» para la memoria de trabajo bajo hiperestrés.</li>
+</ul>
+<h3 id="22-atencion-tipos-que-el-manual-no-distingue">2.2 Atención: tipos que el manual no distingue</h3>
+<p>El manual solo menciona una vez la «atención sostenida/vigilancia». El artículo «Attention Span» de SKYbrary, que cita la guía de un grupo de trabajo europeo, distingue:</p>
+<ul>
+<li><strong>Atención sostenida (= vigilancia)</strong>: capacidad de dirigir y concentrar la actividad cognitiva en estímulos concretos durante un periodo prolongado.</li>
+<li><strong>Procesos de atención controlados frente a automáticos</strong>: los controlados exigen esfuerzo y están limitados por la MCP; con entrenamiento se vuelven automáticos, requieren menos esfuerzo y ya no dependen de la capacidad de la MCP.</li>
+<li><strong>Atención alternante</strong>: pasar la atención entre tareas que requieren procesos de pensamiento distintos.</li>
+<li><strong>Atención dividida</strong>: realizar varias tareas a la vez, que compiten por unos recursos atencionales limitados; es el «multitarea», señalado como potencialmente peligroso porque los recursos se sobrecargan.</li>
+<li>La <strong>atención selectiva</strong> está implícita en todo el artículo (elegir qué muestrear), aunque su taxonomía principal es sostenida/controlada-automática/alternante/dividida.</li>
+</ul>
+<h3 id="23-percepcion-e-ilusiones-en-atc-el-manual-no-da-nada-de-esto">2.3 Percepción e ilusiones en ATC (el manual no da nada de esto)</h3>
+<p>El artículo «Perception in ATC» de SKYbrary define la percepción (según Sternberg 2003) como el conjunto de procesos que nos permiten «reconocer, organizar y dar sentido a las sensaciones que recibimos»: la <strong>primera etapa del procesamiento humano de la información</strong>; un error en ella se propaga a la toma de decisiones y a la acción. Ejemplos resueltos que da (todos ellos percepciones erróneas realistas en ATC):</p>
+<ul>
+<li>Una autorización a rumbo 290° se oye o se colaciona mal como «nivel de vuelo 290»: la expectativa hace que el controlador oiga lo que espera.</li>
+<li>Un ascenso a FL 250 se colaciona como FL 290 porque el piloto había planificado FL 290.</li>
+<li>Una autorización de ascenso destinada a una aeronave la toma otra aeronave que esperaba una autorización de ascenso en la misma frecuencia (raíz directa de los incidentes de <strong>confusión de indicativos</strong>).</li>
+<li>Un controlador «ve» FL 330 en la etiqueta de un bloque de datos porque encaja con su plan, cuando siempre se había mostrado FL 350.</li>
+<li>Defensas prácticas: notificar siempre el potencial de confusión de indicativos, usar fraseología estándar, escuchar con atención las colaciones y volver a preguntar ante cualquier duda, no combinar la escucha de la colación con otras tareas (p. ej. llamadas telefónicas), usar auriculares, no dar nada por supuesto y notificar por el sistema de notificación confidencial los fallos de diseño de las pantallas de los equipos (tipos de letra o símbolos que se confunden fácilmente, trayectoria difícil de interpretar).</li>
+</ul>
+<h3 id="24-toma-de-decisiones-y-sesgos-cognitivos-la-cobertura-del-manual-es-escasa-solo-el-apartado-31">2.4 Toma de decisiones y sesgos cognitivos (la cobertura del manual es escasa: solo el apartado 3.1)</h3>
+<p>«Decision-Making» de SKYbrary (fuente: Flight Safety Foundation): cuatro componentes (<strong>definir el problema, considerar opciones, seleccionar e implantar una opción, revisar el resultado</strong>), influidos por la conciencia situacional, la experiencia, la presión social o la cultura y las limitaciones de la situación (estrés, fatiga, hipoxia, presión de tiempo).</p>
+<p><strong>Sesgo cognitivo</strong> (heurísticos que nos permiten decidir deprisa con información incompleta, a costa de una posible irracionalidad). Sesgos con nombre relevantes para ATC en la biblioteca: sesgo de confirmación, sesgo de continuidad (= sesgo de continuidad de plan en la redacción del manual), sesgo retrospectivo y de resultado, <strong>sesgo de expectativa del ATC</strong>, sesgo de expectativa de la tripulación, sesgo de encuadre, efecto de ambigüedad, automaticidad.</p>
+<p><strong>Sesgo de expectativa del ATC: caso resuelto</strong>: investigación de la NTSB del <strong>vuelo FedEx 1432 / Southwest 737, Austin-Bergstrom, 4 de febrero de 2023</strong>. La niebla redujo la visibilidad; el aeropuerto no tenía equipos de detección en superficie. El controlador de torre autorizó a aterrizar al FedEx 1432 y luego, creyendo que el Southwest 737 que salía ya estaba en el punto de espera (en realidad estaba unos 550 ft antes), lo autorizó a despegar. El Southwest se alineó y luego hizo funcionar los motores según el procedimiento de tiempo frío, lo que añadió retraso. El primer oficial del FedEx vio rodar al Southwest y realizó un motor y al aire (<em>go-around</em>); las aeronaves llegaron a estar a <strong>150-170 pies</strong> una de otra. La NTSB citó el <strong>sesgo de expectativa</strong> del controlador como factor contribuyente. Defensas enumeradas: formación sobre cuándo es probable el sesgo de expectativa, software que destaque las desviaciones de lo normal relevantes para la seguridad y conciencia de la propia susceptibilidad a la fatiga y al estrés.</p>
+<hr />
+<h2 id="3-conciencia-situacional-y-carga-de-trabajo-herramientas-de-medicion-que-el-manual-omite">3. Conciencia situacional y carga de trabajo: herramientas de medición que el manual omite</h2>
+<p>El manual describe el modelo de conciencia situacional de tres niveles de Endsley y cita definiciones de «carga de trabajo mental», pero no nombra ningún instrumento de medición. Dos herramientas de EUROCONTROL y la NASA llenan ese vacío:</p>
+<ul>
+<li><strong>SASHA</strong> = <strong>SA for SHAPE</strong> (SHAPE = Solutions for Human-Automation Partnerships in European ATM), informe de EUROCONTROL (<code>EC-SA-measures-5558</code>). Propone dos medidas: <strong>SASHA_L</strong> («SASHA on-Line»), una técnica de consulta en tiempo real basada en un método anterior (sondea a los controladores durante una simulación), y <strong>SASHA_Q</strong> («SASHA Questionnaire»), un cuestionario posterior a la prueba que usa preguntas que los propios controladores identificaron como elementos clave de la conciencia situacional. El informe también revisa nueve medidas de conciencia situacional existentes.</li>
+<li><strong>NASA-TLX (Task Load Index, Índice de Carga de Tareas)</strong>, de Hart y Staveland, desarrollado por el Human Performance Group de NASA Ames en un esfuerzo de tres años. Produce una puntuación global de carga de trabajo como <strong>media ponderada de seis subescalas</strong>: <strong>Demanda Mental, Demanda Física, Demanda Temporal, Rendimiento (propio), Esfuerzo, Frustración</strong>. Los pesos salen de un procedimiento de comparación por pares (los sujetos eligen, para cada par de títulos de subescala, cuál influyó más en su experiencia de carga de trabajo en la tarea que acaban de realizar). La herramienta <strong>sustituyó a una versión anterior y más larga</strong>: algunas dimensiones originales se descartaron por irrelevantes (p. ej. la fatiga) o por redundantes con otras (p. ej. el estrés con la frustración); tres subescalas se refieren a las <strong>exigencias de la tarea</strong> (Mental/Física/Temporal) y tres a la <strong>interacción del sujeto con la tarea</strong> (Esfuerzo, Frustración, Rendimiento).</li>
+</ul>
+<hr />
+<h2 id="4-automatizacion-el-propio-compendio-de-la-oaci-el-manual-no-cubre-la-automatizacion-en-absoluto">4. Automatización: el propio Compendio de la OACI (el manual no cubre la automatización en absoluto)</h2>
+<p><strong>Circular 234-AN/142 de la OACI, Compendio de Factores Humanos n.º 5, «Operational Implications of Automation in Advanced Technology Flight Decks»</strong>. Aunque está orientado a los pilotos, sus conceptos se trasladan directamente a la automatización del ATC (herramientas de detección de conflictos, tiras electrónicas, STCA) y son examinables como conocimiento general de FH y automatización:</p>
+<ul>
+<li><strong>Dos niveles de gestión de sistemas</strong>: <strong>bucle interno</strong> (control, habilidades psicomotoras) y <strong>bucle externo</strong> (supervisión, exigencias cognitivas y de supervisión): la automatización desplaza al ser humano del control del bucle interno hacia la supervisión del bucle externo.</li>
+<li>Un mito central que corrige el compendio: a menudo se supone que la automatización <strong>reduce o elimina</strong> los requisitos de habilidades; en la práctica, sobre todo <strong>cambia</strong> las habilidades necesarias (aparecen más tareas de diagnóstico, detección de fallos y selección de opciones) y a veces simplemente <strong>añade</strong> habilidades nuevas a las antiguas.</li>
+<li><strong>Complacencia por automatización</strong>: se nombra expresamente como factor en la lista «conciencia situacional... complacencia por automatización... intimidación por automatización»; según el propio compendio, como algunas fases están tan completamente automatizadas, los operadores se «adormecen en la falta de atención» y se aburren o se muestran <strong>demasiado confiados en que los sistemas automáticos funcionarán bien</strong>, lo que reduce la vigilancia y da una tolerancia excesiva a los errores de ejecución. También se documenta una <strong>reticencia a desconectar la automatización</strong> aun cuando algo parece ir mal.</li>
+<li><strong>Reversión al control manual / temor a perder habilidades</strong>: algunos operadores pilotan a mano a propósito para mantener al día sus habilidades; otros muestran reticencia a asumir el control de los sistemas automatizados por miedo a haber perdido la habilidad necesaria; influye la adecuación de la formación, de los procedimientos y de la filosofía de la compañía.</li>
+<li><strong>Intimidación por automatización</strong>: se nombra junto a la complacencia como un riesgo de FH distinto de los sistemas muy automatizados (el compendio no amplía la definición más allá de nombrarla, a la espera de una lectura más completa).</li>
+<li>La lista del compendio de accidentes atribuidos en parte a la <strong>dependencia excesiva de la automatización</strong>: salida de pista de un DC-10, JFK, 1984 (NTSB/AAR 84-15); B-747 que perdió 20 000 ft en menos de dos minutos con daños estructurales, 1985 (NTSB/AAR 86-03).</li>
+</ul>
+<hr />
+<h2 id="5-la-comunicacion-humana-mas-alla-del-manual-colacion-y-escucha-de-la-colacion-y-confusion-de-indicativos">5. La comunicación humana más allá del manual: colación y escucha de la colación, y confusión de indicativos</h2>
+<p>El capítulo 4 del manual cubre el modelo general de comunicación, las barreras y la comunicación no verbal, pero <strong>nunca menciona la fraseología, la colación (<em>readback</em>), la escucha de la colación (<em>hearback</em>) ni la confusión de indicativos</strong>, todo ello materia de examen básica y propia del ATC.</p>
+<ul>
+<li><strong>Colación</strong> (<em>readback</em>), definición propia de la OACI (OACI, 2001, citada en la fuente): <em>«procedimiento por el cual la estación receptora repite a la estación transmisora un mensaje recibido, o una parte apropiada de él, para obtener la confirmación de que se ha recibido correctamente»</em>.</li>
+<li><strong>Bucle de colación y escucha de la colación</strong> (Prinzo y Britton 1993; Cardosi, Falzarano y Han 1998): el piloto transmite la colación → el controlador <strong>escucha la colación</strong> (la escucha activamente una colación correcta) → identifica o corrige cualquier malentendido. Figura de la fuente: autorización ATC → transmisión → el piloto escucha → colación del piloto → ATC escucha (escucha de la colación) → confirma o corrige.</li>
+<li><strong>Caso real resuelto: Sídney Kingsford Smith, 20 de octubre de 2005</strong>: un Boeing 777 inició la carrera de despegue en la pista 34L mientras un tractor que remolcaba un 747 cruzaba esa misma pista. El conductor del tractor (17 años de experiencia, sin incidentes previos) creyó oír una autorización destinada a otra aeronave que rodaba y se apoyó en su propia colación para «confirmarla», pero la mayor parte de esa colación fue <strong>sobretransmitida</strong> y nunca llegó al Control de Movimientos en Superficie, de modo que el bucle de escucha de la colación falló en silencio. Conclusiones de la ATSB: el conductor usó una autorización destinada a otra aeronave; se fio de su propia colación como validación; no consultó al SMC pese a la duda. Es un ejemplo de manual de <strong>escucha de la colación rota</strong>, no de colación rota.</li>
+<li><strong>Confusión de indicativos, cuantificada: UK CAA CAP 710 «On the Level»</strong>: un estudio de <strong>626 informes de incumplimiento de nivel</strong> (julio de 1998 a diciembre de 1999; 568 fueron desviaciones de más de 300 ft y 58 «casi desviaciones»). Tabla clasificada de factores causales (primeras entradas): operación en SID 15,0 %, problemas del piloto automático 13,4 %, no seguir la instrucción ATC 13,3 %, reglaje erróneo del altímetro 10,9 %, manejo por el piloto 10,9 %, confusión sobre el nivel autorizado 8,1 %, cambio tardío de la autorización ATC 5,9 %, <strong>confusión de indicativos 4,2 % (26 de 626)</strong>, distracción 3,4 %, meteorología 3,0 %, autorización ATC incorrecta 2,2 %. Es una estadística concreta y citable que una pregunta de examen podría pedir directamente.</li>
+<li>Cifra general de la comunicación verbal (fuente de los «doce sucios»): <strong>normalmente solo alrededor del 30 % de un mensaje transmitido verbalmente se recibe y se entiende correctamente</strong>: un argumento contundente a favor de la disciplina de colación y escucha de la colación.</li>
+</ul>
+<hr />
+<h2 id="6-el-trabajo-en-equipo-mas-alla-del-manual-relevo-de-posicion-y-la-definicion-actual-de-trm">6. El trabajo en equipo más allá del manual: relevo de posición y la definición actual de TRM</h2>
+<h3 id="61-relevo-de-posiciones-operativas-de-atc-handover-takeover-hoto-ausente-del-manual">6.1 Relevo de posiciones operativas de ATC (<em>handover-takeover</em>, HOTO; ausente del manual)</h3>
+<p>Artículo específico de SKYbrary sobre el HOTO. Principios comunes: el relevo empieza en una situación «<strong>limpia</strong>» (sin emergencia en desarrollo, con los conflictos resueltos o con un plan); el controlador que releva llega con antelación y el relevado permanece hasta estar satisfecho de que la conciencia situacional del nuevo es adecuada; se usan listas de comprobación; el relevo <strong>no</strong> debe coincidir con un cambio de configuración de sectores.</p>
+<p><strong>Tres tipos de rotación de controladores</strong>:</p>
+<ol>
+<li><strong>Intercambio de posición</strong> (sin controlador de relevo; los dos controladores en posición intercambian sus funciones, ya sea cambiando de asiento físicamente o cambiando el papel lógico sin moverse).</li>
+<li><strong>Un controlador de relevo</strong>, con tres variantes: <strong>New-to-Hot-to-Cold</strong> (el controlador fresco ocupa el asiento ejecutivo o «caliente» y el ejecutivo relevado pasa a planificador o «frío»); <strong>New-to-Cold-to-Hot</strong> (el controlador fresco ocupa el de planificador y el planificador relevado, que ya tiene toda la conciencia situacional actualizada, pasa a ejecutivo; relevo más corto y seguro, pero con el riesgo de que el nuevo ejecutivo carezca de toda la conciencia situacional); <strong>intercambio de posición</strong> (el controlador de relevo asume el ejecutivo y luego ambos intercambian los papeles sin cambiar de asiento).</li>
+<li><strong>Dos controladores de relevo</strong> (se sustituyen las dos posiciones a la vez, típicamente al comienzo del turno): obliga a un relevo minucioso, pero conlleva el riesgo de que <strong>ambos</strong> controladores nuevos carezcan de toda la conciencia situacional una vez que el par relevado se ha marchado; <strong>el artículo recomienda evitar este tipo cuando sea posible</strong>.</li>
+</ol>
+<p>Problemas de seguridad clave señalados: intercambio de información insuficiente, tiempo de solape insuficiente, un controlador relevado con prisa por irse (o uno de relevo con prisa por tomar el control), el relevo convertido en un <strong>momento social o de saludo</strong> que distrae de la transferencia formal, falta de información previa o de reunión de equipo al comienzo del turno y demasiados relevos simultáneos entre sectores. Las medidas de mitigación se agrupan en <strong>personas / equipos (herramientas) / procedimientos</strong> e incluyen un formulario de relevo normalizado, una <strong>lista de comprobación en cada posición operativa</strong> y, en consonancia con la regla mnemotécnica «REST» que cita el artículo sobre la memoria, una sigla estructurada para la reunión informativa.
+<strong>Accidentes reales citados</strong>: Sion (Suiza) 2012 (pérdida de separación entre un Cessna 525 y un Piaggio P180, táctica ATC errónea); proximidades de Dubái 2012 (A320/B738 en proximidad peligrosa, el controlador «<strong>acababa de asumir</strong>» la posición de radar, sin STCA por problemas de configuración; lo resolvieron los RA del TCAS correctamente ejecutados); proximidades de Delhi 2013 (motor y al aire de un B737 en conflicto dos veces con un A320 que salía, fallo del ATC al desconflictar); Gotemburgo 2011 (casi colisión de un RJ85 con un vehículo terrestre autorizado a entrar en la pista durante una <strong>conversación no esencial</strong>).</p>
+<h3 id="62-trm-la-definicion-actual-de-eurocontrol-2021-frente-a-la-parafrasis-del-manual">6.2 TRM: la definición actual de EUROCONTROL (2021) frente a la paráfrasis del manual</h3>
+<p>El manual describe las seis categorías de habilidades de la TRM, pero nunca cita una definición exacta. La <strong>EC-TRM-6049</strong> («Guidelines for the Implementation and Enhancement of TRM», edición 1.0, validez 26/04/2021) recoge que la definición <strong>antigua</strong> —<em>«Estrategias para el mejor uso de todos los recursos disponibles (información, equipos y personas) para optimizar la seguridad y la eficiencia de los Servicios de Tránsito Aéreo»</em>— se considera ahora <strong>obsoleta</strong>, y propone una <strong>nueva</strong>: <em>«La Gestión de Recursos de Equipo (TRM) es un Programa de Seguridad de FH que pretende reducir o minimizar el impacto de los errores relacionados con el trabajo en equipo dentro del sistema ATM. También se esfuerza por desarrollar actitudes y conductas positivas hacia las habilidades de trabajo en equipo y el rendimiento humano en la gestión del tránsito aéreo.»</em> La TRM es el <strong>Medio Aceptable de Cumplimiento (AMC)</strong> declarado por la EASA para la formación en FH, estrés y fatiga, tanto en la <strong>formación de unidad</strong> como en la <strong>formación de refresco de ATCO</strong> (AMC1 ATCO.D.080(b)(3)), y está integrada además en la formación de cualificación de los <strong>ATSEP</strong> (apéndice 3a del anexo XIII del Reglamento (UE) 2017/373). El <strong>Marco de Competencias de la OACI para ATCO y ATSEP (2016)</strong>, parte de los PANS-Training, es el modelo de competencias general en el que se encuadra la TRM.</p>
+<hr />
+<h2 id="7-cultura-justa-y-notificacion-de-sucesos-los-textos-legales-exactos-mucho-mas-detallados-que-el-manual">7. Cultura justa y notificación de sucesos: los textos legales exactos (mucho más detallados que el manual)</h2>
+<p>El capítulo del manual sobre la normativa se queda en la lista de ATS.OR.300-320; no da ningún texto legal de cultura justa ni ninguna cita de ley española más allá de menciones genéricas. La propia página «Cultura justa» de la AESA (versión en inglés) da los textos operativos:</p>
+<ul>
+<li><strong>Definición de cultura justa (redacción de la propia AESA, en línea con el uso de la OACI/EUROCONTROL)</strong>: <em>«aquélla en la que no se castigue a los operadores y demás personal de primera línea por sus acciones, omisiones o decisiones cuando sean acordes con su experiencia y capacitación, pero en la cual no se toleren la negligencia flagrante, las infracciones intencionadas ni los actos destructivos»</em> (redacción oficial en español del PESO de la AESA).</li>
+<li><strong>Ley 21/2003, de 7 de julio, de Seguridad Aérea, artículo 11, párrafo tercero</strong> (modificada por la <strong>Ley 1/2011</strong>, de 4 de marzo, que creó el Programa Estatal de Seguridad Operacional, PESO): la información sobre seguridad facilitada voluntariamente en la que <strong>no</strong> se detecte conducta dolosa ni negligencia grave <strong>no puede</strong> usarse como prueba en procedimientos administrativos ni divulgarse públicamente (salvo en virtud del artículo 19), para que la información siga fluyendo con fines preventivos.</li>
+<li><strong>Artículo 12.1</strong> de la misma ley: la información que aporten profesionales aeronáuticos o proveedores de servicios en el marco del Programa no puede usarse para emprender acciones adversas contra ellos ni incorporarse a procedimientos ya abiertos, <strong>salvo</strong> que quede manifiestamente acreditado que los hechos constituyen conducta dolosa o negligencia grave.</li>
+<li><strong>Real Decreto 995/2013</strong>, de desarrollo del PESO: <strong>artículo 8.2</strong>: la protección no se aplica a la información de seguridad que revele acciones dolosas o gravemente negligentes; <strong>artículo 16, párrafo tercero</strong>: los órganos de supervisión deben abstenerse de acciones coercitivas o punitivas por desviaciones notificadas <strong>salvo</strong> que (a) quede claramente establecido que la desviación fue dolosa o gravemente negligente, o (b) se establezca la negligencia grave por la <strong>repetición de la conducta</strong>.</li>
+<li><strong>Reglamento (UE) n.º 376/2014, artículo 16</strong> (aplicable desde el <strong>15 de noviembre de 2015</strong>), sobre notificación de sucesos: apartado 6: los Estados miembros deben abstenerse de perseguir las infracciones no intencionadas o inadvertidas de las que solo tengan conocimiento por la notificación obligatoria o voluntaria; apartado 7: la información de las notificaciones de sucesos no puede usarse contra el notificante ni contra las personas mencionadas en procedimientos disciplinarios o administrativos; apartado 9: el empleador no puede tomar represalias contra los notificantes ni contra las personas mencionadas; <strong>apartado 10: las excepciones</strong>: (a) los casos de <strong>conducta dolosa</strong>; (b) los casos de <strong>infracción manifiesta, significativa y grave del deber de diligencia</strong> ante un riesgo evidente y una falta profesional grave, que cause un daño previsible o ponga gravemente en peligro el nivel de seguridad aérea.</li>
+<li><strong>Procedimiento de evaluación de la AESA</strong> («prueba de sustitución», basada en el trabajo de <strong>James T. Reason y David Marx</strong>): ¿habría actuado igual otro profesional con la misma cualificación y experiencia, en las mismas circunstancias? Lo aplica un <strong>panel colegiado de tres funcionarios</strong> (un delegado de la dirección de gestión de riesgos, un asesor jurídico y un delegado de la dirección responsable del área evaluada); la constatación de conducta dolosa o de negligencia grave <strong>debe ser unánime</strong>: sin unanimidad rige la «duda razonable» y la evaluación es por defecto <strong>negativa</strong> (es decir, la información sigue protegida).</li>
+</ul>
+<p>Esto es bastante más detallado que el manual y una firme candidata a preguntas de examen en la intersección de los temas 1 y 8 (cultura justa, protecciones de la notificación de sucesos).</p>
+<hr />
+<h2 id="8-limitaciones-del-rendimiento-humano-relevantes-para-un-controlador-todo-un-ambito-que-el-manual-omite">8. Limitaciones del rendimiento humano relevantes para un controlador (todo un ámbito que el manual omite)</h2>
+<p>El manual nunca cubre los límites sensoriales fisiológicos ni la ergonomía de la CWP (posición de trabajo del controlador) como tales; lo más cercano son las interfaces generales «L-H»/«L-E» del SHELL. El <em>Pilot's Handbook of Aeronautical Knowledge</em> de la FAA, capítulo 17 (Factores aeromédicos), ofrece fisiología general aprovechable, transferible a la formación de ATCO sobre los límites de la visión y la audición (el manual enumera expresamente la «visión, audición» entre los factores que afectan al L del SHELL, sin detalle):</p>
+<ul>
+<li><strong>Retina</strong>: dos tipos de fotorreceptores. <strong>Conos</strong>: visión del color y detalle fino, concentrados en la <strong>fóvea central</strong> (casi solo conos), funcionan mejor con <strong>mucha luz</strong>. <strong>Bastones</strong>: no discriminan el color, pero son mucho más sensibles con poca luz y mejores para detectar el <strong>movimiento</strong>; la fóvea casi no tiene bastones, de modo que la visión <strong>central</strong> es mala de noche, mientras que la visión <strong>periférica</strong> (rica en bastones) aporta la mayor parte de la visión nocturna.</li>
+<li><strong>Tres regímenes de visión</strong>: <strong>fotópica</strong> (mucha luz, color, detalle fino, agudeza <strong>20/20 o mejor</strong>, gobernada por los conos); <strong>mesópica</strong> (luz media o baja, uso mixto de conos y bastones, agudeza «variable»); <strong>escotópica</strong> (poca luz, gobernada por los bastones, sin color, requiere técnica de exploración, la agudeza cae a <strong>20/200 o peor</strong>: una persona debe situarse a 20 ft para leer lo que una persona de visión normal lee a 200 ft).</li>
+<li>Implicación práctica de FH para un controlador de radar o de torre: con poca luz ambiente, mirar <strong>directamente</strong> un blanco tenue (con visión central o foveal, dominada por los conos) es <strong>peor</strong> que explorar fuera del centro, que recluta los bastones periféricos: la clásica técnica de «visión descentrada» usada de noche.</li>
+</ul>
+<p>No se halló en la biblioteca actual ninguna fuente primaria independiente sobre el <strong>diseño de la CWP/HMI, alarmas, etiquetas y codificación por colores</strong> específica de las consolas ATC; la interfaz L-H del modelo SHELL (manual + CAP719) es la cobertura estructurada más cercana disponible y debe usarse junto con la trampa de examen de que los fallos de diseño de alarmas, etiquetas y colores son <strong>desajustes entre el elemento humano y el equipo</strong>, y no simplemente «error del controlador».</p>
+<hr />
+<h2 id="9-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">9. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Manual de ENAIRE (OM08)</th>
+<th>Fuente primaria</th>
+<th>Cuál seguirá con más probabilidad el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fecha de autoría del diagrama SHELL</td>
+<td>«Edwards 1972, Hawkins 1993»</td>
+<td>Circular 216-AN/131 de la OACI (reimpresa como CAP 719): «Edwards en 1972... Hawkins en <strong>1975</strong>»; el artículo «ICAO SHELL Model» de SKYbrary también afirma, de forma independiente, «Hawkins en <strong>1975</strong>»</td>
+<td>Incierto: el manual es el texto de estudio directo, de modo que una pregunta de examen que copie la redacción del propio manual esperaría 1993; pero cualquier pregunta que se refiera al «modelo SHELL de la OACI» propiamente dicho debería esperar 1975. <strong>Se señalan ambas</strong>; no hay que suponer que el 1993 del manual sea simplemente una errata sin más pruebas, pero dos fuentes independientes, primaria y secundaria, coinciden en 1975 frente al único 1993 sin fuente del manual.</td>
+</tr>
+<tr>
+<td>Nombre del modelo</td>
+<td>«SHELL-O» en todo el texto, presentado como el nombre principal de la OACI</td>
+<td>El propio compendio de la OACI lo llama <strong>SHEL</strong> (cuatro letras); la «O» de Organización es una adición posterior de otros autores (no atribuida a la OACI en la fuente primaria)</td>
+<td>El nombre de trabajo del propio manual para el examen; pero una pregunta del tipo «qué modelo usa la Circular 216-AN/131 de la OACI» debería contestarse SHEL, no SHELL-O</td>
+</tr>
+<tr>
+<td>Definición de TRM</td>
+<td>El manual parafrasea el propósito de la TRM pero no cita ninguna frase de definición única</td>
+<td>EUROCONTROL 2021 (EC-TRM-6049) califica expresamente de <strong>obsoleta</strong> la definición anterior, al estilo de SKYbrary («estrategias para el mejor uso de los recursos...»), y propone una nueva centrada en «Programa de Seguridad de FH... reducir... errores relacionados con el trabajo en equipo»</td>
+<td>Dado que el manual es anterior a la declaración explícita de «obsoleta» de 2021 y no cita literalmente ninguna de las dos frases, es poco probable que se pregunte con precisión; pero si se pregunta, cabe esperar que los bancos de preguntas más recientes prefieran la redacción <strong>actual</strong> de EUROCONTROL</td>
+</tr>
+<tr>
+<td>Cultura justa</td>
+<td>Una línea (principio 3 de los 10 principios de EUROCONTROL): «cultura justa... empatizar, entender las acciones según su contexto»</td>
+<td>Página oficial de la AESA: artículos legales exactos (Ley 21/2003 arts. 11/12, RD 995/2013 arts. 8.2/16, Reglamento 376/2014 art. 16) y el procedimiento colegiado de la «prueba de sustitución»</td>
+<td>Las fuentes primarias y legales tienen muchas más probabilidades de servir de base a una pregunta de examen precisa que la mención de una línea del manual</td>
+</tr>
+<tr>
+<td>Automatización</td>
+<td>No se cubre en absoluto</td>
+<td>Circular 234 de la OACI (Compendio 5): bucle interno/externo, complacencia, cambio de habilidades (no reducción), intimidación por automatización</td>
+<td>Aquí solo puede examinarse la fuente primaria, ya que el manual guarda silencio</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">Trampas de examen (confusiones típicas y cómo distinguirlas)</h2>
+<ol>
+<li><strong>SHEL frente a SHELL-O frente a SHELLO</strong>: el nombre original del compendio de la OACI es <strong>SHEL</strong> (4 letras); la «Organización» es una adición posterior que el manual de ENAIRE y otras fuentes modernas usan como SHELL-O. No hay que suponer que «SHELL» (doble L, sin O) sea erróneo en sí: es una forma intermedia de uso común (Software-Hardware-Environment-Liveware-Liveware, es decir, la L duplicada para marcar la interfaz L-L) que aparece en parte del material de SKYbrary; hay que saber qué variante cita cada pregunta.</li>
+<li><strong>PEAR no es SHEL</strong>: PEAR (People-Environment-Actions-Resources) es una <em>lista de comprobación</em> para evaluar o mitigar el riesgo de FH en una tarea concreta; SHEL/SHELL-O es un <em>modelo sistémico</em> de las interfaces que rodean al ser humano.</li>
+<li><strong>Los «doce sucios» (12, Dupont/Transport Canada, 1993, origen en el mantenimiento) frente a las 6 categorías de habilidades de la TRM frente a los 4 niveles del HFACS</strong>: distintos autores, distintos fines; no hay que mezclar las listas.</li>
+<li><strong>El HFACS se construye sobre el modelo del queso suizo de Reason, pero no es lo mismo</strong>: el modelo de Reason es conceptual (defensas en capas, condiciones latentes); el HFACS es una <strong>taxonomía</strong> aplicada con cuatro niveles con nombre y subcategorías definidas, desarrollada por Shappell y Wiegmann para la Armada de EE. UU.</li>
+<li><strong>La complacencia es un «modelo popular» discutido</strong>: un examen podría comprobar que se sabe que el término carece de una definición conductual rigurosa, en lugar de una definición de manual.</li>
+<li><strong>Colación frente a escucha de la colación</strong>: colación = el receptor repite el mensaje; escucha de la colación = el emisor ORIGINAL (normalmente el ATC) escucha activamente y valida esa colación. El caso del tractor de Sídney es un fallo de <strong>escucha de la colación</strong> provocado por la sobretransmisión, no un fallo de colación: el conductor sí hizo una colación, solo que nunca llegó íntegra al controlador.</li>
+<li><strong>La confusión de indicativos es una causa medida y minoritaria de los incumplimientos de nivel (4,2 % en el estudio UK CAP 710 de 626 informes)</strong>, muy por debajo de la operación en SID (15,0 %) o los problemas del piloto automático (13,4 %); no hay que suponer que sea la causa dominante solo porque se hable mucho de ella en la formación de FH.</li>
+<li><strong>Memoria sensorial (&lt; 0,5 s, ~250 ms la visual) frente a memoria a corto plazo/de trabajo (15-30 s, ~7 elementos) frente a memoria a largo plazo (ilimitada)</strong>: tres etapas distintas, no dos.</li>
+<li><strong>La memoria de trabajo de Baddeley no sustituye al concepto clásico de memoria a corto plazo</strong>: SKYbrary afirma expresamente que «no es un sustituto... sino... que se define... en función del objetivo de la tarea que se está realizando».</li>
+<li><strong>Atención sostenida = vigilancia</strong> (el mismo concepto, dos nombres); <strong>atención dividida</strong> = multitarea (recursos en competencia); <strong>atención alternante</strong> = cambiar entre tareas; <strong>atención selectiva</strong> = elegir qué muestrear. No hay que confundir la atención dividida con la alternante.</li>
+<li><strong>Tipos de rotación del HOTO</strong>: «New-to-Hot-to-Cold» pone al controlador <strong>fresco</strong> de inmediato en el asiento con más carga o ejecutivo; «New-to-Cold-to-Hot» pone primero al controlador fresco en el asiento más tranquilo o de planificador (en general se considera más seguro para la continuidad de la conciencia situacional, ya que el ejecutivo saliente, que ya tiene toda la conciencia situacional, pasa a ser el nuevo ejecutivo). Los «dos controladores de relevo» deben <strong>evitarse cuando sea posible</strong> porque ninguno de los dos nuevos puede tener toda la conciencia situacional una vez que se marchan los dos relevados.</li>
+<li><strong>Definición «antigua» frente a «nueva» (2021) de la TRM</strong>: la antigua destaca el «mejor uso de los recursos»; la nueva plantea la TRM de forma explícita como un «Programa de Seguridad de FH» dirigido a los errores relacionados con el trabajo en equipo; hay que saber que pueden aparecer ambas, pero la de 2021 es la doctrina vigente de EUROCONTROL.</li>
+<li><strong>La protección de la cultura justa no es incondicional</strong>: decae en caso de (a) conducta dolosa o deliberada o (b) infracción manifiesta, significativa y grave del deber de diligencia con daño previsible o riesgo grave para la seguridad (Reglamento 376/2014 art. 16(10)); refleja, pero no reproduce literalmente, la redacción del manual «negligencia grave, infracciones dolosas, actos destructivos».</li>
+<li><strong>«La automatización reduce los requisitos de habilidades» es un mito</strong> según el Compendio 5 de la OACI: la automatización normalmente <strong>cambia</strong> (a menudo haciendo más exigentes) o <strong>añade</strong> requisitos de habilidades, en lugar de eliminarlos.</li>
+<li><strong>Fotópica (conos, color, 20/20, luz intensa) frente a escotópica (bastones, sin color, 20/200 o peor, luz tenue) frente a mesópica (mixta, intermedia)</strong>: hay que saber qué cifra de agudeza corresponde a cada régimen.</li>
+</ol>
+<hr />
+<h2 id="imprescindible-memorizar-breve-y-denso">Imprescindible memorizar (breve y denso)</h2>
+<ul>
+<li>SHEL (Circular 216-AN/131 de la OACI = CAP 719): Edwards 1972, Hawkins 1975 [fuente primaria]; el texto del propio manual dice Hawkins 1993: hay que saber ambas.</li>
+<li>PEAR: People, Environment, Actions, Resources (lista de comprobación de FH de origen en el mantenimiento).</li>
+<li>Los «doce sucios» (12, Dupont, Transport Canada, 1993): comunicación, distracción, recursos, estrés, complacencia, trabajo en equipo, presión, conciencia, conocimientos, fatiga, asertividad, normas.</li>
+<li>HFACS (Shappell y Wiegmann, Armada de EE. UU., construido sobre Reason): 4 niveles: actos inseguros, precondiciones de los actos inseguros, supervisión insegura, influencias organizacionales.</li>
+<li>Memoria: sensorial &lt; 0,5 s (visual ~250 ms); MCP/de trabajo ~7 elementos, 15-30 s; MLP ilimitada. Baddeley: ejecutivo central, bucle fonológico, agenda visoespacial, búfer episódico. Miller 1956, Psychological Review 63:81-97.</li>
+<li>Atención: sostenida (=vigilancia), controlada frente a automática, alternante, dividida (=multitarea).</li>
+<li>Toma de decisiones: 4 pasos (definir, considerar opciones, seleccionar/implantar, revisar); sesgos: de confirmación, de continuidad, retrospectivo/de resultado, de expectativa (ATC/tripulación), de encuadre, efecto de ambigüedad, automaticidad.</li>
+<li>SASHA = SA for SHAPE; dos medidas: SASHA_L (en línea) y SASHA_Q (cuestionario).</li>
+<li>NASA-TLX: 6 subescalas: Demanda Mental, Demanda Física, Demanda Temporal, Rendimiento, Esfuerzo, Frustración; ponderadas por comparación por pares.</li>
+<li>Compendio 5 de la OACI (Circ. 234), automatización: bucle interno (control) / bucle externo (supervisión); complacencia por automatización; intimidación por automatización; la automatización cambia las habilidades, no las reduce.</li>
+<li>Colación (definición de la OACI, 2001): la estación receptora repite el mensaje para confirmarlo. Escucha de la colación = el emisor valida la colación. Caso del tractor de Sídney 2005 = fallo de escucha de la colación por sobretransmisión.</li>
+<li>CAP 710 «On the Level»: 626 informes de incumplimiento de nivel; confusión de indicativos = 4,2 % (26 casos); primera causa, operación en SID 15,0 %.</li>
+<li>HOTO: 3 tipos de rotación (intercambio de posición; un controlador de relevo: New-to-Hot-to-Cold / New-to-Cold-to-Hot / intercambio de posición; dos controladores de relevo: evitar cuando sea posible).</li>
+<li>TRM 2021 (EC-TRM-6049): nueva definición = «Programa de Seguridad de FH» que reduce los errores relacionados con el trabajo en equipo; definición antigua (ahora obsoleta) = «mejor uso de todos los recursos disponibles».</li>
+<li>Cadena legal de la cultura justa: Ley 21/2003 arts. 11 y 12 (modificada por la Ley 1/2011) → RD 995/2013 arts. 8.2 y 16 → Reglamento (UE) 376/2014 art. 16 (apartados 6, 7, 9; excepciones en el 10). Prueba de sustitución (Reason/Marx), panel unánime de 3 funcionarios.</li>
+<li>Visión: conos (color, detalle fino, fóvea, fotópica, 20/20) frente a bastones (movimiento, poca luz, periférica, escotópica, 20/200 o peor); mesópica = mixta/intermedia.</li>
+</ul>
+<hr />
+<h2 id="glosario-bilingue-es-en">Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>modelo PEAR</td>
+<td>PEAR model</td>
+</tr>
+<tr>
+<td>los «doce sucios» / doce factores de riesgo humano</td>
+<td>Dirty Dozen</td>
+</tr>
+<tr>
+<td>los «quince sucios»</td>
+<td>Filthy Fifteen</td>
+</tr>
+<tr>
+<td>normas informales / «así se hacen las cosas aquí»</td>
+<td>norms (workplace)</td>
+</tr>
+<tr>
+<td>Sistema de Análisis y Clasificación de Factores Humanos (HFACS)</td>
+<td>Human Factors Analysis and Classification System (HFACS)</td>
+</tr>
+<tr>
+<td>actos inseguros / precondiciones / supervisión insegura / influencias organizacionales</td>
+<td>unsafe acts / preconditions / unsafe supervision / organisational influences</td>
+</tr>
+<tr>
+<td>complacencia / autocomplacencia</td>
+<td>complacency</td>
+</tr>
+<tr>
+<td>memoria sensorial</td>
+<td>sensory memory</td>
+</tr>
+<tr>
+<td>memoria operativa / de trabajo</td>
+<td>working memory</td>
+</tr>
+<tr>
+<td>agrupación en bloques («chunks»)</td>
+<td>chunking</td>
+</tr>
+<tr>
+<td>bucle fonológico</td>
+<td>phonological loop</td>
+</tr>
+<tr>
+<td>agenda visoespacial</td>
+<td>visuospatial sketchpad</td>
+</tr>
+<tr>
+<td>búfer episódico</td>
+<td>episodic buffer</td>
+</tr>
+<tr>
+<td>ejecutivo central</td>
+<td>central executive</td>
+</tr>
+<tr>
+<td>memoria prospectiva / retrospectiva</td>
+<td>prospective / retrospective memory</td>
+</tr>
+<tr>
+<td>atención sostenida / vigilancia</td>
+<td>sustained attention / vigilance</td>
+</tr>
+<tr>
+<td>atención dividida</td>
+<td>divided attention</td>
+</tr>
+<tr>
+<td>atención alternante</td>
+<td>alternating attention</td>
+</tr>
+<tr>
+<td>atención selectiva</td>
+<td>selective attention</td>
+</tr>
+<tr>
+<td>toma de decisiones</td>
+<td>decision-making</td>
+</tr>
+<tr>
+<td>sesgo de confirmación</td>
+<td>confirmation bias</td>
+</tr>
+<tr>
+<td>sesgo retrospectivo / sesgo de resultado</td>
+<td>hindsight bias / outcome bias</td>
+</tr>
+<tr>
+<td>sesgo de expectativa</td>
+<td>expectation bias</td>
+</tr>
+<tr>
+<td>sesgo de encuadre</td>
+<td>framing bias</td>
+</tr>
+<tr>
+<td>efecto de ambigüedad</td>
+<td>ambiguity effect</td>
+</tr>
+<tr>
+<td>automaticidad</td>
+<td>automaticity</td>
+</tr>
+<tr>
+<td>SASHA (conciencia situacional para SHAPE)</td>
+<td>SASHA (SA for SHAPE)</td>
+</tr>
+<tr>
+<td>Índice de Carga de Tareas de la NASA (NASA-TLX)</td>
+<td>NASA Task Load Index (NASA-TLX)</td>
+</tr>
+<tr>
+<td>demanda mental / física / temporal</td>
+<td>mental / physical / temporal demand</td>
+</tr>
+<tr>
+<td>bucle interno / bucle externo</td>
+<td>inner loop / outer loop (automation)</td>
+</tr>
+<tr>
+<td>intimidación por automatización</td>
+<td>automation intimidation</td>
+</tr>
+<tr>
+<td>degradación de habilidades</td>
+<td>skill degradation</td>
+</tr>
+<tr>
+<td>colación</td>
+<td>readback</td>
+</tr>
+<tr>
+<td>escucha de la colación (por parte de ATC)</td>
+<td>hearback</td>
+</tr>
+<tr>
+<td>confusión de indicativos</td>
+<td>callsign confusion</td>
+</tr>
+<tr>
+<td>incumplimiento de nivel</td>
+<td>level bust</td>
+</tr>
+<tr>
+<td>relevo de posición operativa</td>
+<td>handover-takeover (HOTO)</td>
+</tr>
+<tr>
+<td>controlador de relevo / controlador relevado</td>
+<td>relieving / relieved controller</td>
+</tr>
+<tr>
+<td>controlador ejecutivo («caliente») / controlador planificador («frío»)</td>
+<td>executive controller ("hot") / planner controller ("cold")</td>
+</tr>
+<tr>
+<td>cultura justa</td>
+<td>just culture</td>
+</tr>
+<tr>
+<td>prueba de sustitución</td>
+<td>substitution test</td>
+</tr>
+<tr>
+<td>conducta dolosa / mala conducta intencionada</td>
+<td>wilful misconduct</td>
+</tr>
+<tr>
+<td>negligencia grave</td>
+<td>gross negligence</td>
+</tr>
+<tr>
+<td>notificación de sucesos</td>
+<td>occurrence reporting</td>
+</tr>
+<tr>
+<td>visión fotópica / mesópica / escotópica</td>
+<td>photopic / mesopic / scotopic vision</td>
+</tr>
+<tr>
+<td>bastones y conos</td>
+<td>rods and cones</td>
+</tr>
+<tr>
+<td>fóvea central</td>
+<td>fovea centralis</td>
+</tr>
+<tr>
+<td>agudeza visual</td>
+<td>visual acuity</td>
+</tr>
+<tr>
+<td>posición de trabajo del controlador (CWP)</td>
+<td>controller working position (CWP)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fuentes">Fuentes</h2>
+<p>Todos los elementos siguientes son documentos leídos en el texto extraído, salvo indicación en contrario.</p>
+<ul>
+<li>Circular 216-AN/131 de la OACI (Compendio de Factores Humanos n.º 1), reimpresa como UK CAA <strong>CAP 719 «Fundamental Human Factors Concepts»</strong>, 15 feb. 2002.</li>
+<li>Circular 234-AN/142 de la OACI (Compendio de Factores Humanos n.º 5), «Operational Implications of Automation in Advanced Technology Flight Decks».</li>
+<li>SKYbrary: PEAR Model.</li>
+<li>SKYbrary: The Human Factors «Dirty Dozen».</li>
+<li>SKYbrary: Human Factors Analysis and Classification System (HFACS).</li>
+<li>SKYbrary: Complacency.</li>
+<li>SKYbrary: ICAO SHELL Model.</li>
+<li>SKYbrary: Memory in ATC.</li>
+<li>SKYbrary: Attention Span.</li>
+<li>SKYbrary: Decision-Making.</li>
+<li>SKYbrary: Cognitive Bias.</li>
+<li>SKYbrary: Air Traffic Controller (ATC) Expectation Bias (incluye el caso de Austin de la NTSB).</li>
+<li>SKYbrary: Perception in ATC.</li>
+<li>SKYbrary: The Handover-Takeover Process (Operational ATC Positions).</li>
+<li>SKYbrary: Radiotelephony Readback Compliance and its Relationship to Safety (incluye el caso de Sídney de la ATSB de 2006).</li>
+<li>UK CAA CAP 710 «On the Level» (estudio de incumplimientos de nivel, 626 informes).</li>
+<li>EUROCONTROL, EC-SA-measures-5558 (SASHA, medidas de conciencia situacional).</li>
+<li>NASA-TLX v1.0, manual y formularios (Hart y Staveland).</li>
+<li>George A. Miller (1956), «The Magical Number Seven, Plus or Minus Two», Psychological Review 63, 81-97.</li>
+<li>EUROCONTROL, EC-TRM-6049, «Guidelines for the Implementation and Enhancement of TRM», ed. 1.0, 26/04/2021.</li>
+<li>AESA, «Cultura justa» (<em>Fair culture</em>), página oficial, última modificación el 18 de abril de 2023.</li>
+<li>FAA, Pilot's Handbook of Aeronautical Knowledge, capítulo 17, Aeromedical Factors.</li>
+<li>ENAIRE, <em>Factores Humanos en ATM</em>, julio de 2023, consultado para el contraste de la fecha SHELL-O/Hawkins y de los pasajes de TRM y cultura justa.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,159 @@
+¿Cuál es la base legal que obliga a ENAIRE a tener un «plan de actuación» estratégico?	Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público, arts. 85.1, 92.2 y 92.3 (revisado cada tres años).	ATC::T07b
+¿En qué fecha aprobó el Consejo Rector de ENAIRE el Plan de Vuelo 2030 (versión 1.0)?	El 19 de diciembre de 2025.	ATC::T07b
+¿En qué fecha y mediante qué instrumento se aprobó definitivamente el PV2030 (versión 1.1)?	El 19 de marzo de 2026, por Orden del Ministro de Transportes y Movilidad Sostenible.	ATC::T07b
+¿Cuál es el código de documento del Plan de Vuelo 2030?	G1-25-PLA-001-1.1.	ATC::T07b
+¿Cuántos años está en vigor el Plan de Vuelo 2030 una vez aprobado?	5 años, sin perjuicio de una revisión obligatoria conforme a la Ley 40/2015 durante ese periodo.	ATC::T07b
+¿Por qué dos canales publica ENAIRE el Plan de Vuelo 2030?	Internamente, por la intranet «Nube»; externamente, por www.enaire.es.	ATC::T07b
+¿Qué cinco pilares nombra la introducción del PV2030 como base de la estrategia?	Movilidad sostenible, digitalización, eficiencia, innovación e internacionalización, con la seguridad como máxima prioridad estratégica.	ATC::T07b
+¿Cuántos «Planes Estratégicos de Actuación» tenía el Plan de Vuelo 2025 y en cuántas áreas se clasificaban?	12 planes estratégicos de actuación, clasificados en 3 áreas (Servicios, Desarrollo de Negocio, Transformación), con la Gobernanza como garante transversal.	ATC::T07b
+¿Cómo se compara en escala la estructura de la época del PV2025 (12 planes, 3 áreas) con el PV2030 (56 planes, 4 bloques, 17 áreas)?	El PV2030 tiene unas 4,7 veces más planes estratégicos y una estructura de bloques y áreas mucho más detallada.	ATC::T07b
+¿Cómo se titula el documento que cierra el Plan de Vuelo 2025 y cuándo se emitió?	«Plan de Vuelo 2025 - Grado de Cumplimiento 2021-2025», emitido en junio de 2026.	ATC::T07b
+Según el informe de Grado de Cumplimiento, ¿con cuántos vuelos cerró ENAIRE 2025 y qué parte del tráfico europeo representó España?	2,5 millones de vuelos (récord histórico); España representó el 22 % del tráfico aéreo europeo.	ATC::T07b
+¿Qué reconocimiento EFQM obtuvo ENAIRE en 2024 y quién lo concedió?	El Sello EFQM 600, concedido por el Club de Excelencia en Gestión en nombre de la European Foundation for Quality Management.	ATC::T07b
+Completa el texto íntegro del objetivo estratégico 6 del PV2025, que el PDF del manual corta a mitad de frase.	«...desarrollando una cultura organizativa centrada en nuestras personas como principal activo de la empresa».	ATC::T07b
+¿Qué dos periodos de referencia (RP) tuvo que seguir a la vez el Plan de Vuelo 2025, lo que complicaba sus propios indicadores?	RP3 (2020-2024) y RP4 (2025-2029).	ATC::T07b
+En la estructura de bloques del PV2030, ¿qué bloque tiene él solo tantos planes estratégicos como los otros tres juntos?	El bloque 4 (Servicios), con 28 planes, igual a los bloques 1+2+3 juntos (3+17+8=28).	ATC::T07b
+¿Cuál es el código y el nombre completo del plan de Gobernanza sobre Buen Gobierno del bloque 1?	GC1 - Buena Gobernanza: refuerza y da a conocer la práctica de buen gobierno del Consejo Rector.	ATC::T07b
+¿Cuál es el código y el objetivo del plan de Ética del bloque 1 y qué certificación persigue?	GC2 - Ética y Cumplimiento Normativo: refuerza la formación en el Código Ético y el Canal Ético; persigue la certificación UNE 19601 de cumplimiento penal.	ATC::T07b
+¿Qué es el plan GC3 del bloque Gobernanza y Cumplimiento?	Buenas prácticas tributarias: refuerza la relación cooperativa y transparente con la Agencia Tributaria y mitiga el riesgo fiscal.	ATC::T07b
+¿Qué área del bloque 2 (Liderazgo Transformacional) contiene los planes SF1, SF2 y SF3?	Solidez Financiera.	ATC::T07b
+¿Qué es el plan SF1?	Compite: la posición competitiva de ENAIRE.	ATC::T07b
+¿Qué es el plan SF2?	Agiliza: excelencia en la contratación pública.	ATC::T07b
+¿Qué es el plan SF3?	Optimiza: gestión de costes.	ATC::T07b
+¿Qué área del bloque 2 contiene los planes IR1, IR2 e IR3?	Impulso a las Regiones.	ATC::T07b
+¿Qué es el plan IR1?	Adecuación de las estructuras regionales.	ATC::T07b
+¿Qué es el plan IR3?	Enfoque a turnos.	ATC::T07b
+¿Qué área del bloque 2 contiene los planes PE1, PE2 y PE3?	Nuestras Personas.	ATC::T07b
+¿Qué es el plan PE1?	Hacia nuevas formas de liderar.	ATC::T07b
+¿Qué es el plan PE3?	Compromiso, bienestar y diversidad.	ATC::T07b
+¿Qué área del bloque 2 contiene los planes EX1, EX2 y EX3?	Calidad y Excelencia en Gestión.	ATC::T07b
+¿Qué es el plan EX1?	Gestión excelente 5.0.	ATC::T07b
+¿Qué es el plan EX3?	Optimización de las previsiones de demanda de tráfico aéreo.	ATC::T07b
+¿Qué área del bloque 2 contiene los planes GI1, GI2 y GI3?	Relación con Grupos de Interés.	ATC::T07b
+¿Qué es el plan GI1?	Experiencia de Cliente.	ATC::T07b
+¿Qué área del bloque 2 contiene los planes CM1 y CM2?	Cooperación Civil-Militar.	ATC::T07b
+¿Qué es el plan CM1?	Colaboración estratégica con Defensa.	ATC::T07b
+¿Qué es el plan CM2?	Un futuro en seguridad.	ATC::T07b
+¿Qué área del bloque 3 (Internacionalización y Desarrollo Empresarial) contiene los planes IN1 e IN2?	Internacionalización.	ATC::T07b
+¿Qué es el plan IN1?	Posicionamiento y liderazgo estratégico internacional.	ATC::T07b
+¿Qué área del bloque 3 contiene los planes DN1, DN2 y DN3?	Desarrollo de Negocio.	ATC::T07b
+¿Qué es el plan DN1?	Desarrollo de Negocio No Regulado (EGS).	ATC::T07b
+¿Qué es el plan DN3?	Desarrollo comercial y de nuevos servicios.	ATC::T07b
+¿Qué área del bloque 3 contiene los planes IO1, IO2 e IO3?	Innovación como Motor del Desarrollo.	ATC::T07b
+¿Qué es el plan IO2?	CRIDA como impulsor de la I+D de ENAIRE.	ATC::T07b
+¿Qué es el plan IO3 y cuál es su subtítulo?	Estrategia de Inteligencia Artificial (IA), con el subtítulo «iANAIRE».	ATC::T07b
+¿Qué área del bloque 4 (Servicios) contiene los planes SG1, SG2 y SG3?	Seguridad.	ATC::T07b
+¿Qué es el plan SG1?	REFUERZA: La Seguridad Operacional.	ATC::T07b
+¿Qué es el plan SG2?	ANTICIPA: implantación de un Sistema de Gestión de la Seguridad (SGS) predictivo.	ATC::T07b
+¿Qué es el plan SG3?	PROTEGE: Seguridad Física - Ciber.	ATC::T07b
+¿Qué área del bloque 4 contiene los planes SA1 a SA5?	Servicios ATM.	ATC::T07b
+¿Qué es el plan SA1?	Incremento de la Capacidad.	ATC::T07b
+¿Qué es el plan SA2?	Reestructuración del Espacio Aéreo.	ATC::T07b
+¿Qué es el plan SA4?	Mejora de la gestión de la Meteorología Adversa.	ATC::T07b
+¿Qué es el plan SA5 y qué significa la sigla entre paréntesis?	Mejora del servicio FIS (MiFIS): mejora del servicio de información de vuelo.	ATC::T07b
+¿Qué área del bloque 4 contiene los planes SR1, SR2 y SR3?	Servicios de Red.	ATC::T07b
+¿Qué es el plan SR1?	Plan EYWA.	ATC::T07b
+¿Qué es el plan SR3?	Refuerzo de la resiliencia operacional en Servicios ATS/CNS.	ATC::T07b
+¿Qué área del bloque 4 contiene los planes SI1 y SI2?	Servicios de Información Aeronáutica.	ATC::T07b
+¿Qué es el plan SI2?	Evolución de la gestión de Información Aeronáutica (AIM).	ATC::T07b
+Nombra por orden los 5 planes «Green Sky» (área: Sostenibilidad Medioambiental) del bloque 4 del PV2030.	SM1 Fly Clean; SM2 Fly Quiet; SM3 Eco ENAIRE; SM4 Compromiso Verde; SM5 Responsabilidad Ambiental.	ATC::T07b
+¿Qué área del bloque 4 contiene los planes DT1 a DT7?	Digital Tech.	ATC::T07b
+¿Qué es el plan DT1?	Evolución de Sistemas ATM.	ATC::T07b
+¿Qué es el plan DT7?	Infraestructuras 2030.	ATC::T07b
+¿Qué es el plan DT5?	Evolución de la Explotación Técnica.	ATC::T07b
+¿Qué área del bloque 4 contiene los planes NU1, NU2 y NU3?	Servicios a Drones y Nuevos Usuarios.	ATC::T07b
+¿Qué es el plan NU1?	U-Space / Innovative Air Mobility.	ATC::T07b
+¿Qué es el plan NU3 y qué significa la sigla entre paréntesis?	Gestión del Tráfico Espacial (HAO - STM), es decir, Space Traffic Management / operaciones a gran altitud (high-altitude operations).	ATC::T07b
+¿Cuántos planes estratégicos contiene en total el bloque Servicios del PV2030 y cuántas áreas?	28 planes en 7 áreas (Seguridad, Servicios ATM, Servicios de Red, Servicios de Información Aeronáutica, Sostenibilidad Medioambiental, Digital Tech, Servicios a Drones y Nuevos Usuarios).	ATC::T07b
+¿Cuántos riesgos estratégicos selecciona el mapa de riesgos del PV2030 y cómo se identifican?	13 riesgos estratégicos, identificados con las letras A a M.	ATC::T07b
+¿Qué comité supervisa la gestión de riesgos de ENAIRE en el PV2030?	El Comité de Riesgos, Resiliencia, Crisis y Recuperación.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre el marco regulatorio, la supervisión y las restricciones a la competencia?	Riesgo A.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre los conflictos laborales y la gestión de personas?	Riesgo B.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre la continuidad del servicio y la respuesta a incidentes y crisis?	Riesgo C.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre la incertidumbre macroeconómica y geopolítica?	Riesgo D.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre el contrato de prestación de servicios con Aena S.A.?	Riesgo E.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre la sostenibilidad medioambiental y el cambio climático?	Riesgo F.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre el incumplimiento del plan de inversiones o de las condiciones de las ayudas de la UE?	Riesgo G.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre la ciberseguridad y la seguridad física?	Riesgo H.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre un suceso grave de seguridad operacional en el que intervengan una o varias aeronaves?	Riesgo I.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre la liquidez y la gestión de cobros?	Riesgo J.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre las reclamaciones judiciales adversas?	Riesgo K.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre el daño reputacional?	Riesgo L.	ATC::T07b
+¿Qué riesgo estratégico (letra) del PV2030 cubre el buen gobierno y el cumplimiento normativo?	Riesgo M.	ATC::T07b
+En el mapa de riesgos del PV2030, ¿las cláusulas de penalización de qué contrato concreto se nombran como riesgo estratégico (riesgo E)?	El contrato de servicios de navegación aérea ENAIRE-Aena S.A.	ATC::T07b
+¿Cuáles son los 6 objetivos estratégicos del Plan Estratégico de la OACI 2026-2050?	Cero víctimas mortales; cero emisiones netas de carbono en 2050; movilidad fluida, accesible y fiable para todos; colaboración para que los beneficios lleguen a todos los Estados; derecho aeronáutico adaptado; desarrollo económico del transporte aéreo.	ATC::T07b
+¿Cuándo se aprobó el Plan Estratégico de la OACI 2026-2050 y quién lo hizo?	El 1 de noviembre de 2024, el Consejo de la OACI.	ATC::T07b
+¿Qué papel tuvo España en la elaboración del Plan Estratégico de la OACI 2026-2050?	España fue designada Coordinadora del Grupo Consultivo.	ATC::T07b
+¿Qué significa GANP y qué es?	Plan mundial de navegación aérea (Global Air Navigation Plan): el principal instrumento estratégico de la OACI para alcanzar sus Objetivos Estratégicos; apoya también la Agenda 2030 de la ONU.	ATC::T07b
+¿Qué diferencia hay entre GASP y GASeP?	GASP = Plan global para la seguridad operacional de la aviación (Global Aviation Safety Plan; reducción de accidentes y riesgos, safety); GASeP = Plan global para la seguridad de la aviación (Global Aviation Security Plan; amenazas a la seguridad, security, no safety).	ATC::T07b
+¿Qué es la Empresa Común SESAR 3 (S3JU)?	La asociación público-privada europea institucional que acelera, mediante I+D+i, la transformación hacia el «Cielo Digital Europeo».	ATC::T07b
+¿Qué es el Gestor de Despliegue de SESAR (SDM)?	El organismo designado por la Comisión Europea para coordinar el despliegue sincronizado de las mejoras operativas de SESAR mediante Proyectos Comunes.	ATC::T07b
+¿Quién gestiona la actividad del SDM y durante qué periodo?	Un consorcio de los 14 principales ANSP, operadores aeroportuarios y usuarios del espacio aéreo europeos (SDIP, SESAR Deployment & Infrastructure Partnership), del 1 de junio de 2022 a 2027.	ATC::T07b
+¿Qué dos familias de fondos de la UE cofinancian la I+D+i y el despliegue de SESAR?	El MCE (Mecanismo «Conectar Europa» - CEF, Redes Transeuropeas) y el Programa Marco (Horizonte 2020, Horizonte Europa).	ATC::T07b
+¿Qué visión fija el Plan Maestro ATM europeo para el espacio aéreo europeo y para cuándo?	El cielo más eficiente y más verde del mundo, en 2045.	ATC::T07b
+¿Cuándo se aprobó la última actualización del Plan Maestro ATM europeo?	Diciembre de 2024.	ATC::T07b
+Nombra el SDO 1 del Plan Maestro ATM europeo.	Alertas para reducir los riesgos de colisión en calles de rodaje y pistas.	ATC::T07b
+Nombra el SDO 5 del Plan Maestro ATM europeo.	Transformación hacia operaciones basadas en trayectorias (TBO).	ATC::T07b
+Nombra el SDO 8 del Plan Maestro ATM europeo.	Modelo de prestación orientado al servicio (basado en datos y en la nube).	ATC::T07b
+Nombra el SDO 10 del Plan Maestro ATM europeo.	Habilitar la movilidad aérea innovadora (IAM) y las operaciones con drones.	ATC::T07b
+¿Qué es el Plan Estratégico de la Red (NSP 2025-2029) y cuántos objetivos estratégicos tiene?	La hoja de ruta estratégica del Gestor de Red Europeo para la red ATM continental en el marco del SES; 10 objetivos estratégicos.	ATC::T07b
+¿Qué es el Plan de Operaciones de la Red (NOP) y qué fija por centro de control?	Un plan a corto y medio plazo (2025/2026-2029) que fija Perfiles de Capacidad anuales por centro de control, a partir de los objetivos del RP4 y del indicador de movimientos por hora.	ATC::T07b
+¿Qué centros de control españoles señala el NOP 25-29 como necesitados de aumentos de capacidad especialmente exigentes?	Barcelona y Sevilla.	ATC::T07b
+Según el Reglamento (UE) 2019/317, ¿qué objetivo de capacidad (demora ATFM en ruta) de toda la UE para el RP4 se aplica en 2025 y en 2029?	0,90 min/vuelo (2025), bajando a 0,50 min/vuelo (2029).	ATC::T07b
+¿Cuál es el objetivo local de España de demora ATFM en ruta según el ESPP4 para 2025 y 2029 y cómo se compara con el techo de toda la UE?	0,38 min/vuelo (2025) a 0,21 min/vuelo (2029); mucho más estricto que el techo de toda la UE porque España ya rinde por encima de la media de la UE.	ATC::T07b
+¿Cuál es el objetivo de toda la UE de KEA (KPA de medioambiente) para 2025 y 2029 en el RP4?	2,80 % (2025), mejorando hasta 2,66 % (2029).	ATC::T07b
+¿Cuál es el objetivo local de España de KEA según el ESPP4 para 2025 y 2029?	2,86 % (2025), mejorando hasta 2,74 % (2029).	ATC::T07b
+¿Está el objetivo local de KEA de España por encima o por debajo del de toda la UE y qué significa?	Por encima (peor) en 2025 y en 2029; los valores de referencia locales son un desglose específico de cada Estado y no tienen por qué igualar la media de toda la UE.	ATC::T07b
+¿Cuál es el objetivo de toda la UE de coste-eficiencia (DUC) en el RP4, a corto y a largo plazo?	-1,2 % anual (2025-2029, corto plazo); -1,0 % anual a largo plazo (RP3+RP4 combinados).	ATC::T07b
+¿Qué aeropuertos incluye el ámbito del ESPP4 con ATS de aeródromo de un proveedor privado (Skyway) y con qué regla de umbral?	Alicante-Elche e Ibiza; Alicante superó los 80 000 movimientos IFR al año e Ibiza se esperaba que lo hiciera.	ATC::T07b
+Según el art. 35.2 del Reglamento (UE) 2019/317, ¿de qué requisitos del RP4 están exentos Alicante e Ibiza?	Objetivos de coste-eficiencia, reparto de riesgos de tráfico y costes, incentivos financieros de capacidad y medio ambiente, cálculo de la tarifa terminal y requisitos de consulta.	ATC::T07b
+¿Qué autoridad elabora el ESPP4 y en colaboración con qué otras autoridades nacionales de supervisión?	AESA (ANS civil), en colaboración con la ANS de MET y la ANS militar (MIL).	ATC::T07b
+¿En qué fecha se publicó en el DOUE la Decisión de la Comisión que aprueba el ESPP4?	El 28 de mayo de 2025 (Decisión (UE) 2025/1063, adoptada el 19 de mayo de 2025).	ATC::T07b
+¿Cuánto había superado ya el tráfico real español los supuestos de tráfico de base del ESPP4 en 2025 y cuánto podría crecer la diferencia en 2027-2028?	Cerca del 4 % en 2025, con posibilidad de superar el 10 % en 2027-2028 en el escenario «Alto».	ATC::T07b
+¿Cuándo se promulgó la Ley 9/2025, de Movilidad Sostenible?	El 3 de diciembre de 2025.	ATC::T07b
+¿Qué es la «triple sostenibilidad» que nombra la Ley 9/2025?	Equidad económico-social, eficiencia energética y respeto al entorno natural y urbano.	ATC::T07b
+¿Cuándo se aprobó la Estrategia de Movilidad Segura, Sostenible y Conectada 2030 y quién la aprobó?	En diciembre de 2021, el Consejo de Ministros.	ATC::T07b
+¿Qué es el PERTE Aeroespacial, cuándo se aprobó y cuánto movilizó en 2021-2025?	Proyecto Estratégico para la Recuperación y Transformación Económica del sector Aeroespacial, aprobado en marzo de 2022; movilizó unos 4533 M EUR (~2193 M EUR públicos + ~2340 M EUR privados).	ATC::T07b
+¿Qué es DORA y qué periodo cubre DORA II?	Documento de Regulación Aeroportuaria (instrumento de regulación aeroportuaria de Aena conforme a la Ley 18/2014); DORA II cubre 2022-2026.	ATC::T07b
+¿Cuándo se espera aprobar el DORA III y para qué periodo?	Se espera en 2026, para el periodo 2027-2031.	ATC::T07b
+¿Qué periodo cubre el PANDU (Plan de Acción Nacional para el Despliegue del U-space) y qué papel prevé para ENAIRE?	2022-2025; ENAIRE sería certificada o designada como CISP nacional (proveedor del servicio de información común).	ATC::T07b
+¿Qué Real Decreto de junio de 2024 designa oficialmente a ENAIRE como CISP nacional inicial para el U-space?	El RD 517/2024.	ATC::T07b
+¿Aproximadamente cuánto cayeron las solicitudes de coordinación de drones a ENAIRE después de que el RD 517/2024 permitiera la operación de UAS sin coordinación en algunas zonas?	Cerca de un 25 %.	ATC::T07b
+¿Con arreglo a qué artículo del marco SES2+ de la Ley de Movilidad Sostenible pueden los Estados miembros permitir que los gestores aeroportuarios contraten el ATS de control de aeródromo/aproximación en condiciones de mercado?	Con arreglo a las disposiciones del SES2+ sobre ATSP y condiciones de mercado (no hay un único artículo numerado en el texto leído); el requisito clave es que más del 50 % de la propiedad o del control sea de un Estado miembro o de sus nacionales.	ATC::T07b NV
+¿Cuándo se aprobó originalmente la Política de Cultura Justa de ENAIRE y quién lo hizo?	En noviembre de 2015, el Director General.	ATC::T07b
+¿Cuándo se actualizó la Política de Cultura Justa y se elevó a aprobación del Consejo Rector?	El 27 de marzo de 2023 (entró en vigor ese día).	ATC::T07b
+¿Cuál es el código de documento de la Política de Cultura Justa de ENAIRE?	DGL-15-POL-002-2.0.	ATC::T07b
+¿Cómo define la Política de Cultura Justa de ENAIRE la Cultura Justa?	Una cultura en la que no se castiga al personal por acciones, omisiones o decisiones acordes con su formación y experiencia, pero no se toleran el dolo, la negligencia flagrante, las infracciones intencionadas ni los actos destructivos.	ATC::T07b
+Según la Política de Cultura Justa, ¿cuándo se puede aún tomar medidas disciplinarias contra un trabajador que notifica un suceso de seguridad?	Solo si la investigación prueba una falta deliberada o intencionada, o que el trabajador operaba bajo los efectos de sustancias psicoactivas.	ATC::T07b
+¿Qué es el CISM en la Política de Cultura Justa de ENAIRE?	Gestión del estrés por incidente crítico (Critical Incident Stress Management): un programa para gestionar el estrés de los incidentes traumáticos.	ATC::T07b
+¿Recomendaciones de qué organizaciones cita como referencia la Política de Cultura Justa de ENAIRE, además de la normativa de la UE y nacional?	CANSO y EUROCONTROL, además de la práctica de los principales ANSP del mundo.	ATC::T07b
+¿Quién supervisa el despliegue de la Política de Cultura Justa de ENAIRE y ante quién informa de los avances?	El Comité de Dirección la supervisa e informa de los avances al Consejo Rector cuando procede.	ATC::T07b
+¿Cuándo se publicó la Carta de Servicios 2025-2027 de ENAIRE?	En febrero de 2025.	ATC::T07b
+¿Qué redacción del Propósito cita la Carta de Servicios 2025-2027 y qué confirma?	La del PV2025, con «rápido»; confirma que esa redacción seguía vigente en el lenguaje corporativo todavía en febrero de 2025.	ATC::T07b
+¿Qué compromiso de cumplimiento del slot asume la Carta de Servicios?	Al menos el 90 % de los vuelos cumplirán su slot programado.	ATC::T07b
+¿Qué compromiso de disponibilidad asume la Carta de Servicios para los servicios del Sistema de Navegación Aérea?	El 99 % de los servicios con disponibilidad superior al 95 %; al menos el 97 % por encima de un umbral más estricto.	ATC::T07b
+¿Qué mínimo de calidad percibida asume la Carta de Servicios y cómo se compara con el objetivo del indicador estratégico del propio PV2030?	Superior al 75 %; inferior a la ambición interna del PV2030, del 78,5 % (2026) hasta el 80 % (2030).	ATC::T07b
+¿Qué compromiso de respuesta a reclamaciones asume la Carta de Servicios?	El 85 % de las reclamaciones y sugerencias contestadas en 20 días o menos; otro 10 % en un plazo más largo; el 5 % excluido por causas justificadas.	ATC::T07b
+¿Qué servicio, incluido en la Carta de Servicios, no figura entre los seis servicios oficiales del manual?	El SDP (Servicio de Dirección de Plataforma), gestión de la plataforma.	ATC::T07b
+¿Qué certificado de Sistema de Gestión Ambiental emitido por AENOR tiene ENAIRE?	GA-2005/0575.	ATC::T07b
+¿Qué certificado de Sistema de Gestión de la Calidad emitido por AENOR tiene ENAIRE?	ER-1034/2007.	ATC::T07b
+¿En qué dos categorías está certificada ENAIRE conforme al Esquema Nacional de Seguridad?	MEDIA (ENS-2018/0006) y ALTA (ENS-2020/0020).	ATC::T07b
+¿Cuál es el código del certificado del Sello EFQM 600 de ENAIRE y en qué modelo se basa?	CEG/24/S600/6, basado en el modelo EFQM 2020.	ATC::T07b
+¿Cuántos Objetivos de Desarrollo Sostenible (ODS) de la ONU contiene la Agenda 2030 y cuántos países la firmaron en 2015?	17 ODS, firmados por 193 países.	ATC::T07b
+¿A qué marco del Pacto Mundial se compromete ENAIRE, junto con los ODS?	A los 10 Principios del Pacto Mundial (Pacto Mundial de las Naciones Unidas).	ATC::T07b
+Según la actualización de STATFOR de octubre de 2025, ¿en qué año recuperaría Europa (ECAC, 44 Estados) los niveles de tráfico de 2019 en el escenario «Base»?	2026.	ATC::T07b
+¿Cuál es la previsión propia de ENAIRE de crecimiento del tráfico en España en 2030 respecto a 2025 y el factor de recuperación de 2019 que implica?	+18,1 % (2030 respecto a 2025), un factor de recuperación del 136 % respecto a 2019.	ATC::T07b
+¿Qué gran país europeo por tráfico mostró la mayor caída de tráfico de 2024 respecto a 2019?	Alemania, con -16,9 %.	ATC::T07b
+Según las previsiones del PV2030, ¿a qué país podría superar España en tráfico en 2030?	El Reino Unido.	ATC::T07b
+En la previsión de ENAIRE 2030 respecto a 2025, ¿crece más rápido el tráfico de Canarias o el de la Península?	Canarias (+23 %) crece más rápido que la Península (+19 %).	ATC::T07b
+¿Qué ACC español tiene el mayor crecimiento previsto de tráfico en 2030 respecto a 2025?	El ACC de Sevilla, +22,6 %.	ATC::T07b
+¿Qué ACC español muestra la mayor estacionalidad de 2024 (relación entre tráfico máximo y mínimo)?	El ACC de Palma, con el 321 %.	ATC::T07b
+¿Qué aeropuerto español muestra el mayor crecimiento previsto en 2030 respecto a 2025 entre los aeropuertos principales?	Barcelona, +22,3 %.	ATC::T07b
+¿Cuánto creció el tráfico VFR en España en 2024?	Un 8,5 % respecto al año anterior.	ATC::T07b
+¿Qué condición meteorológica favorable cita el PV2030 para el vuelo VFR en España?	Más de 300 días soleados al año, más de 2500 horas de sol por provincia de media.	ATC::T07b
+¿Qué dos herramientas de ENAIRE nombra el PV2030 para los pilotos VFR?	La Guía VFR y la aplicación Insignia VFR.	ATC::T07b
+¿Cuál es la secuencia de objetivos del indicador estratégico propio de ENAIRE «ERD ATR» (demora ATFM en ruta atribuible a ENAIRE) para 2026 y 2030?	Menor o igual a 0,60 (2026), mejorando hasta 0,21 (2030).	ATC::T07b
+¿Cuál es el objetivo del PV2030 para el indicador «% Contribución inversión a Plan Maestro ATM Europeo», 2026-2028 frente a 2029-2030?	65 % (2026-2028), subiendo al 70 % (2029-2030).	ATC::T07b
+¿Qué análisis CAME usó ENAIRE para preparar la evaluación de factores internos del PV2030?	Corregir, Afrontar, Mantener y Explotar.	ATC::T07b
+¿Qué conclusión del DAFO extrajo el PV2030 sobre las fortalezas internas de ENAIRE?	Muy sólida en seguridad y calidad del servicio, capital humano altamente cualificado, estabilidad financiera y firme compromiso con la sostenibilidad.	ATC::T07b
+¿Qué debilidad o reto interno señaló el análisis DAFO del PV2030 en relación con el personal?	Dificultad para retener talento a largo plazo y envejecimiento de la plantilla.	ATC::T07b

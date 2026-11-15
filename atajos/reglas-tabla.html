@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reglas y orden</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.9' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='5.5'/%3E%3Cpath d='M12 12L19 5'/%3E%3Ccircle cx='16.4' cy='16.6' r='1.1'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light dark;
+--bg:#f4f2ec;--stripe:#ebe8df;--surface:#ffffff;--text:#1b1b1b;--muted:#5f5b53;--rule:#cfcabd;
+--accent:#1a4d8f;--accent-h:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--err:#a3241c;
+--serif:Georgia,"Iowan Old Style",serif;--sans:system-ui,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+--bg:#161615;--stripe:#262624;--surface:#1e1e1c;--text:#e7e4dc;--muted:#a19c90;--rule:#3a3935;
+--accent:#7fb0e8;--accent-h:#a6c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--err:#e5766d}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans);overflow-x:hidden}
+a{color:var(--accent)}a:hover{color:var(--accent-h)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+svg.logo{width:28px;height:28px;flex:none;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+header.top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+header.top h1{font:700 26px/1.15 var(--serif);margin:0;letter-spacing:-.005em}
+header.top a.back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:6px 0}
+header.top a.back:hover{text-decoration:underline}
+header.top a.back svg{transform:scaleX(-1)}
+main{max-width:1100px;margin:0 auto;padding:16px 16px 40px}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:26px 0 10px}
+button,input,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;min-height:40px}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.on{background:var(--accent);color:var(--onacc)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.sm{padding:5px 10px;min-height:32px}
+.seg{display:inline-flex}
+.seg .btn{border-radius:0;margin-left:-1px}
+.seg .btn:first-child{border-radius:2px 0 0 2px;margin-left:0}
+.seg .btn:last-child{border-radius:0 2px 2px 0}
+.seg .btn:focus-visible{position:relative;z-index:1}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select,input[type=text],input[type=number]{background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:7px 9px;min-height:36px;max-width:100%}
+input[type=range]{accent-color:var(--accent);width:100%}
+.muted{color:var(--muted)}.small{font-size:14px}
+.ok{color:var(--ok)}.bad{color:var(--err)}.warn{color:var(--warn)}
+.mono{font-family:var(--mono);font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 10px 6px 0}
+td{padding:6px 10px 6px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.tblw{overflow-x:auto}
+.foot{margin-top:28px;padding-top:12px;border-top:1px solid var(--rule);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.foot a{display:inline-flex;align-items:center;gap:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg text{font-family:var(--sans)}
+.cv{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+:root{--c-rojo:#b3361f;--c-azul:#1a4d8f;--c-verde:#2d6a3e}
+@media (prefers-color-scheme:dark){:root{--c-rojo:#e5766d;--c-azul:#7fb0e8;--c-verde:#7cbf8a}}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:minmax(0,1fr);gap:8px}}
+.ctl{margin:8px 0}
+.rules{border-top:1px solid var(--text)}
+.rr,.rr2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.num{font:700 18px var(--serif);color:var(--accent);width:1.2em}
+.rr .sp{flex:1 1 170px;min-width:0}
+.cw{display:inline-flex;align-items:center;gap:4px;color:var(--muted)}
+.rr2 input[type=number]{width:5.2em}
+table.stats{margin:10px 0}
+table.stats td{padding:6px 10px 6px 0}
+table.stats tr.best td{background:var(--stripe)}
+table.stats .m{font-family:var(--mono);font-size:14px;color:var(--muted)}
+table .r{text-align:right;font-variant-numeric:tabular-nums}
+table .c{text-align:center;width:2.4em}
+table td.c svg.ic{width:1.1em;height:1.1em}
+table .ic.ok{color:var(--ok)}table .ic.bad{color:var(--err);opacity:.8}
+tr.imp td{color:var(--muted);opacity:.55}
+td.bar{width:48%}
+td.bar i{display:block;height:8px;background:var(--accent);opacity:.75}
+.ladder{display:block;width:100%;max-width:440px;height:auto}
+.ladder text{font-size:14px;dominant-baseline:central;fill:var(--text)}
+.ladder .nd rect{fill:var(--surface);stroke:var(--text);stroke-width:1.3}
+.ladder .nd.cur rect{stroke:var(--accent);stroke-width:3}
+.ladder .nd.pass rect{fill:var(--stripe)}
+.ladder .nd.fail rect{fill:var(--stripe);stroke-dasharray:4 3}
+.ladder .nn{font:700 16px var(--serif);fill:var(--accent)}
+.ladder .nl{font-size:14px}
+.ladder .mk.pass{fill:var(--ok);font-weight:700}.ladder .mk.fail{fill:var(--err);font-weight:700}
+.ladder .ed{stroke:var(--muted);stroke-width:1.3;fill:none}
+.ladder .el{font-weight:700}
+.ladder .ep,.ladder .sm{fill:var(--muted);font-size:13px}
+.ladder .ring{fill:none;stroke:var(--accent);stroke-width:2}
+.objrow{display:flex;gap:18px;align-items:center;min-height:100px}
+.objbox{width:92px;height:92px;border:1px solid var(--rule);background:var(--surface);border-radius:2px;display:flex;align-items:center;justify-content:center}
+.objbox text.on{font:700 26px var(--sans);fill:var(--surface);text-anchor:middle;dominant-baseline:central}
+.or{font:700 22px var(--serif);margin-top:6px;min-height:1.3em}
+.or.ok{color:var(--accent)}
+.sets .sv{display:flex;gap:10px;align-items:center;padding:6px 2px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.sets{border-top:1px solid var(--rule)}.sets:empty{border:0}
+.sn{flex:1 1 120px;font-weight:600}
+#nm{width:200px}
+
+</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M6 5l8 7-8 7M18 5v14"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 6L4 11l5 5M4 11h9a6 6 0 0 1 0 8"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></symbol><symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15l-3-3M20 16H5l3 3"/></symbol><symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M8 7L3 18h5zM16 7l5 11h-5z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol></svg>
+
+<header class="top"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg><h1>Reglas y orden</h1><a class="back" href="index.html"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>Atajos</a></header>
+<main>
+<div class="two">
+<section>
+<div class="row ctl">
+<div class="seg" role="group" aria-label="Tipo"><button class="btn" id="md-y" type="button">Todas</button><button class="btn" id="md-l" type="button">Lista</button></div>
+<span class="row" id="pres"></span>
+</div>
+<div id="rules" class="rules"></div>
+<div class="row ctl"><button class="btn" id="add" type="button"><svg class="ic"><use href="#i-plus"/></svg>Regla</button></div>
+<table class="stats"><tbody id="stats"></tbody></table>
+<h2>Tabla</h2>
+<div class="tblw" id="tt"></div>
+</section>
+<section>
+<div class="row ctl"><div class="seg" role="group" aria-label="Orden"><button class="btn" id="v-best" type="button">Mejor</button><button class="btn" id="v-user" type="button">Tuyo</button></div></div>
+<svg id="ladder" class="ladder" viewBox="0 0 420 300" role="img" aria-label="Árbol de decisión"></svg>
+<h2>Objeto</h2>
+<div class="objrow">
+<div id="obj" class="objbox"></div>
+<div><div id="ot" class="small muted"></div><div id="or" class="or" aria-live="polite"></div></div>
+</div>
+<div class="row ctl"><button class="btn primary" id="step" type="button"><svg class="ic"><use href="#i-next"/></svg>Paso</button><button class="btn" id="newo" type="button"><svg class="ic"><use href="#i-dice"/></svg>Objeto</button></div>
+</section>
+</div>
+<h2>Con porcentajes</h2>
+<div class="two">
+<div id="pr"></div>
+<div><table class="stats"><tbody id="pt"></tbody></table><div class="muted small mono" id="pn"></div></div>
+</div>
+<h2>Guardadas</h2>
+<div class="row ctl"><input id="nm" type="text" maxlength="24" aria-label="Nombre" placeholder="Nombre"><button class="btn" id="save" type="button"><svg class="ic"><use href="#i-save"/></svg>Guardar</button></div>
+<div id="sets" class="sets"></div>
+
+<div class="foot"><a href="../practica/aptitude/trainer-matrices.html"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Practicar</a><span class="muted small">Método de ayuda; no garantiza mejora de nota.</span></div>
+</main>
+<script>
+// ==== LOGIC START ====
+const FORMS=['círculo','triángulo','cuadrado'],COLORS=['rojo','azul','verde'],SIZES=['grande','pequeño'];
+const PRED=[
+ {id:'f-tri',g:'Forma',label:'forma = triángulo',t:o=>o.f==='triángulo'},
+ {id:'f-cir',g:'Forma',label:'forma = círculo',t:o=>o.f==='círculo'},
+ {id:'f-cua',g:'Forma',label:'forma = cuadrado',t:o=>o.f==='cuadrado'},
+ {id:'c-roj',g:'Color',label:'color = rojo',t:o=>o.c==='rojo'},
+ {id:'c-azu',g:'Color',label:'color = azul',t:o=>o.c==='azul'},
+ {id:'c-ver',g:'Color',label:'color = verde',t:o=>o.c==='verde'},
+ {id:'n-par',g:'Número',label:'número par',t:o=>o.n%2===0},
+ {id:'n-may',g:'Número',label:'número > 5',t:o=>o.n>5},
+ {id:'t-gra',g:'Tamaño',label:'tamaño grande',t:o=>o.s==='grande'}];
+const PBY=Object.fromEntries(PRED.map(p=>[p.id,p]));
+function universe(){const U=[];for(const f of FORMS)for(const c of COLORS)for(let n=1;n<=9;n++)for(const s of SIZES)U.push({f,c,n,s});return U}
+const UNI=universe();
+function passes(rule,o){return PBY[rule.p].t(o)}
+function passProb(rule,U){U=U||UNI;let k=0;for(const o of U)if(passes(rule,o))k++;return k/U.length}
+// rules: [{p,cost,cat}] in the user's priority order; mode 'y' (all must pass) or 'lista' (first rule that passes decides its category)
+// order: array of rule indices = the order in which the checks are made
+function outcome(order,rules,mode,o){let cost=0;
+  for(let i=0;i<order.length;i++){const r=rules[order[i]];cost+=r.cost;const ok=passes(r,o);
+    if(mode==='y'){if(!ok)return{cat:'No',checks:i+1,cost,at:i}}
+    else if(ok)return{cat:r.cat||'A',checks:i+1,cost,at:i}}
+  return{cat:mode==='y'?'Sí':'Resto',checks:order.length,cost,at:-1}}
+function perms(n){if(n<=1)return[[...Array(n).keys()]];const o=[];for(const p of perms(n-1))for(let i=0;i<=p.length;i++){const q=p.slice();q.splice(i,0,n-1);o.push(q)}return o}
+function expectedEnum(order,rules,mode,U){U=U||UNI;let s=0;for(const o of U)s+=outcome(order,rules,mode,o).cost;return s/U.length}
+function classVec(order,rules,mode,U){U=U||UNI;let s='';for(const o of U)s+=outcome(order,rules,mode,o).cat+'|';return s}
+function equivalentPerms(rules,mode,U){U=U||UNI;const id=[...Array(rules.length).keys()],ref=classVec(id,rules,mode,U);return perms(rules.length).filter(p=>classVec(p,rules,mode,U)===ref)}
+function analyse(rules,mode,userOrder,U){U=U||UNI;const eq=equivalentPerms(rules,mode,U);
+  const rows=eq.map(p=>({order:p,E:expectedEnum(p,rules,mode,U)}));
+  const key=p=>p.join('');rows.sort((a,b)=>a.E-b.E||(key(a.order)<key(b.order)?-1:1));
+  const ord=userOrder||[...Array(rules.length).keys()];
+  return{rows,best:rows[0],worst:rows[rows.length-1],user:{order:ord,E:expectedEnum(ord,rules,mode,U)},equivCount:eq.length}}
+// independent-test model (research 4.10): cost c_i, rejection probability r_i
+function expectedIndep(order,r,c){let E=0,alive=1;for(const i of order){E+=c[i]*alive;alive*=1-r[i]}return E}
+function ratioOrder(r,c){const idx=r.map((_,i)=>i);return idx.sort((a,b)=>{const ra=r[a]>0?c[a]/r[a]:Infinity,rb=r[b]>0?c[b]/r[b]:Infinity;return ra===rb?a-b:ra<rb?-1:1})}
+// truth table: every pass/fail combination, its outcome, how many of the objects realise it, checks in `order`
+function truthTable(rules,mode,order,U){U=U||UNI;const n=rules.length,rows=[];
+  for(let m=0;m<(1<<n);m++){const bits=[];for(let i=0;i<n;i++)bits.push(!!(m&(1<<i)));rows.push({bits,count:0,cat:null,checks:0})}
+  for(const o of U){let m=0;for(let i=0;i<n;i++)if(passes(rules[i],o))m|=1<<i;rows[m].count++}
+  for(const r of rows){let cost=0;r.checks=n;r.cat=mode==='y'?'Sí':'Resto';
+    for(let i=0;i<n;i++){const k=order[i],ok=r.bits[k];if(mode==='y'){if(!ok){r.cat='No';r.checks=i+1;break}}else if(ok){r.cat=rules[k].cat||'A';r.checks=i+1;break}}}
+  return rows}
+// share of objects decided at each step of `order` (last entry = nobody decided)
+function exits(rules,mode,order,U){U=U||UNI;const out=new Array(order.length+1).fill(0);for(const o of U){const r=outcome(order,rules,mode,o);out[r.at<0?order.length:r.at]++}return out.map(k=>k/U.length)}
+// ==== LOGIC END ====
+
+(function(){
+if(typeof document==='undefined')return;
+const $=s=>document.querySelector(s);
+const KEY='atc_aid_reglas_v1';
+const CATS=['A','B','C','D'];
+const fmt=n=>(Math.round(n*100)/100).toFixed(2).replace('.',',');
+const pc=x=>Math.round(x*100)+' %';
+const PRE=[
+ {n:'1',mode:'y',rules:[{p:'f-tri',cost:1,cat:'A'},{p:'c-roj',cost:1,cat:'B'},{p:'n-par',cost:1,cat:'C'}]},
+ {n:'2',mode:'lista',rules:[{p:'f-tri',cost:1,cat:'A'},{p:'c-roj',cost:1,cat:'B'},{p:'n-may',cost:1,cat:'C'}]},
+ {n:'3',mode:'y',rules:[{p:'t-gra',cost:1,cat:'A'},{p:'c-ver',cost:1,cat:'B'},{p:'n-may',cost:2,cat:'C'},{p:'f-cir',cost:1,cat:'D'}]}];
+const S={mode:'y',rules:JSON.parse(JSON.stringify(PRE[0].rules)),view:'best',obj:null,step:0,done:null,sets:[],seed:7};
+function sane(rs){return Array.isArray(rs)&&rs.length>=2&&rs.length<=4&&rs.every(r=>r&&PBY[r.p]&&[1,2,3].includes(r.cost)&&CATS.includes(r.cat))}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify({cur:{mode:S.mode,rules:S.rules},sets:S.sets}))}catch(e){}}
+try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j){if(j.cur&&sane(j.cur.rules)&&(j.cur.mode==='y'||j.cur.mode==='lista')){S.mode=j.cur.mode;S.rules=j.cur.rules}if(Array.isArray(j.sets))S.sets=j.sets.filter(x=>x&&typeof x.name==='string'&&sane(x.rules)).slice(0,12)}}catch(e){}
+function rng(){S.seed=(S.seed*1103515245+12345)&0x7fffffff;return S.seed/0x7fffffff}
+let A=null;
+function compute(){const n=S.rules.length;A=analyse(S.rules,S.mode);
+  S.order=S.view==='best'?A.best.order:[...Array(n).keys()];}
+const selHTML=v=>PRED.reduce((s,p,i)=>{const open=i===0||PRED[i-1].g!==p.g;return s+(open?(i?'</optgroup>':'')+`<optgroup label="${p.g}">`:'')+`<option value="${p.id}"${p.id===v?' selected':''}>${p.label}</option>`},'')+'</optgroup>';
+function drawRules(){
+  $('#rules').innerHTML=S.rules.map((r,i)=>`<div class="rr" data-i="${i}"><b class="num">${i+1}</b><select class="sp" aria-label="Regla ${i+1}">${selHTML(r.p)}</select><label class="cw" title="Coste"><svg class="ic"><use href="#i-clock"/></svg><select class="sc" aria-label="Coste">${[1,2,3].map(c=>`<option${c===r.cost?' selected':''}>${c}</option>`).join('')}</select></label>${S.mode==='lista'?`<select class="sk" aria-label="Categoría">${CATS.map(c=>`<option${c===r.cat?' selected':''}>${c}</option>`).join('')}</select>`:''}<button class="btn sm rm" type="button" aria-label="Quitar regla"${S.rules.length<=2?' disabled':''}><svg class="ic"><use href="#i-x"/></svg></button></div>`).join('');
+  $('#add').disabled=S.rules.length>=4;
+  $('#md-y').classList.toggle('on',S.mode==='y');$('#md-l').classList.toggle('on',S.mode==='lista');
+  $('#v-best').classList.toggle('on',S.view==='best');$('#v-user').classList.toggle('on',S.view==='user');
+}
+const shapeSVG=(o,sz)=>{const r=o.s==='grande'?30:20,col={rojo:'var(--c-rojo)',azul:'var(--c-azul)',verde:'var(--c-verde)'}[o.c];let g;
+  if(o.f==='círculo')g=`<circle r="${r}" fill="${col}"/>`;else if(o.f==='cuadrado')g=`<rect x="${-r}" y="${-r}" width="${2*r}" height="${2*r}" fill="${col}"/>`;else g=`<path d="M0 ${-r*1.15}L${r*1.1} ${r*.85}H${-r*1.1}z" fill="${col}"/>`;
+  return `<svg viewBox="-40 -40 80 80" width="${sz}" height="${sz}" aria-hidden="true">${g}<text class="on" y="${o.f==='triángulo'?10:1}">${o.n}</text></svg>`};
+function drawLadder(){
+  const rules=S.rules,order=S.order,n=order.length,ex=exits(rules,S.mode,order),W=420,H=44,G=26,top=14,x0=14,nw=190;
+  let s='';const h=top+n*(H+G)+50;
+  for(let i=0;i<n;i++){const r=rules[order[i]],y=top+i*(H+G),act=S.obj&&S.step>i||S.obj&&S.step===i+0&&false;
+    const cur=S.obj&&S.step-1===i,state=S.obj&&S.step>i?(S.res[i]?'pass':'fail'):'';
+    s+=`<g class="nd ${cur?'cur':''} ${state}"><rect x="${x0}" y="${y}" width="${nw}" height="${H}" rx="2"/><text class="nn" x="${x0+10}" y="${y+H/2}">${order[i]+1}</text><text class="nl" x="${x0+30}" y="${y+H/2}">${PBY[r.p].label}</text>`;
+    if(state)s+=`<text class="mk ${state}" x="${x0+nw-14}" y="${y+H/2}">${state==='pass'?'✓':'✗'}</text>`;
+    s+=`</g>`;
+    // exit to the right
+    const cat=S.mode==='y'?'No':(r.cat||'A'),ey=y+H/2;
+    s+=`<path class="ed" d="M${x0+nw} ${ey}H${x0+nw+56}"/><text class="el" x="${x0+nw+62}" y="${ey}">${cat}</text><text class="ep" x="${x0+nw+62+(cat.length>1?22:14)}" y="${ey}">${pc(ex[i])}</text>`;
+    // down
+    s+=`<path class="ed" d="M${x0+nw/2} ${y+H}V${y+H+G}"/><path class="ed" d="M${x0+nw/2-4} ${y+H+G-6}L${x0+nw/2} ${y+H+G}L${x0+nw/2+4} ${y+H+G-6}"/>`;
+    s+=`<text class="sm" x="${x0+nw/2+8}" y="${y+H+G/2+1}">${S.mode==='y'?'sí':'no'}</text>`}
+  const by=top+n*(H+G)+4,last=S.mode==='y'?'Sí':'Resto';
+  s+=`<text class="el fin" x="${x0+nw/2}" y="${by+10}" style="text-anchor:middle">${last}</text><text class="ep" x="${x0+nw/2+(last.length>2?32:22)}" y="${by+10}">${pc(ex[n])}</text>`;
+  if(S.obj&&S.done)s+=`<rect class="ring" x="${x0+nw/2-40}" y="${by-8}" width="80" height="36" rx="2" style="display:${S.done.at<0?'block':'none'}"/>`;
+  $('#ladder').setAttribute('viewBox',`0 0 ${W} ${h}`);$('#ladder').innerHTML=s}
+function drawTable(){
+  const rules=S.rules,n=rules.length,rows=truthTable(rules,S.mode,S.order);
+  let h='<table><thead><tr>'+S.order.map(k=>`<th class="c">${k+1}</th>`).join('')+'<th>Cat</th><th class="r">Obj</th><th class="r">Comp.</th></tr></thead><tbody>';
+  // order rows by decision depth in displayed order
+  const mark=b=>b?'<svg class="ic ok"><use href="#i-check"/></svg>':'<svg class="ic bad"><use href="#i-x"/></svg>';
+  const list=rows.map(r=>r).sort((a,b)=>a.checks-b.checks||(a.cat<b.cat?-1:1)||b.count-a.count);
+  for(const r of list){const imp=!r.count;h+=`<tr class="${imp?'imp':''}">`+S.order.map(k=>`<td class="c">${mark(r.bits[k])}</td>`).join('')+`<td><b>${r.cat}</b></td><td class="r">${r.count}</td><td class="r">${r.checks}</td></tr>`}
+  h+='</tbody></table>';$('#tt').innerHTML=h}
+function drawStats(){
+  const eqNote=A.equivCount<A.rows.length?'':'';
+  const o=ord=>ord.map(k=>k+1).join('·');
+  $('#stats').innerHTML=`<tr><td>Tuyo</td><td class="m">${o(A.user.order)}</td><td class="r"><b>${fmt(A.user.E)}</b></td></tr><tr class="best"><td>Mejor</td><td class="m">${o(A.best.order)}</td><td class="r"><b>${fmt(A.best.E)}</b></td></tr><tr><td>Peor</td><td class="m">${o(A.worst.order)}</td><td class="r"><b>${fmt(A.worst.E)}</b></td></tr>`+(S.mode==='lista'?`<tr><td colspan="3" class="muted small">${A.equivCount} de ${perms(S.rules.length).length} órdenes dan las mismas categorías</td></tr>`:'');
+}
+function drawObj(){
+  const box=$('#obj');
+  if(!S.obj){box.innerHTML='';$('#ot').textContent='';return}
+  const o=S.obj;box.innerHTML=shapeSVG(o,92);
+  $('#ot').innerHTML=`${o.f}, ${o.c}, ${o.n}, ${o.s}`;
+  const r=$('#or');if(S.done){r.className='or '+(S.done.cat==='No'||S.done.cat==='Resto'?'':'ok');r.innerHTML=`<b>${S.done.cat}</b> · ${S.done.checks}`}else r.innerHTML='';
+}
+function render(){compute();drawRules();drawStats();drawLadder();drawTable();drawObj();drawPct()}
+function newObj(){S.obj=UNI[Math.floor(rng()*UNI.length)];S.step=0;S.done=null;S.res=[];render()}
+function stepObj(){
+  if(!S.obj||S.done){newObj();return}
+  const i=S.step,r=S.rules[S.order[i]],ok=passes(r,S.obj);S.res[i]=ok;S.step=i+1;
+  if(S.mode==='y'){if(!ok)S.done={cat:'No',checks:S.step,at:i};else if(S.step===S.order.length)S.done={cat:'Sí',checks:S.step,at:-1}}
+  else{if(ok)S.done={cat:r.cat,checks:S.step,at:i};else if(S.step===S.order.length)S.done={cat:'Resto',checks:S.step,at:-1}}
+  render()}
+function resetObj(){S.obj=null;S.step=0;S.done=null;S.res=[]}
+// ---- events
+$('#rules').addEventListener('change',e=>{const row=e.target.closest('.rr');if(!row)return;const i=+row.dataset.i,r=S.rules[i];
+  if(e.target.classList.contains('sp'))r.p=e.target.value;else if(e.target.classList.contains('sc'))r.cost=+e.target.value;else if(e.target.classList.contains('sk'))r.cat=e.target.value;
+  resetObj();persist();render()});
+$('#rules').addEventListener('click',e=>{const b=e.target.closest('.rm');if(!b||b.disabled)return;S.rules.splice(+b.closest('.rr').dataset.i,1);resetObj();persist();render()});
+$('#add').onclick=()=>{if(S.rules.length>=4)return;const used=new Set(S.rules.map(r=>r.p)),p=PRED.find(p=>!used.has(p.id))||PRED[0];S.rules.push({p:p.id,cost:1,cat:CATS[S.rules.length]});resetObj();persist();render()};
+$('#md-y').onclick=()=>{S.mode='y';resetObj();persist();render()};
+$('#md-l').onclick=()=>{S.mode='lista';resetObj();persist();render()};
+$('#v-best').onclick=()=>{S.view='best';resetObj();render()};
+$('#v-user').onclick=()=>{S.view='user';resetObj();render()};
+$('#step').onclick=stepObj;
+$('#newo').onclick=newObj;
+$('#pres').innerHTML=PRE.map((p,i)=>`<button class="btn sm" type="button" data-i="${i}">${p.n}</button>`).join('');
+$('#pres').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const p=PRE[+b.dataset.i];S.mode=p.mode;S.rules=JSON.parse(JSON.stringify(p.rules));resetObj();persist();render()});
+function drawSets(){$('#sets').innerHTML=S.sets.length?S.sets.map((s,i)=>`<div class="sv" data-i="${i}"><span class="sn">${s.name.replace(/[<&>]/g,'')}</span><span class="muted small">${s.mode==='y'?'Y':'Lista'} · ${s.rules.length}</span><button class="btn sm ld" type="button">Cargar</button><button class="btn sm dl" type="button" aria-label="Borrar"><svg class="ic"><use href="#i-trash"/></svg></button></div>`).join(''):''}
+$('#save').onclick=()=>{const nm=($('#nm').value||'').trim().slice(0,24)||('Reglas '+(S.sets.length+1));S.sets=S.sets.filter(s=>s.name!==nm);S.sets.unshift({name:nm,mode:S.mode,rules:JSON.parse(JSON.stringify(S.rules))});S.sets=S.sets.slice(0,12);$('#nm').value='';persist();drawSets()};
+$('#sets').addEventListener('click',e=>{const row=e.target.closest(".sv");if(!row)return;const i=+row.dataset.i;if(e.target.closest('.dl')){S.sets.splice(i,1);persist();drawSets()}else if(e.target.closest('.ld')){const s=S.sets[i];S.mode=s.mode;S.rules=JSON.parse(JSON.stringify(s.rules));resetObj();persist();render()}});
+// ---- percentage block (independent tests, research 4.10)
+const PC={r:[50,20,10],c:[1,1,1]};
+function drawPct(){
+  $('#pr').innerHTML=PC.r.map((r,i)=>`<div class="rr2" data-i="${i}"><b class="num">${i+1}</b><label>% <input type="number" class="pi" min="0" max="99" step="5" value="${r}" aria-label="Rechazo ${i+1} %"></label><label class="cw"><svg class="ic"><use href="#i-clock"/></svg><select class="pcs" aria-label="Coste">${[1,2,3].map(c=>`<option${c===PC.c[i]?' selected':''}>${c}</option>`).join('')}</select></label></div>`).join('');
+  const r=PC.r.map(x=>Math.max(0,Math.min(.99,x/100))),c=PC.c,rows=perms(3).map(p=>({p,E:expectedIndep(p,r,c)})).sort((a,b)=>a.E-b.E),mx=rows[rows.length-1].E;
+  const rat=ratioOrder(r,c);
+  $('#pt').innerHTML=rows.map((x,i)=>`<tr class="${i===0?'best':''}"><td class="m">${x.p.map(k=>k+1).join('·')}</td><td class="bar"><i style="width:${Math.round(x.E/mx*100)}%"></i></td><td class="r"><b>${fmt(x.E)}</b></td></tr>`).join('');
+  $('#pn').textContent='c/r: '+rat.map(k=>k+1).join('·');
+}
+$('#pr').addEventListener('input',e=>{const row=e.target.closest('.rr2');if(!row)return;const i=+row.dataset.i;if(e.target.classList.contains('pi')){PC.r[i]=+e.target.value||0;drawPctTable()}});
+$('#pr').addEventListener('change',e=>{const row=e.target.closest('.rr2');if(!row)return;if(e.target.classList.contains('pcs')){PC.c[+row.dataset.i]=+e.target.value;drawPct()}});
+function drawPctTable(){const r=PC.r.map(x=>Math.max(0,Math.min(.99,x/100))),c=PC.c,rows=perms(3).map(p=>({p,E:expectedIndep(p,r,c)})).sort((a,b)=>a.E-b.E),mx=rows[rows.length-1].E;
+  $('#pt').innerHTML=rows.map((x,i)=>`<tr class="${i===0?'best':''}"><td class="m">${x.p.map(k=>k+1).join('·')}</td><td class="bar"><i style="width:${Math.round(x.E/mx*100)}%"></i></td><td class="r"><b>${fmt(x.E)}</b></td></tr>`).join('');
+  $('#pn').textContent='c/r: '+ratioOrder(r,c).map(k=>k+1).join('·')}
+render();drawSets();
+window.__reg={S,render,stepObj,newObj};
+})();
+
+</script>
+<script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body></html>

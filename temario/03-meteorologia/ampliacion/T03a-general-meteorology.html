@@ -1,0 +1,714 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meteorología general (T03a)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Meteorología</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen-ademas-del-manual">Qué entra en el examen (además del manual)</a></li>
+<li><a href="#1-la-atmosfera-estandar-en-profundidad">1. La atmósfera estándar en profundidad</a><ul>
+<li><a href="#11-valores-isa-de-referencia-confirmados-contraste-con-el-manual">1.1 Valores ISA de referencia confirmados (contraste con el manual)</a></li>
+<li><a href="#12-tabla-isa-de-temperaturas-ampliada-deducida-y-contrastada">1.2 Tabla ISA de temperaturas ampliada (deducida y contrastada)</a></li>
+<li><a href="#13-altitud-de-presion-y-altitud-densidad-conceptos-que-el-manual-enuncia-pero-no-calcula">1.3 Altitud de presión y altitud densidad (conceptos que el manual enuncia pero no calcula)</a></li>
+</ul>
+</li>
+<li><a href="#2-estabilidad-atmosferica-procesos-adiabaticos-no-esta-en-el-manual">2. Estabilidad atmosférica: procesos adiabáticos (no está en el manual)</a><ul>
+<li><a href="#21-los-dos-gradientes-adiabaticos">2.1 Los dos gradientes adiabáticos</a></li>
+<li><a href="#22-gradiente-termico-ambiental-y-los-cuatro-estados-de-estabilidad">2.2 Gradiente térmico ambiental y los cuatro estados de estabilidad</a></li>
+</ul>
+</li>
+<li><a href="#3-dinamica-del-viento-fuerzas-viento-geostrofico-tipos-de-corriente-en-chorro-y-criterios-de-tac">3. Dinámica del viento: fuerzas, viento geostrófico, tipos de corriente en chorro y criterios de TAC</a><ul>
+<li><a href="#31-las-tres-fuerzas-que-actuan-sobre-el-viento-mas-alla-de-la-descripcion-del-manual-limitada-al-gradiente-de-presion">3.1 Las tres fuerzas que actúan sobre el viento (más allá de la descripción del manual, limitada al gradiente de presión)</a></li>
+<li><a href="#32-viento-geostrofico-y-viento-en-superficie">3.2 Viento geostrófico y viento en superficie</a></li>
+<li><a href="#33-corrientes-en-chorro-tres-tipos-y-criterios-de-tac-profundiza-el-54-del-manual">3.3 Corrientes en chorro: tres tipos y criterios de TAC (profundiza el §5.4 del manual)</a></li>
+</ul>
+</li>
+<li><a href="#4-tiempo-en-la-peninsula-iberica-y-el-mediterraneo-mas-alla-del-manual">4. Tiempo en la Península Ibérica y el Mediterráneo más allá del manual</a><ul>
+<li><a href="#41-el-sistema-cierzo-mestral-tramontana-mistral-y-la-linea-de-convergencia-catalano-balear">4.1 El sistema Cierzo-Mestral / Tramontana / Mistral y la línea de convergencia catalano-balear</a></li>
+<li><a href="#42-lluvias-calidas-un-tipo-de-precipitacion-propio-del-mediterraneo-ajeno-a-las-categorias-del-manual">4.2 «Lluvias cálidas»: un tipo de precipitación propio del Mediterráneo, ajeno a las categorías del manual</a></li>
+<li><a href="#43-un-mecanismo-de-cizalladura-en-aire-estable-que-el-manual-no-menciona-la-corriente-de-densidad-atrapada-en-la-costa">4.3 Un mecanismo de cizalladura en aire estable que el manual no menciona: la corriente de densidad atrapada en la costa</a></li>
+<li><a href="#44-referencia-cruzada-a-la-danagota-fria-del-manual">4.4 Referencia cruzada a la DANA/gota fría del manual</a></li>
+</ul>
+</li>
+<li><a href="#5-microfisica-de-las-nubes-y-crecimiento-de-la-precipitacion-mas-alla-de-la-lista-de-tipos-de-precipitacion-del-manual">5. Microfísica de las nubes y crecimiento de la precipitación (más allá de la lista de tipos de precipitación del manual)</a></li>
+<li><a href="#6-tormentas-mas-alla-del-manual-tipos-de-celula-y-umbrales-de-tormenta-severa">6. Tormentas más allá del manual: tipos de célula y umbrales de tormenta severa</a></li>
+<li><a href="#7-engelamiento-turbulencia-y-cizalladura-complemento">7. Engelamiento, turbulencia y cizalladura: complemento</a></li>
+<li><a href="#8-cenizas-volcanicas-el-codigo-de-colores-para-la-aviacion-una-laguna-senalada-expresamente-como-no-encontrado-en-las-notas-base-t03">8. Cenizas volcánicas: el código de colores para la aviación (una laguna señalada expresamente como «no encontrado» en las notas base t03)</a></li>
+<li><a href="#9-sigmetairmetgamet-en-el-marco-oaciomm">9. SIGMET/AIRMET/GAMET en el marco OACI/OMM</a></li>
+<li><a href="#10-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">10. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#11-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">11. Trampas de examen (confusiones típicas y cómo distinguirlas)</a></li>
+<li><a href="#12-imprescindible-memorizar">12. Imprescindible memorizar</a></li>
+<li><a href="#13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#14-fuentes">14. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">42 min de lectura</div><h1 id="t03a-meteorologia-general-mas-alla-del-manual-de-enaire-atmosfera-presion-viento-masas-de-aire-nubes">T03a - Meteorología general más allá del manual de ENAIRE (atmósfera, presión, viento, masas de aire, nubes)</h1>
+<p><em>Complemento de la guía fiel al manual <code>syllabus/manual/OM03-meteorology-study-guide.md</code> y de las notas anteriores <code>syllabus/t03-meteorology.md</code>. Este archivo no repite lo que esos dos ya cubren por completo (valores ISA a nivel del mar, la tabla de las cinco capas, definiciones de QNH/QFE/QNE, octas, los 10 géneros de nubes, nociones básicas de engelamiento/turbulencia/tormenta, decodificación de METAR/TAF/SIGMET/AIRMET/GAMET). En su lugar, contrasta las cifras del manual con fuentes primarias (manuales de referencia conformes con la OACI: FAA, OMM, NASA) y añade los mecanismos físicos, cifras adicionales y detalles ibéricos y mediterráneos que un tribunal podría utilizar más allá de un manual de 70 páginas. Léase primero la guía del manual y después este archivo.</em></p>
+<h2 id="que-entra-en-el-examen-ademas-del-manual">Qué entra en el examen (además del manual)</h2>
+<p>El tema 3 es «Conceptos básicos de meteorología». El manual de ENAIRE da las definiciones que el examen tiene más probabilidades de citar al pie de la letra; las fuentes primarias (FAA Aviation Weather Handbook FAA-H-8083-28B 2026, OMM-N.º 49 vol. II, tablas de atmósfera estándar de la NASA y la FAA, guías meteorológicas de aeródromo de AEMET) permiten responder a las preguntas de razonamiento que las definiciones escuetas del manual no cubren del todo: <em>por qué</em> baja la presión con la altura (ecuación barométrica), <em>por qué</em> un anticiclón trae niebla, <em>por qué</em> un frente frío es más turbulento que uno cálido, <em>qué distingue físicamente</em> una supercélula de una tormenta ordinaria y <em>qué patrón de viento local concreto</em> produce lluvia intensa o cizalladura sobre un aeródromo español determinado. También resuelve dos lagunas que el manual deja abiertas: los gradientes adiabáticos seco y saturado (que el manual menciona en el apartado del efecto Foehn sin dar cifras) y el viento geostrófico (que el manual no llega a nombrar).</p>
+<hr />
+<h2 id="1-la-atmosfera-estandar-en-profundidad">1. La atmósfera estándar en profundidad</h2>
+<h3 id="11-valores-isa-de-referencia-confirmados-contraste-con-el-manual">1.1 Valores ISA de referencia confirmados (contraste con el manual)</h3>
+<p>El FAA Aviation Weather Handbook (FAA-H-8083-28B, ed. 2026), tabla 4-2 «Selected Properties of the Standard Atmosphere», da: presión a nivel del mar <strong>1013,25 hPa (29,92 inHg)</strong>; temperatura a nivel del mar <strong>15 °C (59 °F)</strong>; gradiente térmico de la troposfera <strong>6,5 °C/1000 m (3,57 °F/1000 ft)</strong>; tropopausa a <strong>11 000 m (36 089 ft)</strong>, con una temperatura de <strong>-56,5 °C (-69,7 °F)</strong>. Estas cifras coinciden exactamente con las del manual de ENAIRE (2 °C/1000 ft ≈ 6,5 °C/1000 m; 11 km; -56,5 °C), lo que da mucha confianza al apartado ISA del propio manual (2.10.1).</p>
+<p><strong>Deducción resuelta</strong> del gradiente ISA en unidades imperiales, contrastada con los valores de referencia de la FAA: (15 °C - (-56,5 °C)) / 36,089 (miles de ft) = 71,5 / 36,089 = <strong>1,98 ≈ 2 °C por cada 1000 ft</strong>, lo que confirma que la cifra redondeada del manual es exacta hasta el segundo decimal y no una mera aproximación cómoda.</p>
+<h3 id="12-tabla-isa-de-temperaturas-ampliada-deducida-y-contrastada">1.2 Tabla ISA de temperaturas ampliada (deducida y contrastada)</h3>
+<p>La propia tabla ISA del manual (p. 23, reproducida en la guía OM03) contiene una errata probable (una fila que dice «1700 ft» y que la guía OM03 señala como casi seguramente «7000 ft»). A continuación se da una tabla limpia, deducida a partir de los valores de referencia confirmados (15 °C a nivel del mar, -2 °C por cada 1000 ft, válida solo por debajo de la tropopausa, a 36 089 ft), útil para las preguntas sobre nivel de congelación y del tipo TAT que la tabla defectuosa del manual no permite responder con seguridad:</p>
+<table>
+<thead>
+<tr>
+<th>Altitud de presión</th>
+<th>Temperatura estándar (ISA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nivel del mar (0 ft)</td>
+<td>15,0 °C</td>
+</tr>
+<tr>
+<td>2000 ft</td>
+<td>11,0 °C</td>
+</tr>
+<tr>
+<td>4000 ft</td>
+<td>7,0 °C</td>
+</tr>
+<tr>
+<td>6000 ft</td>
+<td>3,0 °C</td>
+</tr>
+<tr>
+<td>8000 ft</td>
+<td>-1,0 °C</td>
+</tr>
+<tr>
+<td>10 000 ft (FL100, zona de la capa de transición)</td>
+<td>-5,0 °C</td>
+</tr>
+<tr>
+<td>14 000 ft</td>
+<td>-13,0 °C</td>
+</tr>
+<tr>
+<td>18 000 ft (FL180, nivel de transición en EE. UU.)</td>
+<td>-21,0 °C</td>
+</tr>
+<tr>
+<td>24 000 ft (FL240)</td>
+<td>-33,0 °C</td>
+</tr>
+<tr>
+<td>30 000 ft (FL300)</td>
+<td>-45,0 °C</td>
+</tr>
+<tr>
+<td>36 000 ft (≈ tropopausa)</td>
+<td>-57,0 °C (cercana al valor exacto de la tropopausa, -56,5 °C a 36 089 ft)</td>
+</tr>
+</tbody>
+</table>
+<p>Consejo de examen: como el gradiente es de 2 °C/1000 ft exactos, basta con multiplicar la altitud en miles de ft por 2 y restar el resultado de 15 para obtener rápidamente la temperatura ISA: <strong>temperatura ISA (°C) = 15 - 2 x (altitud en miles de ft)</strong>, válida hasta la tropopausa.</p>
+<h3 id="13-altitud-de-presion-y-altitud-densidad-conceptos-que-el-manual-enuncia-pero-no-calcula">1.3 Altitud de presión y altitud densidad (conceptos que el manual enuncia pero no calcula)</h3>
+<ul>
+<li><strong>Altitud de presión (<em>pressure altitude</em>)</strong>: «la altitud (sobre el MSL) que indica el altímetro cuando está reglado a 29,92 inHg (1013,25 hPa)» FAA-H-8083-28B §8.4.1.4. Es la aplicación práctica del concepto QNE del manual (§2.10.3): volar a una altitud de presión constante es volar sobre una superficie de presión constante, y por eso todo el tránsito por encima de la altitud de transición se separa verticalmente por niveles de vuelo y no por altitudes verdaderas.</li>
+<li><strong>Altitud densidad (<em>density altitude</em>)</strong>: «altitud de presión corregida por las desviaciones de temperatura respecto a la atmósfera estándar... la altitud densidad guarda con la altitud de presión la misma relación que la altitud verdadera con la altitud indicada» FAA-H-8083-28B §8.4.1.5. En los días cálidos la altitud densidad es <em>mayor</em> que la altitud de presión (aire menos denso, peores actuaciones); en los días fríos es <em>menor</em> (aire más denso, mejores actuaciones). Esto explica directamente el §9.9 del manual («por encima de 30 °C la densidad del aire disminuye y el recorrido de despegue se alarga»): el manual enuncia el efecto y la FAA explica el mecanismo (la temperatura eleva la altitud densidad, y la altitud densidad es «un índice de las actuaciones de la aeronave»: una mayor altitud densidad reduce las actuaciones, alarga el recorrido de despegue, reduce el régimen de ascenso y resta potencia a un motor atmosférico).</li>
+<li><strong>Ejemplo resuelto</strong>: aeródromo a una altitud de presión de 2000 ft, OAT 30 °C. Temperatura estándar ISA a 2000 ft = 15 - 2x2 = 11 °C (apartado 1.2). Desviación ISA = 30 - 11 = <strong>+19 °C</strong> (es decir, «ISA+19»). Según la regla práctica de planificación aeronáutica, muy difundida, de que la altitud densidad sube aproximadamente 120 ft por cada 1 °C de desviación ISA positiva (este multiplicador concreto no se encontró de forma literal en los textos consultados para este archivo, aunque la relación de fondo —que la altitud de presión se corrige por la temperatura— sí está confirmada arriba): altitud densidad ≈ 2000 + 120 x 19 ≈ <strong>4280 ft</strong>, es decir, casi 2300 ft por encima de la elevación del aeródromo en un día completamente despejado y en calma. Es una trampa clásica de examen de control, porque nada en los grupos de visibilidad o de nubes del METAR haría sospechar la degradación de las actuaciones.</li>
+<li>La desviación ISA es también la forma habitual de describir un día no estándar (§2.10.1 del manual: «los días no estándar se modelan sumando una diferencia de temperatura a la temperatura estándar»); expresar una temperatura como «ISA+15» o «ISA-10» es habitual en cartas y pronósticos e indica al controlador de inmediato si las actuaciones de ascenso de una aeronave serán mejores o peores que las publicadas.</li>
+</ul>
+<hr />
+<h2 id="2-estabilidad-atmosferica-procesos-adiabaticos-no-esta-en-el-manual">2. Estabilidad atmosférica: procesos adiabáticos (no está en el manual)</h2>
+<p>La guía OM03 señala expresamente este punto como <strong>no cubierto</strong> por el manual («valores de los gradientes adiabáticos seco y saturado ... el manual menciona los gradientes seco y saturado en el apartado del efecto Foehn sin cifras»). Este apartado aporta las cifras, tomadas de los capítulos 12-13 de FAA-H-8083-28B.</p>
+<h3 id="21-los-dos-gradientes-adiabaticos">2.1 Los dos gradientes adiabáticos</h3>
+<ul>
+<li><strong>Gradiente adiabático seco (DALR, <em>dry adiabatic lapse rate</em>)</strong>: una burbuja de aire no saturado que asciende se enfría <strong>aproximadamente 3 °C por cada 1000 ft (9,8 °C por km)</strong> §12.2. Su punto de rocío desciende más despacio, unos <strong>0,5 °C por cada 1000 ft (1,8 °C por km)</strong>, de modo que la diferencia entre temperatura y punto de rocío se reduce a medida que la burbuja asciende.</li>
+<li><strong>Nivel de condensación por ascenso (LCL, <em>Lifted Condensation Level</em>)</strong>: la altitud a la que convergen la temperatura y el punto de rocío de la burbuja ascendente (diferencia = 0, HR = 100 %); es la base de la nube que se forma si la burbuja sigue ascendiendo §12.3.</li>
+<li><strong>Gradiente adiabático saturado (húmedo) (SALR, <em>saturated adiabatic lapse rate</em>)</strong>: una vez saturada, la elevación posterior libera calor latente de condensación, que compensa en parte el enfriamiento por expansión; la burbuja se enfría entonces más despacio, a un ritmo que <strong>varía entre unos 1,2 °C/1000 ft (4 °C/km) para burbujas muy cálidas y húmedas y 3 °C/1000 ft (9,8 °C/km) para burbujas saturadas muy frías y algo secas</strong> §12.3. Los ejemplos resueltos de la propia FAA usan un SALR simplificado de <strong>2 °C por cada 1000 ft</strong> cuando no hace falta un valor exacto. Este es exactamente el mecanismo físico de la descripción del efecto Foehn del manual (§8.4.2): «el ascenso... según el gradiente adiabático saturado, que es menor que el seco» es el SALR (≈ 1,2-2 °C/1000 ft) frente al DALR (3 °C/1000 ft) en el descenso.</li>
+<li><strong>Ejemplo resuelto del Foehn</strong>, construido sobre el propio escenario del manual (§8.4.2) con el SALR simplificado de la FAA de 2 °C/1000 ft: una burbuja de aire a nivel del mar, a 20 °C y con punto de rocío de 14 °C, sube por una ladera de barlovento de 6000 ft. Enfriamiento según el DALR hasta el LCL: la diferencia se reduce a (3-0,5) = 2,5 °C/1000 ft, así que LCL ≈ (20-14)/2,5 x 1000 = 2400 ft, y la temperatura allí = 20 - 3x2,4 = <strong>12,8 °C</strong>. Desde los 2400 ft hasta la cima de 6000 ft (3600 ft más de ascenso, ya saturada) se enfría según el SALR (2 °C/1000 ft): temperatura en la cima = 12,8 - 2x3,6 = <strong>5,6 °C</strong>, tras haber perdido agua en forma de precipitación en la ladera de barlovento. Al descender los 6000 ft completos por sotavento, ya no saturada, se calienta según el DALR (3 °C/1000 ft): temperatura en la base = 5,6 + 3x6 = <strong>23,6 °C</strong>, varios grados más cálida y mucho más seca que el aire que inició el ascenso a ese mismo nivel (20 °C); es exactamente el calentamiento por efecto Foehn que el manual describe sin cifras.</li>
+</ul>
+<h3 id="22-gradiente-termico-ambiental-y-los-cuatro-estados-de-estabilidad">2.2 Gradiente térmico ambiental y los cuatro estados de estabilidad</h3>
+<p>El <strong>gradiente térmico ambiental (ELR, <em>environmental lapse rate</em>, también «existente»)</strong> es cómo cambia realmente con la altura la temperatura de la atmósfera real y en reposo en un lugar y un momento dados, a diferencia del DALR y el SALR, que describen cómo se enfría una burbuja <em>en movimiento</em>. La comparación del ELR con los dos gradientes adiabáticos define la estabilidad de la columna §13:</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Condición (ELR frente a los gradientes adiabáticos)</th>
+<th>Significado físico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Estabilidad absoluta</strong></td>
+<td>ELR &lt; SALR (incluye los perfiles isotermos y de inversión)</td>
+<td>Una burbuja elevada es siempre más fría y densa que su entorno en todos los niveles y vuelve a descender; favorece las nubes estratiformes y una mezcla vertical deficiente</td>
+</tr>
+<tr>
+<td><strong>Estabilidad neutra</strong></td>
+<td>ELR = DALR (columna no saturada) o ELR = SALR (columna saturada)</td>
+<td>Una burbuja desplazada tiene siempre la misma temperatura que su entorno; ni se opone al desplazamiento ni lo acelera</td>
+</tr>
+<tr>
+<td><strong>Inestabilidad absoluta</strong></td>
+<td>ELR &gt; DALR (gradiente «superadiabático»)</td>
+<td>Una burbuja desplazada es de inmediato más cálida que su entorno y se aleja acelerando de su nivel de partida; típica muy cerca de una superficie fuertemente calentada</td>
+</tr>
+<tr>
+<td><strong>Inestabilidad condicional</strong></td>
+<td>SALR &lt; ELR &lt; DALR</td>
+<td>La burbuja es estable mientras no está saturada, pero se vuelve inestable una vez elevada más allá de su <strong>nivel de convección libre (LFC, <em>Level of Free Convection</em>)</strong>: el nivel, por encima del LCL, en el que la burbuja pasa por primera vez a ser más cálida que su entorno y empieza a ascender por su propia flotabilidad</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Inestabilidad convectiva</strong>: cuando se eleva toda una capa (por ejemplo, sobre una montaña o por delante de un frente), la parte superior de la capa se estira y se enfría más deprisa que la inferior porque la densidad del aire disminuye con la altura; esto aumenta el gradiente térmico de la capa en su conjunto y puede desestabilizarla aunque empezara siendo estable. La FAA vincula este mecanismo directamente con el desarrollo de las tormentas §13.8.</li>
+<li>Estas definiciones permiten responder correctamente <em>por qué</em> un anticiclón (§6 del manual, «frío» térmico o «cálido» dinámico) suprime la convección: el aire subsidente de un anticiclón se comprime y se calienta adiabáticamente, lo que suele producir una inversión térmica en niveles bajos, que por definición es un caso de <strong>estabilidad absoluta</strong>, y atrapa contaminantes y humedad cerca de la superficie: exactamente la situación favorable a la niebla que el manual describe de forma cualitativa.</li>
+</ul>
+<hr />
+<h2 id="3-dinamica-del-viento-fuerzas-viento-geostrofico-tipos-de-corriente-en-chorro-y-criterios-de-tac">3. Dinámica del viento: fuerzas, viento geostrófico, tipos de corriente en chorro y criterios de TAC</h2>
+<h3 id="31-las-tres-fuerzas-que-actuan-sobre-el-viento-mas-alla-de-la-descripcion-del-manual-limitada-al-gradiente-de-presion">3.1 Las tres fuerzas que actúan sobre el viento (más allá de la descripción del manual, limitada al gradiente de presión)</h3>
+<p>El manual (cap. 5) define el viento solo como «una corriente de aire producida cuando varía la presión» y no nombra las fuerzas. FAA-H-8083-28B §10.3 da el mecanismo completo que se usa en toda la formación ATC:</p>
+<ol>
+<li><strong>Fuerza del gradiente de presión (PGF, <em>pressure gradient force</em>)</strong>: la fuerza que movería el aire directamente de la alta a la baja presión si actuara sola; es proporcional a lo juntas que estén las isobaras.</li>
+<li><strong>Fuerza de Coriolis</strong>: fuerza aparente debida a la rotación de la Tierra, <strong>perpendicular al viento y directamente proporcional a su velocidad</strong> (el doble de velocidad, el doble de fuerza); desvía el aire en movimiento <strong>hacia la derecha en el hemisferio norte y hacia la izquierda en el sur</strong>; <strong>nula en el ecuador y máxima en los polos</strong>.</li>
+<li><strong>Fuerza de rozamiento (<em>friction force</em>)</strong>: actúa en sentido opuesto al viento, proporcional a su velocidad y a la rugosidad del terreno; solo es significativa aproximadamente en los <strong>primeros miles de pies (la capa de fricción)</strong>.</li>
+</ol>
+<h3 id="32-viento-geostrofico-y-viento-en-superficie">3.2 Viento geostrófico y viento en superficie</h3>
+<p>Por encima de la capa de fricción solo actúan la PGF y la fuerza de Coriolis: en cuanto el aire empieza a moverse bajo la PGF, la fuerza de Coriolis lo desvía hasta que, tras girar 90° completos, sopla <strong>paralelo a las isobaras o a las líneas de altura</strong>, con la fuerza de Coriolis equilibrando exactamente la PGF. Este flujo equilibrado es el <strong>viento geostrófico</strong> §10.4, el viento que el manual nunca nombra pero que aparece en todas las cartas de altura. En superficie, el rozamiento frena el viento, lo que debilita la fuerza de Coriolis sin tocar la PGF; la PGF, ya desequilibrada y más intensa, hace girar el viento a través de las isobaras hacia la baja presión, de modo que <strong>el viento en superficie sopla formando un ángulo con las isobaras y no paralelo a ellas</strong> §10.5. Es la base física de la ley de Buys Ballot, ya recogida en las notas base t03 (baja presión a la izquierda con el viento a la espalda, en el hemisferio norte), y de por qué la dirección del viento observado en superficie difiere de la dirección geostrófica que se lee en una carta de presión.</p>
+<p><em>No encontrado en la biblioteca consultada para esta ficha</em>: un tratamiento explícito y con nombre del «viento del gradiente» (el viento geostrófico corregido por la curvatura de las isobaras alrededor de una baja o de una alta) ni un ángulo numérico de desviación (cuántos grados cruza las isobaras el viento en superficie sobre el mar y sobre tierra); la física de fondo expuesta arriba sigue siendo válida.</p>
+<h3 id="33-corrientes-en-chorro-tres-tipos-y-criterios-de-tac-profundiza-el-54-del-manual">3.3 Corrientes en chorro: tres tipos y criterios de TAC (profundiza el §5.4 del manual)</h3>
+<p>El manual nombra solo «la corriente en chorro» como una única corriente intensa con máximos de velocidad. FAA-H-8083-28B distingue <strong>tres corrientes en chorro</strong> §19.2.3.2.1:</p>
+<ul>
+<li><strong>Corriente en chorro del frente polar</strong>, situada hacia los <strong>50°-60° N/S</strong>, vinculada al límite entre las células de Ferrel y polar (el frente polar);</li>
+<li><strong>Corriente en chorro subtropical</strong>, situada hacia los <strong>30° N/S</strong>, vinculada al borde polar de la célula de Hadley;</li>
+<li><strong>Corriente en chorro nocturna polar</strong> (<em>polar night jet stream</em>), fenómeno estratosférico (el vórtice polar invernal) que el manual de la FAA no detalla más.</li>
+</ul>
+<p>Las corrientes en chorro «varían en altura desde alrededor de FL200 hasta FL450» y «pueden alcanzar velocidades de más de 275 mph (239 kt / 442 km/h)». Es una velocidad máxima sensiblemente superior a cualquier cifra de las notas base t03 o de OM03, y conviene memorizarla como cota superior.</p>
+<p><strong>Criterios de turbulencia en aire claro (TAC)</strong> §19.2.3.2, un complemento numérico preciso del que el manual carece por completo (su descripción de la TAC es solo cualitativa):</p>
+<ul>
+<li>Umbral de velocidad del núcleo de la corriente en chorro para la TAC: se considera generalmente <strong>110 kt</strong>; los núcleos más fuertes generan una turbulencia más importante.</li>
+<li>La TAC es más frecuente <strong>en el lado polar del núcleo de la corriente en chorro</strong>, cerca de la tropopausa inclinada por encima del núcleo y en el frente de la corriente en chorro por debajo del núcleo.</li>
+<li>Dimensiones típicas de una zona de TAC: <strong>100-300 mi de largo</strong> (en la dirección del viento), <strong>50-100 mi de ancho</strong>, <strong>unos 5000 ft de espesor</strong>, con una persistencia <strong>de 30 minutos a un día</strong>.</li>
+<li><strong>Es probable una TAC moderada cuando la cizalladura vertical del viento es ≥ 5 kt por cada 1000 ft o la cizalladura horizontal es ≥ 40 kt por cada 150 mi</strong> (o ambas).</li>
+<li>La TAC se intensifica donde una corriente en chorro cruza terreno montañoso (interacción con la onda de montaña) y donde <strong>convergen dos corrientes en chorro</strong> (la corriente del frente polar desplazándose hacia el sur por debajo de la subtropical).</li>
+<li>La TAC asociada al movimiento ondulatorio en capas estables se denomina también <strong>onda de cizalladura gravitatoria u onda de Kelvin-Helmholtz</strong> FAA AC 00-57 (pies de figura), que se hace visible mediante «nubes en oleaje» (<em>billow clouds</em>) cuando las hay.</li>
+</ul>
+<hr />
+<h2 id="4-tiempo-en-la-peninsula-iberica-y-el-mediterraneo-mas-alla-del-manual">4. Tiempo en la Península Ibérica y el Mediterráneo más allá del manual</h2>
+<p>El manual da solo la definición genérica de DANA/gota fría (cap. 6). La guía meteorológica de aeródromo de AEMET para <strong>Barcelona-El Prat (LEBL)</strong>, un documento oficial de AEMET específico de un aeródromo mediterráneo español y justo el tipo de «fuente primaria más allá del manual» que esta ficha quiere aportar, describe dos sistemas de viento regionales con nombre, relevantes para el ámbito explícito del examen «zona de Valencia: levante, gota fría/DANA», además de los mecanismos de disparo subyacentes de los eventos de convección mediterránea y de cizalladura costera.</p>
+<h3 id="41-el-sistema-cierzo-mestral-tramontana-mistral-y-la-linea-de-convergencia-catalano-balear">4.1 El sistema Cierzo-Mestral / Tramontana / Mistral y la línea de convergencia catalano-balear</h3>
+<p>Cuando se establece un <strong>flujo sinóptico de componente norte</strong> sobre la Península (una alta presión atlántica que penetra en forma de dorsal hacia el norte y una baja presión entre los golfos de León y Génova, situación que AEMET denomina «advección septentrional regida por el anticiclón atlántico»), la orografía ibérica lo encauza en un sistema de vientos regionales coordinado, del ámbito mesoescalar (<strong>meso-alfa</strong>) y de naturaleza <strong>ageostrófica</strong>:</p>
+<ul>
+<li><strong>Cierzo-Mestral</strong>: el flujo del norte se acelera al canalizarse a lo largo del <strong>valle del Ebro (depresión del Ebro)</strong>; al llegar al Mediterráneo gira <strong>ciclónicamente</strong> (a la izquierda, en este sentido local) por el contraste de rugosidad tierra-mar.</li>
+<li><strong>Tramontana</strong>: el mismo flujo del norte, canalizado entre los Pirineos y el Macizo Central francés, se acelera en la estrecha planicie del <strong>Rosellón</strong>, cerca del golfo de León, y gira <strong>anticiclónicamente</strong> a la salida, tanto por el contraste de rugosidad como por el equilibrio entre el gradiente de presión alta atlántica/baja mediterránea y la fuerza de Coriolis.</li>
+<li><strong>Mistral</strong>: la misma familia de viento del norte canalizado más al oeste/suroeste, en el corredor del Ródano, que también confluye en la cuenca mediterránea.</li>
+<li>A sotavento de la Tramontana y del Cierzo-Mestral ya establecidos se forma una discontinuidad: la <strong>línea de convergencia catalano-balear</strong>, situada entre la Costa Dorada y la Costa Brava. Es más activa en su <strong>lado norte</strong> (entre la desembocadura del Llobregat y el sur de la Costa Brava), porque el vórtice anticiclónico que se forma a sotavento de la Tramontana es más frecuente y está mejor definido que el vórtice ciclónico a sotavento del Mestral.</li>
+<li>La canalización posterior del flujo resultante tierra adentro, por los valles que cruzan las cordilleras Litoral y Prelitoral (las cuencas del Llobregat, el Besós y el Tordera), junto con el «efecto pantalla» del Pirineo oriental, crea dos zonas especialmente proclives a la convergencia y, por tanto, al <strong>disparo de la convección</strong>: la zona norte (desde la desembocadura del Llobregat hasta Platja d'Aro) y la zona sur (desde Tarragona hasta la desembocadura del Llobregat). AEMET subraya que <strong>la inestabilidad es una cuestión independiente de la convergencia</strong>: la convergencia es solo el mecanismo de <em>disparo</em>, no la fuente de la inestabilidad.</li>
+<li>Según dónde se sitúe el centro del vórtice anticiclónico de la Tramontana, el viento que se observa en LEBL es siempre de componente este, pero puede proceder del <strong>S-SE</strong> o del <strong>NE</strong>, es decir, del <strong>Garbí</strong> (viento del SE alineado con la brisa marina) o del <strong>Gregal</strong> (NE) en la denominación local de la rosa de los vientos ya recogida en el material base de la biblioteca. Conviene recordar que «viento del este en un aeródromo catalán» puede significar dos situaciones sinópticas distintas.</li>
+</ul>
+<h3 id="42-lluvias-calidas-un-tipo-de-precipitacion-propio-del-mediterraneo-ajeno-a-las-categorias-del-manual">4.2 «Lluvias cálidas»: un tipo de precipitación propio del Mediterráneo, ajeno a las categorías del manual</h3>
+<p>La guía de LEBL de AEMET describe las <strong>lluvias cálidas intensas</strong>, un fenómeno que no se nombra en ninguna parte del apartado de precipitación del manual de ENAIRE (el §8.3 del manual solo da chubascos, precipitación intermitente y virga):</p>
+<ul>
+<li>Lluvia muy fuerte, convectiva, a veces torrencial (la intensidad puede superar varios litros/m²/minuto), con <strong>prácticamente ninguna actividad eléctrica</strong>, porque la nube precursora se desarrolla por completo por encima del nivel de congelación (una «nube cálida»), de modo que no hay partículas de hielo que impulsen la separación de cargas.</li>
+<li>La precipitación crece únicamente por el <strong>proceso de colisión-coalescencia (lluvia cálida)</strong> (véase el apartado 5), con gotas relativamente pequeñas; esto explica la trampa de predicción más característica del fenómeno: <strong>la reflectividad del radar se mantiene baja (≤ 50 dBZ) incluso con lluvia intensa</strong>, porque la reflectividad depende del tamaño de las gotas y no solo de la intensidad de la lluvia, y el desarrollo vertical de la nube es limitado.</li>
+<li>Mecanismo de disparo: <strong>convergencia sostenida del viento en niveles bajos</strong>, concretamente entre un flujo de <strong>levante</strong> sinóptico o mesoescalar en la costa central de Barcelona y los <strong>vientos terrales descendentes (vientos catabáticos de tierra)</strong> de la cordillera litoral, canalizados por los valles del Llobregat, el Besós y el Tordera y por cauces menores.</li>
+<li>Más frecuentes en <strong>otoño</strong>, sobre todo de <strong>noche</strong> (a veces hasta primeras horas de la mañana, mientras persistan los terrales); además de la reducción de visibilidad y de la cizalladura por la yuxtaposición de vientos del este y terrales, su principal repercusión operativa es la <strong>inundación de pistas y plataforma</strong> por la altísima intensidad de la lluvia pese a su modesta señal en el radar: una auténtica trampa de examen de interés para el control (lluvia intensa que «parece débil» en el radar).</li>
+<li>Un levante flojo al inicio de la noche es en sí una señal de alarma temprana para los predictores de un posible episodio de lluvias cálidas.</li>
+</ul>
+<h3 id="43-un-mecanismo-de-cizalladura-en-aire-estable-que-el-manual-no-menciona-la-corriente-de-densidad-atrapada-en-la-costa">4.3 Un mecanismo de cizalladura en aire estable que el manual no menciona: la corriente de densidad atrapada en la costa</h3>
+<p>La guía de LEBL de AEMET identifica tres situaciones con mayor probabilidad de producir <strong>cizalladura</strong> en ese aeródromo: las tormentas, el viento sinóptico fuerte de componente oeste y, a diferencia de las dos primeras, un mecanismo que se da en una atmósfera <strong>estable</strong>: la <strong>corriente de densidad atrapada en la costa de Barcelona</strong>. Una masa de aire más fría y húmeda (típicamente una intrusión de tipo brisa marina) avanza contra una masa de aire más cálida y seca que ya está sobre la costa; el borde de avance se percibe en LEBL como un <strong>cambio brusco en la dirección y la intensidad del viento</strong>, con muy probable formación de una <strong>línea de convergencia sobre las propias pistas</strong>, identificable en la lectura de los anemómetros de cada cabecera de pista, que dan componentes de viento de cara distintas. La curvatura de la costa de Barcelona y el valle del Llobregat pueden intensificar aún más la corriente al acercarse al aeródromo. Es operativamente importante precisamente porque ocurre <strong>sin</strong> los disparadores convectivos (tormenta, viento sinóptico fuerte) que un controlador esperaría antes de informar de cizalladura.</p>
+<h3 id="44-referencia-cruzada-a-la-danagota-fria-del-manual">4.4 Referencia cruzada a la DANA/gota fría del manual</h3>
+<p>La descripción del propio manual (cap. 6, ya recogida en OM03 §6): una bolsa aislada de aire frío en altura que se desprende de una onda amplificada de la circulación del oeste, con un diámetro ≥ 200 km, trayectoria impredecible y precipitación intensa, es la definición estándar y no necesita corrección según las fuentes consultadas para esta ficha; no se encontró ningún detalle numérico adicional específico de España (por ejemplo, una duración media documentada de una DANA o una región preferente de formación sobre el Mediterráneo occidental) en la biblioteca leída para T03a. Anótese como <strong>no encontrado</strong>, no como discrepancia.</p>
+<hr />
+<h2 id="5-microfisica-de-las-nubes-y-crecimiento-de-la-precipitacion-mas-alla-de-la-lista-de-tipos-de-precipitacion-del-manual">5. Microfísica de las nubes y crecimiento de la precipitación (más allá de la lista de tipos de precipitación del manual)</h2>
+<p>El manual (§8.3) enumera los tipos de precipitación (lluvia, nieve, aguanieve, lluvia engelante, granizo) y las intensidades (chubascos, intermitente, virga), pero no explica <strong>cómo</strong> crece una gotita de nube hasta tener el tamaño suficiente para caer. FAA-H-8083-28B §14.2-14.3 da los dos mecanismos, que coinciden con lo que el apartado 4.2 invoca para el caso de la «lluvia cálida» mediterránea:</p>
+<ul>
+<li><strong>Ingredientes necesarios para cualquier precipitación</strong>: vapor de agua, un ascenso suficiente para condensarlo en nube y un proceso de crecimiento; en general, las nubes deben tener <strong>al menos 4000 ft de espesor</strong> para producir una precipitación significativa.</li>
+<li><strong>Proceso de colisión-coalescencia (lluvia cálida)</strong>: las gotitas de nube de distinto tamaño caen a velocidades distintas; las gotitas mayores, que caen más deprisa, barren a las más pequeñas que encuentran a su paso y se fusionan en gotas cada vez mayores hasta que pesan demasiado para mantenerse en suspensión y caen en forma de lluvia. Es el <strong>proceso de crecimiento principal en las masas de aire cálidas y tropicales con un nivel de congelación muy alto</strong> y, como mostró el apartado 4.2, en los episodios de lluvia cálida del otoño mediterráneo sobre Cataluña.</li>
+<li><strong>Proceso de cristales de hielo</strong>: en las nubes más frías, donde coexisten cristales de hielo y gotitas de agua subfundida, el vapor de agua se deposita sobre los cristales con más facilidad que sobre las gotitas líquidas, de modo que los cristales crecen a expensas de las gotitas hasta pesar lo suficiente para caer; llegan al suelo como nieve si hace frío en superficie o se funden y caen como lluvia en caso contrario. (Este es el mecanismo que los textos generales de meteorología llaman habitualmente proceso de Bergeron-Findeisen; el manual de la FAA describe el mecanismo sin usar ese epónimo, por lo que el nombre procede del conocimiento general del campo, mientras que el mecanismo en sí sí está confirmado por la fuente primaria.)</li>
+<li><strong>Referencia cruzada</strong>: esto explica por qué la precipitación asociada a los cumulonimbos (la categoría del manual de «intensa, de tipo chubasco, frecuentemente en forma de tormenta», con nubes frías que alcanzan mucho más arriba del nivel de congelación) suele ir acompañada de rayos y de gotas mayores o granizo, mientras que la lluvia cálida mediterránea del apartado 4.2 (una nube cálida, por completo por debajo del nivel de congelación) no produce rayos y da gotas más pequeñas y de menor reflectividad incluso con intensidades de lluvia altas: una explicación física genuina de un hecho que el manual solo enuncia como correlación (tipo de nube frente a carácter de la precipitación, tabla del manual, p. 49).</li>
+</ul>
+<hr />
+<h2 id="6-tormentas-mas-alla-del-manual-tipos-de-celula-y-umbrales-de-tormenta-severa">6. Tormentas más allá del manual: tipos de célula y umbrales de tormenta severa</h2>
+<p>El manual (§9.6) clasifica las tormentas solo por el <strong>origen del cumulonimbo</strong>: frontales (de frente frío o de frente cálido) frente a las de masa de aire. FAA-H-8083-28B §22.4 añade una segunda clasificación, estructuralmente distinta, por la <strong>organización de las células</strong>, que es la que más utiliza en la práctica el material operativo de ATC y de meteorología:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Estructura</th>
+<th>Datos clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tormenta unicelular (de célula ordinaria)</strong></td>
+<td>Una sola célula, con el clásico ciclo de vida de tres fases</td>
+<td>Típica de los días de verano cálidos y húmedos; aun así puede ser severa (granizo, microrreventón); <strong>rara</strong>: casi todas las tormentas reales son multicelulares</td>
+</tr>
+<tr>
+<td><strong>Conjunto multicelular (<em>multicell cluster</em>)</strong></td>
+<td>Un conjunto de células en distintas etapas de su ciclo de vida; a medida que la célula delantera madura y se desplaza a favor del viento, se forma una nueva célula a barlovento que la sustituye</td>
+<td>Puede durar <strong>varias horas o más</strong>; las células individuales pueden moverse de forma distinta al sistema en su conjunto; puede cubrir grandes áreas, «un campo de minas para el tráfico aéreo»</td>
+</tr>
+<tr>
+<td><strong>Línea multicelular (línea de turbonada)</strong></td>
+<td>Una banda estrecha, a veces de cientos de millas de longitud, a menudo sobre un frente frío o por delante de él, aunque puede formarse en aire inestable lejos de cualquier frente; se regeneran continuamente nuevas células en el borde de avance</td>
+<td>«El tipo de tormenta que presenta la barrera más eficaz para el tráfico aéreo»: normalmente demasiado alta para sobrevolarla y demasiado peligrosa para atravesarla o pasar por debajo; puede incluir supercélulas</td>
+</tr>
+<tr>
+<td><strong>Supercélula</strong></td>
+<td>Una única corriente ascendente <strong>giratoria</strong>, duradera y cuasi estacionaria</td>
+<td>Velocidades de la corriente ascendente de hasta <strong>9000 ft/min (100 kt)</strong>; casi todas las supercélulas producen tiempo severo (granizo grande o viento dañino) y <strong>alrededor del 25 % produce un tornado</strong>; <strong>más del 80 % de los tornados de EE. UU. proceden de supercélulas</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Tres ingredientes necesarios</strong> para la formación de una célula de tormenta (recuento propio de la FAA, con una agrupación algo distinta de la lista de cuatro elementos del manual): <strong>vapor de agua suficiente, aire inestable y un mecanismo de ascenso</strong> §22.2. Mientras persistan los tres, un sistema multicelular o una línea de turbonada sigue regenerando células y puede durar muchas horas más que el ciclo de vida de 2-3 horas de cualquier célula individual.</li>
+<li><strong>Nube estante o nube en rollo (<em>shelf/roll cloud</em>)</strong>: nube que marca el borde de avance del frente de racha de una tormenta, en la parte superior de la zona de turbulencia extrema, donde el aire cálido y húmedo es elevado por el flujo de salida frío que avanza; <strong>la más común en las tormentas de línea multicelular</strong> §19.2.</li>
+<li><strong>Umbral de tormenta severa en EE. UU.</strong> (un criterio numérico concreto y comprobable que el manual nunca da, pues solo habla de forma cualitativa de «granizo»): en la práctica de la FAA y el NWS, una tormenta se clasifica como «severa» si produce <strong>granizo de 1 pulgada (2,5 cm) de diámetro o mayor («del tamaño de una moneda de 25 centavos») o rachas de viento convectivo de 50 kt (58 mph) o superiores</strong> FAA-H-8083-28B. Es un <strong>umbral administrativo propio de EE. UU.</strong>, no de la OACI ni de AEMET, pero es una cifra concreta que un distractor de test podría usar con verosimilitud y conviene conocerla como referencia de orden de magnitud de «lo grande que es una piedra de granizo grande».</li>
+</ul>
+<hr />
+<h2 id="7-engelamiento-turbulencia-y-cizalladura-complemento">7. Engelamiento, turbulencia y cizalladura: complemento</h2>
+<ul>
+<li><strong>Ondas de Kelvin-Helmholtz (de cizalladura gravitatoria)</strong>: el término físico del movimiento ondulatorio que genera la TAC y la turbulencia de onda de montaña en una capa estable con fuerte cizalladura vertical del viento; cuando la humedad lo permite, se visualiza como <strong>nubes en oleaje</strong> FAA AC 00-57 (pies de figura). Es el mecanismo que falta tras la escueta afirmación del manual de que la TAC «se presenta en capas estables de niveles altos con fuerte cizalladura vertical del viento» (§9.5.6 del manual): la parte superior de la capa estable se desliza sobre la inferior y genera cizalladura, luego ondulaciones y después (a medida que aumenta la cizalladura) ondas que rompen y torbellinos turbulentos: exactamente una inestabilidad de Kelvin-Helmholtz.</li>
+<li><strong>Nubes lenticulares y nubes rotor como indicadores visuales</strong>: FAA AC 00-57 «Hazardous Mountain Winds» confirma que las nubes lenticulares y las nubes rotor señalan turbulencia de onda de montaña y de zona de rotor, en línea con la propia descripción del §9.5.5 del manual; el material fotográfico de AC 00-57 documenta además que puede haber turbulencia <strong>sin</strong> nubes lenticulares o rotor visibles cuando el aire es demasiado seco, así que la ausencia de estas nubes no prueba que el vuelo vaya a ser suave.</li>
+<li><strong>Aportación de la propia precipitación a la cizalladura y al engelamiento</strong> (§8.3 del manual, «efectos en las operaciones»): el manual enuncia sin más mecanismo la cizalladura vertical y horizontal debida a las corrientes de aire generadas por la caída de las gotas, y el riesgo de engelamiento por debajo de 0 °C; la explicación de la FAA sobre las corrientes descendentes que acompañan a la precipitación en la fase madura (§9.6 «frente de racha», ya en OM03) es el mismo mecanismo a escala de tormenta.</li>
+</ul>
+<hr />
+<h2 id="8-cenizas-volcanicas-el-codigo-de-colores-para-la-aviacion-una-laguna-senalada-expresamente-como-no-encontrado-en-las-notas-base-t03">8. Cenizas volcánicas: el código de colores para la aviación (una laguna señalada expresamente como «no encontrado» en las notas base t03)</h2>
+<p>Las notas base t03 recogían: <em>«Códigos de colores para la aviación (ORANGE, RED, etc.): mencionados en un resultado de búsqueda, sin detalle.»</em>. OMM-N.º 49 vol. II (2018, actualizado en 2021), parte II, la tabla de elementos del mensaje de aviso de cenizas volcánicas (VAA), confirma que el código existe como campo definido en el formato internacional del mensaje VAA:</p>
+<ul>
+<li><strong>Elemento 11 «Colour code»</strong>: nombre del campo <strong>AVIATION COLOUR CODE</strong>, con los valores permitidos <strong>RED, ORANGE, YELLOW, GREEN, UNKNOWN, NOT GIVEN o NIL</strong>.</li>
+<li>El mensaje VAA de ejemplo citado en OMM-49 muestra un código <strong>RED</strong> emitido junto con un informe de erupción (fuente: un organismo nacional de observación volcánica, p. ej., «KVERT KEMSD» en el campo de organismo de origen del mensaje de muestra).</li>
+<li>El significado operativo exacto de cada banda de color (por ejemplo, qué desencadena específicamente ORANGE frente a RED) <strong>no se encontró</strong> en los textos consultados para esta ficha; anótese como laguna. Lo que sí está confirmado es que la escala existe, la emite la cadena de observatorio volcánico/VAAC que el manual y la guía OM03 ya describen (estructura WAFC/VAAC, cap. 1 del manual) y aparece como campo codificado dentro de la cadena de mensajes VAA/SIGMET de cenizas.</li>
+</ul>
+<hr />
+<h2 id="9-sigmetairmetgamet-en-el-marco-oaciomm">9. SIGMET/AIRMET/GAMET en el marco OACI/OMM</h2>
+<p>Las notas base t03 ya decodifican con detalle los mensajes SIGMET/AIRMET/GAMET a partir de la Guía MET de AEMET; este apartado añade solo lo que esa guía de aplicación española no dice de forma explícita: OMM-N.º 49 vol. II es <strong>el equivalente de libre acceso del Anexo 3 de la OACI</strong> (el manual y las notas base señalan que el propio Anexo 3 es de pago), y confirma que la estructura de los mensajes SIGMET/AIRMET se define a <strong>nivel OACI/OMM</strong>, con las tablas detalladas de códigos de fenómenos y las plantillas de formato en su <strong>Apéndice 6</strong> (referencia cruzada repetida en todas las secciones de SIGMET y AIRMET de OMM-49). Esto importa para el examen porque establece que las tablas de SIGMET/AIRMET de la Guía MET de AEMET (ya recogidas en las notas base) son la <em>aplicación</em> española de una plantilla internacional estándar OACI/OMM, no una invención española: útil si una pregunta plantea qué organismo define el formato SIGMET (OACI/OMM, no AEMET).</p>
+<hr />
+<h2 id="10-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">10. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (OM03)</th>
+<th>Afirmación de la fuente primaria</th>
+<th>Valoración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>El manual no da ninguna cifra de DALR/SALR (solo una redacción cualitativa de «gradiente seco menor que el saturado» invertida; véase la propia redacción del manual sobre el Foehn)</td>
+<td>FAA: DALR ≈ 3 °C/1000 ft (9,8 °C/km); SALR ≈ 1,2-3 °C/1000 ft según la temperatura, simplificado a 2 °C/1000 ft</td>
+<td>No es una contradicción, sino una laguna real que el manual deja abierta; usar las cifras de la FAA para cualquier pregunta numérica de Foehn o estabilidad</td>
+</tr>
+<tr>
+<td>2</td>
+<td>El manual no nombra las fuerzas del viento ni el viento geostrófico ni los subtipos de corriente en chorro</td>
+<td>FAA: PGF, Coriolis, rozamiento; viento geostrófico; corrientes del frente polar, subtropical y nocturna polar; criterios numéricos de TAC</td>
+<td>El manual guarda silencio, no se equivoca; las fuentes primarias llenan la laguna</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Capa isoterma de la ISA en el manual: la figura de la p. 22 muestra isoterma de 11 a 25 km (ya señalada como observación interna dudosa en la propia guía OM03, apartado 2.10.1)</td>
+<td>La tabla 4-2 de la FAA solo da el punto de la tropopausa (11 000 m, -56,5 °C) y no da el límite superior de la capa isoterma; ningún texto de la biblioteca consultado para T03a confirma tampoco 20 km frente a 25 km</td>
+<td><strong>Resuelto el 25 de septiembre de 2026</strong>: OACI/ISA = isoterma de 11 a 20 km (NASA-TM-X-74335, tabla 4, idéntica a la OACI hasta 32 km; -2,5 °C a 47 km, isoterma de 47 a 51 km). La cifra del manual (25 km, 10 °C a 47 km, 47-53 km) difiere; se recogen ambas, el examen sigue el texto del manual (que no enuncia ninguno de los dos números); pregunta sobre valores estándar: 20 km</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Manual: tormentas clasificadas solo por el origen del cumulonimbo (frontal frente a masa de aire)</td>
+<td>FAA: una segunda clasificación por organización de las células (unicelular, conjunto multicelular, línea multicelular/línea de turbonada, supercélula), con las estadísticas de supercélula/tornado (25 %, 80 %)</td>
+<td>Complementaria, no contradictoria: el examen podría preguntar por cualquiera de los dos ejes de clasificación</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Manual: el granizo se menciona solo como peligro, sin umbrales de tamaño</td>
+<td>FAA (propio de EE. UU.): umbral de tormenta severa de granizo de 1 pulgada o rachas de 50 kt</td>
+<td>Criterio administrativo de EE. UU., citado aquí solo como referencia de orden de magnitud, no como norma de la OACI ni de AEMET</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Manual: el apartado de vientos locales cubre solo la brisa marina/terrestre y el Foehn de forma genérica</td>
+<td>Guía de LEBL de AEMET: sistema de vientos catalano-balear con nombre y específico de la orografía (Cierzo-Mestral, Tramontana, Mistral, línea de convergencia catalano-balear, Garbí/Gregal) y el mecanismo de las «lluvias cálidas»</td>
+<td>El manual da la física genérica; la guía de aeródromo de AEMET da la aplicación específica del Mediterráneo español que implica la redacción «zona de Valencia» del examen</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Manual: la lista de causas de cizalladura incluye frentes, tormentas, ondas de montaña, microrreventones, vientos catabáticos y brisas, pero ningún mecanismo costero no convectivo en aire estable</td>
+<td>Guía de LEBL de AEMET: una corriente de densidad atrapada en la costa produce cizalladura en una atmósfera <strong>estable</strong>, sin ninguno de los disparadores convectivos que enumera el manual</td>
+<td>Un mecanismo genuinamente nuevo, no una contradicción: una adición a la lista de causas del manual</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-trampas-de-examen-confusiones-tipicas-y-como-distinguirlas">11. Trampas de examen (confusiones típicas y cómo distinguirlas)</h2>
+<ol>
+<li><strong>DALR frente a SALR</strong>: seco ≈ <strong>3 °C/1000 ft</strong>, saturado ≈ <strong>de 1,2 a 3 °C/1000 ft</strong> (a menudo simplificado a 2). Una burbuja se enfría según el DALR solo mientras <em>no está saturada</em>; pasado el LCL cambia al SALR (más lento): por eso el aire ascendente con nube en su cima se enfría más despacio que el aire ascendente despejado.</li>
+<li><strong>LCL frente a LFC</strong>: LCL = donde la burbuja se satura (base de la nube); LFC = donde una burbuja <em>condicionalmente inestable</em>, una vez elevada hasta allí, pasa por fin a ser más cálida que su entorno y asciende por sí sola. Una burbuja puede alcanzar su LCL sin llegar nunca a un LFC (entonces no es convectivamente inestable).</li>
+<li><strong>Cuatro estados de estabilidad</strong> comparando el ELR con el DALR/SALR: ELR &lt; SALR = absolutamente estable; SALR &lt; ELR &lt; DALR = condicionalmente inestable; ELR = DALR o SALR = neutra; ELR &gt; DALR = absolutamente inestable (superadiabática).</li>
+<li><strong>Altitud de presión frente a altitud densidad</strong>: la altitud de presión solo corrige la <em>presión</em> no estándar (altímetro a 29,92/1013,25); la altitud densidad corrige además la <em>temperatura</em> no estándar. Un aeropuerto cálido y de gran elevación puede tener una altitud densidad miles de pies por encima de la elevación del aeródromo en un día despejado y en calma.</li>
+<li><strong>Viento geostrófico (en altura, paralelo a las isobaras, PGF = Coriolis) frente a viento en superficie (cruza las isobaras hacia la baja presión, porque el rozamiento debilita la fuerza de Coriolis pero no la PGF)</strong>.</li>
+<li><strong>Tres corrientes en chorro</strong>: del frente polar (~50-60°), subtropical (~30°), nocturna polar (estratosférica, invernal). Umbral de TAC ≈ 110 kt de velocidad del núcleo; zona típica ≈ 100-300 x 50-100 mi x 5000 ft, de 30 min a 1 día.</li>
+<li><strong>Unicelular frente a multicelular frente a supercélula</strong>: la unicelular es rara y de corta vida; los conjuntos y líneas multicelulares regeneran células mientras persistan vapor + inestabilidad + ascenso; las supercélulas tienen una única corriente ascendente giratoria, ~25 % produce un tornado y causan más del 80 % de los tornados de EE. UU.</li>
+<li><strong>Lluvia cálida (colisión-coalescencia) frente a proceso de cristales de hielo</strong>: lluvia cálida = sin hielo, las gotitas mayores barren a las menores, típica de nubes tropicales o cálidas (y de las «lluvias cálidas» nocturnas del otoño mediterráneo en la costa catalana, con baja reflectividad de radar y sin rayos); proceso de cristales de hielo = gotitas subfundidas + cristales de hielo, el vapor se deposita preferentemente sobre el hielo, típico de nubes frías, altas y eléctricamente activas.</li>
+<li><strong>Cierzo-Mestral / Tramontana / Mistral</strong>: los tres son el <em>mismo</em> flujo sinóptico del norte, canalizado por corredores ibéricos o franceses distintos (el valle del Ebro para el Cierzo-Mestral, el paso del Pirineo-Macizo Central/Rosellón para la Tramontana, el corredor del Ródano para el Mistral); confluyen en la cuenca mediterránea y crean la línea de convergencia catalano-balear a sotavento de Cataluña.</li>
+<li><strong>La cizalladura costera catalana tiene dos causas muy distintas</strong>: (a) convectiva (tormenta) o viento sinóptico fuerte del oeste, ambas esperables y pronosticables; (b) una <strong>corriente de densidad atrapada en la costa en una atmósfera por lo demás estable</strong>, una causa no convectiva fácil de pasar por alto.</li>
+<li><strong>Código de colores para la aviación en cenizas volcánicas</strong>: RED / ORANGE / YELLOW / GREEN / UNKNOWN / NOT GIVEN / NIL, un campo codificado del mensaje VAA, no una invención de AEMET.</li>
+<li><strong>El umbral de granizo/viento de tormenta severa de EE. UU. (1 pulgada / 50 kt)</strong> es un criterio administrativo del NWS/FAA de EE. UU., no un umbral normativo de la OACI ni español (AEMET/AESA); no debe suponerse que se aplique a los criterios de los SIGMET españoles.</li>
+</ol>
+<h2 id="12-imprescindible-memorizar">12. Imprescindible memorizar</h2>
+<ul>
+<li>Valores ISA de referencia (contrastados,): 15 °C / 1013,25 hPa / 29,92 inHg a nivel del mar; -2 °C/1000 ft hasta la tropopausa; tropopausa a 11 000 m / 36 089 ft / -56,5 °C.</li>
+<li>DALR ≈ 3 °C/1000 ft (9,8 °C/km); SALR ≈ 1,2-3 °C/1000 ft (a menudo simplificado a 2); el punto de rocío desciende ≈ 0,5 °C/1000 ft mientras no hay saturación.</li>
+<li>Estabilidad: ELR&lt;SALR estable; SALR&lt;ELR<DALR condicionalmente inestable; ELR=DALR/SALR neutra; ELR>DALR absolutamente inestable. LCL = nivel de saturación; LFC = nivel de convección libre (solo en la inestabilidad condicional).</li>
+<li>Altitud de presión = altímetro a 29,92"/1013,25 hPa; altitud densidad = altitud de presión corregida por temperatura no estándar; sube en los días cálidos y baja en los fríos.</li>
+<li>Tres fuerzas del viento: PGF, Coriolis (derecha en el hemisferio norte / izquierda en el sur, nula en el ecuador, ∝ velocidad), rozamiento (solo en la capa superficial). Viento geostrófico: paralelo a las isobaras, por encima de la capa de fricción. Viento en superficie: cruza las isobaras hacia la baja presión.</li>
+<li>Tres corrientes en chorro: del frente polar (~50-60°), subtropical (~30°), nocturna polar (estratosférica). Altura de la corriente en chorro FL200-FL450, velocidad máxima &gt; 239 kt. Umbral de TAC ≈110 kt de núcleo; TAC moderada con cizalladura vertical ≥5 kt/1000 ft o horizontal ≥40 kt/150 mi; zona ~100-300x50-100 mi x 5000 ft, 30 min-1 día.</li>
+<li>Tipos de célula de tormenta: unicelular (rara), conjunto multicelular, línea multicelular/línea de turbonada (la más difícil de evitar), supercélula (corriente ascendente giratoria, ~9000 fpm, ~25 % de tornados, &gt;80 % de los tornados de EE. UU.).</li>
+<li>Crecimiento de la precipitación: colisión-coalescencia (lluvia cálida, lluvias tropicales o nocturnas del otoño mediterráneo, baja reflectividad de radar, sin rayos) frente a proceso de cristales de hielo (nubes frías, gotitas subfundidas + hielo).</li>
+<li>Sistema de vientos regionales ibérico: Cierzo-Mestral (valle del Ebro, giro ciclónico) + Tramontana (paso del Rosellón, giro anticiclónico) + Mistral (corredor del Ródano) → línea de convergencia catalano-balear, más activa en su lado norte (Tramontana).</li>
+<li>«Lluvias cálidas» de LEBL: convergencia de levante + terral, otoño, noche, nube cálida, sin rayos, dBZ bajos, riesgo de inundación.</li>
+<li>Causa de cizalladura en LEBL más allá de la convección: corriente de densidad atrapada en la costa, atmósfera estable, cambio brusco de viento, línea de convergencia sobre las pistas.</li>
+<li>Código de colores de las cenizas volcánicas: RED/ORANGE/YELLOW/GREEN/UNKNOWN/NOT GIVEN/NIL, un campo del mensaje VAA de OMM-49.</li>
+<li>Formato SIGMET/AIRMET definido a nivel OACI/OMM (Apéndice 6 de OMM-49 = equivalente gratuito del Anexo 3); las tablas de la Guía MET de AEMET son la aplicación española de esa plantilla internacional.</li>
+</ul>
+<hr />
+<h2 id="13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gradiente adiabático seco</td>
+<td>Dry adiabatic lapse rate (DALR)</td>
+</tr>
+<tr>
+<td>gradiente adiabático saturado (húmedo)</td>
+<td>Saturated (moist) adiabatic lapse rate (SALR)</td>
+</tr>
+<tr>
+<td>gradiente térmico ambiental (existente)</td>
+<td>Environmental (existing) lapse rate</td>
+</tr>
+<tr>
+<td>nivel de condensación por ascenso</td>
+<td>Lifted Condensation Level (LCL)</td>
+</tr>
+<tr>
+<td>nivel de convección libre</td>
+<td>Level of Free Convection (LFC)</td>
+</tr>
+<tr>
+<td>estabilidad / inestabilidad absoluta</td>
+<td>Absolute stability / instability</td>
+</tr>
+<tr>
+<td>inestabilidad condicional</td>
+<td>Conditional instability</td>
+</tr>
+<tr>
+<td>estabilidad neutra</td>
+<td>Neutral stability</td>
+</tr>
+<tr>
+<td>inestabilidad convectiva</td>
+<td>Convective instability</td>
+</tr>
+<tr>
+<td>fuerza del gradiente de presión</td>
+<td>Pressure gradient force (PGF)</td>
+</tr>
+<tr>
+<td>fuerza de Coriolis</td>
+<td>Coriolis force</td>
+</tr>
+<tr>
+<td>fuerza de rozamiento / capa de fricción</td>
+<td>Friction force / friction layer</td>
+</tr>
+<tr>
+<td>viento geostrófico</td>
+<td>Geostrophic wind</td>
+</tr>
+<tr>
+<td>altitud de presión</td>
+<td>Pressure altitude</td>
+</tr>
+<tr>
+<td>altitud densidad</td>
+<td>Density altitude</td>
+</tr>
+<tr>
+<td>desviación ISA</td>
+<td>ISA deviation</td>
+</tr>
+<tr>
+<td>corriente en chorro del frente polar / subtropical / nocturna polar</td>
+<td>Polar front jet / subtropical jet / polar night jet</td>
+</tr>
+<tr>
+<td>turbulencia en aire claro (TAC)</td>
+<td>Clear-air turbulence (CAT)</td>
+</tr>
+<tr>
+<td>onda de Kelvin-Helmholtz (onda de cizalladura gravitatoria)</td>
+<td>Kelvin-Helmholtz wave (gravity-shear wave)</td>
+</tr>
+<tr>
+<td>tormenta unicelular / multicelular / supercélula</td>
+<td>Single-cell / multicell / supercell thunderstorm</td>
+</tr>
+<tr>
+<td>línea de turbonada</td>
+<td>Squall line</td>
+</tr>
+<tr>
+<td>nube estante / nube en rollo</td>
+<td>Shelf cloud / roll cloud</td>
+</tr>
+<tr>
+<td>proceso de colisión-coalescencia (lluvia cálida)</td>
+<td>Collision-coalescence (warm rain) process</td>
+</tr>
+<tr>
+<td>proceso de cristales de hielo</td>
+<td>Ice crystal process</td>
+</tr>
+<tr>
+<td>flujo / advección septentrional</td>
+<td>Northerly flow / advection</td>
+</tr>
+<tr>
+<td>Cierzo-Mestral (viento regional del valle del Ebro)</td>
+<td>Cierzo-Mestral</td>
+</tr>
+<tr>
+<td>Tramontana</td>
+<td>Tramontana</td>
+</tr>
+<tr>
+<td>Mistral</td>
+<td>Mistral</td>
+</tr>
+<tr>
+<td>línea de convergencia catalano-balear</td>
+<td>Catalano-Balear convergence line</td>
+</tr>
+<tr>
+<td>Garbí</td>
+<td>Garbí (SE sea-breeze wind, Catalan coast)</td>
+</tr>
+<tr>
+<td>Gregal</td>
+<td>Gregal (NE wind, Catalan coast)</td>
+</tr>
+<tr>
+<td>lluvias cálidas (intensas)</td>
+<td>Warm rains (intense)</td>
+</tr>
+<tr>
+<td>corriente de densidad atrapada (en la costa)</td>
+<td>Trapped (coastal) density current</td>
+</tr>
+<tr>
+<td>mecanismo (disparador) de convergencia</td>
+<td>Convergence (trigger) mechanism</td>
+</tr>
+<tr>
+<td>código de colores para la aviación</td>
+<td>Aviation colour code</td>
+</tr>
+<tr>
+<td>mensaje de aviso de cenizas volcánicas (VAA)</td>
+<td>Volcanic Ash Advisory (VAA) message</td>
+</tr>
+<tr>
+<td>Anexo 3 de la OACI</td>
+<td>ICAO Annex 3</td>
+</tr>
+<tr>
+<td>gota subfundida (superenfriada)</td>
+<td>Supercooled droplet</td>
+</tr>
+<tr>
+<td>terral</td>
+<td>Terral (katabatic land wind, coastal range)</td>
+</tr>
+<tr>
+<td>levante</td>
+<td>Levante (easterly Mediterranean wind)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-fuentes">14. Fuentes</h2>
+<ul>
+<li>FAA-H-8083-28B, <em>Aviation Weather Handbook</em> (ed. 2026): apartados 4.4 (atmósfera estándar), 8.4.1.4-8.4.1.5 (altitud de presión y de densidad), 10.3-10.5 (fuerzas del viento, viento geostrófico y viento en superficie), 9 / 19.2.3.2 (corrientes en chorro y TAC), 12-13 (procesos adiabáticos y estabilidad), 14.2-14.3 (crecimiento de la precipitación), 19.2 (nubes estante), 22.2-22.4 (ingredientes de la tormenta y tipos de célula).</li>
+<li>FAA-H-8083-25C, <em>Pilot's Handbook of Aeronautical Knowledge</em> (PHAK).</li>
+<li>FAA AC 00-57, <em>Hazardous Mountain Winds and Their Visual Indicators</em>: nubes rotor y lenticulares, ondas de Kelvin-Helmholtz (de cizalladura gravitatoria).</li>
+<li>OMM-N.º 49 vol. II (ed. 2018, actualizada en 2021): parte II, tabla de elementos del mensaje VAA (código de colores para la aviación), referencias cruzadas al Apéndice 6 (formato SIGMET/AIRMET definido a nivel OACI/OMM).</li>
+<li>AEMET, <em>Guía Meteorológica de Aeródromo: Josep Tarradellas Barcelona-El Prat (LEBL)</em>: apartados sobre cizalladura (corriente de densidad en la costa), rosas de los vientos locales (Garbí/Gregal), sistema de vientos regionales (Cierzo-Mestral/Tramontana/Mistral, línea de convergencia catalano-balear) y lluvias cálidas intensas.</li>
+<li>NASA-TM-X-74335, <em>U.S. Standard Atmosphere 1976</em>: descargada y presente en la biblioteca, pero su texto extraído está corrompido por el OCR de un informe técnico escaneado (columnas de caracteres ilegibles) y no pudo servir para verificar ni ampliar las tablas ISA de esta ficha; todas las cifras ISA de arriba se remontan en cambio a la tabla 4-2 de la FAA, limpia.</li>
+<li><code>syllabus/manual/OM03-meteorology-study-guide.md</code> y <code>syllabus/t03-meteorology.md</code> (notas base anteriores), leídos por completo para evitar duplicidades.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

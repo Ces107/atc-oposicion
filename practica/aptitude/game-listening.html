@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprensión auditiva</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.2'/%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cpath d='M12 12L19 6.2'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --soft:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --on-accent:#ffffff; --good:#2d6a3e; --bad:#a3241c; --warn:#b3450d;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --soft:#a19c90; --rule:#3a3935;
+  --accent:#7fb0e8; --accent-h:#a4c6ef; --on-accent:#161615; --good:#7cbf8a; --bad:#e5766d; --warn:#e08a55;
+}}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45}
+#app{max-width:920px;margin:0 auto;padding:20px 16px 56px}
+h1{font-family:var(--serif);font-size:1.9rem;line-height:1.1;margin:0 0 .5rem;font-weight:700}
+h2{font-family:var(--serif);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:4px;border-bottom:1px solid var(--rule);font-weight:700}
+h3{font-family:var(--serif);font-size:1.05rem;margin:1.1rem 0 .3rem;font-weight:700}
+p{margin:.4rem 0}
+.soft{color:var(--soft)} .small{font-size:.85rem}
+.good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+.center{text-align:center}
+.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.2em}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand .i{width:34px;height:34px;color:var(--accent);stroke-width:1.5}
+.brand h1{margin:0}
+.list{border-top:2px solid var(--text);margin:14px 0}
+.card{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;border-bottom:1px solid var(--rule);padding:16px 4px;text-align:left;color:var(--text);font:inherit;cursor:pointer}
+.card:hover{background:var(--stripe)}
+.card .i.lead{width:30px;height:30px;color:var(--accent)}
+.card .nm{font-family:var(--serif);font-size:1.3rem;font-weight:700;flex:1}
+.card .data{color:var(--soft);font-size:.86rem;text-align:right}
+.card .go{color:var(--accent)}
+button,select,input{font:inherit}
+.btn{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;min-height:40px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;line-height:1.2;transition:background-color .12s,color .12s}
+.btn:hover:not(:disabled){background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover:not(:disabled){background:var(--accent-h);color:var(--on-accent)}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn.small{min-height:40px;padding:4px 10px;font-size:.86rem}
+.btn:disabled{opacity:.5;cursor:default}
+.link{background:none;border:none;color:var(--accent);cursor:pointer;padding:6px 0;min-height:40px;display:inline-flex;align-items:center;gap:6px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;min-height:42px;width:100%}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=checkbox],input[type=radio]{accent-color:var(--accent);width:auto;min-height:auto;vertical-align:middle}
+input:focus-visible,select:focus-visible,.btn:focus-visible,.card:focus-visible,.link:focus-visible,.optBtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+label.lab{display:block;margin:.9rem 0 .3rem;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.row>*{flex:0 0 auto}
+.figures{display:flex;flex-wrap:wrap;margin:.8rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.figure{padding:10px 26px 10px 0}
+.figure b{display:block;font-family:var(--serif);font-size:1.9rem;line-height:1.1}
+.figure span{color:var(--soft);font-size:.82rem}
+.bar{height:3px;background:var(--stripe);margin:.5rem 0}
+.bar>div{height:100%;background:var(--accent);width:0}
+.fb{min-height:2.2rem;font-size:1.05rem;margin-top:.6rem}
+.head{display:flex;flex-wrap:wrap;gap:4px 24px;color:var(--soft);font-size:.9rem}
+.head b{color:var(--text)}
+.head .link{margin-left:auto;padding:0 4px;min-width:40px;justify-content:center}
+.notice{font-weight:700;margin:.5rem 0}
+.hint{border-top:1px solid var(--rule);color:var(--soft);padding:8px 0;margin:.5rem 0}
+.hint code{background:var(--stripe);padding:1px 6px;border-radius:2px}
+.tbox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.86rem;border-top:1px solid var(--text);border-bottom:1px solid var(--text)}
+th,td{border-bottom:1px solid var(--rule);padding:6px 10px 6px 0;text-align:left;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+th{color:var(--soft);font-weight:600;font-size:.82rem}
+tr.me td{font-weight:700}
+td.mod{white-space:normal;min-width:180px}
+.playbox{border-top:2px solid var(--text);border-bottom:1px solid var(--rule);padding:22px 0;text-align:center;margin:.8rem 0}
+.playbox .i.big{width:36px;height:36px;color:var(--accent)}
+.playword{font-family:var(--serif);font-size:2.1rem;font-weight:700;min-height:2.6rem;letter-spacing:.02em}
+.keys{color:var(--soft);font-size:.8rem;text-align:center}
+@media (pointer:coarse){.keys{display:none}}
+.elems{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 18px;margin:.8rem 0}
+.elemBox label{display:block;font-size:.85rem;color:var(--soft);margin-bottom:4px}
+.dual{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 10px}
+.dual input{width:140px;min-height:38px}
+.passageQ{border-top:1px solid var(--rule);padding:12px 0}
+.optsList{display:grid;gap:6px;margin-top:.5rem}
+.optBtn{background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:9px 12px;min-height:44px;text-align:left;color:var(--text);cursor:pointer;font:inherit}
+.optBtn:hover:not(:disabled){border-color:var(--accent)}
+.optBtn.ok{border-color:var(--good);color:var(--good);font-weight:700}
+.optBtn.bad{border-color:var(--bad);color:var(--bad)}
+.optBtn:disabled{color:var(--text);cursor:default}
+.optBtn.ok:disabled{color:var(--good)} .optBtn.bad:disabled{color:var(--bad)}
+.key{display:inline-block;padding:0 6px;border:1px solid var(--rule);border-radius:2px;font-size:.78rem;background:var(--surface);color:var(--text)}
+.voice{color:var(--soft);font-size:.86rem;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin:10px 0}
+.voice .link{padding:2px 8px;font-size:.86rem}
+#toast{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:2px;z-index:10;max-width:90vw}
+.tags{margin:.4rem 0;color:var(--soft)}
+.tags b{color:var(--text)}
+@media (max-width:640px){
+  html{font-size:16px}
+  #app{padding:14px 16px 44px}
+  h1{font-size:1.6rem}
+  .playword{font-size:1.5rem}
+  .card .data{display:none}
+  .figure{padding-right:18px}
+}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="12" r="4.6"/><path d="M12 12L19 6.2"/><circle cx="16.4" cy="15.6" r="1"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4.5V8h3.5"/><path d="M12 8v4.2l3 1.8"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.6L12 15l4.5-4.4"/><path d="M5 19.5h14"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15.5V4.5"/><path d="M7.5 9L12 4.5 16.5 9"/><path d="M5 19.5h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12L18.5 6"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7.5 15l3.5-4 3 3 5-6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l9 4.8-9 4.8-9-4.8z"/><path d="M3 12.6l9 4.8 9-4.8"/><path d="M3 16.8l9 4.8 9-4.8"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 16v-4a8 8 0 0 1 16 0v4"/><path d="M4 15h3.5v5H5.5A1.5 1.5 0 0 1 4 18.500z"/><path d="M20 15h-3.5v5h2a1.5 1.5 0 0 0 1.500-1.500z"/></symbol>
+<symbol id="i-speech" viewBox="0 0 24 24"><path d="M4.5 5h15v10.500h-9L6 19.500v-4h-1.500z"/><path d="M8.500 9.500h7"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8.500L19 7.500V21H6z"/><path d="M14 3v5h5"/><path d="M9 12.500h7M9 16.500h7"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><path d="M15 4.500v5M9 14.500v5"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.500h10a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.500 7h15"/><path d="M9 7V4h6v3"/><path d="M6.500 7l1 13h9l1-13"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.500L20 8.500"/><path d="M20 4v4.500h-4.500"/><path d="M20 13a8 8 0 0 1-14 4.500L4 15.500"/><path d="M4 20v-4.500h4.500"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8.500L19 7.500V21H6z"/><path d="M14 3v5h5"/></symbol>
+</defs></svg>
+<script>
+
+// ==== PURE LOGIC START ====
+/* ---------- RNG helpers ---------- */
+function randInt(rnd, a, b){ return a + Math.floor(rnd() * (b - a + 1)); }
+function pick(rnd, arr){ return arr[Math.floor(rnd() * arr.length)]; }
+function shuffle(rnd, arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function fmt(x, d){ if (x === null || x === undefined || isNaN(x)) return '—'; return Number(x).toFixed(d === undefined ? 1 : d); }
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function padN(n, len){ let s = String(n); while (s.length < len) s = '0' + s; return s; }
+
+/* ---------- ICAO alphabet and aviation number words (CAP 413, sec. 2.12) ---------- */
+const ICAO_ALPHA = { A:'Alfa', B:'Bravo', C:'Charlie', D:'Delta', E:'Echo', F:'Foxtrot', G:'Golf', H:'Hotel',
+  I:'India', J:'Juliett', K:'Kilo', L:'Lima', M:'Mike', N:'November', O:'Oscar', P:'Papa', Q:'Quebec',
+  R:'Romeo', S:'Sierra', T:'Tango', U:'Uniform', V:'Victor', W:'Whiskey', X:'X-ray', Y:'Yankee', Z:'Zulu' };
+const ICAO_LETTERS = Object.keys(ICAO_ALPHA);
+const NUM_WORD = ['Zero','Wun','Too','Tree','Fower','Fife','Six','Seven','Ait','Niner'];
+function digitsToWords(str){ return String(str).split('').map(function(c){ return NUM_WORD[+c]; }); }
+// Text-to-speech engines mispronounce the ICAO respellings (Wun, Too, Fower, Fife, Ait...), so the
+// synthesiser gets ordinary English digit words; the visual fallback and the Tips page keep the ICAO forms.
+const TTS_WORD = { Zero:'zero', Wun:'one', Too:'two', Tree:'three', Fower:'four', Fife:'five', Six:'six', Seven:'seven', Ait:'eight', Niner:'nine', Juliett:'Juliet', 'X-ray':'X ray', Decimal:'decimal' };
+function toTTS(words){ return words.map(function(w){ return TTS_WORD[w] || w; }); }
+const DIGIT_EN = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+function say(str){ return String(str).split('').map(function(c){ return /\d/.test(c) ? DIGIT_EN[+c] : c; }).join(' '); } // "1013" -> "one zero one three"
+function ordinal(n){ const m = n % 100; if (m >= 11 && m <= 13) return n + 'th'; const r = n % 10; return n + (r === 1 ? 'st' : r === 2 ? 'nd' : r === 3 ? 'rd' : 'th'); }
+function sayRunway(r){ const side = /[LCR]$/.test(r) ? { L:'left', C:'centre', R:'right' }[r.slice(-1)] : ''; return say(r.replace(/[LCR]$/, '')) + (side ? ' ' + side : ''); }
+function sayNum(n){ return n < 0 ? 'minus ' + Math.abs(n) : String(n); }
+function octal4(rnd){ let s = ''; for (let i = 0; i < 4; i++) s += String(randInt(rnd, 0, 7)); return s; }
+
+const AIRLINES = [
+  ['Speedbird','BAW'], ['Ryanair','RYR'], ['Vueling','VLG'], ['Iberia','IBE'], ['Easy','EZY'],
+  ['Norshuttle','NOZ'], ['Lufthansa','DLH'], ['Airfrans','AFR'], ['Klim','KLM'], ['Shamrock','EIN'],
+  ['Wizzair','WZZ'], ['Jetstream','TOM']
+];
+
+/* ---------- Element generators (single dictation items) ---------- */
+function normAns(s){ return String(s || '').toUpperCase().replace(/[\s\-.]/g, ''); }
+
+function genCallsign(rnd){
+  if (rnd() < 0.5){
+    const letters = [pick(rnd, ICAO_LETTERS), pick(rnd, ICAO_LETTERS), pick(rnd, ICAO_LETTERS), pick(rnd, ICAO_LETTERS)];
+    const spoken = ['Golf'].concat(letters.map(function(l){ return ICAO_ALPHA[l]; }));
+    const answer = 'G' + letters.join('');
+    return { kind:'callsign', sub:'registration', spoken:spoken, label:'Matrícula de aeronave', answer:answer,
+      accept:function(v){ return normAns(v) === normAns(answer) || normAns(v) === normAns('G-' + letters.join('')); },
+      display:'G-' + letters.join('') };
+  }
+  const al = pick(rnd, AIRLINES);
+  const n = randInt(rnd, 1, 4);
+  let digs = '';
+  for (let i = 0; i < n; i++) digs += String(randInt(rnd, 0, 9));
+  const spoken = [al[0]].concat(digitsToWords(digs));
+  const answer = al[0].toUpperCase() + ' ' + digs;
+  return { kind:'callsign', sub:'airline', spoken:spoken, label:'Indicativo', answer:answer,
+    accept:function(v){ return normAns(v) === normAns(answer); }, display:al[0] + ' ' + digs };
+}
+function genHeading(rnd){
+  const v = randInt(rnd, 1, 360);
+  const s = padN(v, 3);
+  return { kind:'heading', spoken:digitsToWords(s), label:'Rumbo (3 dígitos)', answer:s,
+    accept:function(x){ return normAns(x) === s; }, display:s };
+}
+function genFlightLevel(rnd){
+  const v = randInt(rnd, 10, 41) * 10;
+  const s = padN(v, 3);
+  return { kind:'flightlevel', spoken:digitsToWords(s), label:'Nivel de vuelo (3 dígitos, sin «FL»)', answer:s,
+    accept:function(x){ return normAns(x) === s; }, display:'FL' + s };
+}
+function genAltimeter(rnd){
+  const v = randInt(rnd, 950, 1050);
+  const s = padN(v, 4);
+  return { kind:'altimeter', spoken:digitsToWords(s), label:'QNH (4 dígitos, hPa)', answer:s,
+    accept:function(x){ return normAns(x) === s; }, display:s + ' hPa' };
+}
+function genFrequency(rnd){
+  const whole = randInt(rnd, 118, 136);
+  const decOpts = ['005','010','025','050','075','100','125','150','175','200','225','250','275','300','325','350','375','400','425','450','475','500','525','550','575','600','625','650','675','700','725','750','775','800','825','850','875','900','925','950','975'];
+  const dec = pick(rnd, decOpts);
+  const s = whole + '.' + dec;
+  const spoken = digitsToWords(String(whole)).concat(['Decimal']).concat(digitsToWords(dec));
+  return { kind:'frequency', spoken:spoken, label:'Frecuencia (p. ej. 127.350)', answer:s,
+    accept:function(x){ const n = normAns(x); return n === normAns(s) || n === normAns(s).slice(1); }, display:s + ' MHz' };
+}
+function genSquawk(rnd){
+  let s = '';
+  for (let i = 0; i < 4; i++) s += String(randInt(rnd, 0, 7));
+  return { kind:'squawk', spoken:digitsToWords(s), label:'Código transpondedor (4 dígitos octales)', answer:s,
+    accept:function(x){ return normAns(x) === s; }, display:s };
+}
+function genRunway(rnd){
+  const v = randInt(rnd, 1, 36);
+  const s = padN(v, 2);
+  const side = rnd() < 0.4 ? pick(rnd, ['L','C','R']) : '';
+  const sideWord = { L:'Left', C:'Centre', R:'Right' }[side] || '';
+  const spoken = digitsToWords(s).concat(sideWord ? [sideWord] : []);
+  const answer = s + side;
+  return { kind:'runway', spoken:spoken, label:'Pista (p. ej. 27 o 27L)', answer:answer,
+    accept:function(x){ return normAns(x) === normAns(answer); }, display:answer };
+}
+const ELEMENT_GENS = { callsign:genCallsign, heading:genHeading, flightlevel:genFlightLevel,
+  altimeter:genAltimeter, frequency:genFrequency, squawk:genSquawk, runway:genRunway };
+const ELEMENT_KINDS = Object.keys(ELEMENT_GENS);
+
+function connectorFor(kind){
+  return { heading:'turn heading', flightlevel:'climb flight level', frequency:'contact on',
+    runway:'cleared runway', altimeter:'QNH', squawk:'squawk' }[kind] || 'and';
+}
+// A "clearance" item chains a callsign with 1+ further elements, connector words spoken
+// in between; scored per element (partial credit), as required for the dictation drill.
+function genClearanceChain(rnd, nParts){
+  nParts = Math.max(2, Math.min(6, nParts || 3));
+  const cs = genCallsign(rnd);
+  const parts = [cs];
+  const kinds = ['heading','flightlevel','frequency','runway','altimeter','squawk'];
+  const chosen = shuffle(rnd, kinds).slice(0, nParts - 1);
+  chosen.forEach(function(k){ parts.push(ELEMENT_GENS[k](rnd)); });
+  let spoken = cs.spoken.slice();
+  parts.slice(1).forEach(function(p){ spoken = spoken.concat(connectorFor(p.kind).split(' ')).concat(p.spoken); });
+  return { kind:'clearance', parts:parts, spoken:spoken };
+}
+function makeDictationItem(rnd, chainLen){
+  if (chainLen <= 1){
+    const kind = pick(rnd, ELEMENT_KINDS);
+    const el = ELEMENT_GENS[kind](rnd);
+    return { kind:'single', parts:[el], spoken:el.spoken };
+  }
+  return genClearanceChain(rnd, chainLen);
+}
+function scoreItem(item, userAnswers){
+  let ok = 0, blank = 0;
+  const detail = item.parts.map(function(p, i){
+    const u = (userAnswers[i] || '').trim();
+    const isBlank = u === '';
+    const good = !isBlank && p.accept(u);
+    if (good) ok++; else if (isBlank) blank++;
+    return { kind:p.kind, label:p.label, expected:p.display || p.answer, got:u, ok:good, blank:isBlank };
+  });
+  const wrong = item.parts.length - ok - blank;
+  return { ok:ok, wrong:wrong, blank:blank, total:item.parts.length, detail:detail,
+    pct: item.parts.length ? ok / item.parts.length * 100 : 0 };
+}
+
+/* ---------- Difficulty ladder (10 levels) ---------- */
+const LEVELS = [null,
+  { n:1,  name:'Calentamiento',     rate:0.72, replays:3, noise:0.00, accent:false, dual:0, hints:3, chain:1, items:8  },
+  { n:2,  name:'Fácil',       rate:0.82, replays:3, noise:0.00, accent:false, dual:0, hints:3, chain:1, items:10 },
+  { n:3,  name:'Constante',       rate:0.92, replays:2, noise:0.06, accent:false, dual:0, hints:2, chain:2, items:10 },
+  { n:4,  name:'Estándar',     rate:1.00, replays:2, noise:0.10, accent:true,  dual:0, hints:2, chain:2, items:12 },
+  { n:5,  name:'Competitivo',  rate:1.05, replays:1, noise:0.16, accent:true,  dual:1, hints:1, chain:3, items:12 },
+  { n:6,  name:'Difícil',       rate:1.15, replays:1, noise:0.22, accent:true,  dual:1, hints:1, chain:3, items:14 },
+  { n:7,  name:'Élite',       rate:1.25, replays:1, noise:0.28, accent:true,  dual:2, hints:0, chain:4, items:14 },
+  { n:8,  name:'Extremo',      rate:1.35, replays:0, noise:0.36, accent:true,  dual:2, hints:0, chain:4, items:16 },
+  { n:9,  name:'Sobrehumano',   rate:1.48, replays:0, noise:0.45, accent:true,  dual:3, hints:0, chain:5, items:16 },
+  { n:10, name:'Imposible',   rate:1.65, replays:0, noise:0.55, accent:true,  dual:3, hints:0, chain:6, items:18 }
+];
+const MAX_LEVEL = 10;
+function hintCap(level){ return LEVELS[Math.max(1, Math.min(MAX_LEVEL, level))].hints; }
+function clampLevel(l){ return Math.max(1, Math.min(MAX_LEVEL, l)); }
+function levelStatement(n){
+  if (n < 5) return 'por debajo del objetivo de la fase 2 / oral';
+  if (n === 5) return 'objetivo de la fase 2 / oral: lo que debe alcanzar un candidato bien preparado';
+  if (n <= 6) return 'margen de seguridad sobre el objetivo';
+  return 'por encima de lo exigido';
+}
+
+/* ---------- Adaptive engine ---------- */
+const ADAPT_TARGET = 96;
+function adaptBlockResult(block){
+  const n = block.length, ok = block.filter(Boolean).length;
+  const acc = n ? ok / n * 100 : 0;
+  return { n:n, ok:ok, acc:acc, clean: acc >= ADAPT_TARGET };
+}
+function adaptStep(state, blockResult, needClean){
+  let level = state.level, cleanStreak = state.cleanStreak, failStreak = state.failStreak, ev = null;
+  if (blockResult.clean){
+    cleanStreak++; failStreak = 0;
+    if (cleanStreak >= (needClean || 2)){
+      if (level < MAX_LEVEL){ level++; ev = 'up'; } else ev = 'max';
+      cleanStreak = 0;
+    }
+  } else {
+    failStreak++; cleanStreak = 0;
+    if (failStreak >= 2){ if (level > 1){ level--; ev = 'down'; } failStreak = 0; }
+  }
+  return { level:level, cleanStreak:cleanStreak, failStreak:failStreak, ev:ev };
+}
+
+/* ---------- Anti-acceleration rule ---------- */
+function isAcceleration(lastSession, reqRate, reqReplays){
+  if (!lastSession || lastSession.accuracy === undefined) return false;
+  if (lastSession.accuracy >= ADAPT_TARGET) return false;
+  const fasterRate = reqRate > lastSession.rate + 1e-9;
+  const fewerReplays = reqReplays < lastSession.replays;
+  return fasterRate || fewerReplays;
+}
+
+/* ---------- Dual-task: light mental arithmetic run in parallel ---------- */
+function genDualTaskSum(rnd, load){
+  const range = [ [1,9], [2,15], [5,25], [10,50] ][Math.max(0, Math.min(3, load - 1))];
+  const a = randInt(rnd, range[0], range[1]), b = randInt(rnd, range[0], range[1]);
+  const op = rnd() < 0.5 ? '+' : '-';
+  const r = op === '+' ? a + b : Math.max(a, b) - Math.min(a, b);
+  const x = op === '+' ? a : Math.max(a, b), y = op === '+' ? b : Math.min(a, b);
+  return { text: x + ' ' + op + ' ' + y, answer:r };
+}
+
+/* ---------- Passage templates: weather / briefing / clearance sequence / NOTAM-like ---------- */
+const WIND_DIRS = function(){ const a = []; for (let i = 10; i <= 360; i += 10) a.push(i); return a; }();
+
+function genWeatherPassage(rnd){
+  const dir = pick(rnd, WIND_DIRS), spd = randInt(rnd, 2, 45);
+  const gust = rnd() < 0.35 ? spd + randInt(rnd, 5, 15) : null;
+  const visKm = pick(rnd, [2,4,6,8,10,15,20]);
+  const cloud = pick(rnd, ['few clouds at two thousand feet','scattered at one thousand five hundred feet','broken at eight hundred feet','overcast at five hundred feet','sky clear']);
+  const temp = randInt(rnd, -5, 30), dew = temp - randInt(rnd, 0, 8);
+  const qnh = randInt(rnd, 985, 1035);
+  const text = 'Wind ' + padN(dir,3) + ' degrees ' + spd + (gust ? ' gusting ' + gust : '') + ' knots. ' +
+    'Visibility ' + visKm + ' kilometres. ' + cloud.charAt(0).toUpperCase() + cloud.slice(1) + '. Temperature ' + sayNum(temp) + ', dew point ' + sayNum(dew) + '. QNH ' + qnh + '.';
+  const speech = 'Wind ' + say(padN(dir,3)) + ' degrees ' + spd + (gust ? ' gusting ' + gust : '') + ' knots. ' +
+    'Visibility ' + visKm + ' kilometres. ' + cloud.charAt(0).toUpperCase() + cloud.slice(1) + '. Temperature ' + sayNum(temp) + ', dew point ' + sayNum(dew) + '. QNH ' + say(qnh) + '.';
+  const data = { dir:dir, spd:spd, gust:gust, visKm:visKm, cloud:cloud, temp:temp, dew:dew, qnh:qnh };
+  return { kind:'weather', label:'Informe meteorológico', text:text, speech:speech, data:data, questions:buildWeatherQuestions(rnd, data) };
+}
+function buildWeatherQuestions(rnd, d){
+  const pool = [];
+  pool.push(mkMCQ(rnd, 'What is the reported wind direction?', d.dir, function(v){ return padN(v,3) + '°'; },
+    function(rnd2){ return pick(rnd2, WIND_DIRS.filter(function(x){ return x !== d.dir; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the QNH?', d.qnh, function(v){ return String(v) + ' hPa'; },
+    function(rnd2){ return d.qnh + pick(rnd2, [-8,-5,-3,3,5,8].filter(function(x){ return d.qnh + x >= 950 && d.qnh + x <= 1060; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the reported wind speed (steady value)?', d.spd, function(v){ return String(v) + ' kt'; },
+    function(rnd2){ return Math.max(1, d.spd + pick(rnd2, [-6,-4,-2,2,4,6])); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the temperature / dew point spread?', d.temp - d.dew, function(v){ return String(v) + ' °C'; },
+    function(rnd2){ return Math.max(0, (d.temp - d.dew) + pick(rnd2, [-3,-2,-1,1,2,3])); }, 3));
+  return shuffle(rnd, pool).slice(0, 2);
+}
+function genRunwayName(rnd){ return padN(randInt(rnd, 1, 36), 2) + (rnd() < 0.4 ? pick(rnd, ['L','C','R']) : ''); }
+function genBriefingPassage(rnd){
+  const info = pick(rnd, ICAO_LETTERS);
+  const rwy = genRunwayName(rnd);
+  const qnh = randInt(rnd, 985, 1035);
+  const trans = pick(rnd, [50,60,70,90,110]);
+  const wdir = pick(rnd, WIND_DIRS), wspd = randInt(rnd, 3, 25);
+  const text = 'Information ' + ICAO_ALPHA[info] + '. Runway in use ' + rwy + '. Wind ' + padN(wdir,3) + ' degrees ' + wspd + ' knots. QNH ' + qnh +
+    '. Transition level ' + trans + '. Report information ' + ICAO_ALPHA[info] + ' received on initial contact.';
+  const infoSay = toTTS([ICAO_ALPHA[info]])[0];
+  const speech = 'Information ' + infoSay + '. Runway in use ' + sayRunway(rwy) + '. Wind ' + say(padN(wdir,3)) + ' degrees ' + wspd + ' knots. QNH ' + say(qnh) +
+    '. Transition level ' + trans + '. Report information ' + infoSay + ' received on initial contact.';
+  const data = { info:info, rwy:rwy, qnh:qnh, trans:trans, wdir:wdir, wspd:wspd };
+  return { kind:'briefing', label:'Boletín tipo ATIS', text:text, speech:speech, data:data, questions:buildBriefingQuestions(rnd, data) };
+}
+function buildBriefingQuestions(rnd, d){
+  const pool = [];
+  const hasSide = /[LCR]$/.test(d.rwy);
+  pool.push(mkMCQ(rnd, 'Which runway is in use?', d.rwy, function(v){ return String(v); },
+    function(rnd2){ const base = padN(randInt(rnd2, 1, 36), 2); return hasSide ? base + pick(rnd2, ['L','C','R']) : base; }, 3));
+  pool.push(mkMCQ(rnd, 'Which ATIS information letter must be reported on initial contact?', d.info, function(v){ return ICAO_ALPHA[v]; },
+    function(rnd2){ return pick(rnd2, ICAO_LETTERS.filter(function(x){ return x !== d.info; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the transition level?', d.trans, function(v){ return String(v); },
+    function(rnd2){ return pick(rnd2, [50,60,70,90,110].filter(function(x){ return x !== d.trans; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the QNH?', d.qnh, function(v){ return String(v) + ' hPa'; },
+    function(rnd2){ return d.qnh + pick(rnd2, [-8,-5,-3,3,5,8]); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the surface wind direction?', d.wdir, function(v){ return padN(v,3) + '°'; },
+    function(rnd2){ return pick(rnd2, WIND_DIRS.filter(function(x){ return x !== d.wdir; })); }, 3));
+  return shuffle(rnd, pool).slice(0, 2);
+}
+const DESTS = ['Barcelona','Madrid','Lisbon','Paris','Frankfurt','Rome','Amsterdam'];
+function genFreqPassage(rnd){ return (118 + randInt(rnd, 0, 18)) + '.' + pick(rnd, ['025','325','425','725']); }
+function genClearanceSeqPassage(rnd){
+  const al = pick(rnd, AIRLINES);
+  const digs = String(randInt(rnd, 100, 999));
+  const cs = al[0] + ' ' + digs;
+  const dest = pick(rnd, DESTS);
+  const sid = pick(rnd, ['Norma One Delta','Ruta Two Echo','Costa Three Bravo']);
+  const fl = randInt(rnd, 5, 24) * 10;
+  const sq = octal4(rnd);
+  const freq = genFreqPassage(rnd);
+  const text = cs + ', cleared to ' + dest + ' via ' + sid + ', climb initially flight level ' + fl +
+    ', squawk ' + sq + ', after departure contact ' + freq + '.';
+  const speech = al[0] + ' ' + say(digs) + ', cleared to ' + dest + ' via ' + sid + ', climb initially flight level ' + say(fl) +
+    ', squawk ' + say(sq) + ', after departure contact ' + say(freq.split('.')[0]) + ' decimal ' + say(freq.split('.')[1]) + '.';
+  const data = { cs:cs, dest:dest, sid:sid, fl:fl, sq:sq, freq:freq };
+  return { kind:'clearanceSeq', label:'Autorización de salida', text:text, speech:speech, data:data, questions:buildClearanceSeqQuestions(rnd, data) };
+}
+function buildClearanceSeqQuestions(rnd, d){
+  const pool = [];
+  pool.push(mkMCQ(rnd, 'What is the cleared destination?', d.dest, function(v){ return String(v); },
+    function(rnd2){ return pick(rnd2, DESTS.filter(function(x){ return x !== d.dest; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the initial cleared flight level?', d.fl, function(v){ return 'FL' + v; },
+    function(rnd2){ return d.fl + pick(rnd2, [-30,-20,-10,10,20,30].filter(function(x){ return d.fl + x >= 50 && d.fl + x <= 240; })); }, 3));
+  pool.push(mkMCQ(rnd, 'What is the assigned squawk code?', d.sq, function(v){ return String(v); },
+    function(rnd2){ return octal4(rnd2); }, 3));
+  pool.push(mkMCQ(rnd, 'What frequency should be contacted after departure?', d.freq, function(v){ return String(v); },
+    function(rnd2){ return genFreqPassage(rnd2); }, 3));
+  return shuffle(rnd, pool).slice(0, 2);
+}
+function genNotamPassage(rnd){
+  const rwy = padN(randInt(rnd, 1, 36), 2);
+  const reason = pick(rnd, ['runway resurfacing work','a crane erected 1.2 nautical miles north of the field, height 400 feet','unserviceable approach lighting','a wildlife hazard reported near the threshold','a temporary displaced threshold, 300 metres']);
+  const from = randInt(rnd, 1, 24), to = from + randInt(rnd, 1, 5);
+  const text = 'NOTAM. Runway ' + rwy + ' closed due to ' + reason + ', effective from the ' + ordinal(from) + ' to the ' + ordinal(to) + ' of the month, daily zero six hundred to eighteen hundred UTC.';
+  const speech = 'NOTAM. Runway ' + say(rwy) + ' closed due to ' + reason + ', effective from the ' + ordinal(from) + ' to the ' + ordinal(to) + ' of the month, daily zero six hundred to eighteen hundred UTC.';
+  const data = { rwy:rwy, reason:reason, from:from, to:to };
+  return { kind:'notam', label:'Aviso tipo NOTAM', text:text, speech:speech, data:data, questions:buildNotamQuestions(rnd, data) };
+}
+function buildNotamQuestions(rnd, d){
+  const pool = [];
+  pool.push(mkMCQ(rnd, 'Which runway is affected?', d.rwy, function(v){ return String(v); },
+    function(rnd2){ return padN(randInt(rnd2, 1, 36), 2); }, 3));
+  pool.push(mkMCQ(rnd, 'On which day of the month does the restriction end?', d.to, function(v){ return ordinal(v); },
+    function(rnd2){ return Math.min(30, Math.max(2, d.to + pick(rnd2, [1,2,-1,-2,3]))); }, 3));
+  pool.push(mkMCQ(rnd, 'On which day of the month does the restriction start?', d.from, function(v){ return ordinal(v); },
+    function(rnd2){ return Math.min(30, Math.max(1, d.from + pick(rnd2, [1,2,-1,-2,3]))); }, 3));
+  return shuffle(rnd, pool).slice(0, 2);
+}
+const PASSAGE_GENS = { weather:genWeatherPassage, briefing:genBriefingPassage, clearanceSeq:genClearanceSeqPassage, notam:genNotamPassage };
+const PASSAGE_KINDS = Object.keys(PASSAGE_GENS);
+
+// Builds one multiple-choice question from data the caller already has; the correct option's
+// text is derived straight from that data, and verifyMCQ() re-checks the result independently
+// before it is ever shown, so every generated item is guaranteed to have exactly one right answer.
+function mkMCQ(rnd, q, correctValue, formatFn, distractorFn, nWrong){
+  const correctText = formatFn(correctValue);
+  const wrongTexts = [];
+  let guard = 0;
+  while (wrongTexts.length < nWrong && guard < 200){
+    guard++;
+    const w = distractorFn(rnd);
+    const wt = formatFn(w);
+    if (wt !== correctText && wrongTexts.indexOf(wt) === -1) wrongTexts.push(wt);
+  }
+  const options = shuffle(rnd, [correctText].concat(wrongTexts));
+  const correctIndex = options.indexOf(correctText);
+  if (options.filter(function(o){ return o === correctText; }).length !== 1 || correctIndex < 0){
+    throw new Error('mkMCQ: question does not have exactly one correct option: ' + q);
+  }
+  return { q:q, options:options, correctIndex:correctIndex };
+}
+function verifyMCQ(mcq){
+  const dupCount = {};
+  mcq.options.forEach(function(o){ dupCount[o] = (dupCount[o] || 0) + 1; });
+  const noDup = Object.keys(dupCount).every(function(k){ return dupCount[k] === 1; });
+  return mcq.correctIndex >= 0 && mcq.correctIndex < mcq.options.length && noDup && mcq.options.length >= 2;
+}
+// PASSAGE_ITEMS scales down the level's item count for the longer passage module.
+function passageItemCount(level){ return Math.max(3, Math.round(LEVELS[level].items / 3)); }
+
+/* ---------- CSV / goal / records ---------- */
+function csvField(v){
+  const s = (v === null || v === undefined) ? '' : String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function dateEU(iso){
+  const d = new Date(iso);
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+function toCSV(sessions){
+  const head = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
+  const rows = sessions.map(function(s){
+    return [dateEU(s.ts), s.module, s.level, s.correct, s.wrong, s.blank,
+      (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal || '',
+      s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
+  });
+  return '﻿' + [head.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+function evaluateGoal(text, r){
+  const t = String(text || '').replace(/\s+/g, ' ');
+  const num = function(x){ return parseFloat(x.replace(',', '.')); };
+  let res = null;
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (mp) res = r.accuracy >= num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-zá-ú])/i);
+  if (ms && r.spi !== null && r.spi !== undefined){ const ok = r.spi <= num(ms[1]); res = res === null ? ok : (res && ok); }
+  const mc = t.match(/(\d+)\s*(?:correct|correctas|aciertos)/i);
+  if (mc){ const ok = r.correct >= parseInt(mc[1], 10); res = res === null ? ok : (res && ok); }
+  return res;
+}
+function personalBest(sessions, level, module){
+  const s = sessions.filter(function(x){ return x.level === level && x.module === module && x.accuracy >= ADAPT_TARGET; });
+  if (!s.length) return { n:0 };
+  let bestAcc = s[0], bestSpi = s[0];
+  s.forEach(function(x){
+    if (x.accuracy > bestAcc.accuracy) bestAcc = x;
+    if (x.spi !== null && x.spi !== undefined && (bestSpi.spi === null || bestSpi.spi === undefined || x.spi < bestSpi.spi)) bestSpi = x;
+  });
+  return { n:s.length, bestAcc:bestAcc.accuracy, bestSpi:bestSpi.spi };
+}
+function currentStreak(sessions, module){
+  let streak = 0;
+  for (let i = sessions.length - 1; i >= 0; i--){
+    if (sessions[i].module !== module) continue;
+    if (sessions[i].accuracy >= ADAPT_TARGET) streak++; else break;
+  }
+  return streak;
+}
+
+/* ---------- Voice selection / no-voice fallback ---------- */
+function pickEnglishVoices(voices){
+  return (voices || []).filter(function(v){ return /^en(-|_|$)/i.test(v.lang || ''); });
+}
+function chooseVoice(englishVoices, wantAccentVariety, seedIndex){
+  if (!englishVoices || !englishVoices.length) return null;
+  if (!wantAccentVariety || englishVoices.length === 1) return englishVoices[0];
+  const locales = {};
+  englishVoices.forEach(function(v){ const loc = (v.lang || '').toLowerCase(); if (!locales[loc]) locales[loc] = v; });
+  const distinct = Object.keys(locales).map(function(k){ return locales[k]; });
+  return distinct[seedIndex % distinct.length];
+}
+// ~150 wpm at rate 1.0, used for the word-by-word visual fallback timer.
+function wordDelayMs(rate){ return Math.max(160, Math.round(60000 / (150 * (rate || 1)))); }
+// ==== PURE LOGIC END ====
+
+// ==================== USER INTERFACE ====================
+// MODULES = STORED/CSV module strings (the dashboard matches them by regex): keep in English. MODULES_ES, KIND_ES and MODE_ES are display only.
+const MODULES = { dictation:'Element dictation', passage:'Passage comprehension' };
+const MODULES_ES = { dictation:'Dictado de elementos', passage:'Comprensión de pasajes' };
+const MODULE_BY_EN = { 'Element dictation':'dictation', 'Passage comprehension':'passage' };
+const KIND_ES = { callsign:'indicativo', heading:'rumbo', flightlevel:'nivel de vuelo', altimeter:'QNH', frequency:'frecuencia', squawk:'código transpondedor', runway:'pista', weather:'meteorología', briefing:'ATIS', clearanceSeq:'autorización de salida', notam:'NOTAM' };
+function modES(m){ return MODULES_ES[MODULE_BY_EN[m]] || m; }
+const STORE_KEY = 'atc_listening_v1';
+let memory = null, storeOk = true;
+let onKey = null, timers = [], audioCtx = null, noiseNode = null, noiseGain = null, genCounter = 0;
+const app = document.getElementById('app');
+
+function ic(n, cls){ return '<svg class="i' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function load(){
+  if (memory) return memory;
+  let d = null;
+  try { const r = localStorage.getItem(STORE_KEY); if (r) d = JSON.parse(r); } catch (e) { storeOk = false; }
+  if (!d || !Array.isArray(d.sessions)) d = { sessions:[], levels:{ dictation:1, passage:1 }, adaptive:{} };
+  if (!d.levels) d.levels = { dictation:1, passage:1 };
+  if (!d.adaptive) d.adaptive = {};
+  memory = d;
+  return d;
+}
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(memory)); return true; } catch (e) { storeOk = false; return false; } }
+function esc(s){
+  return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+function $(id){ return document.getElementById(id); }
+function screen(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function stopAudio(){
+  try { if (noiseNode){ noiseNode.stop(); noiseNode.disconnect(); noiseNode = null; } } catch (e) {}
+  try { if (noiseGain){ noiseGain.disconnect(); noiseGain = null; } } catch (e) {}
+}
+function clear(){
+  timers.forEach(function(t){ clearTimeout(t); clearInterval(t); });
+  timers = []; onKey = null; genCounter++;
+  try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {}
+  stopAudio();
+}
+function tmr(t){ timers.push(t); return t; }
+
+let sessionActive = false, escArmed = false, toastT = null;
+function toast(msg){
+  let t = $('toast'); if (!t){ t = document.createElement('div'); t.id = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
+  t.textContent = msg; t.style.display = 'block'; clearTimeout(toastT); toastT = setTimeout(function(){ t.style.display = 'none'; escArmed = false; }, 2500);
+}
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+    e.preventDefault();
+    if (sessionActive && !escArmed){ escArmed = true; toast('Pulsa Esc otra vez para salir (no se guarda)'); return; }
+    escArmed = false; const t = $('toast'); if (t) t.style.display = 'none'; menu(); return;
+  }
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (onKey) onKey(e);
+});
+
+function quitSession(){ if (window.confirm('¿Salir? No se guardará.')){ escArmed = false; menu(); } }
+/* ---------- Speech engine: real TTS with noise, or visual word-by-word fallback ---------- */
+const Speech = { ready:false, englishVoices:[], hasVoice:false, forcedVisual:false, failures:0, cur:null };
+function refreshVoices(){
+  try { Speech.englishVoices = pickEnglishVoices(speechSynthesis.getVoices()); } catch (e) { Speech.englishVoices = []; }
+  Speech.hasVoice = Speech.englishVoices.length > 0;
+}
+function initSpeech(cb){
+  let synth = null;
+  try { synth = ('speechSynthesis' in window) ? window.speechSynthesis : null; } catch (e) { synth = null; }
+  if (!synth){ Speech.ready = true; Speech.hasVoice = false; cb(); return; }
+  let called = false;
+  const finish = function(){ refreshVoices(); Speech.ready = true; if (!called){ called = true; cb(); } };
+  try {
+    // Chrome loads its voice list asynchronously and may report it after our first look, so keep listening.
+    speechSynthesis.onvoiceschanged = function(){ const had = Speech.hasVoice; refreshVoices(); Speech.ready = true; if (!called){ called = true; cb(); } else if (Speech.hasVoice !== had && app.querySelector('.card')) menu(); };
+    if (speechSynthesis.getVoices().length){ finish(); return; }
+  } catch (e) { Speech.ready = true; Speech.hasVoice = false; cb(); return; }
+  setTimeout(finish, 500);
+}
+function useVisualFallback(){ return Speech.forcedVisual || !Speech.hasVoice || Speech.failures >= 2; }
+function ensureAudioCtx(){
+  if (audioCtx){ try { if (audioCtx.state === 'suspended') audioCtx.resume(); } catch (e) {} return audioCtx; }
+  try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audioCtx = null; }
+  try { if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); } catch (e) {}
+  return audioCtx;
+}
+function startNoise(level){
+  if (!level || level <= 0) return;
+  const ctx = ensureAudioCtx();
+  if (!ctx) return;
+  try {
+    const bufSize = 2 * ctx.sampleRate;
+    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+    noiseNode = ctx.createBufferSource(); noiseNode.buffer = buf; noiseNode.loop = true;
+    noiseGain = ctx.createGain(); noiseGain.gain.value = Math.min(0.6, level) * 0.25;
+    noiseNode.connect(noiseGain); noiseGain.connect(ctx.destination);
+    noiseNode.start();
+  } catch (e) { /* Web Audio unavailable: silently skip the noise layer */ }
+}
+// Speaks `words` (array of strings). Calls onDone() exactly once, when the item has been spoken or
+// (visual fallback) when the last word has been shown. If the speech engine is missing, silent or
+// broken (no start event within 3 s, an error, or no end event), the item falls back to the visual
+// word-by-word display instead of hanging. `accentSeed` rotates the voice when the level wants accent variety.
+function speakItem(words, level, accentSeed, onWord, onDone){
+  // Late callbacks from an old utterance must not touch a screen that has already moved on:
+  // clear() bumps genCounter, and every callback below checks it.
+  const myGen = genCounter;
+  let finished = false, fellBack = false;
+  const done = function(){ if (finished || myGen !== genCounter) return; finished = true; stopAudio(); onDone(); };
+  const visual = function(){
+    if (fellBack || finished || myGen !== genCounter) return;
+    fellBack = true; stopAudio();
+    let i = 0;
+    const delay = wordDelayMs(level.rate);
+    (function step(){
+      if (myGen !== genCounter || finished) return;
+      if (i >= words.length){ done(); return; }
+      onWord('', i); // a short blank gap: two identical words in a row ("Tree Tree") must look like two words
+      tmr(setTimeout(function(){ if (myGen !== genCounter || finished) return; onWord(words[i], i); i++; tmr(setTimeout(step, delay)); }, 130));
+    })();
+  };
+  if (useVisualFallback()){ visual(); return; }
+  startNoise(level.noise);
+  let started = false;
+  const fail = function(){
+    if (finished || fellBack || myGen !== genCounter) return;
+    try { speechSynthesis.cancel(); } catch (e) {}
+    Speech.failures++;
+    visual();
+  };
+  try {
+    const u = new SpeechSynthesisUtterance(toTTS(words).join(' '));
+    Speech.cur = u; // keep a reference: Chrome can garbage-collect a running utterance and never fire onend
+    const voice = chooseVoice(Speech.englishVoices, level.accent, accentSeed || 0);
+    if (voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-GB'; }
+    u.rate = Math.max(0.5, Math.min(2, level.rate));
+    u.onstart = function(){ started = true; };
+    u.onend = function(){ if (!fellBack) done(); };
+    u.onerror = function(){ if (myGen !== genCounter || finished) return; if (started) done(); else fail(); };
+    tmr(setTimeout(function(){ if (!started) fail(); }, 3000));
+    tmr(setTimeout(function(){ if (started && !finished && !fellBack) done(); }, 5000 + words.length * wordDelayMs(level.rate) * 2.5)); // safety net if onend never arrives
+    speechSynthesis.cancel();
+    tmr(setTimeout(function(){ if (myGen !== genCounter || finished || fellBack) return; try { speechSynthesis.speak(u); } catch (e) { fail(); } }, 60));
+  } catch (e) { fail(); }
+}
+
+/* ---------- Custom-mode params (shared shape across both modules) ---------- */
+function defaultCustom(){ return { rate:1.0, items:10, complexity:2, dual:0, hints:2, timeLimit:0, noise:0.1, accent:true }; }
+
+/* ---------- Menu ---------- */
+function moduleSummary(id){
+  const d = load();
+  const ses = d.sessions.filter(function(s){ return s.module === MODULES[id]; });
+  const lv = 'L' + (d.levels[id] || 1);
+  if (!ses.length) return lv;
+  const u = ses[ses.length - 1];
+  return lv + ' · ' + ses.length + (ses.length === 1 ? ' sesión' : ' sesiones') + ' · última ' + fmt(u.accuracy, 1) + ' %';
+}
+function menu(){
+  clear(); sessionActive = false;
+  const d = load();
+  const cards = [['dictation', 'headphones'], ['passage', 'doc']];
+  screen(
+    '<div class="brand">' + ic('logo') + '<h1>Comprensión auditiva</h1></div>' +
+    (storeOk ? '' : '<p><b class="warn">Historial no guardado</b></p>') +
+    voiceBanner() +
+    '<div class="list">' + cards.map(function(c){
+      return '<button class="card" data-m="' + c[0] + '">' + ic(c[1], 'lead') + '<span class="nm">' + MODULES_ES[c[0]] + '</span><span class="data">' + esc(moduleSummary(c[0])) + '</span><span class="go">' + ic('arrow') + '</span></button>';
+    }).join('') + '</div>' +
+    '<p class="row"><button class="btn" id="levels">' + ic('sliders') + 'Niveles (L)</button><button class="btn" id="tips">' + ic('book') + 'Consejos (T)</button><button class="btn" id="hist">' + ic('history') + 'Historial (H)</button></p>'
+  );
+  const go = { dictation:function(){ config('dictation'); }, passage:function(){ config('passage'); } };
+  Array.prototype.forEach.call(app.querySelectorAll('.card'), function(b){ b.addEventListener('click', function(){ go[b.dataset.m](); }); });
+  bindVoiceBanner();
+  $('levels').addEventListener('click', levelsPage);
+  $('tips').addEventListener('click', tipsPage);
+  $('hist').addEventListener('click', historyPage);
+  onKey = function(e){
+    if ((e.key === 'q' || e.key === 'Q') && !d.sessions.length){ e.preventDefault(); quickStart(); }
+    else if (e.key === '1'){ e.preventDefault(); config('dictation'); }
+    else if (e.key === '2'){ e.preventDefault(); config('passage'); }
+    else if (e.key === 'l' || e.key === 'L') levelsPage();
+    else if (e.key === 't' || e.key === 'T') tipsPage();
+    else if (e.key === 'h' || e.key === 'H') historyPage();
+  };
+}
+function quickStart(){ startDictation({ mode:'ladder', level:1, items:5, goal:'96 % precisión' }); }
+function testVoice(){
+  const out = $('voiceTest'); if (out) out.textContent = '…';
+  speakItem(['Speedbird', 'Wun', 'Too', 'Tree', 'Fower'], { rate:0.9, accent:false, noise:0 }, 0, function(){}, function(){ const o = $('voiceTest'); if (o) o.textContent = useVisualFallback() ? 'Sin audio' : 'Speedbird 1 2 3 4?'; });
+}
+function voiceBanner(){
+  if (!Speech.ready) return '<p class="voice">' + ic('headphones') + 'Comprobando voces</p>';
+  if (Speech.hasVoice && !Speech.forcedVisual && Speech.failures < 2){
+    return '<p class="voice">' + ic('headphones') + '<span title="' + esc(Speech.englishVoices.map(function(v){ return v.name + ' (' + v.lang + ')'; }).join(', ')) + '">' + esc(Speech.englishVoices[0].name) + (Speech.englishVoices.length > 1 ? ' +' + (Speech.englishVoices.length - 1) : '') + '</span>' +
+      '<button class="link" id="testVoice">Probar</button><span id="voiceTest"></span><button class="link" id="forceVis">Visual</button></p>';
+  }
+  return '<p class="voice">' + ic('headphones') + '<b class="warn">' + (Speech.failures >= 2 ? 'Sin voz' : (Speech.forcedVisual ? 'Modo visual' : 'Sin voz en inglés')) + '</b>' +
+    (Speech.hasVoice ? '<button class="link" id="useVoice">Usar voz</button>' : '') + '</p>';
+}
+function bindVoiceBanner(){
+  const fv = $('forceVis'); if (fv) fv.addEventListener('click', function(){ Speech.forcedVisual = true; menu(); });
+  const uv = $('useVoice'); if (uv) uv.addEventListener('click', function(){ Speech.forcedVisual = false; Speech.failures = 0; menu(); });
+  const tv = $('testVoice'); if (tv) tv.addEventListener('click', testVoice);
+}
+/* ---------- Config screen (mode select: Ladder / Adaptive / Custom) ---------- */
+function config(mod){
+  clear(); sessionActive = false;
+  const d = load();
+  const lastLevel = d.levels[mod] || 1;
+  const lastSessions = d.sessions.filter(function(s){ return s.module === MODULES[mod]; });
+  const last = lastSessions.length ? lastSessions[lastSessions.length - 1] : null;
+  screen(
+    '<button class="link" id="back">' + ic('back') + 'Menú</button>' +
+    '<h1>' + MODULES_ES[mod] + '</h1>' +
+    voiceBanner() +
+    '<label class="lab" for="mode">Modo</label>' +
+    '<select id="mode"><option value="ladder">Escalera</option><option value="adaptive">Adaptativo</option><option value="custom">Personalizado</option></select>' +
+    '<div id="modeBox"></div>' +
+    '<label class="lab" for="goal">Objetivo</label>' +
+    '<input type="text" id="goal" maxlength="80" autocomplete="off" value="' + ADAPT_TARGET + ' % precisión">' +
+    '<p id="err" class="bad" role="alert"></p>' +
+    '<button class="btn primary" id="go">' + ic('play') + 'Iniciar</button>'
+  );
+  bindVoiceBanner();
+  $('back').addEventListener('click', menu);
+  function renderModeBox(){
+    const mode = $('mode').value;
+    if (mode === 'ladder'){
+      $('modeBox').innerHTML = '<label class="lab" for="level">Nivel</label><select id="level">' + levelOpts(lastLevel) + '</select>';
+    } else if (mode === 'adaptive'){
+      $('modeBox').innerHTML = '<label class="lab" for="astart">Nivel inicial</label><select id="astart">' + levelOpts(Math.min(lastLevel, 4)) + '</select>' +
+        '<label class="lab" for="aneed">Bloques limpios para subir</label><input type="number" id="aneed" min="1" max="5" value="2">' +
+        '<label class="lab" for="ablock">Tamaño del bloque</label><input type="number" id="ablock" min="5" max="20" value="10">';
+    } else {
+      const c = defaultCustom();
+      $('modeBox').innerHTML =
+        '<label class="lab" for="crate">Ritmo (<span id="crateV">' + c.rate.toFixed(2) + '</span>×)</label><input type="range" id="crate" min="0.6" max="1.8" step="0.01" value="' + c.rate + '">' +
+        '<label class="lab" for="ctime">Segundos por ítem (0 = sin límite)</label><input type="number" id="ctime" min="0" max="60" value="' + c.timeLimit + '">' +
+        '<label class="lab" for="citems">Ítems</label><input type="number" id="citems" min="3" max="30" value="' + c.items + '">' +
+        '<label class="lab" for="ccomp">' + (mod === 'dictation' ? 'Elementos' : 'Opciones') + '</label><input type="range" id="ccomp" min="1" max="6" step="1" value="' + c.complexity + '">' +
+        '<label class="lab" for="cnoise">Ruido (0-0,6)</label><input type="range" id="cnoise" min="0" max="0.6" step="0.02" value="' + c.noise + '">' +
+        '<label class="lab" for="cdual">Tarea doble (0 = no)</label><input type="range" id="cdual" min="0" max="4" step="1" value="' + c.dual + '">' +
+        '<label class="lab" for="chints">Pistas (0-3)</label><input type="range" id="chints" min="0" max="3" step="1" value="' + c.hints + '">' +
+        '<label class="lab"><input type="checkbox" id="caccent" checked> Acentos</label>';
+      $('crate').addEventListener('input', function(){ $('crateV').textContent = (+this.value).toFixed(2); });
+    }
+  }
+  renderModeBox();
+  $('mode').addEventListener('change', renderModeBox);
+  function showAccelWarning(){
+    $('err').className = ''; $('err').innerHTML =
+      '<b class="warn">Última sesión por debajo del ' + ADAPT_TARGET + ' %.</b> <label><input type="checkbox" id="override"> Iniciar igualmente</label>';
+    $('override').addEventListener('change', function(){ if (this.checked) goFn(); });
+  }
+  const goFn = function(){
+    const goalTxt = $('goal').value.trim();
+    if (!goalTxt){ $('err').textContent = 'Indica un objetivo'; $('goal').focus(); return; }
+    const mode = $('mode').value;
+    let run;
+    if (mode === 'ladder'){
+      const level = +$('level').value;
+      const L = LEVELS[level];
+      const req = { rate:L.rate, replays:L.replays };
+      if (isAcceleration(last, req.rate, req.replays) && !($('override') && $('override').checked)){ showAccelWarning(); return; }
+      run = { mode:'ladder', level:level, items: mod === 'dictation' ? L.items : passageItemCount(level), goal:goalTxt };
+    } else if (mode === 'adaptive'){
+      const start = +$('astart').value, need = +$('aneed').value, block = +$('ablock').value;
+      run = { mode:'adaptive', level:start, need:need, block:block, goal:goalTxt };
+    } else {
+      const custom = {
+        rate:+$('crate').value, timeLimit:+$('ctime').value, items:+$('citems').value,
+        complexity:+$('ccomp').value, noise:+$('cnoise').value, dual:+$('cdual').value,
+        hints:+$('chints').value, accent:$('caccent').checked };
+      // Custom mode always grants unlimited replays (replays:99, see levelFromRun), so only a
+      // faster rate can trigger the rule here; pass 99 as the requested replay count so the
+      // "fewer replays" branch of isAcceleration() never fires spuriously against it.
+      if (isAcceleration(last, custom.rate, 99) && !($('override') && $('override').checked)){ showAccelWarning(); return; }
+      run = { mode:'custom', goal:goalTxt, custom:custom };
+    }
+    if (mod === 'dictation') startDictation(run); else startPassage(run);
+  };
+  $('go').addEventListener('click', goFn);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && e.target.type !== 'checkbox'){ e.preventDefault(); goFn(); } };
+  $('go').focus();
+}
+function levelOpts(sel){
+  const o = [];
+  for (let l = 1; l <= MAX_LEVEL; l++) o.push('<option value="' + l + '"' + (l === sel ? ' selected' : '') + '>' + l + ' - ' + LEVELS[l].name + (l === 5 ? ' (objetivo)' : '') + '</option>');
+  return o.join('');
+}
+
+/* ---------- Endurance (wave 5, schema coord/SCHEMA-thirds.md): identical copy in every game ---------- */
+function atcThirds(results, durationSec){
+  var N = results ? results.length : 0; if (N < 9) return null;
+  var g = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  for (var i = 0; i < N; i++){ var r = results[i]; var k = durationSec > 0 ? Math.min(2, Math.floor(Math.max(0, +r.t || 0) * 3 / durationSec)) : Math.min(2, Math.floor(i * 3 / N));
+    g[k].n++; if (r.blank) g[k].b++; else if (r.ok) g[k].c++; g[k].s += (isFinite(+r.sec) ? +r.sec : 0); }
+  for (var j = 0; j < 3; j++) g[j].s = Math.round(g[j].s * 100) / 100;
+  return g;
+}
+function atcEnduranceLine(th){
+  if (!th) return '';
+  if (th[0].n < 8 || th[2].n < 8) return '';
+  var f = 100 * th[2].c / th[2].n - 100 * th[0].c / th[0].n;
+  return 'Resistencia: último tercio ' + (f >= 0 ? '+' : '') + Math.round(f) + ' pts frente al primero (' + th[0].n + ' / ' + th[2].n + ' ítems)' + (f <= -5 ? ', decae' : (f <= -3 ? ', ligera caída' : ''));
+}
+/* ---------- Shared result screen ---------- */
+function resultScreen(r){
+  clear(); sessionActive = false;
+  const d = load();
+  const accuracy = (r.correct + r.wrong + r.blank) ? r.correct / (r.correct + r.wrong + r.blank) * 100 : 0;
+  const spi = r.itemCount ? r.elapsedSec / r.itemCount : null;
+  const met = evaluateGoal(r.goal, { accuracy:accuracy, spi:spi, correct:r.correct });
+  const ses = { ts:new Date().toISOString(), module:MODULES[r.mod], level:r.level, mode:r.runMode,
+    correct:r.correct, wrong:r.wrong, blank:r.blank, spi:spi, accuracy:accuracy, goal:r.goal, met:met,
+    rate:r.rate, replays:r.replays, thirds:r.thirds || null };
+  const validLevel = accuracy >= ADAPT_TARGET;
+  d.sessions.push(ses);
+  if (validLevel && r.level > 0) d.levels[r.mod] = r.level;
+  const priorSessions = d.sessions.slice(0, -1).filter(function(s){ return s.module === MODULES[r.mod]; });
+  const pbBefore = personalBest(priorSessions, r.level, MODULES[r.mod]);
+  const isRecord = r.level > 0 && validLevel && pbBefore.n > 0 && accuracy > pbBefore.bestAcc;
+  save();
+  const streak = currentStreak(d.sessions, MODULES[r.mod]);
+  const pb = personalBest(d.sessions.filter(function(s){ return s.module === MODULES[r.mod]; }), r.level, MODULES[r.mod]);
+  let goalHtml;
+  if (met === true) goalHtml = '<p>' + ic('check', 'good') + ' <b class="good">Objetivo cumplido</b> “' + esc(r.goal) + '”</p>';
+  else if (met === false) goalHtml = '<p><b class="warn">Objetivo no cumplido</b> “' + esc(r.goal) + '”</p>';
+  else goalHtml = '<p class="soft">Objetivo no legible: “' + esc(r.goal) + '”</p>';
+  let dualHtml = '';
+  if (r.dualTotal){
+    const dualAcc = r.dualTotal ? r.dualOk / r.dualTotal * 100 : 0;
+    dualHtml = '<p class="soft">Tarea doble: ' + r.dualOk + ' / ' + r.dualTotal + ' = ' + fmt(dualAcc, 1) + ' %</p>';
+  }
+  const endLine = atcEnduranceLine(ses.thirds);
+  screen(
+    '<h1>' + MODULES_ES[r.mod] + '</h1>' +
+    '<p class="soft">' + (r.level > 0 ? 'L' + r.level + ' ' + LEVELS[r.level].name : 'Personalizado') + ' · ' + fmt(r.rate, 2) + '× · repeticiones ' + (r.replays >= 99 ? '∞' : r.replays) + '</p>' +
+    (isRecord ? '<p><b class="good">Nuevo récord</b></p>' : '') +
+    '<div class="figures">' +
+      '<div class="figure"><b>' + r.correct + '</b><span>Correctas</span></div>' +
+      '<div class="figure"><b>' + r.wrong + '</b><span>Incorrectas</span></div>' +
+      '<div class="figure"><b>' + r.blank + '</b><span>En blanco</span></div>' +
+      '<div class="figure"><b>' + fmt(spi, 2) + '</b><span>s por ítem</span></div>' +
+      '<div class="figure"><b class="' + (validLevel ? 'good' : 'bad') + '">' + fmt(accuracy, 1) + ' %</b><span>Precisión</span></div>' +
+      '<div class="figure"><b>' + streak + '</b><span>Racha</span></div>' +
+    '</div>' +
+    (r.level > 0 && pb.n ? '<p class="soft">Mejor en L' + r.level + ': ' + fmt(pb.bestAcc, 1) + ' %, ' + fmt(pb.bestSpi, 2) + ' s/ítem, ' + pb.n + (pb.n === 1 ? ' sesión' : ' sesiones') + '</p>' : '') +
+    goalHtml + dualHtml + (endLine ? '<p class="soft">' + esc(endLine) + '</p>' : '') +
+    (validLevel
+      ? (r.level > 0 && r.level < MAX_LEVEL ? '<p><b class="good">≥ ' + ADAPT_TARGET + ' %.</b> Repite L' + r.level + ' una vez y pasa a L' + (r.level + 1) + '.</p>' : '')
+      : '<p><b class="warn">Por debajo del ' + ADAPT_TARGET + ' %: no aceleres.</b></p>') +
+    (r.reviewHtml || '') +
+    '<p class="row" style="margin-top:14px"><button class="btn primary" id="rep">' + ic('repeat') + 'Repetir</button><button class="btn" id="men">Menú</button><button class="btn" id="his">' + ic('history') + 'Historial</button></p>'
+  );
+  $('rep').addEventListener('click', r.repeat);
+  $('men').addEventListener('click', menu);
+  $('his').addEventListener('click', historyPage);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') r.repeat(); else if (e.key === 'h' || e.key === 'H') historyPage(); };
+  $('rep').focus();
+}
+/* ================= MODULE 1: ELEMENT DICTATION ================= */
+function levelFromRun(run){
+  if (run.mode === 'ladder') return LEVELS[run.level];
+  if (run.mode === 'adaptive') return LEVELS[run.level];
+  const c = run.custom;
+  return { n:0, name:'Personalizado', rate:c.rate, replays:99, noise:c.noise, accent:c.accent, dual:c.dual, hints:c.hints, chain:c.complexity, items:c.items };
+}
+function newState(run, itemCount, L){
+  return { run:run, L:L, itemCount:itemCount, idx:0, correct:0, wrong:0, blank:0, activeMs:0,
+    startTs:performance.now(), rate:L.rate, replays:L.replays, dualOk:0, dualTotal:0, notice:'', levelBanner:'',
+    adaptBlock:[], adaptState: run.mode === 'adaptive' ? { level:run.level, cleanStreak:0, failStreak:0 } : null,
+    reviewRows:[], misses:[], missKinds:{}, thirdRes:[] };
+}
+function startDictation(run){
+  clear();
+  sessionActive = true;
+  const L = levelFromRun(run);
+  const itemCount = run.mode === 'custom' ? run.custom.items : (run.items || L.items);
+  runDictationItem(newState(run, itemCount, L));
+}
+function fallbackNote(){ return ''; }
+function runDictationItem(state){
+  clear();
+  // In Adaptive mode state.adaptState.level moves after each block; re-read the level table
+  // every item so speed/noise/chain/replays/dual-task actually change when the level does.
+  if (state.run.mode === 'adaptive') state.L = LEVELS[state.adaptState.level];
+  const rnd = Math.random;
+  const chainLen = state.run.mode === 'custom' ? state.run.custom.complexity : state.L.chain;
+  const item = makeDictationItem(rnd, chainLen);
+  let replaysLeft = state.run.mode === 'custom' ? 99 : state.L.replays;
+  let played = false, playing = false, submitted = false, advanced = false, dual = null;
+  const timeLimit = state.run.mode === 'custom' ? state.run.custom.timeLimit : 0;
+  const hcap = state.run.mode === 'custom' ? state.run.custom.hints : hintCap(state.run.mode === 'adaptive' ? state.adaptState.level : state.run.level);
+  const dualLoad = state.run.mode === 'custom' ? state.run.custom.dual : state.L.dual;
+  if (dualLoad > 0) dual = genDualTaskSum(Math.random, dualLoad);
+  const notice = state.notice; state.notice = '';
+  let hintsUsed = 0;
+  const itemStart = performance.now();
+  screen(
+    '<div>' +
+    (dual ? '<div class="dual"><label for="dualAns">Suma: ' + esc(dual.text) + '</label><input type="text" id="dualAns" inputmode="numeric" autocomplete="off"></div>' : '') +
+    '<div class="head"><span>Ítem <b>' + (state.idx + 1) + '</b> / ' + state.itemCount + '</span><span>Correctas <b id="okc">' + state.correct + '</b></span><span>Incorrectas <b id="bac">' + state.wrong + '</b></span><span>Repeticiones <b id="repl">' + (replaysLeft >= 99 ? '∞' : replaysLeft) + '</b></span>' + (timeLimit > 0 ? '<span>Tiempo <b id="tleft">' + timeLimit + '</b> s</span>' : '') + '<button class="link" id="quit" type="button">Salir</button></div>' +
+    '<div class="bar"><div style="width:' + (state.idx / state.itemCount * 100) + '%"></div></div>' +
+    (notice ? '<p class="notice" role="status">' + esc(notice) + '</p>' : '') +
+    fallbackNote() +
+    '<div class="playbox">' + ic('headphones', 'big') + '<div class="playword" id="pw" aria-live="polite">Listo</div>' +
+    '<button class="btn primary" id="play" style="margin-top:10px">' + ic('play') + 'Reproducir</button></div>' +
+    '<p class="keys"><span class="key">Enter</span> reproducir / enviar · <span class="key">Shift+Enter</span> repetir' + (hcap > 0 ? ' · <span class="key">F2</span> pista' : '') + ' · <span class="key">Esc Esc</span> salir</p>' +
+    '<div class="elems" id="fields"></div>' +
+    (hcap > 0 ? '<p class="row"><button class="btn small" id="hintBtn">Pista (F2)</button>' + (hcap >= 3 ? '<span class="small soft">La pista 3 deja el ítem en blanco.</span>' : '') + '</p><div id="hintBox"></div>' : '') +
+    '<div class="fb" id="fb" aria-live="polite"></div>' +
+    '<p class="row"><button class="btn primary" id="submit">' + ic('arrow') + 'Enviar</button></p></div>'
+  );
+  $('quit').addEventListener('click', quitSession);
+  const fields = $('fields');
+  fields.innerHTML = item.parts.map(function(p, i){
+    return '<div class="elemBox"><label for="f' + i + '">' + esc(p.label) + '</label><input type="text" id="f' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"></div>';
+  }).join('');
+  const firstInput = $('f0');
+  const speakParams = function(){ return state.L.n ? state.L : { rate:state.run.custom.rate, accent:state.run.custom.accent, noise:state.run.custom.noise }; };
+  function playIt(){
+    if (playing || submitted) return;
+    if (played && replaysLeft <= 0) return;
+    if (played) replaysLeft--;
+    played = true; playing = true;
+    $('repl').textContent = replaysLeft >= 99 ? '∞' : replaysLeft;
+    $('play').disabled = true;
+    speakItem(item.spoken, speakParams(), state.idx, function(w){ const e = $('pw'); if (e) e.textContent = w === '' ? ' ' : w; }, function(){
+      playing = false;
+      const e = $('pw'); if (e) e.textContent = 'Hecho';
+      const pb = $('play'); if (pb){ pb.disabled = replaysLeft <= 0; pb.innerHTML = ic('repeat') + (replaysLeft > 0 ? 'Repetir' + (replaysLeft >= 99 ? '' : ' (' + replaysLeft + ')') : 'Sin repeticiones'); }
+      const ae = document.activeElement;
+      if (firstInput && !(ae && ae.tagName === 'INPUT')) firstInput.focus();
+    });
+  }
+  $('play').addEventListener('click', playIt);
+  if (timeLimit > 0){
+    let timeLeft = timeLimit;
+    tmr(setInterval(function(){ timeLeft -= 0.2; const tl = $('tleft'); if (tl) tl.textContent = Math.max(0, Math.ceil(timeLeft)); if (timeLeft <= 0) submit(); }, 200));
+  }
+  function readHint(level){
+    const box = $('hintBox');
+    if (level === 1) box.innerHTML = '<div class="hint">' + item.parts.length + ': ' + item.parts.map(function(p){ return p.label; }).join(', ') + '</div>';
+    else if (level === 2) box.innerHTML = '<div class="hint">Zero Wun Too Tree Fower Fife Six Seven Ait Niner · punto = Decimal</div>';
+    else box.innerHTML = '<div class="hint">' + item.parts.map(function(p){ return p.label + ' = ' + p.display; }).join(' · ') + '</div>';
+  }
+  function useHint(){
+    if (submitted || hintsUsed >= hcap) return;
+    hintsUsed++; readHint(hintsUsed);
+    if (hintsUsed >= hcap) $('hintBtn').disabled = true;
+    // give the focus back to the answer boxes (a disabled button would keep it and swallow Enter)
+    const empty = Array.prototype.filter.call(fields.querySelectorAll('input'), function(el){ return !el.value; })[0] || firstInput;
+    if (empty) empty.focus();
+  }
+  if (hcap > 0) $('hintBtn').addEventListener('click', useHint);
+  function submit(){
+    if (submitted) return;
+    submitted = true;
+    state.activeMs += performance.now() - itemStart;
+    clear();
+    const dualEl = $('dualAns');
+    if (dual && dualEl){
+      const v = parseInt(dualEl.value, 10);
+      state.dualTotal++;
+      if (!isNaN(v) && v === dual.answer) state.dualOk++;
+    }
+    const showedSolution = hintsUsed >= 3;
+    const answers = item.parts.map(function(p, i){ const el = $('f' + i); return showedSolution ? '' : (el ? el.value : ''); });
+    const sc = scoreItem(item, answers);
+    state.correct += sc.ok; state.wrong += sc.wrong; state.blank += sc.blank;
+    state.reviewRows.push(sc);
+    { const per = ((performance.now() - itemStart) / 1000) / Math.max(1, sc.detail.length); sc.detail.forEach(function(x){ state.thirdRes.push({ ok:!!x.ok, blank:!!x.blank, sec:per, t:0 }); }); }
+    sc.detail.forEach(function(x){ if (!x.ok){ state.missKinds[x.kind] = (state.missKinds[x.kind] || 0) + 1; state.misses.push({ n:state.idx + 1, label:x.label, expected:x.expected, got:x.got }); } });
+    state.adaptBlock.push(sc.pct >= ADAPT_TARGET || (sc.total > 0 && sc.ok === sc.total));
+    Array.prototype.forEach.call(app.querySelectorAll('input,button'), function(el){ el.disabled = true; });
+    const allOk = sc.ok === sc.total;
+    const fb = $('fb');
+    if (allOk) fb.innerHTML = '<span class="good">' + ic('check') + ' Correcto</span>';
+    else fb.innerHTML = '<span class="bad">' + sc.ok + '/' + sc.total + (showedSolution ? ' (en blanco)' : '') + ' · ' + sc.detail.filter(function(x){ return !x.ok; }).map(function(x){ return esc(x.label) + ': <b>' + esc(x.expected) + '</b>' + (x.got ? ', escribiste ' + esc(x.got) : ' (en blanco)'); }).join('; ') + '</span>';
+    state.idx++;
+    const goNext = function(){
+      if (advanced) return; advanced = true;
+      clear();
+      if (state.run.mode === 'adaptive' && state.adaptBlock.length >= state.run.block){
+        const br = adaptBlockResult(state.adaptBlock);
+        const step = adaptStep(state.adaptState, br, state.run.need);
+        state.adaptState = step;
+        state.adaptBlock = [];
+        if (step.ev){
+          state.levelBanner = step.ev === 'up' ? 'Subes de nivel: L' + step.level + ' ' + LEVELS[step.level].name
+            : step.ev === 'down' ? 'Bajas de nivel: L' + step.level + ' ' + LEVELS[step.level].name : 'Nivel 10 superado';
+          state.notice = state.levelBanner;
+        }
+      }
+      if (state.idx >= state.itemCount) finishDictation(state); else runDictationItem(state);
+    };
+    tmr(setTimeout(goNext, allOk ? 700 : 7000));
+    const sb = $('submit'); if (sb && !allOk){ sb.disabled = false; sb.innerHTML = ic('arrow') + 'Siguiente'; sb.addEventListener('click', goNext); }
+    onKey = function(e){ if (e.key === 'Enter'){ e.preventDefault(); goNext(); } };
+  }
+  $('submit').addEventListener('click', function(){ if (!played){ playIt(); } else submit(); });
+  onKey = function(e){
+    if (e.key === 'Enter' && e.target && e.target.tagName === 'BUTTON') return; // Enter on a focused button presses that button
+    if (e.key === 'Enter'){ e.preventDefault(); if (e.shiftKey || !played) playIt(); else submit(); }
+    else if (e.key === 'F2' && hcap > 0){ e.preventDefault(); useHint(); }
+    else if ((e.key === 'h' || e.key === 'H') && hcap > 0 && document.activeElement.tagName !== 'INPUT'){ useHint(); }
+  };
+  if (firstInput) firstInput.focus();
+}
+function missedHtml(state){
+  const kinds = Object.keys(state.missKinds).sort(function(a, b){ return state.missKinds[b] - state.missKinds[a]; });
+  if (!kinds.length) return '<p class="good">Sin fallos</p>';
+  return '<p class="tags">' + kinds.map(function(k){ return esc(KIND_ES[k] || k) + ' <b>' + state.missKinds[k] + '</b>'; }).join(' &nbsp;·&nbsp; ') + '</p>' +
+    '<div class="tbox"><table><tr><th>Ítem</th><th>Elemento</th><th>Esperado</th><th>Escribiste</th></tr>' +
+    state.misses.slice(0, 40).map(function(m){ return '<tr><td>' + m.n + '</td><td>' + esc(m.label) + '</td><td>' + esc(m.expected) + '</td><td>' + (m.got ? esc(m.got) : '-') + '</td></tr>'; }).join('') + '</table></div>';
+}
+function finishDictation(state){
+  clear();
+  const elapsedSec = state.activeMs / 1000;
+  const finalLevel = state.run.mode === 'adaptive' ? state.adaptState.level : (state.run.mode === 'ladder' ? state.run.level : 0);
+  const reviewHtml = '<h2>Revisión</h2>' + missedHtml(state) +
+    (state.levelBanner ? '<p class="notice">' + esc(state.levelBanner) + '</p>' : '');
+  resultScreen({ mod:'dictation', runMode:state.run.mode, level:finalLevel,
+    correct:state.correct, wrong:state.wrong, blank:state.blank, itemCount:state.itemCount, elapsedSec:elapsedSec,
+    rate:state.rate, replays:state.replays, thirds:atcThirds(state.thirdRes, 0), goal:state.run.goal, dualOk:state.dualOk, dualTotal:state.dualTotal,
+    reviewHtml:reviewHtml, repeat:function(){ config('dictation'); } });
+}
+
+/* ================= MODULE 2: PASSAGE COMPREHENSION ================= */
+function startPassage(run){
+  clear();
+  sessionActive = true;
+  const L = levelFromRun(run);
+  const itemCount = run.mode === 'custom' ? run.custom.items : (run.items || passageItemCount(run.level || 1));
+  runPassageItem(newState(run, itemCount, L));
+}
+function runPassageItem(state){
+  clear();
+  // See the matching comment in runDictationItem(): keep state.L in sync with the live adaptive level.
+  if (state.run.mode === 'adaptive') state.L = LEVELS[state.adaptState.level];
+  const rnd = Math.random;
+  const kind = pick(rnd, PASSAGE_KINDS);
+  const passage = PASSAGE_GENS[kind](rnd);
+  passage.questions.forEach(function(q){ if (!verifyMCQ(q)) throw new Error('Generated an invalid question at runtime'); });
+  let replaysLeft = state.run.mode === 'custom' ? 99 : state.L.replays;
+  let played = false, playing = false, shown = false, finished = false;
+  const dualLoad = state.run.mode === 'custom' ? state.run.custom.dual : state.L.dual;
+  const dual = dualLoad > 0 ? genDualTaskSum(rnd, dualLoad) : null;
+  const notice = state.notice; state.notice = '';
+  const itemStart = performance.now();
+  const qResults = [];
+  screen(
+    '<div>' +
+    (dual ? '<div class="dual"><label for="dualAns">Suma: ' + esc(dual.text) + '</label><input type="text" id="dualAns" inputmode="numeric" autocomplete="off"></div>' : '') +
+    '<div class="head"><span>Pasaje <b>' + (state.idx + 1) + '</b> / ' + state.itemCount + '</span><span>Correctas <b>' + state.correct + '</b></span><span>Incorrectas <b>' + state.wrong + '</b></span><span>Repeticiones <b id="repl">' + (replaysLeft >= 99 ? '∞' : replaysLeft) + '</b></span><button class="link" id="quit" type="button">Salir</button></div>' +
+    '<div class="bar"><div style="width:' + (state.idx / state.itemCount * 100) + '%"></div></div>' +
+    (notice ? '<p class="notice" role="status">' + esc(notice) + '</p>' : '') +
+    fallbackNote() +
+    '<div class="playbox">' + ic('headphones', 'big') + '<div class="playword" id="pw" aria-live="polite">' + esc(passage.label) + '</div>' +
+    '<button class="btn primary" id="play" style="margin-top:10px">' + ic('play') + 'Reproducir</button></div>' +
+    '<p class="keys"><span class="key">A-D</span> responder · <span class="key">Enter</span> reproducir / siguiente · <span class="key">Shift+Enter</span> repetir · <span class="key">Esc Esc</span> salir</p>' +
+    '<div id="qs"></div></div>'
+  );
+  $('quit').addEventListener('click', quitSession);
+  function playIt(){
+    if (playing || finished) return;
+    if (played && replaysLeft <= 0) return;
+    if (played) replaysLeft--;
+    played = true; playing = true; $('repl').textContent = replaysLeft >= 99 ? '∞' : replaysLeft;
+    $('play').disabled = true;
+    speakItem(passage.speech.split(' '), state.L.n ? state.L : { rate:state.run.custom.rate, accent:state.run.custom.accent, noise:state.run.custom.noise },
+      state.idx, function(w){ const e = $('pw'); if (e) e.textContent = w === '' ? ' ' : w; }, function(){
+        playing = false;
+        const e = $('pw'); if (e) e.textContent = 'Hecho';
+        const pb = $('play'); if (pb){ pb.disabled = replaysLeft <= 0; pb.innerHTML = ic('repeat') + (replaysLeft > 0 ? 'Repetir' + (replaysLeft >= 99 ? '' : ' (' + replaysLeft + ')') : 'Sin repeticiones'); }
+        showQuestions();
+      });
+  }
+  $('play').addEventListener('click', playIt);
+  function chooseOption(qi, oi){
+    if (qResults[qi] !== undefined) return;
+    const q = passage.questions[qi];
+    qResults[qi] = oi === q.correctIndex;
+    const box = $('opt' + qi);
+    Array.prototype.forEach.call(box.querySelectorAll('.optBtn'), function(bb, bi){
+      bb.disabled = true;
+      if (bi === q.correctIndex) bb.classList.add('ok');
+      else if (bi === oi) bb.classList.add('bad');
+    });
+    if (passage.questions.every(function(x, i){ return qResults[i] !== undefined; })){
+      $('next').disabled = false; $('next').focus();
+      $('next').parentNode.insertAdjacentHTML('beforebegin', '<div class="hint"><b>Transcripción:</b> ' + esc(passage.text) + '</div>');
+    }
+  }
+  function nextPassage(){
+    if (finished || !$('next') || $('next').disabled) return;
+    finished = true; finishPassageItem(state, passage, qResults, dual, performance.now() - itemStart);
+  }
+  function showQuestions(){
+    if (shown) return; // replays must not rebuild the questions (that used to wipe the answers and lock the Next button)
+    shown = true;
+    const qs = $('qs');
+    qs.innerHTML = passage.questions.map(function(q, qi){
+      return '<div class="passageQ"><p><b>Q' + (qi + 1) + '.</b> ' + esc(q.q) + '</p><div class="optsList" id="opt' + qi + '">' +
+        q.options.map(function(o, oi){ return '<button class="optBtn" data-q="' + qi + '" data-o="' + oi + '"><b>' + 'ABCD'[oi] + ')</b> ' + esc(o) + '</button>'; }).join('') +
+        '</div></div>';
+    }).join('') + '<p class="row"><button class="btn primary" id="next" disabled>' + ic('arrow') + 'Siguiente</button></p>';
+    Array.prototype.forEach.call(qs.querySelectorAll('.optBtn'), function(b){
+      b.addEventListener('click', function(){ chooseOption(+b.dataset.q, +b.dataset.o); });
+    });
+    $('next').addEventListener('click', nextPassage);
+    try { qs.scrollIntoView({ block:'nearest' }); } catch (e) {}
+  }
+  onKey = function(e){
+    if (e.key === 'Enter' && e.target && e.target.tagName === 'BUTTON') return; // Enter on a focused button presses that button
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      if (e.shiftKey || !played) playIt();
+      else if (shown && !$('next').disabled) nextPassage();
+      return;
+    }
+    const k = e.key.length === 1 ? 'ABCD'.indexOf(e.key.toUpperCase()) : -1;
+    if (k >= 0 && shown && document.activeElement.tagName !== 'INPUT'){
+      const qi = passage.questions.findIndex(function(x, i){ return qResults[i] === undefined; });
+      if (qi >= 0 && k < passage.questions[qi].options.length){ e.preventDefault(); chooseOption(qi, k); }
+    }
+  };
+}
+function finishPassageItem(state, passage, qResults, dual, ms){
+  clear();
+  state.activeMs += ms;
+  const dualEl = $('dualAns');
+  if (dual && dualEl){
+    const v = parseInt(dualEl.value, 10);
+    state.dualTotal++;
+    if (!isNaN(v) && v === dual.answer) state.dualOk++;
+  }
+  let ok = 0, blank = 0;
+  passage.questions.forEach(function(q, i){ const r = qResults[i]; if (r === undefined) blank++; else if (r) ok++; });
+  const wrong = passage.questions.length - ok - blank;
+  state.correct += ok; state.wrong += wrong; state.blank += blank;
+  passage.questions.forEach(function(q, i){ const r = qResults[i]; state.thirdRes.push({ ok:r === true, blank:r === undefined, sec:(ms / 1000) / Math.max(1, passage.questions.length), t:0 }); });
+  state.reviewRows.push({ kind:passage.kind, ok:ok, wrong:wrong, total:passage.questions.length, text:passage.text });
+  if (wrong + blank > 0){ state.missKinds[passage.kind] = (state.missKinds[passage.kind] || 0) + wrong + blank; state.misses.push({ n:state.idx + 1, label:passage.label, expected:'', got:'', text:passage.text }); }
+  state.adaptBlock.push(passage.questions.length > 0 && ok === passage.questions.length);
+  state.idx++;
+  if (state.run.mode === 'adaptive' && state.adaptBlock.length >= state.run.block){
+    const br = adaptBlockResult(state.adaptBlock);
+    const step = adaptStep(state.adaptState, br, state.run.need);
+    state.adaptState = step; state.adaptBlock = [];
+    if (step.ev){
+      state.levelBanner = step.ev === 'up' ? 'Subes de nivel: L' + step.level + ' ' + LEVELS[step.level].name
+        : step.ev === 'down' ? 'Bajas de nivel: L' + step.level + ' ' + LEVELS[step.level].name : 'Nivel 10 superado';
+      state.notice = state.levelBanner;
+    }
+  }
+  if (state.idx >= state.itemCount) finishPassage(state); else runPassageItem(state);
+}
+function finishPassage(state){
+  clear();
+  const elapsedSec = state.activeMs / 1000;
+  const finalLevel = state.run.mode === 'adaptive' ? state.adaptState.level : (state.run.mode === 'ladder' ? state.run.level : 0);
+  const kinds = Object.keys(state.missKinds).sort(function(a, b){ return state.missKinds[b] - state.missKinds[a]; });
+  const reviewHtml = '<h2>Revisión</h2><div class="tbox"><table><tr><th>#</th><th>Tipo</th><th>Correctas</th><th>Incorrectas</th></tr>' +
+    state.reviewRows.map(function(r, i){ return '<tr><td>' + (i + 1) + '</td><td>' + esc(KIND_ES[r.kind] || r.kind) + '</td><td>' + r.ok + '</td><td>' + r.wrong + '</td></tr>'; }).join('') + '</table></div>' +
+    (kinds.length ? '<h3>Transcripciones</h3>' + state.misses.slice(0, 12).map(function(m){ return '<div class="hint"><b>#' + m.n + ' ' + esc(m.label) + ':</b> ' + esc(m.text) + '</div>'; }).join('') : '<p class="good">Sin fallos</p>') +
+    (state.levelBanner ? '<p class="notice">' + esc(state.levelBanner) + '</p>' : '');
+  resultScreen({ mod:'passage', runMode:state.run.mode, level:finalLevel,
+    correct:state.correct, wrong:state.wrong, blank:state.blank, itemCount:state.itemCount, elapsedSec:elapsedSec,
+    rate:state.rate, replays:state.replays, thirds:atcThirds(state.thirdRes, 0), goal:state.run.goal, dualOk:state.dualOk, dualTotal:state.dualTotal,
+    reviewHtml:reviewHtml, repeat:function(){ config('passage'); } });
+}
+
+/* ---------- Levels and goals page ---------- */
+function levelsPage(){
+  clear(); sessionActive = false;
+  screen(
+    '<button class="link" id="back">' + ic('back') + 'Menú</button><h1>Niveles</h1>' +
+    '<div class="tbox"><table><tr><th>Nivel</th><th>Nombre</th><th>Ritmo</th><th>Repeticiones</th><th>Ruido</th><th>Cadena</th><th>Doble</th><th>Pistas</th></tr>' +
+    LEVELS.slice(1).map(function(L){
+      return '<tr' + (L.n === 5 ? ' class="me"' : '') + '><td>' + L.n + '</td><td>' + L.name + '</td><td>' + fmt(L.rate,2) + '×</td><td>' + L.replays + '</td><td>' + fmt(L.noise,2) + '</td><td>' + L.chain + '</td><td>' + L.dual + '</td><td>' + L.hints + '</td></tr>';
+    }).join('') + '</table></div>' +
+    ''
+  );
+  $('back').addEventListener('click', menu);
+}
+/* ---------- Tips page ---------- */
+function tipsPage(){
+  clear(); sessionActive = false;
+  const alphaRows = ICAO_LETTERS.map(function(l){ return '<tr><td>' + l + '</td><td>' + ICAO_ALPHA[l] + '</td></tr>'; }).join('');
+  const numRows = NUM_WORD.map(function(w, i){ return '<tr><td>' + i + '</td><td>' + w + '</td></tr>'; }).join('');
+  screen(
+    '<button class="link" id="back">' + ic('back') + 'Menú</button><h1>Consejos</h1>' +
+    '<h2>Dígitos</h2><p>Punto decimal: “Decimal”. Cifras redondas: “Hundred”, “Thousand”.</p>' +
+    '<div class="tbox"><table><tr><th>Dígito</th><th>Se dice</th></tr>' + numRows + '</table></div>' +
+    '<h2>Alfabeto</h2>' +
+    '<div class="tbox"><table><tr><th>Letra</th><th>Palabra</th></tr>' + alphaRows + '</table></div>' +
+    '<h2>Notación abreviada</h2>' +
+    '<div class="tbox"><table><tr><th>Dato</th><th>Anota</th></tr>' +
+    '<tr><td>Nivel</td><td><code>350</code> para FL350, <code>S040</code> para 4000 ft</td></tr>' +
+    '<tr><td>Rumbo</td><td><code>150</code></td></tr>' +
+    '<tr><td>Frecuencia</td><td><code>27.350</code> para 127.350</td></tr>' +
+    '<tr><td>QNH</td><td><code>1013</code></td></tr>' +
+    '<tr><td>Tendencia</td><td><code>↑</code> ascenso, <code>↓</code> descenso, <code>→</code> directo</td></tr>' +
+    '<tr><td>Abreviaturas</td><td><code>hdg</code> <code>clrd</code> <code>twy</code> <code>appr</code> <code>sqwk</code> <code>c/s</code></td></tr></table></div>' +
+    '<h2>Bajo carga</h2><ul><li>Anota el indicativo en cuanto lo captes.</li><li>Si pierdes un dígito, deja un guion y sigue escuchando.</li><li>Orden de la colación: nivel, rumbo, QNH, pista, frecuencia, código transpondedor.</li></ul>'
+  );
+  $('back').addEventListener('click', menu);
+}
+/* ---------- History and CSV ---------- */
+function historyPage(){
+  clear(); sessionActive = false;
+  const d = load();
+  const rows = d.sessions.slice(-60).reverse();
+  screen(
+    '<button class="link" id="back">' + ic('back') + 'Menú</button><h1>Historial</h1>' +
+    (rows.length ? '' : '<p class="soft">Sin sesiones</p>') +
+    (rows.length ? '<div class="tbox"><table><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Errores</th><th>Blanco</th><th>s/ítem</th><th>Precisión</th><th>Objetivo</th><th>Cumplido</th></tr>' +
+      rows.map(function(s){ return '<tr><td>' + dateEU(s.ts) + '</td><td class="mod">' + esc(modES(s.module)) + '</td><td>' + (s.level || 'personalizado') + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi,2) + '</td><td>' + fmt(s.accuracy,1) + ' %</td><td>' + esc(s.goal||'') + '</td><td>' + (s.met === true ? 'Sí' : s.met === false ? 'No' : '—') + '</td></tr>'; }).join('') +
+      '</table></div>' : '') +
+    '<p class="row" style="margin-top:12px"><button class="btn primary" id="csv">' + ic('download') + 'Exportar</button><button class="btn danger" id="clr">' + ic('trash') + 'Borrar</button></p>'
+  );
+  $('back').addEventListener('click', menu);
+  $('csv').addEventListener('click', function(){
+    const blob = new Blob([toCSV(d.sessions)], { type:'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'atc-listening-history.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  });
+  $('clr').addEventListener('click', function(){
+    if (!confirm('¿Borrar el historial?')) return;
+    d.sessions = []; save(); historyPage();
+  });
+}
+/* ---------- Boot ---------- */
+menu();
+initSpeech(function(){ if (!onKey || app.querySelector('.card')) menu(); });
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

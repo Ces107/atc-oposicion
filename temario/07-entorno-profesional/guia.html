@@ -1,0 +1,1094 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Entorno profesional</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Entorno profesional</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</a></li>
+<li><a href="#1-capitulo-1-familiarizacion-p-3-denominacion-e-historia">1. Capítulo 1 «Familiarización» (p. 3): denominación e historia</a></li>
+<li><a href="#2-capitulo-11-acerca-de-enaire-pp-4-5">2. Capítulo 1.1 «Acerca de ENAIRE» (pp. 4-5)</a></li>
+<li><a href="#3-capitulo-111-estructura-de-gestion-p-6-organigrama-fuente-organigrama-de-enairees-imagen">3. Capítulo 1.1.1 «Estructura de Gestión» (p. 6): organigrama (fuente: organigrama de enaire.es, imagen)</a></li>
+<li><a href="#4-capitulo-112-grupo-empresarial-p-7">4. Capítulo 1.1.2 «Grupo Empresarial» (p. 7)</a></li>
+<li><a href="#5-capitulo-113-equipo-p-8">5. Capítulo 1.1.3 «Equipo» (p. 8)</a></li>
+<li><a href="#6-capitulo-114-grupos-de-interes-p-9-solo-figura">6. Capítulo 1.1.4 «Grupos de interés» (p. 9): solo figura</a></li>
+<li><a href="#7-capitulo-12-plan-estrategico-de-enaire-plan-de-vuelo-2025-pp-10-11">7. Capítulo 1.2 «Plan estratégico de ENAIRE: Plan de Vuelo 2025» (pp. 10-11)</a><ul>
+<li><a href="#70-aspectos-basicos">7.0 Aspectos básicos</a></li>
+<li><a href="#71-proposito">7.1 Propósito</a></li>
+<li><a href="#72-mision">7.2 Misión</a></li>
+<li><a href="#73-vision-nuestra-ambicion">7.3 Visión: «nuestra ambición»</a></li>
+<li><a href="#74-los-valores-en-enaire">7.4 Los Valores en ENAIRE</a></li>
+<li><a href="#75-objetivos-estrategicos">7.5 Objetivos estratégicos</a></li>
+</ul>
+</li>
+<li><a href="#8-capitulo-13-cielo-unico-europeo-ses-pp-11-12">8. Capítulo 1.3 «Cielo Único Europeo (SES)» (pp. 11-12)</a></li>
+<li><a href="#9-capitulo-14-principales-servicios-prestados-pp-12-13">9. Capítulo 1.4 «Principales servicios prestados» (pp. 12-13)</a></li>
+<li><a href="#10-capitulo-15-formacion-en-enaire-pp-14-15">10. Capítulo 1.5 «Formación en ENAIRE» (pp. 14-15)</a><ul>
+<li><a href="#a-formacion-de-controladores-aereos">A. Formación de controladores aéreos</a></li>
+<li><a href="#b-master-en-gestion-de-servicios-de-navegacion-aerea">B. Máster en Gestión de Servicios de Navegación Aérea</a></li>
+</ul>
+</li>
+<li><a href="#11-manual-nov-2024-frente-al-plan-de-vuelo-2030-aprobado-el-19-12-2025-v11-de-19-03-2026">11. Manual (nov. 2024) frente al Plan de Vuelo 2030 (aprobado el 19-12-2025; v1.1 de 19-03-2026)</a></li>
+<li><a href="#12-trampas-de-examen">12. Trampas de examen</a></li>
+<li><a href="#13-imprescindible-memorizar">13. Imprescindible memorizar</a></li>
+<li><a href="#14-glosario-bilingue-es-en">14. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#15-fuentes">15. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">29 min de lectura</div><h1 id="om07-manual-oficial-7-de-enaire-entorno-profesional-guia-de-estudio-fiel-al-manual">Guía: Entorno profesional</h1>
+<p><strong>Fuente:</strong> ENAIRE, <em>Entorno profesional</em>, 15 páginas, con «Elaborado: noviembre 2024» impreso en la cabecera y «© 2024 ENAIRE» en la portada (pie de página «© 2023 ENAIRE»). Unas 1900 palabras en español, con figuras en las páginas 3, 4, 5, 6, 7, 9, 10, 11 y 12.</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El tema 7 del Anexo I es «Entorno profesional». El manual es el único detalle oficial: es corto, así que <strong>cada frase puede ser una pregunta</strong>. Abarca (1) qué es ENAIRE: naturaleza jurídica, historia, tamaño, espacio aéreo, organigrama, grupo empresarial, plantilla, grupos de interés; (2) el plan estratégico de ENAIRE <strong>tal como figura en este manual: Plan de Vuelo 2025</strong> (propósito, misión, visión, los 12 valores, los 6 objetivos estratégicos); (3) el Cielo Único Europeo (SES) y el sistema de rendimientos; (4) los seis servicios que presta ENAIRE; (5) la formación en ENAIRE (formación de unidad, formación continua, el Máster). Cabe esperar preguntas de memoria sobre cifras (2 190 000 km²; 5 centros; 21 torres; 51 %; 66,66 %; 49 %; años de los periodos del SES y de los RP), sobre listas ordenadas (valores, objetivos, servicios) y del tipo «cuál de estos NO es...». <strong>Importante:</strong> el plan vigente de ENAIRE es el Plan de Vuelo 2030 (aprobado el 19-12-2025); el manual sigue describiendo el de 2025. Antes del examen, revisa la sección «Manual (nov. 2024) frente al Plan de Vuelo 2030»: la próxima convocatoria puede traer un manual actualizado.</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual</th>
+<th>Página</th>
+<th>Sección de la guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Familiarización (párrafo introductorio, cronología «Historia»)</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1.1 Acerca de ENAIRE (naturaleza jurídica, misión de la entidad, tamaño, mapa del espacio aéreo, operador crítico)</td>
+<td>4-5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1.1.1 Estructura de Gestión (organigrama)</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>1.1.2 Grupo Empresarial</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1.1.3 Equipo (plantilla, convenios colectivos, ocupaciones)</td>
+<td>8</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1.1.4 Grupos de interés</td>
+<td>9</td>
+<td>6</td>
+</tr>
+<tr>
+<td>1.2 Plan estratégico: Plan de Vuelo 2025 (1.2.1 Propósito, 1.2.2 Misión, 1.2.3 Visión, 1.2.4 Valores, 1.2.5 Objetivos)</td>
+<td>10-11</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1.3 Cielo Único Europeo (SES) y sistema de rendimientos</td>
+<td>11-12</td>
+<td>8</td>
+</tr>
+<tr>
+<td>1.4 Principales servicios prestados (1.4.1 ATS ... 1.4.6 FPD)</td>
+<td>12-13</td>
+<td>9</td>
+</tr>
+<tr>
+<td>1.5 Formación en ENAIRE (A. formación de controladores, B. Máster)</td>
+<td>14-15</td>
+<td>10</td>
+</tr>
+<tr>
+<td>(añadido) Manual frente al Plan de Vuelo 2030, Trampas de examen, Imprescindible memorizar, Glosario, Fuentes, Dudas</td>
+<td></td>
+<td>11-16</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-capitulo-1-familiarizacion-p-3-denominacion-e-historia">1. Capítulo 1 «Familiarización» (p. 3): denominación e historia</h2>
+<ul>
+<li>La <strong>Entidad Pública Empresarial Aeropuertos españoles y Navegación Aérea (Aena EPE)</strong> fue <strong>creada por el artículo 82 de la Ley 4/1990, de 29 de junio, de Presupuestos Generales del Estado para 1990</strong>. Pasó a denominarse <strong>ENAIRE por la Ley 18/2014, de 15 de octubre</strong>, «de aprobación de medidas urgentes para el crecimiento, la competitividad y la eficiencia».</li>
+<li><strong>Cronología «Historia» (figura, p. 3)</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Año</th>
+<th>Hecho (tal como figura impreso)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1991</td>
+<td>Creación del Ente Público Aeropuertos Españoles y Navegación Aérea (AENA)</td>
+</tr>
+<tr>
+<td>2010</td>
+<td>Ley 9/2010: liberalización de los servicios de tránsito aéreo (ATS) de aeródromo</td>
+</tr>
+<tr>
+<td>2011</td>
+<td>Separación efectiva entre Aena Aeropuertos S.A. y Aena Entidad Pública Empresarial</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>Acuerdo entre España y Portugal para crear el <strong>bloque funcional de espacio aéreo del suroeste (South West Functional Airspace Block, SW FAB)</strong></td>
+</tr>
+<tr>
+<td>2014</td>
+<td>Aena pasa a ser ENAIRE, en el contexto de la privatización parcial de Aena S.A.</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>Entrada de capital privado en el <strong>49 %</strong> de Aena S.A.; <strong>ENAIRE conserva el 51 %</strong> de las acciones</td>
+</tr>
+<tr>
+<td>2016</td>
+<td>Nuevo acuerdo ENAIRE-Aena S.A. para la prestación de servicios de navegación aérea, <strong>firmado el 23 de diciembre de 2016, por 5 años</strong></td>
+</tr>
+<tr>
+<td>2017-2020</td>
+<td><strong>Plan de Vuelo 2020</strong>: las seis palabras con «+»: +Seguros, +Competitivos, +Ecológicos, +Puntuales, +Valorados, +Comprometidos</td>
+</tr>
+<tr>
+<td>2021-2025</td>
+<td><strong>Plan de Vuelo 2025</strong>: «define la hoja de ruta de la transformación de ENAIRE para el periodo»</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Ojo con dos fechas parecidas: creación de la entidad, ley de 1990 y cronología de 1991; cambio de nombre, 2014 (ley de 15 de octubre de 2014 y «2014» en la cronología).</li>
+</ul>
+<h2 id="2-capitulo-11-acerca-de-enaire-pp-4-5">2. Capítulo 1.1 «Acerca de ENAIRE» (pp. 4-5)</h2>
+<ul>
+<li>ENAIRE es una <strong>entidad pública empresarial, adscrita al Ministerio de Transportes y Movilidad Sostenible</strong>. Es <strong>el gestor nacional de navegación aérea en España</strong>: <strong>cinco centros de control y 21 torres</strong> gestionan <strong>más de 2 millones de vuelos al año</strong>.</li>
+<li><strong>Mandato legal (encomendado):</strong> la planificación, dirección, coordinación, explotación, conservación y administración del tráfico aéreo, de los servicios de telecomunicaciones e información aeronáutica, así como de las infraestructuras, instalaciones y redes de comunicaciones del sistema de navegación aérea, con el objetivo de que la prestación del servicio sea <strong>«segura, eficaz, continuada y sostenible»</strong>.</li>
+<li><strong>Posición:</strong> el <strong>principal proveedor de servicios de navegación aérea y de información aeronáutica en España, el cuarto en Europa por volumen de tráfico y uno de los más importantes a nivel mundial</strong>. Gestiona el espacio aéreo español: <strong>2 190 000 km²</strong>. Tráfico en 2023: <strong>más de 2 millones de vuelos, que transportaron a más de 328 millones de personas</strong>.</li>
+<li><strong>Servicios que indica el texto:</strong> a través de <strong>5 centros de control, 21 torres</strong> y una completa red de infraestructuras y equipamientos aeronáuticos, ENAIRE presta los <strong>servicios de tránsito aéreo de control de área, aproximación y aeródromo</strong>, así como los de <strong>información de vuelo, alerta y asesoramiento</strong>. Es el proveedor de servicios de <strong>comunicaciones, navegación y vigilancia (CNS)</strong> en <strong>todo el espacio aéreo español y en los aeropuertos de la red Aena</strong>.</li>
+<li><strong>Designaciones del Estado:</strong> <strong>Operador de Infraestructuras Críticas</strong> en <strong>2015</strong> y <strong>Operador de Servicios Esenciales</strong> en <strong>2019</strong>.</li>
+<li><strong>Figura p. 4 (cadena institucional)</strong>: Ministro de Transporte y Movilidad Sostenible → Secretaría de Estado de Transportes y Movilidad Sostenible → Secretaría General de Transportes Aéreo y Marítimo → <strong>Dirección General de la Aviación Civil (DGAC)</strong>, descrita como «órgano del Ministerio que diseña la estrategia, dirige la política aeronáutica y ejerce de <strong>regulador</strong> en el sector aéreo». A su lado: <strong>AESA</strong> (Agencia Estatal de Seguridad Aérea), <strong>«supervisor»</strong> del cumplimiento de la normativa de aviación civil en España; y <strong>ENAIRE, «Proveedor Nacional de Servicios de Navegación Aérea»</strong>. Lógica de examen: <strong>DGAC = regulador, AESA = supervisor, ENAIRE = proveedor</strong>.</li>
+<li><strong>Figura p. 5 (mapa del espacio aéreo español)</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ACC</th>
+<th>Superficie (km²)</th>
+<th>Nombre de la región en la lista del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACC Madrid</td>
+<td>435 000</td>
+<td>Centro-Norte / Madrid</td>
+</tr>
+<tr>
+<td>ACC Barcelona</td>
+<td>266 000</td>
+<td>Este / Barcelona</td>
+</tr>
+<tr>
+<td>ACC Sevilla</td>
+<td>179 000</td>
+<td>Sur / Sevilla</td>
+</tr>
+<tr>
+<td>ACC Palma</td>
+<td>51 400</td>
+<td>Balear / Palma</td>
+</tr>
+<tr>
+<td>ACC Gran Canaria</td>
+<td>1 370 000</td>
+<td>Canaria / Gran Canaria</td>
+</tr>
+</tbody>
+</table>
+<p>Recuadro: «Gestionamos una extensión de <strong>2.190.000 km²</strong> de espacio aéreo». <strong>3 Regiones de Información de Vuelo (FIR): Madrid, Barcelona y Canarias.</strong> <strong>5 Regiones / 5 Centros de Control:</strong> Centro-Norte (Madrid), Este (Barcelona), Sur (Sevilla), Canarias (Gran Canaria), Balear (Palma). <strong>2 TACC (Centros de Control de Área Terminal): Santiago y Valencia</strong> (el mapa muestra «TACC Santiago» en el noroeste y «TACC Valencia»). Pie de figura: «ENAIRE es una entidad puntera y referente internacional en el ámbito de la navegación aérea». Las cinco superficies de los ACC suman 2 301 400 km², no 2 190 000 (véase Dudas).</p>
+<ul>
+<li>No confundir: <strong>3 FIR (Madrid, Barcelona, Canarias)</strong> ≠ <strong>5 centros/regiones (se añaden Sevilla y Palma)</strong> ≠ <strong>2 TACC (Santiago, Valencia)</strong>.</li>
+</ul>
+<h2 id="3-capitulo-111-estructura-de-gestion-p-6-organigrama-fuente-organigrama-de-enairees-imagen">3. Capítulo 1.1.1 «Estructura de Gestión» (p. 6): organigrama (fuente: organigrama de enaire.es, imagen)</h2>
+<p>El organigrama (edición de nov. 2024):</p>
+<ul>
+<li><strong>Presidente:</strong> José Antonio Santano Clavero. <strong>Director General:</strong> Enrique Maurer Somolinos.</li>
+<li>Dependientes del Director General, funciones de staff: <strong>Secretaria General:</strong> Elena Sáenz Guillén; <strong>Jefe de la División de Auditoría Interna:</strong> Juan Carlos Villalón Pérez; <strong>Director de Coordinación Civil-Militar:</strong> Juan Ángel Trecello García.</li>
+<li>Seis direcciones en una fila: <strong>Director de Comunicación</strong> (Mariano Gasparet Romero); <strong>Jefe de División de Seguridad</strong> (Santiago Cortés Burns); <strong>Jefa de División de Sostenibilidad y Relaciones Institucionales</strong> (Estíbaliz Salazar Fernández); <strong>Directora de Personas</strong> (Aránzazu Hernández Rodríguez); <strong>Directora Económico-Financiera</strong> (Mónica Mansilla Rodríguez); <strong>Directora de Estrategia e Innovación</strong> (María Luz de Mateo García).</li>
+<li><strong>Director de Servicios de Navegación Aérea:</strong> José Luis Meler Jordán, con <strong>Directora Adjunta de Servicios de Navegación Aérea</strong> (Laura Garcés Acín) y <strong>Jefe de la División de Diseño, Desarrollo e Implantación ATM</strong> (Javier Cámara Gracia); de él dependen el <strong>Director de Sistemas</strong> (José Luis Rodríguez Castro) y el <strong>Director de Operaciones</strong> (Xavier Benavent Navarro).</li>
+<li>Cinco directores regionales (fila inferior): <strong>Balear</strong> Alejandro Mena López; <strong>Canarias</strong> Javier Delgado Henríquez; <strong>Centro-Norte</strong> Enrique Gismera Gómez; <strong>Este</strong> Inmaculada Prieto Serrano (Directora); <strong>Sur</strong> Carlos Casqueñas Muñoz.</li>
+<li>Datos estructurales que conviene recordar: el <strong>Presidente está por encima del Director General</strong>; los <strong>cinco directores regionales dependen del Director de Servicios de Navegación Aérea</strong>; el organigrama <strong>no tiene «Director de Aeropuertos»</strong> (los aeropuertos son negocio de Aena). Los nombres cambian con los nombramientos: una pregunta sobre un nombre es improbable; sobre la estructura, menos.</li>
+</ul>
+<h2 id="4-capitulo-112-grupo-empresarial-p-7">4. Capítulo 1.1.2 «Grupo Empresarial» (p. 7)</h2>
+<ul>
+<li>ENAIRE constituye un <strong>Grupo Empresarial</strong> cuya actividad central es la gestión de la navegación aérea en España.</li>
+<li><strong>Accionista mayoritario del gestor aeroportuario Aena S.A., con el 51 % de sus acciones.</strong></li>
+<li>Posee también accionariado en varias empresas estratégicas, «entre las que destacan»: <strong>CRIDA (66,66 %), STARTICAL (50 %), Ineco (45,85 %) y el Grupo EAD (36 %)</strong>.</li>
+<li><strong>Fundación ENAIRE</strong>: gestiona, conserva y difunde el <strong>patrimonio artístico</strong> de la entidad, y fomenta, divulga e impulsa la <strong>cultura aeronáutica</strong> en la sociedad.</li>
+<li><strong>Figura p. 7 (organigrama del grupo)</strong>: Ministerio de Transportes y Movilidad Sostenible → Secretaría de Estado de Transportes y Movilidad Sostenible, «Presidencia de ENAIRE» → <strong>Grupo ENAIRE</strong>, en tres cajas: <strong>Participadas ENAIRE</strong> (Ineco 45,85 %, GroupEAD 36 %, Startical 50 %); <strong>Participación mayoritaria de ENAIRE</strong> (Aena 51 %, CRIDA 66,66 %; debajo de Aena, «Participadas AENA»: <strong>Aena Internacional 100 %</strong>); <strong>Patronato</strong> (Fundación ENAIRE).</li>
+<li>Regla mnemotécnica: <strong>solo Aena (51 %) y CRIDA (66,66 %) son participaciones mayoritarias</strong>; Startical (50 %), Ineco (45,85 %) y EAD (36 %) son «participadas» minoritarias o paritarias. CRIDA = «Centro de Referencia de Investigación, Desarrollo e Innovación en ATM» (desarrollo de las siglas añadido por mí a partir del PV30; no figura en el texto del manual).</li>
+</ul>
+<h2 id="5-capitulo-113-equipo-p-8">5. Capítulo 1.1.3 «Equipo» (p. 8)</h2>
+<ul>
+<li>Plantilla: <strong>más de 4200 personas trabajadoras</strong> (datos a <strong>31 de octubre de 2024</strong>, nota 1).</li>
+<li><strong>Dos Convenios Colectivos diferenciados</strong>:
+  1. <strong>III Convenio Colectivo profesional de Controladores de Tránsito Aéreo</strong>.
+  2. <strong>I Convenio Colectivo del Grupo Aena</strong> (personal no controlador): Técnicos de Mantenimiento, Operaciones, Sistemas, Seguridad, Personas, Calidad y Medioambiente, Comunicación, Jurídico, Sistemas de Información, Económico-Administrativo, Planificación, Delineación, Servicios y Mantenimiento General.</li>
+<li><strong>Personal por ocupaciones</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Ocupación</th>
+<th>Porcentaje</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Controladores aéreos</td>
+<td>alrededor del <strong>49 %</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Ingeniería y Explotación Técnica</td>
+<td>sobre un <strong>20 %</strong></td>
+<td>personal técnico y de ingeniería dedicado al mantenimiento, la explotación técnica y el desarrollo de los sistemas e instalaciones de navegación aérea</td>
+</tr>
+<tr>
+<td>Operaciones</td>
+<td>sobre un <strong>5 %</strong></td>
+<td>información aeronáutica, planes de vuelo y apoyo a la gestión de los servicios de tránsito aéreo ATS</td>
+</tr>
+<tr>
+<td>Gestión</td>
+<td>alrededor de un <strong>26 %</strong></td>
+<td>tareas de administración y gestión de la empresa (incluye ambos convenios)</td>
+</tr>
+</tbody>
+</table>
+<p>49 + 20 + 5 + 26 = 100. Orden que hay que recordar: controladores 49, gestión 26, ingeniería 20, operaciones 5.</p>
+<h2 id="6-capitulo-114-grupos-de-interes-p-9-solo-figura">6. Capítulo 1.1.4 «Grupos de interés» (p. 9): solo figura</h2>
+<p>Cinco «ámbitos»:</p>
+<ol>
+<li><strong>Ámbito CLIENTES:</strong> asociaciones de compañías de aviación comercial; compañías aéreas y sus pilotos; gestores aeroportuarios; asociaciones de Aviación no comercial; operadores de drones.</li>
+<li><strong>Ámbito PERSONAS:</strong> personas empleadas; organizaciones sindicales; asociaciones profesionales; antiguo personal; solicitantes de empleo.</li>
+<li><strong>Ámbito SOCIEDAD:</strong> paisaje/pasaje (la etiqueta del icono se lee «Pasaje»); ciudadanía y asociaciones locales; entidades de protección del medio ambiente; entidades de cooperación social; instituciones educativas; Fundación ENAIRE; medios de comunicación.</li>
+<li><strong>Ámbito REGULADORES / ADMINISTRACIONES PÚBLICAS:</strong> Organización de Aviación Civil Internacional (OACI); Eurocontrol; Dirección General de Aviación Civil; resto de Ministerios y Órganos del Gobierno; Instituciones Autonómicas, Regionales y Locales; Comisión Europea; Agencia Europea de Seguridad Aérea (EASA); Agencia Española de Seguridad Aérea (AESA); Ejército del Aire y del Espacio.</li>
+<li><strong>Ámbito PARTNERS / PROVEEDORES:</strong> Gestor de Red europeo (Network Manager, EUROCONTROL); Grupo A6 de ANSPs (A6 Alliance); Empresas participadas (Aena, Ineco, Crida, Grupo EAD, ESSP (EGNOS), Startical); Alianzas y Socios empresariales (iTEC); SESAR Joint Undertaking / SESAR Deployment Manager (SJU/SDM); Civil Air Navigation Services Organisation (CANSO); otros proveedores de Servicios de Navegación Aérea (ANSPs); Agencia Estatal de Meteorología (AEMET); Proveedores (empresas contratistas).
+- Trampa: <strong>AEMET aparece como partner/proveedor; EASA, AESA y el Ejército del Aire como reguladores/administraciones públicas</strong>; <strong>la Fundación ENAIRE está en «Sociedad»</strong>; <strong>los operadores de drones son «Clientes»</strong>.</li>
+</ol>
+<h2 id="7-capitulo-12-plan-estrategico-de-enaire-plan-de-vuelo-2025-pp-10-11">7. Capítulo 1.2 «Plan estratégico de ENAIRE: Plan de Vuelo 2025» (pp. 10-11)</h2>
+<h3 id="70-aspectos-basicos">7.0 Aspectos básicos</h3>
+<p>El plan estratégico que figura en el manual es el <strong>Plan de Vuelo 2025 (2021-2025)</strong>, «hoja de ruta de la transformación de ENAIRE» (p. 3). Contiene: propósito, misión, visión, valores y seis objetivos estratégicos.</p>
+<h3 id="71-proposito">7.1 Propósito</h3>
+<p>«Cuidamos De tu vuelo para que sea <strong>seguro, rápido, eficiente y sostenible</strong>». Cuatro adjetivos, en este orden. (El PV2030 tiene tres: elimina «rápido».)</p>
+<h3 id="72-mision">7.2 Misión</h3>
+<p>«Proporcionamos servicios de navegación aérea con <strong>seguridad, calidad, eficiencia y respeto al medioambiente</strong>, contribuyendo al desarrollo de la aviación y, por tanto, al <strong>desarrollo económico y social de España</strong>».</p>
+<h3 id="73-vision-nuestra-ambicion">7.3 Visión: «nuestra ambición»</h3>
+<p>«Queremos convertir a ENAIRE en un <strong>operador global, líder del sector de la navegación aérea</strong>, basándonos en <strong>las personas, la innovación y la digitalización</strong>».</p>
+<h3 id="74-los-valores-en-enaire">7.4 Los Valores en ENAIRE</h3>
+<p>Cuatro grupos de tres valores (12 en total). Cada uno lleva una definición breve en la figura:</p>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Valor</th>
+<th>Definición (parafraseada; palabras clave en negrita en el manual)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. La seguridad es lo primero</strong></td>
+<td><strong>En nuestro ADN</strong></td>
+<td>La seguridad es nuestra máxima prioridad, un pilar sobre el que se sustentan nuestro servicio y el bienestar de las personas</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Actitud de confianza y «cultura justa»</strong></td>
+<td>Participamos en un ambiente de confianza en el que todas las personas comunican la información esencial sin miedo a consecuencias punitivas, para mantener y reforzar nuestra Cultura de Seguridad</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Refuerzo e impulso de la Seguridad</strong></td>
+<td>Para afrontar los retos futuros, las actuaciones y los cambios deben reforzar los niveles exigidos de Seguridad</td>
+</tr>
+<tr>
+<td><strong>2. Comprometidos con los clientes y la sociedad</strong></td>
+<td><strong>Buscamos la excelencia</strong></td>
+<td>Prestamos un servicio de calidad que garantiza y supera las necesidades y expectativas de nuestros clientes y grupos de interés</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Somos empáticos</strong></td>
+<td>Nos ponemos en el lugar del otro para comprender y responder a las necesidades del cliente interno y externo</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Responsables con el Medioambiente</strong></td>
+<td>Somos conscientes del impacto de nuestra actividad en el entorno natural y ponemos en práctica acciones para desarrollar soluciones sostenibles</td>
+</tr>
+<tr>
+<td><strong>3. Somos un solo y gran equipo</strong></td>
+<td><strong>Somos ENAIRE</strong></td>
+<td>Orgullosos de pertenecer a ENAIRE; con nuestro trabajo hacemos todo lo posible por alcanzar los objetivos colectivos</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>La integridad es nuestro carácter</strong></td>
+<td>Actuamos con <strong>ética, honestidad y transparencia</strong> en nuestro trabajo</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Respetamos y confiamos</strong></td>
+<td>Colaboramos con los compañeros, reconocemos el mérito de su trabajo y actuamos con <strong>generosidad y humildad</strong> para lograr una organización interconectada</td>
+</tr>
+<tr>
+<td><strong>4. «Hambre» de mejora de nuestra organización</strong></td>
+<td><strong>Somos innovadores</strong></td>
+<td>Nos planteamos nuevos retos y buscamos nuevas ideas y formas de hacer nuestro trabajo, apoyándonos en los últimos avances tecnológicos</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Flexibles ante los cambios</strong></td>
+<td>Mente abierta; nos adaptamos a los cambios para que ENAIRE se transforme y crezca</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Somos proactivos</strong></td>
+<td>Con implicación e iniciativa construimos el futuro de ENAIRE</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Nota: <strong>«cultura justa» (<em>just culture</em>) va entre comillas en el manual</strong>; el título del grupo 4 lleva «Hambre» entre comillas.</li>
+<li><strong>Estos son los valores del PV2025. Los del PV2030 son distintos</strong> (nombres de los grupos 3 y 4, y 3 de los 12 valores: véase la sección 11).</li>
+</ul>
+<h3 id="75-objetivos-estrategicos">7.5 Objetivos estratégicos</h3>
+<p>El manual enumera <strong>seis</strong>, en este orden (negritas como en el manual):</p>
+<ol>
+<li><strong>Reforzar continuamente la seguridad</strong>, prestando especial atención a la <strong>cultura de seguridad, al factor humano y a la ciberseguridad</strong> ante los nuevos riesgos emergentes.</li>
+<li><strong>Mejorar la calidad, escalabilidad y resiliencia de los servicios</strong> prestados a través de la <strong>digitalización, la modernización del espacio aéreo y los conceptos operativos</strong>, y el refuerzo de la cultura de <strong>orientación al cliente y grupos de interés</strong>.</li>
+<li><strong>Contribuir a la movilidad sostenible en el sector</strong>, minimizando el impacto de la actividad de ENAIRE en el medioambiente e impulsando su <strong>descarbonización</strong>.</li>
+<li><strong>Acometer el desarrollo del negocio e internacionalización</strong> de ENAIRE, para posicionarnos en un entorno <strong>global y liberalizado</strong> del futuro sector de la navegación aérea.</li>
+<li><strong>Asegurar la recuperación económica y viabilidad futura de ENAIRE</strong>, y aumentar la <strong>eficiencia, productividad y, por tanto, la competitividad</strong> de la empresa para superar <strong>la crisis</strong> y adaptarse a los cambios estructurales del sector, a la vez que se contribuye a la recuperación global del sector de la aviación.</li>
+<li><strong>Acelerar la transformación cultural, organizativa y modernización</strong> de ENAIRE, aprovechando las nuevas tecnologías para ser más <strong>ágiles y eficientes</strong> y desarrollando una <strong>cultura</strong> ... (la frase queda cortada en el manual tras «una cultura»: el texto termina ahí en el PDF, p. 11).
+- Etiquetas abreviadas para memorizar: <strong>Seguridad; Calidad/escalabilidad/resiliencia; Movilidad sostenible; Negocio e internacionalización; Recuperación económica y viabilidad (eficiencia, productividad, competitividad); Transformación cultural/organizativa y modernización.</strong></li>
+</ol>
+<h2 id="8-capitulo-13-cielo-unico-europeo-ses-pp-11-12">8. Capítulo 1.3 «Cielo Único Europeo (SES)» (pp. 11-12)</h2>
+<ul>
+<li>
+<p>La <strong>iniciativa del Cielo Único Europeo (SES, <em>Single European Sky</em>), creada por la Comisión Europea en 1999</strong>, tiene como principal objetivo aumentar la <strong>eficiencia de la gestión del tránsito aéreo y de los servicios de navegación aérea</strong> mediante:
+  a. <strong>la mejora en la prestación de los servicios de navegación aérea en términos de capacidad, seguridad, coste-eficiencia y medio ambiente</strong>, para hacer frente a la demanda creciente de tráfico aéreo;
+  b. <strong>la reducción de la fragmentación</strong> del espacio aéreo europeo.</p>
+</li>
+<li>
+<p>«Ambos objetivos siguen estando vigentes tras más de 20 años».</p>
+</li>
+<li><strong>Figura p. 11 (mapa de Europa)</strong>: <strong>38 Proveedores de Servicio de Navegación Aérea (ANSPs)</strong> y <strong>63 Centros de Control de Tráfico Aéreo</strong>.</li>
+<li><strong>Paquetes legislativos:</strong> <strong>SES I aprobado y en vigor en 2004; SES II en 2009.</strong> A finales de <strong>2020</strong> la Comisión retomó la propuesta de nuevo texto reglamentario, <strong>SES2+</strong>, «actualmente en proceso de negociación» (<strong>trílogos</strong> entre la Comisión, el Consejo y el Parlamento) en el momento del manual.</li>
+<li><strong>Sistema de Rendimientos</strong>:</li>
+<li>Requiere a los Estados (y a los proveedores de servicios como ENAIRE) el cumplimiento de metas en <strong>cuatro áreas: Seguridad, Coste-Eficiencia, Capacidad y Medioambiente</strong>, con un <strong>esquema de incentivos y penalizaciones</strong> asociado.</li>
+<li>La normativa se despliega en <strong>periodos de cinco años (aunque el primero duró tres)</strong>; el <strong>periodo actual se extiende desde 2020 hasta 2024</strong>; <strong>RP4 (2025-2029)</strong> «supondrá un importante reto», en cuanto que se prevé que los objetivos planteados en las cuatro áreas sean ambiciosos.</li>
+<li><strong>Figura p. 12 (flechas)</strong>: <strong>1.er periodo RP1 (2012-2014); 2.º RP2 (2015-2019); 3.º RP3 (2020-2024); 4.º RP4 (2025-2029).</strong></li>
+<li>3 + 5 + 5 + 5 años = 18 años, de 2012 a 2029 sin huecos.</li>
+</ul>
+<h2 id="9-capitulo-14-principales-servicios-prestados-pp-12-13">9. Capítulo 1.4 «Principales servicios prestados» (pp. 12-13)</h2>
+<p>ENAIRE «está certificada como organización proveedora» de los siguientes servicios de navegación aérea <strong>de acuerdo con la normativa aplicable de la Unión Europea</strong>. Seis servicios, en el orden del manual:</p>
+<table>
+<thead>
+<tr>
+<th>N.º</th>
+<th>Servicio</th>
+<th>Contenido en el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.4.1</td>
+<td><strong>Servicio de Tránsito Aéreo (ATS)</strong></td>
+<td>(i) previene colisiones y acelera y mantiene ordenadamente el movimiento del tránsito aéreo; (ii) proporciona asesoramiento e información útil para la operación segura y eficaz de los vuelos; (iii) notifica y auxilia a los organismos pertinentes respecto de las aeronaves que necesitan ayuda y salvamento</td>
+</tr>
+<tr>
+<td>1.4.2</td>
+<td><strong>Servicio de Comunicaciones, Navegación y Vigilancia (CNS)</strong></td>
+<td>garantiza la disponibilidad, explotación y mantenimiento de los medios técnicos e instalaciones del sistema de navegación aérea en apoyo a la operación de aeronaves</td>
+</tr>
+<tr>
+<td>1.4.3</td>
+<td><strong>Servicio de Información Aeronáutica (AIS)</strong></td>
+<td>pone a disposición de los usuarios del espacio aéreo toda la información del sistema de navegación aérea relevante para la planificación de sus operaciones, de una forma adecuada, actualizada y con la calidad necesaria para que estas se desarrollen de forma segura y eficiente</td>
+</tr>
+<tr>
+<td>1.4.4</td>
+<td><strong>Gestión de Afluencia del Tráfico Aéreo (ATFM)</strong></td>
+<td>«para garantizar la regularidad de los vuelos y la capacidad en el espacio aéreo»</td>
+</tr>
+<tr>
+<td>1.4.5</td>
+<td><strong>Gestión del Espacio Aéreo (ASM) local (táctico / nivel 3)</strong></td>
+<td>«asegurando la coordinación con civil / militar en el desarrollo de las operaciones»</td>
+</tr>
+<tr>
+<td>1.4.6</td>
+<td><strong>Diseño de procedimientos de vuelo (FPD)</strong></td>
+<td>sin más texto</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La ASM es la <strong>local, táctica, de «nivel 3»</strong> (niveles de ASM: 1 estratégico, 2 pretáctico, 3 táctico; el manual no explica los niveles).</li>
+<li>Las viñetas del ATS en el manual reflejan las tres finalidades de los ATS (prevención de colisiones y aceleración del tránsito; asesoramiento e información; alerta), mientras que la sección 1.1 del manual enumera «control de área, aproximación y aeródromo, información de vuelo, alerta y asesoramiento».</li>
+<li><strong>El MET (servicio meteorológico) no figura en la lista.</strong> En la figura de grupos de interés, la Agencia Estatal de Meteorología (AEMET) es partner/proveedor.</li>
+</ul>
+<h2 id="10-capitulo-15-formacion-en-enaire-pp-14-15">10. Capítulo 1.5 «Formación en ENAIRE» (pp. 14-15)</h2>
+<h3 id="a-formacion-de-controladores-aereos">A. Formación de controladores aéreos</h3>
+<ol>
+<li><strong>Formación de Unidad:</strong> cursos de formación para cada <strong>anotación de unidad</strong> establecida en la dependencia de ATC, «tal y como se define en el plan de formación de la unidad». Una vez superada, podrás ejercer las atribuciones de tu <strong>Licencia</strong> en dicha unidad. <strong>Consta de 3 partes:</strong>
+   - <strong>Formación de transición</strong> (teoría);
+   - <strong>Pre-OJT:</strong> formación en <strong>simulador</strong>;
+   - <strong>OJT (<em>On the Job Training</em>):</strong> formación en el <strong>puesto de trabajo</strong>.</li>
+<li><strong>Formación continua:</strong> formación de actualización y conversión que se impartirá de conformidad con los requisitos incluidos en el <strong>plan de capacitación de unidad</strong>, dirigida a <strong>mantener la cualificación</strong>:
+   - <strong>Formación de Actualización:</strong> necesaria para <strong>mantener la anotación de Unidad</strong>; abarca procedimientos y prácticas estándar, <strong>situaciones anormales y emergencias</strong>, <strong>PCATS (Plan de contingencia ATS)</strong>, <strong>Factores Humanos</strong>...
+   - <strong>Formación de Conversión:</strong> asociada a los <strong>cambios operativos</strong> que se implementen en cada Unidad.</li>
+<li><strong>Para puestos de trabajo de carrera profesional:</strong> formación para <strong>instructores, evaluadores, supervisores y puestos de Gestión y «Libre designación»</strong>.</li>
+<li><strong>Lingüística:</strong> formación en idioma de <strong>inglés</strong>.</li>
+<li><strong>Otra:</strong> prevención de riesgos laborales, seguridad física y operacional, ofimática, técnica...
+- Distingue <strong>Actualización</strong> (mantiene la anotación de unidad) de <strong>Conversión</strong> (sigue a los cambios operativos).</li>
+</ol>
+<h3 id="b-master-en-gestion-de-servicios-de-navegacion-aerea">B. Máster en Gestión de Servicios de Navegación Aérea</h3>
+<ul>
+<li>Lo ofrecen <strong>ENAIRE junto con la Universidad Politécnica y la Universidad Autónoma de Madrid (UPM y UAM), en colaboración con la OACI</strong>; «programa formativo especializado y único».</li>
+<li>Cuenta actualmente con la <strong>certificación de programa TRAINAIR PLUS de la OACI</strong>.</li>
+<li><strong>Objetivo:</strong> capacitar a las personas candidatas con competencias técnicas, operativas y de gestión especializadas para adquirir una amplia comprensión de los servicios de navegación aérea y de los retos del sector. <strong>Orientado al <em>management</em></strong>: combina conocimientos y resolución de casos reales, con el foco puesto en la estrategia y el desarrollo de habilidades de gestión y toma de decisiones hacia la resolución de problemas en un sector complejo en constante cambio.</li>
+<li><strong>Público destinatario:</strong> principalmente <strong>profesionales de ENAIRE, proveedores de servicios internacionales</strong> y otras organizaciones del sector: compañías aéreas, gestores aeroportuarios, reguladores y supervisores, autoridades militares, proveedores de meteorología, así como la industria tecnológica, consultoras y titulados universitarios interesados en el sector.</li>
+</ul>
+<hr />
+<h2 id="11-manual-nov-2024-frente-al-plan-de-vuelo-2030-aprobado-el-19-12-2025-v11-de-19-03-2026">11. Manual (nov. 2024) frente al Plan de Vuelo 2030 (aprobado el 19-12-2025; v1.1 de 19-03-2026)</h2>
+<p>Fuente de la columna derecha: el texto del Plan de Vuelo 2030 (251 páginas, código G1-25-PLA-001-1.1). <strong>No se sabe</strong> cuál se examinará: las bases de 2025 citaban el PV2025; la próxima convocatoria puede traer un manual actualizado. Estudia ambos; donde difieren, esta tabla te dice cuál es cuál.</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Manual 7 (PV2025, 2021-2025)</th>
+<th>Plan de Vuelo 2030 (2026-2030)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Periodo / estado</td>
+<td>2021-2025 («hoja de ruta de la transformación»)</td>
+<td>2026-2030; aprobación del Consejo Rector el 19-12-2025; 251 pp.; v1.1 de 19-03-2026; etiqueta #Rumboalfuturo</td>
+</tr>
+<tr>
+<td>Propósito</td>
+<td>«seguro, <strong>rápido</strong>, eficiente y sostenible» (4 adjetivos)</td>
+<td>«seguro, eficiente y sostenible» (3; se elimina «rápido»)</td>
+</tr>
+<tr>
+<td>Misión</td>
+<td>«seguridad, calidad, eficiencia y respeto al medioambiente...»</td>
+<td><strong>Sin cambios</strong> (mismas palabras)</td>
+</tr>
+<tr>
+<td>Visión</td>
+<td>«operador global, líder del sector de la navegación aérea, basándonos en las <strong>personas, la innovación y la digitalización</strong>»</td>
+<td>«<strong>Afianzar</strong> a ENAIRE como operador global, líder en la provisión de servicios de navegación aérea <strong>por su seguridad y calidad</strong>, basándonos en <strong>nuestros profesionales, la innovación y la tecnología</strong>»</td>
+</tr>
+<tr>
+<td>Valores, grupo 1</td>
+<td>La seguridad es lo primero: ADN; Actitud de confianza y «cultura justa»; Refuerzo e impulso de la Seguridad</td>
+<td><strong>Igual</strong></td>
+</tr>
+<tr>
+<td>Valores, grupo 2</td>
+<td>Comprometidos con los clientes y la sociedad: <strong>Buscamos la excelencia</strong>; Somos empáticos; <strong>Responsables con el Medioambiente</strong></td>
+<td>Mismo nombre de grupo: <strong>Somos profesionales</strong>; Somos empáticos; <strong>Protegemos el medioambiente</strong></td>
+</tr>
+<tr>
+<td>Valores, grupo 3</td>
+<td><strong>Somos un solo y gran equipo</strong>: Somos ENAIRE; La integridad es nuestro carácter; Respetamos y confiamos</td>
+<td><strong>Somos un Equipo</strong>: los mismos tres valores</td>
+</tr>
+<tr>
+<td>Valores, grupo 4</td>
+<td><strong>«Hambre» de mejora de nuestra organización</strong>: Somos innovadores; Flexibles ante los cambios; <strong>Somos proactivos</strong></td>
+<td><strong>Perseguimos la excelencia</strong>: Somos innovadores; Flexibles ante los cambios; <strong>Lideramos desde la excelencia</strong></td>
+</tr>
+<tr>
+<td>Objetivo 1</td>
+<td>Seguridad: cultura de seguridad, factor humano, ciberseguridad</td>
+<td>Seguridad: añade la <strong>seguridad física</strong></td>
+</tr>
+<tr>
+<td>Objetivo 2</td>
+<td>Calidad, escalabilidad y resiliencia mediante digitalización, modernización del espacio aéreo...</td>
+<td>«Calidad y resiliencia de servicios»: para afrontar problemas estructurales de capacidad (sin «escalabilidad»)</td>
+</tr>
+<tr>
+<td>Objetivo 3</td>
+<td>Movilidad sostenible en el sector; descarbonización</td>
+<td>«Movilidad aérea sostenible»: nuevos entrantes, eficiencia operativa, descarbonización</td>
+</tr>
+<tr>
+<td>Objetivo 4</td>
+<td>Desarrollo del negocio e internacionalización (sector global y liberalizado)</td>
+<td>«Negocio e internacionalización» (mismo nombre)</td>
+</tr>
+<tr>
+<td>Objetivo 5</td>
+<td><strong>Recuperación económica y viabilidad futura</strong>, superar <strong>la crisis</strong> (COVID)</td>
+<td>«<strong>Competitividad y eficiencia</strong>»: eficiencia y productividad (sin mención de la crisis)</td>
+</tr>
+<tr>
+<td>Objetivo 6</td>
+<td>Transformación cultural/organizativa y modernización</td>
+<td>«Transformación y modernización»: innovación, las Regiones como motor del cambio, las personas como principal activo</td>
+</tr>
+<tr>
+<td>Estructura</td>
+<td>Solo se dan los 6 objetivos</td>
+<td><strong>56 planes estratégicos, 4 bloques, 17 áreas</strong>, 13 riesgos estratégicos, inversión de 937,0 M€</td>
+</tr>
+<tr>
+<td>Redacción del tamaño</td>
+<td>5 centros de control + <strong>21 torres</strong></td>
+<td>ATM en <strong>21 aeropuertos, 5 centros de control y 2 TACC</strong></td>
+</tr>
+<tr>
+<td>Espacio aéreo</td>
+<td><strong>2 190 000 km²</strong></td>
+<td>«aproximada de <strong>2,2 millones de km²</strong>»</td>
+</tr>
+<tr>
+<td>Plantilla</td>
+<td>«más de 4200» a 31 de octubre de 2024; reparto por ocupación 49/20/5/26</td>
+<td><strong>4284</strong> a 31 de diciembre de 2024; 51,1 % Convenio de Control, 48,9 % Convenio Grupo (otro reparto: por convenio)</td>
+</tr>
+<tr>
+<td>Empresas del grupo</td>
+<td>Aena 51 %, CRIDA 66,66 %, Startical 50 %, Ineco 45,85 %, EAD 36 %, Fundación</td>
+<td>Cita <strong>EGS</strong> (ENAIRE Global Services, PYME 100 % de ENAIRE, constituida en <strong>julio de 2025</strong>), CRIDA, Startical, Ineco, GEAD, <strong>ESSP SAS</strong>; los porcentajes no figuran en el texto disponible (solo Aena 51 % y Startical 50 % con Indra)</td>
+</tr>
+<tr>
+<td>SES / rendimientos</td>
+<td>SES2+ «en negociación»; <strong>periodo actual 2020-2024 (RP3)</strong>; RP4 2025-2029 «supondrá» un reto</td>
+<td>SES2+ publicado en el DOUE el <strong>11-11-2024</strong>, parcialmente en vigor desde el 01-12-2024; <strong>RP4 es ya el periodo actual</strong> (ESPP4 aprobado por la Decisión (UE) 2025/1063 de 19-05-2025)</td>
+</tr>
+<tr>
+<td>Origen del SES</td>
+<td>Creado por la Comisión en <strong>1999</strong>; SES I 2004, SES II 2009</td>
+<td>(no se repite)</td>
+</tr>
+<tr>
+<td>Formación</td>
+<td>Unidad / continua / Lingüística; Máster con UPM + UAM + OACI, TRAINAIR PLUS</td>
+<td>El PV2030 añade el <strong>Aula 360</strong>, mejoras del GammaSIM, la <strong>CBTA</strong>, la TRM y un nuevo <strong>Máster Internacional en GSNA</strong>, título propio, <strong>íntegramente en inglés</strong>, modular (2026)</td>
+</tr>
+<tr>
+<td>Servicios</td>
+<td>ATS, CNS, AIS, ATFM, ASM (nivel 3), FPD</td>
+<td>La misma lista en la página «Servicios prestados» (ATS: control, asesoramiento, FIS; ASM nivel 3; ATFM; CNS; AIS...), más U-space</td>
+</tr>
+</tbody>
+</table>
+<p>Regla práctica: si la pregunta dice «Plan de Vuelo 2025» o cita las palabras «rápido», «digitalización», «Hambre», «Somos proactivos», «Buscamos la excelencia» o «crisis», la respuesta sale del manual; «Perseguimos la excelencia», «Lideramos desde la excelencia», «Somos profesionales» y «56 planes» salen del PV2030.</p>
+<h2 id="12-trampas-de-examen">12. Trampas de examen</h2>
+<ol>
+<li><strong>2 190 000 km²</strong> (espacio aéreo, manual) frente a <strong>2190</strong> (personas del Convenio de Control, PV2030): mismas cifras, distintas unidades. No confundir.</li>
+<li><strong>«49 %»</strong> aparece tres veces: los controladores son el 49 % de la plantilla (manual); ENAIRE vendió el <strong>49 % de Aena S.A.</strong> a capital privado en 2015 (cronología); el 49 % de la plantilla tiene más de 51 años (solo en el PV2030). <strong>51 %</strong> = participación de ENAIRE en Aena.</li>
+<li><strong>5 centros de control / 5 regiones</strong> ≠ <strong>3 FIR</strong> ≠ <strong>2 TACC</strong>. Los 5: Madrid, Barcelona, Sevilla, Palma, Gran Canaria. Las FIR: Madrid, Barcelona, Canarias. TACC: Santiago, Valencia.</li>
+<li><strong>El manual dice «21 torres»; el PV2030 dice «21 aeropuertos»</strong> y añade los 2 TACC.</li>
+<li><strong>Porcentajes del grupo:</strong> CRIDA <strong>66,66 %</strong> (mayoritaria), Startical <strong>50 %</strong>, Ineco <strong>45,85 %</strong>, EAD <strong>36 %</strong>. No intercambiar Startical e Ineco.</li>
+<li><strong>SES: creado en 1999</strong> (por la Comisión); <strong>SES I 2004, SES II 2009</strong>, SES2+ retomado a <strong>finales de 2020</strong>. No contestar 2004 a «creado».</li>
+<li><strong>Periodos de rendimientos:</strong> RP1 2012-2014 (tres años), RP2 2015-2019, RP3 2020-2024, RP4 2025-2029. El manual dice que el periodo <strong>actual</strong> es 2020-2024 (está desfasado a partir de 2024).</li>
+<li><strong>Las cuatro áreas de rendimiento:</strong> Seguridad, Coste-Eficiencia, Capacidad, Medioambiente (orden del manual). No «calidad» ni «puntualidad».</li>
+<li><strong>El propósito tiene cuatro adjetivos</strong> (seguro, <strong>rápido</strong>, eficiente, sostenible) en el manual; tres en el PV2030.</li>
+<li><strong>Los valores son 4 grupos x 3 = 12</strong>; títulos de los grupos: «La seguridad es lo primero»; «Comprometidos con los clientes y la sociedad»; «Somos un solo y gran equipo»; «"Hambre" de mejora de nuestra organización». Distractor: «Perseguimos la excelencia» es el título del grupo 4 en el PV2030; «Buscamos la excelencia» es un valor del PV2025 <strong>dentro del grupo 2</strong>.</li>
+<li><strong>La formación de unidad tiene 3 partes</strong> (transición/teoría, Pre-OJT/simulador, OJT/puesto de trabajo). <strong>Actualización</strong> mantiene la anotación de unidad; <strong>Conversión</strong> sigue a los cambios operativos.</li>
+<li><strong>Servicios:</strong> seis, y <strong>el MET no es uno de ellos</strong> (AEMET). El FPD es un servicio de ENAIRE. La ASM es <strong>local, táctica, de nivel 3</strong>, no estratégica.</li>
+<li><strong>Regulador / supervisor / proveedor:</strong> DGAC (regulador; diseña la estrategia y dirige la política aeronáutica), AESA (supervisor), ENAIRE (proveedor nacional).</li>
+<li><strong>Dos convenios colectivos:</strong> III Convenio de Controladores; <strong>I</strong> Convenio del Grupo Aena (no controladores). Los números III y I son preguntables.</li>
+<li><strong>Operador de infraestructuras críticas 2015; operador de servicios esenciales 2019.</strong> Orden y años.</li>
+<li><strong>Cambio de nombre:</strong> Aena EPE (Ley 4/1990, art. 82) → ENAIRE (Ley 18/2014, 15 de octubre). Fechas de la cronología: 1991, 2010, 2011, 2013, 2014, 2015, 2016.</li>
+<li><strong>El ATS es el único servicio definido con tres finalidades</strong> (prevenir colisiones y acelerar; asesorar e informar; alertar y auxiliar).</li>
+<li><strong>Máster:</strong> UPM y <strong>UAM</strong> (Autónoma), colaboración de la OACI, <strong>TRAINAIR PLUS</strong>; el Máster se dirige principalmente al personal de ENAIRE y a proveedores internacionales.</li>
+</ol>
+<h2 id="13-imprescindible-memorizar">13. Imprescindible memorizar</h2>
+<ul>
+<li>Aena EPE creada por la <strong>Ley 4/1990, art. 82</strong>; rebautizada ENAIRE por la <strong>Ley 18/2014, de 15 de octubre</strong>. Cronología: 1991 AENA; 2010 Ley 9/2010 (liberalización de los ATS de aeródromo); 2011 separación; 2013 SW FAB España-Portugal; 2014 ENAIRE; 2015 49 % privado / ENAIRE 51 %; 2016 contrato ENAIRE-Aena de 23 de diciembre de 2016, 5 años; Plan de Vuelo 2020 (2017-2020), Plan de Vuelo 2025 (2021-2025).</li>
+<li>EPE adscrita al <strong>Ministerio de Transportes y Movilidad Sostenible</strong>; <strong>5 centros de control, 21 torres, &gt; 2 millones de vuelos</strong>, <strong>2 190 000 km²</strong>, <strong>328 millones de pasajeros</strong> (2023), <strong>4.º de Europa</strong> por tráfico; <strong>OIC 2015, OSE 2019</strong>.</li>
+<li>Superficies de los ACC: Madrid 435 000; Barcelona 266 000; Sevilla 179 000; Palma 51 400; Gran Canaria 1 370 000 km². 3 FIR; 5 regiones; 2 TACC (Santiago, Valencia).</li>
+<li>Grupo: <strong>Aena 51 %, CRIDA 66,66 %, Startical 50 %, Ineco 45,85 %, EAD 36 %</strong>, Fundación ENAIRE (patrimonio artístico y cultura aeronáutica).</li>
+<li>Plantilla &gt; 4200 (31 de octubre de 2024); convenios III (controladores) y I (Grupo Aena); controladores 49 %, ingeniería 20 %, operaciones 5 %, gestión 26 %.</li>
+<li>Propósito: «seguro, rápido, eficiente y sostenible». Misión: seguridad, calidad, eficiencia, respeto al medioambiente. Visión: operador global, líder; personas, innovación, digitalización.</li>
+<li>12 valores en 4 grupos (sección 7.4). 6 objetivos (sección 7.5).</li>
+<li>SES: Comisión 1999; metas: capacidad/seguridad/coste-eficiencia/medio ambiente + reducir la fragmentación; SES I 2004, SES II 2009, SES2+ 2020; RP1 2012-14, RP2 2015-19, RP3 2020-24, RP4 2025-29; 38 ANSPs y 63 ACC en Europa; 4 áreas de rendimiento con incentivos y penalizaciones.</li>
+<li>Servicios: ATS, CNS, AIS, ATFM, ASM local nivel 3, FPD.</li>
+<li>Formación: unidad (transición, Pre-OJT simulador, OJT), continua (actualización, conversión), puestos de carrera (instructores, evaluadores, supervisores, gestión y libre designación), inglés, otra. Máster: ENAIRE + UPM + UAM + OACI; TRAINAIR PLUS.</li>
+</ul>
+<h2 id="14-glosario-bilingue-es-en">14. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>entidad pública empresarial (EPE)</td>
+<td>public business entity</td>
+</tr>
+<tr>
+<td>adscrita a</td>
+<td>attached to (a ministry)</td>
+</tr>
+<tr>
+<td>Ministerio de Transportes y Movilidad Sostenible</td>
+<td>Ministry of Transport and Sustainable Mobility</td>
+</tr>
+<tr>
+<td>Aeropuertos españoles y Navegación Aérea (Aena)</td>
+<td>Spanish airports and air navigation</td>
+</tr>
+<tr>
+<td>Ley de Presupuestos Generales del Estado</td>
+<td>State Budget Law</td>
+</tr>
+<tr>
+<td>gestor nacional de navegación aérea</td>
+<td>national air navigation manager</td>
+</tr>
+<tr>
+<td>control de área, aproximación, aeródromo</td>
+<td>area control, approach, aerodrome</td>
+</tr>
+<tr>
+<td>información de vuelo, alerta, asesoramiento</td>
+<td>flight information, alerting, advisory</td>
+</tr>
+<tr>
+<td>Operador de Infraestructuras Críticas</td>
+<td>critical infrastructure operator</td>
+</tr>
+<tr>
+<td>Operador de Servicios Esenciales</td>
+<td>essential services operator</td>
+</tr>
+<tr>
+<td>Dirección General de la Aviación Civil (DGAC)</td>
+<td>Civil Aviation Directorate General</td>
+</tr>
+<tr>
+<td>Agencia Estatal de Seguridad Aérea (AESA)</td>
+<td>State Aviation Safety Agency</td>
+</tr>
+<tr>
+<td>Agencia Estatal de Meteorología (AEMET)</td>
+<td>State Meteorological Agency</td>
+</tr>
+<tr>
+<td>regulador / supervisor / proveedor</td>
+<td>regulator / supervisor / provider</td>
+</tr>
+<tr>
+<td>centro de control de área (ACC)</td>
+<td>area control centre</td>
+</tr>
+<tr>
+<td>centro de control de área terminal (TACC)</td>
+<td>terminal area control centre</td>
+</tr>
+<tr>
+<td>región de información de vuelo (FIR)</td>
+<td>flight information region</td>
+</tr>
+<tr>
+<td>torre de control</td>
+<td>control tower</td>
+</tr>
+<tr>
+<td>región de navegación aérea</td>
+<td>air navigation region</td>
+</tr>
+<tr>
+<td>bloque funcional de espacio aéreo (FAB)</td>
+<td>functional airspace block</td>
+</tr>
+<tr>
+<td>grupo empresarial</td>
+<td>business group</td>
+</tr>
+<tr>
+<td>accionista mayoritario</td>
+<td>majority shareholder</td>
+</tr>
+<tr>
+<td>(empresa) participada</td>
+<td>investee company</td>
+</tr>
+<tr>
+<td>Fundación ENAIRE</td>
+<td>ENAIRE Foundation</td>
+</tr>
+<tr>
+<td>patrimonio artístico</td>
+<td>artistic heritage</td>
+</tr>
+<tr>
+<td>cultura aeronáutica</td>
+<td>aeronautical culture</td>
+</tr>
+<tr>
+<td>plantilla</td>
+<td>workforce / staff</td>
+</tr>
+<tr>
+<td>convenio colectivo</td>
+<td>collective agreement</td>
+</tr>
+<tr>
+<td>controladores / ingeniería y explotación técnica / operaciones / gestión</td>
+<td>controllers / engineering and technical operation / operations / management</td>
+</tr>
+<tr>
+<td>grupos de interés</td>
+<td>stakeholders</td>
+</tr>
+<tr>
+<td>clientes, personas, sociedad, reguladores, socios/proveedores</td>
+<td>clients, people, society, regulators, partners</td>
+</tr>
+<tr>
+<td>organizaciones sindicales</td>
+<td>trade unions</td>
+</tr>
+<tr>
+<td>Gestor de Red</td>
+<td>network manager</td>
+</tr>
+<tr>
+<td>plan estratégico / Plan de Vuelo</td>
+<td>strategic plan / Flight Plan</td>
+</tr>
+<tr>
+<td>propósito / misión / visión / valores</td>
+<td>purpose / mission / vision / values</td>
+</tr>
+<tr>
+<td>cultura justa</td>
+<td>just culture</td>
+</tr>
+<tr>
+<td>cultura de seguridad</td>
+<td>safety culture</td>
+</tr>
+<tr>
+<td>factor humano</td>
+<td>human factor</td>
+</tr>
+<tr>
+<td>ciberseguridad</td>
+<td>cybersecurity</td>
+</tr>
+<tr>
+<td>escalabilidad, resiliencia</td>
+<td>scalability, resilience</td>
+</tr>
+<tr>
+<td>descarbonización</td>
+<td>decarbonisation</td>
+</tr>
+<tr>
+<td>recuperación económica y viabilidad</td>
+<td>economic recovery and viability</td>
+</tr>
+<tr>
+<td>transformación cultural y organizativa</td>
+<td>cultural and organisational transformation</td>
+</tr>
+<tr>
+<td>proactivo</td>
+<td>proactive</td>
+</tr>
+<tr>
+<td>Cielo Único Europeo</td>
+<td>Single European Sky (SES)</td>
+</tr>
+<tr>
+<td>fragmentación del espacio aéreo</td>
+<td>fragmentation of airspace</td>
+</tr>
+<tr>
+<td>trílogo</td>
+<td>trilogue</td>
+</tr>
+<tr>
+<td>sistema de rendimientos</td>
+<td>performance scheme</td>
+</tr>
+<tr>
+<td>periodo de referencia (RP)</td>
+<td>reference period</td>
+</tr>
+<tr>
+<td>incentivos y penalizaciones</td>
+<td>incentives and penalties</td>
+</tr>
+<tr>
+<td>coste-eficiencia</td>
+<td>cost-efficiency</td>
+</tr>
+<tr>
+<td>servicio de tránsito aéreo (ATS)</td>
+<td>air traffic service</td>
+</tr>
+<tr>
+<td>comunicaciones, navegación y vigilancia (CNS)</td>
+<td>communications, navigation and surveillance</td>
+</tr>
+<tr>
+<td>servicio de información aeronáutica (AIS)</td>
+<td>aeronautical information service</td>
+</tr>
+<tr>
+<td>gestión de afluencia del tráfico aéreo (ATFM)</td>
+<td>air traffic flow management</td>
+</tr>
+<tr>
+<td>gestión del espacio aéreo (ASM)</td>
+<td>airspace management</td>
+</tr>
+<tr>
+<td>diseño de procedimientos de vuelo (FPD)</td>
+<td>flight procedure design</td>
+</tr>
+<tr>
+<td>formación de unidad</td>
+<td>unit training</td>
+</tr>
+<tr>
+<td>anotación de unidad</td>
+<td>unit endorsement</td>
+</tr>
+<tr>
+<td>formación de transición</td>
+<td>transition training</td>
+</tr>
+<tr>
+<td>formación en simulador (Pre-OJT)</td>
+<td>simulator training</td>
+</tr>
+<tr>
+<td>formación en el puesto de trabajo (OJT)</td>
+<td>on-the-job training</td>
+</tr>
+<tr>
+<td>formación continua</td>
+<td>continuation training</td>
+</tr>
+<tr>
+<td>formación de actualización</td>
+<td>refresher training</td>
+</tr>
+<tr>
+<td>formación de conversión</td>
+<td>conversion training</td>
+</tr>
+<tr>
+<td>plan de capacitación de unidad</td>
+<td>unit competence scheme</td>
+</tr>
+<tr>
+<td>plan de contingencia ATS (PCATS)</td>
+<td>ATS contingency plan</td>
+</tr>
+<tr>
+<td>instructores, evaluadores, supervisores</td>
+<td>instructors, assessors, supervisors</td>
+</tr>
+<tr>
+<td>puestos de libre designación</td>
+<td>free-appointment posts</td>
+</tr>
+<tr>
+<td>formación lingüística</td>
+<td>language training</td>
+</tr>
+<tr>
+<td>prevención de riesgos laborales</td>
+<td>occupational risk prevention</td>
+</tr>
+<tr>
+<td>Máster en Gestión de Servicios de Navegación Aérea</td>
+<td>Master in Air Navigation Services Management</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-fuentes">15. Fuentes</h2>
+<ul>
+<li>ENAIRE, <em>Entorno profesional</em>, Elaborado noviembre 2024, 15 pp. (todas las páginas; figuras incluidas).</li>
+<li>ENAIRE, Plan de Vuelo 2030 (G1-25-PLA-001-1.1, v1.1, 19-03-2026).</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

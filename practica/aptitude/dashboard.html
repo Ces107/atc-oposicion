@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progreso</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.2'/%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cpath d='M12 12L19 6.2'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --soft:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --on-accent:#ffffff; --good:#2d6a3e; --bad:#a3241c; --warn:#b3450d;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --soft:#a19c90; --rule:#3a3935;
+  --accent:#7fb0e8; --accent-h:#a4c6ef; --on-accent:#161615; --good:#7cbf8a; --bad:#e5766d; --warn:#e08a55;
+}}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45}
+#app{max-width:1120px;margin:0 auto;padding:16px 16px 48px}
+h1{font-family:var(--serif);font-size:1.9rem;line-height:1.1;margin:0;font-weight:700}
+h2{font-family:var(--serif);font-size:1.35rem;margin:1.6rem 0 .6rem;padding-bottom:4px;border-bottom:1px solid var(--rule);font-weight:700}
+h3{font-family:var(--serif);font-size:1.06rem;margin:1.1rem 0 .3rem;font-weight:700}
+p{margin:.3rem 0}
+.soft{color:var(--soft)} .small{font-size:.86rem} .tiny{font-size:.78rem}
+.good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+.i{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.2em}
+.row{display:flex;gap:10px 16px;flex-wrap:wrap;align-items:center}
+.spread{justify-content:space-between}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .i{width:34px;height:34px;color:var(--accent);stroke-width:1.5}
+.meta{color:var(--soft);font-size:.86rem}
+button,select,input{font:inherit}
+.btn{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;line-height:1.2;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-h);color:var(--on-accent)}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn.small{padding:4px 10px;font-size:.86rem}
+a{color:var(--accent)}
+input[type=text],input[type=number],input[type=date],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:5px 8px;min-height:34px}
+input[type=number]{width:72px}
+input:focus-visible,select:focus-visible,.btn:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+nav.tabs{display:flex;gap:0;margin:0 0 20px;flex-wrap:wrap;border-bottom:1px solid var(--rule)}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--soft);padding:9px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+nav.tabs button:hover{color:var(--text)}
+nav.tabs button[aria-selected=true]{border-bottom-color:var(--accent);color:var(--text);font-weight:700}
+section.tab{display:none} section.tab.on{display:block}
+.next{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 0;border-top:2px solid var(--text);border-bottom:1px solid var(--rule)}
+.next .i.lead{width:30px;height:30px;color:var(--accent)}
+.next .nm{font-family:var(--serif);font-size:1.5rem;font-weight:700;line-height:1.15;flex:1 1 220px}
+.next .lv{color:var(--soft);font-size:.95rem}
+.figs{display:flex;gap:0;flex-wrap:wrap;margin:0 0 4px;border-bottom:1px solid var(--rule)}
+.fig{padding:12px 28px 12px 0;margin-right:28px}
+.fig .n{display:block;font-family:var(--serif);font-size:2.6rem;line-height:1;font-weight:700}
+.fig .l{display:block;color:var(--soft);font-size:.82rem;margin-top:4px}
+.cols{display:grid;grid-template-columns:2fr 1fr;gap:0 40px}
+.axis{display:grid;grid-template-columns:200px 1fr 84px 96px;gap:10px;color:var(--soft);font-size:.74rem;padding:0 0 2px}
+.axis .scale{position:relative;height:1em}
+.axis .scale span{position:absolute;transform:translateX(-50%)}
+.ab{display:grid;grid-template-columns:200px 1fr 84px 96px;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--rule);grid-template-areas:"nm bar v tr"}
+.ab .nm{font-weight:600;grid-area:nm}
+.ab .bar-w{grid-area:bar}
+.ab.weak .nm{color:var(--warn)}
+.ab .v{grid-area:v;text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.ab .tr{grid-area:tr;font-size:.84rem;text-align:right;white-space:nowrap}
+.ab .cf{font-weight:400;color:var(--soft);font-size:.8rem;display:block}
+.bar{position:relative;height:14px;background:var(--stripe);border-radius:0}
+.bar .ci{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.22}
+.bar .fill{position:absolute;left:0;top:3px;bottom:3px;background:var(--accent)}
+.bar .fill.dim{opacity:.5}
+.bar .mark{position:absolute;top:-2px;bottom:-2px;width:0;border-left:1px solid var(--soft)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:120px}
+.days .d{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.75rem;color:var(--soft)}
+.days .d .b{width:60%;min-height:2px;background:var(--accent)}
+.days .d.today{color:var(--text);font-weight:700}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem;border-top:1px solid var(--text);border-bottom:1px solid var(--text)}
+th,td{text-align:left;padding:6px 10px 6px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:transparent}
+th{color:var(--soft);font-weight:600;font-size:.82rem}
+td.num,th.num{text-align:right;padding-right:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.chart{padding:10px 0 6px;border-top:1px solid var(--rule)}
+.chart svg{width:100%;height:auto;display:block}
+.chart .h{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+.chart .h span{color:var(--soft);font-weight:400;font-size:.84rem}
+.sv .gl{stroke:var(--rule)} .sv .gk{stroke:var(--soft);stroke-dasharray:4 3}
+.sv text{fill:var(--soft);font-size:9px;font-family:var(--sans)}
+.sv .ln{fill:none;stroke:var(--accent);stroke-width:1.6}
+.sv .dot{fill:var(--accent);stroke:var(--bg);stroke-width:2}
+.sv .bm{fill:none;stroke:var(--warn);stroke-width:1.4}
+.drop{border:1px dashed var(--soft);padding:20px;text-align:center;color:var(--soft);display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.drop.over{border-color:var(--accent);color:var(--text)}
+.drop .i{width:24px;height:24px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--rule)}
+.check input{margin-top:4px;width:17px;height:17px;flex:none;accent-color:var(--accent)}
+.check .t{flex:1}
+.check.done .t{color:var(--soft);text-decoration:line-through}
+.check .t a{white-space:nowrap}
+.banner{padding:8px 0;border-bottom:1px solid var(--rule);margin-bottom:14px;font-size:.9rem;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.banner b{color:var(--warn)}
+.banner.err b{color:var(--bad)}
+.pass{color:var(--good);font-weight:700}.fail{color:var(--bad);font-weight:700}
+.trio{display:flex;gap:3px;align-items:flex-end;height:26px}
+.trio i{display:block;width:10px;background:var(--accent)}
+details{margin:.6rem 0}
+summary{cursor:pointer;color:var(--accent);display:flex;align-items:center;gap:7px}
+label.inl{display:inline-flex;align-items:center;gap:6px}
+@media (max-width:900px){.cols,.grid2{grid-template-columns:1fr}}
+@media (max-width:640px){
+  #app{padding:12px 16px 40px}
+  h1{font-size:1.55rem}
+  .axis{display:none}
+  .ab{grid-template-columns:1fr auto;grid-template-areas:"nm v" "bar bar" "tr tr";gap:4px 10px}
+  .ab .tr{text-align:left}
+  .fig{margin-right:20px;padding-right:0}
+  nav.tabs{flex-wrap:nowrap;overflow-x:auto}
+  nav.tabs button{padding:9px 9px;white-space:nowrap;font-size:.92rem}
+  nav.tabs button .i{display:none}
+  .ab.nd{grid-template-areas:"nm v"}
+  .ab.nd .bar-w,.ab.nd .tr{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div class="brand"><svg class="i"><use href="#i-logo"/></svg><h1>Progreso</h1></div>
+    <div class="meta" id="topchips"></div>
+  </header>
+  <div id="sub" class="meta" style="display:none"></div>
+  <div id="banners"></div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+  <section class="tab" id="tab-overview"></section>
+  <section class="tab" id="tab-trends"></section>
+  <section class="tab" id="tab-endurance"></section>
+  <section class="tab" id="tab-maxload"></section>
+  <section class="tab" id="tab-data"></section>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="12" r="4.6"/><path d="M12 12L19 6.2"/><circle cx="16.4" cy="15.6" r="1"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4.5V8h3.5"/><path d="M12 8v4.2l3 1.8"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.6L12 15l4.5-4.4"/><path d="M5 19.5h14"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15.5V4.5"/><path d="M7.5 9L12 4.5 16.5 9"/><path d="M5 19.5h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12L18.5 6"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7.5 15l3.5-4 3 3 5-6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5l9 4.8-9 4.8-9-4.8z"/><path d="M3 12.6l9 4.8 9-4.8"/><path d="M3 16.8l9 4.8 9-4.8"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 16v-4a8 8 0 0 1 16 0v4"/><path d="M4 15h3.5v5H5.5A1.5 1.5 0 0 1 4 18.500z"/><path d="M20 15h-3.5v5h2a1.5 1.5 0 0 0 1.500-1.500z"/></symbol>
+<symbol id="i-speech" viewBox="0 0 24 24"><path d="M4.5 5h15v10.500h-9L6 19.500v-4h-1.500z"/><path d="M8.500 9.500h7"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8.500L19 7.500V21H6z"/><path d="M14 3v5h5"/><path d="M9 12.500h7M9 16.500h7"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><path d="M15 4.500v5M9 14.500v5"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.500h10a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.500 7h15"/><path d="M9 7V4h6v3"/><path d="M6.500 7l1 13h9l1-13"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.500L20 8.500"/><path d="M20 4v4.500h-4.500"/><path d="M20 13a8 8 0 0 1-14 4.500L4 15.500"/><path d="M4 20v-4.500h4.500"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8.500L19 7.500V21H6z"/><path d="M14 3v5h5"/></symbol>
+</defs></svg>
+<input type="file" id="filepick" multiple accept=".csv,.json,.txt" style="display:none">
+<script>
+/* =====================================================================================================
+   CORE (pure functions, no DOM). Extracted and unit-tested in node by dashboard-test/core.test.js.
+   Model = research/wave5-phase2-design-spec.md sections 3.1-3.4, 4.2, 2.1-2.4. Internal scale only: not stanines.
+   ===================================================================================================== */
+//==CORE START==
+const Z80 = 1.2815515655446004;           // two-sided 80 % normal quantile
+const DAY = 86400000;
+const WINDOW_DAYS = 42;
+const clamp = function(x, a, b){ return Math.min(b, Math.max(a, x)); };
+
+function wilson(c, n, z){
+  z = z || Z80;
+  if (!(n > 0)) return null;
+  const p = c / n, z2 = z * z, den = 1 + z2 / n;
+  const centre = (p + z2 / (2 * n)) / den;
+  const half = z * Math.sqrt(p * (1 - p) / n + z2 / (4 * n * n)) / den;
+  return { p: p, lo: Math.max(0, centre - half), hi: Math.min(1, centre + half) };
+}
+// Newcombe hybrid-score interval for p2 - p1 (each proportion carries its own Wilson interval).
+function diffInterval(c1, n1, c3, n3){
+  const a = wilson(c1, n1), b = wilson(c3, n3);
+  if (!a || !b) return null;
+  const d = b.p - a.p;
+  return { d: d, lo: d - Math.sqrt(Math.pow(b.p - b.lo, 2) + Math.pow(a.hi - a.p, 2)), hi: d + Math.sqrt(Math.pow(b.hi - b.p, 2) + Math.pow(a.p - a.lo, 2)), a: a, b: b };
+}
+// 3.1: effective level and session score
+function effLevel(L, acc){ return L + clamp((acc - 96) / 8, -1.5, 0.5); }
+function sessionScore(L, acc){
+  const el = effLevel(L, acc);
+  const s = el <= 5 ? 14 * el : 70 + 10 * (el - 5);
+  return clamp(s, 0, 100);
+}
+function levelFromScore(S){ return S <= 70 ? S / 14 : 5 + (S - 70) / 10; }   // inverse of sessionScore at accuracy 96
+function median(a){ if (!a.length) return null; const s = a.slice().sort(function(x, y){ return x - y; }); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+// 3.3: Theil-Sen slope; pts = [{t (ms), y}], result in y-units per week; null if fewer than 5 points or span < 10 days
+function theilSen(pts){
+  if (pts.length < 5) return null;
+  const ts = pts.map(function(p){ return p.t; });
+  if ((Math.max.apply(null, ts) - Math.min.apply(null, ts)) < 10 * DAY) return null;
+  const sl = [];
+  for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++){
+    const dt = pts[j].t - pts[i].t;
+    if (dt !== 0) sl.push((pts[j].y - pts[i].y) / (dt / (7 * DAY)));
+  }
+  return sl.length ? median(sl) : null;
+}
+
+/* ---------- modules, abilities, weights (spec 3.2) ---------- */
+const MODNAME = {
+  'rad.cat':'Categorización rápida', 'rad.conf':'Detección de conflictos en radar', 'rad.arith':'Aritmética de rumbos',
+  'at.lr':'Izquierda/derecha', 'at.calc':'Cálculo mental', 'at.d2':'Cancelación de atención', 'at.nback':'N-back doble',
+  'sp.rot3d':'Rotación mental 3D', 'sp.net':'Desarrollos de cubos', 'sp.view':'Vistas (planta, alzado, perfil)', 'sp.fold':'Plegado de papel', 'sp.shape2d':'Rotación y simetría 2D', 'sp.mixed':'Espacial mixto',
+  'mat.matrix':'Matrices', 'mat.logic':'Matrices lógicas', 'mat.series':'Series de figuras', 'mat.analogy':'Analogías', 'mat.odd':'El elemento distinto', 'mat.mixed':'Razonamiento abstracto mixto',
+  'mem.m1':'Memoria de tiras de vuelo', 'mem.m2':'Amplitud de dígitos y letras', 'mem.m3':'Verificador de colacionado', 'mem.m4':'Ejecución de instrucciones', 'mem.m5':'Vigilancia', 'mem.m6':'Cambio de tarea', 'mem.m7':'Interferencia tipo Stroop',
+  'lis.dictation':'Dictado de elementos', 'lis.passage':'Comprensión de pasajes',
+  'mm.single':'Cálculo mental (tarea única)', 'mm.dual':'Cálculo mental (doble tarea)',
+  'ss.sim':'Simulador de sector (HTML)', 'sim':'Simulador radar en Python',
+  'sim.plan':'Sim: separación/transferencia/nivel/zona', 'sim.worst':'Sim: peor componente', 'sim.comms':'Sim: colacionado/transferencia/alerta', 'sim.num':'Sim: tiempo al conflicto/ETA', 'sim.alert':'Sim: alerta', 'endur':'Resistencia (último tercio)'
+};
+// Spanish display names for the sim component keys (the keys themselves stay English: they come from the sim JSON)
+const COMPNAME = { 'Separation':'Separación', 'Handoff':'Transferencia', 'Level request':'Petición de nivel', 'Restricted area':'Zona restringida', 'Read-back check':'Comprobación de colacionado', 'Transfer of communication':'Transferencia de comunicaciones', 'Alert (vigilance)':'Alerta (vigilancia)', 'Time to conflict':'Tiempo al conflicto', 'ETA estimate':'Estimación de ETA' };
+function compName(k){ return COMPNAME[k] || k; }
+const CONFNAME = { 'None':'Ninguna', 'Low':'Baja', 'Medium':'Media', 'High':'Alta' };
+const TRENDNAME = { 'rising':'subiendo', 'falling':'bajando', 'flat':'estable', 'n/a':'n/d' };
+const VERDNAME = { 'fading':'cae', 'small fade':'caída leve', 'improving':'mejora', 'no clear fade':'sin caída clara' };
+const MODLINK = {
+  rad:'trainer-radar.html', at:'../aptitude-trainer.html', sp:'trainer-spatial.html', mat:'trainer-matrices.html',
+  mem:'game-memory-attention.html', lis:'game-listening.html', mm:'game-mental-math.html', ss:'game-sector-sim.html', sim:'../sim/README.txt'
+};
+function linkFor(mod){ return MODLINK[String(mod).split('.')[0]] || null; }
+const ABILITIES = [
+  { id:'H1', name:'Visualización (3D)', head:true,  w:{ 'sp.rot3d':.35, 'sp.net':.35, 'sp.view':.15, 'sp.fold':.15, 'sp.mixed':.25 } },
+  { id:'H2', name:'Capacidad de clasificación', head:true,  w:{ 'rad.cat':.45, 'mem.m6':.25, 'at.d2':.15, 'mat.logic':.075, 'mat.series':.075 } },
+  { id:'H3', name:'Planificación ATC',  head:true,  w:{ 'rad.conf':.30, 'sim.plan':.40, 'ss.sim':.20, 'rad.arith':.10 } },
+  { id:'H4', name:'Multitarea',         head:true,  w:{ 'sim.worst':.35, 'sim.comms':.25, 'mm.dual':.20, 'ss.sim':.10, 'mem.m7':.10 } },
+  { id:'H5', name:'Comprensión oral en inglés',  head:true,  w:{ 'lis.dictation':.5, 'lis.passage':.5 } },
+  { id:'S1', name:'Memoria de trabajo', head:false, w:{ 'mem.m1':.35, 'mem.m2':.25, 'mem.m4':.25, 'mem.m3':.15 } },
+  { id:'S2', name:'Aritmética numérica y de rumbos', head:false, w:{ 'mm.single':.5, 'rad.arith':.25, 'at.calc':.15, 'sim.num':.10 } },
+  { id:'S3', name:'Dirección (izquierda/derecha)', head:false, w:{ 'at.lr':.6, 'rad.arith':.2, 'sp.shape2d':.2 } },
+  { id:'S4', name:'Vigilancia y resistencia', head:false, w:{ 'mem.m5':.5, 'sim.alert':.2, 'endur':.3 } },
+  { id:'S5', name:'Razonamiento abstracto', head:false, w:{ 'mat.matrix':.2, 'mat.series':.2, 'mat.analogy':.2, 'mat.odd':.2, 'mat.logic':.2, 'mat.mixed':.2 } }
+];
+const ABIL = {}; ABILITIES.forEach(function(a){ ABIL[a.id] = a; });
+const MODMAP = {};
+ABILITIES.forEach(function(a){ Object.keys(a.w).forEach(function(m){ (MODMAP[m] = MODMAP[m] || []).push([a.id, a.w[m]]); }); });
+// sim components -> virtual modules (spec 3.2)
+const SIM_GROUPS = {
+  'sim.plan':  ['Separation', 'Handoff', 'Level request', 'Restricted area'],
+  'sim.comms': ['Read-back check', 'Transfer of communication', 'Alert (vigilance)'],
+  'sim.num':   ['Time to conflict', 'ETA estimate'],
+  'sim.alert': ['Alert (vigilance)']
+};
+
+/* ---------- normalisation: every game record -> one shape ---------- */
+function parseDate(v){
+  if (v === null || v === undefined || v === '') return null;
+  if (typeof v === 'number') { if (!isFinite(v)) return null; return v < 1e11 ? v * 1000 : v; }
+  const s = String(v).trim();
+  let m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ T]+(\d{1,2}):(\d{2}))?/.exec(s);
+  if (m) { const d = new Date(+m[3], +m[2] - 1, +m[1], +(m[4] || 0), +(m[5] || 0)); return isNaN(d) ? null : d.getTime(); }
+  const t = Date.parse(s);
+  return isNaN(t) ? null : t;
+}
+function parseLevel(v){
+  if (v === null || v === undefined || v === '') return null;
+  const x = typeof v === 'number' ? v : (/(\d+(?:\.\d+)?)/.exec(String(v)) || [])[1];
+  if (x === undefined) return null;
+  const r = Math.round(+x);
+  return (r >= 1 && r <= 10) ? r : null;
+}
+function cleanThirds(t){
+  if (!Array.isArray(t) || t.length !== 3) return null;
+  const out = [];
+  for (let i = 0; i < 3; i++){
+    const x = t[i];
+    if (!x || typeof x !== 'object') return null;
+    const n = +x.n, c = +x.c, b = +x.b, s = +x.s;
+    if (![n, c, b, s].every(isFinite) || n < 0 || c < 0 || b < 0 || c + b > n) return null;
+    out.push({ n: n, c: c, b: b, s: s });
+  }
+  return out;
+}
+function dkey(r){ return Math.floor(r.ts / 60000) + '|' + r.key + '|' + r.correct + '|' + r.wrong + '|' + r.blank; }
+function mkRec(o){
+  const ts = parseDate(o.ts);
+  if (ts === null) return { err: 'fecha no válida' };
+  const c = +o.c, w = +o.w, b = +o.b;
+  if (![c, w, b].every(function(x){ return isFinite(x) && x >= 0; })) return { err: 'recuentos no válidos' };
+  const n = c + w + b;
+  if (n === 0) return { err: 'sesión vacía' };
+  let acc = (o.acc !== undefined && o.acc !== null && o.acc !== '' && isFinite(+o.acc)) ? +o.acc : c / n * 100;
+  acc = clamp(acc, 0, 100);
+  const spi = (o.spi !== undefined && o.spi !== null && o.spi !== '' && isFinite(+o.spi)) ? +o.spi : null;
+  const lvlRaw = o.level;
+  const custom = !!o.custom || /custom|personaliz/i.test(String(lvlRaw === undefined || lvlRaw === null ? '' : lvlRaw)) || /^(custom|personaliz)/i.test(String(o.mode || ''));
+  const rec = {
+    game: o.game || '?', label: String(o.label || ''), key: o.key || 'unknown', ts: ts, level: custom ? parseLevel(lvlRaw) : parseLevel(lvlRaw), mode: String(o.mode || ''),
+    correct: c, wrong: w, blank: b, n: n, spi: spi, accuracy: acc, hinted: !!o.hinted, assisted: !!o.assisted, custom: custom,
+    counted: o.counted !== false, thirds: cleanThirds(o.thirds), components: o.components && typeof o.components === 'object' ? o.components : null,
+    dual: o.dual || null, source: o.source || 'live', losses: (o.losses === undefined || o.losses === null || !isFinite(+o.losses)) ? null : +o.losses
+  };
+  rec.id = dkey(rec);
+  return { rec: rec };
+}
+const CSV_MODULES = [
+  // Every pattern accepts the English label and the Spanish forms ("." stands for an accented letter)
+  [/Radar Sector Sim|Simulador de sector radar|Simulador radar/i, 'sim'], [/Sector sim|Simulador de sector/i, 'ss.sim'],
+  [/Fast categori[sz]ation|Categorizaci.n r.pida|Clasificaci.n r.pida/i, 'rad.cat'], [/Radar conflict|Conflictos? (en|de) radar|Detecci.n de conflictos/i, 'rad.conf'], [/Heading arithmetic|Aritm.tica de rumbos|C.lculo de rumbos/i, 'rad.arith'],
+  [/(Spatial|Espacial):\s*(3D|Rotaci.n 3D)/i, 'sp.rot3d'], [/(Spatial|Espacial):\s*(Cube|Cubo|Desarrollo|Plantilla)/i, 'sp.net'], [/(Spatial|Espacial):\s*(2D|Rotaci.n y simetr.a 2D)/i, 'sp.shape2d'], [/(Spatial|Espacial):\s*(Paper|Papel|Plegado)/i, 'sp.fold'], [/(Spatial|Espacial):\s*(View|Vista)/i, 'sp.view'], [/(Spatial|Espacial):\s*(mixed|mixto|mezcla)/i, 'sp.mixed'],
+  [/(Mental math coach|Entrenador de c.lculo mental|C.lculo mental \(entrenador).*\+ (dual|doble)/i, 'mm.dual'], [/Mental math coach|Entrenador de c.lculo mental/i, 'mm.single'],
+  [/Flight strip recall|Memoria de tiras|Recuerdo de tiras/i, 'mem.m1'], [/Digit \/ letter span|Amplitud de d.gitos|Span de d.gitos/i, 'mem.m2'], [/Read-back checker|Verificador de colacionado|Comprobador de colacionado/i, 'mem.m3'], [/Instruction execution|Ejecuci.n de instrucciones/i, 'mem.m4'],
+  [/Vigilance|Vigilancia/i, 'mem.m5'], [/Task switching|Cambio de tarea/i, 'mem.m6'], [/Stroop/i, 'mem.m7'],
+  [/Element dictation|Dictado de elementos|Dictado/i, 'lis.dictation'], [/Passage comprehension|Comprensi.n de (pasajes?|textos?|fragmentos?)/i, 'lis.passage'],
+  [/Attention cancellation|Cancelaci/i, 'at.d2'], [/^Left\/right|Izquierda\/derecha/i, 'at.lr'], [/n-back/i, 'at.nback'], [/^Mental arithmetic|C.lculo mental/i, 'at.calc'],
+  [/Logic matrices|Matrices l.gicas/i, 'mat.logic'], [/Figure series|Series de figuras/i, 'mat.series'], [/Analogies|Analog.as/i, 'mat.analogy'], [/Odd one out|El (elemento )?distinto|El intruso|Intruso/i, 'mat.odd'], [/Abstract reasoning|Razonamiento abstracto/i, 'mat.mixed'], [/^Matrices/i, 'mat.matrix']
+];
+function keyFromLabel(label){
+  const s = String(label || '');
+  for (let i = 0; i < CSV_MODULES.length; i++) if (CSV_MODULES[i][0].test(s)) return CSV_MODULES[i][1];
+  return 'unknown';
+}
+const GAMES = {
+  atc_entrenador_v1: { id:'at',  name:'Entrenador de aptitudes', container:'sesiones', href:'../aptitude-trainer.html' },
+  atc_radar_v2:      { id:'rad', name:'Entrenador de radar',    container:'sessions', href:'trainer-radar.html' },
+  atc_spatial_v1:    { id:'sp',  name:'Entrenador espacial',  container:'sessions', href:'trainer-spatial.html' },
+  atc_matrices_v1:   { id:'mat', name:'Entrenador de matrices', container:'sessions', href:'trainer-matrices.html' },
+  atc_memattn_v1:    { id:'mem', name:'Memoria y atención', container:'sessions', href:'game-memory-attention.html' },
+  atc_mentalmath_v1: { id:'mm',  name:'Entrenador de cálculo mental', container:'sessions', href:'game-mental-math.html' },
+  atc_listening_v1:  { id:'lis', name:'Comprensión oral',        container:'sessions', href:'game-listening.html' },
+  atc_sectorsim_v1:  { id:'ss',  name:'Simulador de sector (HTML)', container:'sesiones', href:'game-sector-sim.html' }
+};
+// One adapter per game. raw = one saved session object. Returns {rec} or {err}.
+const ADAPTERS = {
+  atc_entrenador_v1: function(s){
+    const label = s.modulo || '';
+    return mkRec({ game:'at', label:label, key:keyFromLabel(label), ts:s.ts, level:(s.nivel !== null && s.nivel !== undefined) ? s.nivel : s.etiquetaNivel, mode:s.modo,
+      c:s.aciertos, w:s.fallos, b:s.blanco, spi:s.spi, acc:s.precision, assisted:(+s.ayudados || 0) > 0, custom:/custom|personaliz/i.test(String(s.etiquetaNivel || '')), thirds:s.thirds, source:'live' });
+  },
+  atc_radar_v2: function(s){
+    const label = s.module || '';
+    return mkRec({ game:'rad', label:label, key:keyFromLabel(label), ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, hinted:!!s.hinted, thirds:s.thirds });
+  },
+  atc_spatial_v1: function(s){
+    const label = s.module || '';
+    let key = keyFromLabel(label);
+    if (key === 'unknown' && s.type) key = ({ rot3d:'sp.rot3d', net:'sp.net', shape2d:'sp.shape2d', fold:'sp.fold', view:'sp.view', mixed:'sp.mixed' })[s.type] || 'unknown';
+    return mkRec({ game:'sp', label:label, key:key, ts:s.ts, level:(/^adapti/i.test(String(s.mode || '')) && s.levelLabel) ? s.levelLabel : s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy,
+      hinted:(+s.hintsUsed || 0) > 0, assisted:(+s.assisted || 0) > 0, thirds:s.thirds });
+  },
+  atc_matrices_v1: function(s){
+    const label = s.module || '';
+    return mkRec({ game:'mat', label:label, key:keyFromLabel(label), ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, thirds:s.thirds });
+  },
+  atc_memattn_v1: function(s){
+    const label = s.module || '';
+    let key = /^m[1-7]$/.test(s.moduleKey || '') ? 'mem.' + s.moduleKey : keyFromLabel(label);
+    return mkRec({ game:'mem', label:label, key:key, ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, thirds:s.thirds });
+  },
+  atc_mentalmath_v1: function(s){
+    const label = s.mod || '';
+    const dual = !!s.dual || /\+ (dual|doble)/i.test(label);
+    return mkRec({ game:'mm', label:label, key:dual ? 'mm.dual' : 'mm.single', ts:s.ts, level:s.lvl, mode:s.mode, c:s.ok, w:s.bad, b:s.blank, spi:s.spi, acc:s.acc,
+      hinted:!!s.hinted || /\((hints used|con pistas|pistas usadas)\)/i.test(label), counted:!(s.count === false || /^(learn|aprend|pr.ctica)/i.test(String(s.mode || ''))), dual:s.dual, thirds:s.thirds });
+  },
+  atc_listening_v1: function(s){
+    const label = s.module || '';
+    return mkRec({ game:'lis', label:label, key:keyFromLabel(label), ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, thirds:s.thirds });
+  },
+  atc_sectorsim_v1: function(s){
+    const label = s.modulo || 'Simulador de sector';
+    return mkRec({ game:'ss', label:label, key:'ss.sim', ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, hinted:(+s.hint || 0) > 0, losses:s.losses, thirds:s.thirds });
+  }
+};
+function simToRec(r){
+  if (!r || typeof r !== 'object') return { err: 'no es un objeto' };
+  const comps = (r.components && typeof r.components === 'object') ? r.components : null;
+  const out = mkRec({ game:'sim', label:'Radar Sector Sim (' + (r.mode || 'Ladder') + ')', key:'sim', ts:r.ts, level:r.level, mode:r.mode, c:r.correct, w:r.wrong, b:r.blank, spi:r.spi, acc:r.accuracy,
+    assisted:!!r.assisted, components:comps, thirds:r.thirds, losses:r.losses, source:'sim-json' });
+  if (out.rec) { out.rec.seed = r.seed; out.rec.realS = r.real_s; }
+  return out;
+}
+// CSV -> records. Header: Date;Module;Level;Correct;Wrong;Blank;Seconds per item;Accuracy %;Goal;Met
+function parseCSV(text){
+  text = String(text || '').replace(/^﻿/, '');
+  const rows = []; let row = [], f = '', q = false, i = 0;
+  const first = text.split(/\r?\n/, 1)[0] || '';
+  const sep = (first.split(';').length >= first.split(',').length) ? ';' : ',';
+  for (; i < text.length; i++){
+    const ch = text[i];
+    if (q){ if (ch === '"'){ if (text[i + 1] === '"'){ f += '"'; i++; } else q = false; } else f += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === sep){ row.push(f); f = ''; }
+    else if (ch === '\n' || ch === '\r'){ if (ch === '\r' && text[i + 1] === '\n') i++; row.push(f); f = ''; if (row.length > 1 || row[0] !== '') rows.push(row); row = []; }
+    else f += ch;
+  }
+  if (f !== '' || row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+function csvToRecords(text){
+  const rows = parseCSV(text), rej = [], recs = [];
+  if (!rows.length) return { kind:'empty', records:recs, rejected:rej };
+  const head = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+  if (head[0] === 'date' && head[1] === 'test') return { kind:'metrics', rows:rows, records:recs, rejected:rej };
+  if (!(head[0] === 'date' && head[1] === 'module' && head.indexOf('correct') >= 0)) return { kind:'unknown', records:recs, rejected:['cabecera no reconocida'] };
+  const ix = function(n){ return head.indexOf(n); };
+  for (let i = 1; i < rows.length; i++){
+    const r = rows[i];
+    const label = r[ix('module')] || '';
+    const key = keyFromLabel(label);
+    if (key === 'unknown'){ rej.push('módulo desconocido: ' + label.slice(0, 40)); continue; }
+    const lv = r[ix('level')];
+    const mode = /\[(adaptive|adaptativo)\]|adaptive|adaptativ/i.test(label + ' ' + lv) ? 'adaptive' : (/custom|personaliz/i.test(label + ' ' + lv) ? 'custom' : 'manual');
+    const spi = String(r[ix('seconds per item')] || '').replace(',', '.');
+    const acc = String(r[ix('accuracy %')] || '').replace(',', '.');
+    const o = mkRec({ game:'csv', label:label, key:key, ts:r[ix('date')], level:lv, mode:mode, c:r[ix('correct')], w:r[ix('wrong')], b:r[ix('blank')], spi:spi, acc:acc,
+      hinted:/\((hints used|con pistas|pistas usadas)\)/i.test(label), counted:!/Learn practice|Pr.ctica de aprendizaje|Pr.ctica guiada|\(aprendizaje\)/i.test(label), source:'csv' });
+    if (o.err) rej.push(o.err); else recs.push(o.rec);
+  }
+  return { kind:'games', records:recs, rejected:rej };
+}
+// merge with de-duplication. On a duplicate the richer record (thirds / components / dual) is kept.
+function mergeRecords(base, extra){
+  const map = new Map(); let dup = 0, added = 0;
+  base.forEach(function(r){ if (!map.has(r.id)) map.set(r.id, r); });
+  extra.forEach(function(r){
+    const cur = map.get(r.id);
+    if (!cur){ map.set(r.id, r); added++; return; }
+    dup++;
+    if (!cur.thirds && r.thirds) cur.thirds = r.thirds;
+    if (!cur.components && r.components) cur.components = r.components;
+    if (!cur.dual && r.dual) cur.dual = r.dual;
+  });
+  return { records: Array.from(map.values()).sort(function(a, b){ return a.ts - b.ts; }), dup: dup, added: added };
+}
+
+/* ---------- validity and units (3.1, 3.2) ---------- */
+function isValid(r){
+  return r.counted && !r.custom && !r.hinted && !r.assisted && r.n >= 10 && r.level !== null && isFinite(r.accuracy);
+}
+function compN(v){ return (+v.correct || 0) + (+v.wrong || 0) + (+v.blank || 0); }
+// A record -> scoring units [{mod, n, c, acc, level}] (before weights).
+function unitsOf(r){
+  const out = [];
+  const add = function(mod, c, n, level){ if (n > 0) out.push({ mod:mod, n:n, c:c, acc:c / n * 100, level:level }); };
+  let ok;
+  if (r.key === 'sim'){
+    ok = r.counted && !r.custom && !r.assisted && r.level !== null;
+    if (!ok) return out;
+    if (r.components){
+      const comps = r.components;
+      Object.keys(SIM_GROUPS).forEach(function(g){
+        let c = 0, n = 0;
+        SIM_GROUPS[g].forEach(function(k){ if (comps[k]){ c += +comps[k].correct || 0; n += compN(comps[k]); } });
+        if (n >= 3) add(g, c, n, r.level);
+      });
+      let worst = null;
+      Object.keys(comps).forEach(function(k){
+        const n = compN(comps[k]); if (n < 3) return;
+        const a = (+comps[k].correct || 0) / n;
+        if (!worst || a < worst.a || (a === worst.a && n > worst.n)) worst = { a:a, n:n, c:+comps[k].correct || 0 };
+      });
+      if (worst) add('sim.worst', worst.c, worst.n, r.level);
+    } else if (r.n >= 3) add('sim.plan', r.accuracy / 100 * r.n, r.n, r.level);
+  } else {
+    ok = isValid(r);
+    if (!ok) return out;
+    add(r.key, r.accuracy / 100 * r.n, r.n, r.level);
+  }
+  if (ok && r.thirds && r.thirds[0].n >= 8 && r.thirds[2].n >= 8) add('endur', r.thirds[2].c, r.thirds[2].n, r.level);
+  return out;
+}
+function durationSec(r){ return (r.spi !== null && r.spi !== undefined) ? r.spi * r.n : (r.realS || null); }
+
+/* ---------- ability model (3.2-3.3) ---------- */
+function computeModel(records, now, o){
+  o = o || {};
+  const decay = o.decay !== false;
+  const from = o.from !== undefined ? o.from : now - (o.windowDays || WINDOW_DAYS) * DAY;
+  const to = o.to !== undefined ? o.to : now;
+  const acc = {};
+  ABILITIES.forEach(function(a){ acc[a.id] = { samples: [], mods: {} }; });
+  records.forEach(function(r){
+    if (r.ts < from || r.ts > to) return;
+    const age = decay ? Math.max(0, (now - r.ts) / DAY) : 0;
+    const dk = Math.pow(0.5, age / 10);
+    unitsOf(r).forEach(function(u){
+      const S = sessionScore(u.level, u.acc);
+      (MODMAP[u.mod] || []).forEach(function(am){
+        if (!(am[1] > 0)) return;
+        acc[am[0]].samples.push({ sid:r.id, ts:r.ts, mod:u.mod, om:am[1], n:u.n, c:u.c, level:u.level, S:S, w:Math.min(u.n, 40) / 40 * dk, dn:u.n * dk, r:r });
+        acc[am[0]].mods[u.mod] = true;
+      });
+    });
+  });
+  const out = ABILITIES.map(function(a){
+    const sm = acc[a.id].samples;
+    const res = { id:a.id, name:a.name, head:a.head, S:null, ci:null, confidence:'None', N:0, sessions:0, level:null, trend:null, trendLabel:'n/a', plateau:false, fadeFlag:false,
+      presence:0, incomplete:false, lastTs:null, points:[], discounted:null };
+    if (!sm.length) return res;
+    let num = 0, den = 0;
+    sm.forEach(function(x){ num += x.om * x.w * x.S; den += x.om * x.w; });
+    res.S = den > 0 ? num / den : null;
+    res.N = sm.reduce(function(s, x){ return s + x.dn; }, 0);
+    const sids = {}; sm.forEach(function(x){ sids[x.sid] = true; });
+    res.sessions = Object.keys(sids).length;
+    res.confidence = res.N >= 150 && res.sessions >= 3 ? 'High' : (res.N >= 60 ? 'Medium' : (res.N > 0 ? 'Low' : 'None'));
+    res.modsPresent = Object.keys(acc[a.id].mods);
+    res.presence = Math.min(1, Object.keys(acc[a.id].mods).reduce(function(s, m){ return s + a.w[m]; }, 0));
+    res.incomplete = res.presence < 0.5;
+    res.lastTs = Math.max.apply(null, sm.map(function(x){ return x.ts; }));
+    // modal level (by decayed items) and Wilson interval at that level
+    const byL = {}; sm.forEach(function(x){ byL[x.level] = (byL[x.level] || 0) + x.dn; });
+    let modal = null; Object.keys(byL).forEach(function(l){ if (modal === null || byL[l] > byL[modal]) modal = l; });
+    modal = +modal; res.level = modal;
+    let pc = 0, pn = 0; sm.forEach(function(x){ if (x.level === modal){ pc += x.c * x.dn / x.n; pn += x.dn; } });
+    const wl = wilson(pc, pn);
+    if (wl && res.S !== null){
+      res.ci = (sessionScore(modal, wl.hi * 100) - sessionScore(modal, wl.lo * 100)) / 2;
+      res.acc = { p: wl.p * 100, lo: wl.lo * 100, hi: wl.hi * 100, n: pn };
+    }
+    res.discounted = res.S === null ? null : res.S - (res.confidence === 'High' ? 0 : (res.confidence === 'Medium' ? 5 : 10));
+    // per-session series (one point per game session, mean over its samples)
+    const per = {};
+    sm.forEach(function(x){ (per[x.sid] = per[x.sid] || { sid:x.sid, ts:x.ts, S:[], r:x.r }).S.push(x.S); });
+    const pts = Object.keys(per).map(function(k){ const p = per[k]; return { sid:p.sid, ts:p.ts, S:p.S.reduce(function(s, v){ return s + v; }, 0) / p.S.length, r:p.r }; }).sort(function(x, y){ return x.ts - y.ts; });
+    res.points = pts;
+    const last8 = pts.slice(-8).map(function(p){ return { t:p.ts, y:p.S }; });
+    const slope = theilSen(last8);
+    if (slope !== null){ res.trend = slope; res.trendLabel = slope > 1.5 ? 'rising' : (slope < -1.5 ? 'falling' : 'flat'); }
+    if (pts.length >= 4){
+      const l3 = pts.slice(-3).map(function(p){ return p.S; }), earlier = pts.slice(0, -3).map(function(p){ return p.S; });
+      res.plateau = (Math.max.apply(null, l3) - Math.min.apply(null, l3)) <= 4 && Math.max.apply(null, l3) <= Math.max.apply(null, earlier);
+    }
+    // fade flag: >= 3 of the last 5 sessions longer than 6 min with last third >= 5 points below first
+    const long = pts.filter(function(p){ const d = durationSec(p.r); return p.r.thirds && d !== null && d > 360 && p.r.thirds[0].n >= 8 && p.r.thirds[2].n >= 8; }).slice(-5);
+    res.fadeFlag = long.filter(function(p){ const t = p.r.thirds; return (t[2].c / t[2].n - t[0].c / t[0].n) * 100 <= -5; }).length >= 3;
+    return res;
+  });
+  return out;
+}
+// 3.4 readiness
+function readiness(abils){
+  const heads = abils.filter(function(a){ return a.head; });
+  const none = heads.filter(function(a){ return a.confidence === 'None'; });
+  const incomplete = heads.filter(function(a){ return a.confidence !== 'None' && a.incomplete; });
+  const usable = heads.filter(function(a){ return a.confidence !== 'None' && !a.incomplete; });
+  let R = null, weakest = null, mean = null;
+  usable.forEach(function(a){ if (R === null || a.discounted < R){ R = a.discounted; weakest = a.id; } });
+  if (usable.length) mean = usable.reduce(function(s, a){ return s + a.S; }, 0) / usable.length;
+  return { R:R, unknown: none.length > 0 || usable.length === 0, mean:mean, weakest:weakest, missing:none.map(function(a){ return a.id; }), incomplete:incomplete.map(function(a){ return a.id; }), usable:usable.length };
+}
+function stageGates(records, now){
+  const a = computeModel(records, now), b = computeModel(records, now - 7 * DAY);
+  const heads = function(m){ return m.filter(function(x){ return x.head; }); };
+  const ab = heads(a).every(function(x){ return x.S !== null && x.S >= 55 && (x.confidence === 'Medium' || x.confidence === 'High'); });
+  const cNow = heads(a).every(function(x){ return x.S !== null && x.S >= 70; });
+  const cPrev = heads(b).every(function(x){ return x.S !== null && x.S >= 70; });
+  return { stageAB: ab, stageC: cNow && cPrev, c_now: cNow };
+}
+// pooled-promotion advice for one module (spec 3.5 items 1 and 3; advisory only)
+function adviceLevel(records, mod){
+  const v = records.filter(function(r){ return r.key === mod && isValid(r); }).sort(function(a, b){ return a.ts - b.ts; });
+  if (!v.length) return null;
+  const L = v[v.length - 1].level;
+  const atL = v.filter(function(r){ return r.level === L; }).slice(-3);
+  let level = L, why = 'seguir en el nivel ' + L;
+  const sum = function(a, f){ return a.reduce(function(s, r){ return s + f(r); }, 0); };
+  if (atL.length === 3){
+    const n = sum(atL, function(r){ return r.n; }), c = sum(atL, function(r){ return r.accuracy / 100 * r.n; });
+    const noneBelow90 = atL.every(function(r){ return r.accuracy >= 90; });
+    const thirdsOk = atL.every(function(r){ return !r.thirds || r.thirds[2].n < 8 || r.thirds[2].c / r.thirds[2].n >= 0.9; });
+    if (n >= 60 && c / n >= 0.96 && noneBelow90 && thirdsOk && L < 10){ level = L + 1; why = 'las 3 últimas sesiones en el nivel ' + L + ' suman ' + (c / n * 100).toFixed(1) + ' % en ' + n + ' elementos: prueba el nivel ' + level; }
+  }
+  const l2 = v.slice(-2);
+  if (level === L && l2.length === 2 && l2[0].level === L && l2[1].level === L){
+    const n = sum(l2, function(r){ return r.n; }), c = sum(l2, function(r){ return r.accuracy / 100 * r.n; });
+    if (n >= 30 && c / n < 0.88 && L > 1){ level = L - 1; why = 'las 2 últimas sesiones suman ' + (c / n * 100).toFixed(1) + ' %: baja al nivel ' + level; }
+  }
+  return { level: level, last: L, why: why };
+}
+// next-session recommender (3.4)
+function recommend(records, abils, now){
+  const heads = abils.filter(function(a){ return a.head; });
+  const pickMod = function(a){
+    let best = null;
+    const present = a.modsPresent || [];
+    Object.keys(a.w || ABIL[a.id].w).forEach(function(m){
+      if (!linkFor(m) || /^sim\./.test(m) || m === 'endur') return;
+      const om = ABIL[a.id].w[m];
+      let recent = 0;
+      records.forEach(function(r){ if (r.key === m && r.ts > now - 14 * DAY) recent += r.n; });
+      const score = om / (1 + recent / 60) * (a.incomplete && present.indexOf(m) < 0 ? 10 : 1);
+      if (!best || score > best.score) best = { mod:m, score:score };
+    });
+    return best ? best.mod : null;
+  };
+  const build = function(a, kind, alt){
+    const mod = pickMod(a);
+    const adv = mod ? adviceLevel(records, mod) : null;
+    let level = adv ? adv.level : (a.S !== null ? clamp(Math.floor(levelFromScore(a.S)), 1, 10) : 1);
+    if (a.S !== null && !adv) level = clamp(Math.round(levelFromScore(a.S)), 1, 10);
+    const missing = a.incomplete ? Object.keys(ABIL[a.id].w).filter(function(m){ return (a.modsPresent || []).indexOf(m) < 0; }).map(function(m){ return MODNAME[m]; }) : [];
+    return { kind:kind, incomplete:!!a.incomplete, missing:missing, ability:a.id, abilityName:a.name, mod:mod, modName:mod ? MODNAME[mod] : null, level:level, why:adv ? adv.why : null, minutes:15, alt:alt || null, S:a.S, confidence:a.confidence, discounted:a.discounted };
+  };
+  const gather = heads.filter(function(a){ return a.confidence === 'None' || a.incomplete; });
+  if (gather.length){
+    gather.sort(function(x, y){ return (x.confidence === 'None' ? 0 : 1) - (y.confidence === 'None' ? 0 : 1); });
+    return build(gather[0], 'data', gather[1] ? gather[1].id : null);
+  }
+  const sorted = heads.slice().sort(function(x, y){ return x.discounted - y.discounted; });
+  const low = sorted[0];
+  const close = sorted.filter(function(a){ return a.discounted - low.discounted <= 3; });
+  let pick = low, alt = null;
+  if (close.length > 1){
+    close.sort(function(x, y){ return (x.lastTs || 0) - (y.lastTs || 0); });   // alternate: the one practised longest ago
+    pick = close[0]; alt = close[1].id;
+  }
+  return build(pick, pick.confidence === 'Low' ? 'data' : 'weakest', alt);
+}
+function suggestedSimLevel(abils){
+  const ss = abils.filter(function(a){ return (a.id === 'H3' || a.id === 'H4') && a.S !== null; }).map(function(a){ return a.S; });
+  if (!ss.length) return null;
+  return clamp(Math.floor(levelFromScore(Math.min.apply(null, ss))), 1, 10);
+}
+function buildProfile(abils, now){
+  const rd = readiness(abils);
+  const heads = abils.filter(function(a){ return a.head && a.S !== null; });
+  let weak = null;
+  heads.forEach(function(a){ if (!weak || a.discounted < weak.discounted) weak = a; });
+  const key = function(a){ return a.id + ' ' + a.name; };
+  const ab = {};
+  abils.forEach(function(a){ if (a.S !== null) ab[key(a)] = { S: Math.round(a.S * 10) / 10, confidence: a.confidence, trend: a.trendLabel }; });
+  return { generated: new Date(now).toISOString(), weakest: weak ? key(weak) : null, weakestId: weak ? weak.id : null, suggestedSimLevel: suggestedSimLevel(abils), readiness: rd.unknown ? null : Math.round(rd.R * 10) / 10, abilities: ab };
+}
+
+/* ---------- endurance (SCHEMA-thirds.md reading rule) ---------- */
+function thirdsPool(records, filt){
+  const t = { n:[0, 0, 0], c:[0, 0, 0], sessions:0 };
+  records.forEach(function(r){
+    if (!r.thirds || (filt && !filt(r))) return;
+    t.sessions++;
+    for (let i = 0; i < 3; i++){ t.n[i] += r.thirds[i].n; t.c[i] += r.thirds[i].c; }
+  });
+  return t;
+}
+function fadeReport(t){
+  if (!t.sessions) return { state:'none' };
+  if (t.n[0] < 8 || t.n[2] < 8) return { state:'small', n1:t.n[0], n3:t.n[2], sessions:t.sessions };
+  const d = diffInterval(t.c[0], t.n[0], t.c[2], t.n[2]);
+  const ch = d.d * 100, lo = d.lo * 100, hi = d.hi * 100;
+  let verdict;
+  if (hi < 0) verdict = ch <= -5 ? 'fading' : 'small fade';
+  else if (lo > 0) verdict = 'improving';
+  else verdict = 'no clear fade';
+  return { state:'ok', n1:t.n[0], n3:t.n[2], a1:d.a.p * 100, a3:d.b.p * 100, w1:[d.a.lo * 100, d.a.hi * 100], w3:[d.b.lo * 100, d.b.hi * 100], change:ch, lo:lo, hi:hi, verdict:verdict, sessions:t.sessions };
+}
+
+/* ---------- max-load protocols (spec 2.1-2.4) ---------- */
+const CIRCUIT = [
+  { id:'c1', name:'Categorización rápida', minutes:5, feeds:'H2', req:[['rad.cat', 5]], note:'5 sesiones encadenadas, nivel manual 5 (unos 150 objetos)', link:'trainer-radar.html' },
+  { id:'c2', name:'Izquierda/derecha', minutes:4, feeds:'S3', req:[['at.lr', 1]], note:'nivel manual 5, al menos 50 elementos', link:'../aptitude-trainer.html' },
+  { id:'c3', name:'Rotación 3D, luego desarrollos de cubos', minutes:8, feeds:'H1', req:[['sp.rot3d', 1], ['sp.net', 1]], note:'nivel manual 5 cada una, 20 elementos cada una', link:'trainer-spatial.html' },
+  { id:'c4', name:'Aritmética de rumbos', minutes:5, feeds:'S2', req:[['rad.arith', 1]], note:'nivel manual 5, 30 elementos', link:'trainer-radar.html' },
+  { id:'c5', name:'Cálculo mental: tarea única, luego doble tarea con cambio de regla, carga 2', minutes:8, feeds:'S2, H4', req:[['mm.single', 1], ['mm.dual', 1]], note:'nivel 5, 20 elementos cada una', link:'game-mental-math.html' },
+  { id:'c6', name:'Memoria de tiras M1, luego cambio de tarea M6', minutes:10, feeds:'S1, H2', req:[['mem.m1', 1], ['mem.m6', 1]], note:'nivel 5 cada una', link:'game-memory-attention.html' },
+  { id:'c7', name:'Vigilancia M5', minutes:8, feeds:'S4', req:[['mem.m5', 1]], note:'nivel 5, duración máxima (8 min o más)', link:'game-memory-attention.html' },
+  { id:'c8', name:'Dictado de elementos', minutes:6, feeds:'H5', req:[['lis.dictation', 1]], note:'nivel 5, 12 elementos', link:'game-listening.html' }
+];
+const CIRCUIT_LOG_MODS = ['rad.cat', 'at.lr', 'sp.rot3d', 'sp.net', 'rad.arith', 'mm.single', 'mm.dual', 'mem.m1', 'mem.m6', 'mem.m5', 'lis.dictation'];
+function stepProgress(step, records, from, to){
+  let done = 0, need = 0;
+  step.req.forEach(function(rq){
+    need += rq[1];
+    const c = records.filter(function(r){ return r.key === rq[0] && r.ts >= from && r.ts <= to && r.counted && !r.custom; }).length;
+    done += Math.min(c, rq[1]);
+  });
+  return { done:done, need:need, ok: done >= need };
+}
+function scoreWindow(records, from, to, minItems){
+  minItems = minItems || 20;
+  const ab = computeModel(records, to, { from:from, to:to, decay:false });
+  const heads = ab.filter(function(a){ return a.head && a.N >= minItems; });
+  let R = null, weakest = null;
+  heads.forEach(function(a){ if (R === null || a.S < R){ R = a.S; weakest = a.id; } });
+  // fade: mean over modules of first-third minus last-third accuracy (points; positive = dropped)
+  const mods = {};
+  records.forEach(function(r){ if (r.ts >= from && r.ts <= to && r.thirds){ (mods[r.key] = mods[r.key] || []).push(r); } });
+  const drops = [];
+  Object.keys(mods).forEach(function(k){
+    const t = thirdsPool(mods[k]);
+    if (t.n[0] >= 8 && t.n[2] >= 8) drops.push(t.c[0] / t.n[0] * 100 - t.c[2] / t.n[2] * 100);
+  });
+  const fade = drops.length ? drops.reduce(function(s, v){ return s + v; }, 0) / drops.length : null;
+  return { abilities:ab, R:R, weakest:weakest, headsScored:heads.length, fade:fade, modulesWithThirds:drops.length };
+}
+function circuitPass(sc, maxFade){ return sc.R !== null && sc.R >= 70 && sc.fade !== null && sc.fade <= (maxFade === undefined ? 3 : maxFade); }
+// Radar block: weakest-link score WL = min over sim components with pooled n >= 8 of the Wilson 80 % lower bound
+function radarBlockScore(records, from, to){
+  const runs = records.filter(function(r){ return r.key === 'sim' && r.components && r.ts >= from && r.ts <= to; }).sort(function(a, b){ return a.ts - b.ts; });
+  const pool = {};
+  runs.forEach(function(r){ Object.keys(r.components).forEach(function(k){ const v = r.components[k]; const p = pool[k] = pool[k] || { c:0, n:0 }; p.c += +v.correct || 0; p.n += compN(v); }); });
+  const comps = [];
+  let WL = null, weakest = null;
+  Object.keys(pool).forEach(function(k){
+    const p = pool[k]; if (p.n < 8) return;
+    const lo = wilson(p.c, p.n).lo * 100;
+    comps.push({ name:k, c:p.c, n:p.n, lo:lo });
+    if (WL === null || lo < WL){ WL = lo; weakest = k; }
+  });
+  const last = runs.length ? runs[runs.length - 1] : null;
+  const lossLast = last ? (last.losses === null ? null : last.losses) : null;
+  return { runs:runs.length, WL:WL, weakest:weakest, comps:comps, lossLastRun:lossLast, pass: WL !== null && WL >= 80 && lossLast === 0 };
+}
+function mockFade(records, start, end){
+  const w = 45 * 60000;
+  const a = scoreWindow(records, start, Math.min(end, start + w), 10), b = scoreWindow(records, Math.max(start, end - w), end, 10);
+  if (a.R === null || b.R === null) return { ok:false, first:a.R, last:b.R };
+  return { ok:true, first:a.R, last:b.R, fade:a.R - b.R };
+}
+//==CORE END==
+
+/* =====================================================================================================
+   UI
+   ===================================================================================================== */
+const STATE_KEY = 'atc_dashboard_v1';
+const $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function f1(x){ return x === null || x === undefined || !isFinite(x) ? '-' : (Math.round(x * 10) / 10).toFixed(1); }
+function f0(x){ return x === null || x === undefined || !isFinite(x) ? '-' : String(Math.round(x)); }
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function fdate(ts){ const d = new Date(ts); return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function ago(ts, now){ const d = (now - ts) / DAY; if (d < 1 / 24) return 'ahora mismo'; if (d < 1) return 'hace ' + Math.round(d * 24) + ' h'; if (d < 2) return 'ayer'; return 'hace ' + Math.floor(d) + ' días'; }
+const NOW = function(){ return (window.__NOW__ !== undefined) ? window.__NOW__ : Date.now(); };
+
+let restoreMsg = '', state = null, memState = null, storeOk = true, LIVE = [], HEALTH = {}, ALL = [], MODEL = null, curTab = 'overview', lastBackupJson = null;
+
+function defaultState(){ return { imported:[], baselines:[], lastBackup:null, runs:{ circuit:null, radar:null, mock:null }, checks:{}, ramp:[], ratings:[], examDate:'', bench:'benchmark', mockNo:1, importLog:[] }; }
+function loadState(){
+  let d = null;
+  try { const r = localStorage.getItem(STATE_KEY); if (r) d = JSON.parse(r); } catch (e) { storeOk = false; }
+  const base = defaultState();
+  if (d && typeof d === 'object') Object.keys(base).forEach(function(k){ if (d[k] !== undefined && d[k] !== null && typeof d[k] === typeof base[k]) base[k] = d[k]; });
+  if (!base.runs || typeof base.runs !== 'object') base.runs = defaultState().runs;
+  base.imported = (Array.isArray(base.imported) ? base.imported : []).filter(function(r){ return r && typeof r === 'object' && isFinite(r.ts) && typeof r.key === 'string'; }).map(function(r){ r.thirds = cleanThirds(r.thirds); r.id = r.id || dkey(r); return r; });
+  state = base;
+}
+function saveState(){
+  memState = state;
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); return true; } catch (e) { storeOk = false; return false; }
+}
+function readLive(){
+  const recs = [], health = {};
+  Object.keys(GAMES).forEach(function(k){
+    const g = GAMES[k], h = { name:g.name, found:false, ok:true, sessions:0, accepted:0, rejected:{}, last:null };
+    let raw = null;
+    try { raw = localStorage.getItem(k); } catch (e) { h.ok = false; h.error = 'almacenamiento bloqueado'; }
+    if (raw !== null && raw !== undefined){
+      h.found = true;
+      let d = null;
+      try { d = JSON.parse(raw); } catch (e) { h.ok = false; h.error = 'JSON ilegible (' + raw.length + ' caracteres)'; }
+      if (d && !Array.isArray(d[g.container])) { h.ok = false; h.error = 'estructura inesperada (sin lista "' + g.container + '")'; d = null; }
+      if (d){
+        h.sessions = d[g.container].length;
+        d[g.container].forEach(function(s){
+          let o;
+          try { o = (s && typeof s === 'object') ? ADAPTERS[k](s) : { err:'no es un objeto' }; } catch (e) { o = { err:'error del adaptador' }; }
+          if (o.err) h.rejected[o.err] = (h.rejected[o.err] || 0) + 1;
+          else { h.accepted++; recs.push(o.rec); if (h.last === null || o.rec.ts > h.last) h.last = o.rec.ts; }
+        });
+      }
+    }
+    health[k] = h;
+  });
+  return { records:recs, health:health };
+}
+function recompute(){
+  const lv = readLive();
+  LIVE = lv.records; HEALTH = lv.health;
+  const m = mergeRecords(LIVE, state.imported);
+  ALL = m.records;
+  MODEL = computeModel(ALL, NOW());
+}
+
+/* ---------- rendering ---------- */
+function fig(n, l){ return '<div class="fig"><span class="n">' + n + '</span><span class="l">' + esc(l) + '</span></div>'; }
+function ic(n, cls){ return '<svg class="i' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+const TABS = [['overview', 'Resumen', 'radar'], ['trends', 'Tendencias', 'trend'], ['endurance', 'Resistencia', 'clock'], ['maxload', 'Carga máxima', 'layers'], ['data', 'Datos', 'db']];
+function renderTabs(){
+  $('tabs').innerHTML = TABS.map(function(t){ return '<button role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === curTab) + '">' + ic(t[2]) + t[1] + '</button>'; }).join('');
+  Array.prototype.forEach.call($('tabs').querySelectorAll('button'), function(b){ b.addEventListener('click', function(){ curTab = b.getAttribute('data-tab'); try { sessionStorage.setItem('atc_dash_tab', curTab); } catch (e) {} renderTabs(); renderAll(); }); });
+  TABS.forEach(function(t){ $('tab-' + t[0]).className = 'tab' + (t[0] === curTab ? ' on' : ''); });
+}
+function confChip(a){
+  const c = a.confidence;
+  return c === 'None' ? '' : '<span class="soft">' + (CONFNAME[c] || c) + '</span>';
+}
+function trendTxt(a){
+  if (a.trend === null) return '';
+  const ar = a.trendLabel === 'rising' ? '&#9650;' : (a.trendLabel === 'falling' ? '&#9660;' : '&#9654;');
+  const cl = a.trendLabel === 'rising' ? 'good' : (a.trendLabel === 'falling' ? 'bad' : 'soft');
+  return '<span class="' + cl + '">' + ar + ' ' + (a.trend > 0 ? '+' : '') + f1(a.trend) + '/sem</span>';
+}
+function abilityRow(a, weakId){
+  let bar, val;
+  if (a.S === null){ bar = '<div class="bar"></div>'; val = '<span class="soft">-</span>'; }
+  else {
+    const lo = clamp(a.S - (a.ci || 0), 0, 100), hi = clamp(a.S + (a.ci || 0), 0, 100);
+    bar = '<div class="bar" role="img" aria-label="' + esc(a.name) + ', puntuación ' + f0(a.S) + '"><div class="ci" style="left:' + lo + '%;width:' + (hi - lo) + '%"></div><div class="fill' + (a.incomplete ? ' dim' : '') + '" style="width:' + a.S + '%"></div>' +
+      '<div class="mark" style="left:55%"></div><div class="mark" style="left:70%"></div></div>';
+    val = f0(a.S) + (a.ci !== null ? '<span class="cf">&plusmn;' + f0(a.ci) + '</span>' : '');
+  }
+  const flags = [];
+  if (a.plateau) flags.push('<span class="warn">Meseta</span>');
+  if (a.fadeFlag) flags.push('<span class="bad">Decae</span>');
+  if (a.incomplete && a.S !== null) flags.push('<span class="warn">Parcial</span>');
+  const tr = a.S === null ? '' : trendTxt(a) + '<span class="cf">' + [confChip(a), a.sessions].concat(flags).filter(Boolean).join(' &middot; ') + '</span>';
+  return '<div class="ab' + (a.id === weakId ? ' weak' : '') + (a.S === null ? ' nd' : '') + '"><div class="nm">' + esc(a.name) + '</div><div class="bar-w">' + bar + '</div><div class="v">' + val + '</div><div class="tr">' + tr + '</div></div>';
+}
+function ABIL_S(id){ return MODEL.find(function(a){ return a.id === id; }).S; }
+function ABIL_C(id){ return MODEL.find(function(a){ return a.id === id; }).confidence.toLowerCase(); }
+function renderHero(now){
+  const rd = readiness(MODEL), rec = recommend(ALL, MODEL, now);
+  let next;
+  if (!ALL.length){
+    next = '<div class="next">' + ic('radar', 'lead') + '<div class="nm">Categorización rápida</div>' +
+      '<a class="btn primary" href="trainer-radar.html">' + ic('play') + 'Abrir</a><button class="btn" data-goto="data">' + ic('upload') + 'Importar</button></div>';
+  } else {
+    const nm = rec.modName || rec.abilityName;
+    next = '<div class="next">' + ic('radar', 'lead') + '<div class="nm">' + esc(nm) + '</div>' + (rec.kind === 'data' ? '' : '<span class="lv">L' + rec.level + '</span>') +
+      (rec.mod ? '<a class="btn primary" href="' + linkFor(rec.mod) + '">' + ic('play') + 'Abrir</a>' : '') + '</div>';
+  }
+  const sg = stageGates(ALL, now);
+  const gate = function(ok){ return ok ? ic('check', 'good') : '<span class="soft">-</span>'; };
+  let figs = '<div class="figs">' + fig(rd.unknown ? '<span class="soft">-</span>' : f0(rd.R), 'Preparación') +
+    (rd.unknown ? '' : fig(f0(ABIL_S(rd.weakest)), 'Más débil: ' + ABIL[rd.weakest].name)) +
+    fig(gate(sg.stageAB), 'Umbral A-B') + fig(gate(sg.stageC), 'Umbral C') + '</div>';
+  if (state.examDate){
+    const days = Math.ceil((new Date(state.examDate + 'T00:00:00').getTime() - now) / DAY);
+    if (days >= 0 && days <= 7) figs += '<p class="warn"><b>Examen en ' + days + ' días: mantén el ritmo.</b></p>';
+  }
+  $('tab-overview').innerHTML = next + figs;
+  Array.prototype.forEach.call($('tab-overview').querySelectorAll('[data-goto]'), function(b){ b.addEventListener('click', function(){ curTab = b.getAttribute('data-goto'); renderTabs(); renderAll(); }); });
+  return rd;
+}
+function activity(now){
+  const today = new Date(now); today.setHours(0, 0, 0, 0);
+  const days = [];
+  for (let i = 6; i >= 0; i--){ const s = today.getTime() - i * DAY; days.push({ s:s, min:0, n:0, items:0 }); }
+  ALL.forEach(function(r){
+    const d = days.find(function(x){ return r.ts >= x.s && r.ts < x.s + DAY; });
+    if (!d || !r.counted) return;
+    d.n++; d.items += r.n; d.min += r.spi !== null ? r.n * r.spi / 60 : (r.realS ? r.realS / 60 : 0);
+  });
+  return days;
+}
+function renderOverviewRest(now, rd){
+  const heads = MODEL.filter(function(a){ return a.head; }).sort(function(x, y){ return (x.discounted === null ? -1e9 : x.discounted) - (y.discounted === null ? -1e9 : y.discounted); });
+  const sup = MODEL.filter(function(a){ return !a.head; });
+  const days = activity(now), maxMin = Math.max.apply(null, days.map(function(d){ return d.min; }).concat([10]));
+  const totalMin = days.reduce(function(s, d){ return s + d.min; }, 0), active = days.filter(function(d){ return d.n > 0; }).length;
+  const names = ['D', 'L', 'M', 'X', 'J', 'V', 'S'];
+  const dayHtml = days.map(function(d, i){
+    return '<div class="d' + (i === 6 ? ' today' : '') + '" title="' + new Date(d.s).toLocaleDateString() + ': ' + d.n + ' sesiones, ' + f0(d.min) + ' min"><span>' + (d.n ? d.n : '') + '</span><div class="b" style="height:' + Math.max(2, d.min / maxMin * 80) + 'px;' + (d.n ? '' : 'opacity:.25') + '"></div><span>' + names[new Date(d.s).getDay()] + '</span></div>';
+  }).join('');
+  const html = '<div class="cols"><div><h2>Aptitudes</h2><div class="axis"><span></span><div class="scale"><span style="left:55%">55</span><span style="left:70%">70</span></div><span></span><span></span></div>' +
+    heads.map(function(a){ return abilityRow(a, rd.weakest); }).join('') +
+    '<h3>De apoyo</h3>' + sup.map(function(a){ return abilityRow(a, null); }).join('') + '</div>' +
+    '<div><h2>Últimos 7 días</h2><div class="days">' + dayHtml + '</div><p class="meta" style="margin-top:8px">' + active + '/7 días &middot; ' + f0(totalMin) + ' min</p></div></div>';
+  $('tab-overview').insertAdjacentHTML('beforeend', html);
+}
+function spark(a, now, big){
+  const W = 420, H = 130, L = 30, B = 18, T = 8, Rg = 8;
+  const t0 = now - WINDOW_DAYS * DAY;
+  const X = function(t){ return L + (t - t0) / (WINDOW_DAYS * DAY) * (W - L - Rg); };
+  const Y = function(v){ return T + (100 - v) / 100 * (H - T - B); };
+  let s = '<svg class="sv" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(a.name) + ', puntuaciones de sesión, últimos 42 días">';
+  [0, 55, 70, 100].forEach(function(v){ s += '<line class="' + (v === 55 || v === 70 ? 'gk' : 'gl') + '" x1="' + L + '" x2="' + (W - Rg) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text x="' + (L - 4) + '" y="' + (Y(v) + 3) + '" text-anchor="end">' + v + '</text>'; });
+  [0, 14, 28, 42].forEach(function(d){ const x = X(t0 + d * DAY); s += '<text x="' + x + '" y="' + (H - 4) + '" text-anchor="' + (d === 42 ? 'end' : 'middle') + '">' + (d === 42 ? 'hoy' : (d - 42) + ' d') + '</text>'; });
+  const pts = a.points.filter(function(p){ return p.ts >= t0; });
+  if (pts.length > 1) s += '<polyline class="ln" points="' + pts.map(function(p){ return X(p.ts).toFixed(1) + ',' + Y(p.S).toFixed(1); }).join(' ') + '"/>';
+  pts.forEach(function(p){
+    const bench = p.r.level === 5 && /^(manual|ladder|escalera)/i.test(String(p.r.mode || ''));
+    s += '<g><title>' + esc(fdate(p.ts) + ' - ' + (MODNAME[p.r.key] || p.r.key) + ' L' + p.r.level + ' ' + f1(p.r.accuracy) + '% -> ' + f0(p.S)) + (bench ? ' (L5)' : '') + '</title>' +
+      '<circle class="dot" cx="' + X(p.ts).toFixed(1) + '" cy="' + Y(p.S).toFixed(1) + '" r="3.5"/>' + (bench ? '<circle class="bm" cx="' + X(p.ts).toFixed(1) + '" cy="' + Y(p.S).toFixed(1) + '" r="7"/>' : '') + '</g>';
+  });
+  if (!pts.length) s += '<text x="' + (W / 2) + '" y="' + (H / 2) + '" font-size="12" text-anchor="middle">Sin sesiones</text>';
+  return s + '</svg>';
+}
+function renderTrends(now){
+  const cards = MODEL.map(function(a){
+    return '<div class="chart"><div class="h"><b>' + esc(a.name) + '</b><span>' + a.points.length + '</span></div>' + spark(a, now) + '</div>';
+  }).join('');
+  const mods = {};
+  ALL.forEach(function(r){
+    if (!r.counted) return;
+    const wk = Math.floor((now - r.ts) / (7 * DAY));
+    if (wk < 0 || wk > 3) return;
+    const m = mods[r.key] = mods[r.key] || [0, 0, 0, 0];
+    m[wk] += r.spi !== null ? r.n * r.spi / 60 : (r.realS ? r.realS / 60 : 0);
+  });
+  const keys = Object.keys(mods).sort();
+  const vol = keys.length ? '<div class="tw"><table><tr><th>Módulo</th><th class="num">Esta semana</th><th class="num">-1 sem</th><th class="num">-2 sem</th><th class="num">-3 sem</th></tr>' + keys.map(function(k){ return '<tr><td>' + esc(MODNAME[k] || k) + '</td>' + mods[k].map(function(v){ return '<td class="num">' + f0(v) + ' min</td>'; }).join('') + '</tr>'; }).join('') + '</table></div>' : '<p class="soft">Sin sesiones</p>';
+  $('tab-trends').innerHTML = '<div class="grid2">' + cards + '</div><h2>Volumen semanal, minutos</h2>' + vol;
+}
+function trio(t){
+  const acc = t.map(function(x){ return x.n ? x.c / x.n : 0; });
+  return '<span class="trio" title="' + acc.map(function(v){ return f0(v * 100) + '%'; }).join(' / ') + '">' + acc.map(function(v){ return '<i style="height:' + Math.max(2, v * 26) + 'px"></i>'; }).join('') + '</span>';
+}
+function fadeRow(label, fr){
+  if (fr.state === 'none') return '<tr><td>' + esc(label) + '</td><td colspan="5" class="soft">-</td></tr>';
+  if (fr.state === 'small') return '<tr><td>' + esc(label) + '</td><td class="num">' + fr.sessions + '</td><td colspan="4" class="soft">n &lt; 8 (' + fr.n1 + ' / ' + fr.n3 + ')</td></tr>';
+  const cls = fr.verdict === 'fading' ? 'bad' : (fr.verdict === 'improving' ? 'good' : (fr.verdict === 'small fade' ? 'warn' : 'soft'));
+  return '<tr><td>' + esc(label) + '</td><td class="num">' + fr.sessions + '</td><td class="num">' + f1(fr.a1) + '% <span class="tiny soft">(' + f0(fr.w1[0]) + '-' + f0(fr.w1[1]) + ', n ' + fr.n1 + ')</span></td><td class="num">' + f1(fr.a3) + '% <span class="tiny soft">(' + f0(fr.w3[0]) + '-' + f0(fr.w3[1]) + ', n ' + fr.n3 + ')</span></td>' +
+    '<td class="num"><b>' + (fr.change > 0 ? '+' : '') + f1(fr.change) + '</b> <span class="tiny soft">(' + f1(fr.lo) + ' a ' + f1(fr.hi) + ')</span></td><td class="' + cls + '">' + (VERDNAME[fr.verdict] || fr.verdict) + '</td></tr>';
+}
+function renderEndurance(now){
+  const withT = ALL.filter(function(r){ return r.thirds && r.counted; });
+  let html = '';
+  if (!withT.length){
+    $('tab-endurance').innerHTML = '<p class="soft">Aún sin datos de resistencia</p>'; return;
+  }
+  const overall = fadeReport(thirdsPool(withT));
+  const byMod = {}; withT.forEach(function(r){ (byMod[r.key] = byMod[r.key] || []).push(r); });
+  html += '<div class="tw"><table><tr><th>Módulo</th><th class="num">Sesiones</th><th class="num">Primer tercio</th><th class="num">Último tercio</th><th class="num">Cambio, pts</th><th>Lectura</th></tr>' +
+    fadeRow('Todos los módulos', overall) + Object.keys(byMod).sort().map(function(k){ return fadeRow(MODNAME[k] || k, fadeReport(thirdsPool(byMod[k]))); }).join('') + '</table></div>';
+  const recent = withT.slice(-12).reverse();
+  html += '<h2>Últimas</h2><div class="tw"><table><tr><th>Cuándo</th><th>Módulo</th><th>Nivel</th><th>Tercios</th><th class="num">Elementos</th><th class="num">Cambio</th></tr>' + recent.map(function(r){
+    const t = r.thirds, ok = t[0].n >= 8 && t[2].n >= 8;
+    const ch = ok ? (t[2].c / t[2].n - t[0].c / t[0].n) * 100 : null;
+    return '<tr><td>' + fdate(r.ts) + '</td><td>' + esc(MODNAME[r.key] || r.key) + '</td><td>' + (r.level === null ? '-' : r.level) + '</td><td>' + trio(t) + '</td><td class="num">' + t.map(function(x){ return x.n; }).join(' / ') + '</td><td class="num">' + (ch === null ? '<span class="soft">n &lt; 8</span>' : (ch > 0 ? '+' : '') + f1(ch)) + '</td></tr>';
+  }).join('') + '</table></div>';
+  const fl = MODEL.filter(function(a){ return a.fadeFlag; });
+  if (fl.length) html = '<div class="banner"><b>Caída de rendimiento: ' + fl.map(function(a){ return esc(a.name); }).join(', ') + '</b></div>' + html;
+  $('tab-endurance').innerHTML = html;
+}
+/* ----- max-load sessions ----- */
+function chk(id, text, extra, autoDone){
+  const on = autoDone === true || !!state.checks[id];
+  return '<div class="check' + (on ? ' done' : '') + '"><input type="checkbox" data-chk="' + id + '"' + (on ? ' checked' : '') + (autoDone === true ? ' disabled' : '') + '><div class="t">' + text + (extra ? '<div class="tiny soft">' + extra + '</div>' : '') + '</div></div>';
+}
+function runBar(key, label){
+  const r = state.runs[key];
+  if (!r) return '<p class="row"><button class="btn primary" data-start="' + key + '">' + ic('play') + 'Empezar</button></p>';
+  return '<p class="row small"><span>Inicio ' + fdate(r.start) + (r.end ? ', fin ' + fdate(r.end) : '') + '</span>' +
+    (r.end ? '' : '<button class="btn small" data-finish="' + key + '">Terminar</button>') + '<button class="btn small danger" data-reset="' + key + '">Reiniciar</button></p>';
+}
+function scoreBlock(sc, maxFade, label){
+  const rows = sc.abilities.map(function(a){ return '<tr><td>' + esc(a.name) + '</td><td class="num">' + (a.S === null ? '-' : f0(a.S)) + '</td><td class="num">' + f0(a.N) + '</td><td class="soft">' + (a.head ? (a.N >= 20 ? '' : (a.N > 0 ? '&lt; 20 elementos' : '')) : '') + '</td></tr>'; }).join('');
+  const pass = circuitPass(sc, maxFade);
+  return '<div class="tw"><table><tr><th>Aptitud</th><th class="num">Puntuación</th><th class="num">Elementos</th><th></th></tr>' + rows + '</table></div>' +
+    '<p><b>Preparación ' + label + '</b> (20+ elementos): <b>' + (sc.R === null ? '-' : f0(sc.R) + ' (' + esc(ABIL[sc.weakest].name) + ')') + '</b> &middot; ' +
+    '<b>Caída</b> (' + sc.modulesWithThirds + ' módulos): <b>' + (sc.fade === null ? '-' : f1(sc.fade) + ' pts') + '</b></p>' +
+    '<p>Superado: preparación 70+, caída ' + maxFade + ' o menos. ' + (sc.R === null || sc.fade === null ? '<span class="soft">-</span>' : (pass ? '<span class="pass">SUPERADO</span>' : '<span class="fail">AÚN NO</span>')) + '</p>';
+}
+function renderMaxLoad(now){
+  const c = state.runs.circuit;
+  const cFrom = c ? c.start : now, cTo = c ? (c.end || now + 1) : now;
+  const bench = state.bench === 'benchmark';
+  let circ = '<h2 style="margin-top:0">1. Circuit-60</h2>' +
+    '<p class="row"><label class="inl"><input type="radio" name="bench" value="benchmark"' + (bench ? ' checked' : '') + '> Referencia, L5</label><label class="inl"><input type="radio" name="bench" value="training"' + (bench ? '' : ' checked') + '> Entrenamiento</label></p>' + runBar('circuit', 'el circuito');
+  CIRCUIT.forEach(function(st, i){
+    const pr = c ? stepProgress(st, ALL, cFrom, cTo) : { done:0, need:st.req.reduce(function(s, q){ return s + q[1]; }, 0), ok:false };
+    let lvl;
+    if (bench) lvl = 'L5';
+    else { const adv = adviceLevel(ALL, st.req[0][0]); lvl = adv ? 'L' + adv.level : ''; }
+    circ += chk('circuit:' + st.id, '<b>' + (i + 1) + '. ' + esc(st.name) + '</b> &middot; ' + st.minutes + ' min' + (lvl ? ' &middot; ' + lvl : '') + ' &middot; <a href="' + st.link + '">Abrir</a>' + (c ? ' &middot; ' + pr.done + '/' + pr.need : ''), '', c ? pr.ok : false);
+  });
+  circ += '<details><summary>' + ic('file') + 'Registrar resultados</summary><div class="tw"><table><tr><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>En blanco</th><th>s/elem.</th></tr>' +
+    CIRCUIT_LOG_MODS.map(function(m){ return '<tr><td>' + esc(MODNAME[m]) + '</td><td><input type="number" data-log="' + m + '" data-f="level" value="5" min="1" max="10"></td><td><input type="number" data-log="' + m + '" data-f="c" min="0"></td><td><input type="number" data-log="' + m + '" data-f="w" min="0"></td><td><input type="number" data-log="' + m + '" data-f="b" min="0"></td><td><input type="number" data-log="' + m + '" data-f="spi" min="0" step="0.1"></td></tr>'; }).join('') +
+    '</table></div><p><button class="btn" id="logcirc">Registrar</button> <span id="logmsg" class="soft small"></span></p></details>';
+  if (c){ circ += '<h3>Puntuación del circuito ' + (c.end ? '' : '(hasta ahora)') + '</h3>' + scoreBlock(scoreWindow(ALL, cFrom, cTo), 3, 'del circuito'); }
+
+  const r = state.runs.radar;
+  const rFrom = r ? r.start : now, rTo = r ? (r.end || now + 1) : now;
+  const simSince = r ? ALL.filter(function(x){ return x.key === 'sim' && x.ts >= rFrom && x.ts <= rTo; }).length : 0;
+  let radar = '<h2>2. Bloque de radar</h2>' + runBar('radar', 'el bloque');
+  [['R1', 'Proteger la separación; cada tarea al 60 % o más'], ['R2', 'Proteger las tareas; sin pérdida de separación'], ['R3', 'Equilibrado']].forEach(function(x, i){
+    radar += chk('radar:' + x[0], '<b>' + x[0] + '</b> &middot; ' + x[1] + ' &middot; 15 min &middot; <a href="../sim/README.txt">Simulador</a>', '', r ? simSince > i : false);
+  });
+  radar += chk('radar:base', 'Prueba solo de radar, misma semilla, cada 2 semanas: coste de 5 pts o menos en L5');
+  if (r){
+    const bs = radarBlockScore(ALL, rFrom, rTo);
+    radar += '<h3>Puntuación del bloque</h3>';
+    if (!bs.runs) radar += '<p class="soft">Sin pruebas</p>';
+    else radar += '<p>' + bs.runs + ' prueba(s). <b>Puntuación del eslabón más débil</b> (8+ elementos): <b>' + (bs.WL === null ? '-' : f1(bs.WL) + ' % (' + esc(compName(bs.weakest)) + ')') + '</b> &middot; pérdidas en la última prueba: ' + (bs.lossLastRun === null ? '-' : bs.lossLastRun) + '. Superado: 80+ y ninguna pérdida en R3. ' + (bs.WL === null ? '<span class="soft">-</span>' : (bs.pass ? '<span class="pass">SUPERADO</span>' : '<span class="fail">AÚN NO</span>')) + '</p>' +
+      (bs.comps.length ? '<div class="tw"><table><tr><th>Componente</th><th class="num">Aciertos/elementos</th><th class="num">Límite inferior</th></tr>' + bs.comps.sort(function(a, b){ return a.lo - b.lo; }).map(function(k){ return '<tr><td>' + esc(compName(k.name)) + '</td><td class="num">' + k.c + '/' + k.n + '</td><td class="num">' + f1(k.lo) + '%</td></tr>'; }).join('') + '</table></div>' : '');
+  }
+
+  const wkStart = new Date(now); wkStart.setHours(0, 0, 0, 0); wkStart.setDate(wkStart.getDate() - ((wkStart.getDay() + 6) % 7));
+  const thisWk = state.ramp.filter(function(t){ return t >= wkStart.getTime(); }).length;
+  const ramp = '<h2>3. Rampa de carga, 2/semana</h2>' +
+    chk('ramp:a', '<b>a.</b> Cálculo mental con doble tarea, 10 min, carga 1-2, L3-5 &middot; <a href="game-mental-math.html">Abrir</a>') +
+    chk('ramp:b', '<b>b.</b> Una prueba de simulador a tu nivel -1, 12-15 min &middot; <a href="../sim/README.txt">Simulador</a> / <a href="game-sector-sim.html">Simulador HTML</a>') +
+    chk('ramp:c', '<b>c.</b> Comprensión oral o vigilancia, 5 min &middot; <a href="game-listening.html">Comprensión oral</a> / <a href="game-memory-attention.html">Vigilancia</a>') +
+    '<p class="row"><button class="btn" id="rampdone">' + ic('check') + 'Hecho</button><span>Esta semana <b>' + thisWk + '/2</b></span></p>';
+
+  const m = state.runs.mock, exam = state.examDate ? new Date(state.examDate + 'T00:00:00').getTime() : null;
+  const dd = exam ? [14, 7].map(function(d){ return new Date(exam - d * DAY).toLocaleDateString(); }) : null;
+  const weakNames = MODEL.filter(function(a){ return a.head && a.S !== null; }).sort(function(x, y){ return x.S - y.S; }).slice(0, 2).map(function(a){ return a.name; });
+  let mock = '<h2>4. Día de simulacro</h2><p class="row"><label class="inl">Fecha del examen <input type="date" id="examdate" value="' + esc(state.examDate) + '"></label>' + (dd ? '<span>Ensayos: <b>' + dd[0] + '</b>, <b>' + dd[1] + '</b></span>' : '') +
+    '<label class="inl">Ensayo <select id="mockno"><option value="1"' + (state.mockNo === 1 ? ' selected' : '') + '>1.º (caída 5)</option><option value="2"' + (state.mockNo === 2 ? ' selected' : '') + '>2.º (caída 3)</option></select></label></p>' + runBar('mock', 'el simulacro') +
+    chk('mock:setup', 'Desayuno del día de la prueba, hora, asiento') +
+    chk('mock:a1', '<b>Bloque A, 150 min.</b> Circuito-60, referencia') +
+    chk('mock:a2', 'Descanso, 10 min') +
+    chk('mock:a3', 'Circuito-60 otra vez: <b>L6 en ' + (weakNames.length ? esc(weakNames.join(' y ')) : 'tus dos más débiles') + '</b>, L5 en el resto') +
+    chk('mock:a4', 'Una prueba de la plataforma FEAST I') +
+    chk('mock:br', 'Descanso, 15 min') +
+    chk('mock:b1', '<b>Bloque B, 90 min.</b> Bloque de radar, pruebas de 15 min') +
+    chk('mock:end', 'Última valoración y después Terminar');
+  mock += '<h3>Fatiga / estrés, 1-5</h3><p class="row"><label class="inl">Fatiga <select id="fat">' + [1, 2, 3, 4, 5].map(function(v){ return '<option>' + v + '</option>'; }).join('') + '</select></label><label class="inl">Estrés <select id="str">' + [1, 2, 3, 4, 5].map(function(v){ return '<option>' + v + '</option>'; }).join('') + '</select></label><button class="btn small" id="rate">Registrar</button></p>';
+  const rt = state.ratings.filter(function(x){ return !m || x.t >= m.start; });
+  if (rt.length) mock += '<p class="small">' + rt.slice(-8).map(function(x){ return fdate(x.t).slice(11) + ' F' + x.f + '/E' + x.s; }).join(' &middot; ') + '</p>';
+  if (m){
+    const end = m.end || now;
+    mock += '<h3>Puntuación del simulacro ' + (m.end ? '' : '(hasta ahora)') + '</h3>' + scoreBlock(scoreWindow(ALL, m.start, end + 1), state.mockNo === 2 ? 3 : 5, 'del día');
+    const mf = mockFade(ALL, m.start, end);
+    mock += '<p>Primeros 45 min: <b>' + (mf.first === null ? '-' : f0(mf.first)) + '</b> &middot; últimos 45 min: <b>' + (mf.last === null ? '-' : f0(mf.last)) + '</b> &middot; ' + (mf.ok ? 'bajada <b>' + f1(mf.fade) + ' pts</b> (límite ' + (state.mockNo === 2 ? 3 : 5) + '): ' + (mf.fade <= (state.mockNo === 2 ? 3 : 5) ? '<span class="pass">OK</span>' : '<span class="fail">Demasiada</span>') : '<span class="soft">Hacen falta 10+ elementos por aptitud</span>') + '</p>';
+  }
+  $('tab-maxload').innerHTML = circ + radar + ramp + mock;
+  bindMaxLoad(now);
+}
+function bindMaxLoad(now){
+  const root = $('tab-maxload');
+  Array.prototype.forEach.call(root.querySelectorAll('[data-chk]'), function(el){ el.addEventListener('change', function(){ state.checks[el.getAttribute('data-chk')] = el.checked; saveState(); renderMaxLoad(NOW()); }); });
+  Array.prototype.forEach.call(root.querySelectorAll('[data-start]'), function(el){ el.addEventListener('click', function(){ const k = el.getAttribute('data-start'); state.runs[k] = { start:NOW(), end:null }; Object.keys(state.checks).forEach(function(c){ if (c.indexOf({ circuit:'circuit:', radar:'radar:', mock:'mock:' }[k]) === 0) delete state.checks[c]; }); saveState(); renderMaxLoad(NOW()); }); });
+  Array.prototype.forEach.call(root.querySelectorAll('[data-finish]'), function(el){ el.addEventListener('click', function(){ state.runs[el.getAttribute('data-finish')].end = NOW(); saveState(); renderMaxLoad(NOW()); }); });
+  Array.prototype.forEach.call(root.querySelectorAll('[data-reset]'), function(el){ el.addEventListener('click', function(){ state.runs[el.getAttribute('data-reset')] = null; saveState(); renderMaxLoad(NOW()); }); });
+  Array.prototype.forEach.call(root.querySelectorAll('input[name=bench]'), function(el){ el.addEventListener('change', function(){ state.bench = el.value; saveState(); renderMaxLoad(NOW()); }); });
+  const lc = $('logcirc');
+  if (lc) lc.addEventListener('click', function(){
+    const rows = {};
+    Array.prototype.forEach.call(root.querySelectorAll('[data-log]'), function(el){ (rows[el.getAttribute('data-log')] = rows[el.getAttribute('data-log')] || {})[el.getAttribute('data-f')] = el.value; });
+    let added = 0; const t = NOW();
+    Object.keys(rows).forEach(function(m, i){
+      const x = rows[m];
+      if (x.c === '' && x.w === '' && x.b === '') return;
+      const o = mkRec({ game:'manual', label:MODNAME[m] + ' (manual)', key:m, ts:t - 1000 + i, level:x.level, mode:'manual', c:x.c || 0, w:x.w || 0, b:x.b || 0, spi:x.spi, source:'manual' });
+      if (o.rec){ state.imported.push(o.rec); added++; }
+    });
+    const mg = mergeRecords([], state.imported); state.imported = mg.records; saveState();
+    if (added){ recompute(); renderAll(); } else $('logmsg').textContent = 'Nada que registrar';
+  });
+  const rd = $('rampdone'); if (rd) rd.addEventListener('click', function(){ state.ramp.push(NOW()); ['ramp:a', 'ramp:b', 'ramp:c'].forEach(function(k){ delete state.checks[k]; }); saveState(); renderMaxLoad(NOW()); });
+  const ed = $('examdate'); if (ed) ed.addEventListener('change', function(){ state.examDate = ed.value; saveState(); renderAll(); });
+  const mn = $('mockno'); if (mn) mn.addEventListener('change', function(){ state.mockNo = +mn.value; saveState(); renderMaxLoad(NOW()); });
+  const rb = $('rate'); if (rb) rb.addEventListener('click', function(){ state.ratings.push({ t:NOW(), f:+$('fat').value, s:+$('str').value }); saveState(); renderMaxLoad(NOW()); });
+}
+
+/* ----- data tab ----- */
+function backupBundle(){
+  const games = {};
+  Object.keys(GAMES).forEach(function(k){ let raw = null; try { raw = localStorage.getItem(k); } catch (e) {} if (raw !== null && raw !== undefined){ try { games[k] = JSON.parse(raw); } catch (e) { games[k] = { unreadable: raw.slice(0, 200000) }; } } });
+  return { format:'atc-dashboard-backup', version:1, generated:new Date(NOW()).toISOString(), games:games, dashboard:state };
+}
+function download(name, text, type){
+  const b = new Blob([text], { type: type || 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function renderData(now){
+  const rows = Object.keys(GAMES).map(function(k){
+    const h = HEALTH[k];
+    const rej = Object.keys(h.rejected).map(function(r){ return h.rejected[r] + ' ' + r; }).join(', ');
+    return '<tr><td><a href="' + GAMES[k].href + '">' + esc(h.name) + '</a></td><td>' + (!h.found ? '<span class="soft">-</span>' : (h.ok ? '<span class="good">OK</span>' : '<span class="bad">problema: ' + esc(h.error) + '</span>')) + '</td><td class="num">' + h.sessions + '</td><td class="num">' + h.accepted + '</td><td>' + (h.last ? ago(h.last, now) : '-') + '</td><td>' + (rej ? '<span class="warn">rechazadas: ' + esc(rej) + '</span>' : '') + '</td></tr>';
+  }).join('');
+  const imp = {}; state.imported.forEach(function(r){ imp[r.source] = (imp[r.source] || 0) + 1; });
+  const lb = state.lastBackup, lbTxt = lb ? fdate(lb) + ' (' + ago(lb, now) + ')' : 'nunca';
+  const recent = ALL.slice(-25).reverse();
+  let html = '<h2 style="margin-top:0">Fuentes</h2><div class="tw"><table><tr><th>Fuente</th><th>Estado</th><th class="num">Sesiones</th><th class="num">Aceptadas</th><th>Última</th><th></th></tr>' + rows +
+    '<tr><td>Importadas</td><td>' + (state.imported.length ? 'OK' : '<span class="soft">-</span>') + '</td><td class="num">' + state.imported.length + '</td><td class="num">' + state.imported.length + '</td><td>' + (state.imported.length ? ago(Math.max.apply(null, state.imported.map(function(r){ return r.ts; })), now) : '-') + '</td><td class="soft">' + Object.keys(imp).map(function(k){ return imp[k] + ' ' + k; }).join(', ') + '</td></tr></table></div>' +
+    '<p class="small">Total <b>' + ALL.length + '</b> &middot; última copia <b>' + lbTxt + '</b>' + (storeOk ? '' : ' &middot; <span class="bad">Almacenamiento bloqueado</span>') + '</p>';
+  html += '<h2>Importar</h2><div class="drop" id="drop">' + ic('upload') + 'Suelta archivos<button class="btn" id="pick">Elegir</button></div><div id="impmsg" class="small" style="margin-top:8px"></div>' +
+    (state.importLog.length ? '<div class="tiny soft">Recientes: ' + state.importLog.slice(-5).map(esc).join(' | ') + '</div>' : '');
+  html += '<h2>Copia de seguridad</h2><div class="row"><button class="btn primary" id="bk">' + ic('download') + 'Copia</button><label class="btn">' + ic('upload') + 'Restaurar<input type="file" id="bkfile" accept=".json" style="display:none"></label>' +
+    '<button class="btn" id="prof">' + ic('file') + 'Perfil</button><button class="btn danger" id="wipe">' + ic('trash') + 'Borrar importadas</button></div><div id="bkmsg" class="small" style="margin-top:8px"></div>';
+  if (state.baselines.length) html += '<h2>Referencias</h2><div class="tw"><table><tr><th>Fecha</th><th>Prueba</th><th class="num">Aciertos</th><th class="num">Errores</th><th class="num">En blanco</th><th class="num">Precisión %</th></tr>' + state.baselines.slice(-15).map(function(b){ return '<tr><td>' + esc(b[0]) + '</td><td>' + esc(b[1]) + '</td><td class="num">' + esc(b[2]) + '</td><td class="num">' + esc(b[3]) + '</td><td class="num">' + esc(b[4]) + '</td><td class="num">' + esc(b[6]) + '</td></tr>'; }).join('') + '</table></div>';
+  html += '<h2>Últimas sesiones</h2>' + (recent.length ? '<div class="tw"><table><tr><th>Cuándo</th><th>Módulo</th><th>Nivel</th><th class="num">Elementos</th><th class="num">Precisión</th><th>Puntúa</th><th>Fuente</th></tr>' + recent.map(function(r){
+    let why = 'sí';
+    if (r.key === 'sim') why = (r.counted && !r.custom && !r.assisted && r.level !== null) ? 'sí' : 'no';
+    else if (!isValid(r)) why = 'no: ' + (r.custom ? 'personalizada' : (r.hinted ? 'con pistas' : (r.assisted ? 'con ayuda' : (!r.counted ? 'práctica' : (r.n < 10 ? '&lt; 10 elementos' : 'sin nivel')))));
+    return '<tr><td>' + fdate(r.ts) + '</td><td>' + esc(MODNAME[r.key] || r.label) + '</td><td>' + (r.level === null ? '-' : r.level) + '</td><td class="num">' + r.n + '</td><td class="num">' + f1(r.accuracy) + '%</td><td>' + why + '</td><td class="soft">' + esc(r.source) + '</td></tr>'; }).join('') + '</table></div>' : '<p class="soft">Sin sesiones</p>');
+  $('tab-data').innerHTML = html;
+  $('pick').addEventListener('click', function(){ $('filepick').click(); });
+  $('bk').addEventListener('click', function(){ state.lastBackup = NOW(); saveState(); download('atc-backup-' + new Date(NOW()).toISOString().slice(0, 10) + '.json', JSON.stringify(backupBundle())); renderAll(); });
+  $('bkfile').addEventListener('change', function(e){ handleFiles(e.target.files); e.target.value = ''; });
+  $('prof').addEventListener('click', function(){ download('atc_profile.json', JSON.stringify(buildProfile(MODEL, NOW()), null, 2)); });
+  $('wipe').addEventListener('click', function(){ if (window.confirm('¿Borrar los datos importados?')){ state.imported = []; saveState(); recompute(); renderAll(); } });
+  if (lastBackupJson && lastBackupJson.games){
+    $('bkmsg').innerHTML = '<button class="btn small" id="restore">' + ic('repeat') + 'Fusionar en los juegos</button>' + (restoreMsg ? ' <span class="good" id="restoremsg">' + esc(restoreMsg) + '</span>' : '');
+    $('restore').addEventListener('click', function(){ restoreMsg = restoreToGames(lastBackupJson); recompute(); renderAll(); });
+  }
+}
+function restoreToGames(bk){
+  let total = 0; const parts = [];
+  Object.keys(GAMES).forEach(function(k){
+    const g = GAMES[k], src = bk.games && bk.games[k];
+    if (!src || !Array.isArray(src[g.container])) return;
+    let cur = null;
+    try { const raw = localStorage.getItem(k); if (raw) cur = JSON.parse(raw); } catch (e) { cur = null; }
+    if (!cur || !Array.isArray(cur[g.container])) cur = JSON.parse(JSON.stringify(src)), cur[g.container] = [];
+    const have = {};
+    cur[g.container].forEach(function(s){ try { const o = ADAPTERS[k](s); if (o.rec) have[o.rec.id] = true; } catch (e) {} });
+    let add = 0;
+    src[g.container].forEach(function(s){ try { const o = ADAPTERS[k](s); if (o.rec && !have[o.rec.id]){ cur[g.container].push(s); have[o.rec.id] = true; add++; } } catch (e) {} });
+    if (add){ try { localStorage.setItem(k, JSON.stringify(cur)); total += add; parts.push(g.name + ' +' + add); } catch (e) { parts.push(g.name + ' falló'); } }
+  });
+  return total ? 'Fusionadas ' + total + ' sesiones (' + parts.join(', ') + ')' : 'Nada que fusionar';
+}
+function importText(name, text){
+  const t = String(text).replace(/^﻿/, '').trim();
+  let msg;
+  if (t[0] === '{' || t[0] === '['){
+    let j; try { j = JSON.parse(t); } catch (e) { return name + ': JSON no válido'; }
+    if (j && j.format === 'atc-dashboard-backup'){
+      lastBackupJson = j; let recs = [], rej = 0;
+      Object.keys(GAMES).forEach(function(k){ const g = GAMES[k]; const s = j.games && j.games[k]; if (s && Array.isArray(s[g.container])) s[g.container].forEach(function(x){ let o; try { o = ADAPTERS[k](x); } catch (e) { o = { err:'x' }; } if (o.rec){ o.rec.source = 'backup'; recs.push(o.rec); } else rej++; }); });
+      const m = mergeRecords(state.imported, recs); state.imported = m.records;
+      if (j.dashboard && typeof j.dashboard === 'object'){ ['runs', 'checks'].forEach(function(f){ if (j.dashboard[f] && typeof j.dashboard[f] === 'object' && !state.importedBackupDone) state[f] = state[f] && Object.keys(state[f]).length ? state[f] : j.dashboard[f]; }); if (Array.isArray(j.dashboard.imported)){ state.imported = mergeRecords(state.imported, j.dashboard.imported.map(function(r){ r.thirds = cleanThirds(r.thirds); r.id = dkey(r); return r; }).filter(function(r){ return isFinite(r.ts); })).records; } }
+      msg = name + ': copia leída, ' + m.added + ' sesiones nuevas añadidas, ' + m.dup + ' duplicadas omitidas, ' + rej + ' rechazadas.';
+    } else if (j && Array.isArray(j.runs)){
+      const recs = [], rej = {};
+      j.runs.forEach(function(r){ const o = simToRec(r); if (o.err) rej[o.err] = (rej[o.err] || 0) + 1; else recs.push(o.rec); });
+      const m = mergeRecords(state.imported, recs); state.imported = m.records;
+      msg = name + ': sim_stats.json, ' + m.added + ' pruebas nuevas, ' + m.dup + ' duplicadas omitidas' + (Object.keys(rej).length ? ', rechazadas: ' + Object.keys(rej).map(function(k){ return rej[k] + ' ' + k; }).join(', ') : '') + '.';
+    } else {
+      // a game's own container object
+      let done = false;
+      Object.keys(GAMES).forEach(function(k){ const g = GAMES[k]; if (!done && j && Array.isArray(j[g.container]) && j[g.container].length){ const first = j[g.container][0] || {}; const isEs = 'aciertos' in first || 'modulo' in first; if ((g.container === 'sesiones') !== isEs) return;
+        const guess = guessGame(first, k); if (guess !== k) return; done = true;
+        const recs = []; j[g.container].forEach(function(x){ let o; try { o = ADAPTERS[k](x); } catch (e) { o = { err:'x' }; } if (o.rec){ o.rec.source = 'json'; recs.push(o.rec); } });
+        const m = mergeRecords(state.imported, recs); state.imported = m.records; msg = name + ': historial de ' + g.name + ', ' + m.added + ' sesiones nuevas, ' + m.dup + ' duplicadas omitidas.'; } });
+      if (!done) return name + ': JSON no reconocido (se esperaba sim_stats.json, una copia del panel o el historial de un juego).';
+    }
+  } else {
+    const c = csvToRecords(t);
+    if (c.kind === 'metrics'){
+      const rows = c.rows.slice(1).filter(function(r){ return r[0] && r[1]; });
+      const seen = {}; state.baselines.forEach(function(b){ seen[b.join('|')] = true; });
+      let add = 0; rows.forEach(function(r){ const k = r.slice(0, 7); if (!seen[k.join('|')]){ state.baselines.push(k); seen[k.join('|')] = true; add++; } });
+      msg = name + ': hoja de métricas, ' + add + ' filas de referencia nuevas (se muestran en Datos, no puntúan: la plataforma es otra prueba).';
+    } else if (c.kind === 'games'){
+      const m = mergeRecords(state.imported, c.records); state.imported = m.records;
+      const rj = {}; c.rejected.forEach(function(r){ rj[r] = (rj[r] || 0) + 1; });
+      msg = name + ': CSV, ' + m.added + ' sesiones nuevas, ' + m.dup + ' duplicadas omitidas' + (c.rejected.length ? ', ' + c.rejected.length + ' filas rechazadas (' + Object.keys(rj).slice(0, 3).join('; ') + ')' : '') + '.';
+    } else return name + ': no reconocido (se esperaba el CSV estándar de diez columnas).';
+  }
+  state.importLog.push(name + ' ' + fdate(NOW())); state.importLog = state.importLog.slice(-20);
+  saveState();
+  return msg;
+}
+function guessGame(first, hint){
+  if ('aciertos' in first) return 'atc_entrenador_v1';
+  if ('ok' in first && 'lvl' in first) return 'atc_mentalmath_v1';
+  if ('losses' in first && 'seed' in first) return 'atc_sectorsim_v1';
+  if ('within15' in first) return 'atc_spatial_v1';
+  if ('moduleKey' in first) return 'atc_memattn_v1';
+  if ('rate' in first && 'replays' in first) return 'atc_listening_v1';
+  if ('hinted' in first && 'valid' in first) return 'atc_radar_v2';
+  if (/Matrices|Logic|l.gicas|series|Analog|Odd|distinto|intruso|Abstract|abstracto/i.test(first.module || '')) return 'atc_matrices_v1';
+  return hint;
+}
+function handleFiles(files){
+  const list = Array.prototype.slice.call(files || []);
+  if (!list.length) return Promise.resolve();
+  const msgs = [];
+  return Promise.all(list.map(function(f){ return f.text().then(function(t){ msgs.push(importText(f.name, t)); }, function(){ msgs.push(f.name + ': no se pudo leer'); }); })).then(function(){
+    recompute(); renderAll();
+    const el = $('impmsg'); if (el) el.innerHTML = msgs.map(esc).join('<br>');
+    window.__lastImport = msgs;
+  });
+}
+function renderBanners(now){
+  const b = [];
+  if (!storeOk) b.push('<div class="banner err"><b>Almacenamiento bloqueado</b> Exporta antes de cerrar.</div>');
+  Object.keys(HEALTH).forEach(function(k){ if (HEALTH[k].found && !HEALTH[k].ok) b.push('<div class="banner err"><b>No se pudo leer el historial de ' + esc(HEALTH[k].name) + '</b> ' + esc(HEALTH[k].error) + '</div>'); });
+  const anyFound = Object.keys(HEALTH).some(function(k){ return HEALTH[k].found; });
+  if (!anyFound && !state.imported.length) b.push('<div class="banner"><b>No hay historial de juegos</b></div>');
+  if (ALL.length && (!state.lastBackup || now - state.lastBackup > 7 * DAY)) b.push('<div class="banner"><b>Última copia: ' + (state.lastBackup ? ago(state.lastBackup, now) : 'nunca') + '</b><button class="btn small" data-goto="data">' + ic('download') + 'Hacer copia</button></div>');
+  $('banners').innerHTML = b.join('');
+  Array.prototype.forEach.call($('banners').querySelectorAll('[data-goto]'), function(x){ x.addEventListener('click', function(){ curTab = 'data'; renderTabs(); renderAll(); }); });
+}
+function renderAll(){
+  const now = NOW();
+  $('sub').textContent = new Date(now).toDateString();
+  const last = ALL.length ? ALL[ALL.length - 1].ts : null;
+  $('topchips').innerHTML = ALL.length + ' sesiones' + (last ? ' &middot; última ' + ago(last, now) : '');
+  renderBanners(now);
+  const rd = renderHero(now);
+  renderOverviewRest(now, rd);
+  renderTrends(now); renderEndurance(now); renderMaxLoad(now); renderData(now);
+}
+function initDrop(){
+  let depth = 0;
+  window.addEventListener('dragenter', function(e){ e.preventDefault(); depth++; const d = $('drop'); if (d) d.classList.add('over'); });
+  window.addEventListener('dragleave', function(){ depth = Math.max(0, depth - 1); if (!depth){ const d = $('drop'); if (d) d.classList.remove('over'); } });
+  window.addEventListener('dragover', function(e){ e.preventDefault(); });
+  window.addEventListener('drop', function(e){ e.preventDefault(); depth = 0; const d = $('drop'); if (d) d.classList.remove('over'); if (curTab !== 'data'){ curTab = 'data'; renderTabs(); } handleFiles(e.dataTransfer && e.dataTransfer.files); });
+  $('filepick').addEventListener('change', function(e){ handleFiles(e.target.files); e.target.value = ''; });
+}
+function init(){
+  loadState();
+  try { const t = sessionStorage.getItem('atc_dash_tab'); if (t && TABS.some(function(x){ return x[0] === t; })) curTab = t; } catch (e) {}
+  recompute(); renderTabs(); renderAll(); initDrop();
+  window.addEventListener('storage', function(e){ if (e.key && GAMES[e.key]){ recompute(); renderAll(); } });
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden){ recompute(); renderAll(); } });
+  window.App = { recompute:recompute, renderAll:renderAll, handleFiles:handleFiles, importText:importText, get all(){ return ALL; }, get model(){ return MODEL; }, get state(){ return state; }, get health(){ return HEALTH; } };
+}
+if (typeof document !== 'undefined' && document.getElementById('app')) init();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

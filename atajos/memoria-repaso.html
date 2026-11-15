@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repaso</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Ccircle cx='12' cy='12' r='4.8'/%3E%3Cpath d='M12 12 19.2 4.8'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onaccent:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a3c6ef; --onaccent:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d}
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5}
+#app{max-width:880px;margin:0 auto;padding:20px 16px 56px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;margin:0}
+h1{font-size:1.9rem;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:30px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px}
+p{margin:.5rem 0}
+a{color:var(--accent)}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:16px;height:16px}
+.muted{color:var(--muted)} .ok{color:var(--ok)} .err{color:var(--err)} .warnc{color:var(--warn)}
+.small{font-size:.85rem}
+.top{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--rule)}
+.top .logo{width:32px;height:32px;color:var(--accent);stroke-width:1.5}
+.top h1{flex:1}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--accent)}
+.back:hover{text-decoration:underline}
+button,select,input,textarea{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;line-height:1.2}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onaccent)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onaccent)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn:focus-visible,.seg button:focus-visible,.cellb:focus-visible,.lnk:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lnk{background:none;border:0;padding:2px 0;color:var(--accent);text-decoration:underline;cursor:pointer;font-family:var(--mono);font-size:.9rem}
+input[type=text],input[type=number],select,textarea{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:7px 10px;min-height:38px}
+input[type=text],textarea{width:100%}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;margin:0}
+.row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:10px 0}
+.seg{display:inline-flex}
+.seg button{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:6px 12px;cursor:pointer;margin-left:-1px;border-radius:0;line-height:1.2}
+.seg button:first-child{border-radius:2px 0 0 2px;margin-left:0}
+.seg button:last-child{border-radius:0 2px 2px 0}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--onaccent)}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field>span{color:var(--muted);font-size:.85rem}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule)}
+thead th{border-top:1px solid var(--rule);color:var(--muted);font-weight:600;font-size:.88rem}
+tbody tr:nth-child(even){background:var(--stripe)}
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:14px 0}
+summary{cursor:pointer;padding:9px 2px;font-weight:600;display:flex;align-items:center;gap:8px}
+.msg{min-height:1.4em;font-weight:600}
+.foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{display:inline-flex;align-items:center;gap:6px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:520px){html{font-size:16px}h1{font-size:1.6rem}}
+
+.status{display:flex;gap:28px;align-items:flex-end;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px}
+.due{display:flex;flex-direction:column}
+.due .dn{font-family:var(--mono);font-size:3rem;font-weight:700;line-height:1;color:var(--accent)}
+.due .dl{color:var(--muted);font-size:.85rem}
+.boxes{display:flex;gap:10px;flex:1;min-width:15rem;max-width:26rem}
+.bx{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bx .n{font-family:var(--mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+.bx .bar{display:flex;align-items:flex-end;width:100%;height:46px;border-bottom:1.5px solid var(--text)}
+.bx .bar i{display:block;width:100%;background:var(--accent);min-height:0;border-radius:1px 1px 0 0}
+.bx .l{font-weight:700;display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.bx .l small{font-weight:400;color:var(--muted);font-size:.72rem}
+.cardarea{min-height:230px;padding:18px 0}
+.face{position:relative;border:1px solid var(--rule);border-radius:2px;background:var(--surface);padding:34px 16px 22px;text-align:center}
+.face .bxn{position:absolute;top:8px;left:12px;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.face .big{font-family:var(--serif);font-weight:700;font-size:2.6rem;line-height:1.15;word-break:break-word}
+.face .fr{font-family:var(--mono)}
+.face .bk{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule);color:var(--accent)}
+.grades{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
+.grades kbd{font-family:var(--mono);font-size:.8rem;border:1px solid currentColor;border-radius:2px;padding:0 5px;opacity:.85}
+.empty{display:flex;gap:14px;align-items:baseline;justify-content:center;padding:70px 0;font-family:var(--mono);font-size:2rem}
+.adhoc{align-items:flex-end}
+.adhoc .field{flex:1;min-width:10rem}
+.dec{padding:6px 10px;font-family:var(--mono);font-size:.88rem}
+@media (max-width:520px){.face .big{font-size:2.1rem}.grades .btn{flex:1 1 40%;justify-content:center}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V5M7 9.5l5-5 5 5M5 20h14"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20l1-4.5L16.5 4l3.5 3.5L8.5 19zM14.5 6l3.5 3.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4.5h6V7M7 7l1 13h8l1-13"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></symbol>
+<symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4 7.5 20M16.5 4l-2 16M4 9h16M3.5 15h16"/></symbol>
+<symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+<symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="13" rx="1"/><path d="M8 7V4h13v13h-5"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3.8 1.3 1.8V9l8 4.7v2l-8-2.2v4.4l2.2 1.6v1.5L12 20l-3.5 1v-1.5l2.2-1.6v-4.4l-8 2.2v-2l8-4.7V4.3c0-1 .5-1.8 1.3-1.8z"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"/></symbol>
+</defs></svg>
+
+<div id="app">
+<header class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Repaso</h1><a class="back" href="index.html"><svg class="ic sm" aria-hidden="true"><use href="#i-back"/></svg>Atajos</a></header>
+<main>
+<div class="status">
+<div class="due"><span id="due" class="dn">0</span><span class="dl">Hoy</span></div>
+<div class="boxes" id="boxes" aria-label="Cajas"></div>
+</div>
+
+<div id="card" class="cardarea" aria-live="polite"></div>
+
+<h2><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Añadir</h2>
+<div class="row"><div class="seg" id="lang" role="group" aria-label="Tabla"><button type="button" data-v="es" aria-pressed="true">ES</button><button type="button" data-v="en" aria-pressed="false">EN</button></div>
+<div class="seg" id="dir" role="group" aria-label="Sentido"><button type="button" data-v="fwd" aria-pressed="false">Cifra → imagen</button><button type="button" data-v="rev" aria-pressed="false">Imagen → cifra</button><button type="button" data-v="both" aria-pressed="true">Ambos</button></div></div>
+<div class="row" id="decs"></div>
+<div class="row"><button class="btn" id="alln" type="button">00-99</button></div>
+<div class="row adhoc"><label class="field"><span>Anverso</span><input type="text" id="af" maxlength="80" autocomplete="off"></label>
+<label class="field"><span>Reverso</span><input type="text" id="ab" maxlength="80" autocomplete="off"></label>
+<button class="btn" id="addx" type="button"><svg class="ic sm" aria-hidden="true"><use href="#i-plus"/></svg>Añadir</button></div>
+<div class="msg" id="addmsg"></div>
+
+<h2><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg>Tarjetas <span class="muted small" id="total">0</span></h2>
+<div class="row"><button class="btn" id="exp" type="button"><svg class="ic sm" aria-hidden="true"><use href="#i-download"/></svg>Exportar</button>
+<button class="btn" id="imp" type="button"><svg class="ic sm" aria-hidden="true"><use href="#i-upload"/></svg>Importar</button>
+<label class="btn" style="cursor:pointer">Archivo<input type="file" id="file" accept=".json,application/json" class="vh"></label>
+<button class="btn danger" id="clear" type="button"><svg class="ic sm" aria-hidden="true"><use href="#i-trash"/></svg>Vaciar</button></div>
+<textarea id="iobox" rows="3" spellcheck="false" aria-label="JSON" style="font-family:var(--mono);font-size:.85rem"></textarea>
+
+</main>
+<footer class="foot"><a href="../practica/aptitude/game-memory-attention.html">Practicar<svg class="ic sm" aria-hidden="true"><use href="#i-arrow"/></svg></a></footer>
+</div>
+<script>
+// ==== LOGIC START ====
+var INTERVALS = [1,2,4,8,16];
+var ES_BANK = ('rorro rata reno remo roca rulo rosa rifa ragú ropa toro dedo tina dama taco tela taza tofu techo tubo ' +
+ 'nuera nido niño ñame ñoqui anillo nuez enojo nacho nube mar moto mono momia mueca mula mesa mafia mago mapa ' +
+ 'cura cota cono cama coco cola casa café coche copa loro lata luna lima loco lila lazo elfo lago lobo ' +
+ 'sierra seta sauna sumo saco sol seso sofá sushi sapo faro foto fauno fama foca fila foso fofo fuego faba ' +
+ 'gorro gato chino goma chico gol gas chef chucho guapo pera pato pan puma boca pala pez Piaf pecho papa').split(' ');
+var ES_PEG = ['oro','té','uña','emú','kiwi','ala','oso','ufo','hacha','uva'];
+var EN_BANK = ('sauce seed sun sum sewer sail sash sock sofa soap toes tot tin tomb tire towel dish tack dove tape ' +
+ 'nose net nun name owner nail notch neck knife knob mouse mat moon mummy mower mail match mug movie map ' +
+ 'rose rod rain ram rower rail roach rock roof rope lace lid lion lamb lawyer lily leech log leaf lip ' +
+ 'cheese sheet chain jam chair jail judge chalk chef ship case cat coin comb car coal cage cake cave cap ' +
+ 'vase foot phone foam fur file fish fig five VIP bus bat bun bomb bar bell beach book beef pipe').split(' ');
+var EN_PEG = ['sea','tie','Noah','ma','rye','law','shoe','key','fee','bee'];
+function defaultBank(lang){
+  var b = {}, src = lang === 'en' ? EN_BANK : ES_BANK, peg = lang === 'en' ? EN_PEG : ES_PEG, i;
+  for (i = 0; i < 100; i++) b[(i < 10 ? '0' : '') + i] = src[i];
+  for (i = 0; i < 10; i++) b['p' + i] = peg[i];
+  return b;
+}
+function mergedBank(lang, user){
+  var b = defaultBank(lang), w = user && user.words;
+  if (w) for (var k in w) if (b.hasOwnProperty(k) && typeof w[k] === 'string' && w[k].trim()) b[k] = w[k].trim().slice(0, 40);
+  return b;
+}
+function pad(n){ return (n < 10 ? '0' : '') + n; }
+function dateStr(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function addDays(s, n){
+  var p = s.split('-'), t = Date.UTC(+p[0], +p[1] - 1, +p[2]) + n * 86400000, d = new Date(t);
+  return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate());
+}
+function newCard(today, extra){
+  var c = {box:1, due:today, n:0};
+  if (extra) for (var k in extra) c[k] = extra[k];
+  return c;
+}
+// g: 1 fallo, 2 dificil, 3 bien, 4 facil
+function grade(card, g, today){
+  var b = card.box;
+  if (g === 1) b = 1; else if (g === 3) b = Math.min(5, b + 1); else if (g === 4) b = Math.min(5, b + 2);
+  var c = {}; for (var k in card) c[k] = card[k];
+  c.box = b; c.due = addDays(today, INTERVALS[b - 1]); c.n = (card.n || 0) + 1; c.last = today;
+  return c;
+}
+function dueIds(cards, today){
+  return Object.keys(cards).filter(function(id){ return cards[id].due <= today; })
+    .sort(function(a, b){ var x = cards[a], y = cards[b]; return x.due < y.due ? -1 : x.due > y.due ? 1 : x.box - y.box || (a < b ? -1 : 1); });
+}
+function boxCounts(cards){
+  var o = [0,0,0,0,0]; Object.keys(cards).forEach(function(id){ o[cards[id].box - 1]++; }); return o;
+}
+function nextDue(cards){
+  var m = null; Object.keys(cards).forEach(function(id){ if (m === null || cards[id].due < m) m = cards[id].due; }); return m;
+}
+function cardSides(id, card, banks){
+  if (card.src === 'bank') {
+    var p = id.split(':'), lang = p[0], key = p[1], dir = p[2], word = banks[lang] && banks[lang][key];
+    var num = key.charAt(0) === 'p' ? key.slice(1) : key;
+    if (!word) return null;
+    return dir === 'f' ? {front:num, back:word} : {front:word, back:num};
+  }
+  return {front:card.front, back:card.back};
+}
+function sanitiseState(o){
+  if (!o || typeof o !== 'object' || !o.cards || typeof o.cards !== 'object') return null;
+  var out = {v:1, cards:{}};
+  Object.keys(o.cards).forEach(function(id){
+    var c = o.cards[id];
+    if (!c || typeof c !== 'object' || !/^\d{4}-\d\d-\d\d$/.test(c.due) || !(c.box >= 1 && c.box <= 5)) return;
+    var n = {box:Math.floor(c.box), due:c.due, n:+c.n || 0};
+    if (c.src === 'bank' && /^(es|en):(\d\d|p\d):[fr]$/.test(id)) n.src = 'bank';
+    else if (c.src === 'adhoc' && typeof c.front === 'string' && typeof c.back === 'string') { n.src = 'adhoc'; n.front = c.front.slice(0, 80); n.back = c.back.slice(0, 80); }
+    else return;
+    out.cards[id] = n;
+  });
+  return out;
+}
+// ==== LOGIC END ====
+
+var $ = function(id){ return document.getElementById(id); };
+var store = {
+  get: function(k, d){ try { var v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+};
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+var lang = store.get('atc_aid_major_lang', 'es'); if (lang !== 'en') lang = 'es';
+var state = sanitiseState(store.get('atc_aid_leitner_v1', null)) || {v:1, cards:{}};
+var dir = 'both', queue = [], revealed = false, requeued = {};
+function today(){ return dateStr(new Date()); }
+function save(){ store.set('atc_aid_leitner_v1', state); }
+function banks(){ return {es:mergedBank('es', store.get('atc_aid_major_es', null)), en:mergedBank('en', store.get('atc_aid_major_en', null))}; }
+
+function startSession(){
+  queue = dueIds(state.cards, today()); revealed = false; requeued = {};
+}
+function sides(id){ return cardSides(id, state.cards[id], banks()); }
+function render(){
+  var t = today(), due = dueIds(state.cards, t), cnt = boxCounts(state.cards), tot = Object.keys(state.cards).length, mx = Math.max.apply(null, cnt.concat([1]));
+  document.querySelectorAll('#lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === lang)); });
+  document.querySelectorAll('#dir button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === dir)); });
+  $('due').textContent = queue.length;
+  $('total').textContent = tot;
+  var h = '';
+  cnt.forEach(function(c, i){ h += '<div class="bx"><span class="n">' + c + '</span><span class="bar"><i style="height:' + Math.round(100 * c / mx) + '%"></i></span><span class="l">' + (i + 1) + '<small>' + INTERVALS[i] + ' d</small></span></div>'; });
+  $('boxes').innerHTML = h;
+  var area = $('card');
+  while (queue.length && !state.cards[queue[0]]) queue.shift();
+  while (queue.length && !sides(queue[0])) queue.shift();
+  $('due').textContent = queue.length;
+  if (!queue.length) {
+    var nd = nextDue(state.cards);
+    area.innerHTML = '<div class="empty">' + (tot ? '<span class="ok">0</span>' + (nd && nd > t ? '<span class="muted small">' + nd + '</span>' : '') : '') + '</div>';
+    return;
+  }
+  var id = queue[0], c = state.cards[id], s = sides(id);
+  var lg = c.src === 'bank' ? id.split(':')[0].toUpperCase() : '';
+  area.innerHTML = '<div class="face"><span class="bxn">' + c.box + (lg ? ' · ' + lg : '') + '</span><div class="fr big">' + esc(s.front) + '</div>' +
+    (revealed ? '<div class="bk big">' + esc(s.back) + '</div>' : '') + '</div>' +
+    (revealed ?
+      '<div class="grades"><button class="btn danger g" data-g="1" type="button"><kbd>1</kbd>Fallo</button><button class="btn g" data-g="2" type="button"><kbd>2</kbd>Difícil</button><button class="btn primary g" data-g="3" type="button"><kbd>3</kbd>Bien</button><button class="btn g" data-g="4" type="button"><kbd>4</kbd>Fácil</button></div>' :
+      '<div class="grades"><button class="btn primary" id="rev" type="button"><svg class="ic sm" aria-hidden="true"><use href="#i-eye"/></svg>Revelar</button></div>');
+  var rv = $('rev'); if (rv) { rv.addEventListener('click', reveal); rv.focus({preventScroll:true}); }
+  area.querySelectorAll('.g').forEach(function(b){ b.addEventListener('click', function(){ answer(+b.dataset.g); }); });
+}
+function reveal(){ revealed = true; render(); var g = document.querySelector('.g[data-g="3"]'); if (g) g.focus({preventScroll:true}); }
+function answer(g){
+  var id = queue.shift(); if (!id || !state.cards[id]) return render();
+  if (requeued[id]) { // second pass after a fail: no scheduling change
+    if (g === 1) queue.push(id); else delete requeued[id];
+  } else {
+    state.cards[id] = grade(state.cards[id], g, today());
+    if (g === 1) { requeued[id] = true; queue.push(id); }
+  }
+  revealed = false; save(); render();
+}
+function addBank(keys){
+  var t = today(), n = 0;
+  keys.forEach(function(k){
+    [dir !== 'rev' ? 'f' : null, dir !== 'fwd' ? 'r' : null].forEach(function(d){
+      if (!d) return; var id = lang + ':' + k + ':' + d;
+      if (!state.cards[id]) { state.cards[id] = newCard(t, {src:'bank'}); n++; }
+    });
+  });
+  save(); startSession(); render(); $('addmsg').textContent = n ? '+' + n : '';
+}
+function addAdhoc(){
+  var f = $('af').value.trim().slice(0, 80), b = $('ab').value.trim().slice(0, 80);
+  if (!f || !b) { $('addmsg').innerHTML = '<span class="err">Falta texto</span>'; return; }
+  var t = today(), n = 0, stamp = Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
+  if (dir !== 'rev') { state.cards['x:' + stamp + ':f'] = newCard(t, {src:'adhoc', front:f, back:b}); n++; }
+  if (dir !== 'fwd') { state.cards['x:' + stamp + ':r'] = newCard(t, {src:'adhoc', front:b, back:f}); n++; }
+  $('af').value = ''; $('ab').value = ''; save(); startSession(); render(); $('addmsg').textContent = '+' + n;
+}
+function exportState(){
+  var txt = JSON.stringify(state, null, 1);
+  try {
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], {type:'application/json'}));
+    a.download = 'atc_aid_leitner_v1.json'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  } catch (e) {}
+  $('iobox').value = txt;
+}
+function importState(txt){
+  var o = null; try { o = sanitiseState(JSON.parse(txt)); } catch (e) {}
+  if (!o) { $('addmsg').innerHTML = '<span class="err">JSON no válido</span>'; return; }
+  state = o; save(); startSession(); render(); $('addmsg').innerHTML = '<span class="ok">' + Object.keys(o.cards).length + '</span>';
+}
+function init(){
+  var dec = $('decs'), h = '', i;
+  for (i = 0; i < 10; i++) h += '<button type="button" class="btn dec" data-r="' + i + '">' + i + '0-' + i + '9</button>';
+  h += '<button type="button" class="btn dec" data-r="p">0-9</button>';
+  dec.innerHTML = h;
+  dec.querySelectorAll('.dec').forEach(function(b){ b.addEventListener('click', function(){
+    var r = b.dataset.r, keys = [], k;
+    if (r === 'p') for (k = 0; k < 10; k++) keys.push('p' + k); else for (k = 0; k < 10; k++) keys.push(r + k);
+    addBank(keys);
+  }); });
+  $('alln').addEventListener('click', function(){ var ks = [], k; for (k = 0; k < 100; k++) ks.push(pad(k)); addBank(ks); });
+  document.querySelectorAll('#lang button').forEach(function(b){ b.addEventListener('click', function(){ lang = b.dataset.v; store.set('atc_aid_major_lang', lang); render(); }); });
+  document.querySelectorAll('#dir button').forEach(function(b){ b.addEventListener('click', function(){ dir = b.dataset.v; render(); }); });
+  $('addx').addEventListener('click', addAdhoc);
+  $('ab').addEventListener('keydown', function(e){ if (e.key === 'Enter') addAdhoc(); });
+  $('exp').addEventListener('click', exportState);
+  $('imp').addEventListener('click', function(){ importState($('iobox').value); });
+  $('file').addEventListener('change', function(){ var f = this.files && this.files[0]; if (!f) return; var r = new FileReader(); r.onload = function(){ importState(String(r.result)); }; r.readAsText(f); this.value = ''; });
+  $('clear').addEventListener('click', function(){
+    if ($('clear').dataset.sure !== '1') { $('clear').dataset.sure = '1'; $('clear').lastChild.textContent = 'Seguro'; setTimeout(function(){ $('clear').dataset.sure = ''; $('clear').lastChild.textContent = 'Vaciar'; }, 3000); return; }
+    state = {v:1, cards:{}}; save(); startSession(); render(); $('clear').dataset.sure = ''; $('clear').lastChild.textContent = 'Vaciar';
+  });
+  document.addEventListener('keydown', function(e){
+    var tg = (e.target && e.target.tagName) || '';
+    if (tg === 'INPUT' || tg === 'TEXTAREA' || tg === 'SELECT' || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (!queue.length) return;
+    if (!revealed && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); reveal(); }
+    else if (revealed && e.key >= '1' && e.key <= '4') { e.preventDefault(); answer(+e.key); }
+  });
+  startSession(); render();
+}
+init();
+
+</script>
+<script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body>
+</html>

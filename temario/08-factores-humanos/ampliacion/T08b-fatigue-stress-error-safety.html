@@ -1,0 +1,960 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fatiga, estrés, error, TEM y gestión de la seguridad operacional (T08b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Factores humanos</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-este-archivo-que-no-cubren-el-manual-ni-el-material-t08-existente">Qué cubre este archivo que no cubren el manual ni el material T08 existente</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-la-fatiga-mas-alla-del-manual-limites-numericos-de-servicio-y-descanso">1. La fatiga más allá del manual: límites numéricos de servicio y descanso</a><ul>
+<li><a href="#11-la-guia-de-eurocontrol-de-2023-sobre-fatiga-y-turnos-buena-practica-no-vinculante">1.1 La guía de EUROCONTROL de 2023 sobre fatiga y turnos (buena práctica no vinculante)</a></li>
+<li><a href="#12-rotacion-hacia-adelante-o-hacia-atras-y-el-dia-de-sueno">1.2 Rotación hacia adelante o hacia atrás y el «día de sueño»</a></li>
+<li><a href="#13-entrenamiento-en-posicion-ojt-y-operacion-con-controlador-unico-spo-medidas-de-mitigacion-de-la-fatiga">1.3 Entrenamiento en posición (OJT) y operación con controlador único (SPO): medidas de mitigación de la fatiga</a></li>
+<li><a href="#14-limites-nacionales-espanoles-de-servicio-y-descanso-real-decreto-10012010-desarrollo-de-la-ley-92010">1.4 Límites nacionales españoles de servicio y descanso: Real Decreto 1001/2010 (desarrollo de la Ley 9/2010)</a></li>
+<li><a href="#15-el-convenio-colectivo-de-enaire-contraste-de-carga-de-trabajo-y-descanso">1.5 El convenio colectivo de ENAIRE: contraste de carga de trabajo y descanso</a></li>
+</ul>
+</li>
+<li><a href="#2-la-discrepancia-quintuple-sobre-la-noche-no-confundir-estas-ventanas">2. La discrepancia quíntuple sobre la «noche»: no confundir estas ventanas</a></li>
+<li><a href="#3-gestion-de-riesgos-de-fatiga-frms-metodos-de-seguimiento-y-contramedidas">3. Gestión de riesgos de fatiga: FRMS, métodos de seguimiento y contramedidas</a></li>
+<li><a href="#4-el-estres-mas-alla-del-manual-sustancias-psicoactivas-atcoa015-y-aptitud">4. El estrés más allá del manual: sustancias psicoactivas, ATCO.A.015 y aptitud</a><ul>
+<li><a href="#41-atcoa015-incapacidad-provisional">4.1 ATCO.A.015: incapacidad provisional</a></li>
+<li><a href="#42-sustancias-psicoactivas-la-definicion-reglamentaria">4.2 Sustancias psicoactivas: la definición reglamentaria</a></li>
+<li><a href="#43-incidente-critico-reacciones-inusuales-o-extremas-definicion-reglamentaria">4.3 Incidente crítico: reacciones inusuales o extremas (definición reglamentaria)</a></li>
+</ul>
+</li>
+<li><a href="#5-taxonomia-del-error-mas-alla-de-gems-transgresiones-fallos-activos-y-latentes">5. Taxonomía del error más allá de GEMS: transgresiones, fallos activos y latentes</a><ul>
+<li><a href="#51-transgresiones-violations-cinco-tipos-asociados-a-los-niveles-de-rasmussen">5.1 Transgresiones (violations): cinco tipos, asociados a los niveles de Rasmussen</a></li>
+<li><a href="#52-fallos-activos-y-latentes-digest-7-de-la-oaci">5.2 Fallos activos y latentes (Digest 7 de la OACI)</a></li>
+</ul>
+</li>
+<li><a href="#6-gestion-de-la-seguridad-operacional-sms-del-anexo-19-de-la-oaci-esarr-2-esarr-5">6. Gestión de la seguridad operacional: SMS del Anexo 19 de la OACI, ESARR 2, ESARR 5</a><ul>
+<li><a href="#61-el-marco-sms-de-la-oaci-cuatro-componentes-doce-elementos">6.1 El marco SMS de la OACI: cuatro componentes, doce elementos</a></li>
+<li><a href="#62-esarr-2-notificacion-y-evaluacion-de-sucesos-de-seguridad-operacional">6.2 ESARR 2: notificación y evaluación de sucesos de seguridad operacional</a></li>
+<li><a href="#63-esarr-5-requisitos-de-seguridad-sobre-licencias-y-garantia-de-competencia-de-los-controladores">6.3 ESARR 5: requisitos de seguridad sobre licencias y garantía de competencia de los controladores</a></li>
+</ul>
+</li>
+<li><a href="#7-cultura-justa-la-definicion-exacta-reglamento-3762014-rd-10882020">7. Cultura justa: la definición exacta, Reglamento 376/2014, RD 1088/2020</a><ul>
+<li><a href="#71-la-definicion-de-la-etapa-eurocontrolesarr-literal">7.1 La definición de la etapa EUROCONTROL/ESARR (literal)</a></li>
+<li><a href="#72-reglamento-ue-3762014-notificacion-de-sucesos-y-proteccion-de-la-cultura-justa">7.2 Reglamento (UE) 376/2014: notificación de sucesos y protección de la cultura justa</a></li>
+<li><a href="#73-rd-10882020-la-transposicion-espanola-nuevo-no-esta-en-el-manual-ni-en-el-material-t08-previo">7.3 RD 1088/2020: la transposición española (nuevo, no está en el manual ni en el material T08 previo)</a></li>
+</ul>
+</li>
+<li><a href="#8-cultura-de-seguridad-el-modelo-de-reason-en-cinco-partes-redes-de-seguridad">8. Cultura de seguridad: el modelo de Reason en cinco partes; redes de seguridad</a><ul>
+<li><a href="#81-el-modelo-de-cultura-de-seguridad-de-reason-en-cinco-partes">8.1 El modelo de cultura de seguridad de Reason en cinco partes</a></li>
+<li><a href="#82-redes-de-seguridad-terrestres-y-de-a-bordo">8.2 Redes de seguridad terrestres y de a bordo</a></li>
+</ul>
+</li>
+<li><a href="#9-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">9. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#10-casos-practicos-mas-de-25-con-solucion">10. Casos prácticos (más de 25, con solución)</a></li>
+<li><a href="#11-trampas-de-examen">11. Trampas de examen</a></li>
+<li><a href="#12-imprescindible-memorizar-breve-y-denso">12. Imprescindible memorizar (breve y denso)</a></li>
+<li><a href="#13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#14-fuentes">14. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">47 min de lectura</div><h1 id="t08b-fatiga-estres-error-tem-y-gestion-de-la-seguridad-operacional-mas-alla-del-manual-de-enaire">T08b: Fatiga, estrés, error, TEM y gestión de la seguridad operacional — más allá del manual de ENAIRE</h1>
+<p>Este archivo va <strong>más allá</strong> del manual oficial 8 de ENAIRE (<em>Factores Humanos en ATM</em>, julio de 2023), cuyo contenido ya recoge <code>syllabus/manual/OM08-human-factors-study-guide.md</code>. Conviene leer antes OM08: contiene los fundamentos del modelo de Reason, SHELL-O, los tres niveles de Rasmussen, las seis habilidades de la TRM, la conciencia situacional (Endsley), la carga de trabajo mental, la comunicación, la tabla de fases del sueño, los cuatro estados de estrés del ATC, el CISM y la taxonomía GEMS de deslices, lapsus y equivocaciones, tal como los expone el manual. Este archivo <strong>no</strong> repite ese contenido, salvo donde una fuente primaria lo corrige, lo cuantifica o lo amplía. <code>anki/t08.txt</code> y <code>questions/t08-test.md</code> (anteriores, basados en SKYbrary) ya cubren los cuatro niveles de Reason, el queso suizo, los fundamentos de SHELL, una definición breve de cultura justa, CRM/TRM, los porcentajes de SA, la colación y la escucha de la colación (<em>readback/hearback</em>), GEMS, las cifras de frecuencia de errores de Rasmussen, las definiciones de TEM, los doce sucios (<em>Dirty Dozen</em>) y los recuentos de precursores de error; este archivo tampoco repite esas fichas ni esas preguntas.</p>
+<h2 id="que-cubre-este-archivo-que-no-cubren-el-manual-ni-el-material-t08-existente">Qué cubre este archivo que no cubren el manual ni el material T08 existente</h2>
+<p>El manual de ENAIRE <strong>no da límites numéricos de servicio ni de descanso</strong> (solo enumera los 8 elementos que ATS.OR.320 exige al proveedor especificar, sin cifras), <strong>no da definición de cultura justa</strong> más allá de nombrarla como principio 3 de EUROCONTROL, <strong>no incluye el marco SMS del Anexo 19 de la OACI</strong>, <strong>ni ESARR 2/5</strong>, <strong>ni taxonomía de transgresiones</strong>, <strong>ni vocabulario de fallos activos y latentes</strong> (usa «condiciones latentes» una sola vez, en la sección del queso suizo, sin desarrollarlas). Este archivo cubre esas lagunas con fuentes primarias: la guía de EUROCONTROL de 2023 sobre fatiga y turnos, el Real Decreto que fija realmente las cifras de servicio y descanso de los controladores (RD 1001/2010), el mecanismo de incapacidad provisional de ATCO.A.015 de la EASA, el marco de cuatro componentes y doce elementos del SMS de la OACI, ESARR 2 y ESARR 5, el material de orientación de EUROCONTROL sobre cultura justa, el modelo de cultura de seguridad en cinco partes de Reason, la taxonomía de transgresiones de SKYbrary, el vocabulario de fallos activos y latentes de la OACI, la guía de EUROCONTROL sobre redes de seguridad terrestres y el Real Decreto 1088/2020, que transpone el Reglamento (UE) 376/2014. También resuelve una <strong>discrepancia quíntuple</strong> en la definición de «noche» que se repite en las fuentes del tema 8, y se cierra con más de 25 casos prácticos.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>La fatiga más allá del manual: límites numéricos de servicio y descanso (guía de la UE y legislación española)</li>
+<li>La discrepancia quíntuple sobre la «noche» (WOCL, período nocturno, horario nocturno, actividad nocturna)</li>
+<li>Gestión de riesgos de fatiga: FRMS, métodos de seguimiento y contramedidas</li>
+<li>El estrés más allá del manual: sustancias psicoactivas, ATCO.A.015 y aptitud</li>
+<li>Taxonomía del error más allá de GEMS: transgresiones, fallos activos y latentes</li>
+<li>Gestión de la seguridad operacional: SMS del Anexo 19 de la OACI, ESARR 2, ESARR 5</li>
+<li>Cultura justa: la definición exacta, Reglamento 376/2014, RD 1088/2020</li>
+<li>Cultura de seguridad: el modelo de Reason en cinco partes; redes de seguridad</li>
+<li>Manual frente a fuentes primarias (tabla de discrepancias)</li>
+<li>Casos prácticos (más de 25, con solución)</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario bilingüe (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-la-fatiga-mas-alla-del-manual-limites-numericos-de-servicio-y-descanso">1. La fatiga más allá del manual: límites numéricos de servicio y descanso</h2>
+<p>El capítulo 5 del manual explica la fisiología del sueño y cita los <strong>ocho elementos</strong> que el proveedor debe especificar según ATS.OR.320 (número máximo de días hábiles consecutivos de servicio, número máximo de horas por período de servicio, duración máxima del servicio de control sin descansos, relación entre los períodos de servicio y los descansos, períodos de descanso mínimos, número máximo de períodos de servicio consecutivos que incluyan la noche, número mínimo de períodos de descanso tras un período de servicio que incluya horas nocturnas, número mínimo de períodos de descanso en un mismo ciclo de turnos), pero <strong>no da ninguna cifra</strong>, porque el Reglamento (UE) 2017/373 deja deliberadamente las cifras en manos del proveedor o del Estado. Dos fuentes primarias sí las dan.</p>
+<h3 id="11-la-guia-de-eurocontrol-de-2023-sobre-fatiga-y-turnos-buena-practica-no-vinculante">1.1 La guía de EUROCONTROL de 2023 sobre fatiga y turnos (buena práctica no vinculante)</h3>
+<p>Fuente: <em>Guidelines for the Management of the Risks of Fatigue in ATC Rostering</em> (EUROCONTROL, 2023). Recomienda (sin imponer) valores coherentes con ATS.OR.320 y los compara con la práctica de la FAA, la CAA británica y el Doc 9966 de la OACI:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Valor recomendado por EUROCONTROL 2023</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Horas máximas por período de servicio</td>
+<td><strong>8 horas</strong>; puede ampliarse a <strong>12 horas</strong> solo si lo valida una <strong>evaluación de riesgos para la seguridad operacional</strong></td>
+</tr>
+<tr>
+<td>Servicio ATC máximo sin descanso (tiempo continuo en posición)</td>
+<td><strong>2 horas</strong> para el personal que trabaja con pantallas visuales o radar; puede reducirse si el tráfico es esporádico (no continuo)</td>
+</tr>
+<tr>
+<td>Descanso mínimo</td>
+<td><strong>30 minutos</strong> en total (puede fraccionarse dentro del período de 2 horas siempre que la suma alcance los 30 min)</td>
+</tr>
+<tr>
+<td>Período mínimo de descanso tras un período de servicio</td>
+<td><strong>11 horas</strong>, calculadas para 8 horas de sueño más unas 3 horas de desplazamientos y comidas</td>
+</tr>
+<tr>
+<td>Período nocturno (a efectos de límites de servicio, definición de la EASA citada)</td>
+<td><strong>00:00–06:00</strong></td>
+</tr>
+<tr>
+<td>Máximo de períodos de servicio consecutivos que invaden el período nocturno</td>
+<td><strong>2</strong>; después debe programarse un <strong>día libre</strong></td>
+</tr>
+<tr>
+<td>Tope semanal de tiempo de trabajo (Directiva de la UE sobre tiempo de trabajo, derecho laboral general, no específico del ATC)</td>
+<td><strong>48 horas/semana</strong> como máximo</td>
+</tr>
+<tr>
+<td>Sentido de rotación fija de turnos</td>
+<td>Se recomienda la <strong>rotación hacia adelante</strong> (mañana → tarde → noche) frente a la rotación hacia atrás; reduce la deuda de sueño (Monk, Folkard y Wedderburn, 1996)</td>
+</tr>
+<tr>
+<td>Turnos de mañana consecutivos («madrugones»)</td>
+<td>Se recomienda no más de <strong>3 por semana</strong></td>
+</tr>
+<tr>
+<td>Tiempo operacional + descanso combinados</td>
+<td>No deberían superar las <strong>32 horas semanales</strong> («Principio del fin de semana»)</td>
+</tr>
+</tbody>
+</table>
+<p>El Doc 9966 de la OACI (2016) se cita en la misma guía como punto de comparación, con valores típicos algo más laxos: el período de servicio no puede exceder de <strong>12 horas</strong>; el total de horas de servicio no puede superar <strong>200 horas en 720 horas consecutivas (30 días)</strong>; debe haber al menos <strong>12 horas</strong> entre el final de un servicio y el comienzo del siguiente; al menos <strong>60 horas</strong> entre el final de un bloque de días de servicio consecutivos y el siguiente; ningún período de servicio operacional de más de <strong>2 horas</strong> sin descanso.</p>
+<h3 id="12-rotacion-hacia-adelante-o-hacia-atras-y-el-dia-de-sueno">1.2 Rotación hacia adelante o hacia atrás y el «día de sueño»</h3>
+<ul>
+<li><strong>Rotación hacia adelante (<em>forward rotation</em>)</strong>: los turnos avanzan de mañana a tarde y a noche, es decir, cada día más tarde. La <strong>rotación hacia atrás (<em>backward rotation</em>)</strong> va en sentido contrario. La rotación hacia adelante se ajusta mejor a la tendencia natural del reloj circadiano (algo más largo de 24 h) a retrasarse, así que produce <strong>menos deuda de sueño y una adaptación más rápida</strong> (Monk, Folkard y Wedderburn, 1996).</li>
+<li><strong>Día de sueño (<em>sleeping day</em>; día libre tras noche)</strong>: la guía de buenas prácticas de EUROCONTROL recomienda que, al concluir un período de servicio nocturno, se programe al personal ATC <strong>un día libre</strong> antes de volver al servicio diurno, para proteger el sueño de recuperación tras el turno de noche en lugar de comprimirlo con un inicio temprano al día siguiente.</li>
+<li><strong>Turnos de noche consecutivos</strong>: la guía indica que <strong>no se recomiendan</strong>; cuando sean inevitables, deben limitarse (véase §1.1) y seguirse de un descanso prolongado.</li>
+</ul>
+<h3 id="13-entrenamiento-en-posicion-ojt-y-operacion-con-controlador-unico-spo-medidas-de-mitigacion-de-la-fatiga">1.3 Entrenamiento en posición (OJT) y operación con controlador único (SPO): medidas de mitigación de la fatiga</h3>
+<p>La guía de 2023 señala dos modos de operación como <strong>amplificadores de la fatiga</strong> y recomienda medidas concretas:</p>
+<ul>
+<li><strong>Entrenamiento en posición (OJT, <em>on-the-job training</em>)</strong>: supervisar a un alumno añade una carga continua de vigilancia y evaluación a las tareas normales de control; la guía recomienda <strong>tiempos continuos en posición más cortos</strong> para las parejas instructor-alumno y más atención a la programación de los descansos que con un controlador habilitado que trabaja solo.</li>
+<li><strong>Operación con controlador único (SPO, <em>single person operations</em>; posiciones de operador único)</strong>: al no haber un segundo controlador con quien compartir la vigilancia mutua, la guía recomienda <strong>límites más estrictos de tiempo continuo en posición y de descansos</strong>, y un seguimiento reforzado de la fatiga en las posiciones SPO (por ejemplo, torres nocturnas de poco tráfico), porque falta el efecto de red de seguridad que aporta un segundo par de ojos.</li>
+</ul>
+<h3 id="14-limites-nacionales-espanoles-de-servicio-y-descanso-real-decreto-10012010-desarrollo-de-la-ley-92010">1.4 Límites nacionales españoles de servicio y descanso: Real Decreto 1001/2010 (desarrollo de la Ley 9/2010)</h3>
+<p><strong>Este contenido es nuevo: no está en el manual, ni en la guía de EUROCONTROL (genérica de la UE, no específica de España), ni en el material T08 existente.</strong> La Ley 9/2010, de 14 de abril, por la que se regula la prestación de servicios de tránsito aéreo, estableció en su artículo 3 los tiempos de actividad y descanso de los controladores civiles y encomendó al Gobierno (disposición final tercera) regularlos con detalle; lo hace el <strong>Real Decreto 1001/2010</strong>. Es la norma española de seguridad operacional vigente sobre la fatiga de los controladores (formulada expresamente «para garantizar que la fatiga no comprometa la seguridad del tránsito aéreo»):</p>
+<table>
+<thead>
+<tr>
+<th>Concepto (artículo del RD 1001/2010)</th>
+<th>Término en el RD</th>
+<th>Límite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Máx. de períodos consecutivos de «actividad aeronáutica»</td>
+<td>actividad aeronáutica</td>
+<td>hasta <strong>6 períodos consecutivos</strong>, <strong>máx. 50 horas en total</strong></td>
+</tr>
+<tr>
+<td>Descanso tras ese bloque</td>
+<td>descanso</td>
+<td>mínimo <strong>60 horas</strong> (art. 6.1), reducible siempre que se respete como mínimo el descanso mensual del art. 6.2</td>
+</tr>
+<tr>
+<td>Descanso mensual reducido (supuesto distinto: bloques de menos de 6 períodos / menos de 50 h)</td>
+<td>descanso mensual mínimo</td>
+<td><strong>180 horas en 3 períodos de 54 horas</strong> (art. 6.2), pero el proveedor puede reducir la duración mínima de alguno de esos períodos a <strong>48 horas</strong> (art. 6.3); no es una reducción directa de las 60 horas del art. 6.1</td>
+</tr>
+<tr>
+<td>Descanso mensual mínimo</td>
+<td>descanso mensual mínimo</td>
+<td><strong>180 horas</strong>, distribuidas en <strong>al menos 3 períodos</strong> de <strong>al menos 54 horas</strong> cada uno</td>
+</tr>
+<tr>
+<td>Tiempo máx. continuo en <strong>posición operacional</strong></td>
+<td>actividad operacional continua</td>
+<td><strong>2 horas</strong>, y después un descanso parcial de <strong>al menos 30 minutos</strong> (art. 7)</td>
+</tr>
+<tr>
+<td>Ampliación en unidades de baja densidad de tráfico</td>
+<td>—</td>
+<td>hasta <strong>4 horas</strong> continuas, con descanso parcial proporcionalmente mayor (art. 8.1)</td>
+</tr>
+<tr>
+<td>Ampliación en torres monoposición</td>
+<td>—</td>
+<td>hasta <strong>12 horas</strong> continuas de actividad aeronáutica, con al menos <strong>1 h 30 min</strong> de descanso parcial distribuido a lo largo del día (art. 8.2)</td>
+</tr>
+<tr>
+<td>Ampliación por relevo</td>
+<td>relevo</td>
+<td>hasta <strong>15 minutos</strong> adicionales para completar un traspaso de funciones ordenado (art. 9)</td>
+</tr>
+<tr>
+<td><strong>Actividad nocturna</strong> (actividad aeronáutica <strong>nocturna</strong>)</td>
+<td>—</td>
+<td>toda actividad que transcurra, total o parcialmente, entre las <strong>01:30 y las 05:29</strong> (art. 10.1)</td>
+</tr>
+<tr>
+<td>Período máx. continuo de servicio nocturno</td>
+<td>—</td>
+<td><strong>9 h 30 min</strong>, que debe concluir <strong>como muy tarde a las 07:30</strong> (art. 10.2)</td>
+</tr>
+<tr>
+<td>Descanso tras un período de servicio nocturno</td>
+<td>—</td>
+<td>mínimo <strong>48 horas</strong> antes del siguiente período de actividad diurna</td>
+</tr>
+<tr>
+<td>Máx. de períodos de servicio nocturno consecutivos</td>
+<td>—</td>
+<td><strong>2</strong>, con un descanso mínimo posterior de <strong>54 horas</strong> (art. 10.3)</td>
+</tr>
+<tr>
+<td><strong>Actividad de madrugada</strong></td>
+<td>—</td>
+<td>comienza entre las <strong>05:30 y las 06:29</strong>; máx. continuo <strong>8 horas</strong>; como máximo <strong>2</strong> períodos de este tipo en 6 días o 144 horas, y esos 2 periodos no pueden ser consecutivos si ambos empiezan antes de las 06:00 (art. 11.3); cada periodo que empiece antes de las 06:00 cuenta como <strong>2 periodos de actividad matinal</strong> a efectos del límite del art. 12.2 (art. 11.4); en unidades con «descanso reforzado» (máximo continuo reducido a 1 h 30 min por el art. 7), se aplican además límites de 1 h 30 min a la actividad de madrugada según su hora de inicio (art. 11.5)</td>
+</tr>
+<tr>
+<td><strong>Actividad matinal</strong></td>
+<td>—</td>
+<td>comienza entre las <strong>06:30 y las 07:59</strong>; máx. continuo <strong>8 h 30 min</strong>; como máximo <strong>5 períodos consecutivos</strong> (un período de «madrugada» cuenta doble, art. 12)</td>
+</tr>
+<tr>
+<td>Guardia localizada («imaginaria»)</td>
+<td>imaginaria</td>
+<td>máx. <strong>20 horas</strong> por período; el tiempo de imaginaria <strong>en el lugar de trabajo cuenta doble</strong>; como máximo <strong>2 en 6 días o 144 horas</strong>; tras una imaginaria nocturna en el lugar de trabajo se garantiza el descanso <strong>hasta el mediodía del día siguiente</strong> (art. 13)</td>
+</tr>
+</tbody>
+</table>
+<p>Contraste relevante para el examen: <strong>la ventana de «actividad nocturna» del RD 1001/2010 es 01:30–05:29</strong>, más estrecha y desplazada respecto del «período nocturno» reglamentario de la EASA (00:00–06:00) y del «horario nocturno» del Doc 9966 de la OACI (18:00–06:00) que se usan en el §2 de este archivo. No hay que mezclar los tres.</p>
+<h3 id="15-el-convenio-colectivo-de-enaire-contraste-de-carga-de-trabajo-y-descanso">1.5 El convenio colectivo de ENAIRE: contraste de carga de trabajo y descanso</h3>
+<p>El <strong>III Convenio Colectivo de ENAIRE</strong> (BOE-A-2023-18633) añade dos cifras de relaciones laborales relevantes para la fatiga que <strong>no</strong> son normativa de seguridad, pero sí condicionan los turnos reales: una <strong>carga de trabajo mensual máxima de 170 horas</strong> en los meses que combinan actividad aeronáutica y no aeronáutica y, para las posiciones declaradas formalmente de <strong>descanso reforzado</strong> (sectores o posiciones especialmente exigentes), una <strong>proporción mínima de descanso del 33 %</strong> del tiempo en esa posición. Es derecho de negociación colectiva, superpuesto a los límites de seguridad del RD 1001/2010 (no en sustitución de ellos).</p>
+<hr />
+<h2 id="2-la-discrepancia-quintuple-sobre-la-noche-no-confundir-estas-ventanas">2. La discrepancia quíntuple sobre la «noche»: no confundir estas ventanas</h2>
+<p>Al menos cinco documentos distintos definen una «noche» o ventana de «baja alerta» para fines cercanos al ATC. Cada cifra es real y de fuente independiente; ninguna es simplemente errónea, responden a preguntas diferentes:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Fuente</th>
+<th>Concepto</th>
+<th>Ventana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Manual OM08 (ENAIRE, citando el proceso circadiano)</td>
+<td><strong>WOCL</strong> (<em>Window of Circadian Low</em>, mínimo de la ventana circadiana), concepto fisiológico: punto más bajo del reloj corporal, coincide con la temperatura corporal mínima</td>
+<td><strong>aprox. 03:00–06:00</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>FAA AC 120-100, <em>Basics of Aviation Fatigue</em></td>
+<td><strong>WOCL</strong>, el mismo concepto fisiológico, con la redacción de una fuente primaria de medicina aeronáutica, más un <strong>WOCL secundario</strong></td>
+<td><strong>aprox. 03:00–05:00</strong>, con un <strong>descenso secundario a primera hora de la tarde</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>EASA, «período nocturno» a efectos de límites de turnos (citado en la guía de EUROCONTROL de 2023 sobre turnos)</td>
+<td>Ventana reglamentaria de límite de servicio, no una afirmación fisiológica</td>
+<td><strong>00:00–06:00</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>«Horario nocturno» (<em>night-time</em>) del Doc 9966 de la OACI</td>
+<td>Otro concepto reglamentario, más amplio, usado para valores típicos de servicio</td>
+<td><strong>18:00–06:00</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>RD 1001/2010, art. 10 (España)</td>
+<td>Definición legal de <strong>«actividad aeronáutica nocturna»</strong> a efectos de límites de servicio de los controladores en España</td>
+<td><strong>01:30–05:29</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Regla práctica para el examen: si la pregunta trata del punto bajo <strong>fisiológico</strong>, la respuesta es el WOCL (3–5 o 3–6 h según la fuente que cite la pregunta; conviene comprobar si menciona el manual de ENAIRE o una fuente de medicina aeronáutica). Si trata de una <strong>ventana reglamentaria de límite de servicio</strong>, hay que identificar <strong>qué norma</strong> es (la genérica de la EASA, el Doc 9966 de la OACI o el RD 1001/2010 de España) antes de responder, porque las tres cifras difieren de verdad.</p>
+<hr />
+<h2 id="3-gestion-de-riesgos-de-fatiga-frms-metodos-de-seguimiento-y-contramedidas">3. Gestión de riesgos de fatiga: FRMS, métodos de seguimiento y contramedidas</h2>
+<ul>
+<li><strong>FRMS (<em>Fatigue Risk Management System</em>, sistema de gestión de riesgos de fatiga)</strong>: medio, basado en datos y en la ciencia, para vigilar y gestionar de forma continua los riesgos de seguridad operacional relacionados con la fatiga, como <strong>alternativa o complemento de los límites prescriptivos</strong> (el enfoque de cifras fijas del §1). El Doc 9966 de la OACI presenta el FRMS como uno de los dos enfoques aceptables (el otro son los límites prescriptivos); el proveedor puede usar cualquiera de los dos o combinarlos. ENAIRE cuenta con un sistema integrado llamado <strong>FSRMS (<em>Fatigue and Stress Risk Management System</em>)</strong>, según el manual.</li>
+<li><strong>Métodos de seguimiento de la fatiga</strong> mencionados en la guía de EUROCONTROL: la <strong>notificación de fatiga</strong> (obligatoria según el Reglamento (UE) 2015/1018, anexo III: los controladores y el proveedor deben notificar la fatiga que repercuta, o pueda repercutir, en la capacidad de ejercer de forma segura las funciones de ATC/ANS), las <strong>auditorías de turnos y horarios frente a los modelos biomatemáticos de fatiga</strong> y la <strong>medición subjetiva u objetiva de la fatiga</strong> durante las pruebas (por ejemplo, diarios de sueño, escalas de alerta) antes de aprobar un nuevo sistema de turnos.</li>
+<li><strong>Contramedidas</strong> (coherentes con la estrategia de dos niveles de la figura 9 del manual, pero con herramientas concretas): <strong>primer nivel</strong> (prevenir o reducir la fatiga): <strong>siestas</strong> estratégicas antes o durante un turno de noche, ingesta de <strong>cafeína</strong> en el momento oportuno, <strong>exposición a luz intensa</strong> al inicio del turno de noche y evitar la luz antes del sueño diurno; <strong>segundo nivel</strong> (mitigar los efectos cuando ya hay fatiga): mayor <strong>vigilancia mutua</strong>, tiempos continuos en posición más cortos y aplazamiento de las tareas no urgentes.</li>
+</ul>
+<hr />
+<h2 id="4-el-estres-mas-alla-del-manual-sustancias-psicoactivas-atcoa015-y-aptitud">4. El estrés más allá del manual: sustancias psicoactivas, ATCO.A.015 y aptitud</h2>
+<h3 id="41-atcoa015-incapacidad-provisional">4.1 ATCO.A.015: incapacidad provisional</h3>
+<p>El <strong>Reglamento (UE) 2015/340</strong>, subparte A, establece un <strong>mecanismo de incapacidad provisional</strong> que el manual no desarrolla (solo enumera las sustancias psicoactivas, el estrés y la fatiga como materias que abordan las reglas ATS.OR). Leído en el texto completo:</p>
+<ul>
+<li><strong>(b) Declaración propia</strong>: «Los titulares de una licencia no ejercerán las atribuciones de esta cuando tengan dudas de su capacidad para ejercerlas de forma segura y, en tales casos, deberán notificar inmediatamente al proveedor de servicios de navegación aérea correspondiente su incapacidad provisional para ejercer las atribuciones de su licencia.»</li>
+<li><strong>(c) Declaración del ANSP</strong>: el proveedor de servicios de navegación aérea <strong>puede declarar por sí mismo</strong> la incapacidad provisional del controlador «si tienen conocimiento de cualquier duda relativa a la capacidad del titular para ejercer de forma segura las atribuciones de su licencia»; el mecanismo no depende solo de la notificación del propio interesado.</li>
+<li><strong>(d) Procedimientos</strong>: el proveedor debe desarrollar <strong>procedimientos objetivos, transparentes y no discriminatorios</strong> que cubran ambas vías (declaración propia y declaración del proveedor), la gestión del impacto operacional y la información a la autoridad competente.</li>
+<li><strong>Definición (según la versión modificada)</strong>: «incapacidad provisional» = <strong>estado temporal</strong> en el que el titular de la licencia no puede ejercer sus atribuciones cuando las habilitaciones, las anotaciones o el certificado médico siguen siendo válidos, pero otra circunstancia (fatiga, estrés, consumo de sustancias psicoactivas, una duda sobre la competencia) hace dudoso un ejercicio seguro.</li>
+<li><strong>Motivos que pueden activarla</strong>: fatiga, estrés, consumo problemático de <strong>sustancias psicoactivas</strong> y dudas sobre la competencia vigente; es decir, ATCO.A.015 es la contrapartida, en el ámbito de las licencias, de las obligaciones organizativas de ATS.OR.305/310/315 que el manual ya cubre.</li>
+</ul>
+<h3 id="42-sustancias-psicoactivas-la-definicion-reglamentaria">4.2 Sustancias psicoactivas: la definición reglamentaria</h3>
+<p>El Reglamento (UE) 2015/340 (consolidado a marzo de 2024) define <strong>«sustancia psicoactiva»</strong> como: <strong>el alcohol, los opiáceos, los canabinoides, los sedantes e hipnóticos, la cocaína, otros psicoestimulantes, los alucinógenos y los disolventes volátiles</strong>, con <strong>exclusión de la cafeína y el tabaco</strong>. Es una lista concreta y evaluable: la cafeína y el tabaco, aunque sean psicoactivos en el sentido corriente, <strong>no</strong> son «sustancias psicoactivas» según este Reglamento.</p>
+<h3 id="43-incidente-critico-reacciones-inusuales-o-extremas-definicion-reglamentaria">4.3 Incidente crítico: reacciones inusuales o extremas (definición reglamentaria)</h3>
+<p>El Reglamento (UE) 2015/340 también define formalmente el <strong>«estrés por incidente crítico»</strong>: «manifestación en una persona de reacciones inusuales y/o extremas de tipo emocional, físico y/o comportamental tras un suceso inesperado, un accidente, un incidente o un incidente grave». Es el anclaje reglamentario del capítulo del manual sobre el CISM (que explica el programa, pero no esta definición formal).</p>
+<hr />
+<h2 id="5-taxonomia-del-error-mas-alla-de-gems-transgresiones-fallos-activos-y-latentes">5. Taxonomía del error más allá de GEMS: transgresiones, fallos activos y latentes</h2>
+<h3 id="51-transgresiones-violations-cinco-tipos-asociados-a-los-niveles-de-rasmussen">5.1 Transgresiones (<em>violations</em>): cinco tipos, asociados a los niveles de Rasmussen</h3>
+<p>El manual menciona las «transgresiones» una sola vez, de pasada (contenido formativo de la subparte D, «errores humanos y transgresiones»), sin taxonomía. El artículo de SKYbrary sobre factores humanos ofrece la taxonomía estándar de la aviación. Se distingue de GEMS porque <strong>las transgresiones son deliberadas</strong>, mientras que los deslices, los lapsus y las equivocaciones no lo son (en las equivocaciones, la <em>acción</em> es deliberada, pero el <em>plan</em> mismo es erróneo, sin que haya un incumplimiento consciente de la norma):</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Definición</th>
+<th>Nivel de Rasmussen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transgresiones involuntarias</strong></td>
+<td>Surgen de procedimientos <strong>imposibles de seguir</strong> en la práctica (confusos, complejos, ambiguos); por sus efectos se parecen a una «equivocación», aunque la persona no tuviera intención de incumplir la norma</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Transgresiones rutinarias</strong></td>
+<td>Atajos <strong>automáticos y habituales</strong> («hábitos fuertes pero erróneos») que el grupo de trabajo acepta como normales y que la organización suele tolerar; se perciben como de bajo riesgo</td>
+<td><strong>Basado en habilidades</strong>: forma parte de la rutina automatizada de la persona</td>
+</tr>
+<tr>
+<td><strong>Transgresiones situacionales</strong></td>
+<td>Resultan de la <strong>presión organizativa o ambiental</strong> que dificulta el cumplimiento: presión de tiempo, mala supervisión, malas condiciones ambientales, recursos insuficientes, cultura negativa</td>
+<td><strong>Basado en reglas</strong>: acciones «consideradas necesarias para sacar el trabajo adelante»</td>
+</tr>
+<tr>
+<td><strong>Transgresiones excepcionales</strong></td>
+<td><strong>Raras</strong>, en circunstancias muy inusuales (emergencias, fallo de equipos); pueden ser una decisión consciente o una reacción instintiva</td>
+<td><strong>Basado en conocimientos</strong>: circunstancias únicas y desconocidas</td>
+</tr>
+<tr>
+<td><strong>Transgresiones de optimización</strong></td>
+<td>Se cometen para <strong>hacer más emocionante una tarea monótona</strong> o aliviar el aburrimiento; frecuentes en tareas largas de vigilancia o con normas obsoletas o excesivamente restrictivas</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Datos de consecuencias citados por SKYbrary: las transgresiones «se producen con regularidad» en las operaciones diarias sin resultado negativo, y <strong>alrededor de un tercio de las transgresiones se gestionan mal</strong>, con lo que acaban causando nuevas transgresiones o errores.</p>
+<h3 id="52-fallos-activos-y-latentes-digest-7-de-la-oaci">5.2 Fallos activos y latentes (Digest 7 de la OACI)</h3>
+<p>La Circular 240 de la OACI, <em>Human Factors Digest No. 7: Investigation of Human Factors in Accidents and Incidents</em>, da la redacción canónica a la que alude la sección del queso suizo del manual, aunque no la cita:</p>
+<ul>
+<li><strong>Fallo activo</strong>: «un acto inseguro [...] que vulnera todas las defensas del sistema». Lo comete la persona que está en <strong>contacto directo e inmediato</strong> con el sistema (por ejemplo, el controlador o el mecánico de turno), y sus efectos se notan <strong>casi de inmediato</strong>.</li>
+<li><strong>Fallo latente</strong>: «resultado de una decisión o de una acción tomada mucho antes de un accidente, cuyas consecuencias pueden permanecer latentes durante mucho tiempo». Se origina en los <strong>responsables de la toma de decisiones, los reguladores o los mandos intermedios</strong> (alta dirección, órgano corporativo de la empresa, reguladores) y solo se hace patente cuando se combina con factores desencadenantes locales (problemas técnicos, condiciones adversas, un fallo activo).</li>
+<li>Ejemplo de fallo latente del Digest: la fusión de una empresa que <strong>suprime la formación normalizada</strong> sin que nadie lo advierta en ese momento; la laguna formativa permanece latente hasta que un suceso ajeno la pone de manifiesto.</li>
+<li>Cadena del Digest 7: <strong>responsables de la toma de decisiones → mandos intermedios → condiciones previas → fallos activos (actividades productivas/actos inseguros) → defensas → resultado.</strong> En un sistema bien defendido, los fallos latentes y activos interactúan, pero por sí solos rara vez vulneran todas las defensas; es exactamente la imagen de «agujeros que se alinean» del queso suizo que el manual ya da sin este vocabulario de fondo.</li>
+</ul>
+<hr />
+<h2 id="6-gestion-de-la-seguridad-operacional-sms-del-anexo-19-de-la-oaci-esarr-2-esarr-5">6. Gestión de la seguridad operacional: SMS del Anexo 19 de la OACI, ESARR 2, ESARR 5</h2>
+<h3 id="61-el-marco-sms-de-la-oaci-cuatro-componentes-doce-elementos">6.1 El marco SMS de la OACI: cuatro componentes, doce elementos</h3>
+<p><strong>No aparece en el manual</strong> (ausencia confirmada; véase §9). El Anexo 19 de la OACI (a través del Doc 9859, <em>Manual de gestión de la seguridad operacional</em>) especifica el marco que debe implantar el sistema de gestión de la seguridad operacional (SMS) de todo Estado o proveedor, «independientemente de la envergadura y complejidad del proveedor de servicios»:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Política y objetivos de seguridad operacional</strong> (<em>Safety policy and objectives</em>)</td>
+<td>1.1 Compromiso de la administración · 1.2 Obligación de rendición de cuentas sobre la seguridad operacional y responsabilidades · 1.3 Designación del personal clave de seguridad operacional · 1.4 Coordinación de la planificación de respuestas ante emergencias · 1.5 Documentación SMS</td>
+</tr>
+<tr>
+<td><strong>2. Gestión de riesgos de seguridad operacional</strong> (<em>Safety risk management</em>)</td>
+<td>2.1 Identificación de peligros · 2.2 Evaluación y mitigación de riesgos de seguridad operacional</td>
+</tr>
+<tr>
+<td><strong>3. Aseguramiento de la seguridad operacional</strong> (<em>Safety assurance</em>)</td>
+<td>3.1 Observación y medición del rendimiento en materia de seguridad operacional · 3.2 Gestión del cambio · 3.3 Mejora continua del SMS</td>
+</tr>
+<tr>
+<td><strong>4. Promoción de la seguridad operacional</strong> (<em>Safety promotion</em>)</td>
+<td>4.1 Instrucción y educación · 4.2 Comunicación de la seguridad operacional</td>
+</tr>
+</tbody>
+</table>
+<p>Consejo para el examen: 5 + 2 + 3 + 2 = <strong>12 elementos</strong>, siempre en este orden de componentes (política → gestión de riesgos → aseguramiento → promoción). Ojo a la trampa de numeración de la tabla original (§9): las etiquetas «1.1–1.5», «2.1–2.2» y «3.1–3.3» <em>sí</em> corresponden correctamente a los componentes 1, 2 y 3; lo que está desplazado es solo la <strong>alineación de las filas</strong> en la tabla impresa, no el esquema de numeración.</p>
+<h3 id="62-esarr-2-notificacion-y-evaluacion-de-sucesos-de-seguridad-operacional">6.2 ESARR 2: notificación y evaluación de sucesos de seguridad operacional</h3>
+<p>ESARR 2 (requisito reglamentario de seguridad de EUROCONTROL, <em>EUROCONTROL Safety Regulatory Requirement</em>) fija el <strong>objetivo de seguridad</strong> que hay detrás de la notificación de sucesos: los Estados deben implantar un <strong>sistema formal de notificación y evaluación de sucesos de seguridad operacional</strong>, garantizar que <strong>cualquier persona u organización del sector aeronáutico pueda notificar</strong> cualquier suceso en el que haya participado o del que haya sido testigo y (5.2.1) recopilar y notificar a EUROCONTROL <strong>cada año indicadores de seguridad operacional de alto nivel</strong>. El anexo A de ESARR 2 define las categorías de sucesos que deben notificarse: <strong>accidentes</strong>, <strong>incidentes</strong> y <strong>sucesos específicos de la ATM</strong>, cada una con subtipos de especial interés para la comunidad ATM, además de los datos contextuales y fácticos mínimos que deben recopilarse y (para los sucesos sometidos a análisis detallado) las categorías de causas, el nivel de gravedad y las recomendaciones de seguridad. ESARR 2 es el antecedente de la etapa EUROCONTROL cuyos principios se trasladaron después, a escala de la UE, al Reglamento (UE) 376/2014 (§7).</p>
+<h3 id="63-esarr-5-requisitos-de-seguridad-sobre-licencias-y-garantia-de-competencia-de-los-controladores">6.3 ESARR 5: requisitos de seguridad sobre licencias y garantía de competencia de los controladores</h3>
+<p>ESARR 5 fija requisitos de seguridad para el <strong>personal de los servicios ATM</strong> (licencias, habilitaciones, evaluación de la competencia). Leído en el texto completo: antes de conceder una licencia, una habilitación, una anotación de habilitación o una <strong>anotación de dependencia</strong> (<em>unit endorsement</em>, habilitación de dependencia), el proveedor debe asegurarse de que el solicitante cumple los requisitos establecidos; los proveedores pueden expedir anotaciones de <strong>OJTI (<em>On-the-Job Training Instructor</em>, instructor de entrenamiento en posición)</strong> a controladores debidamente cualificados para que supervisen a alumnos, y el candidato a OJTI necesita <strong>al menos seis meses de experiencia</strong> en la habilitación <strong>en el sector o la posición operacional concretos</strong> donde se impartirá la instrucción. Un controlador en activo debe, en todo momento, <strong>tener en vigor las habilitaciones, anotaciones de habilitación y anotaciones de dependencia</strong> adecuadas al servicio que presta; es la columna vertebral reglamentaria de la «evaluación de la competencia» mencionada en el alcance de la tarea, distinta del foco de ESARR 2 en la notificación de sucesos.</p>
+<hr />
+<h2 id="7-cultura-justa-la-definicion-exacta-reglamento-3762014-rd-10882020">7. Cultura justa: la definición exacta, Reglamento 376/2014, RD 1088/2020</h2>
+<h3 id="71-la-definicion-de-la-etapa-eurocontrolesarr-literal">7.1 La definición de la etapa EUROCONTROL/ESARR (literal)</h3>
+<p>El manual nombra la «cultura justa» solo como principio 3 de EUROCONTROL (una mentalidad «abierta, justa y de confianza»), sin la redacción canónica. <em>EAM 2/GUI 6, Establishment of "Just Culture" Principles in ATM Safety Data Reporting and Assessment</em>, de EUROCONTROL, da la definición que después se extendió por toda la normativa de seguridad aérea de la UE:</p>
+<blockquote>
+<p>«Una "cultura justa", un clima de confianza en el que se anima e incluso se recompensa a las personas por aportar información esencial relacionada con la seguridad, pero en el que también tienen claro dónde debe trazarse la línea entre el comportamiento aceptable y el inaceptable.»</p>
+</blockquote>
+<p>La misma fuente rechaza expresamente la alternativa de la «ausencia de culpa»: «Una cultura de "no culpabilización" no es, por tanto, ni factible ni deseable», porque una amnistía general para todos los actos inseguros carecería de credibilidad ante el personal y podría parecer contraria a la justicia natural. <strong>Una condición clave para que un sistema de notificación ESARR 2 (y, después, de la UE) funcione es precisamente este entorno de notificación de «cultura justa».</strong></p>
+<h3 id="72-reglamento-ue-3762014-notificacion-de-sucesos-y-proteccion-de-la-cultura-justa">7.2 Reglamento (UE) 376/2014: notificación de sucesos y protección de la cultura justa</h3>
+<p>El Reglamento (UE) 376/2014 es el reglamento vigente de la UE sobre notificación de sucesos (mencionado pero no detallado en el manual, y referido solo de forma genérica,, en el <code>anki/t08.txt</code> anterior). Sus disposiciones de cultura justa protegen al notificante y a las personas mencionadas en una notificación frente al <strong>uso punitivo de esa información</strong> en procedimientos administrativos o disciplinarios, con excepciones definidas (negligencia grave, transgresiones deliberadas). España lo transpone mediante el <strong>Real Decreto 1088/2020</strong>.</p>
+<h3 id="73-rd-10882020-la-transposicion-espanola-nuevo-no-esta-en-el-manual-ni-en-el-material-t08-previo">7.3 RD 1088/2020: la transposición española (nuevo, no está en el manual ni en el material T08 previo)</h3>
+<p>Leído en el texto completo: el RD 1088/2020 crea el sistema español de notificación de sucesos que aplica el Reglamento 376/2014 y nombra el <strong>artículo 16.9 del Reglamento</strong> como fuente de los principios de cultura justa que hace valer en el ámbito nacional. Puntos clave:</p>
+<ul>
+<li>La <strong>Agencia Estatal de Seguridad Aérea (AESA)</strong> debe protocolizar las medidas que adopte para garantizar que la cultura justa se aplica a la información que le llegue <strong>únicamente</strong> a través de la notificación de sucesos (conforme al art. 16.6 del Reglamento).</li>
+<li>El <strong>artículo 3 del RD 1088/2020</strong> asigna la <strong>vigilancia de la cultura justa en la notificación de sucesos</strong> a la <strong>Dirección General de Aviación Civil (DGAC)</strong>, que ejerce las funciones del art. 16.12 del Reglamento, sin perjuicio del derecho de la persona afectada a acudir a la vía judicial.</li>
+<li>Las organizaciones de aviación establecidas en España pueden ser <strong>sancionadas por AESA</strong> por incumplir los principios de cultura justa del art. 16.9 del Reglamento, y el personal puede quejarse ante AESA por el incumplimiento, por parte de una organización, de sus propias reglas internas de cultura justa.</li>
+<li>Esto cubre la mecánica de la transposición española del Reglamento 376/2014 (véase §15 para el texto del Reglamento a nivel UE).</li>
+</ul>
+<hr />
+<h2 id="8-cultura-de-seguridad-el-modelo-de-reason-en-cinco-partes-redes-de-seguridad">8. Cultura de seguridad: el modelo de Reason en cinco partes; redes de seguridad</h2>
+<h3 id="81-el-modelo-de-cultura-de-seguridad-de-reason-en-cinco-partes">8.1 El modelo de cultura de seguridad de Reason en cinco partes</h3>
+<p>El documento <em>Safety Culture in ATM</em> de EUROCONTROL recoge el modelo de Reason, secuencial y acumulativo:</p>
+<ol>
+<li><strong>Cultura informada (<em>informed culture</em>)</strong>: un sistema de seguridad que recopila datos de accidentes <em>y</em> de cuasi accidentes (<em>near misses</em>), combinado con información proactiva (auditorías de seguridad, encuestas de clima).</li>
+<li><strong>Cultura de notificación (<em>reporting culture</em>)</strong>: el personal se siente libre de contribuir a la cultura informada: notifica cuasi accidentes, rellena encuestas y participa en la forma de gestionar la seguridad.</li>
+<li><strong>Cultura justa (<em>just culture</em>)</strong>: el personal no notificará de verdad si no hay un clima de confianza; se distingue de la cultura de no culpabilización (los actos delictivos o de negligencia grave no quedan amparados).</li>
+<li><strong>Cultura flexible (<em>flexible culture</em>)</strong>: la organización puede reconfigurarse ante operaciones de ritmo elevado o inusuales, pasando a menudo de un modo jerárquico a otro más horizontal.</li>
+<li><strong>Cultura de aprendizaje (<em>learning culture</em>)</strong>: la organización extrae las conclusiones correctas de la información recopilada y tiene la <strong>voluntad de aplicar cambios</strong> en los procedimientos y los equipos.</li>
+</ol>
+<p>Conviene fijarse en la cadena causal: la notificación depende de la confianza (cultura justa); sin ella, todo el modelo se derrumba, y por eso la cultura justa ocupa el centro de la doctrina de gestión de la seguridad operacional en ATM y no es un simple adorno.</p>
+<h3 id="82-redes-de-seguridad-terrestres-y-de-a-bordo">8.2 Redes de seguridad terrestres y de a bordo</h3>
+<p><em>Safety Nets — A Guide for Ensuring Effectiveness</em>, de EUROCONTROL, define las cuatro <strong>redes de seguridad terrestres</strong> (<em>ground-based safety nets</em>) tradicionales y sus equivalentes de a bordo:</p>
+<table>
+<thead>
+<tr>
+<th>Red de seguridad terrestre</th>
+<th>Nombre completo</th>
+<th>Función</th>
+<th>Equivalente de a bordo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STCA</strong></td>
+<td><em>Short-Term Conflict Alert</em> (alerta de conflicto a corto plazo)</td>
+<td>Advierte directamente de la pérdida de separación prevista entre aeronaves</td>
+<td><strong>ACAS/TCAS</strong> (<em>Airborne Collision Avoidance System / Traffic Alert &amp; Collision Avoidance System</em>, sistema anticolisión de a bordo)</td>
+</tr>
+<tr>
+<td><strong>APW</strong></td>
+<td><em>Area Proximity Warning</em> (aviso de proximidad de área)</td>
+<td>Ayuda indirectamente a prevenir colisiones al predecir o detectar infracciones de las reglas de segregación del espacio aéreo o del tránsito</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>MSAW</strong></td>
+<td><em>Minimum Safe Altitude Warning</em> (aviso de altitud mínima de seguridad)</td>
+<td>Ayuda a prevenir el impacto contra el suelo sin pérdida de control (CFIT)</td>
+<td><strong>(E)GPWS</strong> (<em>Enhanced Ground Proximity Warning System / Terrain Awareness and Warning System</em>, sistema de aviso de proximidad al terreno)</td>
+</tr>
+<tr>
+<td><strong>APM</strong></td>
+<td><em>Approach Path Monitor</em> (supervisor de trayectoria de aproximación)</td>
+<td>También ayuda a prevenir el CFIT, en concreto en la aproximación</td>
+<td><strong>(E)GPWS</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Las redes de seguridad terrestres y las de a bordo funcionan de forma <strong>independiente</strong> y, por diseño, suelen proteger el mismo espacio aéreo de forma redundante: STCA/APW actúan «junto a» ACAS/TCAS, no en su lugar.</p>
+<hr />
+<h2 id="9-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">9. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tema</th>
+<th>Afirmación del manual OM08</th>
+<th>Fuente(s) primaria(s)</th>
+<th>Lo que probablemente sigue el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>WOCL / ventana nocturna</td>
+<td>«WOCL ≈ 3–6 a. m.» (capítulo 5.4), sin otra ventana nocturna</td>
+<td>FAA AC 120-100: WOCL ≈ <strong>3–5 a. m.</strong> + descenso secundario por la tarde; «período nocturno» de la EASA (límite de servicio) <strong>00:00–06:00</strong>; «horario nocturno» del Doc 9966 de la OACI <strong>18:00–06:00</strong>; «actividad nocturna» del RD 1001/2010 (España) <strong>01:30–05:29</strong></td>
+<td>La cifra del manual para la pregunta sobre el WOCL <strong>fisiológico</strong>; una pregunta sobre la «noche» <strong>reglamentaria</strong> debe nombrar su fuente y, si nombra la legislación española, se aplica la cifra del RD 1001/2010</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Límites numéricos de servicio y descanso</td>
+<td>Ausentes: solo los 8 elementos sin cuantificar de ATS.OR.320</td>
+<td>EUROCONTROL 2023 (buena práctica de la UE: 8 h/12 h, 2 h continuas, 30 min de descanso, 11 h de reposo); RD 1001/2010 (España, vinculante: 50 h/6 períodos y luego 60 h de descanso, 2 h continuas + 30 min, 180 h mensuales de descanso, noche 01:30–05:29 con máx. 9 h 30 min)</td>
+<td><strong>RD 1001/2010</strong>, por ser Derecho español vinculante que rige a los propios controladores de ENAIRE, salvo que la pregunta pida expresamente la orientación genérica de la UE o la EASA</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Definición de cultura justa</td>
+<td>Nombrada solo como principio 3 de EUROCONTROL, sin redacción</td>
+<td>EUROCONTROL EAM 2/GUI 6 (definición literal, §7.1); Reglamento 376/2014 + RD 1088/2020 (mecánica de la protección jurídica, §7.2–7.3)</td>
+<td>Fuentes primarias: probable en examen si la pregunta cita o parafrasea la definición</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Marco SMS del Anexo 19 de la OACI (4 componentes/12 elementos)</td>
+<td>No se menciona en absoluto</td>
+<td>Doc 9859 de la OACI, tabla 10 (§6.1)</td>
+<td>Fuente primaria: pregunta independiente verosímil («cuántos componentes/elementos tiene el marco SMS de la OACI»)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ESARR 2 / ESARR 5</td>
+<td>No se mencionan por su nombre (el manual es anterior a la terminología ESARR o la omite)</td>
+<td>ESARR 2 (categorías de sucesos, objetivo de notificación); ESARR 5 (licencias/competencia, regla de 6 meses del OJTI)</td>
+<td>Fuente primaria</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Taxonomía de transgresiones</td>
+<td>Una mención de pasada («transgresiones») en una lista de contenidos formativos, sin taxonomía</td>
+<td>SKYbrary (5 tipos asociados a los niveles de Rasmussen, §5.1)</td>
+<td>Fuente primaria, aunque es una síntesis de SKYbrary y no un texto reglamentario; considérese una fuente de confianza secundaria pese a haberse leído completa</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Vocabulario de fallos activos y latentes</td>
+<td>«Condiciones latentes» usadas una vez, sin desarrollar, en el pasaje del queso suizo</td>
+<td>Circular 240 de la OACI, Digest 7 (definiciones exactas, §5.2)</td>
+<td>Fuente primaria</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Redes de seguridad (STCA/MSAW/APM/APW)</td>
+<td>No se mencionan (es contenido de frontera entre el tema 5 y el tema 8)</td>
+<td>Guía de EUROCONTROL sobre redes de seguridad</td>
+<td>Fuente primaria; también es verosímil que se examine en el tema 5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-casos-practicos-mas-de-25-con-solucion">10. Casos prácticos (más de 25, con solución)</h2>
+<p>Formato: una situación operativa breve, seguida del concepto que evalúa y de la respuesta correcta, con el razonamiento probable del examinador. <strong>No</strong> están en el formato estricto de test <code>### Q1 / A) B) C) D)</code> (ese es <code>questions/ext/T08b-test.md</code>); son casos resueltos para un estudio más profundo.</p>
+<p><strong>S1.</strong> Un controlador ha hecho 4 servicios nocturnos consecutivos esta semana por un cambio improvisado del cuadrante. ¿Cumple el RD 1001/2010? — <strong>No.</strong> El art. 10.3 limita a <strong>2</strong> los períodos de servicio nocturno consecutivos, tras los cuales es obligatorio un descanso de 54 horas; 4 noches seguidas lo incumplen, con independencia de cómo se sienta la persona.</p>
+<p><strong>S2.</strong> Un controlador de torre termina un servicio nocturno a las 03:00 y está programado para iniciar un turno diurno a las 14:00 del mismo día (11 horas después). ¿Cumple? — <strong>No.</strong> Tras un período de servicio nocturno, el RD 1001/2010 exige un mínimo de <strong>48 horas</strong> de descanso antes del siguiente período de actividad diurna (art. 10.2); 11 horas es muy poco.</p>
+<p><strong>S3.</strong> Un controlador de una torre monoposición trabaja 10 horas continuas de actividad aeronáutica, con un único descanso de 1 h 20 min repartido durante el turno. ¿Cumple? — <strong>No del todo.</strong> El art. 8.2 permite hasta 12 horas continuas en una torre monoposición, pero exige <strong>al menos 1 h 30 min</strong> de descanso parcial durante ese día; 1 h 20 min no llega al mínimo.</p>
+<p><strong>S4.</strong> Un controlador duda, en privado, de que el cansancio por una urgencia familiar le permita trabajar con seguridad, y se lo dice al supervisor antes de tomar posición. ¿Qué mecanismo de licencias lo cubre? — <strong>ATCO.A.015(b), incapacidad provisional por declaración propia.</strong> El controlador no debe ejercer las atribuciones de su licencia mientras dude y debe notificarlo de inmediato al ANSP.</p>
+<p><strong>S5.</strong> Un supervisor, sin que el controlador haya dicho nada, observa un comportamiento errático que sugiere una merma de facultades y lo aparta del servicio. ¿Qué disposición se aplica? — <strong>ATCO.A.015(c), incapacidad provisional declarada por el ANSP</strong>: el proveedor puede declararla por iniciativa propia en cuanto tenga conocimiento de la duda.</p>
+<p><strong>S6.</strong> Un controlador se toma dos tazas de café antes de un turno de noche para mantenerse alerta. ¿Cuenta como consumo de sustancias psicoactivas en el régimen de controles del Reglamento (UE) 2015/340? — <strong>No.</strong> La cafeína (y el tabaco) están expresamente excluidos de la definición reglamentaria de «sustancia psicoactiva».</p>
+<p><strong>S7.</strong> La investigación de una pérdida de separación concluye que el controlador aplicó bien la lista de comprobación del relevo, pero la usó en una situación a la que en realidad no era aplicable. ¿Qué categoría GEMS y qué proceso cognitivo? — <strong>Equivocación</strong> (<em>mistake</em>): aplicación correcta de una regla en la situación equivocada, un error de planificación o de decisión, no un desliz ni un lapsus.</p>
+<p><strong>S8.</strong> Un controlador informa de que estuvo a punto de dar una pista equivocada a una aeronave porque la etiqueta de la tira de progreso no se había actualizado tras un cambio tardío de pista, y el diseño de la etiqueta favorece esa confusión en toda la dependencia. Se notifica con honestidad y no hay daños. Según la orientación de EUROCONTROL sobre cultura justa, ¿cómo debe tratarse? — Como una <strong>notificación honesta y vinculada al sistema que hay que fomentar</strong> (la cultura justa la protege), no como un asunto punitivo; la propia notificación es exactamente el tipo de «información esencial relacionada con la seguridad» que la definición de cultura justa quiere fomentar.</p>
+<p><strong>S9.</strong> Se descubre que un controlador bebió mucho antes de un turno y mintió al respecto cuando se le preguntó. ¿Le protege la cultura justa de consecuencias disciplinarias o penales? — <strong>No.</strong> La cultura justa no es, expresamente, una cultura de «no culpabilización»; el comportamiento deliberado, deshonesto e inseguro (aquí, ocultar la merma de facultades) queda en el lado inaceptable de la línea que traza la propia definición.</p>
+<p><strong>S10.</strong> A un controlador de una unidad de baja densidad se le programa un período de posición operacional continua de 3 h 30 min. ¿Es válida la ampliación sobre el tope normal de 2 horas? — <strong>Solo si</strong> la ampliación no excede de <strong>4 horas</strong> (tope del art. 8.1 para unidades de baja densidad), el proveedor remite antes a AESA un informe que la justifique y se respeta el aumento proporcional del descanso parcial. Las 3 h 30 min están dentro del techo de 4 horas, así que la ampliación es potencialmente válida, pero debe justificarse y alargarse el descanso en proporción.</p>
+<p><strong>S11.</strong> Durante un turno de noche muy tranquilo, un controlador cambia repetidamente ajustes innecesarios de la pantalla «solo para entretenerse», apartándose ligeramente del procedimiento de configuración estándar. ¿Qué tipo de transgresión es? — <strong>Transgresión de optimización</strong>: se comete para aliviar el aburrimiento de un trabajo monótono de vigilancia, no para hacer el trabajo más deprisa ni bajo coacción.</p>
+<p><strong>S12.</strong> Un controlador omite una comprobación cruzada obligatoria porque la unidad siempre lo ha hecho así y nadie ha cuestionado nunca esa práctica. ¿Tipo de transgresión y nivel de Rasmussen? — <strong>Transgresión rutinaria, nivel basado en habilidades</strong>: un atajo habitual y automatizado que tolera el grupo de trabajo.</p>
+<p><strong>S13.</strong> Con mucho tráfico y falta de personal, un controlador fusiona dos pasos de procedimiento que formalmente deben ser independientes, por considerarlo «necesario para sacar el trabajo adelante» ese día. ¿Tipo de transgresión y nivel? — <strong>Transgresión situacional, nivel basado en reglas</strong>: la causa es la presión organizativa o ambiental (presión de tiempo, falta de personal).</p>
+<p><strong>S14.</strong> Ante una emergencia súbita por fallo de dos motores, sin procedimiento aplicable, un controlador improvisa una solución de secuenciación no estándar. ¿Tipo de transgresión y nivel (si llega a clasificarse como transgresión)? — <strong>Transgresión excepcional, nivel basado en conocimientos</strong>: circunstancias raras y únicas; tras la revisión puede juzgarse que fue la elección instintiva más segura y no un acto punible.</p>
+<p><strong>S15.</strong> Una reestructuración organizativa de hace años suprimió sin hacer ruido un módulo de formación de normalización; nadie lo advirtió hasta que hoy aparece una oleada de errores similares en una dependencia fusionada. ¿Qué es en términos del Digest 7? — Un <strong>fallo latente</strong>: una decisión tomada mucho antes del suceso (por los responsables de la toma de decisiones o los mandos intermedios), latente hasta que las condiciones locales lo ponen de manifiesto.</p>
+<p><strong>S16.</strong> Un controlador, en su posición, emite una autorización incorrecta en condiciones normales, inmediatamente visible en la R/T. ¿Qué es en términos del Digest 7? — Un <strong>fallo activo</strong>: un acto inseguro de alguien en contacto directo con el sistema, con efecto casi inmediato.</p>
+<p><strong>S17.</strong> Un proveedor quiere saber si su documentación SMS, su declaración de compromiso de la administración y su plan de coordinación de respuesta a emergencias están todos implantados. ¿Qué componente del SMS de la OACI se evalúa? — <strong>Componente 1, Política y objetivos de seguridad operacional</strong> (elementos 1.1–1.5).</p>
+<p><strong>S18.</strong> Una auditoría comprueba si el proveedor tiene un proceso operativo de identificación de peligros y un método documentado de evaluación y mitigación de riesgos. ¿Qué componente? — <strong>Componente 2, Gestión de riesgos de seguridad operacional</strong> (elementos 2.1–2.2).</p>
+<p><strong>S19.</strong> Una auditoría comprueba si el rendimiento en materia de seguridad operacional se supervisa activamente, si existe un proceso de gestión del cambio y si el propio SMS mejora de forma continua. ¿Qué componente? — <strong>Componente 3, Aseguramiento de la seguridad operacional</strong> (elementos 3.1–3.3).</p>
+<p><strong>S20.</strong> Una auditoría comprueba los programas de formación del personal y la comunicación interna de seguridad. ¿Qué componente? — <strong>Componente 4, Promoción de la seguridad operacional</strong> (elementos 4.1–4.2).</p>
+<p><strong>S21.</strong> Un controlador quiere presentarse al examen de la anotación de OJTI (instructor) con solo 4 meses en el sector concreto. ¿Cumple ESARR 5? — <strong>No.</strong> ESARR 5 exige un mínimo de <strong>6 meses</strong> de experiencia en la habilitación en ese sector o posición concretos antes de la anotación de OJTI.</p>
+<p><strong>S22.</strong> Se produce un cuasi accidente (pérdida de separación, sin accidente) y un compañero que no estaba directamente implicado, pero que lo presenció, quiere presentar una notificación. ¿Está dentro del alcance que protege ESARR 2? — <strong>Sí.</strong> ESARR 2 prevé expresamente que «cualquier persona u organización [...] pueda notificar cualquier suceso o situación en que haya estado implicada <strong>o de los que haya sido testigo</strong>».</p>
+<p><strong>S23.</strong> Salta una alerta STCA y, de forma independiente, el TCAS de los pilotos también emite un RA segundos después. ¿Es un mal funcionamiento del sistema (doble alarma)? — <strong>No.</strong> Por diseño, las redes de seguridad terrestres (STCA) y las de a bordo (ACAS/TCAS) funcionan de forma <strong>independiente</strong> como protecciones redundantes por capas; que salten ambas a la vez es el comportamiento previsto de la defensa por capas, no un fallo.</p>
+<p><strong>S24.</strong> La dependencia de un controlador tiene una excelente recopilación de datos de incidentes (cultura informada) y el personal notifica con libertad (cultura de notificación), pero la dirección no ha cambiado nunca un procedimiento pese a años de notificaciones similares. ¿Qué eslabón del modelo de Reason en cinco partes está roto? — <strong>La cultura de aprendizaje</strong>: la información se recopila y se notifica, pero la organización carece de la «voluntad de aplicar cambios», de modo que el bucle que debería cerrarse de nuevo en prevención no se cierra.</p>
+<p><strong>S25.</strong> Se sanciona a un controlador que cometió un error honesto sin ningún proceso que distinga el error honesto de la conducta dolosa, y ahora los compañeros notifican menos los cuasi accidentes. ¿Qué eslabón está roto y cuál es el efecto previsible? — Se rompe la <strong>cultura justa</strong> (falla la condición de confianza que necesita la notificación); el efecto directo, según la cadena causal del modelo, es el hundimiento de la <strong>cultura de notificación</strong> que depende de ella y, por tanto, una cultura informada más débil en conjunto.</p>
+<p><strong>S26.</strong> Un proveedor quiere ampliar de 2 a 4 horas el tiempo continuo en posición operacional en una torre de poco tráfico. ¿Qué debe hacer primero, según el RD 1001/2010? — Enviar a AESA un <strong>informe previo que justifique la ampliación</strong> atendiendo a las demandas de tráfico, a las posiciones operacionales y a otras circunstancias relevantes (art. 8.1), antes de aplicarla.</p>
+<p><strong>S27.</strong> A un controlador le encargan una imaginaria nocturna y lo convocan una vez al lugar de trabajo durante la noche. ¿Cómo se computa ese tiempo para el tope de 20 horas de imaginaria y qué descanso sigue? — El tiempo de imaginaria <strong>en el lugar de trabajo cuenta doble</strong> para el tope de 20 horas, y al controlador se le garantiza el descanso <strong>hasta el mediodía del día siguiente</strong> tras una imaginaria nocturna cumplida (o con convocatoria) en el lugar de trabajo.</p>
+<hr />
+<h2 id="11-trampas-de-examen">11. Trampas de examen</h2>
+<ol>
+<li><strong>No mezclar las cuatro o cinco cifras de «noche».</strong> El WOCL (fisiológico, ~3–5/3–6 h), el «período nocturno» de la EASA (00:00–06:00, uso en límites de servicio), el «horario nocturno» del Doc 9966 de la OACI (18:00–06:00) y la «actividad nocturna» del RD 1001/2010 de España (01:30–05:29) son cuatro cifras distintas, todas bien fundamentadas. Hay que comprobar siempre qué documento cita la pregunta.</li>
+<li><strong>ATS.OR.320 del manual tiene 8 elementos, pero ninguna cifra.</strong> Si una pregunta da cifras reales de horas de servicio y descanso de controladores y pregunta «según qué norma», la respuesta numérica es la guía de buenas prácticas de EUROCONTROL (genérica de la UE, no vinculante) o el RD 1001/2010 (España, vinculante); nunca «el manual de ENAIRE», que deliberadamente no da ninguna.</li>
+<li><strong>Las franjas horarias propias del RD 1001/2010 no se solapan como cabría suponer</strong>: nocturna 01:30–05:29, madrugada 05:30–06:29 (hora de comienzo, no toda la ventana), matinal 06:30–07:59 (hora de comienzo). Son <strong>ventanas de hora de comienzo que dan nombre al tipo de turno</strong>, no necesariamente la duración completa del servicio.</li>
+<li><strong>Cultura justa ≠ cultura de no culpabilización.</strong> La definición rechaza expresamente la amnistía general; las transgresiones deliberadas y la negligencia grave quedan fuera de su protección.</li>
+<li><strong>Las transgresiones son deliberadas; los deslices, lapsus y equivocaciones (GEMS) no</strong> (o, en una equivocación, el <em>plan</em> era erróneo, sin que hubiera un incumplimiento consciente de la norma). No hay que clasificar una transgresión como «equivocación» ni al revés, aunque ambas puedan implicar una aplicación incorrecta de una norma.</li>
+<li><strong>Transgresión rutinaria → basado en habilidades; situacional → basado en reglas; excepcional → basado en conocimientos.</strong> Las transgresiones involuntarias y las de optimización <strong>no</strong> se asocian a un nivel concreto de Rasmussen en la taxonomía.</li>
+<li><strong>Fallo activo = acto inseguro en el extremo operativo; fallo latente = decisión previa que permaneció latente.</strong> Un «fallo latente» no es automáticamente «culpa de la alta dirección» en sentido de reproche; es cualquier condición latente de origen previo, que también podría venir de un regulador.</li>
+<li><strong>SMS de la OACI = 4 componentes, 12 elementos, siempre en el orden política → gestión de riesgos → aseguramiento → promoción</strong>, repartidos 5+2+3+2. No hay que intercambiar el orden de gestión de riesgos y aseguramiento ni su número de elementos.</li>
+<li><strong>ESARR 2 trata de la notificación de sucesos; ESARR 5, de licencias y competencia.</strong> No hay que confundir los dos ESARR: el manual no usa ninguno de los dos nombres, así que una pregunta que nombre «ESARR 5» evalúa específicamente el contenido de este archivo.</li>
+<li><strong>STCA/APW son terrestres; ACAS/TCAS es de a bordo</strong>: son capas independientes y redundantes, no duplicados de un mismo sistema; MSAW y APM abordan ambos el riesgo de CFIT, con el (E)GPWS como reflejo en la aeronave.</li>
+<li><strong>El RD 1088/2020 asigna la vigilancia de la cultura justa en la notificación de sucesos a la DGAC</strong>, no directamente a AESA (AESA sigue pudiendo sancionar los incumplimientos; la función de vigilancia diaria corresponde a la DGAC según el art. 3 del real decreto).</li>
+<li><strong>La experiencia mínima del OJTI es de 6 meses en el sector o la posición concretos</strong>, según ESARR 5; no es una cifra general de «6 meses como controlador».</li>
+</ol>
+<hr />
+<h2 id="12-imprescindible-memorizar-breve-y-denso">12. Imprescindible memorizar (breve y denso)</h2>
+<ul>
+<li>Cifras de buena práctica de la UE sobre fatiga (EUROCONTROL 2023): 8 h por servicio (hasta 12 h con evaluación de riesgos); 2 h máx. continuas en posición; 30 min de descanso mínimo; 11 h de reposo mínimo; «período nocturno» de la EASA 00:00–06:00; máx. 2 servicios nocturnos consecutivos y luego un día libre.</li>
+<li>RD 1001/2010 (España, vinculante): máx. 50 h/6 períodos y luego 60 h de descanso (o 48 h según el art. 6.3); descanso mensual mínimo de 180 h en bloques de ≥3×54 h; máx. 2 h continuas en posición + 30 min de descanso (ampliable a 4 h en baja densidad, a 12 h en torre monoposición + 1 h 30 de descanso); noche 01:30–05:29, máx. continuo de 9 h 30 que termine antes de las 07:30, 48 h de descanso tras 1 noche o 54 h tras 2 noches consecutivas; madrugada comienza 05:30–06:29 (máx. 8 h, ≤2/144 h); matinal comienza 06:30–07:59 (máx. 8 h 30, ≤5 consecutivas); imaginaria máx. 20 h, el tiempo en el lugar de trabajo cuenta doble, ≤2/144 h.</li>
+<li>III Convenio de ENAIRE: tope de carga de trabajo mensual de 170 h; posiciones de «descanso reforzado» ≥33 % de descanso.</li>
+<li>ATCO.A.015: incapacidad provisional por declaración propia (b) o declarada por el ANSP (c); los motivos incluyen fatiga, estrés, sustancias psicoactivas y dudas sobre la competencia.</li>
+<li>Sustancia psicoactiva (Reglamento 2015/340): alcohol, opiáceos, canabinoides, sedantes e hipnóticos, cocaína, otros psicoestimulantes, alucinógenos, disolventes volátiles; con exclusión de la cafeína y el tabaco.</li>
+<li>Transgresiones (5 tipos): involuntaria, rutinaria (basada en habilidades), situacional (basada en reglas), excepcional (basada en conocimientos), de optimización. Deliberadas, a diferencia de los errores GEMS. ~1/3 de las transgresiones se gestionan mal.</li>
+<li>Fallo activo = acto inseguro en el extremo operativo, efecto inmediato. Fallo latente = decisión previa, latente, de los responsables de la toma de decisiones, los mandos intermedios o los reguladores.</li>
+<li>SMS de la OACI: 4 componentes (Política y objetivos 5 elementos, Gestión de riesgos 2, Aseguramiento 3, Promoción 2) = 12 elementos en total.</li>
+<li>ESARR 2: notificación y evaluación de sucesos, cualquier persona puede notificar, notificación anual a EUROCONTROL. ESARR 5: licencias y competencia, el OJTI necesita 6 meses en el sector concreto.</li>
+<li>Cultura justa (EUROCONTROL EAM2/GUI6): «un clima de confianza en el que se anima e incluso se recompensa a las personas por aportar información esencial relacionada con la seguridad, pero [...] tienen claro dónde debe trazarse la línea». No es una cultura de no culpabilización.</li>
+<li>Reglamento 376/2014 + RD 1088/2020: en España, la vigilancia de la cultura justa en la notificación de sucesos corresponde a la DGAC (art. 3 del RD 1088/2020); el art. 16.9 del Reglamento es el artículo fuente; AESA puede sancionar los incumplimientos.</li>
+<li>Cadena de la cultura de seguridad en 5 partes de Reason: cultura informada → de notificación → justa → flexible → de aprendizaje.</li>
+<li>Redes de seguridad: STCA (conflicto) / MSAW + APM (terreno) / APW (infracción del espacio aéreo), terrestres, independientes de ACAS/TCAS y (E)GPWS de a bordo.</li>
+</ul>
+<hr />
+<h2 id="13-glosario-bilingue-es-en">13. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sistema de gestión de riesgos de fatiga</td>
+<td>fatigue risk management system (FRMS)</td>
+</tr>
+<tr>
+<td>límites prescriptivos</td>
+<td>prescriptive limits</td>
+</tr>
+<tr>
+<td>sistema de turnos / cuadrante</td>
+<td>rostering system</td>
+</tr>
+<tr>
+<td>rotación hacia adelante / hacia atrás</td>
+<td>forward / backward rotation</td>
+</tr>
+<tr>
+<td>día de descanso tras noche</td>
+<td>sleeping day</td>
+</tr>
+<tr>
+<td>operación con controlador único</td>
+<td>single person operations (SPO)</td>
+</tr>
+<tr>
+<td>entrenamiento en posición</td>
+<td>on-the-job training (OJT)</td>
+</tr>
+<tr>
+<td>incapacidad provisional</td>
+<td>provisional inability</td>
+</tr>
+<tr>
+<td>sustancia psicoactiva</td>
+<td>psychoactive substance</td>
+</tr>
+<tr>
+<td>estrés por incidente crítico</td>
+<td>critical incident stress</td>
+</tr>
+<tr>
+<td>actividad aeronáutica</td>
+<td>aeronautical activity</td>
+</tr>
+<tr>
+<td>actividad operacional</td>
+<td>operational activity</td>
+</tr>
+<tr>
+<td>actividad nocturna / de madrugada / matinal</td>
+<td>night / early-morning / morning activity</td>
+</tr>
+<tr>
+<td>imaginaria</td>
+<td>stand-by, on-call duty</td>
+</tr>
+<tr>
+<td>relevo</td>
+<td>handover</td>
+</tr>
+<tr>
+<td>descanso reforzado</td>
+<td>reinforced rest</td>
+</tr>
+<tr>
+<td>transgresión / vulneración</td>
+<td>violation</td>
+</tr>
+<tr>
+<td>transgresión involuntaria / rutinaria / situacional / excepcional / de optimización</td>
+<td>unintentional / routine / situational / exceptional / optimising violation</td>
+</tr>
+<tr>
+<td>fallo activo</td>
+<td>active failure</td>
+</tr>
+<tr>
+<td>fallo latente</td>
+<td>latent failure</td>
+</tr>
+<tr>
+<td>responsables de la toma de decisiones</td>
+<td>decision-makers</td>
+</tr>
+<tr>
+<td>mandos intermedios / línea de mando</td>
+<td>line management</td>
+</tr>
+<tr>
+<td>sistema de gestión de la seguridad operacional (SMS; SGSO)</td>
+<td>Safety Management System (SMS)</td>
+</tr>
+<tr>
+<td>política y objetivos de seguridad operacional</td>
+<td>safety policy and objectives</td>
+</tr>
+<tr>
+<td>gestión de riesgos de seguridad operacional</td>
+<td>safety risk management</td>
+</tr>
+<tr>
+<td>aseguramiento de la seguridad operacional</td>
+<td>safety assurance</td>
+</tr>
+<tr>
+<td>promoción de la seguridad operacional</td>
+<td>safety promotion</td>
+</tr>
+<tr>
+<td>identificación de peligros</td>
+<td>hazard identification</td>
+</tr>
+<tr>
+<td>gestión del cambio</td>
+<td>management of change</td>
+</tr>
+<tr>
+<td>Requisito Reglamentario de Seguridad de EUROCONTROL (ESARR)</td>
+<td>ESARR (EUROCONTROL Safety Regulatory Requirement)</td>
+</tr>
+<tr>
+<td>notificación de sucesos</td>
+<td>occurrence reporting</td>
+</tr>
+<tr>
+<td>habilitación de dependencia</td>
+<td>unit endorsement</td>
+</tr>
+<tr>
+<td>instructor de entrenamiento en posición (OJTI)</td>
+<td>On-the-Job Training Instructor (OJTI)</td>
+</tr>
+<tr>
+<td>cultura justa</td>
+<td>Just Culture</td>
+</tr>
+<tr>
+<td>cultura de no culpabilización</td>
+<td>no-blame culture</td>
+</tr>
+<tr>
+<td>cultura de notificación / informada / flexible / de aprendizaje</td>
+<td>reporting / informed / flexible / learning culture</td>
+</tr>
+<tr>
+<td>notificante</td>
+<td>reporter (of an occurrence)</td>
+</tr>
+<tr>
+<td>vigilancia (de la cultura justa)</td>
+<td>oversight (of Just Culture)</td>
+</tr>
+<tr>
+<td>red de seguridad terrestre</td>
+<td>ground safety net</td>
+</tr>
+<tr>
+<td>alerta de conflicto a corto plazo (STCA)</td>
+<td>Short-Term Conflict Alert (STCA)</td>
+</tr>
+<tr>
+<td>aviso de proximidad de área (APW)</td>
+<td>Area Proximity Warning (APW)</td>
+</tr>
+<tr>
+<td>aviso de altitud mínima de seguridad (MSAW)</td>
+<td>Minimum Safe Altitude Warning (MSAW)</td>
+</tr>
+<tr>
+<td>supervisor de trayectoria de aproximación (APM)</td>
+<td>Approach Path Monitor (APM)</td>
+</tr>
+<tr>
+<td>sistema anticolisión de a bordo (ACAS/TCAS)</td>
+<td>Airborne Collision Avoidance System (ACAS/TCAS)</td>
+</tr>
+<tr>
+<td>sistema de aviso de proximidad al terreno (GPWS)</td>
+<td>Ground Proximity Warning System (GPWS)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-fuentes">14. Fuentes</h2>
+<ul>
+<li>EUROCONTROL, <em>Guidelines for the Management of the Risks of Fatigue in ATC Rostering</em> (2023).</li>
+<li>EASA, <em>Easy Access Rules for Air Traffic Controllers' Licensing and Certification</em> (Reglamento (UE) 2015/340, consolidado, revisión marzo 2024).</li>
+<li>EUROCONTROL, <em>EAM 2/GUI 6 — Establishment of "Just Culture" Principles in ATM Safety Data Reporting and Assessment</em>.</li>
+<li>SKYbrary, ESARR 2, <em>Reporting and Assessment of Safety Occurrences in ATM</em>.</li>
+<li>EUROCONTROL, ESARR 5 (2.ª edición), <em>ATM Services' Personnel</em>.</li>
+<li>SRVSOP/OACI, <em>Manual de Gestión de la Seguridad Operacional (SMM)</em>, edición en español del Doc 9859.</li>
+<li>Real Decreto 1088/2020 (transposición del Reglamento (UE) 376/2014).</li>
+<li>EUROCONTROL, <em>Safety Culture in ATM</em> (doc. 014).</li>
+<li>EUROCONTROL, <em>Safety Nets — A Guide for Ensuring Effectiveness</em>.</li>
+<li>SKYbrary, artículo «Violation».</li>
+<li>OACI, Circular 240, <em>Human Factors Digest No. 7: Investigation of Human Factors in Accidents and Incidents</em>.</li>
+<li>FAA, AC 120-100, <em>Basics of Aviation Fatigue</em>.</li>
+<li>Real Decreto 1001/2010, de 5 de agosto (tiempos de actividad y descanso de los controladores civiles de tránsito aéreo).</li>
+<li>III Convenio Colectivo de ENAIRE (BOE-A-2023-18633).</li>
+<li>ENAIRE, manual <em>Factores Humanos en ATM</em> (julio de 2023) — línea base de comparación del §9; ver <code>syllabus/manual/OM08-human-factors-study-guide.md</code>.</li>
+</ul>
+<hr /></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,1617 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cartografía y geodesia (T04)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Cartografía</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-el-modelo-de-la-tierra-esfera-elipsoide-geoide-datum">1. El modelo de la Tierra: esfera, elipsoide, geoide, datum</a><ul>
+<li><a href="#11-tres-modelos-de-la-tierra">1.1 Tres modelos de la Tierra</a></li>
+<li><a href="#12-sistema-de-referencia-marco-de-referencia-datum">1.2 Sistema de referencia, marco de referencia, datum</a></li>
+<li><a href="#13-puntos-y-lineas-destacados-manual">1.3 Puntos y líneas destacados (manual)</a></li>
+<li><a href="#14-los-cuatro-movimientos-de-la-tierra-manual">1.4 Los cuatro movimientos de la Tierra (manual)</a></li>
+</ul>
+</li>
+<li><a href="#2-wgs-84-sus-realizaciones-etrs89-y-los-sistemas-espanoles">2. WGS-84, sus realizaciones, ETRS89 y los sistemas españoles</a><ul>
+<li><a href="#21-definicion-del-wgs-84-doc-9674-de-la-oaci-cap-3">2.1 Definición del WGS-84 (Doc 9674 de la OACI, cap. 3)</a></li>
+<li><a href="#22-las-cifras-hay-que-saberlas">2.2 Las cifras (hay que saberlas)</a></li>
+<li><a href="#23-realizaciones-del-wgs-84-y-epocas">2.3 Realizaciones del WGS-84 y épocas</a></li>
+<li><a href="#24-etrs89-regcan95-ed50-y-la-legislacion-espanola">2.4 ETRS89, REGCAN95, ED50 y la legislación española</a></li>
+</ul>
+</li>
+<li><a href="#3-alturas-elipsoidal-ortometrica-ondulacion-del-geoide">3. Alturas: elipsoidal, ortométrica, ondulación del geoide</a></li>
+<li><a href="#4-coordenadas-unidades-y-la-notacion-del-aip">4. Coordenadas, unidades y la notación del AIP</a><ul>
+<li><a href="#41-coordenadas-geograficas">4.1 Coordenadas geográficas</a></li>
+<li><a href="#42-notacion-del-aip-espana">4.2 Notación del AIP España</a></li>
+<li><a href="#43-unidades-de-medida-anexo-5-aip-gen-21-apdo-1">4.3 Unidades de medida (Anexo 5; AIP GEN 2.1 apdo. 1)</a></li>
+<li><a href="#44-coordenadas-de-la-cuadricula-universal-transversa-de-mercator-utm">4.4 Coordenadas de la cuadrícula Universal Transversa de Mercator (UTM)</a></li>
+</ul>
+</li>
+<li><a href="#5-proyecciones-cartograficas-teoria-propiedades-escala-convergencia">5. Proyecciones cartográficas: teoría, propiedades, escala, convergencia</a><ul>
+<li><a href="#51-el-problema-basico">5.1 El problema básico</a></li>
+<li><a href="#52-clasificacion">5.2 Clasificación</a></li>
+<li><a href="#53-la-escala">5.3 La escala</a></li>
+<li><a href="#54-convergencia-de-meridianos">5.4 Convergencia de meridianos</a></li>
+<li><a href="#55-curvas-de-nivel-y-relieve">5.5 Curvas de nivel y relieve</a></li>
+</ul>
+</li>
+<li><a href="#6-las-proyecciones-usadas-en-aviacion-y-en-espana">6. Las proyecciones usadas en aviación y en España</a><ul>
+<li><a href="#61-mercator-cilindrica-conforme">6.1 Mercator (cilíndrica, conforme)</a></li>
+<li><a href="#62-conica-conforme-de-lambert-lcc">6.2 Cónica conforme de Lambert (LCC)</a></li>
+<li><a href="#63-proyecciones-acimutales">6.3 Proyecciones acimutales</a></li>
+<li><a href="#64-tabla-comparativa">6.4 Tabla comparativa</a></li>
+</ul>
+</li>
+<li><a href="#7-circulo-maximo-loxodromica-y-formulas-de-navegacion">7. Círculo máximo, loxodrómica y fórmulas de navegación</a><ul>
+<li><a href="#71-definiciones-y-propiedades">7.1 Definiciones y propiedades</a></li>
+<li><a href="#72-formulas-esfera-radio-r">7.2 Fórmulas (esfera, radio R)</a></li>
+<li><a href="#73-regla-practica-de-la-rosa-de-los-vientos">7.3 Regla práctica de la rosa de los vientos</a></li>
+</ul>
+</li>
+<li><a href="#8-magnetismo-variacion-desvio-compas-wmm">8. Magnetismo: variación, desvío, compás, WMM</a><ul>
+<li><a href="#81-terminos">8.1 Términos</a></li>
+<li><a href="#82-conversiones">8.2 Conversiones</a></li>
+<li><a href="#83-el-modelo-magnetico-mundial-wmm">8.3 El Modelo Magnético Mundial (WMM)</a></li>
+<li><a href="#84-norte-geografico-y-norte-magnetico-en-las-cartas-y-los-datos-espanoles">8.4 Norte geográfico y norte magnético en las cartas y los datos españoles</a></li>
+</ul>
+</li>
+<li><a href="#9-el-anexo-4-de-la-oaci-y-las-cartas-del-aip-espana">9. El Anexo 4 de la OACI y las cartas del AIP España</a><ul>
+<li><a href="#91-el-marco-juridico">9.1 El marco jurídico</a></li>
+<li><a href="#92-fases-del-vuelo-y-cartas-manual">9.2 Fases del vuelo y cartas (manual)</a></li>
+<li><a href="#93-cartas-del-aip-espana-finalidad-escala-proyeccion-gen-32">9.3 Cartas del AIP España: finalidad, escala, proyección (GEN 3.2)</a></li>
+<li><a href="#94-mantenimiento-de-las-cartas-y-diferencias-con-la-oaci">9.4 Mantenimiento de las cartas y diferencias con la OACI</a></li>
+</ul>
+</li>
+<li><a href="#10-contenido-de-las-cartas-simbolos-colores-obstaculos-altitudes-minimas">10. Contenido de las cartas: símbolos, colores, obstáculos, altitudes mínimas</a><ul>
+<li><a href="#101-simbolos-aip-gen-23">10.1 Símbolos (AIP GEN 2.3)</a></li>
+<li><a href="#102-colores-y-convenciones-de-diseno-guia-de-eurocontrol-para-la-carta-oaci-1500-000">10.2 Colores y convenciones de diseño (guía de EUROCONTROL para la carta OACI 1:500 000)</a></li>
+<li><a href="#103-altitudes-minimas-definiciones">10.3 Altitudes mínimas (definiciones)</a></li>
+</ul>
+</li>
+<li><a href="#11-publicaciones-aeronauticas-airac-calidad-de-los-datos">11. Publicaciones aeronáuticas, AIRAC, calidad de los datos</a><ul>
+<li><a href="#111-documentacion-integrada-de-informacion-aeronautica-ais-espana">11.1 Documentación Integrada de Información Aeronáutica (AIS España)</a></li>
+<li><a href="#112-el-sistema-airac-aeronautical-information-regulation-and-control-reglamentacion-y-control-de-la-informacion-aeronautica">11.2 El sistema AIRAC (Aeronautical Information Regulation and Control, reglamentación y control de la información aeronáutica)</a></li>
+<li><a href="#113-calidad-de-los-datos-doc-9674-de-la-oaci-capitulo-2">11.3 Calidad de los datos (Doc 9674 de la OACI, capítulo 2)</a></li>
+</ul>
+</li>
+<li><a href="#12-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">12. Manual frente a fuentes primarias (tabla de discrepancias)</a></li>
+<li><a href="#13-ejercicios-numericos-con-solucion-completa-36">13. Ejercicios numéricos con solución completa (36)</a></li>
+<li><a href="#14-trampas-de-examen-confusiones-tipicas">14. Trampas de examen (confusiones típicas)</a></li>
+<li><a href="#15-imprescindible-memorizar">15. Imprescindible memorizar</a></li>
+<li><a href="#16-glosario-es-en">16. Glosario (ES → EN)</a></li>
+<li><a href="#17-fuentes">17. Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">96 min de lectura</div><h1 id="t04-cartografia-y-geodesia-ampliado-cartography-and-geodesy">T04 - Cartografía y geodesia, ampliado (Cartography and geodesy)</h1>
+<p>Apuntes de estudio ampliados para el tema 4 del Anexo I, <em>Cartografía</em>. Van <strong>más allá</strong> del manual oficial de ENAIRE «4. Cartografía» (noviembre de 2024, 66 páginas) y usan fuentes primarias: AIP España, Doc 9674 de la OACI, RD 1071/2007, manuales de EUROCONTROL, NIMA TR8350.2, Bowditch, USGS PP1395, NOAA WMM2025 y los manuales de la FAA. La sección 12 recoge todos los puntos en que el manual y las fuentes primarias no coinciden.</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El Anexo I oficial solo da el título «Cartografía». El manual de ENAIRE del tema (unas 12 400 palabras, con muchas figuras) trata: la forma y el tamaño de la Tierra, los puntos y líneas destacados, los cuatro movimientos de la Tierra, las nociones básicas de navegación (magnetismo, declinación, rumbo, ruta, deriva, derrota), las coordenadas geográficas y el datum WGS-84, la escala, las proyecciones (con especial atención a la cónica conforme de Lambert), las curvas de nivel, los símbolos y las cartas aeronáuticas OACI y españolas (Anexo 4, fases del vuelo, lista de cartas, cartas electrónicas, mantenimiento). Cabe esperar preguntas factuales de una línea: definiciones, cifras (a = 6 378 137 m, 1 NM = 1852 m), listas (qué carta corresponde a cada fase) y cálculos pequeños (rumbo magnético a partir del rumbo geográfico y la declinación, cambios de escala, grados-minutos-segundos). Estos apuntes añaden la profundidad que le falta al manual: constantes geodésicas exactas, textos legales españoles, escalas de las cartas del AIP, reglas sobre obstáculos, aritmética AIRAC y 36 ejercicios resueltos.</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>El modelo de la Tierra: esfera, elipsoide, geoide, datum</li>
+<li>WGS-84, sus realizaciones, ETRS89 y los sistemas españoles</li>
+<li>Alturas: elipsoidal, ortométrica, ondulación del geoide</li>
+<li>Coordenadas, unidades y la notación del AIP</li>
+<li>Proyecciones cartográficas: teoría, propiedades, escala, convergencia</li>
+<li>Las proyecciones usadas en aviación y en España</li>
+<li>Círculo máximo, loxodrómica y fórmulas de navegación</li>
+<li>Magnetismo: variación, desvío, compás, WMM</li>
+<li>El Anexo 4 de la OACI y las cartas del AIP España</li>
+<li>Contenido de las cartas: símbolos, colores, obstáculos, altitudes mínimas</li>
+<li>Publicaciones aeronáuticas: AIP, AMDT, SUP, AIC, NOTAM, AIRAC; calidad de los datos</li>
+<li>Manual frente a fuentes primarias (tabla de discrepancias)</li>
+<li>Ejercicios numéricos con solución (36)</li>
+<li>Trampas de examen</li>
+<li>Imprescindible memorizar</li>
+<li>Glosario (ES → EN)</li>
+<li>Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-el-modelo-de-la-tierra-esfera-elipsoide-geoide-datum">1. El modelo de la Tierra: esfera, elipsoide, geoide, datum</h2>
+<h3 id="11-tres-modelos-de-la-tierra">1.1 Tres modelos de la Tierra</h3>
+<ul>
+<li>La <strong>geodesia</strong> es «la ciencia que se ocupa del estudio de la forma y el tamaño de la Tierra en sentido geométrico, así como de la forma de las superficies equipotenciales del potencial de la gravedad» (Helmert, 1880). D9674 Ap. B 1.1. El manual de ENAIRE la formula como la ciencia que estudia la forma y las dimensiones de la Tierra, su campo de gravedad, sus variaciones temporales y la manera de representarla en un plano. MAN 2.</li>
+<li><strong>Esfera.</strong> El manual emplea una esfera perfecta de radio medio <strong>6371 km</strong>: diámetro 12 742 km, «perímetro» 40 076 km, superficie 510 x 10^6 km², volumen 108,321 x 10^10 km³. MAN 2.1. Comprobaciones: 2 x 6371 = 12 742; 4πR² = 510,06 x 10^6 km²; (4/3)πR³ = 1,0832 x 10^12 km³. <strong>El perímetro no encaja con esa misma esfera</strong>: 2π x 6371 = 40 030 km; 40 076 km es (redondeada) la circunferencia <em>ecuatorial</em> del elipsoide, 2πa = 40 075,0 km. (Sección 12, fila 4.)</li>
+<li><strong>Elipsoide de revolución.</strong> Se genera al hacer girar la elipse meridiana alrededor de su eje menor; queda definido por el semieje mayor <strong>a</strong> y por el semieje menor <strong>b</strong> o el <strong>achatamiento f = (a - b)/a</strong>. D9674 Ap. B 2.7, 3.7. Argumento de Newton: una Tierra en rotación tiene que estar achatada en los polos. D9674 Ap. B 2.6.</li>
+<li><strong>Geoide.</strong> «La superficie equipotencial del campo de gravedad de la Tierra que coincide con el nivel medio del mar (MSL) no perturbado, prolongado de forma continua a través de los continentes.» Es irregular por las perturbaciones locales de la gravedad, y la gravedad es perpendicular a él en todos sus puntos. D9674 Ap. B 2.9. Solo hay un geoide; cubre cerca de dos tercios de la Tierra (los océanos) y es un océano idealizado que se prolonga bajo los continentes. D9674 Ap. B 6.4. En la práctica se materializa observando el nivel medio del mar en mareógrafos, pero la topografía de la superficie marina (viento, salinidad, corrientes) hace que el MSL real se desvíe del geoide hasta unos 2 m, de modo que los datums verticales nacionales difieren entre sí. D9674 Ap. B 6.5.</li>
+<li><strong>La superficie de la Tierra queda a menos de unos 100 m del elipsoide</strong> (la desviación de altura del geoide respecto de un elipsoide de mejor ajuste es &lt; 100 m). D9674 Ap. B 3.6. En España el geoide queda unos 50 m por encima del elipsoide GRS80 (sección 3).</li>
+<li><strong>¿Por qué un elipsoide y un geoide?</strong> El elipsoide es una referencia <em>geométrica</em> para las coordenadas horizontales (latitud, longitud); el geoide es una referencia <em>física</em> para las alturas (hacia dónde fluye el agua). Toda medición geodésica depende del campo de gravedad, porque los instrumentos se nivelan según la vertical local (la línea de la plomada). D9674 Ap. B 1.4-1.5, 2.1.</li>
+</ul>
+<h3 id="12-sistema-de-referencia-marco-de-referencia-datum">1.2 Sistema de referencia, marco de referencia, datum</h3>
+<ul>
+<li><strong>Sistema de referencia geodésico:</strong> la idea conceptual de un sistema cartesiano (X, Y, Z) ligado a la Tierra. <strong>Marco de referencia geodésico:</strong> su realización práctica mediante observaciones, que tienen errores. D9674 Ap. B 4.2-4.3.</li>
+<li><strong>Datum geodésico:</strong> el conjunto mínimo de parámetros necesarios para definir la posición y la orientación de un sistema (local) con respecto al global. Un <strong>datum cartesiano</strong> necesita 7 parámetros (3 traslaciones ΔX, ΔY, ΔZ; 3 giros; 1 factor de escala); un <strong>datum elipsoidal</strong> añade los dos parámetros de forma (Δa, Δf) y necesita por tanto <strong>9 parámetros</strong>. Regla práctica: datum elipsoidal = datum cartesiano + forma del elipsoide terrestre. D9674 Ap. B 4.3-4.9, 5.2. El manual de ENAIRE define el datum como el conjunto de parámetros que fijan el origen, la orientación y la escala del sistema de coordenadas con respecto a un elipsoide de referencia. MAN 2.5.</li>
+<li><strong>Local frente a global:</strong> los datums locales (Airy 1830, Bessel 1841, Internacional 1924/Hayford, Krassovsky 1940, Clarke 1866...) se ajustan a una región y se obtuvieron sobre todo en el siglo XIX con un observatorio local como origen; el centro de ninguno coincide con el centro de masas de la Tierra. Solo existe un sistema realmente global: origen en el centro de masas, eje Z sobre el eje medio de rotación, eje X en el plano del meridiano medio de Greenwich. D9674 1.1.5, 1.3.2, Ap. B 4.4.</li>
+<li><strong>Por qué le importa a la aviación (historia).</strong> Los problemas de datum se detectaron por primera vez en Europa a principios de los años setenta, cuando se fusionaron en el Centro de Control Superior de Maastricht de EUROCONTROL las trazas radar de Bélgica, Alemania y los Países Bajos; a mediados de los setenta, el sistema francés de inspección en vuelo SAVVAN observó «saltos» de posición entre transpondedores DME de Estados distintos. Las discrepancias entre datums van de metros a kilómetros. D9674 1.1.1-1.1.2, 1.2.1. Se adoptó el WGS-84 como marco común de la aviación civil. D9674 1.4.1. La familia WGS: WGS-60, -66, -72, -84. D9674 1.1.7.</li>
+</ul>
+<h3 id="13-puntos-y-lineas-destacados-manual">1.3 Puntos y líneas destacados (manual)</h3>
+<p>Centro de la Tierra; eje terrestre; polos geográficos; <strong>círculos máximos</strong>, definidos por planos que pasan por el centro, que dividen la Tierra en dos hemisferios; los <strong>meridianos</strong> son semicírculos máximos que pasan por los polos y cortan perpendicularmente al ecuador y a todos los paralelos; el meridiano de origen es el de Greenwich (referencia del sistema horario desde 1884); el <strong>ecuador</strong> es el círculo máximo perpendicular al eje; los <strong>círculos menores</strong> no pasan por el centro; los <strong>paralelos</strong> son círculos menores paralelos al ecuador (círculos polares Ártico y Antártico, trópicos de Cáncer y de Capricornio). MAN 2.2.</p>
+<ul>
+<li>Los trópicos están a 23°27' N y S; el eje forma unos 66°33' con el plano de la órbita. MAN 2.3.2.</li>
+</ul>
+<h3 id="14-los-cuatro-movimientos-de-la-tierra-manual">1.4 Los cuatro movimientos de la Tierra (manual)</h3>
+<table>
+<thead>
+<tr>
+<th>Movimiento</th>
+<th>Datos del manual</th>
+<th>Comprobación / comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rotación</td>
+<td>360° en 23 h 56 min 4 s, de oeste a este; causa el día y la noche y el achatamiento polar</td>
+<td>23 h 56 min 4 s = un día sidéreo = 23,934 h</td>
+</tr>
+<tr>
+<td>Traslación</td>
+<td>Alrededor del Sol en 365 días a lo largo de la eclíptica (una elipse con el Sol en uno de sus focos); afelio en torno al 4 de julio, perihelio el 4 de enero; las estaciones se deben a la inclinación del eje</td>
+<td>MAN 2.3.2</td>
+</tr>
+<tr>
+<td>Precesión</td>
+<td>El eje describe un cono en unos 25 700 años, en sentido contrario al de rotación; el manual habla de unos «50 minutos anuales»</td>
+<td>360° / 25 700 años = <strong>50,4 segundos de arco</strong> por año, no minutos. Véase la sección 12</td>
+</tr>
+<tr>
+<td>Nutación</td>
+<td>Pequeña oscilación superpuesta a la precesión, con un ciclo de algo más de 18 años; el manual dice que el eje oscila unos «9 minutos»</td>
+<td>El orden de magnitud real son segundos de arco (unos 9"); lo de minutos es dudoso. La precesión y la nutación combinadas desplazan la posición del norte magnético (manual)</td>
+</tr>
+</tbody>
+</table>
+<p>En los trópicos el Sol pasa por el cenit una vez al año: en el trópico de Cáncer, en el solsticio de verano (del hemisferio norte); en el trópico de Capricornio, en el solsticio de invierno; en los equinoccios pasa por el cenit en el ecuador y el día dura lo mismo que la noche. MAN 2.3.2.</p>
+<hr />
+<h2 id="2-wgs-84-sus-realizaciones-etrs89-y-los-sistemas-espanoles">2. WGS-84, sus realizaciones, ETRS89 y los sistemas españoles</h2>
+<h3 id="21-definicion-del-wgs-84-doc-9674-de-la-oaci-cap-3">2.1 Definición del WGS-84 (Doc 9674 de la OACI, cap. 3)</h3>
+<ul>
+<li>El <strong>Sistema Geodésico Mundial 1984 (<em>World Geodetic System 1984</em>)</strong> es un sistema terrestre convencional (CTS), un marco geocéntrico fijo a la Tierra (ECEF), realizado modificando en origen y escala el marco Doppler NSWC 9Z-2 del sistema de navegación por satélite de la Marina de EE. UU. (NNSS, «TRANSIT») y girándolo para que su meridiano de referencia coincida con el meridiano cero del <strong>BIH</strong> (<em>Bureau International de l'Heure</em>). D9674 3.1.1.</li>
+<li><strong>Ejes:</strong> origen = centro de masas de la Tierra; <strong>Z</strong> = dirección del polo terrestre convencional (CTP) definido por el BIH; <strong>X</strong> = intersección del plano del meridiano de referencia con el plano ecuatorial del CTP; <strong>Y</strong> completa un sistema ortogonal a derechas, medido en el plano ecuatorial <strong>90° al este de X</strong>. D9674 3.1.2. El manual de ENAIRE da los mismos ejes, pero cita al <strong>IERS</strong> (Servicio Internacional de Rotación de la Tierra) en lugar del BIH. MAN 2.5.2. (El BIH es la redacción de 1984 del manual de la OACI; el IERS asumió después su función. Ambos nombres son correctos en sus fuentes.)</li>
+<li><strong>Realización:</strong> el origen y la orientación quedan definidos por las coordenadas X, Y, Z de <strong>cinco estaciones de seguimiento del GPS</strong> (Colorado Springs = control maestro, Hawái, Ascensión, Diego García, Kwajalein). D9674 3.2.1 y Fig. 3-2.</li>
+<li><strong>Exactitud (1σ) de las coordenadas obtenidas directamente por posicionamiento GPS:</strong> horizontal ±1 m, vertical ±1...2 m. Basta para casi toda la navegación aérea; la aproximación de precisión de categoría III necesita 0,6 m en vertical y 6,0 m en horizontal, algo que la definición del WGS-84 no puede dar pero el ITRF sí. D9674 3.3.1, 3.3.4.</li>
+<li><strong>Modelo de gravedad:</strong> el modelo del campo gravitatorio terrestre WGS-84 hasta grado y orden n = m = 180 se usa para las alturas del geoide; n = m = 41, para las órbitas de los satélites. D9674 3.1.4.</li>
+</ul>
+<h3 id="22-las-cifras-hay-que-saberlas">2.2 Las cifras (hay que saberlas)</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Valor</th>
+<th>Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semieje mayor a</td>
+<td><strong>6 378 137,0 m</strong></td>
+<td>D9674 Tabla 3-1; NIMA 3-1</td>
+</tr>
+<tr>
+<td>Achatamiento f</td>
+<td><strong>1/298,257223563</strong> (f = 0,0033528107)</td>
+<td>D9674, NIMA 3-2; valor de f</td>
+</tr>
+<tr>
+<td>Semieje menor b = a(1 - f)</td>
+<td><strong>6 356 752,3142 m</strong></td>
+<td>NIMA Tabla 3.3 (coincide con 6 356 752,3142)</td>
+</tr>
+<tr>
+<td>a - b</td>
+<td>21 384,7 m (unos 21,4 km)</td>
+<td></td>
+</tr>
+<tr>
+<td>Cuadrado de la primera excentricidad e² = 2f - f²</td>
+<td>0,00669437999014</td>
+<td>NIMA Tabla 3.3</td>
+</tr>
+<tr>
+<td>Primera excentricidad e</td>
+<td>0,0818191908426</td>
+<td>NIMA Tabla 3.3</td>
+</tr>
+<tr>
+<td>Velocidad angular ω</td>
+<td>7 292 115 x 10^-11 rad/s (= 7,292115 x 10^-5)</td>
+<td>D9674; NIMA Tabla 3.1</td>
+</tr>
+<tr>
+<td>Constante gravitacional geocéntrica GM (con atmósfera incluida)</td>
+<td><strong>3 986 004,418 x 10^8 m³/s²</strong> en NIMA TR8350.2 (1997); <strong>398 600,5 km³/s²</strong> (= 3 986 005 x 10^8) en el Doc 9674 de la OACI (2002) y en el WGS-84 original de 1987</td>
+<td>ambos; los valores difieren, véase más abajo</td>
+</tr>
+<tr>
+<td>Coeficiente zonal de segundo grado</td>
+<td>C2,0 normalizado = -484,16685 x 10^-6 (original); C2,0 geométrico = -0,484166774985 x 10^-3 (derivado de a, f, GM, ω)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Cuatro parámetros definitorios</strong> en la definición moderna: a, 1/f, GM y ω. La definición original de 1987 usaba a, C2,0, GM, ω. La revisión de 1993-1996 mantuvo a y f sin cambios y afinó GM (hasta 3986004,418 x 10^8 m³/s²) a la vista de la evidencia empírica. NIMA TR8350.2 apdo. 3.1-3.2. Por eso difieren el manual de la OACI (edición de 2002, 398 600,5 km³/s²) y el valor moderno de NIMA: <strong>dos fuentes discrepan y se recogen ambas.</strong> Para el examen, las cifras seguras son a = 6 378 137 m y 1/f = 298,257223563.</li>
+<li>El elipsoide WGS-84 <strong>es idéntico al GRS80 en a</strong>, y su f solo difiere en una cantidad minúscula (GRS80: 1/f = 298,257222101; WGS-84: 298,257223563). lista de elipsoides de NIMA (códigos RF y WE); el Doc 9674, Tabla B-1, incluye ambos con a = 6 378 137. La Tabla B-1 da diferencias «WGS-84 menos local», p. ej. Hayford Internacional 1924: Δa = -251 m; Clarke 1866: -69,4 m; WGS-72: a = 6 378 135 (Δa = +2 m). D9674 Tabla B-1.</li>
+<li><strong>El manual escribe «J2 = -484,166 85 x 10^-6».</strong> Ese número es el coeficiente <em>normalizado</em> C2,0, no J2 (J2 = -√5 C2,0 = 1,08263 x 10^-3). NIMA dice que la forma propia del WGS-84 es C2,0 «en lugar de la notación J2 usada con el GRS 80». NIMA apdo. 3.1.</li>
+</ul>
+<h3 id="23-realizaciones-del-wgs-84-y-epocas">2.3 Realizaciones del WGS-84 y épocas</h3>
+<p>Los marcos globales son dinámicos: las placas tectónicas se mueven, de modo que las coordenadas cambian con el tiempo y deben ir acompañadas de una <strong>época</strong>. ECG 2.4.</p>
+<table>
+<thead>
+<tr>
+<th>Realización</th>
+<th>Fecha</th>
+<th>Época de referencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WGS 84 (G730)</td>
+<td>29 de junio de 1994</td>
+<td>1994,0</td>
+</tr>
+<tr>
+<td>WGS 84 (G873)</td>
+<td>29 de enero de 1997</td>
+<td>1997,0</td>
+</tr>
+<tr>
+<td>WGS 84 (G1150)</td>
+<td>20 de enero de 2002</td>
+<td>2001,0</td>
+</tr>
+<tr>
+<td>WGS 84 (G1674)</td>
+<td>8 de febrero de 2012</td>
+<td>2005,0</td>
+</tr>
+<tr>
+<td>WGS 84 (G1762)</td>
+<td>16 de octubre de 2013</td>
+<td>2005,0</td>
+</tr>
+</tbody>
+</table>
+<p>| WGS 84 (G2139) | 28 de marzo de 2021 (tabla) | 2016,0 | ECG Tabla 3 (EUROCONTROL, diciembre de 2024). G = semana GPS de la realización. Desde G1762 se supone que el WGS 84 y el ITRF coinciden con un error cuadrático medio de unos 1 cm; el WGS 84 está alineado con el ITRS. ECG 2.3. Una realización posterior, G2296 (enero de 2024), solo se menciona en una fuente secundaria (Wikipedia, a través de los apuntes base). <strong>El AIP España GEN 2.1 dice que debe usarse «la última realización publicada por la NGA en la fecha de la medición (en la fecha de actualización de esta página es la G2139, equivalente al ITRF2014)».</strong> A21 apdo. 3.</p>
+<h3 id="24-etrs89-regcan95-ed50-y-la-legislacion-espanola">2.4 ETRS89, REGCAN95, ED50 y la legislación española</h3>
+<ul>
+<li>El <strong>ETRS89</strong> (<em>European Terrestrial Reference System 1989</em>) fue propuesto por EUREF (subcomisión de la IAG) en 1990: coincide con el ITRS en la época 1989,00 y está <em>fijado a la parte estable de la placa euroasiática</em>. Por eso se aleja del WGS-84/ITRS a más o menos la velocidad de la placa, <strong>unos 2,4 cm al año hacia el noreste</strong>. De 1989 a 2024 son 2,4 cm x 35 = 84 cm (el ejemplo del propio EUROCONTROL en Bruselas). ECG 2.4-2.5. Para 2026, el mismo razonamiento da unos 0,89 m (37 años); existen diferencias regionales (p. ej. Italia, Grecia).</li>
+<li><strong>REGCAN95:</strong> marco de las islas Canarias, procedente del ajuste de 1995 de la red canaria dentro de REGENTE y plenamente compatible con el ETRS89. preámbulo del RD.</li>
+<li><strong>ED50</strong> (<em>European Datum 1950</em>): elipsoide de Hayford (Internacional 1924), datum de Potsdam (Alemania) 1950, Greenwich como meridiano origen; oficial en España desde 1970 con la UTM (Decreto 2303/1970). Antes, la Red Geodésica Fundamental de 1852 usaba el elipsoide de Struve, el datum de Madrid, el meridiano de Madrid y una proyección poliédrica. preámbulo del RD.</li>
+<li><strong>Real Decreto 1071/2007, de 27 de julio (BOE n.º 207, 29 de agosto de 2007)</strong>, regula el sistema geodésico de referencia oficial en España título del RD:</li>
+<li>Art. 3: <strong>ETRS89</strong> oficial para la península Ibérica y las islas Baleares; <strong>REGCAN95</strong> para las islas Canarias; ambos asociados al elipsoide <strong>GRS80</strong> y materializados por <strong>REGENTE</strong> (Red Geodésica Nacional por Técnicas Espaciales) y sus densificaciones.</li>
+<li>Art. 4 (sistema altimétrico): referencia de altitudes = registros del nivel medio del mar en <strong>Alicante</strong> para la península y referencias mareográficas locales para cada isla; materializado por la red de nivelación de alta precisión (<strong>REDNAP</strong>, Red de Nivelación de Alta Precisión); el cero hidrográfico de las cartas náuticas lo fija el Instituto Hidrográfico de la Marina.</li>
+<li>Art. 5 (representación planimétrica): la cartografía terrestre (básica y derivada) a escala <strong>1:500 000 o menor</strong> usa la <strong>proyección cónica conforme de Lambert ETRS</strong>; a escalas <strong>mayores que 1:500 000</strong>, la <strong>proyección transversa de Mercator ETRS (UTM)</strong>; las cartas náuticas usan la proyección de <strong>Mercator</strong>.</li>
+<li>Art. 6: el MTN50 (Mapa Topográfico Nacional 1:50 000) es la serie fundamental para la división en hojas; las hojas son de <strong>10' de latitud x 20' de longitud</strong>; las hojas 1:25 000, de 5' x 10' (4 por hoja MTN50); las 1:10 000, de 2'30" x 5' (16 por hoja); las 1:5000, de 1'15" x 2'30" (64 por hoja). Son oficiales las dos numeraciones del MTN50 (el número secuencial del IGN y el número columna-fila del Ejército).</li>
+<li>Disposiciones transitorias: toda la cartografía debe cumplir el real decreto desde el <strong>1 de enero de 2015</strong>; desde el 1 de enero de 2012 no podía inscribirse en el Registro Central de Cartografía ningún proyecto nuevo que no lo cumpliera. Derogó el Decreto 2303/1970 (adopción de la UTM) en lo que se le oponga. RD.</li>
+<li>Ancla de las esquinas de las hojas MTN50: origen en longitud -9°51'15" y latitud 44°00'00"; esquina SE = (-9°51'15" + CC/3°, 44° - FF/6°), con CC la columna y FF la fila. Anexo del RD (resuelto en el ejercicio 30).</li>
+<li><strong>AIP España (GEN 2.1 apdo. 3):</strong> las coordenadas aeronáuticas del AIP están referidas al <strong>WGS-84</strong>, «de acuerdo con lo establecido en el Anexo 15», y la época (fecha de medición) se facilita en el conjunto de datos digitales. Al principio se consideró que el ETRS89 y el REGCAN95 eran equivalentes al WGS-84 dada la exactitud exigida en el Catálogo de Datos Aeronáuticos, pero la divergencia creciente hace que <strong>no puedan considerarse válidos para la publicación de coordenadas en el AIP-España</strong>. Un asterisco (*) marca las coordenadas que no cumplen los requisitos de calidad del Catálogo de Datos Aeronáuticos. Para enviar coordenadas al AIS hay que usar WGS-84 más la época. El área de aplicación de las coordenadas publicadas es el área de responsabilidad de los servicios de tránsito aéreo españoles. A21.</li>
+</ul>
+<hr />
+<h2 id="3-alturas-elipsoidal-ortometrica-ondulacion-del-geoide">3. Alturas: elipsoidal, ortométrica, ondulación del geoide</h2>
+<table>
+<thead>
+<tr>
+<th>Magnitud</th>
+<th>Símbolo</th>
+<th>Superficie de referencia</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Altura elipsoidal (geométrica)</td>
+<td>h</td>
+<td>elipsoide WGS-84</td>
+<td>Lo que entrega el GNSS; sin significado físico (no indica hacia dónde fluye el agua)</td>
+</tr>
+<tr>
+<td>Altura ortométrica / elevación</td>
+<td>H</td>
+<td>geoide (nivel medio del mar)</td>
+<td>La altura que figura en mapas y cartas</td>
+</tr>
+<tr>
+<td>Ondulación del geoide</td>
+<td>N</td>
+<td>-</td>
+<td>Distancia del geoide por encima (+) o por debajo (-) del elipsoide</td>
+</tr>
+</tbody>
+</table>
+<p><strong>H = h - N</strong>, o de forma equivalente <strong>h = H + N.</strong> D9674 Ap. B 6.6 y 4.4.2.2. Si un punto tiene latitud y longitud conocidas pero altura ortométrica desconocida, asignarle 0 m antes de una transformación de datum horizontal cambia el resultado en menos de 15 cm incluso para un punto a 8000 m. D9674 4.4.2.2.</p>
+<ul>
+<li>La ondulación del geoide se exige para las elevaciones de aeródromo, los umbrales de pista y los umbrales TLOF/FATO de helipuertos (Doc 9674 1.4.9); la OACI la publica en los datos del aeródromo. D9674 1.4.8-1.4.9. <strong>El AIP España publica la ondulación del geoide de cada aeropuerto en el punto 2 de su ficha de datos del aeródromo; es la misma para todos los puntos del aeródromo.</strong> A17 (GEN 1.7, otras diferencias).</li>
+<li><strong>España, sistema vertical:</strong> las altitudes se refieren al nivel medio del mar en Alicante (península) y a mareógrafos locales (islas), realizado por REDNAP; el modelo de geoide es <strong>EGM08-REDNAP</strong> (EGM2008 adaptado a REDNAP), «mucho más preciso que el EGM96». Las ondulaciones oscilan <strong>en torno a 50 m</strong> en España. A21 4.1-4.2 y art. 4 del RD.</li>
+<li>Ejemplos de la tabla del AIP (metros) A21 4.3 (solo se citan las filas que se extrajeron limpias; las primeras filas de la tabla salen desordenadas en la extracción de texto): Madrid EGM08-REDNAP <strong>51,111</strong> (EGM08 51,6641, EGM96 51,6653); Las Palmas 43,661 (EGM96 41,9132, diferencia <strong>+1,748 m</strong>); Santa Cruz (Tenerife) EGM08-REDNAP 44,031 frente a EGM96 46,363, una diferencia de <strong>-2,332 m</strong>, la mayor de la tabla. Las diferencias peninsulares EGM08-REDNAP menos EGM96 quedan sobre todo entre -0,8 m (Castellón -0,801, Oviedo -0,807) y +0,1 m (Málaga). Las diferencias EGM08-REDNAP menos EGM08 son de unos -0,4 a -0,7 m en la península (Palma -0,402, San Sebastián -0,661), pero solo de -0,07 a -0,09 m en Canarias (Las Palmas -0,072, Santa Cruz -0,089).</li>
+<li><strong>Las diferencias entre superficies de referencia en el mundo</strong> llegan a cerca de 1 m respecto del geoide (Australia continental -68 cm; Tasmania -98 cm; Inglaterra -87 cm; NAVD88 -72 cm). Los puntos cero de las redes verticales nacionales pueden diferir hasta 3 m. D9674 Tabla B-2, 6.8.</li>
+<li><strong>Las alturas en aviación se basan en la presión.</strong> Los niveles de vuelo y los reglajes del altímetro se definen a partir de la presión atmosférica, no de la altura geométrica; por eso las aeronaves llevan altímetros barométricos. D9674 Ap. B 6.8. (La separación vertical y la altimetría son materia de los temas 5 y 6.)</li>
+<li><strong>Longitudes de arco sobre el elipsoide:</strong> longitud de 1' de latitud = 1842,9 m en el ecuador, 1850,6 m a 40°, <strong>1852,2 m a 45°</strong>, 1856,9 m a 60° y 1861,6 m en el polo. La milla náutica internacional (1852 m) es, por tanto, la longitud media de un minuto de latitud a unos 45°.</li>
+</ul>
+<hr />
+<h2 id="4-coordenadas-unidades-y-la-notacion-del-aip">4. Coordenadas, unidades y la notación del AIP</h2>
+<h3 id="41-coordenadas-geograficas">4.1 Coordenadas geográficas</h3>
+<ul>
+<li><strong>Latitud (φ):</strong> ángulo entre el plano ecuatorial y la normal a la superficie en el punto, medido en el plano del meridiano, de 0° a 90° N o S. <strong>Longitud (λ):</strong> ángulo, en el plano ecuatorial, entre el meridiano cero y el meridiano del punto, de 0° a 180° E u O (W). D9674 Ap. B 3.8. El manual: norte y este son positivos, sur y oeste negativos; todos los puntos de un paralelo tienen la misma latitud; todos los de un meridiano, la misma longitud. MAN 2.5.1.</li>
+<li>Las coordenadas geodésicas (elipsoidales) son (φ, λ, h). D9674 Ap. B 3.10.</li>
+<li><strong>1 grado = 60 minutos = 3600 segundos.</strong> Conversión: decimal = D + M/60 + S/3600. Además: <strong>1 hora = 15° de longitud, 1° = 4 minutos de tiempo</strong> (el manual y el PHAK: la Tierra gira 15° por hora; un huso horario por cada 15° de longitud). PHAK cap. 16.</li>
+</ul>
+<h3 id="42-notacion-del-aip-espana">4.2 Notación del AIP España</h3>
+<ul>
+<li>Latitud <strong>DDMMSS.sN/S</strong>, longitud <strong>DDDMMSS.sE/W</strong>, sin separadores. Ejemplo: TACAN de ALBACETE <code>385644.6N 0015148.4W</code> = 38°56'44,6" N, 1°51'48,4" O = 38,94572°, -1,86344°. <strong>Trampa:</strong> 385644.6 es DD = 38, MM = 56, SS = 44,6, no 38,5644. E41.</li>
+<li>El AIP expresa las coordenadas en <strong>grados, minutos, segundos y decimales de segundo</strong> (resolución del Anexo 15, Ap. 7); la OACI exige la publicación sexagesimal. D9674 5.2.3.</li>
+<li>La variación magnética de cada radioayuda aparece como «(VAR/AÑO)», por ejemplo «<strong>1°E 2025</strong>» (Albacete, Alicante), «<strong>2°E 2025</strong>» (Barcelona, NDB de Palma), «<strong>4°W 2025</strong>» (NDB de La Palma). Las columnas de la tabla en ruta del AIP son ESTACIÓN, ID, FREC/CANAL, HR, COORD (ELEV), relevancia FRA, OBSERVACIONES. E41.</li>
+<li><strong>Redondeo de las marcaciones magnéticas en el AIP:</strong> las marcaciones magnéticas de las cartas en ruta, de área, SID y STAR se redondean al grado más próximo, para mejorar la legibilidad y mantener la coherencia con la precisión de publicación de ENR 3 (Anexo 15). A17 (Anexo 4 cap. 7-10).</li>
+</ul>
+<h3 id="43-unidades-de-medida-anexo-5-aip-gen-21-apdo-1">4.3 Unidades de medida (Anexo 5; AIP GEN 2.1 apdo. 1)</h3>
+<table>
+<thead>
+<tr>
+<th>Magnitud</th>
+<th>Unidad OACI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Altitudes, elevaciones, alturas</td>
+<td>metros <strong>y</strong> pies</td>
+</tr>
+<tr>
+<td>Distancia utilizada en navegación</td>
+<td>millas náuticas</td>
+</tr>
+<tr>
+<td>Distancia relativamente corta (&lt; 4000 m)</td>
+<td>metros</td>
+</tr>
+<tr>
+<td>Velocidad horizontal, incluida la del viento</td>
+<td>nudos o Mach</td>
+</tr>
+<tr>
+<td>Velocidad vertical</td>
+<td>pies por minuto</td>
+</tr>
+<tr>
+<td>Dirección del viento para el despegue y el aterrizaje</td>
+<td>grados <strong>magnéticos</strong></td>
+</tr>
+<tr>
+<td>Dirección del viento en los demás casos</td>
+<td>grados <strong>geográficos</strong> (verdaderos)</td>
+</tr>
+<tr>
+<td>Visibilidad, RVR</td>
+<td>kilómetros, y metros cuando sea inferior a 5 km</td>
+</tr>
+<tr>
+<td>Reglaje del altímetro</td>
+<td>hectopascales (milibares)</td>
+</tr>
+<tr>
+<td>Temperatura</td>
+<td>grados Celsius</td>
+</tr>
+<tr>
+<td>Peso</td>
+<td>kilogramos</td>
+</tr>
+</tbody>
+</table>
+<p>| Tiempo | horas y minutos | A21 apdo. 1. Referencia temporal: UTC y calendario gregoriano. El horario de verano de España (del último domingo de marzo al sábado anterior al último domingo de octubre) es UTC+2 (Canarias UTC+1); el de invierno, UTC+1 (Canarias UTC). El «fin de semana» a efectos del AIS va desde el viernes a las 1500 UTC hasta el lunes a las 0600 UTC. A21 apdo. 2.</p>
+<p><strong>Conversiones (AIP GEN 2.6):</strong> 1 NM = 1852 m = 1,852 km; 1 km = 0,540 NM; 1 m = 3,2808 ft; 1 ft = 0,3048 m; 1 kt = 0,514444 m/s; 1 m/s = 1,9438 kt = 196,85 ft/min; °F = °C x 1,8 + 32. A26. Bowditch: la milla náutica es exactamente 1852 m = 6076,11548556 ft. BOW 1201, Ap.</p>
+<ul>
+<li><strong>Milla náutica.</strong> En origen, cerca de un minuto de latitud; fijada internacionalmente en 1852 m. El manual la define como «la longitud recorrida en un minuto sobre un arco de círculo máximo: 1 NM = 1,852 km». MAN 2.4.4. Para una esfera en la que 1' de arco sea exactamente 1 NM, el radio es 10800/π = 3437,747 NM = 6366,7 km; con el radio medio de la Tierra, 6371 km, resulta 3440,06 NM. Las respuestas de distancia difieren, pues, en un 0,07 % aproximadamente según el radio elegido; el elipsoide modifica los resultados hasta un 0,3 % (ejercicio 8).</li>
+</ul>
+<h3 id="44-coordenadas-de-la-cuadricula-universal-transversa-de-mercator-utm">4.4 Coordenadas de la cuadrícula Universal Transversa de Mercator (UTM)</h3>
+<ul>
+<li>El ejército de EE. UU. adoptó la proyección UTM en 1947. La Tierra entre los <strong>84°N y los 80°S</strong> se divide en <strong>60 husos de 6° de anchura cada uno</strong>, numerados del 1 al 60 hacia el este a partir del meridiano de 180°; los meridianos que los limitan son divisibles por 6°. Más allá de 84°N / 80°S se usa la <strong>UPS</strong> (proyección estereográfica polar universal, <em>Universal Polar Stereographic</em>). USGS p. 57-58.</li>
+<li>Cada huso es una proyección transversa de Mercator con <strong>factor de escala en el meridiano central k0 = 0,9996</strong> («una reducción de 1:2500»), de modo que la escala es demasiado pequeña hasta unos 180 km a cada lado del meridiano central y demasiado grande más allá; la variación de escala llega a 1 parte en 1000 en el ecuador, en el borde del huso. <strong>Falso este 500 000 m</strong> en el meridiano central; <strong>falso norte 0 (hemisferio norte) o 10 000 000 m (sur)</strong>. USGS p. 58.</li>
+<li>Número de huso = floor((λ + 180)/6) + 1; meridiano central = 6 x huso - 183. <strong>España: huso 29 (12°O-6°O, MC 9°O), huso 30 (6°O-0°, MC 3°O), huso 31 (0°-6°E, MC 3°E); Canarias, sobre todo huso 28 (18°O-12°O, MC 15°O).</strong> a partir de la regla, más el art. 5 del RD (ETRS-TM/UTM para escalas mayores que 1:500 000).</li>
+<li>Ejemplo (cálculo propio con series de Krüger, comprobado con el arco de meridiano a φ = 40°): Madrid (40,4084°N, 3,6876°O) está en el huso 30, en torno a E 441 658 m, N 4 473 315 m.</li>
+<li>La proyección transversa de Mercator la inventó Lambert (1772), la analizó Gauss (1822) y Krüger (1912, 1919) le dio series elipsoidales utilizables; de ahí «Gauss-Krüger». USGS.</li>
+</ul>
+<hr />
+<h2 id="5-proyecciones-cartograficas-teoria-propiedades-escala-convergencia">5. Proyecciones cartográficas: teoría, propiedades, escala, convergencia</h2>
+<h3 id="51-el-problema-basico">5.1 El problema básico</h3>
+<p>Una proyección cartográfica es un par de funciones X = f1(φ, λ), Y = f2(φ, λ) que transforman el elipsoide (o la esfera) en un plano. La correspondencia no puede ser exacta: tiene que producirse un cambio de escala, y una superficie curva no puede aplanarse sin estirarla o rasgarla. D9674 Ap. F 2.1-2.3. El manual afirma lo mismo: ninguna proyección conserva a la vez ángulos, áreas y distancias; solo puede conservarse una de las tres. MAN 3.2.1-3.2.2.</p>
+<h3 id="52-clasificacion">5.2 Clasificación</h3>
+<p><strong>Según la propiedad geométrica que conservan (manual + Doc 9674 Ap. F 4):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Conserva</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conforme / ortomórfica</td>
+<td>Los ángulos (la forma local); la escala es la misma en todas las direcciones en un punto (a = b)</td>
+<td>Proyecciones aeronáuticas; meridianos y paralelos se cruzan a 90°. No puede ser a la vez equivalente</td>
+</tr>
+<tr>
+<td>Equivalente (de áreas iguales)</td>
+<td>Las áreas (a x b = 1)</td>
+<td>Deforma los ángulos de forma considerable</td>
+</tr>
+<tr>
+<td>Equidistante</td>
+<td>Las distancias según una escala determinada, normalmente la meridiana; ninguna proyección la conserva en todo el mapa</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| Afiláctica | Ninguna de las tres | | MAN 3.2.2 y D9674 Ap. F 4.1-4.3. Bowditch añade que una proyección no puede ser a la vez conforme y equivalente, ni representar como rectas tanto los círculos máximos como las loxodrómicas. BOW 402.</p>
+<p><strong>Según la superficie de proyección:</strong> (a) un plano <strong>acimutal o cenital</strong>; (b) un <strong>cono</strong> (proyección cónica); (c) un <strong>cilindro</strong> (proyección cilíndrica). Cada una puede estar en posición <strong>normal (directa)</strong>, <strong>transversal</strong> u <strong>oblicua</strong>; el cono o el cilindro pueden ser <strong>tangentes</strong> (una línea de contacto) o <strong>secantes</strong> (dos líneas de contacto). D9674 Ap. F 3.3-3.4. En los términos del manual: directa = eje de la superficie paralelo al eje terrestre; transversal = perpendicular; oblicua = entre 0° y 90°. MAN 3.2.2.
+Las <strong>proyecciones perspectivas (geométricas)</strong> sobre un plano se distinguen por la posición del centro de proyección MAN 3.2.2 y BOW 415-418:</p>
+<ul>
+<li><strong>Gnomónica:</strong> centro en el centro de la Tierra. <strong>Estereográfica:</strong> centro en la superficie terrestre, en el punto opuesto al de tangencia. <strong>Ortográfica:</strong> centro en el infinito. El manual incluye también la «escenográfica» (a una distancia finita fuera de la esfera).</li>
+<li>Según la posición del plano: <strong>polar</strong>, <strong>ecuatorial</strong>, <strong>horizontal/oblicua</strong>.
+<strong>Proyecciones puras y modificadas:</strong> las puras son verdaderas proyecciones geométricas; las modificadas (Bonne, Lambert, Mercator, Mollweide, Goode...) recurren a artificios analíticos para lograr propiedades de las que carece la pura. El manual describe la cónica de Lambert como una proyección modificada derivada de la cónica directa, en la que se sustituye el cono tangente por uno secante. MAN 3.2.2-3.2.3. (En rigor, las de Mercator y Lambert son construcciones analíticas, no proyecciones geométricas; Bowditch: la de Mercator «no es perspectiva». BOW 405.)</li>
+</ul>
+<h3 id="53-la-escala">5.3 La escala</h3>
+<ul>
+<li><strong>Escala numérica:</strong> E = longitud en el plano / longitud correspondiente en el terreno, ambas en las mismas unidades. Con la escala 1:10, 5 cm en el plano equivalen a 50 cm en el terreno. MAN 3.1.1. <strong>Escala gráfica:</strong> una línea graduada; para 1:5 000 000, 1 cm corresponde a 50 km. MAN 3.1.2.</li>
+<li><strong>Escala de reducción</strong> cuando el numerador es menor que el denominador. <strong>Escala grande</strong> = denominador pequeño = poco terreno abarcado (1:5000, 1:10 000: ciudades, fincas); <strong>escala pequeña</strong> = denominador grande (1:5 000 000: países, continentes). <strong>Escala natural</strong> 1:1; escala de ampliación, numerador mayor que el denominador. MAN 3.1.1.</li>
+<li><strong>Trampa de examen:</strong> 1:250 000 es una escala <em>mayor</em> que 1:1 000 000, aunque su número sea menor. Las cartas del AIP España van desde muy grandes (PATC 1:500 en vertical) hasta pequeñas (carta de área 1:2 000 000).</li>
+<li><strong>Conversiones útiles:</strong> 1 cm en el mapa = (denominador / 100 000) km; 1 NM (1852 m) = 1 852 000 / denominador mm: a 1:250 000 → 7,408 mm; 1:500 000 → 3,704 mm; 1:1 000 000 → 1,852 mm; 1:1 250 000 → 1,482 mm; 1:2 000 000 → 0,926 mm. Un grado de latitud (60 NM) = 222,2 mm a 1:500 000 y 55,6 mm a 1:2 000 000.</li>
+<li>El <strong>factor de escala local k</strong> es la relación local entre la distancia en el mapa y la distancia en el terreno, respecto de la escala nominal: Mercator k = sec φ; UTM k = 0,9996 en el meridiano central; cónica de Lambert k = 1 en los paralelos estándar, &lt; 1 entre ellos.</li>
+</ul>
+<h3 id="54-convergencia-de-meridianos">5.4 Convergencia de meridianos</h3>
+<ul>
+<li>Los meridianos convergen en los polos. Una recta trazada en una carta que cruce meridianos forma con cada uno un ángulo verdadero distinto; el cambio de dirección entre dos meridianos es la <strong>convergencia</strong>. En una esfera, convergencia = Δλ x sen φ (φ = latitud media); vale 0 en el ecuador (meridianos paralelos) y Δλ en el polo. BOW 3312 (enunciado «en una esfera es igual al seno de la latitud»).</li>
+<li>En una carta conforme de Lambert la convergencia es la misma en todas partes: <strong>n x Δλ</strong>, donde n es la <strong>constante del cono</strong> = aproximadamente el seno de la latitud media entre los dos paralelos estándar. BOW 3312. Exacta: n = ln(cos φ1 / cos φ2) / ln[tan(45° + φ2/2) / tan(45° + φ1/2)].</li>
+<li><strong>Práctica en la carta:</strong> el rumbo de una ruta se mide en la carta sobre el meridiano más cercano al <strong>punto medio</strong> de la ruta, no en la salida. PHAK cap. 16 y BOW 3319.</li>
+<li><strong>Declinación de cuadrícula (grivación):</strong> el ángulo entre el norte de cuadrícula y el norte magnético, igual a la declinación corregida por la convergencia de meridianos; se usa en cartas polares y hojas UTM. WMM 1.1.2.</li>
+</ul>
+<h3 id="55-curvas-de-nivel-y-relieve">5.5 Curvas de nivel y relieve</h3>
+<p>El relieve se representa con el <strong>sistema de planos acotados</strong>: un punto queda definido por sus coordenadas planas más su altura (cota) por encima o por debajo de un plano de referencia, mediante una proyección ortogonal paralela. Las <strong>curvas de nivel (isohipsas)</strong> unen puntos de igual altura; los planos de corte contiguos están separados por una distancia vertical constante, la <strong>equidistancia</strong>. La exactitud depende tanto de la equidistancia como de la escala: para reflejar detalles pequeños hacen falta curvas más próximas. Las cartas aeronáuticas usan curvas de nivel sobre todo para la navegación visual, los aeródromos y las superficies limitadoras de obstáculos. MAN 3.3-3.3.1.
+<strong>Regla de relieve en las IAC (AIP España):</strong> las cartas IAC muestran la topografía con cotas y curvas de nivel; cuando el terreno supera la elevación del aeródromo en menos de 1000 ft, solo se representan las cotas más destacadas. A32 (IAC). <strong>Guía para la carta 1:500 000 (EUROCONTROL):</strong> curvas de nivel en siete escalones, más pequeños a niveles bajos y mayores a niveles altos, con incremento logarítmico e idénticos a las tintas hipsométricas; se recomiendan curvas en pies; siete tintas para terrenos de 0-1900 ft, 0-5000 ft o 0-11 000 ft; se recomienda el blanco para la capa más baja, para evitar confusiones con los bosques (verde). EGM 3.1-3.2.</p>
+<hr />
+<h2 id="6-las-proyecciones-usadas-en-aviacion-y-en-espana">6. Las proyecciones usadas en aviación y en España</h2>
+<h3 id="61-mercator-cilindrica-conforme">6.1 Mercator (cilíndrica, conforme)</h3>
+<p>Presentada por Gerardus Mercator en 1569 en un mapamundi de 21 hojas destinado expresamente «al uso en la navegación». USGS. Los meridianos y los paralelos se dilatan en la misma proporción, la <strong>secante de la latitud</strong> (con una pequeña corrección por la elipticidad); no pueden representarse los polos. Es conforme, de modo que los ángulos son verdaderos; <strong>las loxodrómicas son rectas</strong>; los círculos máximos (salvo los meridianos y el ecuador) son curvas cóncavas hacia el ecuador; las áreas pequeñas conservan su forma, pero se agrandan al alejarse del ecuador. BOW 405. Las partes meridionales (diferencia meridional) permiten construir la carta: la longitud del meridiano entre el ecuador y la latitud φ, en unidades de minutos del ecuador. BOW 406. Las cartas náuticas de España usan Mercator (art. 5.3 del RD). Factor de escala k = sec φ: 1,000 a 0°, 1,155 a 30°, <strong>1,305 a 40°</strong>, 1,414 a 45°, <strong>2,000 a 60°</strong>, 5,76 a 80°.</p>
+<ul>
+<li><strong>Mercator transversa:</strong> cilindro tangente a lo largo de un meridiano; el meridiano central conserva la escala y la distorsión es pequeña cerca de él; conforme; adecuada para bandas estrechas en dirección norte-sur. La UTM es su aplicación estándar. USGS; BOW 407-408. <strong>Mercator oblicua:</strong> cilindro tangente a lo largo de otro círculo máximo. BOW 409.</li>
+<li><strong>Proyección rectangular (<em>plate carrée</em>):</strong> cilíndrica con espaciado uniforme de los paralelos; cómoda donde la distorsión no importa. BOW 410.</li>
+</ul>
+<h3 id="62-conica-conforme-de-lambert-lcc">6.2 Cónica conforme de Lambert (LCC)</h3>
+<ul>
+<li>Introducida por <strong>J. H. Lambert en 1772</strong> (junto con la transversa de Mercator, la cilíndrica equivalente y la acimutal equivalente). USGS.</li>
+<li>Construcción: un cono cuyo eje coincide con el eje terrestre, <strong>secante</strong> a la esfera a lo largo de dos <strong>paralelos estándar</strong>; el espaciado de los paralelos se ajusta para que la distorsión de escala sea la misma a lo largo de los paralelos que a lo largo de los meridianos, lo que hace conforme la proyección. Los meridianos son <strong>rectas que convergen en el vértice del cono</strong> (cerca del polo); los paralelos son <strong>arcos de circunferencias concéntricas</strong> con centro en el vértice; ambos se cruzan a 90°. BOW 411-413; MAN 3.2.3.</li>
+<li><strong>Escala:</strong> exacta a lo largo de los dos paralelos estándar; demasiado pequeña entre ellos; demasiado grande fuera; en dirección norte-sur cambia más despacio en un paralelo situado más o menos a mitad de camino entre ambos. Si la carta no se extiende mucho más allá de los paralelos estándar y estos no están muy separados, la distorsión en toda la carta es pequeña. USGS; BOW 413. El manual añade que el cono secante reduce a la mitad las deformaciones lineales del cono tangente y que el (único) paralelo estándar tangente es «automecoico» (sin deformación lineal). MAN 3.2.3.</li>
+<li><strong>Por qué la usa la aviación:</strong> una recta en una carta LCC es casi un círculo máximo, de modo que las señales de radionavegación, que viajan a lo largo de círculos máximos, pueden trazarse sin corrección, <strong>sin sacrificar la conformidad</strong>; los rumbos y las distancias pueden medirse directamente con buena exactitud; la loxodrómica es una curva cóncava hacia el vértice. BOW 413; MAN 3.2.3. Bowditch: «esta característica [...] ha hecho popular esta proyección para las cartas aeronáuticas, porque las aeronaves hacen un uso amplio de las radioayudas». BOW 413.</li>
+<li><strong>Legislación y práctica españolas:</strong> toda la cartografía terrestre a 1:500 000 o menor es cónica conforme de Lambert ETRS (art. 5.1 del RD 1071/2007). Casi todas las cartas del AIP GEN 3.2 indican «Proyección: Lambert conforme» (área, SID, STAR, CDA, TRAN, IAC, ATCSMAC, VPT, VAC, otras VFR, OACI 1:500 000). A32. <strong>Paralelos estándar de la carta OACI 1:500 000: 37°N y 42°N (península); 24°N y 29°N (Canarias).</strong> A32 (el AIP los llama «paralelos automecoicos», término propio del AIP; en la versión inglesa la extracción imprime «Automecoico parallels»).</li>
+<li><strong>Calculado para la carta española 1:500 000:</strong> constante del cono n = <strong>0,63628</strong> (seno de la latitud media 39,5° = 0,63608); factor de escala k = 1,00000 a 37° y 42°, <strong>0,99905 a 39,5°</strong> (mínimo, un 0,095 % pequeño), 1,00209 a 35° y 1,00219 a 44°. Hoja de Canarias: n = 0,44634. La convergencia de meridianos entre dos meridianos separados 10° en la hoja peninsular = 6,36°; entre los VOR de Barajas y Barcelona (Δλ = 5,66°) = 3,60° en la carta, mientras que la convergencia real de los dos rumbos es 3,71° (ejercicio 21).</li>
+<li>Comparación con EE. UU.: las cartas seccionales 1:500 000 y las WAC 1:1 000 000 de EE. UU. usan LCC con paralelos estándar 33°N y 45°N. USGS p. 106. (Las tarjetas Anki base ya lo cubren.)</li>
+</ul>
+<h3 id="63-proyecciones-acimutales">6.3 Proyecciones acimutales</h3>
+<ul>
+<li><strong>Acimutal (cenital):</strong> los puntos se proyectan directamente sobre un plano tangente; los rumbos desde el punto de tangencia son verdaderos (de ahí «acimutal»); la distorsión de escala es nula en el punto de tangencia y crece radialmente; las rectas que pasan por el punto de tangencia son círculos máximos. BOW 415.</li>
+<li><strong>Gnomónica:</strong> perspectiva desde el centro de la Tierra; <strong>todo círculo máximo es una recta</strong> (carta de círculos máximos); no es conforme ni equivalente; la distorsión es grande lejos del punto de tangencia. Se usa para planificar derrotas ortodrómicas, cuyos puntos se trasladan después a una carta Mercator y se vuelan como tramos loxodrómicos. BOW 416.</li>
+<li><strong>Estereográfica:</strong> perspectiva desde el punto antipodal; <strong>conforme</strong> (acimutal ortomórfica); la escala aumenta más despacio que en la gnomónica; puede mostrar un hemisferio entero; los círculos máximos que pasan por el punto de tangencia son rectas, y los demás círculos son circunferencias o arcos. <strong>Principal uso en navegación: las cartas polares</strong> (con la cuadrícula UPS). BOW 417. En el caso polar, los meridianos son rectas radiales y los paralelos, circunferencias concéntricas. D9674 Ap. F 5.2.</li>
+<li><strong>Ortográfica:</strong> proyección desde el infinito; perspectiva. BOW 418.</li>
+<li><strong>Cónica simple (Ptolomeo, siglo II d. C.)</strong> para el Mediterráneo; <strong>policónica</strong> (muchos conos tangentes, atlas, no conforme). BOW 412, 414. Ni conformes ni equivalentes: no sirven para la navegación.</li>
+</ul>
+<h3 id="64-tabla-comparativa">6.4 Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Proyección</th>
+<th>Superficie</th>
+<th>Conforme</th>
+<th>Loxodrómica</th>
+<th>Círculo máximo</th>
+<th>Uso en aviación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mercator</td>
+<td>cilindro tangente en el ecuador</td>
+<td>sí</td>
+<td>recta</td>
+<td>curva cóncava hacia el ecuador</td>
+<td>cartas náuticas; no las cartas aeronáuticas españolas</td>
+</tr>
+<tr>
+<td>Mercator transversa / UTM</td>
+<td>cilindro tangente a lo largo de un meridiano</td>
+<td>sí</td>
+<td>curva</td>
+<td>curva (cerca del MC ≈ recta)</td>
+<td>mapas terrestres &gt; 1:500 000 (RD 1071/2007)</td>
+</tr>
+<tr>
+<td>Cónica conforme de Lambert</td>
+<td>cono secante</td>
+<td>sí</td>
+<td>curva, cóncava hacia el vértice</td>
+<td>≈ recta</td>
+<td>Cartas en ruta, de área, SID, STAR, IAC; mapas terrestres ≤ 1:500 000</td>
+</tr>
+<tr>
+<td>Estereográfica polar</td>
+<td>plano en un polo</td>
+<td>sí</td>
+<td>curva de tipo espiral</td>
+<td>recta si pasa por el polo</td>
+<td>cartas polares; cuadrícula UPS</td>
+</tr>
+<tr>
+<td>Gnomónica</td>
+<td>plano, proyección desde el centro</td>
+<td>no</td>
+<td>curva</td>
+<td><strong>exactamente recta</strong></td>
+<td>planificación de círculos máximos</td>
+</tr>
+<tr>
+<td>Policónica</td>
+<td>muchos conos</td>
+<td>no</td>
+<td>-</td>
+<td>-</td>
+<td>atlas</td>
+</tr>
+</tbody>
+</table>
+<p>Regla mnemotécnica: Mercator = loxodrómica recta; Lambert = círculo máximo casi recto; gnomónica = círculo máximo exactamente recto.</p>
+<hr />
+<h2 id="7-circulo-maximo-loxodromica-y-formulas-de-navegacion">7. Círculo máximo, loxodrómica y fórmulas de navegación</h2>
+<h3 id="71-definiciones-y-propiedades">7.1 Definiciones y propiedades</h3>
+<ul>
+<li><strong>Círculo máximo (ortodrómica):</strong> intersección de la esfera con un plano que pasa por su centro; el camino más corto sobre la superficie entre dos puntos; por dos puntos no antipodales pasa exactamente uno; todo círculo máximo biseca a cualquier otro; salvo el ecuador, cada uno queda mitad en cada hemisferio. El <strong>vértice</strong> es su punto de mayor latitud, donde es tangente a un paralelo y discurre en dirección este-oeste exacta; hay uno en cada hemisferio, separados 180°. Cruza el ecuador con un ángulo igual a la latitud del vértice. BOW 1202.</li>
+<li><strong>Loxodrómica (loxodroma):</strong> corta todos los meridianos con el mismo ángulo; mantiene una dirección verdadera constante; es recta en una carta Mercator; más larga que el círculo máximo (salvo en los meridianos y en el ecuador, donde coinciden); describe una espiral hacia el polo. BOW 1204; MAN 2.4.4.</li>
+<li>En una carta Mercator, el círculo máximo es una curva cóncava hacia el ecuador (una sinusoide, con la loxodrómica como cuerda); en cualquier meridiano, el círculo máximo cruza a una <strong>latitud mayor</strong> que la loxodrómica. <strong>El ahorro de un círculo máximo respecto a una loxodrómica aumenta</strong> con la latitud, al disminuir la diferencia de latitud (derrota más este-oeste) y al aumentar la diferencia de longitud. BOW 1202.</li>
+<li>Práctica: como la dirección verdadera de un círculo máximo cambia continuamente, se eligen puntos de paso a lo largo de él (convenientemente separados 5° de longitud) y se vuelan tramos loxodrómicos entre ellos; la <strong>navegación mixta (<em>composite sailing</em>)</strong> consiste en un círculo máximo hasta un paralelo límite, un recorrido a lo largo de ese paralelo y otro círculo máximo hasta el destino, y se usa para evitar un peligro. Solo se aplica cuando el vértice queda entre la salida y la llegada. BOW 1202, 1205.</li>
+<li>Comparación del manual: el círculo máximo forma ángulos distintos con cada meridiano y es difícil de seguir, pero es el más corto y predomina en la aviación de largo alcance, donde el ahorro de combustible es un objetivo; la loxodrómica forma el mismo ángulo con cada meridiano y es fácil de seguir, pero es más larga; se usa en rutas cortas (&lt; 1000 km), donde la diferencia es pequeña. MAN 2.4.4. (Los 1000 km del manual son una regla práctica, no una cifra de la OACI.)</li>
+<li><strong>Tipos de navegación loxodrómica</strong> (Bowditch): navegación por paralelo (exactamente E-O), navegación plana (una sola ruta, con la Tierra tratada como plana), navegación de Mercator, navegación por latitud media, navegación por derrotas sucesivas (<em>traverse sailing</em>), navegación por meridiano. BOW 1204.</li>
+</ul>
+<h3 id="72-formulas-esfera-radio-r">7.2 Fórmulas (esfera, radio R)</h3>
+<p>Sean φ1, λ1 la salida y φ2, λ2 la llegada, Δλ = λ2 - λ1.</p>
+<ol>
+<li><strong>Distancia ortodrómica (haversine):</strong> a = sin²(Δφ/2) + cos φ1 cos φ2 sin²(Δλ/2); d = 2R·asin(√a). (Fórmula haversine: Wikipedia.)</li>
+<li><strong>Rumbo inicial:</strong> θ = atan2(sin Δλ cos φ2; cos φ1 sin φ2 - sin φ1 cos φ2 cos Δλ). <strong>Rumbo final</strong> = (rumbo de la ruta inversa) ± 180°.</li>
+<li><strong>Latitud del vértice:</strong> cos φv = cos φ1 sin θ1. <strong>Intersección con un meridiano:</strong> tan φ = [tan φ1 sin(λ2 - λ) + tan φ2 sin(λ - λ1)] / sin(λ2 - λ1).</li>
+<li><strong>Loxodrómica:</strong> Δψ = ln[tan(45° + φ2/2) / tan(45° + φ1/2)] (diferencia de latitud isométrica; la misma idea que las partes meridionales de Mercator); rumbo C = atan2(Δλ, Δψ); distancia d = R·|Δφ| / cos C (si C no es 090/270); si C = 090/270 (navegación por paralelo), d = R·|Δλ|·cos φ.</li>
+<li><strong>Apartamiento:</strong> p = Δλ' x cos φm (Δλ en minutos → p en NM), donde φm es la latitud media. BOW 1201-1204 (navegación por paralelo y por latitud media); para la expresión.</li>
+<li><strong>1' de latitud ≈ 1 NM</strong>; 1° de latitud ≈ 60 NM; en dirección E-O: 1° de longitud = 60 cos φ NM.</li>
+<li><strong>Recíproco:</strong> en una loxodrómica, el rumbo recíproco difiere exactamente 180°; en un círculo máximo, el rumbo final <strong>no</strong> es el rumbo inicial ± 180°, sino que la diferencia es la convergencia ≈ Δλ sin φm.</li>
+<li><strong>Esfera frente a elipsoide:</strong> las fórmulas esféricas difieren de la solución elipsoidal (Vincenty) hasta un 0,3 % en distancia (ejercicio 8). La OACI exige geodésicas WGS-84 para los datos de coordenadas, pero los cálculos de examen son esféricos.</li>
+</ol>
+<h3 id="73-regla-practica-de-la-rosa-de-los-vientos">7.3 Regla práctica de la rosa de los vientos</h3>
+<p>«Sumar el este (<em>add east</em>)» al pasar de <strong>compás a geográfico</strong> (regla mnemotécnica inglesa <em>Can Dead Men Vote Twice At Elections</em>: Compass, Deviation, Magnetic, Variation, True, Add East); «<em>East is least, west is best</em>» (el este resta, el oeste suma) al pasar de <strong>geográfico a magnético</strong> (se resta la variación este y se suma la oeste). BOW 830; PHAK cap. 16.</p>
+<hr />
+<h2 id="8-magnetismo-variacion-desvio-compas-wmm">8. Magnetismo: variación, desvío, compás, WMM</h2>
+<h3 id="81-terminos">8.1 Términos</h3>
+<ul>
+<li><strong>Variación / declinación magnética:</strong> el ángulo entre el norte geográfico y la componente horizontal del campo magnético en el lugar, medido en sentido horario desde el norte geográfico. «Declinación (también llamada variación magnética).» WMM 1.1.1. El manual: el ángulo entre el norte magnético local y el norte geográfico, <strong>este (positiva)</strong> si un observador que mira al norte geográfico ve el norte magnético a su derecha, <strong>oeste (negativa)</strong> si lo ve a su izquierda. MAN 2.4.2.</li>
+<li><strong>Líneas isógonas:</strong> líneas de igual variación (se muestran en las cartas, normalmente como líneas magenta discontinuas); <strong>línea agónica:</strong> la línea de variación cero. La lista de símbolos del AIP (GEN 2.3) contiene «Línea isógona». PHAK cap. 16; BOW 3110; A23.</li>
+<li><strong>Desvío:</strong> la desviación de la aguja del compás respecto del meridiano magnético causada por el magnetismo propio de la aeronave (circuitos eléctricos, radios, motor, herramientas, metal imantado). Varía de una aeronave a otra y con el rumbo; se corrige mediante la <strong>compensación</strong> y una <strong>tarjeta de desvíos</strong> (lecturas cada 30°, interpoladas); la comprobación se llama <strong>compensación del compás (<em>swinging the compass</em>)</strong>. PHAK cap. 16.</li>
+<li><strong>Error del compás</strong> = suma algebraica del desvío y la variación. BOW 830.</li>
+<li><strong>Rumbo (<em>heading</em>):</strong> el ángulo entre el norte de referencia y el eje longitudinal de la aeronave, de tres cifras, en sentido horario; rumbo geográfico (verdadero) o magnético. <strong>Ruta:</strong> la proyección sobre la Tierra del movimiento de la aeronave; <strong>deriva:</strong> el ángulo entre la ruta deseada y la dirección del movimiento de la aeronave, máximo cuando el viento es perpendicular al rumbo; <strong>derrota:</strong> proyección sobre el suelo de la trayectoria realmente seguida. MAN 2.4.3-2.4.6.</li>
+<li>Secuencia: <strong>geográfico → (variación) → magnético → (desvío) → compás</strong> (en inglés, <em>True → Magnetic → Compass</em>, TVMDC). BOW 829-830; PHAK.</li>
+</ul>
+<h3 id="82-conversiones">8.2 Conversiones</h3>
+<p><strong>Rumbo magnético = rumbo geográfico - declinación (E positiva, W negativa)</strong>; de forma equivalente, magnético = geográfico menos este, más oeste. <strong>Rumbo geográfico = rumbo magnético + declinación (E positiva).</strong> Manual: Rm = Rg - declinación. Ejemplos MAN 2.4.3: geográfico 081° con 3°E → 078°. <strong>El segundo ejemplo del manual tiene una errata:</strong> pide el rumbo para un geográfico de 122° y 5°W, pero calcula con «-(-3°)» y obtiene 125°; la respuesta correcta es 122° + 5° = <strong>127°</strong>. (Sección 12.) Más ejemplos: geográfico 090°, 1°E → 089°; geográfico 270°, 3°W → 273°; geográfico 360°, 9°E → 351°; PHAK: para volar hacia el este verdadero con una variación de 9°E, el rumbo magnético es 081°. PHAK cap. 16.</p>
+<h3 id="83-el-modelo-magnetico-mundial-wmm">8.3 El Modelo Magnético Mundial (WMM)</h3>
+<ul>
+<li>El WMM (EE. UU./Reino Unido, elaborado por NOAA/NCEI y el British Geological Survey) proporciona la declinación en cualquier punto de la Tierra y la geometría completa del campo desde 1 km por debajo del elipsoide WGS-84 hasta al menos 850 km por encima. El WMM2025 es válido de <strong>2025,0 a 2030,0</strong>; como el campo del núcleo cambia de forma impredecible y no lineal, los coeficientes <strong>deben actualizarse cada cinco años</strong>; entre actualizaciones se usa una <strong>variación secular</strong> lineal. Es un desarrollo en armónicos esféricos hasta <strong>grado y orden 12</strong> (336 coeficientes distintos de cero; longitud de onda mínima de unos 3200 km); el nuevo WMMHR, de alta resolución, llega al grado y orden 133. Los requisitos proceden de MIL-PRF-89500B. WMM 1.</li>
+<li>Elementos del campo: X (norte), Y (este), Z (hacia abajo), H (horizontal), F (total), <strong>I inclinación (ángulo de inclinación magnética)</strong> (positiva hacia abajo), <strong>D declinación</strong>. WMM 1.1.1.</li>
+<li>Existen <strong>zonas de exclusión (<em>blackout zones</em>)</strong> alrededor de los dos polos magnéticos, donde los valores de declinación son inexactos y no se puede «confiar en los compases», rodeadas de zonas de precaución. WMM 1.8. Los polos magnéticos se desplazan; el manual atribuye los cambios de posición del norte magnético a la precesión y la nutación, lo cual es una simplificación; la principal causa es la propia variación secular del campo del núcleo WMM 1.</li>
+<li>El WMM es un producto independiente del WGS-84 (que usa como elipsoide de referencia) y del modelo de geoide. WMM 1 (elipsoide de referencia); la afirmación «el geoide se publica por separado como EGM» procede de Wikipedia a través de los apuntes base.</li>
+<li><strong>Fuentes del magnetismo terrestre:</strong> sobre todo el núcleo externo de hierro líquido («campo del núcleo»), con el campo cortical (minerales magnéticos) localmente significativo y contribuciones débiles de las corrientes oceánicas. WMM 1.</li>
+</ul>
+<h3 id="84-norte-geografico-y-norte-magnetico-en-las-cartas-y-los-datos-espanoles">8.4 Norte geográfico y norte magnético en las cartas y los datos españoles</h3>
+<ul>
+<li>El viento para el despegue y el aterrizaje se notifica en grados <strong>magnéticos</strong>; los demás vientos, en grados <strong>geográficos</strong>. A21 apdo. 1.</li>
+<li><strong>El norte geográfico solo se representa en los planos de aeródromo (ADC, GMC, PDC)</strong>; las demás cartas de área están orientadas al <strong>norte magnético</strong>; los AOC y PATC están siempre orientados según la dirección de la pista. A17. El AOC (Tipo A) muestra la declinación magnética. A32.</li>
+<li>Tabla de calidad de los datos para las marcaciones: las marcaciones de los tramos de aerovía se calculan a 1/10 de grado, se publican y se representan en la carta a 1 grado, con integridad 1 x 10^-3 (ordinarios); la marcación de la pista/FATO y la alineación del localizador ILS se expresan como marcaciones <strong>geográficas</strong> con resolución de 1/100 de grado (las columnas de la tabla salen en parte desordenadas en la extracción de texto, por lo que las celdas exactas solo son para la fila de aerovías y para la palabra «True»). D9674 Tabla 2-4.</li>
+<li>Datos de declinación/variación (Tabla 2-3): exactitud de 1 grado en el levantamiento y resolución de publicación de 1 grado; integridad 1 x 10^-5 (esencial) para los elementos relacionados con radioayudas (declinación de la estación VHF para la alineación técnica, variación de la antena del localizador ILS/MLS) y 1 x 10^-3 (ordinarios) para la variación magnética del aeródromo/helipuerto. D9674 Tabla 2-3 (la fila de los NDB es ambigua en la extracción).</li>
+</ul>
+<hr />
+<h2 id="9-el-anexo-4-de-la-oaci-y-las-cartas-del-aip-espana">9. El Anexo 4 de la OACI y las cartas del AIP España</h2>
+<h3 id="91-el-marco-juridico">9.1 El marco jurídico</h3>
+<ul>
+<li><strong>Anexo 4 al Convenio de Chicago, «Cartas aeronáuticas»</strong>, con el <strong>Doc 8697 (Manual de cartas aeronáuticas)</strong>; por el lado del AIS, el <strong>Anexo 15</strong> (Servicios de información aeronáutica) y el <strong>Doc 8126</strong> (Manual para los servicios de información aeronáutica); los procedimientos proceden del <strong>Doc 8168 (PANS-OPS)</strong>. Las cartas militares en España siguen los STANAG 3759 y STANAG 3970 además de los documentos de la OACI. A32 apdo. 1. La bibliografía del manual cita el Anexo 4, 11.ª edición (2009), y el Doc 8697, 3.ª edición (2016); el AIP España enumera sus diferencias con el Anexo 4 «incluyendo hasta la Enmienda 62». MAN 5; A17.</li>
+<li><strong>Quién elabora las cartas en España:</strong> el Servicio de Información Aeronáutica, División de Información Aeronáutica de ENAIRE (dirección postal c/ Campezo 1, Madrid; dirección AFTN <strong>LEANZXTA</strong>), para uso civil y militar. A32 apdo. 1; A31 apdo. 1. El Anexo 4 pretende una interpretación rápida, una presentación uniforme y margen para las mejoras; cada Estado es responsable de su propia producción cartográfica y puede añadir cartas específicas. MAN 4.1.</li>
+<li>
+<p><strong>Carácter de las cartas según el Doc 8697 (tal como lo recoge el manual)</strong> MAN 4.2:
+| Carácter | Cartas |
+|---|---|
+| <strong>Obligatorias</strong> | Plano de obstáculos de aeródromo OACI Tipo A; Carta topográfica para aproximaciones de precisión; Carta de navegación en ruta; Carta de aproximación por instrumentos; Plano de aeródromo/helipuerto; Carta aeronáutica mundial OACI 1:1 000 000 |
+| <strong>Opcionales</strong>, solo si las autoridades del Estado consideran que mejoran la seguridad, la regularidad y la eficiencia | Plano de obstáculos de aeródromo OACI Tipo B; Plano de aeródromo para movimientos en tierra; Plano de estacionamiento y atraque de aeronaves; Carta aeronáutica OACI 1:500 000; Carta de navegación aeronáutica, escala pequeña; Carta de posición |
+| <strong>Condicionalmente necesarias</strong> | Carta de área (solo si las rutas ATS o los requisitos de notificación son complicados y no pueden indicarse en la carta de navegación en ruta); SID (siempre que exista una salida normalizada por instrumentos y no pueda indicarse con claridad en la carta de área); STAR (igual para las llegadas); Carta de aproximación visual (aeródromos con instalaciones de navegación o radio limitadas, sin carta a escala 1:500 000 o mayor, o con procedimientos de aproximación visual establecidos); Carta de altitud mínima de vigilancia ATC (cuando se han establecido procedimientos de guía vectorial y las altitudes mínimas de guía vectorial no pueden indicarse con claridad en la carta de área, SID o STAR) |</p>
+</li>
+<li>
+<p><strong>Capítulos del Anexo 4 citados en las diferencias del AIP España (GEN 1.7)</strong> A17: cap. 4 Plano de obstáculos de aeródromo Tipo B; cap. 7 Carta de navegación en ruta; cap. 8 Carta de área; cap. 9 SID; cap. 10 STAR; cap. 11 Carta de aproximación por instrumentos; cap. 16 Carta aeronáutica mundial 1:1 000 000; cap. 18 Carta de navegación aeronáutica, escala pequeña; cap. 19 Carta de posición; cap. 20 Presentación electrónica de cartas aeronáuticas; Apéndice 2 = símbolos cartográficos de la OACI. <strong>No se proporcionan en España:</strong> el AOC Tipo B, la carta 1:1 000 000, la carta de navegación de escala pequeña, la carta de posición y la presentación electrónica de cartas como producto del Anexo 4; tampoco se elaboran el plano electrónico de terreno y obstáculos del aeródromo ni la carta de altitud mínima de vigilancia ATC para helipuertos.</p>
+</li>
+<li>El Doc 8697 dice que los planos de aeródromo y de obstáculos A se publican para los aeródromos utilizados regularmente por la aviación civil internacional; en España ENAIRE publica el ADC y el AOC para prácticamente todos los aeródromos y helipuertos civiles. La PATC existe para las pistas de precisión CAT II/III de los aeródromos internacionales. MAN 4.4.1, 4.4.4, 4.4.5.</li>
+</ul>
+<h3 id="92-fases-del-vuelo-y-cartas-manual">9.2 Fases del vuelo y cartas (manual)</h3>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Cartas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Rodaje desde el puesto de estacionamiento hasta el punto de despegue</td>
+<td>Plano de estacionamiento y atraque de aeronaves; Plano de aeródromo para movimientos en tierra; Plano de aeródromo/helipuerto</td>
+</tr>
+<tr>
+<td>2 Despegue y ascenso hasta la estructura de rutas ATS</td>
+<td>AOC Tipo A; SID; Carta de altitud mínima de vigilancia ATC</td>
+</tr>
+<tr>
+<td>3 Estructura de rutas ATS en ruta</td>
+<td>Carta de área (rutas de salida y tránsito); Carta de navegación en ruta; Carta de área (rutas de llegada y tránsito); Carta de circulación VFR</td>
+</tr>
+<tr>
+<td>4 Descenso hasta la aproximación</td>
+<td>STAR; Carta de llegada CDA; TRAN; Carta de altitud mínima de vigilancia ATC</td>
+</tr>
+<tr>
+<td>5 Aproximación para aterrizar</td>
+<td>IAC; PATC; Carta de aproximación visual; AOC Tipo A (limitaciones de utilización)</td>
+</tr>
+</tbody>
+</table>
+<p>| 6 Aterrizaje y rodaje hasta el puesto de estacionamiento | Plano de aeródromo/helipuerto; Plano de movimientos en tierra; Plano de estacionamiento y atraque | MAN 4.3.</p>
+<h3 id="93-cartas-del-aip-espana-finalidad-escala-proyeccion-gen-32">9.3 Cartas del AIP España: finalidad, escala, proyección (GEN 3.2)</h3>
+<table>
+<thead>
+<tr>
+<th>Carta</th>
+<th>Finalidad / contenido</th>
+<th>Escala</th>
+<th>Proyección</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plano de aeródromo/helipuerto (ADC/HELC)</strong></td>
+<td>Movimiento en tierra de aeronaves/helicópteros e información operativa; se elabora para todos los aeródromos/helipuertos de AD 0.6</td>
+<td><strong>1:7000 a 1:25 000</strong></td>
+<td>no indicada</td>
+</tr>
+<tr>
+<td><strong>Plano de estacionamiento y atraque de aeronaves (PDC)</strong></td>
+<td>Plataformas, puestos de estacionamiento, resistencia, iluminación, señales, ayudas de guía; donde hay mucha información</td>
+<td><strong>1:3000 a 1:10 000</strong> en general</td>
+<td>no indicada</td>
+</tr>
+<tr>
+<td><strong>Plano de aeródromo para movimientos en tierra (GMC)</strong></td>
+<td>Calles de rodaje hacia y desde los puestos de estacionamiento; designadores de tramos de pista y de calle de rodaje; donde el ADC no puede contener la información</td>
+<td><strong>1:10 000 a 1:30 000</strong> en general</td>
+<td>no indicada</td>
+</tr>
+<tr>
+<td><strong>Plano de obstáculos de aeródromo Tipo A (AOC)</strong></td>
+<td>Datos para las limitaciones de utilización: distancias declaradas para cada sentido de la pista, área de la trayectoria de despegue, obstáculos en ella, declinación magnética</td>
+<td>horizontal <strong>1:10 000 a 1:50 000</strong>; <strong>vertical = 10 x horizontal</strong></td>
+<td>no indicada</td>
+</tr>
+<tr>
+<td><strong>Carta topográfica para aproximaciones de precisión (PATC)</strong></td>
+<td>Perfil del terreno en una parte determinada de la aproximación final para pistas de precisión CAT II/III (DH con radioaltímetro)</td>
+<td>horizontal <strong>1:2500 o 1:5000</strong>, vertical <strong>1:500</strong></td>
+<td>no indicada</td>
+</tr>
+<tr>
+<td><strong>SID (OACI)</strong></td>
+<td>Rutas desde el despegue hasta la fase en ruta; radioayudas, frecuencias, rumbos, distancias, puntos de salida, altitudes mínimas de vuelo, zonas P/D/R</td>
+<td><strong>1:1 500 000 a 1:200 000</strong></td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>STAR (OACI)</strong></td>
+<td>Rutas desde la fase en ruta hasta la aproximación; puntos de entrada</td>
+<td><strong>1:1 500 000 a 1:500 000</strong></td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de llegada CDA (descenso continuo)</strong></td>
+<td>STAR sin restricciones de velocidad ni de altitud salvo las altitudes mínimas de seguridad; distancia al umbral</td>
+<td>1:1 500 000 a 1:500 000</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>TRAN (transición a la aproximación final)</strong></td>
+<td>Transiciones RNAV1 «en trombón» (1 tramo inicial, 1 tramo de alejamiento, 1 tramo de acercamiento) que enlazan una STAR (desde un IAF o antes) con un punto desde el que puede volarse la aproximación final de tipo ILS</td>
+<td><strong>1:500 000</strong></td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de área (OACI)</strong>, rutas de llegada / de salida</td>
+<td>Transición entre la fase en ruta y la aproximación, y entre el despegue y la fase en ruta, dentro de los límites de los TMA españoles</td>
+<td><strong>1:2 000 000</strong> (puede variar)</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de aproximación por instrumentos (IAC)</strong></td>
+<td>Una carta por procedimiento de aproximación por instrumentos, con aproximación frustrada y espera; cotas y curvas de nivel</td>
+<td><strong>1:750 000 a 1:250 000</strong></td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de altitud mínima de vigilancia ATC (ATCSMAC)</strong></td>
+<td>Permite a las tripulaciones vigilar y verificar las altitudes asignadas por un controlador que emplea vigilancia (guía vectorial)</td>
+<td><strong>1:1 250 000</strong> u otra según se necesite</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de maniobra visual (en circuito) utilizando derrotas prescritas (VPT)</strong></td>
+<td>Incorporarse a un circuito visual con trayectorias prescritas tras una maniobra instrumental</td>
+<td><strong>1:100 000</strong> u otra</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta de aproximación visual (VAC)</strong></td>
+<td>VFR: de la fase en ruta a la aproximación; CTR y ATZ; obstáculos; procedimientos de entrada VFR; esperas en fallo de comunicaciones</td>
+<td><strong>1:250 000</strong> u otra</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Otras cartas VFR</strong></td>
+<td>Vuelos VFR que sobrevuelan TMA, VFR militar</td>
+<td>1:250 000 u otra</td>
+<td>Lambert conforme</td>
+</tr>
+<tr>
+<td><strong>Carta aeronáutica OACI 1:500 000</strong></td>
+<td>VFR, baja velocidad, baja cota; serie de <strong>7 hojas</strong> que cubren todo el espacio aéreo español; muestra espacios aéreos y zonas P/R/D por debajo del <strong>FL195</strong></td>
+<td><strong>1:500 000</strong></td>
+<td>Lambert conforme, paralelos estándar 37°N y 42°N (Canarias 24°N y 29°N)</td>
+</tr>
+<tr>
+<td><strong>Carta de circulación VFR de TMA (electrónica: insigniavfr.enaire.es)</strong></td>
+<td>VFR dentro de un TMA; todos los espacios aéreos y zonas P/R/D por debajo del <strong>FL195</strong></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Carta en ruta (electrónica: insignia.enaire.es)</strong></td>
+<td>Aerovías, radioayudas, aeródromos, zonas P/R/D, puntos de notificación, FIR, TMA, AMA, distancias, rumbos magnéticos; IFR</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>| <strong>Luces aeronáuticas de superficie en ruta; áreas prioritarias a evitar en vuelos particulares; concentración de aves; presencia de buitres y cigüeñas</strong> | Cartas en color; los datos de aves y de áreas prioritarias los facilita el Ministerio de Agricultura, Pesca y Alimentación | p. ej. cartas de aves 1:4 000 000 (ENR 5.6) | - | A32 apdo. 4.2 (las escalas 1:4 000 000 y 1:8 000 000 de las cartas de ejemplo de ENR 5.6/4.5 figuran en las páginas del anexo del manual). Series militares (MIPS, corredores OIFR/OVFR): escalas 1:1 000 000, 1:250 000 y 1:1 250 000 (Lambert conforme); la IAC-MIPS usa MDA/DA/MDH/DH en las categorías A-D.</p>
+<ul>
+<li><strong>Maniobra de desplazamiento lateral (<em>side-step</em>) (IAC):</strong> una maniobra visual al final de una aproximación por instrumentos para aterrizar en una pista paralela situada a 1200 ft o menos de la pista principal; los mínimos son más altos que los de la aproximación directa, pero más bajos que los de circuito; fraseología: «Autorizado para aproximación ILS a la RWY 03L, desplazamiento lateral para aterrizar a la RWY 03R». A32 IAC.</li>
+<li><strong>Cartas incluidas en el AIP, sección por sección</strong> A32 apdo. 4.3: <strong>ENR 1</strong> carta de área de cobertura radar; <strong>ENR 4</strong> luces aeronáuticas de superficie en ruta; <strong>ENR 5</strong> áreas prioritarias, concentración de aves, buitres y cigüeñas; <strong>ENR 6</strong> carta en ruta, carta de área de reducción de velocidad, carta de sectores, ATCSMAC en TMA, carta de circulación VFR de TMA, carta FRA, zonas de protección de planes de vuelo (FBZ), zonas obligatorias de transpondedor (TMZ), zonas obligatorias de radio (RMZ); <strong>AD 1</strong> carta de aeródromos y helipuertos, cartas de aeródromos restringidos; <strong>AD 2</strong> ADC, PDC, GMC, AOC A, PATC, SID, STAR, CDA, TRAN, IAC, ATCSMAC, carta de área de llegada/salida, VAC, VPT, carta de corredores VFR (más las cartas militares MIPS); <strong>AD 3</strong> plano de helipuerto, plano de obstáculos de helipuerto. La carta OACI 1:500 000 la vende el AIS, pero <em>no</em> forma parte del AIP (coherente con el manual). MAN 4.4.15; A32 4.1 frente a 4.3. Secciones de ENR 6: 6.1 cartas en ruta; 6.2 TMA Barcelona; 6.3 TMA Canarias; 6.4 TMA Galicia; 6.5 TMA Madrid; 6.6 TMA Palma; 6.7 TMA Sevilla; 6.8 TMA Valencia; 6.9 carta FRA; 6.11 TMZ; 6.12 RMZ; 6.13 FIS. E60.</li>
+<li><strong>Agrupación de obstáculos (AIP España, todas las cartas):</strong> los obstáculos de más de <strong>100 m</strong> de altura se agrupan según la escala: escala <strong>inferior a 1:500 000</strong> → agrupados a <strong>1 NM</strong> del obstáculo más alto; escala <strong>igual o superior a 1:500 000 pero inferior a 1:1 000 000</strong> → <strong>2 NM</strong>; escala <strong>igual o superior a 1:1 000 000</strong> → <strong>3 NM</strong>. A32 apdo. 1. <strong>Ojo con la redacción</strong>: el AIP usa la palabra «escala» para el <em>denominador</em>. Leída así, la única lectura físicamente razonable es: denominador inferior a 500 000 (cartas de escala grande, como la IAC a 1:250 000) → <strong>1 NM</strong>; denominador desde 500 000 hasta 1 000 000 sin incluirlo (STAR, TRAN, carta 1:500 000) → <strong>2 NM</strong>; denominador de 1 000 000 o más (ATCSMAC 1:1 250 000, carta de área 1:2 000 000) → <strong>3 NM</strong>. En la carta, el radio de agrupación se mantiene entonces más o menos constante: 1 NM a 1:250 000 = 7,4 mm, 2 NM a 1:500 000 = 7,4 mm, 3 NM a 1:1 000 000 = 5,6 mm. Si una pregunta dice «cartas de escala 1:1 000 000 o mayor (en denominador)», la respuesta es 3 NM; hay que leer con cuidado la redacción, porque «escala mayor» en cartografía significa normalmente un denominador menor. A32 apdo. 1.</li>
+<li><strong>Obstáculos en las IAC y VAC:</strong> solo los obstáculos de más de 100 m de altura; las cartas IAC llevan además, en lo posible, el obstáculo determinante de cada tramo del procedimiento; cada obstáculo se muestra con su símbolo y su <strong>elevación total</strong>. Topografía básica: Centro Nacional de Información Geográfica, serie digital <strong>BCN 200</strong>. A21 apdo. 7.</li>
+</ul>
+<h3 id="94-mantenimiento-de-las-cartas-y-diferencias-con-la-oaci">9.4 Mantenimiento de las cartas y diferencias con la OACI</h3>
+<ul>
+<li><strong>Mantenimiento:</strong> las cartas se actualizan regularmente o se sustituyen mediante enmiendas al AIP. Las erratas detectadas tras la publicación y las modificaciones urgentes significativas para las operaciones se publican por <strong>NOTAM</strong> con referencia a la carta; si no afectan a las operaciones, mediante <strong>corrección manuscrita al AIP</strong>. Un cambio de importancia operacional en los procedimientos de las cartas → <strong>nueva edición distribuida mediante el sistema AIRAC</strong>; los cambios sin importancia operacional → enmienda regular, SUP o corrección manuscrita. Los datos topográficos e hidrográficos se revisan cuando es necesario. A32 apdo. 2; MAN 4.6.</li>
+<li><strong>Cartas electrónicas:</strong> la OACI define una especificación para las cartas aeronáuticas electrónicas; deben permitir añadir o quitar información (pero no la información básica), pueden llevar información suplementaria, determinan dinámicamente la posición de la aeronave y permiten variar la escala. En el AIP España algunas cartas son solo electrónicas, a través de <strong>Insignia</strong> (la carta en ruta de ENR 6.1 es solo electrónica). MAN 4.5; A32.</li>
+<li><strong>Principales diferencias con la OACI/Anexo 4 en GEN 1.7</strong> A17: el AOC y la PATC se publican en varios colores (OACI: un solo color); las elevaciones en las IAC van en <strong>pies</strong>; cuando una carta no es compatible con el Anexo 4, la palabra «OACI» no aparece en su título; marcaciones magnéticas redondeadas al grado más próximo; norte geográfico solo en ADC/GMC/PDC; cartas de área orientadas al norte magnético, AOC/PATC a la dirección de la pista; el punto decimal sustituye a la coma y no se usa separador entre los millares; sin espacio entre «FL» y el nivel; <strong>NO_ADQ</strong> (<em>Not Aeronautical Data Quality</em>) marca los datos que no cumplen el Catálogo de Datos (un asterisco en el AIP); en la ATCSMAC del TMA de Madrid se usa en algunos sectores un margen lateral adicional de obstáculos de 3 NM en lugar de 5 NM; las áreas NOTAM se publican como polígonos abiertos. A17.</li>
+</ul>
+<hr />
+<h2 id="10-contenido-de-las-cartas-simbolos-colores-obstaculos-altitudes-minimas">10. Contenido de las cartas: símbolos, colores, obstáculos, altitudes mínimas</h2>
+<h3 id="101-simbolos-aip-gen-23">10.1 Símbolos (AIP GEN 2.3)</h3>
+<ul>
+<li>GEN 2.3 recoge los símbolos más utilizados; los símbolos específicos de una carta se explican en ella. Los colores pueden diferir de los mostrados cuando lo exija la legibilidad, <strong>salvo</strong> cuando el mismo símbolo en distintos colores pueda significar cosas distintas. Los símbolos marcados con asterisco <strong>no figuran en el Anexo 4 de la OACI</strong> (los ha diseñado España). A23; MAN 3.4.</li>
+<li>Grupos de GEN 2.3: <strong>Aeródromos</strong> (civil, militar*, mixto civil-militar, helipuerto, helipuerto militar*, base militar de hidroaviones*, aeródromos restringidos*, aeromodelismo/drones* (pasa a violeta cuando el límite vertical supera 120 m / 400 ft), estación de radiosondeo*, globo*, paracaidismo*, paramotor*, planeadores*, ultraligeros*, aeródromo abandonado o cerrado, «aeródromo en que se basa el procedimiento» frente a «otros aeródromos»); <strong>Obstáculos</strong> (obstáculo, grupo, obstáculo iluminado, obstáculo de más de 100 m, obstáculo determinante, grupo con obstáculo determinante, parque eólico de más de 100 m, obstáculo móvil, línea de transmisión/cable, poste/torre/antena); <strong>Planos de aeródromo</strong> (pista pavimentada y sin pavimentar, CWY (<em>clearway</em>), RESA, SWY (<em>stopway</em>), umbral desplazado, barrera de frenado, punto de observación del RVR, anemómetro, ARP, WDI, declinación magnética, barra de parada, puntos de espera de la pista diseños A y B, punto de espera intermedio, lugar crítico (<em>hot spot</em>), pasarela telescópica, punto de verificación del VOR); <strong>Puntos significativos/radioayudas</strong> (VOR, DME, VOR/DME, VORTAC, TACAN, NDB, punto de recorrido, punto de notificación VFR, INT; cada uno se representa de forma distinta para puntos convencionales o de paso (<em>fly-by</em>) y de sobrevuelo (<em>fly-over</em>), y para notificación a petición u obligatoria); <strong>Espacios aéreos</strong> (clasificación, ATZ/FIZ, CTR, FIR, TMA/CTA, sectores VFR, RVSM, FPMZ/RMZ/TMZ, área de reducción de velocidad, FBZ/TSA/TRA y zonas P/R/D, zona restringida al vuelo fotográfico*, fauna sensible*, delegación ATS*); <strong>Procedimientos de vuelo</strong> (segmento de procedimiento, segmento PBN, aerovía, aproximación frustrada, rumbo de penetración (solo HI-TACAN), interrupción de escalas, ruta VFR, «ventana» de altitud/nivel de vuelo, «a o por encima de», «a o por debajo de», «obligatorio», «recomendado», MOCA, FAF, altitud mínima de área); <strong>Varios</strong> (luz puntiforme, punto de referencia visual, DME, radiobaliza, rosa de los vientos (con VOR, VOR/DME, TACAN), ILS/GBAS en planta y en perfil, ciudades, carreteras, ferrocarriles, ríos, lagos, presas, línea isógona, punto de referencia DME); <strong>Cartas en ruta</strong> (puntos RVSM, aerovías CDR, FRA y puntos FRA, aerovías convencionales, aerovías RNAV, VORDME). A23.</li>
+<li><strong>Matiz relevante para el examen:</strong> los puntos significativos se dibujan de forma distinta para <em>fly-by</em> y <em>fly-over</em>, y para notificación <em>a petición</em> frente a <em>obligatoria</em>; la rosa de los vientos se usa con los símbolos VOR, VOR/DME y TACAN. A23.</li>
+</ul>
+<h3 id="102-colores-y-convenciones-de-diseno-guia-de-eurocontrol-para-la-carta-oaci-1500-000">10.2 Colores y convenciones de diseño (guía de EUROCONTROL para la carta OACI 1:500 000)</h3>
+<p>La guía (v1.6, noviembre de 2011, del Grupo de Enfoque para la Armonización de Cartas de la OACI, basada en el Anexo 4 y el Doc 8697) es un documento de armonización europeo, no una SARP de la OACI. Puntos clave EGM:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Representación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Espacio aéreo de clase A</td>
+<td>línea magenta y banda magenta</td>
+</tr>
+<tr>
+<td>Clases B, C, D</td>
+<td>línea azul y banda azul</td>
+</tr>
+<tr>
+<td>Clase E</td>
+<td>solo línea azul (se aparta del Anexo 4 para separar el espacio aéreo que no necesita autorización ATC de los B/C/D); se recomienda una línea más gruesa</td>
+</tr>
+<tr>
+<td>Clases F, G</td>
+<td>línea azul (la G sin marcas, para evitar confusión con la FIR, que el Anexo 4 dibuja igual)</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td>línea azul discontinua con banda o sombreado (magenta para una CTR de clase A)</td>
+</tr>
+<tr>
+<td>Zona de tránsito de aeródromo (ATZ)</td>
+<td>línea azul de puntos</td>
+</tr>
+<tr>
+<td>FIR</td>
+<td>línea azul con marcas</td>
+</tr>
+<tr>
+<td>Espacio aéreo restringido (TRA, TSA, P, R, D)</td>
+<td>el Anexo 4 usa el azul; la guía lo cambia a una representación de tipo magenta (apdo. 2.6: línea roja con banda magenta rayada; apdo. 4.3: línea y banda rayada magenta; los dos apartados de la guía no son idénticos)</td>
+</tr>
+<tr>
+<td>TMZ</td>
+<td>línea gruesa gris oscuro de trazo y punto con la etiqueta «TMZ» (propuesta)</td>
+</tr>
+<tr>
+<td>Servicio de información de vuelo</td>
+<td>línea verde discontinua; reservas naturales con línea verde</td>
+</tr>
+<tr>
+<td>Ciudades/poblaciones grandes</td>
+<td>amarillo o gris; pueblos, círculo negro; carreteras, rojo; bosques, verde</td>
+</tr>
+<tr>
+<td>Cables</td>
+<td>línea magenta con marcas (sin balizar), línea magenta con círculos (balizado); línea de transmisión como recta entre «T»</td>
+</tr>
+<tr>
+<td>Aeródromo abandonado/cerrado</td>
+<td>azul</td>
+</tr>
+<tr>
+<td>Límites verticales del espacio aéreo</td>
+<td>«GND» para el terreno, «AGL» para alturas sobre el terreno, «AMSL» omitido cuando figura en la leyenda; unidades omitidas, indicadas en la leyenda; límite superior del espacio aéreo representado en torno al <strong>FL100</strong></td>
+</tr>
+<tr>
+<td>Texto del aeródromo</td>
+<td>nombre, indicador de lugar, elevación (en negrita), longitud de la pista más larga en centenas, frecuencia; no se muestra la iluminación; se omite la superficie de la pista cuando se muestra el trazado de pista</td>
+</tr>
+<tr>
+<td>Rosa de los vientos</td>
+<td>alineada con la alineación de la radioayuda (normalmente el norte magnético)</td>
+</tr>
+<tr>
+<td>Línea isógona</td>
+<td>según el Anexo 4, Ap. 2</td>
+</tr>
+<tr>
+<td>Curvas de nivel/tintas hipsométricas</td>
+<td>siete escalones (véase 5.5)</td>
+</tr>
+</tbody>
+</table>
+<p>La longitud de la pista se redondea <strong>por defecto</strong> a la centena de metros/pies inferior, y la convención de las «centenas» debe explicarse en la leyenda. La elevación del aeródromo aparece en negrita; la elevación superior de un obstáculo se muestra con su altura, opcionalmente entre paréntesis. EGM 2.17-2.31.</p>
+<h3 id="103-altitudes-minimas-definiciones">10.3 Altitudes mínimas (definiciones)</h3>
+<p>Fuentes: la lista de abreviaturas del AIP (GEN 2.2) para los nombres; el <em>Instrument Procedures Handbook</em> de la FAA de EE. UU. para las definiciones; los valores de los PANS-OPS de la OACI no se han podido verificar aquí (el Doc 8168 es de pago). Las normas de EE. UU. difieren de las de la OACI, así que conviene usarlas como conceptos.</p>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MEA</strong> (<em>minimum en-route altitude</em>, altitud mínima en ruta)</td>
+<td>La altitud publicada más baja entre radioayudas que garantiza una <strong>cobertura aceptable de la señal de navegación</strong> y cumple los requisitos de <strong>franqueamiento de obstáculos</strong> en todo el ancho de la aerovía/ruta. FAA: franqueamiento de obstáculos de 1000 ft (2000 ft en zonas montañosas designadas) dentro de 4 NM del eje; margen de al menos 300 ft (áreas de transición) o 500 ft (áreas de control) por encima del límite inferior del espacio aéreo controlado. IPH; A22</td>
+</tr>
+<tr>
+<td><strong>MOCA</strong> (<em>minimum obstacle clearance altitude</em>, altitud mínima de franqueamiento de obstáculos)</td>
+<td>La altitud publicada más baja entre puntos que cumple el franqueamiento de obstáculos en todo el tramo; garantiza la cobertura de la señal de navegación solo dentro de <strong>22 NM de un VOR</strong> (regla de la FAA). IPH; A22; A23 (símbolo MOCA)</td>
+</tr>
+<tr>
+<td><strong>MRA</strong> (<em>minimum reception altitude</em>, altitud mínima de recepción)</td>
+<td>La altitud más baja a la que puede determinarse una intersección cuando es superior a la MEA. IPH; A22</td>
+</tr>
+<tr>
+<td><strong>MAA</strong> (<em>maximum authorized altitude</em>, altitud máxima autorizada)</td>
+<td>La altitud máxima utilizable para una estructura o un tramo del espacio aéreo (límites técnicos o interferencia de frecuencias). IPH</td>
+</tr>
+<tr>
+<td><strong>MCA</strong> (<em>minimum crossing altitude</em>, altitud mínima de cruce)</td>
+<td>La altitud más baja a la que debe cruzarse un punto al dirigirse a una MEA más alta; se basa en gradientes de ascenso (150 ft/NM desde el nivel del mar hasta 5000 ft MSL, y gradientes mayores por encima). IPH (solo se leyó el primer tramo); A22</td>
+</tr>
+<tr>
+<td><strong>MHA</strong> (<em>minimum holding altitude</em>, altitud mínima de espera)</td>
+<td>Abreviatura del AIP. A22</td>
+</tr>
+<tr>
+<td><strong>MVA</strong> (<em>minimum vectoring altitude</em>, altitud mínima de guía vectorial)</td>
+<td>Establecida para el ATC cuando se emplea radar: 1000 ft por encima del obstáculo más alto en zonas no montañosas, 2000 ft en las montañosas; al menos 300 ft por encima del límite inferior del espacio aéreo controlado; solo se usa si hay un eco radar adecuado; cartas para controladores. IPH</td>
+</tr>
+<tr>
+<td><strong>MSA / sector MSA</strong> (<em>minimum sector altitude</em>, altitud mínima de sector)</td>
+<td>Altitud de emergencia en las cartas de aproximación: 1000 ft por encima de todos los obstáculos, <strong>sin garantía de cobertura de la señal de navegación</strong>; radio normalmente de <strong>25 NM</strong> (puede ampliarse a 30 NM); hasta cuatro sectores, ninguno de menos de 90°. FAA Chart User's Guide; A22</td>
+</tr>
+<tr>
+<td><strong>AMA</strong> (<em>area minimum altitude</em>, altitud mínima de área)</td>
+<td>Altitud de la carta en ruta para un área; símbolo del AIP «altitud mínima de área» y abreviatura AMA. A22, A23</td>
+</tr>
+<tr>
+<td><strong>MORA / OROCA</strong></td>
+<td>Altitud fuera de ruta que da un margen de 1000 ft (2000 ft en terreno montañoso); la FAA la llama OROCA; la leyenda de la FAA incluye «MORA - Minimum Off-Route Altitude» (altitud mínima fuera de ruta). Es una herramienta del piloto para emergencias y no recibe el mismo escrutinio que la MEA/MVA. IPH; guía de cartas de la FAA (leyenda). Uso de la OACI:</td>
+</tr>
+<tr>
+<td><strong>MIA</strong></td>
+<td>En el uso de la FAA, altitud IFR de 1000 ft (2000 ft en montaña) por encima del obstáculo más alto dentro de 4 NM. IPH</td>
+</tr>
+<tr>
+<td><strong>Altitud de transición, OCA/H, MDA/H, DA/H</strong></td>
+<td>Véanse los procedimientos de los temas 5 y 6; OCA y MDA figuran en la lista del AIP. A22</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Contenido de la ATCSMAC (AIP):</strong> aeródromos que afectan a los encaminamientos terminales, elevación del aeródromo principal, zonas P/R/D, cotas y obstáculos; radioayudas con su identificación; límites laterales del espacio aéreo designado; puntos significativos de los procedimientos normalizados por instrumentos; altitud de transición; <strong>sectores de altitud mínima radar</strong>, círculos de distancia, notas sobre la corrección por baja temperatura; distintivos de llamada y frecuencias de las dependencias de aproximación/radar; líneas generales de costa de aguas abiertas, grandes lagos y ríos. OACI: solo puede usarse para verificar las altitudes asignadas cuando la aeronave está identificada. A32; MAN 4.4.12.</li>
+</ul>
+<hr />
+<h2 id="11-publicaciones-aeronauticas-airac-calidad-de-los-datos">11. Publicaciones aeronáuticas, AIRAC, calidad de los datos</h2>
+<h3 id="111-documentacion-integrada-de-informacion-aeronautica-ais-espana">11.1 Documentación Integrada de Información Aeronáutica (AIS España)</h3>
+<p>La presta ENAIRE a través de la División de Información Aeronáutica: la Oficina central AIS, la <strong>Oficina NOTAM internacional (NOF, H24, en el centro de control de Madrid, en Torrejón de Ardoz; AFTN LEANYNYX)</strong>, las oficinas de información aeronáutica (AIO) de los aeródromos y una Oficina AIO centralizada para los aeropuertos de la red de AENA; MILAIS/MILNOF, de carácter militar, son independientes. Base del servicio: Anexo 15, Doc 8126, PANS-AIM (Doc 10066), Doc 7754 (Plan de navegación aérea, Región EUR). El funcionamiento está regulado por el <strong>Libro Octavo del Reglamento de la Circulación Aérea</strong>. A31 apdo. 1-3.</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Contenido</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AIP España</strong></td>
+<td>Información permanente e información temporal de larga duración (al menos <strong>un año</strong>); <strong>bilingüe español/inglés</strong>; partes <strong>GEN, ENR, AD</strong></td>
+<td>Enmiendas regulares (portada azul; entran en vigor al publicarse, se emiten en las fechas AIRAC), <strong>enmiendas AIRAC (portada verde)</strong>, correcciones manuscritas</td>
+</tr>
+<tr>
+<td><strong>Suplementos al AIP (SUP)</strong></td>
+<td>Cambios temporales e información adicional</td>
+<td><strong>Suplemento regular</strong> (páginas amarillas): cambios temporales de larga duración (3 meses o más), o con texto o gráficos extensos aunque duren menos, o información adicional; <strong>suplemento AIRAC</strong> (páginas rosa). Una numeración anual común</td>
+</tr>
+<tr>
+<td><strong>AIC</strong> (Circular de Información Aeronáutica)</td>
+<td>Información que no justifica AIP, NOTAM ni SUP; cambios a largo plazo, seguridad, legislación, asuntos técnicos y administrativos</td>
+<td>Serie nacional y serie internacional; cada una numerada consecutivamente por año civil</td>
+</tr>
+<tr>
+<td><strong>NOTAM</strong></td>
+<td>Información urgente, impredecible, de importancia operacional, en general temporal y de corta duración; también cambios con poca antelación</td>
+<td>Se distribuye por AFTN en «NOTAM Sistema»; <strong>ocho series</strong></td>
+</tr>
+</tbody>
+</table>
+<p>| <strong>PIB</strong> (boletín de información previa al vuelo) | Lista de los NOTAM en vigor en lenguaje claro, para rutas/áreas seleccionadas | Se elabora en cada AIO (no en los aeropuertos de AENA) | A31.</p>
+<ul>
+<li><strong>Series de NOTAM (España):</strong> <strong>A</strong> aeropuertos civiles con operación H24 (LEAL, LEBL, LEGE, GCLP, LEMD, LEMG, LEPA, LEST, GCTS, LEVC, LEVT); <strong>B</strong> el resto; <strong>D</strong> avisos a la navegación, reservas de espacio aéreo, actividad de zonas P/R/D; <strong>E</strong> incidencias de radioayudas e instalaciones de radionavegación; <strong>F</strong> exclusivamente Gibraltar (LXGB); <strong>G</strong> limitaciones de los procedimientos de aproximación y salida basados en satélite y servicio IRIS; <strong>P</strong> reservada para los NOTAM que superen la numeración 9999 en una serie anual; <strong>R</strong> RPAS (aeronaves no tripuladas) a baja cota. <strong>Cada serie tiene su propia numeración, que empieza el 1 de enero en 0001.</strong> Direcciones AFTN colectivas: LEZZNA + las dos primeras letras del indicador de lugar (NOTAM); LEZZSA (SNOWTAM). A31 3.4.</li>
+<li><strong>Trigger NOTAM:</strong> anuncia los cambios de importancia operacional publicados mediante AMDT o SUP AIRAC; se envía en la fecha de publicación; indica una breve descripción, la fecha de entrada en vigor y la referencia a la AMDT/SUP; sigue vigente <strong>14 días después de la fecha de efectividad</strong>. A31 3.4.2.</li>
+<li><strong>Listas de verificación:</strong> las de AIP y SUP son páginas del AIP (GEN 0.3/0.4); la lista de verificación de las AIC es en sí misma una AIC; la de los NOTAM se envía por AFTN; el Sumario de NOTAM se publica a diario en el sitio web de ENAIRE. A31 3.5.</li>
+</ul>
+<h3 id="112-el-sistema-airac-aeronautical-information-regulation-and-control-reglamentacion-y-control-de-la-informacion-aeronautica">11.2 El sistema AIRAC (<em>Aeronautical Information Regulation and Control</em>, reglamentación y control de la información aeronáutica)</h3>
+<ul>
+<li>Los cambios de importancia operacional que puedan preverse se publican mediante el Sistema Reglamentado de Publicación AIRAC, como AMDT o SUP, según el Anexo 15. <strong>Fechas de publicación y de entrada en vigor predeterminadas y acordadas internacionalmente, a intervalos de 28 días.</strong> El AIS España distribuye <strong>42 días antes</strong> de la fecha de efectividad, de modo que los destinatarios la reciban <strong>con 28 días de antelación</strong>; los cambios importantes y los procedimientos nuevos se publican con <strong>56 días</strong> de antelación (doble ciclo) siempre que sea posible; la información notificada mediante AIRAC no se modifica durante al menos <strong>28 días</strong> después de la fecha de efectividad, salvo que sea temporal; <strong>si no hay información AIRAC disponible, se difunde una publicación «NIL» por NOTAM</strong>. A31 apdo. 4.</li>
+<li><strong>Fechas de 2026 (AIP España)</strong>, publicación → efectividad A31: 11 dic 25 → 22 ene 26; 8 ene → 19 feb; 5 feb → 19 mar; 5 mar → 16 abr; 2 abr → 14 may; 30 abr → 11 jun; 28 may → 9 jul; 25 jun → 6 ago; 23 jul → 3 sep; 20 ago → 1 oct; 17 sep → 29 oct; 15 oct → 26 nov; 12 nov → 24 dic; 10 dic → 21 ene 27; 7 ene 27 → 18 feb 27. (La extracción imprime «22-JAN-265» y «25-JUN-265», con un dígito de llamada de nota extraviado.) Todas las fechas de efectividad son <strong>jueves</strong>.</li>
+<li><strong>Aritmética:</strong> las fechas de efectividad se repiten cada 28 días; 13 ciclos = 364 días, de modo que una fecha AIRAC cae el año siguiente en el mismo día del año ± 1; en la ventana del examen, a partir de hoy (24 de septiembre de 2026): <strong>1 oct, 29 oct, 26 nov, 24 dic de 2026, 21 ene de 2027, 18 feb de 2027</strong>. Fecha de publicación = efectividad - 42 días; preaviso de 56 días = efectividad - 56 días. Comprobación de coherencia: el 22 de enero de 2026 está exactamente 79 ciclos después del 2 de enero de 2020 (el ancla del 2 de enero de 2020 es).</li>
+</ul>
+<h3 id="113-calidad-de-los-datos-doc-9674-de-la-oaci-capitulo-2">11.3 Calidad de los datos (Doc 9674 de la OACI, capítulo 2)</h3>
+<ul>
+<li><strong>Tipos de datos de posición:</strong> <strong>punto levantado topográficamente</strong> (un punto físico claramente definido, obtenido por levantamiento: radioayudas, umbrales, obstáculos, puertas de embarque), <strong>punto calculado</strong> (derivado matemáticamente de un punto levantado conocido: puntos de referencia por radial/distancia, intersecciones, puntos de recorrido en ruta), <strong>punto declarado</strong> (definido por latitud/longitud sin depender de un punto levantado: puntos del límite de la FIR, puntos de zonas P/R/D fuera de las áreas de control). D9674 2.2.</li>
+<li><strong>Exactitud</strong> = grado de conformidad entre el valor medido o estimado y el valor verdadero; <strong>confianza del 95 %</strong> (2σ en una dimensión); para la posición bidimensional, la distribución normal circular da P = 1 - exp(-c²/2). El <strong>CEP</strong> (error circular probable) = radio que contiene el 50 % = <strong>1,1774σ</strong>; el radio del 95 % = <strong>2,448σ = 2,079 x CEP</strong>. D9674 2.4.4-2.4.5; comprobado (P(1,1774) = 0,5000, P(2,448) = 0,9500). Probabilidades para 3σ / 2σ / 1σ / error probable: 1D 99,7 / 95,0 / 68,0 / 50; 2D 98,9 / 86,0 / 39,3 / 50; 3D 97,1 / 78,8 / 19,9 / 50. D9674 Tabla 2-6.</li>
+<li><strong>Resolución</strong> = número de unidades o dígitos con que se expresa un valor (redondeado, no truncado); por ejemplo, 54°33'15" tiene resolución de un segundo. <strong>Precisión</strong> = la menor diferencia que puede distinguirse con fiabilidad. Manipular los datos después no puede aumentar la precisión de la medición original. D9674 2.5.</li>
+<li><strong>Clases de integridad</strong> (probabilidad de que un dato recuperado sin indicios de corrupción no sea el previsto) D9674 2.6.2: <strong>críticos 1 x 10^-8</strong> (p. ej. los datos del umbral de pista que definen el punto de aterrizaje; derivada de la integridad del aterrizaje automático); <strong>esenciales 1 x 10^-5</strong> (radioayudas en ruta, obstáculos); <strong>ordinarios 1 x 10^-3</strong> (datos cuyo error no afecta a la navegación, p. ej. los puntos del límite de la FIR). 1 x 10^-8 significa como máximo una corrupción no detectada por cada 100 millones de datos. <strong>Una exactitud menor no implica una integridad menor.</strong></li>
+<li><strong>Datos evaluados</strong> (datos de posición, elevación, longitud de pista, distancias declaradas, resistencia de la plataforma, variación magnética) frente a <strong>datos de referencia</strong> (identificadores de radioayudas, frecuencias, nombres de puntos de recorrido, categoría SSEI, números de teléfono): los datos de referencia son correctos o incorrectos; los datos evaluados tienen una exactitud graduada. D9674 2.4.2-2.4.3.</li>
+<li><strong>Ejemplos de exactitud exigida</strong> D9674 Tabla 2-1 (filas inequívocas en la extracción): puntos del límite de la FIR, 2 km (1 NM), declarados; puntos del límite de zonas P/R/D fuera de CTA/CTZ, 2 km (1 NM), declarados; puntos del límite de zonas P/R/D y CTA/CTZ dentro de áreas de control, 100 m, calculados. D9674 Tabla 2-7, tipos de <strong>RNP</strong> al 95 %: RNP 1 = ±1,85 km (1 NM); RNP 4 = ±7,4 km (4 NM); RNP 12,6 = ±23,3 km (12,6 NM); RNP 20 = ±37 km (20 NM).</li>
+<li><strong>Práctica de EUROCONTROL:</strong> como las coordenadas se desplazan, hay que volver a levantar los elementos de integridad crítica cuando se consume la mitad de la «tolerancia de exactitud»; ejemplo: un punto de extremo de pista con una tolerancia de 1 m, donde la deriva consume 0,5 m. ECG Ap.</li>
+<li><strong>Digitalizar coordenadas a partir de mapas no es fiable:</strong> las coordenadas de cuadrícula tomadas de un mapa pueden hacer que una distancia salga hasta unos 30 cm por km demasiado corta; los mapas no contienen alturas elipsoidales; la transformación de datum solo puede aplicarse tras la proyección inversa a coordenadas geodésicas; una transformación nunca mejora la exactitud (un ejemplo da discrepancias de hasta 50 m entre fuentes de parámetros de datum). D9674 4.2.2.2, 4.4.1.2-4.4.1.4.</li>
+</ul>
+<hr />
+<h2 id="12-manual-frente-a-fuentes-primarias-tabla-de-discrepancias">12. Manual frente a fuentes primarias (tabla de discrepancias)</h2>
+<p>OM04 (el material complementario fiel al manual) ya enumera los errores internos del propio manual (la aritmética de 122°/5°W, los «50 minutos» de precesión, los «9 minutos» de nutación, el valor de GM, IERS frente a BIH, etc.); esta tabla <strong>no</strong> los repite y recoge, en cambio, lo hallado al contrastar el manual con los textos primarios.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación del manual (p. en el PDF)</th>
+<th>Fuente primaria</th>
+<th>Cuál sigue probablemente el examen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>«J2 = -484,166 85 x 10^-6» (p. 21)</td>
+<td>La Tabla 3-1 del Doc 9674 de la OACI llama al mismo número <strong>coeficiente armónico zonal normalizado de segundo grado C2,0</strong>, no J2. J2 = -√5 x C2,0 ≈ 1,08263 x 10^-3</td>
+<td>El <em>valor</em> del manual es correcto (es C2,0); su <em>etiqueta</em> «J2» es un nombre erróneo. Si una pregunta pide «el coeficiente zonal de segundo grado del WGS-84», son más seguros tanto el valor como «C2,0» que «J2»</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Semieje menor b = 6 356 752 m (p. 21, redondeado)</td>
+<td>NIMA TR8350.2 Tabla 3.3: b = <strong>6 356 752,3142 m</strong>; coincide con a(1-f)</td>
+<td>Compatible; el manual redondea a metros</td>
+</tr>
+<tr>
+<td>3</td>
+<td>GM = (3 986 004,418 ± 0,008) x 10^8 m³/s² (p. 21)</td>
+<td>La misma cifra en NIMA TR8350.2 (1997, el valor refinado del DoD); el Doc 9674 de la OACI (edición de 2002) imprime en cambio <strong>398 600,5 km³/s² = 3 986 005 x 10^8 m³/s²</strong>, el valor original del WGS-84 de 1987</td>
+<td>Dos documentos oficiales de la OACI/DoD discrepan en unas 0,6 x 10^4 en las últimas cifras; se recogen ambos; el manual sigue la cifra más reciente de NIMA</td>
+</tr>
+<tr>
+<td>4</td>
+<td>La agrupación de obstáculos y las escalas de las cartas españolas <strong>no se mencionan en absoluto</strong>, salvo las escalas visibles en las cartas de muestra del Anexo (1:500 000, 1:8 000 000 ENR 4.5, 1:4 000 000 ENR 5.6)</td>
+<td>El AIP GEN 3.2 da la escala y la proyección de cada carta, y la regla exacta de agrupación (obstáculos de 100 m a 1/2/3 NM según la escala)</td>
+<td>La tabla completa de escalas (sección 9.3) es conocimiento adicional que no está en el manual; sigue siendo materia válida porque GEN 3.2 es un documento oficial del AIS que el propio manual cita como fuente de «Cartas aeronáuticas OACI y específicas publicadas por España»</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Entre las cartas obligatorias figura la «Carta Aeronáutica Mundial OACI 1:1 000 000» (WAC) (p. 35-36)</td>
+<td>El AIP España GEN 1.7 enumera expresamente «CAPÍTULO 16. CARTA AERONÁUTICA MUNDIAL - OACI 1:1 000 000 — No se proporciona en España»</td>
+<td>España <strong>no</strong> publica la WAC aunque el Doc 8697 la considere obligatoria; ante la pregunta «¿publica España la WAC OACI 1:1 000 000?» → <strong>no</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Entre las cartas opcionales figuran el «Plano de Aeródromo para Movimientos en Tierra» y el «Plano de Estacionamiento y Atraque» (GMC, PDC) (p. 36)</td>
+<td>El AIP GEN 3.2 enumera el GMC y el PDC entre las cartas que España publica realmente en AD 2, elaboradas «para aquellos aeródromos cuyo volumen de información es tal que no se puede incluir en el plano de aeródromo»</td>
+<td>Sin contradicción: el Doc 8697 las llama opcionales y España las publica cuando hace falta; ambos textos coinciden</td>
+</tr>
+<tr>
+<td>7</td>
+<td>El ETRS89/REGCAN95 se describen como «no válidos» para las coordenadas del AIP-España a causa de la deriva (p. 21-22), en línea con el artículo de <em>finalidad</em> del RD 1071/2007</td>
+<td>El art. 3 del RD 1071/2007 solo dice que el ETRS89/REGCAN95 son el <strong>sistema geodésico de referencia oficial de España</strong>; nunca menciona las coordenadas del AIP. La afirmación de «no válido para el AIP» es propia del <strong>AIP GEN 2.1</strong>, un documento distinto y más especializado</td>
+<td>Dos fuentes distintas y no contradictorias: usar el RD 1071/2007 para «cuál es el sistema geodésico oficial de España» y el AIP GEN 2.1 para «en qué sistema publica el AIP las coordenadas»</td>
+</tr>
+<tr>
+<td>8</td>
+<td>El manual da la comparación círculo máximo / loxodrómica solo con palabras (sin fórmulas ni ejemplo resuelto) (p. 16-17)</td>
+<td>Bowditch y este archivo aportan las fórmulas haversine/loxodrómica y 36 ejercicios resueltos</td>
+<td>La comparación cualitativa del manual puede memorizarse tal cual; no cabe esperar que el examen exija las fórmulas cerradas, pero sí un ejemplo numérico</td>
+</tr>
+<tr>
+<td>9</td>
+<td>El manual no menciona nunca la UTM, el MTN50, el ED50 (sistema de España antes de 1970/2007), ni el desvío magnético o las líneas isógonas/agónicas con esos términos exactos</td>
+<td>RD 1071/2007 art. 5-6 (UTM para escalas &gt; 1:500 000, geometría de las hojas MTN50); AIP GEN 2.3 (símbolo de la línea isógona); PHAK/Bowditch (desvío)</td>
+<td>Es contenido genuinamente «más allá del manual»; conviene tratarlo con prioridad menor para el examen, pero conservarlo, ya que el título de una sola palabra del Anexo I, «Cartografía», deja margen para preguntas de cualquier texto cartográfico oficial</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Milla náutica definida por el manual como «la longitud recorrida en un minuto sobre un arco de círculo máximo: 1 NM = 1,852 km» (p. 17)</td>
+<td>Bowditch: la milla náutica está hoy <strong>definida como exactamente 1852 m</strong>, con independencia de cualquier arco concreto; históricamente se aproximaba a 1' de latitud</td>
+<td>Diferencia menor de redacción; la formulación del manual es la regla mnemotécnica tradicional y Bowditch da la definición legal (posterior a 1929); ambos dan 1852 m, de modo que no hay conflicto numérico</td>
+</tr>
+<tr>
+<td>11</td>
+<td>El diagrama de tipos de proyección del manual (p. 27, generado a partir del PDF) muestra los subtipos de perspectiva «Ortográficas, Escenográficas, Estereográficas, Gnomónicas», ordenados por distancia focal creciente desde el infinito hasta el centro</td>
+<td>La lista equivalente de Bowditch (gnomónica, estereográfica, ortográfica) omite «escenográfica» como término; sí aparece en los textos clásicos españoles de topografía (p. ej. la propia bibliografía del manual, Matas Utrilla)</td>
+<td>Conviene aprender los cuatro términos españoles para el examen; «escenográfica» es vocabulario propio de España que no aparece en las fuentes en inglés que se leyeron</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-ejercicios-numericos-con-solucion-completa-36">13. Ejercicios numéricos con solución completa (36)</h2>
+<p>Todos calculados y comprobados dos veces en Python (fórmulas esféricas salvo indicación en contra). R = 6371 km = 3440,06 NM (esfera de radio medio), salvo que un ejercicio especifique la esfera «1' = 1 NM» (R = 3437,75 NM) o el elipsoide WGS-84. Las coordenadas de las radioayudas españolas reales proceden del AIP ENR 4.1 E41; todas son puntos DVOR/DME o NDB vigentes.</p>
+<p><strong>Conversión de coordenadas</strong></p>
+<ol>
+<li>Convierte <code>385644.6N 0015148.4W</code> (TACAN de Albacete) a grados decimales. → 38°56'44,6"N = 38 + 56/60 + 44,6/3600 = <strong>38,94572° N</strong>; 001°51'48,4"W = <strong>-1,86344°</strong>.</li>
+<li>Convierte 40,4719° N a G M S. → 40° + 0,4719 x 60 = 28,314' → 28' + 0,314 x 60 = 18,84" → <strong>40° 28' 18,8" N</strong>.</li>
+<li>Convierte 3,7038° W a G M S. → 3° + 0,7038 x 60 = 42,228' → 42' + 0,228 x 60 = 13,68" → <strong>3° 42' 13,7" W</strong>.</li>
+<li>La coordenada AIP del DVOR de Madrid Barajas (BRA) es <code>402808.9N 0033327.1W</code>; exprésala en decimal y en radianes. → <strong>40,46914° N, -3,55753°</strong>; radianes 0,70634, -0,06207.</li>
+<li>Convierte la longitud decimal de Madrid, -3,68760088° (de la tabla EGM08 del AIP GEN 2.1, fila de Madrid), a G M S. → <strong>-3° 41' 15,4"</strong>.</li>
+</ol>
+<p><strong>Distancia y apartamiento</strong></p>
+<ol start="6">
+<li>Distancia a lo largo de un meridiano de 40°N a 50°N. → 10° x 60 = <strong>600 NM</strong> exactas (independiente de la longitud).</li>
+<li>Apartamiento (distancia este-oeste) para 10° de longitud a 40°N. → 10 x 60 x cos 40° = 600 x 0,76604 = <strong>459,6 NM</strong>; a 60°N, los mismos 10° dan 600 x 0,5 = <strong>300,0 NM</strong>; a 28°N (latitud de Canarias), 600 x 0,88295 = <strong>529,8 NM</strong>.</li>
+<li>Distancia ortodrómica de 40°N 0° a 40°N 90°E (haversine, R = 6371 km) frente a la distancia elipsoidal (Vincenty, WGS-84). → Haversine <strong>3938,4 NM</strong>; Vincenty <strong>3938,7 NM</strong> (convertida desde metros); diferencia <strong>0,3 NM (0,01 %)</strong>: la esfera es una aproximación excelente incluso a lo largo de 90° de longitud en latitudes medias.</li>
+<li>Distancia loxodrómica entre los mismos dos puntos (de 40°N 0° a 40°N 90°E). → Una loxodrómica puramente este-oeste = la fórmula del apartamiento = 90 x 60 x cos 40° = <strong>4136,6 NM</strong>, rumbo 090° exacto. Comparada con el círculo máximo del ej. 8, la loxodrómica es <strong>198 NM (5,0 %) más larga</strong>.</li>
+<li>Rumbos ortodrómicos inicial y final para el mismo par. → Inicial <strong>057,3°</strong>, final <strong>122,7°</strong> (es decir, el recíproco del rumbo inicial del tramo de vuelta, 302,7° - 180°). El rumbo cambia 65,4° a lo largo de la ruta: la aeronave sale con rumbo noreste y llega con rumbo sureste.</li>
+<li>Latitud del vértice del círculo máximo de los ej. 8/10. → cos φv = cos 40° x sin 057,3° → φv = <strong>49,88° N</strong>; la ruta se abomba unos 10° al norte del paralelo 40 en su punto medio (longitud 45°E), en coherencia con la regla «el círculo máximo cruza un meridiano a una latitud mayor que la loxodrómica».</li>
+</ol>
+<p><strong>Pares reales de radioayudas españolas (coordenadas del AIP ENR 4.1)</strong></p>
+<ol start="12">
+<li>VAB (DVOR/DME de Albacete, 38,9471N 1,8593W) a ATE (DVOR/DME de Alicante, 38,2862N 0,5867W): distancia ortodrómica y rumbo inicial. → <strong>71,7 NM</strong>, rumbo inicial <strong>123,2°</strong>, rumbo final 124,0°; loxodrómica 71,7 NM a 123,6°. En un tramo tan corto (&lt; 100 NM), el círculo máximo y la loxodrómica difieren en menos de 1 NM.</li>
+<li>BRA (DVOR de Madrid Barajas, 40,4691N 3,5575W) a BCN (DVOR de Barcelona, 41,3071N 2,1078E): distancia ortodrómica, rumbos inicial y final, y comprobación del recíproco. → <strong>262,0 NM</strong>, inicial <strong>077,1°</strong>, final <strong>080,8°</strong>; el recíproco del rumbo inicial BRA→BCN es 257,1°, pero el rumbo de vuelta real desde BCN es 260,8° (= final 080,8° + 180°): una <strong>diferencia de 3,7° causada por la convergencia de meridianos</strong> (Δλ = 5,665° x sen(latitud media 40,89°) = 3,71°, en coincidencia con la fórmula del círculo máximo).</li>
+<li>STG (DVOR de Santiago, 42,9269N 8,4254W) a BCN: distancia ortodrómica y rumbo. → <strong>478,7 NM</strong>, inicial <strong>098,1°</strong>, final <strong>105,2°</strong>.</li>
+<li>TFS (DVOR de Tenerife Sur, 28,0024N 16,6879W) a BRA (Madrid): distancia ortodrómica. → <strong>990,2 NM</strong> (círculo máximo) frente a <strong>990,9 NM</strong> (loxodrómica): los vuelos entre la península y Canarias ahorran solo unas 0,7 NM al volar el círculo máximo, porque la ruta discurre casi de este a oeste a baja latitud.</li>
+<li>PMI (NDB de Palma de Mallorca, 39,5994N 2,8212E) a BRA (Madrid): distancia y rumbo. → <strong>297,8 NM</strong>, rumbo inicial <strong>282,1°</strong> (oeste-noroeste).</li>
+<li>VES (DVOR de Asturias, 43,5571N 6,0071W) a MGA (VOR de Málaga, 36,8143N 4,3696W): una ruta casi meridiana. → <strong>411,7 NM</strong>, inicial <strong>169,0°</strong>, final <strong>170,0°</strong>: como la ruta discurre casi de norte a sur, el círculo máximo y la loxodrómica casi coinciden (la loxodrómica también da 411,7 NM), lo que confirma la regla de que ambas navegaciones coinciden en los meridianos.</li>
+<li>VGO (DVOR de Vigo, 42,3213N 8,6016W) a BCN: distancia y ambos rumbos. → <strong>482,8 NM</strong>, inicial <strong>093,6°</strong>, final <strong>100,8°</strong>.</li>
+<li>Convierte la distancia ortodrómica del ej. 13 a kilómetros y a pies. → 262,0 NM x 1,852 = <strong>485,2 km</strong>; en pies, 262,0 x 6076,115 = 1 592 000 ft.</li>
+<li>Ejercicio de rumbos recíprocos: ¿cuál es el recíproco de los rumbos 075°, 300°, 010°? → <strong>255°, 120°, 190°</strong> (súmense 180° si el rumbo es &lt; 180°, réstense 180° si es ≥ 180°).</li>
+</ol>
+<p><strong>Convergencia y cónica conforme de Lambert</strong></p>
+<ol start="21">
+<li>Constante del cono n para la hoja peninsular de la carta OACI 1:500 000 española (paralelos estándar 37°N/42°N). → n = ln(cos 37°/cos 42°) / ln[tan(45°+21°)/tan(45°+18,5°)] = <strong>0,6363</strong> (muy próxima a sen 39,5° = 0,6361, la aproximación habitual).</li>
+<li>Lo mismo para la hoja de Canarias (24°N/29°N). → n = <strong>0,4463</strong>.</li>
+<li>Factor de escala local en la carta LCC peninsular a 39,5° (latitud media) y en los paralelos estándar. → k(37°) = k(42°) = <strong>1,0000</strong>; k(39,5°) = <strong>0,99905</strong> (un 0,095 % pequeño, el mínimo); k(35°) = 1,00209; k(44°) = 1,00219; confirma «exacta en los paralelos estándar, algo pequeña entre ellos, grande fuera».</li>
+<li>Convergencia de meridianos en la carta LCC peninsular entre dos meridianos separados 10°. → n x Δλ = 0,6363 x 10° = <strong>6,36°</strong>.</li>
+<li>Con n = 0,6363, calcula la convergencia en la carta entre BRA y BCN (Δλ = 5,665°, ej. 13) y compárala con la diferencia de rumbos verdaderos hallada allí. → en la carta: 0,6363 x 5,665° = <strong>3,61°</strong>; la diferencia verdadera hallada geométricamente en el ej. 13 fue 3,71°: la aproximación de convergencia constante de la carta LCC queda a menos de <strong>0,1°</strong> del valor esférico exacto para esta ruta de 262 NM.</li>
+</ol>
+<p><strong>Mercator y escala</strong></p>
+<ol start="26">
+<li>Factor de escala de Mercator (secante de la latitud) a 0°, 30°, 45°, 60°, 75°. → <strong>1,000, 1,155, 1,414, 2,000, 3,864</strong>: a 60° un mapa Mercator ya es el doble de grande; por eso Mercator no es adecuada para cartas aeronáuticas de latitudes altas.</li>
+<li>En una carta 1:500 000, ¿cuántos milímetros representan 1 NM? ¿Y en 1:1 250 000 (ATCSMAC)? → 1 852 000 mm / 500 000 = <strong>3,704 mm</strong>; 1 852 000 / 1 250 000 = <strong>1,482 mm</strong>.</li>
+<li>Una distancia mide 8,2 cm en una carta y se sabe que son 30 NM en el terreno. ¿Cuál es la escala de la carta? → 30 NM = 55 560 m = 5 556 000 cm; escala = 5 556 000 / 8,2 ≈ 1:<strong>677 561</strong>, es decir, cerca del límite superior de 1:750 000 de las IAC.</li>
+<li>AOC Tipo A: se dibuja un obstáculo de 30 m en una carta de escala horizontal 1:20 000. ¿Qué escala vertical y qué altura dibujada da la regla «vertical = 10 x horizontal»? → escala vertical 1:2000; altura dibujada = 30 000 mm / 2000 = <strong>15,0 mm</strong>.</li>
+<li>PATC: un accidente del terreno de 10 m de altura, escala vertical 1:500. ¿Altura dibujada? → 10 000 mm / 500 = <strong>20,0 mm</strong> (casi 5 veces más alto que el ejemplo del AOC A, lo que ilustra por qué la PATC exagera el relieve del terreno para la planificación de CAT II/III).</li>
+</ol>
+<p><strong>UTM y MTN50</strong></p>
+<ol start="31">
+<li>¿Qué huso UTM y qué meridiano central cubren Madrid (40,41°N, 3,69°W)? → huso = floor((-3,69+180)/6)+1 = <strong>huso 30</strong>, meridiano central <strong>3°W</strong>, en coincidencia con el art. 5 del RD 1071/2007 (UTM para escalas mayores que 1:500 000).</li>
+<li>Calcula el este/norte UTM aproximado del DVOR de Madrid Barajas (40,4691°N, 3,5575°W) con la serie de Krüger (k0 = 0,9996, elipsoide GRS80/WGS-84). → <strong>huso 30, E ≈ 441 658 m, N ≈ 4 473 315 m</strong> (cálculo propio, contrastado con una fórmula cerrada del arco de meridiano para la componente a lo largo del meridiano, con acuerdo dentro de 2 km, es decir, dentro del efecto esperable del desfase de 0,03° de longitud respecto del meridiano central).</li>
+<li>La hoja 559 del MTN50 tiene columna-fila 19-22. Con la fórmula del Anexo del RD 1071/2007 (origen -9°51'15" / 44°00'00"), halla sus esquinas SE y NO. → SE = (-9°51'15" + 19/3°, 44° - 22/6°) = <strong>-3° 31' 15", 40° 20' 00"</strong>; NO = SE + (-20', +10') = <strong>-3° 51' 15", 40° 30' 00"</strong>, en coincidencia exacta con el ejemplo resuelto del propio RD.</li>
+<li>¿Cuántas hojas 1:25 000 caben en una hoja MTN50 (1:50 000) y qué tamaño tienen? → la hoja MTN50 es de 10' x 20'; una hoja 1:25 000 es de 5' x 10' → <strong>4 hojas</strong> (2 x 2), según el art. 6.2 del RD.</li>
+</ol>
+<p><strong>AIRAC y unidades</strong></p>
+<ol start="35">
+<li>Hoy es 24 de septiembre de 2026. Con la tabla AIRAC (ciclo de 28 días, todas las fechas en jueves), halla las tres próximas fechas de efectividad y sus fechas de publicación (42 días antes) y de preaviso de 56 días. → próximas fechas de efectividad <strong>1 oct 2026, 29 oct 2026, 26 nov 2026</strong>; fechas de publicación (efectividad - 42 días) <strong>20 ago, 17 sep, 15 oct 2026</strong>; fechas de preaviso de 56 días <strong>6 ago, 3 sep, 1 oct 2026</strong>, todas coherentes con la tabla impresa del AIP.</li>
+<li>Se emite un Trigger NOTAM para la AMDT AIRAC efectiva el 26 de noviembre de 2026. ¿Hasta qué fecha sigue vigente (14 días después de la fecha de efectividad)? → <strong>10 dic 2026</strong>.</li>
+</ol>
+<hr />
+<h2 id="14-trampas-de-examen-confusiones-tipicas">14. Trampas de examen (confusiones típicas)</h2>
+<ul>
+<li><strong>«Escala mayor» es un denominador menor.</strong> Una carta 1:250 000 es de escala <em>mayor</em> que una 1:2 000 000, aunque 250 000 &lt; 2 000 000; no hay que leer «mayor» como «número más grande».</li>
+<li><strong>El «perímetro» de la Tierra del manual (40 076 km) es la circunferencia ecuatorial del elipsoide (2πa), no la circunferencia de círculo máximo de la esfera media (2π x 6371 km = 40 030 km).</strong> Ambas cifras son correctas para su propio modelo; no deben mezclarse en un mismo cálculo.</li>
+<li><strong>El WGS-84 usa el polo/meridiano definido por el BIH en el texto de 2002 del manual de la OACI, pero el manual (2024) nombra al IERS</strong>, que absorbió las funciones del BIH en 1988; ambos nombres describen en esencia la misma referencia moderna, por lo que cualquiera de los dos puede aparecer en una pregunta.</li>
+<li><strong>GM tiene dos valores oficiales</strong> (398 600,5 km³/s² en el Doc 9674 de la OACI de 2002 frente a 3986004,418 x 10^8 m³/s² en NIMA TR8350.2 y en el manual de ENAIRE de 2024): si una pregunta cita uno exactamente, no hay que «corregirlo» con el otro.</li>
+<li><strong>El ETRS89/REGCAN95 son el sistema geodésico <em>oficial</em> de España (RD 1071/2007), pero <em>no son válidos</em> de forma expresa para publicar coordenadas del AIP (AIP GEN 2.1)</strong>: son dos afirmaciones distintas y no contradictorias sobre dos finalidades distintas (cartografía nacional frente a publicación AIS); una lectura descuidada las convierte en una falsa contradicción.</li>
+<li><strong>Recíproco de un círculo máximo ≠ rumbo inicial + 180°.</strong> Solo los rumbos loxodrómicos tienen un recíproco exacto a 180°; los rumbos ortodrómicos difieren en la convergencia de meridianos (ejercicio 13).</li>
+<li><strong>La MEA garantiza tanto el franqueamiento de obstáculos COMO la recepción de la señal; la MOCA garantiza el franqueamiento de obstáculos, pero la recepción de la señal solo dentro de 22 NM de un VOR (regla de la FAA)</strong>: no son términos intercambiables de «altitud mínima».</li>
+<li><strong>La MSA da 1000 ft de franqueamiento de obstáculos pero NO garantiza la señal de navegación</strong>, y es una altitud de <em>emergencia</em> con un radio normal de 25 NM (ampliable a 30 NM) alrededor de la radioayuda/punto de recorrido/aeropuerto principal del procedimiento; no es una altitud general de operación.</li>
+<li><strong>La distancia de agrupación de obstáculos crece a medida que crece la escala (el área de mapa abarcada)</strong>, es decir, las cartas de denominador pequeño (escala grande, detalladas) agrupan estrechamente (1 NM) y las de escala muy pequeña (área amplia) agrupan con más holgura (3 NM); hay que leer con cuidado la redacción del AIP (sección 9.3).</li>
+<li><strong>La carta OACI 1:500 000 la vende España, pero no forma parte del AIP; la carta en ruta figura en el AIP solo como referencia al servicio electrónico Insignia.</strong></li>
+<li><strong>La lista de cartas «obligatorias» del Anexo 4 (a través del Doc 8697, según la resume el manual) incluye la WAC 1:1 000 000, pero España no la elabora</strong> (AIP GEN 1.7); «obligatoria en el Anexo 4» no equivale a «publicada por todos los Estados».</li>
+<li><strong>Mnemotecnia del signo de la declinación:</strong> el este es positivo (el norte magnético queda a la derecha del observador cuando mira al norte geográfico); «<em>East is least, West is best</em>» se aplica al pasar de <strong>geográfico a magnético</strong> (se resta el este, se suma el oeste); al convertir de compás/magnético de vuelta a geográfico se aplica la convención de signo opuesta.</li>
+<li><strong>Línea isógona = igual declinación; línea agónica = declinación CERO</strong> (no «sin error» en general: el desvío es un error distinto y propio de cada aeronave).</li>
+<li><strong>Una proyección conforme no puede ser además equivalente</strong>, y ninguna proyección puede mostrar a la vez como rectas exactas los círculos máximos y las loxodrómicas (Lambert solo aproxima el círculo máximo por una recta).</li>
+</ul>
+<hr />
+<h2 id="15-imprescindible-memorizar">15. Imprescindible memorizar</h2>
+<ul>
+<li>Elipsoide: a = <strong>6 378 137 m</strong>; f = <strong>1/298,257223563</strong>; b = 6 356 752,3 m; e² = 0,0066944. Origen = centro de masas de la Tierra; Z = polo CTP/IERS; X = meridiano de Greenwich ∩ ecuador; Y = 90° al este de X.</li>
+<li>Las realizaciones llevan una <strong>época</strong>; el AIP España cita actualmente la <strong>G2139 (≈ ITRF2014)</strong>. El ETRS89 se aleja del WGS-84 unos <strong>2,4 cm/año</strong> hacia el noreste.</li>
+<li>España: <strong>ETRS89</strong> (península + Baleares) / <strong>REGCAN95</strong> (Canarias), elipsoide <strong>GRS80</strong>, red <strong>REGENTE</strong>; oficial por el <strong>RD 1071/2007 (27 de julio, BOE 29 de agosto de 2007)</strong>; <strong>no válido para las coordenadas del AIP</strong>, que usan <strong>WGS-84 + época</strong>. Datum vertical: nivel medio del mar en <strong>Alicante</strong>; red <strong>REDNAP</strong>; geoide <strong>EGM08-REDNAP</strong>, ondulación <strong>≈ 50 m</strong>.</li>
+<li>h = H + N (elipsoidal = ortométrica + ondulación).</li>
+<li><strong>1 NM = 1852 m exactos</strong>; 1' de latitud ≈ 1 NM (de 1842,9 m en el ecuador a 1861,6 m en el polo); 1° de longitud = 60 cos φ NM.</li>
+<li><strong>Cónica conforme de Lambert</strong>: cono secante, dos paralelos estándar, conforme, recta ≈ círculo máximo; usada en casi todas las cartas del AIP España (área, SID, STAR, CDA, TRAN, IAC, ATCSMAC, VPT, VAC, 1:500 000). RD 1071/2007: LCC para mapas terrestres ≤ 1:500 000; <strong>UTM/Mercator transversa</strong> para escalas mayores que 1:500 000; <strong>Mercator</strong> para cartas náuticas.</li>
+<li>Paralelos estándar de la carta OACI 1:500 000: <strong>37°N/42°N</strong> (península), <strong>24°N/29°N</strong> (Canarias); 7 hojas.</li>
+<li>Agrupación de obstáculos: <strong>1 NM / 2 NM / 3 NM</strong> según la franja de escala (sección 9.3), para obstáculos <strong>&gt; 100 m</strong>.</li>
+<li>AIRAC: <strong>ciclo de 28 días</strong>; publicación <strong>42 días</strong> antes, es decir, <strong>28 días</strong> de preaviso; cambios importantes <strong>56 días</strong> antes; <strong>series NOTAM A/B/D/E/F/G/P/R</strong>; el Trigger NOTAM es válido <strong>14 días</strong> después de la fecha de efectividad.</li>
+<li>Integridad de los datos: <strong>críticos 10⁻⁸, esenciales 10⁻⁵, ordinarios 10⁻³</strong>; exactitud al <strong>95 % (2σ)</strong>; CEP = 1,1774σ.</li>
+<li>WMM: válido <strong>2025,0-2030,0</strong>, actualizado cada <strong>5 años</strong>, armónicos esféricos hasta <strong>grado/orden 12</strong>.</li>
+</ul>
+<hr />
+<h2 id="16-glosario-es-en">16. Glosario (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geodesia</td>
+<td>geodesy</td>
+</tr>
+<tr>
+<td>geoide / ondulación del geoide</td>
+<td>geoid / geoid undulation</td>
+</tr>
+<tr>
+<td>elipsoide de referencia / elipsoide de revolución</td>
+<td>reference ellipsoid / ellipsoid of revolution</td>
+</tr>
+<tr>
+<td>achatamiento</td>
+<td>flattening</td>
+</tr>
+<tr>
+<td>semieje mayor / semieje menor</td>
+<td>semi-major axis / semi-minor axis</td>
+</tr>
+<tr>
+<td>excentricidad</td>
+<td>eccentricity</td>
+</tr>
+<tr>
+<td>altura elipsoidal / altura ortométrica</td>
+<td>ellipsoidal height / orthometric height</td>
+</tr>
+<tr>
+<td>sistema de referencia geodésico / marco de referencia</td>
+<td>geodetic reference system / reference frame</td>
+</tr>
+<tr>
+<td>datum geodésico</td>
+<td>geodetic datum</td>
+</tr>
+<tr>
+<td>Sistema Terrestre Convencional / polo</td>
+<td>Conventional Terrestrial System / pole</td>
+</tr>
+<tr>
+<td>centro de masas de la Tierra</td>
+<td>centre of mass of the Earth</td>
+</tr>
+<tr>
+<td>círculo máximo / círculo menor</td>
+<td>great circle / small circle</td>
+</tr>
+<tr>
+<td>meridiano / paralelo / ecuador</td>
+<td>meridian / parallel / equator</td>
+</tr>
+<tr>
+<td>trópico / círculo polar</td>
+<td>tropic / polar circle</td>
+</tr>
+<tr>
+<td>rotación / traslación / precesión / nutación</td>
+<td>rotation / translation / precession / nutation</td>
+</tr>
+<tr>
+<td>eclíptica / afelio / perihelio</td>
+<td>ecliptic / aphelion / perihelion</td>
+</tr>
+<tr>
+<td>solsticio / equinoccio</td>
+<td>solstice / equinox</td>
+</tr>
+<tr>
+<td>latitud / longitud</td>
+<td>latitude / longitude</td>
+</tr>
+<tr>
+<td>milla náutica</td>
+<td>nautical mile</td>
+</tr>
+<tr>
+<td>ruta loxodrómica / loxodroma</td>
+<td>rhumb line / loxodrome</td>
+</tr>
+<tr>
+<td>ruta ortodrómica / ortodroma</td>
+<td>great circle route / orthodrome</td>
+</tr>
+<tr>
+<td>apartamiento</td>
+<td>departure (E-W distance)</td>
+</tr>
+<tr>
+<td>convergencia de meridianos / grivación</td>
+<td>convergence of meridians / grivation</td>
+</tr>
+<tr>
+<td>rumbo inicial / rumbo final / rumbo recíproco</td>
+<td>initial course / final course / reciprocal course</td>
+</tr>
+<tr>
+<td>vértice</td>
+<td>vertex (of a great circle)</td>
+</tr>
+<tr>
+<td>proyección conforme / equivalente / equidistante / afiláctica</td>
+<td>conformal / equal-area / equidistant / aphylactic projection</td>
+</tr>
+<tr>
+<td>proyección de Mercator / Mercator transversa</td>
+<td>Mercator projection / transverse Mercator</td>
+</tr>
+<tr>
+<td>proyección cónica conforme de Lambert</td>
+<td>Lambert conformal conic projection</td>
+</tr>
+<tr>
+<td>paralelo estándar (automecoico) / constante del cono</td>
+<td>standard parallel / cone constant</td>
+</tr>
+<tr>
+<td>proyección estereográfica / gnomónica / ortográfica</td>
+<td>stereographic / gnomonic / orthographic projection</td>
+</tr>
+<tr>
+<td>tangente / secante</td>
+<td>tangent / secant (cone, cylinder)</td>
+</tr>
+<tr>
+<td>escala numérica / escala gráfica</td>
+<td>numerical scale / graphic scale</td>
+</tr>
+<tr>
+<td>curva de nivel (isohipsa) / equidistancia</td>
+<td>contour line / equidistance</td>
+</tr>
+<tr>
+<td>sistema de planos acotados</td>
+<td>spot-height system</td>
+</tr>
+<tr>
+<td>variación / declinación magnética</td>
+<td>magnetic variation / declination</td>
+</tr>
+<tr>
+<td>línea isógona / línea agónica</td>
+<td>isogonic line / agonic line</td>
+</tr>
+<tr>
+<td>desvío / error de compás</td>
+<td>deviation / compass error</td>
+</tr>
+<tr>
+<td>rumbo geográfico (verdadero) / magnético / de compás</td>
+<td>true / magnetic / compass heading</td>
+</tr>
+<tr>
+<td>deriva / derrota</td>
+<td>drift / track made good</td>
+</tr>
+<tr>
+<td>Modelo Magnético Mundial (WMM)</td>
+<td>World Magnetic Model</td>
+</tr>
+<tr>
+<td>carta aeronáutica</td>
+<td>aeronautical chart</td>
+</tr>
+<tr>
+<td>Plano de aeródromo/helipuerto</td>
+<td>Aerodrome/Heliport Chart</td>
+</tr>
+<tr>
+<td>Plano de movimientos en tierra</td>
+<td>Ground Movement Chart</td>
+</tr>
+<tr>
+<td>Plano de estacionamiento y atraque</td>
+<td>Parking/Docking Chart</td>
+</tr>
+<tr>
+<td>Plano de obstáculos de aeródromo Tipo A</td>
+<td>Aerodrome Obstacle Chart Type A</td>
+</tr>
+<tr>
+<td>Carta topográfica para aproximaciones de precisión</td>
+<td>Precision Approach Terrain Chart</td>
+</tr>
+<tr>
+<td>Salida / llegada normalizada por instrumentos (SID/STAR)</td>
+<td>Standard Instrument Departure / Arrival (SID/STAR)</td>
+</tr>
+<tr>
+<td>Carta de aproximación por instrumentos</td>
+<td>Instrument Approach Chart</td>
+</tr>
+<tr>
+<td>Carta de aproximación visual</td>
+<td>Visual Approach Chart</td>
+</tr>
+<tr>
+<td>Carta de altitud mínima de vigilancia ATC</td>
+<td>ATC Surveillance Minimum Altitude Chart</td>
+</tr>
+<tr>
+<td>altitud mínima en ruta / de franqueamiento de obstáculos / de sector / de guía vectorial</td>
+<td>minimum en-route / obstacle clearance / sector / vectoring altitude</td>
+</tr>
+<tr>
+<td>simbología</td>
+<td>symbology</td>
+</tr>
+<tr>
+<td>época</td>
+<td>epoch</td>
+</tr>
+<tr>
+<td>ciclo AIRAC</td>
+<td>AIRAC cycle</td>
+</tr>
+<tr>
+<td>Publicación / Circular de Información Aeronáutica</td>
+<td>Aeronautical Information Publication / Circular</td>
+</tr>
+<tr>
+<td>integridad / exactitud / resolución de los datos aeronáuticos</td>
+<td>aeronautical data integrity / accuracy / resolution</td>
+</tr>
+<tr>
+<td>cuadrícula Universal Transversa Mercator</td>
+<td>Universal Transverse Mercator (UTM) grid</td>
+</tr>
+<tr>
+<td>Mapa Topográfico Nacional</td>
+<td>National Topographic Map (MTN50)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="17-fuentes">17. Fuentes</h2>
+<ul>
+<li><strong>MAN</strong>: ENAIRE, manual oficial «4. Cartografía» (noviembre de 2024, 66 páginas).</li>
+<li><strong>D9674</strong>: OACI, Doc 9674, Manual del WGS-84, 2.ª ed. (2002) — capítulos 1-4, Apéndice B «Principios de geodesia» y Apéndice F «Proyecciones cartográficas».</li>
+<li><strong>A21</strong>: AIP España GEN 2.1.</li>
+<li><strong>A22</strong>: AIP España GEN 2.2 (abreviaturas).</li>
+<li><strong>A23</strong>: AIP España GEN 2.3 (símbolos de las cartas).</li>
+<li><strong>A31</strong>: AIP España GEN 3.1 (AIS, AIRAC, NOTAM).</li>
+<li><strong>A32</strong>: AIP España GEN 3.2 (cartas aeronáuticas).</li>
+<li><strong>A17</strong>: AIP España GEN 1.7 (diferencias con la OACI).</li>
+<li><strong>E41</strong>: AIP España ENR 4.1 (radioayudas en ruta).</li>
+<li><strong>E60</strong>: AIP España ENR 6.0 (índice de cartas en ruta).</li>
+<li><strong>RD</strong>: Real Decreto 1071/2007, de 27 de julio (BOE-A-2007-15822).</li>
+<li><strong>NIMA</strong>: NIMA TR8350.2, 3.ª ed. (1997), más adenda.</li>
+<li><strong>ECG</strong>: EUROCONTROL, <em>Coordinate Reference Systems Basic User Guide</em>, ed. 1.0 (19 de diciembre de 2024).</li>
+<li><strong>EGM</strong>: Grupo de Enfoque para la Armonización de Cartas de EUROCONTROL/OACI, <em>Guidance Material for Aeronautical Chart ICAO 1:500 000</em>, v1.6 (14 de noviembre de 2011).</li>
+<li><strong>BOW</strong>: Bowditch, <em>American Practical Navigator</em>, vol. 1, ed. de 2017 — capítulos 4 («Nautical Charts»), 8-9 («Compasses»/«Dead Reckoning»), 12 («The Sailings»).</li>
+<li><strong>USGS</strong>: USGS Professional Paper 1395, Snyder, <em>Map Projections - A Working Manual</em> — secciones de Mercator, Mercator transversa/UTM y cónica conforme de Lambert.</li>
+<li><strong>PHAK</strong>: FAA-H-8083-25B, <em>Pilot's Handbook of Aeronautical Knowledge</em>, capítulo 16 (navegación).</li>
+<li><strong>IPH</strong>: FAA-H-8083-16B, <em>Instrument Procedures Handbook</em>, capítulo 2 (definiciones de altitud MEA/MOCA/MRA/MAA/MCA/MVA/MSA/OROCA).</li>
+<li><strong>FAA-CUG</strong>: FAA, <em>Aeronautical Chart User's Guide</em>, ed. del 22 de enero de 2026 — secciones de MSA y de leyenda.</li>
+<li><strong>WMM</strong>: NOAA/BGS, <em>World Magnetic Model 2025 Technical Report</em> — introducción, apartados 1.1-1.1.3, 1.8.</li>
+<li>También se consultaron para contraste: EUROCONTROL WGS 84 Implementation Manual v2.4, EUROCONTROL Terrain and Obstacle Data Manual v2.1, e IGN, «GDS Teoría de Geodesia».</li>
+</ul>
+<p>Este archivo amplía la guía fiel al manual (OM04) con fuentes primarias: constantes exactas del WGS-84/NIMA, texto legal del RD 1071/2007, la tabla completa de cartas, escalas y proyecciones del AIP GEN 3.2, la regla de agrupación de obstáculos, las definiciones MSA/MEA/MOCA/MVA, la geometría UTM y MTN50, la aritmética AIRAC, las clases de integridad de los datos y 36 ejercicios numéricos resueltos.</p></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,1543 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Aerodinámica y mecánica del vuelo</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Aerodinámica y mecánica del vuelo</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-acronimos-p-3">1. Acrónimos (p. 3)</a></li>
+<li><a href="#2-introduccion-p-3">2. Introducción (p. 3)</a></li>
+<li><a href="#3-principios-basicos-pp-3-7">3. Principios básicos (pp. 3-7)</a><ul>
+<li><a href="#31-teorema-de-bernoulli-pp-3-4">3.1 Teorema de Bernoulli (pp. 3-4)</a></li>
+<li><a href="#32-la-atmosfera-estandar-internacional-isa-pp-4-5">3.2 La Atmósfera Estándar Internacional (ISA) (pp. 4-5)</a></li>
+<li><a href="#33-altitud-de-presion-pp-5-6">3.3 Altitud de presión (pp. 5-6)</a></li>
+<li><a href="#34-altitud-densidad-p-6">3.4 Altitud densidad (p. 6)</a></li>
+<li><a href="#35-velocidades-pp-6-7">3.5 Velocidades (pp. 6-7)</a></li>
+</ul>
+</li>
+<li><a href="#4-fuerzas-aerodinamicas-pp-7-9">4. Fuerzas aerodinámicas (pp. 7-9)</a><ul>
+<li><a href="#41-peso-p-8">4.1 Peso (p. 8)</a></li>
+<li><a href="#42-resistencia-p-8">4.2 Resistencia (p. 8)</a></li>
+<li><a href="#43-empuje-p-9">4.3 Empuje (p. 9)</a></li>
+</ul>
+</li>
+<li><a href="#5-torbellinovortice-de-punta-de-ala-pp-9-12">5. Torbellino/vórtice de punta de ala (pp. 9-12)</a><ul>
+<li><a href="#51-efecto-suelo-pp-11-12">5.1 Efecto suelo (pp. 11-12)</a></li>
+</ul>
+</li>
+<li><a href="#6-factor-de-carga-p-12">6. Factor de carga (p. 12)</a></li>
+<li><a href="#7-entrada-en-perdida-de-perfiles-pp-13-14">7. Entrada en pérdida de perfiles (pp. 13-14)</a><ul>
+<li><a href="#71-coffin-corner-pp-13-14">7.1 Coffin corner (pp. 13-14)</a></li>
+</ul>
+</li>
+<li><a href="#8-el-ala-pp-14-16">8. El ala (pp. 14-16)</a></li>
+<li><a href="#9-ejes-pp-16-17">9. Ejes (pp. 16-17)</a></li>
+<li><a href="#10-mandos-de-vuelo-pp-18-19">10. Mandos de vuelo (pp. 18-19)</a></li>
+<li><a href="#11-actuaciones-en-despegue-y-aterrizaje-pp-19-23">11. Actuaciones en despegue y aterrizaje (pp. 19-23)</a><ul>
+<li><a href="#111-despegue-pp-20-21">11.1 Despegue (pp. 20-21)</a></li>
+<li><a href="#112-requerimientos-de-pista-pp-21-22">11.2 Requerimientos de pista (pp. 21-22)</a></li>
+<li><a href="#113-aterrizaje-pp-22-23">11.3 Aterrizaje (pp. 22-23)</a></li>
+<li><a href="#114-requisitos-de-aterrizaje-p-23">11.4 Requisitos de aterrizaje (p. 23)</a></li>
+<li><a href="#115-hidroplaneo-p-23">11.5 Hidroplaneo (p. 23)</a></li>
+</ul>
+</li>
+<li><a href="#manual-frente-a-fuentes-primarias-contradicciones-y-diferencias-que-conviene-registrar">Manual frente a fuentes primarias (contradicciones y diferencias que conviene registrar)</a></li>
+<li><a href="#trampas-de-examen">Trampas de examen</a></li>
+<li><a href="#imprescindible-memorizar">Imprescindible memorizar</a></li>
+<li><a href="#glosario-es-en">Glosario (ES -&gt; EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">41 min de lectura</div><h1 id="om09-guia-de-estudio-del-tema-9-fiel-al-manual-oficial-de-enaire-aerodinamica-y-mecanica-de-vuelo-elaborado-agosto-2023-23-pp">Guía: Aerodinámica y mecánica del vuelo</h1>
+<p>Fuente de todo lo que sigue, salvo indicación en contrario: el manual oficial de ENAIRE «Aerodinámica y Mecánica de Vuelo». Las fórmulas y la tabla ISA existen solo como imágenes en el PDF (páginas 3-8, 11-13, 16, 18, 20-23). Las páginas «p.» son las del propio manual.</p>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El tema 9 del Anexo I es «Aerodinámica y mecánica de vuelo». El manual oficial es el más corto de los nueve (5 750 palabras en español, 23 páginas, fechado en agosto de 2023, el más antiguo del conjunto). Es un resumen clásico de escuela de pilotos, dirigido a controladores: Bernoulli, la Atmósfera Estándar Internacional (ISA) con una tabla numérica, altitud de presión y altitud densidad, las cinco velocidades (TAS, IAS, CAS, EAS, GS) y el Mach, las cuatro fuerzas con las fórmulas de sustentación y resistencia, los torbellinos de punta de ala y el efecto suelo, el factor de carga en los virajes, la pérdida y el «coffin corner», la geometría del ala (cuerda, envergadura, alargamiento, flecha, diedro, ángulo de ataque), los tres ejes y los mandos de vuelo, y las actuaciones en despegue y aterrizaje (velocidades V, las tres distancias de despegue, stopway y clearway, peso de aterrizaje, hidroplaneo). Casi todo es definición o memorización (una fórmula por tema, una lista por tema). Por eso las preguntas de examen probablemente evalúan: la redacción exacta de una definición, una fórmula, un umbral (35 ft, 400 ft, 50 ft, 1,3, 1,15, 1,05, 7 %, 250 kt, 36 000 ft, 80 000 ft), la correspondencia eje-movimiento-mando y la diferencia entre términos parecidos (VMCG/VMCA, stopway/clearway, TAS/CAS/EAS).</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual</th>
+<th>Páginas</th>
+<th>Sección de la guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Acrónimos</td>
+<td>3</td>
+<td>§1</td>
+</tr>
+<tr>
+<td>2 Introducción</td>
+<td>3</td>
+<td>§2</td>
+</tr>
+<tr>
+<td>3.1 Teorema de Bernoulli</td>
+<td>3-4</td>
+<td>§3.1</td>
+</tr>
+<tr>
+<td>3.2 Atmósfera Estándar Internacional (ISA) + tabla numérica</td>
+<td>4-5</td>
+<td>§3.2</td>
+</tr>
+<tr>
+<td>3.3 Altitud de presión</td>
+<td>5-6</td>
+<td>§3.3</td>
+</tr>
+<tr>
+<td>3.4 Altitud densidad</td>
+<td>6</td>
+<td>§3.4</td>
+</tr>
+<tr>
+<td>3.5 Velocidades (TAS, IAS, CAS, EAS, GS, Mach) y 3.5.1 errores de anemómetro</td>
+<td>6-7</td>
+<td>§3.5</td>
+</tr>
+<tr>
+<td>4 Fuerzas aerodinámicas (fórmula de sustentación) + 4.1 Peso, 4.2 Resistencia, 4.3 Empuje</td>
+<td>7-9</td>
+<td>§4</td>
+</tr>
+<tr>
+<td>5 Torbellino/vórtice de punta de ala + 5.1 Efecto suelo</td>
+<td>9-12</td>
+<td>§5</td>
+</tr>
+<tr>
+<td>6 Factor de carga</td>
+<td>12</td>
+<td>§6</td>
+</tr>
+<tr>
+<td>7 Entrada en pérdida de perfiles + 7.1 Coffin corner</td>
+<td>13-14</td>
+<td>§7</td>
+</tr>
+<tr>
+<td>8 El ala (geometría)</td>
+<td>14-16</td>
+<td>§8</td>
+</tr>
+<tr>
+<td>9 Ejes</td>
+<td>16-17</td>
+<td>§9</td>
+</tr>
+<tr>
+<td>10 Mandos de vuelo</td>
+<td>18-19</td>
+<td>§10</td>
+</tr>
+<tr>
+<td>11 Actuaciones en despegue y aterrizaje: 11.1 velocidades de despegue, 11.2 requerimientos de pista (+ 11.2.1 stopway, clearway), 11.3 velocidades de aterrizaje, 11.4 requisitos de aterrizaje, 11.5 hidroplaneo</td>
+<td>19-23</td>
+<td>§11</td>
+</tr>
+</tbody>
+</table>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Acrónimos · 2. Introducción · 3. Principios básicos (Bernoulli, ISA, altitud de presión, altitud densidad, velocidades) · 4. Fuerzas aerodinámicas · 5. Torbellinos de punta de ala y efecto suelo · 6. Factor de carga · 7. Pérdida y coffin corner · 8. El ala · 9. Ejes · 10. Mandos de vuelo · 11. Actuaciones en despegue y aterrizaje · Manual frente a fuentes primarias · Trampas de examen · Imprescindible memorizar · Glosario · Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-acronimos-p-3">1. Acrónimos (p. 3)</h2>
+<p>El manual enumera exactamente estas diez abreviaturas, en este orden:</p>
+<table>
+<thead>
+<tr>
+<th>Acrónimo</th>
+<th>Significado (manual)</th>
+<th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASI</td>
+<td>Air Speed Indicator</td>
+<td>anemómetro / indicador de velocidad</td>
+</tr>
+<tr>
+<td>CAS</td>
+<td>Calibrated Airspeed</td>
+<td>velocidad calibrada</td>
+</tr>
+<tr>
+<td>EAS</td>
+<td>Equivalent Airspeed</td>
+<td>velocidad equivalente</td>
+</tr>
+<tr>
+<td>GS</td>
+<td>Ground Speed</td>
+<td>velocidad sobre el suelo</td>
+</tr>
+<tr>
+<td>IAS</td>
+<td>Indicated Airspeed</td>
+<td>velocidad indicada</td>
+</tr>
+<tr>
+<td>ISA</td>
+<td>International Standard Atmosphere</td>
+<td>Atmósfera Estándar Internacional</td>
+</tr>
+<tr>
+<td>Kts</td>
+<td>Knots</td>
+<td>nudos</td>
+</tr>
+<tr>
+<td>P</td>
+<td>Presión</td>
+<td>presión</td>
+</tr>
+<tr>
+<td>TAS</td>
+<td>True Airspeed</td>
+<td>velocidad verdadera</td>
+</tr>
+<tr>
+<td>V</td>
+<td>Velocidad</td>
+<td>velocidad</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: la lista es alfabética. V1, VR, V2, VMCG, etc. <strong>no</strong> figuran en ella, pero se definen en el capítulo 11.</p>
+<h2 id="2-introduccion-p-3">2. Introducción (p. 3)</h2>
+<ul>
+<li>La <strong>aerodinámica</strong> es «la rama de la mecánica de fluidos especializada en el cálculo de las acciones que aparecen sobre los cuerpos sólidos cuando existe un movimiento relativo entre estos y el fluido en el que se desplazan».</li>
+<li>La <strong>mecánica de vuelo</strong> es la ciencia aplicada que se ocupa del estudio del movimiento de los vehículos voladores. El manual se centra únicamente en el <strong>movimiento atmosférico de los aviones</strong>.</li>
+<li>Trampa de examen: aerodinámica = acciones sobre cuerpos que se mueven en un fluido (rama de la mecánica de fluidos); mecánica de vuelo = movimiento del vehículo (ciencia aplicada).</li>
+</ul>
+<h2 id="3-principios-basicos-pp-3-7">3. Principios básicos (pp. 3-7)</h2>
+<h3 id="31-teorema-de-bernoulli-pp-3-4">3.1 Teorema de Bernoulli (pp. 3-4)</h3>
+<ul>
+<li>Daniel Bernoulli comprobó experimentalmente que «la presión interna de un fluido (líquido o gas) decrece en la medida que la velocidad del fluido se incrementa».</li>
+<li>Dicho de otra forma, en un punto cualquiera de un fluido (líquido o gas), <strong>la suma de la presión (P) en ese punto más la mitad del producto de la densidad (ρ) por el cuadrado de la velocidad (V) es constante</strong>:</li>
+</ul>
+<p><strong>P + ½ ρ V² = k</strong></p>
+<ul>
+<li>Para que se mantenga esta constante k, si una partícula aumenta su velocidad v será a costa de disminuir su presión p, y a la inversa.</li>
+<li>Aplicación práctica: el <strong>tubo Venturi</strong>. Figura: un conducto con sección S1 (ancha) y S2 (estrecha). En S2 la velocidad es mayor (V2 &gt; V1), por lo que la presión disminuye (P2 &lt; P1), puesto que la densidad ρ es constante.</li>
+<li>Nota: en este capítulo el manual trata la densidad como constante (flujo incompresible).</li>
+</ul>
+<h3 id="32-la-atmosfera-estandar-internacional-isa-pp-4-5">3.2 La Atmósfera Estándar Internacional (ISA) (pp. 4-5)</h3>
+<ul>
+<li>La ISA es un <strong>modelo de la atmósfera terrestre</strong> que permite obtener los valores de <strong>presión, temperatura, densidad y viscosidad</strong> del aire en función de la altitud.</li>
+<li>Su función es proporcionar un <strong>marco de referencia invariante</strong> para la navegación aérea y para la realización de cálculos aerodinámicos consistentes.</li>
+<li><strong>La OACI definió la atmósfera estándar internacional como aquella que tiene 15 °C de temperatura y 1013 hectopascales de presión al nivel del mar</strong>. (El manual redondea a 1013; el valor exacto de la OACI es 1013,25 hPa, véase «Manual frente a fuentes primarias».)</li>
+<li><strong>Gradiente de temperatura:</strong> la temperatura disminuye <strong>2° cada 1000 pies de altitud (6,5 °C por km)</strong> hasta <strong>36 000 pies</strong>. <strong>Por encima de este punto, la temperatura se considera constante, -56 °C, hasta los 80 000 pies</strong>.</li>
+<li>Debido a que las performances de las aeronaves se comparan y evalúan con respecto a la atmósfera estándar, <strong>todos los instrumentos están calibrados para la atmósfera estándar</strong>.</li>
+</ul>
+<p><strong>La tabla ISA (p. 5, solo imagen).</strong> Columnas: altitud (ft), temperatura (°C), presión P (in. Hg), σ = ρ/ρ0 (densidad relativa), √σ, δ = P/P0 (presión relativa), θ = T/T0 (temperatura relativa), velocidad del sonido C (kt), viscosidad cinemática (×10⁻⁵ m²/s). El texto del manual dice «las columnas 4, 6 y 7 muestran los datos de la densidad, presión y temperatura relativa» (σ, δ, θ). Valores leídos en la imagen (ampliada):</p>
+<table>
+<thead>
+<tr>
+<th>Altitud (ft)</th>
+<th>Temp. (°C)</th>
+<th>Presión (in. Hg)</th>
+<th>σ</th>
+<th>δ</th>
+<th>θ</th>
+<th>Velocidad del sonido (kt)</th>
+<th>Viscosidad cinemática (×10⁻⁵ m²/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>15,0</td>
+<td>29,92</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>661,5</td>
+<td>1,460</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>13,0</td>
+<td>28,86</td>
+<td>,971</td>
+<td>,964</td>
+<td>,993</td>
+<td>659,5</td>
+<td>1,496</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>11,0</td>
+<td>27,82</td>
+<td>,943</td>
+<td>,929</td>
+<td>,986</td>
+<td>656,9</td>
+<td>1,532</td>
+</tr>
+<tr>
+<td>5000</td>
+<td>5,1</td>
+<td>24,90</td>
+<td>,862</td>
+<td>,832</td>
+<td>,966</td>
+<td>650,0</td>
+<td>1,649</td>
+</tr>
+<tr>
+<td>10 000</td>
+<td>-4,8</td>
+<td>20,58</td>
+<td>,738</td>
+<td>,688</td>
+<td>,931</td>
+<td>638,3</td>
+<td>1,870</td>
+</tr>
+<tr>
+<td>15 000</td>
+<td>-14,7</td>
+<td>16,89</td>
+<td>,629</td>
+<td>,564</td>
+<td>,897</td>
+<td>626,4</td>
+<td>2,130</td>
+</tr>
+<tr>
+<td>20 000</td>
+<td>-24,6</td>
+<td>13,75</td>
+<td>,533</td>
+<td>,459</td>
+<td>,862</td>
+<td>614,3</td>
+<td>2,438</td>
+</tr>
+<tr>
+<td>30 000</td>
+<td>-44,4</td>
+<td>8,88</td>
+<td>,374</td>
+<td>,297</td>
+<td>,794</td>
+<td>589,3</td>
+<td>3,244</td>
+</tr>
+<tr>
+<td>36 000</td>
+<td>-56,3</td>
+<td>6,71</td>
+<td>,298</td>
+<td>,224</td>
+<td>,752</td>
+<td>573,8</td>
+<td>3,895</td>
+</tr>
+<tr>
+<td>38 000</td>
+<td>-56,5</td>
+<td>6,10</td>
+<td>,271</td>
+<td>,204</td>
+<td>,751</td>
+<td>573,6</td>
+<td>4,282</td>
+</tr>
+<tr>
+<td>40 000</td>
+<td>-56,5</td>
+<td>5,54</td>
+<td>,246</td>
+<td>,185</td>
+<td>,751</td>
+<td>573,6</td>
+<td>4,714</td>
+</tr>
+<tr>
+<td>50 000</td>
+<td>-56,5</td>
+<td>3,42</td>
+<td>,152</td>
+<td>,114</td>
+<td>,751</td>
+<td>573,6</td>
+<td>7,623</td>
+</tr>
+<tr>
+<td>60 000</td>
+<td>-56,5</td>
+<td>2,12</td>
+<td>,094</td>
+<td>,071</td>
+<td>,751</td>
+<td>573,6</td>
+<td>12,32</td>
+</tr>
+<tr>
+<td>64 000</td>
+<td>-56,5</td>
+<td>1,75</td>
+<td>,078</td>
+<td>,058</td>
+<td>,751</td>
+<td>573,6</td>
+<td>14,94</td>
+</tr>
+</tbody>
+</table>
+<p>La tabla tiene una fila cada 1000 ft hasta 16 000 y después cada 2000 ft hasta 64 000 ft (se detiene en <strong>64 000 ft</strong>, aunque el texto habla de 80 000 ft). Pautas que conviene conocer: la temperatura baja 2 °C por cada 1000 ft hasta -56,3 °C a 36 000 ft y es de -56,5 °C desde 38 000 ft; la velocidad del sonido baja de 661,5 kt a 573,6 kt y se mantiene constante donde la temperatura es constante; la presión relativa δ es de aproximadamente 0,297 a 30 000 ft (cerca del 30 % de la presión a nivel del mar) y de 0,224 a 36 000 ft; la densidad relativa σ es de aproximadamente 0,5 a 20 000 ft (0,533).</p>
+<h3 id="33-altitud-de-presion-pp-5-6">3.3 Altitud de presión (pp. 5-6)</h3>
+<ul>
+<li><strong>Altitud de presión</strong> = la altura sobre un <strong>plano de referencia estándar</strong>, que es un nivel teórico donde «el peso de la atmósfera» es de <strong>1013 hectopascales</strong>, medido por el barómetro.</li>
+<li>Un <strong>altímetro</strong> es básicamente un barómetro sensible calibrado para indicar la altitud en la atmósfera estándar.</li>
+<li><strong>Si el altímetro está ajustado para 1013 hectopascales, la altitud indicada es la altitud de presión</strong>.</li>
+<li>A medida que la presión atmosférica cambia, el nivel de referencia puede estar <strong>por debajo, en o sobre el nivel del mar</strong>.</li>
+<li>Importancia (dos usos): (1) como <strong>base para determinar la performance del avión</strong>; (2) para la <strong>asignación de niveles de vuelo a los aviones que operan por encima de un determinado nivel (nivel de transición)</strong>.</li>
+</ul>
+<h3 id="34-altitud-densidad-p-6">3.4 Altitud densidad (p. 6)</h3>
+<ul>
+<li>La <strong>altitud de densidad</strong> es «la distancia vertical sobre el nivel del mar en la atmósfera estándar a la cual se encuentra una determinada densidad». Dicho de otro modo, es la altitud que correspondería en la ISA a una determinada densidad del aire.</li>
+<li>La densidad del aire <strong>decrece cuando la temperatura, altitud y humedad aumentan</strong>.</li>
+<li><strong>Altitud densidad alta (densidad baja) = las actuaciones de la aeronave disminuyen. Altitud densidad baja (densidad alta) = las actuaciones aumentan</strong>.</li>
+<li>La altitud densidad es el <strong>factor más importante que afecta a las actuaciones de la aeronave</strong>, pues está relacionada con (tres elementos, en el orden del manual):
+  1. La <strong>potencia del motor</strong>, debido a que el motor toma menos aire;
+  2. El <strong>empuje</strong>, porque una hélice es menos eficiente en el aire menos denso;
+  3. La <strong>capacidad de sustentación</strong>, debido a que el aire menos denso ejerce menos fuerza en las alas.</li>
+<li>Una <strong>combinación de alta temperatura, alta altitud y alta humedad hacen crítica la maniobra de despegue</strong>.</li>
+</ul>
+<h3 id="35-velocidades-pp-6-7">3.5 Velocidades (pp. 6-7)</h3>
+<p>Definiciones en el orden del manual:</p>
+<table>
+<thead>
+<tr>
+<th>Velocidad</th>
+<th>Definición del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TAS</strong> velocidad verdadera</td>
+<td>Velocidad del avión <strong>respecto al aire</strong> en el que vuela</td>
+</tr>
+<tr>
+<td><strong>IAS</strong> velocidad indicada</td>
+<td>La velocidad que <strong>marca el anemómetro (ASI)</strong>; es la velocidad <strong>sin corrección por errores del indicador, posición o compresibilidad</strong></td>
+</tr>
+<tr>
+<td><strong>CAS</strong> velocidad calibrada</td>
+<td>La <strong>IAS corregida por errores de posición y del instrumento</strong>. «CAS es igual a TAS a nivel del mar en atmósfera estándar»</td>
+</tr>
+<tr>
+<td><strong>EAS</strong> velocidad equivalente</td>
+<td>La velocidad que marca el anemómetro (ASI) <strong>una vez corregidos los errores de instrumento, posición y compresibilidad</strong>. «EAS es igual al CAS a nivel del mar en atmósfera estándar»</td>
+</tr>
+<tr>
+<td><strong>GS</strong> velocidad sobre el suelo</td>
+<td>Velocidad del avión <strong>respecto al suelo</strong>, resultado de la <strong>suma vectorial de la velocidad verdadera y la velocidad del viento</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Número de Mach:</strong> relación entre la <strong>velocidad verdadera del avión (TAS)</strong> y la <strong>velocidad del sonido (c)</strong>: <strong>M = V/c</strong> (fórmula en forma de imagen, leída visualmente).</li>
+<li>Cadena de correcciones implícita en el manual: IAS → (instrumento + posición) → CAS → (compresibilidad) → EAS; la TAS es la velocidad respecto a la masa de aire; GS = TAS + viento (vectorialmente).</li>
+</ul>
+<h4 id="351-errores-de-anemometro-p-7">3.5.1 Errores de anemómetro (p. 7)</h4>
+<p>Dos errores:</p>
+<ol>
+<li><strong>Errores de instrumento y de posición:</strong> debidos a la falta de precisión en su fabricación y a la dificultad de ubicación en un lugar donde la afectación de la <strong>presión estática</strong> sea mínima.</li>
+<li><strong>Error de compresibilidad:</strong> <strong>por encima de 250 kt</strong> la variación de la densidad es apreciable.</li>
+</ol>
+<h2 id="4-fuerzas-aerodinamicas-pp-7-9">4. Fuerzas aerodinámicas (pp. 7-9)</h2>
+<p>En un <strong>vuelo recto y nivelado</strong> hay cuatro fuerzas que nos afectan y que están <strong>equilibradas</strong> entre ellas:</p>
+<ol>
+<li>El <strong>empuje</strong> o «thrust»</li>
+<li>El <strong>peso</strong> o «weight»</li>
+<li>La <strong>resistencia</strong> o «drag»</li>
+<li>La <strong>sustentación</strong> o «lift»</li>
+</ol>
+<p>(La Figura 1 del manual muestra las cuatro fuerzas; el orden de la lista es empuje, peso, resistencia, sustentación.)</p>
+<p><strong>Sustentación</strong>: es la componente <strong>perpendicular a la corriente de aire</strong>:</p>
+<p><strong>L = C_L · q · S</strong></p>
+<ul>
+<li>L = sustentación; C_L = coeficiente de sustentación; S = superficie de las alas; <strong>q = presión dinámica = ½ ρ V²</strong>.</li>
+<li>El <strong>coeficiente de sustentación depende, para cada perfil, del ángulo de ataque</strong>.</li>
+</ul>
+<h3 id="41-peso-p-8">4.1 Peso (p. 8)</h3>
+<ul>
+<li>El peso (W) tira del aeroplano <strong>hacia abajo debido a la fuerza de la gravedad</strong>. <strong>Se opone a la sustentación</strong> y actúa <strong>verticalmente hacia abajo a través del centro de gravedad (CG)</strong> del avión.</li>
+</ul>
+<h3 id="42-resistencia-p-8">4.2 Resistencia (p. 8)</h3>
+<ul>
+<li>La resistencia es una fuerza <strong>hacia atrás, que retarda</strong>, y es causada por la <strong>interrupción del flujo de aire por las alas, fuselaje y otros objetos que sobresalgan</strong>. <strong>Se opone al empuje</strong> y actúa <strong>hacia atrás, paralela al viento relativo</strong>.</li>
+<li>La resistencia al avance depende de las mismas variables que la sustentación: <strong>D = C_D · q · S</strong> (D = resistencia; C_D = coeficiente de resistencia; S = superficie de las alas; q = ½ ρ V²).</li>
+<li><strong>El coeficiente de resistencia es la suma del coeficiente de resistencia parásita y el coeficiente de resistencia inducida</strong>. (El manual no define con más detalle la resistencia parásita ni la inducida.)</li>
+</ul>
+<h3 id="43-empuje-p-9">4.3 Empuje (p. 9)</h3>
+<ul>
+<li>El empuje (T) es la <strong>fuerza de avance producida por el motor/hélice o rotor</strong>. <strong>Se opone o supera la fuerza de resistencia (D)</strong>. Como regla general, <strong>actúa en paralelo al eje longitudinal</strong>.</li>
+<li><strong>Si las fuerzas L, W, T y D se encuentran en equilibrio, el avión mantiene una velocidad uniforme y un nivel de vuelo uniforme.</strong> Si alguna de ellas varía, las características del vuelo cambian.</li>
+<li><strong>El empuje excede a la resistencia:</strong> la velocidad aumenta y el avión acelera horizontalmente; el aumento de velocidad incrementa la sustentación y el avión <strong>subirá</strong>.</li>
+<li><strong>La resistencia excede al empuje:</strong> el avión decelera horizontalmente; la reducción de la velocidad provoca una disminución de la sustentación y el avión <strong>bajará</strong>.</li>
+<li><strong>Origen de la sustentación:</strong> la <strong>diferencia de presión entre el intradós y el extradós, donde es mucho menor</strong>. Con estas diferencias de presión en las puntas de las alas se crean unas <strong>corrientes transversales de abajo hacia arriba</strong> que se suman a la corriente del extradós y generan los <strong>torbellinos/vórtices de punta alar</strong>.</li>
+</ul>
+<h2 id="5-torbellinovortice-de-punta-de-ala-pp-9-12">5. Torbellino/vórtice de punta de ala (pp. 9-12)</h2>
+<ul>
+<li>El vórtice es <strong>el resultado de la sustentación</strong>. Cuando un perfil se vuela a un <strong>ángulo de ataque positivo</strong>, existe una diferencia de presión entre las superficies superior e inferior de dicho perfil: la presión sobre el ala es <strong>menor que la presión atmosférica</strong> y la presión debajo del ala es <strong>igual o mayor que la presión atmosférica</strong>.</li>
+<li>Dado que el aire siempre se mueve desde alta presión hacia baja presión, y el camino de menor resistencia es hacia la punta alar, el aire de la parte inferior del ala se mueve <strong>hacia el exterior, hacia las puntas</strong>, y se «derrama» sobre ellas, creando un remolino de aire llamado <strong>vórtice</strong> (Figura 2).</li>
+<li><strong>Intensidad (fuerza) de los vórtices:</strong> <strong>directamente proporcional al peso</strong> de la aeronave e <strong>inversamente proporcional a la envergadura y a la velocidad</strong> de la aeronave. <strong>Es especialmente violento en los reactores de gran tamaño</strong>.</li>
+<li>El <strong>peligro más grave</strong> para una aeronave que penetre en la zona de estela turbulenta es el <strong>balanceo inducido</strong>, cuando su violencia sobrepasa la eficacia de sus mandos para contrarrestarlo.</li>
+<li><strong>Cuándo existe el vórtice (Figura 3):</strong> <strong>empieza a formarse en el momento de la rotación, cuando las ruedas de proa dejan de hacer contacto con la pista, y termina cuando dichas ruedas de proa hacen contacto con el suelo en el momento del aterrizaje</strong>. La Figura 3 rotula: «Inicio turbulencia» en la rotación, «Fin turbulencia» en el aterrizaje.</li>
+<li><strong>Fuerza máxima:</strong> la fuerza del vórtice es proporcional al peso y alcanza su valor máximo cuando la aeronave que lo genera es <strong>PESADA, en configuración limpia y lenta</strong>.</li>
+<li><strong>Situación extrema (Figura 4):</strong> cuando la <strong>envergadura del avión afectado es de una dimensión similar al diámetro del torbellino</strong>; la figura muestra el campo de flujo del vórtice de estela y al piloto teniendo que contrarrestar con los mandos.</li>
+</ul>
+<h3 id="51-efecto-suelo-pp-11-12">5.1 Efecto suelo (pp. 11-12)</h3>
+<ul>
+<li>Cuando un avión vuela próximo al suelo, sus características aerodinámicas se ven afectadas, con una <strong>disminución de la resistencia al avance y un aumento de la sustentación</strong>.</li>
+<li>Los torbellinos de punta de ala se crean a partir del momento en que el avión se levanta del suelo y desaparecen al aterrizar (véase §5). <strong>Hay una zona muy próxima al suelo en la que el vórtice se destruye contra la superficie (poco antes de contactar con la pista). A este fenómeno lo denominamos efecto suelo</strong>.</li>
+<li><strong>Tiene un efecto mayor cuanto más cercano esté el avión al suelo y mayor sea su envergadura</strong>.</li>
+</ul>
+<h2 id="6-factor-de-carga-p-12">6. Factor de carga (p. 12)</h2>
+<ul>
+<li><strong>Definición:</strong> en aerodinámica, el factor de carga máximo (a un cierto ángulo de ataque) es una <strong>proporción entre la sustentación y el peso</strong> y tiene una <strong>relación trigonométrica</strong>. Se mide en Gs (aceleración de la gravedad), una unidad de fuerza igual a la fuerza ejercida por la gravedad sobre un cuerpo en reposo, e indica la fuerza a la que se somete un cuerpo cuando se acelera.</li>
+<li><strong>Vuelo horizontal:</strong> la sustentación equilibra el peso y se opone a este.</li>
+<li><strong>En viraje:</strong> la <strong>componente vertical de la sustentación</strong> es la que equilibra el peso. Por tanto, para hacer un viraje manteniendo la altura, <strong>la sustentación total deberá aumentar hasta que la componente efectiva (vertical) iguale al peso</strong>.</li>
+<li><strong>Figura 5</strong> («Dos fuerzas producen el factor de carga en un viraje»): viraje coordinado y a altura constante. Muestra la <strong>gravedad = 1 G</strong> (hacia abajo), la <strong>fuerza centrífuga = 1,73 Gs</strong> (horizontal) y el <strong>factor de carga = 2 Gs</strong> (resultante), con una escala de inclinación marcada de 10° a 60°. En la figura, la resultante de 1 G y 1,73 G es 2 G, que corresponde a un <strong>alabeo de 60°</strong> (tan 60° = 1,73; n = 1/cos 60° = 2); el manual no imprime el ángulo de forma explícita.</li>
+<li>Fórmula (no figura en el manual): n = L/W = 1/cos φ en un viraje coordinado a nivel (φ = ángulo de alabeo).</li>
+</ul>
+<h2 id="7-entrada-en-perdida-de-perfiles-pp-13-14">7. Entrada en pérdida de perfiles (pp. 13-14)</h2>
+<ul>
+<li><strong>Definición de pérdida:</strong> en una aeronave, es una <strong>rápida disminución en la sustentación causada por la separación del flujo de aire de la superficie superior del ala, provocada por exceder el ángulo de ataque crítico</strong>.</li>
+<li>El coeficiente de sustentación C_L <strong>aumenta progresivamente con el ángulo de ataque hasta que se alcanza el coeficiente de sustentación máximo (C_Lmax)</strong>. A partir de ahí, la distribución de presiones que generaba la succión dejará de existir. <strong>El perfil entra en pérdida a un determinado ángulo de ataque</strong>. Si consideramos el <strong>avión completo</strong> hablaremos de <strong>velocidad de pérdida</strong>.</li>
+<li><strong>La velocidad de pérdida Vs depende de la densidad del aire ρ</strong>; por lo tanto, cuando estemos a mayor altitud la densidad disminuirá, lo que supone que <strong>la velocidad de pérdida será mayor</strong>. (Véase «Trampas de examen»: se trata de la velocidad verdadera; la velocidad indicada de pérdida es casi constante.)</li>
+<li>Equilibrio en vuelo estacionario (según la dirección normal a la corriente incidente): la sustentación ha de equilibrar el peso de la aeronave, es decir, <strong>M·g = L = ½ ρ V² S C_L</strong> (M = masa del avión, g = aceleración de la gravedad terrestre).</li>
+<li>Consecuencias: en <strong>vuelo de crucero</strong>, la velocidad V es elevada, por lo que C_L no precisa ser muy grande (<strong>un valor típico puede ser C_L = 0,4</strong>); si la velocidad V disminuye (por ejemplo, en la <strong>aproximación al aterrizaje</strong>), es preciso aumentar C_L, y por tanto <strong>hay que aumentar el ángulo de ataque</strong> del ala para conseguir un mayor C_L.</li>
+<li><strong>La velocidad de pérdida es la velocidad mínima de vuelo a la que se puede tener control sobre el avión</strong> (redacción del manual).</li>
+<li><strong>Aviso (buffet o bataneo):</strong> al acercarse a la pérdida se producen signos claros de separación de la corriente, con un margen de antelación. Nota 1: <strong>el bataneo («buffet») es una fuerte vibración que se produce antes de entrar en pérdida, debida a que no todas las zonas del ala entran en pérdida a la vez</strong>.</li>
+<li>Este aviso de pérdida, antes de que se produzca, se suele suministrar al piloto mediante un dispositivo que hace vibrar la palanca de control (<strong>stick shaker</strong>). Este aviso, sea por el shaker o por las propiedades aerodinámicas del avión, <strong>debe experimentarse a una velocidad un 7 % por encima de la pérdida</strong> (redacción del manual; la CS-25.207 difiere, véase la tabla comparativa).</li>
+</ul>
+<h3 id="71-coffin-corner-pp-13-14">7.1 Coffin corner (pp. 13-14)</h3>
+<ul>
+<li>La corriente de aire que circula por el extradós <strong>aumenta en velocidad y disminuye en presión</strong>, generando sustentación.</li>
+<li><strong>A altas velocidades, Mach 0,82 y superiores, que se dan en algunos casos en reactores comerciales, podría suceder que en algún punto del extradós se alcanzara la velocidad del sonido</strong>.</li>
+<li>El <strong>número de Mach que hace que en un punto del extradós se alcance Mach 1 se llama Mach crítico</strong> y dará lugar a una <strong>onda de choque</strong>.</li>
+<li>Este fenómeno provoca la aparición de una <strong>nueva resistencia, tanto mayor cuanto mayor es el número de Mach</strong>; puede provocar la <strong>entrada en pérdida de alta velocidad</strong>. <strong>Lo mejor para evitarlo es reducir el número de Mach si es posible</strong>.</li>
+<li>Los reactores comerciales volando a gran altura y en función de su peso pueden tener un <strong>margen muy pequeño entre las velocidades de pérdida por alta velocidad y por baja velocidad</strong>. <strong>El punto donde coinciden ambas velocidades es conocido como Coffin Corner</strong>.</li>
+<li><strong>El piloto debe descender para ampliar el margen entre las velocidades de pérdida</strong> y de ese modo evitarlo.</li>
+</ul>
+<h2 id="8-el-ala-pp-14-16">8. El ala (pp. 14-16)</h2>
+<ul>
+<li>Las <strong>alas</strong> son perfiles aerodinámicos unidos a cada lado del fuselaje y son las <strong>principales superficies sustentadoras</strong> que mantienen al avión en vuelo. Existen numerosos diseños de alas, tamaños y formas; cada uno responde a una necesidad determinada por el desempeño esperado para un avión en particular.</li>
+<li><strong>Perfil alar:</strong> el corte del ala por un <strong>plano vertical paralelo al eje longitudinal</strong>. Es la forma del área de un elemento que, al avanzar a través del aire, es capaz de crear a su alrededor una distribución de presiones que genera sustentación. (Figura 6.)</li>
+</ul>
+<p>Elementos (en el orden del manual):</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Extradós</strong> / <strong>intradós</strong></td>
+<td>Extradós = parte superior del ala; intradós = parte inferior</td>
+</tr>
+<tr>
+<td><strong>Cuerda</strong></td>
+<td>La <strong>línea que une borde de ataque y borde de salida</strong></td>
+</tr>
+<tr>
+<td><strong>Línea de curvatura media</strong></td>
+<td>La línea <strong>equidistante del intradós y del extradós</strong></td>
+</tr>
+<tr>
+<td>Perfil simétrico</td>
+<td>La cuerda y la línea de curvatura media <strong>coinciden</strong>; con <strong>ángulo de ataque cero no se genera sustentación</strong></td>
+</tr>
+<tr>
+<td>Perfil asimétrico autosustentador</td>
+<td>La línea de curvatura media está <strong>por encima de la cuerda</strong>; con <strong>ángulo de ataque cero se genera sustentación</strong></td>
+</tr>
+<tr>
+<td><strong>Cuerda media</strong></td>
+<td>Como en general la cuerda disminuye a medida que nos alejamos del encastre, se define como cuerda media aquella que, <strong>multiplicada por la envergadura, es igual a la superficie alar</strong></td>
+</tr>
+<tr>
+<td><strong>Envergadura</strong></td>
+<td>Distancia entre los dos extremos de las alas; envergadura × cuerda media = superficie alar</td>
+</tr>
+<tr>
+<td><strong>Estrechamiento</strong></td>
+<td>Cociente entre la <strong>cuerda del perfil en el encastre</strong> y la <strong>cuerda del perfil en la punta del ala</strong></td>
+</tr>
+<tr>
+<td><strong>Alargamiento</strong></td>
+<td>Cociente entre la <strong>envergadura y la cuerda media</strong> (envergadura/cuerda media). Cuanto más elevado es este valor, más larga y estrecha es el ala. <strong>Del orden de 3-4 en aviones muy rápidos a 25-30 en los planeadores</strong></td>
+</tr>
+<tr>
+<td><strong>Flecha</strong></td>
+<td>El ángulo que forman las alas respecto del <strong>eje transversal (lateral)</strong> del avión. Puede ser <strong>positiva/progresiva (extremos de las alas orientados hacia atrás)</strong>, neutra, o <strong>negativa/regresiva (extremos adelantados)</strong>, en función de que la punta del ala esté por delante o por detrás del ala en el encastre (Figura 7: «Flecha positiva / neutra / negativa»)</td>
+</tr>
+<tr>
+<td><strong>Diedro</strong></td>
+<td>Visto el avión de frente, el <strong>ángulo en forma de «V» que forman las alas con el eje lateral</strong>; puede ser <strong>positivo, neutro o negativo</strong> (Figura 8: diedro positivo, neutro, negativo; en la figura, el diedro negativo tiene las puntas de las alas más bajas que el encastre)</td>
+</tr>
+<tr>
+<td><strong>Ángulo de ataque</strong></td>
+<td>El que forman la cuerda y la corriente libre de aire: el <strong>ángulo agudo formado por la cuerda del ala y la dirección del viento relativo</strong>. Es variable, pues depende de la dirección del viento relativo y de la posición de las alas con respecto a este (Figura 9: borde de ataque, borde de salida, trayectoria del avión, viento relativo)</td>
+</tr>
+</tbody>
+</table>
+<p>Nota sobre una inconsistencia del propio manual acerca de la flecha: dice que la flecha «positiva/progresiva» tiene «extremos de las alas orientados hacia atrás» y la negativa «extremos adelantados», y luego explica «en función de que la punta del ala esté por delante o por detrás del ala en el encastre» (la explicación está redactada de forma imprecisa; la Figura 7 muestra la flecha positiva = hacia atrás).</p>
+<h2 id="9-ejes-pp-16-17">9. Ejes (pp. 16-17)</h2>
+<ul>
+<li>Los ejes de un avión son <strong>tres líneas imaginarias que pasan a través del centro de gravedad</strong> de la aeronave y son <strong>perpendiculares entre sí</strong> (Figura 10).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Eje</th>
+<th>Origen y sentido</th>
+<th>Movimiento alrededor del eje</th>
+<th>Superficie de control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Eje longitudinal</strong></td>
+<td>Origen en el CG, situado en el <strong>plano de simetría</strong>, hacia el <strong>morro</strong></td>
+<td><strong>Balanceo o alabeo (roll)</strong></td>
+<td><strong>Alerones</strong></td>
+</tr>
+<tr>
+<td><strong>Eje lateral</strong></td>
+<td>Origen en el CG, <strong>perpendicular al plano de simetría</strong>, con sentido positivo <strong>hacia el ala derecha</strong></td>
+<td><strong>Cabeceo (pitch)</strong></td>
+<td><strong>Elevadores o timones de profundidad</strong></td>
+</tr>
+<tr>
+<td><strong>Eje vertical</strong></td>
+<td>Origen en el CG, situado en el <strong>plano de simetría</strong>, con sentido positivo <strong>hacia abajo</strong></td>
+<td><strong>Dirección o guiñada (yaw)</strong></td>
+<td><strong>Timón de dirección</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Los tres movimientos de los aviones convencionales (alabeo, cabeceo y dirección) están controlados por <strong>tres superficies de control</strong>.</li>
+</ul>
+<h2 id="10-mandos-de-vuelo-pp-18-19">10. Mandos de vuelo (pp. 18-19)</h2>
+<p><strong>Superficies de control primarias (tres)</strong>, con las que el piloto consigue el equilibrio del avión:</p>
+<table>
+<thead>
+<tr>
+<th>Superficie</th>
+<th>Controla</th>
+<th>Ubicación</th>
+<th>Cómo se acciona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Timones de profundidad (elevators)</strong></td>
+<td>El <strong>cabeceo</strong>, alrededor del <strong>eje lateral</strong></td>
+<td>Parte final o borde de salida del <strong>estabilizador horizontal</strong></td>
+<td><strong>Empujando y tirando</strong> del mando de vuelo o palanca</td>
+</tr>
+<tr>
+<td><strong>Alerones</strong></td>
+<td>El <strong>balanceo/alabeo</strong>, alrededor del <strong>eje longitudinal</strong></td>
+<td><strong>Borde de salida de las alas</strong></td>
+<td><strong>Girando</strong> la palanca o mando <strong>a izquierda y derecha</strong></td>
+</tr>
+<tr>
+<td><strong>Timón de dirección (rudder)</strong></td>
+<td>La <strong>guiñada</strong>, alrededor del <strong>eje vertical</strong></td>
+<td>En el <strong>estabilizador vertical</strong>, en la sección de cola y cerca del borde de salida</td>
+<td><strong>Pisando los pedales</strong> del timón <strong>a derecha e izquierda</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Figura 11 (avión rotulado): timón de dirección, trim tabs, timón de profundidad, alerón, flaps, slats, spoilers.</p>
+<p><strong>Otros dispositivos</strong> que se engloban también en el grupo de mandos de vuelo (en el orden del manual):</p>
+<ol>
+<li><strong>Slats y flaps: dispositivos hipersustentadores</strong> que <strong>varían la curvatura aumentándola, consiguiendo un aumento del valor de C_Lmax</strong>. <strong>Los slats están situados en el borde de ataque; los flaps, en el borde de salida.</strong> Los hipersustentadores <strong>reducen las velocidades de despegue y aterrizaje y, consiguientemente, las longitudes de pista necesarias</strong>.</li>
+<li><strong>Spoilers o aerofrenos:</strong> dispositivos que <strong>reducen la sustentación y aumentan la resistencia</strong>. Están situados en el <strong>extradós</strong>; cuando se deflectan <strong>simétricamente</strong> funcionan como <strong>aerofrenos</strong>; cuando se deflectan <strong>asimétricamente</strong> funcionan como <strong>mandos de alabeo a altas velocidades</strong>.</li>
+<li><strong>Trim tabs (tab de compensación):</strong> pequeñas superficies de control situadas cerca del <strong>borde de salida del timón de profundidad, del timón de dirección y de los alerones</strong>. El tab se deflecta <strong>en dirección opuesta al control primario</strong> (del cual forma parte) y se consigue llevar a la posición deseada el control primario <strong>sin esfuerzo del piloto</strong>. Principio de funcionamiento: al deflectar el tab, por ejemplo hacia abajo, aumenta la curvatura de esa parte del perfil y se produce una fuerza aerodinámica que da lugar a un considerable <strong>momento de charnela</strong> debido a su distancia al eje de charnela. Este momento tiende a mover el timón <strong>hacia arriba</strong> (ejemplo del manual). El <strong>eje de charnela</strong> es el eje de rotación del mando primario (por ejemplo, el timón de profundidad). De este modo el esfuerzo en la palanca para mover el timón viene ayudado por el tab. <strong>El trim tab se utiliza para anular el momento de charnela en el eje y, por tanto, la fuerza en la palanca o mando de vuelo</strong>.</li>
+</ol>
+<h2 id="11-actuaciones-en-despegue-y-aterrizaje-pp-19-23">11. Actuaciones en despegue y aterrizaje (pp. 19-23)</h2>
+<p>Muchos factores influyen en las actuaciones del avión: <strong>el empuje de los motores, la temperatura, la altitud de presión, la posición de los flaps, el peso, el viento, la posición del centro de gravedad y la velocidad.</strong> Podemos actuar sobre alguno de estos factores: <strong>escogiendo la posición de flaps más adecuada, limitando el peso y llevando una determinada velocidad</strong> en cada momento.</p>
+<h3 id="111-despegue-pp-20-21">11.1 Despegue (pp. 20-21)</h3>
+<p>En el despegue la velocidad varía continuamente, y esto hace que haya un gran número de velocidades de interés. En el orden del manual:</p>
+<table>
+<thead>
+<tr>
+<th>Velocidad</th>
+<th>Definición del manual</th>
+<th>Fórmula impresa (imagen)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>V_S</strong></td>
+<td>Velocidad de pérdida, <strong>o la velocidad mínima a la que la aeronave es controlable</strong></td>
+<td>ninguna</td>
+</tr>
+<tr>
+<td><strong>V_MCG</strong></td>
+<td><strong>Velocidad mínima de control en el suelo</strong>, con un motor inoperativo (el motor crítico en aviones bimotores). Se producen dos efectos: una <strong>pérdida de aceleración</strong> (mayor distancia en pista para alcanzar una velocidad) y un <strong>momento de giro igual al producto de la potencia (empuje) de ese motor por su brazo (distancia al eje longitudinal)</strong>, que tenderá a sacar el avión de la pista por el lado del motor fallado. Las normas dicen que esta <strong>guiñada adversa</strong> se debe controlar <strong>haciendo uso únicamente de los controles aerodinámicos (el timón de dirección)</strong> en caso de que se decida continuar el despegue. En un polimotor, el fallo de un motor con los otros a potencia de despegue causará una guiñada <strong>tanto mayor cuanto más alejado esté el motor (motor crítico) del eje longitudinal</strong></td>
+<td>ninguna</td>
+</tr>
+<tr>
+<td><strong>V_MCA</strong></td>
+<td><strong>Velocidad mínima de control en el aire</strong>, con un motor inoperativo (motor crítico en aviones bimotores). Del mismo modo, un fallo de motor en el aire provocará una guiñada. <strong>A mayor velocidad, más efectivos son los controles aerodinámicos; existe una velocidad por debajo de la cual el avión no es controlable</strong></td>
+<td><strong>V_MCA ≥ 1.2 V_S</strong></td>
+</tr>
+<tr>
+<td><strong>V1</strong></td>
+<td><strong>Velocidad de decisión</strong>: aquella en la que el piloto tiene que <strong>continuar el despegue o abortarlo</strong>. <strong>Antes abortará y después de esa velocidad continuará el despegue</strong>; a esa velocidad decidirá si hace una cosa o la otra</td>
+<td><strong>V1 ≥ V_MCG</strong></td>
+</tr>
+<tr>
+<td><strong>V_R</strong></td>
+<td><strong>Velocidad de rotación</strong>: la velocidad a la que se <strong>inicia la rotación de la aeronave a la actitud de despegue</strong>. <strong>No puede ser inferior a V1 ni inferior a 1,05 veces V_MC.</strong> Con un fallo de motor, también debe permitir la <strong>aceleración hasta V2 a una altura de 35 pies al final de la pista</strong></td>
+<td><strong>V_R ≥ V1 ; V_R ≥ 1.05 V_MC</strong></td>
+</tr>
+<tr>
+<td><strong>V_LOF</strong></td>
+<td><strong>Velocidad de despegue</strong>: la velocidad a la que, inicialmente, el avión se va al aire</td>
+<td>ninguna</td>
+</tr>
+<tr>
+<td><strong>V2</strong></td>
+<td><strong>Velocidad de seguridad al despegue</strong>, que se debe alcanzar a una <strong>altura de 35 pies al final de la distancia de pista requerida</strong>. Es esencialmente la <strong>velocidad de mejor ángulo de ascenso con un motor operativo</strong> (sic: el manual dice «con un motor de operativo») y se debe <strong>mantener hasta después de franquear los obstáculos al despegue, o hasta por lo menos 400 pies por encima del suelo</strong></td>
+<td>ninguna</td>
+</tr>
+</tbody>
+</table>
+<p>La Figura 12 («velocidades en despegue») muestra, a lo largo de la pista y de izquierda a derecha: <strong>V0, V_S, V1, V_R, V_LOF, V_TR, V2</strong>, con una marca de obstáculo o altura de <strong>35 ft (10,7 m)</strong>. (El manual no define V_TR en el texto; en la figura sigue a V_LOF y precede a V2.)</p>
+<h3 id="112-requerimientos-de-pista-pp-21-22">11.2 Requerimientos de pista (pp. 21-22)</h3>
+<p>Los requerimientos de pista para el despegue son afectados por (cinco factores, en este orden):</p>
+<ol>
+<li><strong>Altitud de presión</strong></li>
+<li><strong>Temperatura</strong></li>
+<li><strong>Componente de viento de frente</strong></li>
+<li><strong>Gradiente o pendiente de pista</strong></li>
+<li><strong>Peso del avión</strong></li>
+</ol>
+<ul>
+<li>La pista requerida para el despegue debe estar basada en la posible pérdida de un motor en el punto más crítico, que es a <strong>V1</strong> (velocidad de decisión). Por regulación, el peso de despegue de la aeronave tiene que adaptarse a <strong>la más larga de las tres distancias</strong>:
+  1. <strong>Distancia de aceleración-despegue:</strong> la distancia requerida para acelerar a V1 con todos los motores a potencia de despegue, experimentar un fallo de motor a V1 y <strong>continuar el despegue con el motor restante</strong>. La pista requerida incluye la distancia necesaria para <strong>ascender a 35 pies, momento en el cual se debe haber llegado a V2</strong>.
+  2. <strong>Distancia de aceleración-parada:</strong> distancia requerida para acelerar a V1 con todos los motores a potencia de despegue, experimentar un fallo de motor a V1, y <strong>abortar el despegue y detener el avión utilizando solo la acción de los frenos (no se considera el uso de la inversión de empuje)</strong>.
+  3. <strong>Distancia de despegue:</strong> distancia requerida para completar un despegue <strong>hasta 35 pies de altura con todos los motores operativos</strong>. Debe ser <strong>por lo menos 15 por ciento menos</strong> que la distancia requerida para un despegue con un motor inoperativo. Esta distancia <strong>normalmente no es un factor limitante</strong>, ya que es generalmente menor que la distancia de despegue con un motor inoperativo.</li>
+<li><strong>Las velocidades de despegue varían con el peso del avión.</strong> Antes de que las velocidades de despegue puedan ser calculadas, el piloto primero debe determinar el <strong>peso máximo permitido al despegue</strong>.</li>
+</ul>
+<h4 id="1121-otros-conceptos-p-22">11.2.1 Otros conceptos (p. 22)</h4>
+<ul>
+<li><strong>Stopway o zona de parada:</strong> un <strong>área en la prolongación de la pista, al menos de su misma anchura</strong>, que puede <strong>soportar el peso del avión sin causarle daños estructurales</strong>. Solo existe como <strong>una longitud adicional a la pista para que, en caso de despegue abortado, se pueda utilizar para deceleración y frenado del avión</strong>.</li>
+<li><strong>Clearway:</strong> una <strong>zona en la prolongación del eje de la pista que está libre de obstáculos</strong>, de forma que proporciona espacio adicional <strong>utilizable solo para la subida</strong> (el agua del mar, por ejemplo). Se considera que <strong>empieza al final de la pista, tanto si hay stopway como si no</strong>.</li>
+<li>Trampa: stopway = para el <strong>frenado</strong> (debe soportar el peso); clearway = solo para la <strong>subida</strong> (puede ser agua).</li>
+</ul>
+<h3 id="113-aterrizaje-pp-22-23">11.3 Aterrizaje (pp. 22-23)</h3>
+<p>Al igual que en la planificación del despegue, ciertas velocidades deben ser consideradas durante el aterrizaje:</p>
+<table>
+<thead>
+<tr>
+<th>Velocidad</th>
+<th>Definición del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>V_SO</strong></td>
+<td>Velocidad de pérdida o <strong>velocidad mínima de vuelo estable en configuración de aterrizaje</strong></td>
+</tr>
+<tr>
+<td><strong>V_REF</strong></td>
+<td><strong>1,3 veces la velocidad de pérdida en configuración de aterrizaje</strong>. Es la velocidad requerida <strong>a 50 pies de altura sobre el umbral de la pista</strong></td>
+</tr>
+<tr>
+<td><strong>V_TD</strong></td>
+<td><strong>Velocidad de toma (touchdown): 1,15 veces la velocidad de pérdida en configuración de aterrizaje</strong></td>
+</tr>
+<tr>
+<td><strong>Ascenso en aproximación</strong></td>
+<td>La velocidad que proporciona el <strong>mejor rendimiento de ascenso en configuración de aproximación con un motor inoperativo, y con la máxima potencia de despegue en el motor operativo(s)</strong></td>
+</tr>
+<tr>
+<td><strong>Ascenso en aterrizaje</strong></td>
+<td>La velocidad que da la <strong>mejor performance en configuración de aterrizaje con máxima potencia de despegue en todos los motores</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Figura 13 («velocidades en aterrizaje»): <strong>V_REF ≈ 1,3 V_SO a h = 50 ft (15,2 m)</strong> sobre el umbral y <strong>V_TD ≈ 1,15 V_SO</strong> en la toma.</p>
+<h3 id="114-requisitos-de-aterrizaje-p-23">11.4 Requisitos de aterrizaje (p. 23)</h3>
+<p>A fin de determinar el peso de aterrizaje permitido para un <strong>avión de categoría de transporte</strong>, deben ser considerados los siguientes detalles (seis elementos, en este orden):</p>
+<ol>
+<li><strong>Altitud de presión del aeródromo</strong></li>
+<li><strong>Temperatura</strong></li>
+<li><strong>Componente de viento en contra</strong></li>
+<li><strong>Longitud de pista</strong></li>
+<li><strong>Gradiente o pendiente de pista</strong></li>
+<li><strong>Condición de la superficie de la pista</strong></li>
+</ol>
+<p>Con estos datos es posible establecer el <strong>peso máximo de aterrizaje permitido</strong>, que será <strong>el menor de los pesos según lo dictado por</strong>:</p>
+<ul>
+<li><strong>Requisitos de pista de aterrizaje</strong>;</li>
+<li><strong>Requisitos de ascenso en aproximación</strong>.</li>
+</ul>
+<p>Comparación: el despegue tiene 5 factores (sin «longitud de pista» ni «condición de la superficie» en la lista) y el peso queda limitado por la <strong>más larga de tres distancias</strong>; el aterrizaje tiene 6 factores y el peso es el <strong>menor de dos pesos</strong>.</p>
+<h3 id="115-hidroplaneo-p-23">11.5 Hidroplaneo (p. 23)</h3>
+<ul>
+<li>Con <strong>pista mojada o contaminada</strong> se produce hidroplaneo en el momento en que las <strong>ruedas del tren dejan de girar y deslizan, perdiendo toda su eficacia la acción de frenado</strong>.</li>
+<li>Este fenómeno depende de <strong>los neumáticos, de la contaminación de la pista, del espesor de la capa de agua o nieve, entre otros</strong>.</li>
+<li><strong>El método más efectivo para parar el avión es el uso de la reversa</strong> (redacción del manual; véanse la tabla comparativa y las dudas).</li>
+</ul>
+<hr />
+<h2 id="manual-frente-a-fuentes-primarias-contradicciones-y-diferencias-que-conviene-registrar">Manual frente a fuentes primarias (contradicciones y diferencias que conviene registrar)</h2>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Dice el manual</th>
+<th>Dice la fuente primaria</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Presión ISA a nivel del mar</td>
+<td>«1013 hPa» (pp. 4, 5)</td>
+<td><strong>1013,25 hPa</strong> (norma OACI/ISO)</td>
+<td>redondeado; en las preguntas usar 1013 (el examen probablemente sigue el manual)</td>
+</tr>
+<tr>
+<td>Tropopausa / fin del gradiente</td>
+<td><strong>36 000 ft</strong>, luego -56 °C constantes «hasta los 80 000 pies»</td>
+<td>ISA: 11 km = 36 089 ft, -56,5 °C, isotermo hasta 20 km (65 617 ft)</td>
+<td>el manual redondea la altura y dice 80 000 ft (la propia tabla termina en 64 000 ft, con -56,3 °C a 36 000 ft y -56,5 °C desde 38 000 ft)</td>
+</tr>
+<tr>
+<td>Gradiente de temperatura</td>
+<td>2° por cada 1000 ft (6,5 °C/km)</td>
+<td>6,5 °C/km = 1,98 °C/1000 ft</td>
+<td>coherente</td>
+</tr>
+<tr>
+<td>V_MCA</td>
+<td>«V_MCA ≥ 1.2 V_S»</td>
+<td>CS 25.149(c): V_MC <strong>no puede exceder de 1,13 V_SR</strong> (con las condiciones enumeradas)</td>
+<td>el manual da un mínimo (≥ 1,2 V_S); la CS-25 fija un máximo para V_MC (≤ 1,13 V_SR). Sentido opuesto: registrar ambos</td>
+</tr>
+<tr>
+<td>V_R</td>
+<td>V_R ≥ V1 y V_R ≥ 1,05 V_MC</td>
+<td>CS 25.107(e): V_R no puede ser menor que V1, <strong>105 % de V_MC</strong>, ...</td>
+<td>coincide</td>
+</tr>
+<tr>
+<td>V1 frente a V_MCG</td>
+<td>V1 ≥ V_MCG</td>
+<td>CS 25.107(a): V_EF no menor que V_MCG; V1 no menor que V_EF más la velocidad ganada hasta que el piloto reacciona</td>
+<td>coincide (V1 ≥ V_EF ≥ V_MCG)</td>
+</tr>
+<tr>
+<td>V2</td>
+<td>se alcanza a 35 ft; se mantiene hasta los obstáculos o al menos 400 ft</td>
+<td>CS 25.107(c): V2 ≥ V2MIN (1,13 o 1,08 V_SR; 1,10 V_MC) y se alcanza a 35 ft (11 m); 400 ft:</td>
+<td>los 400 ft coinciden con la práctica habitual del AFM</td>
+</tr>
+<tr>
+<td>Aviso de pérdida</td>
+<td>7 % por encima de la pérdida</td>
+<td>CS 25.207(c): V_SW excede de la pérdida <strong>en no menos de 5 kt o 5 % CAS, lo que sea mayor</strong>; 25.207(d): excede de V_SR en no menos de 3 kt o 3 %</td>
+<td>el 7 % no aparece en ninguna parte del texto de la CS-25 leído; puede proceder de normas de la FAA</td>
+</tr>
+<tr>
+<td>V_REF</td>
+<td>1,3 × velocidad de pérdida en configuración de aterrizaje; V_TD 1,15 V_SO</td>
+<td>CS 25.125: V_REF no menor que <strong>1,23 V_SR0</strong></td>
+<td>el manual usa el clásico 1,3 V_SO; la CS-25 tiene 1,23 V_SR0. El examen sigue el manual</td>
+</tr>
+<tr>
+<td>Distancia de despegue (todos los motores)</td>
+<td>«por lo menos 15 por ciento menos que la distancia con un motor inoperativo»</td>
+<td>CS 25.113(a): distancia de despegue = la mayor entre la distancia con un motor inoperativo y el <strong>115 % de la distancia con todos los motores hasta 35 ft</strong></td>
+<td>la frase del manual es una paráfrasis imprecisa (115 % de la distancia con todos los motores, equivalente a un 13 % menos aproximadamente, no 15 %)</td>
+</tr>
+<tr>
+<td>Distancia de aceleración-parada</td>
+<td>solo frenos, sin inversión de empuje</td>
+<td>CS 25.109: la inversión de empuje no puede contarse en pista seca, pero sí puede acreditarse en pistas mojadas</td>
+<td>el manual tiene razón para el caso seco</td>
+</tr>
+<tr>
+<td>Velocidad de pérdida y altitud</td>
+<td>Vs «depende de la densidad, por lo que a mayor altitud Vs es mayor»</td>
+<td>La TAS de pérdida aumenta con la altitud; <strong>la velocidad indicada (IAS) de pérdida es casi constante</strong></td>
+<td>el manual habla de la velocidad verdadera; una pregunta formulada con «indicada» tendría la respuesta contraria</td>
+</tr>
+<tr>
+<td>Hidroplaneo</td>
+<td>«el método más efectivo para parar es la reversa»</td>
+<td>En pista contaminada los frenos de rueda pierden eficacia; la inversión de empuje no depende de la fricción, pero su eficacia cae con la velocidad</td>
+<td>mantener lo que dice el manual</td>
+</tr>
+<tr>
+<td>Límites del factor de carga</td>
+<td>no figuran en el manual</td>
+<td>CS 25.337(b),(c): límite positivo no menor de <strong>2,5</strong> (no mayor de 3,8); negativo no menor de <strong>-1,0</strong> hasta V_C</td>
+<td>lo que afirma el material base, +2,5/-1,0, es correcto</td>
+</tr>
+</tbody>
+</table>
+<h2 id="trampas-de-examen">Trampas de examen</h2>
+<ol>
+<li><strong>V_MCG frente a V_MCA:</strong> suelo frente a aire; ambas con un motor inoperativo; V_MCG se controla <strong>solo con el timón de dirección</strong>; V_MCA ≥ 1,2 V_S en el manual. No confundir las fórmulas: V1 ≥ V_MCG; V_R ≥ V1 y ≥ 1,05 V_MC.</li>
+<li><strong>Orden de V1:</strong> antes de V1 se aborta, después de V1 se continúa; V1 ≤ V_R. V2 se alcanza a <strong>35 ft</strong> y se mantiene hasta <strong>400 ft</strong> o hasta franquear los obstáculos.</li>
+<li><strong>Stopway frente a clearway:</strong> stopway = frenado, soporta el peso, mismo ancho; clearway = solo subida, libre de obstáculos, empieza al final de la pista.</li>
+<li><strong>35 ft / 50 ft:</strong> la distancia de despegue, V2 y las condiciones de V_R se refieren a <strong>35 ft</strong> (10,7 m); V_REF se refiere a <strong>50 ft</strong> (15,2 m) sobre el umbral.</li>
+<li><strong>1,3 / 1,15 / 1,05 / 1,2 / 7 %:</strong> V_REF 1,3 V_SO; V_TD 1,15 V_SO; V_R ≥ 1,05 V_MC; V_MCA ≥ 1,2 V_S; aviso de pérdida 7 % por encima de la pérdida.</li>
+<li><strong>La más larga de las tres distancias de despegue</strong> (peso de despegue), <strong>el menor de los dos pesos de aterrizaje</strong> (requisitos de pista, ascenso en aproximación).</li>
+<li><strong>CAS/EAS/IAS/TAS:</strong> la IAS no tiene correcciones; la CAS corrige instrumento y posición; la EAS corrige además la compresibilidad; la TAS es respecto al aire; la GS, respecto al suelo (TAS + vector viento). CAS = TAS <strong>y</strong> EAS = CAS solo a nivel del mar en ISA.</li>
+<li><strong>Error de compresibilidad por encima de 250 kt;</strong> el Mach crítico y el coffin corner aparecen a Mach <strong>0,82 y superiores</strong> en el manual.</li>
+<li><strong>Remedio del coffin corner:</strong> descender (ampliar el margen); remedio de la pérdida de alta velocidad: reducir el Mach.</li>
+<li><strong>Intensidad del vórtice</strong> ∝ peso, ∝ 1/(envergadura × velocidad); el peor caso = pesada + limpia + lenta. El vórtice empieza al <strong>despegar la rueda de proa</strong> y termina al <strong>tocar la rueda de proa</strong>.</li>
+<li><strong>Efecto suelo</strong> = menos resistencia, más sustentación (el vórtice de punta de ala se destruye contra la superficie); mayor con más envergadura y menor altura.</li>
+<li><strong>Slats = borde de ataque; flaps = borde de salida; spoilers = extradós</strong> (simétricos = aerofreno; asimétricos = alabeo a alta velocidad).</li>
+<li><strong>El trim tab</strong> se mueve en sentido opuesto al control primario y anula el momento de charnela y el esfuerzo en la palanca.</li>
+<li><strong>Eje longitudinal = alabeo = alerones; lateral = cabeceo = timones de profundidad; vertical = guiñada = timón de dirección.</strong> Sentido positivo: morro (longitudinal), ala derecha (lateral), hacia abajo (vertical).</li>
+<li><strong>Flecha positiva = extremos hacia atrás</strong> (en flecha); negativa = extremos hacia delante. Alargamiento de 3-4 (aviones rápidos) a 25-30 (planeadores).</li>
+<li><strong>La altitud densidad aumenta</strong> con la temperatura, la altitud y la humedad = las actuaciones empeoran.</li>
+<li><strong>Altitud de presión</strong> = altímetro ajustado a 1013 hPa; se usa por encima del nivel de transición para los niveles de vuelo.</li>
+</ol>
+<h2 id="imprescindible-memorizar">Imprescindible memorizar</h2>
+<ul>
+<li>Bernoulli: <strong>P + ½ρV² = k</strong>; flujo más rápido = menor presión; ejemplo del Venturi (V2 &gt; V1, P2 &lt; P1).</li>
+<li>ISA: <strong>15 °C, 1013 hPa</strong> a nivel medio del mar; <strong>2 °C/1000 ft (6,5 °C/km)</strong> hasta <strong>36 000 ft</strong>; <strong>-56 °C</strong> constantes por encima (hasta 80 000 ft en el manual).</li>
+<li>Altitud de presión = altímetro a 1013 hPa. Regla de la altitud densidad: caliente, alto y húmedo = malas actuaciones.</li>
+<li>Velocidades: TAS, IAS, CAS, EAS, GS; <strong>Mach = TAS/c</strong>; error de compresibilidad por encima de <strong>250 kt</strong>.</li>
+<li>Cuatro fuerzas: empuje, peso, resistencia, sustentación; <strong>L = C_L·q·S</strong>, <strong>D = C_D·q·S</strong>, <strong>q = ½ρV²</strong>; C_D = C_D parásita + C_D inducida.</li>
+<li>Vórtice: ∝ peso, ∝ 1/(envergadura·velocidad); empieza en la rotación, termina en la toma; el peor caso, pesada/limpia/lenta. Efecto suelo: menos resistencia, más sustentación.</li>
+<li>Factor de carga en la Figura 5: 1 G de gravedad, 1,73 G de fuerza centrífuga, 2 G en total (alabeo de 60°).</li>
+<li>Pérdida: exceder el ángulo de ataque crítico; <strong>M·g = L = ½ρV²S·C_L</strong>; C_L típico en crucero = 0,4; aviso al 7 % por encima de la pérdida; bataneo; stick shaker; Mach crítico; coffin corner (descender).</li>
+<li>Ala: cuerda, línea de curvatura media, cuerda media, envergadura, estrechamiento (encastre/punta), alargamiento (envergadura/cuerda media; de 3-4 a 25-30), flecha, diedro, ángulo de ataque.</li>
+<li>Ejes: longitudinal (alabeo, alerones), lateral (cabeceo, timones de profundidad), vertical (guiñada, timón de dirección); pasan por el CG.</li>
+<li>Mandos: 3 primarios; slats (borde de ataque) y flaps (borde de salida) aumentan C_Lmax; spoilers; trim tabs.</li>
+<li>Velocidades de despegue: V_S, V_MCG, V_MCA (≥ 1,2 V_S), V1 (≥ V_MCG), V_R (≥ V1; ≥ 1,05 V_MC), V_LOF, V2 (35 ft; mantener hasta 400 ft).</li>
+<li>Cinco factores de pista: altitud de presión, temperatura, viento de frente, gradiente, peso. La más larga de tres distancias (aceleración-despegue, aceleración-parada, despegue con todos los motores).</li>
+<li>Stopway (frenado) frente a clearway (subida).</li>
+<li>Aterrizaje: V_SO, V_REF = 1,3 V_SO a 50 ft, V_TD = 1,15 V_SO; ascenso en aproximación y ascenso en aterrizaje; seis factores de aterrizaje; el menor de los pesos de pista y de ascenso en aproximación.</li>
+<li>Hidroplaneo: las ruedas dejan de girar; la reversa es el método más efectivo para parar (manual).</li>
+</ul>
+<h2 id="glosario-es-en">Glosario (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aerodinámica</td>
+<td>aerodynamics</td>
+</tr>
+<tr>
+<td>mecánica de vuelo</td>
+<td>flight mechanics</td>
+</tr>
+<tr>
+<td>mecánica de fluidos</td>
+<td>fluid mechanics</td>
+</tr>
+<tr>
+<td>teorema de Bernoulli</td>
+<td>Bernoulli's theorem</td>
+</tr>
+<tr>
+<td>tubo Venturi</td>
+<td>Venturi tube</td>
+</tr>
+<tr>
+<td>Atmósfera Estándar Internacional (ISA)</td>
+<td>International Standard Atmosphere (ISA)</td>
+</tr>
+<tr>
+<td>hectopascal</td>
+<td>hectopascal</td>
+</tr>
+<tr>
+<td>gradiente de temperatura</td>
+<td>temperature lapse rate</td>
+</tr>
+<tr>
+<td>densidad / presión / temperatura relativa</td>
+<td>relative density / pressure / temperature</td>
+</tr>
+<tr>
+<td>velocidad del sonido</td>
+<td>speed of sound</td>
+</tr>
+<tr>
+<td>viscosidad cinemática</td>
+<td>kinematic viscosity</td>
+</tr>
+<tr>
+<td>altitud de presión</td>
+<td>pressure altitude</td>
+</tr>
+<tr>
+<td>altitud densidad</td>
+<td>density altitude</td>
+</tr>
+<tr>
+<td>altímetro</td>
+<td>altimeter</td>
+</tr>
+<tr>
+<td>barómetro</td>
+<td>barometer</td>
+</tr>
+<tr>
+<td>nivel de transición</td>
+<td>transition level</td>
+</tr>
+<tr>
+<td>nivel de vuelo</td>
+<td>flight level</td>
+</tr>
+<tr>
+<td>velocidad verdadera (TAS)</td>
+<td>true airspeed (TAS)</td>
+</tr>
+<tr>
+<td>velocidad indicada (IAS)</td>
+<td>indicated airspeed (IAS)</td>
+</tr>
+<tr>
+<td>velocidad calibrada (CAS)</td>
+<td>calibrated airspeed (CAS)</td>
+</tr>
+<tr>
+<td>velocidad equivalente (EAS)</td>
+<td>equivalent airspeed (EAS)</td>
+</tr>
+<tr>
+<td>velocidad sobre el suelo (GS)</td>
+<td>ground speed (GS)</td>
+</tr>
+<tr>
+<td>número de Mach</td>
+<td>Mach number</td>
+</tr>
+<tr>
+<td>anemómetro / indicador de velocidad (ASI)</td>
+<td>airspeed indicator (ASI)</td>
+</tr>
+<tr>
+<td>error de instrumento / de posición</td>
+<td>instrument error / position error</td>
+</tr>
+<tr>
+<td>error de compresibilidad</td>
+<td>compressibility error</td>
+</tr>
+<tr>
+<td>presión estática</td>
+<td>static pressure</td>
+</tr>
+<tr>
+<td>presión dinámica</td>
+<td>dynamic pressure</td>
+</tr>
+<tr>
+<td>empuje</td>
+<td>thrust</td>
+</tr>
+<tr>
+<td>peso</td>
+<td>weight</td>
+</tr>
+<tr>
+<td>resistencia</td>
+<td>drag</td>
+</tr>
+<tr>
+<td>sustentación</td>
+<td>lift</td>
+</tr>
+<tr>
+<td>coeficiente de sustentación</td>
+<td>lift coefficient</td>
+</tr>
+<tr>
+<td>coeficiente de resistencia</td>
+<td>drag coefficient</td>
+</tr>
+<tr>
+<td>resistencia parásita</td>
+<td>parasite drag</td>
+</tr>
+<tr>
+<td>resistencia inducida</td>
+<td>induced drag</td>
+</tr>
+<tr>
+<td>viento relativo</td>
+<td>relative wind</td>
+</tr>
+<tr>
+<td>centro de gravedad (CG)</td>
+<td>centre of gravity (CG)</td>
+</tr>
+<tr>
+<td>extradós / intradós</td>
+<td>upper surface / lower surface</td>
+</tr>
+<tr>
+<td>torbellino / vórtice de punta de ala</td>
+<td>wingtip vortex</td>
+</tr>
+<tr>
+<td>estela turbulenta</td>
+<td>wake turbulence</td>
+</tr>
+<tr>
+<td>balanceo inducido</td>
+<td>induced roll</td>
+</tr>
+<tr>
+<td>efecto suelo</td>
+<td>ground effect</td>
+</tr>
+<tr>
+<td>factor de carga</td>
+<td>load factor</td>
+</tr>
+<tr>
+<td>viraje coordinado</td>
+<td>coordinated turn</td>
+</tr>
+<tr>
+<td>fuerza centrífuga</td>
+<td>centrifugal force</td>
+</tr>
+<tr>
+<td>pérdida (entrada en pérdida)</td>
+<td>stall</td>
+</tr>
+<tr>
+<td>ángulo de ataque crítico</td>
+<td>critical angle of attack</td>
+</tr>
+<tr>
+<td>coeficiente de sustentación máximo</td>
+<td>maximum lift coefficient</td>
+</tr>
+<tr>
+<td>velocidad de pérdida</td>
+<td>stall speed</td>
+</tr>
+<tr>
+<td>bataneo</td>
+<td>buffet</td>
+</tr>
+<tr>
+<td>vibrador de palanca (stick shaker)</td>
+<td>stick shaker</td>
+</tr>
+<tr>
+<td>Mach crítico</td>
+<td>critical Mach number</td>
+</tr>
+<tr>
+<td>onda de choque</td>
+<td>shock wave</td>
+</tr>
+<tr>
+<td>pérdida de alta velocidad</td>
+<td>high-speed stall</td>
+</tr>
+<tr>
+<td>coffin corner (esquina del ataúd)</td>
+<td>coffin corner</td>
+</tr>
+<tr>
+<td>perfil alar</td>
+<td>aerofoil / wing profile</td>
+</tr>
+<tr>
+<td>borde de ataque / borde de salida</td>
+<td>leading edge / trailing edge</td>
+</tr>
+<tr>
+<td>cuerda</td>
+<td>chord</td>
+</tr>
+<tr>
+<td>línea de curvatura media</td>
+<td>mean camber line</td>
+</tr>
+<tr>
+<td>perfil simétrico</td>
+<td>symmetric profile</td>
+</tr>
+<tr>
+<td>cuerda media</td>
+<td>mean chord</td>
+</tr>
+<tr>
+<td>encastre</td>
+<td>wing root</td>
+</tr>
+<tr>
+<td>envergadura</td>
+<td>wingspan</td>
+</tr>
+<tr>
+<td>superficie alar</td>
+<td>wing area</td>
+</tr>
+<tr>
+<td>estrechamiento</td>
+<td>taper</td>
+</tr>
+<tr>
+<td>alargamiento</td>
+<td>aspect ratio</td>
+</tr>
+<tr>
+<td>flecha</td>
+<td>sweep</td>
+</tr>
+<tr>
+<td>diedro</td>
+<td>dihedral</td>
+</tr>
+<tr>
+<td>ángulo de ataque</td>
+<td>angle of attack</td>
+</tr>
+<tr>
+<td>eje (longitudinal, lateral, vertical)</td>
+<td>axis (longitudinal, lateral, vertical)</td>
+</tr>
+<tr>
+<td>balanceo o alabeo / cabeceo / guiñada</td>
+<td>roll / pitch / yaw</td>
+</tr>
+<tr>
+<td>alerón</td>
+<td>aileron</td>
+</tr>
+<tr>
+<td>timón de profundidad (elevador)</td>
+<td>elevator</td>
+</tr>
+<tr>
+<td>timón de dirección</td>
+<td>rudder</td>
+</tr>
+<tr>
+<td>estabilizador horizontal / vertical</td>
+<td>horizontal / vertical stabiliser</td>
+</tr>
+<tr>
+<td>mando de vuelo / palanca</td>
+<td>control column</td>
+</tr>
+<tr>
+<td>pedales del timón</td>
+<td>rudder pedals</td>
+</tr>
+<tr>
+<td>dispositivos hipersustentadores</td>
+<td>high-lift devices</td>
+</tr>
+<tr>
+<td>slat</td>
+<td>slat</td>
+</tr>
+<tr>
+<td>flap</td>
+<td>flap</td>
+</tr>
+<tr>
+<td>spoiler / aerofreno</td>
+<td>spoiler / air brake</td>
+</tr>
+<tr>
+<td>trim tab / tab de compensación</td>
+<td>trim tab</td>
+</tr>
+<tr>
+<td>momento de charnela / eje de charnela</td>
+<td>hinge moment / hinge axis</td>
+</tr>
+<tr>
+<td>velocidad de decisión (V1)</td>
+<td>decision speed (V1)</td>
+</tr>
+<tr>
+<td>velocidad de rotación (VR)</td>
+<td>rotation speed (VR)</td>
+</tr>
+<tr>
+<td>velocidad de despegue (VLOF)</td>
+<td>lift-off speed (VLOF)</td>
+</tr>
+<tr>
+<td>velocidad de seguridad al despegue (V2)</td>
+<td>take-off safety speed (V2)</td>
+</tr>
+<tr>
+<td>velocidad mínima de control en el suelo (VMCG)</td>
+<td>minimum control speed on the ground (VMCG)</td>
+</tr>
+<tr>
+<td>velocidad mínima de control en el aire (VMCA)</td>
+<td>minimum control speed in the air (VMCA)</td>
+</tr>
+<tr>
+<td>motor crítico</td>
+<td>critical engine</td>
+</tr>
+<tr>
+<td>guiñada adversa</td>
+<td>adverse yaw</td>
+</tr>
+<tr>
+<td>distancia de aceleración-despegue</td>
+<td>accelerate-go distance</td>
+</tr>
+<tr>
+<td>distancia de aceleración-parada</td>
+<td>accelerate-stop distance</td>
+</tr>
+<tr>
+<td>distancia de despegue</td>
+<td>take-off distance</td>
+</tr>
+<tr>
+<td>gradiente o pendiente de pista</td>
+<td>runway gradient</td>
+</tr>
+<tr>
+<td>componente de viento de frente / en contra</td>
+<td>headwind component</td>
+</tr>
+<tr>
+<td>zona de parada (stopway)</td>
+<td>stopway</td>
+</tr>
+<tr>
+<td>clearway (zona libre de obstáculos)</td>
+<td>clearway</td>
+</tr>
+<tr>
+<td>velocidad de referencia (VREF)</td>
+<td>reference speed (VREF)</td>
+</tr>
+<tr>
+<td>velocidad de toma de contacto (VTD)</td>
+<td>touchdown speed (VTD)</td>
+</tr>
+<tr>
+<td>ascenso en aproximación</td>
+<td>approach climb</td>
+</tr>
+<tr>
+<td>ascenso en aterrizaje</td>
+<td>landing climb</td>
+</tr>
+<tr>
+<td>avión de categoría de transporte</td>
+<td>transport-category aeroplane</td>
+</tr>
+<tr>
+<td>hidroplaneo</td>
+<td>hydroplaning</td>
+</tr>
+<tr>
+<td>reversa / inversión de empuje</td>
+<td>reverse thrust</td>
+</tr>
+<tr>
+<td>pista contaminada</td>
+<td>contaminated runway</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fuentes">Fuentes</h2>
+<ul>
+<li>ENAIRE, «Aerodinámica y Mecánica de Vuelo», elaborado agosto 2023, 23 páginas.</li>
+<li>EASA CS-25 Amendment 28, apartados CS 25.107, 25.113, 25.125, 25.149, 25.207, 25.337.</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>

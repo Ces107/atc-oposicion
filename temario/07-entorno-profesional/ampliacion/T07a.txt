@@ -1,0 +1,108 @@
+¿Quiénes forman el Consejo Rector de ENAIRE y cuántas personas son en total?	El Presidente (nato, cargo que ocupa el Secretario de Estado de Transportes y Movilidad Sostenible) más 11 Consejeros = 12 personas en total.	ATC::T07a
+¿Quién nombra y separa a los 11 Consejeros de ENAIRE?	El Ministro de Transportes, Movilidad y Agenda Urbana, respetando el principio de presencia equilibrada de mujeres y hombres (RD 160/2023, art. 9).	ATC::T07a
+¿Cuál es la indemnización anual máxima que puede percibir un Consejero de ENAIRE y por cuántas sesiones?	11 735,24 EUR al año por un máximo de 11 sesiones (se reduce proporcionalmente si se celebran menos sesiones).	ATC::T07a
+¿Qué documentos aprueba específicamente el Consejo Rector de ENAIRE, según su propia página web de gobernanza?	El Plan de Vuelo (plan estratégico), el Código Ético, las Políticas, el Plan de Actuación Plurianual (PAP), el Presupuesto Operativo, el Plan Empresarial, el mapa de riesgos, los objetivos de la empresa y las Cuentas Anuales.	ATC::T07a
+Según el RD 160/2023, ¿qué ocurre con los dividendos que ENAIRE recibe de filiales ajenas al negocio de navegación aérea?	El 100 % debe ingresarse en el Tesoro Público.	ATC::T07a
+Según el art. 28 del RD 160/2023, ¿cuál es la naturaleza jurídica de las tarifas de ruta y de aproximación de ENAIRE?	Son «ingresos de derecho público», exigibles mediante el procedimiento administrativo de apremio del Ministerio de Hacienda.	ATC::T07a
+Nombra tres de las seis categorías de recursos económicos legales de ENAIRE que enumera el art. 27 del RD 160/2023.	Tres cualesquiera de estas: productos de su propio patrimonio; ingresos ordinarios y extraordinarios de su actividad; préstamos y operaciones de crédito; subvenciones de los Presupuestos Generales del Estado; ayudas de la UE o de administraciones públicas; otros recursos atribuidos por ley o convenio.	ATC::T07a
+¿Dónde está físicamente el ACC de Madrid de ENAIRE?	En Madrid-Torrejón (no en el propio aeropuerto de Barajas).	ATC::T07a
+Enumera los aeropuertos donde ENAIRE presta ATS (torre/aproximación) en la región Centro-Norte, además del ACC de Madrid-Torrejón.	Asturias, Bilbao, Logroño, Pamplona, Santander, Santiago (TACC) y Vitoria.	ATC::T07a
+Enumera los aeropuertos donde ENAIRE presta solo CNS (no ATS) en la región Centro-Norte.	A Coruña, Burgos, Huesca-Pirineos, León, Madrid-Cuatro Vientos, Salamanca, Valladolid, Vigo y Zaragoza.	ATC::T07a
+¿En qué aeropuertos de la región Sur presta ENAIRE ATS, además del ACC de Sevilla?	Almería, Granada, Málaga y Melilla.	ATC::T07a
+¿Qué aeropuertos de la región Sur reciben de ENAIRE solo CNS?	Badajoz, Córdoba, Jerez y el helipuerto de Ceuta.	ATC::T07a
+¿En qué aeropuertos de la región Este presta ENAIRE ATS, además del ACC de Barcelona?	Girona, Reus y Valencia (TACC).	ATC::T07a
+¿Qué aeropuertos de la región Este reciben de ENAIRE solo CNS?	Albacete, Alicante/Alacant, Murcia y Sabadell.	ATC::T07a
+En la región Balear, ¿qué aeropuerto recibe ATS de ENAIRE además del ACC de Palma y cuál recibe solo CNS?	Menorca recibe ATS; Ibiza recibe solo CNS.	ATC::T07a
+¿En qué aeropuertos de la región Canaria presta ENAIRE ATS, además del ACC de Gran Canaria?	Tenerife Norte y Tenerife Sur.	ATC::T07a
+¿Qué aeropuertos de la región Canaria reciben de ENAIRE solo CNS?	Fuerteventura, La Gomera, El Hierro, Lanzarote y La Palma.	ATC::T07a
+Según el AIP GEN 3.3 (dic. 2025), ¿qué dos organizaciones privadas tiene certificadas AESA para prestar el servicio de control de aeródromo en España, además de ENAIRE?	SAERCO (Servicios Aeronáuticos Control y Navegación, S.L.) y Skyway Air Navigation Services.	ATC::T07a
+Enumera los aeropuertos donde SAERCO presta el servicio de control de aeródromo (ATC).	A Coruña, El Hierro, Fuerteventura, Jerez, La Palma, Lanzarote/César Manrique, Madrid/Cuatro Vientos, Sevilla y Vigo.	ATC::T07a
+Enumera los aeródromos donde SAERCO presta AFIS (servicio de información de vuelo de aeródromo).	Burgos/Villafría, Córdoba, El Hierro, Huesca/Pirineos y La Gomera.	ATC::T07a
+Enumera los aeropuertos donde Skyway presta el servicio de control de aeródromo (ATC).	Alicante-Elche, Castellón, Ibiza, Lleida/Alguaire, Murcia-Región de Murcia, Sabadell y Valencia.	ATC::T07a
+¿Dónde presta Skyway el AFIS?	En el aeropuerto de Andorra-La Seu d'Urgell, durante su operación de uso público.	ATC::T07a
+¿Cuál fue el nombre anterior de Skyway y cuándo y por qué cambió?	FerroNATS; pasó a llamarse Skyway en febrero de 2023 tras comprar Serveo (antes Ferrovial Servicios) el 50 % de su socio en la empresa conjunta, NATS Ltd.	ATC::T07a
+¿Cómo se creó FerroNATS originalmente y al amparo de qué ley?	Como empresa conjunta al 50 % en 2011 entre Ferrovial Servicios y el ANSP británico NATS Ltd, para concursar a los contratos de torres de ATS de aeródromo tras la liberalización de estos servicios en España por la Ley 9/2010.	ATC::T07a
+Según el Reglamento del sistema de rendimientos y tarificación del SES, ¿en qué condiciones se fijan las tarifas de ATS de aeródromo de Alicante-Elche e Ibiza?	En «condiciones de mercado» (licitadas por Aena), no con el esquema de incentivos del periodo de referencia que se aplica a ENAIRE.	ATC::T07a
+¿Cuántas radioayudas (DME, GBAS, ILS, NDB, VOR) explotó ENAIRE en 2024?	301.	ATC::T07a
+¿Cuántos sistemas de vigilancia (ADS-B, MLAT, PSR, SSR, SMR) explotó ENAIRE en 2024?	92.	ATC::T07a
+¿Cuántos centros de comunicaciones explotó ENAIRE en 2024?	168.	ATC::T07a
+¿Cuántos nodos REDAN (red de comunicaciones de voz y datos) tenía ENAIRE en 2024?	122.	ATC::T07a
+¿Cuántas posiciones de control de torre tenía ENAIRE en 2024 y cuántas eran posiciones de torre remota?	135 posiciones de control de torre, de las cuales 5 eran posiciones de torre remota.	ATC::T07a
+¿Cuántas posiciones de control de sector tenía ENAIRE en 2024 (ruta, TMA, CAO, simulación, CATS)?	200.	ATC::T07a
+En 2024, ¿en qué aeropuertos o emplazamientos radar se integró la señal ADS-B en SACTA?	Yeste, Vejer, Menorca, Cabo Higuer, San Sebastián, Bilbao, Monte del Perdón, Valencia y Lanzarote.	ATC::T07a
+¿Qué dos radares se actualizaron a Modo S en 2024?	Valencia y Madrid-Barajas.	ATC::T07a
+En 2024, ¿qué radar de movimiento en superficie (SMR) y qué sistemas de multilateración (MLAT) se renovaron?	Se renovó el SMR de Barcelona y los sistemas MLAT de Málaga y Palma.	ATC::T07a
+¿Cuáles son las dos zonas tarifarias de las tarifas de ruta de ENAIRE?	Península y Canarias.	ATC::T07a
+¿Cuáles son las tarifas unitarias de ruta de ENAIRE para 2025 en Península y Canarias?	Península: 66,31 EUR; Canarias: 51,89 EUR (por unidad, sin impuestos, con efectos desde el 1 de enero de 2025).	ATC::T07a
+¿Cuál es la fórmula de las tarifas de ruta de ENAIRE?	Tarifa de ruta = (MTOW/50)^0,5 x (distancia ortodrómica en km / 100) x tarifa unitaria.	ATC::T07a
+¿Cuál es la fórmula de las tarifas de aproximación de ENAIRE?	Tarifa de aproximación = (MTOW/50)^0,70 x tarifa unitaria.	ATC::T07a
+¿Cuántas categorías de aeropuertos usa ENAIRE para las tarifas de aproximación y cuáles son las tarifas unitarias de 2025?	Tres categorías: categoría 1, 25,78 EUR; categoría 2, 23,20 EUR; categoría 3, 19,33 EUR.	ATC::T07a
+Nombra cinco aeropuertos de categoría 1 para la tarifa de aproximación de ENAIRE (2025).	Cinco cualesquiera de estos: Alicante-Elche, Barcelona-El Prat, Bilbao, Fuerteventura, Gran Canaria, Ibiza, Lanzarote, Madrid-Barajas, Málaga, Menorca, Palma de Mallorca, Sevilla, Tenerife Norte, Tenerife Sur, Valencia.	ATC::T07a
+¿Qué organismos financian las tarifas de ruta, además de la propia ENAIRE?	AESA, AEMET, el Ministerio de Defensa y EUROCONTROL, entre otros.	ATC::T07a
+¿A quién ha delegado España la facturación y el cobro de las tarifas de ruta y de aproximación?	A EUROCONTROL.	ATC::T07a
+Nombra dos categorías de vuelos exentas de las tarifas de ruta de ENAIRE.	Dos cualesquiera de estas: aeronaves de menos de 2 toneladas de MTOW; vuelos totalmente VFR en las FIR españolas; vuelos oficiales del monarca o Jefe de Estado; vuelos de búsqueda y salvamento; vuelos militares españoles; vuelos de instrucción para obtener una licencia; vuelos de calibración de radioayudas; vuelos circulares sin aterrizaje intermedio.	ATC::T07a
+¿Qué categoría de vuelos está exenta de la tarifa de aproximación de ENAIRE pero NO figura entre las exenciones de las tarifas de ruta?	Los vuelos de aduanas y policía.	ATC::T07a
+¿Cuánto subieron las tarifas de ruta de ENAIRE en Península y Canarias en 2024 respecto a 2023?	+14,7 % en Península y +9,6 % en Canarias.	ATC::T07a
+Una vez superados los niveles de tráfico de 2019, ¿cómo se comparan las tarifas de ruta de 2024 con las de 2019?	Volvieron aproximadamente a los niveles de 2019: solo +2,3 % en Península y +0,8 % en Canarias respecto a 2019.	ATC::T07a
+¿Menciona la Ley 3/2013 (que crea la CNMC) las tarifas de navegación aérea entre los sectores regulados por la CNMC?	No: se buscó y no se encontró ninguna mención; los sectores que enumera la CNMC son energía, telecomunicaciones, ferroviario, postal y competencia en general.	ATC::T07a
+¿Cuál fue el importe neto de la cifra de negocios aproximado de ENAIRE en 2025?	Unos 1192,2 M EUR (1192,1 M EUR del segmento Navegación Aérea + 0,1 M EUR de Corporativo).	ATC::T07a
+¿Cuál fue el EBITDA de ENAIRE en 2024 y 2023 y su variación porcentual?	353,5 M EUR en 2024 frente a 272,6 M EUR en 2023, un aumento de 80,8 M EUR (+29,7 %).	ATC::T07a
+¿Cuáles fueron las cifras principales de ENAIRE en 2022 en pasajeros, vuelos e inversión?	243 millones de pasajeros; cerca de 2 millones de vuelos; 169 M EUR invertidos (+36 % respecto al año anterior).	ATC::T07a
+¿Cuánto aumentaron los ingresos de ENAIRE en 2022 respecto a 2021 y a qué porcentaje del tráfico de 2019 se había recuperado?	Los ingresos subieron 281,6 M EUR (+60 %); el tráfico se recuperó hasta el 92 % de los niveles de 2019.	ATC::T07a
+¿Quiénes son los accionistas ANSP reales de Aireon (según fuentes de 2026) y está ENAIRE entre ellos?	NAV CANADA, ENAV S.p.A. (Italia), la Irish Aviation Authority, Naviair (Dinamarca) y NATS (Reino Unido); ENAIRE NO está entre ellos.	ATC::T07a
+¿Cuál es la trampa clásica de nombres entre los accionistas de Aireon y ENAIRE?	ENAV (el ANSP de Italia) es accionista de Aireon; se confunde fácilmente con ENAIRE (el ANSP de España), que no lo es.	ATC::T07a
+¿Está confirmado Searidge Technologies (proveedor de torres remotas) como socio de ENAIRE?	No: su trabajo confirmado en España es con Aena y FerroNATS/Skyway en la torre digital del aeropuerto de Vigo, no con ENAIRE.	ATC::T07a
+¿Qué empresa es el socio tecnológico de ENAIRE para su propia torre digital/remota y para iTEC SkyNex?	Indra.	ATC::T07a
+¿Es ENAIRE miembro de COOPANS?	No: ninguna fuente de ENAIRE menciona COOPANS; la alianza tecnológica confirmada de ENAIRE es iTEC SkyNex, construida sobre una tecnología distinta (Indra).	ATC::T07a
+Enumera los 8 miembros de la alianza iTEC SkyNex.	DFS (Alemania), Avinor (Noruega), Oro Navigacija (Lituania), PANSA (Polonia), LVNL (Países Bajos), ENAIRE (España), NATS (Reino Unido) y NAV Canada, con Indra como socio tecnológico.	ATC::T07a
+¿Cuándo se lanzó el programa iTEC SkyNex y qué espacio aéreo y tráfico abarca la alianza?	Se lanzó en 2021; abarca más de 26 millones de km² de espacio aéreo y gestiona más de 12 millones de vuelos al año desde 27 centros de control.	ATC::T07a
+¿Qué diferencia hay entre «Skyway» y «SkyNex» en el entorno profesional de ENAIRE?	Skyway es el ANSP español privado de torres (ex-FerroNATS); SkyNex es el programa de alianza tecnológica iTEC de la propia ENAIRE. No tienen relación pese a la similitud de nombres.	ATC::T07a
+¿Qué servicio enumera la Carta de Servicios 2025-2027 de ENAIRE que omite el manual oficial del tema 7 (nov. 2024)?	El Servicio de Dirección de Plataforma (SDP).	ATC::T07a
+¿Qué hace el SDP (Servicio de Dirección de Plataforma) de ENAIRE?	Dirige las actividades y el movimiento de aeronaves y vehículos en la plataforma de un aeropuerto.	ATC::T07a
+¿Qué certificaciones de sistemas de gestión ISO tiene ENAIRE y cuáles son sus números de certificado?	ISO 14001 (medioambiente) GA-2005/0575; ISO 9001 (calidad) ER-1034/2007; ISO 45001 (seguridad y salud en el trabajo) SST-0156/2014, todas de AENOR.	ATC::T07a
+¿Para qué categorías del Esquema Nacional de Seguridad (ENS) está certificada ENAIRE?	Categoría MEDIA (ENS-2018/0006) y categoría ALTA (ENS-2020/0020), por AENOR.	ATC::T07a
+¿Cuándo obtuvo ENAIRE el sello EFQM 600 y cuál es su código de certificado?	En 2024; certificado CEG/24/S600/6, basado en el modelo EFQM 2020.	ATC::T07a
+¿Cómo se llama el certificado de formación de controladores de ENAIRE y qué cuatro tipos de formación cubre?	PFTAC-10 (expedido por AESA conforme al Reglamento (UE) 2015/340); cubre Formación de Unidad ATCO, Formación Continua ATCO, Formación de Instructor práctico y Formación de Evaluador.	ATC::T07a
+¿Cuál es el objetivo de la Carta de Servicios 2025-2027 de ENAIRE para el Nivel Ponderado de Seguridad (NPS) en 2027?	Igual o inferior a 11,00.	ATC::T07a
+¿Cuál es el objetivo de la Carta de Servicios para la demora ATFM de ruta media atribuible a ENAIRE en 2027?	Igual o inferior a 0,23 minutos por vuelo IFR.	ATC::T07a
+¿Qué porcentaje de vuelos debe cumplir su ventana de despegue prevista (ETOT/CTOT) en los cinco principales aeropuertos de España, según la Carta de Servicios?	Al menos el 90 %.	ATC::T07a
+¿Qué compromisos de disponibilidad y continuidad asume la Carta de Servicios para el Sistema de Navegación Aérea?	Al menos el 99 % de los servicios con disponibilidad superior al 95 % y al menos el 97 % de los servicios con continuidad superior a 1000 horas (MTBO).	ATC::T07a
+¿Qué compromiso sobre enmiendas del AIP asume la Carta de Servicios de ENAIRE?	El 100 % de las enmiendas del AIP publicadas en las fechas fijadas anualmente por la OACI.	ATC::T07a
+¿Qué objetivo de calidad percibida fija la Carta de Servicios para los clientes?	Superior al 75 %.	ATC::T07a
+Nombra cinco de los canales electrónicos públicos de servicio de ENAIRE.	Cinco cualesquiera de estos: enaire.es, clientes.enaire.es (portal de clientes), aip.enaire.es/AIP, insignia.enaire.es, insigniavfr.enaire.es/guiavfr.enaire.es, drones.enaire.es, planea.enaire.es, el servicio de plan de vuelo en línea, la calculadora de tarifas, enaire.sede.gob.es.	ATC::T07a
+¿Qué plataforma se necesita para abrir un expediente en la Sede Electrónica de ENAIRE y con qué se firma?	Cl@ve para abrir un expediente; AutoFirma para firmar electrónicamente.	ATC::T07a
+En la fórmula del valor de la hora salarial HO=(SB+CPT+CA+CAFP+CNP+CPAF)/CCE del III Convenio, ¿qué valor tiene CCE?	1470 (Coeficiente de Cálculo Estimado).	ATC::T07a
+En la fórmula del valor de la hora del III Convenio, ¿qué significa CPT y qué representa?	Complemento de Puesto de Trabajo: un complemento salarial que varía según el grupo de dependencias y el puesto específico, no una categoría de personal.	ATC::T07a
+¿Por qué factor se multiplica la hora extraordinaria respecto a la hora ordinaria según el III Convenio?	1,75.	ATC::T07a
+¿Cuántas pagas extraordinarias reciben los CTA al año según el III Convenio y en qué meses?	Dos, en junio y diciembre.	ATC::T07a
+¿Cuál es la jornada anual máxima a turnos de los CTA y cuánto puede ampliarse por formación?	1595 horas al año, ampliables en 20 horas para actividades de formación.	ATC::T07a
+¿Cuál es el límite mensual de actividad aeronáutica de un CTA según el III Convenio?	170 horas.	ATC::T07a
+¿Cuántas horas anuales y semanales tienen los CTA en el horario ordinario (sin turnos)?	1711 horas al año, 37,5 horas a la semana (7,5 horas al día, de lunes a viernes).	ATC::T07a
+Nombra los seis tipos de servicio en turnos que define el III Convenio.	Mañana, Tarde, Día, Noche, Imaginaria y Refuerzo.	ATC::T07a
+¿Qué es el Servicio de Imaginaria y cuál es la ventana de disponibilidad del CTA?	Un servicio de disponibilidad para controladores fuera de servicio; disponible desde 1 hora antes hasta 30 minutos después de la hora de comienzo del turno cubierto.	ATC::T07a
+En las dependencias de los Grupos 1-5, ¿cuántos servicios de imaginaria al mes puede tener programados como máximo un CTA?	5 al mes.	ATC::T07a
+¿Qué es un Servicio de Guardia Localizada (SGL) y en cuánto tiempo debe presentarse un CTA una vez localizado?	Un servicio de disponibilidad de «urgencia vital» (transporte de órganos, evacuación de heridos o enfermos, emergencias); el CTA debe presentarse en un plazo de 45 minutos desde que es localizado.	ATC::T07a
+¿Cuál es el porcentaje máximo combinado de servicios nocturnos y festivos en los servicios anuales de un CTA según el III Convenio?	El 33 % del total de servicios anuales.	ATC::T07a
+¿Cuándo se considera «festivo» un servicio según el III Convenio?	Cuando la mayor parte del servicio cae entre las 14:00 del sábado y las 23:59 del domingo.	ATC::T07a
+¿Con cuánta antelación deben publicarse los cuadrantes mensuales de turnos según el III Convenio?	Al menos 30 días antes.	ATC::T07a
+Si no llega el relevo de la posición de un CTA, ¿cuánto tiempo debe permanecer como máximo y cómo se paga ese tiempo?	Hasta 2 horas adicionales, abonadas como horas extraordinarias por fuerza mayor.	ATC::T07a
+Según el RD 1001/2010, ¿cuánto puede prolongarse la actividad aeronáutica continua en las torres de control monoposición?	Hasta 12 horas.	ATC::T07a
+¿Qué cifra de ejemplo da el III Convenio para el CPT del Grupo 8 de Dependencias (dependencias monoposición)?	10 564,08 EUR al año.	ATC::T07a
+Según el III Convenio, ¿qué es una «Licencia de Controlador de Tránsito Aéreo»?	Un documento expedido y anotado conforme al Reglamento (UE) 2015/340 que faculta a su titular para ejercer las atribuciones de las habilitaciones y anotaciones que contiene.	ATC::T07a
+Según el III Convenio, ¿qué es una «Habilitación»?	Una autorización incorporada a una licencia que establece condiciones, atribuciones o restricciones específicas.	ATC::T07a
+Según el III Convenio, ¿qué consigna una «Anotación de Unidad»?	El indicador de lugar OACI y el sector, grupo de sectores o puestos en los que el titular de la licencia es competente para trabajar.	ATC::T07a
+Según el III Convenio, ¿qué certifica una anotación OJTI?	La competencia para impartir formación en el puesto de trabajo y en dispositivos sintéticos de entrenamiento.	ATC::T07a
+Según el III Convenio, ¿qué certifica una anotación STDI y en qué se diferencia de la OJTI?	La competencia para impartir formación específicamente en dispositivos sintéticos de entrenamiento (simuladores); la OJTI abarca también la formación en el puesto de trabajo, la STDI solo el simulador.	ATC::T07a
+Según el III Convenio, ¿qué certifica una «Anotación de evaluador»?	La competencia para evaluar las habilidades prácticas de un alumno controlador y de un controlador.	ATC::T07a
+Según el III Convenio, ¿qué diferencia hay entre «CTA operativo» y «CTA no operativo»?	El CTA operativo posee un certificado de aptitud psicofísica en vigor; el CTA no operativo carece de él.	ATC::T07a
+Según el III Convenio, ¿cuándo se considera «cualificado» a un CTA para un puesto?	Una vez que supera la evaluación de competencia y, en su caso, el curso de formación exigido.	ATC::T07a
+Según el III Convenio, ¿qué es un «Núcleo TMA» frente a un «Núcleo ruta»?	El Núcleo TMA son principalmente sectores de aproximación de una dependencia (puede incluir sectores de ruta); el Núcleo ruta son exclusivamente sectores de ruta.	ATC::T07a
+Según el III Convenio, ¿qué tres criterios ordenan el «Escalafón» de los CTA?	Nivel Profesional, antigüedad como CTA y número de controlador, por ese orden.	ATC::T07a
+Según el III Convenio, ¿cómo se definen las «funciones superiores/iguales/inferiores» de un puesto?	Por el tamaño relativo del CPT (Complemento de Puesto de Trabajo) entre puestos: una definición retributiva, no basada en las tareas.	ATC::T07a
+¿Qué convenio colectivo rige actualmente para el personal no controlador de ENAIRE y en qué se diferencia del que cita el manual de nov. 2024?	El II Convenio del Grupo AENA-ENAIRE (BOE-A-2025-15819, 2025); el manual todavía cita el anterior «I Convenio Colectivo del Grupo Aena».	ATC::T07a
+¿Qué discrepancia hay entre el número de aeropuertos del manual y el de la página web Red ENAIRE?	El manual y el PV2030 indican 21 aeropuertos/torres; sumando las listas ATS por región de Red ENAIRE salen 22 ubicaciones ATS, una discrepancia sin resolver.	ATC::T07a
+¿Qué abreviatura usa el III Convenio en todo el texto para Controlador de Tránsito Aéreo?	CTA (Controlador de Tránsito Aéreo).	ATC::T07a
+¿Qué son CAG y CAO en la descripción del servicio ASM de nivel 3 de la propia ENAIRE?	CAG = Circulación Aérea General; CAO = Circulación Aérea Operativa (militar).	ATC::T07a
+¿Qué significa la abreviatura MTBO en los compromisos de continuidad de ENAIRE?	Mean Time Between Outages (tiempo medio entre indisponibilidades).	ATC::T07a
+¿Qué significa REDAN en la infraestructura de red de ENAIRE?	Red de Datos de Navegación Aérea, la red de telecomunicaciones dedicada de ENAIRE.	ATC::T07a
+¿Qué trampa de examen afecta a los exponentes de las fórmulas de tarifas de ENAIRE?	La tarifa de ruta usa exponente 0,50 sobre (MTOW/50); la de aproximación, 0,70 sobre (MTOW/50): no las intercambies.	ATC::T07a

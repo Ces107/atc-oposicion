@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar: entrenador</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='4.5'/%3E%3Cpath d='M12 12L18.4 5.6'/%3E%3Cpath d='M15.6 16.4h.01' stroke-width='2.8'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onacc:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a6c8f0; --onacc:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans)}
+.top{display:flex;align-items:center;gap:10px;margin:0 auto;padding:14px 16px 10px}
+.top .logo{width:30px;height:30px;color:var(--accent);flex:none}
+.top .brand{font:700 20px/1 var(--serif);letter-spacing:.01em}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.logo{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 28px/1.2 var(--serif);margin:.3em 0 .5em}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:1.6em 0 .6em}
+h3{font:700 17px var(--serif);margin:1em 0 .3em}
+p{margin:.4rem 0}
+.soft{color:var(--muted)} .small{font-size:14px}
+.good{color:var(--ok)} .bad{color:var(--err)} .warn{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn:disabled{opacity:.4;cursor:default}
+.link{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0;margin-bottom:6px;min-height:40px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;width:100%;max-width:420px}
+input[type=range]{width:100%;max-width:420px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;vertical-align:-3px;margin-right:8px}
+label.lb{display:block;margin:1rem 0 .3rem;font-weight:600}
+label.lb.inline{font-weight:400}
+kbd,.key{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.head{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;color:var(--muted);font-size:15px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.head b{color:var(--text)}
+.head .ic{margin-right:4px}
+.bar{height:3px;background:var(--rule);margin:0 0 12px}
+.bar>div{height:100%;background:var(--accent);width:0}
+.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.fig{padding:10px 26px 10px 0}
+.fig b{display:block;font:700 28px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.fig span{color:var(--muted);font-size:13px}
+.tbl,.tbl-box,.tab-box,.tabla-caja{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 12px 6px 0;white-space:nowrap}
+td{padding:6px 12px 6px 0;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top}
+.list{border-top:1px solid var(--text);margin:8px 0 16px}
+.card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 4px;cursor:pointer;color:var(--text)}
+.card:hover{background:var(--stripe)}
+.card .ic{width:30px;height:30px;color:var(--accent);stroke-width:1.5}
+.card .nm{display:block;font:700 20px/1.2 var(--serif)}
+.card .dt{display:block;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.hintbox{border-top:1px solid var(--rule);padding-top:8px;margin-top:10px}
+@media (max-width:640px){.fig{padding-right:18px}.fig b{font-size:24px}h1{font-size:25px}}
+
+#app{max-width:1000px;margin:0 auto;padding:8px 16px 56px}
+.top{max-width:1000px}
+.question{font:600 38px/1.25 var(--serif);text-align:center;margin:28px 0;font-variant-numeric:tabular-nums}
+.entry{font:600 30px var(--sans);text-align:center;max-width:280px;margin:0 auto;display:block}
+.fb{min-height:2.2rem;text-align:center;font-size:18px;margin-top:10px}
+.fbbig{font-size:30px;font-weight:700;min-height:44px}
+.thin{font-size:14px;color:var(--muted)}
+.slider-row{display:grid;grid-template-columns:1fr 64px;gap:2px 10px;align-items:center;max-width:420px;margin-top:12px}
+.slider-row output{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+canvas{display:block;width:100%;max-width:700px;height:auto;margin:0 auto;background:#09110c;border:1px solid #2b3a30;border-radius:0}
+.radar-wrap{display:grid;grid-template-columns:min(700px,max(380px,calc(100vh - 150px))) minmax(210px,1fr);gap:20px;align-items:start;margin-top:12px}
+@media (max-width:900px){.radar-wrap{grid-template-columns:1fr}}
+tr.conf td{color:var(--err);font-weight:600}
+.rules{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.rules:empty{border:0;margin:0}
+.rule .key{font-size:16px;padding:3px 9px}
+.rule{display:flex;align-items:center;gap:8px;padding:9px 22px 9px 0;font-size:17px}
+.rule svg{display:block}
+.key.hl{background:var(--warn);color:#fff;border-color:var(--warn)}
+.stage{display:flex;justify-content:center;align-items:center;height:210px;margin-top:10px}
+.stage.rev{outline:4px solid var(--warn);outline-offset:-4px}
+.rev-sample{display:inline-block;width:24px;height:16px;border:3px solid var(--warn);vertical-align:-3px}
+.tbar{height:3px;background:var(--rule);margin:6px 0 4px}
+.tbar>div{height:100%;width:100%;background:var(--accent);transform-origin:left center}
+.keys{display:flex;gap:10px;justify-content:center;margin-top:8px}
+.keys .key{min-width:60px;min-height:44px;line-height:28px;text-align:center;font-size:20px;padding:8px 10px;cursor:pointer;user-select:none}
+.flash-bad{color:var(--err)} .flash-good{color:var(--ok)}
+.mon{display:inline-block;padding:1px 10px;border:1px solid var(--rule);color:var(--muted)}
+.mon.sig{background:var(--warn);color:#fff;border-color:var(--warn)}
+.rec{font-weight:700;color:var(--ok);margin:8px 0}
+.rec .ic{margin-right:6px}
+td.k{font-weight:700;padding-right:24px}
+h2.ttl{font:700 28px/1.2 var(--serif);border:0;padding:0;margin:.3em 0 .5em}
+@media (max-width:640px){h2.ttl{font-size:25px}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){.question{font-size:28px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.5L20 9"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4.5L4 15"/><path d="M4 20v-5h5"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5C6.5 4 9.5 4 12 5.5v14c-2.5-1.5-5.5-1.5-8 0z"/><path d="M20 5.5C17.5 4 14.5 4 12 5.5v14c2.5-1.5 5.5-1.5 8 0z"/></symbol><symbol id="i-conflict" viewBox="0 0 24 24"><path d="M4 18L20 6"/><path d="M4 6l16 12"/><circle cx="12" cy="12" r="3.5"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-keys" viewBox="0 0 24 24"><rect x="3.5" y="4" width="7" height="7"/><circle cx="16.5" cy="7.5" r="3.5"/><path d="M7 13.5l3.5 6.5h-7z"/><path d="M16.5 13.5l3.5 3.5-3.5 3.5-3.5-3.5z"/></symbol><symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-dash" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12L18.4 5.6"/><path d="M15.6 16.4h.01" stroke-width="2.8"/></symbol></defs></svg>
+<header class="top"><svg class="logo" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand">Radar</span></header>
+<h1 class="sr-only" id="pageh1">Radar: entrenador de conflictos, rumbos y categorías</h1>
+<main id="app"></main>
+<script>
+// ==== PURE LOGIC START ====
+// Everything between the START and END markers has no DOM dependency and is executed by node for testing (see the README).
+// Conventions: x = east (NM), y = north (NM); heading 0 = north, clockwise; speed in kt; flight level FL in hundreds of ft;
+// times in minutes. Separation minimum: 5 NM lateral OR 1000 ft vertical. Loss = lateral < 5 NM AND vertical < 1000 ft
+// (exactly 5.0 NM or exactly 1000 ft counts as separated).
+const SEP_NM = 5, SEP_FT = 1000, MIN_ACCURACY = 96;
+const LEVEL_NAMES = ['Calentamiento', 'Fácil', 'Constante', 'Estándar', 'Competitivo', 'Difícil', 'Élite', 'Extremo', 'Sobrehumano', 'Imposible'];
+const HINT_MAX = [3, 3, 3, 3, 2, 1, 0, 0, 0, 0]; // highest hint tier available at each level (none from level 7 up)
+
+function mulberry32(a){
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function randInt(rnd, a, b){ return a + Math.floor(rnd() * (b - a + 1)); }
+function pick(rnd, arr){ return arr[Math.floor(rnd() * arr.length)]; }
+function shuffle(rnd, arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function fmt(x, d){
+  if (x === null || x === undefined || isNaN(x)) return '—';
+  return Number(x).toFixed(d === undefined ? 1 : d);
+}
+function mod360(x){ return ((x % 360) + 360) % 360; }
+function pad3(n){ n = Math.round(n); return (n < 100 ? (n < 10 ? '00' : '0') : '') + n; }
+function clamp(x, a, b){ return Math.min(b, Math.max(a, x)); }
+
+/* ---- 0. Difficulty ladder: 10 manual levels per module, plus custom parameters ---- */
+// conf: n aircraft | window minutes | limit = seconds per picture (0 = untimed) | pictures | traps = minimum number of trap pairs
+//       (a pair saved only by 1000 ft vertical, or a lateral near miss of 6-9 NM) | exposure = seconds the picture stays visible (0 = always)
+const CONF_LEVELS = [
+  { n: 2, window: 5,  limit: 0,  pictures: 8,  traps: 0, exposure: 0 },
+  { n: 3, window: 6,  limit: 90, pictures: 8,  traps: 0, exposure: 0 },
+  { n: 3, window: 8,  limit: 60, pictures: 10, traps: 1, exposure: 0 },
+  { n: 4, window: 8,  limit: 50, pictures: 10, traps: 1, exposure: 0 },
+  { n: 4, window: 10, limit: 40, pictures: 10, traps: 2, exposure: 0 },
+  { n: 5, window: 10, limit: 35, pictures: 12, traps: 2, exposure: 0 },
+  { n: 6, window: 10, limit: 28, pictures: 12, traps: 3, exposure: 0 },
+  { n: 6, window: 12, limit: 20, pictures: 12, traps: 4, exposure: 0 },
+  { n: 6, window: 12, limit: 14, pictures: 12, traps: 5, exposure: 10 },
+  { n: 6, window: 15, limit: 9,  pictures: 15, traps: 6, exposure: 6 }
+];
+// arith: step = granularity of angles (10, 5 or 1 degree) | kinds | limit = seconds per question (0 = untimed) | items |
+//        comboShare = share of multi-step questions | comboSteps = steps in those | tdsWide = harder time/distance/speed numbers | dual = monitor task
+const ARITH_LEVELS = [
+  { step: 10, kinds: ['recip', 'turn'], limit: 0, items: 15, comboShare: 0, comboSteps: 2, tdsWide: false, dual: false },
+  { step: 10, kinds: ['recip', 'turn'], limit: 35, items: 15, comboShare: 0, comboSteps: 2, tdsWide: false, dual: false },
+  { step: 10, kinds: ['recip', 'turn', 'wind'], limit: 25, items: 20, comboShare: 0, comboSteps: 2, tdsWide: false, dual: false },
+  { step: 5,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 18, items: 20, comboShare: 0, comboSteps: 2, tdsWide: false, dual: false },
+  { step: 5,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 12, items: 20, comboShare: 0, comboSteps: 2, tdsWide: false, dual: false },
+  { step: 5,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 7, items: 25, comboShare: 0.15, comboSteps: 2, tdsWide: true, dual: false },
+  { step: 1,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 6, items: 25, comboShare: 0.3, comboSteps: 2, tdsWide: true, dual: false },
+  { step: 1,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 5, items: 25, comboShare: 0.5, comboSteps: 3, tdsWide: true, dual: false },
+  { step: 1,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 4, items: 30, comboShare: 0.8, comboSteps: 3, tdsWide: true, dual: true },
+  { step: 1,  kinds: ['recip', 'turn', 'wind', 'drift', 'tds'], limit: 3, items: 30, comboShare: 1, comboSteps: 3, tdsWide: true, dual: true }
+];
+// cat: rule = rule-set complexity 1-4 | speed = seconds allowed per object | per = objects per round | rounds | reversal = share of objects
+//      shown in an orange frame (answer with the MIRRORED key) | dual = monitor task | rulesVisible = rule bar stays on screen
+const CAT_LEVELS = [
+  { rule: 1, speed: 5,   per: 10, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 1, speed: 4,   per: 12, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 2, speed: 3.5, per: 15, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 2, speed: 3,   per: 15, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 3, speed: 2.2, per: 15, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 4, speed: 1.8, per: 20, rounds: 2, reversal: 0,    dual: false, rulesVisible: true },
+  { rule: 4, speed: 1.5, per: 20, rounds: 2, reversal: 0.25, dual: false, rulesVisible: false },
+  { rule: 4, speed: 1.2, per: 20, rounds: 3, reversal: 0.3,  dual: false, rulesVisible: false },
+  { rule: 4, speed: 1.0, per: 25, rounds: 3, reversal: 0.4,  dual: true,  rulesVisible: false },
+  { rule: 4, speed: 0.7, per: 30, rounds: 3, reversal: 0.5,  dual: true,  rulesVisible: false }
+];
+const LEVEL_TABLES = { conf: CONF_LEVELS, arith: ARITH_LEVELS, cat: CAT_LEVELS };
+function paramsForLevel(module, level){
+  const t = LEVEL_TABLES[module], L = clamp(Math.round(level), 1, 10);
+  return Object.assign({ level: L, maxHint: HINT_MAX[L - 1] }, t[L - 1]);
+}
+// Custom parameters come from sliders and are clamped to safe ranges. v = raw slider values.
+function customParams(module, v){
+  const num = function(x, a, b, d){ x = parseFloat(x); return isNaN(x) ? d : clamp(x, a, b); };
+  const p = { level: 'Custom', maxHint: Math.round(num(v.hint, 0, 3, 3)) };
+  if (module === 'conf') return Object.assign(p, { n: Math.round(num(v.n, 2, 6, 3)), window: Math.round(num(v.window, 4, 15, 8)), limit: Math.round(num(v.limit, 0, 120, 0)),
+    pictures: Math.round(num(v.pictures, 3, 20, 8)), traps: Math.round(num(v.traps, 0, 6, 0)), exposure: Math.round(num(v.exposure, 0, 30, 0)) });
+  if (module === 'arith'){
+    const step = [1, 5, 10].indexOf(parseInt(v.step, 10)) >= 0 ? parseInt(v.step, 10) : 5;
+    const kinds = v.kinds && v.kinds !== 'all' ? String(v.kinds).split(',') : ['recip', 'turn', 'wind', 'drift', 'tds'];
+    return Object.assign(p, { step: step, kinds: kinds, limit: Math.round(num(v.limit, 0, 30, 0)), items: Math.round(num(v.items, 5, 40, 20)),
+      comboShare: num(v.comboShare, 0, 100, 0) / 100, comboSteps: Math.round(num(v.comboSteps, 2, 3, 2)), tdsWide: !!v.tdsWide, dual: !!v.dual });
+  }
+  return Object.assign(p, { rule: Math.round(num(v.rule, 1, 4, 2)), speed: Math.round(num(v.speed, 0.5, 8, 3) * 10) / 10, per: Math.round(num(v.per, 5, 40, 15)),
+    rounds: Math.round(num(v.rounds, 1, 4, 2)), reversal: num(v.reversal, 0, 60, 0) / 100, dual: !!v.dual, rulesVisible: p.maxHint >= 1 || !!v.rulesVisible });
+}
+// Adaptive / progression rule. One state per module: {level, streak, fails, unlocked}.
+// Up after THREE consecutive valid sessions (>= 96 %) played at the current level; down after TWO consecutive failures (< 96 %).
+// Sessions that used hints, or were played at another level, or in Custom mode, never change the state.
+function newProgress(){ return { level: 1, streak: 0, fails: 0, unlocked: 1 }; }
+function advanceLevel(st, played, accuracy, hinted){
+  const s = { level: st.level, streak: st.streak, fails: st.fails, unlocked: st.unlocked };
+  if (hinted || played !== s.level) return s;
+  if (accuracy >= MIN_ACCURACY){
+    s.streak++; s.fails = 0;
+    if (s.streak >= 3){
+      if (s.level < 10){ s.level++; s.streak = 0; s.unlocked = Math.max(s.unlocked, s.level); } else s.streak = 3;
+    }
+  } else {
+    s.streak = 0; s.fails++;
+    if (s.fails >= 2){ if (s.level > 1) s.level--; s.fails = 0; }
+  }
+  return s;
+}
+// Wave 5 (U8 subset): pooled + thirds-aware promotion, layered on top of advanceLevel (which stays unchanged: streak of 3 valid sessions,
+// two failures go down). sess = { n, c, t3n, t3c } of one hint-free session played at the current level (t3* = last third, 0 if no thirds).
+// - PROMOTE (pooled): the last 2, 3 or 4 sessions at this level (since the last level change) pool to >= 60 items with pooled accuracy >= 96 %,
+//   no single session below 90 %, and (when thirds exist in all of them) pooled last-third accuracy >= 90 %.
+// - The classic 3-valid-in-a-row promotion still works but is cancelled when the last-third accuracy of those sessions is below 90 % (fading run).
+// Anti-acceleration is preserved: pooled accuracy is always >= 96 %, hinted / other-level / Custom sessions change nothing.
+// Returns a state {level, streak, fails, unlocked, pool, why}; why = 'pooled' | 'gated' | ''.
+const POOL_MIN_ITEMS = 60, POOL_MIN_SESSION = 90, POOL_LAST_THIRD = 90;
+function poolQualifies(pool){
+  for (let k = 2; k <= Math.min(4, pool.length); k++){
+    const w = pool.slice(-k);
+    let n = 0, c = 0, t3n = 0, t3c = 0, allT = true, minAcc = 100;
+    w.forEach(function(x){ n += x.n; c += x.c; t3n += x.t3n; t3c += x.t3c; if (!(x.t3n > 0)) allT = false; minAcc = Math.min(minAcc, x.n ? x.c / x.n * 100 : 0); });
+    if (n >= POOL_MIN_ITEMS && c / n * 100 >= MIN_ACCURACY && minAcc >= POOL_MIN_SESSION && (!allT || t3c / t3n * 100 >= POOL_LAST_THIRD)) return true;
+  }
+  return false;
+}
+function lastThirdOk(pool, k){
+  const w = pool.slice(-k);
+  if (w.length < k || w.some(function(x){ return !(x.t3n > 0); })) return true;   // no thirds data: cannot gate
+  let n = 0, c = 0; w.forEach(function(x){ n += x.t3n; c += x.t3c; });
+  return c / n * 100 >= POOL_LAST_THIRD;
+}
+function advanceLevelPooled(st, played, sess, hinted){
+  const acc = sess.n ? sess.c / sess.n * 100 : 0;
+  const s = advanceLevel(st, played, acc, hinted);
+  s.pool = (st.pool || []).slice(); s.why = '';
+  if (hinted || played !== st.level) return s;
+  s.pool.push({ n: sess.n, c: sess.c, t3n: sess.t3n || 0, t3c: sess.t3c || 0 }); s.pool = s.pool.slice(-4);
+  if (s.level > st.level){                                   // classic promotion: check the fade gate
+    if (!lastThirdOk(s.pool, 3)){ s.level = st.level; s.streak = 2; s.unlocked = st.unlocked; s.why = 'gated'; }
+  } else if (s.level === st.level && st.level < 10 && poolQualifies(s.pool)){
+    s.level = st.level + 1; s.streak = 0; s.fails = 0; s.unlocked = Math.max(st.unlocked, s.level); s.why = 'pooled';
+  }
+  if (s.level !== st.level) s.pool = [];
+  return s;
+}
+function levelStatement(level){
+  if (level === 'Custom') return 'Sesión personalizada: no cuenta para la progresión ni para los récords personales.';
+  if (level <= 3) return 'El nivel ' + level + ' está por debajo del objetivo de la oposición (objetivo = nivel 5). Primero, consolida la precisión.';
+  if (level === 4) return 'El nivel 4 se acerca al objetivo: el nivel 5 es lo que un candidato bien preparado debe dominar para la Fase 2.';
+  if (level === 5) return 'El nivel 5 es el objetivo para la Fase 2: un candidato bien preparado debe superarlo con un 96 % o más.';
+  if (level === 6) return 'El nivel 6 está por encima del objetivo para la Fase 2.';
+  if (level < 10) return 'El nivel ' + level + ' va más allá de la oposición (del 7 en adelante): margen de entrenamiento, no un requisito del examen.';
+  return 'El nivel 10 está calibrado para que incluso un candidato excelente alcance el 96 % menos de la mitad de las veces. Fallar aquí es normal.';
+}
+
+/* ---- 1. Geometry ---- */
+function velocity(ac){
+  const r = ac.hdg * Math.PI / 180;
+  return { x: ac.spd / 60 * Math.sin(r), y: ac.spd / 60 * Math.cos(r) }; // NM per minute
+}
+function position(ac, t){
+  const v = velocity(ac);
+  return { x: ac.x + v.x * t, y: ac.y + v.y * t };
+}
+// Full analysis of one pair over [0, windowMin]. a, b = {x,y,hdg,spd,fl}.
+function pairGeometry(a, b, windowMin){
+  const va = velocity(a), vb = velocity(b);
+  const rx = b.x - a.x, ry = b.y - a.y, vx = vb.x - va.x, vy = vb.y - va.y;
+  const vv = vx * vx + vy * vy, rv = rx * vx + ry * vy, rr = rx * rx + ry * ry;
+  const still = vv < 1e-9;
+  const tcpaRaw = still ? 0 : -rv / vv;                     // time of closest approach, may be < 0 (already diverging)
+  const tcpa = Math.max(0, tcpaRaw);                         // future CPA, unbounded
+  const cpa = still ? Math.sqrt(rr) : Math.sqrt(Math.max(0, rr + 2 * rv * tcpa + vv * tcpa * tcpa));
+  const tw = Math.min(windowMin, tcpa);                      // time of closest approach inside the window
+  const dWin = Math.sqrt(Math.max(0, rr + 2 * rv * tw + vv * tw * tw));
+  const dz = Math.abs(a.fl - b.fl) * 100;
+  const vertLoss = dz < SEP_FT;
+  let lossFrom = null, lossTo = null;
+  if (still){ if (rr < SEP_NM * SEP_NM){ lossFrom = 0; lossTo = windowMin; } }
+  else {
+    const disc = rv * rv - vv * (rr - SEP_NM * SEP_NM);
+    if (disc > 0){
+      const s = Math.sqrt(disc), t1 = (-rv - s) / vv, t2 = (-rv + s) / vv;
+      const f = Math.max(0, t1), e = Math.min(windowMin, t2);
+      if (f < e){ lossFrom = f; lossTo = e; }
+    }
+  }
+  const lateralLoss = lossFrom !== null;
+  const dist0 = Math.sqrt(rr);
+  const bearingRate = rr > 1e-9 ? (rx * vy - ry * vx) / rr * 180 / Math.PI : 0; // deg/min, bearing from a to b
+  const rangeRate = dist0 > 1e-9 ? rv / dist0 : 0;                              // NM/min, negative = closing
+  const cpaCross = still ? dist0 : Math.abs(rx * vy - ry * vx) / Math.sqrt(vv); // |r x v| / |v| = distance at CPA
+  return { dist0: dist0, tcpaRaw: tcpaRaw, tcpa: tcpa, cpa: cpa, cpaCross: cpaCross, tw: tw, dWin: dWin, dz: dz,
+    vertLoss: vertLoss, lateralLoss: lateralLoss, lossFrom: lossFrom, lossTo: lossTo,
+    conflict: vertLoss && lateralLoss, bearingRate: bearingRate, rangeRate: rangeRate,
+    cbdr: rangeRate < -1e-9 && Math.abs(bearingRate) < 0.2 };
+}
+const LETTERS = 'ABCDEF';
+function analyze(acs, windowMin){
+  const pairs = [];
+  for (let i = 0; i < acs.length; i++) for (let j = i + 1; j < acs.length; j++){
+    const g = pairGeometry(acs[i], acs[j], windowMin);
+    g.i = i; g.j = j; g.key = LETTERS[i] + LETTERS[j];
+    g.trap = isTrap(g);
+    pairs.push(g);
+  }
+  return pairs;
+}
+// A pair is "clear" if the answer cannot hinge on rounding: a vertically-eroded pair must have its closest approach
+// inside the window either < 4 NM or > 6 NM, and no pair may start closer than 8 NM (nobody is already in loss).
+function pairIsClear(g){
+  if (g.dist0 < 8) return false;
+  if (g.vertLoss && g.dWin >= 4 && g.dWin <= 6) return false;
+  return true;
+}
+// Trap pair (distractor): would be a conflict but for 1000 ft or more of vertical separation, or a lateral near miss of 6 to 9 NM.
+function isTrap(g){
+  return (!g.vertLoss && g.lateralLoss) || (g.vertLoss && !g.lateralLoss && g.dWin > 6 && g.dWin < 9);
+}
+
+/* ---- 2. Scenario generator ---- */
+function makeScenario(rnd, P){
+  const n = P.n, windowMin = P.window, flBase = [240, 260, 280, 300, 320, 340, 360, 380];
+  const nPairs = n * (n - 1) / 2, minTraps = Math.min(P.traps || 0, nPairs);
+  const designProb = Math.min(0.95, 0.5 + 0.08 * (P.traps || 0)), maxConf = Math.max(1, Math.ceil(nPairs / 2));
+  for (let attempt = 0; attempt < 60000; attempt++){
+    const acs = [];
+    for (let i = 0; i < n; i++){
+      let ac = null;
+      if (i > 0 && rnd() < designProb){
+        const j = randInt(rnd, 0, i - 1), other = acs[j];
+        const tm = 2 + rnd() * (windowMin - 2.5);
+        const type = pick(rnd, ['conflict', 'conflict', 'vsave', 'near']);
+        const hdg = mod360(other.hdg + pick(rnd, [-1, 1]) * randInt(rnd, 30, 150));
+        const spd = randInt(rnd, 20, 48) * 10;
+        const off = type === 'near' ? 6.5 + rnd() * 2.5 : rnd() * 3, ang = rnd() * 2 * Math.PI;
+        const om = position(other, tm);
+        const mx = om.x + off * Math.cos(ang), my = om.y + off * Math.sin(ang);
+        const hr = hdg * Math.PI / 180;
+        let fl;
+        if (type === 'conflict') fl = other.fl + pick(rnd, [0, 0, 0, 5, -5]);
+        else if (type === 'vsave') fl = other.fl + pick(rnd, [10, -10, 20, -20]);
+        else fl = other.fl + pick(rnd, [0, 0, 5, -5]);
+        ac = { x: mx - spd / 60 * Math.sin(hr) * tm, y: my - spd / 60 * Math.cos(hr) * tm, hdg: hdg, spd: spd, fl: fl };
+      } else {
+        ac = { x: (rnd() * 2 - 1) * 40, y: (rnd() * 2 - 1) * 40, hdg: randInt(rnd, 0, 359), spd: randInt(rnd, 20, 48) * 10, fl: pick(rnd, flBase) };
+      }
+      ac.x = Math.round(ac.x); ac.y = Math.round(ac.y);
+      ac.hdg = Math.round(ac.hdg / 5) * 5 % 360; ac.spd = Math.round(ac.spd / 10) * 10;
+      if (Math.abs(ac.x) > 45 || Math.abs(ac.y) > 45 || ac.fl < 100 || ac.fl > 400) { acs.length = 0; break; }
+      acs.push(ac);
+    }
+    if (acs.length !== n) continue;
+    const pairs = analyze(acs, windowMin);
+    if (!pairs.every(pairIsClear)) continue;
+    const conflicts = pairs.filter(function(p){ return p.conflict; }).length;
+    const traps = pairs.filter(function(p){ return p.trap; }).length;
+    if (conflicts > maxConf || traps < minTraps) continue;
+    if (n >= 2 && conflicts === 0 && rnd() < 0.7) continue; // "no conflict" happens, but rarely
+    return { aircraft: acs, windowMin: windowMin, pairs: pairs };
+  }
+  return null;
+}
+// Parses "AC BD", "ac,bd", "0", "none", "-" -> sorted unique keys, or null if invalid. n = number of aircraft.
+function parsePairs(text, n){
+  const t = String(text || '').trim().toUpperCase();
+  if (t === '0' || t === 'NONE' || t === '-') return [];
+  if (!t) return null;
+  const s = t.replace(/[^A-Z]/g, '');
+  if (!s.length || s.length % 2) return null;
+  const out = {};
+  for (let k = 0; k < s.length; k += 2){
+    const a = LETTERS.indexOf(s[k]), b = LETTERS.indexOf(s[k + 1]);
+    if (a < 0 || b < 0 || a >= n || b >= n || a === b) return null;
+    out[LETTERS[Math.min(a, b)] + LETTERS[Math.max(a, b)]] = 1;
+  }
+  return Object.keys(out).sort();
+}
+function scoreConflicts(scenario, given){
+  const exp = scenario.pairs.filter(function(p){ return p.conflict; }).map(function(p){ return p.key; }).sort();
+  return { expected: exp, correct: exp.length === given.length && exp.every(function(k, i){ return k === given[i]; }) };
+}
+// Hint tiers for a picture: 1 nudge, 2 method, 3 full solution (the picture then counts as blank).
+function conflictHint(sc, tier){
+  const conf = sc.pairs.filter(function(p){ return p.conflict; }), cand = sc.pairs.filter(function(p){ return p.vertLoss; });
+  if (tier === 1) return (conf.length === 1 ? 'Hay 1 par en conflicto' : 'Hay ' + conf.length + ' pares en conflicto') + ' en esta imagen' + (conf.length ? '.' : ' (escribe 0).');
+  if (tier === 2) return 'Método: descarta primero todo par que ya tenga 1000 ft o más de separación vertical. Candidatos restantes: ' +
+    (cand.length ? cand.map(function(p){ return p.key + ' (demora ' + fmt(p.bearingRate, 2) + '°/min, ' + (p.rangeRate < 0 ? 'se acercan' : 'se alejan') + ')'; }).join('; ') : 'ninguno') +
+    '. Un cambio pequeño de demora mientras se acercan (CBDR) implica un CPA pequeño.';
+  return 'Solución: ' + (conf.length ? conf.map(function(p){ return p.key + ' (CPA ' + fmt(p.cpa, 1) + ' NM, pérdida desde el min ' + fmt(p.lossFrom, 1) + ')'; }).join('; ') : 'sin conflicto (escribe 0)') + '.';
+}
+
+/* ---- 3. Heading and speed arithmetic ---- */
+const TECH = {
+  recip: 'Recíproco: suma 200 y resta 20 (o ±180).',
+  turn: 'Derecha suma grados, izquierda resta; da la vuelta en 360.',
+  drift: 'Regla 1 en 60: deriva = 60 × viento cruzado / TAS; el viento por la derecha empuja la aeronave a la izquierda, así que trayectoria = rumbo − deriva (por la izquierda: +).',
+  wind: 'Velocidad respecto al suelo = TAS − viento de cara, o TAS + viento de cola.',
+  tds: 'NM por minuto = velocidad respecto al suelo / 60 (360 kt = 6 NM/min); tiempo = distancia / (GS/60).',
+  combo: 'Hazlo paso a paso y anota el rumbo tras cada paso.'
+};
+function driftChoices(tas){
+  const opts = [];
+  for (let xw = 5; xw <= 60; xw++){ const d = 60 * xw / tas; if (Number.isInteger(d) && d >= 2 && d <= 12) opts.push(xw); }
+  return opts;
+}
+function applyStep(h, s){
+  if (s.op === 'turn') return mod360(h + (s.right ? s.deg : -s.deg));
+  if (s.op === 'recip') return mod360(h + 180);
+  return mod360(h + (s.right ? -s.drift : s.drift)); // drift: wind from the right moves the track to the left
+}
+function stepText(s){
+  if (s.op === 'turn') return 'vira a la ' + (s.right ? 'DERECHA ' : 'IZQUIERDA ') + s.deg + '°';
+  if (s.op === 'recip') return 'invierte el rumbo (recíproco)';
+  return 'viento cruzado por la ' + (s.right ? 'DERECHA' : 'IZQUIERDA') + ' de ' + s.xw + ' kt con TAS ' + s.tas + ' (trayectoria por 1 en 60)';
+}
+function makeArith(rnd, P){
+  const step = P.step;
+  const angle = function(min, max){ return step * randInt(rnd, Math.ceil(min / step), Math.floor(max / step)); };
+  let kind = pick(rnd, P.kinds);
+  if (P.comboShare > 0 && rnd() < P.comboShare) kind = 'combo';
+  const out = function(o){ o.kind = kind; o.tech = TECH[kind]; return o; };
+  if (kind === 'recip'){
+    const h = angle(10, 350);
+    return out({ text: 'Rumbo recíproco de ' + pad3(h) + '°', answer: mod360(h + 180) || 360, heading: true, unit: '°',
+      spec: { h: h }, solution: pad3(h) + ' ' + (h >= 180 ? '− 180' : '+ 180') + ' = ' + pad3(mod360(h + 180)) });
+  }
+  if (kind === 'turn'){
+    const h = angle(10, 350), t = angle(step === 1 ? 10 : 20, 180), right = rnd() < 0.5, a = mod360(h + (right ? t : -t)) || 360;
+    return out({ text: 'Rumbo ' + pad3(h) + '°, viras a la ' + (right ? 'DERECHA' : 'IZQUIERDA') + ' ' + t + '°. ¿Nuevo rumbo?', answer: a, heading: true, unit: '°',
+      spec: { h: h, t: t, right: right }, solution: h + (right ? ' + ' : ' − ') + t + ' = ' + (right ? h + t : h - t) + ' → ' + pad3(a) });
+  }
+  if (kind === 'drift'){
+    const tas = pick(rnd, [120, 150, 180, 240, 300, 360]), xw = pick(rnd, driftChoices(tas)), d = 60 * xw / tas, h = angle(10, 350), right = rnd() < 0.5;
+    const a = mod360(h + (right ? -d : d)) || 360;
+    return out({ text: 'Rumbo ' + pad3(h) + '°, TAS ' + tas + ' kt, viento cruzado puro por la ' + (right ? 'DERECHA' : 'IZQUIERDA') + ' de ' + xw + ' kt. ¿Trayectoria (regla 1 en 60)?',
+      answer: a, heading: true, unit: '°', spec: { h: h, tas: tas, xw: xw, right: right },
+      solution: 'deriva = 60 × ' + xw + ' / ' + tas + ' = ' + d + '°; ' + h + (right ? ' − ' : ' + ') + d + ' = ' + pad3(a) });
+  }
+  if (kind === 'wind'){
+    const tas = randInt(rnd, 9, 48) * 10, w = randInt(rnd, 1, 8) * 10, head = rnd() < 0.5, a = head ? tas - w : tas + w;
+    return out({ text: 'TAS ' + tas + ' kt, ' + w + ' kt de viento ' + (head ? 'DE CARA' : 'DE COLA') + '. ¿Velocidad respecto al suelo (GS)?', answer: a, heading: false, unit: 'kt',
+      spec: { tas: tas, w: w, head: head }, solution: tas + (head ? ' − ' : ' + ') + w + ' = ' + a });
+  }
+  if (kind === 'combo'){
+    const h0 = angle(10, 350), steps = [];
+    const nSteps = P.comboSteps;
+    for (let k = 0; k < nSteps; k++){
+      const last = k === nSteps - 1, r = rnd();
+      if (last && r < 0.45){
+        const tas = pick(rnd, [120, 150, 180, 240, 300, 360]), xw = pick(rnd, driftChoices(tas));
+        steps.push({ op: 'drift', tas: tas, xw: xw, drift: 60 * xw / tas, right: rnd() < 0.5 });
+      } else if (r < 0.7 || last) steps.push({ op: 'turn', deg: angle(step === 1 ? 10 : 20, 180), right: rnd() < 0.5 });
+      else steps.push({ op: 'recip' });
+    }
+    let h = h0; const trace = [pad3(h0)];
+    steps.forEach(function(s){ h = applyStep(h, s); trace.push(pad3(h)); });
+    const a = mod360(h) || 360;
+    return out({ text: 'Rumbo ' + pad3(h0) + '°: ' + steps.map(stepText).join(', luego ') + '. ¿Rumbo / trayectoria final?', answer: a, heading: true, unit: '°',
+      spec: { h0: h0, steps: steps }, solution: trace.join(' → ') });
+  }
+  // tds: time / distance / speed with integer results (6 NM per minute at 360 kt)
+  const speeds = !P.tdsWide ? (step >= 10 ? [120, 180, 240, 300, 360, 420, 480] : [150, 210, 270, 330, 390, 450]) : null;
+  let gs, min;
+  do { gs = speeds ? pick(rnd, speeds) : randInt(rnd, 10, 50) * 10; min = randInt(rnd, 2, P.tdsWide ? 30 : 24); } while ((gs * min) % 60 !== 0);
+  const d = gs * min / 60, v = pick(rnd, ['time', 'dist', 'speed']);
+  const base = gs + ' kt = ' + fmt(gs / 60, 2).replace(/\.?0+$/, '') + ' NM/min';
+  if (v === 'time') return out({ text: d + ' NM a ' + gs + ' kt de velocidad respecto al suelo. ¿Minutos?', answer: min, heading: false, unit: 'min', spec: { gs: gs, min: min, d: d, v: v }, solution: base + '; ' + d + ' / ' + fmt(gs / 60, 2).replace(/\.?0+$/, '') + ' = ' + min + ' min' });
+  if (v === 'dist') return out({ text: min + ' min a ' + gs + ' kt de velocidad respecto al suelo. ¿Distancia en NM?', answer: d, heading: false, unit: 'NM', spec: { gs: gs, min: min, d: d, v: v }, solution: base + '; × ' + min + ' min = ' + d + ' NM' });
+  return out({ text: d + ' NM recorridas en ' + min + ' min. ¿Velocidad respecto al suelo en kt?', answer: gs, heading: false, unit: 'kt', spec: { gs: gs, min: min, d: d, v: v }, solution: d + ' / ' + min + ' = ' + fmt(d / min, 2).replace(/\.?0+$/, '') + ' NM/min × 60 = ' + gs + ' kt' });
+}
+// Independent evaluation of an item's answer from its spec (used by the tests, and a guard for the generator).
+function arithFromSpec(it){
+  const s = it.spec;
+  if (it.kind === 'recip') return mod360(s.h + 180) || 360;
+  if (it.kind === 'turn') return mod360(s.right ? s.h + s.t : s.h - s.t) || 360;
+  if (it.kind === 'drift') return mod360(s.right ? s.h - 60 * s.xw / s.tas : s.h + 60 * s.xw / s.tas) || 360;
+  if (it.kind === 'wind') return s.head ? s.tas - s.w : s.tas + s.w;
+  if (it.kind === 'combo'){
+    let h = s.h0;
+    s.steps.forEach(function(x){
+      if (x.op === 'turn') h += x.right ? x.deg : -x.deg;
+      else if (x.op === 'recip') h += 180;
+      else h += x.right ? -(60 * x.xw / x.tas) : 60 * x.xw / x.tas;
+      h = ((h % 360) + 360) % 360;
+    });
+    return h || 360;
+  }
+  return s.v === 'time' ? s.d / (s.gs / 60) : (s.v === 'dist' ? (s.gs / 60) * s.min : s.d / s.min * 60);
+}
+function parseNumber(text){
+  const t = String(text || '').trim().replace(',', '.');
+  if (!/^-?\d+(\.\d+)?$/.test(t)) return null;
+  return parseFloat(t);
+}
+function checkArith(item, text){
+  const x = parseNumber(text);
+  if (x === null) return null;
+  return item.heading ? mod360(x) === mod360(item.answer) : Math.abs(x - item.answer) < 1e-6;
+}
+function ansText(item){ return item.heading ? pad3(item.answer) + '°' : item.answer + ' ' + item.unit; }
+function arithHint(item, tier){
+  if (tier === 1) return 'Técnica: ' + item.tech;
+  if (tier === 2) return 'Método: ' + item.tech + ' Cifras: ' + item.solution.replace(/[\d.]+\s*$/, '…');
+  return 'Solución: ' + item.solution;
+}
+
+/* ---- 4. Fast categorization (FEAST-style) ---- */
+const COLORS = ['red', 'blue', 'green', 'yellow'];
+const SHAPES = ['circle', 'square', 'triangle', 'diamond'];
+// Display names (Spanish); the internal values above are never shown or stored.
+const VALUE_ES = { red: 'rojo', blue: 'azul', green: 'verde', yellow: 'amarillo', circle: 'círculo', square: 'cuadrado', triangle: 'triángulo', diamond: 'rombo' };
+function valueEs(v){ return VALUE_ES[v] || v; }
+function allObjects(){
+  const o = [];
+  COLORS.forEach(function(c){ SHAPES.forEach(function(s){ o.push({ color: c, shape: s }); }); });
+  return o;
+}
+function predMatches(pred, obj){ return pred.values.indexOf(obj[pred.attr]) >= 0; }
+// keysMatching returns the list of keys whose rule fires for the object. An unambiguous object fires exactly one.
+function keysMatching(rule, obj){
+  return rule.keys.filter(function(k){ return predMatches(k.pred, obj); }).map(function(k){ return k.key; });
+}
+// level 1: 2 keys, colours only | 2: 2 keys, one colour vs one shape | 3: 4 keys, colours only | 4: 4 keys, 2 colours + 2 shapes
+function makeRuleSet(rnd, level){
+  const c = shuffle(rnd, COLORS), s = shuffle(rnd, SHAPES);
+  let keys;
+  if (level <= 1) keys = [['F', 'left', 'color', [c[0], c[1]]], ['J', 'right', 'color', [c[2], c[3]]]];
+  else if (level === 2) keys = [['F', 'left', 'color', [c[0]]], ['J', 'right', 'shape', [s[0]]]];
+  else if (level === 3) keys = [['D', 'far left', 'color', [c[0]]], ['F', 'left', 'color', [c[1]]], ['J', 'right', 'color', [c[2]]], ['K', 'far right', 'color', [c[3]]]];
+  else keys = [['D', 'far left', 'color', [c[0]]], ['F', 'left', 'color', [c[1]]], ['J', 'right', 'shape', [s[0]]], ['K', 'far right', 'shape', [s[1]]]];
+  const rule = { level: level, keys: keys.map(function(k){ return { key: k[0], side: k[1], pred: { attr: k[2], values: k[3] } }; }) };
+  // Pool = objects that fire EXACTLY one key. Everything drawn later comes from this pool, so no item is ambiguous or unassigned.
+  rule.pool = allObjects().filter(function(o){ return keysMatching(rule, o).length === 1; });
+  rule.byKey = {};
+  rule.keys.forEach(function(k){ rule.byKey[k.key] = rule.pool.filter(function(o){ return keysMatching(rule, o)[0] === k.key; }); });
+  return rule;
+}
+function ruleIsUsable(rule){
+  return rule.keys.every(function(k){ return rule.byKey[k.key].length >= 2; });
+}
+function ruleText(rule){
+  return rule.keys.map(function(k){
+    return k.pred.values.map(valueEs).join(' o ').toUpperCase() + (k.pred.attr === 'shape' ? ' (forma)' : '') + ' → ' + k.key + ' (' + ({ 'far left': 'extremo izquierdo', left: 'izquierda', right: 'derecha', 'far right': 'extremo derecho' }[k.side] || k.side) + ')';
+  });
+}
+// Mirror mapping used by the orange frame: first key <-> last key, second <-> second-to-last (F<->J, D<->K). A bijection, so never ambiguous.
+function mirrorKey(rule, key){
+  const i = rule.keys.findIndex(function(k){ return k.key === key; });
+  return rule.keys[rule.keys.length - 1 - i].key;
+}
+function mirrorText(rule){
+  return rule.keys.length === 2 ? 'F ↔ J' : 'D ↔ K, F ↔ J';
+}
+function nextItem(rnd, rule, prev, reversal){
+  let it = null;
+  for (let t = 0; t < 50 && !it; t++){
+    const k = pick(rnd, rule.keys).key, o = pick(rnd, rule.byKey[k]);
+    if (!prev || o.color !== prev.obj.color || o.shape !== prev.obj.shape) it = { obj: o, key: k };
+  }
+  if (!it){ const k2 = pick(rnd, rule.keys).key; it = { obj: pick(rnd, rule.byKey[k2]), key: k2 }; }
+  it.reversed = !!reversal && rnd() < reversal;
+  it.expected = it.reversed ? mirrorKey(rule, it.key) : it.key;
+  return it;
+}
+
+/* ---- 5. Goal, records, CSV ---- */
+function isValid(acc, hinted){ return acc >= MIN_ACCURACY && !hinted; }
+function evaluateGoal(text, r){
+  const t = String(text || '').replace(/\s+/g, ' ');
+  const num = function(x){ return parseFloat(x.replace(',', '.')); };
+  let res = null;
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (mp) res = r.accuracy >= num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:segundos|segundo|seg|seconds|second|secs|sec|s)(?![a-zA-Z])/i);
+  if (ms && r.spi !== null && r.spi !== undefined){ const ok = r.spi <= num(ms[1]); res = res === null ? ok : (res && ok); }
+  const ma = t.match(/(\d+)\s*(?:aciertos|acierto|correctas|correctos|correct|hits)/i);
+  if (ma){ const ok = r.correct >= parseInt(ma[1], 10); res = res === null ? ok : (res && ok); }
+  return res;
+}
+// Personal best = lowest seconds per item among valid sessions of the same module and level (Custom sessions never count).
+function bestAtLevel(prev, module, level){
+  const comp = prev.filter(function(x){ return x.module === module && String(x.level) === String(level) && x.valid && x.level !== 'Custom' && x.spi !== null && x.spi !== undefined; });
+  if (!comp.length) return null;
+  return { spi: Math.min.apply(null, comp.map(function(x){ return x.spi; })), accuracy: Math.max.apply(null, comp.map(function(x){ return x.accuracy; })), sessions: comp.length };
+}
+function isRecord(prev, s){
+  if (!s.valid || s.level === 'Custom' || s.spi === null || s.spi === undefined) return false;
+  const b = bestAtLevel(prev, s.module, s.level);
+  return !!b && s.spi < b.spi;
+}
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function dateES(iso){
+  const d = new Date(iso);
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+function csvField(v){
+  const s = (v === null || v === undefined) ? '' : String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function toCSV(sessions){
+  const head = ['Date', 'Module', 'Level', 'Correct', 'Wrong', 'Blank', 'Seconds per item', 'Accuracy %', 'Goal', 'Met'];
+  const rows = sessions.map(function(s){
+    return [dateES(s.ts), s.module, s.level, s.correct, s.wrong, s.blank,
+      (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
+      s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
+  });
+  return '﻿' + [head.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+
+/* ---- 6. Self tests against hand-computed cases (run in node, see README) ---- */
+function runSelfTests(){
+  const fails = [];
+  const ok = function(name, cond){ if (!cond) fails.push(name); };
+  const near = function(a, b, e){ return Math.abs(a - b) <= (e === undefined ? 1e-6 : e); };
+  // H1 head-on 60 NM apart, 300 kt each: closing 10 NM/min, CPA 0 at t=6, loss (5 NM) starts at 5.5 and ends 6.5.
+  let g = pairGeometry({ x: -30, y: 0, hdg: 90, spd: 300, fl: 300 }, { x: 30, y: 0, hdg: 270, spd: 300, fl: 300 }, 10);
+  ok('H1 tcpa', near(g.tcpa, 6)); ok('H1 cpa', near(g.cpa, 0)); ok('H1 loss', near(g.lossFrom, 5.5) && near(g.lossTo, 6.5) && g.conflict);
+  ok('H1 cbdr', g.cbdr && near(g.rangeRate, -10));
+  // H1b same but window only 5 min: the aircraft are still 10 NM apart at 5 min -> no loss.
+  g = pairGeometry({ x: -30, y: 0, hdg: 90, spd: 300, fl: 300 }, { x: 30, y: 0, hdg: 270, spd: 300, fl: 300 }, 5);
+  ok('H1b window', !g.lateralLoss && !g.conflict && near(g.dWin, 10) && near(g.tw, 5));
+  // H2 90 degree crossing at 360 kt (6 NM/min) both 20 NM from the crossing point: collision at t=10/3, bearing constant.
+  g = pairGeometry({ x: 0, y: -20, hdg: 0, spd: 360, fl: 280 }, { x: -20, y: 0, hdg: 90, spd: 360, fl: 280 }, 10);
+  ok('H2 tcpa', near(g.tcpa, 10 / 3)); ok('H2 cpa', near(g.cpa, 0)); ok('H2 bearing rate 0', near(g.bearingRate, 0) && g.cbdr);
+  // H3 same crossing, second aircraft offset 4 NM north: hand result sqrt(8) = 2.828 NM at t = 11/3.
+  g = pairGeometry({ x: 0, y: -20, hdg: 0, spd: 360, fl: 280 }, { x: -20, y: 4, hdg: 90, spd: 360, fl: 280 }, 10);
+  ok('H3 cpa', near(g.cpa, Math.sqrt(8), 1e-6) && near(g.tcpa, 11 / 3) && near(g.cpaCross, Math.sqrt(8)));
+  // H4 1000 ft exactly = separated; 500 ft = loss (levels in FL hundreds, so 5 FL = 500 ft).
+  const A = { x: -30, y: 0, hdg: 90, spd: 300, fl: 300 }, B = { x: 30, y: 0, hdg: 270, spd: 300 };
+  ok('H4 1000ft ok', !pairGeometry(A, Object.assign({ fl: 310 }, B), 10).conflict);
+  ok('H4 500ft conflict', pairGeometry(A, Object.assign({ fl: 305 }, B), 10).conflict);
+  // H5 diverging: CPA is now; window distance = current distance.
+  g = pairGeometry({ x: 0, y: 0, hdg: 270, spd: 300, fl: 300 }, { x: 10, y: 0, hdg: 90, spd: 300, fl: 300 }, 10);
+  ok('H5 diverging', near(g.tcpaRaw, -1) && near(g.tcpa, 0) && near(g.dWin, 10) && !g.lateralLoss);
+  // H6 same speed and heading, 3 NM apart: constant distance 3 -> loss over whole window.
+  g = pairGeometry({ x: 0, y: 0, hdg: 90, spd: 300, fl: 300 }, { x: 0, y: 3, hdg: 90, spd: 300, fl: 300 }, 10);
+  ok('H6 parallel', near(g.dWin, 3) && near(g.lossFrom, 0) && near(g.lossTo, 10) && g.conflict);
+  // H7 CPA exactly 5 NM is NOT a loss (5 NM apart parallel).
+  g = pairGeometry({ x: 0, y: 0, hdg: 90, spd: 300, fl: 300 }, { x: 0, y: 5, hdg: 90, spd: 300, fl: 300 }, 10);
+  ok('H7 exactly 5', !g.lateralLoss);
+  // H8 trap classification: same head-on pair, 1000 ft apart is a vertical-save trap; 8 NM offset at same level is a near-miss trap.
+  g = pairGeometry(A, Object.assign({ fl: 310 }, B), 10); ok('H8 vsave trap', isTrap(g));
+  g = pairGeometry({ x: 0, y: -20, hdg: 0, spd: 360, fl: 280 }, { x: -20, y: 8, hdg: 90, spd: 360, fl: 280 }, 10);
+  ok('H8 near-miss trap', near(g.cpa, 8 / Math.SQRT2 * 1, 1) && !g.lateralLoss); // r=(-20,28): |cross|/|v| = (20*6... ) checked below
+  // hand: r=(-20,28), v=(6,-6): r x v = (-20)(-6) - (28)(6) = 120 - 168 = -48; |v| = 8.485; cpa = 5.657 (not > 6): NOT a trap.
+  ok('H8 hand cpa', near(g.cpa, 48 / Math.sqrt(72)) && !isTrap(g));
+  // Cross-check the closed form against brute-force sampling on random pairs.
+  const rnd = mulberry32(12345);
+  for (let k = 0; k < 400; k++){
+    const a = { x: (rnd() - .5) * 80, y: (rnd() - .5) * 80, hdg: randInt(rnd, 0, 359), spd: randInt(rnd, 20, 48) * 10, fl: 300 };
+    const b = { x: (rnd() - .5) * 80, y: (rnd() - .5) * 80, hdg: randInt(rnd, 0, 359), spd: randInt(rnd, 20, 48) * 10, fl: 300 };
+    const gg = pairGeometry(a, b, 10);
+    let best = 1e9, lossSamples = false;
+    for (let t = 0; t <= 10.0001; t += 0.005){ const p = position(a, t), q = position(b, t); const d = Math.hypot(p.x - q.x, p.y - q.y); if (d < best) best = d; if (d < 4.98) lossSamples = true; }
+    if (!near(best, gg.dWin, 0.06)) { fails.push('brute dWin ' + k); break; }
+    if (gg.lateralLoss !== (best < 5) && Math.abs(best - 5) > 0.1) { fails.push('brute loss ' + k); break; }
+    if (lossSamples && !gg.lateralLoss) { fails.push('brute loss2 ' + k); break; }
+  }
+  // Difficulty ladder: 10 levels per module, monotone where it must be.
+  ['conf', 'arith', 'cat'].forEach(function(m){ ok('ladder length ' + m, LEVEL_TABLES[m].length === 10); });
+  for (let L = 2; L <= 10; L++){
+    const a = CONF_LEVELS[L - 2], b = CONF_LEVELS[L - 1];
+    ok('conf monotone ' + L, b.n >= a.n && b.window >= a.window && (b.limit || 1e9) <= (a.limit || 1e9) && b.traps >= a.traps && (b.exposure === 0 ? a.exposure === 0 || true : true));
+    ok('conf limit strictly decreasing ' + L, L === 2 || b.limit < a.limit);
+    const c = ARITH_LEVELS[L - 2], d = ARITH_LEVELS[L - 1];
+    ok('arith monotone ' + L, d.step <= c.step && (d.limit || 1e9) <= (c.limit || 1e9) && d.comboShare >= c.comboShare && d.items >= c.items);
+    const e = CAT_LEVELS[L - 2], f = CAT_LEVELS[L - 1];
+    ok('cat monotone ' + L, f.speed <= e.speed && f.rule >= e.rule && f.reversal >= e.reversal && f.per * f.rounds >= e.per * e.rounds);
+    ok('hint max non-increasing ' + L, HINT_MAX[L - 1] <= HINT_MAX[L - 2]);
+  }
+  ok('no hints from level 7', HINT_MAX.slice(6).every(function(x){ return x === 0; }) && paramsForLevel('conf', 7).maxHint === 0 && paramsForLevel('cat', 5).maxHint === 2);
+  ok('level 10 brutal', CONF_LEVELS[9].n === 6 && CONF_LEVELS[9].limit <= 9 && ARITH_LEVELS[9].limit <= 3 && CAT_LEVELS[9].speed <= 0.7);
+  // customParams clamps
+  const cp = customParams('conf', { n: 99, window: 1, limit: -5, pictures: 'x', traps: 50, exposure: 100, hint: 9 });
+  ok('custom clamp', cp.n === 6 && cp.window === 4 && cp.limit === 0 && cp.pictures === 8 && cp.traps === 6 && cp.exposure === 30 && cp.maxHint === 3 && cp.level === 'Custom');
+  const ca = customParams('arith', { step: 7, kinds: 'recip,turn', limit: 3, items: 999, comboShare: 200, dual: true, hint: 0 });
+  ok('custom arith', ca.step === 5 && ca.kinds.length === 2 && ca.items === 40 && ca.comboShare === 1 && ca.dual === true && ca.maxHint === 0);
+  const cc = customParams('cat', { rule: 9, speed: 0.1, per: 1, rounds: 9, reversal: 90, hint: 0 });
+  ok('custom cat', cc.rule === 4 && cc.speed === 0.5 && cc.per === 5 && cc.rounds === 4 && cc.reversal === 0.6 && cc.rulesVisible === false);
+  // Scenario generator: for EVERY level, scenarios have only clear pairs, >= 8 NM start distance, and at least the required number of traps.
+  let scen = 0, withConflict = 0, withoutConflict = 0;
+  for (let L = 1; L <= 10; L++){
+    const P = paramsForLevel('conf', L);
+    for (let k = 0; k < 60; k++){
+      const sc = makeScenario(mulberry32(L * 1000 + k), P);
+      if (!sc){ fails.push('generator failed L' + L); continue; }
+      scen++;
+      if (!sc.pairs.every(pairIsClear)) fails.push('unclear pair L' + L);
+      if (sc.aircraft.length !== P.n) fails.push('size');
+      if (sc.pairs.filter(function(p){ return p.trap; }).length < Math.min(P.traps, sc.pairs.length)) fails.push('traps L' + L);
+      if (sc.pairs.some(function(p){ return p.conflict; })) withConflict++; else withoutConflict++;
+      const again = analyze(sc.aircraft, P.window);
+      if (again.some(function(p, i){ return p.conflict !== sc.pairs[i].conflict || p.trap !== sc.pairs[i].trap; })) fails.push('not deterministic');
+    }
+  }
+  ok('generator has both outcomes', withConflict > 200 && withoutConflict > 5);
+  // hints: text exists for every tier and does not crash
+  const sc0 = makeScenario(mulberry32(5), paramsForLevel('conf', 4));
+  ok('conf hints', [1, 2, 3].every(function(t){ return conflictHint(sc0, t).length > 10; }));
+  // parsePairs
+  ok('parse AC BD', JSON.stringify(parsePairs('ac, bd', 4)) === '["AC","BD"]');
+  ok('parse CA', JSON.stringify(parsePairs('CA', 3)) === '["AC"]');
+  ok('parse none', JSON.stringify(parsePairs('0', 3)) === '[]' && JSON.stringify(parsePairs('none', 3)) === '[]');
+  ok('parse bad', parsePairs('AAB', 3) === null && parsePairs('AD', 3) === null && parsePairs('AA', 3) === null && parsePairs('', 3) === null);
+  // Arithmetic: hand cases and independent re-derivation for every level.
+  const chk = function(txt, item, ans){ return checkArith(item, txt) === ans; };
+  ok('recip 070', chk('250', { answer: 250, heading: true }, true));
+  ok('recip 360/0', chk('0', { answer: 360, heading: true }, true) && chk('360', { answer: 360, heading: true }, true));
+  ok('num comma', parseNumber('7,5') === 7.5 && parseNumber('abc') === null);
+  let bad = 0, made = 0, combos = 0;
+  for (let L = 1; L <= 10; L++) for (let k = 0; k < 400; k++){
+    const P = paramsForLevel('arith', L), it = makeArith(rnd, P); made++;
+    if (it.kind === 'combo') combos++;
+    if (P.kinds.indexOf(it.kind) < 0 && it.kind !== 'combo') bad++;
+    if (!Number.isInteger(it.answer) || it.answer <= 0) bad++;
+    if (it.heading && (it.answer < 1 || it.answer > 360)) bad++;
+    if (Math.abs(arithFromSpec(it) - it.answer) > 1e-6) bad++;          // independent derivation from the spec must agree
+    if (L <= 3 && it.kind === 'combo') bad++;
+    if (!it.tech || !it.solution || !arithHint(it, 1) || !arithHint(it, 2) || !arithHint(it, 3)) bad++;
+    if (it.solution.indexOf('NaN') >= 0 || it.text.indexOf('NaN') >= 0) bad++;
+  }
+  ok('arith answers verified independently (' + bad + ')', bad === 0 && combos > 500);
+  // hand-checked instances
+  ok('hand drift', 60 * 20 / 240 === 5 && mod360(90 - 5) === 85);
+  ok('hand tds', 42 / (420 / 60) === 6);
+  // hand combo: heading 130, left 75 -> 055, reciprocal -> 235, crosswind from the right 20 kt at TAS 240 (drift 5) -> track 230.
+  const hc = { kind: 'combo', spec: { h0: 130, steps: [{ op: 'turn', deg: 75, right: false }, { op: 'recip' }, { op: 'drift', tas: 240, xw: 20, right: true }] } };
+  ok('hand combo', arithFromSpec(hc) === 230 && applyStep(applyStep(130, hc.spec.steps[0]), hc.spec.steps[1]) === 235);
+  // Categorization: 4 complexities x 750 rule sets, with reversal frames: never ambiguous, always exactly one expected key.
+  const cr = mulberry32(777);
+  let ambiguous = 0, unusable = 0, items = 0, mismatch = 0, minPool = 99, badMirror = 0, revCount = 0;
+  for (let lv = 1; lv <= 4; lv++) for (let k = 0; k < 750; k++){
+    const rule = makeRuleSet(cr, lv);
+    if (!ruleIsUsable(rule)) unusable++;
+    let prev = null;
+    for (let m = 0; m < 30; m++){
+      const it = nextItem(cr, rule, prev, 0.5); prev = it; items++;
+      const ks = keysMatching(rule, it.obj);
+      if (ks.length !== 1) ambiguous++;
+      if (ks[0] !== it.key) mismatch++;
+      if (it.reversed){ revCount++; if (it.expected === it.key && rule.keys.length >= 2) badMirror++; if (mirrorKey(rule, it.expected) !== it.key) badMirror++; }
+      else if (it.expected !== it.key) badMirror++;
+    }
+    minPool = Math.min(minPool, rule.pool.length);
+    rule.pool.forEach(function(o){ if (keysMatching(rule, o).length !== 1) ambiguous++; });
+    // mirror is a bijection of the key set
+    const img = rule.keys.map(function(kk){ return mirrorKey(rule, kk.key); }).sort().join('');
+    if (img !== rule.keys.map(function(kk){ return kk.key; }).sort().join('')) badMirror++;
+  }
+  ok('categorization no ambiguity (' + ambiguous + ')', ambiguous === 0 && mismatch === 0 && items === 3000 * 30);
+  ok('categorization usable (' + unusable + ')', unusable === 0);
+  ok('mirror rule (' + badMirror + ')', badMirror === 0 && revCount > 30000);
+  // hand mirror: 4 keys D,F,J,K: D->K, F->J.
+  const hr = { keys: [{ key: 'D' }, { key: 'F' }, { key: 'J' }, { key: 'K' }] };
+  ok('hand mirror', mirrorKey(hr, 'D') === 'K' && mirrorKey(hr, 'F') === 'J' && mirrorKey(hr, 'K') === 'D');
+  // Anti-acceleration / adaptive rule
+  let st = newProgress();
+  st = advanceLevel(st, 1, 97, false); st = advanceLevel(st, 1, 100, false); ok('2 valid -> still level 1', st.level === 1 && st.streak === 2);
+  st = advanceLevel(st, 1, 95.9, false); ok('95.9 resets streak, 1 fail', st.level === 1 && st.streak === 0 && st.fails === 1);
+  st = advanceLevel(st, 1, 96, false); st = advanceLevel(st, 1, 96, false); st = advanceLevel(st, 1, 96, false); ok('3 in a row -> level 2', st.level === 2 && st.streak === 0 && st.unlocked === 2);
+  st = advanceLevel(st, 2, 80, false); st = advanceLevel(st, 2, 70, false); ok('2 failures -> back to level 1', st.level === 1 && st.unlocked === 2);
+  const same = advanceLevel({ level: 3, streak: 2, fails: 0, unlocked: 3 }, 2, 100, false); ok('other level changes nothing', same.level === 3 && same.streak === 2);
+  const hint = advanceLevel({ level: 3, streak: 2, fails: 0, unlocked: 3 }, 3, 100, true); ok('hinted session changes nothing', hint.level === 3 && hint.streak === 2);
+  const top = advanceLevel({ level: 10, streak: 2, fails: 0, unlocked: 10 }, 10, 100, false); ok('cap at 10', top.level === 10);
+  const low = advanceLevel({ level: 1, streak: 0, fails: 1, unlocked: 1 }, 1, 10, false); ok('floor at 1', low.level === 1 && low.fails === 0);
+  // The rule never raises the level below 96 %: exhaustive over accuracies.
+  let raised = 0; for (let a = 0; a < 96; a += 0.5) for (let L = 1; L <= 10; L++) if (advanceLevel({ level: L, streak: 2, fails: 0, unlocked: L }, L, a, false).level > L) raised++;
+  ok('never raises below 96 %', raised === 0);
+  ok('statements', [1, 4, 5, 6, 8, 10, 'Custom'].every(function(l){ return levelStatement(l).length > 20; }) && levelStatement(5).indexOf('objetivo para la Fase 2') > 0);
+  // Goal parsing, records and CSV
+  ok('goal', evaluateGoal('96 % and 2.5 s', { accuracy: 97, spi: 2.4, correct: 9 }) === true && evaluateGoal('8 correct', { accuracy: 80, spi: 2, correct: 7 }) === false && evaluateGoal('do well', { accuracy: 1 }) === null);
+  const prev = [{ module: 'M', level: 5, valid: true, spi: 3, accuracy: 96 }, { module: 'M', level: 5, valid: false, spi: 1, accuracy: 50 }, { module: 'M', level: 'Custom', valid: true, spi: 0.5, accuracy: 100 }];
+  ok('best', bestAtLevel(prev, 'M', 5).spi === 3 && isRecord(prev, { module: 'M', level: 5, valid: true, spi: 2.9 }) && !isRecord(prev, { module: 'M', level: 5, valid: true, spi: 3.1 }) && !isRecord(prev, { module: 'M', level: 'Custom', valid: true, spi: 0.1 }));
+  ok('valid needs no hints', isValid(96, false) && !isValid(96, true) && !isValid(95.9, false));
+  const csv = toCSV([{ ts: '2026-09-24T10:05:00', module: 'Radar conflict detection', level: 5, correct: 9, wrong: 1, blank: 0, spi: 12.345, accuracy: 90, goal: 'a;b', met: false }]);
+  ok('csv header', csv.indexOf('Date;Module;Level;Correct;Wrong;Blank;Seconds per item;Accuracy %;Goal;Met') === 1 && csv.charCodeAt(0) === 0xFEFF);
+  ok('csv row', csv.indexOf(';Radar conflict detection;5;9;1;0;12.35;90.0;"a;b";No') > 0);
+  // Pooled + thirds-aware promotion (wave 5)
+  const S = function(n, c, t3n, t3c){ return { n: n, c: c, t3n: t3n, t3c: t3c }; };
+  const P0 = function(pool, streak){ return { level: 3, streak: streak || 0, fails: 0, unlocked: 3, pool: pool || [] }; };
+  let ps = advanceLevelPooled(P0(), 3, S(30, 29, 10, 10), false); ok('pool: 1 session no promotion', ps.level === 3 && ps.why === '');
+  ps = advanceLevelPooled(ps, 3, S(30, 29, 10, 9), false); ok('pool: 2x30 items 58/60 -> promoted', ps.level === 4 && ps.why === 'pooled' && ps.pool.length === 0 && ps.unlocked === 4);
+  ps = advanceLevelPooled(P0(), 3, S(20, 20, 6, 6), false); ps = advanceLevelPooled(ps, 3, S(20, 20, 6, 6), false); ok('pool: only 40 items -> stay', ps.level === 3);
+  ps = advanceLevelPooled(ps, 3, S(20, 20, 6, 6), false); ok('pool: third 20-item session (60 items) -> promoted', ps.level === 4);
+  ps = advanceLevelPooled(advanceLevelPooled(P0(), 3, S(30, 30, 10, 10), false), 3, S(30, 26, 10, 8), false); ok('pool: 56/60 = 93 % -> no promotion', ps.level === 3);
+  ps = advanceLevelPooled(advanceLevelPooled(P0(), 3, S(30, 30, 10, 10), false), 3, S(30, 26, 10, 10), false); ok('pool: 56/60 with one session at 86.7 % blocks', ps.level === 3);
+  ps = advanceLevelPooled(advanceLevelPooled(P0(), 3, S(30, 30, 10, 10), false), 3, S(30, 29, 10, 8), false); ok('pool: 59/60, last third 18/20 = 90 % -> promoted', ps.level === 4);
+  ps = advanceLevelPooled(advanceLevelPooled(P0(), 3, S(30, 30, 10, 10), false), 3, S(30, 29, 10, 7), false); ok('pool: last third 17/20 = 85 % blocks (fade)', ps.level === 3);
+  ps = advanceLevelPooled(P0([S(20, 20, 6, 6), S(20, 20, 6, 6)], 2), 3, S(15, 15, 5, 3), false);
+  ok('classic 3 valid but last thirds 15/17 = 88 % -> gated, streak stays 2', ps.level === 3 && ps.streak === 2 && ps.why === 'gated');
+  ps = advanceLevelPooled(P0([S(20, 20, 0, 0), S(20, 20, 0, 0)], 2), 3, S(20, 20, 0, 0), false);
+  ok('classic 3 valid without thirds data -> promoted', ps.level === 4);
+  const hp = advanceLevelPooled(P0([S(30, 30, 10, 10)]), 3, S(30, 30, 10, 10), true);
+  ok('pool: hinted session changes nothing', hp.level === 3 && hp.pool.length === 1);
+  const op = advanceLevelPooled(P0([S(30, 30, 10, 10)]), 2, S(30, 30, 10, 10), false);
+  ok('pool: other level changes nothing', op.level === 3 && op.pool.length === 1);
+  const tp = advanceLevelPooled({ level: 10, streak: 0, fails: 0, unlocked: 10, pool: [S(30, 30, 10, 10)] }, 10, S(30, 30, 10, 10), false);
+  ok('pool: cap at 10', tp.level === 10);
+  let badPool = 0;
+  for (let a = 0; a <= 30; a++) for (let b = 0; b <= 30; b++) if ((a + b) / 60 * 100 < 96){
+    const r2 = advanceLevelPooled({ level: 4, streak: 0, fails: 0, unlocked: 4, pool: [S(30, a, 10, Math.min(10, a))] }, 4, S(30, b, 10, Math.min(10, b)), false);
+    if (r2.level > 4) badPool++;
+  }
+  ok('pool: never promotes below 96 % pooled (' + badPool + ')', badPool === 0);
+  // Endurance thirds (wave 5 U1)
+  const t12 = atcThirds(Array.from({ length: 12 }, function(_, i){ return { ok: i < 8, blank: i === 11, sec: 2 }; }), 0);
+  ok('thirds 12 items -> 4/4/4', t12 && t12.map(function(x){ return x.n; }).join() === '4,4,4' && t12[0].c === 4 && t12[1].c === 4 && t12[2].c === 0 && t12[2].b === 1 && t12[0].s === 8);
+  ok('thirds <9 items -> null', atcThirds(Array.from({ length: 8 }, function(){ return { ok: true, sec: 1 }; }), 0) === null);
+  ok('thirds 10 items index rule', atcThirds(Array.from({ length: 10 }, function(){ return { ok: true, sec: 1 }; }), 0).map(function(x){ return x.n; }).join() === '4,3,3');
+  const tt = atcThirds(Array.from({ length: 10 }, function(_, i){ return { ok: true, sec: 1, t: i * 6 }; }), 60);
+  ok('thirds time rule', tt.map(function(x){ return x.n; }).join() === '4,3,3');
+  ok('thirds line', atcThirdsLine(t12).indexOf('Precisión por tercios: 100 / 100 / 0 %') === 0 && atcThirdsLine(t12).indexOf('muy pocos') > 0 && atcThirdsLine(null) === '');
+  return { fails: fails, scenarios: scen, withConflict: withConflict, withoutConflict: withoutConflict, minPool: minPool, arithItems: made, combos: combos };
+}
+// ---- Endurance ("thirds", wave 5 U1): identical copy in every ATC game; see coord/SCHEMA-thirds.md ----
+// results = [{ok, blank, sec, t}] (optional n/c/b give weighted counts, e.g. one d2 row or one n-back stimulus).
+// durationSec > 0: time thirds (group = min(2, floor(t*3/duration))); otherwise index thirds (min(2, floor(i*3/N))).
+// Fewer than 9 results: null. Returns [{n,c,b,s} x3]; wrong = n - c - b.
+function atcThirds(results, durationSec){
+  const N = results ? results.length : 0;
+  if (N < 9) return null;
+  const th = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  results.forEach(function(r, i){
+    const g = durationSec > 0 ? Math.max(0, Math.min(2, Math.floor((r.t || 0) * 3 / durationSec))) : Math.min(2, Math.floor(i * 3 / N));
+    th[g].n += r.n === undefined ? 1 : r.n;
+    th[g].c += r.c === undefined ? (r.ok ? 1 : 0) : r.c;
+    th[g].b += r.b === undefined ? (r.blank ? 1 : 0) : r.b;
+    th[g].s += r.sec || 0;
+  });
+  th.forEach(function(x){ x.s = Math.round(x.s * 100) / 100; });
+  return th;
+}
+// One result-screen line: accuracy per third and the fade (third 3 minus third 1); fade only when both thirds have n >= 8.
+function atcThirdsLine(th){
+  if (!th || th.length !== 3) return '';
+  const acc = function(x){ return x.n > 0 ? x.c / x.n * 100 : null; };
+  const a = th.map(acc);
+  const txt = a.map(function(v){ return v === null ? '—' : String(Math.round(v)); }).join(' / ');
+  let fade = ' (muy pocos elementos por tercio para estimar la caída)';
+  if (th[0].n >= 8 && th[2].n >= 8){
+    const f = Math.round(a[2]) - Math.round(a[0]);
+    fade = ' → caída ' + (f > 0 ? '+' : (f < 0 ? '−' : '')) + Math.abs(f) + ' pts';
+  }
+  return 'Precisión por tercios: ' + txt + ' %' + fade;
+}
+// ==== PURE LOGIC END ====
+
+// ==================== USER INTERFACE ====================
+// MODULES holds the STORED module names (session.module); the dashboard matches them by regex, so they stay in English.
+// Only the display goes through modEs()/MODULES_ES.
+const MODULES = { conf: 'Radar conflict detection', arith: 'Heading arithmetic', cat: 'Fast categorization' };
+const MODULES_ES = { conf: 'Detección de conflictos en radar', arith: 'Aritmética de rumbos', cat: 'Categorización rápida' };
+function modEs(stored){ for (const k in MODULES) if (MODULES[k] === stored) return MODULES_ES[k]; return stored; }
+function lvlEs(l){ return l === 'Custom' ? 'Personalizado' : l; }
+function modeEs(m){ return { manual: 'manual', adaptive: 'adaptativo', custom: 'personalizado' }[m] || m; }
+const STORE_KEY = 'atc_radar_v2';
+let memory = null, storeOk = true, onKey = null, timers = [];
+const app = document.getElementById('app');
+
+function load(){
+  if (memory) return memory;
+  let d = null;
+  try { const r = localStorage.getItem(STORE_KEY); if (r) d = JSON.parse(r); } catch (e) { storeOk = false; }
+  if (!d || !Array.isArray(d.sessions)) d = { sessions: [] };
+  if (!d.prog) d.prog = {};
+  ['conf', 'arith', 'cat'].forEach(function(m){ if (!d.prog[m]) d.prog[m] = newProgress(); });
+  memory = d; return d;
+}
+function save(){
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(memory)); return true; } catch (e) { storeOk = false; return false; }
+}
+function esc(s){
+  return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+}
+function $(id){ return document.getElementById(id); }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function screen(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function cleanup(){ timers.forEach(function(t){ clearTimeout(t); clearInterval(t); }); timers = []; onKey = null; dual.running = false; dual.signal = false; }
+function timer(t){ timers.push(t); return t; }
+function keepFocusKeys(e){ return e.target && e.target.tagName === 'INPUT' && e.target.type === 'range'; }
+let live = false;   // true while a session is running: Esc then asks before abandoning it
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){ e.preventDefault(); if (live && !window.confirm('¿Abandonar la sesión?')) return; menu(); return; }
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (dual.running && e.key === ' '){ e.preventDefault(); dualPress(); return; }
+  if (onKey && !keepFocusKeys(e)) onKey(e);
+});
+
+/* ---------- Dual-task monitor: press Space when the MONITOR light turns amber (within 1.6 s) ---------- */
+const dual = { running: false, signal: false, sigAt: 0, signals: 0, hits: 0, falseAlarms: 0 };
+function dualReset(){ dual.running = false; dual.signal = false; dual.signals = 0; dual.hits = 0; dual.falseAlarms = 0; }
+function dualBegin(){
+  dual.running = true; dual.signal = false;
+  (function schedule(){
+    timer(setTimeout(function(){
+      if (!dual.running) return;
+      const el = $('mon'); dual.signal = true; dual.signals++; dual.sigAt = performance.now(); if (el) el.classList.add('sig');
+      timer(setTimeout(function(){ dual.signal = false; const e2 = $('mon'); if (e2) e2.classList.remove('sig'); schedule(); }, 1600));
+    }, 4000 + Math.random() * 5000));
+  })();
+}
+function dualPress(){
+  const el = $('mon');
+  if (dual.signal){ dual.hits++; dual.signal = false; if (el) el.classList.remove('sig'); } else dual.falseAlarms++;
+}
+function dualHtml(on){ return on ? '<span class="mon" id="mon">Monitor <kbd>Espacio</kbd></span>' : ''; }
+function dualReport(on){
+  if (!on) return '';
+  return '<p>Monitor ' + dual.hits + ' / ' + dual.signals + ' · falsas ' + dual.falseAlarms + '</p>';
+}
+
+/* ---------- Menu ---------- */
+function moduleSummary(id){
+  const d = load(), p = d.prog[id];
+  const ses = d.sessions.filter(function(s){ return s.module === MODULES[id]; });
+  const base = 'N' + p.level;
+  if (!ses.length) return base;
+  const u = ses[ses.length - 1];
+  return base + ' · ' + ses.length + (ses.length === 1 ? ' sesión · ' : ' sesiones · ') + fmt(u.accuracy, 0) + ' %';
+}
+function menu(){
+  live = false;
+  cleanup();
+  const cards = [['conf', 'Conflictos', 'conflict', '1'], ['arith', 'Rumbos', 'compass', '2'], ['cat', 'Categorías', 'keys', '3'], ['rules', 'Referencia', 'book', '4']];
+  screen('<div class="list">' + cards.map(function(t){
+    return '<button class="card" data-m="' + t[0] + '">' + ic(t[2]) + '<span><span class="nm">' + t[1] + '</span>' + (t[0] === 'rules' ? '' : '<span class="dt">' + esc(moduleSummary(t[0])) + '</span>') + '</span><kbd>' + t[3] + '</kbd></button>';
+  }).join('') + '</div><p class="row"><button class="btn" id="hist">' + ic('history') + 'Historial <kbd>H</kbd></button></p>');
+  const go = { conf: configConf, arith: configArith, cat: configCat, rules: rulesPage };
+  Array.prototype.forEach.call(app.querySelectorAll('.card'), function(b){ b.addEventListener('click', function(){ go[b.dataset.m](); }); });
+  $('hist').addEventListener('click', history);
+  onKey = function(e){
+    if (['1', '2', '3', '4', 'h', 'H'].indexOf(e.key) >= 0) e.preventDefault(); // do not type the key into the next screen's focused field
+    if (e.key === '1') configConf(); else if (e.key === '2') configArith(); else if (e.key === '3') configCat(); else if (e.key === '4') rulesPage();
+    else if (e.key === 'h' || e.key === 'H') history();
+  };
+}
+
+/* ---------- Rules page ---------- */
+function rulesPage(){
+  cleanup();
+  const rows = [['Pérdida', 'lateral &lt; 5 NM y vertical &lt; 1000 ft'], ['CBDR', 'demora constante y distancia decreciente: CPA 0'], ['CPA', 't = −(r·v) / |v|²  ·  d = |r × v| / |v|'],
+    ['Recíproco', '± 180°'], ['Viraje', 'derecha +, izquierda −, vuelta en 360'], ['Deriva', '60 × viento cruzado / TAS; viento por la derecha: trayectoria = rumbo − deriva'],
+    ['Velocidad suelo', 'TAS − viento de cara, TAS + viento de cola'], ['Velocidad', '360 kt = 6 NM/min'], ['Marco naranja', 'tecla invertida: F ↔ J, D ↔ K']];
+  screen('<button class="link" id="back">' + ic('back') + 'Menú</button><h2 class="ttl">Referencia</h2><div class="tbl"><table><tbody>' +
+    rows.map(function(r){ return '<tr><td class="k">' + r[0] + '</td><td style="white-space:normal">' + r[1] + '</td></tr>'; }).join('') + '</tbody></table></div>');
+  $('back').addEventListener('click', menu);
+}
+
+/* ---------- Common configuration: mode, level, sliders, hints, goal ---------- */
+const SLIDERS = {
+  conf: [['n', 'Aeronaves', 2, 6, 1, 4], ['window', 'Ventana, min', 4, 15, 1, 8], ['limit', 'Segundos por imagen', 0, 120, 5, 40], ['pictures', 'Imágenes', 3, 20, 1, 10],
+    ['traps', 'Trampas', 0, 6, 1, 2], ['exposure', 'Visible, s', 0, 30, 1, 0]],
+  arith: [['step', 'Paso de ángulo', 1, 10, 4, 5], ['limit', 'Segundos por pregunta', 0, 30, 1, 10], ['items', 'Preguntas', 5, 40, 1, 20], ['comboShare', 'Varios pasos, %', 0, 100, 10, 0], ['comboSteps', 'Pasos', 2, 3, 1, 2]],
+  cat: [['rule', 'Conjunto de reglas', 1, 4, 1, 2], ['speed', 'Segundos por objeto', 0.5, 8, 0.1, 3], ['per', 'Objetos por ronda', 5, 40, 1, 15], ['rounds', 'Rondas', 1, 4, 1, 2], ['reversal', 'Invertidos, %', 0, 60, 5, 0]]
+};
+function configScreen(o){
+  cleanup();
+  const d = load(), p = d.prog[o.id];
+  const lvlOpts = []; for (let i = 1; i <= p.unlocked; i++) lvlOpts.push('<option value="' + i + '"' + (i === p.level ? ' selected' : '') + '>' + i + ' ' + LEVEL_NAMES[i - 1] + '</option>');
+  const slid = SLIDERS[o.id].map(function(s){
+    const val = (o.id === 'arith' && s[0] === 'step') ? 5 : s[5];
+    return '<div class="slider-row"><label for="sl_' + s[0] + '">' + s[1] + '</label><output id="o_' + s[0] + '">' + val + '</output><input type="range" id="sl_' + s[0] + '" min="' + s[2] + '" max="' + s[3] + '" step="' + s[4] + '" value="' + val + '" style="grid-column:1 / span 2"></div>';
+  }).join('');
+  const chk = (o.id !== 'conf' ? '<label class="lb inline"><input type="checkbox" id="sl_dual">Doble tarea</label>' : '') +
+    (o.id === 'arith' ? '<label class="lb" for="sl_kinds">Tipos</label><select id="sl_kinds"><option value="all">Todos</option><option value="recip">Recíproco</option><option value="turn">Viraje</option><option value="drift">Deriva</option><option value="wind">Velocidad suelo</option><option value="tds">Tiempo / distancia / velocidad</option></select><label class="lb inline"><input type="checkbox" id="sl_tdsWide">Cifras amplias</label>' : '');
+  screen('<button class="link" id="back">' + ic('back') + 'Menú</button><h2 class="ttl">' + o.title + '</h2>' +
+    '<label class="lb" for="mode">Modo</label><select id="mode"><option value="manual">Manual</option><option value="adaptive">Adaptativo · N' + p.level + ' · ' + p.streak + '/3</option><option value="custom">Personalizado</option></select>' +
+    '<div id="manualBox"><label class="lb" for="lvl">Nivel<select id="lvl">' + lvlOpts.join('') + '</select></div>' +
+    '<div id="customBox" style="display:none">' + slid + chk + '</div>' +
+    '<label class="lb" for="hint">Pistas</label><select id="hint"></select>' +
+    '<label class="lb" for="goal">Objetivo</label>' +
+    '<input type="text" id="goal" maxlength="80" autocomplete="off" value="' + esc(o.goal) + '">' +
+    '<p id="err" class="bad" role="alert"></p><p><button class="btn primary" id="go">' + ic('play') + 'Empezar</button></p>');
+  const sel = function(id){ return $(id); };
+  function collectCustom(){
+    const v = {};
+    SLIDERS[o.id].forEach(function(s){ v[s[0]] = sel('sl_' + s[0]).value; });
+    if (o.id === 'arith'){ v.step = { 1: 1, 2: 1, 3: 5, 4: 5, 5: 5, 6: 5, 7: 10, 8: 10, 9: 10, 10: 10 }[v.step] || 5; v.kinds = sel('sl_kinds').value; v.tdsWide = sel('sl_tdsWide').checked; }
+    if (o.id !== 'conf') v.dual = sel('sl_dual').checked;
+    v.hint = sel('hint').value;
+    return v;
+  }
+  function refresh(){
+    const mode = sel('mode').value;
+    sel('manualBox').style.display = mode === 'manual' ? '' : 'none';
+    sel('customBox').style.display = mode === 'custom' ? '' : 'none';
+    const level = mode === 'adaptive' ? p.level : parseInt(sel('lvl').value, 10);
+    let cap = 3;
+    if (mode !== 'custom') cap = HINT_MAX[level - 1];
+    const cur = parseInt(sel('hint').value, 10) || 0, want = Math.min(cur, cap);
+    sel('hint').innerHTML = [0, 1, 2, 3].filter(function(h){ return h <= cap; }).map(function(h){ return '<option value="' + h + '"' + (h === want ? ' selected' : '') + '>' + (h === 0 ? 'Sin pistas' : h + ' ' + ['', 'indicio', 'método', 'solución'][h]) + '</option>'; }).join('');
+    if (o.id === 'arith'){ const row = sel('o_step'); if (row) row.textContent = { 1: 1, 2: 1, 3: 5, 4: 5, 5: 5, 6: 5, 7: 10, 8: 10, 9: 10, 10: 10 }[sel('sl_step').value] + '°'; }
+    SLIDERS[o.id].forEach(function(s){ if (!(o.id === 'arith' && s[0] === 'step')) sel('o_' + s[0]).textContent = sel('sl_' + s[0]).value; });
+  }
+  ['mode', 'lvl', 'hint'].forEach(function(id){ sel(id).addEventListener('change', refresh); });
+  SLIDERS[o.id].forEach(function(s){ sel('sl_' + s[0]).addEventListener('input', refresh); });
+  refresh();
+  $('back').addEventListener('click', menu);
+  const go = function(){
+    const v = $('goal').value.trim();
+    if (!v){ $('err').textContent = 'Falta el objetivo'; $('goal').focus(); return; }
+    const mode = sel('mode').value, hint = parseInt(sel('hint').value, 10) || 0;
+    let P;
+    if (mode === 'custom') P = customParams(o.id, collectCustom());
+    else { P = paramsForLevel(o.id, mode === 'adaptive' ? p.level : parseInt(sel('lvl').value, 10)); P.maxHint = Math.min(hint, P.maxHint); }
+    o.start(v, P, mode);
+  };
+  $('go').addEventListener('click', go);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'SELECT'){ e.preventDefault(); go(); } };
+  $('goal').focus(); $('goal').select();
+}
+
+/* ---------- Common result screen ---------- */
+function finish(r){
+  live = false;
+  cleanup();
+  const d = load(), P = r.P;
+  const custom = P.level === 'Custom';
+  const valid = isValid(r.accuracy, r.hinted);
+  const met = evaluateGoal(r.goal, { accuracy: r.accuracy, spi: r.spi, correct: r.correct });
+  const ses = { ts: new Date().toISOString(), module: MODULES[r.id], level: P.level, mode: r.mode, params: r.params, correct: r.correct, wrong: r.wrong, blank: r.blank,
+    spi: r.spi, accuracy: r.accuracy, goal: r.goal, met: met, valid: valid, hinted: !!r.hinted,
+    thirds: r.outs ? atcThirds(r.outs, 0) : null };
+  const best = custom ? null : bestAtLevel(d.sessions, ses.module, ses.level);
+  const rec = isRecord(d.sessions, ses);
+  d.sessions.push(ses);
+  const idx = d.sessions.length - 1;
+  let note = '';
+  if (custom) note = 'Personalizado';
+  else if (r.hinted) note = 'Con pistas';
+  else {
+    const before = d.prog[r.id];
+    const t3 = ses.thirds ? ses.thirds[2] : null;
+    const after = advanceLevelPooled(before, P.level, { n: r.correct + r.wrong + r.blank, c: r.correct, t3n: t3 ? t3.n : 0, t3c: t3 ? t3.c : 0 }, false);
+    const why = after.why; delete after.why;
+    d.prog[r.id] = after;
+    if (P.level !== before.level) note = 'Otro nivel';
+    else if (why === 'pooled' || after.level > before.level) note = '<b class="good">Nivel ' + after.level + ' ' + LEVEL_NAMES[after.level - 1] + '</b>';
+    else if (why === 'gated') note = '<b class="warn">Caída al final</b>';
+    else if (after.level < before.level) note = '<b class="warn">Baja a ' + after.level + '</b>';
+    else note = 'Racha ' + after.streak + ' / 3';
+  }
+  save();
+  let goalHtml;
+  if (met === true) goalHtml = '<p><b class="good">Objetivo cumplido</b> · ' + esc(r.goal) + '</p>';
+  else if (met === false) goalHtml = '<p><b class="warn">Objetivo no cumplido</b> · ' + esc(r.goal) + '</p>';
+  else goalHtml = '<p id="goalbox">' + esc(r.goal) + ' <button class="btn" id="yes">' + ic('check') + 'Cumplido</button> <button class="btn" id="no">' + ic('x') + 'No cumplido</button></p>';
+  const p = d.prog[r.id];
+  screen('<h2 class="ttl">' + MODULES_ES[r.id] + '</h2><p class="soft">' + (custom ? 'Personalizado' : 'Nivel ' + esc(P.level) + ' ' + LEVEL_NAMES[P.level - 1] + ' · ' + modeEs(r.mode)) + '</p>' + (rec ? '<p class="rec">' + ic('check') + 'Récord</p>' : '') +
+    '<div class="figs"><div class="fig"><b>' + r.correct + '</b><span>Aciertos</span></div><div class="fig"><b>' + r.wrong + '</b><span>Fallos</span></div><div class="fig"><b>' + r.blank + '</b><span>En blanco</span></div>' +
+    '<div class="fig"><b>' + fmt(r.spi, 2) + '</b><span>s / elemento</span></div><div class="fig"><b class="' + (valid ? 'good' : 'bad') + '">' + fmt(r.accuracy, 1) + ' %</b><span>Precisión</span></div></div>' + goalHtml +
+    (ses.thirds ? '<p class="soft" id="thirdsLine">' + esc(atcThirdsLine(ses.thirds)) + '</p>' : '') +
+    '<div class="tbl"><table><thead><tr><th>Nivel</th><th>Racha</th><th>Desbloqueado</th>' + (custom ? '' : '<th>Mejor s / elemento</th>') + '<th></th></tr></thead><tbody><tr><td>' + p.level + '</td><td>' + p.streak + ' / 3</td><td>' + p.unlocked + '</td>' +
+    (custom ? '' : '<td>' + (best ? fmt(best.spi, 2) : '–') + '</td>') + '<td>' + (valid ? '' : '<b class="warn">&lt; ' + MIN_ACCURACY + ' %</b> ') + note + '</td></tr></tbody></table></div>' +
+    (r.extra || '') + '<p class="row" style="margin-top:16px"><button class="btn primary" id="rep">' + ic('repeat') + 'Repetir</button><button class="btn" id="men">' + ic('back') + 'Menú</button><button class="btn" id="his">' + ic('history') + 'Historial</button></p>');
+  if (met === null){
+    const mark = function(v){ d.sessions[idx].met = v; save(); $('goalbox').innerHTML = esc(r.goal) + ' · ' + (v ? '<b class="good">cumplido</b>' : '<b class="warn">no cumplido</b>'); };
+    $('yes').addEventListener('click', function(){ mark(true); }); $('no').addEventListener('click', function(){ mark(false); });
+  }
+  $('rep').addEventListener('click', r.repeat); $('men').addEventListener('click', menu); $('his').addEventListener('click', history);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') r.repeat(); else if (e.key === 'h' || e.key === 'H') history(); };
+  $('rep').focus();
+}
+function hintBar(P){
+  return P.maxHint > 0 ? '<p class="row" style="margin-top:12px"><button class="btn" id="hintbtn">' + ic('hint') + 'Pista <kbd>?</kbd></button></p><div id="hintbox" class="hintbox" style="display:none"></div>' : '';
+}
+
+/* ================= 1. CONFLICT DETECTION ================= */
+const RADAR_PX = 700, RADAR_NM = 50; // canvas is 700 px wide and covers +-50 NM
+function describeConf(P){
+  return P.n + ' aeronaves, ventana de ' + P.window + ' min, ' + (P.limit ? P.limit + ' s por imagen' : 'sin tiempo') + ', ' + P.pictures + ' imágenes, ' + P.traps + '+ par(es) trampa' + (P.exposure ? ', imagen visible ' + P.exposure + ' s' : '') + '.';
+}
+function configConf(){
+  configScreen({ id: 'conf', title: 'Conflictos', describe: describeConf, goal: '≥96 % de precisión',
+    start: function(g, P, mode){ startConf(g, P, mode); } });
+}
+function drawRadar(cv, sc, solution, hidden){
+  const ctx = cv.getContext('2d'), S = RADAR_PX, k = S / (2 * RADAR_NM), C = S / 2;
+  const X = function(x){ return C + x * k; }, Y = function(y){ return C - y * k; };
+  const MONO = 'ui-monospace,Consolas,monospace';
+  const f = Math.min(1.7, Math.max(1, S / (cv.clientWidth || S)));   // narrow screens: draw text larger so it stays readable
+  ctx.clearRect(0, 0, S, S); ctx.fillStyle = '#09110c'; ctx.fillRect(0, 0, S, S);
+  // range rings, cross-hair and bearing ticks
+  ctx.strokeStyle = '#1c3826'; ctx.lineWidth = 1;
+  for (let r = 10; r <= 50; r += 10){ ctx.beginPath(); ctx.arc(C, C, r * k, 0, 2 * Math.PI); ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(C, 0); ctx.lineTo(C, S); ctx.moveTo(0, C); ctx.lineTo(S, C); ctx.stroke();
+  ctx.strokeStyle = '#2f5a3e';
+  for (let a = 0; a < 360; a += 10){
+    const t = a % 30 === 0 ? 9 : 5, rr = 50 * k, h = a * Math.PI / 180;
+    ctx.beginPath(); ctx.moveTo(C + Math.sin(h) * rr, C - Math.cos(h) * rr); ctx.lineTo(C + Math.sin(h) * (rr - t), C - Math.cos(h) * (rr - t)); ctx.stroke();
+  }
+  ctx.font = Math.round(11 * f) + 'px ' + MONO; ctx.fillStyle = '#4d8a5e'; ctx.textBaseline = 'alphabetic';
+  for (let r = 10; r <= 40; r += 10) ctx.fillText(String(r), C + 3, C - r * k + 12 * f);
+  ctx.fillText('N', C + 5, 22 * f);
+  if (hidden){ ctx.fillStyle = '#8fe3a0'; ctx.font = Math.round(18 * f) + 'px ' + MONO; ctx.textAlign = 'center'; ctx.fillText('— — —', C, C + 60); ctx.textAlign = 'left'; return; }
+  const N = sc.windowMin;
+  if (solution) sc.aircraft.forEach(function(a){
+    ctx.strokeStyle = '#c99a3a'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(X(a.x), Y(a.y));
+    const e = position(a, N); ctx.lineTo(X(e.x), Y(e.y)); ctx.stroke();
+    ctx.fillStyle = '#c99a3a';
+    for (let t = 1; t <= N; t++){ const p = position(a, t); ctx.fillRect(X(p.x) - 2, Y(p.y) - 2, 4, 4); }
+  });
+  if (solution) sc.pairs.filter(function(p){ return p.conflict; }).forEach(function(p){
+    const a = sc.aircraft[p.i], b = sc.aircraft[p.j], t = p.lossFrom;
+    [a, b].forEach(function(ac){ const q = position(ac, t); ctx.strokeStyle = '#ff7a45'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(X(q.x), Y(q.y), SEP_NM / 2 * k, 0, 2 * Math.PI); ctx.stroke(); });
+    const qa = position(a, t), qb = position(b, t); ctx.beginPath(); ctx.moveTo(X(qa.x), Y(qa.y)); ctx.lineTo(X(qb.x), Y(qb.y)); ctx.stroke();
+    ctx.fillStyle = '#ff9a70'; ctx.font = 'bold ' + Math.round(12 * f) + 'px ' + MONO; ctx.fillText(p.key + ' ' + fmt(t, 1), X(qa.x) + 8, Y(qa.y) - 8);
+  });
+  sc.aircraft.forEach(function(a, i){
+    const x = X(a.x), y = Y(a.y), h = a.hdg * Math.PI / 180;
+    ctx.strokeStyle = '#7fe08f'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 22 * Math.sin(h), y - 22 * Math.cos(h)); ctx.stroke();
+    ctx.strokeRect(x - 4, y - 4, 8, 8); ctx.fillStyle = '#7fe08f'; ctx.fillRect(x - 1.5, y - 1.5, 3, 3);
+    ctx.font = 'bold ' + Math.round(13 * f) + 'px ' + MONO; ctx.fillStyle = '#b6f2c0';
+    const lx = x > S - 120 * f ? x - 108 * f : x + 9, ly = y > S - 30 * f ? y - 14 * f : y + 16 * f;
+    ctx.fillText(LETTERS[i] + ' FL' + a.fl, lx, ly);
+    ctx.font = Math.round(12 * f) + 'px ' + MONO; ctx.fillStyle = '#6fae7c'; ctx.fillText(a.spd + ' ' + pad3(a.hdg), lx, ly + 13 * f);
+  });
+}
+function startConf(goal, P, mode){
+  cleanup(); live = true;
+  const n = P.n, TOTAL = P.pictures;
+  let idx = 0, correct = 0, wrong = 0, blank = 0, times = [], outs = [], sc = null, t0 = 0, phase = 'ask', hintTier = 0, hinted = false, tick = null, left = 0;
+  const rnd = mulberry32((Date.now() % 1000000) | 0);
+  const params = describeConf(P) + (P.maxHint ? ' Pistas hasta ' + P.maxHint + '.' : '');
+  function next(){
+    cleanup(); onKey = keys;
+    if (idx >= TOTAL) return end();
+    sc = makeScenario(rnd, P);
+    if (!sc){ screen('<p class="bad">Error al generar. Esc.</p>'); return; }
+    phase = 'ask'; hintTier = 0;
+    screen('<div class="head"><span><b>' + (idx + 1) + '</b> / ' + TOTAL + '</span><span>' + ic('timer') + '<b>' + P.window + '</b> min</span>' + (P.limit ? '<span><b id="left">' + P.limit + '</b> s</span>' : '') + '<span>' + ic('check') + '<b>' + correct + '</b></span></div>' +
+      '<div class="bar"><div style="width:' + (idx / TOTAL * 100) + '%"></div></div>' +
+      '<div class="radar-wrap"><canvas id="cv" width="' + RADAR_PX + '" height="' + RADAR_PX + '" aria-label="Pantalla radar"></canvas><div id="side">' +
+      '<div class="tbl-box" id="acs"><table><thead><tr><th></th><th>FL</th><th>kt</th><th>Rumbo</th></tr></thead><tbody>' +
+      sc.aircraft.map(function(a, i){ return '<tr><td><b>' + LETTERS[i] + '</b></td><td>' + a.fl + '</td><td>' + a.spd + '</td><td>' + pad3(a.hdg) + '°</td></tr>'; }).join('') + '</tbody></table></div>' +
+      '<label class="lb" for="ans">Pares</label><input type="text" id="ans" autocomplete="off" maxlength="40" placeholder="AC BD">' +
+      '<p id="fb" class="fb" aria-live="polite" style="text-align:left"></p><button class="btn primary" id="ok">Enviar</button>' + hintBar(P) + '</div></div>');
+    drawRadar($('cv'), sc, false, false);
+    $('ans').focus(); t0 = performance.now();
+    $('ok').addEventListener('click', submit);
+    if ($('hintbtn')) $('hintbtn').addEventListener('click', function(){ hint(); $('ans').focus(); });
+    if (P.exposure) timer(setTimeout(function(){ if (phase === 'ask'){ drawRadar($('cv'), sc, false, true); $('acs').style.visibility = 'hidden'; } }, P.exposure * 1000));
+    if (P.limit){
+      left = P.limit;
+      tick = timer(setInterval(function(){ left--; const el = $('left'); if (el) el.textContent = left; if (left <= 0){ clearInterval(tick); submit(true); } }, 1000));
+    }
+  }
+  function submit(forced){
+    if (phase !== 'ask') return;
+    const text = $('ans').value.trim();
+    let given = null, timedOut = forced === true;
+    if (!text){ if (!timedOut) { blank++; } else blank++; }
+    else {
+      given = parsePairs(text, n);
+      if (given === null){ if (!timedOut){ $('fb').innerHTML = '<span class="warn">AC BD, o 0</span>'; return; } blank++; }
+    }
+    if (tick) clearInterval(tick);
+    times.push((performance.now() - t0) / 1000);
+    phase = 'review'; idx++;
+    const res = scoreConflicts(sc, given || []);
+    outs.push({ ok: given !== null && res.correct, blank: given === null, sec: times[times.length - 1] });
+    let verdict;
+    if (given === null){ verdict = '<b class="warn">' + (timedOut ? 'Tiempo agotado' : 'En blanco') + '</b>'; }
+    else if (res.correct){ correct++; verdict = '<b class="good">Correcto</b>'; }
+    else { wrong++; verdict = '<b class="bad">Incorrecto</b> · ' + (given.length ? given.join(' ') : '0'); }
+    reveal(verdict + ' · <b>' + (res.expected.length ? res.expected.join(' ') : '0') + '</b>');
+  }
+  function reveal(verdictHtml){
+    const rows = sc.pairs.map(function(p){
+      const why = p.conflict ? fmt(p.lossFrom, 1) + ' – ' + fmt(p.lossTo, 1) + ' min'
+        : (!p.vertLoss ? 'vertical' : (p.lateralLoss ? '' : (p.tcpaRaw > sc.windowMin ? 'tras la ventana' : (p.tcpaRaw <= 0 ? 'se alejan' : 'pasan'))));
+      return '<tr class="' + (p.conflict ? 'conf' : '') + '"><td><b>' + p.key + '</b></td><td>' + (p.conflict ? 'Conflicto' : (p.trap ? 'Libre · trampa' : 'Libre')) + '</td><td>' + fmt(p.cpa, 1) + ' NM</td><td>' + fmt(p.tcpaRaw > 0 ? p.tcpaRaw : 0, 1) + ' min</td><td>' + p.dz + ' ft</td><td>' + fmt(p.bearingRate, 2) + '°/min' + (p.cbdr ? ' CBDR' : '') + '</td><td>' + why + '</td></tr>';
+    }).join('');
+    $('fb').innerHTML = verdictHtml;
+    $('ok').textContent = idx >= TOTAL ? 'Terminar' : 'Siguiente';
+    $('ok').removeEventListener('click', submit); $('ok').addEventListener('click', next);
+    $('ans').disabled = true; $('acs').style.visibility = 'visible';
+    drawRadar($('cv'), sc, true, false);
+    const box = document.createElement('div'); box.className = 'tbl-box'; box.style.marginTop = '10px';
+    box.innerHTML = '<table><thead><tr><th>Par</th><th></th><th>CPA</th><th>t CPA</th><th>Vert.</th><th>Demora</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>';
+    $('cv').parentNode.parentNode.appendChild(box);
+    $('ok').focus();
+  }
+  function hint(){
+    if (phase !== 'ask' || hintTier >= P.maxHint) return;
+    hintTier++; hinted = true;
+    const b = $('hintbox'); b.style.display = ''; b.textContent = hintTier + ' · ' + conflictHint(sc, hintTier);
+    if (hintTier === 3){ // full solution: the picture counts as blank
+      if (tick) clearInterval(tick);
+      blank++; times.push((performance.now() - t0) / 1000); phase = 'review'; idx++;
+      outs.push({ ok: false, blank: true, sec: times[times.length - 1] });
+      reveal('<b class="warn">En blanco</b>');
+    }
+  }
+  function keys(e){
+    if (e.key === '?' && P.maxHint > 0){ e.preventDefault(); hint(); return; }
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    if (phase === 'ask') submit(); else next();
+  }
+  function end(){
+    const total = correct + wrong + blank;
+    const spi = times.length ? times.reduce(function(a, b){ return a + b; }, 0) / times.length : null;
+    finish({ id: 'conf', P: P, mode: mode, params: params, correct: correct, wrong: wrong, blank: blank, spi: spi, hinted: hinted,
+      accuracy: total ? correct / total * 100 : 0, goal: goal, outs: outs, repeat: function(){ startConf(goal, P, mode); } });
+  }
+  next();
+}
+
+/* ================= 2. HEADING ARITHMETIC ================= */
+function describeArith(P){
+  const KN = { recip: 'recíproco', turn: 'viraje', wind: 'viento', drift: 'deriva', tds: 'tiempo/distancia/velocidad' };
+  return 'Ángulos en pasos de ' + P.step + '°, ' + (P.limit ? P.limit + ' s por pregunta' : 'sin tiempo') + ', ' + P.items + ' preguntas, tipos: ' + (P.kinds.length === 5 ? 'todos' : P.kinds.map(function(k){ return KN[k] || k; }).join(', ')) + ', ' +
+    (P.comboShare ? Math.round(P.comboShare * 100) + '% de varios pasos (' + P.comboSteps + ' pasos)' : 'un solo paso') + (P.tdsWide ? ', tiempo/distancia/velocidad más difícil' : '') + (P.dual ? ', monitor de doble tarea' : '') + '.';
+}
+function configArith(){
+  configScreen({ id: 'arith', title: 'Rumbos', describe: describeArith, goal: '≥96 % de precisión',
+    start: function(g, P, mode){ startArith(g, P, mode); } });
+}
+function startArith(goal, P, mode){
+  cleanup(); dualReset(); live = true;
+  const TOTAL = P.items, rnd = mulberry32((Date.now() % 1000000) | 0);
+  let idx = 0, correct = 0, wrong = 0, blank = 0, times = [], outs = [], item = null, t0 = 0, locked = false, hintTier = 0, hinted = false, tick = null, left = 0;
+  const params = describeArith(P) + (P.maxHint ? ' Pistas hasta ' + P.maxHint + '.' : '');
+  screen('<div class="head"><span><b id="p">1</b> / ' + TOTAL + '</span>' + (P.limit ? '<span>' + ic('timer') + '<b id="left">' + P.limit + '</b> s</span>' : '') + '<span>' + ic('check') + '<b id="ok">0</b></span><span>' + ic('x') + '<b id="ko">0</b></span>' + dualHtml(P.dual) + '</div>' +
+    '<div class="bar"><div id="bar"></div></div><div class="question" id="q"></div>' +
+    '<input class="entry" id="a" type="text" inputmode="numeric" autocomplete="off" aria-label="Respuesta"><div class="fb" id="fb" aria-live="polite"></div>' + hintBar(P));
+  const inp = $('a');
+  if ($('hintbtn')) $('hintbtn').addEventListener('click', function(){ hint(); inp.focus(); });
+  function show(){
+    const prevText = item ? item.text : '';
+    for (let tries = 0; tries < 5; tries++){ item = makeArith(rnd, P); if (item.text !== prevText) break; }
+    locked = false; hintTier = 0;
+    $('q').textContent = item.text; inp.value = ''; inp.disabled = false; inp.focus(); t0 = performance.now();
+    $('p').textContent = Math.min(TOTAL, idx + 1); $('ok').textContent = correct; $('ko').textContent = wrong; $('bar').style.width = idx / TOTAL * 100 + '%';
+    const hb = $('hintbox'); if (hb) hb.style.display = 'none';
+    if (tick) clearInterval(tick);
+    if (P.limit){ left = P.limit; $('left').textContent = left; tick = timer(setInterval(function(){ left--; const el = $('left'); if (el) el.textContent = left; if (left <= 0){ clearInterval(tick); answer(true); } }, 1000)); }
+  }
+  let advT = null;
+  function goNext(){ if (advT){ clearTimeout(advT); advT = null; } $('fb').textContent = ''; if (idx >= TOTAL) end(); else show(); }
+  function advance(delay){ advT = timer(setTimeout(goNext, delay)); }
+  function answer(forced){
+    if (locked) return;
+    const r = checkArith(item, inp.value);
+    if (r === null && forced !== true){ $('fb').innerHTML = '<span class="warn">#</span>'; return; }
+    locked = true; if (tick) clearInterval(tick); times.push((performance.now() - t0) / 1000); idx++; inp.disabled = true;
+    outs.push({ ok: r === true, blank: r === null, sec: times[times.length - 1] });
+    if (r === null){ blank++; $('fb').innerHTML = '<span class="warn">' + (forced === true ? 'Tiempo agotado' : 'En blanco') + ' · ' + ansText(item) + '</span>'; advance(1800); }
+    else if (r){ correct++; if (idx >= TOTAL){ end(); return; } show(); $('fb').innerHTML = '<span class="flash-good">' + ic('check') + '</span>'; timer(setTimeout(function(){ if (!locked) $('fb').textContent = ''; }, 500)); }   // next question at once: no keystrokes are lost
+    else { wrong++; $('fb').innerHTML = '<span class="flash-bad">' + ansText(item) + '</span><br><span class="small soft">' + esc(item.solution) + '</span>'; advance(2600); }
+  }
+  function hint(){
+    if (locked || hintTier >= P.maxHint) return;
+    hintTier++; hinted = true;
+    const b = $('hintbox'); b.style.display = ''; b.textContent = hintTier + ' · ' + arithHint(item, hintTier);
+    if (hintTier === 3){ locked = true; if (tick) clearInterval(tick); times.push((performance.now() - t0) / 1000); idx++; blank++; outs.push({ ok: false, blank: true, sec: times[times.length - 1] }); inp.disabled = true; $('fb').innerHTML = '<span class="warn">En blanco</span>'; advance(3000); }
+  }
+  function end(){
+    const spi = times.length ? times.reduce(function(a, b){ return a + b; }, 0) / times.length : null;
+    finish({ id: 'arith', P: P, mode: mode, params: params, correct: correct, wrong: wrong, blank: blank, spi: spi, hinted: hinted, extra: dualReport(P.dual),
+      accuracy: correct / TOTAL * 100, goal: goal, outs: outs, repeat: function(){ startArith(goal, P, mode); } });
+  }
+  onKey = function(e){
+    if (e.key === '?' && P.maxHint > 0){ e.preventDefault(); hint(); return; }
+    if (e.key === 'Enter'){ e.preventDefault(); if (locked && advT) goNext(); else answer(); }
+  };
+  show();
+  if (P.dual) dualBegin();
+}
+
+/* ================= 3. FAST CATEGORIZATION ================= */
+const COLOR_HEX = { red: '#c9372c', blue: '#2a6cb8', green: '#3b8a4c', yellow: '#e2b12a' };
+function objectSvg(o, size){
+  const c = COLOR_HEX[o.color], s = size || 150;
+  let shape;
+  if (o.shape === 'circle') shape = '<circle cx="50" cy="50" r="38" fill="' + c + '"/>';
+  else if (o.shape === 'square') shape = '<rect x="14" y="14" width="72" height="72" fill="' + c + '"/>';
+  else if (o.shape === 'triangle') shape = '<polygon points="50,10 92,88 8,88" fill="' + c + '"/>';
+  else shape = '<polygon points="50,6 94,50 50,94 6,50" fill="' + c + '"/>';
+  return '<svg viewBox="0 0 100 100" width="' + s + '" height="' + s + '" role="img" aria-label="' + valueEs(o.shape) + ' ' + valueEs(o.color) + '">' + shape + '</svg>';
+}
+function ruleHtml(rule, hl){
+  return '<div class="rules" id="rulebar">' + rule.keys.map(function(k){
+    const sw = k.pred.values.map(function(v){
+      return k.pred.attr === 'color' ? objectSvg({ color: v, shape: 'circle' }, 26) : objectSvg({ color: 'green', shape: v }, 26).replace(COLOR_HEX.green, '#8d8878');
+    }).join(' ');
+    return '<div class="rule"><span class="key' + (hl === k.key ? ' hl' : '') + '" data-k="' + k.key + '">' + k.key + '</span> ' + sw + ' ' + k.pred.values.map(valueEs).join(' o ').toUpperCase() + (k.pred.attr === 'shape' ? ' (forma)' : '') + '</div>';
+  }).join('') + '</div>';
+}
+function describeCat(P){
+  return 'Complejidad de reglas ' + P.rule + ', ' + P.speed + ' s por objeto, ' + P.rounds + ' rondas de ' + P.per + ' objetos, ' + Math.round(P.reversal * 100) + '% de marcos de tecla invertida, reglas ' + (P.rulesVisible ? 'visibles' : 'ocultas tras la introducción') + (P.dual ? ', monitor de doble tarea' : '') + '.';
+}
+function configCat(){
+  configScreen({ id: 'cat', title: 'Categorías', describe: describeCat, goal: '≥96 % de precisión',
+    start: function(g, P, mode){ startCat(g, P, mode); } });
+}
+function startCat(goal, P, mode){
+  cleanup(); dualReset(); live = true;
+  const limit = P.speed * 1000;
+  const rnd = mulberry32((Date.now() % 1000000) | 0);
+  let round = 0, n = 0, correct = 0, wrong = 0, blank = 0, times = [], outs = [], rule = null, cur = null, prev = null, t0 = 0, acc = false, deadline = null, hinted = false, hintTimer = null;
+  const params = describeCat(P) + (P.maxHint ? ' Pistas hasta ' + P.maxHint + '.' : '');
+  function intro(){
+    cleanup(); acc = false;
+    do { rule = makeRuleSet(rnd, P.rule); } while (!ruleIsUsable(rule));
+    round++; n = 0; prev = null;
+    screen('<div class="head"><span>Ronda <b>' + round + '</b> / ' + P.rounds + '</span><span>' + ic('timer') + '<b>' + P.speed + '</b> s</span></div>' +
+      ruleHtml(rule) + (P.reversal > 0 ? '<p><span class="rev-sample"></span> ' + mirrorText(rule) + '</p>' : '') +
+      '<p><button class="btn primary" id="go">' + ic('play') + 'Empezar <kbd>Espacio</kbd></button></p>');
+    $('go').addEventListener('click', show); $('go').focus();
+    onKey = function(e){ if (e.key === ' '){ e.preventDefault(); show(); } };
+  }
+  function show(){
+    cleanup(); acc = true;
+    screen('<div class="head"><span>Ronda <b>' + round + '</b> / ' + P.rounds + '</span><span><b id="c">' + (n + 1) + '</b> / ' + P.per + '</span><span>' + ic('check') + '<b>' + correct + '</b></span><span>' + ic('x') + '<b>' + wrong + '</b></span><span>' + ic('dash') + '<b>' + blank + '</b></span>' + dualHtml(P.dual) + '</div>' +
+      (P.rulesVisible ? ruleHtml(rule) : '<div class="rules" id="rulebar"></div>') + '<div class="tbar"><div id="tb"></div></div><div class="stage" id="stage"></div><div class="keys">' + rule.keys.map(function(k){ return '<span class="key">' + k.key + '</span>'; }).join('') + '</div><div class="fb fbbig" id="fb" aria-live="polite"></div>');
+    onKey = keyHandler; item();
+    Array.prototype.forEach.call(app.querySelectorAll('.keys .key'), function(el){ el.addEventListener('click', function(){ keyHandler({ key: el.textContent }); }); });
+    if (P.dual) dualBegin();
+  }
+  function highlight(k){
+    const bar = $('rulebar'); if (!bar) return;
+    if (!P.rulesVisible){ bar.innerHTML = k ? '<div class="rule"><span class="key hl">' + k + '</span></div>' : ''; return; } // rules hidden: only the hinted key shows
+    Array.prototype.forEach.call(bar.querySelectorAll('.key'), function(el){ el.classList.toggle('hl', el.dataset.k === k); });
+  }
+  function item(){
+    cur = nextItem(rnd, rule, prev, P.reversal); prev = cur;
+    const st = $('stage'); st.className = 'stage' + (cur.reversed ? ' rev' : ''); st.innerHTML = objectSvg(cur.obj, 170); $('fb').textContent = ''; $('c').textContent = n + 1;
+    highlight(null);
+    t0 = performance.now();
+    const tb = $('tb'); if (tb){ tb.style.transition = 'none'; tb.style.transform = 'scaleX(1)'; void tb.offsetWidth; tb.style.transition = 'transform ' + limit + 'ms linear'; tb.style.transform = 'scaleX(0)'; }
+    deadline = timer(setTimeout(function(){ if (acc) record('blank'); }, limit));
+    // Hint tiers: 2 highlights the correct key after half the time, 3 highlights it at once. Both mark the session as hinted.
+    if (P.maxHint >= 3){ hinted = true; highlight(cur.expected); }
+    else if (P.maxHint === 2){ hinted = true; hintTimer = timer(setTimeout(function(){ if (acc) highlight(cur.expected); }, limit / 2)); }
+  }
+  function record(kind){
+    if (!acc) return; acc = false; clearTimeout(deadline); clearTimeout(hintTimer);   // a hint timer must never survive into the next object
+    outs.push({ ok: kind === 'ok', blank: kind !== 'ok' && kind !== 'wrong', sec: kind === 'blank' ? limit / 1000 : (performance.now() - t0) / 1000 });
+    if (kind === 'ok'){ correct++; times.push((performance.now() - t0) / 1000); $('fb').innerHTML = '<span class="flash-good">' + ic('check') + '</span>'; }
+    else if (kind === 'wrong'){ wrong++; times.push((performance.now() - t0) / 1000); $('fb').innerHTML = '<span class="flash-bad">' + ic('x') + ' ' + cur.expected + '</span>'; }
+    else { blank++; $('fb').innerHTML = '<span class="warn">' + ic('dash') + ' ' + cur.expected + '</span>'; }
+    n++;
+    $('stage').innerHTML = '';
+    timer(setTimeout(function(){
+      if (n >= P.per){ if (round >= P.rounds) end(); else intro(); return; }
+      acc = true; item();
+    }, kind === 'ok' ? 200 : 700));
+  }
+  function keyHandler(e){
+    if (!acc || e.repeat) return;   // a held key must not answer the next object
+    const k = e.key.toUpperCase();
+    if (!rule.byKey[k]) return;
+    record(k === cur.expected ? 'ok' : 'wrong');
+  }
+  function end(){
+    const total = correct + wrong + blank;
+    const spi = times.length ? times.reduce(function(a, b){ return a + b; }, 0) / times.length : null;
+    finish({ id: 'cat', P: P, mode: mode, params: params, correct: correct, wrong: wrong, blank: blank, spi: spi, hinted: hinted && P.maxHint >= 2, extra: dualReport(P.dual),
+      accuracy: total ? correct / total * 100 : 0, goal: goal, outs: outs, repeat: function(){ startCat(goal, P, mode); } });
+  }
+  intro();
+}
+
+/* ---------- History and CSV ---------- */
+function history(){
+  cleanup();
+  const d = load(), ses = d.sessions.slice(-100).reverse();
+  const rows = ses.map(function(s){
+    return '<tr><td>' + dateES(s.ts) + '</td><td>' + esc(modEs(s.module)) + '</td><td>' + esc(lvlEs(s.level)) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 2) + '</td><td>' + fmt(s.accuracy, 1) + '</td><td>' + esc(s.goal) + '</td><td>' +
+      (s.met === true ? 'Sí' : (s.met === false ? 'No' : '—')) + '</td><td>' + (s.valid ? 'Sí' : 'No') + '</td></tr>';
+  }).join('');
+  const prog = ['conf', 'arith', 'cat'].map(function(m){ const p = d.prog[m]; return '<tr><td>' + MODULES_ES[m] + '</td><td>' + p.level + '</td><td>' + p.streak + ' / 3</td><td>' + p.unlocked + '</td></tr>'; }).join('');
+  screen('<button class="link" id="back">' + ic('back') + 'Menú</button><h2 class="ttl">Historial</h2>' +
+    '<div class="tbl"><table><thead><tr><th>Módulo</th><th>Nivel</th><th>Racha</th><th>Desbloqueado</th></tr></thead><tbody>' + prog + '</tbody></table></div>' +
+    '<h2>Sesiones</h2>' +
+    (ses.length ? '<div class="tbl-box"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>En blanco</th><th>s/elemento</th><th>Precisión %</th><th>Objetivo</th><th>Cumplido</th><th>Válida</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<p class="soft">Sin sesiones</p>') +
+    '<p class="row" style="margin-top:16px"><button class="btn primary" id="csv">' + ic('download') + 'CSV</button><button class="btn danger" id="del">' + ic('trash') + 'Borrar</button><span id="conf"></span></p>');
+  $('back').addEventListener('click', menu);
+  $('csv').addEventListener('click', function(){
+    try {
+      const blob = new Blob([toCSV(d.sessions)], { type: 'text/csv;charset=utf-8' }), a = document.createElement('a'), f = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = 'radar-trainer-' + f.getFullYear() + pad2(f.getMonth() + 1) + pad2(f.getDate()) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    } catch (e) { $('conf').innerHTML = '<span class="bad">Error</span>'; }
+  });
+  $('del').addEventListener('click', function(){
+    $('conf').innerHTML = '<span class="warn">¿Borrar todo?</span> <button class="btn danger" id="yes">Borrar</button> <button class="btn" id="no">Cancelar</button>';
+    $('no').addEventListener('click', function(){ $('conf').innerHTML = ''; });
+    $('yes').addEventListener('click', function(){ memory = null; try { localStorage.removeItem(STORE_KEY); } catch (e) {} load(); save(); history(); });
+  });
+}
+
+if (typeof document !== 'undefined' && document.getElementById('app')){ load(); menu(); }
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

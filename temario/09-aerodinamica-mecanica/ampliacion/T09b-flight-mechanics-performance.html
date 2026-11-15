@@ -1,0 +1,1037 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mecánica de vuelo, sistemas de la aeronave y actuaciones (performance) (T09b)</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="../index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Aerodinámica y mecánica del vuelo</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-cubre-el-examen">Qué cubre el examen</a></li>
+<li><a href="#indice">Índice</a></li>
+<li><a href="#1-velocidades-mas-alla-de-t09a-y-del-manual">1. Velocidades más allá de T09a y del manual</a><ul>
+<li><a href="#11-cadena-castasgs-con-la-regla-practica-operativa">1.1 Cadena CAS/TAS/GS, con la regla práctica operativa</a></li>
+<li><a href="#12-el-alfabeto-completo-de-velocidades-v-que-no-figura-en-el-manual-marcas-de-colores-del-asi">1.2 El alfabeto completo de velocidades V que no figura en el manual (marcas de colores del ASI)</a></li>
+<li><a href="#13-v1-vr-las-definiciones-certificadas-no-solo-las-del-manual">1.3 V1, VR: las definiciones certificadas (no solo las del manual)</a></li>
+<li><a href="#14-vmu-velocidad-minima-de-despegue-del-suelo-ausente-por-completo-del-manual">1.4 VMU (velocidad mínima de despegue del suelo): ausente por completo del manual</a></li>
+<li><a href="#15-vat-y-categoria-de-aproximacion-de-la-aeronave-ae-no-figuran-en-el-manual">1.5 VAT y categoría de aproximación de la aeronave (A–E): no figuran en el manual</a></li>
+</ul>
+</li>
+<li><a href="#2-performance-de-despegue-y-distancias-declaradas-de-pista">2. Performance de despegue y distancias declaradas de pista</a><ul>
+<li><a href="#21-tora-toda-asda-definiciones-jar-ops-cs-25-literales">2.1 TORA, TODA, ASDA (definiciones JAR-OPS / CS-25, literales)</a></li>
+<li><a href="#22-trayectorias-de-vuelo-bruta-y-neta-al-despegue-y-franqueamiento-de-obstaculos">2.2 Trayectorias de vuelo bruta y neta al despegue, y franqueamiento de obstáculos</a></li>
+<li><a href="#23-factores-que-afectan-a-los-requerimientos-de-pista-al-despegue-contrastados-con-el-manual">2.3 Factores que afectan a los requerimientos de pista al despegue (contrastados con el manual)</a></li>
+</ul>
+</li>
+<li><a href="#3-performance-de-ascenso-y-franqueamiento-de-obstaculos">3. Performance de ascenso y franqueamiento de obstáculos</a><ul>
+<li><a href="#31-gradiente-de-ascenso-frente-a-regimen-de-ascenso-la-distincion-que-podria-preguntarse">3.1 Gradiente de ascenso frente a régimen de ascenso: la distinción que podría preguntarse</a></li>
+<li><a href="#32-los-segmentos-de-despegue-y-la-penalizacion-de-gradiente-brutoneto-22-se-aplican-tambien-aqui">3.2 Los segmentos de despegue y la penalización de gradiente bruto/neto (§2.2) se aplican también aquí</a></li>
+<li><a href="#33-franqueamiento-de-obstaculos-en-un-despegue-recto-la-razon-de-la-gestion-del-aoa-al-estilo-va">3.3 Franqueamiento de obstáculos en un despegue recto: la razón de la gestión del AOA al estilo VA</a></li>
+</ul>
+</li>
+<li><a href="#4-performance-de-crucero">4. Performance de crucero</a><ul>
+<li><a href="#41-altitud-optima-y-ascenso-escalonado">4.1 Altitud óptima y ascenso escalonado</a></li>
+<li><a href="#42-indice-de-coste-ci-el-compromiso-entre-combustible-y-tiempo">4.2 Índice de coste (CI): el compromiso entre combustible y tiempo</a></li>
+<li><a href="#43-alcance-autonomia-y-la-consecuencia-relevante-para-el-atc">4.3 Alcance, autonomía y la consecuencia relevante para el ATC</a></li>
+</ul>
+</li>
+<li><a href="#5-performance-de-descenso-aproximacion-y-aterrizaje">5. Performance de descenso, aproximación y aterrizaje</a><ul>
+<li><a href="#51-distancia-de-aterrizaje-disponible-lda-el-manual-no-la-define-en-absoluto">5.1 Distancia de aterrizaje disponible (LDA): el manual no la define en absoluto</a></li>
+<li><a href="#52-ascenso-en-aproximacion-y-ascenso-en-aterrizaje-ya-en-el-manual-contrastados">5.2 Ascenso en aproximación y ascenso en aterrizaje: ya en el manual, contrastados</a></li>
+<li><a href="#53-motor-y-al-aire-go-around-un-concepto-operativo-que-el-manual-nunca-menciona">5.3 Motor y al aire (go-around): un concepto operativo que el manual nunca menciona</a></li>
+<li><a href="#54-factores-de-la-distancia-de-aterrizaje-en-pista-contaminada">5.4 Factores de la distancia de aterrizaje en pista contaminada</a></li>
+</ul>
+</li>
+<li><a href="#6-performance-de-la-aeronave-y-atc">6. Performance de la aeronave y ATC</a><ul>
+<li><a href="#61-por-que-necesitan-los-controladores-un-modelo-mental-de-las-actuaciones">6.1 Por qué necesitan los controladores un modelo mental de las actuaciones</a></li>
+<li><a href="#62-la-limitacion-de-velocidad-de-250-kt-fl100">6.2 La limitación de velocidad de 250 kt / FL100</a></li>
+<li><a href="#63-grupos-tipicos-de-actuaciones-cualitativos-relevantes-para-el-atc">6.3 Grupos típicos de actuaciones (cualitativos, relevantes para el ATC)</a></li>
+</ul>
+</li>
+<li><a href="#7-motores">7. Motores</a><ul>
+<li><a href="#71-motores-alternativos-de-piston-relevancia-para-la-aviacion-general-ligera">7.1 Motores alternativos (de pistón): relevancia para la aviación general ligera</a></li>
+<li><a href="#72-motores-de-turbina-los-cuatro-tipos-y-la-relacion-de-derivacion">7.2 Motores de turbina: los cuatro tipos y la relación de derivación</a></li>
+<li><a href="#73-empuje-frente-a-potencia-reversa-apu">7.3 Empuje frente a potencia, reversa, APU</a></li>
+</ul>
+</li>
+<li><a href="#8-sistemas-de-la-aeronave-que-debe-reconocer-un-controlador">8. Sistemas de la aeronave que debe reconocer un controlador</a><ul>
+<li><a href="#81-tren-de-aterrizaje">8.1 Tren de aterrizaje</a></li>
+<li><a href="#82-presurizacion-de-cabina-y-descompresion-relevancia-directa-para-los-factores-humanos">8.2 Presurización de cabina y descompresión: relevancia directa para los factores humanos</a></li>
+<li><a href="#83-sistemas-de-proteccion-contra-el-hielo">8.3 Sistemas de protección contra el hielo</a></li>
+<li><a href="#84-piloto-automatico">8.4 Piloto automático</a></li>
+</ul>
+</li>
+<li><a href="#9-tcasacas-y-gpwsegpwstaws">9. TCAS/ACAS y GPWS/EGPWS/TAWS</a><ul>
+<li><a href="#91-acastcas">9.1 ACAS/TCAS</a></li>
+<li><a href="#92-gpws-egpws-taws">9.2 GPWS / EGPWS / TAWS</a></li>
+</ul>
+</li>
+<li><a href="#10-tipos-de-aeronave-y-sus-cifras">10. Tipos de aeronave y sus cifras</a></li>
+<li><a href="#11-masa-y-centrado-mercancias-peligrosas-politica-de-combustible">11. Masa y centrado, mercancías peligrosas, política de combustible</a><ul>
+<li><a href="#111-definiciones-estandar-de-pesos-gamafaa-phak-cap-10">11.1 Definiciones estándar de pesos (GAMA/FAA, PHAK cap. 10)</a></li>
+<li><a href="#112-efectos-del-centro-de-gravedad-cg">11.2 Efectos del centro de gravedad (CG)</a></li>
+<li><a href="#113-categorias-de-peso-referencia-cruzada-no-repeticion">11.3 Categorías de peso (referencia cruzada, no repetición)</a></li>
+<li><a href="#114-mercancias-peligrosas-solo-nociones-basicas">11.4 Mercancías peligrosas: solo nociones básicas</a></li>
+<li><a href="#115-politica-de-combustible-solo-nociones-basicas">11.5 Política de combustible: solo nociones básicas</a></li>
+</ul>
+</li>
+<li><a href="#12-ejemplos-numericos-resueltos-todos-comprobados-dos-veces">12. Ejemplos numéricos resueltos (todos comprobados dos veces)</a></li>
+<li><a href="#manual-frente-a-fuentes-primarias-adicional-a-las-tablas-de-om09-y-t09a-no-duplicar-sus-entradas">Manual frente a fuentes primarias (adicional a las tablas de OM09 y T09a; no duplicar sus entradas)</a></li>
+<li><a href="#trampas-de-examen">Trampas de examen</a></li>
+<li><a href="#imprescindible-memorizar">Imprescindible memorizar</a></li>
+<li><a href="#glosario-es-en">Glosario (ES -&gt; EN)</a></li>
+<li><a href="#fuentes">Fuentes</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">52 min de lectura</div><h1 id="t09b-mecanica-de-vuelo-sistemas-de-la-aeronave-y-actuaciones-performance-mas-alla-del-manual-fuentes-primarias">T09b: Mecánica de vuelo, sistemas de la aeronave y actuaciones (performance) — más allá del manual (fuentes primarias)</h1>
+<h2 id="que-cubre-el-examen">Qué cubre el examen</h2>
+<p>El manual de ENAIRE dedica a las actuaciones solo su último capítulo (pp. 19-23), y únicamente en forma de definiciones de velocidades V y de reglas de distancias de despegue y aterrizaje; no toca en absoluto los motores, los sistemas de la aeronave, los tipos de aeronave ni la masa y el centrado. Sin embargo, el título del Anexo I es «<strong>Aerodinámica y mecánica de vuelo</strong>», y un controlador que nunca aprendiera a distinguir un cuerpo ancho pesado de un turbohélice regional, o que no supiera explicar por qué un reactor necesita 10 minutos y 3000 ft/min para llegar a FL350 mientras que un bimotor de pistón no necesita ni lo uno ni lo otro, estaría mal preparado para el lado práctico del ATC, aunque ninguna pregunta concreta plantee «qué es la relación de derivación». Por ello este archivo desarrolla, con cifras de fuentes primarias: la familia completa de velocidades V (muchas ausentes por completo del manual: VS1, VNO, VFE, VNE, VLE/VLO, VMU, VAT/categoría de aproximación), las definiciones certificadas de TORA/TODA/ASDA/LDA y de las trayectorias de vuelo bruta y neta al despegue (JAR-OPS/CS-25, que no figuran en absoluto en el manual), la optimización del crucero (ascenso escalonado, índice de coste), la sección de sistemas de la aeronave de un manual para pilotos de la que podría salir con verosimilitud una pregunta de examen relevante para el controlador (motores, presurización, protección contra el hielo, tren de aterrizaje, piloto automático), los dos sistemas más ligados a las operaciones ATC (TCAS/ACAS y GPWS/EGPWS), cifras clave de los tipos habituales de avión comercial y el vocabulario de masa y centrado (MTOW/MLW/MZFW, CG, categorías de peso).</p>
+<h2 id="indice">Índice</h2>
+<ol>
+<li>Velocidades más allá de T09a y del manual · 2. Performance de despegue y distancias declaradas de pista · 3. Performance de ascenso y franqueamiento de obstáculos · 4. Performance de crucero · 5. Performance de descenso, aproximación y aterrizaje · 6. Performance de la aeronave y ATC · 7. Motores · 8. Sistemas de la aeronave que debe reconocer un controlador · 9. TCAS/ACAS y GPWS/EGPWS/TAWS · 10. Tipos de aeronave y sus cifras · 11. Masa y centrado, mercancías peligrosas, política de combustible · 12. Ejemplos numéricos resueltos · Manual frente a fuentes primarias · Trampas de examen · Imprescindible memorizar · Glosario · Fuentes</li>
+</ol>
+<hr />
+<h2 id="1-velocidades-mas-alla-de-t09a-y-del-manual">1. Velocidades más allá de T09a y del manual</h2>
+<p>T09a ya cubre en profundidad VA/VC/VD y el diagrama V-n; el manual de ENAIRE cubre TAS/IAS/CAS/EAS/GS, Mach, VS, VMCG, VMCA, V1, VR, VLOF, V2, VSO, VREF y VTD (OM09 §3.5 y §11). Esta sección añade el detalle de fuentes primarias y las velocidades que ninguno de los dos archivos ha cubierto todavía.</p>
+<h3 id="11-cadena-castasgs-con-la-regla-practica-operativa">1.1 Cadena CAS/TAS/GS, con la regla práctica operativa</h3>
+<p>El Pilot's Handbook of Aeronautical Knowledge (PHAK) de la FAA da la cadena práctica que un candidato debe saber reproducir:</p>
+<ul>
+<li><strong>Velocidad calibrada (CAS)</strong> = IAS corregida por errores de instalación e instrumento; el error es «generalmente mayor a bajas velocidades» y, en los rangos de crucero y alta velocidad, IAS ≈ CAS.</li>
+<li><strong>Velocidad verdadera (TAS)</strong> = CAS corregida por altitud y temperatura no estándar. Como la densidad del aire cae con la altitud, una aeronave debe volar más rápido (en TAS) en altitud para producir la misma presión dinámica (y, por tanto, la misma lectura de CAS/IAS). <strong>Regla práctica: añadir un 2 % a la CAS por cada 1000 ft de altitud para aproximar la TAS</strong>; una herramienta de cálculo mental rápido que un examinador podría preguntar directamente (p. ej., 250 KCAS en FL200 ≈ 250 × 1,40 ≈ 350 KTAS).</li>
+<li><strong>Velocidad sobre el suelo (GS)</strong> = TAS ajustada vectorialmente por el viento; disminuye con viento de frente y aumenta con viento de cola.</li>
+</ul>
+<h3 id="12-el-alfabeto-completo-de-velocidades-v-que-no-figura-en-el-manual-marcas-de-colores-del-asi">1.2 El alfabeto completo de velocidades V que no figura en el manual (marcas de colores del ASI)</h3>
+<p>El código de colores del indicador de velocidad del PHAK da definiciones certificadas y fáciles de recordar de cada velocidad V de las aeronaves ligeras y de aviación general que el manual omite:</p>
+<table>
+<thead>
+<tr>
+<th>Velocidad</th>
+<th>Definición</th>
+<th>Marca en el ASI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VSO</strong> velocidad de pérdida / velocidad mínima de vuelo estable, configuración de aterrizaje</td>
+<td>Velocidad de pérdida sin potencia con el peso máximo de aterrizaje, tren y flaps abajo</td>
+<td>Extremo inferior del arco blanco</td>
+</tr>
+<tr>
+<td><strong>VS1</strong> velocidad de pérdida / velocidad mínima de vuelo estable, configuración especificada (limpia)</td>
+<td>Velocidad de pérdida sin potencia con el peso máximo al despegue, en configuración limpia (tren y flaps arriba)</td>
+<td>Extremo inferior del arco verde</td>
+</tr>
+<tr>
+<td><strong>VFE</strong> velocidad máxima con flaps extendidos</td>
+<td>Velocidad máxima con los flaps extendidos</td>
+<td>Extremo superior del arco blanco</td>
+</tr>
+<tr>
+<td><strong>VNO</strong> velocidad máxima estructural de crucero</td>
+<td>No exceder salvo en aire en calma</td>
+<td>Extremo superior del arco verde</td>
+</tr>
+<tr>
+<td><strong>VNE</strong> velocidad de nunca exceder</td>
+<td>Operar por encima de ella arriesga daños o fallo estructurales</td>
+<td>Línea radial roja</td>
+</tr>
+<tr>
+<td><strong>VA</strong> velocidad de maniobra de diseño</td>
+<td>Velocidad máxima para una deflexión completa de mando sin daño estructural; <strong>varía con el peso</strong> (p. ej., 100 kt con peso alto, 90 kt con peso bajo en la misma célula); no está marcada en el ASI, se encuentra en el AFM/POH</td>
+<td>Sin marca</td>
+</tr>
+<tr>
+<td><strong>VLO</strong> velocidad de operación del tren de aterrizaje</td>
+<td>Velocidad máxima para extender o recoger el tren retráctil</td>
+<td>Sin marca</td>
+</tr>
+<tr>
+<td><strong>VLE</strong> velocidad con el tren extendido</td>
+<td>Velocidad máxima para volar con seguridad con el tren abajo</td>
+<td>Sin marca</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Arco amarillo</strong> = rango de precaución, solo en aire en calma; entre VNO y VNE. En las aeronaves de transporte multimotor, los límites equivalentes se expresan normalmente como <strong>VMO</strong> (velocidad máxima de operación, en KIAS/KCAS) y <strong>MMO</strong> (número de Mach máximo de operación) en lugar de VNE; la aeronave queda limitada por el más restrictivo de los dos (VMO o MMO) a una altitud dada, exactamente la lógica del coffin corner que T09a ya desarrolla. Ejemplo verificado en el certificado de tipo de un avión comercial: <strong>VMO/MMO de la familia A320 = 350 kt / Mach 0,82</strong>.</p>
+<h3 id="13-v1-vr-las-definiciones-certificadas-no-solo-las-del-manual">1.3 V1, VR: las definiciones certificadas (no solo las del manual)</h3>
+<p>SKYbrary, que cita las definiciones vigentes de la FAA/EASA:</p>
+<blockquote>
+<p>«V1 es la velocidad máxima en el despegue a la que el piloto debe tomar la primera acción... para detener el avión dentro de la distancia de aceleración-parada. V1 significa también la velocidad mínima en el despegue, tras un fallo del motor crítico a VEF, a la que el piloto puede continuar el despegue y alcanzar la altura requerida sobre la superficie de despegue dentro de la distancia de despegue.»</p>
+</blockquote>
+<p>Detalles clave que omite la definición de una línea del manual: <strong>VEF</strong> (velocidad de fallo de motor) es una <em>velocidad de diseño designada por el fabricante</em>, debe exceder VMCG y debe producirse <strong>al menos un segundo antes de V1</strong>; <strong>V1 nunca puede exceder VR</strong>; cuando la longitud de pista excede la mínima requerida, los operadores pueden elegir una V1 dentro de un intervalo limitado por una <strong>V1 mínima</strong> (desde la cual aún puede completarse con seguridad el despegue con un motor inoperativo) y una <strong>V1 máxima</strong> (desde la cual un despegue abortado aún puede detenerse dentro de la pista restante). <strong>VR</strong>: «la velocidad a la que debe iniciarse la rotación...», no puede ser menor que V1, es función del peso y del ajuste de flaps (varía también con la altitud de presión y la temperatura) y, en el caso de fallo de motor, debe permitir acelerar hasta V2 a 35 ft.</p>
+<h3 id="14-vmu-velocidad-minima-de-despegue-del-suelo-ausente-por-completo-del-manual">1.4 VMU (velocidad mínima de despegue del suelo): ausente por completo del manual</h3>
+<p><strong>VMU (velocidad mínima de despegue del suelo, <em>minimum unstick speed</em>)</strong>: la CS 25.107(d) la define como «la velocidad calibrada a partir de la cual el avión puede despegar del suelo con seguridad y continuar el despegue». El reglamento fija también un margen certificado entre VMU y la <strong>velocidad de despegue VLOF</strong> (que el manual define solo de forma imprecisa como «la velocidad a la que, inicialmente, el avión se va al aire»): VLOF no debe ser menor que el <strong>110 % de VMU con todos los motores operativos</strong>, ni que el <strong>105 % de VMU con el motor crítico inoperativo</strong> (108 %/104 %, respectivamente, si la actitud de VMU está limitada por la geometría, p. ej., por riesgo de golpe de cola). Este margen VMU→VLOF es una laguna real del manual (el §11.1 enumera VLOF sin fórmula alguna).</p>
+<h3 id="15-vat-y-categoria-de-aproximacion-de-la-aeronave-ae-no-figuran-en-el-manual">1.5 VAT y categoría de aproximación de la aeronave (A–E): no figuran en el manual</h3>
+<p><strong>VAT (velocidad de referencia de aproximación)</strong>: PANS-OPS/FAA definen la <strong>categoría de aproximación de la aeronave (AAC)</strong> como una agrupación de aeronaves por <strong>velocidad de referencia de aterrizaje (VREF)</strong> o, si no se especifica VREF, <strong>1,3 × VSO con el peso máximo certificado de aterrizaje</strong>. Es la clasificación de estilo FAA/OACI que se usa para dimensionar las áreas protegidas de las aproximaciones instrumentales (la definición del manual VREF = 1,3 VSO es un ingrediente de esta clasificación, pero el manual nunca menciona las letras de las categorías):</p>
+<table>
+<thead>
+<tr>
+<th>AAC</th>
+<th>Banda de VREF / velocidad de aproximación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>&lt; 91 kt</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>91 – &lt; 121 kt</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>121 – &lt; 141 kt</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>141 – &lt; 166 kt</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>≥ 166 kt</td>
+</tr>
+</tbody>
+</table>
+<p>. Ubicaciones típicas: monomotores ligeros y la mayor parte de la aviación general en A/B; reactores regionales y la familia A320/B737 en general en <strong>C</strong>; cuerpos anchos (A330, B777, B787) en general en <strong>D</strong>; los tipos pesados o supersónicos de mayor velocidad de aproximación en <strong>E</strong>.</p>
+<p>Una clasificación complementaria, el <strong>grupo de diseño de avión (ADG)</strong>, agrupa las aeronaves según la más restrictiva entre la <strong>envergadura o la altura de la cola</strong> (seis grupos, I–VI):</p>
+<table>
+<thead>
+<tr>
+<th>ADG</th>
+<th>Altura de cola</th>
+<th>Envergadura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>&lt; 20 ft (6,1 m)</td>
+<td>&lt; 49 ft (14,9 m)</td>
+</tr>
+<tr>
+<td>II</td>
+<td>20–&lt;30 ft (6,1–9,1 m)</td>
+<td>49–&lt;79 ft (14,9–24,1 m)</td>
+</tr>
+<tr>
+<td>III</td>
+<td>30–&lt;45 ft (9,1–13,7 m)</td>
+<td>79–&lt;118 ft (24,1–36,0 m)</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>45–&lt;60 ft (13,7–18,3 m)</td>
+<td>118–&lt;171 ft (36,0–52,1 m)</td>
+</tr>
+<tr>
+<td>V</td>
+<td>60–&lt;66 ft (18,3–20,1 m)</td>
+<td>171–&lt;214 ft (52,1–65,2 m)</td>
+</tr>
+<tr>
+<td>VI</td>
+<td>66–&lt;80 ft (20,1–24,4 m)</td>
+<td>214–&lt;262 ft (65,2–79,9 m)</td>
+</tr>
+</tbody>
+</table>
+<p>La AAC (basada en la velocidad) y el ADG (basado en el tamaño) fijan juntos las normas de separación y de diseño de pistas y calles de rodaje de un aeródromo; una letra de AAC y un número de ADG son ejes independientes (p. ej., una aeronave rápida pero pequeña puede ser «D-II»).</p>
+<hr />
+<h2 id="2-performance-de-despegue-y-distancias-declaradas-de-pista">2. Performance de despegue y distancias declaradas de pista</h2>
+<p>El manual nombra la distancia de aceleración-despegue, la de aceleración-parada y la de despegue con todos los motores en prosa (§11.2), pero nunca da el vocabulario certificado de longitudes de pista (TORA/TODA/ASDA), que un examen de ATC tiene más probabilidades de preguntar por su nombre, ya que son los términos impresos en las cartas de aeródromo y en las páginas del AIP.</p>
+<h3 id="21-tora-toda-asda-definiciones-jar-ops-cs-25-literales">2.1 TORA, TODA, ASDA (definiciones JAR-OPS / CS-25, literales)</h3>
+<ul>
+<li><strong>Recorrido de despegue disponible (TORA):</strong> «La longitud de pista declarada disponible... y adecuada para el recorrido en tierra de un avión que despega». Igual a la longitud de la pista o a la distancia desde la calle de rodaje de entrada hasta el final de la pista. <strong>TOR ≤ TORA.</strong></li>
+<li><strong>Distancia de despegue disponible (TODA) = TORA + clearway (CWY), si existe.</strong> Un <strong>clearway</strong> debe: estar centrado en la prolongación del eje de pista, bajo el control de la autoridad aeroportuaria; expresarse como un plano con <strong>pendiente ascendente que no exceda el 1,25 %</strong>; tener <strong>al menos 152 m (500 ft) de ancho</strong>; no tener objetos que sobresalgan, salvo luces de umbral de hasta <strong>0,66 m (26 in)</strong> de altura a cada lado. <strong>TOD ≤ TODA.</strong></li>
+<li><strong>Distancia de aceleración-parada disponible (ASDA) = TORA + stopway (SWY), si existe.</strong> Un <strong>stopway</strong> debe: ser al menos tan ancho como la pista, centrado en su eje prolongado; poder soportar el peso de la aeronave sin daños estructurales en un despegue abortado; estar designado por la autoridad aeroportuaria solo para su uso en deceleración. <strong>ASD ≤ ASDA.</strong></li>
+<li><strong>Pérdida de longitud de pista por alineación:</strong> JAR-OPS 1.490(c)(6) exige a los operadores tener en cuenta la distancia que se pierde al girar la aeronave hasta el eje de pista desde una calle de rodaje de intersección; las normas de la FAA no lo exigen de forma explícita.</li>
+</ul>
+<p>Trampa ya señalada por OM09 sobre la función del stopway y el clearway (frenado frente a solo subida); esta sección añade la <strong>envolvente numérica exacta</strong> (pendiente máxima 1,25 %, ancho mínimo 152 m/500 ft, altura máxima de luces 0,66 m/26 in) que podría preguntar una pregunta tipo test precisa.</p>
+<h3 id="22-trayectorias-de-vuelo-bruta-y-neta-al-despegue-y-franqueamiento-de-obstaculos">2.2 Trayectorias de vuelo bruta y neta al despegue, y franqueamiento de obstáculos</h3>
+<p>Ausente por completo del manual y un concepto realmente distinto de la «distancia de pista»: una vez en el aire, la aeronave debe además franquear los obstáculos a lo largo de la trayectoria de subida inicial con un margen certificado.</p>
+<ul>
+<li><strong>Trayectoria de vuelo bruta:</strong> «la trayectoria de vuelo al despegue realmente volada por la aeronave», desde 35 ft sobre la superficie de despegue hasta el final de la trayectoria de despegue.</li>
+<li><strong>Trayectoria de vuelo neta = trayectoria bruta reducida, en cada punto, por una penalización obligatoria de gradiente</strong>: <strong>0,8 % para aviones bimotores, 1,0 % para aviones cuatrimotores</strong>. (Las aeronaves trimotores toman un valor intermedio que no figura en el texto leído.) Esta penalización se aplica a lo largo de los segmentos primero, segundo y final del despegue.</li>
+<li><strong>Ángulo de alabeo máximo durante el tramo de viraje de un procedimiento de evitación de obstáculos</strong>: <strong>15°</strong> por debajo de 200 ft en todos los casos; <strong>15°</strong> (estándar) o <strong>20°</strong> (con aprobación específica) entre 200 y 400 ft; <strong>25°</strong> (estándar) o <strong>30°</strong> (con aprobación específica) por encima de 400 ft. Por debajo de 50 ft se supone que la aeronave no está inclinada en absoluto.</li>
+</ul>
+<h3 id="23-factores-que-afectan-a-los-requerimientos-de-pista-al-despegue-contrastados-con-el-manual">2.3 Factores que afectan a los requerimientos de pista al despegue (contrastados con el manual)</h3>
+<p>La lista del propio manual (altitud de presión, temperatura, viento de frente, gradiente de pista, peso; OM09 §11.2) coincide con las fuentes certificadas leídas; el detalle adicional que conviene registrar es que la <strong>contaminación de la superficie de la pista</strong> (agua, nieve fundente, nieve, hielo) es un factor separado y de gran reducción de las actuaciones que la lista de cinco elementos del manual para el despegue no nombra (aunque sí aparece, para el aterrizaje, en OM09 §11.4 punto 6 y en §11.5, hidroplaneo); una asimetría entre las dos listas del propio manual que conviene conocer para una pregunta trampa del tipo «cuál de los siguientes NO afecta a la distancia de despegue» (la contaminación afecta también al despegue, en la realidad; la lista de despegue del manual es sencillamente menos completa que la de aterrizaje).</p>
+<hr />
+<h2 id="3-performance-de-ascenso-y-franqueamiento-de-obstaculos">3. Performance de ascenso y franqueamiento de obstáculos</h2>
+<h3 id="31-gradiente-de-ascenso-frente-a-regimen-de-ascenso-la-distincion-que-podria-preguntarse">3.1 Gradiente de ascenso frente a régimen de ascenso: la distinción que podría preguntarse</h3>
+<p>El <strong>régimen de ascenso (velocidad ascensional)</strong> es una <em>velocidad vertical</em>, expresada en ft/min; el <strong>gradiente de ascenso</strong> es una <em>relación entre la distancia vertical y la distancia horizontal recorrida</em>, expresada como porcentaje (%); ambos se relacionan mediante la velocidad sobre el suelo: una aeronave con mayor velocidad sobre el suelo necesita un régimen de ascenso mayor para mantener el mismo gradiente porcentual. Consecuencia relevante para el ATC: un reactor que acelera en el ascenso (al aumentar su velocidad sobre el suelo) debe aumentar su régimen de ascenso solo para mantener un gradiente constante, y esa es una de las razones por las que los gradientes mínimos de ascenso publicados (p. ej., en una SID) se expresan en % y no en ft/min: son independientes de la velocidad real de la aeronave.</p>
+<h3 id="32-los-segmentos-de-despegue-y-la-penalizacion-de-gradiente-brutoneto-22-se-aplican-tambien-aqui">3.2 Los segmentos de despegue y la penalización de gradiente bruto/neto (§2.2) se aplican también aquí</h3>
+<p>Los cuatro o cinco segmentos de despegue (primero, segundo, tercero/de aceleración y final; véase la Figura C17 a la que se remite en el §2.2) llevan cada uno su propio requisito de <strong>gradiente neto mínimo de ascenso</strong> según la CS-25/JAR-OPS. Lo que sí está verificado es que <strong>la misma penalización de gradiente del 0,8 %/1,0 %</strong> (bimotor/cuatrimotor) se resta de la trayectoria realmente volada (bruta) en cada punto de todos estos segmentos para obtener la trayectoria certificada (neta) que se usa para el franqueamiento de obstáculos.</p>
+<h3 id="33-franqueamiento-de-obstaculos-en-un-despegue-recto-la-razon-de-la-gestion-del-aoa-al-estilo-va">3.3 Franqueamiento de obstáculos en un despegue recto: la razón de la gestión del AOA al estilo VA</h3>
+<p>Los cálculos de franqueamiento de obstáculos (JAR-OPS 1.495 / FAR 121.189(d)(2)) usan la trayectoria de vuelo <strong>neta</strong>, con lo que se da un margen certificado en el peor caso (un motor inoperativo, con la penalización de gradiente aplicada).</p>
+<hr />
+<h2 id="4-performance-de-crucero">4. Performance de crucero</h2>
+<p>No figura en absoluto en el manual: el capítulo 11 del manual solo cubre el despegue y el aterrizaje.</p>
+<h3 id="41-altitud-optima-y-ascenso-escalonado">4.1 Altitud óptima y ascenso escalonado</h3>
+<p>A medida que una aeronave quema combustible y se aligera, su <strong>altitud óptima</strong> (la altitud que minimiza el consumo de combustible para el Mach volado) <strong>sube</strong>; pero el ATC exige tramos de crucero nivelados, por lo que las aeronaves vuelan una «escalera» de tramos de altitud constante lo más cerca posible de la altitud óptima creciente. La regla utilizada en todo el sector: <strong>mantenerse a menos de 2000 ft de la altitud óptima</strong> es coherente en líneas generales con poder lograr el 99 % del alcance específico máximo (SR ≥ 99 % SR_max) en toda esa banda. El <strong>patrón de ascenso escalonado</strong> resultante: <strong>escalones de 2000 ft por debajo de FL290, escalones de 4000 ft por encima de FL290</strong> con el esquema heredado de separación vertical (no RVSM), o <strong>escalones de 2000 ft en todo el rango en un entorno RVSM</strong> (ya que RVSM da 1000 ft de separación hasta FL410, de modo que un «escalón» es un salto de dos niveles de vuelo). La selección del nivel de vuelo sigue también la temperatura: los días con desviación ISA más fría permiten a la aeronave empezar su primer escalón de crucero más abajo.</p>
+<h3 id="42-indice-de-coste-ci-el-compromiso-entre-combustible-y-tiempo">4.2 Índice de coste (CI): el compromiso entre combustible y tiempo</h3>
+<p>El <strong>índice de coste (CI)</strong>, según la propia definición de Airbus, expresa la relación entre el <strong>coste del tiempo</strong> (tripulación, mantenimiento, coste de oportunidad de una llegada tardía) y el <strong>coste del combustible</strong>. Operativamente: <strong>CI = 0</strong> significa volar con el mínimo consumo de combustible sin importar el tiempo (crucero de máximo alcance, el más lento, a velocidades próximas a L/D_MAX; véase T09a §7, régimen de mando invertido); un <strong>CI alto</strong> significa volar más rápido para ahorrar tiempo aunque aumente el consumo de combustible, hasta VMO/MMO. El FMS usa el CI que introduce la aerolínea para calcular el Mach de crucero, la velocidad de ascenso y la de descenso de cada vuelo; por eso dos aeronaves del mismo tipo en la misma ruta pueden volar legítimamente números de Mach notablemente distintos.</p>
+<h3 id="43-alcance-autonomia-y-la-consecuencia-relevante-para-el-atc">4.3 Alcance, autonomía y la consecuencia relevante para el ATC</h3>
+<p>La velocidad de máximo alcance (cerca de L/D_MAX, ajustada por el CI) y la de máxima autonomía ya se desarrollan en T09a §7 (régimen de mando invertido) y no se repiten aquí; el hecho operativamente nuevo de este archivo es que <strong>la relación de derivación del turbofán determina directamente el consumo específico de combustible y, por tanto, tanto el alcance como el Mach de crucero típico</strong> (véase §7.3): un cuerpo ancho de largo alcance de alta derivación cruza con eficiencia en el rango alto de Mach 0,8x a FL350-410, mientras que un motor de baja derivación de generación anterior o de reactor ejecutivo cambia eficiencia por un grupo motopropulsor menor y más ligero.</p>
+<hr />
+<h2 id="5-performance-de-descenso-aproximacion-y-aterrizaje">5. Performance de descenso, aproximación y aterrizaje</h2>
+<h3 id="51-distancia-de-aterrizaje-disponible-lda-el-manual-no-la-define-en-absoluto">5.1 Distancia de aterrizaje disponible (LDA): el manual no la define en absoluto</h3>
+<p>El manual define las <em>velocidades de aterrizaje</em> (VSO, VREF, VTD; OM09 §11.3) pero nunca define el concepto de longitud de pista <strong>LDA</strong>, que es la contrapartida de aterrizaje de TORA/TODA/ASDA:</p>
+<ul>
+<li><strong>Sin obstáculo bajo la trayectoria de aproximación: LDA = TORA</strong> (el stopway no puede contarse para el aterrizaje).</li>
+<li><strong>Con un obstáculo en el embudo de aproximación:</strong> el Anexo 8 de la OACI define superficies de protección para la aproximación; <strong>cuando ningún obstáculo penetra en el embudo de aproximación</strong> (una <strong>superficie con pendiente del 15 % que empieza 300 m antes del umbral, de 60 m de ancho</strong>), se puede usar toda la longitud de pista para aterrizar. <strong>Cuando un obstáculo sí penetra en el embudo,</strong> se establece un <strong>umbral desplazado</strong> mediante un <strong>plano del 2 % tangente al obstáculo más penalizador, más un margen de 60 m</strong>; <strong>LDA = la longitud desde el umbral desplazado hasta el final de la pista</strong>.</li>
+</ul>
+<h3 id="52-ascenso-en-aproximacion-y-ascenso-en-aterrizaje-ya-en-el-manual-contrastados">5.2 Ascenso en aproximación y ascenso en aterrizaje: ya en el manual, contrastados</h3>
+<p>OM09 §11.3 ya recoge las definiciones del manual del ascenso en aproximación (mejor ascenso, configuración de aproximación, un motor inoperativo, potencia máxima de despegue) y del ascenso en aterrizaje (mejor ascenso, configuración de aterrizaje, todos los motores, potencia máxima de despegue).</p>
+<h3 id="53-motor-y-al-aire-go-around-un-concepto-operativo-que-el-manual-nunca-menciona">5.3 Motor y al aire (<em>go-around</em>): un concepto operativo que el manual nunca menciona</h3>
+<p>Una <strong>maniobra de motor y al aire (aproximación frustrada, <em>go-around</em>)</strong> es una aproximación interrumpida, que se vuela cuando la aproximación no puede completarse con seguridad hasta el aterrizaje (aproximación inestable, pérdida de referencias visuales, pista ocupada, RA del TCAS, aviso de cizalladura del viento, etc.). Exige una transición inmediata desde una configuración de aterrizaje de baja potencia y alta resistencia (tren y flaps extendidos, baja velocidad) hasta potencia de ascenso y una secuencia de recogida (primero los flaps, luego el tren). Es precisamente el <strong>régimen de mando invertido</strong> (T09a §7) en su aplicación más crítica para la seguridad: a baja velocidad, lo que frena el régimen de descenso es más potencia (no solo cabeceo).</p>
+<h3 id="54-factores-de-la-distancia-de-aterrizaje-en-pista-contaminada">5.4 Factores de la distancia de aterrizaje en pista contaminada</h3>
+<p>OM09 §11.4-11.5 ya recoge los seis factores de aterrizaje y el hidroplaneo. El hidroplaneo se clasifica en tres mecanismos físicos: <strong>dinámico</strong> (una cuña de fluido levanta el neumático de la superficie por encima de una velocidad sobre el suelo crítica, aproximadamente proporcional a √(presión del neumático)), <strong>viscoso</strong> (una fina película de fluido impide el contacto neumático-superficie incluso a menor velocidad, en superficies lisas o contaminadas de goma) y <strong>de goma revertida</strong> (un neumático bloqueado que patina genera calor de fricción suficiente para hervir una película de agua y convertirla en vapor, que entonces sostiene el neumático).</p>
+<hr />
+<h2 id="6-performance-de-la-aeronave-y-atc">6. Performance de la aeronave y ATC</h2>
+<h3 id="61-por-que-necesitan-los-controladores-un-modelo-mental-de-las-actuaciones">6.1 Por qué necesitan los controladores un modelo mental de las actuaciones</h3>
+<p>Según el artículo «Aircraft Performance» de SKYbrary: las actuaciones certificadas garantizan que una aeronave puede (1) mantener los regímenes mínimos de ascenso especificados tras el despegue, con todos los motores y con un motor inoperativo; (2) detenerse dentro de la pista o franquear todos los obstáculos con margen si falla un motor durante la carrera de despegue; (3) continuar con seguridad hasta un aeródromo adecuado con un motor inoperativo; (4) aterrizar con seguridad. El <strong>AFM (Aeroplane Flight Manual, manual de vuelo de la aeronave)</strong> es la fuente autorizada de actuaciones del fabricante; los <strong>datos de actuaciones en ruta</strong> (tablas de ascenso/crucero/descenso por peso, altitud y desviación ISA) permiten a los despachadores y a los pilotos construir el perfil que el ATC tiene después que acomodar.</p>
+<h3 id="62-la-limitacion-de-velocidad-de-250-kt-fl100">6.2 La limitación de velocidad de 250 kt / FL100</h3>
+<p><strong>«Por debajo de 10 000 ft AMSL (3050 m / FL100) se aplica una limitación de velocidad de 250 kt IAS»</strong>, tanto a los vuelos IFR como a los VFR en la mayoría de las clases de espacio aéreo de la OACI, según SERA (las Normas Europeas Normalizadas del Aire). Es la razón operativa por la que los reactores vuelan perfiles notablemente distintos por debajo y por encima de FL100/10 000 ft, y es directamente relevante para las instrucciones de velocidad del ATC y para la secuenciación en la TMA.</p>
+<h3 id="63-grupos-tipicos-de-actuaciones-cualitativos-relevantes-para-el-atc">6.3 Grupos típicos de actuaciones (cualitativos, relevantes para el ATC)</h3>
+<ul>
+<li><strong>Cuerpos anchos pesados</strong> (A330/A340/A350/B777/B787/B747/A380): gran inercia, radios de viraje mayores, respuesta más lenta de aceleración y deceleración a las instrucciones de velocidad del ATC; normalmente los más lentos en abandonar la pista a bajas velocidades ajustadas al peso, pero capaces de gradientes de ascenso inicial pronunciados cuando van ligeros.</li>
+<li><strong>Reactores de fuselaje estrecho</strong> (familia A320, familia B737): la mayor parte del tráfico de las TMA europeas; VMO/MMO en torno a 340-350 kt/M0,78-0,82 (A320 verificado en el §1.2); categoría RECAT-EU normalmente Media superior (D); véase T09a §11.2 para la tabla completa de categorías, que no se repite.</li>
+<li><strong>Reactores regionales y turbohélices</strong> (E-Jets, CRJ, ATR, Dash 8): velocidades y altitudes de crucero menores, a menudo mezclados en la misma secuencia de aproximación que los reactores, lo que exige mayores ajustes de velocidad y espaciamiento por parte del ATC; RECAT-EU Media inferior (E) o Ligera (F).</li>
+<li><strong>Reactores ejecutivos y aviación general ligera</strong>: la mayor variabilidad de actuaciones dentro de una misma categoría (desde un monomotor de pistón Ligero hasta un reactor de gran cabina y largo alcance), RECAT-EU Ligera (F) o, para los más pequeños, por debajo del alcance de RECAT-EU (OACI heredada Ligera, MTOM &lt; 7000 kg).</li>
+<li><strong>Helicópteros</strong>: comportamiento distinto en estela turbulenta y actuaciones (corriente descendente del rotor, vuelo estacionario, perfiles verticales o casi verticales) que las categorías RECAT/OACI de ala fija no modelan en absoluto; las categorías de estela de helicópteros se tratan por separado en documentos de la OACI.</li>
+</ul>
+<hr />
+<h2 id="7-motores">7. Motores</h2>
+<p>El manual no los cubre en absoluto. El cap. 7 «Aircraft Systems» del PHAK de la FAA es la fuente primaria de esta sección.</p>
+<h3 id="71-motores-alternativos-de-piston-relevancia-para-la-aviacion-general-ligera">7.1 Motores alternativos (de pistón): relevancia para la aviación general ligera</h3>
+<p>Se clasifican por la disposición de los cilindros (radial, en línea, en V, de cilindros opuestos horizontalmente, el más común en aeronaves pequeñas, siempre con un número par de cilindros), por el ciclo de funcionamiento (dos o cuatro tiempos; el de cuatro tiempos domina en la aviación) y por la refrigeración (por aire o por líquido). El <strong>ciclo de cuatro tiempos</strong>: admisión → compresión → potencia → escape. La <strong>detonación</strong> (combustión explosiva incontrolada, por combustible de grado bajo, presión de admisión excesiva a bajas rpm o mezcla pobre a alta potencia) y el <strong>preencendido</strong> (encendido prematuro por un punto caliente) causan ambos temperatura y presión excesivas y pueden destruir el motor; ambos se evitan con el grado de combustible correcto, la gestión de las compuertas del capó y el control de la mezcla. <strong>Engelamiento del carburador</strong>: puede producirse incluso con OAT de hasta 38 °C / 100 °F y con una humedad de solo el 50 %, porque la aceleración en el Venturi más la vaporización del combustible pueden hacer caer la temperatura interna entre 22 y 39 °C (una caída absoluta de 38,89 grados Celsius); una trampa de examen fuerte, ya que «engelamiento solo con tiempo frío» es la suposición intuitiva pero errónea. <strong>FADEC</strong> (Full Authority Digital Engine Control, control digital de motor de autoridad plena): un ordenador digital que controla los parámetros del motor (y, si lo hay, de la hélice); se usó primero en motores de turbina y se emplea cada vez más en motores de pistón; elimina la necesidad de la gestión de magnetos, control de mezcla y calefacción del carburador en los motores de pistón equipados con FADEC; exige redundancia de doble canal, ya que un fallo del FADEC puede suponer la pérdida total de empuje.</p>
+<h3 id="72-motores-de-turbina-los-cuatro-tipos-y-la-relacion-de-derivacion">7.2 Motores de turbina: los cuatro tipos y la relación de derivación</h3>
+<p><strong>Todos los motores de turbina comparten cuatro secciones: entrada de aire, compresor, cámara(s) de combustión, turbina + escape</strong>. Los compresores son <strong>de flujo centrífugo, de flujo axial o centrífugo-axial</strong>. Cuatro tipos de motor de turbina según cómo se transmite el empuje o la potencia:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Mecanismo</th>
+<th>Uso típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Turborreactor (<em>turbojet</em>)</strong></td>
+<td>Todo el empuje procede del gas de escape acelerado; solo compresor–cámara de combustión–turbina–escape</td>
+<td>Primeros reactores; «limitado en alcance y autonomía... lento en responder a la palanca de gases con bajas velocidades del compresor»</td>
+</tr>
+<tr>
+<td><strong>Turbohélice (<em>turboprop</em>)</strong></td>
+<td>La turbina mueve una hélice mediante un reductor (las rpm óptimas de la hélice &lt;&lt; las rpm de la turbina)</td>
+<td>Más eficiente a <strong>250–400 mph, 18 000–30 000 ft</strong>; consumo específico mínimo normalmente disponible <strong>de 25 000 ft hasta la tropopausa</strong></td>
+</tr>
+<tr>
+<td><strong>Turbofán (<em>turbofan</em>)</strong></td>
+<td>Una corriente de aire de <strong>derivación (bypass)</strong> se desvía alrededor del núcleo de combustión, además del flujo de aire del núcleo; <strong>relación de derivación = flujo másico de aire por el fan ÷ flujo másico de aire por el núcleo del motor</strong></td>
+<td>Combina la velocidad de crucero de tipo turborreactor con una economía de combustible similar a la del turbohélice; el tipo de motor dominante en los aviones comerciales actuales</td>
+</tr>
+<tr>
+<td><strong>Turboeje (<em>turboshaft</em>)</strong></td>
+<td>La mayor parte de la energía del gas en expansión mueve un eje (no da empuje); se usa para mover algo distinto de una hélice</td>
+<td>La mayoría de los helicópteros</td>
+</tr>
+</tbody>
+</table>
+<p>Consecuencia de la relación de derivación relevante para el examen: un motor de <strong>mayor relación de derivación</strong> mueve más aire a menor velocidad de escape para un empuje dado, lo que es a la vez más eficiente en combustible y más silencioso; la razón principal por la que los motores modernos de cuerpo ancho de largo alcance (alta derivación) se ven y suenan distintos de los diseños más antiguos o de reactores ejecutivos (baja derivación).</p>
+<h3 id="73-empuje-frente-a-potencia-reversa-apu">7.3 Empuje frente a potencia, reversa, APU</h3>
+<p>El <strong>empuje</strong> es una fuerza (lbf/N); la <strong>potencia</strong> es la tasa de realización de trabajo (empuje × velocidad, o caballos de potencia al eje para un motor de hélice o de turboeje); las actuaciones de una aeronave de hélice se expresan de forma natural en potencia, y las de un turborreactor puro, en empuje. <strong>Reversa (inversión de empuje)</strong>: en los turbofanes, se consigue desplegando compuertas de bloqueo o álabes de cascada que redirigen hacia delante el <strong>flujo de aire del fan (de derivación)</strong> (la mayoría de los motores modernos de alta derivación invierten solo la corriente del fan, no el escape caliente del núcleo); pierde eficacia a medida que cae la velocidad sobre el suelo y (según OM09 §11.2) no puede acreditarse en la distancia certificada de aceleración-parada sobre pista seca según la CS-25. <strong>APU (Auxiliary Power Unit / grupo auxiliar de potencia)</strong>: una pequeña turbina (normalmente en el cono de cola) que proporciona energía eléctrica y aire de sangrado en tierra (y como respaldo en vuelo, dentro de su envolvente certificada) sin poner en marcha los motores principales; es el origen del zumbido que se oye en un avión comercial estacionado y la razón por la que el personal de tierra puede hacer funcionar el aire acondicionado de cabina y arrancar los motores principales sin energía externa en tierra.</p>
+<hr />
+<h2 id="8-sistemas-de-la-aeronave-que-debe-reconocer-un-controlador">8. Sistemas de la aeronave que debe reconocer un controlador</h2>
+<p>El cap. 7 «Aircraft Systems» del PHAK de la FAA es de nuevo la fuente primaria.</p>
+<h3 id="81-tren-de-aterrizaje">8.1 Tren de aterrizaje</h3>
+<p>El <strong>tren triciclo</strong> (rueda de morro delante, dos trenes principales detrás del CG) domina en las aeronaves modernas: permite un frenado más enérgico a alta velocidad sin que la aeronave se vaya de morro, mejor visibilidad hacia delante y resiste el trompo en tierra porque el CG queda por delante de las ruedas principales. El <strong>tren de rueda de cola (convencional)</strong> (dos ruedas principales por delante del CG, una pequeña rueda de cola detrás) da más distancia al suelo a la hélice, pero es direccionalmente menos estable en tierra (con el CG por detrás del tren principal, un desvío favorece el trompo) y da peor visibilidad hacia delante mientras la rueda de cola está abajo. <strong>Fijo frente a retráctil</strong>: el tren fijo es más sencillo y de mantenimiento más ligero; el tren retráctil se recoge en crucero para reducir la resistencia.</p>
+<h3 id="82-presurizacion-de-cabina-y-descompresion-relevancia-directa-para-los-factores-humanos">8.2 Presurización de cabina y descompresión: relevancia directa para los factores humanos</h3>
+<p>Un sistema de presurización típico mantiene la altitud de cabina en unos <strong>8000 ft a la altitud máxima de crucero de diseño de la aeronave</strong>. En las aeronaves de turbina, el aire de presurización es normalmente <strong>aire de sangrado del motor</strong>, procedente de la sección del compresor; la <strong>válvula de salida</strong> regula el flujo de aire de salida para mantener la presión diferencial fijada. <strong>Presión diferencial</strong> = presión de cabina − presión ambiente (exterior); esta diferencia, y no una altitud de cabina absoluta, es lo que la estructura del fuselaje está certificada para soportar. <strong>Descompresión</strong> = fallo del sistema de presurización para mantener su presión diferencial de diseño, por avería del sistema o daño estructural; se clasifica en <strong>explosiva</strong> (más rápida de lo que pueden descomprimirse los pulmones, en menos de 0,5 s aproximadamente; la más peligrosa) o <strong>rápida</strong> (los pulmones se descomprimen más deprisa que la cabina). La descompresión rápida reduce el tiempo de consciencia útil efectivo del piloto a <strong>un tercio o un cuarto de lo normal</strong>, porque el oxígeno se exhala con rapidez de los pulmones. <strong>Requisitos de oxígeno</strong> (norma de la FAA, citada por el PHAK): se exige oxígeno suplementario a la tripulación de vuelo tras <strong>30 minutos a altitudes de cabina de 12 500–14 000 ft</strong>; se exige <strong>de inmediato</strong> por encima de 14 000 ft; <strong>cada ocupante</strong> debe tener oxígeno suplementario por encima de una altitud de cabina de <strong>15 000 ft</strong>. La mayoría de los reguladores de demanda pasan del 0 % al 100 % de oxígeno de la botella entre 8000 ft (0 %) y unos <strong>34 000 ft de altitud de cabina (100 %)</strong>.</p>
+<h3 id="83-sistemas-de-proteccion-contra-el-hielo">8.3 Sistemas de protección contra el hielo</h3>
+<p>Tres tecnologías principales de protección del borde de ataque: <strong>botas neumáticas (inflables)</strong>: una lámina de goma en el borde de ataque, inflada por una bomba accionada por el motor o (en turbohélices) por aire de sangrado, que rompe el hielo acumulado; las botas modernas pueden ciclarse en cuanto se observa hielo (la preocupación histórica del «puenteo de hielo» por ciclar demasiado pronto no se aplica a las botas modernas); <strong>antihielo térmico</strong>: aire caliente de sangrado del compresor (o, en el tipo más reciente «ThermaWing», un laminado de lámina de grafito calentado eléctricamente) calienta el borde de ataque para impedir que se forme hielo desde el principio, y debe conectarse <strong>antes</strong> de entrar en engelamiento, no después; <strong>ala «weeping» (TKS)</strong>: pequeños orificios en el borde de ataque rezuman un fluido anticongelante (glicol) que impide la formación de hielo y rompe químicamente la unión hielo-célula para que el flujo de aire lo arrastre. Los parabrisas usan flujo de alcohol o calefacción eléctrica (la calefacción eléctrica puede causar una desviación de la brújula de hasta <strong>40°</strong>; un dato real de trampa de examen). Las hélices usan anillos lanzadores de alcohol o botas calentadas eléctricamente (vigiladas mediante un amperímetro del antihielo de la hélice).</p>
+<h3 id="84-piloto-automatico">8.4 Piloto automático</h3>
+<p>Un <strong>sistema automático de control de vuelo</strong> que mantiene el vuelo nivelado o un rumbo fijado, dirigido por el piloto o acoplado a una señal de radionavegación. Un piloto automático de <strong>un solo eje</strong> controla solo el alabeo (servo de alerones); uno de <strong>tres ejes</strong> controla alabeo, cabeceo y guiñada (servos de alerones, timón de profundidad y timón de dirección). Los sistemas avanzados añaden modos de velocidad vertical o de mantenimiento de IAS y se acoplan a las radioayudas mediante un <strong>director de vuelo</strong>; una <strong>función de seguridad de desconexión</strong> permite la desconexión automática o manual; en las aeronaves <strong>fly-by-wire</strong>, el piloto automático es una parte integrada del ordenador de mandos de vuelo y no una caja añadida. Un <strong>sistema de gestión de vuelo (FMS)</strong> va más allá del piloto automático propiamente dicho: integra la navegación, las actuaciones y el plan de vuelo para ordenar al piloto automático o al mando automático de gases que sigan perfiles laterales (LNAV) y verticales (VNAV). Es equipo estándar en aviación de transporte; el PHAK, orientado a la aviación general, no lo describe con ese nivel de detalle.</p>
+<hr />
+<h2 id="9-tcasacas-y-gpwsegpwstaws">9. TCAS/ACAS y GPWS/EGPWS/TAWS</h2>
+<p>Dos sistemas con la relevancia operativa más directa para el ATC; se citan sobre todo de SKYbrary/EUROCONTROL y no del PHAK, ya que el alcance del PHAK son las aeronaves ligeras y de aviación general.</p>
+<h3 id="91-acastcas">9.1 ACAS/TCAS</h3>
+<p><strong>ACAS (Airborne Collision Avoidance System, sistema anticolisión de a bordo)</strong>, el término genérico de la OACI: «un sistema de aeronave basado en las señales del transpondedor del radar secundario de vigilancia (SSR) que funciona con independencia del equipo terrestre para orientar al piloto sobre posibles aeronaves en conflicto». <strong>TCAS II</strong> (Traffic-alert and Collision Avoidance System) es actualmente la única implantación de la norma ACAS II de la OACI; la <strong>versión 7.1</strong> es obligatoria en Europa desde el <strong>1 de diciembre de 2015</strong> y en todo el mundo (según la Enmienda 85 del Anexo 10 de la OACI) desde el <strong>1 de enero de 2017</strong>. <strong>Obligación de equipamiento (UE):</strong> aeronaves de turbina con <strong>MTOM &gt; 5700 kg o autorizadas para &gt; 19 pasajeros</strong>.</p>
+<p>Hechos operativos clave, todos:</p>
+<ul>
+<li><strong>TA (Traffic Advisory, aviso de tráfico):</strong> ayuda al piloto a adquirir visualmente el tráfico y a anticipar una posible RA.</li>
+<li><strong>RA (Resolution Advisory, aviso de resolución):</strong> un margen de velocidad vertical que el piloto debe volar para resolver el conflicto; <strong>las RA buscan una separación vertical de 300-700 ft</strong>, no la mínima de separación estándar del ATC. Presupuesto de tiempo: <strong>TA generado hasta 48 s y RA hasta 35 s antes del punto de máxima aproximación</strong>, menos a menor altitud o velocidad.</li>
+<li><strong>Coordinación:</strong> dos aeronaves con TCAS en conflicto coordinan el sentido vertical de sus RA mediante un <strong>enlace de datos en Modo S</strong>, de modo que sus maniobras sean complementarias.</li>
+<li><strong>Cumplimiento obligatorio por el piloto:</strong> «Los pilotos deben cumplir de inmediato todas las RA, <strong>incluso si las RA son contrarias a las autorizaciones o instrucciones del ATC</strong>». Una vez que un piloto notifica una RA, <strong>el controlador deja de ser responsable de la separación de las aeronaves implicadas</strong> y no debe intentar modificar su trayectoria de vuelo hasta «libre de conflicto».</li>
+<li><strong>El TCAS ignora por completo la intención del ATC, del FMS y del piloto:</strong> evalúa las amenazas solo a partir de la distancia y la altitud derivadas del transpondedor, con independencia de las autorizaciones.</li>
+<li><strong>ACAS I</strong> (solo TA, sin RA) frente a <strong>ACAS II</strong> (TA + RA verticales; la única versión implantada, como TCAS II) frente a <strong>ACAS III</strong> (añadiría RA horizontales; aún no implantado; <strong>ACAS Xu</strong>, que usa ADS-B, es el concepto emergente para RPAS/drones).</li>
+</ul>
+<h3 id="92-gpws-egpws-taws">9.2 GPWS / EGPWS / TAWS</h3>
+<p>Desarrollo oficial de los acrónimos, verificado con el AIP España y con los glosarios normativos de EASA: <strong>GPWS = Ground Proximity Warning System</strong>; <strong>EGPWS = Enhanced Ground Proximity Warning System</strong>; <strong>TAWS = Terrain Awareness and Warning System</strong> (el término genérico de la OACI que abarca ambos). En lo operativo: el <strong>GPWS</strong> clásico compara los datos del radioaltímetro con un conjunto fijo de envolventes de aviso (reactivo: avisa solo cuando ya existe una condición peligrosa de trayectoria de vuelo o de aproximación al terreno); el <strong>EGPWS/TAWS</strong> añade una base de datos mundial almacenada de terreno y obstáculos más la posición GPS, con lo que da una capacidad <strong>predictiva</strong> de evitación del terreno, orientada hacia delante, que redujo la tasa histórica de accidentes CFIT (<em>Controlled Flight Into Terrain</em>, vuelo controlado contra el terreno). El AIP España cita como desencadenante obligatorio de notificación de sucesos la activación de un «aviso genuino» del GPWS/TAWS, lo que subraya su relevancia para el ATC y la seguridad aunque el controlador no tenga un papel directo en un suceso de GPWS/EGPWS (es un aviso solo de cabina, a diferencia de las RA del TCAS, que cambian la responsabilidad del controlador sobre la separación).</p>
+<hr />
+<h2 id="10-tipos-de-aeronave-y-sus-cifras">10. Tipos de aeronave y sus cifras</h2>
+<p>Cifras verificadas solo donde hay una hoja de datos del certificado de tipo (TCDS) de EASA o un documento Aircraft Characteristics de Airbus; los demás tipos se dan de forma cualitativa.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Motores</th>
+<th>Cifras verificadas</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Familia A320</strong> (A318/A319/A320/A321)</td>
+<td>2 turbofán (CFM56, IAE V2500, PW1100G o LEAP-1A según la variante)</td>
+<td><strong>VMO 350 kt, MMO 0,82</strong>; intervalo de MTOW <strong>64 500 – 79 000 kg</strong> según las variantes</td>
+<td>El avión de fuselaje estrecho más común en el espacio aéreo europeo; RECAT-EU Media superior</td>
+</tr>
+<tr>
+<td><strong>Familia B737</strong></td>
+<td>2 turbofán</td>
+<td></td>
+<td>Competidor directo de la familia A320; igualmente RECAT-EU Media superior</td>
+</tr>
+<tr>
+<td><strong>A330 / A340</strong></td>
+<td>2 (A330) / 4 (A340) turbofán</td>
+<td><strong>Envergadura ≈ 60,3 m; MTOW de hasta ≈ 242 t</strong> (A330-300, la variante más pesada leída)</td>
+<td>RECAT-EU Pesada superior</td>
+</tr>
+<tr>
+<td><strong>A350</strong></td>
+<td>2 turbofán (Trent XWB)</td>
+<td></td>
+<td>RECAT-EU Pesada superior</td>
+</tr>
+<tr>
+<td><strong>B777</strong></td>
+<td>2 turbofán</td>
+<td></td>
+<td>El mayor cuerpo ancho bimotor en servicio amplio; RECAT-EU Pesada superior</td>
+</tr>
+<tr>
+<td><strong>B787</strong></td>
+<td>2 turbofán</td>
+<td></td>
+<td>Bimotor de largo alcance de estructura de materiales compuestos; RECAT-EU Pesada superior</td>
+</tr>
+<tr>
+<td><strong>A380</strong></td>
+<td>4 turbofán</td>
+<td></td>
+<td>El único <strong>Super Pesada</strong> actual de RECAT-EU; exige las mayores mínimas de separación por estela de todos los tipos</td>
+</tr>
+<tr>
+<td><strong>B747</strong></td>
+<td>4 turbofán</td>
+<td><strong>Envergadura 59,6 m (195 ft 8 in); MTOW 870 000 lb (394 625 kg)</strong></td>
+<td>Característica joroba de la cubierta superior; RECAT-EU Pesada superior</td>
+</tr>
+<tr>
+<td><strong>Reactores regionales</strong> (E-Jets, CRJ)</td>
+<td>2 turbofán</td>
+<td></td>
+<td>RECAT-EU Media inferior</td>
+</tr>
+<tr>
+<td><strong>Turbohélices</strong> (ATR42/72, Dash 8)</td>
+<td>2 turbohélices</td>
+<td></td>
+<td>Altitud y velocidad de crucero menores que los reactores; mezclados en las mismas secuencias de TMA; RECAT-EU Ligera o Media inferior según el tipo</td>
+</tr>
+<tr>
+<td><strong>Reactores ejecutivos</strong></td>
+<td>2 turbofán (normalmente)</td>
+<td></td>
+<td>Gran dispersión de actuaciones dentro de una misma categoría OACI/RECAT</td>
+</tr>
+<tr>
+<td><strong>Helicópteros</strong></td>
+<td>Turboeje (normalmente)</td>
+<td>—</td>
+<td>Comportamiento de vórtices de estela distinto, no cubierto por las categorías RECAT/OACI de ala fija (véase §6.3)</td>
+</tr>
+<tr>
+<td><strong>Transportes militares</strong> (p. ej., A400M, C-130)</td>
+<td>4 turbohélices (típico)</td>
+<td></td>
+<td>Sin TCDS civil; actuaciones inusuales en pista corta y aproximación con gran pendiente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-masa-y-centrado-mercancias-peligrosas-politica-de-combustible">11. Masa y centrado, mercancías peligrosas, política de combustible</h2>
+<p>El manual no lo cubre más allá de nombrar el «peso» como factor de despegue y aterrizaje.</p>
+<h3 id="111-definiciones-estandar-de-pesos-gamafaa-phak-cap-10">11.1 Definiciones estándar de pesos (GAMA/FAA, PHAK cap. 10)</h3>
+<ul>
+<li><strong>Peso máximo al despegue (MTOW):</strong> el peso máximo permitido para el despegue.</li>
+<li><strong>Peso máximo de aterrizaje (MLW):</strong> el mayor peso que se permite normalmente en el aterrizaje (puede ser menor que el MTOW: una aeronave que despega con MTOW y debe volver de inmediato puede tener que quemar o soltar combustible hasta alcanzar el MLW).</li>
+<li><strong>Peso máximo sin combustible (MZFW):</strong> el peso máximo <strong>sin incluir el combustible utilizable</strong>; es decir, el límite estructural de la célula + la carga de pago antes de añadir combustible; el combustible que se añade por encima de este punto suma peso pero (en líneas generales) no carga de flexión la raíz del ala, ya que el combustible se lleva en las alas.</li>
+<li><strong>Peso máximo en rampa (de rodaje):</strong> el peso total cargado, con todo el combustible; <strong>mayor que el MTOW</strong>, porque incluye el combustible que se quemará en el rodaje y en las pruebas de motores antes del despegue.</li>
+<li><strong>Carga útil:</strong> piloto + pasajeros + equipaje + combustible utilizable + aceite drenable (término propio de la aviación general).</li>
+<li><strong>Momento, estación, punto de referencia (dátum), cuerda aerodinámica media (MAC):</strong> el vocabulario estándar de masa y centrado; momento = peso × brazo; estación = una ubicación referida en pulgadas (u otra unidad) desde el dátum (estación cero); MAC = distancia media entre el borde de ataque y el de salida, la referencia habitual para expresar la posición del CG como «% MAC» en las aeronaves de transporte.</li>
+</ul>
+<h3 id="112-efectos-del-centro-de-gravedad-cg">11.2 Efectos del centro de gravedad (CG)</h3>
+<p>Ya cubierto en parte en T09a §8.2 (el CG retrasado reduce la carga estabilizadora hacia abajo de la cola, el CG adelantado lo contrario) desde la perspectiva de la <em>estabilidad</em>; el añadido relevante para las actuaciones: una aeronave cargada cerca de su <strong>límite de CG trasero</strong> es más eficiente en combustible en crucero (menos carga de cola que contrarrestar), pero tiene menor estabilidad longitudinal y menor margen de recuperación de la pérdida, mientras que una aeronave con <strong>CG delantero</strong> es más estable y suele tener una menor velocidad de pérdida para una configuración dada, pero quema algo más de combustible y necesita más autoridad del timón de profundidad (a encabritar) en la rotación y en la recogida.</p>
+<h3 id="113-categorias-de-peso-referencia-cruzada-no-repeticion">11.3 Categorías de peso (referencia cruzada, no repetición)</h3>
+<p>La OACI heredada (Pesada/Media/Ligera por MTOM) y RECAT-EU (A–F) se tabulan por completo en T09a §11 y no se repiten aquí; el §10 anterior sitúa tipos concretos de aeronave en esas categorías cuando es relevante para sus cifras de actuaciones.</p>
+<h3 id="114-mercancias-peligrosas-solo-nociones-basicas">11.4 Mercancías peligrosas: solo nociones básicas</h3>
+<p>El transporte de mercancías peligrosas se rige por el Anexo 18 de la OACI y las Instrucciones Técnicas asociadas. Nociones básicas relevantes para el ATC: las mercancías peligrosas se clasifican en nueve clases OACI/ONU (explosivos; gases; líquidos inflamables; sólidos inflamables; sustancias comburentes/peróxidos orgánicos; sustancias tóxicas/infecciosas; material radiactivo; corrosivos; diversas), cada una con requisitos específicos de embalaje, etiquetado, límites de cantidad y restricciones de estiba; un vuelo que transporta mercancías peligrosas lo comunica normalmente al ATC/ATS mediante el plan de vuelo (observaciones de los campos 18/19) para que los servicios de emergencia puedan recibir las indicaciones adecuadas en caso de accidente o incidente.</p>
+<h3 id="115-politica-de-combustible-solo-nociones-basicas">11.5 Política de combustible: solo nociones básicas</h3>
+<p>La carga de combustible de un vuelo comercial se planifica normalmente como <strong>combustible de rodaje + combustible de trayecto + combustible de contingencia (normalmente el 5 % del combustible de trayecto, o una regla equivalente basada en el tiempo) + combustible de alternativa (si se requiere una alternativa) + combustible de reserva final</strong> (habitualmente <strong>30 minutos de espera a 1500 ft sobre la elevación del aeródromo en condiciones estándar</strong>, para aviones de turbina) <strong>+ cualquier combustible adicional a discreción del comandante</strong>. Relevancia para el ATC: una llamada por radio de «MINIMUM FUEL» o «MAYDAY FUEL» (términos distintos, con implicaciones de prioridad ATC distintas) indica que el combustible restante de un vuelo se acerca a esta reserva planificada o está por debajo de ella; un tema que corresponde más bien al material del tema 6/7, señalado aquí solo para completar el alcance de masa y centrado y política de combustible que recoge esta ficha.</p>
+<hr />
+<h2 id="12-ejemplos-numericos-resueltos-todos-comprobados-dos-veces">12. Ejemplos numéricos resueltos (todos comprobados dos veces)</h2>
+<ol>
+<li><strong>TAS a partir de la CAS con la regla práctica del 2 %/1000 ft:</strong> CAS = 280 kt en FL300 (30 000 ft). TAS ≈ 280 × (1 + 0,02 × 30) = 280 × 1,60 = <strong>448 kt</strong>. (Comprobación cruzada con la tabla ISA de OM09 §3.2: a 30 000 ft, θ ≈ 0,794 y TAS/CAS ≈ 1/√σ ≈ 1/√0,374 ≈ 1,636; la regla práctica (1,60) se acerca a la relación exacta √(1/σ) (1,636), pero no es idéntica; la regla práctica es una aproximación lineal de una relación de raíz cuadrada, por lo que se queda algo corta en altitudes elevadas.)</li>
+<li><strong>Margen de VLOF sobre VMU (bimotor, caso OEI):</strong> si el ensayo en vuelo determina VMU = 118 kt (OEI), el <strong>VLOF mínimo certificado ≥ 1,05 × 118 = 123,9 kt</strong>.</li>
+<li><strong>Categoría de aproximación de la aeronave a partir de VREF:</strong> una aeronave con VREF = 135 kt cae en la <strong>categoría C</strong> (121–&lt;141 kt).</li>
+<li><strong>Ganancia de altitud del ascenso escalonado (RVSM):</strong> una aeronave con altitud óptima que asciende desde FL330 en un entorno RVSM pasa a <strong>FL350</strong> (2000 ft, el siguiente nivel disponible con las reglas RVSM), y no a FL370 (que sería el escalón heredado de 4000 ft por encima de FL290).</li>
+<li><strong>Comprobación de la geometría del clearway:</strong> un plano de clearway que sube con la pendiente máxima permitida del <strong>1,25 %</strong>, a partir del final de la pista, alcanza una altura de <strong>0,66 m (la altura máxima de las luces de umbral que sobresalen)</strong> a una distancia horizontal de 0,66 / 0,0125 = <strong>52,8 m</strong> del final de la pista.</li>
+<li><strong>Distancia de aterrizaje con un umbral desplazado:</strong> un obstáculo de 15 m de altura está 500 m antes de un umbral de pista por lo demás utilizable, dentro del embudo de aproximación. Según la regla CS/JAR-OPS del <strong>plano de franqueamiento de obstáculos del 2 % + margen de 60 m</strong>, el umbral desplazado debe estar al menos 15 m / 0,02 = 750 m más allá del obstáculo, más el margen de 60 m ⇒ el umbral queda desplazado <strong>810 m</strong> más allá del obstáculo solo por el requisito geométrico (ilustrativo; las determinaciones reales dependen también de la geometría lateral y longitudinal del embudo, que este ejemplo simplificado no modela).</li>
+</ol>
+<hr />
+<h2 id="manual-frente-a-fuentes-primarias-adicional-a-las-tablas-de-om09-y-t09a-no-duplicar-sus-entradas">Manual frente a fuentes primarias (adicional a las tablas de OM09 y T09a; no duplicar sus entradas)</h2>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Dice el manual (ENAIRE)</th>
+<th>Dice la fuente primaria</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definición de VLOF</strong></td>
+<td>«la velocidad a la que, inicialmente, el avión se va al aire» (sic), sin fórmula ni relación con ninguna otra velocidad</td>
+<td>CS 25.107(d): VLOF ≥ 110 % VMU (todos los motores) o 105 % VMU (OEI); VMU es en sí una velocidad certificada, derivada de ensayos en vuelo</td>
+<td>La VLOF del manual no está definida en relación con ninguna otra magnitud; la CS-25 le da un margen preciso y comprobable que el manual omite por completo</td>
+</tr>
+<tr>
+<td><strong>Distancias declaradas de pista (TORA/TODA/ASDA/LDA)</strong></td>
+<td>No se nombran en absoluto; el manual describe las tres distancias de despegue solo en prosa (§11.2)</td>
+<td>JAR-OPS/CS-25 definen TORA, TODA, ASDA y (para el aterrizaje) LDA como conceptos de longitud de pista concretos y acotados numéricamente, con geometría exacta del clearway (pendiente 1,25 %, ancho 152 m/500 ft, altura de luces 0,66 m/26 in) y del stopway (ancho completo de pista, portante)</td>
+<td>Una laguna de cobertura importante: una pregunta de examen que nombrara «TORA» o el «ancho del clearway» con su cifra certificada no encontraría nada en el manual en lo que apoyarse</td>
+</tr>
+<tr>
+<td><strong>Trayectoria de vuelo bruta/neta al despegue y penalización de gradiente del 0,8 %/1,0 %</strong></td>
+<td>No se menciona</td>
+<td>CS/JAR 25.115: trayectoria neta = trayectoria bruta − gradiente del 0,8 % (bimotor) / 1,0 % (cuatrimotor) en cada punto</td>
+<td>Los cálculos de franqueamiento de obstáculos usan la trayectoria <em>neta</em>, no la real (bruta): una cifra materialmente distinta (más conservadora) que «el gradiente de ascenso que la aeronave vuela realmente»</td>
+</tr>
+<tr>
+<td><strong>Categoría de aproximación de la aeronave / VAT</strong></td>
+<td>El manual define VREF = 1,3 VSO (aterrizaje), pero nunca agrupa las aeronaves en categorías de aproximación</td>
+<td>FAA AC 150/5300-13B: AAC A–E, por banda de VREF (&lt; 91 / 91–120 / 121–140 / 141–165 / ≥ 166 kt)</td>
+<td>El manual tiene el <em>ingrediente</em> (VREF), pero no la <em>clasificación</em> construida a partir de él; una pregunta de ampliación natural</td>
+</tr>
+<tr>
+<td><strong>Motores, sistemas de la aeronave, TCAS, GPWS, tipos de aeronave, masa y centrado</strong></td>
+<td>El manual no los cubre en absoluto (su alcance se detiene en los mandos de vuelo y en las velocidades V y distancias de despegue/aterrizaje)</td>
+<td>PHAK cap. 6-7, 10; artículos de SKYbrary sobre ACAS/TCAS; datos de TCDS de EASA</td>
+<td>Las 23 páginas del manual simplemente no llegan a este material; tratar todos los §§6-11 de este archivo como <strong>relleno de lagunas de cobertura</strong>, no como contradicción del manual</td>
+</tr>
+</tbody>
+</table>
+<h2 id="trampas-de-examen">Trampas de examen</h2>
+<ol>
+<li><strong>VLOF frente a VMU:</strong> VLOF no es una velocidad independiente: se certifica como un margen porcentual (110 %/105 %) por encima de VMU, y no como una velocidad definida por sí sola como podría sugerir la redacción del manual.</li>
+<li><strong>TORA ≠ longitud de pista siempre que el punto de entrada al despegue no sea el umbral de la pista:</strong> TORA se mide desde el punto de entrada (intersección) realmente usado, que puede ser más corto que la pista completa.</li>
+<li><strong>TODA y ASDA parten ambas de TORA, pero añaden cosas distintas:</strong> TODA añade el <em>clearway</em> (solo subida, sin requisito de resistencia); ASDA añade el <em>stopway</em> (frenado, debe soportar el peso de la aeronave). No intercambiar qué prolongación corresponde a cada una.</li>
+<li><strong>LDA sin obstáculo = TORA, no la longitud física completa de la pista en todos los casos:</strong> y el stopway nunca puede contarse para la LDA aunque exista físicamente.</li>
+<li><strong>Trayectoria de vuelo bruta frente a neta:</strong> la trayectoria <em>neta</em> (usada para la certificación y el franqueamiento de obstáculos) es siempre más conservadora que la <em>bruta</em> (realmente volada); una pregunta sobre «la trayectoria de vuelo usada para certificar el franqueamiento de obstáculos» quiere la trayectoria neta, con su penalización de gradiente ya restada.</li>
+<li><strong>El régimen de ascenso (ft/min) no es la misma magnitud que el gradiente de ascenso (%):</strong> una aeronave más rápida necesita un régimen de ascenso mayor para mantener el <em>mismo</em> gradiente porcentual que una más lenta; las SID publican gradientes (%) y no regímenes, precisamente por esto.</li>
+<li><strong>VMO/MMO (límite de la categoría transporte, a la vez límite de IAS/CAS y de Mach, el que actúe primero) es el análogo operativo de VNE (límite duro único de las aeronaves ligeras):</strong> no tratarlos como el mismo tipo de límite; VMO/MMO son en realidad dos límites (uno de velocidad a baja altitud y otro de Mach a gran altitud) que juntos trazan la frontera del coffin corner (T09a §10.3).</li>
+<li><strong>Los turbohélices son más eficientes en una banda concreta (250-400 mph, 18 000-30 000 ft), no «bajos y lentos» en general:</strong> un error habitual; su consumo específico mínimo se da en realidad cerca de la tropopausa, de forma similar a la preferencia del turbofán por una altitud de crucero alta.</li>
+<li><strong>La relación de derivación es flujo del fan ÷ flujo del núcleo, no diámetro del fan ÷ diámetro del núcleo:</strong> una definición errónea pero verosímil; la relación trata del flujo másico de aire, no del tamaño físico (aunque ambos se correlacionan).</li>
+<li><strong>El TCAS/ACAS es independiente del ATC:</strong> no conoce la autorización del ATC, y el piloto debe seguir una RA «incluso si... es contraria a las autorizaciones del ATC»; en ese momento es el <em>controlador</em> (no el piloto) quien pierde la responsabilidad de la separación de ese par hasta «libre de conflicto».</li>
+<li><strong>El GPWS es reactivo (basado en envolventes, sin base de datos de terreno); el EGPWS/TAWS es predictivo (base de datos de terreno + GPS, orientado hacia delante):</strong> no tratar los dos nombres como intercambiables; el EGPWS es una mejora técnica concreta, no un simple cambio de nombre.</li>
+<li><strong>El MZFW excluye el combustible utilizable; el MTOW y el MLW lo incluyen:</strong> una pregunta de carga de pago más combustible que ignore esta distinción dará el peso limitante equivocado.</li>
+<li><strong>El peso máximo en rampa &gt; MTOW</strong> (incluye el combustible quemado antes de soltar frenos), no al revés.</li>
+<li><strong>El engelamiento del carburador puede producirse con una OAT de hasta 38 °C (100 °F):</strong> «el hielo solo aparece cuando hace frío» es una intuición errónea clásica; lo que determina el riesgo es la caída de temperatura por el Venturi y la vaporización, no solo la temperatura ambiente.</li>
+<li><strong>La categoría de aproximación de la aeronave (basada en la velocidad, A-E) y el grupo de diseño de avión (basado en el tamaño, I-VI) son clasificaciones independientes:</strong> la letra de una aeronave y su número romano no tienen por qué «coincidir» de ninguna forma sencilla.</li>
+</ol>
+<h2 id="imprescindible-memorizar">Imprescindible memorizar</h2>
+<ul>
+<li>Regla práctica CAS→TAS: <strong>sumar un 2 % por cada 1000 ft</strong>.</li>
+<li>Colores del ASI: arco blanco VS0 (inferior)-VFE (superior); arco verde VS1 (inferior)-VNO (superior); arco amarillo de precaución VNO-VNE; línea roja VNE.</li>
+<li>V1 ≥ VEF (≥ VMCG) con margen de ≥1 s; V1 ≤ VR; VR es función del peso, los flaps, la altitud de presión y la temperatura.</li>
+<li><strong>VLOF ≥ 110 % VMU (todos los motores) / 105 % VMU (OEI)</strong>; 108 %/104 % si está limitada por la geometría.</li>
+<li><strong>Bandas de AAC: A &lt;91, B 91-120, C 121-140, D 141-165, E ≥166 kt</strong>; ADG I-VI por envergadura/altura de cola (la que sea mayor).</li>
+<li><strong>TORA</strong> = longitud de pista declarada para la carrera en tierra; <strong>TODA = TORA + clearway</strong> (pendiente ≤1,25 %, ancho ≥152 m/500 ft, altura de luces ≤0,66 m/26 in); <strong>ASDA = TORA + stopway</strong> (ancho completo de pista, portante).</li>
+<li><strong>LDA</strong> = TORA sin obstáculo (el stopway nunca cuenta); con obstáculo, LDA = longitud desde un umbral desplazado fijado por un <strong>plano del 2 % + margen de 60 m</strong> más allá del obstáculo.</li>
+<li><strong>Trayectoria neta = trayectoria bruta − gradiente del 0,8 % (2 motores) / 1,0 % (4 motores)</strong>, en cada punto.</li>
+<li>Alabeo máximo en procedimientos con obstáculos: <strong>15° &lt;200 ft; 15°/20° 200-400 ft; 25°/30° &gt;400 ft</strong>.</li>
+<li>Ascenso escalonado: <strong>2000 ft por debajo de FL290 / 4000 ft por encima (heredado); 2000 ft en todo el rango (RVSM)</strong>.</li>
+<li>Índice de coste: 0 = mínimo combustible (lento); CI alto = mínimo tiempo (rápido, hasta VMO/MMO).</li>
+<li>Tipos de turbina: turborreactor (empuje puro), turbohélice (óptimo a 250-400 mph, 18-30 mil ft), <strong>turbofán (relación de derivación = flujo del fan / flujo del núcleo)</strong>, turboeje (mueve un eje, p. ej., helicópteros).</li>
+<li>Presurización: altitud de cabina ≈ <strong>8000 ft</strong> en el crucero máximo; O2 exigido a la tripulación tras 30 min a 12 500-14 000 ft, de inmediato por encima de 14 000 ft, a todos por encima de 15 000 ft de altitud de cabina.</li>
+<li>Descompresión: <strong>explosiva &lt;0,5 s; rápida</strong>, más lenta que la explosiva pero más rápida que los pulmones; ambas reducen el tiempo de consciencia útil a <strong>1/3-1/4 de lo normal</strong>.</li>
+<li>Protección contra el hielo: botas neumáticas / antihielo térmico (aire de sangrado o eléctrico) / ala «weeping» (TKS); la calefacción eléctrica del parabrisas puede causar una <strong>desviación de la brújula de 40°</strong>.</li>
+<li>Piloto automático: un eje (solo alabeo) frente a tres ejes (alabeo+cabeceo+guiñada); el director de vuelo lo acopla a las radioayudas.</li>
+<li>TCAS: <strong>TA y luego RA</strong>; la RA busca una separación vertical de <strong>300-700 ft</strong>; cumplimiento obligatorio por el piloto incluso contra el ATC; <strong>el controlador no es responsable de la separación una vez notificada la RA</strong>; versión 7.1 obligatoria desde 2015 (UE)/2017 (OACI); obligación UE &gt;5700 kg o &gt;19 pasajeros.</li>
+<li>GPWS = envolvente reactiva; <strong>EGPWS/TAWS = predictivo, base de datos de terreno + GPS</strong>.</li>
+<li>MTOW/MLW incluyen combustible; <strong>MZFW excluye el combustible utilizable</strong>; peso en rampa &gt; MTOW.</li>
+<li>Límite de velocidad de 250 kt IAS por debajo de FL100/10 000 ft (SERA.923).</li>
+</ul>
+<h2 id="glosario-es-en">Glosario (ES -&gt; EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>regla práctica de velocidad calibrada</td>
+<td>calibrated airspeed rule of thumb</td>
+</tr>
+<tr>
+<td>velocidad de pérdida en configuración de aterrizaje (VSO)</td>
+<td>stalling speed, landing config. (VSO)</td>
+</tr>
+<tr>
+<td>velocidad de pérdida en configuración limpia (VS1)</td>
+<td>stalling speed, clean config. (VS1)</td>
+</tr>
+<tr>
+<td>velocidad máxima con flaps extendidos (VFE)</td>
+<td>maximum flap-extended speed (VFE)</td>
+</tr>
+<tr>
+<td>velocidad máxima estructural de crucero (VNO)</td>
+<td>maximum structural cruising speed (VNO)</td>
+</tr>
+<tr>
+<td>velocidad de nunca exceder (VNE)</td>
+<td>never-exceed speed (VNE)</td>
+</tr>
+<tr>
+<td>velocidad / Mach máximo de operación (VMO/MMO)</td>
+<td>maximum operating speed / Mach (VMO/MMO)</td>
+</tr>
+<tr>
+<td>velocidad de maniobra / de extensión del tren (VLO/VLE)</td>
+<td>landing gear operating / extended speed (VLO/VLE)</td>
+</tr>
+<tr>
+<td>velocidad mínima de despegue del suelo (VMU)</td>
+<td>minimum unstick speed (VMU)</td>
+</tr>
+<tr>
+<td>velocidad de referencia de aterrizaje (VAT/VREF)</td>
+<td>reference landing speed (VAT/VREF)</td>
+</tr>
+<tr>
+<td>categoría de aeronave por velocidad de aproximación</td>
+<td>Aircraft Approach Category</td>
+</tr>
+<tr>
+<td>grupo de diseño de aeronave</td>
+<td>Airplane Design Group</td>
+</tr>
+<tr>
+<td>recorrido de despegue disponible (TORA)</td>
+<td>take-off run available (TORA)</td>
+</tr>
+<tr>
+<td>distancia de despegue disponible (TODA)</td>
+<td>take-off distance available (TODA)</td>
+</tr>
+<tr>
+<td>distancia de aceleración-parada disponible (ASDA)</td>
+<td>accelerate-stop distance available (ASDA)</td>
+</tr>
+<tr>
+<td>distancia de aterrizaje disponible (LDA)</td>
+<td>landing distance available (LDA)</td>
+</tr>
+<tr>
+<td>zona libre de obstáculos (clearway)</td>
+<td>clearway</td>
+</tr>
+<tr>
+<td>zona de parada (stopway)</td>
+<td>stopway</td>
+</tr>
+<tr>
+<td>trayectoria de vuelo bruta / neta</td>
+<td>gross / net flight path</td>
+</tr>
+<tr>
+<td>penalización de gradiente</td>
+<td>gradient penalty</td>
+</tr>
+<tr>
+<td>umbral desplazado</td>
+<td>displaced threshold</td>
+</tr>
+<tr>
+<td>gradiente de ascenso</td>
+<td>climb gradient</td>
+</tr>
+<tr>
+<td>régimen / velocidad de ascenso</td>
+<td>rate of climb</td>
+</tr>
+<tr>
+<td>ascenso escalonado</td>
+<td>step climb</td>
+</tr>
+<tr>
+<td>altitud óptima</td>
+<td>optimum altitude</td>
+</tr>
+<tr>
+<td>índice de coste</td>
+<td>cost index</td>
+</tr>
+<tr>
+<td>alcance específico</td>
+<td>specific range</td>
+</tr>
+<tr>
+<td>motor y al aire / aproximación frustrada</td>
+<td>go-around</td>
+</tr>
+<tr>
+<td>hidroplaneo (dinámico / viscoso / de goma revertida)</td>
+<td>hydroplaning (dynamic/viscous/reverted rubber)</td>
+</tr>
+<tr>
+<td>motor alternativo (de pistón)</td>
+<td>reciprocating (piston) engine</td>
+</tr>
+<tr>
+<td>detonación / preencendido</td>
+<td>detonation / preignition</td>
+</tr>
+<tr>
+<td>engelamiento del carburador</td>
+<td>carburettor icing</td>
+</tr>
+<tr>
+<td>control digital de motor de autoridad plena (FADEC)</td>
+<td>Full Authority Digital Engine Control (FADEC)</td>
+</tr>
+<tr>
+<td>turborreactor / turbohélice / turbofán / turboeje</td>
+<td>turbojet / turboprop / turbofan / turboshaft</td>
+</tr>
+<tr>
+<td>relación de derivación (bypass)</td>
+<td>bypass ratio</td>
+</tr>
+<tr>
+<td>reversa / inversión de empuje</td>
+<td>reverse thrust</td>
+</tr>
+<tr>
+<td>grupo auxiliar de potencia (APU)</td>
+<td>Auxiliary Power Unit (APU)</td>
+</tr>
+<tr>
+<td>tren triciclo / tren convencional (rabeta)</td>
+<td>tricycle / tailwheel landing gear</td>
+</tr>
+<tr>
+<td>tren retráctil / tren fijo</td>
+<td>retractable / fixed landing gear</td>
+</tr>
+<tr>
+<td>presurización de cabina</td>
+<td>cabin pressurization</td>
+</tr>
+<tr>
+<td>válvula de salida</td>
+<td>outflow valve</td>
+</tr>
+<tr>
+<td>presión diferencial</td>
+<td>differential pressure</td>
+</tr>
+<tr>
+<td>descompresión explosiva / rápida</td>
+<td>explosive / rapid decompression</td>
+</tr>
+<tr>
+<td>tiempo de consciencia útil</td>
+<td>time of useful consciousness</td>
+</tr>
+<tr>
+<td>sistema antihielo / de deshielo</td>
+<td>anti-ice / de-ice system</td>
+</tr>
+<tr>
+<td>botas neumáticas (de deshielo)</td>
+<td>pneumatic boots</td>
+</tr>
+<tr>
+<td>ala «weeping» (TKS)</td>
+<td>weeping wing</td>
+</tr>
+<tr>
+<td>piloto automático</td>
+<td>autopilot</td>
+</tr>
+<tr>
+<td>director de vuelo</td>
+<td>flight director</td>
+</tr>
+<tr>
+<td>sistema de gestión de vuelo (FMS)</td>
+<td>Flight Management System (FMS)</td>
+</tr>
+<tr>
+<td>sistema anticolisión de a bordo (ACAS)</td>
+<td>Airborne Collision Avoidance System (ACAS)</td>
+</tr>
+<tr>
+<td>sistema de alerta de tráfico y anticolisión (TCAS)</td>
+<td>Traffic Collision Avoidance System (TCAS)</td>
+</tr>
+<tr>
+<td>aviso de tráfico (TA)</td>
+<td>Traffic Advisory (TA)</td>
+</tr>
+<tr>
+<td>aviso de resolución (RA)</td>
+<td>Resolution Advisory (RA)</td>
+</tr>
+<tr>
+<td>sistema de aviso de proximidad al terreno (GPWS)</td>
+<td>Ground Proximity Warning System (GPWS)</td>
+</tr>
+<tr>
+<td>sistema mejorado de aviso de proximidad al terreno (EGPWS)</td>
+<td>Enhanced GPWS (EGPWS)</td>
+</tr>
+<tr>
+<td>sistema de alerta y conocimiento del terreno (TAWS)</td>
+<td>Terrain Awareness and Warning System (TAWS)</td>
+</tr>
+<tr>
+<td>vuelo controlado contra el terreno (CFIT)</td>
+<td>Controlled Flight Into Terrain (CFIT)</td>
+</tr>
+<tr>
+<td>peso máximo al despegue (MTOW)</td>
+<td>maximum take-off weight (MTOW)</td>
+</tr>
+<tr>
+<td>peso máximo de aterrizaje (MLW)</td>
+<td>maximum landing weight (MLW)</td>
+</tr>
+<tr>
+<td>peso máximo sin combustible (MZFW)</td>
+<td>maximum zero-fuel weight (MZFW)</td>
+</tr>
+<tr>
+<td>peso máximo en rampa</td>
+<td>maximum ramp weight</td>
+</tr>
+<tr>
+<td>carga útil</td>
+<td>useful load</td>
+</tr>
+<tr>
+<td>momento / estación / punto de referencia (dátum)</td>
+<td>moment / station / datum</td>
+</tr>
+<tr>
+<td>cuerda aerodinámica media (MAC)</td>
+<td>mean aerodynamic chord (MAC)</td>
+</tr>
+<tr>
+<td>centro de gravedad (CG)</td>
+<td>centre of gravity (CG)</td>
+</tr>
+<tr>
+<td>mercancías peligrosas</td>
+<td>dangerous goods</td>
+</tr>
+<tr>
+<td>combustible de contingencia / de reserva final</td>
+<td>contingency fuel / final reserve fuel</td>
+</tr>
+<tr>
+<td>combustible mínimo / mayday por combustible</td>
+<td>minimum fuel / mayday fuel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fuentes">Fuentes</h2>
+<ul>
+<li>FAA, <em>Pilot's Handbook of Aeronautical Knowledge</em> (PHAK), FAA-H-8083-25C, capítulos 6 (Flight Controls, piloto automático), 7 (Aircraft Systems), 8 (Flight Instruments), 10 (Weight and Balance).</li>
+<li>EASA, <em>CS-25 Amendment 28</em>, CS 25.107(d) (VMU, márgenes de VLOF), CS 25.115 (trayectoria de vuelo bruta/neta, penalización de gradiente).</li>
+<li>Airbus, <em>Getting to Grips with Aircraft Performance</em> (2002): TORA/TODA/ASDA, trayectoria de vuelo bruta/neta, ascenso escalonado, Cost Index, LDA.</li>
+<li>SKYbrary Aviation Safety, artículos «V1», «Rotation Speed (Vr)», «Aircraft Performance», «Flight Envelope», «Airborne Collision Avoidance System (ACAS)».</li>
+<li>EASA, <em>Easy Access Rules for SERA</em> (2012, consolidado), SERA.923 (limitación de velocidad de 250 kt / FL100).</li>
+<li>FAA, <em>AC 150/5300-13B, Airport Design</em>, §1.6.1 Aircraft Approach Category, §1.6.2 Airplane Design Group.</li>
+<li>EASA, <em>Type Certificate Data Sheets</em> A064 (A318-A321), A004 (A330), IM.A196 (B747): VMO/MMO, MTOW, envergadura.</li>
+<li>Airbus, <em>A320 Aircraft Characteristics — Airport and Maintenance Planning</em> (junio de 2024), intervalo de MTOW.</li>
+<li>AIP España, secciones GEN/ENR: acrónimos GPWS/EGPWS/TAWS y desencadenante de notificación de sucesos.</li>
+<li>EASA, <em>Easy Access Rules for ATM/ANS</em> (Reglamento (UE) 2017/373), acrónimo EGPWS.</li>
+</ul></main></div><script src="../../../assets/search.js" defer></script><script src="../../../assets/config.js"></script><script src="../../../assets/account.js" defer></script><script src="../../../assets/progress.js" defer></script></body></html>

@@ -1,0 +1,111 @@
+¿Cuál es el umbral exacto de velocidad de OMM-49/Anexo 3 para notificar dirección del viento variable (VRB) (variación de 60-180 grados)?	Velocidad media inferior a 3 kt (1,5 m/s); con 3 kt o más se notifican las dos direcciones extremas en lugar de VRB	ATC::T03b
+¿Cuándo se notifica la dirección del viento como VRB, sin dirección media, con independencia de la velocidad?	Cuando la variación direccional total en los últimos 10 minutos es de 180 grados o más	ATC::T03b
+¿Cuál es la definición exacta de OMM-49 de «nube de importancia para las operaciones»?	Una nube con la base por debajo de 1500 m (5000 ft) o por debajo de la altitud mínima de sector (MSA) más alta, la que sea mayor, o una nube CB/TCU a cualquier altura	ATC::T03b
+¿Cuáles son las tres condiciones simultáneas necesarias para codificar CAVOK?	Visibilidad >= 10 km (no se notifica por separado la visibilidad mínima); ninguna nube de importancia para las operaciones; ningún fenómeno significativo para la aviación	ATC::T03b
+Según OMM-49, ¿cuándo se emite un SPECI en lugar de un informe especial local?	Cuando el informe debe difundirse más allá del aeródromo de origen (planificación de vuelos, VOLMET, D-VOLMET), salvo que en ese aeródromo ya se emita un METAR cada media hora	ATC::T03b
+¿Cuánto debe cambiar la dirección media del viento en superficie, y con qué velocidad mínima, para exigir un SPECI?	60 grados o más, con una velocidad media antes o después del cambio (o en ambos casos) de al menos 10 kt (5 m/s)	ATC::T03b
+¿Cuánto debe cambiar la velocidad media del viento en superficie para exigir un SPECI?	10 kt (5 m/s) o más respecto al último informe	ATC::T03b
+¿Cuánto debe cambiar la variación de racha, y con qué velocidad media mínima, para exigir un SPECI?	10 kt (5 m/s) o más, con una velocidad media antes o después de al menos 15 kt (7,5 m/s)	ATC::T03b
+¿Qué cambios del tiempo relacionados con la precipitación exigen un SPECI al comienzo, al final o al cambiar de intensidad?	Precipitación engelante; precipitación moderada o fuerte (incluidos los chubascos); tormenta con precipitación	ATC::T03b
+¿Qué fenómenos meteorológicos exigen un SPECI solo al comienzo o al final (no al cambiar de intensidad)?	Niebla engelante; tormenta sin precipitación	ATC::T03b
+¿Qué cambio en una capa de nubes por debajo de 450 m (1500 ft) exige un SPECI?	El paso de la cantidad entre SCT o menos y BKN u OVC (en cualquier sentido)	ATC::T03b
+¿Cuáles son los umbrales de visibilidad recomendados (OMM-49) cuya superación exige un SPECI?	800, 1500 o 3000 m, y 5000 m donde opera un tráfico VFR importante	ATC::T03b
+¿Cuáles son los umbrales de RVR recomendados cuya superación exige un SPECI?	50, 175, 300, 550 u 800 m	ATC::T03b
+¿Cuáles son los umbrales recomendados de base de nubes (capa BKN/OVC) cuya superación exige un SPECI?	30, 60, 150 o 300 m (100, 200, 500 o 1000 ft), y 450 m (1500 ft) donde opera un tráfico VFR importante	ATC::T03b
+¿Qué criterio de cambio de temperatura puede exigir un informe especial local?	Un aumento de la temperatura del aire de 2 °C o más respecto al último informe	ATC::T03b
+¿Qué ocurre cuando un elemento meteorológico empeora y otro mejora al mismo tiempo?	Se emite un único SPECI, que se trata como un informe de empeoramiento	ATC::T03b
+¿Cuál es la lista oficial completa de fenómenos de tiempo reciente (RE) en OMM-49?	Precipitación engelante, precipitación moderada o fuerte, ventisca alta de nieve, tempestad de polvo o de arena, tormenta, nube en embudo, cenizas volcánicas y, solo en AUTO, precipitación desconocida	ATC::T03b
+¿En qué ventana temporal se define el «tiempo reciente» (RE)?	Desde el último informe rutinario o la última hora, lo que sea más corto, pero sin que ocurra en el momento de la observación	ATC::T03b
+¿Número máximo de grupos RE (tiempo reciente) permitidos en un informe?	Tres	ATC::T03b
+Según OMM-49, ¿en qué tipo de informe se incluye únicamente el QFE?	Solo en los informes locales rutinarios y especiales; nunca en los METAR/SPECI difundidos internacionalmente	ATC::T03b
+¿Cómo es la plantilla de OMM-49 del grupo suplementario de cizalladura WS?	[MOD o SEV] WS [APCH] RWYnn, o WS ALL RWY para todas las pistas	ATC::T03b
+¿Por debajo de qué altura sobre el nivel de la pista se notifica normalmente la cizalladura en este grupo suplementario?	500 m (1600 ft)	ATC::T03b
+¿Cuál es el orden oficial de los elementos de un METAR/SPECI según OMM-49?	Tipo; lugar; hora; identificador de auto o dato ausente; viento; visibilidad; RVR; tiempo presente; nubes o visibilidad vertical; temperatura y punto de rocío; QNH (y QFE si es local); información suplementaria	ATC::T03b
+¿Qué significa SNRA en un grupo de tiempo presente de un METAR?	Nieve y lluvia moderadas (dos tipos de precipitación simultáneos; sin signo = moderada)	ATC::T03b
+¿Qué significa +TSSNGR?	Tormenta con nieve fuerte y granizo	ATC::T03b
+Según la recomendación de OMM-49, ¿cuál es la validez mínima de un TAF rutinario?	No menos de 6 horas	ATC::T03b
+Según la recomendación de OMM-49, ¿cuál es la validez máxima de un TAF rutinario?	No más de 30 horas	ATC::T03b
+¿Con qué frecuencia se emite un TAF con validez inferior a 12 horas?	Cada 3 horas	ATC::T03b
+¿Con qué frecuencia se emite un TAF con validez de 12 a 30 horas?	Cada 6 horas	ATC::T03b
+¿Qué debe hacerse con un TAF que no puede mantenerse bajo vigilancia continua?	Debe cancelarse (CNL), no dejarlo caducar sin avisar	ATC::T03b
+¿Qué significa el grupo FM en un TAF y en qué se diferencia de BECMG?	Un cambio rápido y significativo en un instante concreto; a diferencia de BECMG, TODOS los elementos anteriores a FM quedan totalmente sustituidos por los posteriores	ATC::T03b
+¿Qué formato de hora usa FM y cuál usan BECMG/TEMPO?	FM usa una sola marca de día-hora-minuto; BECMG/TEMPO usan una ventana «desde/hasta» de día-hora/día-hora	ATC::T03b
+¿Cuál es la duración máxima recomendada de la ventana de un grupo de cambio BECMG?	4 horas (normalmente en torno a 2 horas)	ATC::T03b
+¿Cuáles son las reglas de duración de un grupo TEMPO?	Cada episodio dura menos de 1 hora; el conjunto de todos los episodios es inferior a la mitad del periodo indicado	ATC::T03b
+¿Qué restricciones hay para usar TEMPO en periodos largos o muy tempranos?	No se recomienda para periodos de más de 8 horas ni dentro de las primeras 6 horas desde que el TAF entra en vigor	ATC::T03b
+¿Qué rangos de probabilidad representan PROB30 y PROB40?	PROB30 = 30-39 %; PROB40 = 40-49 %	ATC::T03b
+En el uso estándar del Anexo 3, ¿con qué grupo de cambio se combina normalmente PROB?	TEMPO (PROB no se emite normalmente solo, sin TEMPO)	ATC::T03b
+¿Cuál es el número máximo de valores TX/TN (temperatura) que puede contener un TAF?	Cuatro: hasta dos temperaturas máximas (TX) y dos mínimas (TN)	ATC::T03b
+¿Cuál es la diferencia entre TAF AMD y TAF COR?	AMD = enmienda tras revisión porque han cambiado las condiciones pronosticadas; COR = corrección de un error de sintaxis o de transmisión	ATC::T03b
+¿Cuál es la validez máxima de un SIGMET ordinario (no de cenizas volcánicas ni de ciclón tropical)?	4 horas	ATC::T03b
+¿Cuál es la validez máxima de un SIGMET de cenizas volcánicas o de ciclón tropical?	6 horas	ATC::T03b
+¿Con cuánta antelación al periodo de validez puede emitirse un SIGMET ordinario?	No más de 4 horas antes del comienzo de la validez	ATC::T03b
+¿Con cuánta antelación a la validez puede emitirse un SIGMET de cenizas volcánicas o de ciclón tropical y con qué frecuencia debe actualizarse?	Se emite hasta 12 horas antes del comienzo de la validez; se actualiza al menos cada 6 horas	ATC::T03b
+¿A qué hora UTC se reinicia el número de secuencia diario de los SIGMET?	A las 0001 UTC	ATC::T03b
+¿Cuántos fenómenos puede describir un único mensaje SIGMET?	Solo uno	ATC::T03b
+¿Puede un SIGMET de tormenta o de ciclón tropical mencionar también la turbulencia o el engelamiento asociados?	No: el texto del SIGMET no debe incluir material descriptivo más allá de la categoría de fenómeno indicada; la turbulencia y el engelamiento se sobreentienden y no se codifican por separado	ATC::T03b
+¿Cuáles son los cuatro códigos SIGMET de tormenta (sin granizo)?	OBSC TS, EMBD TS, FRQ TS, SQL TS (oscurecida, embebida, frecuente, línea de turbonada)	ATC::T03b
+¿Cuáles son los cuatro códigos SIGMET de tormenta con granizo?	OBSC TSGR, EMBD TSGR, FRQ TSGR, SQL TSGR	ATC::T03b
+¿Qué velocidad media mínima del viento en superficie en 10 minutos hace que un sistema se considere ciclón tropical a efectos de SIGMET?	34 kt (17 m/s)	ATC::T03b
+¿Cuáles son los dos códigos SIGMET de engelamiento fuerte?	SEV ICE y SEV ICE (FZRA), para el engelamiento fuerte por lluvia engelante	ATC::T03b
+¿Cuál es el código SIGMET de onda de montaña fuerte?	SEV MTW	ATC::T03b
+¿Cuáles son los códigos SIGMET de tempestad de polvo fuerte y de tempestad de arena fuerte?	HVY DS (tempestad de polvo), HVY SS (tempestad de arena)	ATC::T03b
+¿Cuál es el código SIGMET de nube radiactiva?	RDOACT CLD	ATC::T03b
+¿Cuál es el formato de cancelación de los mensajes SIGMET y AIRMET?	Un mensaje nuevo: CNL SIGMET (o AIRMET) n VALID ddhhmm/ddhhmm	ATC::T03b
+¿Cuál es la validez máxima de un mensaje AIRMET?	4 horas	ATC::T03b
+¿Cuál es el límite de altitud por defecto de la OACI por debajo del cual se aplica el AIRMET?	Por debajo del FL100 (ampliado al FL150 en zonas montañosas o a más por acuerdo regional)	ATC::T03b
+¿Qué umbral de viento en superficie define el fenómeno AIRMET SFC WIND?	Viento medio en superficie generalizado de más de 30 kt (15 m/s)	ATC::T03b
+¿Qué umbral de visibilidad define el fenómeno AIRMET SFC VIS?	Reducción generalizada de la visibilidad por debajo de 5000 m	ATC::T03b
+¿Cuáles son los tres calificadores de intensidad usados para CB/TCU/TS en AIRMET (no en SIGMET)?	ISOL (aislada), OCNL (ocasional), FRQ (frecuente)	ATC::T03b
+¿Qué intensidad de engelamiento y de turbulencia se codifica en AIRMET, frente al «fuerte» del SIGMET?	Moderada: MOD ICE, MOD TURB (el SIGMET usa SEV ICE, SEV TURB para la fuerte)	ATC::T03b
+¿En qué se divide una FIR a efectos de AIRMET, a diferencia del SIGMET, que normalmente cubre el área descrita de toda la FIR?	En subáreas, según sea necesario	ATC::T03b
+¿Con qué frecuencia se emite un GAMET y cuál es su validez?	Se emite cada 6 horas; válido 6 horas	ATC::T03b
+¿Qué límite de altitud cubre un GAMET?	Vuelos por debajo del FL150	ATC::T03b
+¿Qué significan PS y MS en un grupo de viento o temperatura de un GAMET?	PS = temperatura positiva; MS = temperatura negativa	ATC::T03b
+¿A qué se refiere la abreviatura PSYS en la sección II de un GAMET?	A los sistemas de presión (ubicación de frentes y centros de presión)	ATC::T03b
+¿Qué banda de altitud cubre típicamente una carta SIGWX de nivel alto (SWH)?	Del FL250 al FL630	ATC::T03b
+¿Qué banda de altitud cubre la carta SIGWX de nivel medio de la región EUR (SWM), según la guía de AEMET?	Del FL100 al FL450	ATC::T03b
+¿Qué banda de altitud cubre una carta SIGWX de nivel bajo (SWL)?	De la superficie al FL100 (10 000 ft)	ATC::T03b
+¿Qué nota de leyenda estándar aparece en las cartas SIGWX de los WAFC sobre el cumulonimbo?	«CB implies thunderstorm, moderate or severe turbulence, icing (and hail)» (en español: CB implica tormenta, turbulencia moderada o fuerte, engelamiento y granizo).	ATC::T03b
+¿Qué dos centros elaboran conjuntamente como WAFC los pronósticos mundiales en malla y las cartas SIGWX?	WAFC Londres y WAFC Washington	ATC::T03b
+¿Qué unidades y convenios se usan para la temperatura en las cartas de viento y temperatura en altura de los WAFC?	Nudos y grados Celsius; los valores negativos no llevan marca y los positivos llevan el prefijo «PS» o «+»	ATC::T03b
+¿Cuál es la definición de OMM-49 de «exposición verbal» (briefing)?	Comentario oral sobre las condiciones meteorológicas existentes o previstas, o ambas	ATC::T03b
+¿Cómo distingue OMM-49 la «consulta» de la «exposición verbal»?	La consulta es una conversación con un meteorólogo que incluye respuestas a preguntas; la exposición verbal es un comentario unidireccional	ATC::T03b
+¿Qué elementos meteorológicos debe incluir una difusión ATIS, según AIP España GEN 3.5?	Viento, visibilidad o RVR, tiempo presente, nubes o visibilidad vertical, temperatura, punto de rocío, QNH, pronóstico tipo TREND y nivel de transición	ATC::T03b
+¿Qué deben hacer los pilotos en el primer contacto con ATC respecto a una difusión ATIS?	Acusar recibo de la letra de identificación del ATIS, para que el controlador confirme que disponen de la información más reciente	ATC::T03b
+¿Qué rango de altura de decisión define una aproximación de precisión CAT I?	No inferior a 60 m (200 ft)	ATC::T03b
+¿Qué visibilidad o RVR define los mínimos CAT I?	Visibilidad no inferior a 800 m, o RVR no inferior a 550 m	ATC::T03b
+¿Qué RVR puede usar una aproximación CAT I inferior a la estándar (LTS CAT I), con la misma altura de decisión de CAT I?	Hasta 400 m	ATC::T03b
+¿Qué rango de altura de decisión define la CAT II?	De 30 m (100 ft) a menos de 60 m (200 ft)	ATC::T03b
+¿Qué RVR mínimo define la CAT II?	No inferior a 300 m	ATC::T03b
+¿Qué altura de decisión y RVR definen la CAT II distinta de la estándar (OTS CAT II)?	DH inferior a 200 ft pero no inferior a 100 ft; RVR no inferior a 350 m	ATC::T03b
+¿Qué altura de decisión y RVR definen la CAT IIIA?	DH inferior a 30 m (100 ft), o sin DH; RVR no inferior a 175 m	ATC::T03b
+¿Qué altura de decisión y RVR definen la CAT IIIB?	DH inferior a 15 m (50 ft), o sin DH; RVR inferior a 175 m pero no inferior a 50 m	ATC::T03b
+¿Qué define la CAT IIIC?	Sin altura de decisión y sin limitación de RVR (el RVR puede ser 0 m)	ATC::T03b
+¿Cuál es la definición formal de los Procedimientos de Baja Visibilidad (LVP)?	Procedimientos específicos que se aplican en un aeródromo para garantizar la seguridad de las operaciones CAT II, CAT III y de despegue con baja visibilidad (LVTO)	ATC::T03b
+¿Qué cuatro tipos de operación de vuelo respaldan los LVP?	Salidas con RVR inferior a 550 m; aproximación y aterrizaje CAT II/III; CAT II distinta de la estándar; CAT I inferior a la estándar	ATC::T03b
+¿Qué valores de RVR o de base de nubes/DH activan la fase de preparación de los LVP?	RVR inferior a 550 m o altura de la base de nubes/DH inferior a 200 ft (o ambos)	ATC::T03b
+¿Qué valor de RVR marca el inicio de la «fase de operaciones» de los LVP?	RVR inferior a 400 m	ATC::T03b
+¿Cuál es el RVR mínimo general indicado para el despegue con baja visibilidad (LVTO)?	400 m (los mínimos inferiores, hasta 75-150 m, requieren aprobación específica de aeronave, tripulación y aeródromo)	ATC::T03b
+¿Cuáles son los dos fines declarados de los LVP?	Proteger la pista contra incursiones; proteger la integridad de las señales de navegación en tierra (áreas sensibles del ILS)	ATC::T03b
+¿Qué cambia la referencia de la altitud de transición en España y cuándo se usa?	De QNH a la presión estándar de 1013,25 hPa (QNE); se usa en el ascenso, en el despegue; es un valor fijo publicado por TMA/CTA	ATC::T03b
+¿Qué cambia la referencia del nivel de transición y cuándo se usa?	De la presión estándar de 1013,25 hPa (QNE) a QNH; se usa en el descenso o la aproximación; es un valor variable, publicado por ATIS o calculado a partir del QNH	ATC::T03b
+¿Qué espesor mínimo se exige a la capa de transición?	Al menos 1000 ft	ATC::T03b
+¿Cómo se trunca el QNH al codificarlo en un METAR/TAF (por ejemplo, un valor real de 1008,7 hPa)?	Se trunca hacia abajo al hectopascal entero (Q1008), no se redondea	ATC::T03b
+¿Qué condición meteorológica puede obligar a cambiar de pista y reducir temporalmente la capacidad del aeródromo?	Viento cruzado o en cola fuerte o racheado, por encima de los límites demostrados de un tipo de aeronave	ATC::T03b
+¿Qué actuación inmediata de ATC suele seguir a un aviso de cizalladura o de microrreventón en final?	Motor y al aire (go-around) y suspensión temporal de las aproximaciones en la pista afectada	ATC::T03b
+¿Qué significa DRDU en un grupo de tiempo presente de un METAR?	Polvo arrastrado bajo (low drifting dust)	ATC::T03b
+¿Qué significa VCTS en un METAR?	Tormenta en las inmediaciones (de 8 a 16 km del aeródromo, no sobre él)	ATC::T03b
+¿Qué significa el código VV seguido de tres cifras en un METAR y cuándo se usa en lugar de los grupos de cobertura de nubes?	Visibilidad vertical en centenares de pies; se usa cuando el cielo está oscurecido, en sustitución de los grupos normales de cobertura de nubes	ATC::T03b
+¿Qué significa el grupo de tres barras ///CB en un grupo de nubes de un METAR automático?	Se ha detectado nube convectiva (CB), pero no se pudo asignar automáticamente la capa o la altura	ATC::T03b
+¿Cuál es la diferencia entre niebla (FG) y neblina (BR) por la visibilidad, según las fuentes de este tema?	Niebla: visibilidad inferior a 1000 m; neblina: visibilidad superior a 1000 m con humedad relativa superior al 70 %	ATC::T03b
+¿Qué representa el formato Rrr[L/C/R]/vvvv del grupo de RVR de pista?	El RVR de una pista concreta (con la letra de pista paralela si procede), con el valor en metros	ATC::T03b
+¿Qué significan los prefijos P y M antes de un valor de RVR?	P = más que el valor máximo medible por el instrumento; M = menos que el valor mínimo medible por el instrumento	ATC::T03b
+¿Qué significan los sufijos U, D y N después de un valor de RVR?	U = mejorando (tendencia ascendente); D = empeorando (tendencia descendente); N = sin cambios	ATC::T03b
+¿Qué cambio de RVR (y con qué comparación temporal) define el indicador de tendencia U/D/N?	Un cambio de 100 m o más entre la media de los últimos 5 minutos y la media de los primeros 5 de los 10 minutos anteriores	ATC::T03b
+¿Qué significa la abreviatura NIL cuando se usa para un METAR o un TAF programado?	El informe o pronóstico programado no se emitió (por ejemplo, aeródromo cerrado o fallo de equipos)	ATC::T03b
+¿Cuál es la diferencia de significado entre NSC y NCD en un METAR?	NSC = ninguna nube por debajo de 1500 m/5000 ft o de la MSA más alta y ningún CB/TCU (juicio del observador); NCD = ninguna nube detectada (estación automática, sin retorno)	ATC::T03b
+¿Cómo se codifican en un METAR/SPECI los elementos obligatorios no disponibles, en lugar de omitirlos?	Con el número correcto de barras para ese grupo (por ejemplo, ///// para un grupo de viento totalmente no disponible)	ATC::T03b
+¿Qué indica el código HVY DS con el descriptor de zona «ENTIRE FIR» en un SIGMET?	Una tempestad de polvo fuerte que cubre toda la región de información de vuelo, usado como alternativa a un polígono delimitado por latitud y longitud cuando el fenómeno es realmente generalizado	ATC::T03b
+¿Qué publicación de la OMM, equivalente en texto libre del Anexo 3 de la OACI, se usa como fuente principal para la decodificación de productos de este tema?	OMM-N.º 49, Reglamento Técnico, volumen II (2018, actualizado en 2021; dejó de existir como título independiente de la OMM a finales de 2023)	ATC::T03b
+¿Qué documento es la referencia de EUROCONTROL/OACI-EUR usada para los umbrales de CAT I/II/III y de LVP en este tema?	ICAO EUR Doc 013, «European Guidance Material on All-Weather Operations at Aerodromes» (5.ª ed., 2016)	ATC::T03b

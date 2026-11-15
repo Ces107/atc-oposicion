@@ -1,0 +1,132 @@
+Primera ley de Newton (ley de inercia) aplicada a una aeronave	Si el empuje, la resistencia, la sustentación y el peso se anulan, la aeronave mantiene velocidad constante (vuelo recto y nivelado, sin aceleración).	ATC::T09a
+Segunda ley de Newton aplicada a una aeronave	F = m*a: una fuerza no equilibrada produce una aceleración proporcional a la fuerza e inversamente proporcional a la masa.	ATC::T09a
+Tercera ley de Newton aplicada a la sustentación	El ala desvía el aire hacia abajo (corriente descendente, downwash); por reacción, el aire empuja el ala hacia arriba.	ATC::T09a
+Tercera ley de Newton aplicada a un motor a reacción	Los gases de escape se aceleran hacia atrás; por reacción se produce una fuerza de empuje hacia delante.	ATC::T09a
+Ecuación de continuidad	rho1*A1*V1 = rho2*A2*V2; para flujo incompresible, A1*V1 = A2*V2 (conservación de la masa).	ATC::T09a
+¿Qué explica la ecuación de continuidad que no explica Bernoulli por sí solo?	Por qué cambia la velocidad del flujo donde cambia el área de la sección (aumenta donde el área disminuye).	ATC::T09a
+Capa límite	La fina capa de aire junto a la superficie donde la viscosidad frena el flujo desde la velocidad de la corriente libre hasta casi cero en la pared.	ATC::T09a
+Capa límite laminar	Flujo muy suave; menos resistencia de fricción superficial que la turbulenta, pero menos estable (se desprende de forma más brusca).	ATC::T09a
+Capa límite turbulenta	Contiene remolinos; más resistencia de fricción superficial que la laminar, pero más resistente al desprendimiento.	ATC::T09a
+Desprendimiento de la capa límite	El flujo de aire se separa de la superficie tras la transición de laminar a turbulento; produce mucha resistencia y destruye la sustentación (la pérdida).	ATC::T09a
+Generadores de vórtices	Pequeños perfiles de bajo alargamiento a 12-15 grados de ángulo de ataque delante de los alerones; retrasan el desprendimiento de la capa límite inducido por ondas de choque en vuelo transónico.	ATC::T09a
+Sustentación y velocidad (regla del PHAK)	La sustentación varía con el cuadrado de la velocidad: duplicar la velocidad con ángulo de ataque constante da cuatro veces la sustentación.	ATC::T09a
+L/D_MAX	El ángulo de ataque (y la velocidad) al que la relación sustentación/resistencia es máxima; la resistencia total es mínima en ese punto.	ATC::T09a
+¿Deja de producir sustentación un ala en pérdida?	No: produce menos sustentación de la necesaria para el vuelo nivelado, pero no deja de producirla por completo.	ATC::T09a
+Ángulo de ataque crítico: ¿cambia con el peso, el alabeo, la temperatura, la altitud densidad o el CG?	No, es fijo para una configuración dada; lo que cambia con esos factores es la velocidad o el factor de carga a los que se alcanza.	ATC::T09a
+Condiciones en que es válida la velocidad de pérdida publicada (1g)	Vuelo sin aceleración (1G), vuelo coordinado (sin resbalamiento) y un peso concreto.	ATC::T09a
+Pérdida acelerada	Pérdida producida con un factor de carga superior a 1G (p. ej., viraje cerrado, recuperación de una picada) a una velocidad mayor que la velocidad de pérdida a 1G.	ATC::T09a
+¿Qué parte de un ala recta (sin flecha) suele entrar en pérdida primero?	La raíz del ala, por diseño (torsión o listones de pérdida), lo que conserva la eficacia de los alerones en las puntas.	ATC::T09a
+Efecto de 0,8 mm de hielo en la superficie superior del ala	Puede reducir la sustentación en un 25 % aproximadamente y aumentar la resistencia, al alterar la capa límite.	ATC::T09a
+Indicador de ángulo de ataque (AOA): finalidad	Muestra directamente al piloto el AOA actual y su proximidad al AOA crítico (el AOA es, de otro modo, invisible para el piloto).	ATC::T09a
+Torsión del ala (washout, alabeo geométrico)	Característica de diseño que da a la punta del ala un AOA menor que a la raíz, de modo que la raíz entra en pérdida primero y se conserva el control de los alerones.	ATC::T09a
+Efecto de un mayor alargamiento sobre la resistencia inducida	Menor resistencia inducida con un C_L dado, a costa de más peso estructural por la mayor envergadura.	ATC::T09a
+Efecto de un alargamiento muy bajo	Alta carga alar y altas velocidades de pérdida.	ATC::T09a
+Ala elíptica: ventaja e inconveniente	Resistencia inducida mínima para un alargamiento dado (ideal), pero da poco aviso previo de pérdida y es difícil de construir.	ATC::T09a
+Ala rectangular: comportamiento en pérdida	Entra en pérdida primero por la raíz, lo que da buen aviso de pérdida y eficacia de los alerones; preferida en aviones de instrucción de bajo coste.	ATC::T09a
+Flecha y diedro efectivo (regla práctica)	Unos 10 grados de flecha dan aproximadamente 1 grado de diedro efectivo.	ATC::T09a
+Ala alta frente a ala baja: diedro efectivo	Una configuración de ala alta añade unos 5 grados de diedro efectivo respecto a un ala baja equivalente.	ATC::T09a
+Efecto quilla	En un avión de ala alta, el fuselaje bajo el ala actúa como la quilla de un barco y contribuye a la estabilidad lateral en un resbalamiento.	ATC::T09a
+Flap simple	El flap más sencillo; se articula hacia abajo, aumenta la curvatura y el C_L; aumenta la resistencia y desplaza el CP hacia atrás (momento de picado).	ATC::T09a
+Flap partido (split)	Deflecta solo la superficie inferior; algo más de sustentación que el flap simple pero más resistencia por la estela turbulenta.	ATC::T09a
+Flap ranurado	Una ranura canaliza aire de alta energía desde la superficie inferior sobre la superior del flap; el flap más habitual, con mayor C_Lmax que el simple o el partido.	ATC::T09a
+Flap Fowler	Se desliza hacia atrás sobre carriles (aumentando la superficie alar) y después se deflecta hacia abajo (aumentando la curvatura); poco aumento inicial de resistencia y gran aumento de sustentación.	ATC::T09a
+Ranura fija (borde de ataque)	Una abertura fija que canaliza el aire hacia la superficie superior, retrasando el desprendimiento con AOA mayores; no cambia la curvatura.	ATC::T09a
+Slat móvil: mecanismo	Se mantiene a ras con AOA bajos por la alta presión en el borde de ataque; con AOA mayores el slat avanza y abre una ranura que reenergiza la capa límite.	ATC::T09a
+Flap de borde de ataque	Aumenta tanto el C_Lmax como la curvatura; suele combinarse con flaps de borde de salida y puede reducir su momento de picado.	ATC::T09a
+Cuff de borde de ataque	Un borde de ataque caído fijo; aumenta el C_Lmax y reduce la velocidad de pérdida, con cierto coste en velocidad de crucero.	ATC::T09a
+Spoiler usado asimétricamente para el alabeo: ventaja principal	Elimina la guiñada adversa (levantar el spoiler del ala que debe bajar destruye sustentación y añade resistencia en ella sin la tendencia a guiñar en sentido opuesto de los alerones).	ATC::T09a
+Efecto suelo: mecanismo de los libros de texto (PHAK/SKYbrary)	Una reducción de la resistencia inducida: la proximidad del suelo restringe la corriente ascendente y descendente y aplana el torbellino de punta de ala, lo que aumenta el alargamiento efectivo del ala.	ATC::T09a
+Efecto suelo, reducción de la resistencia inducida a una altura = 1 envergadura	Solo un 1,4 % aproximadamente (PHAK).	ATC::T09a
+Efecto suelo, reducción de la resistencia inducida a una altura = 1/4 de envergadura	Un 23,5 % aproximadamente (PHAK).	ATC::T09a
+Efecto suelo, reducción de la resistencia inducida a una altura = 1/10 de envergadura	Un 47,6 % aproximadamente (PHAK).	ATC::T09a
+Efecto suelo (SKYbrary): ganancia de sustentación a una altura del 10 % de la envergadura	Cae a aproximadamente la mitad de su valor máximo.	ATC::T09a
+Salir del efecto suelo tras el despegue: tres consecuencias	Aumento del AOA necesario para el mismo C_L; aumento de la resistencia inducida y del empuje necesario; disminución de la estabilidad (momento de encabritado).	ATC::T09a
+Entrar en efecto suelo durante el aterrizaje: posible consecuencia	Un «flotado»: menor empuje necesario y menor deceleración si se lleva exceso de velocidad en la recogida.	ATC::T09a
+Efecto suelo y AOA de pérdida	El AOA de pérdida es menor en efecto suelo que en aire libre, para una misma cantidad de sustentación.	ATC::T09a
+Resistencia de interferencia	Resistencia debida a la intersección de flujos de aire (p. ej., la unión ala-fuselaje); peor en intersecciones en ángulo recto; se reduce con carenados.	ATC::T09a
+Dos depósitos externos idénticos en un caza a reacción: efecto sobre la resistencia total	Mayor que el doble de la resistencia de un solo depósito, por la resistencia de interferencia entre los campos de flujo de ambos.	ATC::T09a
+Corriente descendente y resistencia inducida: mecanismo	La corriente descendente inclina el viento relativo local hacia abajo; como la sustentación es perpendicular a él, el vector de sustentación se inclina hacia atrás, y esa componente hacia atrás es la resistencia inducida.	ATC::T09a
+¿Cómo varía la resistencia inducida con la velocidad?	Inversamente con el cuadrado de la velocidad (domina a baja velocidad); aumenta con el AOA.	ATC::T09a
+Resistencia de onda	El aumento de resistencia en la región transónica por la formación de ondas de choque y el desprendimiento del flujo, distinto y mayor que la pérdida de calor a través del choque.	ATC::T09a
+Mejor velocidad de planeo, relación con L/D	Corresponde a L/D_MAX: minimiza la resistencia total para la sustentación producida y maximiza la distancia de planeo sin motor.	ATC::T09a
+Curva de potencia necesaria, forma a baja velocidad (cerca de la pérdida)	Alta: un AOA grande produce mucha resistencia inducida, lo que exige un ajuste de potencia alto.	ATC::T09a
+Región de mando normal	Una velocidad mayor exige un ajuste de potencia mayor para mantener la altitud (la mayor parte del ascenso, el crucero y la maniobra).	ATC::T09a
+Región de mando inverso	Entre la velocidad de máxima autonomía y la velocidad de pérdida o de control mínimo: una velocidad MENOR exige un ajuste de potencia MAYOR para mantener la altitud.	ATC::T09a
+Velocidad de máxima autonomía	La velocidad en el punto más bajo de la curva de potencia necesaria, donde la menor potencia sostiene el vuelo nivelado (máximo tiempo de espera).	ATC::T09a
+Estabilidad: definición	La cualidad inherente de una aeronave para corregir las perturbaciones y volver a la trayectoria de vuelo original o continuar en ella (una característica de diseño).	ATC::T09a
+Controlabilidad frente a estabilidad	La controlabilidad es la respuesta a las órdenes del piloto, con independencia de la estabilidad; la estabilidad es la tendencia a volver al equilibrio tras una perturbación.	ATC::T09a
+Estabilidad estática positiva	Tendencia inicial de la aeronave a volver hacia el equilibrio original tras una perturbación.	ATC::T09a
+Estabilidad estática neutra	Tendencia inicial a permanecer en la nueva condición, desplazada, tras una perturbación.	ATC::T09a
+Estabilidad estática negativa	Tendencia inicial a seguir alejándose del equilibrio tras una perturbación.	ATC::T09a
+Estabilidad dinámica positiva	Con el tiempo, la amplitud de la oscilación disminuye (amortiguada) y la aeronave vuelve al equilibrio.	ATC::T09a
+Estabilidad dinámica negativa	Con el tiempo, la amplitud de la oscilación aumenta (divergente).	ATC::T09a
+¿Puede una aeronave tener estabilidad estática positiva y estabilidad dinámica negativa?	Sí: inicialmente se mueve de vuelta hacia el equilibrio, pero la oscilación resultante crece con el tiempo.	ATC::T09a
+Tres factores de la estabilidad estática longitudinal	Posición del ala respecto al CG; posición de la cola horizontal respecto al CG; superficie o tamaño de las superficies de cola.	ATC::T09a
+¿Dónde sitúan los diseñadores el CG respecto a la MAC?	Cerca del 20 % de la cuerda aerodinámica media (MAC).	ATC::T09a
+Estabilidad direccional: principales contribuyentes	La deriva vertical más el área lateral del fuselaje por detrás del CG, que debe superar el área lateral por delante del CG.	ATC::T09a
+Balanceo holandés (Dutch roll)	Oscilación acoplada lateral-direccional (el morro traza un ocho); suele ser dinámicamente estable pero poco segura; se controla con un amortiguador de guiñada (yaw damper).	ATC::T09a
+Inestabilidad espiral	Existe cuando la estabilidad direccional es muy fuerte respecto a la estabilidad de diedro (lateral); produce una espiral descendente lenta y divergente si no se corrige.	ATC::T09a
+¿Por qué prefieren los fabricantes la inestabilidad espiral a las tendencias de balanceo holandés?	La divergencia de la inestabilidad espiral suele ser lo bastante gradual para que el piloto la controle sin dificultad; el balanceo holandés es oscilatorio y poco seguro.	ATC::T09a
+Recuperación incorrecta de la inestabilidad espiral (tirar de la palanca)	Solo «cierra el viraje», aumentando aún más el factor de carga y la velocidad; contribuye en gran medida a las muertes por fallo estructural en aviación general.	ATC::T09a
+Cola en T: diferencia de fuerzas de mando respecto a la cola convencional	Requiere mayor deflexión del timón de profundidad a baja velocidad (no hay corriente de la hélice que ayude a la autoridad de encabritado).	ATC::T09a
+Cola en T: riesgo de pérdida profunda (deep stall)	Con AOA muy alto y CG retrasado, la estela del ala puede envolver la cola y reducir o eliminar gravemente la eficacia del timón de profundidad.	ATC::T09a
+Stabilator: ¿por qué se añade una aleta antiservo?	Los stabilators son muy sensibles al mando; la aleta antiservo aumenta la fuerza de mando necesaria e impide el sobrecontrol.	ATC::T09a
+Canard: diferencia clave respecto a una cola trasera convencional	El canard produce sustentación y mantiene el morro arriba; una cola convencional empuja la cola hacia abajo para equilibrar la aeronave.	ATC::T09a
+Cola en V («ruddervators»)	Dos superficies inclinadas que combinan la función de timón de profundidad y de dirección; más susceptible al balanceo holandés, con una reducción de resistencia mínima.	ATC::T09a
+Protección alpha floor (mandos eléctricos, fly-by-wire)	Ordena automáticamente empuje de motor al aire/TOGA si el ángulo de ataque se aproxima a un valor crítico.	ATC::T09a
+Factor de carga límite, categoría Normal	3,8 g positivo, -1,52 g negativo.	ATC::T09a
+Factor de carga límite, categoría Utility	4,4 g positivo, -1,76 g negativo.	ATC::T09a
+Factor de carga límite, categoría Acrobática	6,0 g positivo, -3,00 g negativo.	ATC::T09a
+Coeficiente de seguridad aplicado a la carga límite para obtener la carga última	1,5 (la estructura debe soportar 1,5 veces la carga límite sin rotura).	ATC::T09a
+CS 25.337(b): factor de carga límite de maniobra positivo, categoría de transporte	No menor de 2,5, sin necesidad de exceder de 3,8; n = 2,1 + 24000/(W+10000) lb.	ATC::T09a
+CS 25.337(c): factor de carga límite negativo, categoría de transporte	No menor de -1,0 hasta VC, variando linealmente hasta cero en VD.	ATC::T09a
+Factor de carga con 80 grados de alabeo	5,76 g (frente a 2 g con 60 grados).	ATC::T09a
+Ángulo de alabeo al que un viraje coordinado a altitud constante se vuelve matemáticamente imposible	90 grados (cos 90 = 0).	ATC::T09a
+Punto de cedencia típico (ángulo de alabeo) de una aeronave ligera media	Alrededor de 70-75 grados de alabeo.	ATC::T09a
+VA (velocidad de maniobra de diseño): ¿contra qué protege?	UNA deflexión completa de un mando, UNA sola vez, en UN solo eje, en aire en calma.	ATC::T09a
+¿Protege VA contra varias deflexiones completas o contra órdenes combinadas en varios ejes?	No, no protege contra ellas; es un error muy extendido.	ATC::T09a
+CS 25.335(c): definición formal de VA	VA no debe ser menor que VS1 multiplicada por la raíz cuadrada de n (n = factor de carga límite positivo a VC).	ATC::T09a
+Regla práctica de VA para aeronaves antiguas de aviación general sin VA publicada	Aproximadamente 1,7 veces la velocidad de pérdida normal (1g).	ATC::T09a
+Diagrama V-n	Representa el factor de carga n frente a la velocidad V; su contorno usa VS, VA, VC y VD; la estructura debe ser adecuada dentro de esta envolvente.	ATC::T09a
+Velocidad de ráfaga de referencia de la CS-25 hasta 20 000 pies	15,2 m/s (50 ft/s) EAS.	ATC::T09a
+Velocidad de ráfaga de referencia de la CS-25 a 50 000 pies	7,6 m/s (25 ft/s) EAS (reducida linealmente desde 20 000 pies).	ATC::T09a
+Régimen de velocidad: subsónico (PHAK)	Números de Mach inferiores a 0,75.	ATC::T09a
+Régimen de velocidad: transónico (PHAK)	De Mach 0,75 a 1,20.	ATC::T09a
+Régimen de velocidad: supersónico (PHAK)	De Mach 1,20 a 5,00.	ATC::T09a
+Régimen de velocidad: hipersónico (PHAK)	Números de Mach superiores a 5,00.	ATC::T09a
+Fórmula de la velocidad del sonido (Airbus GTG, en nudos)	a(kt) es aproximadamente 39 veces la raíz cuadrada de (273 + SAT en grados Celsius).	ATC::T09a
+Mach crítico: definición	El menor número de Mach al que el flujo de aire sobre cualquier parte de la aeronave alcanza por primera vez (sin superarla) la velocidad del sonido.	ATC::T09a
+Número de Mach de divergencia de fuerzas	El número de Mach al que la resistencia aumenta bruscamente; suele ser un 5-10 % superior al Mach crítico.	ATC::T09a
+Efecto de la flecha sobre el Mach crítico y el Mach de divergencia de fuerzas	Retrasa (aumenta) ambos y suaviza la magnitud de los cambios de resistencia, sustentación y momento de cabeceo en la divergencia de resistencia.	ATC::T09a
+Onda de choque normal: efecto sobre la corriente de aire	La frena de supersónica a subsónica; la presión estática y la densidad aumentan bruscamente; la energía total disminuye.	ATC::T09a
+Causa principal de la resistencia de onda	La resistencia debida al desprendimiento del flujo provocado por la onda de choque, mucho mayor que la pérdida de calor a través del propio choque.	ATC::T09a
+Mach tuck (picado por Mach)	Al desplazarse la onda de choque hacia atrás con el aumento de velocidad, el centro de presiones se desplaza hacia atrás y produce un momento de picado.	ATC::T09a
+Ala en flecha: ¿dónde tiende a entrar en pérdida primero?	En las puntas (al contrario que un ala recta), lo que puede adelantar el centro de sustentación y encabritar aún más el morro.	ATC::T09a
+¿Por qué se agrava la pérdida de punta de un ala en flecha en una aeronave de cola en T?	La cola en T queda por encima de la estela del ala y da poco aviso de bataneo previo a la pérdida.	ATC::T09a
+Bataneo de Mach a baja velocidad	Con AOA muy alto y velocidad baja, el flujo local sobre la superficie superior del ala puede alcanzar por sí mismo la velocidad sónica y causar choque, desprendimiento y bataneo como el de alta velocidad.	ATC::T09a
+Tres factores que aumentan la probabilidad de bataneo de Mach	Gran altitud, peso elevado y cargas G (virajes, turbulencia, uso brusco de los mandos).	ATC::T09a
+Coffin corner (definición del PHAK)	Al ascender con MMO constante, la velocidad de pérdida (en Mach) sube hasta alcanzar el límite MMO: no se puede reducir velocidad (pérdida) ni aumentarla (superar MMO).	ATC::T09a
+Coffin corner y vuelo en viraje	En un viraje cerca del coffin corner, el ala interior se frena y la exterior se acelera, de modo que solo con virar se pueden rebasar ambos límites a la vez.	ATC::T09a
+Regla del área: ¿quién la desarrolló?	Richard T. Whitcomb, NASA Langley, principios de la década de 1950.	ATC::T09a
+Regla del área: enunciado	La resistencia transónica/supersónica mínima se da cuando el área transversal total de la aeronave a lo largo de su longitud forma una curva suave, sin cambios bruscos.	ATC::T09a
+Regla del área: ejemplo clásico	El Convair F-102A: un fuselaje «en botella de cola» con abultamientos traseros le permitió alcanzar la velocidad supersónica, algo que el diseño original no logró.	ATC::T09a
+Categoría de estela turbulenta OACI tradicional: Pesada (Heavy)	MTOM (masa máxima al despegue) de 136 000 kg o más.	ATC::T09a
+Categoría de estela turbulenta OACI tradicional: Media	MTOM de 7000 kg hasta (sin incluir) 136 000 kg.	ATC::T09a
+Categoría de estela turbulenta OACI tradicional: Ligera	MTOM inferior a 7000 kg.	ATC::T09a
+RECAT-EU, número de categorías de estela turbulenta	Seis: Super Pesada (A), Pesada Superior (B), Pesada Inferior (C), Media Superior (D), Media Inferior (E), Ligera (F).	ATC::T09a
+Categoría RECAT-EU del A380	Super Pesada (categoría A).	ATC::T09a
+Separación mínima RECAT-EU, guía Super Pesada y seguidora Ligera	8 NM.	ATC::T09a
+Separación mínima RECAT-EU, guía Super Pesada y seguidora Super Pesada	3 NM.	ATC::T09a
+Separación mínima RECAT-EU, guía Pesada Superior y seguidora Ligera	7 NM.	ATC::T09a
+Separación radar mínima (MRS) RECAT-EU aplicable en algunos pares de categorías	2,5 NM (según las condiciones del Doc 4444 de la OACI).	ATC::T09a
+RECAT-EU: motivo de su adopción	En general reduce la separación respecto a la OACI tradicional para las aeronaves «sobreclasificadas» por el sistema grueso de 3 categorías, lo que aumenta la capacidad de la pista.	ATC::T09a
+Ejemplo de RECAT-EU: A340-600 detrás de B767-300	4 NM con la OACI tradicional frente a 2,5 NM con RECAT-EU.	ATC::T09a
+Ejemplo resuelto: sustentación con rho=1,225 kg/m3, V=60 m/s, S=20 m2, CL=0,6	q=2205 Pa; L = CL*q*S = 26 460 N (unos 2698 kgf).	ATC::T09a
+Ejemplo resuelto: coeficiente de resistencia inducida, CL=0,6, AR=9, e=0,75	C_Di = CL^2/(pi*AR*e) = 0,36/21,21 = aproximadamente 0,017.	ATC::T09a
+Ejemplo resuelto: factor de carga con 75 grados de alabeo	n = 1/cos75 = aproximadamente 3,86 g.	ATC::T09a
+Ejemplo resuelto: velocidad de pérdida con 75 grados de alabeo, Vs(1g)=120 kt	120 * sqrt(3,86) = aproximadamente 235,8 kt.	ATC::T09a
+Ejemplo resuelto: regla práctica de VA frente al mínimo de la CS-25, Vs1=90 kt	Regla práctica: 90*1,7=153 kt; mínimo de la CS-25 (n=2,5): 90*sqrt(2,5)=142,3 kt.	ATC::T09a
+CS 25.113(a): distancia de despegue, requisito con todos los motores	Distancia de despegue = la mayor entre la distancia con un motor inoperativo (OEI) y el 115 % de la distancia con todos los motores hasta 35 pies.	ATC::T09a
+Ejemplo resuelto: el 115 % de la distancia con todos los motores (AE) iguala la distancia OEI (2000 m): ¿cuánto más corta es la distancia AE?	AE = 2000/1,15 = 1739 m, aproximadamente un 13,04 % más corta que la distancia OEI (no un 15 %).	ATC::T09a
+Explicación del efecto suelo del manual frente a la de los libros de texto	Manual: el vórtice se destruye contra la superficie. Libros de texto (PHAK/SKYbrary): reducción de la resistencia inducida por el aumento del alargamiento efectivo.	ATC::T09a
+Fugoide: ¿se encontró en la biblioteca de esta sesión para el tema 9?	No: no se localizó ni se define en las fuentes leídas; queda registrado como no encontrado. NV	ATC::T09a NV

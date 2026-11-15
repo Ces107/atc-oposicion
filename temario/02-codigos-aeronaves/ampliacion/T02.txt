@@ -1,0 +1,208 @@
+¿Qué documento del AIP España recoge los indicadores de lugar OACI españoles?	AIP España GEN 2.4 «Indicadores de lugar». Su tabla tiene tres columnas: indicador, AFS (Sí/No) y lugar.	ATC::T02
+¿Qué indica la columna AFS del AIP GEN 2.4 sobre un indicador?	Si el lugar está conectado al Servicio Fijo Aeronáutico, es decir, si se le pueden enviar mensajes AFTN (Sí o No).	ATC::T02
+¿Cómo se decide la primera letra de un indicador de lugar OACI?	Es la letra de un área de encaminamiento del AFS. Estas áreas no tienen por qué coincidir con un Estado, territorio o FIR; obedecen solo a las necesidades de encaminamiento de mensajes del AFS.	ATC::T02
+¿Por qué España tiene dos primeras letras, L y G?	Porque la primera letra corresponde a un área de encaminamiento del AFS, no a un país: L para la península y Baleares; G para Canarias, Ceuta y Melilla.	ATC::T02
+¿Qué identifica la segunda letra de un indicador de lugar OACI?	El Estado o territorio (o parte de él) donde está el lugar. Para España: E (península, Ceuta y Melilla) y C (Canarias).	ATC::T02
+¿Qué representan la tercera y la cuarta letra de LEMD?	El lugar en sí: «MD» para Madrid/Adolfo Suárez Madrid-Barajas.	ATC::T02
+¿Cuánto tiempo mínimo debe pasar para reasignar un indicador de lugar OACI a otro lugar?	Al menos seis meses desde que se anuló su asignación anterior (manual de ENAIRE, según los principios del Doc 7910 de la OACI).	ATC::T02
+¿Cómo debe promulgarse un cambio en la asignación de indicadores de lugar?	Por NOTAM o AIP, con la mayor antelación posible a la fecha de efectividad.	ATC::T02
+¿Se puede usar por radio un indicador de lugar OACI como GCCC en vez del distintivo de llamada?	No. El distintivo de llamada de Canarias ACC es «Canarias Control»; GCCC es solo el indicador de lugar.	ATC::T02
+¿Qué documento de la OACI define los indicadores de lugar y es de pago?	El Doc 7910 «Indicadores de lugar» de la OACI.	ATC::T02
+¿Indicador OACI del aeropuerto de Girona?	LEGE (IATA GRO).	ATC::T02
+¿Indicador OACI del aeropuerto de Ibiza?	LEIB (IATA IBZ).	ATC::T02
+¿Indicador OACI del aeropuerto de Menorca?	LEMH (IATA MAH).	ATC::T02
+¿Indicador OACI del aeropuerto de Zaragoza y qué más comparte ese indicador en el AIP?	LEZG; el mismo indicador aparece para el TACC de Zaragoza (centro de control de área terminal).	ATC::T02
+¿Códigos OACI e IATA de Santiago de Compostela / Rosalía de Castro?	OACI LEST, IATA SCQ.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Vigo?	OACI LEVX, IATA VGO.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de A Coruña?	OACI LECO, IATA LCG.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Asturias?	OACI LEAS, IATA OVD.	ATC::T02
+¿Códigos OACI e IATA de Santander / Seve Ballesteros?	OACI LEXJ, IATA SDR.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de San Sebastián?	OACI LESO, IATA EAS.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Vitoria?	OACI LEVT, IATA VIT.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Pamplona?	OACI LEPP, IATA PNA.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Logroño?	OACI LERJ, IATA RJL.	ATC::T02
+¿Códigos OACI e IATA de Burgos / Villafría?	OACI LEBG, IATA RGS.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de León?	OACI LELN, IATA LEN.	ATC::T02
+¿Códigos OACI e IATA de Salamanca / Matacán?	OACI LESA, IATA SLM.	ATC::T02
+¿Códigos OACI e IATA de Valladolid / Villanubla?	OACI LEVD, IATA VLL.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Jerez?	OACI LEJR, IATA XRY (no JER).	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Almería?	OACI LEAM, IATA LEI (no ALM).	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Córdoba?	OACI LEBA, IATA ODB.	ATC::T02
+¿Códigos OACI e IATA de Granada / Federico García Lorca Granada-Jaén?	OACI LEGR, IATA GRX.	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de la Región de Murcia?	OACI LEMI, IATA RMU (San Javier es LELC, IATA MJV en el manual).	ATC::T02
+¿Códigos OACI e IATA del aeropuerto de Reus?	OACI LERS, IATA REU.	ATC::T02
+¿Códigos OACI e IATA del aeródromo de Sabadell?	OACI LELL, IATA QSA.	ATC::T02
+¿Códigos OACI e IATA de Lleida / Alguaire?	OACI LEDA, IATA ILD.	ATC::T02
+¿Códigos OACI e IATA de Fuerteventura?	OACI GCFV, IATA FUE.	ATC::T02
+¿Códigos OACI e IATA de Lanzarote / César Manrique?	OACI GCRR, IATA ACE.	ATC::T02
+¿Códigos OACI e IATA de La Palma?	OACI GCLA, IATA SPC.	ATC::T02
+¿Códigos OACI e IATA de El Hierro?	OACI GCHI, IATA VDE.	ATC::T02
+¿Códigos OACI e IATA de La Gomera?	OACI GCGM, IATA GMZ.	ATC::T02
+¿Indicador OACI del aeropuerto de Melilla?	GEML (IATA MLN). El helipuerto de Melilla es GEHM (militar).	ATC::T02
+¿Indicador OACI del helipuerto de Ceuta?	GECE.	ATC::T02
+¿Qué prefijo identifica los indicadores de Ceuta y Melilla?	GE (GECE helipuerto de Ceuta, GEML aeropuerto de Melilla, GEHM helipuerto militar de Melilla).	ATC::T02
+¿Indicadores OACI de Madrid/Torrejón y Madrid/Getafe?	LETO (Torrejón, militar) y LEGT (Getafe, militar).	ATC::T02
+¿Qué dos indicadores tiene Madrid/Cuatro Vientos?	LECU (aeródromo civil) y LEVS (militar); código IATA MCV.	ATC::T02
+¿Qué indicadores tienen Palma y Mallorca/Son Bonet?	Aeropuerto de Palma LEPA; Palma (militar) LESJ; Mallorca/Son Bonet LESB (IATA SBO).	ATC::T02
+¿Cuál es el indicador de Cádiz/Rota y qué tipo de aeródromo es?	LERT, aeródromo militar (IATA ROZ).	ATC::T02
+¿Qué indicador tiene Sevilla/Morón?	LEMO, aeródromo militar (IATA OZP es el código derivado, no procede del manual).	ATC::T02 NV
+¿Qué es el indicador LXGB?	El aeródromo de Gibraltar. El manual lo recoge entre los aeródromos «en situación excepcional».	ATC::T02
+¿Qué aeródromos del Sáhara Occidental figuran en la lista del AIP español y con qué indicadores?	GSAI El Aaiún y GSVO Villacisneros, ambos listados como aeródromos en situación excepcional.	ATC::T02
+¿Qué indicador tiene Lisboa ACC/FIC (lista de dependencias adyacentes del manual)?	LPPC.	ATC::T02
+¿Qué indicador tiene Marsella FIC/ACC/UAC?	LFMM.	ATC::T02
+¿Qué indicador tiene Casablanca ACC/FIC?	GMMM.	ATC::T02
+¿Qué indicador tiene Dakar ACC/FIC?	GOOO.	ATC::T02
+¿Qué indicador tiene Santa María OAC/FIC?	LPPO.	ATC::T02
+¿Cuántas letras tiene una dirección AFTN completa que nombra una oficina y cómo se forma?	Ocho: indicador de lugar de cuatro letras + designador de tres letras (Doc 8585) + una letra de relleno X (o la letra de un departamento). Ejemplo: LEALZTZX.	ATC::T02
+¿Qué significa LEALZTZX?	LEAL Alicante + ZTZ torre de control de aeródromo + X relleno: la torre de control de Alicante.	ATC::T02
+¿Qué significa el designador de tres letras ZZZ en la dirección de un mensaje?	Aeronave en vuelo (no debe confundirse con el designador de tipo ZZZZ).	ATC::T02
+¿Qué identifica el designador YMY?	Oficina meteorológica (ejemplo: GCHIYMYX = oficina MET de El Hierro).	ATC::T02
+¿Qué identifica el designador YOY?	Oficina AIS de aeródromo (ejemplo: LEAMYOYX = Almería).	ATC::T02
+¿Qué identifica el designador ZRZ en el AIP GEN 2.4?	Centro de control de área.	ATC::T02
+¿Qué hace la letra O como octavo carácter de una dirección (nota del AIP GEN 2.4)?	Encamina el mensaje a la sección de Operaciones de la dependencia (para los designadores con asterisco).	ATC::T02
+¿Con qué resolución de IATA se asignan los códigos de lugar?	Resolución 763.	ATC::T02
+¿Cuándo puede IATA emitir un código de lugar?	Solo a petición de una compañía aérea comercial (o de una estación de un viaje intermodal con billete); suele pedirlo la primera compañía que sirve el lugar.	ATC::T02
+¿Cuál es la primera opción de IATA al elegir un código de lugar nuevo?	Un código sin asignar formado por las tres primeras letras del nombre del lugar; como segunda opción, uno que empiece por la primera letra del nombre.	ATC::T02
+¿Qué código IATA sirve a la vez a la ciudad y al aeropuerto de Ginebra?	GVA. Cuando una ciudad tiene un solo aeropuerto, un único código sirve para ambos.	ATC::T02
+¿Cuál es el código metropolitano IATA de Washington D. C. y cuáles son sus aeropuertos?	WAS; aeropuertos DCA, BWI e IAD.	ATC::T02
+¿Por qué se cambió el código de Washington Dulles de DIA a IAD?	Para evitar confusiones con DCA (Reagan National). Los códigos IATA se consideran permanentes y rara vez cambian.	ATC::T02
+¿Cuántos códigos de lugar IATA hay asignados y cuántos nuevos por año?	Unos 11 300 asignados (más de 17 000 combinaciones posibles); unos 40-50 códigos nuevos al año.	ATC::T02
+¿Qué diferencia hay entre los códigos de aeropuerto IATA y OACI en cuanto a su finalidad?	IATA: 3 letras, fines comerciales de las compañías aéreas, se emiten a petición de estas y también para estaciones de tren y de ferri. OACI: 4 letras, operaciones de vuelo, se emiten para aeropuertos comerciales y no comerciales.	ATC::T02
+¿Cuál es la publicación de referencia de los códigos IATA de compañías aéreas?	El Airline Coding Directory (ACD).	ATC::T02
+¿Qué es un BTIC en la codificación IATA?	Baggage Tag Issuer Code (código del emisor de la etiqueta de equipaje): junto con el número de serie de la etiqueta forma la «matrícula» única de cada maleta facturada.	ATC::T02
+¿Dónde se publican los códigos IATA de tipo de aeronave?	En el Apéndice A del SSIM (Standard Schedules Information Manual).	ATC::T02
+¿Estructura de un identificador IATA de tipo de aeronave (SSIM)?	Designador general (3 caracteres por familia) + subtipo (3 caracteres) + categoría (H, J, P, S, T, precedida del número de motores). Ejemplo Embraer 190: EMJ / E90 / 2J.	ATC::T02
+¿Designador telefónico de Iberia Express?	IBEREXPRES (código OACI IBS).	ATC::T02
+¿Código OACI y designador telefónico de Binter Canarias?	IBB, BINTER.	ATC::T02
+¿Código OACI y designador telefónico de Volotea?	VOE, VOLOTEA.	ATC::T02
+¿Código OACI y designador telefónico de Swiftair?	SWT, SWIFT.	ATC::T02
+¿Código OACI y designador telefónico de Plus Ultra Líneas Aéreas?	PUE, SPANISH.	ATC::T02
+¿Código OACI y designador telefónico de Fly Level?	LVL, DALI.	ATC::T02
+¿Código OACI y designador telefónico de Aura Airlines (GoWair)?	GWR, LEMON.	ATC::T02
+¿Código OACI y designador telefónico de Wamos Air?	PLM, PULLMAN.	ATC::T02
+¿Código OACI y designador telefónico de World2Fly?	WFL, BLUE WORLD.	ATC::T02
+¿Código OACI y designador telefónico de Ryanair?	RYR, RYANAIR (IATA FR).	ATC::T02
+¿Código OACI y designador telefónico de Lufthansa?	DLH, LUFTHANSA.	ATC::T02
+¿Código OACI y designador telefónico de Emirates?	UAE, EMIRATES (IATA EK).	ATC::T02
+¿Código OACI y designador telefónico de Turkish Airlines?	THY, TURKISH.	ATC::T02
+¿Código OACI y designador telefónico de Aer Lingus?	EIN, SHAMROCK.	ATC::T02
+¿Código OACI y designador telefónico de Qatar Airways?	QTR, QATARI.	ATC::T02
+¿Código OACI y designador telefónico de TAP Air Portugal?	TAP, AIR PORTUGAL.	ATC::T02
+¿Código OACI y designador telefónico de easyJet UK?	EZY, EASY.	ATC::T02
+¿Código OACI y designador telefónico de Delta Air Lines?	DAL, DELTA.	ATC::T02
+¿Código OACI y designador telefónico de FedEx?	FDX, FEDEX.	ATC::T02
+¿Quién es hoy JAT en la lista de designadores OACI de 2026 (copia de la FAA JO 7340.2P)?	JetSmart SPA (Chile), designador telefónico ROCKSMART. Air Serbia es ASL. El manual de ENAIRE sigue listando a Jat Airways como JAT.	ATC::T02
+¿Qué orden de la FAA reproduce la lista de designadores OACI de tres letras y de designadores telefónicos?	FAA Order JO 7340.2 Contractions, capítulo 3 (tres secciones más los distintivos de llamada especiales de EE. UU.); el capítulo 4 recoge las marcas de nacionalidad.	ATC::T02
+¿Qué es la marca común 4YB?	La marca común OACI de Arab Air Cargo, establecida por Jordania e Irak (Jordania ejerce la función de Estado de matrícula).	ATC::T02
+¿Qué es una marca común según el Anexo 7?	Una marca que se usa en lugar de la marca de nacionalidad en las aeronaves de un organismo internacional de explotación sobre una base no nacional (ejemplo del manual: Naciones Unidas, 4U).	ATC::T02
+¿Cuándo se pone un guion entre la marca de nacionalidad y la de matrícula?	Cuando el primer carácter de la marca de matrícula es una letra (EC-AUM).	ATC::T02
+¿Qué combinaciones de letras no deben usarse como marcas de matrícula (Anexo 7, según el manual)?	Las que puedan confundirse con los grupos de cinco letras del Código Internacional de Señales, con la señal de auxilio SOS o con señales de urgencia como XXX, PAN y TTT.	ATC::T02
+¿Quién asigna la marca de nacionalidad y quién la de matrícula?	La OACI asigna las marcas de nacionalidad y las comunes; la autoridad competente de cada Estado asigna la marca de matrícula.	ATC::T02
+¿Qué anexo del Convenio de Chicago trata de las marcas de nacionalidad y de matrícula?	El Anexo 7 «Marcas de nacionalidad y de matrícula de las aeronaves».	ATC::T02
+¿Qué dice el art. 3 del Convenio de Chicago sobre las aeronaves de Estado?	El Convenio se aplica solo a las aeronaves civiles. Las aeronaves utilizadas en servicios militares, de aduanas y de policía son aeronaves de Estado; necesitan autorización para sobrevolar otro Estado o aterrizar en él.	ATC::T02
+¿Qué dice el art. 17 del Convenio de Chicago?	Las aeronaves tienen la nacionalidad del Estado en que estén matriculadas.	ATC::T02
+¿Qué dice el art. 18 del Convenio de Chicago?	Matriculación doble: una aeronave no puede matricularse válidamente en más de un Estado, pero su matrícula puede cambiar de un Estado a otro.	ATC::T02
+¿Qué exige el art. 20 del Convenio de Chicago?	Toda aeronave que se emplee en la navegación aérea internacional llevará las marcas de nacionalidad y de matrícula que le correspondan.	ATC::T02
+¿Qué exige el art. 21 del Convenio de Chicago a los Estados contratantes?	Facilitar, a petición de cualquier otro Estado o de la OACI, información sobre la matrícula y la propiedad de las aeronaves matriculadas en él.	ATC::T02
+¿Formato de la marca de matrícula en el AIP España GEN 2.1, sección 5?	EC + guion + 3 letras, o 2 letras y un dígito. Ejemplos: EC-AUM, EC-JM7.	ATC::T02
+¿Formato de la marca de matrícula según el Reglamento (RD 1029/2025, art. 4.1, que derogó el RD 384/2015, art. 17.1)?	EC + guion + 4 letras del alfabeto español (sin ñ), en orden alfabético sucesivo. Las marcas que se emiten hoy siguen siendo EC + 3 letras (regla de examen: «según el Reglamento» = 4; «actual» o ejemplo EC-xxx = 3).	ATC::T02
+¿Qué dice la norma transitoria (RD 1029/2025, disposición adicional segunda; mismo contenido que la DA 3 del RD 384/2015 derogado) sobre las letras?	Se siguen emitiendo marcas de tres letras hasta agotar esa serie; después empieza el sistema de 4 letras del Reglamento. Las marcas de construcción por aficionados siguen empezando por Y, Z o X; los ultraligeros usan dos letras más un dígito del 1 al 9.	ATC::T02
+¿Formato de la matrícula de prueba en el RD 1029/2025, art. 28 (RD 384/2015, art. 36, derogado)?	EC + guion + tres números.	ATC::T02
+¿Cuándo entró en vigor el RD 384/2015 y qué lo sustituyó?	El 1 de diciembre de 2015 (BOE de 17 de junio de 2015); lo derogó el RD 1029/2025 (BOE de 13-11-2025), que se aplica a los 20 días de su publicación y, para los capítulos II-IV, a los seis meses.	ATC::T02
+¿Dónde está el Registro de Matrícula de Aeronaves Civiles y de quién depende?	Depende de AESA; ámbito nacional; oficina única con sede en Madrid (RD 384/2015, art. 4; el RD 1029/2025, art. 5, también lo sitúa en AESA).	ATC::T02
+¿Afecta el reglamento de matriculación a las aeronaves militares (RD 384/2015, derogado; no se ha vuelto a comprobar en el RD 1029/2025)?	No. El Reglamento no se aplica a las aeronaves militares (art. 2.3). (Norma derogada por el RD 1029/2025; vigente: art. 2.2.a.)	ATC::T02
+¿Duración máxima de una reserva de matrícula (norma vigente, RD 1029/2025)?	Un año, prorrogable por otros seis meses (art. 15.2); no es posible para ultraligeros ni aeronaves de construcción por aficionados. El RD 384/2015, derogado, la fijaba en seis meses (art. 20).	ATC::T02
+¿Validez de la matrícula provisional y su prórroga?	Tres meses; prórroga de hasta 45 días naturales, que se solicita al menos 2 días hábiles antes de que venza (arts. 21-22). (Norma derogada por el RD 1029/2025; vigente: art. 20.3, seis meses; los tres meses más 45 días del art. 22.4 se refieren al uso tras un cambio de titularidad.)	ATC::T02
+¿Plazo para solicitar la actualización del Registro tras un cambio de propiedad?	Un mes desde la fecha del contrato (art. 28.2). Mientras tanto, AESA puede autorizar el uso durante tres meses, prorrogables 45 días. (Norma derogada por el RD 1029/2025; vigente: art. 22, dos meses para el transmitente y seis meses para el nuevo propietario; art. 22.4, uso durante tres meses más 45 días.)	ATC::T02
+¿Qué arrendamientos no se anotan en el Registro?	Los arrendamientos o subarrendamientos de seis meses o menos (siguen necesitando autorización de AESA) (art. 27). (Norma derogada por el RD 1029/2025; vigente: art. 22.2, no hace falta anotar los contratos de duración no superior a siete meses, o diez en lucha contra incendios.)	ATC::T02
+¿Qué aeronaves están exentas de matrícula (RD 384/2015, art. 3, derogado; no se ha vuelto a comprobar en el RD 1029/2025)? Indica los límites de peso.	Alas delta, parapentes, parapentes con motor, aeronaves que requieren esfuerzo físico para despegar, microplaneadores (menos de 80 kg monoplaza y 100 kg biplaza, en vacío), otras de menos de 70 kg de peso al despegue sin el piloto, algunos globos (libres no tripulados de menos de 6 kg) y aeronaves no tripuladas no certificadas. (Norma derogada por el RD 1029/2025; vigente: art. 2.2.b, con microplaneadores de 80 kg monoplaza o 100 kg biplaza y otras aeronaves tripuladas de hasta 70 kg de masa máxima en vacío; sin el límite de 6 kg para los globos.)	ATC::T02
+¿Durante cuánto tiempo puede cancelarse temporalmente una matrícula mientras la aeronave está matriculada en el extranjero?	No más de 5 años (preámbulo del RD 384/2015, derogado). (Norma derogada por el RD 1029/2025; el texto vigente no recoge esta cancelación temporal; cancelación en arts. 24-26.)	ATC::T02
+¿Validez del certificado de matrícula de una aeronave en propiedad?	Indefinida mientras no cambie la propiedad. Es necesario, pero no suficiente, para operar (arts. 25-26). (Norma derogada por el RD 1029/2025; vigente: art. 18, vigencia indefinida mientras no cambie la titularidad registral, y art. 19.)	ATC::T02
+¿Marca OACI de Türkiye?	TC.	ATC::T02
+¿Marca OACI de Chequia y de Eslovaquia?	OK (Chequia) y OM (Eslovaquia).	ATC::T02
+¿Marcas OACI de Polonia, Suecia, Noruega y Finlandia?	SP, SE, LN, OH.	ATC::T02
+¿Marcas OACI de Dinamarca y Luxemburgo?	OY y LX.	ATC::T02
+¿Marca OACI de la Federación de Rusia, Ucrania y Rumanía?	RA, UR y YR.	ATC::T02
+¿Marcas OACI de Marruecos, Argelia y Túnez?	CN, 7T y TS.	ATC::T02
+¿Marcas OACI de Brasil?	PP, PR, PS, PT y PU (cinco marcas).	ATC::T02
+¿Qué países tienen marcas OACI señaladas por diferir de la disposición 3.3 del Anexo 7?	La República Popular Democrática de Corea (P), la RDP Lao (RDPL) y Filipinas (RP).	ATC::T02
+¿Qué Estados no han notificado marcas de nacionalidad a la OACI (tabla del 1/6/26)?	Andorra, Kiribati, Timor-Leste y Tuvalu (la Santa Sede no es Estado contratante).	ATC::T02
+¿Cuál es la marca de Gibraltar y por qué no es EC?	VP-G (también ZD-A a ZD-E): Gibraltar es un territorio británico, por lo que usa marcas de la familia del Reino Unido.	ATC::T02
+¿Qué marcas se usan con emblema nacional?	Liechtenstein y Suiza (HB) y México (XA, XB, XC).	ATC::T02
+¿Cuántas filas de modelo y cuántos designadores distintos tiene la base de datos del Doc 8643 de la OACI (sep. 2026)?	7262 filas de modelo y 2614 designadores distintos (5783 filas de 4 caracteres; 1190 de 3 caracteres; 289 de 2 caracteres).	ATC::T02 NV
+Principio: ¿se cambia un designador de tipo ya asignado cuando el fabricante cambia de nombre?	No. Un designador no cambia en las aeronaves construidas bajo licencia, cuando cambia el nombre del fabricante ni cuando el tipo se deriva o se convierte (JO 7360.1K 2-3).	ATC::T02
+¿Cuándo da la OACI un designador propio a un subtipo?	Solo cuando hay una diferencia significativa de actuaciones (performance) para los ATS o no se puede asignar un designador compartido.	ATC::T02
+¿Con qué frecuencia actualiza la OACI la lista de designadores de tipo?	Cada 28 días.	ATC::T02
+¿Para qué aeronaves no suele dar la OACI un designador propio?	Para las de masa máxima de 1000 lb (454 kg) o menos; se usan designadores especiales.	ATC::T02
+Indica los designadores especiales de globo, planeador, dirigible y paracaídas motorizado.	BALL, GLID, SHIP, PARA.	ATC::T02
+¿Designadores especiales de aeronave ultraligera, autogiro ultraligero y helicóptero ultraligero?	ULAC, GYRO, UHEL.	ATC::T02
+¿Qué significa ZZZZ y dónde se indica entonces el tipo real?	Tipo de aeronave al que aún no se ha asignado designador; el tipo se indica en la casilla 18 tras TYP/.	ATC::T02
+¿Definición OACI de aeronave micro/ultraligera en términos del Doc 8643?	Masa máxima al despegue de 454 kg (1000 lb) o menos y velocidad de pérdida no superior a 35 kt.	ATC::T02
+¿Designadores de tipo de las aeronaves no tripuladas de 454 kg o menos?	FFLO (forward flight lift only: necesita movimiento horizontal) y VFHC (vertical flight and hover capability: vuelo vertical y estacionario).	ATC::T02
+¿Qué significa el número de motores «C» en la descripción del Doc 8643?	Dos motores acoplados para accionar una sola hélice (solo en ala fija).	ATC::T02
+¿Descripción del Doc 8643 del A320, B744, MD11 y B52?	A320 L2J; B744 L4J; MD11 L3J; B52 L8J.	ATC::T02
+¿Descripción del Doc 8643 del C172, C208, AT72 y C130?	C172 L1P; C208 L1T; AT72 L2T; C130 L4T.	ATC::T02
+¿Descripción del Doc 8643 del R44, el AW139 (A139) y el V-22?	R44 H1P; A139 H2T; V22 T2T (convertiplano, tiltrotor).	ATC::T02
+¿Qué WTC tienen el A310 y el A300-600 (A306)?	H (Pesada).	ATC::T02
+¿Qué WTC y qué categoría RECAT-EU tiene el B757-200?	WTC OACI M, RECAT-EU CAT-C (Pesada inferior, Lower Heavy).	ATC::T02
+¿Cuáles son las letras de WTC OACI en la base de datos del Doc 8643 y qué significa L/M?	L, M, H, J y L/M. L/M se usa cuando las variantes de un tipo están a ambos lados de los 7000 kg (ejemplo: BE20 Super King Air 200); el piloto anota una sola letra.	ATC::T02
+¿Cuántos tipos tienen WTC J en el Doc 8643?	Un tipo: el A388 (Airbus A380-800; dos filas de modelo, estándar y Prestige).	ATC::T02
+¿Categorías de estela por MTOM en kg (OACI)?	Pesada 136 000 kg o más; Media menos de 136 000 y más de 7000 kg; Ligera 7000 kg o menos; J es una lista de tipos del Doc 8643 (A380-800).	ATC::T02
+¿Qué documento de EUROCONTROL da los umbrales en kg de la OACI y la tabla de mínimos?	RECAT-EU (edición 1.1, 15/07/2015), tabla 1.	ATC::T02
+¿Separación por estela OACI en radar con un A380 como precedente (seguidor H / M / L)?	6 NM detrás para Pesada, 7 NM para Media y 8 NM para Ligera.	ATC::T02
+¿Separación por estela OACI con un precedente Pesada (seguidor H / M / L)?	4 NM Pesada, 5 NM Media, 6 NM Ligera.	ATC::T02
+¿Separación por estela OACI con precedente Media y seguidor Ligera?	5 NM.	ATC::T02
+¿Separación mínima radar cuando no se aplica ninguna restricción por estela?	3 NM (o 2,5 NM en las condiciones del Doc 4444), o la que prescriba la autoridad ATS.	ATC::T02
+¿Por qué se creó RECAT-EU?	Los mínimos de la OACI tienen más de 40 años y se basan en la MTOM, por lo que separan de más (p. ej. el A346 y el B763 son ambos Pesada aunque sus envergaduras difieren en más de 15 m). RECAT-EU divide Pesada y Media en superior e inferior y añade Super Pesada.	ATC::T02
+¿Qué motivó el trabajo de RECAT?	El Airbus A380, cuya estela era más intensa que la de la categoría Pesada de la OACI (grupo director A380 de la OACI con EUROCONTROL, EASA, Airbus, FAA y OACI).	ATC::T02
+Nombra las seis categorías RECAT-EU con sus letras.	CAT-A Super Pesada (J), CAT-B Pesada superior (H+), CAT-C Pesada inferior (H-), CAT-D Media superior (M+), CAT-E Media inferior (M-), CAT-F Ligera (L+).	ATC::T02
+¿Categoría RECAT-EU del A320, B738 y B38M?	CAT-D (Media superior).	ATC::T02
+¿Categoría RECAT-EU del E190, AT72, DH8D y CRJ9?	CAT-E (Media inferior).	ATC::T02
+¿Categoría RECAT-EU del B77W, B744, A359 y A333?	CAT-B (Pesada superior).	ATC::T02
+¿Categoría RECAT-EU del B763, A310 y MD11?	CAT-C (Pesada inferior).	ATC::T02
+Mínimo de distancia RECAT-EU con precedente Super Pesada seguida de Pesada superior / Pesada inferior / Media superior / Media inferior / Ligera.	4 / 5 / 5 / 6 / 8 NM (A detrás de A: 3 NM).	ATC::T02
+Mínimo de distancia RECAT-EU con precedente Pesada superior seguida de B / C / D / E / F.	3 / 4 / 4 / 5 / 7 NM.	ATC::T02
+Mínimo de distancia RECAT-EU con precedente Pesada inferior seguida de C / D / E / F.	3 / 3 / 4 / 6 NM (C detrás de B es el mínimo de separación radar, 2,5 NM).	ATC::T02
+Mínimos de distancia RECAT-EU cuando el seguidor es Ligera (CAT-F) y el precedente es Media superior, Media inferior o Ligera.	Precedente Media superior a Ligera 5 NM, Media inferior a Ligera 4 NM, Ligera a Ligera 3 NM.	ATC::T02
+Mínimos de salida por tiempo de RECAT-EU con precedente Super Pesada (seguidores B, C, D, E, F).	100 s, 120 s, 140 s, 160 s, 180 s.	ATC::T02
+Mínimo de salida por tiempo de RECAT-EU con precedente Ligera seguida de Ligera.	80 s.	ATC::T02
+¿Qué separación aumenta con RECAT-EU respecto a la de la OACI?	Precedente Pesada superior seguida de Ligera: 7 NM en lugar de 6 (+1 NM), en beneficio de las aeronaves más vulnerables.	ATC::T02
+¿Dónde se aplica RECAT-EU en España y cambia el plan de vuelo o la fraseología?	Es un esquema de separación que se usa en LEMD (llegadas) y LEBL (AIP AD 2). No cambia nada en el plan de vuelo: la casilla 9 sigue usando J, H, M o L de la OACI; los tipos Pesada siguen siendo «HEAVY»; el piloto no necesita conocer la categoría RECAT-EU.	ATC::T02
+¿Qué mejora de capacidad de pista se espera de RECAT-EU?	Un 5 % o más en las horas punta, hasta un 8 % en los aeropuertos europeos más limitados.	ATC::T02
+¿Qué es RECAT-EU-PWS?	Un refinamiento de EUROCONTROL de 2023 con mínimos de separación por pares (pair-wise) para 103 tipos de aeronave frecuentes y un esquema de 20 categorías para todos los demás.	ATC::T02
+¿De qué se construye el esquema RECAT-EU de 20 categorías (20-CAT)?	De 14 categorías adicionales (A1, B1, B2, C1-C4, D1, E1-E3, F1-F3) más las 6 categorías RECAT-EU para los demás tipos menos frecuentes.	ATC::T02
+¿Cuándo se aplica la separación por distancia RECAT-EU detrás de un precedente (aplicabilidad de PWS)?	Directamente detrás, a la misma altitud o a menos de 300 m (1000 ft) por debajo; en pistas iguales o paralelas separadas menos de 760 m (2500 ft); o cruzando por detrás.	ATC::T02
+¿Definición de Pesada de la FAA en la JO 7360.1K?	Tipos de 300 000 lb o más, salvo los listados como J en el Doc 8643; Media: menos de 300 000 lb y más de 15 400 lb; Ligera: 15 400 lb o menos.	ATC::T02
+Convierte a libras los límites de la OACI de 7000 kg y 136 000 kg.	7000 kg = 15 432 lb; 136 000 kg = 299 829 lb (la FAA redondea a 15 400 y 300 000 lb).	ATC::T02
+¿Cuántas categorías de turbulencia de estela consolidadas (CWT) tiene la FAA?	Nueve, de la A a la I (A Super, I aeronaves pequeñas como un King Air 200).	ATC::T02
+¿Qué significa «A345/H» en la casilla 9 del plan de vuelo?	Tipo de aeronave A345 (Airbus A340-500) con categoría de estela turbulenta H (Pesada).	ATC::T02
+¿Definición de categoría de aproximación de aeronave de la FAA (AC 150/5300-13B)?	Agrupación por velocidad de referencia de aterrizaje Vref, o 1,3 x Vso a la masa máxima certificada de aterrizaje si no se especifica la Vref.	ATC::T02
+¿Categorías de aproximación B y D de la FAA en nudos?	B: 91 kt o más pero menos de 121 kt. D: 141 kt o más pero menos de 166 kt.	ATC::T02
+¿Cómo define Airbus la velocidad de aproximación final?	Velocidad indicada en el umbral, en configuración de aterrizaje, con la posición máxima certificada de flaps, a la masa máxima de aterrizaje, en atmósfera estándar; se usa para clasificar la categoría de aproximación.	ATC::T02
+¿Categoría de aproximación del A319 y su velocidad de aproximación final?	Categoría C; 126 kt con una MLW de 62 500 kg.	ATC::T02
+¿Categoría de aproximación del A350-900 y del A350-1000?	A350-900 categoría C (140 kt con 207 t); A350-1000 categoría D (147 kt con 236 t).	ATC::T02
+¿Pueden dos versiones del mismo tipo de Airbus caer en categorías de aproximación distintas?	Sí: el A321 tiene 140 kt (C) con 75,5 t, pero 142 kt (D) con una MLW de 77,8 t; algunas versiones del A330 llegan a 141,9 kt (D).	ATC::T02
+¿En qué dos dimensiones se basa el grupo de diseño de aeronave (ADG)?	En la envergadura y la altura de cola, la que sea más restrictiva (se aplica el grupo mayor).	ATC::T02
+¿Rangos de envergadura de los ADG III y ADG IV?	III: de 79 a menos de 118 ft (de 24,1 a menos de 36,0 m). IV: de 118 a menos de 171 ft (de 36,0 a menos de 52,1 m).	ATC::T02
+¿Qué significan las letras de clase de peso de la FAA J, H, L, S y qué significa «+»?	Super, Heavy, Large, Small. «+» marca las aeronaves entre 12 500 y 41 000 lb (aeronaves grandes de turbina para las reglas de clase B). No son categorías de la OACI.	ATC::T02
+¿Envergadura y longitud del A320 (manual de Airbus)?	Envergadura 34,10 m (35,80 m con sharklets); longitud 37,57 m.	ATC::T02
+¿Envergadura del A330-200/300 y del A350-900?	A330 60,3 m; A350-900 64,75 m.	ATC::T02
+¿Envergadura y altitud máxima del Boeing 747-400 (TCDS de EASA)?	Envergadura 64,44 m; altitud máxima de operación 45 100 ft (13 750 m); VMO/MMO 375/0,92.	ATC::T02
+¿Envergadura del B777-200 frente a la del B777-300ER?	60,9 m frente a 64,8 m.	ATC::T02
+¿Envergadura, VMO/MMO y techo del Boeing 787 (TCDS de EASA)?	Envergadura 60,12 m; VMO/MMO 350 KEAS / M 0,90; altitud máxima de operación 43 100 ft.	ATC::T02
+¿VMO/MMO de la familia A318-A321?	350 kt / M 0,82.	ATC::T02
+¿Altitud máxima de operación del A350-900 frente al A350-1000 (TCDS)?	43 100 ft frente a 41 450 ft.	ATC::T02
+¿Envergadura del Embraer 190 (ERJ 190-100)?	28,72 m (longitud 36,24 m).	ATC::T02
+¿Envergadura del B737-800 sin y con winglets?	34,32 m y 35,79 m.	ATC::T02
+¿MTOM básica del A380-800 en el TCDS de EASA y de las variantes posteriores?	560 t la variante básica, hasta unas 573-577 t las variantes posteriores (deducido de una tabla con etiquetas desalineadas).	ATC::T02 NV
+¿Códigos SSR de emergencia, fallo de radio, entrada controlada y entrada no controlada en España?	7700 emergencia; 7600 fallo de radio; 2000 vuelos controlados que entran en las FIR/UIR de Madrid, Barcelona y Canarias; 7000 vuelos no controlados.	ATC::T02
+¿Capacidad mínima de transpondedor exigida en España (AIP ENR 1.6)?	Modo A/3 con 4096 códigos (64 códigos solo en casos expresamente autorizados).	ATC::T02
+¿Qué plan rige la asignación de códigos SSR en Europa?	El Plan europeo de gestión de códigos SSR de la OACI y la lista de asignación de códigos (CAL) del Gestor de Red (Network Manager) de EUROCONTROL.	ATC::T02
+Manual de ENAIRE: ¿tipos de ala, de cola y de flecha usados para el reconocimiento?	Ala: alta, baja, biplano. Cola: en T, en cruz, fuselada, doble. Flecha: regresiva, recta, progresiva. Motores: pistón, turbohélice, reacción.	ATC::T02
+Manual de ENAIRE: ¿cómo se reconocen los helicópteros?	Por el soporte en tierra (patines o ruedas), el número de rotores (uno o dos) y el número de palas (2, 3, 4, 5, 8).	ATC::T02
+¿Prefijo de indicador de lugar OACI de Türkiye y de Hungría?	LT (Türkiye) y LH (Hungría).	ATC::T02 NV
+¿Códigos OACI de Londres Heathrow, Gatwick y Stansted?	EGLL, EGKK, EGSS (IATA LHR, LGW, STN).	ATC::T02 NV
+¿Códigos OACI de París CDG y Orly, Ámsterdam y Fráncfort?	LFPG, LFPO, EHAM, EDDF (IATA CDG, ORY, AMS, FRA).	ATC::T02 NV
+¿Códigos OACI de Lisboa, Roma Fiumicino, Zúrich y Bruselas?	LPPT, LIRF, LSZH, EBBR (IATA LIS, FCO, ZRH, BRU).	ATC::T02 NV
+¿Códigos OACI de Nueva York JFK, Los Ángeles, Chicago O'Hare y Toronto?	KJFK, KLAX, KORD, CYYZ.	ATC::T02 NV
+¿Códigos OACI de Dubái, Tokio Haneda y Singapur Changi?	OMDB, RJTT, WSSS (IATA DXB, HND, SIN).	ATC::T02 NV

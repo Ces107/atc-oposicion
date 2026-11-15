@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cálculo mental</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='3' width='14' height='18' rx='1.5'/%3E%3Cpath d='M8 7h8v3H8z'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onaccent:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+  --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a3c6ef; --onaccent:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d}
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5}
+#app{max-width:880px;margin:0 auto;padding:20px 16px 56px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;margin:0}
+h1{font-size:1.9rem;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+h3{font-size:1.02rem;margin:18px 0 6px}
+p{margin:.5rem 0}
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:16px;height:16px}
+.muted{color:var(--muted)} .ok{color:var(--ok)} .err{color:var(--err)} .warnc{color:var(--warn)}
+.top{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--rule)}
+.top .logo{width:32px;height:32px;color:var(--accent);stroke-width:1.5}
+.top h1{flex:1}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;line-height:1.2}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onaccent)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onaccent)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn:focus-visible,.mod:focus-visible,.opt:focus-visible,.ico:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ico{background:none;border:0;color:var(--muted);padding:4px;min-width:40px;min-height:40px;align-items:center;justify-content:center;cursor:pointer;display:inline-flex;border-radius:2px}
+.ico:hover{color:var(--text)}
+input[type=text],input[type=number],select{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:7px 10px;width:100%;min-height:40px}
+input[type=range]{width:100%;min-height:32px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.setup{display:grid;grid-template-columns:250px 1fr;gap:6px 36px;align-items:start}
+.mods{border-top:1px solid var(--rule)}
+.mod{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:10px 8px;cursor:pointer;color:var(--text);border-radius:0}
+.mod:hover{background:var(--stripe)}
+.mod[aria-checked=true]{background:var(--stripe);color:var(--accent);font-weight:600}
+.form{border-top:1px solid var(--rule)}
+.fr{display:grid;grid-template-columns:128px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule)}
+.fr>label{color:var(--muted);font-size:.92rem}
+.fr .chk{display:flex;align-items:center;gap:10px}
+.msg{min-height:1.4em;margin-top:12px;font-weight:600}
+.head{display:flex;align-items:center;gap:16px;padding-bottom:10px;margin-bottom:22px;border-bottom:1px solid var(--rule);color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.head .hm{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:600}
+.head .sp{flex:1}
+.head .pr{color:var(--warn);font-weight:700}
+.cd{display:flex;align-items:center;gap:14px;margin-top:18px}
+.cd .bar{flex:1;height:4px;background:var(--stripe);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.cd .bar i{display:block;height:100%;width:100%;background:var(--accent)}
+.cd .timer{font-family:var(--mono);min-width:3.4em;text-align:right}
+.timer{font-variant-numeric:tabular-nums}
+.timer.late{color:var(--warn)} .timer.over{color:var(--err)}
+.bignum{font-family:var(--mono);font-size:3.4rem;text-align:center;padding:28px 0;font-weight:600}
+.stim{font-family:var(--mono);font-size:3rem;font-weight:600;text-align:center;padding:24px 8px;min-height:110px;display:flex;align-items:center;justify-content:center;margin:0}
+.stim.word{font-family:var(--sans);letter-spacing:.04em}
+.center{text-align:center}
+.q{font-family:var(--serif);font-size:1.3rem;margin:6px 0 16px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1px solid var(--rule);border-radius:2px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:1.02rem;min-height:44px}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opt.wrong{border-color:var(--err);color:var(--err);text-decoration:line-through}
+.opt[disabled]{cursor:default}
+.key{display:inline-block;min-width:22px;text-align:center;padding:0 5px;border:1px solid var(--rule);border-radius:2px;font-family:var(--mono);font-size:.82rem;color:var(--muted);background:var(--bg)}
+.foot{display:flex;align-items:center;gap:14px;margin-top:16px}
+.foot .sp{flex:1}
+.hinttxt{color:var(--warn);margin:10px 0 0;min-height:1.2em}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:6px 10px;text-align:left;white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:.85rem}
+tbody tr:nth-child(even){background:var(--stripe)}
+.tab-box{overflow-x:auto;max-width:100%;border-top:1px solid var(--rule);margin-bottom:18px}
+table.strips{font-family:var(--mono);font-size:1.15rem}
+table.strips td{padding:9px 12px}
+table.strips td:first-child{font-weight:700}
+table.rb th{width:110px;background:none}
+table.rb td{font-family:var(--mono);white-space:normal}
+table.kv td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+table.kv th{font-weight:400}
+.big{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:18px 0}
+.big>div{flex:1 1 140px;padding:14px 16px 12px 0}
+.big b{display:block;font-family:var(--serif);font-size:2.3rem;line-height:1.1}
+.big span{color:var(--muted);font-size:.85rem}
+.fb{min-height:1.8em;text-align:center;font-weight:700;margin:12px 0}
+.pad{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pad .btn{min-width:130px;justify-content:center;padding:12px 16px}
+.stimbox{min-height:130px;text-align:center;display:flex;align-items:center;justify-content:center;margin:0 0 6px}
+.rule{text-align:center;font-weight:700;min-height:1.5em}
+.chart{display:block;width:100%;height:auto;margin-bottom:14px}
+.chart .g{stroke:var(--rule);stroke-width:1}
+.chart .t{fill:var(--muted);font-size:11px;font-family:var(--sans)}
+.chart .l{fill:none;stroke:var(--accent);stroke-width:2}
+.chart .p{fill:var(--accent)}
+.chart .m{stroke:var(--ok);stroke-dasharray:6 4;fill:none}
+.chart .mt{fill:var(--ok);font-size:11px}
+.sh-c{fill:var(--muted)} .sh-s{fill:var(--warn)} .sh-t{fill:var(--accent)}
+.swatch{width:12px;height:12px;border-radius:1px;display:inline-block;flex:none}
+.back{display:inline-flex;margin-bottom:14px}
+@media (max-width:720px){
+  html{font-size:16px}
+  .setup{grid-template-columns:1fr}
+  .mods{display:grid;grid-template-columns:1fr 1fr}
+  .mod{border-right:1px solid var(--rule)}
+  h1{font-size:1.6rem}
+  .stim{font-size:2.4rem}
+}
+@media (max-width:420px){
+  .fr{grid-template-columns:82px 1fr;gap:8px}
+  .opts{grid-template-columns:1fr}
+}
+.stim .ic{width:52px;height:52px;stroke-width:1.8}
+.small{font-size:.85rem}
+.top+.form,.top+.list,.top+.setup{border-top:0}
+.top>.ic:not(.logo){width:26px;height:26px}
+.head span{white-space:nowrap}
+@media (max-width:420px){.head{gap:10px;font-size:.82rem}}
+.list{border-top:1px solid var(--rule)}
+.li{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:12px 8px;cursor:pointer;color:var(--text);border-radius:0}
+.li:hover{background:var(--stripe);color:var(--accent)}
+.li:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.li .nm{flex:1}
+.li .dt{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.form.narrow{max-width:620px}
+.bar{height:4px;background:var(--stripe);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:-12px 0 18px}
+.bar>div{height:100%;width:100%;background:var(--accent)}
+.bar.late>div{background:var(--warn)}
+.question{font-family:var(--mono);font-size:2.8rem;text-align:center;margin:14px 0 18px;font-variant-numeric:tabular-nums}
+.question.long{font-family:var(--serif);font-size:1.4rem;line-height:1.5}
+.answer{font-family:var(--mono);font-size:1.9rem;text-align:center;max-width:300px}
+.optrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.optrow .btn{min-width:84px;justify-content:center;font-size:1.3rem}
+.dist{list-style:none;margin:0 0 6px;padding:0;text-align:center;color:var(--muted);font-size:.92rem}
+.banner{text-align:center;margin:0 0 8px}
+.coach{max-width:640px;margin:8px auto}
+.coach .ans{font-size:1.5rem;margin:.2rem 0 .8rem;font-family:var(--mono)}
+.mono{font-family:var(--mono);font-size:.92rem}
+.hinttxt{margin:8px auto;max-width:640px}
+.lnk{color:var(--accent);text-decoration:underline;display:inline-block;padding:10px 0}
+canvas#cv{touch-action:none}
+.radar{display:block;margin:0 auto;max-width:300px;width:100%;height:auto}
+.rd-g{stroke:var(--rule);stroke-width:1}.rd-a{stroke:var(--muted);stroke-width:1}
+.rd-t{fill:var(--muted);font-size:10px}.rd-tf{fill:var(--warn);font-size:10px}.rd-f{fill:none;stroke:var(--warn);stroke-width:1.4}
+.rd-v{stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3}.rd-c{fill:var(--accent)}.rd-l{fill:var(--text);font-size:13px;font-weight:700}
+#app.dual{max-width:1180px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+#sec{border-left:1px solid var(--rule);padding-left:22px}
+#sec canvas{display:block;margin:0 auto;background:var(--surface);border:1px solid var(--rule);border-radius:2px;max-width:100%;cursor:crosshair}
+.tiles{display:flex;gap:8px;justify-content:center;margin:.6rem 0}
+.tile{width:70px;padding:10px 0;text-align:center;font-family:var(--mono);font-size:1.4rem;border:1px solid var(--rule);border-radius:2px;background:var(--surface)}
+.tile.alert{background:var(--warn);color:var(--surface);border-color:var(--warn)}
+.msgbox{font-family:var(--mono);text-align:center;min-height:3rem;border:1px solid var(--rule);border-radius:2px;padding:10px;background:var(--surface)}
+#sec .bignum{font-size:2.6rem;padding:10px 0}
+label.chk{display:inline-flex;align-items:center;gap:10px;min-height:40px}
+td.mod{white-space:normal;min-width:240px;max-width:360px}
+@media (max-width:1000px){#app.dual{display:block}#sec{border-left:0;border-top:1px solid var(--rule);padding:16px 0 0;margin-top:20px}}
+@media (max-width:720px){.question{font-size:2.1rem}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
+<symbol id="i-strip" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M9 6v12M12.5 10h5M12.5 14h3"/></symbol>
+<symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4 7.5 20M16.5 4l-2 16M4 9h16M3.5 15h16"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4z"/><path d="M8 9h8M8 12.2h5"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10M3.5 6l1.2 1.2L7 4.8M3.5 12l1.2 1.2L7 10.8M3.5 18l1.2 1.2L7 16.8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-switch" viewBox="0 0 24 24"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3.8 1.3 1.8V9l8 4.7v2l-8-2.2v4.4l2.2 1.6v1.5L12 20l-3.5 1v-1.5l2.2-1.6v-4.4l-8 2.2v-2l8-4.7V4.3c0-1 .5-1.8 1.3-1.8z"/></symbol>
+<symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/><path d="M12 8h.01M12 12h.01M12 16h.01" /></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8v3H8zM8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5M12 7.5V12l3 2"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4.5h6V7M7 7l1 13h8l1-13"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-skip" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM18.5 5v14"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.1 2.2h5c0-1 .5-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h12l-3-3M20 13v2a3 3 0 0 1-3 3H5l3 3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5.7 1.5 1.5z"/></symbol>
+<symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9M3 20h18"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1"/><rect x="13" y="4" width="8" height="7" rx="1"/><path d="M3 15h18M3 19h18"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9M13 5v4M7 15v4"/></symbol>
+<symbol id="i-steps" viewBox="0 0 24 24"><path d="M3 19h5v-5h5V9h5V4h3"/></symbol>
+<symbol id="i-dual" viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></symbol>
+</defs></svg>
+<main id="app"></main>
+<script>
+// ==== PURE LOGIC START ====
+/* ---------- Basics ---------- */
+function mulberry32(a){ return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function ri(r, a, b){ return a + Math.floor(r() * (b - a + 1)); }
+function pick(r, a){ return a[Math.floor(r() * a.length)]; }
+function shuffle(r, a){ const b = a.slice(); for (let i = b.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); const t = b[i]; b[i] = b[j]; b[j] = t; } return b; }
+function span(d, lo1, hi1, lo10, hi10){ const k = (Math.max(1, Math.min(10, d)) - 1) / 9; return [Math.round(lo1 + (lo10 - lo1) * k), Math.round(hi1 + (hi10 - hi1) * k)]; }
+function rs(r, d, lo1, hi1, lo10, hi10){ const s = span(d, lo1, hi1, lo10, hi10); return ri(r, s[0], s[1]); }
+function fnum(x){ if (!isFinite(x)) return '?'; return String(Math.round(x * 100000) / 100000); }
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function retry(fn, n){ for (let i = 0; i < (n || 300); i++){ const it = fn(); if (it) return it; } throw new Error('generator could not produce a valid item'); }
+function isInt(x){ return Math.abs(x - Math.round(x)) < 1e-9; }
+function hhmm(min){ const m = ((min % 1440) + 1440) % 1440; return pad2(Math.floor(m / 60)) + pad2(m % 60); }
+function dr9(x){ return x % 9; } // digit root modulo 9 (0 stands for 9)
+function roundSig(x, s){ const p = Math.pow(10, Math.floor(Math.log10(Math.abs(x))) - s + 1); return Math.round(x / p) * p; }
+
+/* ---------- Difficulty ladder (10 levels) ---------- */
+const PASS_ACC = 96;
+const LEVELS = [null,
+  { n:1,  name:'Calentamiento',      sec:60,  items:10, dist:0, hints:3, dual:1 },
+  { n:2,  name:'Fácil',         sec:45,  items:12, dist:0, hints:3, dual:1 },
+  { n:3,  name:'Constante',       sec:32,  items:15, dist:0, hints:3, dual:2 },
+  { n:4,  name:'Estándar',     sec:22,  items:15, dist:1, hints:2, dual:2 },
+  { n:5,  name:'Competitivo',  sec:14,  items:20, dist:1, hints:1, dual:2 },
+  { n:6,  name:'Difícil',         sec:9,   items:20, dist:2, hints:1, dual:3 },
+  { n:7,  name:'Élite',        sec:7,   items:25, dist:2, hints:0, dual:3 },
+  { n:8,  name:'Extremo',      sec:5.5, items:25, dist:3, hints:0, dual:3 },
+  { n:9,  name:'Sobrehumano',   sec:4.5, items:30, dist:3, hints:0, dual:4 },
+  { n:10, name:'Imposible',   sec:3.5, items:30, dist:4, hints:0, dual:4 }
+];
+function levelStatement(l){
+  if (l <= 2) return 'El nivel ' + l + ' está por debajo del nivel de la oposición: úsalo para aprender y ganar precisión.';
+  if (l <= 4) return 'El nivel ' + l + ' sigue por debajo del objetivo: el nivel 5 es el objetivo de la Fase 2 (lo que debe dominar un candidato bien preparado).';
+  if (l === 5) return 'Nivel 5 = objetivo de la Fase 2: el nivel que debe dominar un candidato bien preparado. Alcanzarlo con un 96 % o más es la meta.';
+  if (l === 6) return 'El nivel 6 está por encima del objetivo: un margen de seguridad sobre el nivel 5, pero aún dentro de lo que puede hacer un candidato muy bueno.';
+  if (l <= 8) return 'Nivel ' + l + ' (7+ = más allá de la oposición): entrenas por encima de lo que el examen debería pedir.';
+  return 'El nivel ' + l + ' está muy por encima de la oposición (calibrado para que fallarlo sea normal): es entrenamiento de estrés, no un objetivo.';
+}
+// Anti-acceleration rule: never recommend more speed (higher level or shorter time) after a session below 96 %.
+function antiAccel(last, req){
+  if (!last || last.acc === null || last.acc === undefined) return { warn:false, msg:'' };
+  if (last.acc >= PASS_ACC) return { warn:false, msg:'' };
+  const faster = (req.level > last.lvl) || (req.sec !== undefined && last.sec !== undefined && req.sec < last.sec - 1e-9);
+  if (!faster) return { warn:false, msg:'' };
+  return { warn:true, msg:'Última sesión ' + fnum(Math.round(last.acc * 10) / 10) + ' %: aún sin acelerar.' };
+}
+
+/* ---------- Distractor lines (irrelevant data) ---------- */
+const DIST_POOL = [
+  function(r){ return 'Código transpondedor ' + ri(r, 1000, 7777).toString().replace(/[89]/g, '3'); },
+  function(r){ return 'Frecuencia 1' + ri(r, 18, 36) + '.' + pick(r, ['025','125','275','450','575','800','975']); },
+  function(r){ return 'Indicativo ' + pick(r, ['IBE','VLG','RYR','AEA','EZY']) + ri(r, 100, 999) + pick(r, ['A','B','K','R']) + ' (' + pick(r, ['A320','B738','A321','E190','ATR72']) + ')'; },
+  function(r){ return 'Pista en uso: ' + pick(r, ['32L','14R','36','18','08','26']); },
+  function(r){ return 'Visibilidad ' + ri(r, 4, 10) + ' km'; },
+  function(r){ return 'Sector ' + pick(r, ['N2','S1','W3','E4']) + ' con ' + ri(r, 3, 9) + ' aeronaves'; },
+  function(r){ return 'Información ATIS ' + pick(r, ['B','F','K','M','R']); },
+  function(r){ return 'Otro tráfico (no implicado): GS ' + ri(r, 18, 46) * 10 + ' kt, FL ' + ri(r, 12, 39) * 10; },
+  function(r){ return 'Tiempo: ' + pick(r, ['lluvia débil', 'CAVOK', 'nubes dispersas', 'bancos de niebla', 'tormentas en la zona']); }
+];
+function makeDistractors(r, k){
+  if (!k) return [];
+  return shuffle(r, DIST_POOL).slice(0, Math.min(k, DIST_POOL.length)).map(function(f){ return f(r); });
+}
+
+/* ---------- Technique catalogue ---------- */
+const TECH = {};
+const TECH_ORDER = [];
+function T(id, cat, name, o, gen){ TECH[id] = Object.assign({ id:id, cat:cat, name:name, gen:gen, tf:1 }, o); TECH_ORDER.push(id); }
+const CATS = ['Arithmetic', 'Aviation', 'Prediction'];
+const CATNAME = { Arithmetic:'Aritmética', Aviation:'Aviación', Prediction:'Predicción' };
+function catName(c){ return CATNAME[c] || c; }
+
+/* ----- Arithmetic ----- */
+T('mul5', 'Arithmetic', 'Multiplicar por 5', {
+  nudge:'5 es la mitad de 10.', method:'x 5 = x 10 y dividir entre 2 (o dividir entre 2 primero y luego x 10).',
+  example:'46 x 5: 46 x 10 = 460, mitad de 460 = 230.', when:'Cualquier producto con 5, 50 o 500 (y las divisiones entre 2, 20 y 200 usan el truco inverso).' },
+  function(r, d){ const n = rs(r, d, 12, 30, 400, 9999); return { kind:'mul5', q:n + ' × 5', ans:n * 10 / 2, type:'num', p:{ n:n }, sol:n + ' × 10 = ' + n * 10 + '; mitad de ' + n * 10 + ' = ' + n * 5 + '.' }; });
+T('mul9', 'Arithmetic', 'Multiplicar por 9', {
+  nudge:'9 es uno menos que 10.', method:'x 9 = x 10 menos el propio número.',
+  example:'47 x 9: 470 - 47 = 423.', when:'Cualquier producto con 9 o 90; también sirve para comprobar sumas de cifras (los múltiplos de 9 suman 9).' },
+  function(r, d){ const n = rs(r, d, 12, 30, 300, 999), m = (d >= 8 && r() < .4) ? 90 : 9; return { kind:'mul9', q:n + ' × ' + m, ans:n * 10 * (m / 9) - n * (m / 9), type:'num', p:{ n:n, m:m }, sol:n + ' × ' + (m / 9 * 10) + ' = ' + n * 10 * (m / 9) + '; menos ' + n * (m / 9) + ' = ' + n * m + '.' }; });
+T('mul11', 'Arithmetic', 'Multiplicar por 11', {
+  nudge:'Suma cada cifra con su vecina.', method:'x 11 = x 10 más el propio número. Para dos cifras ab: escribe a, luego (a+b), luego b (llevando una si a+b >= 10).',
+  example:'53 x 11: 5 | 5+3 | 3 = 583. 87 x 11: 8 | 15 | 7 -> 957.', when:'Números de dos y tres cifras por 11.' },
+  function(r, d){ const n = rs(r, d, 12, 60, 100, 999); let s = n + ' × 10 = ' + n * 10 + '; más ' + n + ' = ' + n * 11 + '.';
+    if (n < 100){ const a = Math.floor(n / 10), b = n % 10; s += ' Truco de cifras: ' + a + ' | ' + (a + b) + ' | ' + b + (a + b >= 10 ? ' (llevo 1)' : '') + '.'; }
+    return { kind:'mul11', q:n + ' × 11', ans:n * 10 + n, type:'num', p:{ n:n }, sol:s }; });
+T('mul25', 'Arithmetic', 'Multiplicar por 25', {
+  nudge:'25 es un cuarto de 100.', method:'x 25 = x 100 y dividir entre 4 (mitad dos veces).',
+  example:'36 x 25: 3600 / 4 = 900.', when:'Productos con 25, 250, 2.5; porcentajes que son múltiplos de 25.' },
+  function(r, d){ const n = rs(r, d, 12, 40, 200, 2000); return { kind:'mul25', q:n + ' × 25', ans:n * 100 / 4, type:'num', p:{ n:n }, sol:n + ' × 100 = ' + n * 100 + '; / 4 = ' + n * 25 + '.' }; });
+T('mul99', 'Arithmetic', 'Multiplicar por 99, 101 y 999', {
+  nudge:'El multiplicador está junto a un número redondo.', method:'x 99 = x 100 menos el número; x 101 = x 100 más el número; x 999 = x 1000 menos el número.',
+  example:'37 x 99 = 3700 - 37 = 3663.', when:'Multiplicadores justo por debajo o por encima de una potencia de diez.' },
+  function(r, d){ const n = rs(r, d, 12, 60, 100, 999); const m = d >= 9 ? pick(r, [99, 101, 999]) : (d >= 5 ? pick(r, [99, 101]) : 99);
+    const base = m === 999 ? 1000 : 100; const ans = m === 101 ? n * base + n : n * base - n;
+    return { kind:'mul99', q:n + ' × ' + m, ans:ans, type:'num', p:{ n:n, m:m }, sol:n + ' × ' + base + ' = ' + n * base + (m === 101 ? '; más ' : '; menos ') + n + ' = ' + ans + '.' }; });
+T('sq5', 'Arithmetic', 'Cuadrados de números acabados en 5', {
+  nudge:'El resultado siempre acaba en 25.', method:'(10k+5)^2: multiplica k por (k+1) y escribe 25 detrás.',
+  example:'65^2: 6 x 7 = 42 -> 4225. 115^2: 11 x 12 = 132 -> 13225.', when:'Cualquier cuadrado de un número acabado en 5.' },
+  function(r, d){ const k = ri(r, 1, d <= 4 ? 9 : (d <= 7 ? 19 : 29)); const n = 10 * k + 5;
+    return { kind:'sq5', q:n + '²', ans:k * (k + 1) * 100 + 25, type:'num', p:{ n:n }, sol:'k = ' + k + '; ' + k + ' × ' + (k + 1) + ' = ' + k * (k + 1) + '; añade 25 -> ' + (k * (k + 1) * 100 + 25) + '.' }; });
+T('sq50', 'Arithmetic', 'Cuadrados cercanos a 50', {
+  nudge:'Usa 50 como ancla: 50^2 = 2500.', method:'(50+e)^2 = 2500 + 100e + e^2 (e puede ser negativo).',
+  example:'53^2 = 2500 + 300 + 9 = 2809. 47^2 = 2500 - 300 + 9 = 2209.', when:'Cuadrados entre 30 y 70.' },
+  function(r, d){ const m = span(d, 3, 5, 14, 20)[1]; const e = ri(r, -m, m); if (!e) return null; const n = 50 + e;
+    return { kind:'sq50', q:n + '²', ans:2500 + 100 * e + e * e, type:'num', p:{ n:n }, sol:'e = ' + e + '; 2500 + 100 × (' + e + ') + ' + e * e + ' = ' + (2500 + 100 * e + e * e) + '.' }; });
+T('sq100', 'Arithmetic', 'Cuadrados cercanos a 100', {
+  nudge:'Usa 100 como ancla: 100^2 = 10000.', method:'(100+e)^2 = 10000 + 200e + e^2.',
+  example:'104^2 = 10000 + 800 + 16 = 10816. 97^2 = 10000 - 600 + 9 = 9409.', when:'Cuadrados entre 85 y 115.' },
+  function(r, d){ const m = span(d, 3, 4, 12, 15)[1]; const e = ri(r, -m, m); if (!e) return null; const n = 100 + e;
+    return { kind:'sq100', q:n + '²', ans:10000 + 200 * e + e * e, type:'num', p:{ n:n }, sol:'e = ' + e + '; 10000 + 200 × (' + e + ') + ' + e * e + ' = ' + (10000 + 200 * e + e * e) + '.' }; });
+T('diffsq', 'Arithmetic', 'Diferencia de cuadrados (a+b)(a-b)', {
+  nudge:'Los dos números son simétricos respecto a un punto medio redondo.', method:'(m-k)(m+k) = m^2 - k^2. Halla el punto medio m, la distancia k y resta.',
+  example:'47 x 53: punto medio 50, k = 3: 2500 - 9 = 2491.', when:'Dos números cuya media es fácil de elevar al cuadrado (múltiplos de 5 o de 10).' },
+  function(r, d){ const m = d >= 8 ? 10 * ri(r, 10, 20) : 5 * ri(r, 6, span(d, 8, 8, 10, 12)[1]); const k = ri(r, 1, span(d, 3, 5, 9, 9)[1]); const a = m - k, b = m + k;
+    const swap = r() < .5; return { kind:'diffsq', q:(swap ? b + ' × ' + a : a + ' × ' + b), ans:m * m - k * k, type:'num', p:{ a:a, b:b }, sol:'Punto medio m = ' + m + ', k = ' + k + '; ' + m + '² − ' + k + '² = ' + m * m + ' − ' + k * k + ' = ' + (m * m - k * k) + '.' }; });
+T('addlr', 'Arithmetic', 'Suma de izquierda a derecha', {
+  nudge:'Empieza por el valor posicional más alto.', method:'Suma posición a posición desde la izquierda (centenas, decenas, unidades), llevando un total acumulado.',
+  example:'478 + 356: 478 + 300 = 778; + 50 = 828; + 6 = 834.', when:'Cualquier suma mental; también para restar (resta por posiciones desde la izquierda).', tf:1.3 },
+  function(r, d){ const cnt = d <= 6 ? 2 : 3; const nums = []; for (let i = 0; i < cnt; i++) nums.push(d <= 3 ? ri(r, 12, 99) : (d <= 8 ? ri(r, 112, 989) : ri(r, 1100, 9899)));
+    let cur = nums[0], steps = [];
+    for (let i = 1; i < cnt; i++){ const s = String(nums[i]); for (let j = 0; j < s.length; j++){ const dg = +s[j]; if (dg){ const v = dg * Math.pow(10, s.length - 1 - j); cur += v; steps.push('+' + v + ' → ' + cur); } } }
+    return { kind:'addlr', q:nums.join(' + '), ans:cur, type:'num', p:{ nums:nums }, sol:nums[0] + ' ' + steps.join(', ') + '.' }; });
+T('comp100', 'Arithmetic', 'Complementos a 100', {
+  nudge:'Haz que las cifras sumen 9 y 10.', method:'100 - n: cifra de las decenas hasta 9, cifra de las unidades hasta 10. Con varios números, súmalos primero y toma el complemento.',
+  example:'100 - 37: 9-3 = 6, 10-7 = 3 -> 63.', when:'Cambio, porcentajes sobrantes, "cuánto falta para 100".' },
+  function(r, d){ if (d <= 4){ const n = ri(r, 3, 97); if (n % 10 === 0) return null; return { kind:'comp100', q:'100 − ' + n, ans:100 - n, type:'num', p:{ nums:[n], tot:100 }, sol:'Decenas: 9 − ' + Math.floor(n / 10) + ' = ' + (9 - Math.floor(n / 10)) + '; unidades: 10 − ' + n % 10 + ' = ' + (10 - n % 10) + ' -> ' + (100 - n) + '.' }; }
+    const c = d <= 7 ? 2 : 3; const nums = []; let s = 0; for (let i = 0; i < c; i++){ const n = ri(r, 11, c === 2 ? 49 : 32); nums.push(n); s += n; } if (s >= 100) return null;
+    return { kind:'comp100', q:'100 − ' + nums.join(' − '), ans:100 - s, type:'num', p:{ nums:nums, tot:100 }, sol:'Suma las partes: ' + nums.join(' + ') + ' = ' + s + '; complemento de ' + s + ' a 100 = ' + (100 - s) + '.' }; });
+T('comp1000', 'Arithmetic', 'Complementos a 1000', {
+  nudge:'Ahora las cifras suman 9, 9 y 10.', method:'1000 - n: centenas y decenas hasta 9, unidades hasta 10.',
+  example:'1000 - 372: 9-3 = 6, 9-7 = 2, 10-2 = 8 -> 628.', when:'Distancias, altitudes y niveles hasta un millar redondo.' },
+  function(r, d){ if (d <= 5){ const n = ri(r, 101, 989); if (n % 10 === 0) return null; return { kind:'comp1000', q:'1000 − ' + n, ans:1000 - n, type:'num', p:{ nums:[n], tot:1000 }, sol:'9−' + Math.floor(n / 100) + ' = ' + (9 - Math.floor(n / 100)) + ', 9−' + Math.floor(n / 10) % 10 + ' = ' + (9 - Math.floor(n / 10) % 10) + ', 10−' + n % 10 + ' = ' + (10 - n % 10) + ' -> ' + (1000 - n) + '.' }; }
+    const nums = [ri(r, 120, 480), ri(r, 120, 480)]; const s = nums[0] + nums[1];
+    return { kind:'comp1000', q:'1000 − ' + nums[0] + ' − ' + nums[1], ans:1000 - s, type:'num', p:{ nums:nums, tot:1000 }, sol:nums[0] + ' + ' + nums[1] + ' = ' + s + '; 1000 − ' + s + ' = ' + (1000 - s) + '.' }; });
+T('pct', 'Arithmetic', 'Porcentajes descomponiendo en 10 % y 1 %', {
+  nudge:'Halla primero el 10 % (mueve la coma).', method:'10 % = dividir entre 10; 1 % = dividir entre 100; 5 % = mitad del 10 %. Construye el porcentaje con estos bloques.',
+  example:'15 % de 240: 10 % = 24, 5 % = 12 -> 36. 17 % de 300: 30 + 15 + 6 = 51 (10 % + 5 % + 2 x 1 %).', when:'Descuentos, márgenes de combustible, porcentajes de viento y de error.' },
+  function(r, d){ const P = d <= 2 ? [10, 20, 50, 5, 25, 30, 40] : (d <= 5 ? [15, 35, 45, 12, 60, 70, 8, 11] : [13, 17, 22, 27, 37, 65, 7, 3, 19, 23, 42, 75]);
+    const p = pick(r, P); const N = 10 * rs(r, d, 4, 20, 30, 300); if ((p * N) % 100 !== 0) return null; const tens = Math.floor(p / 10), ones = p % 10;
+    return { kind:'pct', q:p + ' % de ' + N, ans:p * N / 100, type:'num', p:{ p:p, N:N }, sol:'10% = ' + fnum(N / 10) + '; 1% = ' + fnum(N / 100) + '; ' + p + '% = ' + tens + ' × ' + fnum(N / 10) + ' + ' + ones + ' × ' + fnum(N / 100) + ' = ' + fnum(p * N / 100) + '.' }; });
+T('frac', 'Arithmetic', 'Fracciones a decimales', {
+  nudge:'Constrúyela a partir de una fracción unitaria que conozcas.', method:'Aprende 1/8 = 0.125, 1/16 = 0.0625, 1/20 = 0.05, 1/25 = 0.04, 1/40 = 0.025; luego multiplica por el numerador.',
+  example:'5/8 = 5 x 0.125 = 0.625. 7/40 = 7 x 0.025 = 0.175.', when:'Porcentajes, gradientes, razones (3:1 = 33 %, 1 de cada 60 = 1.7 %).' },
+  function(r, d){ let F = [[1,2],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],[1,10],[3,10],[7,10],[9,10]];
+    if (d >= 3) F = F.concat([[1,8],[3,8],[5,8],[7,8],[1,20],[3,20],[7,20],[9,20]]);
+    if (d >= 6) F = F.concat([[1,16],[3,16],[5,16],[7,16],[1,25],[3,25],[7,25],[1,40],[3,40]]);
+    if (d >= 9) F = F.concat([[9,16],[11,16],[13,16],[15,16],[11,40],[17,40],[9,32]]);
+    const f = pick(r, F); const u = f[1] === 32 ? 0.03125 : 1 / f[1];
+    return { kind:'frac', q:f[0] + '/' + f[1] + ' en decimal', ans:Math.round(f[0] * u * 1e6) / 1e6, type:'num', p:{ n:f[0], d:f[1] }, sol:'1/' + f[1] + ' = ' + fnum(u) + '; ' + f[0] + ' × ' + fnum(u) + ' = ' + fnum(f[0] * u) + '.' }; });
+T('div5', 'Arithmetic', 'Dividir entre 5', {
+  nudge:'Dividir entre 5 = multiplicar por 2 y mover la coma.', method:'n / 5 = (n x 2) / 10: dobla el número y desplaza la coma decimal un lugar a la izquierda.',
+  example:'384 / 5: 768 / 10 = 76.8.', when:'Divisiones entre 5, 50 y 500; tiempo y distancia a 300 kt (5 NM por minuto).' },
+  function(r, d){ const q = rs(r, d, 8, 30, 60, 999); const n = d <= 4 ? 5 * q : 5 * q + ri(r, 0, 4);
+    return { kind:'div5', q:n + ' ÷ 5', ans:n * 2 / 10, type:'num', p:{ n:n }, sol:n + ' × 2 = ' + n * 2 + '; / 10 = ' + fnum(n * 2 / 10) + '.' }; });
+T('div9', 'Arithmetic', 'Dividir entre 9', {
+  nudge:'Quita múltiplos grandes de 9 por posiciones.', method:'Toma el mayor 9 x (decenas o centenas) que quepa (9x10 = 90, 9x100 = 900), resta y repite. Comprobación: la suma de cifras de un múltiplo de 9 es 9.',
+  example:'738 / 9: 720 = 9 x 80, resto 18 = 9 x 2 -> 82.', when:'Divisiones exactas entre 9; también criterios de divisibilidad.' },
+  function(r, d){ const q = rs(r, d, 5, 20, 100, 999); const n = 9 * q; const s = String(q); const parts = [];
+    for (let i = 0; i < s.length; i++){ const dg = +s[i]; if (dg) parts.push(dg * Math.pow(10, s.length - 1 - i)); }
+    return { kind:'div9', q:n + ' ÷ 9', ans:q, type:'num', p:{ n:n }, sol:n + ' = ' + parts.map(function(x){ return '9×' + x + ' (' + 9 * x + ')'; }).join(' + ') + ' -> ' + parts.join(' + ') + ' = ' + q + '.' }; });
+T('div11', 'Arithmetic', 'Dividir entre 11', {
+  nudge:'Quita múltiplos de 11 (110, 220, ...).', method:'Toma el mayor 11 x (decenas o centenas) que quepa, resta y repite. En un múltiplo de 11 las sumas de cifras alternas son iguales (mod 11).',
+  example:'583 / 11: 550 = 11 x 50, resto 33 = 11 x 3 -> 53.', when:'Divisiones exactas entre 11.' },
+  function(r, d){ const q = rs(r, d, 6, 20, 100, 999); const n = 11 * q; const s = String(q); const parts = [];
+    for (let i = 0; i < s.length; i++){ const dg = +s[i]; if (dg) parts.push(dg * Math.pow(10, s.length - 1 - i)); }
+    return { kind:'div11', q:n + ' ÷ 11', ans:q, type:'num', p:{ n:n }, sol:n + ' = ' + parts.map(function(x){ return '11×' + x + ' (' + 11 * x + ')'; }).join(' + ') + ' -> ' + parts.join(' + ') + ' = ' + q + '.' }; });
+T('nines', 'Arithmetic', 'Prueba del nueve (comprobación)', {
+  nudge:'Reduce cada número a su raíz digital (suma de cifras, repetida).', method:'raíz digital(A) x raíz digital(B) debe igualar la raíz digital del resultado, mod 9. Si difiere, el resultado es seguro erróneo; si coincide, probablemente es correcto.',
+  example:'47 x 68 = 3196? raíces: 47 -> 2, 68 -> 5, 2 x 5 = 10 -> 1; 3196 -> 19 -> 1. Coincide: correcto.', when:'Comprobar rápido una multiplicación o una suma. Punto ciego: no detecta cifras intercambiadas.', tf:1.4 },
+  function(r, d){ const a = rs(r, d, 12, 60, 100, 990), b = rs(r, d, 12, 60, 21, 99); const prod = a * b; const good = r() < .5; let c = prod;
+    if (!good){ const k = pick(r, [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 20, 100, 110]) * (r() < .5 ? -1 : 1); c = prod + k; if (k % 9 === 0 || c <= 0) return null; }
+    const ra = dr9(a), rb = dr9(b), rp = dr9(ra * rb), rc = dr9(c);
+    return { kind:'nines', q:a + ' × ' + b + ' = ' + c + ' ?  (S = correcto, N = incorrecto)', ans:good ? 'S' : 'N', type:'choice', opts:['S', 'N'], est:false, p:{ a:a, b:b, c:c },
+      sol:'Raíces digitales (mod 9): ' + a + ' -> ' + (ra || 9) + ', ' + b + ' -> ' + (rb || 9) + '; producto -> ' + (rp || 9) + '. Resultado dado ' + c + ' -> ' + (rc || 9) + '. ' + (good ? 'Coinciden, y el producto es efectivamente ' + prod + '.' : 'Difieren, así que ' + c + ' es incorrecto (el producto real es ' + prod + ').') }; });
+T('est', 'Arithmetic', 'Redondeo y estimación con margen de error', {
+  nudge:'Redondea a 1-2 cifras significativas y sigue el error.', method:'Redondea cada factor, calcula y suma los errores relativos: (1+e1)(1+e2) ~ 1+e1+e2. Da la respuesta dentro del margen de error.',
+  example:'487 x 62: 490 x 60 = 29400; errores +0.6 % y -3.2 % -> el valor real es ~2.6 % mayor = ~30170 (exacto 30194).', when:'Preguntas solo de estimación, comprobaciones de plausibilidad, presupuestos rápidos de combustible y tiempo.', tf:1.4 },
+  function(r, d){ const tol = d <= 5 ? 0.05 : (d <= 8 ? 0.04 : 0.03);
+    if (r() < .6){ const a = rs(r, d, 23, 99, 210, 989), b = rs(r, d, 12, 49, 23, 99); const ra = roundSig(a, a >= 100 ? 2 : 1), rb = roundSig(b, 1); const e1 = (a - ra) / ra * 100, e2 = (b - rb) / rb * 100;
+      return { kind:'est:mul', q:'Estima ' + a + ' × ' + b + ' (se acepta con ±' + tol * 100 + ' %)', ans:a * b, type:'num', tol:tol, p:{ a:a, b:b }, sol:'Redondeo: ' + a + ' -> ' + ra + ', ' + b + ' -> ' + rb + '; producto ' + ra * rb + '. El valor real es aproximadamente ' + fnum(e1 + e2) + ' % superior (los errores se suman): ~' + Math.round(ra * rb * (1 + (e1 + e2) / 100)) + ' (exacto ' + a * b + ').' }; }
+    const a = rs(r, d, 240, 990, 2400, 99000), b = rs(r, d, 12, 49, 23, 99); if (a % b === 0) return null; const ra = roundSig(a, 2), rb = roundSig(b, 1);
+    return { kind:'est:div', q:'Estima ' + a + ' ÷ ' + b + ' (se acepta con ±' + tol * 100 + ' %)', ans:a / b, type:'num', tol:tol, p:{ a:a, b:b }, sol:'Redondeo: ' + a + ' -> ' + ra + ', ' + b + ' -> ' + rb + '; ' + ra + ' / ' + rb + ' = ' + fnum(ra / rb) + ' (exacto ' + fnum(Math.round(a / b * 100) / 100) + ').' }; });
+T('dblhalve', 'Arithmetic', 'Doblar y dividir a la mitad', {
+  nudge:'Dobla un factor, divide el otro a la mitad.', method:'a x b = 2a x b/2. Repite hasta que un factor sea redondo (50, 100).',
+  example:'25 x 48 = 50 x 24 = 100 x 12 = 1200.', when:'Un factor es 25, 35, 45, 75 o 125 y el otro es par.' },
+  function(r, d){ const a = pick(r, d <= 3 ? [25, 15, 35] : (d <= 6 ? [25, 35, 45, 15, 75] : [35, 45, 75, 125, 65, 85])); const b = 4 * ri(r, 2, span(d, 8, 8, 25, 25)[1]);
+    let x = a, y = b, chain = [a + '×' + b], n = 0; while (x % 100 !== 0 && y % 2 === 0 && n < 3){ x *= 2; y /= 2; n++; chain.push(x + '×' + y); }
+    return { kind:'dblhalve', q:a + ' × ' + b, ans:x * y, type:'num', p:{ a:a, b:b }, sol:chain.join(' = ') + ' = ' + x * y + '.' }; });
+T('distrib', 'Arithmetic', 'Atajos distributivos (descomponer o compensar)', {
+  nudge:'Descompón un factor en decenas y unidades, o redondéalo al alza y corrige.', method:'a x (10+7) = 10a + 7a. Para terminaciones en 8 y 9 redondea al alza y resta: 19 x 7 = 20 x 7 - 7.',
+  example:'23 x 17 = 230 + 161 = 391. 38 x 6 = 40 x 6 - 12 = 228.', when:'Cualquier producto sin truco especial; úsalo cuando nada más encaje.', tf:1.2 },
+  function(r, d){ let x, y; if (d <= 3){ x = ri(r, 12, 89); y = ri(r, 3, 9); } else if (d <= 6){ x = ri(r, 11, 39); y = ri(r, 21, 89); } else { x = ri(r, 12, 39); y = ri(r, 101, 399); }
+    const u = x % 10, t = x - u; let s;
+    if (u >= 8){ const c = 10 - u; s = x + ' × ' + y + ' = ' + (x + c) + ' × ' + y + ' − ' + c + ' × ' + y + ' = ' + (x + c) * y + ' − ' + c * y + ' = ' + x * y + '.'; }
+    else s = x + ' × ' + y + ' = ' + t + ' × ' + y + ' + ' + u + ' × ' + y + ' = ' + t * y + ' + ' + u * y + ' = ' + x * y + '.';
+    return { kind:'distrib', q:x + ' × ' + y, ans:x * y, type:'num', p:{ a:x, b:y }, sol:s }; });
+
+/* ----- Aviation ----- */
+function gsPick(r, d){ return d <= 3 ? 60 * ri(r, 1, 5) : (d <= 6 ? 30 * ri(r, 3, 16) : 10 * ri(r, 12, 50)); }
+T('dst', 'Aviation', 'Distancia = velocidad x tiempo', {
+  nudge:'Convierte la velocidad respecto al suelo en NM por minuto.', method:'NM por minuto = GS / 60. Distancia = GS x minutos / 60; tiempo = distancia x 60 / GS; GS = distancia x 60 / minutos.',
+  example:'GS 240 kt durante 15 min: 4 NM/min x 15 = 60 NM.', when:'Cada pregunta de tramo, ETA y hora de paso por un punto.', tf:1.3 },
+  function(r, d){ const v = pick(r, ['dist', 'time', 'speed']); const gs = gsPick(r, d);
+    if (v === 'dist'){ const m = ri(r, 3, span(d, 12, 12, 55, 55)[1]); const x = gs * m / 60; if (!isInt(x)) return null; return { kind:'dst:dist', q:'GS ' + gs + ' kt. ¿Qué distancia en ' + m + ' minutos?', unit:'NM', ans:x, type:'num', p:{ gs:gs, m:m }, sol:gs + ' / 60 = ' + fnum(gs / 60) + ' NM/min; × ' + m + ' min = ' + fnum(x) + ' NM.' }; }
+    if (v === 'time'){ const m = ri(r, 3, span(d, 12, 12, 55, 55)[1]); const x = gs * m / 60; if (!isInt(x)) return null; return { kind:'dst:time', q:x + ' NM por recorrer a GS ' + gs + ' kt. ¿Cuántos minutos?', unit:'min', ans:x * 60 / gs, type:'num', p:{ gs:gs, x:x }, sol:gs + ' / 60 = ' + fnum(gs / 60) + ' NM/min; ' + x + ' / ' + fnum(gs / 60) + ' = ' + fnum(x * 60 / gs) + ' min.' }; }
+    const m = ri(r, 3, span(d, 12, 12, 55, 55)[1]); const x = gs * m / 60; if (!isInt(x)) return null; return { kind:'dst:speed', q:x + ' NM recorridas en ' + m + ' minutos. ¿Velocidad respecto al suelo?', unit:'kt', ans:x * 60 / m, type:'num', p:{ x:x, m:m }, sol:x + ' NM en ' + m + ' min -> × 60 / ' + m + ' = ' + fnum(x * 60 / m) + ' kt.' }; });
+T('nmpm', 'Aviation', 'NM por minuto y regla de los 6 minutos', {
+  nudge:'Seis minutos son una décima de hora.', method:'En 6 min recorres GS/10 NM (quita un cero). 3 min = GS/20, 12 min = GS/5, 15 min = GS/4. NM por minuto = GS/60.',
+  example:'GS 270 kt: 6 min = 27 NM; 3 min = 13.5 NM; 4.5 NM por minuto.', when:'Comprobaciones rápidas de distancia en radar, espaciado y tiempos.' },
+  function(r, d){ const gs = d <= 3 ? 10 * ri(r, 10, 40) : 10 * ri(r, 10, 90); const v = pick(r, ['6', '3', '12', '15', 'pm']);
+    if (v === 'pm'){ if (gs % 30) return null; return { kind:'nmpm:pm', q:'GS ' + gs + ' kt. ¿Cuántas NM por minuto?', unit:'NM/min', ans:gs / 60, type:'num', p:{ gs:gs }, sol:gs + ' / 60 = ' + fnum(gs / 60) + '.' }; }
+    const mins = +v; const x = gs * mins / 60; if (!isInt(x * 2) ) return null; if (!isInt(x) && d <= 6) return null;
+    return { kind:'nmpm:' + v, q:'GS ' + gs + ' kt. ¿Cuántas NM en ' + mins + ' minutos?', unit:'NM', ans:x, type:'num', p:{ gs:gs, m:mins }, sol:'En ' + mins + ' min = ' + fnum(mins / 60) + ' h: ' + gs + (mins === 6 ? ' / 10' : ' × ' + mins + ' / 60') + ' = ' + fnum(x) + ' NM.' }; });
+T('oneinsixty', 'Aviation', 'Regla 1 en 60 (error de derrota y corrección de rumbo)', {
+  nudge:'1 grado de error da 1 NM de desvío tras 60 NM.', method:'Error en grados = 60 x NM de desvío / distancia recorrida. NM de desvío = grados x distancia / 60. Corrección para recuperar la derrota = error de derrota + ángulo de convergencia (60 x desvío / distancia restante).',
+  example:'6 NM de desvío tras 60 NM: 6 grados de error de derrota. Con 90 NM por recorrer, ángulo de convergencia 4 grados: vira 10 grados.', when:'Desplazamientos laterales, correcciones de rumbo, derrotas paralelas, vectores radar.', tf:1.4 },
+  function(r, d){ const v = pick(r, d <= 2 ? ['hdg', 'off'] : ['hdg', 'off', 'both']); const Y = pick(r, [10, 15, 20, 30, 40, 60, 90, 120]);
+    if (v === 'hdg'){ const X = ri(r, 1, 15); const a = 60 * X / Y; if (!isInt(a)) return null; return { kind:'1in60:hdg', q:'Tras ' + Y + ' NM estás a ' + X + ' NM de la derrota. ¿Error de derrota en grados (1 en 60)?', unit:'grados', ans:a, type:'num', p:{ X:X, Y:Y }, sol:'60 × ' + X + ' / ' + Y + ' = ' + fnum(a) + ' grados.' }; }
+    if (v === 'off'){ const a = ri(r, 2, 12); const x = a * Y / 60; if (!isInt(x)) return null; return { kind:'1in60:off', q:'Vuelas ' + Y + ' NM con un error de derrota de ' + a + ' grados. ¿Cuántas NM te desvías de la derrota (1 en 60)?', unit:'NM', ans:x, type:'num', p:{ a:a, Y:Y }, sol:a + ' × ' + Y + ' / 60 = ' + fnum(x) + ' NM.' }; }
+    const X = ri(r, 2, 12), Z = pick(r, [30, 40, 60, 90, 120, 20]); const a = 60 * X / Y, c = 60 * X / Z; if (!isInt(a) || !isInt(c)) return null;
+    return { kind:'1in60:both', q:X + ' NM fuera de la derrota tras ' + Y + ' NM; faltan ' + Z + ' NM. ¿Cambio de rumbo para volver a la derrota en el punto (error de derrota + ángulo de convergencia)?', unit:'grados', ans:a + c, type:'num', p:{ X:X, Y:Y, Z:Z }, sol:'Error de derrota 60 × ' + X + ' / ' + Y + ' = ' + a + '; ángulo de convergencia 60 × ' + X + ' / ' + Z + ' = ' + c + '; total ' + (a + c) + ' grados.' }; });
+T('desc31', 'Aviation', 'Descenso 3:1 y punto de inicio del descenso', {
+  nudge:'Tres millas por cada mil pies.', method:'Distancia = 3 x (altitud a perder en miles de pies). Punto de inicio del descenso (TOD) = esa distancia antes del punto.',
+  example:'Perder del FL 330 al FL 100 = 23,000 ft -> 69 NM antes del punto.', when:'Planificar descensos, comprobar una autorización, TOD.', tf:1.3 },
+  function(r, d){ const v = pick(r, d <= 3 ? ['dist', 'alt'] : ['dist', 'alt', 'tod', 'rem']); const k = rs(r, d, 2, 6, 10, 32);
+    if (v === 'dist'){ return { kind:'desc31:dist', q:'¿Cuántas NM hacen falta para perder ' + k * 1000 + ' ft a 3:1?', unit:'NM', ans:3 * k, type:'num', p:{ k:k }, sol:k + ' mil ft × 3 = ' + 3 * k + ' NM.' }; }
+    if (v === 'alt'){ return { kind:'desc31:alt', q:'Vuelas ' + 3 * k + ' NM en descenso a 3:1. ¿Cuántos pies pierdes?', unit:'ft', ans:k * 1000, type:'num', p:{ k:k }, sol:3 * k + ' / 3 = ' + k + ' -> ' + k * 1000 + ' ft.' }; }
+    const hi = ri(r, 12, 39) * 10, lo = ri(r, 3, 11) * 10; if (hi <= lo + 10) return null; const dz = (hi - lo) * 100 / 1000; const nm = 3 * dz;
+    if (v === 'tod') return { kind:'desc31:tod', q:'Estás en FL ' + hi + ' y debes estar en FL ' + lo + ' sobre el punto. ¿A cuántas NM del punto empiezas el descenso 3:1?', unit:'NM', ans:nm, type:'num', p:{ hi:hi, lo:lo }, sol:'FL ' + hi + ' − FL ' + lo + ' = ' + dz * 1000 + ' ft = ' + dz + ' mil -> × 3 = ' + nm + ' NM.' };
+    const dist = nm + ri(r, 4, 25); return { kind:'desc31:rem', q:'FL ' + hi + ', a ' + dist + ' NM del punto, para estar en FL ' + lo + ' sobre él. ¿Cuántas NM faltan por volar antes de iniciar un descenso 3:1?', unit:'NM', ans:dist - nm, type:'num', p:{ hi:hi, lo:lo, dist:dist }, sol:'El descenso necesita ' + dz + ' × 3 = ' + nm + ' NM; ' + dist + ' − ' + nm + ' = ' + (dist - nm) + ' NM.' }; });
+T('rod', 'Aviation', 'Régimen de descenso requerido (GS x 5)', {
+  nudge:'En una trayectoria de 3 grados el régimen de descenso es unas 5 veces la velocidad respecto al suelo.', method:'Régimen (ft/min) ~ GS (kt) x 5 para una trayectoria de 3 grados (mitad de la GS y luego x 10). Tiempo = altitud / régimen.',
+  example:'GS 140 kt: 70 x 10 = 700 ft/min. 3000 ft a 700 ft/min ~ 4.3 min.', when:'Aproximaciones finales ILS y de no precisión, descenso continuo.' },
+  function(r, d){ const v = pick(r, ['rod', 'gs', 'time']); const gs = d <= 4 ? 10 * ri(r, 8, 18) : 10 * ri(r, 8, 30);
+    if (v === 'rod') return { kind:'rod:rod', q:'GS ' + gs + ' kt en una trayectoria de 3 grados. ¿Régimen de descenso (ft/min, regla: GS × 5)?', unit:'ft/min', ans:gs * 5, type:'num', p:{ gs:gs }, sol:gs + ' / 2 = ' + gs / 2 + '; × 10 = ' + gs * 5 + ' ft/min.' };
+    if (v === 'gs'){ return { kind:'rod:gs', q:'Vuelas una trayectoria de 3 grados a ' + gs * 5 + ' ft/min (regla: régimen = GS × 5). ¿Cuál es la GS (kt)?', unit:'kt', ans:gs, type:'num', p:{ rod:gs * 5 }, sol:gs * 5 + ' / 5 = ' + gs + ' kt.' }; }
+    const alt = 100 * ri(r, 10, 60); const rod = gs * 5; const t = alt / rod; if (!isInt(t)) return null;
+    return { kind:'rod:time', q:'Descendiendo ' + alt + ' ft a ' + rod + ' ft/min. ¿Cuántos minutos?', unit:'min', ans:t, type:'num', p:{ alt:alt, rod:rod }, sol:alt + ' / ' + rod + ' = ' + fnum(t) + ' min.' }; });
+T('grad', 'Aviation', 'Gradientes de ascenso y descenso', {
+  nudge:'El 1 % son unos 60 ft por NM.', method:'gradiente % x 60 = ft por NM (1 % = 60.76 ft/NM). Régimen de ascenso (ft/min) = gradiente % x GS (kt). Altitud ganada = ft/NM x NM.',
+  example:'5 % a GS 120 kt: 300 ft/NM y 600 ft/min. Una SID del 3.3 % = ~200 ft/NM.', when:'Gradientes mínimos de SID/STAR, franqueamiento de obstáculos, viabilidad de un ascenso.', tf:1.3 },
+  function(r, d){ const v = pick(r, ['ftnm', 'pct', 'fpm', 'gain']); const g = ri(r, 2, span(d, 6, 6, 12, 12)[1]);
+    if (v === 'ftnm') return { kind:'grad:ftnm', q:'¿A cuántos ft por NM equivale un gradiente del ' + g + ' % (1 % = 60 ft/NM)?', unit:'ft/NM', ans:g * 60, type:'num', p:{ g:g }, sol:g + ' × 60 = ' + g * 60 + ' ft/NM.' };
+    if (v === 'pct') return { kind:'grad:pct', q:g * 60 + ' ft por NM, ¿qué gradiente en % es (1 % = 60 ft/NM)?', unit:'%', ans:g, type:'num', p:{ ft:g * 60 }, sol:g * 60 + ' / 60 = ' + g + '%.' };
+    const gs = 10 * ri(r, 9, 30);
+    if (v === 'fpm') return { kind:'grad:fpm', q:'Gradiente de ascenso ' + g + ' % (1 % = 60 ft/NM) a GS ' + gs + ' kt. ¿Régimen de ascenso (ft/min)?', unit:'ft/min', ans:g * gs, type:'num', p:{ g:g, gs:gs }, sol:g + '% = ' + g * 60 + ' ft/NM; ' + gs + ' kt = ' + fnum(gs / 60) + ' NM/min; producto = ' + fnum(g * gs) + ' ft/min (atajo: % × GS).' };
+    const nm = ri(r, 4, 30); return { kind:'grad:gain', q:'Gradiente de ascenso ' + g + ' % (1 % = 60 ft/NM) en ' + nm + ' NM. ¿Altitud ganada (ft)?', unit:'ft', ans:g * 60 * nm, type:'num', p:{ g:g, nm:nm }, sol:g + ' × 60 = ' + g * 60 + ' ft/NM; × ' + nm + ' = ' + g * 60 * nm + ' ft.' }; });
+T('convspd', 'Aviation', 'Conversiones de velocidad y distancia (kt, km/h, NM, km)', {
+  nudge:'1 kt = 1 NM por hora = 1.85 km/h.', method:'Usa 1.85: km = NM x 1.85 (x 2 menos 7.5 %); NM = km / 1.85. Mismo factor para kt y km/h. (Exacto: 1.852.)',
+  example:'120 kt = 222 km/h. 74 km = 40 NM.', when:'Datos de vuelo extranjeros, Mach y límites de velocidad en km/h, distancias en km.' },
+  function(r, d){ const kt = 20 * ri(r, 3, span(d, 12, 12, 45, 45)[1]); const v = pick(r, ['kt2k', 'k2kt', 'nm2km', 'km2nm']); const k = kt * 185 / 100;
+    if (v === 'kt2k') return { kind:'conv:kt2k', q:kt + ' kt en km/h (1 kt = 1.85 km/h)', unit:'km/h', ans:k, type:'num', p:{ kt:kt }, sol:kt + ' × 1.85 = ' + fnum(k) + ' km/h.' };
+    if (v === 'k2kt') return { kind:'conv:k2kt', q:fnum(k) + ' km/h en kt (1 kt = 1.85 km/h)', unit:'kt', ans:kt, type:'num', p:{ k:k }, sol:fnum(k) + ' / 1.85 = ' + kt + ' kt.' };
+    if (v === 'nm2km') return { kind:'conv:nm2km', q:kt + ' NM en km (1 NM = 1.85 km)', unit:'km', ans:k, type:'num', p:{ nm:kt }, sol:kt + ' × 1.85 = ' + fnum(k) + ' km.' };
+    return { kind:'conv:km2nm', q:fnum(k) + ' km en NM (1 NM = 1.85 km)', unit:'NM', ans:kt, type:'num', p:{ km:k }, sol:fnum(k) + ' / 1.85 = ' + kt + ' NM.' }; });
+T('convalt', 'Aviation', 'Pies y metros', {
+  nudge:'1 ft son unos 0.3 m.', method:'metros = pies x 0.3 (exacto 0.3048); pies = metros / 0.3 (aprox. x 3.3). Un nivel de vuelo son centenas de pies: FL 350 = 35,000 ft.',
+  example:'FL 350 = 35,000 ft = 10,500 m. 900 m = 3000 ft.', when:'Datos de altitud en metros, alturas de obstáculos, espacio aéreo ruso y chino.' },
+  function(r, d){ const v = pick(r, ['f2m', 'm2f', 'fl2m']); if (v === 'm2f'){ const m = 30 * ri(r, 2, span(d, 30, 30, 200, 200)[1]); return { kind:'alt:m2f', q:m + ' m en pies (1 ft = 0.3 m)', unit:'ft', ans:Math.round(m / 0.3), type:'num', p:{ m:m }, sol:m + ' / 0.3 = ' + Math.round(m / 0.3) + ' ft.' }; }
+    if (v === 'fl2m'){ const fl = 10 * ri(r, 5, 41); return { kind:'alt:fl2m', q:'FL ' + fl + ' en metros (1 ft = 0.3 m)', unit:'m', ans:fl * 100 * 3 / 10, type:'num', p:{ fl:fl }, sol:'FL ' + fl + ' = ' + fl * 100 + ' ft; × 0.3 = ' + fl * 30 + ' m.' }; }
+    const ft = 100 * ri(r, 5, span(d, 40, 40, 400, 400)[1]); return { kind:'alt:f2m', q:ft + ' ft en metros (1 ft = 0.3 m)', unit:'m', ans:ft * 3 / 10, type:'num', p:{ ft:ft }, sol:ft + ' × 0.3 = ' + ft * 3 / 10 + ' m.' }; });
+T('convpress', 'Aviation', 'Presión: hPa e inHg', {
+  nudge:'Toma como ancla 1013 hPa = 29.92 inHg.', method:'1 hPa = 0.03 inHg (1 inHg = 33.86 hPa). Toma la diferencia respecto a 1013, multiplica por 0.03 y suma a 29.92. Se aceptan respuestas con 0.03 inHg (o 2 hPa) de margen.',
+  example:'1025 hPa: +12 x 0.03 = +0.36 -> 30.28 inHg. 29.50 inHg: -0.42 / 0.03 = -14 -> 999 hPa.', when:'QNH de EE. UU. y Canadá, reglajes de altímetro en cartas extranjeras.', tf:1.3 },
+  function(r, d){ if (r() < .5){ const h = ri(r, 985, 1045); const a = Math.round(h / 33.86 * 100) / 100; return { kind:'press:h2i', q:'QNH ' + h + ' hPa en inHg (se acepta ±0.03)', unit:'inHg', ans:a, type:'num', tolAbs:0.03, p:{ h:h }, sol:(h - 1013) + ' × 0.03 = ' + fnum((h - 1013) * 0.03) + '; 29.92 + eso = ' + fnum(29.92 + (h - 1013) * 0.03) + ' (exacto ' + a + ').' }; }
+    const i = ri(r, 2910, 3070) / 100; const h = Math.round(i * 33.86); return { kind:'press:i2h', q:'Altímetro ' + i.toFixed(2) + ' inHg en hPa (se acepta ±2)', unit:'hPa', ans:h, type:'num', tolAbs:2, p:{ i:i }, sol:'(' + i.toFixed(2) + ' − 29.92) / 0.03 = ' + fnum((i - 29.92) / 0.03) + '; 1013 + eso = ' + fnum(1013 + (i - 29.92) / 0.03) + ' (exacto ' + h + ').' }; });
+T('tas', 'Aviation', 'IAS a TAS (+2 % por cada 1000 ft)', {
+  nudge:'La TAS crece un 2 % de la IAS por cada 1000 ft.', method:'TAS ~ IAS x (1 + 0.02 x altitud en miles de pies). Válida como regla por debajo de unos 20,000 ft; ignora temperatura y compresibilidad.',
+  example:'IAS 250 a 10,000 ft: +20 % = +50 -> TAS 300.', when:'Velocidades del plan de vuelo, conversión entre IAS, TAS y Mach en el descenso.', tf:1.3 },
+  function(r, d){ const k = ri(r, 2, d <= 5 ? 10 : 20); const ias = 10 * ri(r, 10, 40); const tas = ias * (100 + 2 * k) / 100; if (!isInt(tas)) return null;
+    if (r() < .7) return { kind:'tas:tas', q:'IAS ' + ias + ' kt a ' + k * 1000 + ' ft. ¿TAS (regla +2 % por 1000 ft)?', unit:'kt', ans:tas, type:'num', p:{ ias:ias, k:k }, sol:'+' + 2 * k + ' % de ' + ias + ' = ' + fnum(ias * 2 * k / 100) + '; TAS = ' + tas + ' kt.' };
+    return { kind:'tas:ias', q:'TAS ' + tas + ' kt a ' + k * 1000 + ' ft. ¿IAS (regla +2 % por 1000 ft)?', unit:'kt', ans:ias, type:'num', p:{ tas:tas, k:k }, sol:'La TAS es IAS × ' + (100 + 2 * k) / 100 + '; ' + tas + ' / ' + (100 + 2 * k) / 100 + ' = ' + ias + ' kt.' }; });
+T('isa', 'Aviation', 'Temperatura ISA y desviación', {
+  nudge:'15 grados a nivel del mar, menos 2 por cada 1000 ft.', method:'Temperatura ISA = 15 - 2 x (altitud en miles de ft) (regla, hasta 35,000 ft). Desviación = OAT real - temperatura ISA; ISA+10 significa 10 grados más cálido que el estándar.',
+  example:'FL 250: 15 - 50 = -35 C. OAT -25 C es ISA+10.', when:'Altitud de densidad, TAS y cuestiones de rendimiento.' },
+  function(r, d){ const k = ri(r, 1, 35); const isa = 15 - 2 * k; const v = pick(r, ['isa', 'dev', 'oat']);
+    if (v === 'isa') return { kind:'isa:isa', q:'Temperatura ISA a ' + k * 1000 + ' ft (15 °C a nivel del mar, −2 °C por cada 1000 ft)', unit:'°C', ans:isa, type:'num', p:{ k:k }, sol:'2 × ' + k + ' = ' + 2 * k + '; 15 − ' + 2 * k + ' = ' + isa + ' °C.' };
+    const dv = ri(r, -15, 15); if (!dv) return null; const oat = isa + dv;
+    if (v === 'dev') return { kind:'isa:dev', q:'OAT ' + oat + ' °C a ' + k * 1000 + ' ft. ¿Desviación ISA (positiva = más cálido; regla ISA 15 − 2 por 1000 ft)?', unit:'°C', ans:dv, type:'num', p:{ k:k, oat:oat }, sol:'ISA a ' + k * 1000 + ' ft = ' + isa + ' °C; ' + oat + ' − (' + isa + ') = ' + dv + '.' };
+    return { kind:'isa:oat', q:'A ' + k * 1000 + ' ft la temperatura es ISA' + (dv > 0 ? '+' : '−') + Math.abs(dv) + '. ¿OAT en °C (regla ISA 15 − 2 por 1000 ft)?', unit:'°C', ans:oat, type:'num', p:{ k:k, dv:dv }, sol:'ISA a ' + k * 1000 + ' ft = ' + isa + ' °C; ' + isa + ' ' + (dv > 0 ? '+ ' : '− ') + Math.abs(dv) + ' = ' + oat + ' °C.' }; });
+T('mach', 'Aviation', 'Mach y TAS', {
+  nudge:'TAS = Mach x velocidad del sonido a ese nivel.', method:'TAS = M x a (a dada, unos 570-600 kt hacia el FL 350). Para M en pasos de 0.05 usa 5 centésimas de a. M = TAS / a.',
+  example:'M 0.80 con a = 580 kt: 0.8 x 580 = 464 kt. 493 kt / 580 = 0.85.', when:'Velocidades de crucero, cruce Mach-IAS, conversión de velocidades de las autorizaciones.', tf:1.3 },
+  function(r, d){ const a = 20 * ri(r, 28, 33); const M = ri(r, 10, 19) * 5 / 100; const tas = Math.round(M * 100) * a / 100; if (!isInt(tas)) return null;
+    if (r() < .6) return { kind:'mach:tas', q:'Mach ' + M.toFixed(2) + ', velocidad del sonido ' + a + ' kt a este nivel. ¿TAS?', unit:'kt', ans:tas, type:'num', p:{ M100:Math.round(M * 100), a:a }, sol:'0.' + Math.round(M * 100) + ' × ' + a + ' = ' + tas + ' kt.' };
+    return { kind:'mach:m', q:'TAS ' + tas + ' kt, velocidad del sonido ' + a + ' kt. ¿Número de Mach?', unit:'M', ans:M, type:'num', p:{ tas:tas, a:a }, sol:tas + ' / ' + a + ' = ' + M.toFixed(2) + '.' }; });
+const COSF = { 0:1, 30:0.9, 45:0.7, 60:0.5, 90:0, 120:-0.5, 135:-0.7, 150:-0.9, 180:-1 };
+const SINF = { 0:0, 30:0.5, 45:0.7, 60:0.9, 90:1, 120:0.9, 135:0.7, 150:0.5, 180:0 };
+T('wind', 'Aviation', 'Viento de cara y cruzado (método del reloj / 5-7-9)', {
+  nudge:'Halla primero el ángulo entre el viento y la pista.', method:'Ángulo 30 / 45 / 60 / 90: fracción de viento cruzado 0.5 / 0.7 / 0.9 / 1.0 (5-7-9); la fracción de viento de cara es la inversa 0.9 / 0.7 / 0.5 / 0. En el reloj: 30 min = 1/2, 60 min = completo. Ángulo mayor de 90: viento de cola.',
+  example:'RWY 27, viento 330/20: ángulo 60. Viento cruzado 0.9 x 20 = 18; viento de cara 0.5 x 20 = 10.', when:'Cualquier pregunta de componente de viento en pista o ruta (valores de la regla; el seno/coseno exacto difiere hasta un 4 %).', tf:1.4 },
+  function(r, d){ const angs = d <= 3 ? [0, 30, 60, 90] : (d <= 6 ? [0, 30, 45, 60, 90] : [0, 30, 45, 60, 90, 120, 135, 150, 180]); const A = pick(r, angs);
+    const rwy = 10 * ri(r, 1, 36); const s = r() < .5 ? 1 : -1; const wd = ((rwy + s * A) % 360 + 360) % 360 || 360; const W = 10 * ri(r, 1, span(d, 3, 3, 6, 6)[1]);
+    const hd = Math.round(W * COSF[A] * 10) / 10, xw = Math.round(W * SINF[A] * 10) / 10; const rw = (rwy === 360 ? '36' : pad2(rwy / 10));
+    if (r() < .5) return { kind:'wind:head', q:'Pista ' + rw + ' (rumbo ' + rwy + '°). Viento ' + wd + '/' + W + '. ¿Componente a lo largo de la pista (regla 5-7-9; positivo = viento de cara, negativo = viento de cola)?', unit:'kt', ans:hd, type:'num', p:{ A:A, W:W }, sol:'Ángulo entre el viento y la pista = ' + A + ' grados; factor ' + COSF[A] + ' × ' + W + ' = ' + fnum(hd) + ' kt.' };
+    return { kind:'wind:cross', q:'Pista ' + rw + ' (rumbo ' + rwy + '°). Viento ' + wd + '/' + W + '. ¿Componente de viento cruzado (regla 5-7-9, kt, solo el valor)?', unit:'kt', ans:xw, type:'num', p:{ A:A, W:W }, sol:'Ángulo = ' + A + ' grados; factor de viento cruzado ' + SINF[A] + ' × ' + W + ' = ' + fnum(xw) + ' kt.' }; });
+T('drift', 'Aviation', 'Deriva y corrección de rumbo', {
+  nudge:'Deriva en grados = viento cruzado dividido entre NM por minuto.', method:'Deriva ~ 60 x viento cruzado / TAS (= viento cruzado / NM por minuto). Vuela el rumbo hacia el viento: viento por la derecha -> rumbo = derrota + deriva; por la izquierda -> derrota - deriva.',
+  example:'TAS 120 (2 NM/min), viento cruzado 20 kt: deriva 10. Derrota 090, viento por la derecha: rumbo 100.', when:'Rumbo para volar una derrota, vectores radar con viento, errores de combustible y tiempo.', tf:1.4 },
+  function(r, d){ const tas = 30 * ri(r, 3, span(d, 6, 6, 14, 14)[1]); const dr = ri(r, 2, 14); const xw = dr * tas / 60; if (!isInt(xw)) return null;
+    if (r() < .5) return { kind:'drift:deg', q:'TAS ' + tas + ' kt, componente de viento cruzado ' + xw + ' kt. ¿Ángulo de deriva (grados, regla 1 en 60)?', unit:'grados', ans:dr, type:'num', p:{ tas:tas, xw:xw }, sol:tas + ' / 60 = ' + fnum(tas / 60) + ' NM/min; ' + xw + ' / ' + fnum(tas / 60) + ' = ' + dr + ' grados.' };
+    const trk = 10 * ri(r, 1, 36); const right = r() < .5; const hd = ((trk + (right ? dr : -dr)) % 360 + 360) % 360 || 360;
+    return { kind:'drift:hdg', q:'Derrota ' + trk + '°, TAS ' + tas + ' kt, viento cruzado ' + xw + ' kt por la ' + (right ? 'derecha' : 'izquierda') + '. ¿Rumbo a volar (grados, deriva por la regla 1 en 60)?', unit:'grados', ans:hd, type:'num', p:{ trk:trk, tas:tas, xw:xw, right:right }, sol:'Deriva = 60 × ' + xw + ' / ' + tas + ' = ' + dr + '; viento por la ' + (right ? 'derecha: derrota + deriva' : 'izquierda: derrota − deriva') + ' = ' + hd + '.' }; });
+T('closing', 'Aviation', 'Velocidad de aproximación y tiempo hasta la máxima proximidad', {
+  nudge:'De frente: suma las velocidades. Mismo sentido: réstalas.', method:'Velocidad de aproximación = v1 + v2 (sentidos opuestos) o |v1 - v2| (mismo sentido). Tiempo (min) = 60 x distancia / velocidad de aproximación.',
+  example:'A 60 NM, 240 kt y 360 kt de frente: aproximación 600 kt = 10 NM/min: 6 min.', when:'Predicción de conflictos, adelantamientos, cuándo estarán a la par.', tf:1.4 },
+  function(r, d){ const v1 = 30 * ri(r, 4, 14), v2 = 30 * ri(r, 3, 14); const opp = r() < .5; const cs = opp ? v1 + v2 : Math.abs(v1 - v2); if (!cs) return null; const t = ri(r, 2, span(d, 8, 8, 30, 30)[1]); const D = cs * t / 60; if (!isInt(D)) return null;
+    const v = pick(r, ['cs', 'time', 'dist']);
+    if (v === 'cs') return { kind:'closing:cs', q:'Dos aeronaves ' + (opp ? 'volando una hacia la otra' : 'en la misma ruta') + ' a GS ' + v1 + ' y ' + v2 + ' kt. ¿Velocidad de aproximación (kt)?', unit:'kt', ans:cs, type:'num', p:{ v1:v1, v2:v2, opp:opp }, sol:opp ? v1 + ' + ' + v2 + ' = ' + cs + ' kt.' : '|' + v1 + ' − ' + v2 + '| = ' + cs + ' kt.' };
+    if (v === 'time') return { kind:'closing:time', q:'Dos aeronaves separadas ' + D + ' NM, ' + (opp ? 'volando una hacia la otra' : 'en la misma ruta, la más rápida detrás') + ', GS ' + v1 + ' y ' + v2 + ' kt. ¿Minutos hasta que estén a la par (o la de atrás alcance a la de delante)?', unit:'min', ans:t, type:'num', p:{ D:D, v1:v1, v2:v2, opp:opp }, sol:'Velocidad de aproximación ' + cs + ' kt = ' + fnum(cs / 60) + ' NM/min; ' + D + ' / ' + fnum(cs / 60) + ' = ' + t + ' min.' };
+    return { kind:'closing:dist', q:'Dos aeronaves ' + (opp ? 'volando una hacia la otra' : 'en la misma ruta') + ' a GS ' + v1 + ' y ' + v2 + ' kt se encontrarán en ' + t + ' minutos. ¿A cuántas NM están ahora?', unit:'NM', ans:D, type:'num', p:{ t:t, v1:v1, v2:v2, opp:opp }, sol:'Velocidad de aproximación ' + cs + ' kt = ' + fnum(cs / 60) + ' NM/min × ' + t + ' min = ' + D + ' NM.' }; });
+T('intrail', 'Aviation', 'Espaciado en cola (distancia, tiempo y velocidad)', {
+  nudge:'Convierte entre NM y segundos con las NM por minuto.', method:'NM = GS x segundos / 3600 = (GS/60) x minutos. Segundos = 3600 x NM / GS. El espaciado en NM se mantiene entre dos aeronaves con la misma GS.',
+  example:'8 NM a GS 240 kt = 120 s. 90 s a GS 240 = 6 NM.', when:'Espaciado de flujo, separación mínima en final, espaciado por estela.', tf:1.4 },
+  function(r, d){ const gs = gsPick(r, d); if (r() < .5){ const s = 15 * ri(r, 2, span(d, 8, 8, 24, 24)[1]); const x = gs * s / 3600; if (!isInt(x)) return null; return { kind:'intrail:nm', q:'Aeronaves separadas ' + s + ' segundos, ambas a GS ' + gs + ' kt. ¿Distancia entre ellas (NM)?', unit:'NM', ans:x, type:'num', p:{ gs:gs, s:s }, sol:gs + ' kt = ' + fnum(gs / 60) + ' NM/min; ' + s + ' s = ' + fnum(s / 60) + ' min; producto = ' + fnum(x) + ' NM.' }; }
+    const x = ri(r, 3, span(d, 10, 10, 30, 30)[1]); const s = 3600 * x / gs; if (!isInt(s)) return null; return { kind:'intrail:s', q:x + ' NM en cola, ambas a GS ' + gs + ' kt. ¿Intervalo de tiempo sobre el punto (segundos)?', unit:'s', ans:s, type:'num', p:{ gs:gs, x:x }, sol:x + ' NM / ' + fnum(gs / 60) + ' NM/min = ' + fnum(x * 60 / gs) + ' min = ' + fnum(s) + ' s.' }; });
+const ZONES = [
+  { n:'España, invierno (CET)', o:1 }, { n:'España, verano (CEST)', o:2 }, { n:'Reino Unido, invierno (GMT)', o:0 }, { n:'Reino Unido, verano (BST)', o:1 },
+  { n:'Canarias, invierno (WET)', o:0 }, { n:'Nueva York, invierno (EST)', o:-5 }, { n:'Nueva York, verano (EDT)', o:-4 }, { n:'Dubái (GST)', o:4 }, { n:'Tokio (JST)', o:9 }
+];
+T('utc', 'Aviation', 'UTC y aritmética de husos horarios', {
+  nudge:'Pasa siempre por UTC.', method:'UTC = hora local - desfase. Hora local = UTC + desfase. UTC de llegada = UTC de salida + tiempo en calzos; luego convierte. Responde en HHMM (24 h, vuelta tras 2400).',
+  example:'1435 local CEST (UTC+2) = 1235 UTC. Salida 2240 UTC, 3 h 50 min: 0230 UTC del día siguiente.', when:'ETA/ETD, horas de NOTAM y METAR (siempre UTC), horarios.', tf:1.5 },
+  function(r, d){ const z = pick(r, ZONES.slice(0, d <= 3 ? 2 : 9)); const t = 5 * ri(r, 0, 287); const v = pick(r, ['toutc', 'toloc', 'arr', 'arrloc']);
+    if (v === 'toutc') return { kind:'utc:toutc', q:hhmm(t) + ' hora local en ' + z.n + ', UTC' + (z.o >= 0 ? '+' : '−') + Math.abs(z.o) + '. ¿Hora UTC (HHMM)?', unit:'HHMM', ans:((t - 60 * z.o) % 1440 + 1440) % 1440, type:'time', p:{ t:t, o:z.o }, sol:hhmm(t) + ' − (' + z.o + ' h) = ' + hhmm(t - 60 * z.o) + ' UTC.' };
+    if (v === 'toloc') return { kind:'utc:toloc', q:hhmm(t) + ' UTC. ¿Hora local en ' + z.n + ', UTC' + (z.o >= 0 ? '+' : '−') + Math.abs(z.o) + ' (HHMM)?', unit:'HHMM', ans:((t + 60 * z.o) % 1440 + 1440) % 1440, type:'time', p:{ t:t, o:z.o }, sol:hhmm(t) + ' + (' + z.o + ' h) = ' + hhmm(t + 60 * z.o) + ' local.' };
+    const bh = ri(r, 0, 9), bm = 5 * ri(r, 0, 11); if (!bh && !bm) return null; const blk = bh * 60 + bm;
+    if (v === 'arr') return { kind:'utc:arr', q:'Salida ' + hhmm(t) + ' UTC, tiempo en calzos ' + bh + ' h ' + bm + ' min. ¿UTC de llegada (HHMM)?', unit:'HHMM', ans:(t + blk) % 1440, type:'time', p:{ t:t, blk:blk }, sol:hhmm(t) + ' + ' + bh + ':' + pad2(bm) + ' = ' + hhmm(t + blk) + ' UTC.' };
+    const z2 = pick(r, ZONES); return { kind:'utc:arrloc', q:'Salida ' + hhmm(t) + ' local en ' + z.n + ' (UTC' + (z.o >= 0 ? '+' : '−') + Math.abs(z.o) + '), tiempo en calzos ' + bh + ' h ' + bm + ' min, destino ' + z2.n + ' (UTC' + (z2.o >= 0 ? '+' : '−') + Math.abs(z2.o) + '). ¿Hora local de llegada (HHMM)?', unit:'HHMM', ans:((t - 60 * z.o + blk + 60 * z2.o) % 1440 + 1440) % 1440, type:'time', p:{ t:t, o1:z.o, blk:blk, o2:z2.o }, sol:'UTC de salida ' + hhmm(t - 60 * z.o) + '; + ' + bh + ':' + pad2(bm) + ' = ' + hhmm(t - 60 * z.o + blk) + ' UTC; + (' + z2.o + ' h) = ' + hhmm(t - 60 * z.o + blk + 60 * z2.o) + ' local.' }; });
+T('fuel', 'Aviation', 'Combustible y tiempo', {
+  nudge:'Convierte el consumo por hora en consumo por minuto.', method:'Combustible = consumo (kg/h) x tiempo (h) = (consumo/60) x minutos. Autonomía (min) = 60 x combustible / consumo. Tiempo utilizable = autonomía - reserva.',
+  example:'2400 kg/h = 40 kg/min: 95 min = 3800 kg. 5200 kg a 2600 kg/h = 120 min.', when:'Planificación de vuelo, decisiones de desvío, tiempo de espera.', tf:1.4 },
+  function(r, d){ const f = 60 * ri(r, 5, span(d, 20, 20, 60, 60)[1]); const v = pick(r, ['burn', 'end', 'usable']); const m = 5 * ri(r, 4, span(d, 30, 30, 60, 60)[1]);
+    if (v === 'burn'){ const x = f * m / 60; return { kind:'fuel:burn', q:'Consumo ' + f + ' kg/h. ¿Combustible consumido en ' + m + ' minutos (kg)?', unit:'kg', ans:x, type:'num', p:{ f:f, m:m }, sol:f + ' / 60 = ' + f / 60 + ' kg/min × ' + m + ' = ' + x + ' kg.' }; }
+    const x = f * m / 60; if (v === 'end') return { kind:'fuel:end', q:x + ' kg a bordo, consumo ' + f + ' kg/h. ¿Autonomía en minutos?', unit:'min', ans:m, type:'num', p:{ x:x, f:f }, sol:f / 60 + ' kg/min; ' + x + ' / ' + f / 60 + ' = ' + m + ' min.' };
+    const res = 5 * ri(r, 6, 12); return { kind:'fuel:usable', q:x + ' kg a bordo, consumo ' + f + ' kg/h, debe quedar una reserva final de ' + res + ' min. ¿Minutos utilizables antes de llegar a la reserva?', unit:'min', ans:m - res, type:'num', p:{ x:x, f:f, res:res }, sol:'Autonomía = ' + x + ' / ' + f / 60 + ' = ' + m + ' min; menos ' + res + ' = ' + (m - res) + ' min.' }; });
+T('turn', 'Aviation', 'Reglas prácticas de viraje (régimen uno)', {
+  nudge:'Régimen uno = 3 grados por segundo.', method:'Viraje de régimen uno: 3 grados/s, así que segundos = grados / 3 (180 grados = 60 s, 360 grados = 120 s). Ángulo de alabeo aproximado = 15 % de la TAS. Distancia recorrida en un viraje completo de 360 = TAS / 30 (NM).',
+  example:'Viraje de 120 grados: 40 s. TAS 120 kt: alabeo de unos 18 grados.', when:'Circuitos de espera, virajes de procedimiento, vectores radar, cronometrar virajes.' },
+  function(r, d){ const v = pick(r, ['time', 'bank', 'circle']);
+    if (v === 'time'){ const a = 15 * ri(r, 1, 24); const s = a / 3; return { kind:'turn:time', q:'Un viraje de régimen uno de ' + a + ' grados, ¿cuántos segundos dura?', unit:'s', ans:s, type:'num', p:{ a:a }, sol:a + ' / 3 = ' + s + ' s.' }; }
+    if (v === 'bank'){ const tas = 20 * ri(r, 4, 10); return { kind:'turn:bank', q:'¿Ángulo de alabeo de un viraje de régimen uno a TAS ' + tas + ' kt (regla: 15 % de la TAS), en grados?', unit:'grados', ans:tas * 15 / 100, type:'num', p:{ tas:tas }, sol:'0.15 × ' + tas + ' = ' + tas * 15 / 100 + ' grados.' }; }
+    const tas = 30 * ri(r, 4, 12); return { kind:'turn:circle', q:'TAS ' + tas + ' kt. ¿Cuántas NM se recorren en un viraje completo de 360 grados a régimen uno?', unit:'NM', ans:tas / 30, type:'num', p:{ tas:tas }, sol:'360 grados a 3 grados/s = 120 s = 2 min; ' + tas + ' / 60 × 2 = ' + fnum(tas / 30) + ' NM.' }; });
+T('wake', 'Aviation', 'Espaciado por estela turbulenta (de NM a tiempo)', {
+  nudge:'Convierte el mínimo de distancia en segundos con la velocidad respecto al suelo del seguidor.', method:'Segundos = 3600 x NM / GS. Los mínimos vienen dados en la pregunta (valores típicos 4-10 NM según el par de categorías).',
+  example:'5 NM a GS 150 kt = 120 s.', when:'Secuenciación de llegadas, intervalos de salida, conversión de mínimos de distancia en intervalos de tiempo.', tf:1.4 },
+  function(r, d){ const nm = pick(r, [4, 5, 6, 8, 10]); const gs = pick(r, [120, 135, 150, 160, 180, 200, 240, 300]); const s = 3600 * nm / gs; if (!isInt(s)) return null;
+    const pair = pick(r, ['Pesada tras Pesada', 'Media tras Pesada', 'Ligera tras Pesada', 'Ligera tras Media', 'Pesada tras Super']);
+    return { kind:'wake', q:pair + ': mínimo de ' + nm + ' NM (dado). GS del seguidor ' + gs + ' kt. ¿Qué intervalo de tiempo representa (segundos)?', unit:'s', ans:s, type:'num', p:{ nm:nm, gs:gs }, sol:nm + ' NM / ' + fnum(gs / 60) + ' NM/min = ' + fnum(nm * 60 / gs) + ' min = ' + fnum(s) + ' s.' }; });
+
+/* ----- Predictions (positions and times) ----- */
+const LBL = ['A', 'B', 'C', 'D'];
+function acCount(r, d){ return d <= 3 ? ri(r, 1, 2) : (d <= 6 ? ri(r, 2, 3) : ri(r, 3, 4)); }
+function velPick(r, d){ // returns [vx, vy] in NM per minute
+  const s = d <= 3 ? ri(r, 2, 6) : ri(r, 2, 8);
+  if (d >= 6 && r() < .4){ const tri = pick(r, [[3, 4], [4, 3], [6, 8], [8, 6], [5, 12], [12, 5]]); return [tri[0] * (r() < .5 ? 1 : -1), tri[1] * (r() < .5 ? 1 : -1)]; }
+  return pick(r, [[s, 0], [-s, 0], [0, s], [0, -s]]);
+}
+function velText(v){
+  if (v[1] === 0) return 'volando hacia el ' + (v[0] > 0 ? 'este' : 'oeste') + ' a GS ' + Math.abs(v[0]) * 60 + ' kt (' + Math.abs(v[0]) + ' NM/min)';
+  if (v[0] === 0) return 'volando hacia el ' + (v[1] > 0 ? 'norte' : 'sur') + ' a GS ' + Math.abs(v[1]) * 60 + ' kt (' + Math.abs(v[1]) + ' NM/min)';
+  return 'moviéndose ' + Math.abs(v[0]) + ' NM/min hacia el ' + (v[0] > 0 ? 'este' : 'oeste') + ' y ' + Math.abs(v[1]) + ' NM/min hacia el ' + (v[1] > 0 ? 'norte' : 'sur') + ' (GS ' + Math.round(Math.hypot(v[0], v[1]) * 60) + ' kt)';
+}
+T('predpos', 'Prediction', '¿Dónde estará? (posición en la cuadrícula)', {
+  nudge:'Posición + velocidad x tiempo, un eje cada vez.', method:'x_nueva = x + vx x t, y_nueva = y + vy x t, con vx, vy en NM por minuto (GS / 60, positivas al este y al norte). Responde como "x, y" (con coma).',
+  example:'A en (-20, 10) volando al este a 4 NM/min: tras 6 min: (-20 + 24, 10) = (4, 10).', when:'Predicción de la imagen radar, extrapolación de tráfico, comprobación de conflictos.', tf:2 },
+  function(r, d){ const n = acCount(r, d); const R = span(d, 15, 15, 40, 40)[1]; const ac = []; for (let i = 0; i < n; i++){ const v = velPick(r, d); ac.push({ id:LBL[i], x:ri(r, -R, R), y:ri(r, -R, R), vx:v[0], vy:v[1] }); }
+    const k = ri(r, 0, n - 1), t = ri(r, 2, span(d, 8, 8, 20, 20)[1]); const a = ac[k];
+    const desc = ac.map(function(c){ return 'Aeronave ' + c.id + ' en (' + c.x + ', ' + c.y + ') ' + velText([c.vx, c.vy]); }).join('. ');
+    return { kind:'pos', q:desc + '. ¿Dónde estará la aeronave ' + a.id + ' dentro de ' + t + ' minutos? (responde "x, y" en NM al este/norte del punto)', unit:'x, y', ans:[a.x + a.vx * t, a.y + a.vy * t], type:'pair', ac:ac, p:{ k:k, t:t, ac:ac }, sol:'Aeronave ' + a.id + ': x = ' + a.x + ' + ' + a.vx + ' × ' + t + ' = ' + (a.x + a.vx * t) + '; y = ' + a.y + ' + ' + a.vy + ' × ' + t + ' = ' + (a.y + a.vy * t) + '.' }; });
+T('predfirst', 'Prediction', '¿Cuál llega primero? (horas de paso)', {
+  nudge:'Compara tiempos, no distancias ni velocidades.', method:'Tiempo hasta el punto (min) = 60 x distancia / GS para cada aeronave; llega primero la del menor tiempo. Calcula las NM por minuto de cada una.',
+  example:'A: 30 NM a 240 kt = 7.5 min; B: 20 NM a 180 kt = 6.7 min -> B primero.', when:'Secuenciación, decidir a quién reducir velocidad, conflicto en un punto de convergencia.', tf:2 },
+  function(r, d){ const n = Math.max(2, acCount(r, d)); const ac = []; for (let i = 0; i < n; i++){ const gs = 30 * ri(r, 4, 14); ac.push({ id:LBL[i], dist:5 * ri(r, 4, span(d, 12, 12, 30, 30)[1]), gs:gs, t:0 }); }
+    ac.forEach(function(c){ c.t = c.dist * 60 / c.gs; }); const last = r() < .3; const ts = ac.map(function(c){ return c.t; }); const best = last ? Math.max.apply(null, ts) : Math.min.apply(null, ts);
+    if (ac.filter(function(c){ return Math.abs(c.t - best) < 1e-9; }).length !== 1) return null; const win = ac.filter(function(c){ return Math.abs(c.t - best) < 1e-9; })[0];
+    if (ac.some(function(c, i){ return ac.some(function(o, j){ return i < j && Math.abs(c.t - o.t) < 0.25; }); })) return null;
+    return { kind:'first', q:'Todas se dirigen directamente al mismo punto: ' + ac.map(function(c){ return c.id + ' ' + c.dist + ' NM a GS ' + c.gs + ' kt'; }).join('; ') + '. ¿Cuál llega ' + (last ? 'la ÚLTIMA' : 'la PRIMERA') + '?', ans:win.id, type:'choice', opts:ac.map(function(c){ return c.id; }), est:false, p:{ ac:ac, last:last }, sol:ac.map(function(c){ return c.id + ': ' + c.dist + ' NM × 60 / ' + c.gs + ' = ' + fnum(Math.round(c.t * 100) / 100) + ' min'; }).join('; ') + ' -> llega ' + (last ? 'la última' : 'la primera') + ': ' + win.id + '.' }; });
+T('predovertake', 'Prediction', '¿Cuándo adelanta A a B?', {
+  nudge:'Solo la diferencia de velocidad cierra la distancia.', method:'Tiempo = 60 x distancia / (GS_A - GS_B) minutos. Si la más rápida va detrás, la distancia se cierra con la diferencia de velocidades.',
+  example:'A va 20 NM detrás de B; A 300 kt, B 240 kt: 60 kt = 1 NM/min: 20 min.', when:'Tráfico en la misma ruta, control de velocidad, decidir si vectorizar o reducir velocidad.', tf:2 },
+  function(r, d){ const gb = 30 * ri(r, 5, 12), diff = 10 * ri(r, 1, span(d, 6, 6, 12, 12)[1]); const ga = gb + diff; const t = ri(r, 3, span(d, 10, 10, 40, 40)[1]); const g = diff * t / 60; if (!isInt(g)) return null;
+    return { kind:'overtake', q:'A y B en la misma ruta, A ' + g + ' NM detrás de B. GS A ' + ga + ' kt, GS B ' + gb + ' kt. ¿En cuántos minutos alcanza A a B?', unit:'min', ans:t, type:'num', p:{ g:g, ga:ga, gb:gb }, sol:'Velocidad de aproximación ' + ga + ' − ' + gb + ' = ' + diff + ' kt = ' + fnum(diff / 60) + ' NM/min; ' + g + ' / ' + fnum(diff / 60) + ' = ' + t + ' min.' }; });
+T('predreach', 'Prediction', 'Tiempo hasta el punto', {
+  nudge:'Divide la distancia entre las NM por minuto.', method:'Minutos = distancia / (GS / 60). Lee la distancia en la cuadrícula: en una línea que pasa por el punto es |x| o |y|.',
+  example:'En (-48, 0) volando al este a 4 NM/min hacia el punto en (0, 0): 12 min.', when:'ETA en un punto, momento de la transferencia, coordinación.', tf:1.8 },
+  function(r, d){ const s = ri(r, 2, 8); const t = ri(r, 3, span(d, 12, 12, 30, 30)[1]); const D = s * t; const dir = pick(r, [[1, 0], [-1, 0], [0, 1], [0, -1]]); const n = acCount(r, d);
+    const x0 = -dir[0] * D, y0 = -dir[1] * D; const others = []; for (let i = 1; i < n; i++){ const v = velPick(r, d); others.push('Aeronave ' + LBL[i] + ' en (' + ri(r, -40, 40) + ', ' + ri(r, -40, 40) + ') ' + velText(v) + ' (no implicada)'); }
+    return { kind:'reach', q:'Aeronave A en (' + x0 + ', ' + y0 + ') ' + velText([dir[0] * s, dir[1] * s]) + ', dirigiéndose al punto en (0, 0). ' + others.join('. ') + (others.length ? '. ' : '') + '¿Minutos hasta que A llegue al punto?', unit:'min', ans:t, type:'num', p:{ D:D, s:s }, sol:'Distancia = ' + D + ' NM; velocidad = ' + s + ' NM/min; ' + D + ' / ' + s + ' = ' + t + ' min.' }; });
+T('predtod', 'Prediction', 'Distancia necesaria para perder altura (3:1)', {
+  nudge:'Tres millas por millar de pies; luego pasa a tiempo con las NM por minuto.', method:'Distancia = 3 x miles de pies. Tiempo = distancia / (GS/60). Régimen requerido = altitud / tiempo.',
+  example:'Perder 4000 ft a 3:1 = 12 NM; a GS 240 (4 NM/min) tarda 3 min.', when:'Planificar descensos para llegar a un punto y nivel, comprobar que una autorización es factible.', tf:1.8 },
+  function(r, d){ const k = rs(r, d, 2, 6, 8, 22); const v = pick(r, ['dist', 'time', 'startdist']); const gs = 30 * ri(r, 5, 12);
+    if (v === 'dist') return { kind:'tod:dist', q:'Debes perder ' + k * 1000 + ' ft antes del punto. ¿Distancia necesaria a 3:1 (NM)?', unit:'NM', ans:3 * k, type:'num', p:{ k:k }, sol:k + ' × 3 = ' + 3 * k + ' NM.' };
+    const t = 3 * k * 60 / gs; if (!isInt(t)) return null;
+    if (v === 'time') return { kind:'tod:time', q:'Pierdes ' + k * 1000 + ' ft a 3:1 con GS ' + gs + ' kt. ¿Cuántos minutos dura el descenso?', unit:'min', ans:t, type:'num', p:{ k:k, gs:gs }, sol:'Distancia ' + 3 * k + ' NM; ' + gs + ' kt = ' + fnum(gs / 60) + ' NM/min; ' + 3 * k + ' / ' + fnum(gs / 60) + ' = ' + t + ' min.' };
+    const more = ri(r, 3, 20); return { kind:'tod:start', q:'Una aeronave a ' + (3 * k + more) + ' NM del punto debe perder ' + k * 1000 + ' ft al llegar al punto a 3:1. ¿Tras cuántas NM de vuelo a nivel debe iniciar el descenso?', unit:'NM', ans:more, type:'num', p:{ k:k, D:3 * k + more }, sol:'El descenso necesita ' + 3 * k + ' NM; ' + (3 * k + more) + ' − ' + 3 * k + ' = ' + more + ' NM.' }; });
+T('preddist', 'Prediction', 'Distancia entre dos aeronaves tras N minutos', {
+  nudge:'Rutas opuestas: suma. Rutas perpendiculares: piensa en 3-4-5.', method:'Rutas opuestas: distancia +/- (v1+v2) x t. Rutas perpendiculares desde el mismo punto: distancia = raíz((vx t)^2 + (vy t)^2); con velocidades de 3 y 4 NM/min son exactamente 5 NM por minuto (también 6-8-10, 5-12-13).',
+  example:'A al este 3 NM/min, B al norte 4 NM/min desde el mismo punto: tras 6 min: 18 y 24 -> 30 NM.', when:'Estimar la separación, decidir si se desarrolla un conflicto.', tf:2 },
+  function(r, d){ const t = ri(r, 2, span(d, 8, 8, 20, 20)[1]);
+    if (d <= 4 || r() < .5){ const v1 = ri(r, 2, 6), v2 = ri(r, 2, 6), g = 5 * ri(r, 2, 12); const conv = r() < .5;
+      if (conv){ const sep = g - (v1 + v2) * t; if (sep < 0) return null; return { kind:'dist:opp', q:'A y B en la misma línea, a ' + g + ' NM, volando uno hacia el otro a ' + v1 + ' y ' + v2 + ' NM/min. ¿Distancia entre ellos tras ' + t + ' minutos?', unit:'NM', ans:sep, type:'num', p:{ g:g, v1:v1, v2:v2, t:t, conv:true }, sol:'Aproximación ' + (v1 + v2) + ' NM/min × ' + t + ' = ' + (v1 + v2) * t + '; ' + g + ' − ' + (v1 + v2) * t + ' = ' + sep + ' NM.' }; }
+      return { kind:'dist:opp', q:'A y B parten separados ' + g + ' NM en la misma línea y se alejan uno del otro a ' + v1 + ' y ' + v2 + ' NM/min. ¿Distancia entre ellos tras ' + t + ' minutos?', unit:'NM', ans:g + (v1 + v2) * t, type:'num', p:{ g:g, v1:v1, v2:v2, t:t, conv:false }, sol:'La separación crece ' + (v1 + v2) + ' NM/min × ' + t + ' = ' + (v1 + v2) * t + '; + ' + g + ' = ' + (g + (v1 + v2) * t) + ' NM.' }; }
+    const tri = pick(r, [[3, 4, 5], [6, 8, 10], [5, 12, 13]]); const sw = r() < .5; const a = sw ? tri[1] : tri[0], b = sw ? tri[0] : tri[1];
+    return { kind:'dist:perp', q:'A y B salen del mismo punto: A vuela al este a ' + a * 60 + ' kt, B vuela al norte a ' + b * 60 + ' kt. ¿Distancia entre ellos tras ' + t + ' minutos (NM)?', unit:'NM', ans:tri[2] * t, type:'num', p:{ a:a, b:b, t:t }, sol:a + ' y ' + b + ' NM/min: un triángulo ' + a + '-' + b + '-' + tri[2] + ', así que ' + tri[2] + ' NM por minuto × ' + t + ' = ' + tri[2] * t + ' NM.' }; });
+T('predcross', 'Prediction', 'Dos aeronaves hacia un punto de cruce (diferencia de tiempo)', {
+  nudge:'Calcula el tiempo de cada aeronave hasta el punto de cruce y resta.', method:'t_i = 60 x d_i / GS_i. La diferencia entre llegadas = |t_1 - t_2|. Compárala con la separación requerida (p. ej., 5 min).',
+  example:'A: 40 NM a 240 kt = 10 min; B: 30 NM a 180 kt = 10 min -> diferencia 0 (conflicto).', when:'Tráfico que se cruza, flujos que convergen, decidir cambios de velocidad o de nivel.', tf:2 },
+  function(r, d){ const gsA = 30 * ri(r, 5, 14), gsB = 30 * ri(r, 5, 14); const tA = ri(r, 4, span(d, 14, 14, 30, 30)[1]), tB = ri(r, 4, span(d, 14, 14, 30, 30)[1]); const dA = gsA * tA / 60, dB = gsB * tB / 60; if (!isInt(dA) || !isInt(dB) || tA === tB && d <= 3) return null;
+    return { kind:'cross', q:'La aeronave A está a ' + dA + ' NM y la B a ' + dB + ' NM del mismo punto de cruce, GS ' + gsA + ' y ' + gsB + ' kt. ¿Cuántos minutos hay entre sus llegadas?', unit:'min', ans:Math.abs(tA - tB), type:'num', p:{ dA:dA, gsA:gsA, dB:dB, gsB:gsB }, sol:'A: ' + dA + ' × 60 / ' + gsA + ' = ' + tA + ' min; B: ' + dB + ' × 60 / ' + gsB + ' = ' + tB + ' min; diferencia = ' + Math.abs(tA - tB) + ' min.' }; });
+
+/* ---------- Item construction ---------- */
+function makeItem(id, d, r, ndist){
+  const t = TECH[id]; const it = retry(function(){ return t.gen(r, d); });
+  it.tech = id; it.cat = t.cat; it.name = t.name; it.d = d; it.tf = t.tf || 1;
+  if (it.est === undefined) it.est = (it.type === 'num');
+  it.hints = [t.nudge, t.method, it.sol];
+  it.dist = makeDistractors(r, ndist || 0);
+  return it;
+}
+// Independent verification (different formulas from the generators; uses only item.p / item.kind).
+const VER = {
+  mul5:p => p.n * 5, mul9:p => p.n * p.m, mul11:p => p.n * 11, mul25:p => p.n * 25, mul99:p => p.n * p.m,
+  sq5:p => p.n * p.n, sq50:p => p.n * p.n, sq100:p => p.n * p.n, diffsq:p => p.a * p.b,
+  addlr:p => p.nums.reduce((s, x) => s + x, 0),
+  comp100:p => p.tot - p.nums.reduce((s, x) => s + x, 0), comp1000:p => p.tot - p.nums.reduce((s, x) => s + x, 0),
+  pct:p => p.p * p.N / 100, frac:p => p.n / p.d, div5:p => p.n / 5, div9:p => p.n / 9, div11:p => p.n / 11,
+  nines:p => (p.a * p.b === p.c ? 'S' : 'N'), 'est:mul':p => p.a * p.b, 'est:div':p => p.a / p.b, dblhalve:p => p.a * p.b, distrib:p => p.a * p.b,
+  'dst:dist':p => p.gs * (p.m / 60), 'dst:time':p => p.x / (p.gs / 60), 'dst:speed':p => p.x / (p.m / 60),
+  'nmpm:6':p => p.gs / 10, 'nmpm:3':p => p.gs / 20, 'nmpm:12':p => p.gs / 5, 'nmpm:15':p => p.gs / 4, 'nmpm:pm':p => p.gs / 60,
+  '1in60:hdg':p => p.X / p.Y * 60, '1in60:off':p => p.a * (p.Y / 60), '1in60:both':p => 60 * p.X * (1 / p.Y + 1 / p.Z),
+  'desc31:dist':p => p.k * 3, 'desc31:alt':p => p.k * 3 / 3 * 1000, 'desc31:tod':p => ((p.hi - p.lo) * 100) / 1000 * 3, 'desc31:rem':p => p.dist - ((p.hi - p.lo) * 100) / 1000 * 3,
+  'rod:rod':p => p.gs * 5, 'rod:gs':p => p.rod / 5, 'rod:time':p => p.alt / p.rod,
+  'grad:ftnm':p => p.g * 60, 'grad:pct':p => p.ft / 60, 'grad:fpm':p => p.g * 60 * (p.gs / 60), 'grad:gain':p => p.g * p.nm * 60,
+  'conv:kt2k':p => p.kt * 1.85, 'conv:k2kt':p => Math.round(p.k / 1.85), 'conv:nm2km':p => p.nm * 1.85, 'conv:km2nm':p => Math.round(p.km / 1.85),
+  'alt:f2m':p => p.ft * 0.3, 'alt:m2f':p => Math.round(p.m / 0.3), 'alt:fl2m':p => p.fl * 100 * 0.3,
+  'press:h2i':p => Math.round(p.h * 100 / 33.86) / 100, 'press:i2h':p => Math.round(p.i * 33.86),
+  'tas:tas':p => p.ias + p.ias * 0.02 * p.k, 'tas:ias':p => p.tas / (1 + 0.02 * p.k),
+  'isa:isa':p => 15 - 2 * p.k, 'isa:dev':p => p.oat - (15 - 2 * p.k), 'isa:oat':p => 15 - 2 * p.k + p.dv,
+  'mach:tas':p => (p.M100 / 100) * p.a, 'mach:m':p => p.tas / p.a,
+  'wind:head':p => Math.round(p.W * COSF[p.A] * 10) / 10, 'wind:cross':p => Math.round(p.W * SINF[p.A] * 10) / 10,
+  'drift:deg':p => 60 * p.xw / p.tas, 'drift:hdg':p => { const dg = 60 * p.xw / p.tas; let h = (p.trk + (p.right ? 1 : -1) * dg) % 360; if (h <= 0) h += 360; return h; },
+  'closing:cs':p => p.opp ? p.v1 + p.v2 : Math.max(p.v1, p.v2) - Math.min(p.v1, p.v2), 'closing:time':p => p.D * 60 / (p.opp ? p.v1 + p.v2 : Math.abs(p.v1 - p.v2)), 'closing:dist':p => p.t * (p.opp ? p.v1 + p.v2 : Math.abs(p.v1 - p.v2)) / 60,
+  'intrail:nm':p => p.gs / 3600 * p.s, 'intrail:s':p => p.x / p.gs * 3600,
+  'utc:toutc':p => (((p.t - p.o * 60) % 1440) + 1440) % 1440, 'utc:toloc':p => (((p.t + p.o * 60) % 1440) + 1440) % 1440, 'utc:arr':p => (p.t + p.blk) % 1440,
+  'utc:arrloc':p => (((p.t + p.blk + (p.o2 - p.o1) * 60) % 1440) + 1440) % 1440,
+  'fuel:burn':p => p.f / 60 * p.m, 'fuel:end':p => p.x / (p.f / 60), 'fuel:usable':p => p.x / (p.f / 60) - p.res,
+  'turn:time':p => p.a / 3, 'turn:bank':p => p.tas * 0.15, 'turn:circle':p => (p.tas / 60) * 2,
+  wake:p => 3600 / p.gs * p.nm,
+  pos:p => { const a = p.ac[p.k]; let x = a.x, y = a.y; for (let i = 0; i < p.t * 2; i++){ x += a.vx / 2; y += a.vy / 2; } return [x, y]; },
+  first:p => { let bi = 0; p.ac.forEach((c, i) => { const better = p.last ? (c.dist / c.gs > p.ac[bi].dist / p.ac[bi].gs) : (c.dist / c.gs < p.ac[bi].dist / p.ac[bi].gs); if (better) bi = i; }); return p.ac[bi].id; },
+  overtake:p => p.g / ((p.ga - p.gb) / 60), reach:p => p.D / p.s,
+  'tod:dist':p => p.k * 3, 'tod:time':p => (p.k * 3) / (p.gs / 60), 'tod:start':p => p.D - p.k * 3,
+  'dist:opp':p => p.conv ? p.g - (p.v1 + p.v2) * p.t : p.g + (p.v1 + p.v2) * p.t, 'dist:perp':p => Math.hypot(p.a * p.t, p.b * p.t),
+  cross:p => Math.abs(p.dA / (p.gsA / 60) - p.dB / (p.gsB / 60))
+};
+function verifyItem(it){
+  const f = VER[it.kind]; if (!f) return { ok:false, why:'no verifier for ' + it.kind };
+  const e = f(it.p);
+  if (it.type === 'pair') return { ok:Array.isArray(it.ans) && Math.abs(e[0] - it.ans[0]) < 1e-9 && Math.abs(e[1] - it.ans[1]) < 1e-9, why:'pair ' + JSON.stringify(e) + ' vs ' + JSON.stringify(it.ans) };
+  if (it.type === 'choice') return { ok:e === it.ans && it.opts.indexOf(it.ans) >= 0 && it.opts.filter(function(o){ return o === e; }).length === 1, why:'choice ' + e + ' vs ' + it.ans };
+  return { ok:Math.abs(e - it.ans) < 1e-6, why:e + ' vs ' + it.ans };
+}
+
+/* ---------- Answer parsing and checking ---------- */
+function parseNum(s){ const t = String(s).trim().replace(/[−–]/g, '-').replace(',', '.'); if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(t)) return NaN; return parseFloat(t); }
+function parseTime(s){ const m = String(s).trim().match(/^(\d{1,2}):?(\d{2})$/); if (!m) return NaN; const h = +m[1], mi = +m[2]; if (h > 23 || mi > 59) return NaN; return h * 60 + mi; }
+function parsePair(s){ const m = String(s).trim().replace(/[−–]/g, '-').match(/^([+-]?\d+)\s*[ ,;\/]\s*([+-]?\d+)$/); return m ? [+m[1], +m[2]] : null; }
+// est = 0 (exact) or 0.05 / 0.10 (estimate-only mode: relative tolerance on numeric items).
+function checkAnswer(it, s, est){
+  s = String(s === null || s === undefined ? '' : s).trim();
+  if (s === '') return { ok:false, blank:true };
+  if (it.type === 'choice') return { ok:s.toUpperCase() === it.ans, blank:false };
+  if (it.type === 'time'){ const v = parseTime(s); return { ok:v === it.ans, blank:false, bad:isNaN(v) }; }
+  if (it.type === 'pair'){ const v = parsePair(s); return { ok:!!v && v[0] === it.ans[0] && v[1] === it.ans[1], blank:false, bad:!v }; }
+  const v = parseNum(s); if (isNaN(v)) return { ok:false, blank:false, bad:true };
+  let tol = Math.max(it.tolAbs || 0, (it.tol || 0) * Math.abs(it.ans), (it.est && est) ? est * Math.abs(it.ans) : 0);
+  return { ok:Math.abs(v - it.ans) <= tol + 1e-9, blank:false };
+}
+function fmtAns(it){
+  if (it.type === 'pair') return '(' + it.ans[0] + ', ' + it.ans[1] + ')';
+  if (it.type === 'time') return hhmm(it.ans);
+  if (it.type === 'choice') return String(it.ans);
+  return fnum(it.ans) + (it.unit ? ' ' + it.unit : '');
+}
+function timeLimit(level, it, estMode, customSec){
+  const base = customSec !== undefined && customSec !== null ? customSec : LEVELS[level].sec;
+  return Math.round(base * (it ? it.tf : 1) * (estMode ? 0.6 : 1) * 10) / 10;
+}
+function hintCap(level, userHints){ return Math.max(0, Math.min(userHints, LEVELS[level].hints)); }
+
+/* ---------- Adaptive engine ---------- */
+const ADAPT = { block:25, need:2, failsDown:2 };
+function adaptNew(level, need){ return { level:level, blockN:0, blockErr:0, okBlocks:0, failBlocks:0, need:need || ADAPT.need }; }
+function allowedErrors(block){ return Math.floor(block * (100 - PASS_ACC) / 100 + 1e-9); }
+// clean = correct, no hint, in time. Returns { st, ev } with ev in null|'block-ok'|'block-fail'|'up'|'down'|'max'.
+function adaptStep(st, clean){
+  const s = Object.assign({}, st); let ev = null; s.blockN++; if (!clean) s.blockErr++;
+  if (s.blockErr > allowedErrors(ADAPT.block)){ // this block can no longer reach 96 %
+    s.failBlocks++; s.okBlocks = 0; s.blockN = 0; s.blockErr = 0; ev = 'block-fail';
+    if (s.failBlocks >= ADAPT.failsDown){ s.failBlocks = 0; if (s.level > 1){ s.level--; ev = 'down'; } }
+  } else if (s.blockN >= ADAPT.block){
+    s.okBlocks++; s.failBlocks = 0; s.blockN = 0; s.blockErr = 0; ev = 'block-ok';
+    if (s.okBlocks >= s.need){ s.okBlocks = 0; if (s.level < 10){ s.level++; ev = 'up'; } else ev = 'max'; }
+  }
+  return { st:s, ev:ev };
+}
+
+/* ---------- Goal, records, stats, CSV ---------- */
+function parseGoal(text){
+  const t = String(text || '').replace(/\s+/g, ' '); const num = function(x){ return parseFloat(x.replace(',', '.')); }; const g = {};
+  const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/); if (mp) g.acc = num(mp[1]);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|segundos|segundo|segs|seg|s)(?![a-z])/i); if (ms) g.spi = num(ms[1]);
+  const ma = t.match(/(\d+)\s*(?:correct|hits|aciertos|acierto|correctas|correcta)/i); if (ma) g.ok = parseInt(ma[1], 10);
+  return (g.acc !== undefined || g.spi !== undefined || g.ok !== undefined) ? g : null;
+}
+function evalGoal(text, r){
+  const g = parseGoal(text); if (!g) return null; let res = true;
+  if (g.acc !== undefined) res = res && r.acc >= g.acc;
+  if (g.spi !== undefined) res = res && r.spi !== null && r.spi !== undefined && r.spi <= g.spi;
+  if (g.ok !== undefined) res = res && r.ok >= g.ok;
+  return res;
+}
+function calcStats(res){ // res = [{ok, blank, clean, secs}]
+  let ok = 0, bad = 0, blank = 0, clean = 0, sec = 0, n = 0, run = 0, best = 0;
+  res.forEach(function(x){ if (x.blank) blank++; else if (x.ok){ ok++; run++; if (run > best) best = run; } else { bad++; run = 0; } if (x.blank) run = 0; if (x.clean) clean++; if (x.secs !== undefined && !x.blank){ sec += x.secs; n++; } });
+  const tot = res.length;
+  return { ok:ok, bad:bad, blank:blank, clean:clean, tot:tot, acc:tot ? ok / tot * 100 : 0, cleanAcc:tot ? clean / tot * 100 : 0, spi:n ? sec / n : null, bestRun:best };
+}
+function csvField(v){ const s = (v === null || v === undefined) ? '' : String(v); return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function dateES(iso){ const d = new Date(iso); return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function toCSV(ses){
+  const head = ['Date', 'Module', 'Level', 'Correct', 'Wrong', 'Blank', 'Seconds per item', 'Accuracy %', 'Goal', 'Met'];
+  const rows = ses.map(function(s){ return [dateES(s.ts), s.mod, s.lvl, s.ok, s.bad, s.blank, (s.spi === null || s.spi === undefined) ? '' : (Math.round(s.spi * 100) / 100).toFixed(2), (Math.round(s.acc * 10) / 10).toFixed(1), s.goal, s.met === true ? 'Sí' : (s.met === false ? 'No' : '')].map(csvField).join(';'); });
+  return '﻿' + [head.join(';')].concat(rows).join('\r\n') + '\r\n';
+}
+// Personal best for a level: best accuracy, best seconds per item among sessions with accuracy >= 96 (valid, no hints).
+function personalBest(ses, lvl){
+  const c = ses.filter(function(s){ return s.lvl === lvl && s.valid && !s.hinted && s.count; });
+  let acc = null, spi = null; c.forEach(function(s){ if (acc === null || s.acc > acc) acc = s.acc; if (s.spi !== null && s.spi !== undefined && (spi === null || s.spi < spi)) spi = s.spi; });
+  return { n:c.length, acc:acc, spi:spi };
+}
+function isRecord(ses, s){ if (!s.valid || s.hinted || !s.count || s.spi === null) return false; const pb = personalBest(ses, s.lvl); return pb.spi !== null && s.spi < pb.spi; }
+function sessionStreak(ses){ let n = 0; for (let i = ses.length - 1; i >= 0; i--){ if (ses[i].count && ses[i].valid) n++; else if (ses[i].count) break; } return n; }
+function dualCost(single, dual){ if (single === null || single === undefined || dual === null || dual === undefined) return null; return { points:single - dual, rel:single > 0 ? (single - dual) / single * 100 : null }; }
+
+/* ---------- Technique statistics, spaced repetition, weak-category focus ---------- */
+const BOX_DAYS = [0, 1, 2, 4, 8, 16];
+function techNew(){ return { n:0, ok:0, clean:0, ms:0, box:0, due:0, last:0 }; }
+function techUpdate(st, ok, clean, secs, now){
+  const s = Object.assign(techNew(), st || {}); s.n++; s.last = now; s.ms += Math.round((secs || 0) * 1000);
+  if (ok){ s.ok++; if (clean){ s.clean++; s.box = Math.min(5, s.box + 1); } } else s.box = 1;
+  s.due = now + BOX_DAYS[s.box] * 86400000; return s;
+}
+function techWeakness(st, now){
+  if (!st || !st.n) return 0.55;
+  const acc = (st.ok + 1) / (st.n + 2); const dueBonus = st.due <= now ? 0.1 : 0;
+  return (1 - acc) * 1.5 + dueBonus + (5 - st.box) * 0.06;
+}
+function pickWeakest(stats, ids, now){
+  let best = null, bs = -1; ids.forEach(function(id){ const w = techWeakness(stats[id], now); if (w > bs){ bs = w; best = id; } }); return best;
+}
+function chooseTech(r, ids, stats, now){
+  const w = ids.map(function(id){ const x = techWeakness(stats[id], now); return 0.2 + 4 * x * x; }); const tot = w.reduce(function(a, b){ return a + b; }, 0); let x = r() * tot;
+  for (let i = 0; i < ids.length; i++){ x -= w[i]; if (x <= 0) return ids[i]; } return ids[ids.length - 1];
+}
+function techIds(focus){ if (focus === 'all') return TECH_ORDER.slice(); if (CATS.indexOf(focus) >= 0) return TECH_ORDER.filter(function(id){ return TECH[id].cat === focus; }); return TECH[focus] ? [focus] : TECH_ORDER.slice(); }
+
+/* ---------- Secondary (dual-task) engines: pure state machines ---------- */
+const DUAL_NAMES = { track:'Seguimiento', monitor:'Vigilancia', callsign:'Indicativos', rules:'Cambio de regla' };
+const DUAL_LOAD = {
+  track:{ speed:[0, 55, 85, 125, 175], radius:[0, 38, 32, 27, 22] },
+  monitor:{ every:[0, 10, 7, 5, 3.5], win:[0, 4, 3.2, 2.5, 1.9] },
+  callsign:{ every:[0, 9, 7, 5, 3.8], show:[0, 5, 4.2, 3.4, 2.7] },
+  rules:{ every:[0, 4.2, 3.2, 2.5, 1.9], sw:[0, 6, 5, 4, 3] }
+};
+function hitScore(hit, miss, fa){ const ev = hit + miss; return ev ? Math.max(0, hit - 0.5 * fa) / ev * 100 : null; }
+function SecTrack(load, rnd){ this.rnd = rnd; this.W = 320; this.H = 200; this.x = 160; this.y = 100; this.ang = rnd() * 6.283; this.sp = DUAL_LOAD.track.speed[load]; this.rad = DUAL_LOAD.track.radius[load]; this.on = 0; this.tot = 0; this.cx = null; this.cy = null; }
+SecTrack.prototype.update = function(dt){
+  this.ang += (this.rnd() - 0.5) * 3.2 * dt; this.x += Math.cos(this.ang) * this.sp * dt; this.y += Math.sin(this.ang) * this.sp * dt;
+  if (this.x < 12){ this.x = 12; this.ang = Math.PI - this.ang; } if (this.x > this.W - 12){ this.x = this.W - 12; this.ang = Math.PI - this.ang; }
+  if (this.y < 12){ this.y = 12; this.ang = -this.ang; } if (this.y > this.H - 12){ this.y = this.H - 12; this.ang = -this.ang; }
+  this.tot += dt; if (this.cx !== null && Math.hypot(this.cx - this.x, this.cy - this.y) <= this.rad) this.on += dt;
+};
+SecTrack.prototype.cursor = function(x, y){ this.cx = x; this.cy = y; };
+SecTrack.prototype.key = function(){ return null; };
+SecTrack.prototype.stats = function(){ return { score:this.tot > 0 ? this.on / this.tot * 100 : null, label:'en el objetivo' }; };
+function SecMonitor(load, rnd){ this.rnd = rnd; this.t = 0; this.every = DUAL_LOAD.monitor.every[load]; this.win = DUAL_LOAD.monitor.win[load]; this.next = this.every * (0.5 + this.rnd()); this.ev = []; this.hit = 0; this.miss = 0; this.fa = 0; this.base = [50, 47, 53, 49]; }
+SecMonitor.prototype.update = function(dt){
+  this.t += dt;
+  if (this.t >= this.next){ this.ev.push({ t0:this.t, t1:this.t + this.win, hit:false, done:false, tile:ri(this.rnd, 0, 3), jump:(this.rnd() < .5 ? 18 : -18) }); this.next = this.t + this.every * (0.6 + 0.8 * this.rnd()); }
+  const me = this; this.ev.forEach(function(e){ if (!e.done && !e.hit && me.t > e.t1){ e.done = true; me.miss++; } });
+};
+SecMonitor.prototype.active = function(){ const me = this; return this.ev.filter(function(x){ return !x.done && !x.hit && me.t >= x.t0 && me.t <= x.t1; })[0] || null; };
+SecMonitor.prototype.tiles = function(){ const a = this.active(); return this.base.map(function(v, i){ return a && a.tile === i ? { v:v + a.jump, alert:true } : { v:v, alert:false }; }); };
+SecMonitor.prototype.key = function(k){
+  if (k !== ' ') return null; const e = this.active();
+  if (e){ e.hit = true; e.done = true; this.hit++; return 'hit'; } this.fa++; return 'false'; };
+SecMonitor.prototype.stats = function(){ return { score:hitScore(this.hit, this.miss, this.fa), label:'eventos detectados', hit:this.hit, miss:this.miss, fa:this.fa }; };
+function SecCall(load, rnd){ this.rnd = rnd; this.t = 0; this.every = DUAL_LOAD.callsign.every[load]; this.show = DUAL_LOAD.callsign.show[load]; this.own = 'IBE' + ri(rnd, 2, 9) + pick(rnd, ['H', 'K', 'R']) + pick(rnd, ['D', 'M', 'T']); this.next = this.every * 0.5; this.cur = null; this.hit = 0; this.miss = 0; this.fa = 0; this.msgs = ['descend FL 100', 'contact 121.3', 'turn left heading 270', 'squawk 4312', 'report passing FL 200', 'cleared direct to fix']; }
+SecCall.prototype.near = function(){ const s = this.own.split(''); const i = ri(this.rnd, 3, 5); const alt = { H:'K', K:'H', R:'B', D:'B', M:'N', T:'F' }; const a = s[i]; s[i] = alt[a] || (a === '2' ? '3' : 'X'); if (s.join('') === this.own) s[i] = 'Z'; return s.join(''); };
+SecCall.prototype.update = function(dt){
+  this.t += dt;
+  if (this.cur && this.t > this.cur.t1){ if (this.cur.own && !this.cur.done) this.miss++; this.cur = null; }
+  if (!this.cur && this.t >= this.next){ const u = this.rnd(); let cs, own = false; if (u < .3){ cs = this.own; own = true; } else if (u < .55) cs = this.near(); else cs = pick(this.rnd, ['VLG', 'RYR', 'AEA', 'EZY']) + ri(this.rnd, 10, 99) + pick(this.rnd, ['A', 'B', 'C']) + pick(this.rnd, ['D', 'F', 'G']);
+    this.cur = { cs:cs, own:own, txt:cs + ', ' + pick(this.rnd, this.msgs), t0:this.t, t1:this.t + this.show, done:false }; this.next = this.t + this.every * (0.6 + 0.8 * this.rnd()); }
+};
+SecCall.prototype.key = function(k){
+  if (k !== 'z' && k !== 'Z') return null; if (this.cur && this.cur.own && !this.cur.done){ this.cur.done = true; this.hit++; return 'hit'; } this.fa++; return 'false'; };
+SecCall.prototype.stats = function(){ return { score:hitScore(this.hit, this.miss, this.fa), label:'llamadas propias respondidas', hit:this.hit, miss:this.miss, fa:this.fa }; };
+function ruleAnswer(rule, n){ return rule === 'P' ? (n % 2 === 0 ? 'Z' : 'X') : (n < 50 ? 'Z' : 'X'); }
+function SecRules(load, rnd){ this.rnd = rnd; this.t = 0; this.every = DUAL_LOAD.rules.every[load]; this.swEvery = DUAL_LOAD.rules.sw[load]; this.rule = 'P'; this.count = 0; this.cur = null; this.tot = 0; this.ok = 0; this.swTot = 0; this.swOk = 0; this.next = 0.3; }
+SecRules.prototype.spawn = function(){ this.count++; let sw = false; if (this.count > 1 && (this.count - 1) % this.swEvery === 0){ this.rule = this.rule === 'P' ? 'S' : 'P'; sw = true; } const n = ri(this.rnd, 10, 99); this.cur = { n:n, rule:this.rule, sw:sw, t1:this.t + this.every, done:false }; };
+SecRules.prototype.finish = function(good){ const c = this.cur; if (!c || c.done) return; c.done = true; this.tot++; if (good) this.ok++; if (c.sw){ this.swTot++; if (good) this.swOk++; } };
+SecRules.prototype.update = function(dt){
+  this.t += dt; if (this.cur && !this.cur.done && this.t > this.cur.t1) this.finish(false);
+  if ((!this.cur || this.cur.done && this.t >= this.cur.t1) && this.t >= this.next){ this.spawn(); this.next = this.t + this.every; }
+};
+SecRules.prototype.key = function(k){ const K = String(k).toUpperCase(); if (K !== 'Z' && K !== 'X') return null; if (!this.cur || this.cur.done) return 'false'; const good = ruleAnswer(this.cur.rule, this.cur.n) === K; this.finish(good); return good ? 'hit' : 'false'; };
+SecRules.prototype.stats = function(){ return { score:this.tot ? this.ok / this.tot * 100 : null, label:'estímulos respondidos correctamente', switchScore:this.swTot ? this.swOk / this.swTot * 100 : null }; };
+function makeSecondary(kind, load, rnd){ return kind === 'track' ? new SecTrack(load, rnd) : kind === 'monitor' ? new SecMonitor(load, rnd) : kind === 'callsign' ? new SecCall(load, rnd) : new SecRules(load, rnd); }
+// ==== PURE LOGIC END ====
+// ==================== USER INTERFACE ====================
+const app = document.getElementById('app');
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+function f1(x){ return (x === null || x === undefined || isNaN(x)) ? '—' : (Math.round(x * 10) / 10).toFixed(1); }
+function f2(x){ return (x === null || x === undefined || isNaN(x)) ? '—' : (Math.round(x * 100) / 100).toFixed(2); }
+function IC(n, c){ return '<svg class="ic' + (c ? ' ' + c : '') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function cssv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#888'; }
+let onKey = null, S = null, menuNotice = '';
+const timers = { tick:null, raf:null, fb:null, dl:null };
+document.addEventListener('keydown', function(e){ if (e.ctrlKey || e.altKey || e.metaKey) return; if (onKey) onKey(e); });
+document.addEventListener('click', function(e){
+  const t = e.target && e.target.closest ? e.target.closest('[data-quit]') : null;
+  if (t){ e.preventDefault(); if (S) finish(true); else menu(); }
+});
+function stopAll(){ if (timers.tick) clearInterval(timers.tick); if (timers.raf) cancelAnimationFrame(timers.raf); if (timers.fb) clearTimeout(timers.fb); if (timers.dl) clearTimeout(timers.dl); timers.tick = null; timers.raf = null; timers.fb = null; timers.dl = null; }
+function show(html){ app.className = ''; app.innerHTML = html; window.scrollTo(0, 0); }
+function topBar(icon, title){ return '<div class="top">' + IC(icon) + '<h1>' + title + '</h1></div>'; }
+function backBtn(target){ return '<button class="btn back" id="back" type="button" title="Esc">' + IC('back') + (target || 'Menú') + '</button>'; }
+function kvRow(k, v){ return '<tr><th>' + k + '</th><td>' + v + '</td></tr>'; }
+
+/* ---------- Endurance (wave 5, schema coord/SCHEMA-thirds.md): identical copy in every game ---------- */
+function atcThirds(results, durationSec){
+  var N = results ? results.length : 0; if (N < 9) return null;
+  var g = [{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0},{n:0,c:0,b:0,s:0}];
+  for (var i = 0; i < N; i++){ var r = results[i]; var k = durationSec > 0 ? Math.min(2, Math.floor(Math.max(0, +r.t || 0) * 3 / durationSec)) : Math.min(2, Math.floor(i * 3 / N));
+    g[k].n++; if (r.blank) g[k].b++; else if (r.ok) g[k].c++; g[k].s += (isFinite(+r.sec) ? +r.sec : 0); }
+  for (var j = 0; j < 3; j++) g[j].s = Math.round(g[j].s * 100) / 100;
+  return g;
+}
+/* ---------- Storage (localStorage inside try/catch; memory fallback) ---------- */
+const STORE_KEY = 'atc_mentalmath_v1';
+let store = { sessions:[], tech:{}, settings:{} }, storeOk = true;
+(function load(){ try { const r = localStorage.getItem(STORE_KEY); if (r){ const o = JSON.parse(r); store = { sessions:o.sessions || [], tech:o.tech || {}, settings:o.settings || {} }; } } catch (e){ storeOk = false; } })();
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); return true; } catch (e){ storeOk = false; return false; } }
+function lastCounted(){ for (let i = store.sessions.length - 1; i >= 0; i--) if (store.sessions[i].count) return store.sessions[i]; return null; }
+function weakestSeen(){ const ids = TECH_ORDER.filter(function(id){ return store.tech[id] && store.tech[id].n >= 3; }); return ids.length ? pickWeakest(store.tech, ids, Date.now()) : null; }
+function techAcc(id){ const t = store.tech[id]; return t && t.n ? t.ok / t.n * 100 : null; }
+const MODE_LABEL = { ladder:'Escalera', adaptive:'Adaptativo', custom:'Personalizado', learn:'Práctica guiada' };
+const MODE_ICON = { ladder:'steps', adaptive:'sliders', custom:'layers', learn:'book' };
+
+/* ---------- Menu ---------- */
+function menu(){
+  stopAll(); S = null;
+  const weak = weakestSeen(); const last = lastCounted();
+  const rows = [
+    ['Q', 'play', 'Rápida', '10'],
+    ['1', 'steps', 'Escalera', last ? 'L' + last.lvl + ' · ' + f1(last.acc) + ' %' : ''],
+    ['2', 'sliders', 'Adaptativo', ''],
+    ['3', 'layers', 'Personalizado', ''],
+    ['4', 'dual', 'Doble tarea', ''],
+    ['5', 'book', 'Técnicas', String(TECH_ORDER.length)],
+    ['6', 'bars', 'Dominio', weak ? TECH[weak].name : ''],
+    ['7', 'history', 'Historial', String(store.sessions.length)]
+  ];
+  if (weak) rows.push(['W', 'target', 'Reforzar', TECH[weak].name]);
+  show('<div class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Cálculo mental</h1></div>' +
+    (menuNotice ? '<p class="msg warnc" role="status">' + esc(menuNotice) + '</p>' : '') +
+    '<div class="list">' + rows.map(function(c){ return '<button type="button" class="li" data-k="' + c[0] + '" title="' + c[0] + '">' + IC(c[1]) + '<span class="nm">' + c[2] + '</span><span class="dt">' + esc(c[3]) + '</span></button>'; }).join('') + '</div>');
+  menuNotice = '';
+  Array.prototype.forEach.call(app.querySelectorAll('.li'), function(b){ b.addEventListener('click', function(){ goMenu(b.dataset.k); }); });
+  onKey = function(e){ // preventDefault: otherwise the hotkey character is typed into the input that the next screen focuses
+    if ((e.key === 'q' || e.key === 'Q')){ e.preventDefault(); quickStart(); } else if (e.key.length === 1 && e.key >= '1' && e.key <= '7'){ e.preventDefault(); goMenu(e.key); } else if ((e.key === 'w' || e.key === 'W') && weak){ e.preventDefault(); setup('ladder', { focus:'weak' }); } };
+}
+function quickStart(){ const L = LEVELS[1]; startSession({ mode:'ladder', level:1, hints:3, items:10, sec:L.sec, dist:0, num:1, load:1, est:0, dual:'off', focus:'all', goal:'96 %' }); }
+function goMenu(k){
+  if (k === 'Q') quickStart(); else if (k === 'W') setup('ladder', { focus:'weak' });
+  else if (k === '1') setup('ladder'); else if (k === '2') setup('adaptive'); else if (k === '3') setup('custom'); else if (k === '4') setup('ladder', { dual:'track' });
+  else if (k === '5') learnList(); else if (k === '6') skillMap(); else if (k === '7') history();
+}
+
+/* ---------- Setup ---------- */
+function selHtml(id, opts, val){ return '<select id="' + id + '">' + opts.map(function(o){ return '<option value="' + o[0] + '"' + (String(o[0]) === String(val) ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select>'; }
+function levelOpts(){ const o = []; for (let l = 1; l <= 10; l++) o.push([l, l + ' ' + LEVELS[l].name]); return o; }
+const HINT_OPTS = [[0, 'No'], [1, 'Indicio'], [2, 'Método'], [3, 'Solución']];
+function focusOpts(){
+  const o = [['all', 'Todas'], ['weak', 'Más débil'], ['Arithmetic', 'Aritmética'], ['Aviation', 'Aviación'], ['Prediction', 'Predicción']];
+  return o.concat(TECH_ORDER.map(function(id){ return [id, catName(TECH[id].cat) + ': ' + TECH[id].name]; }));
+}
+function fr(label, ctl, forId){ return '<div class="fr"><label' + (forId ? ' for="' + forId + '"' : '') + '>' + label + '</label>' + ctl + '</div>'; }
+function setup(mode, pre){
+  stopAll(); S = null; pre = pre || {};
+  const c = Object.assign({ level:3, num:4, sec:12, items:20, dist:1, hints:2, est:0, dual:'off', load:2, focus:'all', goal:'96 %', need:2, len:50, start:2 }, store.settings[mode] || {}, pre);
+  if (c.dual === undefined) c.dual = 'off';
+  let body = '';
+  if (mode === 'ladder') body += fr('Nivel', selHtml('level', levelOpts(), c.level), 'level') + fr('Pistas', selHtml('hints', HINT_OPTS, c.hints), 'hints');
+  if (mode === 'adaptive') body += fr('Inicio', selHtml('start', levelOpts().slice(0, 4), c.start), 'start') + fr('Bloques', selHtml('need', [[1, '1'], [2, '2'], [3, '3']], c.need), 'need') +
+    fr('Longitud', selHtml('len', [[25, '25'], [50, '50'], [75, '75'], [100, '100']], c.len), 'len') + fr('Pistas', selHtml('hints', HINT_OPTS, c.hints), 'hints');
+  if (mode === 'custom') body +=
+    fr('Dificultad <b id="numv"></b>', '<input type="range" id="num" min="1" max="10" step="1" value="' + c.num + '">', 'num') +
+    fr('Segundos <b id="secv"></b>', '<input type="range" id="sec" min="0" max="40" step="0.5" value="' + c.sec + '">', 'sec') +
+    fr('Elementos <b id="itemsv"></b>', '<input type="range" id="items" min="5" max="60" step="1" value="' + c.items + '">', 'items') +
+    fr('Distractores <b id="distv"></b>', '<input type="range" id="dist" min="0" max="4" step="1" value="' + c.dist + '">', 'dist') +
+    fr('Pistas', selHtml('hints', HINT_OPTS, c.hints), 'hints') +
+    fr('Carga <b id="loadv"></b>', '<input type="range" id="load" min="1" max="4" step="1" value="' + c.load + '">', 'load');
+  body += fr('Enfoque', selHtml('focus', focusOpts(), c.focus), 'focus') +
+    fr('Respuestas', selHtml('est', [[0, 'Exactas'], [0.05, 'Estimación ±5 %'], [0.10, 'Estimación ±10 %']], c.est), 'est') +
+    fr('Segunda tarea', selHtml('dual', [['off', 'No'], ['track', 'Seguimiento'], ['monitor', 'Vigilancia'], ['callsign', 'Indicativo'], ['rules', 'Reglas']], c.dual), 'dual') +
+    fr('Objetivo', '<input type="text" id="goal" maxlength="80" autocomplete="off" placeholder="96 %, 6 s, 20 aciertos" value="' + esc(c.goal) + '">', 'goal');
+  show(backBtn() + topBar(MODE_ICON[mode], MODE_LABEL[mode]) + '<div class="form narrow">' + body + '</div><div id="anti"></div><p id="err" class="msg err" role="alert"></p>' +
+    '<div class="actions"><button class="btn primary" id="go" title="Enter">' + IC('play') + 'Empezar</button></div>');
+  const g = function(id){ return $(id) ? $(id).value : undefined; };
+  function read(){
+    const r = { mode:mode, focus:g('focus'), est:+g('est'), dual:g('dual'), goal:g('goal').trim() };
+    if (mode === 'ladder'){ r.level = +g('level'); r.hints = +g('hints'); const L = LEVELS[r.level]; r.items = L.items; r.sec = L.sec; r.dist = L.dist; r.num = L.n; r.load = L.dual; }
+    if (mode === 'adaptive'){ r.start = +g('start'); r.level = r.start; r.need = +g('need'); r.len = +g('len'); r.hints = +g('hints'); r.items = r.len; r.load = LEVELS[r.level].dual; r.num = r.level; r.sec = LEVELS[r.level].sec; r.dist = LEVELS[r.level].dist; }
+    if (mode === 'custom'){ r.num = +g('num'); r.level = r.num; r.sec = +g('sec'); r.items = +g('items'); r.dist = +g('dist'); r.hints = +g('hints'); r.load = +g('load'); }
+    return r;
+  }
+  function refresh(){
+    const r = read();
+    if (mode === 'custom'){ $('numv').textContent = r.num; $('secv').textContent = r.sec ? r.sec : 'sin límite'; $('itemsv').textContent = r.items; $('distv').textContent = r.dist; $('loadv').textContent = r.load; }
+    const aa = antiAccel(lastCounted(), { level:mode === 'adaptive' ? r.start : r.num, sec:mode === 'adaptive' ? undefined : (r.sec || 999) });
+    const wasOvr = !!($('ovr') && $('ovr').checked);
+    $('anti').innerHTML = aa.warn ? '<p class="err"><b>' + esc(aa.msg) + '</b></p><p><label class="chk"><input type="checkbox" id="ovr"> Forzar</label></p>' : '';
+    if (aa.warn && wasOvr) $('ovr').checked = true;
+    return aa;
+  }
+  Array.prototype.forEach.call(app.querySelectorAll('input,select'), function(el){ el.addEventListener('input', refresh); el.addEventListener('change', refresh); });
+  refresh();
+  const go = function(){
+    const r = read(); const aa = refresh();
+    if (!parseGoal(r.goal)){ $('err').textContent = 'Falta el objetivo'; $('goal').focus(); return; }
+    if (aa.warn && !($('ovr') && $('ovr').checked)){ $('err').textContent = 'Marca Forzar'; return; }
+    r.override = aa.warn; store.settings[mode] = Object.assign({}, r); save(); startSession(r);
+  };
+  $('go').addEventListener('click', go); $('back').addEventListener('click', menu);
+  onKey = function(e){ if (e.key === 'Escape') menu(); else if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && e.target.type !== 'checkbox'){ e.preventDefault(); go(); } };
+  if (!window.matchMedia('(pointer:coarse)').matches){ $('goal').focus(); $('goal').select(); }
+}
+
+/* ---------- Session ---------- */
+function startSession(cfg){
+  const ids = cfg.focus === 'weak' ? [pickWeakest(store.tech, TECH_ORDER, Date.now()) || TECH_ORDER[0]] : techIds(cfg.focus);
+  S = { cfg:cfg, mode:cfg.mode, rnd:mulberry32((Date.now() ^ 0x5bd1e995) >>> 0), results:[], ids:ids, est:cfg.est || 0, ad:cfg.mode === 'adaptive' ? adaptNew(cfg.start, cfg.need) : null,
+    phase:'idle', item:null, hints:0, flash:'', banner:'', evs:[], techErr:{}, minL:cfg.level, maxL:cfg.level, secKind:(cfg.dual && cfg.dual !== 'off' && cfg.mode !== 'learn') ? cfg.dual : null, sec:null, lastTs:0, t0:0, limit:0, done:false };
+  show('<div id="main"><div class="head" id="head"></div><div class="bar" id="tb"><div id="tbi"></div></div><div id="area"></div></div>' + (S.secKind ? '<aside id="sec"></aside>' : ''));
+  if (S.secKind){ app.className = 'dual'; initSec(); }
+  timers.tick = setInterval(tick, 100);
+  onKey = sessionKey;
+  nextItem();
+}
+function params(){
+  const c = S.cfg;
+  if (c.mode === 'adaptive'){ const L = LEVELS[S.ad.level]; return { num:L.n, sec:L.sec, dist:L.dist, hcap:hintCap(L.n, c.hints), lvl:L.n }; }
+  if (c.mode === 'ladder'){ const L = LEVELS[c.level]; return { num:L.n, sec:L.sec, dist:L.dist, hcap:hintCap(L.n, c.hints), lvl:L.n }; }
+  if (c.mode === 'custom') return { num:c.num, sec:c.sec, dist:c.dist, hcap:hintCap(c.num, c.hints), lvl:c.num };
+  return { num:c.num, sec:0, dist:0, hcap:3, lvl:c.num };
+}
+function nextItem(){
+  if (S.results.length >= S.cfg.items) return finish(false);
+  const p = params(); const id = chooseTech(S.rnd, S.ids, store.tech, Date.now());
+  S.item = makeItem(id, p.num, S.rnd, p.dist); S.p = p; S.hints = 0; S.phase = 'ask'; S.t0 = performance.now();
+  S.limit = p.sec > 0 ? timeLimit(p.lvl, S.item, S.est > 0, p.sec) : 0;
+  if (timers.dl){ clearTimeout(timers.dl); timers.dl = null; }
+  if (S.limit){ const my = S, it = S.item; timers.dl = setTimeout(function(){ if (S === my && S.phase === 'ask' && S.item === it) submit('', true); }, S.limit * 1000); }
+  if (S.sec) S.paused = false;
+  renderItem(); updHead();
+}
+function updHead(){
+  const c = S.cfg, p = S.p || params(); const st = calcStats(S.results);
+  if (!$('head')) return;
+  $('head').innerHTML = '<span class="hm">' + IC(c.mode === 'learn' ? 'book' : 'calc') + MODE_LABEL[c.mode] + '</span>' + (S.est ? '<span>±' + S.est * 100 + ' %</span>' : '') + '<span class="sp"></span>' +
+    '<span>L' + p.lvl + '</span><span>' + Math.min(S.results.length + 1, c.items) + ' / ' + c.items + '</span><span title="Aciertos">' + IC('check', 'sm') + st.ok + '</span><span>' + (st.tot ? f1(st.cleanAcc) + ' %' : '—') + '</span>' + (S.limit ? '<span>' + f1(S.limit) + ' s</span>' : '') +
+    '<button class="ico" data-quit type="button" aria-label="Salir">' + IC('x', 'sm') + '</button>';
+  $('tb').style.visibility = S.limit ? 'visible' : 'hidden';
+}
+function radar(ac){
+  const m = Math.max.apply(null, ac.map(function(a){ return Math.max(Math.abs(a.x), Math.abs(a.y), Math.abs(a.x + a.vx * 3), Math.abs(a.y + a.vy * 3)); })) + 8; const sc = 140 / m; const X = function(x){ return 150 + x * sc; }, Y = function(y){ return 150 - y * sc; };
+  const step = m > 60 ? 20 : (m > 30 ? 10 : 5); let g = '';
+  for (let v = -Math.floor(m / step) * step; v <= m; v += step){ g += '<line class="rd-g" x1="' + X(v) + '" y1="10" x2="' + X(v) + '" y2="290"/><line class="rd-g" x1="10" y1="' + Y(v) + '" x2="290" y2="' + Y(v) + '"/>'; }
+  g += '<line class="rd-a" x1="150" y1="10" x2="150" y2="290"/><line class="rd-a" x1="10" y1="150" x2="290" y2="150"/><text class="rd-t" x="292" y="146" text-anchor="end">E</text><text class="rd-t" x="154" y="20">N</text><rect class="rd-f" x="146" y="146" width="8" height="8"/><text class="rd-tf" x="158" y="162">punto</text>';
+  ac.forEach(function(a){ g += '<line class="rd-v" x1="' + X(a.x) + '" y1="' + Y(a.y) + '" x2="' + X(a.x + a.vx * 3) + '" y2="' + Y(a.y + a.vy * 3) + '"/><circle class="rd-c" cx="' + X(a.x) + '" cy="' + Y(a.y) + '" r="6"/><text class="rd-l" x="' + (X(a.x) + 9) + '" y="' + (Y(a.y) - 7) + '">' + a.id + '</text>'; });
+  return '<svg class="radar" viewBox="0 0 300 300" role="img" aria-label="Cuadrícula radar">' + g + '</svg><p class="center small muted">' + step + ' NM &middot; guiones 3 min</p>';
+}
+function renderItem(){
+  const it = S.item; const hc = S.p.hcap;
+  const input = it.type === 'choice'
+    ? '<div class="optrow">' + it.opts.map(function(o){ return '<button class="btn" data-o="' + o + '">' + o + '</button>'; }).join('') + '</div>'
+    : '<p class="center"><input type="text" id="ans" class="answer" autocomplete="off" inputmode="' + (it.type === 'num' && it.ans >= 0 ? 'decimal' : 'text') + '" aria-label="Respuesta"' + (it.type === 'time' ? ' placeholder="HHMM"' : '') + (it.type === 'pair' ? ' placeholder="x, y"' : '') + '></p>' +
+      (it.unit ? '<p class="center muted">' + esc(it.unit) + '</p>' : '');
+  $('area').innerHTML = (S.banner ? '<p class="banner">' + S.banner + '</p>' : '') +
+    (it.dist.length ? '<ul class="dist">' + it.dist.map(function(d){ return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>' : '') +
+    '<p class="center small muted">' + esc(catName(it.cat)) + '</p>' +
+    '<div class="question' + (it.q.length > 34 ? ' long' : '') + '" id="q">' + esc(it.q) + '</div>' + (it.ac ? radar(it.ac) : '') + input +
+    '<div id="hintbox"></div>' + (hc > 0 ? '<p class="center"><button class="btn" id="hbtn" type="button" title="H">' + IC('bulb', 'sm') + 'Pista <span id="hleft">' + hc + '</span></button></p>' : '') +
+    '<div class="fb" id="fb" aria-live="polite">' + S.flash + '</div>';
+  S.flash = ''; S.banner = '';
+  if ($('hbtn')) $('hbtn').addEventListener('click', giveHint);
+  Array.prototype.forEach.call(app.querySelectorAll('[data-o]'), function(b){ b.addEventListener('click', function(){ submit(b.dataset.o, false); }); });
+  if ($('ans')) $('ans').focus();
+}
+function giveHint(){
+  if (S.phase !== 'ask' || S.hints >= S.p.hcap) return;
+  S.hints++; const t = S.item.hints[S.hints - 1];
+  $('hintbox').insertAdjacentHTML('beforeend', '<p class="hinttxt"><b>' + S.hints + '</b> ' + esc(t) + '</p>');
+  $('hleft').textContent = S.p.hcap - S.hints; if ($('ans')) $('ans').focus();
+}
+function tick(){
+  if (!S || S.phase !== 'ask' || !S.limit) return;
+  const el = (performance.now() - S.t0) / 1000; const f = Math.max(0, 1 - el / S.limit);
+  if ($('tbi')) $('tbi').style.width = (f * 100) + '%'; if ($('tb')) $('tb').className = 'bar' + (f < 0.25 ? ' late' : '');
+  if (el >= S.limit) submit('', true);
+}
+function submit(text, timeout){
+  if (!S || S.phase !== 'ask') return;
+  const secs = (performance.now() - S.t0) / 1000; const it = S.item; let res;
+  if (timeout) res = { ok:false, blank:true };
+  else { res = checkAnswer(it, text, S.est); if (res.bad && !res.blank){ $('fb').innerHTML = '<span class="warnc">' + (it.type === 'time' ? 'HHMM' : it.type === 'pair' ? 'x, y' : 'Número') + '</span>'; if ($('ans')) $('ans').select(); return; } }
+  if (timers.dl){ clearTimeout(timers.dl); timers.dl = null; }
+  S.phase = 'review'; const clean = res.ok && S.hints === 0;
+  S.results.push({ ok:res.ok, blank:!!res.blank, clean:clean, secs:secs, tech:it.tech, hints:S.hints });
+  store.tech[it.tech] = techUpdate(store.tech[it.tech], res.ok, clean, secs, Date.now());
+  if (!res.ok) S.techErr[it.tech] = (S.techErr[it.tech] || 0) + 1;
+  if (S.ad){ const o = adaptStep(S.ad, clean); S.ad = o.st; if (S.ad.level > S.maxL) S.maxL = S.ad.level; if (S.ad.level < S.minL) S.minL = S.ad.level;
+    if (o.ev === 'up') S.banner = '<b class="ok">Nivel ' + S.ad.level + ' ' + IC('arrow', 'sm') + '</b>';
+    else if (o.ev === 'down') S.banner = '<b class="warnc">Nivel ' + S.ad.level + '</b>';
+    else if (o.ev === 'block-ok') S.banner = '<b class="ok">Bloque ' + S.ad.okBlocks + ' / ' + S.ad.need + '</b>';
+    else if (o.ev === 'block-fail') S.banner = '<b class="warnc">Bloque fallado</b>';
+    else if (o.ev === 'max') S.banner = '<b class="ok">Nivel 10</b>'; }
+  save();
+  if (res.ok){ S.flash = '<span class="ok">' + IC('check', 'sm') + esc(fmtAns(it)) + '</span>'; nextItem(); return; }
+  if (S.sec) S.paused = true;
+  const t = TECH[it.tech];
+  $('area').innerHTML = (S.banner ? '<p class="banner">' + S.banner + '</p>' : '') +
+    '<div class="coach"><p class="err"><b>' + (timeout ? 'Tiempo' : (res.blank ? 'Omitida' : 'Fallo')) + '</b>' + (res.blank ? '' : ' &middot; ' + esc(text)) + '</p>' +
+    '<p class="muted small">' + esc(it.q) + '</p><p class="ans"><b class="ok">' + esc(fmtAns(it)) + '</b></p>' +
+    '<h3>' + esc(t.name) + '</h3><p>' + esc(t.method) + '</p><p class="mono">' + esc(it.sol) + '</p>' +
+    '<p class="actions"><button class="btn primary" id="cont" title="Enter">' + IC('arrow') + 'Siguiente</button></p></div>';
+  S.banner = '';
+  $('cont').addEventListener('click', nextItem); $('cont').focus(); updHead();
+  S.phase = 'coach';
+}
+function sessionKey(e){
+  if (!S) return; const k = e.key;
+  if (k === 'Escape'){ finish(true); return; }
+  if (S.phase === 'coach'){ if (k === 'Enter'){ e.preventDefault(); nextItem(); } return; }
+  if (S.phase !== 'ask') return;
+  if (k === 'Enter' && e.target && e.target.tagName === 'BUTTON') return; // Enter on a focused button presses that button (e.g. Hint)
+  if (S.sec){
+    const kind = S.secKind; let used = false;
+    if (kind === 'monitor' && k === ' ') used = true; else if (kind === 'callsign' && (k === 'z' || k === 'Z')) used = true; else if (kind === 'rules' && (k === 'z' || k === 'Z' || k === 'x' || k === 'X')) used = true;
+    if (used){ e.preventDefault(); const r = S.sec.key(kind === 'monitor' ? ' ' : k); const fb = $('secfb'); if (fb) fb.innerHTML = r === 'hit' ? '<span class="ok">' + IC('check', 'sm') + '</span>' : (r === 'false' ? '<span class="err">' + IC('x', 'sm') + '</span>' : ''); clearTimeout(timers.fb); timers.fb = setTimeout(function(){ const f = $('secfb'); if (f) f.innerHTML = ''; }, 700); drawSec(); return; }
+  }
+  if (k === 'h' || k === 'H'){ e.preventDefault(); giveHint(); return; }
+  if (S.item.type === 'choice'){ const K = k.toUpperCase(); if (S.item.opts.indexOf(K) >= 0){ e.preventDefault(); submit(K, false); } return; }
+  if (k === 'Enter'){ e.preventDefault(); submit($('ans') ? $('ans').value : '', false); }
+}
+
+/* ---------- Dual-task panel ---------- */
+const SEC_HELP = {
+  track:'Puntero en el círculo',
+  monitor:'Espacio en ámbar',
+  callsign:'Z con tu indicativo',
+  rules:'Z / X según la regla'
+};
+function initSec(){
+  const kind = S.secKind; S.sec = makeSecondary(kind, S.cfg.load, S.rnd); S.paused = false;
+  $('sec').innerHTML = '<h3>' + DUAL_NAMES[kind] + ' <span class="muted">L' + S.cfg.load + '</span></h3><p class="muted small">' + SEC_HELP[kind] + '</p><div id="secbody"></div><p class="center" id="secfb"></p><p class="center muted small" id="secscore"></p>';
+  if (kind === 'track'){
+    $('secbody').innerHTML = '<canvas id="cv" width="320" height="200"></canvas>';
+    const cv = $('cv');
+    cv.addEventListener("pointermove", function(e){ const r = cv.getBoundingClientRect(); S.sec.cursor((e.clientX - r.left) * cv.width / r.width, (e.clientY - r.top) * cv.height / r.height); });
+    cv.addEventListener("pointerleave", function(){ S.sec.cursor(null, null); });
+  }
+  S.lastTs = performance.now(); timers.raf = requestAnimationFrame(loop);
+}
+function loop(ts){
+  if (!S || !S.sec) return;
+  const dt = Math.min(0.1, Math.max(0, (ts - S.lastTs) / 1000)); S.lastTs = ts;
+  if (S.phase === 'ask' && !S.paused){ S.sec.update(dt); drawSec(); }
+  timers.raf = requestAnimationFrame(loop);
+}
+function drawSec(){
+  const s = S.sec, kind = S.secKind; if (!s || !$('secbody')) return;
+  if (kind === 'track'){ const cv = $('cv'), x = cv.getContext('2d'); x.clearRect(0, 0, 320, 200); x.strokeStyle = cssv('--accent'); x.lineWidth = 2; x.beginPath(); x.arc(s.x, s.y, s.rad, 0, 6.2832); x.stroke(); x.fillStyle = cssv('--accent'); x.beginPath(); x.arc(s.x, s.y, 3, 0, 6.2832); x.fill();
+    if (s.cx !== null){ x.strokeStyle = cssv('--warn'); x.lineWidth = 2; x.beginPath(); x.moveTo(s.cx - 8, s.cy); x.lineTo(s.cx + 8, s.cy); x.moveTo(s.cx, s.cy - 8); x.lineTo(s.cx, s.cy + 8); x.stroke(); } }
+  else if (kind === 'monitor'){ $('secbody').innerHTML = '<div class="tiles">' + s.tiles().map(function(t){ return '<div class="tile' + (t.alert ? ' alert' : '') + '">' + t.v + '</div>'; }).join('') + '</div>'; }
+  else if (kind === 'callsign'){ $('secbody').innerHTML = '<p class="center mono"><b class="warnc">' + esc(s.own) + '</b></p><div class="msgbox">' + (s.cur ? esc(s.cur.txt) : '<span class="muted">…</span>') + '</div>'; }
+  else { const c = s.cur; $('secbody').innerHTML = '<p class="center"><b class="warnc">' + (s.rule === 'P' ? 'Z par · X impar' : 'Z &lt; 50 · X &ge; 50') + '</b></p><div class="bignum">' + (c && !c.done ? c.n : '·') + '</div>'; }
+  const st = s.stats(); if ($('secscore')) $('secscore').textContent = st.score === null ? '' : f1(st.score) + ' %';
+}
+
+/* ---------- Finish and results ---------- */
+function moduleLabel(){
+  const c = S.cfg; let m = 'Entrenador de cálculo mental - ' + MODE_LABEL[c.mode];
+  if (c.mode === 'learn') m += ': ' + TECH[c.focus].name;
+  else if (c.focus !== 'all') m += ' [' + (TECH[c.focus] ? TECH[c.focus].name : c.focus) + ']';
+  if (S.secKind) m += ' + doble tarea ' + DUAL_NAMES[S.secKind] + ' L' + c.load;
+  if (c.est) m += ' + estimación ' + c.est * 100 + '%';
+  if (S.results.some(function(r){ return r.hints > 0; })) m += ' (pistas usadas)';
+  if (c.override) m += ' (forzada)';
+  return m;
+}
+function finish(early){
+  stopAll(); onKey = null;
+  if (!S){ menu(); return; }
+  const st = calcStats(S.results);
+  if (!st.tot){ S.sec = null; menu(); return; }
+  if (early && st.tot < Math.min(5, S.cfg.items) && S.cfg.mode !== 'learn'){ S = null; menuNotice = 'No guardada: menos de 5 respuestas'; menu(); return; }
+  const c = S.cfg; const p = S.p || params(); const lvl = S.ad ? S.ad.level : p.lvl; const hinted = S.results.some(function(r){ return r.hints > 0; });
+  const met = c.goal ? evalGoal(c.goal, { acc:st.cleanAcc, spi:st.spi, ok:st.ok }) : null;
+  const ses = { ts:new Date().toISOString(), mod:moduleLabel(), mode:c.mode, lvl:lvl, ok:st.ok, bad:st.bad, blank:st.blank, spi:st.spi, acc:st.cleanAcc, goal:c.goal || '', met:met, valid:st.cleanAcc >= PASS_ACC && !early, hinted:hinted, count:c.mode !== 'learn', sec:(c.mode === 'adaptive' ? LEVELS[lvl].sec : (c.sec || 999)), est:c.est || 0, n:st.tot, thirds:atcThirds(S.results.map(function(r){ return { ok:r.ok, blank:r.blank, sec:r.secs, t:0 }; }), 0) };
+  let dualInfo = null;
+  if (S.sec){ const ss = S.sec.stats(); const base = store.sessions.filter(function(x){ return x.count && !x.dual && x.lvl === lvl && (x.est || 0) === (c.est || 0); }).slice(-3).map(function(x){ return x.acc; });
+    const baseline = base.length ? base.reduce(function(a, b){ return a + b; }, 0) / base.length : null;
+    dualInfo = { kind:S.secKind, load:c.load, score:ss.score, sw:ss.switchScore, label:ss.label, baseline:baseline, cost:dualCost(baseline, st.cleanAcc) }; ses.dual = { kind:S.secKind, load:c.load, score:ss.score }; }
+  const record = isRecord(store.sessions, ses);
+  store.sessions.push(ses);
+  let run = 0; for (let i = store.sessions.length - 1; i >= 0; i--){ const x = store.sessions[i]; if (!x.count || x.lvl !== lvl) continue; if (x.valid) run++; else break; }
+  save();
+  const pb = personalBest(store.sessions, lvl); const streak = sessionStreak(store.sessions);
+  const errs = Object.keys(S.techErr).sort(function(a, b){ return S.techErr[b] - S.techErr[a]; });
+  const sessionRef = S; S = null;
+  let dualRows = '';
+  if (dualInfo){ dualRows = kvRow(DUAL_NAMES[dualInfo.kind] + ' L' + dualInfo.load, f1(dualInfo.score) + ' %') + kvRow('Tarea única', f1(dualInfo.baseline) + ' %') +
+    kvRow('Coste', '<span class="' + (dualInfo.cost && dualInfo.cost.points > 5 ? 'err' : 'ok') + '">' + (dualInfo.cost ? (dualInfo.cost.points >= 0 ? '−' : '+') + f1(Math.abs(dualInfo.cost.points)) + ' pts' : '—') + '</span>') +
+    (dualInfo.sw !== undefined && dualInfo.sw !== null ? kvRow('Tras el cambio', f1(dualInfo.sw) + ' %') : ''); }
+  const th = ses.thirds;
+  show(topBar(MODE_ICON[c.mode], 'Resultado') +
+    '<p class="muted">' + esc(ses.mod) + (early ? ' &middot; terminada antes' : '') + '</p>' +
+    '<div class="big"><div><b class="' + (ses.valid ? 'ok' : 'err') + '">' + f1(st.cleanAcc) + ' %</b><span>Precisión</span></div>' +
+    '<div><b>' + f2(st.spi) + ' s</b><span>Por elemento</span></div>' +
+    '<div><b class="' + (met === true ? 'ok' : (met === false ? 'err' : '')) + '">' + (met === true ? 'Cumplido' : (met === false ? 'No cumplido' : '—')) + '</b><span>' + esc(c.goal || '') + '</span></div></div>' +
+    '<div class="tab-box"><table class="kv"><tbody>' +
+    kvRow('Nivel', lvl + (c.mode === 'custom' ? '' : ' ' + LEVELS[lvl].name) + (c.mode === 'adaptive' ? ' (' + sessionRef.minL + '–' + sessionRef.maxL + ')' : '')) +
+    kvRow('Aciertos', st.ok) + kvRow('Fallos', st.bad) + kvRow('En blanco', st.blank) + (hinted ? kvRow('Con pistas', f1(st.acc) + ' %') : '') +
+    kvRow('Mejor racha', st.bestRun) + (c.mode === 'learn' ? '' : kvRow('Sesiones seguidas', streak) + kvRow('Válidas en L' + lvl, run) + kvRow(record ? 'Nuevo récord' : 'Mejor', pb.n ? f2(pb.spi) + ' s · ' + f1(pb.acc) + ' %' : '—')) +
+    (th && th[0].n >= 3 && th[2].n >= 3 ? kvRow('Último vs primer tercio', (function(){ const d = 100 * th[2].c / th[2].n - 100 * th[0].c / th[0].n; return (d >= 0 ? '+' : '') + Math.round(d) + ' pts'; })()) : '') +
+    dualRows + '</tbody></table></div>' +
+    (storeOk ? '' : '<p class="err"><b>No guardado</b></p>') +
+    (errs.length ? '<h2>Repasar</h2><div class="tab-box"><table class="kv"><tbody>' + errs.map(function(id){ return '<tr><th>' + esc(TECH[id].name) + '</th><td>' + sessionRef.techErr[id] + '</td></tr>'; }).join('') + '</tbody></table></div>' : '') +
+    '<div class="actions"><button class="btn primary" id="rep" title="Enter">' + IC(c.mode === 'learn' ? 'back' : 'arrow') + (c.mode === 'learn' ? 'Técnica' : 'Repetir') + '</button><button class="btn" id="men">' + IC('back') + 'Menú</button><button class="btn" id="his" title="H">' + IC('history') + 'Historial</button></div>');
+  const again = function(){ if (c.mode === 'learn') learnPage(c.focus); else setup(c.mode, c); };
+  $('rep').addEventListener('click', again); $('men').addEventListener('click', menu); $('his').addEventListener('click', history);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON'){ e.preventDefault(); again(); } else if (e.key === 'Escape') menu(); else if (e.key === 'h' || e.key === 'H'){ e.preventDefault(); history(); } };
+}
+
+/* ---------- Learn pages ---------- */
+function learnList(){
+  stopAll(); S = null;
+  let h = backBtn() + topBar('book', 'Técnicas');
+  CATS.forEach(function(cat){
+    h += '<h2>' + catName(cat) + '</h2><div class="list">' + TECH_ORDER.filter(function(id){ return TECH[id].cat === cat; }).map(function(id){ const a = techAcc(id);
+      return '<button type="button" class="li" data-id="' + id + '"><span class="nm">' + esc(TECH[id].name) + '</span><span class="dt">' + (a === null ? '' : f1(a) + ' % · ' + store.tech[id].n) + '</span></button>'; }).join('') + '</div>';
+  });
+  show(h); $('back').addEventListener('click', menu);
+  Array.prototype.forEach.call(app.querySelectorAll('.li'), function(b){ b.addEventListener('click', function(){ learnPage(b.dataset.id); }); });
+  onKey = function(e){ if (e.key === 'Escape') menu(); };
+}
+function learnPage(id){
+  stopAll(); S = null; const t = TECH[id]; const ex = makeItem(id, 3, mulberry32(id.length * 7919 + 13), 0); const st = store.tech[id];
+  show(backBtn('Técnicas') + topBar('book', esc(t.name)) +
+    '<h3>Regla</h3><p>' + esc(t.method) + '</p><h3>Ejemplo</h3><p class="mono">' + esc(t.example) + '</p><h3>Uso</h3><p>' + esc(t.when) + '</p>' +
+    '<h3>Ahora</h3><p><b>' + esc(ex.q) + '</b> = <b class="ok">' + esc(fmtAns(ex)) + '</b></p><p class="mono muted">' + esc(ex.sol) + '</p>' +
+    (st && st.n ? '<p class="muted small">' + st.ok + ' / ' + st.n + ' &middot; ' + f1(techAcc(id)) + ' % &middot; caja ' + st.box + '</p>' : '') +
+    '<div class="actions"><button class="btn primary" id="prac" title="Enter">' + IC('play') + 'Practicar</button></div>');
+  const go = function(){ startSession({ mode:'learn', focus:id, num:ri(Math.random, 2, 4), items:5, hints:3, est:0, dual:'off', goal:'', level:3, sec:0, dist:0 }); };
+  $('back').addEventListener('click', learnList); $('prac').addEventListener('click', go);
+  onKey = function(e){ if (e.key === 'Escape') learnList(); else if (e.key === 'Enter' && e.target.tagName !== 'BUTTON'){ e.preventDefault(); go(); } };
+}
+
+/* ---------- Skill map ---------- */
+function dueText(st){ if (!st || !st.n) return 'nueva'; const d = st.due - Date.now(); if (d <= 0) return 'ahora'; return Math.ceil(d / 86400000) + ' d'; }
+function skillMap(){
+  stopAll(); S = null; const now = Date.now();
+  const rows = TECH_ORDER.slice().sort(function(a, b){ return techWeakness(store.tech[b], now) - techWeakness(store.tech[a], now); });
+  const weak = weakestSeen();
+  show(backBtn() + topBar('bars', 'Dominio') +
+    '<div class="tab-box"><table><thead><tr><th>Técnica</th><th>Categoría</th><th>Elem.</th><th>Prec.</th><th>Limpio</th><th>s</th><th>Caja</th><th>Toca</th></tr></thead><tbody>' +
+    rows.map(function(id){ const s = store.tech[id]; return '<tr><td><a href="#" class="lnk" data-id="' + id + '">' + esc(TECH[id].name) + '</a></td><td>' + catName(TECH[id].cat) + '</td><td>' + (s ? s.n : 0) + '</td><td>' + (s && s.n ? f1(s.ok / s.n * 100) + ' %' : '—') + '</td><td>' + (s && s.n ? f1(s.clean / s.n * 100) + ' %' : '—') + '</td><td>' + (s && s.n ? f1(s.ms / s.n / 1000) : '—') + '</td><td>' + (s ? s.box : 0) + '</td><td>' + dueText(s) + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+    (weak ? '<div class="actions"><button class="btn primary" id="wk" title="W">' + IC('target') + 'Reforzar ' + esc(TECH[weak].name) + '</button></div>' : ''));
+  $('back').addEventListener('click', menu);
+  Array.prototype.forEach.call(app.querySelectorAll('a[data-id]'), function(a){ a.addEventListener('click', function(e){ e.preventDefault(); learnPage(a.dataset.id); }); });
+  if ($('wk')) $('wk').addEventListener('click', function(){ setup('ladder', { focus:'weak' }); });
+  onKey = function(e){ if (e.key === 'Escape') menu(); else if ((e.key === 'w' || e.key === 'W') && weak){ e.preventDefault(); setup('ladder', { focus:'weak' }); } };
+}
+
+/* ---------- History and CSV ---------- */
+function history(){
+  stopAll(); S = null; const ses = store.sessions;
+  const rows = ses.slice(-300).reverse().map(function(s){ return '<tr><td>' + dateES(s.ts) + '</td><td class="mod">' + esc(s.mod) + '</td><td>' + s.lvl + '</td><td>' + s.ok + '</td><td>' + s.bad + '</td><td>' + s.blank + '</td><td>' + (s.spi === null || s.spi === undefined ? '' : f2(s.spi)) + '</td><td>' + f1(s.acc) + '</td><td>' + esc(s.goal) + '</td><td>' + (s.met === true ? 'Sí' : (s.met === false ? 'No' : '')) + '</td></tr>'; }).join('');
+  const pbs = []; for (let l = 1; l <= 10; l++){ const b = personalBest(ses, l); if (b.n) pbs.push('<tr><td>' + l + ' ' + LEVELS[l].name + '</td><td>' + f1(b.acc) + ' %</td><td>' + f2(b.spi) + ' s</td><td>' + b.n + '</td></tr>'); }
+  show(backBtn() + topBar('history', 'Historial') +
+    (pbs.length ? '<h2>Mejores</h2><div class="tab-box"><table><thead><tr><th>Nivel</th><th>Precisión</th><th>s / elem.</th><th>Válidas</th></tr></thead><tbody>' + pbs.join('') + '</tbody></table></div>' : '') +
+    '<h2>Sesiones</h2>' + (rows ? '<div class="tab-box" style="max-height:420px;overflow:auto"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>Blanco</th><th>s/elem.</th><th>Prec. %</th><th>Objetivo</th><th>Cumplido</th></tr></thead><tbody>' + rows + '</tbody></table></div>' : '<p class="muted">Sin sesiones</p>') +
+    '<div class="actions"><button class="btn primary" id="csv">' + IC('download') + 'CSV</button><button class="btn danger" id="del">' + IC('trash') + 'Borrar</button><span id="conf" style="display:inline-flex;gap:10px;align-items:center"></span></div>');
+  $('back').addEventListener('click', menu);
+  $('csv').addEventListener('click', function(){
+    try { const blob = new Blob([toCSV(ses)], { type:'text/csv;charset=utf-8' }); const a = document.createElement('a'); const d = new Date(); a.href = URL.createObjectURL(blob); a.download = 'calculo-mental-' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
+    catch (e){ $('conf').innerHTML = '<span class="err">Error</span>'; }
+  });
+  $('del').addEventListener('click', function(){
+    $('conf').innerHTML = '<span class="warnc">¿Borrar todo?</span> <button class="btn danger" id="y">Sí</button> <button class="btn" id="n">No</button>';
+    $('y').addEventListener('click', function(){ store = { sessions:[], tech:{}, settings:store.settings }; save(); history(); }); $('n').addEventListener('click', function(){ $('conf').innerHTML = ''; });
+  });
+  onKey = function(e){ if (e.key === 'Escape') menu(); };
+}
+
+menu();
+
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

@@ -1,0 +1,387 @@
+En el manual 3 de ENAIRE, ¿cómo define la OMM el «tiempo»?	El estado de la atmósfera en un instante dado, definido por los diversos elementos meteorológicos.	ATC::OM03
+En el manual 3 de ENAIRE, ¿cómo define la OMM (WMO) el «clima»?	La síntesis de las condiciones meteorológicas en un lugar determinado, caracterizada por estadísticas a largo plazo de los elementos meteorológicos en dicho lugar.	ATC::OM03
+¿Qué es la meteorología aeronáutica?	La meteorología que trata los fenómenos y las variables que afectan a las operaciones de las aeronaves, tanto en tierra como en vuelo.	ATC::OM03
+¿Cuáles son las dos vertientes de la información meteorológica que se suministra a la aviación?	La situación observada (momento reciente) y la situación pronosticada.	ATC::OM03
+¿Cómo debe entenderse el valor que figura en un pronóstico (manual 3)?	Como el valor más probable que puede adoptar el elemento durante el periodo de validez del pronóstico.	ATC::OM03
+Cita los cuatro destinatarios de la información meteorológica aeronáutica que enumera el manual 3.	Los explotadores y las tripulaciones de vuelo; los proveedores de servicios de tránsito aéreo (ATS) y de información de vuelo; los servicios de búsqueda y salvamento; los aeródromos.	ATC::OM03
+¿Qué Anexo de la OACI regula el servicio meteorológico para la navegación aérea internacional?	El Anexo 3 de la OACI.	ATC::OM03
+¿Cuál es la finalidad del servicio meteorológico para la navegación aérea internacional (Anexo 3, según el manual)?	Contribuir a la seguridad, la regularidad y la eficiencia de la navegación aérea internacional.	ATC::OM03
+¿Con qué organismo especializado de las Naciones Unidas coopera la OACI en meteorología aeronáutica?	La Organización Meteorológica Mundial (OMM, WMO).	ATC::OM03
+¿Cuántos Centros Mundiales de Pronóstico de Área (WAFC) hay y dónde están?	Dos: Londres y Washington; si uno deja de funcionar, el otro asume sus funciones.	ATC::OM03
+¿Qué elaboran los WAFC?	Pronósticos mundiales en malla de viento, temperatura, humedad, etc. en distintos niveles, y pronósticos mundiales de fenómenos significativos (SIGWX).	ATC::OM03
+¿De quién reciben los WAFC la información que incluyen en sus pronósticos?	De los centros regionales especializados (emisiones radiactivas), los VAAC (cenizas volcánicas) y los TCAC (ciclones tropicales).	ATC::OM03
+¿Cuántos Centros de Avisos de Cenizas Volcánicas (VAAC) existen?	Nueve.	ATC::OM03
+¿Qué facilita un VAAC?	Información de asesoramiento sobre la extensión lateral y vertical y el movimiento pronosticado de las cenizas volcánicas a las oficinas de vigilancia meteorológica (MWO), los centros de control de área (ACC), los centros de información de vuelo (FIC), los WAFC y los bancos internacionales de datos OPMET.	ATC::OM03
+¿Cuánto tiempo mantienen su vigilancia los VAAC y qué ocurre si uno falla?	24 horas al día; otro VAAC asume sus funciones.	ATC::OM03
+¿Junto con qué unión científica establecieron la OACI y la OMM los VAAC (manual 3)?	La Unión Internacional de Geodesia y Geofísica (UIGG).	ATC::OM03
+¿Cuántos Centros de Avisos de Ciclones Tropicales (TCAC) hay?	Siete.	ATC::OM03
+¿Qué información da un TCAC?	Posición pronosticada, dirección y velocidad de desplazamiento, presión central y viento máximo en superficie de los ciclones tropicales.	ATC::OM03
+¿A quién da su información un TCAC?	A las oficinas de vigilancia meteorológica, a los WAFC y a los bancos internacionales de datos OPMET.	ATC::OM03
+¿Cuál es la función de los Centros Meteorológicos Regionales Especializados (CMRE)?	Proporcionar mapas de pronóstico de la trayectoria y la deposición de los materiales radiactivos liberados a la atmósfera.	ATC::OM03
+¿Cuántos CMRE hay? Nómbralos.	Ocho: Beijing, Exeter, Melbourne, Montreal, Obninsk, Tokio, Toulouse y Washington.	ATC::OM03
+Ámbito de servicio de los WAFC y de los VAAC: ¿mundial o regional? ¿Cuál es cuál (tabla del manual 3)?	WAFC = mundial; VAAC, TCAC y CMRE = regional.	ATC::OM03
+¿Qué oficina presta el servicio meteorológico a escala FIR?	La Oficina de Vigilancia Meteorológica.	ATC::OM03
+¿Qué oficina o estación presta el servicio meteorológico a escala de aeródromo?	Las Estaciones Meteorológicas Aeronáuticas (EMAe) y las Oficinas Meteorológicas de Aeródromo (OMAe).	ATC::OM03
+¿Cuáles son las funciones de una Oficina de Vigilancia Meteorológica (MWO)?	Vigilancia continua de las condiciones que afectan a las operaciones de vuelo en su(s) FIR; preparar y difundir información sobre los fenómenos peligrosos previstos en ruta; suministrar información sobre actividad volcánica y cenizas y sobre liberaciones accidentales de material radiactivo.	ATC::OM03
+¿Cuántas MWO tiene AEMET en España y dónde?	Dos: Valencia (FIR Madrid y FIR Barcelona) y Las Palmas de Gran Canaria (FIR Canarias).	ATC::OM03
+¿De qué se encargan las Oficinas Meteorológicas de Aeródromo (OMAe) en España?	De la vigilancia meteorológica y de las predicciones de aeródromo, principalmente TAF, TREND y avisos de aeródromo.	ATC::OM03
+¿Cuántas OMAe hay en España y dónde?	Cinco: Las Palmas, Madrid, Santander, Sevilla y Valencia.	ATC::OM03
+¿Qué hacen las Estaciones Meteorológicas Aeronáuticas (EMAe)?	Realizan las observaciones ordinarias y especiales del aeródromo y vigilan el tiempo presente, principalmente METAR/SPECI.	ATC::OM03
+¿Con qué frecuencia se hacen las observaciones ordinarias de aeródromo para el METAR?	A intervalos fijos: cada media hora o cada hora.	ATC::OM03
+¿Cuándo se hacen observaciones especiales en una EMAe?	Cuando se producen cambios especificados en el viento, la visibilidad, etc.	ATC::OM03
+¿De qué depende el equipamiento de una EMAe española?	Del número de pistas, de las categorías de las operaciones de aproximación y aterrizaje de esas pistas y de las características climatológicas del aeródromo.	ATC::OM03
+¿Dónde tiene AEMET oficinas meteorológicas (cifras del manual 3)?	En los 40 aeropuertos de la red de AENA y en 8 bases aéreas abiertas al tráfico civil.	ATC::OM03
+¿Qué suministran las oficinas meteorológicas de aeródromo a las tripulaciones de vuelo?	Exposiciones verbales, consultas y documentación de vuelo.	ATC::OM03
+¿Qué variables miden los sensores electrónicos y cuáles requieren un observador humano?	Sensores: presión, temperatura, etc. Observador: visibilidad, nubosidad, etc.	ATC::OM03
+¿Cómo se hacen las observaciones en altura (manual 3, cinco medios)?	Sondeos, radar, red de detección de descargas eléctricas, satélites meteorológicos y aeronaves.	ATC::OM03
+¿Qué miden los sondeos aerológicos?	Presión, temperatura y humedad a lo largo de la vertical de un lugar.	ATC::OM03
+¿A qué horas se sueltan los globos sonda?	A las 00 y a las 12 UTC.	ATC::OM03
+¿Qué permiten el radar y la red de detección de descargas eléctricas?	Localizar cumulonimbos y tormentas y relacionar las características de las imágenes de radar con fenómenos peligrosos.	ATC::OM03
+¿Qué aportan los satélites meteorológicos (manual 3)?	Datos de altitud, medidas de temperatura y humedad y contenido de ozono, entre otros; son esenciales para localizar los sistemas nubosos.	ATC::OM03
+¿Qué sistema suministra los datos globales que alimentan los modelos numéricos?	El Sistema Mundial de Observación de la OMM.	ATC::OM03
+¿Cuál es la composición del aire seco cerca del nivel del mar según el manual 3?	78 % de nitrógeno (N2), 21 % de oxígeno (O2), 1 % de otros gases (Ar, Ne, CO2, H2, O3...).	ATC::OM03
+¿Entre qué valores varía el contenido de vapor de agua de la atmósfera?	Entre el 0,2 % y el 3 %.	ATC::OM03
+¿Qué es el aire húmedo?	La mezcla de dos gases: aire seco y vapor de agua.	ATC::OM03
+¿En qué capa se encuentra casi todo el vapor de agua?	En la troposfera.	ATC::OM03
+Cita los cinco cambios de estado del agua.	Evaporación, condensación, congelación, fusión y sublimación.	ATC::OM03
+¿Cuáles son los procesos principales del ciclo hidrológico?	Evaporación, condensación y precipitación.	ATC::OM03
+¿Qué es la evapotranspiración?	La evaporación del agua del mar y también de la vegetación y otras superficies.	ATC::OM03
+Fórmula de la presión atmosférica en el manual 3.	P = F/S = m·g/S (peso de la columna de aire sobre la superficie).	ATC::OM03
+¿Qué fórmula relaciona la presión con la densidad y la altura?	P = d·g·h.	ATC::OM03
+¿Cómo varía la presión con la altitud?	Disminuye, y no de forma lineal: cerca de la superficie, aproximadamente 1 mb cada 9 m (30 ft); después, de forma exponencial.	ATC::OM03
+¿Cuánto baja la presión por metro cerca de la superficie (manual 3)?	Aproximadamente 1 mb cada 9 metros (30 ft).	ATC::OM03
+¿Cómo es la variación diaria de la presión en zonas templadas?	Inferior a 1 hPa, con dos máximos (hacia las 10:00 y las 22:00) y dos mínimos (hacia las 04:00 y las 16:00).	ATC::OM03
+¿A qué horas se dan los máximos y los mínimos diarios de presión?	Máximos hacia las 10 y las 22 h; mínimos hacia las 4 y las 16 h.	ATC::OM03
+Cita los tres factores que afectan a la presión atmosférica (manual 3).	La altura o altitud, la temperatura (hora del día, estación, movimiento de masas de aire) y la orografía.	ATC::OM03
+¿Cuál es la relación general entre la temperatura del aire y la presión y la densidad en el manual 3?	Aire más cálido: menor densidad y menor presión; aire más frío: mayor densidad y mayor presión.	ATC::OM03
+¿Cómo afecta la orografía a la presión?	Los relieves pueden producir acumulaciones o déficits de masa de aire que suben o bajan la presión localmente.	ATC::OM03
+¿Qué es una atmósfera (1 atm)?	1013,25 hPa = 760 mm Hg = el peso de una columna de mercurio de 1 cm² de sección y 76 cm de altura.	ATC::OM03
+¿En qué consistió el experimento de Torricelli?	Un tubo de vidrio de 1 m (1 cm² de sección) lleno de mercurio se invirtió en una cubeta de mercurio; el mercurio descendió hasta los 76 cm.	ATC::OM03
+Equivalencia de las tres unidades principales de presión.	1 atm = 760 mm Hg = 1013,25 mb/hPa.	ATC::OM03
+¿Cómo se define físicamente la temperatura del aire?	Como la medida de la energía cinética media de las moléculas que lo componen.	ATC::OM03
+¿Cómo define el manual 3 el gradiente térmico vertical?	La variación de la temperatura con la altura (en el manual, gradiente positivo = la temperatura desciende con la altura; negativo = aumenta).	ATC::OM03
+¿Cuándo se produce el máximo diario de temperatura?	Unas dos horas después del mediodía; el mínimo, poco después de la salida del Sol (inercia térmica).	ATC::OM03
+¿Por qué los máximos y los mínimos no se producen exactamente al mediodía y a la puesta del Sol?	Por la inercia térmica: el aire tarda en calentarse o enfriarse.	ATC::OM03
+Enumera los cinco factores que afectan a la temperatura en el manual 3.	La altura, la variación a lo largo del día, la nubosidad, el viento y la naturaleza de la superficie.	ATC::OM03
+¿Cómo afecta la nubosidad a la amplitud térmica?	La reduce: las nubes reflejan la radiación solar y absorben la radiación terrestre.	ATC::OM03
+¿Cómo afecta el viento a la variación diurna de la temperatura?	Mezcla capas a distintas temperaturas, de modo que la variación es menos marcada.	ATC::OM03
+Puntos de fusión y de ebullición del agua en la escala Kelvin (manual 3).	273,16 K y 373,16 K.	ATC::OM03
+Puntos de fusión y de ebullición del agua en grados Fahrenheit.	32 ºF y 212 ºF.	ATC::OM03
+Fórmula para pasar de Fahrenheit a centígrados en el manual 3.	C = 5/9 · (F - 32).	ATC::OM03
+Fórmula para pasar de centígrados a Kelvin en el manual 3.	K = C + 273.	ATC::OM03
+Definición de densidad.	Masa de un gas por unidad de volumen: d = m/V (V = S·h).	ATC::OM03
+¿Cuál es la ecuación de estado de los gases perfectos en el manual 3?	P = d·R·T.	ATC::OM03
+¿Qué valor de R da el manual?	R = 2870 hPa·cm³/(kg·K).	ATC::OM03
+A presión constante, ¿qué le ocurre a una columna de aire más cálido?	Su densidad es menor y su altura mayor: se dilata.	ATC::OM03
+¿Qué es la humedad ambiental?	La cantidad de vapor de agua que contiene la atmósfera.	ATC::OM03
+¿Qué limita la cantidad de vapor que puede contener el aire?	La temperatura: cuanto mayor es, más vapor puede contener.	ATC::OM03
+¿Cuándo está saturado un volumen de aire?	Cuando contiene el máximo de vapor de agua que puede contener.	ATC::OM03
+Dos mecanismos por los que el aire no saturado pasa a saturarse.	Bajar su temperatura; inyectarle vapor de agua.	ATC::OM03
+¿Qué le ocurre al vapor cuando el aire saturado se sigue enfriando?	Una parte se condensa en agua líquida.	ATC::OM03
+Definición de humedad relativa.	Cociente entre el vapor de agua que contiene realmente un volumen de aire a una temperatura dada y el máximo que podría contener a esa temperatura.	ATC::OM03
+¿Cuál es la humedad relativa del aire saturado?	100 %.	ATC::OM03
+Definición de punto de rocío.	Temperatura a la que hay que enfriar el aire, a presión constante, para saturarlo (HR 100 %).	ATC::OM03
+¿Por qué es útil el punto de rocío para la aviación?	Ayuda a predecir la niebla, que puede aparecer cuando la temperatura del aire se acerca al punto de rocío o lo alcanza.	ATC::OM03
+¿Cuántas capas tiene la atmósfera (manual 3) y cuáles son, de abajo arriba?	Cinco: troposfera, estratosfera, mesosfera, termosfera (ionosfera) y exosfera.	ATC::OM03
+Altura media del techo de la troposfera en latitudes polares, medias y tropicales.	Polar, 8 km; latitudes medias, 12 km; tropical, 18 km.	ATC::OM03
+¿Cómo evoluciona la temperatura en la troposfera y qué valor alcanza?	Disminuye con la altitud hasta -56,5 ºC.	ATC::OM03
+¿Por qué la mayoría de los fenómenos meteorológicos se dan en la troposfera?	Contiene casi todo el vapor de agua y la mayor parte de la masa, y tiene movimientos verticales muy marcados.	ATC::OM03
+¿Qué es la tropopausa?	El límite superior de la troposfera: una superficie de discontinuidad donde la temperatura se mantiene constante en torno a -56 ºC.	ATC::OM03
+¿Qué se origina en las «roturas» entre tropopausas de distintas latitudes?	Vientos muy fuertes llamados corrientes en chorro.	ATC::OM03
+Extensión de la estratosfera.	Desde la tropopausa hasta unos 50 o 55 km.	ATC::OM03
+¿Cómo varía la temperatura en la estratosfera y por qué?	Aumenta con la altitud, principalmente por la abundancia de ozono.	ATC::OM03
+¿Qué fracción de la presión al nivel del mar hay en la estratosfera (manual 3)?	Solo alrededor del 0,1 %.	ATC::OM03
+¿Qué nubes hay en la estratosfera?	Nubes nacaradas, a 20-30 km, y topes de cumulonimbos que sobrepasan la tropopausa.	ATC::OM03
+¿Qué es la estratopausa?	El límite superior de la estratosfera, a unos 50 km, por encima del cual la temperatura vuelve a disminuir.	ATC::OM03
+Extensión de la mesosfera.	Desde la estratopausa hasta unos 80 km.	ATC::OM03
+Evolución de la temperatura y valor en la parte superior de la mesosfera.	Disminuye con la altitud hasta unos -95 ºC.	ATC::OM03
+¿Qué nubes aparecen en la mesosfera y dónde?	Nubes noctilucentes, en latitudes altas, cuando el Sol está entre 5º y 13º.	ATC::OM03
+¿De qué están formadas las nubes noctilucentes?	De cristales y polvo de meteoritos; se ven al crepúsculo con tonos azulados.	ATC::OM03
+¿Qué caracteriza a la mesopausa?	Es el nivel más frío de toda la atmósfera y donde termina la composición homogénea de los gases.	ATC::OM03
+¿Qué es la homosfera?	La zona de composición homogénea: troposfera, estratosfera y mesosfera.	ATC::OM03
+Extensión y temperatura de la termosfera (o ionosfera).	Desde la mesopausa hasta unos 500 km; la temperatura aumenta con la altitud hasta 1100 ºC.	ATC::OM03
+¿Por qué son importantes los iones de la termosfera para las radiocomunicaciones?	Pueden reflejar las ondas de radio y permiten comunicar lugares alejados del globo.	ATC::OM03
+¿Qué fenómeno produce la ionización en la termosfera?	La aurora boreal.	ATC::OM03
+¿Se forman nubes en la termosfera?	No, allí no se forma ninguna nube.	ATC::OM03
+¿Qué es la exosfera?	La última capa, por encima de la termosfera, tan tenue que se funde con el gas interplanetario.	ATC::OM03
+Evolución de la temperatura por capas, de abajo arriba.	Troposfera, disminuye; estratosfera, aumenta; mesosfera, disminuye; termosfera, aumenta.	ATC::OM03
+Define la estabilidad de la atmósfera.	La capacidad de una masa de aire para resistirse al desplazamiento vertical desde su posición inicial o nivel de equilibrio.	ATC::OM03
+¿Cómo se origina la inestabilidad en el aire?	Cuando una burbuja de aire está más cálida (menos densa) que su entorno y asciende.	ATC::OM03
+¿Cuándo es estable una burbuja de aire?	Cuando está más fría que su entorno.	ATC::OM03
+¿Qué tiempo acompaña al aire estable?	Cielo despejado o nubes estratiformes; niebla en las capas bajas si hay humedad (sobre todo en invierno); el humo y los contaminantes no pueden ascender y reducen la visibilidad.	ATC::OM03
+¿Qué tiempo acompaña al aire inestable?	A veces nubes muy desarrolladas, chubascos y turbulencia; buena visibilidad, salvo en nubes y chubascos.	ATC::OM03
+¿Quién definió la ISA y qué significan sus siglas?	La OACI; Atmósfera Estándar Internacional (International Standard Atmosphere).	ATC::OM03
+¿Qué tipo de atmósfera es la ISA?	Una atmósfera ideal, independiente de la latitud y de la estación, formada por aire seco que se comporta como un gas perfecto.	ATC::OM03
+Masa molecular media del aire ISA.	0,02896442 kg/mol.	ATC::OM03
+Valores ISA al nivel del mar: temperatura, presión y densidad.	15 ºC (288,15 K), 1013,25 hPa (760 mm Hg), 1,2250 kg/m³.	ATC::OM03
+Temperatura absoluta ISA del punto de fusión del hielo.	273,15 K.	ATC::OM03
+Gradiente térmico ISA en la troposfera.	2 ºC cada 1000 ft (6,5 ºC cada 1000 m).	ATC::OM03
+Temperatura ISA en la tropopausa (manual 3).	Unos -56,5 ºC.	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 10 000 ft.	697 mb y -4,8 ºC.	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 20 000 ft.	466 mb y -24,6 ºC.	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 22 000 ft.	428 mb y -28,5 ºC.	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 8000 ft.	752 mb y -0,8 ºC.	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 9000 ft.	724 mb y -2,8 ºC.	ATC::OM03
+¿Para qué aplicaciones se usa la atmósfera estándar?	Solo para aplicaciones aeronáuticas.	ATC::OM03
+Define altura.	Distancia vertical entre un punto en el aire y una superficie horizontal de referencia, generalmente el terreno.	ATC::OM03
+Define altitud.	Distancia vertical entre un punto en el aire y el nivel medio del mar (MSL).	ATC::OM03
+Define elevación.	Distancia vertical entre un punto del terreno y el nivel medio del mar.	ATC::OM03
+¿Qué es físicamente un altímetro?	Un barómetro aneroide graduado para indicar altitudes.	ATC::OM03
+¿Por qué hay que calar el altímetro?	La presión real al nivel del mar generalmente no es 1013,25 hPa, así que hay que ajustar la indicación a la presión real.	ATC::OM03
+Define QNH.	Presión atmosférica del aeródromo reducida al nivel del mar en condiciones ISA; el altímetro indica altitud (en tierra, la elevación del aeródromo).	ATC::OM03
+Define QFE.	Presión atmosférica del aeródromo medida por el barómetro de la oficina meteorológica; el altímetro indica altura (cero en tierra).	ATC::OM03
+Define QNE.	Presión estándar al nivel del mar, 1013,25 hPa; el altímetro da la distancia a la superficie de 1013,25 hPa; se usa para los niveles de vuelo.	ATC::OM03
+¿Qué indica el altímetro en tierra con QNH calado?	La elevación (altitud) del aeródromo.	ATC::OM03
+¿Qué indica el altímetro en tierra con QFE calado?	Cero.	ATC::OM03
+Relación entre QNH y QFE en un aeródromo al nivel del mar.	QNH = QFE.	ATC::OM03
+Relación entre QNH y QFE en un aeródromo por encima del nivel del mar.	QNH es mayor que QFE.	ATC::OM03
+Relación entre QNH y QFE en un aeródromo por debajo del nivel del mar.	QNH es menor que QFE.	ATC::OM03
+¿Dónde deben obtenerse los valores de QNH y QFE?	En la estación meteorológica más cercana; varían en el tiempo y en el espacio.	ATC::OM03
+¿Qué son los niveles de vuelo?	Superficies de presión atmosférica constante, a una distancia dada de la superficie de 1013,25 hPa, calculadas a partir de la atmósfera estándar de la OACI; niveles de crucero por encima de la altitud de transición.	ATC::OM03
+¿En qué unidad se expresan los niveles de vuelo?	En centenares de pies.	ATC::OM03
+¿Quién fija la separación entre niveles de vuelo (manual 3)?	El Reglamento de la Circulación Aérea.	ATC::OM03
+Definición de altitud de transición.	La altitud por debajo de la cual la posición vertical se controla por altitudes (altímetro en QNH) y por encima de la cual se controla por niveles de vuelo (QNE).	ATC::OM03
+¿Cuándo tiene en cuenta la aeronave la altitud de transición?	En el despegue (ascenso).	ATC::OM03
+Altitudes de transición en España según el manual 3.	TMA de Madrid, 13 000 ft; CTA de Granada, 7000 ft; resto, 6000 ft.	ATC::OM03
+Definición de nivel de transición.	El nivel de vuelo más bajo disponible por encima de la altitud de transición.	ATC::OM03
+¿Cuándo tiene en cuenta la aeronave el nivel de transición?	En la aproximación para aterrizar.	ATC::OM03
+Separación mínima del nivel de transición por encima de la altitud de transición.	Generalmente, al menos 1000 ft.	ATC::OM03
+Definición de capa de transición.	La capa situada entre el nivel de transición y la altitud de transición; de espesor variable, siempre de 1000 ft o más.	ATC::OM03
+Reglaje del altímetro por debajo y por encima del nivel de transición.	Por debajo: QNH (altitudes); por encima: QNE (niveles de vuelo).	ATC::OM03
+Definición de radiación solar.	Radiación electromagnética de onda corta procedente del Sol.	ATC::OM03
+Distribución de la radiación solar en el manual 3.	36 % absorbida por las nubes o reflejada por sus topes; 20 % absorbida por los gases (5 % O3, 15 % CO2); 4 % reflejada por la superficie; 40 % absorbida por la corteza terrestre.	ATC::OM03
+¿Qué porcentaje de la radiación solar absorbe la corteza terrestre?	Aproximadamente el 40 %.	ATC::OM03
+¿Qué porcentaje de la radiación solar absorben las nubes o reflejan sus topes?	Aproximadamente el 36 %.	ATC::OM03
+¿Qué gases absorben la radiación solar en la atmósfera y en qué proporción?	Ozono, 5 %, y dióxido de carbono, 15 % (total, 20 %).	ATC::OM03
+¿Qué propiedades determinan cuánto se calienta un material con la radiación solar?	La reflectancia, la absorbancia y la transmitancia.	ATC::OM03
+¿Qué sustancia tiene el calor específico más alto de la naturaleza y qué consecuencia tiene?	El agua; los mares se calientan y se enfrían más despacio que la tierra.	ATC::OM03
+Definición de radiación terrestre.	Radiación de onda larga emitida por la superficie terrestre y por los gases, aerosoles y nubes; en parte se reabsorbe en la atmósfera.	ATC::OM03
+¿A qué radiación son transparentes los gases de efecto invernadero y cuál absorben?	Transparentes a la radiación solar de onda corta; absorben la radiación de onda larga emitida por la Tierra.	ATC::OM03
+¿Cómo se comportan las nubes ante la radiación terrestre cuando el cielo está totalmente cubierto?	Absorben gran cantidad y la reemiten con su propia longitud de onda.	ATC::OM03
+Define balance radiactivo.	Balance entre los flujos de radiación solar y terrestre en la superficie de la Tierra.	ATC::OM03
+¿Cuándo recibe el hemisferio norte la radiación máxima?	Hacia el solsticio de junio (hemisferio sur: solsticio de diciembre).	ATC::OM03
+¿Por qué la temperatura media anual de la Tierra apenas cambia?	Cada año el sistema Tierra-atmósfera envía al espacio tanta energía como recibe del Sol.	ATC::OM03
+¿Qué es la conducción?	Transmisión de calor por contacto entre dos cuerpos a distinta temperatura (choque molecular); por ejemplo, las pistas calientan el aire en contacto con ellas.	ATC::OM03
+¿Qué es la convección?	Transmisión de calor mediante un fluido que lo transporta entre regiones de distinta temperatura; con frecuencia origina movimientos verticales de masas de aire.	ATC::OM03
+¿Qué es la advección?	Transmisión de calor por movimientos horizontales de masas de aire; importante para las nubes orográficas y el ciclo del agua.	ATC::OM03
+¿Qué es la turbulencia como proceso de transmisión de calor?	Transmisión por corrientes desordenadas y desiguales que forman torbellinos turbulentos.	ATC::OM03
+¿Qué determina la sensibilidad de una aeronave a la turbulencia (manual 3)?	El peso, la superficie alar, la actitud y la velocidad.	ATC::OM03
+¿En qué sentido fluye siempre el calor?	De las zonas más calientes a las más frías.	ATC::OM03
+Dos mecanismos que transfieren energía entre latitudes.	Las corrientes de convección (por gradientes térmicos) y las corrientes oceánicas de los trópicos hacia los polos.	ATC::OM03
+Define la circulación general atmosférica.	Flujo de aire alrededor del globo que redistribuye el calor por la superficie terrestre.	ATC::OM03
+Movimiento del aire en el modelo simple con la Tierra inmóvil.	El aire asciende en el ecuador, se desplaza en altura hacia los polos, desciende en el polo y regresa por la superficie: una sola célula de circulación.	ATC::OM03
+¿Qué tres células aparecen al incluir la rotación de la Tierra?	Hadley (del ecuador a ~30º), Ferrel (de ~30º a 60º) y polar (de ~60º al polo).	ATC::OM03
+¿Cómo se llama la banda de bajas presiones en torno a 60º?	Zona de baja presión subpolar.	ATC::OM03
+¿Cómo se llama la banda de altas presiones en torno a 30º?	Zona de alta presión subtropical.	ATC::OM03
+¿Cómo se llama la zona de bajas presiones en el ecuador?	Vaguada ecuatorial.	ATC::OM03
+Definición de la fuerza de Coriolis.	Fuerza debida a la rotación de la Tierra que desvía los objetos en movimiento: hacia la derecha en el hemisferio norte y hacia la izquierda en el sur.	ATC::OM03
+Definición de viento en el capítulo 5 del manual 3.	Una corriente de aire producida en la atmósfera cuando varía la presión.	ATC::OM03
+Define convergencia y divergencia del viento.	Convergencia: la masa de aire se comprime donde se encuentran dos corrientes; divergencia: la masa de aire se separa.	ATC::OM03
+Define subsidencia.	Descenso de aire hacia el suelo en la troposfera, generalmente aire frío y denso de capas medias o altas que empuja hacia arriba el aire de superficie.	ATC::OM03
+¿Qué vientos soplan entre la vaguada ecuatorial y la alta subtropical?	Los vientos alisios: del NE en el hemisferio norte y del SE en el sur.	ATC::OM03
+¿Dónde convergen los alisios y cómo se llama la zona?	En el ecuador, en la Zona de Convergencia Intertropical.	ATC::OM03
+¿Entre qué zonas de presión soplan los vientos del oeste?	Entre la baja subpolar y la alta subtropical.	ATC::OM03
+¿Qué vientos soplan entre los polos y la baja subpolar (hemisferio norte)?	Vientos del NE hacia el sur (del SE hacia el norte en el hemisferio sur), ligeramente desviados por Coriolis.	ATC::OM03
+Definición de corriente en chorro.	Corriente fuerte y estrecha concentrada a lo largo de un eje casi horizontal en la troposfera superior o en la estratosfera, con fuerte cizalladura horizontal y vertical del viento y uno o varios máximos de velocidad.	ATC::OM03
+Dirección y forma de las corrientes en chorro.	De oeste a este, alrededor del planeta, en ocasiones discontinuas y con ondulaciones (ondas de Rossby).	ATC::OM03
+¿Cuáles son las corrientes en chorro más intensas?	Las polares; también hay corrientes en chorro subtropicales en ambos hemisferios.	ATC::OM03
+¿Por qué buscan las aeronaves las corrientes en chorro en ruta?	Para tener viento en cola y ahorrar combustible; soplan aproximadamente a la altitud habitual de crucero.	ATC::OM03
+Definición de anticiclón en el manual 3.	Región de la atmósfera donde la presión es mayor que en las zonas circundantes.	ATC::OM03
+Circulación y régimen de vientos de un anticiclón.	En el sentido de las agujas del reloj en el hemisferio norte y en el contrario en el sur; vientos débiles en el centro y más fuertes en el exterior.	ATC::OM03
+¿Qué son los anticiclones fríos?	De naturaleza térmica: se forman por bajas temperaturas y alta densidad.	ATC::OM03
+¿Qué son los anticiclones cálidos?	De naturaleza dinámica: la convergencia en altura, la subsidencia y las corrientes descendentes generan altas presiones y divergencia en superficie.	ATC::OM03
+Tiempo típico de los anticiclones.	Estable, vientos flojos en superficie y cielo despejado; es probable la niebla en invierno, con la consiguiente baja visibilidad en los aeródromos.	ATC::OM03
+Definición de depresión (borrasca).	Región donde la presión es mucho menor que en el entorno; extensión horizontal muy variable.	ATC::OM03
+Circulación y régimen de vientos de una depresión.	En sentido contrario a las agujas del reloj en el hemisferio norte y en el mismo sentido en el sur; vientos normalmente fuertes en el centro y más débiles en el exterior.	ATC::OM03
+¿Cómo se llaman los ciclones tropicales en el Atlántico y el Pacífico nororiental frente al Pacífico noroccidental (manual 3, cap. 6)?	Huracanes (Atlántico y Pacífico nororiental); tifones (Pacífico noroccidental).	ATC::OM03
+¿Dónde se forman los ciclones tropicales y qué régimen de presiones tienen?	Sobre océanos tropicales cálidos; una baja de superficie aislada, a veces muy profunda, con altas presiones en altura; los vientos en altura suelen ser débiles.	ATC::OM03
+¿Qué significa DANA?	Depresión Aislada en Niveles Altos, antes llamada «gota fría».	ATC::OM03
+¿Cómo se forma una DANA?	Una ondulación amplificada de la circulación del oeste se rompe y se separa, dejando en altura una bolsa de aire frío.	ATC::OM03
+Tamaño y comportamiento típicos de una DANA.	Diámetro de 200 km o más, trayectoria difícil de predecir, aire inestable y precipitaciones intensas.	ATC::OM03
+¿Cuáles son las otras depresiones de latitudes medias en el manual 3?	Las depresiones asociadas a los frentes polares de ambos hemisferios; pueden ser grandes y profundas, con vientos fuertes y lluvia.	ATC::OM03
+Definición de masa de aire.	Gran volumen de aire (miles de km) con propiedades físicas horizontalmente homogéneas; sus principales identificadores son la temperatura y la humedad.	ATC::OM03
+¿Qué es la región manantial (o fuente) de una masa de aire?	La gran superficie terrestre o marítima donde permanece y adquiere sus características.	ATC::OM03
+Clasificación de las masas de aire por temperatura (latitud de origen).	Ártica, polar, tropical y ecuatorial.	ATC::OM03
+Clasificación de las masas de aire por humedad.	Seca si la región manantial es continental; húmeda si es marítima.	ATC::OM03
+¿Cuántos tipos de masa de aire resultan de combinar las clases de temperatura y de humedad?	8.	ATC::OM03
+Define frente.	La frontera entre dos masas de aire de distinta temperatura y densidad; la masa cálida, más ligera, asciende sobre la fría y densa.	ATC::OM03
+¿Cómo se clasifican los frentes en el manual 3?	Según la masa de aire que empuja: frío, cálido, estacionario y ocluido.	ATC::OM03
+Frente frío: ¿qué ocurre?	Una masa fría desplaza a una cálida como una cuña y la obliga a ascender; nubes de desarrollo vertical y precipitación si el vapor se condensa.	ATC::OM03
+Frente cálido: ¿qué ocurre?	Una masa cálida desplaza a la fría; el aire cálido asciende sobre ella, se enfría, se condensa y da nubes y precipitación; el tiempo depende de la humedad y la estabilidad.	ATC::OM03
+Frente estacionario: ¿qué ocurre?	Las masas se encuentran sin desplazarse; el viento sopla paralelo al frente en sentidos opuestos; precipitación prolongada si hay mucha humedad.	ATC::OM03
+Frente ocluido: ¿qué ocurre?	Un frente frío (que suele moverse más rápido) alcanza al frente cálido y eleva el sector cálido en altura; el frente en superficie combina ambos.	ATC::OM03
+Dos tipos de oclusión.	De tipo frío y de tipo cálido, según que el aire detrás de la oclusión sea más frío o más cálido que el aire delante.	ATC::OM03
+Define nube en el manual 3.	Conjunto de diminutas partículas de agua líquida o de hielo, o de ambas, en suspensión en la atmósfera.	ATC::OM03
+Tres requisitos para la formación de una nube.	Humedad relativa alta; un mecanismo que sature el aire (por ejemplo, el enfriamiento); núcleos de condensación.	ATC::OM03
+¿Qué son los núcleos de condensación?	Partículas higroscópicas que facilitan la condensación.	ATC::OM03
+Mecanismo más común de formación de nubes.	El enfriamiento de la masa de aire.	ATC::OM03
+Dos formas de enfriarse una masa de aire para formar nubes (manual 3).	Contacto con una superficie muy fría (advección, radiación) y expansión adiabática.	ATC::OM03
+Casos de enfriamiento adiabático en el manual 3.	Enfriamiento convectivo en una columna ascendente; ascenso forzado por una ladera; convergencia en superficie (enfriamiento frontal); turbulencia en capas bajas que transporta calor y humedad.	ATC::OM03
+¿Por qué se llama expansión adiabática?	Porque el enfriamiento se produce prácticamente sin intercambio de calor entre la masa de aire y el aire circundante.	ATC::OM03
+¿En cuántos pisos se dividen las nubes y cuáles son?	Tres: alto, medio y bajo.	ATC::OM03
+¿En qué cuatro familias se clasifican las nubes?	Bajas, medias, altas y de desarrollo vertical.	ATC::OM03
+Pisos de nubes en la región polar (manual 3).	Alto, 3-8 km; medio, 2-4 km; bajo, 0-2 km.	ATC::OM03
+Pisos de nubes en la región templada (manual 3).	Alto, 5-13 km; medio, 2-7 km; bajo, 0-2 km.	ATC::OM03
+Pisos de nubes en la región tropical (manual 3).	Alto, 6-18 km; medio, 2-8 km; bajo, 0-2 km.	ATC::OM03
+Piso alto de nubes en la región templada, en pies.	16 500-45 000 ft.	ATC::OM03
+Piso alto de nubes en la región tropical, en pies.	20 000-60 000 ft.	ATC::OM03
+Piso bajo de nubes en pies (todas las regiones).	0-6500 ft (0-2 km).	ATC::OM03
+¿Qué publicación de la OMM clasifica las nubes en 10 géneros?	El Atlas Internacional de Nubes, volumen I (OMM n.º 407, 1993).	ATC::OM03
+¿Cómo se subdividen los géneros de nubes?	En especies (particularidades y estructura interna) y variedades (disposición de los elementos macroscópicos y transparencia).	ATC::OM03
+Géneros de nubes altas en el manual 3.	Cirros (Ci), cirroestratos (Cs) y cirrocúmulos (Cc).	ATC::OM03
+Géneros de nubes medias en el manual 3.	Altocúmulos (Ac), nimboestratos (Ns) y altoestratos (As).	ATC::OM03
+Géneros de nubes bajas en el manual 3.	Estratos (St) y estratocúmulos (Sc).	ATC::OM03
+Nubes de desarrollo vertical en el manual 3.	Cúmulos (Cu) y cumulonimbos (Cb).	ATC::OM03
+Base y tope medios de las nubes altas en el manual 3.	Base, 6000 m; tope, 12 000 m.	ATC::OM03
+Base y tope medios de las nubes medias en el manual 3.	Base, 2500 m; tope, 6000 m.	ATC::OM03
+Base y tope del cumulonimbo en la tabla del manual.	Base, 600-2400 m; tope, 12 000 m.	ATC::OM03
+Base y tope del cúmulo en la tabla del manual.	Base, 300-2400 m; tope, 6000 m.	ATC::OM03
+¿De qué están formadas las nubes altas?	De cristales de hielo.	ATC::OM03
+¿De qué están formadas las nubes medias?	De gotas de agua (muchas subfundidas), a veces con cristales de hielo.	ATC::OM03
+¿De qué están formadas las nubes bajas?	Por lo general, solo de gotas de agua líquida.	ATC::OM03
+Describe los cirros.	Filamentos blancos, largos y finos, de cristales de hielo, estirados por vientos fuertes; pueden indicar la llegada de una perturbación.	ATC::OM03
+¿Qué nube alta produce halos y por qué?	El cirroestrato: por la refracción y la reflexión de la luz en los cristales de hielo.	ATC::OM03
+¿Producen halos los altoestratos?	No, a diferencia de los cirroestratos.	ATC::OM03
+Describe los cirrocúmulos.	Banco o capa delgada de nubes generalmente blancas, sin sombras, formadas por elementos muy pequeños en forma de granos o rizos.	ATC::OM03
+¿Qué indican los altocúmulos vistos en una mañana húmeda y cálida?	Que por la tarde pueden aparecer tormentas.	ATC::OM03
+Describe los nimboestratos.	Capa gris de base desgarrada, velada por lluvia o nieve continuas, lo bastante espesa para ocultar el Sol; nube media que puede llegar hasta el suelo y a los pisos bajo y alto.	ATC::OM03
+Describe los altoestratos.	Manto gris o gris azulado que suele cubrir todo el cielo; el Sol se ve difusamente, como a través de un vidrio esmerilado.	ATC::OM03
+Describe los estratos.	Capa generalmente gris que cubre el cielo; parece una niebla que no llega al suelo.	ATC::OM03
+Describe los estratocúmulos.	Capa gris o blanquecina con aspecto de terrones, a menudo en filas, con trozos de cielo azul visibles entre ellos.	ATC::OM03
+Describe los cúmulos.	Nubes blancas, aisladas y densas, como enormes bolas de algodón, de contornos bien definidos, base plana relativamente oscura y tope en forma de coliflor.	ATC::OM03
+Describe los cumulonimbos.	Nube densa y potente, de gran desarrollo vertical (montaña o torres), que da precipitación en forma de tormenta o chubasco; puede crecer hasta la tropopausa; base oscura.	ATC::OM03
+¿Por qué un cumulonimbo deja de crecer en la tropopausa?	Allí empieza una capa estable que impide la flotabilidad (puede sobrepasarla ligeramente si la convección es intensa).	ATC::OM03
+¿Qué incluye una descripción completa de la nubosidad?	La altura, la cantidad de cielo cubierto y los tipos de nubes de cada capa.	ATC::OM03
+¿Qué es una octa?	Un octavo del cielo.	ATC::OM03
+Significado de FEW en los mensajes aeronáuticos (manual 3).	Algunas nubes: de 1 a 2 octas.	ATC::OM03
+Significado de SCT.	Nubosidad dispersa: de 3 a 4 octas.	ATC::OM03
+Significado de BKN.	Nuboso (broken): de 5 a 7 octas.	ATC::OM03
+Significado de OVC.	Cielo cubierto (overcast).	ATC::OM03
+Significado de NSC.	Sin nubes de importancia para las operaciones.	ATC::OM03
+Significado de CAVOK en el manual 3.	Sin nubes, sin fenómenos significativos y con visibilidad mayor que 10 km.	ATC::OM03
+Definición de techo de nubes.	Altura sobre el suelo (tierra o agua) de la base de la capa de nubes más baja que cubre más de la mitad del cielo (BKN/OVC) y está por debajo de 20 000 ft (6000 m).	ATC::OM03
+Definición de nube de importancia para las operaciones.	Nube cuya base está por debajo del mayor de estos dos valores: 1500 m (5000 ft) o la altitud mínima de sector más alta; o un cumulonimbo o cúmulo torreante a cualquier altura.	ATC::OM03
+Dos definiciones de visibilidad horizontal en el Anexo 3 de la OACI (manual 3): ¿cuál es el valor que cuenta?	El mayor de estos: la distancia a la que se ve un objeto negro sobre un fondo brillante (MOR, de día) y la distancia a la que se ve una luz de 1000 candelas sobre un fondo no iluminado (de noche).	ATC::OM03
+¿Qué significan las siglas MOR?	Alcance óptico meteorológico (Meteorological Optical Range).	ATC::OM03
+¿Qué tipo de luz se usa para estimar la visibilidad de noche?	Luces de unas 1000 candelas sobre un fondo no iluminado.	ATC::OM03
+Define visibilidad vertical.	Visibilidad máxima a la que se ve un globo ascendente; en aeronáutica, la distancia vertical desde la que el piloto ve la pista.	ATC::OM03
+Define visibilidad oblicua.	Distancia desde la que un piloto, mirando a lo largo de la senda de descenso, puede ver la pista (o las ayudas de aterrizaje en el umbral).	ATC::OM03
+¿Cómo es la visibilidad oblicua frente a la vertical y la horizontal?	Normalmente inferior a ambas.	ATC::OM03
+Define el RVR (alcance visual en pista).	Distancia hasta la cual el piloto de una aeronave situada en el eje de la pista puede ver las marcas de la superficie o las luces que delimitan la pista o señalan su eje.	ATC::OM03
+Principales factores que influyen en la estimación de la visibilidad.	La humedad relativa, la posición del Sol y la dirección del viento.	ATC::OM03
+¿En qué unidad se mide normalmente la visibilidad?	En metros.	ATC::OM03
+Define visibilidad reinante.	Valor máximo de visibilidad alcanzado dentro de un círculo que abarque al menos la mitad del horizonte o la mitad de la superficie del aeródromo, de forma continua o no.	ATC::OM03
+¿Qué se notifica cuando la visibilidad fluctúa rápidamente y no se puede determinar un valor reinante?	La visibilidad mínima.	ATC::OM03
+Define precipitación.	Conjunto de partículas líquidas o sólidas que, procedentes de las nubes, llegan al suelo.	ATC::OM03
+Tipos de precipitación según la distribución de la temperatura.	Agua (lluvia), nieve, aguanieve, lluvia helada y granizo.	ATC::OM03
+¿Qué nubes dan precipitación intensa en forma de chubasco?	Las de desarrollo vertical: cumulonimbos y, ocasionalmente, cúmulos.	ATC::OM03
+¿Qué nubes dan precipitación continua de intensidad moderada?	Las estratiformes, sobre todo altoestratos y nimboestratos.	ATC::OM03
+Define chubascos.	Precipitación que empieza y termina bruscamente, relativamente intensa y corta, con gotas grandes, procedente de nubes convectivas.	ATC::OM03
+Define precipitaciones intermitentes.	No necesariamente continuas en superficie, empiezan y terminan gradualmente y proceden de capas nubosas no convectivas.	ATC::OM03
+¿Qué son las virgas?	Estructuras filamentosas bajo una nube donde la precipitación se evapora antes de llegar al suelo (humedad baja o temperatura alta, o ambas).	ATC::OM03
+Cinco formas en que la precipitación afecta a las operaciones (manual 3).	Reducción de la visibilidad; cizalladura; engelamiento; mal frenado o aquaplaning en el aterrizaje; rodaje más lento y mayores tiempos de ocupación.	ATC::OM03
+Fuerza principal que genera el viento.	El gradiente de presión entre dos masas de aire (proporcional a él).	ATC::OM03
+¿Qué otras fuerzas actúan sobre el viento además del gradiente de presión?	La fuerza de Coriolis, la fuerza centrífuga y el rozamiento con la superficie.	ATC::OM03
+¿En qué unidad se da la velocidad del viento en aeronáutica y cómo se expresa la dirección?	En nudos; la dirección es aquella de donde sopla, en grados desde el norte verdadero, medidos en el sentido de las agujas del reloj.	ATC::OM03
+Límite de viento cruzado de las aeronaves (manual 3).	Entre 15 y 35 kt, según el tipo de aeronave y el estado de la pista.	ATC::OM03
+¿Con qué viento deben aterrizar y despegar las aeronaves y qué se permite?	Con viento de cara; es posible un ligero viento en cola, cuyo máximo depende del tipo de aeronave y de la longitud de la pista.	ATC::OM03
+¿Qué es la brisa de mar?	Un viento local diurno del mar hacia la tierra, causado porque la tierra se calienta más que el mar.	ATC::OM03
+¿Qué es la brisa de tierra?	Un viento local nocturno de la tierra hacia el mar, porque la tierra se enfría más rápido que el mar.	ATC::OM03
+¿Por qué se producen las brisas?	Por el distinto calentamiento de la tierra y el mar por la radiación solar, debido a sus diferentes calores específicos.	ATC::OM03
+¿Por qué son útiles las brisas para los aeropuertos costeros?	Su ciclo diario es repetitivo y predecible, de modo que se pueden adaptar los ejes y las configuraciones de pista.	ATC::OM03
+Define el efecto Foehn.	En la ladera de sotavento de una cadena montañosa: aumento de la temperatura y disminución de la humedad relativa respecto a la misma altitud en la ladera de barlovento.	ATC::OM03
+¿Por qué el aire está más cálido en la ladera de sotavento en el efecto Foehn?	Desciende calentándose por compresión adiabática según el gradiente adiabático seco, tras haber perdido humedad en el ascenso por barlovento (gradiente saturado, menor que el seco).	ATC::OM03
+¿Cuál es menor: el gradiente adiabático saturado o el seco (manual 3)?	El gradiente adiabático saturado es menor que el seco.	ATC::OM03
+Umbral de visibilidad por debajo del cual se notifica el RVR.	1500 m.	ATC::OM03
+¿A qué altura sobre el eje de la pista se define el RVR?	5 m.	ATC::OM03
+¿A qué promedio temporal corresponde el RVR de un informe?	Al promedio de los 10 minutos anteriores a la hora de observación.	ATC::OM03
+¿Dónde se colocan los transmisómetros de RVR?	A 2,5 m sobre el suelo, a unos 100 m del eje de la pista, en la zona de toma de contacto.	ATC::OM03
+Enumera los fenómenos que reducen la visibilidad en superficie (manual 3).	Niebla y neblina, ventiscas, calima, contaminación o humo, smog, torbellinos de polvo o arena, nubes bajas y precipitación intensa.	ATC::OM03
+¿Qué factor reduce más a menudo la visibilidad?	La niebla.	ATC::OM03
+¿Cómo puede afectar la estabilidad a una capa de niebla?	La estabilidad, por ejemplo una inversión térmica, dificulta su disipación; la inestabilidad favorece chubascos y corrientes verticales que levantan polvo y arena.	ATC::OM03
+Definición de niebla en el manual 3.	Nube estratiforme en contacto con el suelo o muy baja, que restringe la visibilidad a menos de 1000 m.	ATC::OM03
+Definición de neblina en el manual 3.	La misma nube cuando la reducción de visibilidad es superior a 1000 m con humedad relativa superior al 70 %.	ATC::OM03
+¿Qué es la bruma?	Un caso especial de neblina causado por agua y partículas higroscópicas (sobre todo sal); típica de zonas costeras.	ATC::OM03
+¿Cuándo se llama niebla baja a la niebla?	Cuando su extensión vertical no supera los 2 m.	ATC::OM03
+Extensión vertical de la niebla.	Desde unos pocos metros hasta unos pocos cientos de metros.	ATC::OM03
+¿Cómo se forma la niebla?	Por condensación del vapor de agua, por enfriamiento o por aporte de vapor.	ATC::OM03
+Enumera los factores que causan ilusiones ópticas a los pilotos.	La pendiente y la anchura de la pista, la pendiente del terreno, el agua en el parabrisas, la falta de contraste de las luces de pista, los fenómenos meteorológicos y las condiciones de iluminación.	ATC::OM03
+Define engelamiento.	Formación de hielo sobre la estructura de la aeronave o en el motor, o en ambos, cuando el agua líquida subfundida (gotas a 0 ºC o menos) se congela al impactar.	ATC::OM03
+Condiciones para el engelamiento en vuelo.	Gotas de agua visibles (gotas de nube o lluvia) con temperatura del aire igual o inferior a 0 ºC (en ocasiones algo superior).	ATC::OM03
+¿Dónde se acumula principalmente el hielo en la aeronave?	En las partes más salientes y en los elementos expuestos al viento relativo.	ATC::OM03
+Enumera los efectos del engelamiento (manual 3).	Peso y resistencia; instrumentos con indicaciones falsas e interferencias en las comunicaciones; reducción de la visibilidad; pérdida de sustentación y de maniobrabilidad; pérdida de frenado; pérdida de potencia; vibraciones y fatiga; mal funcionamiento del motor.	ATC::OM03
+Engelamiento ligero: definición.	El crecimiento del depósito de hielo no causa problemas, salvo que sea muy prolongado.	ATC::OM03
+Engelamiento moderado: definición.	El hielo crece rápidamente incluso en periodos cortos; el equipo de a bordo puede eliminar el depósito.	ATC::OM03
+Engelamiento fuerte: definición.	El hielo crece tan rápido que el equipo de a bordo no lo puede controlar; es necesario un cambio inmediato de altitud.	ATC::OM03
+Cuatro procesos de engelamiento en vuelo.	Hielo claro, hielo granulado, lluvia engelante y depósito de nieve húmeda o escarcha.	ATC::OM03
+Hielo claro: aspecto y congelación.	Homogéneo, casi transparente, vítreo, liso y muy adherente; congelación lenta de gotas subfundidas; muy peligroso.	ATC::OM03
+Temperatura del aire más favorable para el hielo claro.	Entre 0 ºC y -10 ºC.	ATC::OM03
+Hielo granulado: aspecto y congelación.	Blanco, opaco, rugoso, granular y poco adherente; congelación rápida; no supone un gran problema para las operaciones.	ATC::OM03
+Temperatura del aire más favorable para el hielo granulado.	Entre 0 ºC y -40 ºC (normalmente entre -10 ºC y -20 ºC).	ATC::OM03
+¿Cómo se forma la lluvia engelante?	Gotas líquidas de una capa por encima de 0 ºC se subfunden al atravesar capas por debajo de 0 ºC.	ATC::OM03
+¿Cuál es el tipo de engelamiento más peligroso?	La lluvia engelante (hielo transparente que se congela de manera uniforme sobre todas las partes de la aeronave).	ATC::OM03
+Engelamiento por escarcha o nieve húmeda: composición y peligro.	Cristales de hielo que coexisten con gotas subfundidas; en aeronaves aparcadas a la intemperie altera el perfil, reduce la sustentación, aumenta la resistencia y puede obligar a cancelar el despegue.	ATC::OM03
+Define cizalladura del viento (wind shear).	Cambio en la velocidad o la dirección del viento, o en ambas, entre dos puntos próximos; puede ser horizontal, vertical o ambas.	ATC::OM03
+¿Cuándo es más fuerte la cizalladura?	Cuanto menor es la distancia en la que se produce el cambio y mayor la velocidad a la que ocurre.	ATC::OM03
+¿Dónde es especialmente importante la cizalladura para el piloto?	Por debajo de la capa de fricción, porque afecta a la senda de descenso.	ATC::OM03
+Efecto de la cizalladura en niveles altos frente a niveles bajos.	Niveles altos: favorece la turbulencia; niveles bajos: peligro para el aterrizaje y el despegue.	ATC::OM03
+Fenómenos que pueden causar cizalladura (manual 3).	Tormentas (microrreventones, frentes de racha), tornados, frentes fríos o cálidos, vientos fuertes perturbados por el relieve, inversiones térmicas cerca del suelo (frentes, brisas, vientos catabáticos).	ATC::OM03
+¿Qué es un frente de racha?	Rachas fuertes en la frontera entre el aire frío de la tormenta y el aire circundante más cálido; forma parte del ciclo normal de la tormenta.	ATC::OM03
+Define turbulencia en el flujo de aire.	Estado del flujo en el que las velocidades presentan fluctuaciones irregulares, con torbellinos que varían la intensidad y la dirección del viento.	ATC::OM03
+Cuatro intensidades de turbulencia.	Ligera, moderada, fuerte y extrema.	ATC::OM03
+Turbulencia ligera: efecto.	Pequeñas variaciones en la altitud de la aeronave.	ATC::OM03
+Turbulencia moderada: efecto.	Variaciones mayores; normalmente requiere la intervención del piloto.	ATC::OM03
+Turbulencia fuerte: efecto.	Variaciones amplias y violentas de la altitud y del ángulo de ataque.	ATC::OM03
+Turbulencia extrema: efecto.	La aeronave es sacudida violentamente y resulta prácticamente incontrolable.	ATC::OM03
+Turbulencia convectiva: ¿cuándo se produce?	En días calurosos de verano o cuando una masa de aire frío se desplaza sobre una superficie más cálida.	ATC::OM03
+¿Por qué en la turbulencia convectiva la aviación solo considera las corrientes ascendentes?	Son más violentas que las descendentes.	ATC::OM03
+Define turbulencia mecánica.	Turbulencia formada por un obstáculo material en la trayectoria del viento; su intensidad depende del tamaño del obstáculo, la velocidad del viento y la rugosidad del terreno.	ATC::OM03
+Turbulencia mecánica en aire inestable frente a aire estable.	Inestable: torbellinos grandes y mayor espesor afectado; estable: torbellinos más pequeños y menor espesor.	ATC::OM03
+Define turbulencia de estela.	Torbellinos que dejan las aeronaves en vuelo, en aterrizaje y en despegue; su intensidad depende del tamaño, la velocidad y la configuración alar.	ATC::OM03
+¿Por qué debe tener cuidado el controlador tras el despegue de una aeronave pesada?	El aire sobre la pista está agitado; autorizar otro despegue de inmediato puede ser peligroso.	ATC::OM03
+Turbulencia asociada a los frentes: ¿fríos o cálidos?	Por lo general mayor en los frentes fríos que en los cálidos.	ATC::OM03
+¿Qué es una onda de montaña?	Un comportamiento ondulatorio del flujo tras chocar con una cadena montañosa, con ascendencias y descendencias a sotavento.	ATC::OM03
+¿Qué aeronaves resultan afectadas por las ondas de montaña?	Todas en el ascenso; en el descenso, sobre todo las ligeras.	ATC::OM03
+¿Qué refuerza una onda de montaña en niveles altos?	Una corriente en chorro más o menos perpendicular a la montaña (su cizalladura).	ATC::OM03
+¿Qué son los rotores?	Torbellinos bajo las crestas de las ondas de montaña; las formas más peligrosas se dan bajo la primera onda.	ATC::OM03
+Condiciones de la onda de montaña: viento en la cima.	Superior a 15 kt (posiblemente más en una montaña muy alta) y creciente con la altura.	ATC::OM03
+Condiciones de la onda de montaña: dirección del viento.	Dentro de 30º de la perpendicular al eje de la montaña y constante; cuanto menor es el ángulo, más fuerte es la onda.	ATC::OM03
+Condiciones de la onda de montaña: estabilidad.	Una capa estable por encima de la cima.	ATC::OM03
+Nubes que pueden acompañar a las ondas de montaña (manual 3).	Lenticulares, de rotor (eje horizontal), de ladera y de cresta, y nubes orográficas de capuchón (sombrero).	ATC::OM03
+Define turbulencia en aire claro (TAC).	Turbulencia a gran altitud, a menudo fuera de nubes; generalmente ligera, a veces fuerte.	ATC::OM03
+¿Dónde suele producirse la turbulencia en aire claro?	En capas estables de niveles altos con fuerte cizalladura vertical y cerca de las corrientes en chorro; también con ondas de montaña y con dorsales y vaguadas en altura.	ATC::OM03
+Diferencia entre «baches» y «meneos» en la TAC.	Baches: sacudidas bruscas con cambio de altitud; meneos: sacudidas sin gran cambio de altitud, con un ruido como de martilleo.	ATC::OM03
+¿Por qué debe conocer el controlador las corrientes en chorro de la zona (TAC)?	Un piloto con TAC intensa y persistente solicitará cambios de ruta o de nivel.	ATC::OM03
+¿Dónde puede producirse turbulencia en una tormenta?	Dentro de la nube convectiva y a su alrededor.	ATC::OM03
+¿Qué define una tormenta en el manual 3?	Cumulonimbos acompañados de actividad eléctrica (rayos y truenos).	ATC::OM03
+Condiciones necesarias para formar una tormenta.	Energía térmica (principalmente en superficie), atmósfera inestable, humedad suficiente y, a veces, un mecanismo de ascenso.	ATC::OM03
+¿Qué es una tormenta seca?	Una tormenta sin precipitación o con precipitación que no llega al suelo.	ATC::OM03
+Dos clases de tormenta según su origen.	Tormentas frontales y tormentas de masa de aire.	ATC::OM03
+Tormentas frontales con un frente frío frente a un frente cálido.	Frente frío: se extienden a lo largo de él varios cientos de km; frente cálido: gran superficie, generalmente menos desarrolladas, embebidas en nimboestratos.	ATC::OM03
+Tormentas de masa de aire: causa y tamaño.	Atmósfera inestable, normalmente por calentamiento diurno; decenas de kilómetros cuadrados; origen térmico, orográfico o de mezcla turbulenta.	ATC::OM03
+¿Cuándo se dan las tormentas de masa de aire en latitudes medias?	Preferentemente en las tardes de verano y primavera.	ATC::OM03
+Duración típica de una tormenta y número de fases.	De dos a tres horas; tres fases.	ATC::OM03
+Tres fases de una tormenta.	Formación, madurez y disipación.	ATC::OM03
+Fase de formación de una tormenta.	Las corrientes ascendentes elevan aire húmedo, la condensación libera energía y se desarrollan cumulonimbos; empiezan corrientes descendentes débiles fuera de la nube.	ATC::OM03
+Fase de madurez de una tormenta.	Cae la precipitación y las corrientes descendentes llegan al suelo y forman el frente de racha; las corrientes ascendentes están en su intensidad máxima; yunque; descargas frecuentes.	ATC::OM03
+Fase de disipación de una tormenta.	Empieza cuando desaparecen las corrientes ascendentes; las descendentes se extienden por el nivel bajo y se debilitan; la precipitación disminuye.	ATC::OM03
+Define línea de turbonada.	Línea de tormentas muy activas de cientos de km de longitud y de 20 a 50 km de anchura, que se desplaza a unos 25 kt de media.	ATC::OM03
+Tiempo asociado a las líneas de turbonada.	Vientos fuertes y destructivos, turbulencia fuerte, granizo intenso y tornados.	ATC::OM03
+Define microrreventón.	Fuerte corriente descendente de aire frío y denso originada en una nube convectiva, de hasta 60 kt, que supera el régimen de descenso de una aeronave.	ATC::OM03
+Comportamiento de un microrreventón en el suelo.	Se extiende horizontalmente y forma torbellinos anulares horizontales de hasta 1 km de altura, no siempre simétricos.	ATC::OM03
+Tamaño y duración de un microrreventón.	Hasta 5 km; dura de 1 a 5 minutos, nunca más de 15 minutos desde que llega al suelo.	ATC::OM03
+Valores de viento que produce un microrreventón.	Vientos de hasta 150 kt con variaciones de velocidad de más de 50 kt.	ATC::OM03
+Microrreventón húmedo frente a seco.	Húmedo: acompañado de precipitación; seco: sin ella.	ATC::OM03
+Define tornado.	Columna de aire en violenta rotación desde la base de un cumulonimbo hasta el suelo; en su interior baja la presión.	ATC::OM03
+Diámetro, velocidad y viento de un tornado (manual 3).	Desde menos de 10 m hasta 1 km; se desplaza a unos 25 kt; vientos en superficie de más de 270 kt.	ATC::OM03
+¿Qué es una tuba (funnel cloud)?	Un vórtice de tornado que no llega al suelo.	ATC::OM03
+¿Qué es una tromba marina?	Un tornado que se forma sobre el mar y aspira agua hasta cientos de metros de altura.	ATC::OM03
+¿Dónde se llama «huracán» a un ciclón tropical (manual 3)?	Atlántico norte occidental, Pacífico norte central y oriental, Caribe y golfo de México.	ATC::OM03
+¿Dónde se llama «ciclón» y dónde «tifón»?	Ciclón: bahía de Bengala y mar Arábigo; tifón: Filipinas, Taiwán, China y Japón.	ATC::OM03
+¿Dónde y cuándo se forman las depresiones tropicales?	Entre unos 25º N y 25º S, cuando el agua del mar supera unos 27 ºC.	ATC::OM03
+Nombres de los sistemas tropicales según el viento máximo en superficie.	Perturbación tropical (vientos flojos); depresión tropical (hasta 33 kt); tormenta tropical (34-63 kt); huracán, ciclón o tifón (más de 64 kt).	ATC::OM03
+Viento máximo en superficie de una tormenta tropical.	De 34 a 63 kt.	ATC::OM03
+¿Qué dice el manual sobre la actividad aérea con un huracán presente?	Su presencia es motivo suficiente para suspender toda la actividad aérea.	ATC::OM03
+¿Qué causa las corrientes convectivas?	El calentamiento del suelo: el aire sobre el suelo caliente se calienta por conducción, se hace menos denso y asciende, dilatándose y enfriándose.	ATC::OM03
+¿Qué efecto tienen las corrientes convectivas sobre las aeronaves?	Turbulencia y, a veces, ascensos y descensos bruscos.	ATC::OM03
+Efecto de las temperaturas superiores a 30 ºC en un aeródromo.	La densidad del aire disminuye, lo que puede alargar la carrera de despegue; hacen falta pistas más largas o una reducción del peso máximo.	ATC::OM03

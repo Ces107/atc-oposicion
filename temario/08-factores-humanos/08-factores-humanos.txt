@@ -1,0 +1,277 @@
+En el manual de ENAIRE, ¿cómo define el Doc. 10151 de la OACI las actuaciones humanas (*human performance*)?	Cómo llevan a cabo las personas sus actividades; representan la contribución humana al funcionamiento del sistema.	ATC::OM08
+En el manual de ENAIRE, ¿cómo define el Doc. 10151 de la OACI los factores humanos (*human factors*)?	La aplicación del conocimiento sobre los seres humanos, sus capacidades, características y limitaciones al diseño de los equipos que utilizan, los entornos en los que operan y las actividades que realizan.	ATC::OM08
+Fuera de la aviación, ¿con qué aspectos se asocian, respectivamente, los factores humanos y la ergonomía?	Factores humanos: más con los aspectos psicológicos. Ergonomía: más con los aspectos físicos o fisiológicos.	ATC::OM08
+Cita cuatro disciplinas de las que los factores humanos obtienen su comprensión de las actuaciones humanas.	Por ejemplo: psicología (cognitiva, organizacional y del trabajo, social), psicología conductual, sociología, antropología, ciencias médicas (medicina de aviación y ocupacional), diseño e ingeniería, informática, estadística.	ATC::OM08
+¿Por qué es esencial el estudio de los factores humanos en ATM (manual 1.1)?	Para saber si el diseño de la tecnología, la selección del personal, la formación, los procedimientos, los roles, tareas y responsabilidades y la gestión de la organización garantizan un rendimiento óptimo del sistema y una gestión eficaz del riesgo.	ATC::OM08
+¿Cuándo presentó James Reason su visión sistémica de la gestión de la seguridad (manual 1.2.1)?	A mediados de la década de 1990 («a mediados de 1990»).	ATC::OM08
+Según la visión de Reason, ¿de qué son resultado los accidentes?	De la acción humana combinada con otros fallos del sistema (no del error individual por sí solo).	ATC::OM08
+¿Qué concepto introdujo el modelo del queso suizo en cualquier industria?	El accidente organizacional: el impacto de la cultura y las políticas de la organización sobre los controles de riesgo para la seguridad.	ATC::OM08
+En el modelo del queso suizo, ¿qué representan las lonchas y los agujeros, y cuándo ocurre el suceso?	Lonchas = capas de protección; agujeros = sus debilidades; el suceso ocurre cuando los agujeros se alinean.	ATC::OM08
+En el modelo del queso suizo, ¿qué crean los factores organizacionales que puede hacer fallar las defensas?	Condiciones latentes.	ATC::OM08
+Según el manual, ¿cuál fue la mayor contribución de Reason, y la menos conocida?	Su investigación sobre los errores humanos, de la que salió el modelo de clasificación GEMS (Sistema General de Modelado de Errores, *General Error Modelling System*).	ATC::OM08
+¿Qué estudió Reason sobre las actuaciones sobresalientes?	Qué hace que los sistemas funcionen correctamente y qué permite que las personas salven a veces situaciones críticas.	ATC::OM08
+¿El modelo de qué autor explica el comportamiento mediante tres modos de desempeño (habilidades, reglas, conocimiento)?	Rasmussen.	ATC::OM08
+Rasmussen: conducta basada en habilidades (*skill-based*)	Acciones no realizadas de forma consciente; control cognitivo automatizado; tarea rutinaria muy conocida (p. ej., conducir siendo un conductor experimentado).	ATC::OM08
+Rasmussen: conducta basada en reglas (*rule-based*)	Procesos de decisión conscientes para elegir qué reglas aplicar; situaciones conocidas pero poco frecuentes (p. ej., aplicar los procedimientos operativos en frecuencia).	ATC::OM08
+Rasmussen: conducta basada en conocimiento (*knowledge-based*)	No hay reglas ni secuencias almacenadas; gran esfuerzo consciente para analizar y elegir entre alternativas; aprendizaje de habilidades nuevas, situaciones de emergencia o inusuales.	ATC::OM08
+¿Qué modo de Rasmussen asocia el manual con una emergencia o una situación inusual en frecuencia?	La conducta basada en conocimiento.	ATC::OM08
+¿Qué circular de la OACI propuso formalmente el modelo SHELL como modelo conceptual de FFHH (manual)?	La Circular 216-AN31.	ATC::OM08
+¿Quién y cuándo creó el modelo SHELL según el manual?	Edwards 1972, Hawkins 1993.	ATC::OM08
+¿Qué añade la versión actualizada SHELL-O?	Organización: los factores organizacionales como parte del sistema.	ATC::OM08
+SHELL-O: ¿qué significa cada letra (con el español del manual)?	S *Software* (soporte lógico, procedimientos); H *Hardware* (soporte físico, sistemas técnicos); E *Environment* (entorno); L *Liveware* (elemento humano); O *Organization* (organización).	ATC::OM08
+En SHELL-O, ¿qué componente es el centro y el más flexible?	El ser humano, *Liveware* (L); los demás componentes deben ajustarse a él.	ATC::OM08
+¿A qué operadores de primera línea puede representar la L de SHELL-O (manual)?	Al controlador de tránsito aéreo, al ATSEP y al piloto.	ATC::OM08
+SHELL-O: interfaz L-S	Relación entre el controlador y todos los sistemas de apoyo: reglamentos, manuales, listas de comprobación, procedimientos normalizados de operación.	ATC::OM08
+SHELL-O: interfaz L-H	Interfaz ser humano-máquina: si el diseño del equipo se adapta a la persona (consolas, pantallas, alarmas, ergonomía).	ATC::OM08
+SHELL-O: interfaz L-E	Persona y entorno de trabajo, interno (temperatura, ruido, clima laboral) y externo (p. ej., meteorología).	ATC::OM08
+SHELL-O: interfaz L-L	Persona y las demás personas en el trabajo: liderazgo, cooperación, trabajo en equipo (TRM), relaciones entre operación y dirección, cultura de la empresa.	ATC::OM08
+¿Por qué la letra O tiene más peso en SHELL-O?	Los factores organizacionales tienen mayor peso específico: las políticas sobre cómo se gestionan los procedimientos y los cambios, los sistemas técnicos y las personas.	ATC::OM08
+¿Qué son los factores psicosociales en el manual?	Factores externos del sistema social de la persona, dentro y fuera del trabajo, que añaden presión e influyen en su enfoque personal del trabajo y en su capacidad para afrontar el estrés y las situaciones anormales (OACI 2002).	ATC::OM08
+Cita cuatro factores físicos o fisiológicos que afectan a las actuaciones humanas (manual 1.2.3).	Visión, audición, luz, ruido, estrés, ritmos circadianos.	ATC::OM08
+Cita cuatro factores psicológicos que afectan a las actuaciones humanas (manual 1.2.3).	Conocimientos y experiencia, idoneidad de la formación, motivación, confianza, toma de decisiones, fatiga, carga de trabajo, trabajo en equipo.	ATC::OM08
+Enumera los ocho factores organizacionales del comienzo de la sección 1.3 del manual.	1 adecuación de los recursos humanos; 2 selección de personal idóneo; 3 formación recibida; 4 atención al bienestar de los profesionales; 5 eficiencia de la empresa en la gestión de procesos y proyectos; 6 planificación y organización del personal; 7 gestión del riesgo; 8 cultura organizacional y comunicación.	ATC::OM08
+¿Por qué es la aviación un sistema sociotécnico complejo?	Es de gran tamaño y alta tecnología y requiere interacciones complejas entre componentes humanos y tecnológicos.	ATC::OM08
+¿Qué implica la complejidad para el comportamiento de un sistema sociotécnico?	Incertidumbre en las interacciones internas: el comportamiento es no lineal y en parte impredecible; pero también le da una gran capacidad de adaptación.	ATC::OM08
+¿Qué componente del sistema es el más flexible, adaptable y valioso, pero también el más vulnerable?	El ser humano.	ATC::OM08
+Según el manual, ¿qué debería ser la expresión «error humano»?	Un punto de partida que indica dónde falló el sistema, no una explicación.	ATC::OM08
+¿Por qué el manual llama al «error humano» una construcción social?	Porque una instrucción errónea corregida a tiempo rara vez se llama error, aunque no se diferencie de otra que acaba en incidente: la etiqueta depende de las consecuencias más que de la acción.	ATC::OM08
+Según el manual, ¿de qué heredan sus procesos las metodologías actuales de investigación?	De los procedimientos de investigación criminal surgidos a principios del siglo XX.	ATC::OM08
+¿Qué documento de la OACI adoptó formalmente el enfoque sistémico en la investigación de sucesos, y en qué año?	El Anexo 13, en 1994.	ATC::OM08
+Visión contemporánea de la seguridad: ¿cómo se considera todo accidente o incidente?	Como un fallo del sistema, no solo de una persona o un grupo, porque las actuaciones humanas no se dan en el vacío.	ATC::OM08
+¿Quién propuso los diez principios del pensamiento sistémico para la seguridad (*Systems Thinking for Safety*), y cuándo?	EUROCONTROL, 2014.	ATC::OM08
+Principio sistémico 1 de EUROCONTROL	Implicación de los expertos en la materia.	ATC::OM08
+Principio sistémico 2 de EUROCONTROL	Racionalidad local.	ATC::OM08
+Principio sistémico 3 de EUROCONTROL	Cultura justa.	ATC::OM08
+Principio sistémico 4 de EUROCONTROL	Demanda y presión.	ATC::OM08
+Principio sistémico 5 de EUROCONTROL	Recursos y limitaciones.	ATC::OM08
+Principio sistémico 6 de EUROCONTROL	Interacciones y flujos.	ATC::OM08
+Principio sistémico 7 de EUROCONTROL	Contrapartidas (*trade-offs*).	ATC::OM08
+Principio sistémico 8 de EUROCONTROL	Variabilidad del rendimiento.	ATC::OM08
+Principio sistémico 9 de EUROCONTROL	Emergencia del sistema.	ATC::OM08
+Principio sistémico 10 de EUROCONTROL	Equivalencia.	ATC::OM08
+¿Qué principio de EUROCONTROL dice que la contribución de cada experto debe entenderse desde sus propios objetivos, limitaciones y contexto?	El principio 2, racionalidad local.	ATC::OM08
+¿Qué principio dice que el éxito y el fracaso se originan en los mismos procesos?	El principio 10, equivalencia.	ATC::OM08
+¿Qué principio dice que una acción pequeña puede tener grandes efectos y que los resultados pueden ser inesperados?	El principio 9, emergencia del sistema.	ATC::OM08
+¿Qué principio implica que los profesionales equilibran eficiencia y precisión?	El principio 7, contrapartidas.	ATC::OM08
+¿Qué principio dice que entender la demanda es crucial y que el par demanda-presión afecta al rendimiento?	El principio 4, demanda y presión.	ATC::OM08
+¿Qué principio pide gestionar los flujos «de extremo a extremo» y entender las interacciones?	El principio 6, interacciones y flujos.	ATC::OM08
+¿Qué principio pide identificar la variabilidad deseada y la no deseada?	El principio 8, variabilidad del rendimiento.	ATC::OM08
+¿Qué principio implica una mentalidad abierta, justa y de confianza y un lenguaje que evite los juicios de valor?	El principio 3, cultura justa.	ATC::OM08
+Safety-I: definición de seguridad	Que salgan mal las menos cosas posibles.	ATC::OM08
+Safety-II: definición de seguridad	Que salgan bien las máximas cosas posibles.	ATC::OM08
+Safety-I frente a Safety-II: principio de gestión de la seguridad	Safety-I es reactivo (se responde cuando ocurre algo o un riesgo es inaceptable); Safety-II es proactivo (se intenta anticipar los sucesos de forma continua).	ATC::OM08
+Safety-I frente a Safety-II: visión del ser humano	Safety-I: predominantemente una amenaza. Safety-II: un recurso necesario para la resiliencia y la flexibilidad del sistema.	ATC::OM08
+Safety-II: finalidad de la investigación de accidentes	Entender cómo salen bien normalmente las cosas, como base para explicar cómo salen mal a veces.	ATC::OM08
+¿En qué décadas se desarrolló sobre todo Safety-I, y por qué?	Entre las décadas de 1960 y 1980, cuando la demanda de tráfico era menor y los sistemas, más simples e independientes.	ATC::OM08
+¿Qué año de publicación de EUROCONTROL se da para la tabla Safety-I frente a Safety-II?	2013.	ATC::OM08
+Rasmussen (1985, 1986): ¿de qué es resultado el error humano?	Del desequilibrio entre las demandas del trabajo y los recursos mentales disponibles para atenderlas; las raíces del éxito y del fracaso son las mismas.	ATC::OM08
+¿Cómo llama Simon (1957) a los límites en las decisiones de los operadores debidos a la información, la capacidad mental y el tiempo limitados?	Racionalidad limitada.	ATC::OM08
+¿Qué autor (2009) se cita a propósito de las contrapartidas de los controladores, p. ej., más seguro frente a más eficiente?	Hollnagel (2009), el principio ETTO.	ATC::OM08
+Trabajo como se imagina (*Work-As-Imagined*, WAI) frente a trabajo como se hace (*Work-As-Done*, WAD)	WAI = cómo debería ocurrir el trabajo tal como se concibe y diseña; WAD = lo que ocurre realmente en el día a día.	ATC::OM08
+¿Qué ejemplo da el manual de una brecha WAI/WAD en ATM?	La implantación prematura de nuevos sistemas: comportamientos inesperados y perturbaciones, que obligan a revisar la operación real en una fase táctica.	ATC::OM08
+Según Woods y Dekker (2002), ¿qué son los conceptos de diseño?	Solo hipótesis sobre la relación futura entre la tecnología y las personas; la automatización transforma la práctica diaria.	ATC::OM08
+¿Cuántas variedades de trabajo añade Steven Shorrock, y cuáles son?	Ocho: trabajo prescrito, divulgado, analizado, observado, simulado, instruido, medido y juzgado.	ATC::OM08
+¿Qué reglamento fija requisitos comunes para los proveedores de ATM/ANS y otras funciones de la red de ATM?	El Reglamento de Ejecución (UE) 2017/373 de la Comisión, de 1 de marzo de 2017.	ATC::OM08
+¿En qué parte del Reglamento 2017/373 están los requisitos específicos de FFHH para los proveedores de ATC?	Anexo IV, sección 3.	ATC::OM08
+¿Qué regula ATS.OR.300?	El alcance: los requisitos de actuaciones humanas del proveedor para prevenir y limitar el uso problemático de sustancias psicoactivas, los efectos negativos del estrés y los efectos negativos de la fatiga en los controladores.	ATC::OM08
+¿Qué regula ATS.OR.305?	Las responsabilidades de los proveedores de ATC sobre el uso problemático de sustancias psicoactivas por parte de los controladores.	ATC::OM08
+¿Quién debe aprobar el procedimiento para detectar el uso problemático de sustancias psicoactivas (ATS.OR.305)?	La autoridad competente.	ATC::OM08
+¿Qué punto de las licencias ATCO indica ATS.OR.305 que el proveedor debe tener en cuenta?	El punto ATCO.A.015 del Reglamento (UE) 2015/340.	ATC::OM08
+¿Qué características debe tener el procedimiento de detección de sustancias psicoactivas?	Objetivo, transparente y no discriminatorio.	ATC::OM08
+¿Qué regula ATS.OR.310?	El estrés: una política de gestión del estrés que incluya un programa de gestión del estrés por incidente crítico, y programas de formación e información sobre la prevención del estrés.	ATC::OM08
+¿Qué regula ATS.OR.315?	La fatiga: una política de gestión de la fatiga y programas de información sobre su prevención.	ATC::OM08
+¿Qué regula ATS.OR.320?	Los sistemas de turnos de los controladores: un sistema para gestionar el riesgo de fatiga ocupacional, que especifica ocho elementos, y la consulta a los controladores afectados o a sus representantes.	ATC::OM08
+¿Qué dos disposiciones del Reglamento 2015/340 complementan los programas de información de ATS.OR.310 y ATS.OR.315?	La formación en FFHH de las secciones 3 y 4 de la subparte D del anexo I.	ATC::OM08
+ATS.OR.320: enumera los ocho elementos que debe especificar el sistema de turnos.	1 máximo de días laborables consecutivos; 2 máximo de horas por periodo de servicio; 3 duración máxima del control de tránsito aéreo sin pausas; 4 proporción entre periodos de servicio y pausas; 5 periodos mínimos de descanso; 6 máximo de periodos de servicio consecutivos que incluyan la noche; 7 periodos mínimos de descanso tras un servicio que incluya horas nocturnas; 8 periodos mínimos de descanso dentro del mismo ciclo de turnos.	ATC::OM08
+ATS.OR.320: elemento 6	Número máximo de periodos de servicio consecutivos que incluyan la noche, en su caso, según las horas de funcionamiento de la dependencia.	ATC::OM08
+¿A quién hay que consultar al desarrollar el sistema de turnos (ATS.OR.320 b)?	A los controladores sujetos a él o, en su caso, a sus representantes.	ATC::OM08
+¿Qué reglamento, de 20 de febrero de 2015, fija los requisitos de las licencias ATCO y los conocimientos de FFHH que deben tener los controladores?	El Reglamento (UE) 2015/340 de la Comisión.	ATC::OM08
+Formación básica en FFHH (2015/340): los cinco apartados del manual.	Introducción a los FFHH; actuaciones humanas; error humano; comunicación; entorno de trabajo.	ATC::OM08
+¿Qué temas abarcan las «actuaciones humanas» en la formación básica (manual 1.5)?	Conducta individual, cultura de seguridad y conducta profesional, salud y bienestar, trabajo en equipo, necesidades humanas básicas en el trabajo, estrés.	ATC::OM08
+Cursos de formación de habilitación: nombra los temas de FFHH del manual.	Factores psicológicos y cognitivos; factores médicos y fisiológicos (fatiga y aptitud); factores sociales y organizacionales (TRM, trabajo en equipo y roles, conducta responsable); estrés; error humano (errores y transgresiones); trabajo colaborativo (comunicación, trabajo en equipo, cooperación controlador/piloto).	ATC::OM08
+Nombra cinco efectos sobre la organización si los FFHH no se gestionan bien (manual 1.6).	Compromiso de los empleados, rendimiento y productividad del personal, incidentes causados por error humano, absentismo, satisfacción del cliente, daño a la imagen y la reputación.	ATC::OM08
+Nombra los ámbitos en los que una integración eficaz de los FFHH tiene un impacto positivo y medible (manual 1.6).	Mejora de la seguridad, optimización de la organización y del personal, mejora de la capacidad y la eficiencia, reducción de costes, cumplimiento normativo.	ATC::OM08
+«El ser humano siempre es el porqué, y la tecnología el cómo»: ¿qué expresa?	Que en el sistema sociotécnico de ATM el ser humano es siempre el porqué y la tecnología, el cómo.	ATC::OM08
+¿Qué permite la integración de los FFHH en el SMS?	Identificar y entender la variabilidad del rendimiento (humano y del sistema), mejorar la investigación de sucesos, hacer más eficaces las recomendaciones de seguridad y aumentar los márgenes de seguridad.	ATC::OM08
+¿En qué clima notifican los controladores con confianza los incidentes de seguridad (manual 1.6)?	En un clima de cultura justa.	ATC::OM08
+¿Sobre qué premisa se desarrolló el concepto operativo básico de SESAR respecto a los FFHH?	Que el factor humano es un pilar fundamental en la operación de los futuros sistemas ATM.	ATC::OM08
+¿Qué porcentaje del coste final de un proyecto queda fijado en el primer 10 % de su ciclo de vida (EUROCONTROL-FAA 2010)?	Alrededor del 70 %.	ATC::OM08
+Da cuatro razones de negocio para detectar y vigilar el impacto de las acciones sobre los FFHH (manual 1.6).	Evitar daños; anticipar nuevos requisitos legislativos; evitar sanciones; favorecer la imagen pública e interna de la empresa.	ATC::OM08
+Definición de equipo en el manual	Un grupo de personas que interactúan de forma dinámica, son interdependientes y tienen un objetivo común, con tareas, funciones y roles diferentes.	ATC::OM08
+Grupo frente a equipo: ¿cuál tiene un control externo elevado y limita la comunicación al superior inmediato?	El grupo.	ATC::OM08
+Grupo frente a equipo: ¿cuál actúa con gran autonomía, se preocupa por el resultado y el proceso y fomenta la comunicación abierta?	El equipo.	ATC::OM08
+¿Qué elemento de los equipos avisa a los demás cuando se acerca un límite operativo o una persona se desvía?	El sistema de monitorización mutua.	ATC::OM08
+Comunicación ideal en el equipo según el manual	Comunicación constante en bucle cerrado de toda la información relevante, tanto al emitir como al escuchar.	ATC::OM08
+¿Qué significa TRM y de qué concepto deriva?	*Team Resource Management* (gestión de recursos de equipo); deriva del CRM (*Cockpit/Crew Resource Management*).	ATC::OM08
+Además de la aviación, ¿en qué campos se usa la terminología TRM (manual)?	Sanidad, energía nuclear y operaciones militares.	ATC::OM08
+TRM como filosofía: ¿de qué reconocimiento surge?	De que los seres humanos son propensos a cometer errores y estos no pueden eliminarse del todo.	ATC::OM08
+Enumera las seis categorías de habilidades TRM (en el orden del manual).	1 Trabajo en equipo; 2 gestión de roles en un equipo; 3 comunicación interpersonal; 4 conciencia situacional; 5 resolución de problemas y toma de decisiones; 6 gestión del estrés.	ATC::OM08
+¿Las habilidades TRM son de naturaleza cognitiva o conductual?	Conductual: rastreables hasta aspectos concretos del funcionamiento humano.	ATC::OM08
+¿Qué beneficio del TRM evita saturar la capacidad de una persona y produce redundancia?	El mejor uso de los recursos humanos mediante una distribución bien planificada de las cargas de trabajo y las responsabilidades.	ATC::OM08
+¿Cuánto tiempo retiene la información la memoria a corto plazo, según el manual?	De 20 a 30 segundos; funciona como la memoria de trabajo de un ordenador.	ATC::OM08
+Capacidad de la memoria a largo plazo según el manual	Ilimitada, pero requiere más tiempo.	ATC::OM08
+¿Qué método para consolidar información en la memoria a largo plazo indica el manual?	El ensayo repetitivo de una actividad.	ATC::OM08
+¿Qué construye los modelos mentales?	La formación, el aprendizaje y la experiencia, que almacenan patrones que forman representaciones de la realidad.	ATC::OM08
+En la descripción del manual, ¿qué dos personas gestionan un sector radar?	Un controlador ejecutivo y un controlador planificador.	ATC::OM08
+Funciones básicas del profesional del control de tránsito aéreo (manual 3.2)	Prevención de colisiones, supervisión del tráfico, gestión del espacio aéreo, comunicaciones y toma de decisiones.	ATC::OM08
+Definición de conciencia situacional de Endsley	Percepción de los elementos del entorno dentro de un volumen de tiempo y espacio, comprensión de su significado y proyección de su estado en un futuro próximo.	ATC::OM08
+Los tres niveles de SA de Endsley	1 Percepción; 2 comprensión; 3 proyección.	ATC::OM08
+¿Quién describe la SA como un estado o proceso que evalúa indicios pasados y presentes en una situación dinámica?	Isaac y Ruitenberg.	ATC::OM08
+¿Cómo describen los controladores la SA de manera informal?	«Ver el tráfico» o «adelantarse al tráfico».	ATC::OM08
+¿Cómo expresan los controladores la dificultad para mantener la SA?	«Ir por detrás del tráfico» o «perder el control».	ATC::OM08
+Perder el control está directamente relacionado, en sucesos inesperados, con	La falta de tiempo, de conocimientos, de competencia y de recursos cognitivos.	ATC::OM08
+¿Qué tres grupos de factores influyen en la SA según Endsley?	Factores individuales, factores ambientales y factores del sistema.	ATC::OM08
+Factores individuales que limitan la SA (Endsley)	Los límites que imponen la atención humana y la memoria de trabajo.	ATC::OM08
+Factores ambientales y del sistema que afectan a la SA (Endsley)	Factores estresantes físicos y psicológicos.	ATC::OM08
+¿Es la SA una instantánea? ¿Qué es, según el manual?	No: un modelo mental dinámico, un conjunto de procesos que dan forma a la información percibida hasta componer una imagen mental sobre la que se proyectan cursos de acción y estados futuros.	ATC::OM08
+¿Qué hace la mente cuando al modelo mental le falta información (visión TRM)?	Rellena los huecos haciendo asunciones basadas en la experiencia pasada o en lo más probable.	ATC::OM08
+¿Qué dos puntos vitales para la seguridad se derivan de las asunciones en la SA?	El equipo es también una fuente vital de información; y la mayoría de los incidentes de tránsito aéreo implican alguna asunción.	ATC::OM08
+Las tres dimensiones fundamentales de la carga de trabajo mental	1 Presión de tiempo de la tarea; 2 recursos de procesamiento cognitivo que exige la tarea; 3 aspectos emocionales.	ATC::OM08
+Definición de carga de trabajo mental (Sebastián y del Hoyo, 2002)	El conjunto de requerimientos mentales, cognitivos o intelectuales a los que se enfrenta el trabajador a lo largo de la jornada laboral, es decir, el nivel de esfuerzo intelectual necesario para realizar las tareas.	ATC::OM08
+¿Qué norma española da orientaciones para diseñar sistemas de trabajo frente al riesgo de carga de trabajo mental?	UNE-EN ISO 10075-2.	ATC::OM08
+ISO 10075: presión mental frente a tensión mental	Presión mental = todas las influencias externas evaluables que afectan mentalmente a una persona; tensión mental = el efecto inmediato de la presión mental sobre el individuo.	ATC::OM08
+Ley de Yerkes-Dodson	La relación entre estrés o activación y rendimiento tiene forma de U invertida: es óptima con una activación moderadamente alta y empeora si es demasiado alta o demasiado baja.	ATC::OM08
+Yerkes-Dodson: tareas complejas frente a tareas simples	Con una tarea compleja el umbral de máximo rendimiento se alcanza antes que con una tarea simple.	ATC::OM08
+¿Por qué una baja densidad de tráfico no es automáticamente inocua para los FFHH?	La vigilancia sostenida en la monitorización puede causar tanta fatiga como una carga de trabajo mental alta, o más.	ATC::OM08
+Según el manual, ¿cuándo es probable que un controlador cometa un error o pase por alto un problema?	Tras gestionar un pico de tráfico («una vara de tráfico»), porque la atención sostenida satura los recursos mentales.	ATC::OM08
+Opinión de consenso sobre complejidad, carga de trabajo y capacidad (manual 3.4)	La complejidad impulsa la carga de trabajo mental del controlador, que a su vez limita en última instancia la capacidad ATC.	ATC::OM08
+Da seis factores que influyen en la complejidad del tráfico aéreo (manual 3.4).	Por ejemplo: complejidad del sector y flujos, áreas restringidas, volumen y tipo de tráfico (IFR/VFR, esperas, vectorización), conflictos, congestión de la frecuencia, emergencias, tiempo disponible, número de cartas de acuerdo, aeropuertos y fijos, meteorología, estado de los sistemas, coordinación, trabajo en equipo, herramientas de apoyo, experiencia del controlador, estrés y fatiga.	ATC::OM08
+¿Quiénes desarrollaron en 2013 una taxonomía de las estrategias de mitigación de la complejidad de los controladores?	Kontogiannis y Malakis.	ATC::OM08
+Tácticas de los controladores en la resolución de conflictos complejos (manual 3.4)	Soluciones que requieran menos coordinaciones; separación vertical para los conflictos más complejos; autorizaciones iniciales más «seguras» que se revisan después.	ATC::OM08
+Efecto de una alta complejidad en la calidad del servicio (manual)	La calidad del servicio se reduce en favor de más seguridad: se priorizan las tareas importantes, se simplifican los problemas y se anticipan las amenazas; pero esto requiere tiempo y aumenta la carga de trabajo, lo que facilita el error.	ATC::OM08
+Bajo una presión extrema, el controlador tiende a	Actuar de la forma que normalmente funciona y a veces omitir acciones.	ATC::OM08
+Definición de comunicación en el manual	Proceso en el que un emisor transmite un mensaje, verbal o no verbal, a un receptor a través de un canal y con un código común a ambos, para difundir, intercambiar o compartir información, ideas o sentimientos.	ATC::OM08
+Componentes de la comunicación en el manual	Emisor, receptor, mensaje, canal, mismo código, barreras; además de ruido y retroalimentación.	ATC::OM08
+«Quien mejor se comunica es quien ...», y ¿quién es responsable de que el mensaje llegue?	Quien mejor escucha; quien se comunica es responsable de asegurarse de que el mensaje ha llegado correctamente.	ATC::OM08
+Comunicación correcta pero no eficaz: ¿qué muestra el ejemplo del destornillador?	Que el ruido puede impedir que el receptor reaccione: el mensaje estaba bien expresado (correcto) pero no produjo la acción (no fue eficaz).	ATC::OM08
+¿Qué concepto vincula el manual con comprobar que la interferencia no reduce la ejecución del mensaje?	La «colación» (*read-back*).	ATC::OM08
+Retroalimentación (*feedback*) en el manual	La respuesta del receptor a la información del emisor; no tiene por qué ser explícita: el silencio es en sí mismo un mensaje.	ATC::OM08
+Finalidad de la comunicación en las organizaciones (manual)	No que alguien te entienda, sino generar una acción común; es persuasiva.	ATC::OM08
+¿Escuchar es una combinación de qué cinco actividades?	Oír; comprender los sonidos; comprender la interpretación; retener y recordar; actuar o responder de algún modo.	ATC::OM08
+Da tres factores que favorecen la escucha activa.	Mantener el contacto visual; hacer pequeños resúmenes de lo que el otro dice y siente; hacer preguntas abiertas.	ATC::OM08
+Da tres factores que dificultan la escucha activa.	Lenguaje corporal inhibidor; abuso de distracciones; dejar temas a medias; interrupciones constantes; comentarios cortantes o gratuitos.	ATC::OM08
+Barreras ambientales a la comunicación: ejemplos	Incomodidad física (calor, silla incómoda), distracciones visuales, interrupciones y ruidos (timbre, teléfono, tos).	ATC::OM08
+Tres tipos de barreras inherentes al ser humano	Cognitivas, fisiológicas y psicológicas.	ATC::OM08
+Barreras cognitivas: ejemplos	Barreras verbales (hablar rápido, lengua materna distinta); barreras semánticas; desconocimiento de procedimientos o términos; carga de trabajo/fatiga; pocas referencias sobre el receptor.	ATC::OM08
+Barreras fisiológicas: ejemplos	Emisor: voz débil, pronunciación defectuosa. Receptor: sordera, problemas de visión.	ATC::OM08
+Barreras psicológicas: ejemplos	Emociones como el miedo, la tristeza o la ira; estrés que lleva a una comunicación excesivamente agresiva.	ATC::OM08
+Los dos grandes antídotos contra las barreras de la comunicación	La empatía y la asertividad.	ATC::OM08
+Empatía en el manual	Participación afectiva en la realidad que afecta a otro; ponerse en el lugar del otro, respetar sus derechos, atribuir una intención razonable a su conducta.	ATC::OM08
+Asertividad en el manual	Capacidad de comunicar sentimientos y necesidades sin herir ni ofender a los demás; de decir «no» y defender la propia posición sin atacar a la otra parte.	ATC::OM08
+Tres formas básicas de reaccionar ante una situación (figura del manual)	Pasividad, asertividad, agresividad.	ATC::OM08
+Pasividad en la figura del manual	Pensar que los demás tienen más derechos que nosotros; no expresar nuestras ideas y sentimientos con honestidad, de modo que los demás prevalecen.	ATC::OM08
+Agresividad en la figura del manual	Defender los propios derechos y expresar los pensamientos de forma deshonesta, normalmente inadecuada, que no respeta los derechos del otro.	ATC::OM08
+Según Allan Pease, ¿qué tres recursos usamos para transmitir un mensaje?	Lenguaje verbal (palabras), lenguaje no verbal (gestos, posturas) y lenguaje paraverbal (volumen, tono de voz).	ATC::OM08
+Pease: proporción de la comunicación debida al lenguaje no verbal, y con el paraverbal añadido	Más del 50 % para el no verbal; el 80 % si se suma el paraverbal.	ATC::OM08
+Enumera las seis emociones básicas del manual.	Tristeza, asco, sorpresa, ira, alegría, miedo.	ATC::OM08
+Lado positivo del miedo según el manual	Nos hace más responsables y cautelosos; el lado negativo es que puede paralizarnos.	ATC::OM08
+Fatiga: ¿se puede evitar por medios naturales?	No: es un mecanismo biológico que no se puede suprimir de forma natural y que empuja a la persona a descansar.	ATC::OM08
+¿Por qué el trabajo nocturno es inherente a la profesión de controlador (CTA)?	Porque muchas dependencias funcionan H24 y el personal rota por turnos que incluyen noches; la noche se diferencia en el entorno (falta de luz, menos tráfico) y en la fisiología.	ATC::OM08
+Además de los factores circadianos, ¿qué otro factor inductor de fatiga nombra el manual?	La carga de trabajo mental sostenida, que puede combinarse con los factores circadianos, el estrés y los factores personales.	ATC::OM08
+Sueño medio recomendado para adultos de 18 a 64 años (OMS, National Sleep Foundation)	8 horas al día.	ATC::OM08
+Dos tipos de sueño en el manual	No REM (sueño lento; cuatro fases) y REM (movimientos oculares rápidos, *Rapid Eye Movements*).	ATC::OM08
+¿Cuántas fases de sueño hay en total y cuánto dura un ciclo de sueño?	Cinco fases (cuatro no REM + REM); un nuevo ciclo aproximadamente cada 90/100 minutos, y los últimos 20 o 30 minutos son REM.	ATC::OM08
+Fase de sueño I	Sueño ligero; se siguen percibiendo la mayoría de los estímulos; disminuye el tono muscular; movimientos oculares lentos; poco o ningún valor reparador.	ATC::OM08
+Fase de sueño II	El sistema nervioso bloquea la entrada sensorial; ocupa el 50 % del tiempo de sueño de un adulto; tono muscular menor; sin movimientos oculares; parcialmente reparador.	ATC::OM08
+Fase de sueño III	Sueño «delta» más profundo; despertar provoca confusión y desorientación; sin sueños; la presión arterial y la frecuencia respiratoria bajan un 10-30 %; aumenta la producción de hormona del crecimiento.	ATC::OM08
+Fase de sueño IV	Sueño más profundo, actividad cerebral más lenta (delta); esencial para la recuperación física y, sobre todo, psíquica; los déficits de III y IV causan somnolencia diurna.	ATC::OM08
+Sueño REM en el manual	Sueños narrativos; actividad eléctrica cerebral rápida; atonía muscular (parálisis) que impide representar los sueños.	ATC::OM08
+Factores que empeoran la calidad del sueño (manual)	Envejecimiento, síntomas de trastornos del sueño (p. ej., apnea), entorno (iluminación, temperatura), cafeína, alcohol, nicotina.	ATC::OM08
+Según los estudios citados, ¿cómo es el sueño de los controladores durante el turno de noche en el trabajo?	Más ligero y a menudo interrumpido (no REM), no comparable al sueño en casa.	ATC::OM08
+Deuda de sueño	Restricción del sueño que, si se prolonga varias noches, se acumula y reduce progresivamente la atención y la capacidad de trabajo; la recuperación requiere más descanso que una noche normal.	ATC::OM08
+Microsueño	Unos segundos en los que el cerebro se desconecta y la persona se queda dormida, posiblemente sin darse cuenta, perdiendo la conexión con los estímulos externos.	ATC::OM08
+Riesgos para la salud de la privación continuada de sueño (manual)	Obesidad, diabetes de tipo 2, enfermedades cardiovasculares.	ATC::OM08
+Tres procesos que regulan el sueño y la vigilia (manual 5.4)	Circadiano (C), homeostático (S) y de vigilia (W).	ATC::OM08
+Proceso circadiano (C)	Reloj biológico interno con un patrón de unas 24 horas que regula la temperatura, las hormonas, etc.; menor actividad aprox. entre las 3 y las 6 h.	ATC::OM08
+WOCL	*Window Of Circadian Low* (mínimo de la ventana circadiana): coincide con la temperatura corporal basal mínima; mayor somnolencia y menor rendimiento.	ATC::OM08
+Proceso homeostático (S)	Impulso de dormir que crece con el tiempo de vigilia; sincronizado con C en el trabajo diurno normal, desincronizado en el trabajo nocturno.	ATC::OM08
+Proceso de vigilia (W)	Inercia del sueño: estado de transición tras despertar con rendimiento reducido; conviene dejar un tiempo prudencial antes de tareas exigentes.	ATC::OM08
+¿Qué documento de la OACI (2016) define la fatiga en el manual?	El Doc. 9966, *Manual para la supervisión de los enfoques de gestión de la fatiga*.	ATC::OM08
+Definición de fatiga del Doc. 9966 de la OACI	Estado fisiológico caracterizado por una reducción de la capacidad de desempeño mental o físico debida a la falta de sueño, a periodos prolongados de vigilia, a la fase circadiana y/o a la carga de trabajo, que puede menoscabar el estado de alerta y la capacidad de desempeñar funciones relacionadas con la seguridad.	ATC::OM08
+Aspectos que normalmente se relacionan con la carga de trabajo, ya que no tiene una definición universal	Tipo y naturaleza del trabajo (duración, dificultad, complejidad); limitaciones de tiempo; factores de la capacidad de desempeño individual (experiencia, formación, esfuerzo, historial de sueño, fase circadiana).	ATC::OM08
+¿En qué nivel de carga de trabajo es mejor el rendimiento, según los estudios del manual?	En niveles medios de carga de trabajo.	ATC::OM08
+Consecuencias de una activación baja con un rendimiento inferior al requerido	Pérdida de información, acciones omitidas, menor vigilancia, rastreo insuficiente, errores, reacción más lenta ante los cambios.	ATC::OM08
+Consecuencias de una activación demasiado alta	Más errores, decisiones más difíciles, mayor tiempo de reacción, menor atención y concentración, información omitida, incapacidad para evaluar el riesgo y fijar prioridades.	ATC::OM08
+¿Qué reglamento (de 29 de junio de 2015) enumera los sucesos de notificación obligatoria y trata la fatiga?	El Reglamento de Ejecución (UE) 2015/1018 de la Comisión, anexo III (servicios e instalaciones de navegación aérea).	ATC::OM08
+¿Qué fatiga hay que notificar según el anexo III del 2015/1018 (cita del manual)?	La fatiga que afecte, o pueda afectar, a la capacidad de desempeñar con seguridad las funciones de navegación aérea o de tránsito aéreo.	ATC::OM08
+Se gestione como se gestione la fatiga, ¿qué son los informes de fatiga?	Una fuente de información esencial, tanto si se gestiona mediante un FRMS como mediante límites prescriptivos.	ATC::OM08
+¿Cuál es el sistema integrado de ENAIRE para la gestión de riesgos de fatiga y estrés?	El FSRMS, *Fatigue and Stress Risk Management System*.	ATC::OM08
+Fatiga frente a cansancio	El cansancio es el elemento subjetivo; la fatiga es objetiva, un estado fisiológico que muestra una capacidad de trabajo reducida.	ATC::OM08
+Tres tipos de fatiga que nombra el manual	Fatiga mental, visual y física.	ATC::OM08
+Síntomas psicológicos de la fatiga (manual)	Capacidad cognitiva alterada; memoria afectada; capacidad de planificar/ejecutar alterada; estado de ánimo alterado; irritabilidad; percepción del riesgo alterada.	ATC::OM08
+Síntomas fisiológicos de la fatiga (manual)	Dificultad para enfocar/visión borrosa; irritación, dolor o picor en los ojos; lagrimeo; ojos rojos; dolores de cabeza, confusión o mareos; trastornos relacionados con el sueño.	ATC::OM08
+Figura 9: ¿qué ocurre si el controlador no es consciente de su fatiga?	Puede producirse un incidente de seguridad; si es consciente, se aplican estrategias de primer nivel (prevenir o reducir la fatiga: siesta, cafeína) y de segundo nivel (mitigar sus efectos).	ATC::OM08
+Rasgos que distinguen al ATC de otras industrias (manual 5.7)	La seguridad es siempre crítica; muchas dependencias necesitan servicio H24; complejidad y dinamismo muy elevados; escenario de trabajo variable; las personas deben mantener un alto rendimiento.	ATC::OM08
+Tres grupos de aspectos afectados por el trabajo a turnos	Trastornos del sueño; problemas de salud física y psicológica; dificultades en la vida familiar y social.	ATC::OM08
+¿Qué sueño es «verdaderamente reparador» según el manual?	El sueño nocturno (su ausencia produce fatiga crónica).	ATC::OM08
+¿De qué diferencias individuales depende la tolerancia al trabajo a turnos?	Edad, sexo, condición física, flexibilidad para conciliar el sueño y capacidad para superar la somnolencia.	ATC::OM08
+Efectos objetivos de los horarios no circadianos en los controladores (manual)	Menor alerta y atención; mayores tiempos de reacción y decisión; pérdida de memoria a corto plazo; errores de cálculo; menor rendimiento operativo.	ATC::OM08
+Definición de estrés en el manual	Respuesta psicofisiológica a un estímulo interno o externo que surge cuando el organismo interpreta que sus recursos son insuficientes para adaptarse a él.	ATC::OM08
+Tres componentes de respuesta del estrés (tabla del manual)	Endocrino, autónomo, conductual.	ATC::OM08
+Estrés agudo frente a estrés crónico (manual)	Agudo: debido a factores que provocan estrés en una ocasión concreta. Crónico: resultado de presiones mantenidas durante mucho tiempo, normalmente emocionales.	ATC::OM08
+Eustrés frente a distrés según Lazarus y Folkman	Eustrés si la persona espera poder manejar el estímulo; distrés si no.	ATC::OM08
+¿Qué modelo tiene en cuenta la demanda, la capacidad real y la autopercepción de la persona?	El modelo transaccional del estrés de Cox-Mackay (fuente: EUROCONTROL, «Managing Stress in ATM»).	ATC::OM08
+Modelo de Cox-Mackay: ¿qué produce el estrés?	El desequilibrio que se encuentra en la valoración cognitiva entre la demanda percibida y la capacidad percibida (la demanda y la capacidad reales alimentan las percibidas).	ATC::OM08
+Síntomas fisiológicos del estrés (manual)	Cardiovasculares (palpitaciones, tensión arterial alta, frecuencia cardiaca), respiratorios, sudoración, del sueño, gastrointestinales, musculares, psicosomáticos, dolores de cabeza y migrañas.	ATC::OM08
+Síntomas conductuales del estrés (manual)	Problemas de autocontrol, confianza o autoestima; automedicación, alcohol o drogas; fatiga y problemas de sueño; absentismo; aislamiento social; deterioro del desempeño laboral.	ATC::OM08
+Síntomas cognitivos del estrés (manual)	Atención, vigilancia y alerta afectadas; capacidad de planificar/ejecutar afectada; acciones no deliberadas (activación involuntaria de funciones).	ATC::OM08
+Nombra seis habilidades requeridas en ATC (manual 6.3).	Por ejemplo: habilidades visoespaciales, percepción, procesamiento de la información, reconocimiento de imágenes y patrones, priorización, resolución lógica de problemas, reglas y procedimientos, toma de decisiones, comunicación interpersonal, trabajo en equipo, vocabulario técnico.	ATC::OM08
+Los cuatro estados de estrés relacionados con las tareas de control	Hipoestrés, eustrés, hiperestrés, distrés.	ATC::OM08
+Hipoestrés en ATC	Aburrimiento o tarea rutinaria: poco interés y tensión; mal rendimiento y alta probabilidad de error.	ATC::OM08
+Eustrés en ATC	Tarea más interesante o urgente: tensión positiva; la zona de mejor rendimiento sin que la presión desborde.	ATC::OM08
+Hiperestrés en ATC	Sobrecarga de tareas o conflicto muy elevado: pérdida de control, ansiedad, distracciones, decisiones retrasadas; «por detrás del tráfico»; atención centrada en las señales centrales o más frecuentes.	ATC::OM08
+Distrés en ATC (manual 6.3)	Los procedimientos usados para controlar son nuevos y aún no resultan familiares; la calidad de la gestión de conflictos se resiente.	ATC::OM08
+Límite de la memoria de trabajo que se da en el párrafo del hiperestrés	No puede manejar más de seis o siete elementos.	ATC::OM08
+¿Qué texto de la EASA distingue tres fuentes principales de estrés en ATC?	GM1 ATS.OR.310 Estrés (Reglamento 2017/373).	ATC::OM08
+Tres fuentes principales de estrés en ATC (EASA)	Factores estresantes ambientales/físicos, relacionados con la tarea e individuales.	ATC::OM08
+Factores estresantes ambientales/físicos: ejemplos	Hambre, dolor, falta de sueño; contaminación acústica, calor; en la sala de operaciones: temperatura, espacio de trabajo incómodo, calidad del aire, iluminación, ruido o vibración intrusivos.	ATC::OM08
+El estrés depende de la intensidad y ¿de qué más?	De la duración de la exposición (un ruido agudo persistente puede estresar tanto como uno fuerte y repentino).	ATC::OM08
+Factores estresantes relacionados con la tarea (ejemplos)	Carga de trabajo alta sostenida; tráfico heterogéneo; equipos poco fiables; procedimientos imprecisos; equipos complejos; supervisión de alumnos; desajuste entre carga de trabajo y habilidades; ambigüedad de roles; conflictos interpersonales; situaciones inusuales, incidentes, emergencias.	ATC::OM08
+Factores estresantes individuales: ¿cuál es el «mito» que se menciona?	La creencia de que los factores estresantes personales se pueden dejar en casa.	ATC::OM08
+Ejemplos de grandes acontecimientos vitales que actúan como factores estresantes (manual)	Muerte de un ser querido, nacimientos, matrimonio, divorcio.	ATC::OM08
+Factores estresantes que reconocen los controladores en los estudios (varios)	Fallo de equipos, tráfico muy elevado, miedo a causar accidentes, falta de tiempo o de conocimientos, incertidumbre, cambios en los procedimientos, evaluación continua de la competencia, incertidumbre profesional, trabajo a turnos, cuestiones laborales.	ATC::OM08
+¿Qué tres funciones del controlador perjudica un estrés elevado?	La percepción, la conciencia situacional y la toma de decisiones.	ATC::OM08
+Efectos del estrés en el desempeño del controlador (nombra cinco).	Problemas de concentración; errores y omisiones; «el camino más rápido/fácil»; traspasar responsabilidad a otros; fijación mental; posponer decisiones; no tener plan B; asumir más riesgos; precipitación por la adrenalina; usar procedimientos no operativos, olvidar la fraseología, usar la lengua materna.	ATC::OM08
+Bajo un estrés significativo, ¿qué idioma y qué fraseología puede usar el controlador?	Su lengua materna, olvidando la fraseología normalizada, y puede usar procedimientos que ya no están operativos.	ATC::OM08
+Medidas de mitigación del estrés que sugiere la normativa europea (manual)	Política de estrés y programa CISM; vigilancia proactiva; mitigación del impacto operativo; formación/información; mecanismos si el estrés impide tareas críticas; actividades que mitiguen el estrés.	ATC::OM08
+CISM significa	*Critical Incident Stress Management* (gestión del estrés por incidente crítico).	ATC::OM08
+Finalidad del programa CISM	Apoyo psicológico al personal operativo para evitar reacciones de estrés postraumático derivadas de un incidente crítico.	ATC::OM08
+Tres rasgos clave del CISM	Confidencial, voluntario y educativo; se conoce como «primeros auxilios psicológicos».	ATC::OM08
+Definición de incidente crítico	Un suceso que ocurre de forma repentina o inesperada y tiene potencial para crear una angustia grave, causando malestar o incapacidad para desempeñar las funciones en ese momento o más tarde.	ATC::OM08
+Ejemplos de incidentes críticos en ATC (nombra cinco).	Accidentes; desastres devastadores; gestión de una aeronave en emergencia; sucesos con resultado de muerte; vulneraciones de la separación mínima; muerte de familiares o compañeros; incidentes evitados por poco (*near-incidents*); violencia; actos delictivos, agresiones o amenazas.	ATC::OM08
+¿En qué modelo se basa el programa CISM de ENAIRE?	El modelo de *peers* (controladores de apoyo).	ATC::OM08
+¿Qué es un *peer* en el CISM?	Un controlador de apoyo específicamente formado para dar apoyo psicológico a otros controladores tras un incidente crítico (complementado con ayuda psicológica profesional cuando hace falta).	ATC::OM08
+¿Qué normas se siguen para formar a los *peers*?	Las de la International Critical Incident Stress Foundation (ICISF).	ATC::OM08
+Tareas principales de los *peers* (tres)	Intervención inmediata en la crisis; asesoramiento psicológico a los compañeros afectados; organizar apoyo profesional de salud mental cuando es necesario.	ATC::OM08
+¿Quién puede ser *peer*?	Controladores voluntarios con amplia experiencia profesional, específicamente seleccionados y formados.	ATC::OM08
+Perfil del *peer*: ¿qué debe saber sobre los límites del CISM?	Que su trabajo es prestar primeros auxilios, no atención psicológica profesional.	ATC::OM08
+¿Qué documento de EUROCONTROL fija los requisitos de selección de *peers* de ENAIRE?	*Human Factors - Critical Incident Stress Management: User Implementation Guidelines*, 2008, edición 2.0.	ATC::OM08
+Las cinco fases del CISM (en orden)	1 Comunicación y difusión; 2 selección y formación de *peers* y grupos de interés; 3 intervención de los *peers*; 4 derivación a un profesional médico cuando proceda; 5 evaluación periódica del programa.	ATC::OM08
+¿Cómo se evalúa el programa CISM y qué se registra?	Mediante cuestionarios totalmente anónimos a los usuarios; un informe anual del CISM; estadísticas de activaciones frente a incidentes y de cuántos necesitaron psicólogos profesionales.	ATC::OM08
+Error humano: ¿es evitable?	Inevitable y también necesario para promover el aprendizaje; no se puede eliminar del todo, pero pueden identificarse los contextos que lo facilitan.	ATC::OM08
+Definición operativa de error en el manual	Situación en la que una secuencia planificada de acciones no logra alcanzar el objetivo.	ATC::OM08
+En el sistema ATC, «error» se refiere a	Toda la organización, no solo a los fallos de los controladores.	ATC::OM08
+GEMS: ¿cómo se clasifican primero los errores?	Como consecuencia de una conducta intencionada o no intencionada, y luego se subdividen en deslices, lapsus y equivocaciones.	ATC::OM08
+GEMS, desliz (*slip*): definición y proceso cognitivo	Acción no intencionada por un fallo o laguna de atención: omisión, inversión o alteración del orden o del momento; procesos atencionales.	ATC::OM08
+GEMS, lapsus (*lapse*): definición y proceso cognitivo	Acción no intencionada por un fallo de memoria (olvidar una intención u omitir aspectos planificados); procesos mnemónicos y gestión de la memoria de trabajo.	ATC::OM08
+GEMS, equivocación (*mistake*): definición y proceso cognitivo	Acción intencionada por un error de planificación: aplicación incorrecta de una regla correcta, o regla correcta en una situación inadecuada; procesos de SA y de toma de decisiones.	ATC::OM08
+¿Qué tipo de error GEMS es el más frecuente?	Los lapsus.	ATC::OM08
+¿Qué tipos de error GEMS son en esencia respuestas automáticas sin decisión consciente?	Los deslices y los lapsus.	ATC::OM08
+¿Cómo se mitigan los deslices (manual)?	Formación procedimental, entrenamiento atencional, monitorización mutua, procedimientos y listas de comprobación.	ATC::OM08
+¿Cómo se mitigan los lapsus (manual)?	Actualización frecuente de la información y ayudas cognitivas externas (notas en la etiqueta de la tira o en papel).	ATC::OM08
+¿De qué tipo de error es ejemplo el fallo de la memoria prospectiva?	De un lapsus.	ATC::OM08
+¿Cómo se mitigan las equivocaciones (manual)?	Mediante procedimientos y normalización de los métodos, y mediante la actitud del profesional, consciente de su vulnerabilidad a los sesgos.	ATC::OM08
+Tres sesgos cognitivos que el manual nombra para las equivocaciones	Sesgo de continuidad de plan, sesgo de expectativa, sesgo de familiaridad.	ATC::OM08
+¿Dónde se originan los sesgos cognitivos?	En procesos mentales heurísticos que generan reglas rápidas del tipo «si A, entonces B».	ATC::OM08
+Cuatro grandes familias de sesgos cognitivos (manual)	Los que deciden qué debo recordar; los que filtran la información cuando hay demasiada; los que aparecen cuando necesito actuar rápido; los que surgen cuando la información carece de suficiente significado.	ATC::OM08
+TEM (gestión de amenazas y errores): ¿qué organismo desarrolló el concepto?	La OACI (referencia del manual: Circular 314, 2005).	ATC::OM08
+TEM: ¿cuál es su análisis clave?	Las acciones u omisiones que generan un estado inseguro (no deseado) que no acaba en un suceso, para detectar y captar los errores como mecanismo para crear seguridad.	ATC::OM08
+Secuencia de la figura TEM (modelo de la OACI)	Amenazas, estrategias, errores, resistir/resolver, consecuencia.	ATC::OM08
+Amenazas TEM	Errores o incidentes externos que aumentan la complejidad y ocurren sin que el controlador los haya causado (indicativos parecidos, procedimientos locales no estándar, restricciones del espacio aéreo, meteorología adversa, congestión, contingencias).	ATC::OM08
+TEM: amenazas previsibles frente a imprevistas	Previsibles: el controlador puede anticiparlas (p. ej., meteorología adversa). Imprevistas: aparecen de forma inesperada (p. ej., un piloto copia instrucciones dadas a otra aeronave).	ATC::OM08
+Premisa del TEM sobre errores y amenazas	No pueden eliminarse, por lo que se necesitan estrategias para afrontarlos; la relación amenaza-error-estado no deseado no siempre es directa ni lineal.	ATC::OM08
+Errores TEM	Decisiones u omisiones del controlador que hacen que no se cumplan los objetivos planificados y se comprometan los márgenes de seguridad; pueden ser espontáneos, estar ligados a amenazas o formar parte de una cadena de errores.	ATC::OM08
+Estados no deseados TEM	Situaciones en las que la planificación ha fallado y los límites de seguridad se reducen (p. ej., una aeronave que asciende a un nivel de vuelo no autorizado o vira a un rumbo no planificado).	ATC::OM08
+Estado no deseado frente a consecuencia	En un estado no deseado la situación aún se puede resolver; una vez se produce una consecuencia ya no hay vuelta atrás.	ATC::OM08
+Según el manual, ¿qué es implícitamente el control de tránsito aéreo?	La detección de estados no deseados, tanto naturales por la evolución del tráfico como generados por la acción del ATC.	ATC::OM08
+Fecha del manual	Julio de 2023 («julio 2023»), 65 páginas, © ENAIRE.	ATC::OM08

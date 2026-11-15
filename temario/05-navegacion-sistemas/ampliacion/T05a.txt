@@ -1,0 +1,112 @@
+¿Cuáles son los cuatro componentes básicos de la navegación a estima (CNATRA)?	Posición, dirección, tiempo y velocidad	ATC::T05a
+En el triángulo de viento, ¿qué representa el vector aire?	El rumbo verdadero (TH) y la velocidad verdadera (TAS) de la aeronave	ATC::T05a
+En el triángulo de viento, ¿qué representa el vector tierra?	La derrota verdadera (True Course/Track) y la velocidad sobre el suelo (GS)	ATC::T05a
+¿Qué es el ángulo de deriva?	La diferencia entre el rumbo verdadero y la derrota, medida a izquierda o derecha del rumbo	ATC::T05a
+¿Qué es el ángulo de corrección de deriva (crab angle)?	La corrección que se aplica contra el viento para mantener la derrota deseada; igual en magnitud y de sentido contrario al ángulo de deriva	ATC::T05a
+Según la regla del 10 %, si el viento cruzado es el 10 % de la TAS, ¿cuál es el ángulo de corrección aproximado?	Unos 6 grados	ATC::T05a
+Con TAS de 150 kt y viento cruzado de 30 kt (el 20 % de la TAS), ¿qué ángulo de corrección predice la regla del 10 %?	Unos 12 grados (el doble del valor de 6 grados para el 10 %)	ATC::T05a
+¿Qué es la velocidad verdadera (TAS)?	La velocidad calibrada corregida por la densidad del aire (presión y temperatura)	ATC::T05a
+¿Qué es la velocidad sobre el suelo (GS)?	La velocidad real de la aeronave respecto al suelo	ATC::T05a
+¿Cómo se mide y se designa la latitud?	Desde el Ecuador, de 0 a 90 grados, designada Norte o Sur	ATC::T05a
+¿Cómo se mide y se designa la longitud?	Desde el Meridiano de Greenwich (meridiano origen), de 0 a 180 grados, designada Este u Oeste, hasta la Línea Internacional de Cambio de Fecha	ATC::T05a
+En el convenio de coordenadas de aviación, ¿qué se lee primero, la latitud o la longitud?	La latitud (y la longitud se escribe con 3 cifras, p. ej. N30°22', W087°19')	ATC::T05a
+¿Qué es una línea de posición (línea de situación) en navegación?	Una línea sobre la que se sabe que se encuentra la aeronave, obtenida de una sola medida de navegación	ATC::T05a
+¿Qué produce la intersección de dos líneas de posición?	Una posición observada (fix)	ATC::T05a
+¿Qué exactitud comprometida fija el estándar de performance del GPS SPS (5.ª ed.) para el SIS URE, en operación normal, sobre todo el AOD?	7,0 m, error estadístico global de distancia de usuario (URE) al 95 %	ATC::T05a
+¿Qué estándar de exactitud del SIS URE del GPS se aplica con AOD cero?	3,8 m, URE estadístico global al 95 %	ATC::T05a
+¿Qué estándar de exactitud del SIS URE del GPS se aplica en operaciones extendidas (14 días sin carga de datos, código C/A monofrecuencia)?	388 m, URE estadístico global al 95 %	ATC::T05a
+Según el documento SPS PS, ¿qué exactitud real horizontal y vertical ha logrado el GPS en la práctica?	3 m o mejor en horizontal y 5 m o mejor en vertical	ATC::T05a
+¿Cuál es la estructura de la constelación base del GPS?	Constelación de 24 posiciones, 6 planos orbitales y 4 posiciones por plano (ampliable a 6 posiciones)	ATC::T05a
+¿Cuántos satélites nominales tiene la constelación Galileo y en cuántos planos orbitales?	24 satélites MEO nominales en 3 planos orbitales	ATC::T05a
+¿Cuál es la inclinación orbital de la constelación Galileo?	56 grados respecto al Ecuador	ATC::T05a
+¿Cuántas posiciones de satélite tiene cada plano orbital de Galileo?	8 posiciones, separadas 45 grados dentro del plano	ATC::T05a
+¿Cuál es el desfase angular entre satélites de planos orbitales adyacentes de Galileo?	15 grados	ATC::T05a
+¿En qué frecuencia está centrada la señal E1 de Galileo?	1575,42 MHz (la misma que la L1 del GPS)	ATC::T05a
+¿En qué frecuencia está centrada la señal E5a de Galileo?	1176,45 MHz	ATC::T05a
+¿En qué frecuencia está centrada la señal E5b de Galileo?	1207,14 MHz	ATC::T05a
+¿En qué frecuencia está centrada la señal E6 de Galileo?	1278,75 MHz	ATC::T05a
+¿En qué frecuencia combinada se multiplexan las señales E5a y E5b de Galileo?	1191,795 MHz	ATC::T05a
+¿Qué modos de uso monofrecuencia existen en el Servicio Abierto de Galileo?	Solo E1, solo E5a y solo E5b	ATC::T05a
+¿Qué modos de uso bifrecuencia existen en el Servicio Abierto de Galileo?	E1/E5a y E1/E5b	ATC::T05a
+Según el SoL SDD de EGNOS, ¿qué exactitud horizontal (95 %) ofrece EGNOS para APV-I y LPV-200?	3 m	ATC::T05a
+Según el SoL SDD de EGNOS, ¿qué exactitud vertical (95 %) ofrece EGNOS para APV-I y LPV-200?	4 m	ATC::T05a
+¿Qué cifra de integridad de EGNOS se aplica a APV-I/LPV-200?	1 - 2x10^-7 por aproximación	ATC::T05a
+¿Qué disponibilidad de EGNOS se aplica a APV-I/LPV-200?	0,99 en la mayor parte de las masas continentales de la CEAC (ECAC)	ATC::T05a
+¿Qué exactitud horizontal (95 %) ofrece EGNOS para NPA?	200 m	ATC::T05a
+¿Qué disponibilidad ofrece EGNOS para NPA?	0,999 en toda la CEAC (ECAC)	ATC::T05a
+Para LPV-200, ¿cuál es la probabilidad máxima de un VNSE superior a 10 m en condiciones nominales?	Inferior a 10^-7 por aproximación	ATC::T05a
+Para LPV-200, ¿cuál es la probabilidad máxima de un VNSE superior a 15 m en condiciones degradadas?	Inferior a 10^-5 por aproximación	ATC::T05a
+Según la Tabla 7 del SoL SDD de EGNOS, ¿qué exactitud horizontal (95 %) exige la OACI para APV-I?	16,0 m (52 ft)	ATC::T05a
+Según la Tabla 7, ¿qué exactitud vertical (95 %) exige la OACI para la aproximación de precisión CAT I?	De 6,0 a 4,0 m (de 20 a 13 ft)	ATC::T05a
+¿Cuándo se declaró por primera vez el SoL SDD v1.0 de EGNOS (niveles de servicio NPA y APV-I)?	En marzo de 2011	ATC::T05a
+¿Qué nivel de servicio de EGNOS se añadió después de NPA y APV-I?	LPV-200	ATC::T05a
+Según el AIP España ENR 4.3, ¿quién opera EGNOS?	El proveedor europeo de servicios de satélite (ESSP), bajo la autoridad de operación de la EASA	ATC::T05a
+¿Qué elementos GNSS enumera el AIP España ENR 4.3?	Solo EGNOS y GPS (ambos en L1, 1575,42 MHz)	ATC::T05a
+¿Enumera el AIP España ENR 4.3 a Galileo como elemento GNSS?	No, solo figuran EGNOS y GPS	ATC::T05a
+¿Qué estándar de SIS URE del GPS se usa en operaciones extendidas tras 14 días sin carga de datos?	388 m, URE estadístico global al 95 % (código C/A monofrecuencia)	ATC::T05a
+¿Se incluyen los errores del modelo de retardo ionosférico monofrecuencia en el estándar básico de exactitud del SIS URE del GPS SPS?	No, están excluidos de forma explícita y los trata un modelo de corrección aparte	ATC::T05a
+¿Cuál es la frecuencia y el canal del DVOR/DME de ALBACETE VAB en España?	115,80 MHz, canal 105X	ATC::T05a
+¿Qué canal TACAN está coemplazado con el DVOR/DME de ALBACETE VAB?	Canal 17X (TACAN «TAB»)	ATC::T05a
+¿Cuál es la frecuencia y el canal del DVOR/DME de ALICANTE ATE?	114,65 MHz, canal 93Y	ATC::T05a
+¿Cuál es la frecuencia del NDB de ALMERÍA AMN?	310,00 kHz	ATC::T05a
+¿Cuál es la frecuencia y el canal del DVOR/DME de ASTURIAS VES?	112,40 MHz, canal 71X	ATC::T05a
+¿Cuál es la frecuencia del DVOR/DME de BARAJAS (Madrid) BRA?	116,45 MHz	ATC::T05a
+¿Cuál es la frecuencia del VOR/DME de BURGOS BUR?	111,40 MHz	ATC::T05a
+¿Es ALCANTARILLA TRL un DVOR/DME civil o una estación militar solo TACAN?	Una estación militar solo TACAN (canal 113X), sin VOR coemplazado	ATC::T05a
+¿Qué sentido tiene la declinación magnética que indican en el AIP la mayoría de las radioayudas españolas?	Este (p. ej. «1 grado E 2025»)	ATC::T05a
+¿Qué tipos de radioayudas para la navegación enumera el AIP España GEN 3.4 para España?	PAR, NDB, VDF, ILS, VOR, DME, TACAN y GBAS	ATC::T05a
+Según el AIP GEN 3.4, ¿qué entidad es la autoridad responsable de las comunicaciones en España?	ENAIRE	ATC::T05a
+¿Qué aeropuerto español tiene una estación GBAS operativa que da soporte a tráfico comercial regular?	Málaga	ATC::T05a
+Además de Málaga, cita otros dos países con aeropuertos GBAS operativos que figuran en las preguntas frecuentes de la FAA sobre GBAS.	Alemania (Bremen, Fráncfort) y también Australia (Sídney) o Suiza (Zúrich)	ATC::T05a
+¿Qué soporta el GAST-C?	Mínimos de aproximación de precisión CAT I (aumentación monofrecuencia)	ATC::T05a
+¿Qué soporta el GAST-D?	Hasta mínimos CAT III	ATC::T05a
+¿Cuántos procedimientos de aproximación puede soportar una sola asignación VHF de GBAS?	Hasta 48	ATC::T05a
+¿En qué se diferencia el ILS del GBAS en la asignación de frecuencias?	El ILS necesita una frecuencia por sistema y pista; una sola asignación VHF de GBAS puede soportar hasta 48 aproximaciones	ATC::T05a
+¿Qué es el GLS?	El nombre del procedimiento o capacidad de aproximación instrumental que proporciona el GBAS (no es el sistema de navegación en sí)	ATC::T05a
+¿En qué se diferencia la entrega de correcciones del GBAS y del WAAS/SBAS?	Las correcciones SBAS/WAAS llegan por un satélite geoestacionario en L1; las del GBAS se calculan localmente y se difunden por radiodifusión de datos VHF (VDB)	ATC::T05a
+¿Por qué puede el GBAS soportar una exactitud más estricta (hasta CAT III) que el SBAS?	Porque calcula las correcciones localmente en el aeropuerto y no sobre un área extensa	ATC::T05a
+¿Por qué se desarrolló el TACAN en lugar de usar el VOR/DME en el ámbito militar?	El VOR/DME (basado en amplitud) se consideraba demasiado voluminoso o impreciso para el uso militar y naval a bordo de buques	ATC::T05a
+¿En qué banda de frecuencias opera el TACAN y qué tipo de señal usa?	UHF, sistema de pulsos	ATC::T05a
+¿Qué es un VORTAC?	Una instalación que combina VOR y TACAN y proporciona, desde un mismo emplazamiento, acimut VOR, acimut TACAN y distancia TACAN	ATC::T05a
+¿Por qué están entrelazadas las señales VOR y TACAN en un VORTAC?	Para garantizar que el piloto que combina el acimut VOR con la distancia TACAN recibe ambas señales de la misma estación	ATC::T05a
+¿Forma parte de un VORTAC toda estación TACAN española?	No, algunas (p. ej. Alcantarilla) son exclusivamente militares, TACAN autónomo sin VOR coemplazado	ATC::T05a
+¿Qué significa RF como tipo de tramo de un procedimiento PBN?	Radius to fix (tramo curvo de radio fijo)	ATC::T05a
+¿Cuándo se introdujo por primera vez la funcionalidad de radio fijo (RF) en el Manual PBN?	En la 4.ª edición (2013), inicialmente dentro de la RNP AR APCH	ATC::T05a
+Según el Manual PBN (5.ª ed.) y los PANS-OPS, ¿es exclusivo de la RNP AR APCH el uso de tramos RF?	No, se ha aclarado que pueden usarse en especificaciones de navegación distintas de la RNP AR APCH	ATC::T05a
+¿Qué manuales respaldan los procedimientos de salida (DP) RNP AR?	El Doc. 9905 (diseño de procedimientos) y el Doc. 8697 (Manual de cartas aeronáuticas, para la representación en cartas)	ATC::T05a
+¿Qué nivel de autorización requieren la RNP AR APCH y los DP RNP AR, frente a la mayoría de las operaciones PBN?	Una aprobación específica (la mayoría de las demás operaciones PBN requieren solo una aprobación general)	ATC::T05a
+¿Qué convenio usa el AIP España ENR 4.4 para los nombres de los puntos significativos en ruta?	Designadores «name-code» pronunciables de cinco letras (convenio DesignatedPoint de OACI/AIXM)	ATC::T05a
+Da un ejemplo de punto de recorrido name-code del ENR 4.4 en España.	ABOSI, ABRIX, ABUPI o ADINO	ATC::T05a
+¿Qué fue históricamente la P-RNAV?	La especificación de navegación europea para el espacio aéreo terminal previa a la PBN (Precision RNAV), equiparada después a la RNAV 1	ATC::T05a
+¿Qué fue históricamente la B-RNAV?	La especificación de navegación europea en ruta previa a la PBN (Basic RNAV), equiparada después a la RNAV 5	ATC::T05a
+¿Es la RNP escalable una función obligatoria u opcional dentro de la A-RNP?	Opcional, incluso dentro de la RNP avanzada	ATC::T05a
+¿En qué dos secciones divide el Manual PBN las operaciones RNP APCH?	Sección A (mínimos LNAV y LNAV/VNAV) y Sección B (mínimos LP y LPV)	ATC::T05a
+¿Qué aumentación exige la sección B de la RNP APCH (LP/LPV) que no exige la sección A (LNAV/LNAV-VNAV)?	SBAS	ATC::T05a
+¿En qué se basa normalmente el guiado vertical LNAV/VNAV?	En baro-VNAV (altimetría barométrica)	ATC::T05a
+¿Cuál es la diferencia clave entre los mínimos LP y LPV?	LP es solo lateral (sin guiado vertical); LPV añade guiado vertical derivado del SBAS	ATC::T05a
+¿Cuándo se publica una línea de mínimos LP en lugar de LPV en una carta RNP APCH?	Cuando el tramo de aproximación final requiere SBAS pero no se publica un perfil vertical LPV estabilizado	ATC::T05a
+¿Hasta qué altura de decisión pueden llegar los mínimos LPV?	60 m (200 ft), equivalente al ILS CAT I	ATC::T05a
+¿Desde qué fecha se aplica con carácter general el Reglamento (UE) 2018/1048 (implantación de la PBN)?	Desde el 3 de diciembre de 2020 (art. 7.2); excepciones: 25 de enero de 2024 (RNP APCH en los aeródromos principales y en los extremos de pista de precisión, una SID/STAR, rutas ATS por debajo del FL150) y 6 de junio de 2030 (art. 5, todas las rutas SID/STAR). El «31 de diciembre de 2020» es la copia retenida en el Reino Unido (día de finalización del periodo de implantación), no el texto de la UE.	ATC::T05a
+Según el Reglamento (UE) 2018/1048, ¿qué excepción se aplica cuando los procedimientos 3D son excesivamente difíciles (terreno u obstáculos)?	Pueden implantarse en su lugar procedimientos RNP APCH 2D (solo LNAV)	ATC::T05a
+Según el Reglamento (UE) 2018/1048, ¿qué ocurre cuando todavía no hay cobertura SBAS en un extremo de pista?	Hay que implantar igualmente LNAV y LNAV/VNAV; el LPV debe añadirse en un plazo de 18 meses desde que haya cobertura SBAS	ATC::T05a
+Según el Reglamento (UE) 2018/1048, ¿qué especificación de navegación deben usar las rutas ATS en el FL150 o por encima?	RNAV 5	ATC::T05a
+Según el Reglamento (UE) 2018/1048, ¿qué tres especificaciones pueden usar las rutas SID/STAR de ala rotatoria (a elección del ANSP)?	RNP 0,3, RNAV 1 o RNP 1	ATC::T05a
+Según el Manual de procedimientos instrumentales de la FAA, ¿cuál es el rango de IAS de las aeronaves de categoría de aproximación A?	Menos de 91 nudos	ATC::T05a
+Según el Manual de procedimientos instrumentales de la FAA, ¿cuál es el rango de IAS de las aeronaves de categoría de aproximación B?	91 nudos o más, pero menos de 121 nudos	ATC::T05a
+Según el Manual de procedimientos instrumentales de la FAA, ¿cuál es el rango de IAS de las aeronaves de categoría de aproximación C?	121 nudos o más, pero menos de 141 nudos	ATC::T05a
+¿Qué determina el tamaño del área protegida de franqueamiento de obstáculos de una aproximación en circuito?	La velocidad de la categoría de aproximación	ATC::T05a
+Si una aeronave de categoría B da la vuelta en circuito a 145 nudos de IAS, ¿qué mínimos de categoría debe usar?	Los de la categoría D (los que corresponden a la velocidad realmente volada)	ATC::T05a
+¿Entre qué niveles de vuelo se aplica el RVSM?	Entre el FL290 y el FL410	ATC::T05a
+¿Qué separación vertical se aplica a las aeronaves con aprobación RVSM entre el FL290 y el FL410?	1000 pies	ATC::T05a
+¿Qué separación vertical se aplica a las aeronaves sin aprobación RVSM en el FL290 o por encima?	2000 pies	ATC::T05a
+¿Qué mide un altímetro radar (radioaltímetro)?	La altura sobre el terreno situado justo debajo de la aeronave (no sobre el nivel del mar)	ATC::T05a
+¿Cuál es la aplicación principal de un altímetro radar?	Información precisa de altura absoluta durante la aproximación y el aterrizaje	ATC::T05a
+¿Qué sistema de seguridad emplea la altura del radioaltímetro junto con la velocidad para avisar de una aproximación peligrosa al terreno?	El GPWS (sistema de aviso de proximidad al terreno)	ATC::T05a
+¿Quién concibió por primera vez el concepto de «sistema de navegación maestro» que dio lugar al FMS?	Hubert Naimer, de Universal Avionics	ATC::T05a
+¿Cómo llamó Naimer a la posición, resultado de combinar sensores, que calculaba el sistema de navegación maestro?	La «mejor posición calculada» (Best Computed Position)	ATC::T05a
+¿Cuál fue el primer sistema al que se llamó realmente «sistema de gestión de vuelo (FMS)» y cuándo se lanzó?	El Universal UNS-1, lanzado en 1982	ATC::T05a
+¿Cómo puede un FMS moderno calcular una posición casi tan exacta como la del GPS sin señal de satélite?	Seleccionando e interrogando automáticamente varias estaciones DME de su base de datos de navegación (posicionamiento DME/DME)	ATC::T05a
+¿Qué dos capacidades de navegación combina un FMS moderno para volar un perfil 3D sincronizado?	Navegación lateral (LNAV) y navegación vertical (VNAV)	ATC::T05a
+¿Qué tres componentes de error combina el error total del sistema (TSE)?	Error del sistema de navegación (NSE), error técnico de vuelo (FTE) y error de definición de la trayectoria (PDE)	ATC::T05a
+En el Doc. 9613, ¿cómo suele tratarse el error de definición de la trayectoria (PDE)?	Como despreciable	ATC::T05a
+¿Cuál es el equivalente numérico, en metros, de la precisión de la aproximación final RNP APCH de RNP 0,3 (0,3 NM)?	Aproximadamente 556 m (0,3 x 1852 m)	ATC::T05a
