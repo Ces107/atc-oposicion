@@ -105,7 +105,7 @@ table.cmp td.cn{font:12px/1 var(--sans);color:#5f5b53;padding-right:6px}
 button.opt:hover{border-color:var(--accent)}
 .opt .lt{position:absolute;left:4px;top:3px;font:700 13px/1 ui-monospace,Consolas,monospace;color:#5f5b53;padding:2px 4px;border-radius:2px;z-index:1}
 .opt svg{display:block;margin:0 auto;width:100%;height:auto;max-height:200px}
-.opt.num{font:700 28px/1 var(--serif);padding:22px 8px}
+.opt.num{font:700 28px/1 var(--sans);font-variant-numeric:lining-nums tabular-nums;padding:22px 8px}
 .opt.txt{font-size:16px;padding:24px 8px}
 .opt.sel{border-color:#1a4d8f;box-shadow:0 0 0 2px #1a4d8f}
 .opt.sel .lt{background:#1a4d8f;color:#fff}
@@ -118,7 +118,7 @@ button.opt:hover{border-color:var(--accent)}
 .nav{margin:18px 0 0;border-top:1px solid var(--rule);padding-top:10px}
 .navf{display:flex;gap:8px;align-items:flex-start;margin:0 0 8px}
 .navf>.ic{margin-top:9px;color:var(--muted)}
-.navg{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;flex:1}
+.navg{display:grid;grid-template-columns:repeat(13,minmax(0,44px));gap:4px;flex:1}
 .nv{position:relative;height:36px;border:1px solid var(--rule);background:var(--surface);color:var(--text);font:13px/1 var(--sans);font-variant-numeric:tabular-nums;border-radius:2px;cursor:pointer;padding:0}
 .nv.a{background:var(--accent);border-color:var(--accent);color:var(--onacc)}
 .nv.f::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--warn) transparent transparent}
@@ -159,7 +159,7 @@ button.bub.on{background:var(--accent);border-color:var(--accent);color:var(--on
 .popt{position:relative;border:1px solid #8a8578;background:#fbfaf6;color:#1b1b1b;padding:2px;text-align:center;min-height:30px}
 .popt .lt{position:absolute;left:3px;top:2px;font:700 10px/1 ui-monospace,Consolas,monospace;z-index:1}
 .popt svg{display:block;width:100%;height:auto;max-height:80px}
-.popt.num{font:700 18px/1 var(--serif);padding:14px 2px 6px}
+.popt.num{font:700 18px/1 var(--sans);font-variant-numeric:lining-nums tabular-nums;padding:14px 2px 6px}
 .popt.txt{font-size:11px;padding:14px 2px 4px}
 .pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:2px 8px;font:13px/1.6 ui-monospace,Consolas,monospace}
 @media screen{.pkey{display:none}}
@@ -171,6 +171,7 @@ button.bub.on{background:var(--accent);border-color:var(--accent);color:var(--on
   .opts.mx{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
   .ctl .btn{padding:8px 11px}
   .ctl kbd{display:none}
+  .navg{grid-template-columns:repeat(9,minmax(0,1fr))}
 }
 @media print{
   @page{margin:12mm}
@@ -2528,10 +2529,10 @@ function renderRun(){
     '<span>' + ic('f-' + q.fam) + FAM_LABEL[q.fam] + '</span><span>' + ic('check') + '<b id="na">' + c.a + '</b></span><span>' + ic('flag') + '<b id="nf">' + c.f + '</b></span></div>' +
     '<div class="bar"><div id="bar" style="width:' + Math.round(c.a / N_ITEMS * 100) + '%"></div></div>' +
     (lb ? '<p class="pr">' + escH(lb) + '</p>' : '') + stemHTML(q) + optsHTML(q, 'run', S.ans[S.cur]) +
-    '<div class="row ctl"><button class="btn" id="prev" aria-label="Anterior"' + (S.cur === 0 ? ' disabled' : '') + '>' + ic('back') + '<kbd>←</kbd></button>' +
+    '<div class="row ctl"><button class="btn" id="prev" aria-label="Anterior"' + (S.cur === 0 ? ' disabled' : '') + '>' + ic('back') + '</button>' +
     '<button class="btn' + (S.flag[S.cur] ? ' on' : '') + '" id="flag" aria-pressed="' + S.flag[S.cur] + '">' + ic('flag') + 'Marcar <kbd>M</kbd></button>' +
     '<button class="btn" id="clr"' + (S.ans[S.cur] < 0 ? ' disabled' : '') + '>' + ic('x') + 'Borrar</button>' +
-    '<button class="btn primary" id="next" aria-label="Siguiente"' + (S.cur === N_ITEMS - 1 ? ' disabled' : '') + '>' + ic('next') + '<kbd>→</kbd></button>' +
+    '<button class="btn primary" id="next" aria-label="Siguiente"' + (S.cur === N_ITEMS - 1 ? ' disabled' : '') + '>' + ic('next') + '</button>' +
     '<span class="grow"></span><button class="btn" id="end">' + ic('check') + 'Entregar</button></div>' + navHTML());
   $('opts').addEventListener('click', function(e){ const b = e.target.closest('button.opt'); if (b) choose(+b.getAttribute('data-i')); });
   $('prev').addEventListener('click', function(){ go(S.cur - 1); });
