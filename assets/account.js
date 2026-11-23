@@ -8,7 +8,8 @@
  *   atc_radar_v2, atc_spatial_v1, atc_matrices_v1, atc_mentalmath_v1, atc_listening_v1, atc_memattn_v1,
  *   atc_sectorsim_v1, atc_dashboard_v1, atc_entrenador_v1 (aptitude-trainer), atctrainer:v1 (Entrenador),
  *   atc3b.v1, atc3b.g.v1, atc3b.consistency.v1 (herramientas conductuales), atcquiz:<ruta> (tests).
- *   NUNCA se sincroniza nada mas: ni el token (acct.token), ni acct.meta, ni acct.lock.
+ *   atc_reset = instante (ms) del ultimo «Empezar de cero»: ver el bloque "empezar de cero".
+ *   NUNCA se sincroniza nada mas: ni el token (acct.token), ni acct.meta, ni acct.lock, ni acct.reset, ni acct.backup.
  * TRADUCCION (EXTRA): claves del sitio que NO empiezan por "atc" se envian como "atc.<clave original>".
  *   Hoy el sitio no tiene ninguna (el tema claro/oscuro sigue la configuracion del sistema); la lista queda vacia.
  */
@@ -22,6 +23,7 @@
   var EXTRA = {}; // { 'clave-local': true }  -> servidor: 'atc.clave-local'
   var SRV_RE = /^atc[A-Za-z0-9_:\/.\-]{0,150}$/;
   var K_TOKEN = 'acct.token', K_META = 'acct.meta', K_LOCK = 'acct.lock', K_LAST = 'acct.last';
+  var K_RESET = 'acct.reset', K_BACKUP = 'acct.backup', RESET_KEY = 'atc_reset';
   var ID = Math.random().toString(36).slice(2);
   var script = document.currentScript;
   var BASE = '';
@@ -261,6 +263,15 @@
       var items = (r.data && r.data.items) || {};
       Object.keys(items).forEach(function (sk) { var lk = fromServer(sk); if (isSynced(lk)) srv[lk] = items[sk]; });
       reloadMeta();
+      // «Empezar de cero» pedido en cualquier dispositivo: lo anterior al reinicio se borra, nunca se fusiona
+      var rsv = srv[RESET_KEY];
+      var rs = Math.max(rsv && typeof rsv.value === 'string' ? (parseInt(rsv.value, 10) || 0) : 0, parseInt(lget(RESET_KEY) || '0', 10) || 0);
+      if (rs > (parseInt(lget(K_RESET) || '0', 10) || 0) && wipeBefore(rs) > 0) { bc('reset'); setTimeout(reload, 0); return 'stop'; }
+      if (rs) Object.keys(srv).forEach(function (k) {
+        if (k === RESET_KEY || (srv[k].updated_at || 0) >= rs) return;
+        if (lget(k) === null) dels.push(k); // si aqui hay una copia posterior al reinicio, esa pisa la del servidor
+        delete srv[k];
+      });
       var all = {};
       Object.keys(srv).forEach(function (k) { all[k] = 1; });
       lkeys().forEach(function (k) { if (isSynced(k)) all[k] = 1; });
@@ -354,6 +365,37 @@
     } catch (e) {}
   }
 
+  /* ---------- empezar de cero ---------- */
+  // atc_reset (clave sincronizada) guarda el instante del ultimo reinicio. Cada navegador borra, en cuanto lo ve,
+  // todo lo anterior a ese instante en vez de volver a subirlo: sin esto, un segundo dispositivo con progreso
+  // antiguo lo devolveria a la cuenta. acct.reset (local) recuerda el ultimo reinicio ya aplicado en este navegador.
+  function wipeBefore(ts) {
+    reloadMeta();
+    var n = 0;
+    busy = true;
+    try {
+      lkeys().forEach(function (k) {
+        if (k === RESET_KEY || !isSynced(k) || ((meta[k] || {}).t || 0) >= ts) return;
+        try { oRem.call(window.localStorage, k); n++; } catch (e) {}
+      });
+    } finally { busy = false; }
+    Object.keys(meta).forEach(function (k) { if (k !== RESET_KEY && (meta[k].t || 0) < ts) delete meta[k]; });
+    saveMeta(); lset(K_RESET, String(ts));
+    return n;
+  }
+  // las paginas guardan su estado en memoria: tras borrar hay que recargar o lo volverian a escribir
+  function reload() { try { window.location.reload(); } catch (e) {} }
+  function doReset(noAsk) {
+    if (!noAsk && !window.confirm('¿Borrar todo el progreso?')) return;
+    var ts = Date.now(), snap = {};
+    lkeys().forEach(function (k) { if (isSynced(k) && k !== RESET_KEY) snap[k] = lget(k); });
+    lset(K_BACKUP, JSON.stringify({ t: ts, d: snap })); // copia local de lo borrado (no se sincroniza)
+    try { window.localStorage.setItem(RESET_KEY, String(ts)); } catch (e) {}
+    wipeBefore(ts);
+    bc('reset');
+    if (token && S.net === 'ok') { backoffUntil = 0; sync('reset').then(reload, reload); } else reload();
+  }
+
   /* ---------- salud ---------- */
   var healthTimer = null, healthTry = 0, lastHealth = 0;
   var RETRY = [15000, 45000, 120000, 180000];
@@ -409,6 +451,7 @@
     if (!m || m.id === ID) return;
     if (m.t === 'auth') { loadAuth(); ui(); if (token) schedule(500); }
     else if (m.t === 'synced') { S.last = parseInt(lget(K_LAST) || '0', 10) || 0; ui(); }
+    else if (m.t === 'reset') reload();
     else if (m.t === 'net' && m.id) { /* cada pestana comprueba su propia salud */ }
   }
   window.addEventListener('storage', function (e) {
@@ -425,7 +468,8 @@
     'cloud-off': '<path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/>',
     logout: '<path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/>',
     key: '<circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/>',
-    shield: '<path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/>'
+    shield: '<path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/>',
+    history: '<path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/>' // el mismo trazo que theme.py
   };
   function ico(n) {
     if (document.getElementById('i-' + n)) return '<svg class="acct-i" aria-hidden="true"><use href="#i-' + n + '"/></svg>';
@@ -542,6 +586,7 @@
         + '<input name="p" type="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password" maxlength="128">'
         + '<div class="acct-err" role="alert">' + esc(S.msg) + '</div>'
         + '<div class="acct-acts"><button type="submit" class="acct-b pri" data-a="login">Entrar</button><button type="button" class="acct-b" data-a="reg">Crear cuenta</button></div></form>'
+        + '<button type="button" class="acct-l" data-a="reset" style="margin-top:12px">' + ico('history') + 'Empezar de cero</button>'
         + (k === 'connecting' ? '<div class="acct-row acct-mut" style="margin:8px 0 0">' + ico('cloud') + 'Conectando</div>' : '');
     } else {
       var admin = S.role === 'admin';
@@ -553,6 +598,7 @@
           ? '<form data-a="pw" style="border-top:1px solid var(--a-line);padding-top:8px"><input name="o" type="password" placeholder="Contraseña" aria-label="Contraseña actual" autocomplete="current-password" maxlength="128"><input name="n" type="password" placeholder="Nueva contraseña" aria-label="Nueva contraseña" autocomplete="new-password" maxlength="128"><div class="acct-acts"><button type="submit" class="acct-b pri">Guardar</button></div></form>'
           : '<button type="button" class="acct-l" data-a="pwv">' + ico('key') + 'Cambiar contraseña</button>')
         + (admin ? '<a class="acct-l" href="' + esc(BASE + 'cuenta/index.html') + '">' + ico('shield') + 'Usuarios</a>' : '')
+        + '<button type="button" class="acct-l" data-a="reset">' + ico('history') + 'Empezar de cero</button>'
         + '<button type="button" class="acct-l" data-a="out">' + ico('logout') + 'Salir</button>';
     }
     pop.innerHTML = h;
@@ -571,6 +617,7 @@
     var a = t.getAttribute('data-a');
     if (a === 'reg') doAuth('register', pop.querySelector('form'));
     else if (a === 'out') { signOut(); }
+    else if (a === 'reset') doReset();
     else if (a === 'sync') { backoffUntil = 0; sync('manual'); }
     else if (a === 'pwv') { view = 'pw'; S.msg = ''; render(); place(); var i = pop.querySelector('input'); if (i) i.focus(); }
   });
@@ -654,6 +701,6 @@
     window.addEventListener('pagehide', flush);
     window.addEventListener('online', function () { if (S.net === 'down') { if (healthTimer) clearTimeout(healthTimer); health(); } });
   }
-  window.__acct = { sync: sync, health: health, state: function () { return { net: S.net, sync: S.sync, user: S.user, role: S.role, key: stateKey(), last: S.last }; }, isSynced: isSynced };
+  window.__acct = { sync: sync, health: health, reset: doReset, state: function () { return { net: S.net, sync: S.sync, user: S.user, role: S.role, key: stateKey(), last: S.last }; }, isSynced: isSynced };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
