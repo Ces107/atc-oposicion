@@ -274,4 +274,44 @@ Errores TEM	Decisiones u omisiones del controlador que hacen que no se cumplan l
 Estados no deseados TEM	Situaciones en las que la planificación ha fallado y los límites de seguridad se reducen (p. ej., una aeronave que asciende a un nivel de vuelo no autorizado o vira a un rumbo no planificado).	ATC::OM08
 Estado no deseado frente a consecuencia	En un estado no deseado la situación aún se puede resolver; una vez se produce una consecuencia ya no hay vuelta atrás.	ATC::OM08
 Según el manual, ¿qué es implícitamente el control de tránsito aéreo?	La detección de estados no deseados, tanto naturales por la evolución del tráfico como generados por la acción del ATC.	ATC::OM08
-Fecha del manual	Julio de 2023 («julio 2023»), 65 páginas, © ENAIRE.	ATC::OM08
+Fecha del manual	«Elaborado: noviembre 2026», 65 páginas, © 2026 ENAIRE (mismo contenido y paginación que la edición de julio de 2023, salvo la corrección de la p. 35).	ATC::OM08
+Figura 1 del modelo de Reason: ¿qué cinco bloques aparecen de izquierda a derecha?	Organización (decisiones de gestión y procesos institucionales), lugar de trabajo (condiciones de trabajo), personas (errores e infracciones), defensas y accidente.	ATC::OM08
+Figura 1 del modelo de Reason: ¿qué tres defensas aparecen?	Tecnología, capacitación y reglamentos.	ATC::OM08
+Figura 1 del modelo de Reason: ¿qué une directamente la organización con las defensas?	La trayectoria de las condiciones latentes.	ATC::OM08
+Figura 2 del manual: ¿cómo se dibuja el modelo SHELL-O?	La L en el centro, rodeada de H (arriba), S (izquierda), E (derecha) y otra L (abajo); un círculo O envuelve el conjunto.	ATC::OM08
+Según el manual (1.3), ¿por qué fueron tan importantes los trabajos de Reason y Rasmussen?	Porque aportaron una visión científica sobre las actuaciones que fallan, con el error despojado de juicios de valor.	ATC::OM08
+Safety-II: reconocer e investigar cómo afronta el individuo sus continuas adaptaciones diarias, ¿qué permite comprender?	Cómo se desarrolla la competencia profesional.	ATC::OM08
+Figura 4 (EUROCONTROL/FAA 2010): ¿qué tres estrategias de integración de los FFHH en la gestión de proyectos compara?	a) Sin integración de los FFHH; b) integración reactiva; c) integración proactiva.	ATC::OM08
+Figura 4: ¿qué estrategia tiene el coste más alto en el diseño y el más bajo en la operación?	La integración proactiva de los FFHH.	ATC::OM08
+Figura 4: ¿qué estrategia acaba con el mayor coste de detectar y resolver problemas de actuación humana en la operación?	No integrar los FFHH (la reactiva queda en un nivel intermedio).	ATC::OM08
+Figura 4: ¿qué fases del ciclo de vida aparecen en el eje horizontal?	Diseño, implementación y operación.	ATC::OM08
+Según el manual (1.6), ¿qué debe fijar como prioridad una organización respecto a los proyectos tecnológicos ATM?	La sistematización de la integración de los FFHH en el desarrollo e implementación de todos los proyectos tecnológicos.	ATC::OM08
+¿Con qué horizonte tendrán impacto las mayores exigencias de la normativa europea sobre la gestión del factor humano (manual 1.6)?	A medio y largo plazo.	ATC::OM08
+Figura 5 (Endsley): factores de la tarea y del entorno	Carga de trabajo, estresores, diseño del sistema y complejidad.	ATC::OM08
+Figura 5 (Endsley): factores individuales	Objetivos, ideas preconcebidas, conocimiento, experiencia, formación y habilidades.	ATC::OM08
+Figura 5 (Endsley): ¿qué sigue a la conciencia situacional en la cadena del modelo?	La decisión y después la ejecución de la acción, que modifica el estado del entorno/sistema y realimenta la SA.	ATC::OM08
+Figura 6 (Isaac y Ruitenberg, 1997): ¿cuántos elementos influyen en la SA del controlador y cuáles son?	Once: centros adyacentes, factores personales, meteorología, infraestructura del aeropuerto, compañeros, tráfico, operadores y pilotos, entorno, radioayudas, actuaciones de la aeronave y equipos.	ATC::OM08
+Figura 6: aspectos del elemento «factores personales»	Confort físico, estrés y fatiga.	ATC::OM08
+Figura 6: aspectos del elemento «compañeros»	Puntos fuertes y débiles, nivel de rendimiento, gradiente social y formación en curso.	ATC::OM08
+Figura 6: aspectos del elemento «tráfico»	Situación («la imagen»), evolución, patrones y flujo.	ATC::OM08
+Figura 6: aspectos del elemento «infraestructura del aeropuerto»	Pistas disponibles, obras en curso y ayudas visuales (iluminación, señales).	ATC::OM08
+Figura 6: aspectos del elemento «operadores y pilotos»	Nivel de familiaridad, nivel de rendimiento y nivel de radiotelefonía (incluido el vocabulario).	ATC::OM08
+Figura 6: aspectos del elemento «entorno»	Obstáculos, características del terreno y sensibilidad al ruido.	ATC::OM08
+Figura 6: aspectos del elemento «meteorología»	Actual, prevista y especial (cizalladura, vientos en altura).	ATC::OM08
+Figura 6: aspectos de «equipos» y de «radioayudas»	Equipos: disponibilidad, fiabilidad, rendimiento, degradaciones. Radioayudas: disponibilidad y nivel de rendimiento.	ATC::OM08
+Figura 6: aspectos de «centros adyacentes» y de «actuaciones de la aeronave»	Centros adyacentes: nivel de rendimiento, limitaciones, capacidad. Actuaciones de la aeronave: diferencias, degradaciones, posibilidades y limitaciones.	ATC::OM08
+¿Qué año da el pie de la figura 6 para Isaac y Ruitenberg, y cuál la bibliografía del manual?	El pie de la figura, 1997; la bibliografía, 1999 (*Air Traffic Control: Human Performance Factors*).	ATC::OM08
+Figura 7 (Yerkes-Dodson según la complejidad): ¿cómo es la curva de la tarea compleja frente a la de la sencilla?	Queda por debajo y su pico (activación óptima) llega antes, con menos activación.	ATC::OM08
+Figura 8 (Yerkes-Dodson): ¿qué rótulos llevan los tramos ascendente y descendente de la curva?	Ascendente: atención e interés crecientes. Descendente: rendimiento deteriorado por una ansiedad intensa. Cima: activación y rendimiento óptimos.	ATC::OM08
+¿En qué marco sitúa el manual la definición de carga de trabajo mental (3.3)?	En un marco de factores de estrés que interactúan en el individuo y que, por tanto, influyen en el rendimiento humano.	ATC::OM08
+Escucha activa: además de entender una situación, ¿qué consigue según el manual (4.1)?	Que el otro se relaje o se sienta comprendido y tender un puente hacia él cuando cuesta entenderse; es la mejor manera de conectar emocionalmente.	ATC::OM08
+Gráfico de la p. 34: nombra cinco beneficios de la escucha activa.	Clima de confianza y cercanía; comunicar aceptación e incrementar la motivación; estimular la cooperación; reducir la tensión y las diferencias de criterios; ganar tiempo para pensar; aprender del otro; aprender a trabajar mejor; tomar mejores decisiones con mayor seguridad; reducir los conflictos.	ATC::OM08
+Barreras semánticas (manual, edición de noviembre de 2026)	El emisor utiliza palabras con un significado, pero el receptor lo interpreta de manera diferente.	ATC::OM08
+Según el recuadro de la p. 38, ¿qué lenguaje es el de las emociones y cuál el de la lógica?	El no verbal y el paraverbal son el lenguaje de las emociones; las palabras, el de la lógica.	ATC::OM08
+¿Cuándo pasa a ser predominante el lenguaje no verbal y paraverbal (manual, p. 38)?	Cuando aparecen las emociones (cansancio, estrés, presión de tiempos, conflictos); sin ningún conflicto, las palabras bastan.	ATC::OM08
+Tristeza según el manual	No ayuda dejarse llevar por ella; al superarla se asume una pérdida o se toma conciencia de una situación.	ATC::OM08
+Asco y sorpresa según el manual	Asco: adaptativamente positiva, ayuda a rechazar algo que no es bueno para la salud. Sorpresa: ayuda a reconocer novedades, siempre que no lleve al sobresalto constante.	ATC::OM08
+Ira y alegría según el manual	Ira: mal manejada es una pérdida de energía; bien manejada lleva a rebelarse contra una situación no deseada y da fuerzas para afrontarla. Alegría: necesaria para «recargar» las pilas y facilitar la interacción.	ATC::OM08
+Gestión de los riesgos del estrés: ¿qué oportunidad ofrece según el manual (6.4)?	Maximizar el bienestar del personal ATM, con el propósito final de mejorar la seguridad y la eficiencia.	ATC::OM08
+TEM como herramienta de análisis de riesgos: ¿qué es tan importante como analizar los errores y amenazas potenciales?	Estudiar las circunstancias (estados) no deseadas que se pueden crear en el desarrollo de las operaciones.	ATC::OM08
+Reglamento 2017/373: ¿qué fecha da el manual como entrada en vigor, y qué es realmente esa fecha?	El 02/01/2020; según el art. 10 del Reglamento es la fecha desde la que es aplicable (entró en vigor a los veinte días de su publicación en el DOUE).	ATC::OM08

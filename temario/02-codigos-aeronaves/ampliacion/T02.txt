@@ -48,7 +48,7 @@
 ¿Qué indicador tiene Sevilla/Morón?	LEMO, aeródromo militar (IATA OZP es el código derivado, no procede del manual).	ATC::T02 NV
 ¿Qué es el indicador LXGB?	El aeródromo de Gibraltar. El manual lo recoge entre los aeródromos «en situación excepcional».	ATC::T02
 ¿Qué aeródromos del Sáhara Occidental figuran en la lista del AIP español y con qué indicadores?	GSAI El Aaiún y GSVO Villacisneros, ambos listados como aeródromos en situación excepcional.	ATC::T02
-¿Qué indicador tiene Lisboa ACC/FIC (lista de dependencias adyacentes del manual)?	LPPC.	ATC::T02
+¿Qué indicador tiene Lisboa ACC/FIC (lista de dependencias colaterales del manual)?	LPPC.	ATC::T02
 ¿Qué indicador tiene Marsella FIC/ACC/UAC?	LFMM.	ATC::T02
 ¿Qué indicador tiene Casablanca ACC/FIC?	GMMM.	ATC::T02
 ¿Qué indicador tiene Dakar ACC/FIC?	GOOO.	ATC::T02

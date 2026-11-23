@@ -1,0 +1,291 @@
+¿Cómo se denominan comúnmente los Sistemas de Aeronaves No Tripuladas (UAS) según el manual 10?	Drones.	ATC::OM10
+¿Cuándo y con qué fines se emplearon las primeras aeronaves no tripuladas, origen de los UAS (manual 10, p. 4)?	Con fines militares, entre finales del siglo XIX y principios del siglo XX.	ATC::OM10
+¿Qué avances permitieron la evolución de los UAS hacia aplicaciones civiles y comerciales (manual 10, p. 4)?	Los avances en electrónica, telecomunicaciones y sistemas de navegación.	ATC::OM10
+¿Qué ámbitos de uso actual de los UAS cita el manual 10?	Inspección de infraestructuras, agricultura de precisión, vigilancia, gestión de emergencias y logística.	ATC::OM10
+¿Qué consideración otorga la normativa europea a los UAS y qué implica?	La de aeronaves: sus operaciones deben integrarse de forma segura en el sistema aeronáutico y compartir el espacio aéreo con el resto de usuarios.	ATC::OM10
+¿Quién ha desarrollado el concepto de U-space y en respuesta a qué?	La Unión Europea, ante la necesidad de mecanismos de gestión del tráfico adaptados a los UAS por el aumento progresivo de sus operaciones.	ATC::OM10
+Definición de U-space según el manual 10 (p. 4).	Un sistema de servicios y procedimientos diseñado para permitir la gestión segura, eficiente y automatizada de un elevado número de operaciones con UAS.	ATC::OM10
+Figura del U-space (manual 10, p. 4): ¿qué elementos muestra?	Un volumen «U-SPACE» sobre una ciudad con seis geozonas (GEOZONE 1 a 6), dos proveedores (USSP 1 y USSP 2) y una red de rutas de UAS en el espacio aéreo U-space.	ATC::OM10
+¿Qué regula la normativa europea de UAS según la introducción del capítulo 2 (p. 5)?	Los requisitos aplicables a los UAS, sus operadores, las operaciones y los servicios U-space, con una regulación armonizada en todos los Estados miembros.	ATC::OM10
+¿Qué tres materias regula el Real Decreto 517/2024 según la introducción del capítulo 2 (p. 5)?	Determinados aspectos nacionales, las actividades excluidas de la normativa europea y el régimen de zonificación mediante las zonas geográficas UAS y los espacios U-space.	ATC::OM10
+¿Qué planes orientan el despliegue progresivo del U-space en España (manual 10, p. 5)?	Los planes PANDU y PANDU+.	ATC::OM10
+¿En qué se basa el marco normativo europeo armonizado de los UAS?	En el nivel de riesgo operacional.	ATC::OM10
+¿Qué tres reglamentos constituyen principalmente la normativa europea de UAS (manual 10, p. 5)?	El Reglamento (UE) 2018/1139, el Reglamento Delegado (UE) 2019/945 y el Reglamento de Ejecución (UE) 2019/947.	ATC::OM10
+Reglamento (UE) 2018/1139: ¿de quién es y de qué fecha?	Del Parlamento Europeo y del Consejo, de 4 de julio de 2018.	ATC::OM10
+Reglamento (UE) 2018/1139: ¿sobre qué trata y qué organismo crea?	Sobre normas comunes en el ámbito de la aviación civil; crea la Agencia de la Unión Europea para la Seguridad Aérea (EASA).	ATC::OM10
+Según el manual 10, ¿qué recoge el Reglamento (UE) 2018/1139 sobre las aeronaves no tripuladas?	Que entran a formar parte del ámbito de EASA independientemente de su masa.	ATC::OM10
+Figura del 2018/1139 (p. 6): definición de «aeronave no tripulada».	Cualquier aeronave que opere o esté diseñada para operar de forma autónoma o para ser pilotada a distancia sin un piloto a bordo.	ATC::OM10
+Figura del 2018/1139 (p. 6): ¿qué dos precisiones acompañan a la definición de aeronave no tripulada?	Sin distinción por razón de su uso, y los aeromodelos quedan dentro del concepto de aeronave no tripulada.	ATC::OM10
+¿Están los aeromodelos dentro del concepto de aeronave no tripulada según el manual 10?	Sí (figura del Reglamento 2018/1139, p. 6).	ATC::OM10
+Figura del 2018/1139 (p. 6): ¿sobre qué aeronaves extiende la UE su competencia?	Sobre todas las aeronaves no tripuladas, independientemente de su masa operativa.	ATC::OM10
+Figura del 2018/1139 (p. 6): ¿qué dos excepciones tiene la competencia de la UE sobre aeronaves no tripuladas?	Las «Actividades o servicios no EASA» y las aeronaves no tripuladas incluidas en el anexo I.	ATC::OM10
+¿Qué establece el Reglamento Delegado (UE) 2019/945?	Los requisitos aplicables al diseño, fabricación y comercialización de los sistemas de UAS y de los accesorios de identificación a distancia.	ATC::OM10
+¿Cuál es el objetivo del Reglamento Delegado (UE) 2019/945?	Garantizar que los UAS comercializados en el mercado europeo cumplan unos requisitos técnicos mínimos de seguridad y prestaciones.	ATC::OM10
+¿Qué sistema introduce el Reglamento Delegado (UE) 2019/945 y en qué clases divide los drones?	El sistema de marcado de clase: clases C0 a C6, en función de sus características técnicas y operacionales.	ATC::OM10
+Además del marcado de clase, ¿qué obligaciones introduce el Reglamento Delegado (UE) 2019/945 según el texto del manual?	Las obligaciones de fabricantes, importadores y distribuidores procedentes de terceros países.	ATC::OM10
+¿Qué establece el Reglamento de Ejecución (UE) 2019/947?	Las normas y procedimientos aplicables a la utilización de UAS; es la principal referencia normativa para las operaciones con drones en Europa.	ATC::OM10
+¿Cuál es la característica fundamental del Reglamento de Ejecución (UE) 2019/947?	La adopción de un enfoque basado en el riesgo operacional, clasificando las operaciones en tres categorías.	ATC::OM10
+Reglamento 2019/947: ¿qué nivel de riesgo corresponde a cada categoría?	Abierta: bajo riesgo. Específica: riesgo medio. Certificada: alto riesgo.	ATC::OM10
+Además de las categorías, ¿qué otros aspectos regula el Reglamento de Ejecución (UE) 2019/947?	El registro de operadores, la formación de los pilotos a distancia y las condiciones aplicables a cada categoría operacional.	ATC::OM10
+¿Qué otra disposición europea de navegación aérea destaca el manual 10 como aplicable en determinadas circunstancias a los UAS?	El Reglamento de Ejecución (UE) 923/2012 (SERA), que establece las reglas comunes del aire aplicables en Europa.	ATC::OM10
+¿Qué abarca en conjunto la normativa europea de UAS (manual 10, p. 7)?	Requisitos técnicos de las aeronaves, condiciones de operación, capacitación del personal y responsabilidades de los actores; es la base de la regulación nacional.	ATC::OM10
+¿Cuál es la fecha del Real Decreto 517/2024?	4 de junio de 2024.	ATC::OM10
+¿Cuándo entró en vigor el Real Decreto 517/2024?	El 25 de junio de 2024.	ATC::OM10
+¿Qué desarrolla el Real Decreto 517/2024?	El régimen jurídico para la utilización civil de los UAS en España, complementando el marco normativo de la Unión Europea.	ATC::OM10
+¿A qué adaptó el Real Decreto 517/2024 la normativa española?	Al nuevo marco regulador europeo de los UAS y del U-space.	ATC::OM10
+Enumera las seis principales aportaciones del Real Decreto 517/2024.	Disposiciones nacionales de uso civil de UAS; actividades NO EASA; clubes y asociaciones de aeromodelismo; régimen de zonas geográficas UAS; marco nacional de los espacios U-space; ENAIRE como sCISP.	ATC::OM10
+¿Cómo se denominan comúnmente las actividades y servicios excluidos del ámbito del Reglamento (UE) 2018/1139?	Operaciones NO EASA.	ATC::OM10
+RD 517/2024: ¿qué permite al Estado el régimen de las zonas geográficas UAS?	Limitar, restringir o facilitar operaciones en determinados volúmenes de espacio aéreo.	ATC::OM10
+RD 517/2024: ¿por qué razones pueden limitarse, restringirse o facilitarse operaciones mediante zonas geográficas UAS?	Por razones de seguridad, defensa, protección, privacidad o medio ambiente.	ATC::OM10
+¿A quién designa el Real Decreto 517/2024 como proveedor único de servicios de información común (sCISP)?	A ENAIRE, en los espacios aéreos U-space bajo responsabilidad española.	ATC::OM10
+Mapa normativo (figura p. 8): ¿cómo se rotula el Reglamento (UE) 2018/1139?	Como «Reglamento Base (UE) 2018/1139», del que parten el 2019/947 y el 2019/945.	ATC::OM10
+Mapa normativo (p. 8): ¿qué subtítulo lleva el Reglamento de Ejecución 2019/947 y qué contenidos lista?	«(Reglas y procedimientos para la utilización UAS)»: categorías operacionales abierta, específica y certificada; operadores y pilotos; condiciones de registro y formación; riesgo (SORA).	ATC::OM10
+Mapa normativo (p. 8): ¿qué subtítulo lleva el Reglamento Delegado 2019/945 y qué contenidos lista?	«(Orientado a fabricantes)»: diseño y fabricación UAS; marcado de clase; comercialización; operadores de terceros países.	ATC::OM10
+Mapa normativo (p. 8): ¿con qué reglamento se asocia «Riesgo (SORA)»?	Con el Reglamento de Ejecución (UE) 2019/947.	ATC::OM10
+Mapa normativo (p. 8): ¿qué contenidos asigna a la normativa nacional (RD 517/2024)?	Zonificación, operaciones EASA, NO EASA, clubes y asociaciones de aeromodelismo y ENAIRE como sCISP.	ATC::OM10
+Enumera las seis «otras disposiciones de aplicación» que afectan a las operaciones con UAS (manual 10, 2.3).	Requisitos técnicos de diseño y fabricación de UAS; protección de datos y privacidad; espectro radioeléctrico; compatibilidad electromagnética; medio ambiente (ruido y emisiones); juguetes.	ATC::OM10
+¿Son europeas o nacionales las «otras disposiciones de aplicación» del apartado 2.3?	Ambas: disposiciones europeas y nacionales de diversos ámbitos.	ATC::OM10
+Según el Reglamento (UE) 2018/1139, ¿de qué se compone un UAS?	De una aeronave no tripulada (UA) y el equipo necesario para permitir su operación segura.	ATC::OM10
+Enumera los cinco elementos que comprende con carácter general un UAS (manual 10, 3.1).	Aeronave no tripulada (UA), piloto a distancia, estación de control remoto (RCS), enlace de mando y control (C2) y equipos asociados.	ATC::OM10
+Componentes del UAS: definición de aeronave no tripulada (UA).	Aeronave destinada a operar sin piloto a bordo.	ATC::OM10
+Componentes del UAS: ¿qué es la estación de control remoto (RCS)?	El equipo utilizado para controlar la aeronave y supervisar el vuelo.	ATC::OM10
+Componentes del UAS: ¿qué es el enlace de mando y control (C2)?	El sistema de comunicaciones que permite el intercambio de información entre la aeronave y la estación de control.	ATC::OM10
+Componentes del UAS: ¿qué ejemplos de «equipos asociados» da el manual?	Equipos de navegación, posicionamiento, identificación a distancia o carga útil.	ATC::OM10
+¿Qué sigla usa el manual 10 para la estación de control remoto?	RCS.	ATC::OM10
+¿En qué cinco materias hay que cumplir requisitos para operar un UAS (manual 10, 3.2)?	Registro, formación, edad mínima, seguro y condiciones operacionales.	ATC::OM10
+Figura de requisitos (p. 10): ¿dónde se registra el operador y qué obtiene?	En la sede electrónica de AESA; obtiene un número de operador, que debe figurar visible en el dron.	ATC::OM10
+Figura de requisitos (p. 10): ¿qué dice sobre la formación como piloto?	Formación mínima acreditable según la categoría operacional; examen accesible en la web de AESA para las subcategorías A1 y A3.	ATC::OM10
+¿Para qué subcategorías hay examen accesible en la web de AESA según la figura de la p. 10?	A1 y A3.	ATC::OM10
+Figura de requisitos (p. 10): ¿qué cubre el seguro obligatorio?	Póliza de responsabilidad civil frente a terceros por daños durante cada vuelo.	ATC::OM10
+Figura de requisitos (p. 10): ¿qué excepción al seguro obligatorio indica?	Excepción para UAS con MTOM inferior a 20 kg.	ATC::OM10
+Figura de requisitos (p. 10): ¿qué dice la ficha «Reglas de Vuelo y Lugar»?	Sujeto a reglas generales según peso, personas y edificios cercanos; consultar zonas geográficas UAS antes de cada operación.	ATC::OM10
+Figura de requisitos (p. 10): ¿qué dice la ficha «Edad Mínima»?	16 años para pilotos a distancia; en categoría abierta puede reducirse dependiendo de la clase de UAS utilizada.	ATC::OM10
+¿A quién afectan los requisitos de operación de UAS y de qué dependen?	Tanto al operador de UAS como al piloto a distancia; pueden variar según la categoría operacional.	ATC::OM10
+Definición de operador de UAS (manual 10, p. 10).	Persona física o jurídica que utiliza o tiene intención de utilizar uno o varios UAS.	ATC::OM10
+¿De qué es responsable el operador de UAS?	De garantizar que la operación se realice conforme a la normativa y de que se cumplan los requisitos operacionales, de seguridad y, cuando proceda, de registro, formación, autorización y seguro.	ATC::OM10
+Definición de piloto a distancia (manual 10, p. 10).	Persona física responsable de conducir el UAS o supervisar su trayectoria durante el vuelo.	ATC::OM10
+¿Cuáles son las principales obligaciones del piloto a distancia?	Disponer de la formación requerida, operar conforme a la normativa y garantizar la seguridad de la operación durante todas sus fases.	ATC::OM10
+¿Puede ser el piloto a distancia una persona jurídica?	No: es una persona física. El operador sí puede ser persona física o jurídica.	ATC::OM10
+Registro: ¿quién debe registrarse y qué número obtiene?	Los operadores de UAS, cuando así lo exija la normativa; obtienen un número de operador válido en toda la Unión Europea.	ATC::OM10
+¿En qué ámbito territorial es válido el número de operador de UAS?	En toda la Unión Europea.	ATC::OM10
+Formación: ¿qué deben tener los pilotos a distancia?	La formación, competencias y acreditaciones exigidas para la categoría operacional y el tipo de operación que pretendan realizar.	ATC::OM10
+¿Cuál es, con carácter general, la edad mínima para actuar como piloto a distancia en España?	16 años, sin perjuicio de las excepciones previstas para determinadas operaciones de bajo riesgo.	ATC::OM10
+Según el texto del manual 10, ¿en qué casos es obligatorio el seguro de responsabilidad civil?	En las categorías específica y certificada y en las actividades o servicios NO EASA.	ATC::OM10
+Según el texto del manual 10, ¿qué operaciones pueden quedar exentas del seguro?	Determinadas operaciones de bajo riesgo en categoría abierta, en los términos de la normativa aplicable.	ATC::OM10
+Responsabilidades: ¿qué deben respetar el operador y el piloto a distancia?	Las limitaciones operacionales, las zonas geográficas UAS y las condiciones de seguridad establecidas para cada tipo de vuelo.	ATC::OM10
+¿Qué significa VLOS?	Visual Line of Sight: el piloto a distancia mantiene contacto visual directo y continuo con la aeronave durante todo el vuelo.	ATC::OM10
+¿Qué tipo de operación es la más habitual y la base de la mayoría de las operaciones en categoría abierta?	La operación VLOS.	ATC::OM10
+¿Qué significa EVLOS?	Extended Visual Line of Sight: amplía el alcance de una operación VLOS mediante uno o varios observadores de espacio aéreo.	ATC::OM10
+¿Qué hacen los observadores de espacio aéreo en una operación EVLOS?	Mantienen contacto visual con la aeronave y transmiten información al piloto, permitiendo operar a mayores distancias sin perder la conciencia situacional.	ATC::OM10
+¿Qué significa BVLOS?	Beyond Visual Line of Sight: operaciones más allá del alcance visual del piloto, sin observación visual continua del UAS ni por el piloto ni por observadores.	ATC::OM10
+¿En qué categoría suelen desarrollarse las operaciones BVLOS y por qué?	En la categoría específica, por su mayor complejidad y riesgo operacional.	ATC::OM10
+¿Qué requieren las operaciones BVLOS según el manual 10?	Medidas adicionales de mitigación del riesgo, sistemas de comunicaciones fiables y procedimientos específicos de seguridad.	ATC::OM10
+¿Qué diferencia EVLOS de BVLOS?	En EVLOS los observadores de espacio aéreo mantienen contacto visual con el UAS; en BVLOS nadie lo observa de forma continua.	ATC::OM10
+¿Con qué criterio clasifica el Reglamento 2019/947 las operaciones con UAS?	En función del riesgo de la operación, con requisitos proporcionales a su nivel de complejidad.	ATC::OM10
+¿Requiere la categoría abierta autorización operacional previa?	No: son operaciones de bajo riesgo que no requieren autorización operacional previa de la autoridad competente.	ATC::OM10
+¿Cuál es la altura máxima en categoría abierta?	120 m sobre la superficie.	ATC::OM10
+¿Qué modalidad de vuelo se exige con carácter general en categoría abierta?	VLOS (vuelo dentro del alcance visual del piloto a distancia).	ATC::OM10
+¿Qué tres cosas no se permiten en categoría abierta?	Operar sobre concentraciones de personas, transportar mercancías peligrosas y lanzar materiales que puedan poner en riesgo a terceros.	ATC::OM10
+¿En cuántas subcategorías se divide la categoría abierta y cuáles son?	En tres: A1 (vuelo sobre personas), A2 (vuelo cerca de personas) y A3 (vuelo alejado de personas).	ATC::OM10
+Subcategoría A1: ¿qué permite?	Operar sobre personas no participantes, evitando en todo caso el sobrevuelo de concentraciones de personas.	ATC::OM10
+Subcategoría A2: ¿qué permite?	Operar cerca de personas no participantes manteniendo las distancias de seguridad establecidas por la normativa.	ATC::OM10
+Subcategoría A3: ¿a qué operaciones se destina?	A operaciones lejos de personas y de zonas residenciales, comerciales, industriales o recreativas.	ATC::OM10
+¿Qué subcategoría de la categoría abierta es «vuelo cerca de personas»?	A2.	ATC::OM10
+¿Qué subcategoría de la categoría abierta es «vuelo alejado de personas»?	A3.	ATC::OM10
+¿Qué subcategoría de la categoría abierta es «vuelo sobre personas»?	A1.	ATC::OM10
+Definición de la categoría específica (manual 10, 3.4.2).	Operaciones cuyo riesgo excede las limitaciones de la categoría abierta, pero que no requieren los niveles de certificación propios de la categoría certificada.	ATC::OM10
+Categoría específica: ¿qué debe demostrar el operador?	Que los riesgos de la operación se encuentran adecuadamente mitigados mediante alguno de los mecanismos previstos por la normativa.	ATC::OM10
+Categoría específica: ¿cuáles son los tres mecanismos para operar?	Declaración operacional, autorización operacional y certificado LUC.	ATC::OM10
+Categoría específica: ¿cuándo basta una declaración operacional y requiere autorización?	Cuando la operación se ajusta a un escenario estándar (STS) definido en la normativa europea; no requiere autorización operacional.	ATC::OM10
+Categoría específica: ¿quién emite la autorización operacional y en qué suele basarse?	La autoridad competente; normalmente se basa en una evaluación del riesgo operacional.	ATC::OM10
+¿Qué significa LUC?	Light UAS Operator Certificate (certificado de operador de UAS ligeros).	ATC::OM10
+¿Qué permite el certificado LUC según el manual 10?	Permite a determinados operadores ejercer privilegios, expedido previamente por la autoridad competente.	ATC::OM10
+¿Qué operaciones engloba la categoría específica según el manual 10?	Gran parte de las operaciones profesionales avanzadas, incluidas numerosas operaciones BVLOS y determinados vuelos en entornos urbanos o de mayor complejidad operacional.	ATC::OM10
+Categoría certificada: ¿a qué operaciones se reserva y a qué requisitos está sujeta?	A operaciones de alto riesgo, sujetas a requisitos similares a los exigidos en la aviación tripulada.	ATC::OM10
+¿Qué tres requisitos exige con carácter general la categoría certificada?	Certificación del UAS, certificación del operador y licencia del piloto a distancia.	ATC::OM10
+¿A qué supuestos resulta aplicable la categoría certificada según el manual 10?	Al transporte de personas, al transporte de mercancías peligrosas y a las operaciones cuyo riesgo, según la autoridad, no puede mitigarse adecuadamente con los requisitos de la categoría específica.	ATC::OM10
+¿En qué categoría operacional se encuadra el transporte de personas con UAS?	En la categoría certificada.	ATC::OM10
+¿Qué reglamento establece el sistema de marcado de clase de los UAS?	El Reglamento Delegado (UE) 2019/945.	ATC::OM10
+¿A qué UAS se destina principalmente el sistema de marcado de clase?	A los UAS destinados principalmente a operar en la categoría abierta.	ATC::OM10
+¿Qué identifica el marcado de clase y qué permite determinar?	Identifica las características técnicas de la aeronave y permite determinar las condiciones operacionales aplicables conforme al Reglamento de Ejecución (UE) 2019/947.	ATC::OM10
+Clase C0: ¿a qué se destina y cuál es su peso máximo?	UAS de muy bajo riesgo operacional, generalmente asociados a operaciones en la subcategoría A1; peso máximo 250 g.	ATC::OM10
+Clase C1: ¿a qué se destina y cuál es su peso máximo?	UAS destinados a operaciones en la subcategoría A1, sujetos a requisitos técnicos adicionales; peso máximo 900 g.	ATC::OM10
+Clase C2: ¿a qué se destina y cuál es su peso máximo?	UAS aptos para operaciones en la subcategoría A2, permitiendo vuelos cerca de personas bajo determinadas condiciones; peso máximo 4 kg.	ATC::OM10
+Clase C3: ¿a qué se destina y cuál es su peso máximo?	UAS destinados principalmente a operaciones en la subcategoría A3; peso máximo 25 kg.	ATC::OM10
+Clase C4: ¿a qué se destina y cuál es su peso máximo?	UAS de características similares a los aeromodelos tradicionales, destinados a operaciones en la subcategoría A3; peso máximo 25 kg.	ATC::OM10
+Clase C5: ¿para qué está diseñada?	Para operaciones en el escenario estándar STS-01 de la categoría específica.	ATC::OM10
+Clase C6: ¿para qué está diseñada?	Para operaciones en el escenario estándar STS-02 de la categoría específica.	ATC::OM10
+¿Qué peso máximo da la tabla del manual 10 para las clases C5 y C6?	Ninguno: las casillas de peso de C5 y C6 están en blanco.	ATC::OM10
+¿Qué clase de UAS tiene un peso máximo de 250 g?	C0.	ATC::OM10
+¿Qué clase de UAS tiene un peso máximo de 900 g?	C1.	ATC::OM10
+¿Qué clase de UAS tiene un peso máximo de 4 kg?	C2.	ATC::OM10
+¿Qué dos clases tienen un peso máximo de 25 kg según el manual 10?	C3 y C4.	ATC::OM10
+¿Qué clases se asocian a la subcategoría A1?	C0 y C1.	ATC::OM10
+¿Qué clase se asocia a la subcategoría A2?	C2.	ATC::OM10
+¿Qué clases se asocian a la subcategoría A3?	C3 y C4.	ATC::OM10
+¿Qué clase se asocia al escenario estándar STS-01?	C5.	ATC::OM10
+¿Qué clase se asocia al escenario estándar STS-02?	C6.	ATC::OM10
+¿Qué clase corresponde a UAS similares a los aeromodelos tradicionales?	C4.	ATC::OM10
+¿Qué clases pertenecen a la categoría abierta y cuáles a la específica (figura p. 16)?	Abierta: C0, C1, C2, C3 y C4. Específica: C5 y C6.	ATC::OM10
+¿Qué permite la relación entre clases y categorías operacionales?	Asociar las características técnicas de cada UAS con los requisitos y limitaciones establecidos para cada tipo de operación.	ATC::OM10
+¿Qué UAS sin marcado de clase cita el manual 10?	Determinadas aeronaves introducidas en el mercado antes de la aplicación del sistema europeo de clases y los UAS de construcción privada.	ATC::OM10
+¿Cómo valora el manual 10 el sistema de marcado de clase?	Como uno de los principales instrumentos de la regulación europea, al vincular las características técnicas de los UAS con los requisitos operacionales de cada categoría.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué rasgos lista para la categoría abierta?	Bajo riesgo; por debajo de 120 m; VLOS; MTOM < 25 kg; prohibido sobrevolar concentraciones de personas; prohibido transporte y/o arrojo de materiales o mercancías peligrosas.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué rasgos lista para la categoría específica?	Riesgo medio; vuelos por encima de 120 m; BVLOS; MTOM > 25 kg; vuelos sobre concentraciones de personas; arrojo de materiales.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué rasgos lista para la categoría certificada?	Alto riesgo; UAS con una dimensión característica de 3 m o más utilizados sobre concentraciones de personas; diseñados y utilizados para el transporte de personas o de mercancías peligrosas.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué dimensión característica asocia a la categoría certificada?	3 m o más (UAS utilizados sobre concentraciones de personas).	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué MTOM separa la categoría abierta de la específica?	25 kg: abierta MTOM < 25 kg; específica MTOM > 25 kg.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué trámite requiere la categoría abierta?	Ninguno: no requieren autorización de AESA ni declaración operacional.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿qué trámite requiere la categoría específica?	Autorización de AESA o declaración operacional (escenario estándar), o que el operador posea un certificado LUC.	ATC::OM10
+Figura «Riesgo» (p. 16): ¿cómo se describe el estado de la categoría certificada?	«Categoría en desarrollo».	ATC::OM10
+¿Qué tres instrumentos regulatorios destacan en la integración de los UAS en el espacio aéreo (capítulo 4)?	Las categorías operacionales, las modalidades de vuelo y las zonas geográficas UAS.	ATC::OM10
+Definición de zonas geográficas UAS (manual 10, 4.1).	Volúmenes de espacio aéreo establecidos por los Estados miembros en los que las operaciones con UAS pueden estar prohibidas, restringidas o sujetas a condiciones específicas.	ATC::OM10
+¿Quién establece las zonas geográficas UAS?	Los Estados miembros.	ATC::OM10
+¿Dónde está previsto el establecimiento de las zonas geográficas UAS y qué norma lo complementa en España?	En la normativa europea sobre UAS; en España lo complementa el Real Decreto 517/2024.	ATC::OM10
+¿Cuál es la finalidad de las zonas geográficas UAS (manual 10, p. 17)?	Proteger la seguridad operacional, la defensa nacional, la seguridad pública, las infraestructuras críticas, la privacidad o el medio ambiente.	ATC::OM10
+¿Qué cuatro tipos de medidas pueden aplicarse en las zonas geográficas UAS?	Prohibiciones de vuelo; restricciones operacionales; requisitos adicionales para las operaciones; condiciones específicas de equipamiento o coordinación o autorización previa.	ATC::OM10
+¿Para qué pueden establecer los Estados zonas geográficas UAS distintas de las de carácter general?	Para responder a necesidades operacionales específicas o situaciones concretas que requieran condiciones diferenciadas de utilización del espacio aéreo.	ATC::OM10
+Cita ejemplos de zonas geográficas UAS para situaciones concretas (manual 10, p. 17).	Gestión de emergencias y protección civil; incendios forestales u otras emergencias; zonas temporales por eventos con gran concentración de personas; zonas para facilitar operaciones UAS que requieran gestión específica.	ATC::OM10
+¿Pueden las zonas geográficas UAS servir para facilitar operaciones?	Sí: el manual cita zonas establecidas para facilitar determinadas operaciones UAS que requieran una gestión específica del espacio aéreo.	ATC::OM10
+¿A través de qué plataforma se publica en España la información sobre zonas geográficas UAS?	La plataforma ENAIRE Drones.	ATC::OM10
+¿Qué permite a operadores y pilotos la plataforma ENAIRE Drones?	Conocer las limitaciones aplicables (restricciones, condiciones de utilización y requisitos de las zonas geográficas UAS) antes de realizar una operación.	ATC::OM10
+¿Qué norma regula las actividades NO EASA?	El Real Decreto 517/2024 (son actividades excluidas del Reglamento (UE) 2018/1139).	ATC::OM10
+¿Qué actividades incluye el manual 10 entre las NO EASA?	Aduanas, policía, búsqueda y salvamento, lucha contra incendios, control fronterizo, vigilancia costera y otras realizadas en interés general bajo el control y responsabilidad de una autoridad pública.	ATC::OM10
+Actividades NO EASA: ¿qué dos modalidades distingue la figura de la p. 18?	Directa e indirecta.	ATC::OM10
+Actividad NO EASA directa: definición.	La realizada directamente por un organismo público.	ATC::OM10
+Actividad NO EASA indirecta: definición.	La realizada por otra organización en nombre de un organismo público.	ATC::OM10
+¿Cuándo tienen las operaciones NO EASA exención de identificación a distancia?	Cuando actúan en operaciones contra el crimen organizado, el terrorismo o amenazas graves para la seguridad pública.	ATC::OM10
+¿Es obligatorio el seguro de responsabilidad civil en las actividades NO EASA?	Sí, según el manual 10 (p. 11).	ATC::OM10
+¿Qué artículo de qué reglamento rige el régimen de clubes y asociaciones de aeromodelismo?	El artículo 16 del Reglamento de Ejecución (UE) 2019/947.	ATC::OM10
+¿A quién pueden solicitar una autorización operacional los clubes y asociaciones de aeromodelismo?	A AESA, siempre que estén legalmente constituidos.	ATC::OM10
+¿Cuáles son las tres opciones para la práctica del aeromodelismo en España?	Operar conforme a la categoría abierta; operar dentro de zonas geográficas UAS según sus condiciones; operar con una autorización operacional de AESA conforme al artículo 16 del 2019/947.	ATC::OM10
+¿Qué instrumentos permiten, según el cierre del capítulo 4, la integración progresiva y segura de los UAS?	Los distintos tipos de operación, la zonificación del espacio aéreo y los mecanismos de coordinación asociados.	ATC::OM10
+Según el manual 10, ¿qué reglamento permite designar determinadas zonas geográficas UAS como espacios aéreos U-space?	El Reglamento de Ejecución (UE) 2021/664.	ATC::OM10
+¿Cuándo pueden designarse zonas geográficas UAS como espacios aéreos U-space (p. 18)?	Cuando sea necesario facilitar operaciones UAS de mayor complejidad o gestionar un elevado volumen de tráfico de UAS.	ATC::OM10
+¿De qué estrategia es objetivo el despliegue progresivo de los espacios aéreos U-space (p. 19)?	De la estrategia nacional de zonificación y U-space.	ATC::OM10
+¿A qué necesidad responde el desarrollo del U-space?	A facilitar la integración segura de los UAS en el espacio aéreo, especialmente en entornos de elevada densidad de tráfico o mayor complejidad operacional.	ATC::OM10
+Enumera los seis principales objetivos del U-space (manual 10, 5.1).	Integración segura de los UAS; más seguridad operacional; gestión de un elevado volumen de operaciones simultáneas; digitalización y automatización; operaciones más complejas, incluidas BVLOS; coordinación entre actores.	ATC::OM10
+¿Qué modalidad de vuelo cita expresamente el manual entre los objetivos del U-space?	BVLOS (operaciones más allá del alcance visual del piloto a distancia).	ATC::OM10
+¿Qué lugar ocupa el despliegue del U-space en la estrategia europea?	Es uno de los pilares de la estrategia europea para integrar los UAS y desarrollar nuevos servicios de movilidad aérea basados en aeronaves no tripuladas.	ATC::OM10
+¿Cuál es el objetivo del U-space resumido en una frase del manual 10 (p. 19)?	Facilitar operaciones con UAS de forma segura, eficiente y escalable mediante un entorno de gestión altamente digitalizado y automatizado.	ATC::OM10
+¿Qué regula el marco normativo del U-space?	Los espacios aéreos U-space, los servicios U-space y los actores que participan en su prestación y utilización.	ATC::OM10
+¿Cuál es la base jurídica del marco regulador del U-space?	El Reglamento (UE) 2018/1139.	ATC::OM10
+¿Qué tres reglamentos constituyen principalmente el paquete regulatorio U-space?	Los Reglamentos de Ejecución (UE) 2021/664, 2021/665 y 2021/666.	ATC::OM10
+¿Qué es el Reglamento de Ejecución (UE) 2021/664 según el manual 10?	El marco regulador para el U-space.	ATC::OM10
+¿Qué reglamento modifica el Reglamento de Ejecución (UE) 2021/665?	El Reglamento de Ejecución (UE) 2017/373.	ATC::OM10
+¿Qué incorpora el Reglamento de Ejecución (UE) 2021/665 (p. 20)?	Requisitos aplicables a los proveedores de servicios de navegación aérea (ANSP) en relación con los volúmenes U-space situados en espacio aéreo controlado.	ATC::OM10
+¿Qué reglamento modifica el Reglamento de Ejecución (UE) 2021/666?	El Reglamento de Ejecución (UE) 923/2012 (SERA).	ATC::OM10
+¿Qué establece el Reglamento de Ejecución (UE) 2021/666 (p. 20)?	Requisitos para la aviación tripulada para garantizar su visibilidad electrónica en los espacios aéreos U-space situados en espacio aéreo no controlado.	ATC::OM10
+¿Qué reglamento del paquete U-space se refiere al espacio aéreo controlado y cuál al no controlado?	Controlado: 2021/665 (ANSP). No controlado: 2021/666 (aviación tripulada, visibilidad electrónica).	ATC::OM10
+¿Qué condiciones establece el paquete regulatorio U-space en su conjunto?	Las de designación de espacios aéreos U-space, prestación de servicios U-space y coordinación entre los actores de las operaciones con UAS.	ATC::OM10
+¿Qué aspectos del U-space desarrolla en España el Real Decreto 517/2024 (p. 21)?	Utilización de UAS, zonas geográficas UAS, designación de espacios aéreos U-space y el Servicio de Información Común.	ATC::OM10
+¿Es PANDU+ una norma jurídica de obligado cumplimiento?	No: actúa como instrumento de planificación y coordinación del despliegue nacional del U-space.	ATC::OM10
+¿A qué se aplica principalmente el Reglamento de Ejecución (UE) 2021/664?	A los espacios aéreos U-space, a los servicios U-space y a los actores responsables de su prestación y utilización.	ATC::OM10
+Además de espacios, servicios y actores, ¿qué requisitos establece el Reglamento 2021/664?	Requisitos de coordinación con la aviación tripulada para garantizar la interoperabilidad y la seguridad operacional.	ATC::OM10
+Definición de espacio aéreo U-space (manual 10, 5.3.1).	Una zona geográfica UAS designada por un Estado miembro en la que las operaciones con UAS solo pueden realizarse con el apoyo de servicios U-space.	ATC::OM10
+¿Es toda zona geográfica UAS un espacio aéreo U-space?	No. Todo espacio aéreo U-space es una zona geográfica UAS, pero no todas las zonas geográficas UAS son espacio aéreo U-space.	ATC::OM10
+¿A qué responde la designación de espacios aéreos U-space?	A gestionar entornos con elevada densidad de operaciones con UAS o mayor complejidad operacional.	ATC::OM10
+Definición de servicios U-space (manual 10, 5.3.2).	Servicios digitales destinados a facilitar la realización segura, eficiente y automatizada de operaciones con UAS dentro de un espacio aéreo U-space.	ATC::OM10
+¿Quién presta los servicios U-space y a quién?	Los proveedores de servicios U-space (USSP) certificados por la autoridad competente, a los operadores UAS que operan o pretenden operar en un espacio aéreo U-space.	ATC::OM10
+¿Cuántos servicios U-space obligatorios establece el Reglamento 2021/664?	Cuatro.	ATC::OM10
+Enumera los cuatro servicios U-space obligatorios.	Autorización de vuelo, información de tráfico, identificación de red y geoconsciencia.	ATC::OM10
+Servicio U-space de autorización de vuelo: ¿qué permite?	Gestionar las autorizaciones necesarias para realizar operaciones en el espacio aéreo U-space.	ATC::OM10
+Servicio U-space de información de tráfico: ¿qué suministra?	Información sobre el tráfico aéreo que pueda afectar a la operación del UAS en su entorno operacional.	ATC::OM10
+Servicio U-space de identificación de red: ¿qué permite?	Obtener y poner a disposición la información de identificación a distancia y la posición de los UAS que operan en el espacio aéreo U-space.	ATC::OM10
+Servicio U-space de geoconsciencia (geo-awareness): ¿qué proporciona según el recuadro de la p. 22?	Información sobre las condiciones operacionales, limitaciones y restricciones aplicables al espacio aéreo U-space.	ATC::OM10
+Nota al pie de la p. 22: definición de geoconsciencia.	Capacidad del UAS de detectar su intrusión en un espacio aéreo restringido y avisar al piloto para que realice las acciones rectificadoras oportunas.	ATC::OM10
+¿Qué servicio U-space obligatorio da la posición e identificación a distancia de los UAS?	El servicio de identificación de red.	ATC::OM10
+¿Cuál es el término inglés del servicio de geoconsciencia?	Geo-awareness.	ATC::OM10
+¿Para qué pueden prestarse servicios U-space adicionales?	Para mejorar la seguridad, la eficiencia y la capacidad de las operaciones.	ATC::OM10
+¿Qué dos servicios U-space adicionales cita el manual 10?	El seguimiento de la conformidad de la operación (conformance monitoring) y la información meteorológica.	ATC::OM10
+¿Es la información meteorológica un servicio U-space obligatorio?	No: es un servicio adicional (opcional, con asterisco en la figura de la p. 22).	ATC::OM10
+¿Es el seguimiento de la conformidad un servicio U-space obligatorio?	No: es adicional; la figura de la p. 22 lo llama «supervisión de la conformidad» y lo marca como opcional.	ATC::OM10
+¿Qué significa conformance monitoring?	Seguimiento (o supervisión) de la conformidad de la operación: servicio U-space adicional.	ATC::OM10
+Figura radial de la p. 22: ¿qué servicios rodean al U-space y cuáles llevan asterisco?	Autorización de vuelo de UAS, identificación de red, geoconsciencia, información sobre el tráfico; con asterisco (opcionales): información meteorológica y supervisión de la conformidad.	ATC::OM10
+¿Qué significa CIS en el ámbito U-space?	Common Information Service: Servicio de Información Común.	ATC::OM10
+¿Qué hace el Servicio de Información Común (CIS)?	Proporciona y difunde la información común estática y dinámica necesaria para apoyar la prestación de los servicios U-space y garantizar su funcionamiento coordinado.	ATC::OM10
+¿Qué datos puede incluir la información común del CIS?	Estructura del espacio aéreo, zonas geográficas UAS, restricciones operacionales y cualquier otra información aeronáutica u operacional necesaria.	ATC::OM10
+¿Qué constituye la información común para los proveedores de servicios U-space?	Una fuente única y fiable, esencial para la prestación coordinada de los servicios U-space a los operadores UAS.	ATC::OM10
+¿Es la información común del CIS estática o dinámica?	Ambas: estática y dinámica.	ATC::OM10
+Enumera los seis actores principales del ecosistema U-space.	Autoridad competente (AC), ANSP, CISP, USSP, operador de UAS y piloto a distancia.	ATC::OM10
+Actores U-space: ¿de qué es responsable la autoridad competente (AC)?	De la supervisión y aplicación del marco regulador U-space y de las funciones que le atribuye la normativa europea y nacional.	ATC::OM10
+Actores U-space: ¿de qué es responsable el ANSP?	De la prestación de servicios de navegación aérea y de la coordinación con los servicios U-space cuando resulte necesario.	ATC::OM10
+Actores U-space: ¿de qué es responsable el CISP?	De proporcionar el Servicio de Información Común.	ATC::OM10
+Actores U-space: ¿de qué se encarga el USSP?	De prestar los servicios U-space a los operadores de UAS.	ATC::OM10
+Actores U-space: definición de operador de UAS.	Persona física o jurídica responsable de la realización de la operación y del cumplimiento de los requisitos aplicables.	ATC::OM10
+Actores U-space: definición de piloto a distancia.	Persona física responsable de conducir la aeronave o supervisar su trayectoria durante el vuelo.	ATC::OM10
+¿Qué significa USSP?	U-space Service Provider: Proveedor de Servicios U-space.	ATC::OM10
+¿Qué son los USSP según el manual 10?	Entidades certificadas responsables de prestar los servicios U-space a los operadores de UAS que realizan operaciones en espacios aéreos U-space.	ATC::OM10
+¿Qué información utilizan los USSP?	La proporcionada mediante el Servicio de Información Común (CIS).	ATC::OM10
+¿Qué cuatro fases de las operaciones apoyan los servicios que prestan los USSP?	Planificación, autorización, ejecución y supervisión.	ATC::OM10
+¿Qué prestación deben garantizar los USSP al cumplir la normativa europea?	Una prestación segura, continua e interoperable de los servicios U-space.	ATC::OM10
+¿Qué significa CISP?	Common Information Service Provider: Proveedor de Servicios de Información Común.	ATC::OM10
+¿Cuántos CISP prestan el Servicio de Información Común?	Uno o varios, según el modelo adoptado por cada Estado miembro.	ATC::OM10
+¿Qué es el sCISP?	El Proveedor de Servicios de Información Común único (single CISP), que los Estados miembros pueden designar.	ATC::OM10
+¿Quién es el sCISP en España y qué norma lo designa?	ENAIRE, designada por el Real Decreto 517/2024.	ATC::OM10
+¿De qué es responsable cada CISP o el sCISP?	De recopilar, mantener actualizada y poner a disposición la información común necesaria para apoyar la prestación de los servicios U-space.	ATC::OM10
+¿De qué fuentes integra información el CISP o sCISP?	De la autoridad competente (AC), de los ANSP, de los USSP y de otros proveedores de información cuando resulte necesario.	ATC::OM10
+Figura p. 25: ¿qué información aporta la autoridad competente al CISP único?	Límites geográficos del espacio aéreo U-space designado; requisitos de performance; lista de USSP certificados; zonas geográficas UAS relevantes; restricciones estáticas y dinámicas.	ATC::OM10
+Figura p. 25: ¿a qué se refieren los «requisitos de performance» que aporta la autoridad competente?	Al UAS, al servicio U-space y a las condiciones operativas aplicables al espacio aéreo.	ATC::OM10
+Figura p. 25: ¿qué información aporta el ANSP?	Reconfiguración dinámica del espacio aéreo y datos operacionales en tiempo real.	ATC::OM10
+Figura p. 25: ¿qué información aporta el USSP?	Los términos y condiciones de los servicios U-space.	ATC::OM10
+Figura p. 25: ¿quién aporta la lista de USSP certificados?	La autoridad competente.	ATC::OM10
+Figura p. 25: ¿cómo se conectan la información común, el CISP y los USSP?	La información común (CA, ANSP, USSP) llega al Single CISP, que la distribuye a USSP 1, USSP 2 … USSP n; estos, conectados entre sí, sirven a los drones.	ATC::OM10
+¿Para qué es la base común la información que gestiona el CISP?	Para garantizar la interoperabilidad, la coordinación y el funcionamiento eficiente de los servicios U-space.	ATC::OM10
+¿Qué papel tienen los ANSP en el ecosistema U-space (5.3.7)?	Participan en la coordinación entre operaciones tripuladas y no tripuladas, proporcionando información operacional relevante, conforme al Reglamento de Ejecución (UE) 2021/665.	ATC::OM10
+¿En qué reglamento se desarrollan las funciones específicas de los ANSP en los espacios aéreos U-space?	En el Reglamento de Ejecución (UE) 2021/665.	ATC::OM10
+Según el capítulo 5.4, ¿a quién incorpora requisitos el Reglamento 2021/665?	A los proveedores de servicios de gestión del tránsito aéreo y navegación aérea (ATM/ANS), en relación con los espacios aéreos U-space situados en espacio aéreo controlado.	ATC::OM10
+¿Cuál es la finalidad del Reglamento de Ejecución (UE) 2021/665?	Garantizar la coordinación entre los servicios de tránsito aéreo y el ecosistema U-space donde coexisten aeronaves tripuladas y no tripuladas.	ATC::OM10
+¿Qué papel tienen los proveedores ATS en los espacios aéreos U-space situados en espacio aéreo controlado?	Un papel fundamental en la integración de las operaciones UAS.	ATC::OM10
+¿Qué tres actuaciones corresponden a los proveedores ATS en el U-space en espacio aéreo controlado?	Facilitar la información sobre tráfico tripulado para el CIS; coordinar sus actuaciones con los USSP; aplicar, cuando proceda, medidas de reconfiguración dinámica del espacio aéreo (DAR).	ATC::OM10
+¿Qué información facilitan los proveedores ATS para el Servicio de Información Común?	La información sobre tráfico tripulado.	ATC::OM10
+¿Con qué proveedores coordinan sus actuaciones los proveedores ATS en el U-space?	Con los proveedores de servicios U-space (USSP).	ATC::OM10
+¿Qué significa DAR?	Dynamic Airspace Reconfiguration: Reconfiguración Dinámica del Espacio Aéreo.	ATC::OM10
+¿Qué permite la reconfiguración dinámica del espacio aéreo (DAR)?	Modificar temporalmente las condiciones de utilización de un espacio aéreo U-space cuando sea necesario por motivos operacionales, de seguridad o de coordinación del tráfico aéreo.	ATC::OM10
+¿A qué situaciones facilita la DAR la adaptación temporal del espacio aéreo?	A situaciones de elevada demanda, operaciones especiales, emergencias o necesidades específicas de coordinación entre aeronaves tripuladas y no tripuladas.	ATC::OM10
+¿Entre quiénes requiere coordinación la aplicación de medidas DAR?	Entre los proveedores ATS, los ANSP, los USSP y, cuando proceda, los CISP.	ATC::OM10
+¿Modifica la DAR la estructura del espacio aéreo de forma permanente?	No: adapta temporalmente las condiciones operacionales sin necesidad de modificar permanentemente su estructura.	ATC::OM10
+¿Qué reglamento establece la DAR según el manual 10?	El Reglamento de Ejecución (UE) 2021/665.	ATC::OM10
+¿Para qué aplican los proveedores ATS la DAR?	Para garantizar la coexistencia segura entre la aviación tripulada y las operaciones con UAS.	ATC::OM10
+Figura de la p. 27: ¿qué ejemplo de DAR representa?	En un «U-space in controlled airspace», el controlador crea una «Temporary limitation»: un pasillo libre de drones para que un helicóptero llegue a un hospital.	ATC::OM10
+¿Qué establece el Reglamento de Ejecución (UE) 2021/666 para la aviación tripulada?	Requisitos aplicables a determinadas operaciones de aviación tripulada realizadas en espacios aéreos U-space.	ATC::OM10
+2021/666: ¿qué aeronaves deben ser electrónicamente perceptibles en un espacio aéreo U-space?	Las aeronaves tripuladas que operen en un espacio aéreo U-space y no reciban servicios de control de tránsito aéreo.	ATC::OM10
+2021/666: ¿para qué debe ser perceptible electrónicamente la aeronave tripulada?	Para que la información sobre su posición pueda ponerse a disposición de los USSP para la prestación segura de los servicios U-space.	ATC::OM10
+Definición de conspicuidad electrónica.	Capacidad de una aeronave para transmitir información que permita conocer su presencia y posición mediante sistemas de vigilancia apropiados.	ATC::OM10
+¿En qué se diferencia la conspicuidad electrónica de la visual?	La visual se basa en la observación directa de la aeronave; la electrónica, en transmitir presencia y posición mediante sistemas de vigilancia.	ATC::OM10
+¿A quién debe ponerse a disposición la posición de las aeronaves tripuladas electrónicamente perceptibles?	A los USSP.	ATC::OM10
+Figura de la p. 28: ¿qué representa?	Un «U-space airspace» sobre una ciudad con drones y helicópteros que emiten señales: la conspicuidad electrónica de la aviación tripulada.	ATC::OM10
+¿Cómo se desarrolla la implantación del U-space en España (capítulo 6)?	De forma progresiva, combinando el marco regulador europeo, la normativa nacional y las iniciativas estratégicas de administraciones y organizaciones del sector.	ATC::OM10
+¿Qué significa PANDU+?	Plan de Acción Nacional para el Despliegue del U-space y la Zonificación.	ATC::OM10
+¿Qué periodo cubre PANDU+?	2026-2030.	ATC::OM10
+¿Qué establece PANDU+?	La hoja de ruta nacional para completar el despliegue del U-space, avanzar en el establecimiento y gestión de las zonas geográficas de UAS y favorecer la integración de operaciones UAS más complejas.	ATC::OM10
+¿En torno a cuántos y cuáles objetivos principales articula PANDU+ sus actuaciones?	Tres: zonificación del espacio aéreo, desarrollo del U-space y actividades transversales.	ATC::OM10
+PANDU+: ¿qué líneas comprende el objetivo «Zonificación del espacio aéreo»?	Zonas geográficas de UAS; nuevas estructuras de espacio aéreo; estandarización de las coordinaciones.	ATC::OM10
+PANDU+: ¿qué líneas comprende el objetivo «Desarrollo del U-space»?	Despliegue operacional del U-space; evolución del U-space; habilitadores de la IAM en España.	ATC::OM10
+PANDU+: ¿qué líneas comprende el objetivo «Actividades transversales»?	Coordinación y divulgación; actualización de la regulación; gestión de la seguridad y la calidad; Plan de Acción de Zonificación.	ATC::OM10
+PANDU+: ¿en qué objetivo figura el «Plan de Acción de Zonificación»?	En «Actividades transversales».	ATC::OM10
+PANDU+: ¿en qué objetivo figuran los «Habilitadores de la IAM en España»?	En «Desarrollo del U-space».	ATC::OM10
+¿Qué permitirá la disponibilidad de espacios aéreos U-space y servicios asociados (capítulo 7)?	Apoyar operaciones cada vez más complejas y ampliar las capacidades operacionales de los UAS.	ATC::OM10
+¿En qué se enmarca la evolución del U-space según el capítulo 7?	En la estrategia europea de integración gradual de los UAS en el espacio aéreo y en las iniciativas de movilidad aérea innovadora.	ATC::OM10
+¿Qué favorecen la evolución de los UAS y el despliegue del U-space según el capítulo 8?	El desarrollo de nuevas formas de movilidad aérea basadas en aeronaves innovadoras y servicios digitales avanzados.	ATC::OM10
+¿Qué elementos del U-space crean las condiciones para integrar nuevas capacidades de movilidad aérea (8.1)?	Los espacios aéreos U-space, los servicios U-space, los mecanismos de coordinación y los sistemas de intercambio de información.	ATC::OM10
+¿Qué papel atribuye el manual 10 al U-space respecto de la movilidad aérea?	Es un elemento facilitador para la evolución de las operaciones con UAS y los nuevos servicios basados en aeronaves innovadoras.	ATC::OM10
+¿Qué significa IAM?	Innovative Air Mobility: Movilidad Aérea Innovadora.	ATC::OM10
+¿Qué comprende la Movilidad Aérea Innovadora (IAM)?	Las operaciones y servicios de movilidad aérea habilitados por nuevas tecnologías aeronáuticas y por la integración de soluciones innovadoras en el sistema de transporte.	ATC::OM10
+Definición de la IAM (manual 10, p. 32).	La movilidad segura, eficiente y sostenible de personas y mercancías posibilitada por tecnologías de nueva generación integradas en un sistema multimodal de transporte.	ATC::OM10
+¿En qué entornos operacionales se desarrolla la IAM?	En ámbitos urbanos, periurbanos y regionales.	ATC::OM10
+Enumera las cinco tecnologías asociadas a la IAM según el manual 10.	eVTOL; sistemas altamente automatizados; servicios digitales avanzados; nuevas soluciones de conectividad e intercambio de información; tecnologías avanzadas de navegación, vigilancia y gestión del tráfico.	ATC::OM10
+¿Qué significa eVTOL?	Aeronaves de despegue y aterrizaje vertical (así lo desarrolla el manual; la «e» de eléctrica no se desarrolla en el texto).	ATC::OM10
+¿Qué significa UAM?	Urban Air Mobility: Movilidad Aérea Urbana.	ATC::OM10
+¿Qué relación hay entre la UAM y la IAM?	La UAM es un ámbito específico de la IAM.	ATC::OM10
+¿En qué se centra la Movilidad Aérea Urbana (UAM)?	En el transporte de personas y mercancías en entornos urbanos y periurbanos.	ATC::OM10
+¿En qué tecnologías se apoya la UAM según el manual 10?	En la propulsión eléctrica y las aeronaves de despegue y aterrizaje vertical (eVTOL).	ATC::OM10
+Enumera las cinco posibles aplicaciones de la UAM.	Transporte de mercancías; distribución urgente de suministros; servicios de emergencia; inspección de infraestructuras; futuras operaciones de transporte de pasajeros.	ATC::OM10
+¿De qué depende la evolución de las aplicaciones de la UAM (p. 33)?	Del desarrollo de las tecnologías aeronáuticas, de la disponibilidad de servicios digitales adecuados y de la integración progresiva de los UAS en el sistema aeronáutico.	ATC::OM10
+¿Qué entorno abarca la IAM que no abarca la UAM?	El regional (la UAM se limita a entornos urbanos y periurbanos).	ATC::OM10
+¿En qué fecha fue elaborado el manual 10 «Drones (UAS) y U-space»?	Noviembre de 2026 (33 páginas).	ATC::OM10
+¿Qué significa MTOM, sigla usada en las figuras del manual 10? (desarrollo no impreso en el manual)	Masa máxima de despegue (maximum take-off mass).	ATC::OM10 NV
+¿Qué significa SORA, sigla de la figura de la p. 8? (desarrollo no impreso en el manual)	Specific Operations Risk Assessment: evaluación de riesgos de las operaciones en categoría específica.	ATC::OM10 NV
+Más allá del manual: ¿desde cuándo son aplicables los Reglamentos 2021/664 y 2021/666?	Desde el 26 de enero de 2023 (no figura en el manual 10).	ATC::OM10 NV
+Más allá del manual: ¿qué punto del Reglamento 2021/665 regula la DAR según el art. 4 del 2021/664?	El punto ATS.TR.237 (no figura en el manual 10).	ATC::OM10 NV
+Más allá del manual: ¿qué disposición de SERA sustituye el Reglamento 2021/666?	SERA.6005 (RMZ, TMZ y, en la letra c, espacio aéreo U-Space). No figura en el manual 10.	ATC::OM10 NV

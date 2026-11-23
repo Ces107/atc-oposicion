@@ -57,6 +57,12 @@ Según la sección de sistemas no autónomos del manual, ¿cuántos satélites d
 Según el manual, ¿qué aumentación integrada incluyen todos los receptores GNSS de aeronave certificados?	ABAS (sistema de aumentación basado en la aeronave) integrado, para alcanzar los requisitos mínimos de performance de la OACI	ATC::OM05
 ¿Qué constelaciones GNSS cita el manual?	GPS (EE. UU.), GLONASS (Rusia), Galileo (Unión Europea) y BeiDou/BDS (China)	ATC::OM05
 ¿Qué sistemas SBAS cita el manual?	WAAS (EE. UU.), EGNOS (Unión Europea), MSAS (Japón) y GAGAN (India)	ATC::OM05
+Según la tabla de clasificación por técnicas y elementos (3.2.3), ¿en qué dos grupos se dividen los sistemas no autónomos?	A) Terrestres (por radioayudas y visuales) y B) Espaciales (constelaciones GNSS con ABAS, SBAS y GBAS); los autónomos forman un bloque aparte	ATC::OM05
+Según el manual, aparte de los satélites, ¿qué sistemas espaciales NO incluyen infraestructuras terrestres auxiliares?	Solo los de aumentación ABAS; todos los demás sistemas espaciales sí las incluyen	ATC::OM05
+Según el manual, ¿de qué son la base los sistemas GNSS?	De la implantación del concepto PBN	ATC::OM05
+Según la tabla de 3.2.3, ¿cómo obtiene el SBAS sus correcciones y cómo llegan a la aeronave?	Una red de estaciones de referencia terrestres las calcula (correcciones e información de integridad) a partir de los datos GNSS; se envían mediante satélites en órbita geoestacionaria (GEO)	ATC::OM05
+Según el manual, ¿qué transmite la estación GBAS a las aeronaves del área terminal y por qué medio?	Correcciones de pseudodistancia, parámetros de integridad y datos de definición de aproximaciones localmente pertinentes, mediante radiodifusión de datos en VHF (VDB)	ATC::OM05
+Según el manual, ¿cómo calcula su posición un receptor SBAS o GBAS embarcado?	Combinando a bordo la posición obtenida directamente de las constelaciones con los datos emitidos por el sistema SBAS o GBAS	ATC::OM05
 ¿Qué proporciona el NDB (radiofaro no direccional)?	Solo guiado horizontal, es decir, rumbos	ATC::OM05
 ¿Cómo transmite su señal la estación terrestre del NDB?	De forma omnidireccional (en todas las direcciones), mediante un transmisor convencional, en los 360 grados	ATC::OM05
 ¿Qué es el ADF y qué hace?	El componente de a bordo del sistema NDB: una antena y un receptor que procesan la señal del NDB y se la presentan al piloto en un indicador	ATC::OM05

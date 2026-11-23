@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulacro de aptitudes</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4d8f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='16' height='18'/%3E%3Ccircle cx='8.5' cy='8' r='1.3'/%3E%3Ccircle cx='8.5' cy='12.5' r='1.3'/%3E%3Cpath d='M12 8h4.5M12 12.5h4.5M8 17h8.5'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f2ec; --stripe:#ebe8df; --surface:#ffffff; --text:#1b1b1b; --muted:#5f5b53; --rule:#cfcabd;
+  --accent:#1a4d8f; --accent-h:#123a6e; --onacc:#ffffff; --warn:#b3450d; --ok:#2d6a3e; --err:#a3241c;
+  --serif:Georgia,"Iowan Old Style",serif; --sans:system-ui,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#161615; --stripe:#262624; --surface:#1e1e1c; --text:#e7e4dc; --muted:#a19c90; --rule:#3a3935;
+    --accent:#7fb0e8; --accent-h:#a6c8f0; --onacc:#161615; --warn:#e08a55; --ok:#7cbf8a; --err:#e5766d;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 var(--sans)}
+.top{display:flex;align-items:center;gap:10px;margin:0 auto;padding:14px 16px 10px}
+.top .logo{width:30px;height:30px;color:var(--accent);flex:none}
+.top .brand{font:700 20px/1 var(--serif);letter-spacing:.01em}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.logo{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 28px/1.2 var(--serif);margin:.3em 0 .5em}
+h2{font:700 20px/1.3 var(--serif);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:1.6em 0 .6em}
+h3{font:700 17px var(--serif);margin:1em 0 .3em}
+p{margin:.4rem 0}
+.soft{color:var(--muted)} .small{font-size:14px}
+.good{color:var(--ok)} .bad{color:var(--err)} .warn{color:var(--warn)}
+button,select,input{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background-color .12s,color .12s;min-height:40px}
+.btn:hover{background:var(--stripe);color:var(--accent-h)}
+.btn.primary{background:var(--accent);color:var(--onacc)}
+.btn.primary:hover{background:var(--accent-h);color:var(--onacc)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn.on{background:var(--warn);border-color:var(--warn);color:var(--onacc)}
+.btn:disabled{opacity:.4;cursor:default}
+.link{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--accent);cursor:pointer;padding:6px 0;margin-bottom:6px;min-height:40px}
+.link:hover{color:var(--accent-h);text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text]{background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;width:100%;max-width:420px}
+label.lb{display:block;margin:1rem 0 .3rem;font-weight:600}
+kbd{font:12px/1 ui-monospace,Consolas,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:2px;padding:2px 6px;background:var(--surface);color:var(--muted);display:inline-block}
+.btn kbd{background:transparent}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.head{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;color:var(--muted);font-size:15px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.head b{color:var(--text)}
+.head .ic{margin-right:4px}
+.bar{height:3px;background:var(--rule);margin:0 0 12px}
+.bar>div{height:100%;background:var(--accent);width:0}
+.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--text);border-bottom:1px solid var(--rule);margin:14px 0}
+.fig{padding:10px 26px 10px 0}
+.fig b{display:block;font:700 28px/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.fig span{color:var(--muted);font-size:13px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-weight:600;text-align:left;color:var(--muted);border-bottom:1px solid var(--text);padding:6px 12px 6px 0;white-space:nowrap}
+td{padding:6px 12px 6px 0;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:top;font-variant-numeric:tabular-nums}
+td .ic,th .ic{color:var(--muted)}
+.list{border-top:1px solid var(--text);margin:8px 0 16px}
+.card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 4px;cursor:pointer;color:var(--text)}
+.card:hover{background:var(--stripe)}
+.card .ic{width:30px;height:30px;color:var(--accent);stroke-width:1.5}
+.card .nm{display:block;font:700 20px/1.2 var(--serif)}
+.card .dt{display:block;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+details{margin:10px 0}
+summary{cursor:pointer;color:var(--accent);min-height:32px}
+ul.rules{list-style:none;margin:6px 0;padding:0;border-top:1px solid var(--rule)}
+ul.rules li{padding:5px 0;border-bottom:1px solid var(--rule)}
+@media (max-width:640px){.fig{padding-right:18px}.fig b{font-size:24px}h1{font-size:25px}}
+
+#app{max-width:1040px;margin:0 auto;padding:8px 16px 56px}
+.top{max-width:1040px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;color:var(--text);font-size:18px}
+.timer .ic{color:var(--muted)}
+.timer.late{color:var(--warn)}
+.timer.over{color:var(--err)}
+.pr{font-weight:700;margin:10px 0 4px;text-align:center}
+svg.cell{display:block;width:100%;height:auto}
+.mat{display:grid;grid-template-columns:repeat(3,minmax(0,112px));gap:6px;justify-content:center;margin:12px auto}
+.seq{display:grid;grid-template-columns:repeat(6,minmax(0,100px));gap:6px;justify-content:center;margin:12px auto}
+.ana{display:grid;grid-template-columns:repeat(2,minmax(0,112px));gap:6px 40px;justify-content:center;margin:12px auto}
+.svgbox{background:#fbfaf6;border:1px solid var(--rule);border-radius:2px;padding:6px}
+.svgbox svg{display:block;margin:0 auto;width:100%;height:auto;max-height:320px}
+.cap{font-size:13px;color:var(--muted);text-align:center;margin:.3rem 0}
+.panels{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0}
+.panels figure{margin:0;width:140px;text-align:center;font-size:13px;color:var(--muted)}
+.panels svg{width:140px;height:140px;background:#fbfaf6;border:1px solid var(--rule)}
+.lbox{background:#fbfaf6;color:#1b1b1b;border:1px solid var(--rule);border-radius:2px;padding:8px;margin:10px auto;max-width:760px}
+.d2row{display:flex;flex-wrap:wrap;gap:2px 5px;justify-content:center}
+.d2c{width:22px;height:auto;display:block}
+table.cmp{width:auto;margin:0 auto;font:600 18px/1.3 ui-monospace,Consolas,monospace}
+table.cmp td{padding:4px 16px;border-bottom:1px solid #d9d4c7;color:#1b1b1b}
+table.cmp td.cn{font:12px/1 var(--sans);color:#5f5b53;padding-right:6px}
+.opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px auto;max-width:860px}
+.opts.mx{grid-template-columns:repeat(4,minmax(0,112px));justify-content:center}
+.opts.at{max-width:520px}
+.opt{position:relative;background:#fbfaf6;border:2px solid var(--rule);border-radius:2px;padding:6px;color:#1b1b1b;cursor:pointer;text-align:center;min-height:44px}
+button.opt:hover{border-color:var(--accent)}
+.opt .lt{position:absolute;left:4px;top:3px;font:700 13px/1 ui-monospace,Consolas,monospace;color:#5f5b53;padding:2px 4px;border-radius:2px;z-index:1}
+.opt svg{display:block;margin:0 auto;width:100%;height:auto;max-height:200px}
+.opt.num{font:700 28px/1 var(--serif);padding:22px 8px}
+.opt.txt{font-size:16px;padding:24px 8px}
+.opt.sel{border-color:#1a4d8f;box-shadow:0 0 0 2px #1a4d8f}
+.opt.sel .lt{background:#1a4d8f;color:#fff}
+.opt.right{border-color:#2d6a3e;box-shadow:0 0 0 2px #2d6a3e}
+.opt.right .lt{background:#2d6a3e;color:#fff}
+.opt.wrong{border-color:#a3241c;box-shadow:0 0 0 2px #a3241c}
+.opt.wrong .lt{background:#a3241c;color:#fff}
+.ctl{margin:8px 0 0}
+.ctl .grow{flex:1}
+.nav{margin:18px 0 0;border-top:1px solid var(--rule);padding-top:10px}
+.navf{display:flex;gap:8px;align-items:flex-start;margin:0 0 8px}
+.navf>.ic{margin-top:9px;color:var(--muted)}
+.navg{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;flex:1}
+.nv{position:relative;height:36px;border:1px solid var(--rule);background:var(--surface);color:var(--text);font:13px/1 var(--sans);font-variant-numeric:tabular-nums;border-radius:2px;cursor:pointer;padding:0}
+.nv.a{background:var(--accent);border-color:var(--accent);color:var(--onacc)}
+.nv.f::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--warn) transparent transparent}
+.nv.cur{outline:2px solid var(--text);outline-offset:1px}
+.scale{position:relative;height:10px;background:var(--stripe);border:1px solid var(--rule);margin:18px 0 4px;max-width:520px}
+.scale>div{height:100%;background:var(--accent)}
+.scale i{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--text)}
+.scl{position:relative;height:18px;max-width:520px;font-size:12px;color:var(--muted)}
+.scl span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.rq{border-bottom:1px solid var(--rule);padding:10px 0 14px}
+.rq .head{border:0}
+.why{margin:.3rem 0}
+.sheet{columns:4 150px;column-gap:22px;margin:10px 0}
+.sr{display:flex;align-items:center;gap:5px;break-inside:avoid;padding:3px 0}
+.sr b{width:2.2em;text-align:right;font-variant-numeric:tabular-nums;font-size:13px;margin-right:2px}
+.bub{width:22px;height:22px;border:1px solid var(--text);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:11px/1 var(--sans);color:var(--muted);background:transparent;padding:0;flex:none}
+button.bub{width:30px;height:30px;cursor:pointer}
+button.bub.on{background:var(--accent);border-color:var(--accent);color:var(--onacc)}
+.phead{display:flex;flex-wrap:wrap;gap:4px 18px;justify-content:space-between;border-bottom:2px solid var(--text);padding:4px 0;margin:6px 0;font-weight:600}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.pitem{display:grid;grid-template-columns:28px minmax(0,1fr);gap:6px;border-top:1px solid var(--rule);padding:8px 0;break-inside:avoid}
+.pn{font:700 15px/1.4 var(--serif)}
+.pitem .pr{font-size:13px;margin:0 0 4px;text-align:left}
+.pitem .mat{grid-template-columns:repeat(3,56px);gap:3px;justify-content:start;margin:4px 0}
+.pitem .seq{grid-template-columns:repeat(6,46px);gap:3px;justify-content:start;margin:4px 0}
+.pitem .ana{grid-template-columns:repeat(2,56px);gap:3px 20px;justify-content:start;margin:4px 0}
+.pitem .svgbox{max-width:190px!important;margin:0!important;padding:2px}
+.pitem .svgbox svg{max-height:130px}
+.pitem .panels{justify-content:flex-start;gap:4px;margin:2px 0}
+.pitem .panels figure{width:70px;font-size:10px}
+.pitem .panels svg{width:70px;height:70px}
+.pitem .cap{text-align:left;font-size:10px}
+.pitem .lbox{margin:2px 0;padding:4px;max-width:none}
+.pitem .d2c{width:15px}
+.pitem table.cmp{font-size:13px;margin:0}
+.pitem table.cmp td{padding:1px 10px}
+.popts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:5px;max-width:330px}
+.popt{position:relative;border:1px solid #8a8578;background:#fbfaf6;color:#1b1b1b;padding:2px;text-align:center;min-height:30px}
+.popt .lt{position:absolute;left:3px;top:2px;font:700 10px/1 ui-monospace,Consolas,monospace;z-index:1}
+.popt svg{display:block;width:100%;height:auto;max-height:80px}
+.popt.num{font:700 18px/1 var(--serif);padding:14px 2px 6px}
+.popt.txt{font-size:11px;padding:14px 2px 4px}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:2px 8px;font:13px/1.6 ui-monospace,Consolas,monospace}
+@media screen{.pkey{display:none}}
+@media (max-width:700px){.pgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .mat{grid-template-columns:repeat(3,minmax(0,92px))}
+  .seq{grid-template-columns:repeat(3,minmax(0,92px))}
+  .opts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opts.mx{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .ctl .btn{padding:8px 11px}
+  .ctl kbd{display:none}
+}
+@media print{
+  @page{margin:12mm}
+  :root{--bg:#fff;--stripe:#eee;--surface:#fff;--text:#000;--muted:#333;--rule:#999;--accent:#000;--onacc:#fff;color-scheme:light}
+  body{background:#fff;color:#000;font-size:11pt}
+  .top,.noprint{display:none!important}
+  #app{max-width:none;padding:0}
+  .pkey{display:block}
+  .psheet,.pkey{break-before:page}
+  .pitem{break-inside:avoid}
+  .bub{color:#333;border-color:#000}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a8 8 0 0 1 14-4.5L20 9"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4.5L4 15"/><path d="M4 20v-5h5"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol><symbol id="i-dash" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2.5 4L17 12H6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8"/><path d="M7 14h10v7H7z"/></symbol><symbol id="i-sheet" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18"/><circle cx="8.5" cy="8" r="1.3"/><circle cx="8.5" cy="12.5" r="1.3"/><path d="M12 8h4.5M12 12.5h4.5M8 17h8.5"/></symbol><symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 3h5"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol><symbol id="i-f-abstracto" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><circle cx="18" cy="18" r="1.7"/></symbol><symbol id="i-f-series" viewBox="0 0 24 24"><rect x="2.5" y="8" width="5" height="8"/><rect x="9.5" y="8" width="5" height="8"/><path d="M17 12h4.5M19.5 9.5l2 2.5-2 2.5"/></symbol><symbol id="i-f-espacial" viewBox="0 0 24 24"><path d="M10 3.5l6 3.4v6.8l-6 3.4-6-3.4V6.9z"/><path d="M4 6.9l6 3.4 6-3.4M10 10.3v6.8"/><path d="M14 20.5a7 7 0 0 0 7-6"/><path d="M21 17.5v-3.5h-3.5"/></symbol><symbol id="i-f-atencion" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-logo" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18"/><circle cx="8.5" cy="8" r="1.3"/><circle cx="8.5" cy="12.5" r="1.3"/><path d="M12 8h4.5M12 12.5h4.5M8 17h8.5"/></symbol></defs></svg>
+<header class="top"><svg class="logo" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand">Simulacro de aptitudes</span></header>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Simulacro de la prueba de aptitudes</h1>
+<main id="app"></main>
+<script>
+'use strict';
+// ==== PURE LOGIC START ====
+/* =====================================================================
+   PURE LOGIC (no DOM). Item generators copied from trainer-matrices.html (MX) and trainer-spatial.html (SP);
+   attention items (AT) built on the d2 symbol pools of aptitude-trainer.html. Only hints and difficulty scores
+   were removed from the copies (they use no random numbers), so a seed gives the same item as the trainer.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------- MX: abstract reasoning (trainer-matrices.html) */
+const MX = (function(){
+'use strict';
+function makeRng(seed){
+  let h = 2166136261 >>> 0;
+  const s = String(seed);
+  for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  let a = h;
+  function next(){
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  return {
+    next: next,
+    int: function(n){ return Math.floor(next() * n); },
+    range: function(lo, hi){ return lo + Math.floor(next() * (hi - lo + 1)); },
+    pick: function(arr){ return arr[Math.floor(next() * arr.length)]; },
+    chance: function(p){ return next() < p; },
+    shuffle: function(arr){
+      const b = arr.slice();
+      for (let i = b.length - 1; i > 0; i--){ const j = Math.floor(next() * (i + 1)); const t = b[i]; b[i] = b[j]; b[j] = t; }
+      return b;
+    }
+  };
+}
+function mod(a, n){ return ((a % n) + n) % n; }
+function uniq(arr){ const seen = {}; const out = []; arr.forEach(function(x){ if (!seen[x]){ seen[x] = 1; out.push(x); } }); return out; }
+function fill3(x){ return [[x, x, x], [x, x, x], [x, x, x]]; }
+function transpose3(g){ return [[g[0][0], g[1][0], g[2][0]], [g[0][1], g[1][1], g[2][1]], [g[0][2], g[1][2], g[2][2]]]; }
+function range(n){ const r = []; for (let i = 0; i < n; i++) r.push(i); return r; }
+
+/* ---------- Attribute model ---------- */
+const SHAPES = ['circle','square','triangle','diamond','pentagon','star','cross','hexagon','arrow','ell','halfdisc','rtri'];
+const ASYM_IDX = [8,9,10,11];              // shapes with no rotational symmetry: the only ones used when rotation is a rule
+const ALL_SHAPES = range(12);
+const ATTRS = ['shape','count','shade','size','rot','pos'];
+const ATTR_KIND = { shape:'cat', count:'ord', shade:'ord', size:'ord', rot:'cyc', pos:'cyc' };
+const ATTR_D = { shape:12, count:5, shade:4, size:3, rot:8, pos:8 };
+const ATTR_LABEL = { shape:'Forma', count:'Número de figuras', shade:'Sombreado', size:'Tamaño', rot:'Rotación', pos:'Posición' };
+const SHAPE_ES = ['círculo','cuadrado','triángulo','rombo','pentágono','estrella','cruz','hexágono','flecha','ele','semicírculo','triángulo rectángulo'];
+const SHAPE_ES_PL = ['círculos','cuadrados','triángulos','rombos','pentágonos','estrellas','cruces','hexágonos','flechas','eles','semicírculos','triángulos rectángulos'];
+const DIRW = { row:'fila', column:'columna' };
+const SHADE_NAMES = ['blanco','rayado','gris','negro'];
+const SIZE_NAMES = ['pequeño','mediano','grande'];
+function valName(a, v){
+  if (a === 'shape') return SHAPE_ES[v];
+  if (a === 'count') return String(v + 1);
+  if (a === 'shade') return SHADE_NAMES[v];
+  if (a === 'size') return SIZE_NAMES[v];
+  if (a === 'rot') return (v * 45) + ' grados';
+  if (a === 'pos') return 'posición ' + (v + 1);
+  return String(v);
+}
+function mkCell(o){ return { t:'a', shape:o.shape, count:o.count, shade:o.shade, size:o.size, rot:o.rot, pos:o.pos }; }
+function sig(c){
+  if (c === null || c === undefined) return '?';
+  if (c.t === 'l') return 'l' + c.slots.map(function(x){ return x ? 1 : 0; }).join('');
+  return 'a' + [c.shape, c.count, c.shade, c.size, c.rot, c.pos].join(',');
+}
+function hamming(c1, c2){ let n = 0; ATTRS.forEach(function(a){ if (c1[a] !== c2[a]) n++; }); return n; }
+
+/* Context: which attributes are "alive" in an item, and the fixed values of the rest. */
+function makeCtx(chosen){
+  const hasPos = chosen.indexOf('pos') >= 0, hasRot = chosen.indexOf('rot') >= 0;
+  const active = hasPos ? ['shape','shade','pos'] : ['shape','count','shade','size'];
+  if (hasRot) active.push('rot');
+  const fixed = { count:0, size:(hasPos ? 2 : 1), rot:0, pos:-1 };
+  if (hasPos){ fixed.count = 0; fixed.size = 2; }
+  return { active: active, fixed: fixed, shapeDom: hasRot ? ASYM_IDX : ALL_SHAPES };
+}
+function domainOf(ctx, a){ return a === 'shape' ? ctx.shapeDom : range(ATTR_D[a]); }
+function cellFrom(ctx, vals){
+  const o = {};
+  ATTRS.forEach(function(a){ o[a] = (vals[a] !== undefined && ctx.active.indexOf(a) >= 0) ? vals[a] : ctx.fixed[a]; });
+  return mkCell(o);
+}
+// count and size conflict with position (a lone small shape moves round the cell)
+function pickAttrs(rng, pool, n){
+  const order = rng.shuffle(pool);
+  const out = [];
+  for (let i = 0; i < order.length && out.length < n; i++){
+    const a = order[i];
+    const hasPos = out.indexOf('pos') >= 0;
+    if (a === 'pos' && (out.indexOf('count') >= 0 || out.indexOf('size') >= 0)) continue;
+    if ((a === 'count' || a === 'size') && hasPos) continue;
+    out.push(a);
+  }
+  return out.length === n ? out : null;
+}
+
+/* ---------- Levels (the ladder) ---------- */
+const MATRIX_P = [null,
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1'],                                   opts:4,  transp:0,  close:0 },
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1','dist3'],                           opts:5,  transp:0,  close:0 },
+  { nVar:2, attrs:['shade','size','count','shape'],                rules:['rowconst','prog1','dist3'],                           opts:6,  transp:.4, close:.1 },
+  { nVar:2, attrs:['shade','size','count','shape','rot'],          rules:['rowconst','prog1','prog2','dist3'],                   opts:6,  transp:.5, close:.2 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['rowconst','prog1','prog2','dist3','arith'],           opts:8,  transp:.5, close:.35 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['rowconst','prog1','prog2','prog3','dist3','arith'],   opts:8,  transp:.5, close:.5 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','prog3','dist3','arith'],              opts:8,  transp:.5, close:.65 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:9,  transp:.5, close:.8 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:10, transp:.5, close:.95 },
+  { nVar:5, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','prog3','dist3','arith'],              opts:10, transp:.5, close:1 }];
+const SERIES_P = [null,
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['prog1','alt2'],                          opts:4,  close:0 },
+  { nVar:1, attrs:['shade','size','count','shape'],                rules:['prog1','alt2','cyc3'],                   opts:5,  close:0 },
+  { nVar:2, attrs:['shade','size','count','shape'],                rules:['prog1','alt2','cyc3'],                   opts:6,  close:.1 },
+  { nVar:2, attrs:['shade','size','count','shape','rot'],          rules:['prog1','prog2','alt2','cyc3'],           opts:6,  close:.2 },
+  { nVar:2, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','alt2','cyc3','lag2'],    opts:8,  close:.35 },
+  { nVar:3, attrs:['shade','size','count','shape','rot','pos'],    rules:['prog1','prog2','alt2','cyc3','lag2','bounce'], opts:8, close:.5 },
+  { nVar:3, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:8,  close:.65 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:9,  close:.8 },
+  { nVar:4, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:10, close:.95 },
+  { nVar:5, attrs:['shade','size','count','shape','rot'],          rules:['prog2','prog3','cyc3','lag2','bounce'], opts:10, close:1 }];
+const ANALOGY_P = [null,
+  { changes:1, maxD:1, attrs:['shade','size','count'],                opts:4,  close:0 },
+  { changes:1, maxD:1, attrs:['shade','size','count','rot'],          opts:5,  close:0 },
+  { changes:2, maxD:1, attrs:['shade','size','count','rot'],          opts:6,  close:.1 },
+  { changes:2, maxD:1, attrs:['shade','size','count','rot','pos'],    opts:6,  close:.2 },
+  { changes:2, maxD:2, attrs:['shade','size','count','rot','pos'],    opts:8,  close:.35 },
+  { changes:3, maxD:2, attrs:['shade','size','count','rot'],          opts:8,  close:.5 },
+  { changes:3, maxD:2, attrs:['shade','size','count','rot'],          opts:8,  close:.65 },
+  { changes:3, maxD:3, attrs:['shade','size','count','rot'],          opts:9,  close:.8 },
+  { changes:4, maxD:3, attrs:['shade','size','count','rot'],          opts:10, close:.95 },
+  { changes:4, maxD:4, attrs:['shade','size','count','rot'],          opts:10, close:1 }];
+const ODD_P = [null,
+  { n:5, cons:['v'],           near:false, rot:false },
+  { n:5, cons:['v'],           near:false, rot:false },
+  { n:6, cons:['v'],           near:true,  rot:false },
+  { n:6, cons:['v','v'],       near:true,  rot:false },
+  { n:6, cons:['r'],           near:false, rot:false },
+  { n:6, cons:['r','v'],       near:false, rot:false },
+  { n:7, cons:['r'],           near:true,  rot:false },
+  { n:7, cons:['r','v'],       near:true,  rot:true },
+  { n:8, cons:['r','v'],       near:true,  rot:true },
+  { n:8, cons:['r','v','v'],   near:true,  rot:true }];
+const LOGIC_OPS = ['or','and','xor','andnot','notand','xnor'];
+const OP_FN = {
+  or:     function(a, b){ return a || b; },
+  and:    function(a, b){ return a && b; },
+  xor:    function(a, b){ return a !== b; },
+  andnot: function(a, b){ return a && !b; },
+  notand: function(a, b){ return !a && b; },
+  xnor:   function(a, b){ return a === b; }
+};
+const OP_TEXT = {
+  or:     'OR (O): hay marca si está en la primera celda, en la segunda o en ambas',
+  and:    'AND (Y): hay marca solo si está en AMBAS de las dos primeras celdas',
+  xor:    'XOR (O exclusivo): hay marca si está en exactamente UNA de las dos primeras celdas (las marcas presentes en ambas se anulan)',
+  andnot: 'PRIMERA MENOS SEGUNDA: hay marca si está en la primera celda y NO en la segunda',
+  notand: 'SEGUNDA MENOS PRIMERA: hay marca si está en la segunda celda y NO en la primera',
+  xnor:   'XNOR: hay marca si está en las dos celdas o en ninguna (lo contrario de XOR)'
+};
+const LOGIC_P = [null,
+  { N:4, groups:1, ops:['or','and'],                 opts:4 },
+  { N:4, groups:1, ops:['or','and','xor'],           opts:5 },
+  { N:6, groups:1, ops:['or','and','xor'],           opts:6 },
+  { N:6, groups:1, ops:['or','and','xor','andnot'],  opts:6 },
+  { N:9, groups:1, ops:['or','and','xor','andnot'],  opts:8 },
+  { N:9, groups:2, ops:['or','and','xor','andnot'],  opts:8 },
+  { N:9, groups:2, ops:LOGIC_OPS,                    opts:8 },
+  { N:9, groups:3, ops:['or','and','xor','andnot'],  opts:9 },
+  { N:9, groups:3, ops:LOGIC_OPS,                    opts:10 },
+  { N:9, groups:3, ops:LOGIC_OPS,                    opts:10 }];
+const KIND_LABEL = { matrix:'Matriz', logic:'Matriz lógica', series:'Serie de figuras', analogy:'Analogía', odd:'Intruso' };
+
+/* ---------- Rule descriptions ---------- */
+function stepText(a, s, wrap){
+  const n = Math.abs(s), w = wrap ? ' (vuelve al principio al llegar al final de la escala)' : '';
+  if (a === 'count') return (s > 0 ? 'gana ' : 'pierde ') + n + ' figura' + (n > 1 ? 's' : '') + w;
+  if (a === 'shade') return 'se hace ' + (s > 0 ? 'más oscuro' : 'más claro') + ' en ' + n + ' paso' + (n > 1 ? 's' : '') + w;
+  if (a === 'size')  return (s > 0 ? 'crece' : 'se reduce') + ' en ' + n + ' paso' + (n > 1 ? 's' : '') + w;
+  if (a === 'rot')   return 'gira ' + (n * 45) + ' grados en sentido ' + (s > 0 ? 'horario' : 'antihorario');
+  if (a === 'pos')   return 'avanza ' + n + (n > 1 ? ' posiciones' : ' posición') + (s > 0 ? ' en sentido horario' : ' en sentido antihorario') + ' por el borde de la celda';
+  return 'cambia';
+}
+function matrixRuleText(a, spec, g, dirWord){
+  const L = ATTR_LABEL[a], along = dirWord === 'row' ? 'a lo largo de cada fila' : 'hacia abajo en cada columna', dw = DIRW[dirWord];
+  const vals = function(x){ return valName(a, x); };
+  if (spec.type === 'const') return L + ': constante, igual en las nueve celdas (' + vals(g[0][0]) + ').';
+  if (spec.type === 'rowconst') return L + ': constante dentro de cada ' + dw + ' y distinta en cada ' + dw + '.';
+  if (spec.type === 'prog') return L + ': progresión. De una celda a la siguiente ' + along + ', ' + stepText(a, spec.s, false) + '.';
+  if (spec.type === 'dist3'){
+    const set = uniq([g[0][0], g[0][1], g[0][2], g[1][0], g[1][1], g[1][2]]).map(vals).join(', ');
+    return L + ': distribución de tres. Los tres valores (' + set + ') aparecen una vez en cada ' + dw + ', desplazados una posición de una ' + dw + ' a la siguiente.';
+  }
+  if (spec.type === 'arith') return L + ': aritmética. En cada ' + dw + ' la tercera celda tiene el número de la primera ' + (spec.op === 'add' ? 'MÁS' : 'MENOS') + ' el de la segunda.';
+  return L + ': ' + spec.type;
+}
+function seqRuleText(a, spec, seq){
+  const L = ATTR_LABEL[a], wrap = ATTR_KIND[a] !== 'cyc';
+  if (spec.type === 'const') return L + ': constante (' + valName(a, seq[0]) + ').';
+  if (spec.type === 'prog1' || spec.type === 'prog2' || spec.type === 'prog3') return L + ': progresión. En cada paso ' + stepText(a, spec.s, wrap) + '.';
+  if (spec.type === 'alt2') return L + ': alterna entre ' + valName(a, seq[0]) + ' y ' + valName(a, seq[1]) + '.';
+  if (spec.type === 'cyc3') return L + ': recorre tres valores (' + [0,1,2].map(function(i){ return valName(a, seq[i]); }).join(', ') + ') y se repite.';
+  if (spec.type === 'lag2'){
+    const de = spec.de, dO = spec.dO;
+    const t = function(d){ return d === 0 ? 'se mantiene igual' : stepText(a, d > (ATTR_D[a] / 2) ? d - ATTR_D[a] : d, wrap); };
+    return L + ': dos secuencias intercaladas. Figuras 1, 3, 5: en cada paso ' + t(de) + '; figuras 2, 4, 6: en cada paso ' + t(dO) + '.';
+  }
+  if (spec.type === 'bounce') return L + ': sube o baja un paso cada vez e invierte el sentido al llegar al final de la escala (rebote).';
+  return L + ': ' + spec.type;
+}
+
+/* ---------- Matrix: rule generation ---------- */
+function tierToSpec(rng, tier){
+  if (tier === 'rowconst') return { type:'rowconst' };
+  if (tier === 'dist3') return { type:'dist3' };
+  if (tier === 'arith') return { type:'arith', op: rng.pick(['add','sub']) };
+  if (tier === 'prog1') return { type:'prog', s: rng.pick([1, -1]) };
+  if (tier === 'prog2') return { type:'prog', s: rng.pick([2, -2]) };
+  if (tier === 'prog3') return { type:'prog', s: rng.pick([3, -3]) };
+  return { type:'const' };
+}
+function compatRule(a, tier){
+  const kind = ATTR_KIND[a];
+  if (a === 'shape') return tier === 'rowconst' || tier === 'dist3';
+  if (tier === 'arith') return a === 'count';
+  if (tier === 'prog3') return kind === 'cyc';
+  return true;
+}
+const ADD_TRIPLES = [[1,1,2],[1,2,3],[2,1,3],[2,2,4],[1,3,4],[3,1,4],[1,4,5],[4,1,5],[2,3,5],[3,2,5]];
+const SUB_TRIPLES = [[2,1,1],[3,1,2],[3,2,1],[4,1,3],[4,2,2],[4,3,1],[5,1,4],[5,2,3],[5,3,2],[5,4,1]];
+function genGrid(rng, a, spec, dom){
+  const D = ATTR_D[a], kind = ATTR_KIND[a];
+  if (spec.type === 'const') return fill3(rng.pick(dom));
+  if (spec.type === 'rowconst'){
+    if (dom.length < 3) return null;
+    const v = rng.shuffle(dom).slice(0, 3);
+    return [[v[0], v[0], v[0]], [v[1], v[1], v[1]], [v[2], v[2], v[2]]];
+  }
+  if (spec.type === 'prog'){
+    const s = spec.s;
+    const starts = range(D).filter(function(x){ return kind === 'cyc' || (x + 2 * s >= 0 && x + 2 * s < D); });
+    if (!starts.length) return null;
+    const sh = rng.shuffle(starts), rows = [];
+    for (let r = 0; r < 3; r++){
+      const x = sh[r % sh.length];
+      rows.push(kind === 'cyc' ? [x, mod(x + s, D), mod(x + 2 * s, D)] : [x, x + s, x + 2 * s]);
+    }
+    return rows;
+  }
+  if (spec.type === 'dist3'){
+    if (dom.length < 3) return null;
+    const t = rng.shuffle(dom).slice(0, 3), k = rng.pick([1, 2]), rows = [];
+    for (let r = 0; r < 3; r++) rows.push([t[mod(0 + r * k, 3)], t[mod(1 + r * k, 3)], t[mod(2 + r * k, 3)]]);
+    return rows;
+  }
+  if (spec.type === 'arith'){
+    const tr = rng.shuffle(spec.op === 'add' ? ADD_TRIPLES : SUB_TRIPLES).slice(0, 3);
+    return tr.map(function(t){ return [t[0] - 1, t[1] - 1, t[2] - 1]; });
+  }
+  return null;
+}
+
+/* ---------- Matrix: independent solver ---------- */
+function lineHyps(g, a){
+  const kind = ATTR_KIND[a], D = ATTR_D[a], preds = [];
+  const l0 = g[0], l1 = g[1], l2 = g[2];
+  const eq3 = function(l){ return l[0] === l[1] && l[1] === l[2]; };
+  if (eq3(l0) && eq3(l1) && l0[0] === l1[0] && l2[0] === l0[0] && l2[1] === l0[0]) preds.push({ n:'const', p:l0[0] });
+  if (eq3(l0) && eq3(l1) && l2[0] === l2[1]) preds.push({ n:'rowconst', p:l2[0] });
+  if (kind !== 'cat'){
+    const steps = kind === 'cyc' ? [1, -1, 2, -2, 3, -3] : [1, -1, 2, -2];
+    steps.forEach(function(s){
+      const ok = function(l){
+        return kind === 'cyc' ? (mod(l[1] - l[0], D) === mod(s, D) && mod(l[2] - l[1], D) === mod(s, D)) : (l[1] - l[0] === s && l[2] - l[1] === s);
+      };
+      if (ok(l0) && ok(l1)){
+        const fits = kind === 'cyc' ? mod(l2[1] - l2[0], D) === mod(s, D) : l2[1] - l2[0] === s;
+        if (fits){
+          const p = kind === 'cyc' ? mod(l2[1] + s, D) : l2[1] + s;
+          if (kind === 'cyc' || (p >= 0 && p < D)) preds.push({ n:'prog' + s, p:p });
+        }
+      }
+    });
+  }
+  const d3 = function(l){ return l[0] !== l[1] && l[1] !== l[2] && l[0] !== l[2]; };
+  const sameSet = function(x, y){ return x.every(function(v){ return y.indexOf(v) >= 0; }); };
+  if (d3(l0) && d3(l1) && sameSet(l0, l1) && l2[0] !== l2[1] && l0.indexOf(l2[0]) >= 0 && l0.indexOf(l2[1]) >= 0){
+    preds.push({ n:'dist3', p: l0.filter(function(v){ return v !== l2[0] && v !== l2[1]; })[0] });
+  }
+  if (a === 'count'){
+    const addOk = function(l){ return (l[0] + 1) + (l[1] + 1) === l[2] + 1; };
+    const subOk = function(l){ return (l[0] + 1) - (l[1] + 1) === l[2] + 1; };
+    if (addOk(l0) && addOk(l1)){ const p = (l2[0] + 1) + (l2[1] + 1) - 1; if (p < D) preds.push({ n:'add', p:p }); }
+    if (subOk(l0) && subOk(l1)){ const p = (l2[0] + 1) - (l2[1] + 1) - 1; if (p >= 0) preds.push({ n:'sub', p:p }); }
+  }
+  return preds;
+}
+function solveMatrix(cells, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    const g = [[0,0,0],[0,0,0],[0,0,null]];
+    for (let i = 0; i < 8; i++) g[Math.floor(i / 3)][i % 3] = cells[i][a];
+    const preds = lineHyps(g, a).concat(lineHyps(transpose3(g), a));
+    const set = uniq(preds.map(function(h){ return h.p; }));
+    if (set.length === 0) return { ok:false, why:'no rule fits attribute ' + a };
+    if (set.length > 1) return { ok:false, why:'ambiguous attribute ' + a };
+    vals[a] = set[0];
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+
+/* ---------- Distractors ---------- */
+function cycDist(a, x, y){ const D = ATTR_D[a]; const d = Math.abs(x - y); return ATTR_KIND[a] === 'cyc' ? Math.min(d, D - d) : d; }
+// Builds nOpts options: the answer plus distractors that each differ from it in exactly ONE attribute (one broken rule).
+function buildOptions(rng, answer, ctx, nOpts, hints, closeP, varying){
+  const per = {};
+  ctx.active.forEach(function(a){
+    const dom = domainOf(ctx, a).filter(function(v){ return v !== answer[a]; });
+    const pref = uniq((hints[a] || []).filter(function(v){ return dom.indexOf(v) >= 0; }));
+    let rest = dom.filter(function(v){ return pref.indexOf(v) < 0; });
+    if (ATTR_KIND[a] !== 'cat' && rng.chance(closeP)){
+      rest = rng.shuffle(rest).sort(function(x, y){ return cycDist(a, x, answer[a]) - cycDist(a, y, answer[a]); });
+    } else rest = rng.shuffle(rest);
+    let order = pref.concat(rest);
+    if (ATTR_KIND[a] !== 'cat' && closeP >= 0.5 && rng.chance(closeP)){
+      order = order.slice().sort(function(x, y){ return cycDist(a, x, answer[a]) - cycDist(a, y, answer[a]); });
+    }
+    per[a] = { vals: order, i: 0 };
+  });
+  const vary = ctx.active.filter(function(a){ return varying.indexOf(a) >= 0; });
+  const rest = ctx.active.filter(function(a){ return varying.indexOf(a) < 0; });
+  const attrOrder = rng.shuffle(vary).concat(rng.shuffle(rest));
+  const opts = [{ cell: answer, attr: null, from: null, to: null }];
+  const seen = {}; seen[sig(answer)] = 1;
+  let progress = true;
+  while (opts.length < nOpts && progress){
+    progress = false;
+    for (let k = 0; k < attrOrder.length && opts.length < nOpts; k++){
+      const a = attrOrder[k], p = per[a];
+      while (p.i < p.vals.length){
+        const v = p.vals[p.i++];
+        const cell = Object.assign({}, answer); cell[a] = v;
+        if (!seen[sig(cell)]){ seen[sig(cell)] = 1; opts.push({ cell: cell, attr: a, from: answer[a], to: v }); progress = true; break; }
+      }
+    }
+  }
+  if (opts.length < nOpts) return null;
+  const shuffled = rng.shuffle(opts);
+  return { options: shuffled.map(function(o){ return o.cell; }), notes: shuffled.map(function(o){ return o.attr === null ? null : { attr:o.attr, from:o.from, to:o.to }; }), answer: shuffled.findIndex(function(o){ return o.attr === null; }) };
+}
+function noteText(n, kindWord){
+  if (!n) return '';
+  return 'Difiere de la figura correcta solo en ' + (ATTR_LABEL[n.attr].toLowerCase()) + ': muestra ' + valName(n.attr, n.to) + ' donde ' + (kindWord === 'analogy' ? 'la analogía' : 'la regla') + ' exige ' + valName(n.attr, n.from) + '.';
+}
+
+/* ---------- Matrix builder ---------- */
+function buildMatrix(rng, level, ov){
+  const P = MATRIX_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const chosen = pickAttrs(rng, P.attrs, P.nVar);
+  if (!chosen) return null;
+  const ctx = makeCtx(chosen);
+  const grids = {}, specs = {}, tiersUsed = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    if (chosen.indexOf(a) >= 0){
+      const tiers = rng.shuffle(P.rules.filter(function(t){ return compatRule(a, t); }));
+      let done = false;
+      for (let j = 0; j < tiers.length && !done; j++){
+        const spec = tierToSpec(rng, tiers[j]);
+        const g = genGrid(rng, a, spec, domainOf(ctx, a));
+        if (g){ grids[a] = g; specs[a] = spec; tiersUsed[a] = tiers[j]; done = true; }
+      }
+      if (!done) return null;
+    } else { grids[a] = fill3(rng.pick(domainOf(ctx, a))); specs[a] = { type:'const' }; tiersUsed[a] = 'const'; }
+  }
+  const transposed = rng.chance(P.transp);
+  const cells = [];
+  for (let i = 0; i < 9; i++){
+    const r = Math.floor(i / 3), c = i % 3, vals = {};
+    ctx.active.forEach(function(a){ vals[a] = transposed ? grids[a][c][r] : grids[a][r][c]; });
+    cells.push(cellFrom(ctx, vals));
+  }
+  const answer = cells[8];
+  const prompt = cells.slice(0, 8).concat([null]);
+  const hints = {};
+  chosen.forEach(function(a){
+    const h = [];
+    [cells[6], cells[7], cells[2], cells[5]].forEach(function(x){ h.push(x[a]); });
+    if (ATTR_KIND[a] !== 'cat'){ h.push(answer[a] + 1, answer[a] - 1); if (ATTR_KIND[a] === 'cyc'){ h.push(mod(answer[a] + 2, ATTR_D[a]), mod(answer[a] - 2, ATTR_D[a])); } }
+    hints[a] = h.map(function(v){ return ATTR_KIND[a] === 'cyc' ? mod(v, ATTR_D[a]) : v; });
+  });
+  const built = buildOptions(rng, answer, ctx, nOpts, hints, P.close, chosen);
+  if (!built) return null;
+  const dirWord = transposed ? 'column' : 'row';
+  const rules = ctx.active.map(function(a){ return matrixRuleText(a, specs[a], grids[a], dirWord); });
+  return { kind:'matrix', level:level, prompt:prompt, options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:chosen, dir:dirWord, nOpts:nOpts };
+}
+
+/* ---------- Series ---------- */
+function seqHyps(v, a){
+  const kind = ATTR_KIND[a], D = ATTR_D[a], preds = [];
+  [1, 2, 3].forEach(function(p){
+    let ok = true;
+    for (let i = p; i < 5; i++) if (v[i] !== v[i - p]) ok = false;
+    if (ok) preds.push({ n:'period' + p, p: v[5 - p] });
+  });
+  if (kind !== 'cat'){
+    const d = mod(v[1] - v[0], D);
+    let ok = true;
+    for (let i = 1; i < 5; i++) if (mod(v[i] - v[i - 1], D) !== d) ok = false;
+    if (ok && d !== 0) preds.push({ n:'step', p: mod(v[4] + d, D) });
+    const de = mod(v[2] - v[0], D);
+    if (mod(v[4] - v[2], D) === de){
+      const dO = mod(v[3] - v[1], D);
+      preds.push({ n:'lag2', p: mod(v[3] + dO, D) });
+    }
+    if (kind === 'ord' && Math.abs(v[1] - v[0]) === 1){
+      let pos = v[0], dir = v[1] - v[0], ok2 = true;
+      for (let i = 1; i < 5 && ok2; i++){
+        let nx = pos + dir;
+        if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; }
+        if (nx !== v[i]) ok2 = false;
+        pos = nx;
+      }
+      if (ok2){ let nx = pos + dir; if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; } preds.push({ n:'bounce', p: nx }); }
+    }
+  }
+  return preds;
+}
+function solveSeries(cells, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k];
+    const v = cells.slice(0, 5).map(function(c){ return c[a]; });
+    const set = uniq(seqHyps(v, a).map(function(h){ return h.p; }));
+    if (set.length !== 1) return { ok:false, why: set.length ? 'ambiguous attribute ' + a : 'no rule fits attribute ' + a };
+    vals[a] = set[0];
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+function genSeq(rng, a, tier, dom){
+  const D = ATTR_D[a], kind = ATTR_KIND[a];
+  if (tier === 'const'){ const x = rng.pick(dom); return { seq:[x,x,x,x,x,x], spec:{ type:'const' } }; }
+  if (tier === 'prog1' || tier === 'prog2' || tier === 'prog3'){
+    if (a === 'shape') return null;
+    const n = tier === 'prog1' ? 1 : (tier === 'prog2' ? 2 : 3);
+    if (n > 1 && kind !== 'cyc' && D < 5) return null;
+    if (kind !== 'cyc' && n >= D - 1) return null;
+    const s = rng.pick([n, -n]), x = rng.int(D), seq = [];
+    for (let i = 0; i < 6; i++) seq.push(mod(x + s * i, D));
+    return { seq:seq, spec:{ type:tier, s:s } };
+  }
+  if (tier === 'alt2'){
+    if (dom.length < 2) return null;
+    const t = rng.shuffle(dom).slice(0, 2);
+    return { seq:[t[0],t[1],t[0],t[1],t[0],t[1]], spec:{ type:'alt2' } };
+  }
+  if (tier === 'cyc3'){
+    if (dom.length < 3) return null;
+    const t = rng.shuffle(dom).slice(0, 3);
+    return { seq:[t[0],t[1],t[2],t[0],t[1],t[2]], spec:{ type:'cyc3' } };
+  }
+  if (tier === 'lag2'){
+    if (a === 'shape') return null;
+    const de = rng.pick([1, 2, D - 1, D - 2]), dO = rng.pick([0, 1, D - 1]);
+    if (de === dO) return null;
+    const e0 = rng.int(D), o0 = rng.int(D), seq = [];
+    if (e0 === o0) return null;
+    for (let i = 0; i < 6; i++) seq.push(i % 2 === 0 ? mod(e0 + de * (i / 2), D) : mod(o0 + dO * ((i - 1) / 2), D));
+    return { seq:seq, spec:{ type:'lag2', de:de, dO:dO } };
+  }
+  if (tier === 'bounce'){
+    if (kind !== 'ord') return null;
+    let pos = rng.int(D), dir = rng.pick([1, -1]); const seq = [pos];
+    for (let i = 1; i < 6; i++){ let nx = pos + dir; if (nx < 0 || nx >= D){ dir = -dir; nx = pos + dir; } seq.push(nx); pos = nx; }
+    return { seq:seq, spec:{ type:'bounce' } };
+  }
+  return null;
+}
+function buildSeries(rng, level, ov){
+  const P = SERIES_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const chosen = pickAttrs(rng, P.attrs, P.nVar);
+  if (!chosen) return null;
+  const ctx = makeCtx(chosen);
+  const seqs = {}, specs = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k], dom = domainOf(ctx, a);
+    if (chosen.indexOf(a) >= 0){
+      const tiers = rng.shuffle(P.rules);
+      let done = false;
+      for (let j = 0; j < tiers.length && !done; j++){
+        const r = genSeq(rng, a, tiers[j], dom);
+        if (r){ seqs[a] = r.seq; specs[a] = r.spec; done = true; }
+      }
+      if (!done) return null;
+    } else { const r = genSeq(rng, a, 'const', dom); seqs[a] = r.seq; specs[a] = r.spec; }
+  }
+  const cells = [];
+  for (let i = 0; i < 6; i++){ const vals = {}; ctx.active.forEach(function(a){ vals[a] = seqs[a][i]; }); cells.push(cellFrom(ctx, vals)); }
+  const answer = cells[5];
+  const hints = {};
+  chosen.forEach(function(a){
+    const h = [cells[4][a], cells[3][a], cells[2][a]];
+    if (ATTR_KIND[a] !== 'cat') h.push(mod(answer[a] + 1, ATTR_D[a]), mod(answer[a] - 1, ATTR_D[a]));
+    hints[a] = h;
+  });
+  const built = buildOptions(rng, answer, ctx, nOpts, hints, P.close, chosen);
+  if (!built) return null;
+  const rules = ctx.active.map(function(a){ return seqRuleText(a, specs[a], seqs[a]); });
+  return { kind:'series', level:level, prompt:cells.slice(0, 5), options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:chosen, nOpts:nOpts };
+}
+
+/* ---------- Analogies ---------- */
+function solveAnalogy(A, B, C, ctx){
+  const vals = {};
+  for (let k = 0; k < ctx.active.length; k++){
+    const a = ctx.active[k], kind = ATTR_KIND[a], D = ATTR_D[a];
+    if (A[a] === B[a]) { vals[a] = C[a]; continue; }
+    if (kind === 'cat') return { ok:false, why:'shape changes cannot be transferred' };
+    const d = kind === 'cyc' ? mod(B[a] - A[a], D) : B[a] - A[a];
+    const p = kind === 'cyc' ? mod(C[a] + d, D) : C[a] + d;
+    if (kind !== 'cyc' && (p < 0 || p >= D)) return { ok:false, why:'change does not fit C' };
+    vals[a] = p;
+  }
+  return { ok:true, cell: cellFrom(ctx, vals) };
+}
+function buildAnalogy(rng, level, ov){
+  const P = ANALOGY_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const changed = pickAttrs(rng, P.attrs, P.changes);
+  if (!changed) return null;
+  const ctx = makeCtx(changed);
+  const deltas = {};
+  const A = {}, B = {}, C = {}, Dd = {};
+  ctx.active.forEach(function(a){
+    const dom = domainOf(ctx, a), kind = ATTR_KIND[a], D = ATTR_D[a];
+    A[a] = rng.pick(dom); C[a] = rng.pick(dom);
+    if (a === 'shape'){ while (C[a] === A[a]) C[a] = rng.pick(dom); B[a] = A[a]; Dd[a] = C[a]; return; }
+    if (changed.indexOf(a) >= 0){
+      const mags = range(P.maxD).map(function(x){ return x + 1; });
+      let d = rng.pick(mags) * rng.pick([1, -1]);
+      if (kind === 'cyc' && Math.abs(d) >= 4) d = 3;
+      if (kind !== 'cyc'){
+        // A and C both need room for the same step
+        const okVals = dom.filter(function(x){ return x + d >= 0 && x + d < D; });
+        if (okVals.length < 2) { deltas[a] = null; return; }
+        A[a] = rng.pick(okVals); C[a] = rng.pick(okVals);
+        B[a] = A[a] + d; Dd[a] = C[a] + d;
+      } else { B[a] = mod(A[a] + d, D); Dd[a] = mod(C[a] + d, D); }
+      deltas[a] = d;
+    } else { B[a] = A[a]; Dd[a] = C[a]; }
+  });
+  for (let k = 0; k < changed.length; k++) if (deltas[changed[k]] === null || deltas[changed[k]] === undefined) return null;
+  const cA = cellFrom(ctx, A), cB = cellFrom(ctx, B), cC = cellFrom(ctx, C), cD = cellFrom(ctx, Dd);
+  if (sig(cA) === sig(cC)) return null;
+  const hints = {};
+  ctx.active.forEach(function(a){
+    const h = [cC[a]];
+    if (deltas[a] !== undefined && ATTR_KIND[a] !== 'cat'){
+      const d = deltas[a], D = ATTR_D[a];
+      h.push(cD[a] + d, cD[a] - d, cC[a] - d, cC[a] + 2 * d);
+    } else if (ATTR_KIND[a] !== 'cat'){ h.push(cD[a] + 1, cD[a] - 1); }
+    hints[a] = h.map(function(v){ return ATTR_KIND[a] === 'cyc' ? mod(v, ATTR_D[a]) : v; }).filter(function(v){ return ATTR_KIND[a] === 'cyc' || (v >= 0 && v < ATTR_D[a]); });
+  });
+  const built = buildOptions(rng, cD, ctx, nOpts, hints, P.close, changed);
+  if (!built) return null;
+  const rules = [];
+  changed.forEach(function(a){
+    const d = deltas[a];
+    rules.push(ATTR_LABEL[a] + ': de A a B ' + stepText(a, d, false) + '; aplica el mismo cambio a C.');
+  });
+  rules.push('Todo lo demás (' + ctx.active.filter(function(a){ return changed.indexOf(a) < 0; }).map(function(a){ return ATTR_LABEL[a].toLowerCase(); }).join(', ') + ') se queda como en C. La analogía es relativa: aplica el mismo paso, no el mismo valor absoluto.');
+  return { kind:'analogy', level:level, prompt:[cA, cB, cC], options:built.options, answer:built.answer, notes:built.notes, ctx:ctx, rules:rules,
+    varying:changed, nOpts:nOpts };
+}
+
+/* ---------- Odd one out ---------- */
+const REL_PAIRS = [['count','shade'], ['count','size'], ['shade','size']];
+function oddCandidates(cells, ctx){
+  const out = {}, n = cells.length;
+  const single = function(vals){
+    for (let i = 0; i < n; i++){
+      const others = vals.filter(function(_, j){ return j !== i; });
+      if (others.every(function(x){ return x === others[0]; }) && vals[i] !== others[0]) return i;
+    }
+    return -1;
+  };
+  ctx.active.forEach(function(a){ const i = single(cells.map(function(c){ return c[a]; })); if (i >= 0) out['v:' + a] = i; });
+  REL_PAIRS.forEach(function(p){
+    if (ctx.active.indexOf(p[0]) < 0 || ctx.active.indexOf(p[1]) < 0) return;
+    const i = single(cells.map(function(c){ return c[p[0]] - c[p[1]]; })); if (i >= 0) out['r:' + p.join('-')] = i;
+    const j = single(cells.map(function(c){ return c[p[0]] + c[p[1]]; })); if (j >= 0) out['s:' + p.join('+')] = j;
+  });
+  return out;
+}
+function solveOdd(cells, ctx){
+  const c = oddCandidates(cells, ctx);
+  const idxs = uniq(Object.keys(c).map(function(k){ return c[k]; }));
+  if (idxs.length !== 1) return { ok:false, why: idxs.length ? 'several odd figures' : 'no odd figure' };
+  return { ok:true, index: idxs[0], via: Object.keys(c) };
+}
+function buildOdd(rng, level, ov){
+  const P = ODD_P[level];
+  const n = (ov && ov.opts) ? Math.max(4, Math.min(ov.opts, 10)) : P.n;
+  const ctx = makeCtx(P.rot ? ['rot'] : []);
+  const cons = [];
+  let pool = ctx.active.slice();
+  const ordPool = ['count','shade','size'].filter(function(a){ return ctx.active.indexOf(a) >= 0; });
+  let ordLeft = ordPool.slice();
+  for (let k = 0; k < P.cons.length; k++){
+    if (P.cons[k] === 'v'){
+      const cand = rng.shuffle(pool.filter(function(a){ return true; }));
+      if (!cand.length) return null;
+      cons.push({ type:'v', a:cand[0] }); pool = pool.filter(function(a){ return a !== cand[0]; }); ordLeft = ordLeft.filter(function(a){ return a !== cand[0]; });
+    } else {
+      if (ordLeft.length < 2) return null;
+      const two = rng.shuffle(ordLeft).slice(0, 2);
+      const A = two[0], B = two[1];
+      const dA = ATTR_D[A], dB = ATTR_D[B];
+      const ks = [];
+      for (let d = -(dB - 1); d <= dA - 1; d++){
+        let cnt = 0; for (let b = 0; b < dB; b++){ if (b + d >= 0 && b + d < dA) cnt++; }
+        if (cnt >= 3) ks.push(d);
+      }
+      if (!ks.length) return null;
+      cons.push({ type:'r', a:A, b:B, k: rng.pick(ks) });
+      pool = pool.filter(function(x){ return x !== A && x !== B; }); ordLeft = ordLeft.filter(function(x){ return x !== A && x !== B; });
+    }
+  }
+  const oddIdx = rng.int(n), broken = rng.int(cons.length);
+  const cells = [];
+  const shared = {};
+  cons.forEach(function(c, i){ if (c.type === 'v') shared[i] = rng.pick(domainOf(ctx, c.a)); });
+  for (let i = 0; i < n; i++){
+    const vals = {};
+    ctx.active.forEach(function(a){ vals[a] = rng.pick(domainOf(ctx, a)); });
+    cons.forEach(function(c, ci){
+      const isBroken = i === oddIdx && ci === broken;
+      if (c.type === 'v'){
+        if (!isBroken) vals[c.a] = shared[ci];
+        else {
+          const dom = domainOf(ctx, c.a).filter(function(v){ return v !== shared[ci]; });
+          let pick = rng.pick(dom);
+          if (P.near && ATTR_KIND[c.a] !== 'cat'){ const near = dom.filter(function(v){ return cycDist(c.a, v, shared[ci]) === 1; }); if (near.length) pick = rng.pick(near); }
+          vals[c.a] = pick;
+        }
+      } else {
+        const bs = range(ATTR_D[c.b]).filter(function(b){ return b + c.k >= 0 && b + c.k < ATTR_D[c.a]; });
+        const b = rng.pick(bs);
+        vals[c.b] = b;
+        if (!isBroken) vals[c.a] = b + c.k;
+        else {
+          const wrong = range(ATTR_D[c.a]).filter(function(x){ return x !== b + c.k; });
+          let pick = rng.pick(wrong);
+          if (P.near){ const near = wrong.filter(function(x){ return Math.abs(x - (b + c.k)) === 1; }); if (near.length) pick = rng.pick(near); }
+          vals[c.a] = pick;
+        }
+      }
+    });
+    cells.push(cellFrom(ctx, vals));
+  }
+  const sigs = cells.map(sig);
+  if (uniq(sigs).length !== cells.length) return null;
+  const rules = [];
+  const oddLetter = '§';   // replaced by the option letter when shown (options are permuted after generation)
+  cons.forEach(function(c, ci){
+    if (c.type === 'v') rules.push('Todas las figuras salvo la ' + oddLetter + ' tienen ' + ATTR_LABEL[c.a].toLowerCase() + ' = ' + valName(c.a, shared[ci]) + '.' + (ci === broken ? ' La figura ' + oddLetter + ' muestra ' + valName(c.a, cells[oddIdx][c.a]) + ' en su lugar. Esa es la regla que rompe.' : ''));
+    else rules.push('En todas las figuras salvo la ' + oddLetter + ', el índice de ' + ATTR_LABEL[c.a].toLowerCase() + ' menos el índice de ' + ATTR_LABEL[c.b].toLowerCase() + ' es siempre ' + c.k + ' (1 figura es el índice 0, negro es el índice 3, grande es el índice 2)' + (ci === broken ? '; la figura ' + oddLetter + ' tiene ' + (cells[oddIdx][c.a] - cells[oddIdx][c.b]) + ' ahí. Esa es la regla que rompe.' : '.'));
+  });
+  rules.push('Los demás atributos varían al azar y son irrelevantes.');
+  const notes = cells.map(function(c, i){ return i === oddIdx ? null : { text:'Cumple todas las reglas: no es la distinta.' }; });
+  const varyAttrs = uniq([].concat.apply([], cons.map(function(c){ return c.type === 'v' ? [c.a] : [c.a, c.b]; })));
+  return { kind:'odd', level:level, prompt:[], options:cells, answer:oddIdx, notes:notes, ctx:ctx, rules:rules, varying:varyAttrs, nOpts:n };
+}
+
+/* ---------- Logic matrices (XOR / AND / OR ...) ---------- */
+const GLYPH_SHAPES = [0, 1, 2, 3, 5, 7];
+function logicCell(slots, glyphs){ return { t:'l', slots:slots.slice(), glyphs:glyphs }; }
+function solveLogic(cells, groupsOf, nGroups){
+  const N = cells[0].slots.length, preds = {};
+  let count = 0;
+  const combos = [];
+  const rec = function(i, cur){ if (i === nGroups){ combos.push(cur.slice()); return; } LOGIC_OPS.forEach(function(o){ cur.push(o); rec(i + 1, cur); cur.pop(); }); };
+  rec(0, []);
+  [false, true].forEach(function(tr){
+    const at = function(r, c){ return tr ? cells[c * 3 + r] : cells[r * 3 + c]; };
+    combos.forEach(function(ops){
+      let ok = true;
+      for (let r = 0; r < 2 && ok; r++){
+        for (let s = 0; s < N && ok; s++){
+          const f = OP_FN[ops[groupsOf[s]]];
+          if (f(at(r, 0).slots[s], at(r, 1).slots[s]) !== at(r, 2).slots[s]) ok = false;
+        }
+      }
+      if (!ok) return;
+      const a = at(2, 0), b = at(2, 1), out = [];
+      for (let s = 0; s < N; s++) out.push(OP_FN[ops[groupsOf[s]]](a.slots[s], b.slots[s]));
+      preds[out.map(function(x){ return x ? 1 : 0; }).join('')] = out; count++;
+    });
+  });
+  const keys = Object.keys(preds);
+  if (keys.length !== 1) return { ok:false, why: keys.length ? 'ambiguous logic' : 'no logic fits' };
+  return { ok:true, slots: preds[keys[0]] };
+}
+function buildLogic(rng, level, ov){
+  const P = LOGIC_P[level], nOpts = (ov && ov.opts) || P.opts;
+  const N = P.N, G = P.groups;
+  const shapes = rng.shuffle(GLYPH_SHAPES).slice(0, G);
+  const gl = [];
+  const groupsOf = [];
+  const order = rng.shuffle(range(N));
+  for (let i = 0; i < N; i++) groupsOf[order[i]] = i % G;
+  for (let s = 0; s < N; s++) gl.push({ shape: shapes[groupsOf[s]], shade: 3 });
+  const ops = rng.shuffle(P.ops).slice(0, G);
+  if (ops.length < G) return null;
+  const transposed = level >= 2 && rng.chance(0.5);
+  const grid = [[null,null,null],[null,null,null],[null,null,null]];
+  for (let r = 0; r < 3; r++){
+    const a = [], b = [], c = [];
+    for (let s = 0; s < N; s++){ a.push(rng.chance(0.5)); b.push(rng.chance(0.5)); c.push(OP_FN[ops[groupsOf[s]]](a[s], b[s])); }
+    const cnt = function(x){ return x.filter(Boolean).length; };
+    if (cnt(a) === 0 || cnt(b) === 0 || cnt(c) === 0) return null;
+    const same = function(x, y){ return x.every(function(v, i){ return v === y[i]; }); };
+    if (same(c, a) || same(c, b)) return null;
+    grid[r] = [logicCell(a, gl), logicCell(b, gl), logicCell(c, gl)];
+  }
+  const cells = [];
+  for (let i = 0; i < 9; i++){ const r = Math.floor(i / 3), c = i % 3; cells.push(transposed ? grid[c][r] : grid[r][c]); }
+  const answer = cells[8];
+  const prompt = cells.slice(0, 8).concat([null]);
+  // distractors: one group given the wrong operator, then single-slot toggles
+  const a3 = transposed ? grid[2][0] : grid[2][0], b3 = grid[2][1];
+  const seen = {}; seen[sig(answer)] = 1;
+  const wrongOps = [];
+  for (let g = 0; g < G; g++){
+    LOGIC_OPS.forEach(function(o){
+      if (o === ops[g]) return;
+      const sl = answer.slots.slice();
+      for (let s = 0; s < N; s++) if (groupsOf[s] === g) sl[s] = OP_FN[o](a3.slots[s], b3.slots[s]);
+      wrongOps.push({ cell: logicCell(sl, gl), why: (G > 1 ? 'las marcas del grupo ' + (g + 1) + ' (' + SHAPE_ES_PL[shapes[g]] + ')' : 'las marcas') + ' se combinaron con ' + o.toUpperCase() + ' en vez de ' + ops[g].toUpperCase() });
+    });
+  }
+  const toggles = [];
+  for (let s = 0; s < N; s++){
+    const sl = answer.slots.slice(); sl[s] = !sl[s];
+    toggles.push({ cell: logicCell(sl, gl), why: 'la posición ' + (s + 1) + ' está ' + (sl[s] ? 'rellena y debería estar vacía' : 'vacía y debería estar rellena') });
+  }
+  const pool = rng.shuffle(wrongOps).slice(0, Math.ceil((nOpts - 1) / 2)).concat(rng.shuffle(toggles));
+  const opts = [{ cell: answer, why: null }];
+  pool.forEach(function(o){
+    if (opts.length >= nOpts) return;
+    const k = sig(o.cell);
+    if (seen[k]) return;
+    seen[k] = 1; opts.push(o);
+  });
+  if (opts.length < nOpts){
+    rng.shuffle(wrongOps).forEach(function(o){ if (opts.length >= nOpts) return; const k = sig(o.cell); if (!seen[k]){ seen[k] = 1; opts.push(o); } });
+  }
+  if (opts.length < nOpts) return null;
+  const sh = rng.shuffle(opts);
+  const dirWord = transposed ? 'column' : 'row';
+  const third = transposed ? 'la celda inferior de cada columna' : 'la celda de la derecha de cada fila';
+  const rules = [];
+  for (let g = 0; g < G; g++){
+    rules.push((G > 1 ? 'Grupo ' + (g + 1) + ' (' + SHAPE_ES_PL[shapes[g]] + '): ' : 'Todas las marcas: ') + OP_TEXT[ops[g]] + '. Lee ' + third + ' como el resultado de las dos primeras celdas de esa ' + DIRW[dirWord] + '.');
+  }
+  return { kind:'logic', level:level, prompt:prompt, options:sh.map(function(o){ return o.cell; }), answer:sh.findIndex(function(o){ return o.why === null; }),
+    notes: sh.map(function(o){ return o.why === null ? null : { text:'Esta opción difiere de la correcta porque ' + o.why + '.' }; }),
+    ctx:{ groupsOf:groupsOf, nGroups:G, N:N }, rules:rules, varying:[], nOpts:nOpts, dir:dirWord };
+}
+
+/* ---------- Independent verification of any item ---------- */
+function verifyItem(it){
+  const sigs = it.options.map(sig);
+  if (uniq(sigs).length !== sigs.length) return { ok:false, why:'duplicate options' };
+  if (it.answer < 0 || it.answer >= it.options.length) return { ok:false, why:'bad answer index' };
+  if (it.kind === 'odd'){
+    const r = solveOdd(it.options, it.ctx);
+    if (!r.ok) return r;
+    return r.index === it.answer ? { ok:true } : { ok:false, why:'solver found another odd figure' };
+  }
+  let sol;
+  if (it.kind === 'matrix') sol = solveMatrix(it.prompt, it.ctx);
+  else if (it.kind === 'series') sol = solveSeries(it.prompt, it.ctx);
+  else if (it.kind === 'analogy') sol = solveAnalogy(it.prompt[0], it.prompt[1], it.prompt[2], it.ctx);
+  else if (it.kind === 'logic'){
+    const r = solveLogic(it.prompt, it.ctx.groupsOf, it.ctx.nGroups);
+    if (!r.ok) return r;
+    sol = { ok:true, cell: logicCell(r.slots, it.prompt[0].glyphs) };
+  }
+  if (!sol.ok) return sol;
+  const s = sig(sol.cell);
+  const hits = sigs.map(function(x, i){ return x === s ? i : -1; }).filter(function(i){ return i >= 0; });
+  if (hits.length !== 1) return { ok:false, why:'solver answer matches ' + hits.length + ' options' };
+  if (hits[0] !== it.answer) return { ok:false, why:'solver answer differs from the stored answer' };
+  if (it.kind !== 'logic'){
+    const ans = it.options[it.answer];
+    for (let i = 0; i < it.options.length; i++) if (i !== it.answer && hamming(it.options[i], ans) !== 1) return { ok:false, why:'a distractor differs by more than one rule' };
+  }
+  return { ok:true };
+}
+
+/* ---------- Item generation ---------- */
+const BUILDERS = { matrix:buildMatrix, series:buildSeries, analogy:buildAnalogy, odd:buildOdd, logic:buildLogic };
+function genItem(seed, kind, level, index, ov){
+  ov = ov ? Object.assign({}, ov) : {};
+  for (let att = 0; att < 600; att++){
+    if (att === 250 && ov.opts && ov.opts > 4) ov.opts--;
+    if (att === 400 && ov.opts && ov.opts > 4) ov.opts--;
+    const rng = makeRng(seed + '|' + index + '|' + kind + '|' + level + '|' + att);
+    let it = null;
+    try { it = BUILDERS[kind](rng, level, ov); } catch (e) { it = null; }
+    if (it && verifyItem(it).ok){
+      it.seed = seed; it.index = index; it.attempts = att + 1;
+      return it;
+    }
+  }
+  throw new Error('item generation failed for ' + kind + ' level ' + level);
+}
+
+/* ---------- Drawing (SVG strings) ---------- */
+function f1(n){ return Math.round(n * 10) / 10; }
+function regPoly(n){ const p = []; for (let i = 0; i < n; i++){ const a = i * 2 * Math.PI / n; p.push([Math.sin(a), -Math.cos(a)]); } return p; }
+function starPts(){ const p = []; for (let i = 0; i < 10; i++){ const a = i * Math.PI / 5, r = i % 2 === 0 ? 1 : 0.45; p.push([r * Math.sin(a), -r * Math.cos(a)]); } return p; }
+const POLY = {
+  triangle:[[0,-1],[.87,.5],[-.87,.5]],
+  square:[[-.75,-.75],[.75,-.75],[.75,.75],[-.75,.75]],
+  diamond:[[0,-1],[.7,0],[0,1],[-.7,0]],
+  pentagon:regPoly(5), hexagon:regPoly(6), star:starPts(),
+  cross:[[-.3,-.9],[.3,-.9],[.3,-.3],[.9,-.3],[.9,.3],[.3,.3],[.3,.9],[-.3,.9],[-.3,.3],[-.9,.3],[-.9,-.3],[-.3,-.3]],
+  arrow:[[0,-1],[.8,0],[.35,0],[.35,.95],[-.35,.95],[-.35,0],[-.8,0]],
+  ell:[[-.6,-.8],[-.05,-.8],[-.05,.3],[.75,.3],[.75,.8],[-.6,.8]],
+  rtri:[[-.8,-.8],[-.8,.8],[.8,.8]]
+};
+const LAY = {
+  1:{ R:38, pts:[[0,0]] },
+  2:{ R:20, pts:[[-22,0],[22,0]] },
+  3:{ R:17, pts:[[0,-22],[-24,17],[24,17]] },
+  4:{ R:19, pts:[[-22,-22],[22,-22],[-22,22],[22,22]] },
+  5:{ R:15, pts:[[-27,-27],[27,-27],[-27,27],[27,27],[0,0]] }
+};
+const SIZE_SCALE = [0.55, 0.78, 1];
+const RING = [[-30,-30],[0,-30],[30,-30],[30,0],[30,30],[0,30],[-30,30],[-30,0]];
+let svgUid = 0;
+function shapeEl(shape, r, shade, rot, cx, cy, uid){
+  const fill = shade === 0 ? '#ffffff' : (shade === 1 ? 'url(#h' + uid + ')' : (shade === 2 ? '#9aa0a8' : '#222222'));
+  const st = ' fill="' + fill + '" stroke="#222" stroke-width="2.5" stroke-linejoin="round"';
+  const tf = ' transform="translate(' + f1(cx) + ' ' + f1(cy) + ')' + (rot ? ' rotate(' + (rot * 45) + ')' : '') + '"';
+  const name = SHAPES[shape];
+  if (name === 'circle') return '<circle r="' + f1(r) + '"' + st + tf + '/>';
+  if (name === 'halfdisc') return '<path d="M ' + f1(-r) + ' ' + f1(0.3 * r) + ' A ' + f1(r) + ' ' + f1(r) + ' 0 0 1 ' + f1(r) + ' ' + f1(0.3 * r) + ' Z"' + st + tf + '/>';
+  const sc = (name === 'ell' || name === 'rtri') ? 0.92 : 1;
+  return '<polygon points="' + POLY[name].map(function(p){ return f1(p[0] * r * sc) + ',' + f1(p[1] * r * sc); }).join(' ') + '"' + st + tf + '/>';
+}
+function attrBody(c, uid){
+  let out = '';
+  if (c.pos >= 0){
+    out += shapeEl(c.shape, 14, c.shade, c.rot, 50 + RING[c.pos][0], 50 + RING[c.pos][1], uid);
+    return out;
+  }
+  const lay = LAY[c.count + 1], r = lay.R * SIZE_SCALE[c.size];
+  lay.pts.forEach(function(p){ out += shapeEl(c.shape, r, c.shade, c.rot, 50 + p[0], 50 + p[1], uid); });
+  return out;
+}
+function logicBody(c, uid){
+  const N = c.slots.length;
+  let xs, ys, r;
+  if (N === 4){ xs = [30, 70]; ys = [30, 70]; r = 15; }
+  else if (N === 6){ xs = [22, 50, 78]; ys = [32, 68]; r = 11; }
+  else { xs = [22, 50, 78]; ys = [22, 50, 78]; r = 10; }
+  let out = '';
+  for (let s = 0; s < N; s++){
+    const cx = xs[s % xs.length], cy = ys[Math.floor(s / xs.length)];
+    if (c.slots[s]) out += shapeEl(c.glyphs[s].shape, r, c.glyphs[s].shade, 0, cx, cy, uid);
+    else out += '<circle cx="' + cx + '" cy="' + cy + '" r="1.6" fill="#c9c4b5"/>';
+  }
+  return out;
+}
+function cellSVG(c){
+  const uid = ++svgUid;
+  let body;
+  if (c === null) body = '<text x="50" y="68" text-anchor="middle" font-size="56" font-weight="700" fill="#777">?</text>';
+  else if (c.t === 'l') body = logicBody(c, uid);
+  else body = attrBody(c, uid);
+  return '<svg class="cell" viewBox="0 0 100 100" role="img" aria-label="figura"><defs><pattern id="h' + uid + '" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><line x1="0" y1="0" x2="0" y2="6" stroke="#222" stroke-width="2.2"/></pattern></defs><rect x="1" y="1" width="98" height="98" rx="2" fill="#fbfaf6" stroke="#8a8578"/>' + body + '</svg>';
+}
+
+return { makeRng:makeRng, genItem:genItem, verifyItem:verifyItem, sig:sig, noteText:noteText, cellSVG:cellSVG, KIND_LABEL:KIND_LABEL };
+})();
+
+/* ---------------------------------------------------------------- SP: spatial reasoning (trainer-spatial.html) */
+const SP = (function(){
+'use strict';
+function randInt(rnd, a, b){ return a + Math.floor(rnd() * (b - a + 1)); }
+function pick(rnd, arr){ return arr[Math.floor(rnd() * arr.length)]; }
+function shuffle(rnd, arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+
+/* ---------------- Vectors and rotations ---------------- */
+function vkey(v){ return v[0] + ',' + v[1] + ',' + v[2]; }
+function vadd(a, b){ return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+function vneg(a){ return [-a[0] + 0, -a[1] + 0, -a[2] + 0]; }
+function vcross(a, b){ return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+function matVec(M, v){
+  return [M[0] * v[0] + M[1] * v[1] + M[2] * v[2] + 0, M[3] * v[0] + M[4] * v[1] + M[5] * v[2] + 0, M[6] * v[0] + M[7] * v[1] + M[8] * v[2] + 0];
+}
+function matMul(A, B){
+  const C = new Array(9);
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) C[i * 3 + j] = A[i * 3] * B[j] + A[i * 3 + 1] * B[3 + j] + A[i * 3 + 2] * B[6 + j];
+  return C;
+}
+function matDet(M){
+  return M[0] * (M[4] * M[8] - M[5] * M[7]) - M[1] * (M[3] * M[8] - M[5] * M[6]) + M[2] * (M[3] * M[7] - M[4] * M[6]);
+}
+// The 24 proper rotations of the cube, built as the closure of two 90-degree turns (generation side).
+function buildRot24(){
+  const gens = [[1,0,0, 0,0,-1, 0,1,0], [0,-1,0, 1,0,0, 0,0,1]];
+  const I = [1,0,0, 0,1,0, 0,0,1];
+  const seen = new Map(); seen.set(I.join(), I);
+  const q = [I];
+  while (q.length){
+    const m = q.shift();
+    for (let g = 0; g < gens.length; g++){
+      const n = matMul(gens[g], m).map(function(x){ return x + 0; });
+      const k = n.join();
+      if (!seen.has(k)){ seen.set(k, n); q.push(n); }
+    }
+  }
+  return Array.from(seen.values());
+}
+// The same 24 rotations obtained a different way: signed permutation matrices with determinant +1 (verification side).
+function buildRot24Indep(){
+  const perms = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+  const out = [];
+  perms.forEach(function(p){
+    for (let s = 0; s < 8; s++){
+      const M = [0,0,0, 0,0,0, 0,0,0];
+      for (let i = 0; i < 3; i++) M[i * 3 + p[i]] = (s >> i) & 1 ? -1 : 1;
+      if (matDet(M) === 1) out.push(M);
+    }
+  });
+  return out;
+}
+const ROT24 = buildRot24();
+const ROT24_INDEP = buildRot24Indep();
+const DIRS6 = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+
+/* ---------------- 3D block figures ---------------- */
+function normCubes(cubes){
+  let mx = Infinity, my = Infinity, mz = Infinity;
+  cubes.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); mz = Math.min(mz, c[2]); });
+  return cubes.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0, c[2] - mz + 0]; });
+}
+function shapeKey3(cubes){
+  return normCubes(cubes).map(vkey).sort().join(';');
+}
+function canonShape3(cubes){
+  let best = null;
+  for (let i = 0; i < ROT24_INDEP.length; i++){
+    const k = shapeKey3(cubes.map(function(c){ return matVec(ROT24_INDEP[i], c); }));
+    if (best === null || k < best) best = k;
+  }
+  return best;
+}
+function sameShape3(a, b){ return canonShape3(a) === canonShape3(b); }
+function mirrorCubes(cubes){ return cubes.map(function(c){ return [-c[0] + 0, c[1], c[2]]; }); }
+function rotateCubes(cubes, M){ return cubes.map(function(c){ return matVec(M, c); }); }
+function isChiral3(cubes){ return canonShape3(cubes) !== canonShape3(mirrorCubes(cubes)); }
+
+const FIG_LEVELS = [null,
+  { arms:[3,3], len:[2,2] }, { arms:[3,3], len:[2,3] }, { arms:[4,4], len:[1,2] }, { arms:[4,4], len:[2,2] },
+  { arms:[4,5], len:[2,2] }, { arms:[5,5], len:[2,3] }, { arms:[5,6], len:[2,2] }, { arms:[6,6], len:[2,3] },
+  { arms:[7,7], len:[2,3] }, { arms:[8,8], len:[2,3] }
+];
+function genFigure(rnd, level){
+  const P = FIG_LEVELS[level];
+  for (let t = 0; t < 4000; t++){
+    const arms = randInt(rnd, P.arms[0], P.arms[1]);
+    let cur = [0, 0, 0];
+    const seen = new Set([vkey(cur)]); const cubes = [cur]; let prev = -1, ok = true;
+    for (let a = 0; a < arms && ok; a++){
+      let axis; do { axis = randInt(rnd, 0, 2); } while (axis === prev);
+      const sg = rnd() < 0.5 ? -1 : 1, len = randInt(rnd, P.len[0], P.len[1]);
+      for (let s = 0; s < len; s++){
+        cur = cur.slice(); cur[axis] += sg;
+        const k = vkey(cur);
+        if (seen.has(k)){ ok = false; break; }
+        seen.add(k); cubes.push(cur);
+      }
+      prev = axis;
+    }
+    if (!ok) continue;
+    if (!isChiral3(cubes)) continue;
+    return normCubes(cubes);
+  }
+  throw new Error('genFigure failed at level ' + level);
+}
+function hiddenCount(cubes){
+  const set = new Set(cubes.map(vkey));
+  let n = 0;
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    if (set.has(vkey([x + 1, y + 1, z + 1])) || (set.has(vkey([x + 1, y, z])) && set.has(vkey([x, y + 1, z])) && set.has(vkey([x, y, z + 1])))) n++;
+  });
+  return n;
+}
+function bestViewRotation(rnd, cubes, avoidKey){
+  let best = null, bh = Infinity;
+  for (let i = 0; i < 60; i++){
+    const rc = normCubes(rotateCubes(cubes, pick(rnd, ROT24)));
+    if (avoidKey && shapeKey3(rc) === avoidKey) continue;
+    const h = hiddenCount(rc);
+    if (h < bh){ bh = h; best = rc; }
+    if (h === 0) break;
+  }
+  return best || normCubes(cubes);
+}
+function alterCubes(rnd, cubes, near){
+  const set = new Set(cubes.map(vkey));
+  function deg(c){ let n = 0; DIRS6.forEach(function(d){ if (set.has(vkey(vadd(c, d)))) n++; }); return n; }
+  const ends = shuffle(rnd, cubes.filter(function(c){ return deg(c) === 1; }));
+  for (let i = 0; i < ends.length; i++){
+    const e = ends[i], ek = vkey(e);
+    const rest = cubes.filter(function(c){ return vkey(c) !== ek; });
+    const rs = new Set(rest.map(vkey));
+    const cands = [];
+    rest.forEach(function(c){
+      DIRS6.forEach(function(d){
+        const p = vadd(c, d), k = vkey(p);
+        if (rs.has(k) || k === ek) return;
+        if (near && Math.abs(p[0] - e[0]) + Math.abs(p[1] - e[1]) + Math.abs(p[2] - e[2]) > 2) return;
+        cands.push(p);
+      });
+    });
+    if (cands.length) return normCubes(rest.concat([pick(rnd, cands)]));
+  }
+  return null;
+}
+const WHY3 = {
+  correct:'Es la figura de referencia girada: mismos brazos, mismos giros, misma lateralidad.',
+  mirror:'Es la imagen especular de la referencia: ningún giro la convierte en la referencia (la lateralidad de las esquinas de los brazos está invertida).',
+  altered:'Se ha movido un cubo de la referencia a otro lugar.',
+  alteredMirror:'Imagen especular en la que, además, se ha movido un cubo.'
+};
+function makeRot3d(level, rnd, nopts){
+  for (let t = 0; t < 300; t++){
+    const fig = genFigure(rnd, level);
+    const ref = bestViewRotation(rnd, fig, null);
+    const correct = bestViewRotation(rnd, fig, shapeKey3(ref));
+    const keys = new Set([canonShape3(fig)]);
+    const opts = [{ cubes:correct, kind:'correct' }];
+    let ok = true;
+    for (let i = 0; i < nopts - 1 && ok; i++){
+      const kind = i === 0 ? 'mirror' : (i % 2 === 1 ? (level <= 2 ? 'altered' : 'alteredMirror') : 'altered');
+      let shape = null;
+      for (let r = 0; r < 12 && !shape; r++){
+        let s;
+        if (kind === 'mirror') s = mirrorCubes(fig);
+        else s = alterCubes(rnd, kind === 'altered' ? fig : mirrorCubes(fig), level >= 6);
+        if (!s) continue;
+        const ck = canonShape3(s);
+        if (keys.has(ck)) continue;
+        keys.add(ck); shape = s;
+      }
+      if (!shape){ ok = false; break; }
+      opts.push({ cubes:bestViewRotation(rnd, shape, null), kind:kind });
+    }
+    if (!ok) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHY3[o.kind]; });
+    return { type:'rot3d', level:level, ref:ref, options:options, answer:answer, whys:whys };
+  }
+  throw new Error('makeRot3d failed');
+}
+// What the player actually SEES: a signature of the visible faces of the isometric drawing (viewer at +x,+y,+z).
+function drawSig(cubes){
+  const IC2 = 0.8660254, res = 6, best = new Map();
+  cubes.forEach(function(c){
+    ['T','X','Y'].forEach(function(t){
+      for (let i = 0; i < res; i++) for (let j = 0; j < res; j++){
+        const a = (i + 0.5) / res, b = (j + 0.5) / res;
+        const P = t === 'T' ? [c[0] + a, c[1] + b, c[2] + 1] : (t === 'X' ? [c[0] + 1, c[1] + a, c[2] + b] : [c[0] + a, c[1] + 1, c[2] + b]);
+        const sx = (P[1] - P[0]) * IC2, sy = (P[0] + P[1]) / 2 - P[2];
+        const key = Math.round(sx * 1000) + ',' + Math.round(sy * 1000), depth = P[0] + P[1] + P[2];
+        const cur = best.get(key);
+        if (!cur || depth > cur.depth + 1e-9){
+          const ox = t === 'T' ? c[1] - c[0] : (t === 'X' ? c[1] - c[0] - 1 : c[1] + 1 - c[0]);
+          best.set(key, { depth:depth, tag:t + '@' + Math.round(ox * IC2 * 1000) + ',' + Math.round(((c[0] + c[1]) / 2 - c[2]) * 1000) });
+        }
+      }
+    });
+  });
+  return Array.from(best.entries()).map(function(e){ return e[0] + '=' + e[1].tag; }).sort().join('|');
+}
+function verifyRot3d(item){
+  const flags = item.options.map(function(o){ return sameShape3(o.cubes, item.ref); });
+  const n = flags.filter(Boolean).length;
+  if (n !== 1 || !flags[item.answer]) return false;
+  const pics = item.options.map(function(o){ return drawSig(o.cubes); });
+  if (new Set(pics).size !== pics.length) return false;
+  if (pics.indexOf(drawSig(item.ref)) >= 0) return false;
+  const ck = item.options.map(function(o){ return canonShape3(o.cubes); });
+  if (new Set(ck).size !== ck.length) return false;
+  const cref = canonShape3(item.ref), cmir = canonShape3(mirrorCubes(item.ref));
+  if (cref === cmir) return false;
+  for (let i = 0; i < item.options.length; i++){
+    if (item.options[i].kind === 'mirror' && ck[i] !== cmir) return false;
+    if (item.options[i].kind === 'correct' && ck[i] !== cref) return false;
+  }
+  return true;
+}
+
+/* ---------------- Cube nets ---------------- */
+const NET_T8 = [[1,0,0,1],[-1,0,0,1],[1,0,0,-1],[-1,0,0,-1],[0,1,1,0],[0,-1,1,0],[0,1,-1,0],[0,-1,-1,0]];
+function normCells2(cells){
+  let mx = Infinity, my = Infinity;
+  cells.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); });
+  return cells.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0].concat(c.slice(2)); }).sort(function(a, b){ return a[1] - b[1] || a[0] - b[0]; });
+}
+function canonCells2(cells){
+  let best = null;
+  NET_T8.forEach(function(T){
+    const k = normCells2(cells.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0]; })).map(function(c){ return c[0] + ',' + c[1]; }).join(';');
+    if (best === null || k < best) best = k;
+  });
+  return best;
+}
+function foldNet(cells){
+  const idx = new Map();
+  cells.forEach(function(c, i){ idx.set(c[0] + ',' + c[1], i); });
+  const faces = new Array(cells.length).fill(null);
+  faces[0] = { n:[0,0,1], r:[1,0,0], u:[0,1,0] };
+  const q = [0];
+  while (q.length){
+    const i = q.shift(), f = faces[i], cx = cells[i][0], cy = cells[i][1];
+    [[1,0],[-1,0],[0,-1],[0,1]].forEach(function(d){
+      const j = idx.get((cx + d[0]) + ',' + (cy + d[1]));
+      if (j === undefined || faces[j]) return;
+      let nf;
+      if (d[0] === 1) nf = { n:f.r, r:vneg(f.n), u:f.u };
+      else if (d[0] === -1) nf = { n:vneg(f.r), r:f.n, u:f.u };
+      else if (d[1] === -1) nf = { n:f.u, r:f.r, u:vneg(f.n) };
+      else nf = { n:vneg(f.u), r:f.r, u:f.n };
+      faces[j] = nf; q.push(j);
+    });
+  }
+  if (faces.some(function(f){ return f === null; })) return null;
+  if (new Set(faces.map(function(f){ return vkey(f.n); })).size !== cells.length) return null;
+  return faces;
+}
+function hasStrip4(cells){
+  const s = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+  for (let i = 0; i < cells.length; i++){
+    const x = cells[i][0], y = cells[i][1];
+    if (s.has((x + 1) + ',' + y) && s.has((x + 2) + ',' + y) && s.has((x + 3) + ',' + y)) return true;
+    if (s.has(x + ',' + (y + 1)) && s.has(x + ',' + (y + 2)) && s.has(x + ',' + (y + 3))) return true;
+  }
+  return false;
+}
+function enumNets(){
+  let level = new Map(); level.set('0,0', [[0, 0]]);
+  for (let size = 2; size <= 6; size++){
+    const next = new Map();
+    level.forEach(function(cells){
+      const set = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+      cells.forEach(function(c){
+        [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+          const p = [c[0] + d[0], c[1] + d[1]];
+          if (set.has(p[0] + ',' + p[1])) return;
+          const nc = normCells2(cells.concat([p]));
+          const k = canonCells2(nc);
+          if (!next.has(k)) next.set(k, nc);
+        });
+      });
+    });
+    level = next;
+  }
+  const all = Array.from(level.values());
+  return { hexominoes:all, nets:all.filter(function(c){ return foldNet(c) !== null; }) };
+}
+const NET_ENUM = enumNets();
+const NETS = NET_ENUM.nets;
+const NET_ARROWS = [0, 0, 0, 0, 0, 2, 3, 4, 5, 6, 6];   // number of faces carrying an arrow, by level
+const NET_KIND_POOL = [null, ['opp','hidden'], ['opp','hidden','swap'], ['hidden','swap'], ['swap','hidden'],
+  ['arrow','swap','hidden'], ['arrow','swap','hidden'], ['arrow','swap','swap'], ['arrow','swap','swap'], ['arrow','swap','swap'], ['arrow','swap','swap']];
+const VIEW_NORMALS = { top:[0,0,1], left:[1,0,0], right:[0,1,0] };
+const VIEW_FACES = ['top','left','right'];
+function cubeMap(cube, R){
+  const m = new Map();
+  cube.forEach(function(f){
+    m.set(vkey(matVec(R, f.n)), { col:f.col, a:f.a ? matVec(R, f.a) : null });
+  });
+  return m;
+}
+function viewTriple(cube, R){
+  const m = cubeMap(cube, R), t = {};
+  VIEW_FACES.forEach(function(k){ const f = m.get(vkey(VIEW_NORMALS[k])); t[k] = { col:f.col, a:f.a }; });
+  return t;
+}
+function tripleKey(t){
+  return VIEW_FACES.map(function(k){ return t[k].col + ':' + (t[k].a ? vkey(t[k].a) : '-'); }).join('|');
+}
+function tripleAchievable(cube, t){
+  const key = tripleKey(t);
+  for (let i = 0; i < ROT24_INDEP.length; i++) if (tripleKey(viewTriple(cube, ROT24_INDEP[i])) === key) return true;
+  return false;
+}
+function cloneTriple(t){ return JSON.parse(JSON.stringify(t)); }
+function mutateTriple(rnd, cube, R, t, kind){
+  const c = cloneTriple(t), m = cubeMap(cube, R);
+  const X = pick(rnd, VIEW_FACES);
+  const others = VIEW_FACES.filter(function(k){ return k !== X; });
+  if (kind === 'swap'){
+    const Y = pick(rnd, others);
+    const tmp = c[X].col; c[X].col = c[Y].col; c[Y].col = tmp;
+  } else if (kind === 'opp'){
+    const Y = pick(rnd, others);
+    c[X].col = m.get(vkey(vneg(VIEW_NORMALS[Y]))).col;
+  } else if (kind === 'hidden'){
+    const hid = [vneg(VIEW_NORMALS.top), vneg(VIEW_NORMALS.left), vneg(VIEW_NORMALS.right)].map(function(n){ return m.get(vkey(n)).col; });
+    c[X].col = pick(rnd, hid);
+  } else if (kind === 'arrow'){
+    const withA = VIEW_FACES.filter(function(k){ return c[k].a; });
+    if (!withA.length) return null;
+    const F = pick(rnd, withA);
+    let a = c[F].a; const turns = randInt(rnd, 1, 3);
+    for (let i = 0; i < turns; i++) a = vcross(VIEW_NORMALS[F], a);
+    c[F].a = a.map(function(x){ return x + 0; });
+  }
+  return c;
+}
+const WHYNET = {
+  correct:'Correcta: estas tres caras coinciden en una esquina en este orden, tal como se pliega el desarrollo.',
+  opp:'Imposible: muestra juntas dos caras que son opuestas en el desarrollo (las caras opuestas nunca se tocan).',
+  hidden:'Imposible: estas tres caras no coinciden en una misma esquina del cubo construido con este desarrollo.',
+  swap:'Dos caras están intercambiadas: la esquina existe, pero el orden de los colores en sentido horario está invertido (disposición especular).',
+  arrow:'Una flecha apunta en sentido erróneo para esta orientación del cubo.'
+};
+function makeNet(level, rnd, nopts){
+  for (let t = 0; t < 400; t++){
+    let base = pick(rnd, NETS.filter(function(c){ return level > 3 || hasStrip4(c); }));
+    const T = pick(rnd, NET_T8);
+    const cells = normCells2(base.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0]; }));
+    const fold = foldNet(cells);
+    if (!fold) throw new Error('transformed net does not fold');
+    const perm = shuffle(rnd, [0,1,2,3,4,5]);
+    const arrowIdx = new Set(shuffle(rnd, [0,1,2,3,4,5]).slice(0, NET_ARROWS[level]));
+    const faces = fold.map(function(f, i){
+      const k = arrowIdx.has(i) ? randInt(rnd, 0, 3) : null;
+      const dirs = [f.u, f.r, vneg(f.u), vneg(f.r)];
+      return { cell:cells[i], n:f.n, col:perm[i], k:k, a:k === null ? null : dirs[k].map(function(x){ return x + 0; }) };
+    });
+    const cube = faces.map(function(f){ return { n:f.n, col:f.col, a:f.a }; });
+    const R = pick(rnd, ROT24);
+    const correct = viewTriple(cube, R);
+    const opts = [{ t:correct, kind:'correct' }], keys = new Set([tripleKey(correct)]);
+    const pool = NET_KIND_POOL[level];
+    let guard = 0;
+    while (opts.length < nopts && guard++ < 600){
+      const kind = pool[(opts.length - 1 + Math.floor(guard / 8)) % pool.length];
+      const m = mutateTriple(rnd, cube, R, correct, kind);
+      if (!m) continue;
+      const k = tripleKey(m);
+      if (keys.has(k) || tripleAchievable(cube, m)) continue;
+      keys.add(k); opts.push({ t:m, kind:kind });
+    }
+    if (opts.length < nopts) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHYNET[o.kind]; });
+    return { type:'net', level:level, cells:cells, faces:faces, options:options, answer:answer, whys:whys };
+  }
+  throw new Error('makeNet failed');
+}
+function verifyNet(item){
+  const cube = item.faces.map(function(f){ return { n:f.n, col:f.col, a:f.a }; });
+  if (new Set(item.faces.map(function(f){ return vkey(f.n); })).size !== 6) return false;
+  const flags = item.options.map(function(o){ return tripleAchievable(cube, o.t); });
+  const keys = item.options.map(function(o){ return tripleKey(o.t); });
+  if (new Set(keys).size !== keys.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- 2D shapes: rotation and reflection ---------------- */
+const ROT2 = [[1,0,0,1],[0,-1,1,0],[-1,0,0,-1],[0,1,-1,0]];   // x' = a x + b y ; y' = c x + d y
+function normShape2(cells){
+  let mx = Infinity, my = Infinity;
+  cells.forEach(function(c){ mx = Math.min(mx, c[0]); my = Math.min(my, c[1]); });
+  return cells.map(function(c){ return [c[0] - mx + 0, c[1] - my + 0, c[2]]; });
+}
+function shapeKey2(cells){ return normShape2(cells).map(function(c){ return c[0] + ',' + c[1] + ',' + c[2]; }).sort().join(';'); }
+function canonRot2(cells){
+  let best = null;
+  ROT2.forEach(function(T){
+    const k = shapeKey2(cells.map(function(c){ return [T[0] * c[0] + T[1] * c[1] + 0, T[2] * c[0] + T[3] * c[1] + 0, c[2]]; }));
+    if (best === null || k < best) best = k;
+  });
+  return best;
+}
+function eqRot2(a, b){ return canonRot2(a) === canonRot2(b); }
+function mirror2(cells){ return cells.map(function(c){ return [-c[0] + 0, c[1], c[2]]; }); }
+function rot90(cells, k){
+  let r = cells;
+  for (let i = 0; i < (k % 4 + 4) % 4; i++) r = r.map(function(c){ return [-c[1] + 0, c[0], c[2]]; });
+  return r;
+}
+function isChiral2(cells){ return !eqRot2(cells, mirror2(cells)); }
+function bbox2(cells){
+  let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+  cells.forEach(function(p){ a = Math.min(a, p[0]); b = Math.min(b, p[1]); c = Math.max(c, p[0]); d = Math.max(d, p[1]); });
+  return { w:c - a + 1, h:d - b + 1 };
+}
+function connected2(cells){
+  if (!cells.length) return false;
+  const set = new Set(cells.map(function(c){ return c[0] + ',' + c[1]; }));
+  const seen = new Set([cells[0][0] + ',' + cells[0][1]]); const q = [cells[0]];
+  while (q.length){
+    const c = q.shift();
+    [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+      const k = (c[0] + d[0]) + ',' + (c[1] + d[1]);
+      if (set.has(k) && !seen.has(k)){ seen.add(k); q.push([c[0] + d[0], c[1] + d[1]]); }
+    });
+  }
+  return seen.size === cells.length;
+}
+const SHAPE_LEVELS = [null,
+  { N:4, k:5, col:0 }, { N:4, k:6, col:0 }, { N:5, k:7, col:0 }, { N:5, k:8, col:0 }, { N:5, k:9, col:1 },
+  { N:6, k:10, col:2 }, { N:6, k:12, col:2 }, { N:7, k:14, col:3 }, { N:7, k:16, col:3 }, { N:8, k:20, col:4 }
+];
+function genShape(rnd, level){
+  const P = SHAPE_LEVELS[level];
+  for (let t = 0; t < 4000; t++){
+    let cells = [[randInt(rnd, 0, P.N - 1), randInt(rnd, 0, P.N - 1), 1]];
+    const set = new Set([cells[0][0] + ',' + cells[0][1]]);
+    let guard = 0;
+    while (cells.length < P.k && guard++ < 400){
+      const c = pick(rnd, cells), d = pick(rnd, [[1,0],[-1,0],[0,1],[0,-1]]);
+      const x = c[0] + d[0], y = c[1] + d[1];
+      if (x < 0 || y < 0 || x >= P.N || y >= P.N || set.has(x + ',' + y)) continue;
+      set.add(x + ',' + y); cells.push([x, y, 1]);
+    }
+    if (cells.length < P.k) continue;
+    const bb = bbox2(cells);
+    if (bb.w < Math.min(3, P.N) || bb.h < Math.min(3, P.N)) continue;
+    const idx = shuffle(rnd, cells.map(function(c, i){ return i; })).slice(0, P.col);
+    idx.forEach(function(i, j){ cells[i][2] = j % 2 === 0 ? 2 : 3; });
+    if (!isChiral2(cells)) continue;
+    return normShape2(cells);
+  }
+  throw new Error('genShape failed');
+}
+function alterShape(rnd, cells, N, near){
+  for (let t = 0; t < 60; t++){
+    const kind = rnd() < 0.5 ? 'move' : 'color';
+    if (kind === 'color'){
+      const colored = cells.filter(function(c){ return c[2] !== 1; });
+      if (!colored.length) continue;
+      const a = pick(rnd, colored), b = pick(rnd, cells.filter(function(c){ return c[2] === 1; }));
+      if (!b) continue;
+      const res = cells.map(function(c){
+        if (c === a) return [c[0], c[1], 1];
+        if (c === b) return [c[0], c[1], a[2]];
+        return c.slice();
+      });
+      return normShape2(res);
+    }
+    const victim = pick(rnd, cells);
+    const rest = cells.filter(function(c){ return c !== victim; });
+    const rs = new Set(rest.map(function(c){ return c[0] + ',' + c[1]; }));
+    const cands = [];
+    rest.forEach(function(c){
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){
+        const p = [c[0] + d[0], c[1] + d[1]];
+        if (rs.has(p[0] + ',' + p[1]) || (p[0] === victim[0] && p[1] === victim[1])) return;
+        if (near && Math.abs(p[0] - victim[0]) + Math.abs(p[1] - victim[1]) > 2) return;
+        cands.push(p);
+      });
+    });
+    if (!cands.length) continue;
+    const p = pick(rnd, cands);
+    const res = rest.map(function(c){ return c.slice(); }).concat([[p[0], p[1], victim[2]]]);
+    const bb = bbox2(res);
+    if (Math.max(bb.w, bb.h) > N || !connected2(res)) continue;
+    return normShape2(res);
+  }
+  return null;
+}
+const WHY2 = {
+  correct:'Correcta.',
+  rotated:'Es solo un giro de la referencia (no una imagen especular).',
+  mirror:'Imagen especular de la referencia: no se obtiene girándola.',
+  altered:'Un cuadrado está en otro lugar (o es de otro color) respecto a la referencia.',
+  alteredMirror:'Imagen especular con un cuadrado cambiado.'
+};
+function makeShape2d(level, rnd, nopts, variant){
+  const P = SHAPE_LEVELS[level];
+  for (let t = 0; t < 300; t++){
+    const ref = genShape(rnd, level);
+    const near = level >= 6;
+    const opts = [];
+    let correct;
+    if (variant === 'rotate') correct = normShape2(rot90(ref, randInt(rnd, 1, 3)));
+    else correct = normShape2(rot90(mirror2(ref), randInt(rnd, 0, 3)));
+    opts.push({ cells:correct, kind:'correct' });
+    const keys = new Set([canonRot2(correct)]);
+    let ok = true;
+    for (let i = 0; i < nopts - 1 && ok; i++){
+      let kind;
+      if (variant === 'rotate') kind = i === 0 ? 'mirror' : (i % 2 === 1 ? (level <= 2 ? 'altered' : 'alteredMirror') : 'altered');
+      else kind = i === 0 ? 'rotated' : (i % 2 === 1 ? 'alteredMirror' : 'altered');
+      let shape = null;
+      for (let r = 0; r < 14 && !shape; r++){
+        let s;
+        if (kind === 'mirror') s = mirror2(ref);
+        else if (kind === 'rotated') s = ref;
+        else if (kind === 'altered') s = alterShape(rnd, ref, P.N, near);
+        else s = alterShape(rnd, normShape2(mirror2(ref)), P.N, near);
+        if (!s) continue;
+        const ck = canonRot2(s);
+        if (keys.has(ck)) continue;
+        keys.add(ck); shape = normShape2(rot90(s, randInt(rnd, 0, 3)));
+      }
+      if (!shape){ ok = false; break; }
+      opts.push({ cells:shape, kind:kind });
+    }
+    if (!ok) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return o.kind === 'correct' ? (variant === 'rotate' ? 'Correcta: la referencia girada en el plano.' : 'Correcta: la imagen especular de la referencia.') : WHY2[o.kind]; });
+    return { type:'shape2d', level:level, variant:variant, N:P.N, ref:ref, options:options, answer:answer, whys:whys };
+  }
+  throw new Error('makeShape2d failed');
+}
+function verifyShape2d(item){
+  const flags = item.options.map(function(o){
+    if (item.variant === 'rotate') return eqRot2(o.cells, item.ref);
+    return !eqRot2(o.cells, item.ref) && eqRot2(mirror2(o.cells), item.ref);
+  });
+  if (flags.filter(Boolean).length !== 1 || !flags[item.answer]) return false;
+  const ck = item.options.map(function(o){ return canonRot2(o.cells); });
+  if (new Set(ck).size !== ck.length) return false;
+  if (eqRot2(item.ref, mirror2(item.ref))) return false;
+  return true;
+}
+
+/* ---------------- Paper folding and punching (8 x 8 cells) ---------------- */
+const PAPER = 8;
+function foldMap(f, p){
+  const r = f.region, x = p[0], y = p[1];
+  if (f.t === 'V'){
+    const xm = (r.x0 + r.x1) / 2;
+    if ((f.keep === 'R' && x < xm) || (f.keep === 'L' && x >= xm)) return [r.x0 + r.x1 - 1 - x, y];
+    return [x, y];
+  }
+  if (f.t === 'H'){
+    const ym = (r.y0 + r.y1) / 2;
+    if ((f.keep === 'B' && y < ym) || (f.keep === 'T' && y >= ym)) return [x, r.y0 + r.y1 - 1 - y];
+    return [x, y];
+  }
+  const s = r.x1 - r.x0, u = x - r.x0, v = y - r.y0;
+  if (f.t === 'D1'){
+    if ((f.keep === 'A' && u < v) || (f.keep === 'B' && u > v)) return [r.x0 + v, r.y0 + u];
+    return [x, y];
+  }
+  // D2: anti-diagonal
+  if ((f.keep === 'A' && u + v < s - 1) || (f.keep === 'B' && u + v > s - 1)) return [r.x0 + s - 1 - v, r.y0 + s - 1 - u];
+  return [x, y];
+}
+function foldReflect(f, p){
+  const r = f.region, x = p[0], y = p[1];
+  if (f.t === 'V') return [r.x0 + r.x1 - 1 - x, y];
+  if (f.t === 'H') return [x, r.y0 + r.y1 - 1 - y];
+  const s = r.x1 - r.x0, u = x - r.x0, v = y - r.y0;
+  if (f.t === 'D1') return [r.x0 + v, r.y0 + u];
+  return [r.x0 + s - 1 - v, r.y0 + s - 1 - u];
+}
+function foldRegionAfter(f){
+  const r = f.region;
+  if (f.t === 'V'){ const xm = (r.x0 + r.x1) / 2; return f.keep === 'R' ? { x0:xm, y0:r.y0, x1:r.x1, y1:r.y1 } : { x0:r.x0, y0:r.y0, x1:xm, y1:r.y1 }; }
+  if (f.t === 'H'){ const ym = (r.y0 + r.y1) / 2; return f.keep === 'B' ? { x0:r.x0, y0:ym, x1:r.x1, y1:r.y1 } : { x0:r.x0, y0:r.y0, x1:r.x1, y1:ym }; }
+  return { x0:r.x0, y0:r.y0, x1:r.x1, y1:r.y1 };
+}
+function foldKeptCells(folds){
+  const out = [];
+  for (let y = 0; y < PAPER; y++) for (let x = 0; x < PAPER; x++){
+    let p = [x, y];
+    for (let i = 0; i < folds.length; i++) p = foldMap(folds[i], p);
+    if (p[0] === x && p[1] === y) out.push(p);
+  }
+  return out;
+}
+const FOLD_LEVELS = [null,
+  { n:1, diag:false, alt:false, punches:1 }, { n:2, diag:false, alt:false, punches:1 }, { n:2, diag:false, alt:false, punches:2 },
+  { n:3, diag:false, alt:false, punches:1 }, { n:3, diag:false, alt:false, punches:2 },
+  { n:2, diag:true, alt:true, punches:1 },   { n:2, diag:true, alt:true, punches:2 },
+  { n:2, diag:true, alt:true, punches:3 },   { n:4, diag:false, alt:true, punches:3 }, { n:4, diag:true, alt:true, punches:3 }
+];
+function genFolds(rnd, level){
+  const P = FOLD_LEVELS[level];
+  for (let t = 0; t < 200; t++){
+    let region = { x0:0, y0:0, x1:PAPER, y1:PAPER };
+    const folds = [];
+    let axis = rnd() < 0.5 ? 'V' : 'H', ok = true;
+    for (let i = 0; i < P.n; i++){
+      const w = region.x1 - region.x0, h = region.y1 - region.y0;
+      let a = P.alt ? axis : pick(rnd, ['V','H']);
+      if (a === 'V' && (w < 2 || w % 2)) a = 'H';
+      if (a === 'H' && (h < 2 || h % 2)) a = 'V';
+      if ((a === 'V' && (w < 2 || w % 2)) || (a === 'H' && (h < 2 || h % 2))){ ok = false; break; }
+      const f = { t:a, keep:a === 'V' ? pick(rnd, ['L','R']) : pick(rnd, ['T','B']), region:region };
+      folds.push(f); region = foldRegionAfter(f);
+      axis = a === 'V' ? 'H' : 'V';
+    }
+    if (!ok) continue;
+    if (P.diag){
+      if (region.x1 - region.x0 !== region.y1 - region.y0) continue;
+      const f = { t:pick(rnd, ['D1','D2']), keep:pick(rnd, ['A','B']), region:region };
+      folds.push(f);
+    }
+    return folds;
+  }
+  throw new Error('genFolds failed');
+}
+function unfoldHoles(folds, punches){
+  let set = new Map();
+  punches.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+  for (let i = folds.length - 1; i >= 0; i--){
+    const add = [];
+    set.forEach(function(p){ add.push(foldReflect(folds[i], p)); });
+    add.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+  }
+  return Array.from(set.values());
+}
+function holesByForward(folds, punches){
+  const target = new Set(punches.map(function(p){ return p[0] + ',' + p[1]; }));
+  const out = [];
+  for (let y = 0; y < PAPER; y++) for (let x = 0; x < PAPER; x++){
+    let p = [x, y];
+    for (let i = 0; i < folds.length; i++) p = foldMap(folds[i], p);
+    if (target.has(p[0] + ',' + p[1])) out.push([x, y]);
+  }
+  return out;
+}
+function holesKey(h){ return h.map(function(p){ return p[0] + ',' + p[1]; }).sort().join(';'); }
+const WHYFOLD = {
+  correct:'Correcta: cada agujero se repite en cada capa, así que al desplegar cada doblez se reflejan todos los agujeros respecto a él.',
+  partial:'Se olvidó un desdoblado: los agujeros no se reflejaron respecto a todos los pliegues.',
+  shift:'Un agujero está mal colocado (el agujero se refleja exactamente respecto al pliegue, así que conserva su distancia a él).',
+  extra:'Tiene un agujero que ninguna capa del papel plegado podría haber producido.',
+  wrongaxis:'Los agujeros se reflejaron respecto a una línea equivocada.',
+  missing:'Falta un agujero: cada perforación hace un agujero por capa.'
+};
+function makeFold(level, rnd, nopts){
+  const P = FOLD_LEVELS[level];
+  for (let t = 0; t < 300; t++){
+    const folds = genFolds(rnd, level);
+    const kept = foldKeptCells(folds);
+    if (kept.length < P.punches) continue;
+    const punches = shuffle(rnd, kept).slice(0, P.punches);
+    const S = unfoldHoles(folds, punches);
+    const sKey = holesKey(S);
+    const cands = [];
+    for (let skip = 0; skip < folds.length; skip++){
+      let set = new Map(); punches.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+      for (let i = folds.length - 1; i >= 0; i--){
+        if (i === skip) continue;
+        const add = []; set.forEach(function(p){ add.push(foldReflect(folds[i], p)); });
+        add.forEach(function(p){ set.set(p[0] + ',' + p[1], p); });
+      }
+      cands.push({ holes:Array.from(set.values()), kind:'partial' });
+    }
+    cands.push({ holes:S.map(function(p){ return [PAPER - 1 - p[0], p[1]]; }), kind:'wrongaxis' });
+    cands.push({ holes:S.map(function(p){ return [p[0], PAPER - 1 - p[1]]; }), kind:'wrongaxis' });
+    cands.push({ holes:S.map(function(p){ return [p[1], p[0]]; }), kind:'wrongaxis' });
+    for (let e = 0; e < 40; e++){
+      const i = randInt(rnd, 0, S.length - 1);
+      const dx = pick(rnd, [-1, 0, 1]), dy = pick(rnd, [-1, 0, 1]);
+      const q = [S[i][0] + dx, S[i][1] + dy];
+      if ((dx || dy) && q[0] >= 0 && q[1] >= 0 && q[0] < PAPER && q[1] < PAPER){
+        cands.push({ holes:S.map(function(p, j){ return j === i ? q : p; }), kind:'shift' });
+      }
+      if (S.length > 1) cands.push({ holes:S.filter(function(p, j){ return j !== i; }), kind:'missing' });
+      cands.push({ holes:S.concat([[randInt(rnd, 0, PAPER - 1), randInt(rnd, 0, PAPER - 1)]]), kind:'extra' });
+    }
+    const keys = new Set([sKey]); const opts = [{ holes:S, kind:'correct' }];
+    const pool = shuffle(rnd, cands);
+    pool.sort(function(a, b){ return ['partial','wrongaxis'].indexOf(b.kind) < 0 ? -1 : 1; });
+    for (let i = 0; i < pool.length && opts.length < nopts; i++){
+      const k = holesKey(pool[i].holes);
+      if (keys.has(k)) continue;
+      const dedup = new Map(); pool[i].holes.forEach(function(p){ dedup.set(p[0] + ',' + p[1], p); });
+      if (dedup.size !== pool[i].holes.length) continue;
+      keys.add(k); opts.push(pool[i]);
+    }
+    if (opts.length < nopts) continue;
+    const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+    const options = order.map(function(i){ return opts[i]; });
+    const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+    const whys = options.map(function(o){ return WHYFOLD[o.kind]; });
+    return { type:'fold', level:level, folds:folds, punches:punches, kept:kept, options:options, answer:answer, whys:whys };
+  }
+  throw new Error('makeFold failed');
+}
+function verifyFold(item){
+  const truth = holesKey(holesByForward(item.folds, item.punches));
+  const flags = item.options.map(function(o){ return holesKey(o.holes) === truth; });
+  const keys = item.options.map(function(o){ return holesKey(o.holes); });
+  if (new Set(keys).size !== keys.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- Views: top / front / side ---------------- */
+const VIEW_NAMES = ['Vista superior','Vista frontal','Vista lateral derecha','Vista lateral izquierda','Vista posterior','Vista inferior'];
+const VIEW_IDS = ['top','front','right','left','back','bottom'];
+function solidDims(cubes){
+  let gx = 0, gy = 0, gz = 0;
+  cubes.forEach(function(c){ gx = Math.max(gx, c[0] + 1); gy = Math.max(gy, c[1] + 1); gz = Math.max(gz, c[2] + 1); });
+  return { gx:gx, gy:gy, gz:gz };
+}
+function viewDims(d, id){
+  if (id === 'top' || id === 'bottom') return { rows:d.gx, cols:d.gy };
+  if (id === 'front' || id === 'back') return { rows:d.gz, cols:d.gy };
+  return { rows:d.gz, cols:d.gx };
+}
+function viewGrid(cubes, d, id){
+  const vd = viewDims(d, id);
+  const g = []; for (let r = 0; r < vd.rows; r++){ g.push(new Array(vd.cols).fill(0)); }
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    let r, k;
+    if (id === 'top'){ r = x; k = y; }
+    else if (id === 'bottom'){ r = d.gx - 1 - x; k = y; }
+    else if (id === 'front'){ r = d.gz - 1 - z; k = y; }
+    else if (id === 'back'){ r = d.gz - 1 - z; k = d.gy - 1 - y; }
+    else if (id === 'right'){ r = d.gz - 1 - z; k = d.gx - 1 - x; }
+    else { r = d.gz - 1 - z; k = x; }
+    g[r][k] = 1;
+  });
+  return g;
+}
+function viewGridIndep(cubes, d, id){
+  const vd = viewDims(d, id);
+  const set = new Set(cubes.map(vkey));
+  const g = [];
+  for (let r = 0; r < vd.rows; r++){
+    const row = [];
+    for (let k = 0; k < vd.cols; k++){
+      let hit = 0;
+      const depthMax = (id === 'top' || id === 'bottom') ? d.gz : ((id === 'front' || id === 'back') ? d.gx : d.gy);
+      for (let s = 0; s < depthMax && !hit; s++){
+        let x, y, z;
+        if (id === 'top'){ x = r; y = k; z = s; }
+        else if (id === 'bottom'){ x = d.gx - 1 - r; y = k; z = s; }
+        else if (id === 'front'){ z = d.gz - 1 - r; y = k; x = s; }
+        else if (id === 'back'){ z = d.gz - 1 - r; y = d.gy - 1 - k; x = s; }
+        else if (id === 'right'){ z = d.gz - 1 - r; x = d.gx - 1 - k; y = s; }
+        else { z = d.gz - 1 - r; x = k; y = s; }
+        if (set.has(x + ',' + y + ',' + z)) hit = 1;
+      }
+      row.push(hit);
+    }
+    g.push(row);
+  }
+  return g;
+}
+function gridKey(g){ return g.length + 'x' + (g[0] ? g[0].length : 0) + ':' + g.map(function(r){ return r.join(''); }).join('/'); }
+function flipH(g){ return g.map(function(r){ return r.slice().reverse(); }); }
+function flipV(g){ return g.slice().reverse().map(function(r){ return r.slice(); }); }
+const SOLID_LEVELS = [null,
+  { gx:3, gy:3, hmax:2 }, { gx:3, gy:3, hmax:3 }, { gx:3, gy:4, hmax:3 }, { gx:4, gy:4, hmax:2 }, { gx:4, gy:4, hmax:3 },
+  { gx:4, gy:4, hmax:4 }, { gx:5, gy:4, hmax:4 }, { gx:5, gy:5, hmax:4 }, { gx:5, gy:5, hmax:5 }, { gx:6, gy:5, hmax:5 }
+];
+function hiddenSet(cubes){
+  const set = new Set(cubes.map(vkey)), out = new Set();
+  cubes.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    if (set.has(vkey([x + 1, y + 1, z + 1])) || (set.has(vkey([x + 1, y, z])) && set.has(vkey([x, y + 1, z])) && set.has(vkey([x, y, z + 1])))) out.add(vkey(c));
+  });
+  return out;
+}
+function hiddenMatters(cubes, d){
+  const hs = hiddenSet(cubes);
+  if (!hs.size) return false;
+  const vis = cubes.filter(function(c){ return !hs.has(vkey(c)); });
+  return VIEW_IDS.some(function(id){ return gridKey(viewGrid(vis, d, id)) !== gridKey(viewGrid(cubes, d, id)); });
+}
+function genSolid(rnd, level){
+  const P = SOLID_LEVELS[level];
+  const cells = P.gx * P.gy;
+  for (let t = 0; t < 60000; t++){
+    const cubes = [];
+    for (let x = 0; x < P.gx; x++) for (let y = 0; y < P.gy; y++){
+      const h = rnd() < 0.18 ? 0 : randInt(rnd, 1, P.hmax);
+      for (let z = 0; z < h; z++) cubes.push([x, y, z]);
+    }
+    if (cubes.length < Math.ceil(cells * 0.7) || cubes.length > Math.floor(cells * P.hmax * 0.75)) continue;
+    const d = solidDims(cubes);
+    if (d.gx < 2 || d.gy < 2 || d.gz < 2) continue;
+    if (hiddenMatters(cubes, d)) continue;
+    return { cubes:cubes, dims:d };
+  }
+  throw new Error('genSolid failed');
+}
+function makeView(level, rnd, nopts, variant){
+  for (let t = 0; t < 300; t++){
+    const S = genSolid(rnd, level), d = S.dims;
+    const grids = {}; VIEW_IDS.forEach(function(id){ grids[id] = viewGrid(S.cubes, d, id); });
+    if (variant === 'named'){
+      const idx = randInt(rnd, 0, 2);
+      const target = ['top','front','right'][idx];
+      const correct = grids[target], ck = gridKey(correct);
+      const cands = [];
+      VIEW_IDS.forEach(function(id){ if (id !== target) cands.push({ g:grids[id], kind:'other', id:id }); });
+      cands.push({ g:flipH(correct), kind:'flip' }); cands.push({ g:flipV(correct), kind:'flip' });
+      for (let e = 0; e < 30; e++){
+        const g = correct.map(function(r){ return r.slice(); });
+        const r = randInt(rnd, 0, g.length - 1), c = randInt(rnd, 0, g[0].length - 1);
+        g[r][c] = 1 - g[r][c];
+        cands.push({ g:g, kind:'tweak' });
+      }
+      const keys = new Set([ck]); const opts = [{ g:correct, kind:'correct' }];
+      shuffle(rnd, cands).forEach(function(c){
+        if (opts.length >= nopts) return;
+        const k = gridKey(c.g);
+        if (keys.has(k)) return;
+        if (!c.g.some(function(r){ return r.some(function(v){ return v; }); })) return;
+        keys.add(k); opts.push(c);
+      });
+      if (opts.length < nopts) continue;
+      const order = shuffle(rnd, opts.map(function(o, i){ return i; }));
+      const options = order.map(function(i){ return opts[i]; });
+      const answer = options.findIndex(function(o){ return o.kind === 'correct'; });
+      const whys = options.map(function(o){
+        if (o.kind === 'correct') return 'Correcta.';
+        if (o.kind === 'other') return 'Es la ' + VIEW_NAMES[VIEW_IDS.indexOf(o.id)].toLowerCase() + ' del sólido, no la ' + VIEW_NAMES[VIEW_IDS.indexOf(target)].toLowerCase() + '.';
+        if (o.kind === 'flip') return 'Es la vista pedida volteada (izquierda y derecha, o arriba y abajo, intercambiadas).';
+        return 'Un cuadrado difiere de la vista real.';
+      });
+      return { type:'view', level:level, variant:variant, cubes:S.cubes, dims:d, target:target, options:options, answer:answer, whys:whys };
+    }
+    // variant 'identify': a picture is given, the solid is shown; which view is it?
+    const names = VIEW_IDS.slice();
+    const target = pick(rnd, names);
+    const given = grids[target], gk = gridKey(given);
+    const chosen = shuffle(rnd, names.filter(function(n){ return n !== target; })).slice(0, nopts - 1).concat([target]);
+    if (chosen.some(function(id){ return id !== target && gridKey(grids[id]) === gk; })) continue;
+    const order = shuffle(rnd, chosen);
+    const options = order.map(function(id){ return { id:id, kind:id === target ? 'correct' : 'other' }; });
+    const answer = order.indexOf(target);
+    const whys = options.map(function(o){ return o.kind === 'correct' ? 'Correcta.' : 'La ' + VIEW_NAMES[VIEW_IDS.indexOf(o.id)].toLowerCase() + ' de este sólido es una imagen distinta.'; });
+    return { type:'view', level:level, variant:variant, cubes:S.cubes, dims:d, target:target, given:given, options:options, answer:answer, whys:whys };
+  }
+  throw new Error('makeView failed');
+}
+function verifyView(item){
+  const d = item.dims;
+  if (item.variant === 'named'){
+    const truth = gridKey(viewGridIndep(item.cubes, d, item.target));
+    const flags = item.options.map(function(o){ return gridKey(o.g) === truth; });
+    const keys = item.options.map(function(o){ return gridKey(o.g); });
+    if (new Set(keys).size !== keys.length) return false;
+    return flags.filter(Boolean).length === 1 && flags[item.answer];
+  }
+  const gk = gridKey(item.given);
+  const flags = item.options.map(function(o){ return gridKey(viewGridIndep(item.cubes, d, o.id)) === gk; });
+  const ids = item.options.map(function(o){ return o.id; });
+  if (new Set(ids).size !== ids.length) return false;
+  return flags.filter(Boolean).length === 1 && flags[item.answer];
+}
+
+/* ---------------- Item factory and verification ---------------- */
+function generateItem(type, level, rnd, nopts, seq){
+  seq = seq || 0;
+  for (let t = 0; t < 8; t++){
+    let item;
+    if (type === 'rot3d') item = makeRot3d(level, rnd, nopts);
+    else if (type === 'net') item = makeNet(level, rnd, nopts);
+    else if (type === 'shape2d') item = makeShape2d(level, rnd, nopts, (level >= 3 && seq % 2 === 1) ? 'mirror' : 'rotate');
+    else if (type === 'fold') item = makeFold(level, rnd, nopts);
+    else if (type === 'view') item = makeView(level, rnd, nopts, (level >= 2 && seq % 2 === 1) ? 'identify' : 'named');
+    else throw new Error('unknown type ' + type);
+    if (verifyItem(item)) return item;
+  }
+  throw new Error('could not generate a verified item of type ' + type + ' level ' + level);
+}
+function verifyItem(item){
+  if (item.options.length < 2) return false;
+  if (item.type === 'rot3d') return verifyRot3d(item);
+  if (item.type === 'net') return verifyNet(item);
+  if (item.type === 'shape2d') return verifyShape2d(item);
+  if (item.type === 'fold') return verifyFold(item);
+  if (item.type === 'view') return verifyView(item);
+  return false;
+}
+
+/* ---------- SVG drawing ---------- */
+function esc(s){
+  return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+const IC = 0.8660254;
+function isoP(x, y, z){ return [(y - x) * IC, (x + y) * 0.5 - z]; }
+function pstr(list){
+  return list.map(function(p){ const q = isoP(p[0], p[1], p[2]); return q[0].toFixed(3) + ',' + q[1].toFixed(3); }).join(' ');
+}
+function isoCubeCorners(c){
+  const x = c[0], y = c[1], z = c[2], pts = [];
+  [0, 1].forEach(function(a){ [0, 1].forEach(function(b){ [0, 1].forEach(function(e){ pts.push(isoP(x + a, y + b, z + e)); }); }); });
+  return pts;
+}
+function isoBBox(cubes){
+  let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+  cubes.forEach(function(cu){ isoCubeCorners(cu).forEach(function(p){ a = Math.min(a, p[0]); b = Math.min(b, p[1]); c = Math.max(c, p[0]); d = Math.max(d, p[1]); }); });
+  return { minx:a, miny:b, maxx:c, maxy:d, w:c - a, h:d - b };
+}
+function svgBox(cx, cy, side, inner, extra){
+  const s = side;
+  return '<svg viewBox="' + (cx - s / 2).toFixed(3) + ' ' + (cy - s / 2).toFixed(3) + ' ' + s.toFixed(3) + ' ' + s.toFixed(3) +
+    '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(extra || 'figura') + '">' + inner + '</svg>';
+}
+function isoFigureInner(cubes){
+  const sorted = cubes.slice().sort(function(a, b){ return (a[0] + a[1] + a[2]) - (b[0] + b[1] + b[2]) || a[0] - b[0] || a[1] - b[1] || a[2] - b[2]; });
+  let out = '<g stroke="#1b1b1b" stroke-width="0.07" stroke-linejoin="round">';
+  sorted.forEach(function(c){
+    const x = c[0], y = c[1], z = c[2];
+    out += '<polygon fill="#d6ecfb" points="' + pstr([[x,y,z+1],[x+1,y,z+1],[x+1,y+1,z+1],[x,y+1,z+1]]) + '"/>';
+    out += '<polygon fill="#79b3d9" points="' + pstr([[x+1,y,z],[x+1,y+1,z],[x+1,y+1,z+1],[x+1,y,z+1]]) + '"/>';
+    out += '<polygon fill="#4a86ad" points="' + pstr([[x,y+1,z],[x+1,y+1,z],[x+1,y+1,z+1],[x,y+1,z+1]]) + '"/>';
+  });
+  return out + '</g>';
+}
+function figureSet(cubeLists){
+  let side = 0;
+  cubeLists.forEach(function(cl){ const b = isoBBox(cl); side = Math.max(side, b.w, b.h); });
+  return side + 0.6;
+}
+function isoFigureSvg(cubes, side, label){
+  const b = isoBBox(cubes);
+  return svgBox((b.minx + b.maxx) / 2, (b.miny + b.maxy) / 2, side, isoFigureInner(cubes), label);
+}
+const FACE_COLORS = ['#c8452f','#2f6fb3','#4a9a63','#e0b23a','#7a5aa6','#f4f1e8'];
+function arrowPoly3(c, n, a){
+  const w = vcross(n, a);
+  function P(s, t){ return [c[0] + a[0] * s + w[0] * t, c[1] + a[1] * s + w[1] * t, c[2] + a[2] * s + w[2] * t]; }
+  return [P(-0.32, 0.08), P(0.02, 0.08), P(0.02, 0.22), P(0.34, 0), P(0.02, -0.22), P(0.02, -0.08), P(-0.32, -0.08)];
+}
+function isoFaceCubeSvg(t){
+  const faces = [
+    { k:'top',   pts:[[0,0,1],[1,0,1],[1,1,1],[0,1,1]], c:[0.5,0.5,1], n:[0,0,1], shade:0 },
+    { k:'left',  pts:[[1,0,0],[1,1,0],[1,1,1],[1,0,1]], c:[1,0.5,0.5], n:[1,0,0], shade:0.10 },
+    { k:'right', pts:[[0,1,0],[1,1,0],[1,1,1],[0,1,1]], c:[0.5,1,0.5], n:[0,1,0], shade:0.22 }
+  ];
+  let out = '<g stroke="#1b1b1b" stroke-width="0.05" stroke-linejoin="round">';
+  faces.forEach(function(f){
+    const face = t[f.k];
+    out += '<polygon fill="' + FACE_COLORS[face.col] + '" points="' + pstr(f.pts) + '"/>';
+    if (f.shade) out += '<polygon fill="rgba(0,0,0,' + f.shade + ')" stroke="none" points="' + pstr(f.pts) + '"/>';
+    if (face.a) out += '<polygon fill="#111" stroke="#fff" stroke-width="0.02" points="' + pstr(arrowPoly3(f.c, f.n, face.a)) + '"/>';
+  });
+  return svgBox(0, -0.25, 3.0, out + '</g>', 'cubo');
+}
+function netSvg(item){
+  let mx = 0, my = 0;
+  item.faces.forEach(function(f){ mx = Math.max(mx, f.cell[0] + 1); my = Math.max(my, f.cell[1] + 1); });
+  const side = Math.max(mx, my) + 0.6;
+  let out = '<g stroke="#1b1b1b" stroke-width="0.05">';
+  item.faces.forEach(function(f){
+    const x = f.cell[0], y = f.cell[1];
+    out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + FACE_COLORS[f.col] + '"/>';
+    if (f.k !== null){
+      const dirs = [[0,-1],[1,0],[0,1],[-1,0]], d = dirs[f.k], cx = x + 0.5, cy = y + 0.5;
+      const P = function(s, t){ return (cx + d[0] * s - d[1] * t).toFixed(3) + ',' + (cy + d[1] * s + d[0] * t).toFixed(3); };
+      out += '<polygon fill="#111" stroke="#fff" stroke-width="0.02" points="' + [P(-0.32,0.08),P(0.02,0.08),P(0.02,0.22),P(0.34,0),P(0.02,-0.22),P(0.02,-0.08),P(-0.32,-0.08)].join(' ') + '"/>';
+    }
+  });
+  return svgBox(mx / 2, my / 2, side, out + '</g>', 'desarrollo de cubo');
+}
+const SHAPE_FILL = { 1:'#3f78b5', 2:'#d98b3a', 3:'#6ea57b' };
+function shapeSvg(cells, N){
+  const bb = bbox2(cells), ox = (N - bb.w) / 2, oy = (N - bb.h) / 2;
+  let out = '<g stroke="#1b1b1b" stroke-width="0.06">';
+  cells.forEach(function(c){ out += '<rect x="' + (c[0] + ox).toFixed(2) + '" y="' + (c[1] + oy).toFixed(2) + '" width="1" height="1" fill="' + SHAPE_FILL[c[2]] + '"/>'; });
+  return svgBox(N / 2, N / 2, N + 0.6, out + '</g>', 'forma plana');
+}
+function gridSvg(g, maxR, maxC){
+  const R = g.length, C = g[0].length, ox = (maxC - C) / 2, oy = (maxR - R) / 2;
+  let out = '<g stroke="#b7b2a3" stroke-width="0.05">';
+  for (let r = 0; r < R; r++) for (let c = 0; c < C; c++){
+    out += '<rect x="' + (c + ox) + '" y="' + (r + oy) + '" width="1" height="1" fill="' + (g[r][c] ? '#1a4d8f' : '#f4f1e8') + '"/>';
+  }
+  const side = Math.max(maxR, maxC) + 0.6;
+  return svgBox(maxC / 2, maxR / 2, side, out + '</g>', 'vista');
+}
+let markerCounter = 0;
+function paperSvg(o){
+  const id = 'ah' + (markerCounter++);
+  let out = '<defs><marker id="' + id + '" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 z" fill="#b3450d"/></marker></defs>';
+  out += '<rect x="0" y="0" width="8" height="8" fill="none" stroke="#b7b2a3" stroke-width="0.06" stroke-dasharray="0.25 0.2"/>';
+  if (o.poly) out += '<polygon points="' + o.poly + '" fill="#f4f1e8" stroke="#222" stroke-width="0.08"/>';
+  else if (o.region) out += '<rect x="' + o.region.x0 + '" y="' + o.region.y0 + '" width="' + (o.region.x1 - o.region.x0) + '" height="' + (o.region.y1 - o.region.y0) + '" fill="#f4f1e8" stroke="#222" stroke-width="0.08"/>';
+  if (o.grid){
+    for (let i = 1; i < 8; i++) out += '<line x1="' + i + '" y1="0" x2="' + i + '" y2="8" stroke="#00000022" stroke-width="0.04"/><line x1="0" y1="' + i + '" x2="8" y2="' + i + '" stroke="#00000022" stroke-width="0.04"/>';
+  }
+  (o.creases || []).forEach(function(c){ out += '<line x1="' + c.x1 + '" y1="' + c.y1 + '" x2="' + c.x2 + '" y2="' + c.y2 + '" stroke="#d62828" stroke-width="0.14" stroke-dasharray="0.4 0.25"/>'; });
+  if (o.arrow) out += '<line x1="' + o.arrow.x1.toFixed(2) + '" y1="' + o.arrow.y1.toFixed(2) + '" x2="' + o.arrow.x2.toFixed(2) + '" y2="' + o.arrow.y2.toFixed(2) + '" stroke="#b3450d" stroke-width="0.2" marker-end="url(#' + id + ')"/>';
+  (o.holes || []).forEach(function(h){ out += '<circle cx="' + (h[0] + 0.5) + '" cy="' + (h[1] + 0.5) + '" r="0.32" fill="#1b1b1b" stroke="#fbfaf6" stroke-width="0.06"/>'; });
+  return '<svg viewBox="-0.4 -0.4 8.8 8.8" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="papel">' + out + '</svg>';
+}
+function triPoly(region, f){
+  const r = region, s = r.x1 - r.x0;
+  if (f.t === 'D1') return f.keep === 'A' ? [[r.x0,r.y0],[r.x1,r.y0],[r.x1,r.y1]] : [[r.x0,r.y0],[r.x0,r.y1],[r.x1,r.y1]];
+  return f.keep === 'A' ? [[r.x1,r.y0],[r.x1,r.y1],[r.x0,r.y1]] : [[r.x0,r.y0],[r.x1,r.y0],[r.x0,r.y1]];
+}
+function foldPanels(item){
+  const panels = [];
+  const folds = item.folds;
+  let region = { x0:0, y0:0, x1:PAPER, y1:PAPER };
+  for (let i = 0; i < folds.length; i++){
+    const f = folds[i], r = f.region;
+    let crease, from, to;
+    if (f.t === 'V'){
+      const xm = (r.x0 + r.x1) / 2; crease = { x1:xm, y1:r.y0, x2:xm, y2:r.y1 };
+      const ym = (r.y0 + r.y1) / 2, a = (r.x0 + xm) / 2, b = (xm + r.x1) / 2;
+      from = f.keep === 'R' ? [a, ym] : [b, ym]; to = f.keep === 'R' ? [b, ym] : [a, ym];
+    } else if (f.t === 'H'){
+      const ym = (r.y0 + r.y1) / 2; crease = { x1:r.x0, y1:ym, x2:r.x1, y2:ym };
+      const xm = (r.x0 + r.x1) / 2, a = (r.y0 + ym) / 2, b = (ym + r.y1) / 2;
+      from = f.keep === 'B' ? [xm, a] : [xm, b]; to = f.keep === 'B' ? [xm, b] : [xm, a];
+    } else {
+      crease = f.t === 'D1' ? { x1:r.x0, y1:r.y0, x2:r.x1, y2:r.y1 } : { x1:r.x1, y1:r.y0, x2:r.x0, y2:r.y1 };
+      const kept = triPoly(r, f);
+      const cxk = (kept[0][0] + kept[1][0] + kept[2][0]) / 3, cyk = (kept[0][1] + kept[1][1] + kept[2][1]) / 3;
+      const mx = (r.x0 + r.x1) / 2, my = (r.y0 + r.y1) / 2;
+      to = [cxk, cyk]; from = [2 * mx - cxk, 2 * my - cyk];
+    }
+    const sh = 0.35, dx = to[0] - from[0], dy = to[1] - from[1], len = Math.sqrt(dx * dx + dy * dy) || 1;
+    const arrow = { x1:from[0] + dx / len * sh, y1:from[1] + dy / len * sh, x2:to[0] - dx / len * sh, y2:to[1] - dy / len * sh };
+    panels.push({ label:'Pliegue ' + (i + 1), svg:paperSvg({ region:region, creases:[crease], arrow:arrow }) });
+    if (f.t === 'D1' || f.t === 'D2'){
+      const tp = triPoly(r, f);
+      region = { poly:tp.map(function(p){ return p[0] + ',' + p[1]; }).join(' ') };
+    } else region = foldRegionAfter(f);
+  }
+  const finalOpts = { holes:item.punches };
+  if (region.poly) finalOpts.poly = region.poly; else finalOpts.region = region;
+  panels.push({ label:'Perforar', svg:paperSvg(finalOpts) });
+  return panels;
+}
+
+return { generateItem:generateItem, verifyItem:verifyItem, VIEW_NAMES:VIEW_NAMES, VIEW_IDS:VIEW_IDS,
+  figureSet:figureSet, isoFigureSvg:isoFigureSvg, isoFaceCubeSvg:isoFaceCubeSvg, netSvg:netSvg, shapeSvg:shapeSvg,
+  gridSvg:gridSvg, paperSvg:paperSvg, foldPanels:foldPanels };
+})();
+
+/* ---------------------------------------------------------------- AT: attention and perception (d2 pools of aptitude-trainer.html) */
+const AT = (function(){
+'use strict';
+// d2: the target is a "d" with exactly two dashes (above, below or split). Near lookalikes as in aptitude-trainer.html:
+// a d with 1 or 3 dashes (right letter, wrong count) and a p with 2 dashes (right count, wrong letter).
+const D2_TGT = [[0,2],[2,0],[1,1]];
+const D2_NEAR = [{ c:'d', up:0, dn:1 }, { c:'d', up:1, dn:0 }, { c:'d', up:1, dn:2 }, { c:'d', up:2, dn:1 }, { c:'p', up:0, dn:2 }, { c:'p', up:2, dn:0 }, { c:'p', up:1, dn:1 }];
+const D2_FAR = [{ c:'d', up:2, dn:2 }, { c:'p', up:0, dn:1 }, { c:'p', up:1, dn:0 }, { c:'p', up:1, dn:2 }, { c:'p', up:2, dn:1 }, { c:'p', up:2, dn:2 }];
+function isTarget(s){ return s.c === 'd' && s.up + s.dn === 2; }
+function pickOpts(rng, truth, cands, max){
+  const opts = [{ v:truth, why:null }], seen = {}; seen[truth] = 1;
+  cands.forEach(function(c){ if (opts.length < 4 && c.v >= 0 && c.v <= max && !seen[c.v]){ seen[c.v] = 1; opts.push(c); } });
+  return opts.length === 4 ? rng.shuffle(opts) : null;
+}
+function makeD2(rng, level){
+  const n = 16 + 2 * level, near = 0.3 + 0.08 * (level - 3);
+  for (let t = 0; t < 500; t++){
+    const row = [];
+    for (let i = 0; i < n; i++){
+      if (rng.chance(0.3)){ const x = rng.pick(D2_TGT); row.push({ c:'d', up:x[0], dn:x[1] }); }
+      else { const o = rng.pick(rng.chance(near) ? D2_NEAR : D2_FAR); row.push({ c:o.c, up:o.up, dn:o.dn }); }
+    }
+    const T = row.filter(isTarget).length;
+    const P2 = row.filter(function(s){ return s.c === 'p' && s.up + s.dn === 2; }).length;
+    const D13 = row.filter(function(s){ return s.c === 'd' && (s.up + s.dn) % 2 === 1; }).length;
+    if (T < 3 || !P2 || !D13) continue;
+    const cands = rng.shuffle([{ v:T + P2, why:'Cuenta también las p con dos rayas.' }, { v:T + D13, why:'Cuenta también las d con una o tres rayas.' }])
+      .concat(rng.shuffle([{ v:T - 1, why:'Se salta una d con dos rayas.' }, { v:T + 1, why:'Cuenta una de más.' }]))
+      .concat([{ v:T - 2, why:'Se salta dos d con dos rayas.' }, { v:T + 2, why:'Cuenta dos de más.' }]);
+    const opts = pickOpts(rng, T, cands, n);
+    if (!opts) continue;
+    return { type:'d2', level:level, row:row, options:opts.map(function(o){ return o.v; }),
+      whys:opts.map(function(o){ return o.why || ('Correcta: ' + T + ' d con dos rayas.'); }), answer:opts.findIndex(function(o){ return o.why === null; }) };
+  }
+  throw new Error('makeD2 failed');
+}
+// Code comparison: pairs of radio-style codes; how many pairs differ? Differences are one swapped pair or one changed character.
+const AIRL = ['IBE','VLG','AEA','RYR','EZY','DLH','AFR','BAW','KLM','TAP','ANE','SWR'];
+const LETS = 'ABCDEFGHJKLMNPRSTUVWXYZ', DIG = '0123456789';
+function rs(rng, set, n){ let s = ''; for (let i = 0; i < n; i++) s += set[rng.int(set.length)]; return s; }
+function makeCode(rng){
+  const k = rng.int(4);
+  if (k === 0) return rng.pick(AIRL) + rs(rng, DIG, rng.range(3, 4));
+  if (k === 1) return rs(rng, '01234567', 4);
+  if (k === 2) return '1' + rs(rng, '1223', 1) + rs(rng, DIG, 1) + '.' + rs(rng, DIG, 2) + rng.pick(['0','5']);
+  return 'EC-' + rs(rng, LETS, 3);
+}
+function mutate(rng, s){
+  const pos = []; for (let i = 0; i < s.length; i++) if (/[0-9A-Z]/.test(s[i])) pos.push(i);
+  for (let t = 0; t < 50; t++){
+    const i = rng.pick(pos);
+    let out;
+    if (rng.chance(0.5) && i + 1 < s.length && /[0-9A-Z]/.test(s[i + 1]) && s[i] !== s[i + 1]) out = s.slice(0, i) + s[i + 1] + s[i] + s.slice(i + 2);
+    else {
+      const set = /[0-9]/.test(s[i]) ? DIG : LETS;
+      let c = s[i]; while (c === s[i]) c = set[rng.int(set.length)];
+      out = s.slice(0, i) + c + s.slice(i + 1);
+    }
+    if (out !== s) return out;
+  }
+  return null;
+}
+function makeCmp(rng, level){
+  const n = 5 + Math.floor((level - 3) / 2);
+  for (let t = 0; t < 300; t++){
+    const left = [], seen = {};
+    while (left.length < n){ const c = makeCode(rng); if (!seen[c]){ seen[c] = 1; left.push(c); } }
+    const K = rng.int(Math.min(4, n - 1) + 1);
+    const idx = []; for (let i = 0; i < n; i++) idx.push(i);
+    const diff = rng.shuffle(idx).slice(0, K);
+    const pairs = left.map(function(a, i){ return [a, diff.indexOf(i) >= 0 ? mutate(rng, a) : a]; });
+    if (pairs.some(function(p){ return p[1] === null; })) continue;
+    const cands = rng.shuffle([{ v:K - 1, why:'Pasa por alto una diferencia.' }, { v:K + 1, why:'Ve una diferencia que no existe.' }])
+      .concat(rng.shuffle([{ v:K - 2, why:'Pasa por alto dos diferencias.' }, { v:K + 2, why:'Ve dos diferencias que no existen.' }]))
+      .concat([{ v:K + 3, why:'Ve tres diferencias que no existen.' }]);
+    const opts = pickOpts(rng, K, cands, n);
+    if (!opts) continue;
+    const rows = diff.slice().sort(function(a, b){ return a - b; }).map(function(i){ return i + 1; });
+    return { type:'cmp', level:level, pairs:pairs, options:opts.map(function(o){ return o.v; }),
+      whys:opts.map(function(o){ return o.why || ('Correcta: ' + (K ? 'distintas las filas ' + rows.join(', ') : 'todas iguales') + '.'); }), answer:opts.findIndex(function(o){ return o.why === null; }) };
+  }
+  throw new Error('makeCmp failed');
+}
+function make(kind, rng, level){ return kind === 'd2' ? makeD2(rng, level) : makeCmp(rng, level); }
+// Independent recount (different predicate from the generator).
+function verify(it){
+  let truth;
+  if (it.type === 'd2') truth = it.row.reduce(function(n, s){ return n + (s.c === 'd' && ['02','20','11'].indexOf('' + s.up + s.dn) >= 0 ? 1 : 0); }, 0);
+  else truth = it.pairs.reduce(function(n, p){ return n + (p[0].length !== p[1].length || p[0].split('').some(function(ch, i){ return ch !== p[1][i]; }) ? 1 : 0); }, 0);
+  if (it.options.length !== 4 || new Set(it.options).size !== 4) return false;
+  const hits = it.options.filter(function(v){ return v === truth; }).length;
+  return hits === 1 && it.options[it.answer] === truth;
+}
+function d2Svg(it){
+  let lines = '';
+  const pos = function(n){ return n === 1 ? [12] : [8, 16]; };
+  if (it.up) pos(it.up).forEach(function(x){ lines += '<line x1="' + x + '" y1="3" x2="' + x + '" y2="10"/>'; });
+  if (it.dn) pos(it.dn).forEach(function(x){ lines += '<line x1="' + x + '" y1="31" x2="' + x + '" y2="38"/>'; });
+  return '<svg class="d2c" viewBox="0 0 24 42" aria-hidden="true"><g stroke="#111" stroke-width="2" stroke-linecap="round">' + lines + '</g>' +
+    '<text x="12" y="27" text-anchor="middle" font-size="24" font-family="Arial,Helvetica,sans-serif" fill="#111">' + it.c + '</text></svg>';
+}
+return { make:make, verify:verify, d2Svg:d2Svg };
+})();
+
+/* ---------------------------------------------------------------- The form: 76 items, A-D, scoring */
+const N_ITEMS = 76, LIMIT = 3600, BEST_NET = 72.01, MAX_PTS = 50, PASS_PTS = 25, TOP_NET = 60;
+const LETTERS = ['A','B','C','D'];
+const FAMS = ['abstracto','series','espacial','atencion'];
+const FAM_LABEL = { abstracto:'Abstracto', series:'Series', espacial:'Espacial', atencion:'Atención' };
+// [source, kind, how many]; levels run 3..7 inside each kind (ascending difficulty inside each family block)
+const PLAN = {
+  abstracto: [['mx','matrix',9], ['mx','logic',5], ['mx','analogy',6], ['mx','odd',5]],
+  series:    [['mx','series',13]],
+  espacial:  [['sp','rot3d',5], ['sp','net',5], ['sp','shape2d',5], ['sp','fold',5], ['sp','view',5]],
+  atencion:  [['at','d2',7], ['at','cmp',6]]
+};
+const KIND_ES = { matrix:'Matriz', logic:'Matriz lógica', analogy:'Analogía', odd:'Intruso', series:'Serie',
+  rot3d:'Rotación 3D', net:'Desarrollo de cubo', shape2d:'Giro y simetría', fold:'Plegado', view:'Vistas', d2:'d2', cmp:'Comparación' };
+// Form codes: 5 random characters + 1 check character, alphabet without 0/O, 1/I/L.
+const CODE_AB = '23456789abcdefghjkmnpqrstuvwxyz';
+function codeCheck(s5){ let t = 0; for (let i = 0; i < 5; i++) t += (CODE_AB.indexOf(s5[i]) + 1) * (i + 3); return CODE_AB[t % CODE_AB.length]; }
+function newCode(rnd){ rnd = rnd || Math.random; let s = ''; for (let i = 0; i < 5; i++) s += CODE_AB[Math.floor(rnd() * CODE_AB.length)]; return s + codeCheck(s); }
+function normCode(s){
+  const c = String(s || '').toLowerCase().replace(/[^0-9a-z]/g, '');
+  if (c.length !== 6) return null;
+  for (let i = 0; i < 6; i++) if (CODE_AB.indexOf(c[i]) < 0) return null;
+  return codeCheck(c.slice(0, 5)) === c[5] ? c : null;
+}
+function placeAnswer(it, target){
+  const n = it.options.length, a = it.answer, others = [], order = [];
+  for (let i = 0; i < n; i++) if (i !== a) others.push(i);
+  let k = 0;
+  for (let j = 0; j < n; j++) order.push(j === target ? a : others[k++]);
+  it.options = order.map(function(i){ return it.options[i]; });
+  if (it.notes) it.notes = order.map(function(i){ return it.notes[i]; });
+  if (it.whys) it.whys = order.map(function(i){ return it.whys[i]; });
+  it.answer = target;
+}
+function verifyQ(q){
+  const it = q.it;
+  if (!it || it.options.length !== 4 || it.answer < 0 || it.answer > 3) return false;
+  if (q.src === 'mx') return MX.verifyItem(it).ok;
+  if (q.src === 'sp') return SP.verifyItem(it);
+  return AT.verify(it);
+}
+function makeOne(code, s, n){
+  if (s.src === 'mx') return MX.genItem(code + '|mx', s.kind, s.level, n, { opts:4 });
+  if (s.src === 'sp'){
+    for (let a = 0; a < 6; a++){ try { return SP.generateItem(s.kind, s.level, MX.makeRng(code + '|sp|' + n + '|' + a).next, 4, s.seq); } catch (e) {} }
+    throw new Error('spatial item failed: ' + s.kind);
+  }
+  return AT.make(s.kind, MX.makeRng(code + '|at|' + n), s.level);
+}
+function buildForm(code){
+  const rng = MX.makeRng(code + '|form');
+  const slots = [];
+  FAMS.forEach(function(fam){
+    let list = [];
+    PLAN[fam].forEach(function(p){ for (let j = 0; j < p[2]; j++) list.push({ fam:fam, src:p[0], kind:p[1], level:3 + Math.floor(j * 5 / p[2]), seq:j }); });
+    list = rng.shuffle(list);
+    list.sort(function(a, b){ return a.level - b.level; });
+    slots.push.apply(slots, list);
+  });
+  const keys = [];
+  for (let i = 0; i < N_ITEMS / 4; i++) keys.push(0, 1, 2, 3);
+  const target = rng.shuffle(keys);
+  slots.forEach(function(s, n){
+    s.n = n;
+    s.it = makeOne(code, s, n);
+    placeAnswer(s.it, target[n]);
+    if (!verifyQ(s)) throw new Error('item ' + (n + 1) + ' failed verification');
+  });
+  return { code:code, items:slots };
+}
+function round2(x){ return Math.round(x * 100) / 100; }
+function scoreForm(form, ans){
+  const fam = {};
+  FAMS.forEach(function(f){ fam[f] = { c:0, w:0, b:0 }; });
+  let c = 0, w = 0, b = 0;
+  form.items.forEach(function(q, i){
+    const a = ans[i], x = fam[q.fam];
+    if (a === null || a === undefined || a < 0){ b++; x.b++; }
+    else if (a === q.it.answer){ c++; x.c++; }
+    else { w++; x.w++; }
+  });
+  return { c:c, w:w, b:b, net:round2(c - w / 3), fam:fam };
+}
+// Published mark: the best net score of the call is worth 50 (2025: best net about 72.01 of 76).
+function toPts(net){ return round2(Math.min(MAX_PTS, Math.max(0, net) * MAX_PTS / BEST_NET)); }
+function makeRecord(r, secs, paper, ts){
+  const rec = { ts:ts, correct:r.c, wrong:r.w, blank:r.b, net:r.net, secs:secs, fam:r.fam };
+  if (paper) rec.paper = 1;
+  return rec;
+}
+function pushRecord(data, rec){
+  const d = (data && typeof data === 'object' && !Array.isArray(data)) ? data : {};
+  if (!Array.isArray(d.sessions)) d.sessions = [];
+  d.sessions.push(rec);
+  if (d.sessions.length > 60) d.sessions = d.sessions.slice(-60);
+  return d;
+}
+// ==== PURE LOGIC END ====
+
+/* ==================================================================== USER INTERFACE */
+const STORE_KEY = 'atc_aptmock_v1', RUN_KEY = 'atc_aptmock_run_v1';
+const app = document.getElementById('app');
+let S = null, tickId = null, onKey = null;
+function $(id){ return document.getElementById(id); }
+function escH(s){ return String(s === null || s === undefined ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function show(html){ app.innerHTML = html; window.scrollTo(0, 0); }
+function stop(){ if (tickId){ clearInterval(tickId); tickId = null; } onKey = null; }
+function lsGet(k){ try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function lsSet(k, v){ try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+function num(x, d){ return Number(x).toFixed(d === undefined ? 2 : d).replace('.', ','); }
+function clock(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+function dateEs(ts){ const d = new Date(ts); const p = function(n){ return ('0' + n).slice(-2); }; return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + String(d.getFullYear()).slice(-2) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()); }
+
+/* ---------- item rendering ---------- */
+function label(q){
+  const it = q.it;
+  if (q.src === 'mx') return it.kind === 'analogy' ? 'A : B = C : ?' : (it.kind === 'odd' ? 'La figura distinta' : '');
+  if (q.src === 'sp'){
+    if (it.type === 'rot3d') return 'Girada, no reflejada';
+    if (it.type === 'net') return 'Cubo del desarrollo';
+    if (it.type === 'shape2d') return it.variant === 'rotate' ? 'Girada, sin voltear' : 'Imagen especular';
+    if (it.type === 'fold') return 'Desplegado';
+    return it.variant === 'named' ? SP.VIEW_NAMES[SP.VIEW_IDS.indexOf(it.target)] : '¿Desde qué lado?';
+  }
+  return it.type === 'd2' ? '¿Cuántas d con dos rayas?' : '¿Cuántas parejas son distintas?';
+}
+function spSide(it){ return SP.figureSet([it.ref].concat(it.options.map(function(o){ return o.cubes; }))); }
+function cells(list){ return list.map(function(c){ return '<div>' + MX.cellSVG(c) + '</div>'; }).join(''); }
+function stemHTML(q){
+  const it = q.it;
+  if (q.src === 'mx'){
+    if (it.kind === 'matrix' || it.kind === 'logic') return '<div class="mat">' + cells(it.prompt) + '</div>';
+    if (it.kind === 'series') return '<div class="seq">' + cells(it.prompt.concat([null])) + '</div>';
+    if (it.kind === 'analogy') return '<div class="ana">' + cells([it.prompt[0], it.prompt[1], it.prompt[2], null]) + '</div>';
+    return '';
+  }
+  if (q.src === 'sp'){
+    if (it.type === 'rot3d') return '<div class="svgbox" style="max-width:360px;margin:8px auto">' + SP.isoFigureSvg(it.ref, spSide(it), 'figura de referencia') + '</div>';
+    if (it.type === 'net') return '<div class="svgbox" style="max-width:340px;margin:8px auto">' + SP.netSvg(it) + '</div>';
+    if (it.type === 'shape2d') return '<div class="svgbox" style="max-width:260px;margin:8px auto">' + SP.shapeSvg(it.ref, it.N) + '</div>';
+    if (it.type === 'fold') return '<div class="panels">' + SP.foldPanels(it).map(function(p){ return '<figure>' + p.svg + '<figcaption>' + p.label + '</figcaption></figure>'; }).join('') + '</div>';
+    let h = '<div class="svgbox" style="max-width:360px;margin:8px auto">' + SP.isoFigureSvg(it.cubes, SP.figureSet([it.cubes]) + 0.4, 'sólido') + '</div><p class="cap">Frente: abajo izquierda · Lado: abajo derecha</p>';
+    if (it.variant !== 'named') h += '<div class="svgbox" style="max-width:200px;margin:6px auto">' + SP.gridSvg(it.given, it.given.length, it.given[0].length) + '</div>';
+    return h;
+  }
+  if (it.type === 'd2') return '<div class="lbox d2row">' + it.row.map(AT.d2Svg).join('') + '</div>';
+  return '<div class="lbox"><table class="cmp">' + it.pairs.map(function(p, i){ return '<tr><td class="cn">' + (i + 1) + '</td><td>' + escH(p[0]) + '</td><td>' + escH(p[1]) + '</td></tr>'; }).join('') + '</table></div>';
+}
+function optInner(q, i){
+  const it = q.it, o = it.options[i];
+  if (q.src === 'mx') return { cls:'', h:MX.cellSVG(o) };
+  if (q.src === 'sp'){
+    if (it.type === 'rot3d') return { cls:'', h:SP.isoFigureSvg(o.cubes, spSide(it), 'opción ' + LETTERS[i]) };
+    if (it.type === 'net') return { cls:'', h:SP.isoFaceCubeSvg(o.t) };
+    if (it.type === 'shape2d') return { cls:'', h:SP.shapeSvg(o.cells, it.N) };
+    if (it.type === 'fold') return { cls:'', h:SP.paperSvg({ region:{ x0:0, y0:0, x1:8, y1:8 }, holes:o.holes, grid:true }) };
+    if (it.variant === 'named'){
+      let mr = 0, mc = 0;
+      it.options.forEach(function(x){ mr = Math.max(mr, x.g.length); mc = Math.max(mc, x.g[0].length); });
+      return { cls:'', h:SP.gridSvg(o.g, mr, mc) };
+    }
+    return { cls:'txt', h:SP.VIEW_NAMES[SP.VIEW_IDS.indexOf(o.id)] };
+  }
+  return { cls:'num', h:String(o) };
+}
+function optsClass(q){ return q.src === 'mx' ? 'mx' : (q.src === 'at' ? 'at' : 'sp'); }
+// mode: 'run' (buttons, chosen = selected), 'review' (right/wrong marks)
+function optsHTML(q, mode, chosen){
+  let h = '<div class="opts ' + optsClass(q) + '" id="opts">';
+  for (let i = 0; i < 4; i++){
+    const o = optInner(q, i);
+    let cls = 'opt ' + o.cls;
+    if (mode === 'run'){
+      if (i === chosen) cls += ' sel';
+      h += '<button class="' + cls + '" data-i="' + i + '" aria-label="Opción ' + LETTERS[i] + '" aria-pressed="' + (i === chosen) + '"><span class="lt">' + LETTERS[i] + '</span>' + o.h + '</button>';
+    } else {
+      if (i === q.it.answer) cls += ' right'; else if (i === chosen) cls += ' wrong';
+      h += '<div class="' + cls + '"><span class="lt">' + LETTERS[i] + '</span>' + o.h + '</div>';
+    }
+  }
+  return h + '</div>';
+}
+function whyOf(q, i){
+  const it = q.it;
+  if (q.src === 'mx'){ const n = it.notes[i]; return n ? (n.text || MX.noteText(n, it.kind)) : 'Correcta.'; }
+  return it.whys[i] || '';
+}
+function kindName(q){ return KIND_ES[q.src === 'mx' ? q.it.kind : q.it.type]; }
+
+/* ---------- home ---------- */
+function card(id, icon, name, detail){
+  return '<button class="card" id="' + id + '">' + ic(icon) + '<span><span class="nm">' + name + '</span><span class="dt">' + detail + '</span></span>' + ic('next') + '</button>';
+}
+function home(){
+  stop(); S = null;
+  const run = lsGet(RUN_KEY);
+  const hasRun = run && normCode(run.code) && typeof run.a === 'string';
+  const hist = (lsGet(STORE_KEY) || {}).sessions;
+  let h = '<div class="list">' + card('go', 'play', 'Simulacro', N_ITEMS + ' ítems · 60 min · A-D');
+  if (hasRun) h += card('cont', 'repeat', 'Continuar', run.a.replace(/-/g, '').length + ' / ' + N_ITEMS + ' · ' + clock(LIMIT - (run.el || 0)));
+  h += card('prt', 'print', 'Imprimir', 'Modelo · hoja · plantilla') + card('fix', 'sheet', 'Corregir hoja', 'Código del modelo') + '</div>';
+  if (hasRun) h += '<p><button class="btn danger" id="drop">' + ic('trash') + 'Descartar el simulacro abierto</button></p>';
+  h += '<details><summary>Puntuación</summary><ul class="rules">' +
+    '<li>Neta = aciertos − errores / 3 · en blanco = 0</li>' +
+    '<li>/50 = neta × 50 / ' + num(BEST_NET) + ' (mejor neta de 2025)</li>' +
+    '<li>Apto: 25 = ' + num(PASS_PTS * BEST_NET / MAX_PTS, 1) + ' netas · cabeza del ranking ≈ ' + TOP_NET + ' netas</li></ul></details>';
+  if (Array.isArray(hist) && hist.length){
+    h += '<h2>' + ic('history') + ' Historial</h2><div class="tbl"><table><thead><tr><th>Fecha</th><th>Neta</th><th>/50</th><th>' + ic('check') + '</th><th>' + ic('x') + '</th><th>' + ic('dash') + '</th><th>' + ic('timer') + '</th></tr></thead><tbody>' +
+      hist.slice().reverse().map(function(r){
+        return '<tr><td>' + dateEs(r.ts) + '</td><td><b>' + num(r.net) + '</b></td><td>' + num(toPts(r.net)) + '</td><td>' + r.correct + '</td><td>' + r.wrong + '</td><td>' + r.blank + '</td><td>' + (r.paper ? ic('print') : clock(r.secs)) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  show(h);
+  $('go').addEventListener('click', function(){ startRun(newCode(), null); });
+  if (hasRun){
+    $('cont').addEventListener('click', function(){ startRun(normCode(run.code), run); });
+    $('drop').addEventListener('click', function(){ if (window.confirm('¿Descartar?')){ lsSet(RUN_KEY, null); home(); } });
+  }
+  $('prt').addEventListener('click', function(){ printView(newCode()); });
+  $('fix').addEventListener('click', function(){ fixView(''); });
+}
+
+/* ---------- timed run ---------- */
+function elapsed(){ return S.el + (performance.now() - S.t0) / 1000; }
+function saveRun(){
+  if (!S || S.mode !== 'run') return;
+  lsSet(RUN_KEY, { code:S.form.code, a:S.ans.map(function(x){ return x < 0 ? '-' : LETTERS[x]; }).join(''), f:S.flag.map(function(b){ return b ? 1 : 0; }).join(''), el:Math.round(elapsed()), ts:Date.now() });
+}
+function busy(){ show('<p class="soft">…</p>'); }
+function startRun(code, run){
+  stop(); busy();
+  setTimeout(function(){
+    let form;
+    try { form = buildForm(code); } catch (e) { show('<p class="bad">' + escH(e.message) + '</p>'); return; }
+    const ans = [], flag = [];
+    for (let i = 0; i < N_ITEMS; i++){
+      const ch = run && run.a ? run.a[i] : '-';
+      ans.push(LETTERS.indexOf(ch));
+      flag.push(!!(run && run.f && run.f[i] === '1'));
+    }
+    S = { mode:'run', form:form, ans:ans, flag:flag, cur:0, el:run ? (run.el || 0) : 0, t0:performance.now(), lastSave:0 };
+    if (run){ const firstBlank = ans.indexOf(-1); S.cur = firstBlank >= 0 ? firstBlank : 0; }
+    saveRun();
+    tickId = setInterval(tick, 250);
+    renderRun();
+  }, 20);
+}
+function counts(){ return { a:S.ans.filter(function(x){ return x >= 0; }).length, f:S.flag.filter(Boolean).length }; }
+function navHTML(){
+  let h = '<div class="nav" id="nav">';
+  FAMS.forEach(function(f){
+    h += '<div class="navf">' + ic('f-' + f) + '<div class="navg">';
+    S.form.items.forEach(function(q, i){
+      if (q.fam !== f) return;
+      h += '<button class="nv' + (S.ans[i] >= 0 ? ' a' : '') + (S.flag[i] ? ' f' : '') + (i === S.cur ? ' cur' : '') + '" data-n="' + i + '" aria-label="Ítem ' + (i + 1) + '">' + (i + 1) + '</button>';
+    });
+    h += '</div></div>';
+  });
+  return h + '</div>';
+}
+function renderRun(){
+  const q = S.form.items[S.cur], c = counts(), lb = label(q);
+  show('<div class="head"><span class="timer" id="tm">' + ic('timer') + ' ' + clock(LIMIT - elapsed()) + '</span><span><b>' + (S.cur + 1) + '</b> / ' + N_ITEMS + '</span>' +
+    '<span>' + ic('f-' + q.fam) + FAM_LABEL[q.fam] + '</span><span>' + ic('check') + '<b id="na">' + c.a + '</b></span><span>' + ic('flag') + '<b id="nf">' + c.f + '</b></span></div>' +
+    '<div class="bar"><div id="bar" style="width:' + Math.round(c.a / N_ITEMS * 100) + '%"></div></div>' +
+    (lb ? '<p class="pr">' + escH(lb) + '</p>' : '') + stemHTML(q) + optsHTML(q, 'run', S.ans[S.cur]) +
+    '<div class="row ctl"><button class="btn" id="prev" aria-label="Anterior"' + (S.cur === 0 ? ' disabled' : '') + '>' + ic('back') + '<kbd>←</kbd></button>' +
+    '<button class="btn' + (S.flag[S.cur] ? ' on' : '') + '" id="flag" aria-pressed="' + S.flag[S.cur] + '">' + ic('flag') + 'Marcar <kbd>M</kbd></button>' +
+    '<button class="btn" id="clr"' + (S.ans[S.cur] < 0 ? ' disabled' : '') + '>' + ic('x') + 'Borrar</button>' +
+    '<button class="btn primary" id="next" aria-label="Siguiente"' + (S.cur === N_ITEMS - 1 ? ' disabled' : '') + '>' + ic('next') + '<kbd>→</kbd></button>' +
+    '<span class="grow"></span><button class="btn" id="end">' + ic('check') + 'Entregar</button></div>' + navHTML());
+  $('opts').addEventListener('click', function(e){ const b = e.target.closest('button.opt'); if (b) choose(+b.getAttribute('data-i')); });
+  $('prev').addEventListener('click', function(){ go(S.cur - 1); });
+  $('next').addEventListener('click', function(){ go(S.cur + 1); });
+  $('flag').addEventListener('click', toggleFlag);
+  $('clr').addEventListener('click', function(){ choose(-1); });
+  $('end').addEventListener('click', function(){ submit(false); });
+  $('nav').addEventListener('click', function(e){ const b = e.target.closest('button.nv'); if (b) go(+b.getAttribute('data-n')); });
+  onKey = function(e){
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (k.length === 1 && 'abcd'.indexOf(k) >= 0) choose('abcd'.indexOf(k));
+    else if (k.length === 1 && '1234'.indexOf(k) >= 0) choose(+k - 1);
+    else if (k === 'Backspace' || k === 'Delete' || k === '0') choose(-1);
+    else if (k === 'ArrowLeft') go(S.cur - 1);
+    else if (k === 'ArrowRight' || k === 'Enter') go(S.cur + 1);
+    else if (k === 'm') toggleFlag();
+    else return;
+    e.preventDefault();
+  };
+}
+function refreshRun(){
+  const c = counts(), cur = S.cur, a = S.ans[cur];
+  document.querySelectorAll('#opts button.opt').forEach(function(b){ const i = +b.getAttribute('data-i'); b.classList.toggle('sel', i === a); b.setAttribute('aria-pressed', String(i === a)); });
+  const nb = document.querySelector('#nav button[data-n="' + cur + '"]');
+  if (nb){ nb.classList.toggle('a', a >= 0); nb.classList.toggle('f', S.flag[cur]); }
+  $('na').textContent = c.a; $('nf').textContent = c.f;
+  $('bar').style.width = Math.round(c.a / N_ITEMS * 100) + '%';
+  $('clr').disabled = a < 0;
+  $('flag').classList.toggle('on', S.flag[cur]); $('flag').setAttribute('aria-pressed', String(S.flag[cur]));
+}
+function choose(i){
+  if (!S || S.mode !== 'run') return;
+  S.ans[S.cur] = (i === S.ans[S.cur]) ? -1 : i;
+  refreshRun(); saveRun();
+}
+function toggleFlag(){ S.flag[S.cur] = !S.flag[S.cur]; refreshRun(); saveRun(); }
+function go(n){ if (n < 0 || n >= N_ITEMS || n === S.cur) return; S.cur = n; renderRun(); }
+function tick(){
+  if (!S || S.mode !== 'run') return;
+  const left = LIMIT - elapsed(), tm = $('tm');
+  if (tm){
+    tm.innerHTML = ic('timer') + ' ' + clock(left);
+    tm.className = 'timer' + (left <= 60 ? ' over' : (left <= 300 ? ' late' : ''));
+  }
+  if (left <= 0){ submit(true); return; }
+  if (performance.now() - S.lastSave > 10000){ S.lastSave = performance.now(); saveRun(); }
+}
+function submit(auto){
+  if (!S || S.mode !== 'run') return;
+  if (!auto){
+    const blank = S.ans.filter(function(x){ return x < 0; }).length;
+    if (!window.confirm('¿Entregar?' + (blank ? ' En blanco: ' + blank : ''))) return;
+  }
+  const secs = Math.min(LIMIT, Math.round(elapsed()));
+  const form = S.form, ans = S.ans.slice();
+  stop(); lsSet(RUN_KEY, null);
+  finish(form, ans, secs, false);
+}
+function finish(form, ans, secs, paper){
+  const r = scoreForm(form, ans);
+  const ok = lsSet(STORE_KEY, pushRecord(lsGet(STORE_KEY), makeRecord(r, secs, paper, Date.now())));
+  results(form, ans, r, secs, paper, ok);
+}
+
+/* ---------- results ---------- */
+function results(form, ans, r, secs, paper, saved){
+  S = { mode:'results' };
+  const pts = toPts(r.net), pct = function(x){ return Math.max(0, Math.min(100, x / N_ITEMS * 100)).toFixed(1); };
+  const passNet = PASS_PTS * BEST_NET / MAX_PTS;
+  let h = '<button class="link" id="back">' + ic('back') + 'Inicio</button>' +
+    '<div class="figs"><div class="fig"><b>' + num(r.net) + '</b><span>Neta</span></div>' +
+    '<div class="fig"><b>' + num(pts) + '</b><span>/50 si el mejor saca 72</span></div>' +
+    '<div class="fig"><b class="good">' + r.c + '</b><span>Aciertos</span></div>' +
+    '<div class="fig"><b class="bad">' + r.w + '</b><span>Errores</span></div>' +
+    '<div class="fig"><b>' + r.b + '</b><span>En blanco</span></div>' +
+    '<div class="fig"><b>' + (paper ? '—' : clock(secs)) + '</b><span>Tiempo</span></div></div>' +
+    '<div class="scale" aria-hidden="true"><div style="width:' + pct(r.net) + '%"></div><i style="left:' + pct(passNet) + '%"></i><i style="left:' + pct(TOP_NET) + '%"></i></div>' +
+    '<div class="scl"><span style="left:' + pct(passNet) + '%">Apto</span><span style="left:' + pct(TOP_NET) + '%">Cabeza</span></div>' +
+    (saved ? '' : '<p class="warn">Sin guardar</p>') +
+    '<div class="tbl"><table><thead><tr><th></th><th>' + ic('check') + '</th><th>' + ic('x') + '</th><th>' + ic('dash') + '</th><th>Neta</th></tr></thead><tbody>' +
+    FAMS.map(function(f){ const x = r.fam[f]; return '<tr><td>' + ic('f-' + f) + ' ' + FAM_LABEL[f] + '</td><td>' + x.c + '</td><td>' + x.w + '</td><td>' + x.b + '</td><td><b>' + num(x.c - x.w / 3) + '</b></td></tr>'; }).join('') +
+    '</tbody></table></div>';
+  const miss = form.items.filter(function(q, i){ return ans[i] !== q.it.answer; });
+  if (miss.length){
+    h += '<h2>Revisión · ' + miss.length + '</h2>';
+    miss.forEach(function(q){
+      const i = q.n, ch = ans[i], it = q.it, lb = label(q);
+      const rules = q.src === 'mx' ? it.rules.map(function(t){ return t.split('§').join(LETTERS[it.answer]); }) : [whyOf(q, it.answer)];
+      h += '<div class="rq"><div class="head"><span><b>' + (i + 1) + '</b></span><span>' + ic('f-' + q.fam) + kindName(q) + '</span>' +
+        (ch >= 0 ? '<span class="bad">' + ic('x') + LETTERS[ch] + '</span>' : '<span>' + ic('dash') + '</span>') + '<span class="good">' + ic('check') + LETTERS[it.answer] + '</span></div>' +
+        (lb ? '<p class="pr">' + escH(lb) + '</p>' : '') + stemHTML(q) + optsHTML(q, 'review', ch) +
+        (ch >= 0 ? '<p class="why"><b class="bad">' + LETTERS[ch] + '</b> · ' + escH(whyOf(q, ch)) + '</p>' : '') +
+        '<details><summary>Regla</summary><ul class="rules">' + rules.map(function(t){ return '<li>' + escH(t) + '</li>'; }).join('') + '</ul></details></div>';
+    });
+  }
+  h += '<p class="row" style="margin-top:18px"><button class="btn primary" id="again">' + ic('play') + 'Otro simulacro</button><button class="btn" id="home2">' + ic('back') + 'Inicio</button></p>';
+  show(h);
+  $('back').addEventListener('click', home); $('home2').addEventListener('click', home);
+  $('again').addEventListener('click', function(){ startRun(newCode(), null); });
+}
+
+/* ---------- paper: print a form, correct a sheet ---------- */
+function sheetHTML(ans){
+  let h = '<div class="sheet" id="sheet">';
+  for (let i = 0; i < N_ITEMS; i++){
+    h += '<div class="sr"><b>' + (i + 1) + '</b>';
+    for (let j = 0; j < 4; j++){
+      if (ans) h += '<button class="bub' + (ans[i] === j ? ' on' : '') + '" data-n="' + i + '" data-j="' + j + '" aria-label="' + (i + 1) + ' ' + LETTERS[j] + '">' + LETTERS[j] + '</button>';
+      else h += '<span class="bub">' + LETTERS[j] + '</span>';
+    }
+    h += '</div>';
+  }
+  return h + '</div>';
+}
+function printView(code){
+  stop(); busy();
+  setTimeout(function(){
+    let form;
+    try { form = buildForm(code); } catch (e) { show('<p class="bad">' + escH(e.message) + '</p>'); return; }
+    S = { mode:'print', form:form };
+    const C = code.toUpperCase();
+    const head = function(t, extra){ return '<div class="phead"><span>' + t + '</span><span>Modelo <b>' + C + '</b></span><span>' + (extra || '') + '</span></div>'; };
+    let h = '<div class="noprint row" style="margin:0 0 10px"><button class="link" id="back">' + ic('back') + 'Inicio</button><button class="btn primary" id="pp">' + ic('print') + 'Imprimir</button><button class="btn" id="fx">' + ic('sheet') + 'Corregir</button></div>' +
+      head('Simulacro de aptitudes', N_ITEMS + ' · 60 min · ✓ − ✗/3') + '<div class="pgrid">';
+    form.items.forEach(function(q){
+      const lb = label(q);
+      h += '<div class="pitem"><div class="pn">' + (q.n + 1) + '</div><div>' + (lb ? '<p class="pr">' + escH(lb) + '</p>' : '') + stemHTML(q) + '<div class="popts">';
+      for (let i = 0; i < 4; i++){ const o = optInner(q, i); h += '<div class="popt ' + o.cls + '"><span class="lt">' + LETTERS[i] + '</span>' + o.h + '</div>'; }
+      h += '</div></div></div>';
+    });
+    h += '</div><section class="psheet">' + head('Hoja de respuestas', '✓ − ✗/3') + sheetHTML(null) + '</section>' +
+      '<section class="pkey">' + head('Plantilla', '') + '<div class="pk">' + form.items.map(function(q){ return '<span>' + (q.n + 1) + ' ' + LETTERS[q.it.answer] + '</span>'; }).join('') + '</div></section>';
+    show(h);
+    $('back').addEventListener('click', home);
+    $('pp').addEventListener('click', function(){ window.print(); });
+    $('fx').addEventListener('click', function(){ sheetView(code); });
+  }, 20);
+}
+function fixView(pre){
+  stop(); S = { mode:'fix' };
+  show('<button class="link" id="back">' + ic('back') + 'Inicio</button><label class="lb" for="code">Modelo</label>' +
+    '<div class="row"><input type="text" id="code" value="' + escH(pre) + '" autocomplete="off" spellcheck="false" maxlength="8" style="max-width:180px;text-transform:uppercase;font-family:ui-monospace,Consolas,monospace">' +
+    '<button class="btn primary" id="open" aria-label="Abrir">' + ic('next') + '</button></div><div id="err"></div>');
+  const open = function(){ const c = normCode($('code').value); if (!c){ $('err').innerHTML = '<p class="bad">Código no válido</p>'; $('code').focus(); return; } sheetView(c); };
+  $('back').addEventListener('click', home);
+  $('open').addEventListener('click', open);
+  $('code').focus();
+  onKey = function(e){ if (e.key === 'Enter'){ e.preventDefault(); open(); } };
+}
+function sheetView(code){
+  stop(); busy();
+  setTimeout(function(){
+    let form;
+    try { form = buildForm(code); } catch (e) { show('<p class="bad">' + escH(e.message) + '</p>'); return; }
+    const ans = []; for (let i = 0; i < N_ITEMS; i++) ans.push(-1);
+    S = { mode:'sheet', form:form, ans:ans };
+    show('<button class="link" id="back">' + ic('back') + 'Inicio</button><div class="head"><span>' + ic('sheet') + 'Modelo <b>' + code.toUpperCase() + '</b></span><span>' + ic('check') + '<b id="na">0</b> / ' + N_ITEMS + '</span></div>' +
+      sheetHTML(ans) + '<p class="row"><button class="btn primary" id="score">' + ic('check') + 'Corregir</button></p>');
+    $('back').addEventListener('click', home);
+    $('sheet').addEventListener('click', function(e){
+      const b = e.target.closest('button.bub'); if (!b) return;
+      const n = +b.getAttribute('data-n'), j = +b.getAttribute('data-j');
+      S.ans[n] = S.ans[n] === j ? -1 : j;
+      document.querySelectorAll('#sheet button.bub[data-n="' + n + '"]').forEach(function(x){ x.classList.toggle('on', +x.getAttribute('data-j') === S.ans[n]); });
+      $('na').textContent = S.ans.filter(function(x){ return x >= 0; }).length;
+    });
+    $('score').addEventListener('click', function(){ const f = S.form, a = S.ans.slice(); finish(f, a, 0, true); });
+  }, 20);
+}
+
+/* ---------- keys and start ---------- */
+document.addEventListener('keydown', function(e){
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  const tag = e.target && e.target.tagName;
+  if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA'){ if (e.key === 'Enter' && onKey) onKey(e); return; }
+  if (e.key === 'Escape'){ e.preventDefault(); if (S && S.mode === 'run') saveRun(); home(); return; }
+  if (S && S.mode === 'run' && (e.key === ' ' || e.key.indexOf('Arrow') === 0)) e.preventDefault();
+  if (onKey) onKey(e);
+});
+document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') saveRun(); });
+window.addEventListener('pagehide', saveRun);
+home();
+</script>
+<script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
+</html>

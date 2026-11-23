@@ -93,6 +93,9 @@ tr.conf td{color:var(--err);font-weight:600}
 .key.hl{background:var(--warn);color:#fff;border-color:var(--warn)}
 .stage{display:flex;justify-content:center;align-items:center;height:210px;margin-top:10px}
 .stage.rev{outline:4px solid var(--warn);outline-offset:-4px}
+.stage.msg{height:auto;min-height:210px;outline:4px solid var(--warn);outline-offset:-4px;padding:12px 16px}
+.stage.msg .rules{border:0;margin:0;justify-content:center}
+details{margin:.6rem 0} summary{cursor:pointer;color:var(--accent);min-height:32px}
 .rev-sample{display:inline-block;width:24px;height:16px;border:3px solid var(--warn);vertical-align:-3px}
 .tbar{height:3px;background:var(--rule);margin:6px 0 4px}
 .tbar>div{height:100%;width:100%;background:var(--accent);transform-origin:left center}
@@ -209,7 +212,8 @@ function customParams(module, v){
       comboShare: num(v.comboShare, 0, 100, 0) / 100, comboSteps: Math.round(num(v.comboSteps, 2, 3, 2)), tdsWide: !!v.tdsWide, dual: !!v.dual });
   }
   return Object.assign(p, { rule: Math.round(num(v.rule, 1, 4, 2)), speed: Math.round(num(v.speed, 0.5, 8, 3) * 10) / 10, per: Math.round(num(v.per, 5, 40, 15)),
-    rounds: Math.round(num(v.rounds, 1, 4, 2)), reversal: num(v.reversal, 0, 60, 0) / 100, dual: !!v.dual, rulesVisible: p.maxHint >= 1 || !!v.rulesVisible });
+    rounds: Math.round(num(v.rounds, 1, 4, 2)), reversal: num(v.reversal, 0, 60, 0) / 100, dual: !!v.dual, rulesVisible: p.maxHint >= 1 || !!v.rulesVisible,
+    changes: Math.round(num(v.changes, 0, 4, 0)) });
 }
 // Adaptive / progression rule. One state per module: {level, streak, fails, unlocked}.
 // Up after THREE consecutive valid sessions (>= 96 %) played at the current level; down after TWO consecutive failures (< 96 %).
@@ -586,6 +590,70 @@ function nextItem(rnd, rule, prev, reversal){
   it.expected = it.reversed ? mirrorKey(rule, it.key) : it.key;
   return it;
 }
+// ---- 150-object benchmark and mid-block rule changes (batch b1123, AAPT improvement 7) ----
+// Benchmark = one fixed block: 150 objects, rule complexity 4 (as level 6), 1.8 s per object (the protocol's top-result pace:
+// the platform session is about 150 objects in 4.5 min), no mirrored frames, rule bar hidden, 4 unannounced rule changes.
+// Target (AAPT section 5, internal, not an official norm): >= 96 % correct over the 150 objects with a mean response <= 1.8 s.
+const BENCH_N = 150, BENCH_SEC = 1.8, BENCH_ACC = 96, BENCH_CHANGES = 4, POST_N = 5, RULE_MSG_MS = 3000;
+function benchParams(){
+  return { level: 6, bench: true, maxHint: 0, rule: 4, speed: BENCH_SEC, per: BENCH_N, rounds: 1, reversal: 0, dual: false, rulesVisible: false, changes: BENCH_CHANGES };
+}
+// Rule changes inside a round of n objects: returns k sorted 0-based object indices; the rule changes just BEFORE that object.
+// One change per equal segment, jittered by up to 45 % of a segment (unannounced), never inside the first POST_N objects,
+// at least POST_N + 1 apart and at least POST_N objects before the end, so every post-change window has POST_N objects.
+function planChanges(rnd, n, k){
+  k = Math.max(0, k | 0);
+  if (n < 2 * POST_N) return [];
+  k = Math.min(k, Math.floor((n - 2 * POST_N) / (POST_N + 1)) + 1);
+  const out = [], seg = n / (k + 1);
+  for (let i = 1; i <= k; i++){
+    const lo = out.length ? out[out.length - 1] + POST_N + 1 : POST_N;
+    const hi = n - POST_N - (k - i) * (POST_N + 1);
+    out.push(clamp(Math.round(seg * i + (rnd() * 2 - 1) * seg * 0.45), lo, hi));
+  }
+  return out;
+}
+function ruleSig(rule){ return rule.keys.map(function(k){ return k.key + ':' + k.pred.attr + ':' + k.pred.values.join('/'); }).join('|'); }
+// A usable rule set of the given complexity whose key mapping differs from prev (prev = null: any usable rule set).
+function changeRule(rnd, complexity, prev){
+  let r = null;
+  for (let t = 0; t < 500; t++){ r = makeRuleSet(rnd, complexity); if (ruleIsUsable(r) && (!prev || ruleSig(r) !== ruleSig(prev))) return r; }
+  return r;
+}
+// Mean of the slowest 10 % (at least one) of the response times.
+function slowDecileMean(times){
+  if (!times || !times.length) return null;
+  const s = times.slice().sort(function(a, b){ return b - a; }), k = Math.max(1, Math.ceil(s.length / 10));
+  let t = 0; for (let i = 0; i < k; i++) t += s[i];
+  return t / k;
+}
+// outs = [{ok, blank, sec, rs, post, attr}]: rs = rule segment (0 = first rule; +1 at every new round and every change),
+// post = object among the first POST_N after a mid-block change, attr = 'color' | 'shape' of the rule that sorts the object.
+// Errors = wrong + blank. Response times use answered objects only (a blank is a time-out, not a response).
+function catReport(outs){
+  const cnt = function(){ return { n: 0, c: 0, w: 0, b: 0 }; };
+  const add = function(o, x){ o.n++; if (x.ok) o.c++; else if (x.blank) o.b++; else o.w++; };
+  const all = cnt(), post = cnt(), rest = cnt(), byRule = [], byAttr = { color: cnt(), shape: cnt() }, rts = [];
+  (outs || []).forEach(function(x){
+    add(all, x); add(x.post ? post : rest, x);
+    const i = x.rs || 0;
+    while (byRule.length <= i){ const z = cnt(); z.pn = 0; z.pe = 0; byRule.push(z); }
+    add(byRule[i], x);
+    if (x.post){ byRule[i].pn++; if (!x.ok) byRule[i].pe++; }
+    if (byAttr[x.attr]) add(byAttr[x.attr], x);
+    if (!x.blank && isFinite(x.sec)) rts.push(x.sec);
+  });
+  return { n: all.n, correct: all.c, wrong: all.w, blank: all.b, accuracy: all.n ? all.c / all.n * 100 : 0,
+    rtMean: rts.length ? rts.reduce(function(a, b){ return a + b; }, 0) / rts.length : null, rtSlow10: slowDecileMean(rts),
+    post: post, rest: rest, byRule: byRule, byAttr: byAttr };
+}
+function benchTargetMet(rep){ return rep.n >= BENCH_N && rep.accuracy >= BENCH_ACC && rep.rtMean !== null && rep.rtMean <= BENCH_SEC; }
+// Compact stored form of a report (kept small: counts as [n, correct, wrong, blank], times in s with 3 decimals).
+function catStore(rep, nChanges){
+  const q = function(o){ return [o.n, o.c, o.w, o.b]; }, r3 = function(x){ return x === null ? null : Math.round(x * 1000) / 1000; };
+  return { changes: nChanges, rtMean: r3(rep.rtMean), rtSlow10: r3(rep.rtSlow10), post: q(rep.post), rest: q(rep.rest),
+    byRule: rep.byRule.map(function(o){ return q(o).concat([o.pn, o.pe]); }), byAttr: { color: q(rep.byAttr.color), shape: q(rep.byAttr.shape) } };
+}
 
 /* ---- 5. Goal, records, CSV ---- */
 function isValid(acc, hinted){ return acc >= MIN_ACCURACY && !hinted; }
@@ -601,14 +669,14 @@ function evaluateGoal(text, r){
   if (ma){ const ok = r.correct >= parseInt(ma[1], 10); res = res === null ? ok : (res && ok); }
   return res;
 }
-// Personal best = lowest seconds per item among valid sessions of the same module and level (Custom sessions never count).
+// Personal best = lowest seconds per item among valid sessions of the same module and level (Custom and benchmark sessions never count).
 function bestAtLevel(prev, module, level){
-  const comp = prev.filter(function(x){ return x.module === module && String(x.level) === String(level) && x.valid && x.level !== 'Custom' && x.spi !== null && x.spi !== undefined; });
+  const comp = prev.filter(function(x){ return x.module === module && String(x.level) === String(level) && x.valid && x.level !== 'Custom' && !x.bench && x.spi !== null && x.spi !== undefined; });
   if (!comp.length) return null;
   return { spi: Math.min.apply(null, comp.map(function(x){ return x.spi; })), accuracy: Math.max.apply(null, comp.map(function(x){ return x.accuracy; })), sessions: comp.length };
 }
 function isRecord(prev, s){
-  if (!s.valid || s.level === 'Custom' || s.spi === null || s.spi === undefined) return false;
+  if (!s.valid || s.level === 'Custom' || s.bench || s.spi === null || s.spi === undefined) return false;
   const b = bestAtLevel(prev, s.module, s.level);
   return !!b && s.spi < b.spi;
 }
@@ -624,7 +692,7 @@ function csvField(v){
 function toCSV(sessions){
   const head = ['Date', 'Module', 'Level', 'Correct', 'Wrong', 'Blank', 'Seconds per item', 'Accuracy %', 'Goal', 'Met'];
   const rows = sessions.map(function(s){
-    return [dateES(s.ts), s.module, s.level, s.correct, s.wrong, s.blank,
+    return [dateES(s.ts), s.module + (s.bench ? ' [benchmark]' : ''), s.level, s.correct, s.wrong, s.blank,
       (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.accuracy, 1), s.goal,
       s.met === true ? 'Yes' : (s.met === false ? 'No' : '')].map(csvField).join(';');
   });
@@ -834,6 +902,54 @@ function runSelfTests(){
   const tt = atcThirds(Array.from({ length: 10 }, function(_, i){ return { ok: true, sec: 1, t: i * 6 }; }), 60);
   ok('thirds time rule', tt.map(function(x){ return x.n; }).join() === '4,3,3');
   ok('thirds line', atcThirdsLine(t12).indexOf('Precisión por tercios: 100 / 100 / 0 %') === 0 && atcThirdsLine(t12).indexOf('muy pocos') > 0 && atcThirdsLine(null) === '');
+  // Benchmark block and rule changes (b1123)
+  const BP = benchParams();
+  ok('bench params', BP.per * BP.rounds === 150 && BP.speed === 1.8 && BP.rule === 4 && BP.changes === 4 && BP.maxHint === 0 && BP.reversal === 0 && !BP.dual && BP.bench === true && BP.level === 6);
+  let badPlan = 0; const sigs = {};
+  for (let k = 0; k < 300; k++){
+    const pl = planChanges(mulberry32(9000 + k), 150, 4); sigs[pl.join()] = 1;
+    if (pl.length !== 4 || pl[0] < POST_N || pl[3] > 150 - POST_N) badPlan++;
+    for (let i = 1; i < pl.length; i++) if (pl[i] - pl[i - 1] < POST_N + 1) badPlan++;
+  }
+  ok('plan changes 150/4 (' + badPlan + ')', badPlan === 0 && Object.keys(sigs).length > 200);
+  let badSmall = 0;
+  for (let n = 1; n <= 40; n++) for (let k = 0; k <= 4; k++) for (let s = 0; s < 20; s++){
+    const pl = planChanges(mulberry32(n * 100 + k * 10 + s), n, k);
+    if (pl.length > k || (n < 2 * POST_N && pl.length) || (k > 0 && n >= 2 * POST_N && !pl.length)) badSmall++;
+    pl.forEach(function(p, i){ if (p < POST_N || p > n - POST_N || (i && p - pl[i - 1] < POST_N + 1)) badSmall++; });
+  }
+  ok('plan changes small rounds (' + badSmall + ')', badSmall === 0 && planChanges(mulberry32(1), 150, 0).length === 0);
+  const r0 = changeRule(mulberry32(3), 4, null); let sameRule = 0;
+  for (let k = 0; k < 200; k++){ const r1 = changeRule(mulberry32(50 + k), 4, r0); if (ruleSig(r1) === ruleSig(r0) || !ruleIsUsable(r1)) sameRule++; }
+  ok('rule change always differs', sameRule === 0 && changeRule(mulberry32(4), 1, makeRuleSet(mulberry32(4), 1)).keys.length === 2);
+  // full simulated 150-object block: every object unambiguous under the rule in force, segments counted, post windows of 5
+  const br = mulberry32(4242), plan = planChanges(br, 150, 4).slice(); let rule = changeRule(br, 4, null), prevIt = null, rs = 0, since = 1e9;
+  const simOuts = []; let amb = 0;
+  for (let i = 0; i < 150; i++){
+    if (plan.length && plan[0] === i){ plan.shift(); rule = changeRule(br, 4, rule); rs++; since = 0; }
+    const it = nextItem(br, rule, prevIt, 0); prevIt = it;
+    if (keysMatching(rule, it.obj).length !== 1 || it.expected !== it.key) amb++;
+    const k = rule.keys.find(function(x){ return x.key === it.key; });
+    simOuts.push({ ok: i % 25 !== 0, blank: i === 75, sec: 1 + (i % 10) / 10, rs: rs, post: since < POST_N, attr: k.pred.attr }); since++;
+  }
+  const sr = catReport(simOuts);
+  ok('simulated block', amb === 0 && sr.n === 150 && sr.byRule.length === 5 && sr.post.n === 20 && sr.rest.n === 130 && sr.correct === 144 && sr.blank === 1 && sr.wrong === 5 &&
+    sr.byAttr.color.n + sr.byAttr.shape.n === 150 && sr.byRule.reduce(function(s, o){ return s + o.pn; }, 0) === 20 && benchTargetMet(sr) === true);
+  // hand-computed report
+  const hr6 = catReport([{ ok: true, sec: 1.0, rs: 0, attr: 'color' }, { ok: false, sec: 1.5, rs: 0, attr: 'shape' }, { ok: false, blank: true, sec: 1.8, rs: 0, attr: 'color' },
+    { ok: true, sec: 0.6, rs: 1, post: true, attr: 'shape' }, { ok: false, sec: 1.2, rs: 1, post: true, attr: 'color' }, { ok: true, sec: 0.8, rs: 1, attr: 'color' }]);
+  ok('report hand case', hr6.n === 6 && hr6.correct === 3 && hr6.wrong === 2 && hr6.blank === 1 && Math.abs(hr6.accuracy - 50) < 1e-9 && Math.abs(hr6.rtMean - 1.02) < 1e-9 && hr6.rtSlow10 === 1.5 &&
+    hr6.post.n === 2 && hr6.post.c === 1 && hr6.post.w === 1 && hr6.rest.n === 4 && hr6.rest.b === 1 && hr6.byRule[0].n === 3 && hr6.byRule[0].pn === 0 && hr6.byRule[1].pn === 2 && hr6.byRule[1].pe === 1 &&
+    hr6.byAttr.color.n === 4 && hr6.byAttr.color.c === 2 && hr6.byAttr.color.b === 1 && hr6.byAttr.shape.n === 2 && hr6.byAttr.shape.w === 1);
+  ok('slowest decile', slowDecileMean(Array.from({ length: 20 }, function(_, i){ return i + 1; })) === 19.5 && slowDecileMean([]) === null && slowDecileMean([2]) === 2);
+  const T6 = function(n, acc, rt){ return { n: n, accuracy: acc, rtMean: rt }; };
+  ok('bench target', benchTargetMet(T6(150, 96, 1.8)) && !benchTargetMet(T6(150, 95.99, 1.2)) && !benchTargetMet(T6(149, 100, 1)) && !benchTargetMet(T6(150, 100, 1.81)) && !benchTargetMet(T6(150, 100, null)));
+  const st6 = catStore(hr6, 1);
+  ok('compact store', JSON.stringify(st6.post) === '[2,1,1,0]' && st6.byRule[1].join() === '3,2,1,0,2,1' && st6.rtMean === 1.02 && st6.changes === 1 && JSON.stringify(st6).length < 400);
+  const pb = [{ module: 'M', level: 6, valid: true, spi: 1.0, accuracy: 99, bench: true }, { module: 'M', level: 6, valid: true, spi: 1.5, accuracy: 97 }];
+  ok('benchmark never a personal best', bestAtLevel(pb, 'M', 6).spi === 1.5 && !isRecord(pb, { module: 'M', level: 6, valid: true, spi: 0.5, bench: true }));
+  ok('custom changes clamp', customParams('cat', { changes: 9 }).changes === 4 && customParams('cat', {}).changes === 0);
+  ok('csv marks benchmark', toCSV([{ ts: '2026-11-23T10:00:00', module: 'Fast categorization', level: 6, correct: 145, wrong: 3, blank: 2, spi: 1.1, accuracy: 96.7, goal: 'x', met: true, bench: true }]).indexOf(';Fast categorization [benchmark];6;145;3;2;') > 0);
   return { fails: fails, scenarios: scen, withConflict: withConflict, withoutConflict: withoutConflict, minPool: minPool, arithItems: made, combos: combos };
 }
 // ---- Endurance ("thirds", wave 5 U1): identical copy in every ATC game; see coord/SCHEMA-thirds.md ----
@@ -876,7 +992,7 @@ const MODULES = { conf: 'Radar conflict detection', arith: 'Heading arithmetic',
 const MODULES_ES = { conf: 'Detección de conflictos en radar', arith: 'Aritmética de rumbos', cat: 'Categorización rápida' };
 function modEs(stored){ for (const k in MODULES) if (MODULES[k] === stored) return MODULES_ES[k]; return stored; }
 function lvlEs(l){ return l === 'Custom' ? 'Personalizado' : l; }
-function modeEs(m){ return { manual: 'manual', adaptive: 'adaptativo', custom: 'personalizado' }[m] || m; }
+function modeEs(m){ return { manual: 'manual', adaptive: 'adaptativo', custom: 'personalizado', bench: 'referencia' }[m] || m; }
 const STORE_KEY = 'atc_radar_v2';
 let memory = null, storeOk = true, onKey = null, timers = [];
 const app = document.getElementById('app');
@@ -939,8 +1055,9 @@ function moduleSummary(id){
   const ses = d.sessions.filter(function(s){ return s.module === MODULES[id]; });
   const base = 'N' + p.level;
   if (!ses.length) return base;
-  const u = ses[ses.length - 1];
-  return base + ' · ' + ses.length + (ses.length === 1 ? ' sesión · ' : ' sesiones · ') + fmt(u.accuracy, 0) + ' %';
+  const u = ses[ses.length - 1], bs = ses.filter(function(s){ return s.bench; });
+  return base + ' · ' + ses.length + (ses.length === 1 ? ' sesión · ' : ' sesiones · ') + fmt(u.accuracy, 0) + ' %' +
+    (bs.length ? ' · 150: ' + fmt(bs[bs.length - 1].accuracy, 1) + ' %' : '');
 }
 function menu(){
   live = false;
@@ -964,7 +1081,8 @@ function rulesPage(){
   cleanup();
   const rows = [['Pérdida', 'lateral &lt; 5 NM y vertical &lt; 1000 ft'], ['CBDR', 'demora constante y distancia decreciente: CPA 0'], ['CPA', 't = −(r·v) / |v|²  ·  d = |r × v| / |v|'],
     ['Recíproco', '± 180°'], ['Viraje', 'derecha +, izquierda −, vuelta en 360'], ['Deriva', '60 × viento cruzado / TAS; viento por la derecha: trayectoria = rumbo − deriva'],
-    ['Velocidad suelo', 'TAS − viento de cara, TAS + viento de cola'], ['Velocidad', '360 kt = 6 NM/min'], ['Marco naranja', 'tecla invertida: F ↔ J, D ↔ K']];
+    ['Velocidad suelo', 'TAS − viento de cara, TAS + viento de cola'], ['Velocidad', '360 kt = 6 NM/min'], ['Marco naranja', 'tecla invertida: F ↔ J, D ↔ K'],
+    ['Referencia 150', BENCH_N + ' objetos, ' + String(BENCH_SEC).replace('.', ',') + ' s por objeto, ' + BENCH_CHANGES + ' cambios de regla sin aviso; objetivo ≥' + BENCH_ACC + ' %']];
   screen('<button class="link" id="back">' + ic('back') + 'Menú</button><h2 class="ttl">Referencia</h2><div class="tbl"><table><tbody>' +
     rows.map(function(r){ return '<tr><td class="k">' + r[0] + '</td><td style="white-space:normal">' + r[1] + '</td></tr>'; }).join('') + '</tbody></table></div>');
   $('back').addEventListener('click', menu);
@@ -975,8 +1093,10 @@ const SLIDERS = {
   conf: [['n', 'Aeronaves', 2, 6, 1, 4], ['window', 'Ventana, min', 4, 15, 1, 8], ['limit', 'Segundos por imagen', 0, 120, 5, 40], ['pictures', 'Imágenes', 3, 20, 1, 10],
     ['traps', 'Trampas', 0, 6, 1, 2], ['exposure', 'Visible, s', 0, 30, 1, 0]],
   arith: [['step', 'Paso de ángulo', 1, 10, 4, 5], ['limit', 'Segundos por pregunta', 0, 30, 1, 10], ['items', 'Preguntas', 5, 40, 1, 20], ['comboShare', 'Varios pasos, %', 0, 100, 10, 0], ['comboSteps', 'Pasos', 2, 3, 1, 2]],
-  cat: [['rule', 'Conjunto de reglas', 1, 4, 1, 2], ['speed', 'Segundos por objeto', 0.5, 8, 0.1, 3], ['per', 'Objetos por ronda', 5, 40, 1, 15], ['rounds', 'Rondas', 1, 4, 1, 2], ['reversal', 'Invertidos, %', 0, 60, 5, 0]]
+  cat: [['rule', 'Conjunto de reglas', 1, 4, 1, 2], ['speed', 'Segundos por objeto', 0.5, 8, 0.1, 3], ['per', 'Objetos por ronda', 5, 40, 1, 15], ['rounds', 'Rondas', 1, 4, 1, 2], ['reversal', 'Invertidos, %', 0, 60, 5, 0],
+    ['changes', 'Cambios de regla por ronda', 0, 4, 1, 0]]
 };
+const BENCH_GOAL = '≥96 % y ≤1,8 s';
 function configScreen(o){
   cleanup();
   const d = load(), p = d.prog[o.id];
@@ -988,7 +1108,8 @@ function configScreen(o){
   const chk = (o.id !== 'conf' ? '<label class="lb inline"><input type="checkbox" id="sl_dual">Doble tarea</label>' : '') +
     (o.id === 'arith' ? '<label class="lb" for="sl_kinds">Tipos</label><select id="sl_kinds"><option value="all">Todos</option><option value="recip">Recíproco</option><option value="turn">Viraje</option><option value="drift">Deriva</option><option value="wind">Velocidad suelo</option><option value="tds">Tiempo / distancia / velocidad</option></select><label class="lb inline"><input type="checkbox" id="sl_tdsWide">Cifras amplias</label>' : '');
   screen('<button class="link" id="back">' + ic('back') + 'Menú</button><h2 class="ttl">' + o.title + '</h2>' +
-    '<label class="lb" for="mode">Modo</label><select id="mode"><option value="manual">Manual</option><option value="adaptive">Adaptativo · N' + p.level + ' · ' + p.streak + '/3</option><option value="custom">Personalizado</option></select>' +
+    '<label class="lb" for="mode">Modo</label><select id="mode"><option value="manual">Manual</option><option value="adaptive">Adaptativo · N' + p.level + ' · ' + p.streak + '/3</option><option value="custom">Personalizado</option>' +
+    (o.id === 'cat' ? '<option value="bench">Referencia · ' + BENCH_N + ' objetos · ' + String(BENCH_SEC).replace('.', ',') + ' s</option>' : '') + '</select>' +
     '<div id="manualBox"><label class="lb" for="lvl">Nivel<select id="lvl">' + lvlOpts.join('') + '</select></div>' +
     '<div id="customBox" style="display:none">' + slid + chk + '</div>' +
     '<label class="lb" for="hint">Pistas</label><select id="hint"></select>' +
@@ -1004,13 +1125,21 @@ function configScreen(o){
     v.hint = sel('hint').value;
     return v;
   }
+  let lastMode = sel('mode').value;
   function refresh(){
     const mode = sel('mode').value;
     sel('manualBox').style.display = mode === 'manual' ? '' : 'none';
     sel('customBox').style.display = mode === 'custom' ? '' : 'none';
+    if (mode !== lastMode){   // the benchmark has its own default goal; a goal the user typed is never overwritten
+      const g = $('goal');
+      if (mode === 'bench' && g.value === o.goal) g.value = BENCH_GOAL;
+      else if (lastMode === 'bench' && g.value === BENCH_GOAL) g.value = o.goal;
+      lastMode = mode;
+    }
     const level = mode === 'adaptive' ? p.level : parseInt(sel('lvl').value, 10);
     let cap = 3;
-    if (mode !== 'custom') cap = HINT_MAX[level - 1];
+    if (mode === 'bench') cap = 0;
+    else if (mode !== 'custom') cap = HINT_MAX[level - 1];
     const cur = parseInt(sel('hint').value, 10) || 0, want = Math.min(cur, cap);
     sel('hint').innerHTML = [0, 1, 2, 3].filter(function(h){ return h <= cap; }).map(function(h){ return '<option value="' + h + '"' + (h === want ? ' selected' : '') + '>' + (h === 0 ? 'Sin pistas' : h + ' ' + ['', 'indicio', 'método', 'solución'][h]) + '</option>'; }).join('');
     if (o.id === 'arith'){ const row = sel('o_step'); if (row) row.textContent = { 1: 1, 2: 1, 3: 5, 4: 5, 5: 5, 6: 5, 7: 10, 8: 10, 9: 10, 10: 10 }[sel('sl_step').value] + '°'; }
@@ -1026,6 +1155,7 @@ function configScreen(o){
     const mode = sel('mode').value, hint = parseInt(sel('hint').value, 10) || 0;
     let P;
     if (mode === 'custom') P = customParams(o.id, collectCustom());
+    else if (mode === 'bench') P = benchParams();
     else { P = paramsForLevel(o.id, mode === 'adaptive' ? p.level : parseInt(sel('lvl').value, 10)); P.maxHint = Math.min(hint, P.maxHint); }
     o.start(v, P, mode);
   };
@@ -1039,18 +1169,20 @@ function finish(r){
   live = false;
   cleanup();
   const d = load(), P = r.P;
-  const custom = P.level === 'Custom';
+  const custom = P.level === 'Custom', bench = !!P.bench;
   const valid = isValid(r.accuracy, r.hinted);
   const met = evaluateGoal(r.goal, { accuracy: r.accuracy, spi: r.spi, correct: r.correct });
   const ses = { ts: new Date().toISOString(), module: MODULES[r.id], level: P.level, mode: r.mode, params: r.params, correct: r.correct, wrong: r.wrong, blank: r.blank,
     spi: r.spi, accuracy: r.accuracy, goal: r.goal, met: met, valid: valid, hinted: !!r.hinted,
     thirds: r.outs ? atcThirds(r.outs, 0) : null };
-  const best = custom ? null : bestAtLevel(d.sessions, ses.module, ses.level);
+  if (r.store) Object.keys(r.store).forEach(function(k){ ses[k] = r.store[k]; });   // benchmark / rule-change fields
+  const best = custom || bench ? null : bestAtLevel(d.sessions, ses.module, ses.level);
   const rec = isRecord(d.sessions, ses);
   d.sessions.push(ses);
   const idx = d.sessions.length - 1;
   let note = '';
   if (custom) note = 'Personalizado';
+  else if (bench) note = 'Referencia';   // a benchmark never moves the level, the streak or the personal bests
   else if (r.hinted) note = 'Con pistas';
   else {
     const before = d.prog[r.id];
@@ -1070,12 +1202,12 @@ function finish(r){
   else if (met === false) goalHtml = '<p><b class="warn">Objetivo no cumplido</b> · ' + esc(r.goal) + '</p>';
   else goalHtml = '<p id="goalbox">' + esc(r.goal) + ' <button class="btn" id="yes">' + ic('check') + 'Cumplido</button> <button class="btn" id="no">' + ic('x') + 'No cumplido</button></p>';
   const p = d.prog[r.id];
-  screen('<h2 class="ttl">' + MODULES_ES[r.id] + '</h2><p class="soft">' + (custom ? 'Personalizado' : 'Nivel ' + esc(P.level) + ' ' + LEVEL_NAMES[P.level - 1] + ' · ' + modeEs(r.mode)) + '</p>' + (rec ? '<p class="rec">' + ic('check') + 'Récord</p>' : '') +
+  screen('<h2 class="ttl">' + MODULES_ES[r.id] + '</h2><p class="soft">' + (custom ? 'Personalizado' : (bench ? 'Referencia · ' + BENCH_N + ' objetos' : 'Nivel ' + esc(P.level) + ' ' + LEVEL_NAMES[P.level - 1] + ' · ' + modeEs(r.mode))) + '</p>' + (rec ? '<p class="rec">' + ic('check') + 'Récord</p>' : '') +
     '<div class="figs"><div class="fig"><b>' + r.correct + '</b><span>Aciertos</span></div><div class="fig"><b>' + r.wrong + '</b><span>Fallos</span></div><div class="fig"><b>' + r.blank + '</b><span>En blanco</span></div>' +
     '<div class="fig"><b>' + fmt(r.spi, 2) + '</b><span>s / elemento</span></div><div class="fig"><b class="' + (valid ? 'good' : 'bad') + '">' + fmt(r.accuracy, 1) + ' %</b><span>Precisión</span></div></div>' + goalHtml +
     (ses.thirds ? '<p class="soft" id="thirdsLine">' + esc(atcThirdsLine(ses.thirds)) + '</p>' : '') +
-    '<div class="tbl"><table><thead><tr><th>Nivel</th><th>Racha</th><th>Desbloqueado</th>' + (custom ? '' : '<th>Mejor s / elemento</th>') + '<th></th></tr></thead><tbody><tr><td>' + p.level + '</td><td>' + p.streak + ' / 3</td><td>' + p.unlocked + '</td>' +
-    (custom ? '' : '<td>' + (best ? fmt(best.spi, 2) : '–') + '</td>') + '<td>' + (valid ? '' : '<b class="warn">&lt; ' + MIN_ACCURACY + ' %</b> ') + note + '</td></tr></tbody></table></div>' +
+    '<div class="tbl"><table><thead><tr><th>Nivel</th><th>Racha</th><th>Desbloqueado</th>' + (custom || bench ? '' : '<th>Mejor s / elemento</th>') + '<th></th></tr></thead><tbody><tr><td>' + p.level + '</td><td>' + p.streak + ' / 3</td><td>' + p.unlocked + '</td>' +
+    (custom || bench ? '' : '<td>' + (best ? fmt(best.spi, 2) : '–') + '</td>') + '<td>' + (valid ? '' : '<b class="warn">&lt; ' + MIN_ACCURACY + ' %</b> ') + note + '</td></tr></tbody></table></div>' +
     (r.extra || '') + '<p class="row" style="margin-top:16px"><button class="btn primary" id="rep">' + ic('repeat') + 'Repetir</button><button class="btn" id="men">' + ic('back') + 'Menú</button><button class="btn" id="his">' + ic('history') + 'Historial</button></p>');
   if (met === null){
     const mark = function(v){ d.sessions[idx].met = v; save(); $('goalbox').innerHTML = esc(r.goal) + ' · ' + (v ? '<b class="good">cumplido</b>' : '<b class="warn">no cumplido</b>'); };
@@ -1304,8 +1436,8 @@ function objectSvg(o, size){
   else shape = '<polygon points="50,6 94,50 50,94 6,50" fill="' + c + '"/>';
   return '<svg viewBox="0 0 100 100" width="' + s + '" height="' + s + '" role="img" aria-label="' + valueEs(o.shape) + ' ' + valueEs(o.color) + '">' + shape + '</svg>';
 }
-function ruleHtml(rule, hl){
-  return '<div class="rules" id="rulebar">' + rule.keys.map(function(k){
+function ruleHtml(rule, hl, noId){
+  return '<div class="rules"' + (noId ? '' : ' id="rulebar"') + '>' + rule.keys.map(function(k){
     const sw = k.pred.values.map(function(v){
       return k.pred.attr === 'color' ? objectSvg({ color: v, shape: 'circle' }, 26) : objectSvg({ color: 'green', shape: v }, 26).replace(COLOR_HEX.green, '#8d8878');
     }).join(' ');
@@ -1313,7 +1445,22 @@ function ruleHtml(rule, hl){
   }).join('') + '</div>';
 }
 function describeCat(P){
-  return 'Complejidad de reglas ' + P.rule + ', ' + P.speed + ' s por objeto, ' + P.rounds + ' rondas de ' + P.per + ' objetos, ' + Math.round(P.reversal * 100) + '% de marcos de tecla invertida, reglas ' + (P.rulesVisible ? 'visibles' : 'ocultas tras la introducción') + (P.dual ? ', monitor de doble tarea' : '') + '.';
+  return (P.bench ? 'Referencia. ' : '') + 'Complejidad de reglas ' + P.rule + ', ' + P.speed + ' s por objeto, ' + P.rounds + ' rondas de ' + P.per + ' objetos, ' + Math.round(P.reversal * 100) + '% de marcos de tecla invertida, reglas ' + (P.rulesVisible ? 'visibles' : 'ocultas tras la introducción') +
+    (P.changes ? ', ' + P.changes + ' cambios de regla por ronda' : '') + (P.dual ? ', monitor de doble tarea' : '') + '.';
+}
+// Result block of a benchmark or of a session with rule changes. Errors = wrong + blank.
+function catReportHtml(rep, P){
+  const err = function(o){ return (o.n - o.c) + ' / ' + o.n; };
+  const met = P.bench ? benchTargetMet(rep) : null;
+  return '<div class="figs" id="catrep">' +
+    (P.bench ? '<div class="fig"><b class="' + (met ? 'good' : 'bad') + '" id="benchmet">' + (met ? 'Sí' : 'No') + '</b><span>≥' + BENCH_ACC + ' % · ≤' + String(BENCH_SEC).replace('.', ',') + ' s</span></div>' : '') +
+    '<div class="fig"><b>' + fmt(rep.rtSlow10, 2) + '</b><span>s · 10 % más lento</span></div>' +
+    '<div class="fig"><b id="posterr">' + err(rep.post) + '</b><span>Errores tras cambio</span></div>' +
+    '<div class="fig"><b id="resterr">' + err(rep.rest) + '</b><span>Errores, resto</span></div></div>' +
+    '<details><summary>Por regla</summary><div class="tbl"><table><thead><tr><th>Regla</th><th>Objetos</th><th>Fallos</th><th>En blanco</th><th>Tras cambio</th></tr></thead><tbody>' +
+    rep.byRule.map(function(o, i){ return '<tr><td>' + (i + 1) + '</td><td>' + o.n + '</td><td>' + o.w + '</td><td>' + o.b + '</td><td>' + (o.pn ? o.pe + ' / ' + o.pn : '—') + '</td></tr>'; }).join('') +
+    ['color', 'shape'].map(function(a){ const o = rep.byAttr[a]; return '<tr><td>' + (a === 'color' ? 'Color' : 'Forma') + '</td><td>' + o.n + '</td><td>' + o.w + '</td><td>' + o.b + '</td><td></td></tr>'; }).join('') +
+    '</tbody></table></div></details>';
 }
 function configCat(){
   configScreen({ id: 'cat', title: 'Categorías', describe: describeCat, goal: '≥96 % de precisión',
@@ -1324,11 +1471,13 @@ function startCat(goal, P, mode){
   const limit = P.speed * 1000;
   const rnd = mulberry32((Date.now() % 1000000) | 0);
   let round = 0, n = 0, correct = 0, wrong = 0, blank = 0, times = [], outs = [], rule = null, cur = null, prev = null, t0 = 0, acc = false, deadline = null, hinted = false, hintTimer = null;
+  let plan = [], rs = -1, since = 1e9, nChanges = 0;   // mid-block rule changes: planned positions, rule segment, objects since the last change
   const params = describeCat(P) + (P.maxHint ? ' Pistas hasta ' + P.maxHint + '.' : '');
   function intro(){
     cleanup(); acc = false;
-    do { rule = makeRuleSet(rnd, P.rule); } while (!ruleIsUsable(rule));
+    rule = changeRule(rnd, P.rule, null);
     round++; n = 0; prev = null;
+    plan = planChanges(rnd, P.per, P.changes || 0); rs++; since = 1e9;
     screen('<div class="head"><span>Ronda <b>' + round + '</b> / ' + P.rounds + '</span><span>' + ic('timer') + '<b>' + P.speed + '</b> s</span></div>' +
       ruleHtml(rule) + (P.reversal > 0 ? '<p><span class="rev-sample"></span> ' + mirrorText(rule) + '</p>' : '') +
       '<p><button class="btn primary" id="go">' + ic('play') + 'Empezar <kbd>Espacio</kbd></button></p>');
@@ -1348,7 +1497,18 @@ function startCat(goal, P, mode){
     if (!P.rulesVisible){ bar.innerHTML = k ? '<div class="rule"><span class="key hl">' + k + '</span></div>' : ''; return; } // rules hidden: only the hinted key shows
     Array.prototype.forEach.call(bar.querySelectorAll('.key'), function(el){ el.classList.toggle('hl', el.dataset.k === k); });
   }
+  // Unannounced rule change: the new rule replaces the object for RULE_MSG_MS, then the stream goes on (keys are ignored meanwhile).
+  function ruleChange(){
+    acc = false; nChanges++;
+    rule = changeRule(rnd, P.rule, rule); rs++; since = 0;
+    const st = $('stage'); st.className = 'stage msg'; st.innerHTML = ruleHtml(rule, null, true);
+    $('fb').textContent = '';
+    const tb = $('tb'); if (tb){ tb.style.transition = 'none'; tb.style.transform = 'scaleX(1)'; }
+    if (P.rulesVisible){ const bar = $('rulebar'); if (bar) bar.outerHTML = ruleHtml(rule); }
+    timer(setTimeout(function(){ acc = true; item(); }, RULE_MSG_MS));
+  }
   function item(){
+    if (plan.length && plan[0] === n){ plan.shift(); ruleChange(); return; }
     cur = nextItem(rnd, rule, prev, P.reversal); prev = cur;
     const st = $('stage'); st.className = 'stage' + (cur.reversed ? ' rev' : ''); st.innerHTML = objectSvg(cur.obj, 170); $('fb').textContent = ''; $('c').textContent = n + 1;
     highlight(null);
@@ -1361,7 +1521,9 @@ function startCat(goal, P, mode){
   }
   function record(kind){
     if (!acc) return; acc = false; clearTimeout(deadline); clearTimeout(hintTimer);   // a hint timer must never survive into the next object
-    outs.push({ ok: kind === 'ok', blank: kind !== 'ok' && kind !== 'wrong', sec: kind === 'blank' ? limit / 1000 : (performance.now() - t0) / 1000 });
+    const kr = rule.keys.find(function(k){ return k.key === cur.key; });
+    outs.push({ ok: kind === 'ok', blank: kind !== 'ok' && kind !== 'wrong', sec: kind === 'blank' ? limit / 1000 : (performance.now() - t0) / 1000, rs: rs, post: since < POST_N, attr: kr ? kr.pred.attr : '' });
+    since++;
     if (kind === 'ok'){ correct++; times.push((performance.now() - t0) / 1000); $('fb').innerHTML = '<span class="flash-good">' + ic('check') + '</span>'; }
     else if (kind === 'wrong'){ wrong++; times.push((performance.now() - t0) / 1000); $('fb').innerHTML = '<span class="flash-bad">' + ic('x') + ' ' + cur.expected + '</span>'; }
     else { blank++; $('fb').innerHTML = '<span class="warn">' + ic('dash') + ' ' + cur.expected + '</span>'; }
@@ -1381,7 +1543,14 @@ function startCat(goal, P, mode){
   function end(){
     const total = correct + wrong + blank;
     const spi = times.length ? times.reduce(function(a, b){ return a + b; }, 0) / times.length : null;
-    finish({ id: 'cat', P: P, mode: mode, params: params, correct: correct, wrong: wrong, blank: blank, spi: spi, hinted: hinted && P.maxHint >= 2, extra: dualReport(P.dual),
+    let store = null, extra = dualReport(P.dual);
+    if (P.bench || P.changes){
+      const rep = catReport(outs);
+      store = catStore(rep, nChanges);
+      if (P.bench){ store.bench = true; store.target = benchTargetMet(rep); }
+      extra = catReportHtml(rep, P) + extra;
+    }
+    finish({ id: 'cat', P: P, mode: mode, params: params, correct: correct, wrong: wrong, blank: blank, spi: spi, hinted: hinted && P.maxHint >= 2, extra: extra, store: store,
       accuracy: total ? correct / total * 100 : 0, goal: goal, outs: outs, repeat: function(){ startCat(goal, P, mode); } });
   }
   intro();
@@ -1392,7 +1561,7 @@ function history(){
   cleanup();
   const d = load(), ses = d.sessions.slice(-100).reverse();
   const rows = ses.map(function(s){
-    return '<tr><td>' + dateES(s.ts) + '</td><td>' + esc(modEs(s.module)) + '</td><td>' + esc(lvlEs(s.level)) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 2) + '</td><td>' + fmt(s.accuracy, 1) + '</td><td>' + esc(s.goal) + '</td><td>' +
+    return '<tr><td>' + dateES(s.ts) + '</td><td>' + esc(modEs(s.module)) + '</td><td>' + (s.bench ? 'Ref. ' + BENCH_N : esc(lvlEs(s.level))) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi, 2) + '</td><td>' + fmt(s.accuracy, 1) + '</td><td>' + esc(s.goal) + '</td><td>' +
       (s.met === true ? 'Sí' : (s.met === false ? 'No' : '—')) + '</td><td>' + (s.valid ? 'Sí' : 'No') + '</td></tr>';
   }).join('');
   const prog = ['conf', 'arith', 'cat'].map(function(m){ const p = d.prog[m]; return '<tr><td>' + MODULES_ES[m] + '</td><td>' + p.level + '</td><td>' + p.streak + ' / 3</td><td>' + p.unlocked + '</td></tr>'; }).join('');

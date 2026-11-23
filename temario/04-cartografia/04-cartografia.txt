@@ -56,7 +56,7 @@ Define rumbo.	La distancia angular entre el norte de referencia y el eje longitu
 ¿Cómo se escriben y se miden los rumbos?	Con tres cifras, como ángulo respecto al norte (geográfico o magnético), medido en el sentido de giro de las agujas del reloj.	ATC::OM04
 Fórmula del manual para obtener el rumbo magnético	Rumbo magnético = rumbo geográfico - declinación (declinación positiva E, negativa W).	ATC::OM04
 Rumbo geográfico 081, declinación 3E: ¿rumbo magnético?	078 (081 - (+3)).	ATC::OM04
-Rumbo geográfico 122, declinación 5W: ¿rumbo magnético?	127 (122 - (-5)). Nota: el manual imprime «122 - (-3) = 125», una errata aritmética.	ATC::OM04
+Rumbo geográfico 122, declinación 3W: ¿rumbo magnético?	125 (122 - (-3) = 122 + 3); restar una declinación W (negativa) equivale a sumarla.	ATC::OM04
 Define ruta en el manual.	La proyección del movimiento de una aeronave, persona u objeto sobre la superficie terrestre; en una carta, la trayectoria que une el punto de salida con el de destino (magnética o geográfica).	ATC::OM04
 Sin viento, ¿cómo se comparan el rumbo y la ruta?	El rumbo de la aeronave coincide con la ruta que sobrevuela.	ATC::OM04
 ¿Cuáles son los dos tipos de ruta más importantes?	Ortodrómica y loxodrómica.	ATC::OM04
@@ -111,8 +111,10 @@ Define proyección cartográfica.	Las transformaciones matemáticas que permiten
 Dos factores principales para elegir una proyección	La zona de la superficie terrestre que se quiere representar y la especialización (finalidad) del mapa.	ATC::OM04
 Dos formas de clasificar las proyecciones en el manual	(a) Según la magnitud geométrica que conservan; (b) según la forma de proyección.	ATC::OM04
 Proyección conforme	Conserva el ángulo entre dos puntos medido en la superficie de referencia y en el mapa.	ATC::OM04
-Proyección equivalente	Conserva la proporcionalidad entre las áreas; no es posible sin deformar considerablemente los ángulos.	ATC::OM04
-Proyección equidistante	Mantiene la proporcionalidad entre las distancias; en la práctica ninguna proyección la conserva en todo el mapa.	ATC::OM04
+Proyección equivalente	Conserva la proporcionalidad entre las áreas; no es posible sin deformar considerablemente los ángulos, por lo que ninguna proyección puede ser equivalente y conforme a la vez.	ATC::OM04
+Proyección equidistante	Guarda la proporcionalidad entre las distancias; en la práctica ninguna proyección la conserva en todo el mapa, pero puede conservarse a lo largo de determinadas líneas, que se denominan automecoicas.	ATC::OM04
+¿Puede una proyección ser equivalente y conforme a la vez?	No: la equivalencia no es posible sin deformar considerablemente los ángulos originales.	ATC::OM04
+En una proyección equidistante, ¿cómo se llaman las líneas a lo largo de las cuales se conserva la proporcionalidad de las distancias?	Automecoicas.	ATC::OM04
 Proyección afiláctica	No tiene ninguna de las tres propiedades (conforme, equivalente, equidistante).	ATC::OM04
 ¿Puede una proyección ser a la vez conforme, equivalente y equidistante?	No: está matemáticamente demostrado que ninguna mantiene las tres propiedades, solo una.	ATC::OM04
 Dos familias de proyecciones según su forma	Puras y modificadas.	ATC::OM04
@@ -123,8 +125,9 @@ Proyección gnomónica: posición del foco	En el centro de la Tierra.	ATC::OM04
 Proyecciones polar, ecuatorial y horizontal: ¿qué define cada una?	La posición del plano de proyección: tangente en un Polo (polar), en un punto del Ecuador (ecuatorial) o en un punto no significativo (horizontal).	ATC::OM04
 Dos tipos de proyección por desarrollo	Cónica (cono tangente o secante) y cilíndrica (cilindro tangente o secante).	ATC::OM04
 Proyección directa, transversal y oblicua: el eje de la superficie de proyección es...	Directa: paralelo al eje de rotación terrestre. Transversal: perpendicular. Oblicua: forma un ángulo entre 0 y 90 grados.	ATC::OM04
-¿Qué son las proyecciones modificadas?	Proyecciones puras alteradas con artificios geométricos y analíticos para adquirir una propiedad que no tenían, con menos distorsiones en las áreas de interés; hoy, la mayoría de los mapas.	ATC::OM04
-Proyecciones modificadas populares citadas en el manual	Bonne, Lambert, Mercator, Mollweide, Goode.	ATC::OM04
+¿Qué son las proyecciones modificadas?	Las que recurren a artificios geométricos y analíticos para que una proyección pura adquiera alguna propiedad que no posee originariamente, con el fin de disminuir las distorsiones en las áreas de interés para el uso de la carta; hoy, la mayoría de los mapas se hacen a base de ellas.	ATC::OM04
+Proyecciones modificadas más populares según el manual	Bonne, Lambert, Mercator, Mollweide, Goode o Boggs.	ATC::OM04
+¿Qué proyección modificada describe el manual con detalle?	La cónica conforme de Lambert (basada en la directa-gnomónica con un cono secante).	ATC::OM04
 ¿Qué proyecciones se usan mucho en la cartografía aeronáutica, sobre todo en ruta?	Las cónicas, por la facilidad y la exactitud con que se representan las trayectorias.	ATC::OM04
 En una proyección cónica gnomónica directa, ¿cómo se coloca el cono?	Tangente a la Tierra a lo largo de un paralelo denominado paralelo estándar.	ATC::OM04
 Meridianos y paralelos en la proyección cónica	Meridianos: rectas concurrentes en el Polo. Paralelos: arcos de circunferencias concéntricas. Mantienen 90 grados.	ATC::OM04
@@ -139,7 +142,7 @@ Define topografía en el manual.	La ciencia que se ocupa de la representación d
 Define equidistancia en los mapas de curvas de nivel.	La distancia vertical constante entre los planos paralelos que cortan el terreno.	ATC::OM04
 ¿De qué depende la precisión de un mapa de curvas de nivel?	De la equidistancia y de la escala; para reflejar pequeños detalles hay que disminuir la equidistancia.	ATC::OM04
 ¿Qué se puede calcular con las curvas de nivel?	Distancias, áreas, ángulos e incluso volúmenes, de forma sencilla y precisa.	ATC::OM04
-¿Qué cartas aeronáuticas usan habitualmente la topografía por curvas de nivel?	Las cartas para la navegación visual, las que representan aeródromos y las que definen superficies limitadoras de obstáculos.	ATC::OM04
+¿Qué cartas aeronáuticas usan habitualmente la topografía por curvas de nivel?	Las cartas para la navegación visual, las que representan aeródromos y las que definen superficies delimitadoras de obstáculos.	ATC::OM04
 ¿Qué documento de la OACI normaliza los símbolos de las cartas aeronáuticas?	El Anexo 4 de la OACI.	ATC::OM04
 ¿Dónde se publican los símbolos propios de España, que no están en el Anexo 4, y cómo se marcan?	En el AIP-España GEN 2.3, marcados con un asterisco (*): «No incluidos en el ANEXO 4 de OACI».	ATC::OM04
 Definición de carta aeronáutica en el apartado 4	La representación de una porción de tierra, su relieve y sus construcciones, diseñada especialmente para satisfacer los requisitos de la navegación aérea.	ATC::OM04
@@ -196,5 +199,5 @@ Características exigidas a las cartas electrónicas (lista)	Agregar o quitar in
 ¿Cómo se notifican las erratas y los cambios urgentes de las cartas significativos para las operaciones?	Por NOTAM, con referencia a la carta afectada.	ATC::OM04
 ¿Cómo se publican los cambios de las cartas sin repercusión operacional?	Mediante enmienda regular al AIP, Suplemento Regular (SUP) o corrección manuscrita al AIP.	ATC::OM04
 ¿Cómo se publica un cambio de importancia operacional en los procedimientos de las cartas?	Con una nueva edición de la carta distribuida mediante el sistema AIRAC.	ATC::OM04
-¿Cuál es la fecha («Elaborado») del manual de Cartografía de ENAIRE?	Noviembre de 2024 (66 páginas).	ATC::OM04
+¿Cuál es la fecha («Elaborado») del manual de Cartografía de ENAIRE?	Noviembre de 2026 (66 páginas); sustituye a la edición de noviembre de 2024.	ATC::OM04
 ¿Qué dos partes del AIP-España contienen cartas de ejemplo en el anexo del manual?	ENR (cobertura radar, luces de superficie, áreas prioritarias, aves, VFR en TMA, ATCSMAC) y AD (planos de aeródromo, AOC A, PATC, SID, STAR, TRAN, ATCSMAC, IAC, VAC).	ATC::OM04

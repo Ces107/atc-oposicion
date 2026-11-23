@@ -200,12 +200,13 @@ const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[
 (function(){try{Object.keys(B.pages).forEach(k=>{const raw=localStorage.getItem(k);if(!raw)return;let o;try{o=JSON.parse(raw)}catch(e){return}
   const m=B.pages[k];Object.keys(o).forEach(n=>{const id=m[n];if(!id||!o[n]||S.res[id])return;const ok=!!o[n].ok;S.res[id]={box:ok?1:0,last:Date.now()-2*DAY,seen:1,right:ok?1:0,ok:ok}})})}catch(e){}save()})();
 const due=r=>Date.now()>=r.last+IV[Math.min(r.box,5)]*DAY;
-function stats(){const T={};for(let t=1;t<=9;t++)T[t]={n:0,seen:0,right:0,due:0,mastered:0};
+const TOPICS=Object.keys(B.topics).map(Number).sort((a,b)=>a-b);
+function stats(){const T={};TOPICS.forEach(t=>{T[t]={n:0,seen:0,right:0,due:0,mastered:0}});
   Q.forEach(q=>{const x=T[q.t];x.n++;const r=S.res[q.id];if(r){x.seen++;if(r.ok)x.right++;if(due(r))x.due++;if(r.box>=4)x.mastered++}});return T}
 function renderProgress(){
   const T=stats();let n=0,seen=0,right=0,d=0,m=0;Object.values(T).forEach(x=>{n+=x.n;seen+=x.seen;right+=x.right;d+=x.due;m+=x.mastered});
   let h=`<div class="grid"><div class="stat"><b>${n}</b><span>preguntas</span></div><div class="stat"><b>${seen}</b><span>contestadas</span></div><div class="stat"><b>${seen?Math.round(100*right/seen):0}%</b><span>acierto</span></div><div class="stat"><b>${d}</b><span>para repasar</span></div><div class="stat"><b>${m}</b><span>dominadas</span></div></div>`;
-  for(let t=1;t<=9;t++){const x=T[t];h+=`<div class="trow"><b>${t}</b><div><div>${esc(B.topics[t])}</div><div class="barbg"><span class="seen" style="width:${100*x.seen/Math.max(1,x.n)}%"></span><span class="acc" style="width:${100*x.right/Math.max(1,x.n)}%"></span></div></div><small>${x.seen?Math.round(100*x.right/x.seen):'–'}% · ${x.seen}/${x.n}</small></div>`}
+  for(const t of TOPICS){const x=T[t];h+=`<div class="trow"><b>${t}</b><div><div>${esc(B.topics[t])}</div><div class="barbg"><span class="seen" style="width:${100*x.seen/Math.max(1,x.n)}%"></span><span class="acc" style="width:${100*x.right/Math.max(1,x.n)}%"></span></div></div><small>${x.seen?Math.round(100*x.right/x.seen):'–'}% · ${x.seen}/${x.n}</small></div>`}
   $('#prog').innerHTML=h}
 function setupHtml(){
   const tp=Object.keys(B.topics).map(t=>`<label><input type="checkbox" class="tp" value="${t}" checked> ${t}. ${esc(B.topics[t])}</label>`).join('<br>');
@@ -234,10 +235,11 @@ const fmt=s=>{s=Math.max(0,s);return Math.floor(s/60)+':'+String(s%60).padStart(
 function rec(q,ok){const r=S.res[q.id]||{box:0,seen:0,right:0};r.seen++;if(ok){r.right++;r.box=Math.min(5,r.box+1)}else r.box=0;r.ok=ok;r.last=Date.now();S.res[q.id]=r}
 function showQ(){const r=run,it=r.qs[r.i],q=it.q;
   let h=`<div class="runbar"><span>${esc(r.label)} · ${r.i+1} de ${r.qs.length}</span><span>${r.mode==='exam'?'<span id="clock">'+fmt(r.total-Math.floor((Date.now()-r.t0)/1000))+'</span>':''}</span></div><div class="prog"><i style="width:${100*r.i/r.qs.length}%"></i></div>
-<section class="q"><div class="qn">Tema ${q.t} · ${esc(B.sets[q.s])}</div><div class="stem">${q.stem}</div><div id="opts"></div><div id="fb"></div></section><div class="btns"><button class="sec" id="quit">Terminar</button></div>`;
+<section class="q"><div class="qn">Tema ${q.t} · ${esc(B.sets[q.s])}</div><div class="stem">${q.stem}</div><div id="opts"></div><div id="fb"></div></section><div class="btns">${r.mode==='exam'?'<button class="sec" id="blank">En blanco</button>':''}<button class="sec" id="quit">Terminar</button></div>`;
   $('#app').innerHTML=h;const box=$('#opts');
   it.idx.forEach((oi,pos)=>{const b=document.createElement('button');b.className='opt';b.innerHTML=`<b>${'ABCD'[pos]}</b> <span>${q.o[oi]}</span>`;b.onclick=()=>answer(oi);box.appendChild(b)});
   let qt=0;$('#quit').onclick=function(){if(qt){finish();return}qt=1;this.textContent='¿Seguro?';setTimeout(()=>{qt=0;if(this.isConnected)this.textContent='Terminar'},3000)};
+  if($('#blank'))$('#blank').onclick=()=>{it.pick=null;next()};
   if(r.i>0)window.scrollTo(0,0)}
 function answer(oi){const r=run,it=r.qs[r.i],q=it.q;it.pick=oi;const ok=oi===q.a;
   if(r.mode==='exam'){rec(q,ok);save();next();return}
@@ -250,10 +252,11 @@ function finish(){if(!run||run.done)return;run.done=true;clearInterval(run.timer
   if(r.mode==='study')r.qs=r.qs.filter(x=>x.pick!==null);
   if(!r.qs.length){home();return}
   const answered=r.qs.filter(x=>x.pick!==null),right=answered.filter(x=>x.pick===x.q.a),wrong=r.qs.filter(x=>x.pick!==x.q.a);
-  const un=r.qs.length-answered.length;S.hist.unshift({t:Date.now(),mode:r.mode,n:r.qs.length,right:right.length,label:r.label});S.hist=S.hist.slice(0,40);save();
+  // nota como en la Fase 1 real: cada fallo resta 0,33 y la pregunta en blanco no resta (deducido de las notas de 2025)
+  const un=r.qs.length-answered.length,bad=answered.length-right.length,net=right.length-bad/3;S.hist.unshift({t:Date.now(),mode:r.mode,n:r.qs.length,right:right.length,bad:bad,label:r.label});S.hist=S.hist.slice(0,40);save();
   const pt={};r.qs.forEach(x=>{const t=x.q.t;pt[t]=pt[t]||{n:0,ok:0};pt[t].n++;if(x.pick===x.q.a)pt[t].ok++});
   const secs=Math.round((Date.now()-r.t0)/1000);
-  let h=`<h2>Resultado</h2><div class="grid"><div class="stat"><b>${right.length}/${r.qs.length}</b><span>aciertos</span></div><div class="stat"><b>${Math.round(100*right.length/r.qs.length)}%</b><span>nota</span></div><div class="stat"><b>${fmt(secs)}</b><span>tiempo${r.mode==='exam'?' (límite '+fmt(r.total)+')':''}</span></div>${un?`<div class="stat"><b>${un}</b><span>sin contestar</span></div>`:''}</div>`;
+  let h=`<h2>Resultado</h2><div class="grid"><div class="stat"><b>${right.length}/${r.qs.length}</b><span>aciertos</span></div><div class="stat"><b>${net.toFixed(2).replace('.',',')}</b><span>netos (fallo −0,33)</span></div><div class="stat"><b>${(50*Math.max(0,net)/r.qs.length).toFixed(1).replace('.',',')}</b><span>sobre 50</span></div><div class="stat"><b>${fmt(secs)}</b><span>tiempo${r.mode==='exam'?' (límite '+fmt(r.total)+')':''}</span></div>${un?`<div class="stat"><b>${un}</b><span>sin contestar</span></div>`:''}</div>`;
   h+='<table class="res"><tr><th>Tema</th><th>Aciertos</th></tr>'+Object.keys(pt).sort().map(t=>`<tr><td>${t}. ${esc(B.topics[t])}</td><td>${pt[t].ok}/${pt[t].n}</td></tr>`).join('')+'</table>';
   if(wrong.length){h+=`<h2>Repasar (${wrong.length})</h2>`+wrong.map(x=>{const q=x.q;return `<div class="miss"><div class="qn">Tema ${q.t}</div><div class="stem">${q.stem}</div><div>${x.pick===null?'<span class="badt">Sin contestar.</span>':'<span class="badt">Tu respuesta:</span> '+q.o[x.pick]}</div><div><span class="okt">Correcta:</span> ${q.o[q.a]}</div><div class="exp">${q.why||''}${q.src?`<div class="src">Fuente: ${q.src}</div>`:''}</div></div>`}).join('')}
   h+=`<div class="btns">${wrong.length?'<button class="go" id="again">Repetir fallos</button>':''}<button class="sec" id="back">Volver</button></div>`;

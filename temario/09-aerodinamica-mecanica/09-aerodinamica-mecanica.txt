@@ -40,7 +40,7 @@ Velocidad sobre el suelo (GS): definición del manual	Velocidad del avión respe
 ¿Cuándo es la CAS igual a la TAS (manual)?	A nivel del mar en atmósfera estándar.	ATC::OM09
 ¿Cuándo es la EAS igual a la CAS (manual)?	A nivel del mar en atmósfera estándar.	ATC::OM09
 ¿Qué velocidad corrige el error de compresibilidad: la CAS o la EAS?	La EAS (la CAS corrige solo los errores de instrumento y de posición).	ATC::OM09
-Número de Mach en el manual	Relación entre la velocidad verdadera del avión (TAS) y la velocidad del sonido (c): M = V/c.	ATC::OM09
+Número de Mach en el manual	Relación entre la velocidad verdadera del avión (TAS) y la velocidad del sonido (c); el manual lo escribe MN = TAS/c.	ATC::OM09
 Dos errores de anemómetro en el manual	Errores de instrumento y de posición; error de compresibilidad.	ATC::OM09
 Causa de los errores de instrumento y de posición	La falta de precisión en su fabricación y la dificultad de ubicación en un lugar donde la afectación de la presión estática sea mínima.	ATC::OM09
 ¿Por encima de qué velocidad es apreciable el error de compresibilidad (manual)?	Por encima de 250 kt (la variación de la densidad es apreciable).	ATC::OM09
@@ -109,7 +109,7 @@ Alargamiento: definición del manual	Cociente entre la envergadura y la cuerda m
 Valores típicos del alargamiento en el manual	Del orden de 3-4 en aviones muy rápidos a 25-30 en los planeadores.	ATC::OM09
 Un alargamiento mayor significa que el ala es...	Más larga y estrecha.	ATC::OM09
 Flecha: definición del manual	El ángulo que forman las alas respecto del eje transversal del avión.	ATC::OM09
-Tipos de flecha en el manual	Positiva/progresiva (extremos hacia atrás), neutra, negativa/regresiva (extremos adelantados).	ATC::OM09
+Tipos de flecha en el manual (edición de noviembre de 2026)	Regresiva/positiva (extremos de las alas orientados hacia atrás), recta, o invertida/progresiva (extremos adelantados).	ATC::OM09
 Diedro: definición del manual	Visto el avión de frente, el ángulo en forma de «V» que forman las alas con el eje lateral; positivo, neutro o negativo.	ATC::OM09
 Ángulo de ataque: definición del manual	El ángulo agudo formado por la cuerda del ala y la dirección del viento relativo (corriente libre de aire).	ATC::OM09
 ¿Por qué es variable el ángulo de ataque?	Depende de la dirección del viento relativo y de la posición de las alas con respecto a este.	ATC::OM09
@@ -175,4 +175,25 @@ Categoría de avión para la que el manual calcula el peso de aterrizaje	Categor
 Hidroplaneo: ¿cuándo se produce (manual)?	Con pista mojada o contaminada, en el momento en que las ruedas del tren dejan de girar y deslizan, perdiendo toda su eficacia la acción de frenado.	ATC::OM09
 El hidroplaneo depende de...	Los neumáticos, la contaminación de la pista y el espesor de la capa de agua o nieve, entre otros factores.	ATC::OM09
 Método más efectivo para parar el avión con hidroplaneo (manual)	El uso de la reversa.	ATC::OM09
-Fecha del manual de ENAIRE del tema 9	Elaborado: agosto 2023 (23 páginas).	ATC::OM09
+Fecha del manual de ENAIRE del tema 9	Elaborado: noviembre 2026 (23 páginas; sustituye a la edición de agosto de 2023).	ATC::OM09
+Flecha progresiva (manual del tema 9, edición de noviembre de 2026): ¿hacia dónde van los extremos de las alas?	Adelantados: flecha invertida/progresiva. (En la edición de 2023 «progresiva» significaba hacia atrás; ya no.)	ATC::OM09
+Flecha regresiva (manual del tema 9, edición de noviembre de 2026): ¿hacia dónde van los extremos de las alas?	Hacia atrás: flecha regresiva/positiva.	ATC::OM09
+¿Qué otro nombre da el manual a la flecha positiva? ¿Y a la invertida?	Positiva = regresiva (extremos hacia atrás). Invertida = progresiva (extremos adelantados).	ATC::OM09
+Flecha sin inclinación hacia atrás ni hacia delante: nombre en el texto del manual y en la Figura 7	Texto: flecha recta. Figura 7: «Flecha Neutra».	ATC::OM09
+Figura 7 del manual (tipos de flecha): rótulos	Flecha Positiva, Flecha Neutra, Flecha Negativa (positiva = extremos hacia atrás; negativa = adelantados).	ATC::OM09
+Diedro frente a flecha: ¿cómo se llama el tipo intermedio en cada caso?	Diedro: neutro (positivo, neutro, negativo). Flecha: recta (regresiva/positiva, recta, invertida/progresiva).	ATC::OM09
+Diedro negativo en la Figura 8 del manual: ¿cómo están las puntas de las alas?	Más bajas que el encastre (diedro positivo: más altas).	ATC::OM09
+Estela, figura de la p. 10 del manual: velocidad vertical de descenso de los torbellinos	2 a 2,5 m/s (400 a 500 ft/min).	ATC::OM09
+Estela, figura de la p. 10 del manual: ¿cuánto por debajo de la trayectoria del avión generador se nivelan los torbellinos?	Aproximadamente 275 m (900 ft).	ATC::OM09
+Estela, figura de la p. 10 del manual: altura de la banda de torbellinos al nivelarse	60 m (200 ft).	ATC::OM09
+Estela, figura de la p. 10 del manual: ¿qué indican las cotas de 150 m (500 ft)?	150 m (500 ft) por encima y 150 m (500 ft) por debajo de la línea que separa «espacio aéreo superior» y «espacio aéreo inferior».	ATC::OM09
+Figura 3 del manual: rótulos del inicio y del fin de los torbellinos	«Inicio turbulencia» en la rotación; «Fin turbulencia» en el aterrizaje.	ATC::OM09
+Figura 10 del manual (ejes): letras de eje y de momento para el balanceo, el cabeceo y la guiñada	Eje X, momento L = balanceo positivo; eje Y, momento M = cabeceo positivo; eje Z (hacia abajo), momento N = guiñada positivo.	ATC::OM09
+Figura 6 del manual (perfil alar): rótulos	Borde de ataque, radio de curvatura del borde de ataque, extradós, intradós, línea de curvatura media, cuerda, borde de salida.	ATC::OM09
+Las alas según el manual	Perfiles aerodinámicos unidos a cada lado del fuselaje; son las principales superficies sustentadoras que mantienen al avión en vuelo.	ATC::OM09
+¿Qué ocurre si las fuerzas L, W, T y D están en equilibrio (manual)?	El avión mantiene una velocidad uniforme y un nivel de vuelo uniforme; si alguna varía, las características del vuelo cambian.	ATC::OM09
+¿Por qué afecta la altitud densidad a la capacidad de sustentación?	Porque el aire menos denso ejerce menos fuerza en las alas.	ATC::OM09
+V_MCA: ¿cómo influye la velocidad en la eficacia de los controles aerodinámicos (manual)?	A mayor velocidad, más efectivos son; existe una velocidad por debajo de la cual el avión no es controlable.	ATC::OM09
+Trim tab: si el tab se deflecta hacia abajo, ¿hacia dónde tiende a mover el timón el momento de charnela (ejemplo del manual)?	Hacia arriba (el tab se deflecta en dirección opuesta al control primario).	ATC::OM09
+Factor de carga: ¿en qué se mide y qué indica (manual)?	En Gs (aceleración de la gravedad), unidad de fuerza igual a la fuerza ejercida por la gravedad sobre un cuerpo en reposo; indica la fuerza a la que se somete un cuerpo cuando se acelera.	ATC::OM09
+Tabla ISA del manual: densidad relativa sigma a 20 000 pies y presión relativa delta a 30 000 pies	Sigma = 0,533 a 20 000 ft (aprox. la mitad); delta = 0,297 a 30 000 ft (aprox. el 30 %).	ATC::OM09

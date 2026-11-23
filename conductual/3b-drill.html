@@ -75,6 +75,20 @@ summary{cursor:pointer;font-weight:600}
 .summary{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}
 .pill{font-weight:700;font-size:13px}
 .pill.c{color:var(--bad)}.pill.w{color:var(--warn)}.pill.s{color:var(--acc)}.pill.ok{color:var(--ok)}
+nav{overflow-x:auto;scrollbar-width:none}nav button{flex:none;white-space:nowrap}
+@media(max-width:480px){nav,.tabs{gap:14px}}
+.scrollx{overflow-x:auto}
+.logt td{padding:5px 6px 5px 0}
+.logt input[type=number]{width:70px}
+.nowrap{white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+button.se{min-width:40px;height:34px;border:1px solid var(--line);border-radius:2px;background:transparent;color:var(--mut);font-weight:700;font-size:12.5px;cursor:pointer}
+button.se[aria-pressed=true]{background:var(--bad);border-color:var(--bad);color:var(--onacc)}
+.mg.ok{color:var(--ok)}.mg.bad{color:var(--bad);font-weight:700}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:4px 0}
+.r-yo{color:var(--mut)}.r-ia{color:var(--acc)}.r-persona{color:var(--ink)}
+.up{color:var(--ok);font-weight:600}.down{color:var(--bad);font-weight:600}
+svg#l-svg{height:96px}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E">
 </head>
@@ -84,6 +98,7 @@ summary{cursor:pointer;font-weight:600}
 <p>Las competencias, los 120 puntos y los suelos del 50% son de ENAIRE (Anexo IV). Los casos, las etiquetas, los tiempos y los avisos son material de práctica propio.</p>
 </header>
 <nav role="tablist" id="tabs">
+<button role="tab" data-tab="log" aria-selected="false">Registro</button>
 <button role="tab" data-tab="sjt" aria-selected="true">Juicio</button>
 <button role="tab" data-tab="group" aria-selected="false">Grupo</button>
 <button role="tab" data-tab="rating" aria-selected="false">Valoración</button>
@@ -92,6 +107,29 @@ summary{cursor:pointer;font-weight:600}
 <main>
 <div id="corruptwarn" class="banner warn hidden">Parte del historial guardado no se pudo leer; se han conservado las filas legibles.</div>
 <div id="storewarn" class="banner warn hidden">Almacenamiento no disponible: exporta el CSV antes de salir.</div>
+
+<section id="tab-log" class="hidden">
+<div class="card">
+<h2>Registro de sesiones</h2>
+<div class="row">
+<label>Tipo <select id="l-type"><option value="entrevista">Entrevista</option><option value="grupo">Grupo</option></select></label>
+<label>Valora <select id="l-rater"><option value="yo">Yo</option><option value="ia">IA</option><option value="persona">Persona</option></select></label>
+<label>Fecha <input type="date" id="l-date"></label>
+</div>
+<div id="l-panel" class="scrollx"></div>
+<div class="row" style="margin-top:10px"><button class="btn" id="l-save" disabled>Guardar</button><button class="btn sec" id="l-clear">Borrar</button><span id="l-msg" class="small muted" role="status"></span></div>
+</div>
+<div class="card">
+<h2>Resumen</h2>
+<div id="l-bytype" class="scrollx"></div>
+<div class="row"><label>Serie <select id="l-series"><option value="all">Todas</option><option value="yo">Yo</option><option value="ia">IA</option><option value="persona">Persona</option></select></label></div>
+<div id="l-sum"></div>
+</div>
+<div class="card">
+<h2>Sesiones</h2>
+<div id="l-list" class="scrollx"></div>
+</div>
+</section>
 
 <section id="tab-rating" class="hidden">
 <div class="card">
@@ -200,8 +238,9 @@ function makeRec(sid,component,item,comp,score,max,note){
 /* ---------- tabs ---------- */
 function showTab(t){
  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
- ["rating","sjt","group","history"].forEach(x=>$("#tab-"+x).classList.toggle("hidden",x!==t));
+ ["log","rating","sjt","group","history"].forEach(x=>$("#tab-"+x).classList.toggle("hidden",x!==t));
  if(t==="history")renderHistory();
+ if(t==="log")renderLog();
  try{sessionStorage.setItem("atc3b.tab",t);}catch(e){}
 }
 document.querySelectorAll("#tabs button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
@@ -419,7 +458,8 @@ function gFinish(early){
  post.replaceChildren(
   h("div",{class:"banner neu",text:(early?"Terminado a los ":"Tiempo. Duración ")+fmt(G.elapsed)+"."}),
   h("h3",{text:"Valoración"}),ratingHost,
-  h("div",{class:"row",style:"margin-top:8px"},saveBtn,h("button",{class:"btn sec",text:"Nueva sesión",onclick:gLeave}),saved),
+  h("div",{class:"row",style:"margin-top:8px"},saveBtn,h("button",{class:"btn sec",text:"Nueva sesión",onclick:gLeave}),
+   h("button",{class:"btn sec",id:"g-tolog",text:"Al registro",onclick:()=>lPrefill("grupo","yo",gw.vals)}),saved),
   h("details",{open:true},h("summary",{text:"Jugadas modelo"}),
    h("p",{},h("b",{text:"Jugada de apertura: "}),cs.opening),h("p",{},h("b",{text:"Integrar a los callados: "}),cs.quiet),
    h("p",{},h("b",{text:"Resumen de cierre: "}),cs.closing),h("p",{},h("b",{text:"Qué elimina: "}),cs.eliminates)));
@@ -440,15 +480,18 @@ function csvText(){
  DB=load();
  const head="Date;Module;Component;Item;Competency;Score;Max;Score type;Floor met;Note";
  const rows=DB.records.slice().sort((a,b)=>a.ts-b.ts).map(r=>[r.date,r.module,r.component,r.item,r.comp,r.score,r.max,r.component==="SJT"?"SJT practice 0-5":"Rating points",r.component==="SJT"?"n/a":(r.met?"Y":"N"),r.note].map(esc).join(";"));
- return [head,...rows].join("\n")+"\n";
+ const lt={entrevista:"interview",grupo:"group"},lr={yo:"self",ia:"AI",persona:"person"};
+ const lrows=sOrder(sLoad().sessions).flatMap(s=>COMPS.map(x=>{const v=s.pts[x.c];
+  return [s.date,"3B","Session log ("+lt[s.type]+", "+lr[s.rater]+")","Session "+s.id,x.c,v===null?"SE":v,x.max,"Rating points",v!==null&&v>=x.max/2?"Y":"N",""].map(esc).join(";");}));
+ return [head,...rows,...lrows].join("\n")+"\n";
 }
 function downloadCsv(){
  const blob=new Blob([csvText()],{type:"text/csv;charset=utf-8"});
  const a=h("a",{href:URL.createObjectURL(blob),download:"3b-history-"+new Date().toISOString().slice(0,10)+".csv"});
  document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
- $("#h-msg").textContent=DB.records.length+" filas.";
+ $("#h-msg").textContent=(DB.records.length+sLoad().sessions.length*COMPS.length)+" filas.";
 }
-$("#h-csv").addEventListener("click",()=>{DB=load();if(!DB.records.length){$("#h-msg").textContent="Sin sesiones.";return;}downloadCsv();});
+$("#h-csv").addEventListener("click",()=>{DB=load();if(!DB.records.length&&!sLoad().sessions.length){$("#h-msg").textContent="Sin sesiones.";return;}downloadCsv();});
 $("#h-clear").addEventListener("click",()=>{if(confirm("¿Borrar todo el historial?")){DB={records:[]};save(DB);renderHistory();$("#h-msg").textContent="Borrado.";}});
 function pct(r){return r.score/r.max*100;}
 function trendSvg(list){
@@ -485,6 +528,142 @@ function renderHistory(){
     h("td",{text:f.component==="SJT"?"práctica 0-5":(bad.length?"BAJO: "+bad.map(r=>r.comp).join(", "):"superados")}),
     h("td",{},h("button",{class:"btn sec",text:"Borrar","aria-label":"Borrar sesión "+f.date,onclick:()=>{DB=load();DB.records=DB.records.filter(r=>r.sid!==sid);save(DB);renderHistory();}})));}))));
 }
+/* ---------- registro de sesiones en la escala oficial: clave propia atc3b.scores.v1 ----------
+   {v:1,sessions:[{id,ts,date:"AAAA-MM-DD",type:"entrevista"|"grupo",rater:"yo"|"ia"|"persona",pts:{TW:13.5,...,ST:null}}]}
+   null = SE (sin evidencia), cuenta 0. Sin texto libre. assets/progress.js la lee para el área conductual de «Siguiente».
+   No va dentro de atc3b.v1 porque las versiones anteriores de esta página reescriben esa clave solo con {records}. */
+const SKEY="atc3b.scores.v1";
+const STYPE={entrevista:"Entrevista",grupo:"Grupo"},RATER={yo:"Yo",ia:"IA",persona:"Persona"};
+const RMARK={yo:"●",ia:"■",persona:"▲"},RCOL={yo:"var(--mut)",ia:"var(--acc)",persona:"var(--ink)"};
+const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+let SMEM={v:1,sessions:[]};
+function okSes(s){return !!s&&typeof s==="object"&&typeof s.id==="string"&&typeof s.ts==="number"&&isFinite(s.ts)
+ &&typeof s.date==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(s.date)&&own(STYPE,s.type)&&own(RATER,s.rater)&&!!s.pts&&typeof s.pts==="object"
+ &&COMPS.every(x=>{const v=s.pts[x.c];return v===null||(typeof v==="number"&&isFinite(v)&&v>=0&&v<=x.max);});}
+function sClean(s){const p={};COMPS.forEach(x=>p[x.c]=s.pts[x.c]);return {id:s.id,ts:s.ts,date:s.date,type:s.type,rater:s.rater,pts:p};}
+function sSave(o){SMEM=o;try{localStorage.setItem(SKEY,JSON.stringify(o));}catch(e){storageOK=false;$("#storewarn").classList.remove("hidden");}}
+function sAside(r){try{localStorage.setItem(SKEY+".corrupt",r);}catch(e){}$("#corruptwarn").classList.remove("hidden");}
+function sLoad(){let r=null;
+ try{r=localStorage.getItem(SKEY);}catch(e){return SMEM;}
+ if(!r)return SMEM;
+ let o=null;try{o=JSON.parse(r);}catch(e){}
+ const good=o&&Array.isArray(o.sessions)?o.sessions.filter(okSes):[];
+ const c={v:1,sessions:good.map(sClean)};
+ if(!(o&&Array.isArray(o.sessions)&&good.length===o.sessions.length)){sAside(r);sSave(c);}
+ return c;}
+function sTotal(s){return COMPS.reduce((a,x)=>a+(s.pts[x.c]||0),0);}
+function median(a){if(!a.length)return null;const b=a.slice().sort((p,q)=>p-q),m=b.length>>1;return b.length%2?b[m]:(b[m-1]+b[m])/2;}
+function sOrder(l){return l.slice().sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:a.ts-b.ts);}
+function today(){const d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function sgn(x){return (x>0?"+":x<0?"−":"")+nf(Math.abs(x));}
+
+const LV={},LROW={};
+(function(){
+ const tb=h("tbody");
+ COMPS.forEach(x=>{
+  const inp=h("input",{type:"number",min:0,max:x.max,step:0.5,id:"l-in-"+x.c,inputmode:"decimal","aria-label":x.n+": puntos sobre "+x.max});
+  const se=h("button",{type:"button",class:"se",id:"l-se-"+x.c,"aria-pressed":"false","aria-label":x.n+": sin evidencia",title:"Sin evidencia",text:"SE"});
+  const mg=h("td",{class:"n mg muted",id:"l-mg-"+x.c});
+  const tr=h("tr",{},h("td",{},h("span",{class:"tag",text:x.c}),h("span",{class:"nm",text:x.n})),
+   h("td",{class:"nowrap"},inp,h("span",{class:"muted small",text:" /"+x.max})),h("td",{},se),mg);
+  inp.addEventListener("input",()=>{const v=inp.value.trim(),n=v===""?NaN:parseFloat(v);
+   if(isNaN(n))LV[x.c]="";else{const c=Math.max(0,Math.min(x.max,n));if(c!==n)inp.value=c;LV[x.c]=c;}lRefresh();});
+  inp.addEventListener("change",()=>{if(typeof LV[x.c]==="number"){const r=Math.round(LV[x.c]*2)/2;LV[x.c]=r;inp.value=r;lRefresh();}});
+  se.addEventListener("click",()=>{LV[x.c]=LV[x.c]===null?"":null;inp.value="";lRefresh();});
+  LV[x.c]="";LROW[x.c]={tr,inp,se,mg};tb.append(tr);
+ });
+ $("#l-panel").replaceChildren(h("table",{class:"logt",id:"l-form"},h("thead",{},h("tr",{},h("th",{text:"Competencia"}),h("th",{text:"Puntos"}),h("th",{text:"SE"}),h("th",{class:"n",text:"Suelo"}))),tb),h("div",{id:"l-tot"}));
+})();
+function lRefresh(){
+ let tot=0,set=0;const bad=[];
+ COMPS.forEach(x=>{const v=LV[x.c],r=LROW[x.c],fl=x.max/2;
+  r.se.setAttribute("aria-pressed",v===null?"true":"false");
+  if(v===""){r.tr.classList.remove("below");r.mg.className="n mg muted";r.mg.textContent=nf(fl);return;}
+  set++;const p=v===null?0:v;tot+=p;
+  if(p<fl){bad.push(x);r.tr.classList.add("below");r.mg.className="n mg bad";}else{r.tr.classList.remove("below");r.mg.className="n mg ok";}
+  r.mg.textContent=sgn(p-fl);});
+ $("#l-save").disabled=set<7;
+ $("#l-tot").replaceChildren(
+  h("div",{class:"row",style:"margin-top:6px"},h("strong",{id:"l-total",text:"Total "+nf(tot)+" / 120"}),h("span",{class:"muted small",id:"l-count",text:set+"/7"})),
+  bad.length?h("div",{class:"banner bad",role:"alert",id:"l-flag",text:"BAJO EL SUELO: "+bad.map(x=>x.n+" "+(LV[x.c]===null?"SE":nf(LV[x.c]))+"/"+x.max).join(" · ")})
+  :set===7?h("div",{class:"banner ok",id:"l-flag",text:"Los 7 suelos superados"}):"");
+}
+function lReset(){COMPS.forEach(x=>{LV[x.c]="";LROW[x.c].inp.value="";});lRefresh();}
+function lDefaults(){const last=sLoad().sessions.slice().sort((a,b)=>b.ts-a.ts)[0];
+ if(last){$("#l-type").value=last.type;$("#l-rater").value=last.rater;}
+ $("#l-date").value=today();}
+function lPrefill(type,rater,vals){
+ showTab("log");$("#l-type").value=type;$("#l-rater").value=rater;$("#l-date").value=today();$("#l-msg").textContent="";
+ COMPS.forEach(x=>{const v=vals&&typeof vals[x.c]==="number"?vals[x.c]:"";LV[x.c]=v;LROW[x.c].inp.value=v;});lRefresh();
+ const first=COMPS.find(x=>LV[x.c]==="");(first?LROW[first.c].inp:$("#l-save")).focus();
+}
+$("#l-save").addEventListener("click",()=>{
+ const msg=$("#l-msg");
+ COMPS.forEach(x=>{if(typeof LV[x.c]==="number"){LV[x.c]=Math.round(LV[x.c]*2)/2;LROW[x.c].inp.value=LV[x.c];}});
+ if(COMPS.some(x=>LV[x.c]==="")){msg.textContent="Faltan competencias.";return;}
+ const s={id:uid(),ts:Date.now(),date:$("#l-date").value,type:$("#l-type").value,rater:$("#l-rater").value,pts:{}};
+ COMPS.forEach(x=>s.pts[x.c]=LV[x.c]);
+ if(!okSes(s)){msg.textContent="Fecha no válida.";$("#l-date").focus();return;}
+ const o=sLoad();sSave({v:1,sessions:o.sessions.concat([s])});
+ lReset();msg.textContent="Guardado · "+nf(sTotal(s))+" / 120";renderLog();
+});
+$("#l-clear").addEventListener("click",()=>{lReset();$("#l-msg").textContent="";});
+$("#l-series").addEventListener("change",()=>renderLog());
+function lStats(L){
+ const last3=L.slice(-3);
+ const comps=COMPS.map(x=>{const m=median(last3.map(s=>s.pts[x.c]||0));return {x,med:m,margin:m-x.max/2};});
+ const focus=comps.slice().sort((a,b)=>a.margin-b.margin||a.margin/a.x.max-b.margin/b.x.max)[0];
+ const tot=median(last3.map(sTotal)),prev=L.length>=4?median(L.slice(-6,-3).map(sTotal)):null;
+ return {comps,focus,tot,trend:prev==null?null:tot-prev};
+}
+function totalsSvg(L){
+ const W=300,Hh=96,pts=L.slice(-30),ns="http://www.w3.org/2000/svg";
+ const x=i=>pts.length<2?W/2:10+i*(W-20)/(pts.length-1),y=v=>Hh-7-(v/120)*(Hh-14);
+ const s=document.createElementNS(ns,"svg");
+ [["viewBox","0 0 "+W+" "+Hh],["class","trend"],["id","l-svg"],["role","img"],["aria-label","Total por sesión sobre 120; líneas en 60 y 100"]].forEach(a=>s.setAttribute(a[0],a[1]));
+ const mk=(t,a)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+ s.append(mk("line",{x1:0,x2:W,y1:y(60),y2:y(60),style:"stroke:var(--bad)","stroke-dasharray":"4 3","stroke-width":1}));
+ s.append(mk("line",{x1:0,x2:W,y1:y(100),y2:y(100),style:"stroke:var(--ok)","stroke-dasharray":"1 3","stroke-width":1.5}));
+ Object.keys(RATER).forEach(r=>{const idx=pts.map((p,i)=>[p,i]).filter(z=>z[0].rater===r);
+  if(idx.length>1)s.append(mk("polyline",{points:idx.map(z=>x(z[1])+","+y(sTotal(z[0]))).join(" "),fill:"none",style:"stroke:"+RCOL[r],"stroke-width":1.5,opacity:.6}));});
+ pts.forEach((p,i)=>{const cx=x(i),cy=y(sTotal(p)),c=RCOL[p.rater];
+  const st="fill:"+(p.type==="entrevista"?c:"var(--bg)")+";stroke:"+c+";stroke-width:1.5";
+  if(p.rater==="yo")s.append(mk("circle",{cx,cy,r:4,style:st}));
+  else if(p.rater==="ia")s.append(mk("rect",{x:cx-4,y:cy-4,width:8,height:8,style:st}));
+  else s.append(mk("polygon",{points:cx+","+(cy-5)+" "+(cx-4.5)+","+(cy+4)+" "+(cx+4.5)+","+(cy+4),style:st}));});
+ return s;
+}
+function renderLog(){
+ const all=sOrder(sLoad().sessions),bt=$("#l-bytype"),sum=$("#l-sum"),list=$("#l-list");
+ if(!all.length){bt.replaceChildren();sum.replaceChildren(h("p",{class:"muted",id:"l-empty",text:"Sin sesiones"}));list.replaceChildren();return;}
+ bt.replaceChildren(h("table",{id:"l-med"},
+  h("thead",{},h("tr",{},h("th",{text:"Mediana, 3 últimas"}),Object.keys(STYPE).map(t=>h("th",{class:"n",text:STYPE[t]})))),
+  h("tbody",{},Object.keys(RATER).map(r=>h("tr",{},h("td",{},h("span",{class:"r-"+r,text:RMARK[r]+" "}),RATER[r]),
+   Object.keys(STYPE).map(t=>{const L=all.filter(s=>s.rater===r&&s.type===t),m=median(L.slice(-3).map(sTotal));
+    return h("td",{class:"n",id:"l-med-"+r+"-"+t,text:m==null?"–":nf(m)+" ("+L.length+")"});}))))));
+ const ser=$("#l-series").value,L=ser==="all"?all:all.filter(s=>s.rater===ser);
+ if(!L.length)sum.replaceChildren(h("p",{class:"muted",id:"l-empty",text:"Sin sesiones: "+RATER[ser]}));
+ else{const st=lStats(L),f=st.focus,low=st.comps.filter(c=>c.margin<0);
+  sum.replaceChildren(
+   low.length?h("div",{class:"banner bad",role:"alert",id:"l-floorwarn",text:"BAJO EL SUELO: "+low.map(c=>c.x.n).join(" · ")}):"",
+   h("div",{class:"banner "+(f.margin<0?"bad":"neu"),id:"l-focus"},"Foco: ",h("strong",{text:f.x.n})," · margen "+sgn(f.margin)),
+   h("div",{class:"row"},h("strong",{id:"l-medtot",text:"Mediana "+nf(st.tot)+" / 120"}),
+    h("span",{id:"l-trend",class:st.trend==null||st.trend===0?"muted":st.trend>0?"up":"down",text:"Tendencia "+(st.trend==null?"–":(st.trend>0?"↑ ":st.trend<0?"↓ ":"= ")+sgn(st.trend))}),
+    h("span",{class:"muted small",text:"aprobado 60 · objetivo 100"})),
+   h("table",{id:"l-comp",class:"logt"},h("thead",{},h("tr",{},h("th",{text:"Competencia"}),h("th",{class:"n",text:"Mediana"}),h("th",{class:"n",text:"Suelo"}),h("th",{class:"n",text:"Margen"}))),
+    h("tbody",{},st.comps.map(c=>h("tr",{class:c.margin<0?"below":"",id:"l-c-"+c.x.c},h("td",{},h("span",{class:"tag",text:c.x.c}),h("span",{class:"nm",text:c.x.n})),
+     h("td",{class:"n",text:nf(c.med)+" / "+c.x.max}),h("td",{class:"n",text:nf(c.x.max/2)}),h("td",{class:"n mg "+(c.margin<0?"bad":"ok"),text:sgn(c.margin)}))))),
+   totalsSvg(L),
+   h("div",{class:"legend"},Object.keys(RATER).map(r=>h("span",{class:"r-"+r,text:RMARK[r]+" "+RATER[r]})),h("span",{text:"relleno: entrevista · hueco: grupo"})));}
+ list.replaceChildren(h("table",{id:"l-table"},h("thead",{},h("tr",{},["Fecha","Tipo","Valora","Total","Suelos",""].map(t=>h("th",{text:t})))),
+  h("tbody",{},all.slice().reverse().map(s=>{const bad=COMPS.filter(x=>(s.pts[x.c]||0)<x.max/2);
+   return h("tr",{class:bad.length?"below":""},h("td",{class:"nowrap",text:s.date}),h("td",{text:STYPE[s.type]}),
+    h("td",{class:"nowrap"},h("span",{class:"r-"+s.rater,text:RMARK[s.rater]+" "}),RATER[s.rater]),h("td",{class:"n",text:nf(sTotal(s))}),
+    h("td",{text:bad.length?"BAJO: "+bad.map(x=>x.c+(s.pts[x.c]===null?" SE":"")).join(", "):"superados"}),
+    h("td",{},h("button",{class:"btn sec sm",text:"Borrar","aria-label":"Borrar sesión "+s.date,onclick:()=>{sSave({v:1,sessions:sLoad().sessions.filter(z=>z.id!==s.id)});renderLog();}})));}))));
+}
+lDefaults();lRefresh();
+
 function weekly(){
  const recs=load().records,el=$("#weekly");if(!el)return;
  if(!recs.length){el.textContent="";return;}
@@ -493,7 +672,9 @@ function weekly(){
  el.textContent="Última: "+(days===0?"hoy":"hace "+days+" d")+" · 7 días: "+wk;
 }
 weekly();
-try{const t=sessionStorage.getItem("atc3b.tab");if(t&&["rating","sjt","group","history"].includes(t))showTab(t);}catch(e){}
+try{const t=sessionStorage.getItem("atc3b.tab");if(t&&["log","rating","sjt","group","history"].includes(t))showTab(t);}catch(e){}
+function hashTab(){if(location.hash==="#registro")showTab("log");}
+hashTab();window.addEventListener("hashchange",hashTab);
 </script>
 <script src="../assets/config.js"></script><script src="../assets/account.js" defer></script><script src="../assets/progress.js" defer></script></body>
 </html>

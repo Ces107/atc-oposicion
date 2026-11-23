@@ -68,7 +68,7 @@ Enumera los cinco factores que afectan a la temperatura en el manual 3.	La altur
 Puntos de fusión y de ebullición del agua en la escala Kelvin (manual 3).	273,16 K y 373,16 K.	ATC::OM03
 Puntos de fusión y de ebullición del agua en grados Fahrenheit.	32 ºF y 212 ºF.	ATC::OM03
 Fórmula para pasar de Fahrenheit a centígrados en el manual 3.	C = 5/9 · (F - 32).	ATC::OM03
-Fórmula para pasar de centígrados a Kelvin en el manual 3.	K = C + 273.	ATC::OM03
+Fórmula para pasar de centígrados a Kelvin en el manual 3.	K = C + 273,16 (edición de noviembre de 2026; la de 2024 decía «K = C + 273»).	ATC::OM03
 Definición de densidad.	Masa de un gas por unidad de volumen: d = m/V (V = S·h).	ATC::OM03
 ¿Cuál es la ecuación de estado de los gases perfectos en el manual 3?	P = d·R·T.	ATC::OM03
 ¿Qué valor de R da el manual?	R = 2870 hPa·cm³/(kg·K).	ATC::OM03
@@ -198,7 +198,7 @@ Circulación y régimen de vientos de una depresión.	En sentido contrario a las
 ¿Qué significa DANA?	Depresión Aislada en Niveles Altos, antes llamada «gota fría».	ATC::OM03
 ¿Cómo se forma una DANA?	Una ondulación amplificada de la circulación del oeste se rompe y se separa, dejando en altura una bolsa de aire frío.	ATC::OM03
 Tamaño y comportamiento típicos de una DANA.	Diámetro de 200 km o más, trayectoria difícil de predecir, aire inestable y precipitaciones intensas.	ATC::OM03
-¿Cuáles son las otras depresiones de latitudes medias en el manual 3?	Las depresiones asociadas a los frentes polares de ambos hemisferios; pueden ser grandes y profundas, con vientos fuertes y lluvia.	ATC::OM03
+¿Qué son las «borrascas de latitudes medias» en la tabla de depresiones del manual 3?	Las depresiones asociadas a los frentes polares de ambos hemisferios; pueden ser de gran extensión y profundas, con vientos fuertes y lluvias que complican las operaciones. Son el tercer ejemplo, distinto del ciclón tropical y de la DANA.	ATC::OM03
 Definición de masa de aire.	Gran volumen de aire (miles de km) con propiedades físicas horizontalmente homogéneas; sus principales identificadores son la temperatura y la humedad.	ATC::OM03
 ¿Qué es la región manantial (o fuente) de una masa de aire?	La gran superficie terrestre o marítima donde permanece y adquiere sus características.	ATC::OM03
 Clasificación de las masas de aire por temperatura (latitud de origen).	Ártica, polar, tropical y ecuatorial.	ATC::OM03
@@ -385,3 +385,59 @@ Viento máximo en superficie de una tormenta tropical.	De 34 a 63 kt.	ATC::OM03
 ¿Qué causa las corrientes convectivas?	El calentamiento del suelo: el aire sobre el suelo caliente se calienta por conducción, se hace menos denso y asciende, dilatándose y enfriándose.	ATC::OM03
 ¿Qué efecto tienen las corrientes convectivas sobre las aeronaves?	Turbulencia y, a veces, ascensos y descensos bruscos.	ATC::OM03
 Efecto de las temperaturas superiores a 30 ºC en un aeródromo.	La densidad del aire disminuye, lo que puede alargar la carrera de despegue; hacen falta pistas más largas o una reducción del peso máximo.	ATC::OM03
+¿Por qué la variación diaria de temperatura es mayor en tierra que en el mar y las zonas costeras (manual 3, 2.5)?	Porque el agua tiene un calor específico más alto que las zonas terrestres (redacción de la edición de noviembre de 2026; la de 2024 decía «más bajo»).	ATC::OM03
+Tabla ISA del manual 3 (p. 23): presión y temperatura a 7000 ft.	782 mb y 1,1 ºC (la edición de 2024 imprimía por error «1.700 ft» en esta fila).	ATC::OM03
+Tabla ISA del manual 3: presión y temperatura a 0 ft, tal como se imprime.	1013,2 mb y 15 ºC.	ATC::OM03
+Kelvin en el manual 3: ¿273,16 o 273,15?	273,16 en la tabla de escalas y en la fórmula K = C + 273,16 (p. 16); 273,15 K para el punto de fusión del hielo en las características de la ISA (p. 21).	ATC::OM03
+Figura ISA del manual 3 (p. 22): ¿qué perfil de temperatura dibuja?	15 ºC en superficie; -6,5 ºC/km hasta 11 km (-56 ºC); isotermia hasta 25 km; aumento hasta 10 ºC a 47 km; isotermia de 47 a 53 km; descenso después. (La ISA estándar es isoterma de 11 a 20 km.)	ATC::OM03
+En la figura de cambios de estado del agua (manual 3, p. 11), ¿qué procesos absorben calor?	La evaporación, la fusión y la sublimación de sólido a vapor.	ATC::OM03
+En la figura de cambios de estado del agua (manual 3, p. 11), ¿qué procesos desprenden calor?	La condensación, la congelación y la sublimación de vapor a sólido.	ATC::OM03
+Esquema de la p. 6 del manual 3: ¿cómo fluye la información entre los centros meteorológicos?	VAAC, WAFC y TCAC alimentan a las «Oficinas», y estas al «Usuario».	ATC::OM03
+Elementos del Sistema Mundial de Observación de la OMM en la figura de la p. 10 del manual 3.	Satélite geoestacionario, satélite en órbita polar, aeronaves, radar meteorológico, estación automatizada, estación de superficie, estación aerológica, estación satelital terrena, buque meteorológico y boya de datos oceánicos, todos hacia los servicios meteorológicos nacionales.	ATC::OM03
+Cotas de la figura «Capas de la atmósfera y sus grosores» (manual 3, p. 20).	Troposfera 8-10 km, 15 km y 18-22 km; estratosfera 40-50 km; mesosfera 30-50 km; termosfera 300 km (grosores; el texto da 8/12/18 km y termosfera hasta 500 km).	ATC::OM03
+¿Qué isobara y qué nivel de vuelo rotula la figura de la altitud y el nivel de transición (manual 3, p. 27)?	La isobara de 700 hPa, rotulada FL 100.	ATC::OM03
+Según la figura de la p. 27 del manual 3, ¿dónde se cambia el reglaje en el ascenso y en el descenso?	Ascenso: a QNE al pasar la altitud de transición. Descenso: a QNH al pasar el nivel de transición.	ATC::OM03
+Rótulos de la figura del modelo de 3 células (manual 3, p. 33).	Células polar, de Ferrel y de Hadley; altas polares; frente polar hacia 60º; altas (H) en 30º; bajas (L) en 60º; calmas ecuatoriales y bajas ecuatoriales en 0º.	ATC::OM03
+¿Qué muestra la figura de convergencia y divergencia (manual 3, p. 34)?	Convergencia en superficie, ascenso del aire y divergencia en altura.	ATC::OM03
+¿Qué dos corrientes en chorro rotula la figura de la p. 36 del manual 3?	«Midlatitude jet stream» (la polar, más al norte) y «Subtropical jet stream».	ATC::OM03
+Nubes y lluvia en la figura del frente frío (manual 3, p. 40).	Cumulonimbos, cúmulos y altocúmulos; lluvias fuertes.	ATC::OM03
+Nubes y lluvia en la figura del frente cálido (manual 3, p. 40).	Cirros, cirroestratos, altoestratos, nimboestratos y estratocúmulos; lluvias suaves.	ATC::OM03
+¿Qué tres masas de aire y temperaturas rotula la figura del frente ocluido (manual 3, p. 41)?	Aire frío a 15º, aire cálido a 30º (en altura) y aire fresco a 18º.	ATC::OM03
+Base y tope medios de los estratos en la tabla del manual 3.	Base, 150-600 m; tope, 750 m.	ATC::OM03
+Base y tope medios de los estratocúmulos en la tabla del manual 3.	Base, 600-1500 m; tope, 2400 m.	ATC::OM03
+¿Entre qué altitudes se encuentra la mayor parte de las nubes según el manual 3?	Entre el nivel del mar y la tropopausa: 0-13 km en latitudes medias.	ATC::OM03
+Piso medio de nubes en pies en las regiones polar, templada y tropical (manual 3).	Polar, 6500-13 000 ft; templada, 6500-23 000 ft; tropical, 6500-25 000 ft.	ATC::OM03
+Piso alto de nubes en la región polar, en km y en pies (manual 3).	3-8 km (10 000-25 000 ft).	ATC::OM03
+¿Qué caracteriza a las nubes de desarrollo vertical en el manual 3?	Pueden alcanzar los tres pisos y presentan una combinación de partículas propias de las nubes altas, medias y bajas.	ATC::OM03
+Temperaturas de la figura del efecto Foehn (manual 3, p. 53).	15 ºC al pie de barlovento, unos 6 ºC en la cima y 19 ºC al pie de sotavento (escala de 0 a 1400 m).	ATC::OM03
+Tope y anchura de la tormenta en la figura de la etapa de formación (manual 3, p. 65).	30 000 ft y 8 km.	ATC::OM03
+Tope y anchura de la tormenta en la figura de la etapa de madurez (manual 3, p. 66).	45 000 ft y 10 km.	ATC::OM03
+Tope y anchura de la tormenta en la figura de la etapa de disipación (manual 3, p. 67).	40 000 ft y 10 km.	ATC::OM03
+¿Qué separa la lluvia de la nieve y el hielo en las figuras de las etapas de una tormenta (manual 3)?	La isoterma de 0 ºC.	ATC::OM03
+¿Qué nubes rotula la figura de la onda de montaña (manual 3, p. 63)?	Nimboestratos y cumulonimbos sobre la cresta; nube rotor, cúmulos y estratocúmulos bajo la primera onda; nubes lenticulares en las ondas superiores; tropopausa y corriente en chorro hacia los 40 000 ft.	ATC::OM03
+Géneros de nube asociados a cada tipo de nube de onda de montaña (manual 3).	Lenticulares: altocúmulos y altoestratos. Rotor: fractocúmulos y fractostratos. De ladera y cresta: cumulonimbos y nimbostratos. Bonete o sombrero: estratiformes.	ATC::OM03
+¿En qué dirección ejerce su presión la atmósfera sobre los objetos (manual 3)?	Por igual en todas las direcciones; se debe al peso de los gases que la componen.	ATC::OM03
+¿Qué emiten los gases de la atmósfera por estar a una temperatura determinada (manual 3, cap. 3)?	Una radiación propia en todas las direcciones.	ATC::OM03
+¿Qué supuestos tiene el modelo simple de circulación general con una Tierra inmóvil?	Superficie uniforme, sin fricción, sin calentamiento diferencial entre océano y continente, y vientos debidos solo a factores térmicos.	ATC::OM03
+¿Hacia dónde llevan el aire los vientos originados por el gradiente de presión entre latitudes (manual 3, 4.2.1)?	De las altas presiones a las bajas, afectados por la fuerza de Coriolis.	ATC::OM03
+¿De qué dependen los cambios de las propiedades de una masa de aire al desplazarse?	De sus propiedades iniciales, de su velocidad de desplazamiento y de la naturaleza de la superficie sobre la que se desplaza.	ATC::OM03
+¿A qué sistemas están asociados los frentes según el manual 3?	A las depresiones.	ATC::OM03
+¿Cómo se ajusta inicialmente el altímetro antes de convertir presión en altitud (manual 3)?	A cero metros, o a la altitud conocida del punto de la superficie que corresponda; a partir de esa referencia convierte presión en altitud.	ATC::OM03
+Otros factores que influyen en la estimación de la visibilidad, además de la humedad, el Sol y el viento.	El tamaño y el color del objeto, la iluminación (artificial, del Sol o de la Luna), la agudeza visual del observador y la posición desde la que se estima.	ATC::OM03
+¿Qué condición deben cumplir las gotas o cristales para que haya precipitación?	Alcanzar un tamaño adecuado para vencer las corrientes ascendentes y caer libremente por la gravedad.	ATC::OM03
+¿Qué es la lluvia helada en el manual 3?	Gotas que se congelan en el momento del contacto.	ATC::OM03
+¿Qué precipitación dan los altoestratos según la tabla del manual 3?	Débil o moderada y continua.	ATC::OM03
+¿Por qué hay que limpiar las pistas tras una nevada (manual 3)?	Porque, si la temperatura baja de 0 ºC y no se limpian, se forma hielo.	ATC::OM03
+¿Por qué la visibilidad que percibe el piloto puede diferir de la medida en el suelo?	Porque fenómenos locales como la niebla afectan a la visibilidad en superficie: se puede iniciar la aproximación con buena visibilidad y encontrar después niebla densa en la pista.	ATC::OM03
+¿Qué les ocurre a los aviones que sobrevuelan un aeródromo con niebla delgada?	Es corriente que vean la pista y que la pierdan, o noten una disminución muy sensible de la visibilidad, al iniciar la aproximación.	ATC::OM03
+Temperatura del avión más favorable para el hielo claro y para el hielo granulado (manual 3).	En ambos casos, ligeramente por debajo de 0 ºC.	ATC::OM03
+¿Cuándo se considera en aviación que existe turbulencia?	Cuando sus efectos afectan al movimiento del avión, en forma de aceleraciones generalmente verticales (ascensos y descensos violentos y abruptos).	ATC::OM03
+Turbulencia convectiva con atmósfera estable: ¿qué ocurre?	La convección afecta solo a las capas bajas y, si hay humedad suficiente, se forman cúmulos de poco desarrollo con una capa estable encima.	ATC::OM03
+¿Qué aumenta la intensidad de la turbulencia asociada a un frente?	La presencia, además del frente, de convección y de vientos sinópticos fuertes.	ATC::OM03
+¿Por qué se dice que una tormenta es altamente peligrosa para un avión en vuelo?	Porque reúne todos los elementos capaces de dañarlo: chubascos, granizo, turbulencia fuerte o extrema, viento fuerte y racheado, engelamiento y cizalladura.	ATC::OM03
+¿Por qué las tormentas frontales suelen durar más que las células aisladas?	Porque aparecen encadenadas unas a otras; las líneas tormentosas se desplazan con el frente, aunque a veces son estacionarias.	ATC::OM03
+Tormentas de masa de aire en zonas ecuatoriales y en latitudes altas.	Ecuatoriales: en cualquier época del año. Latitudes altas: muy raras, porque el calentamiento solar prácticamente no existe.	ATC::OM03
+Además de la cizalladura, ¿qué otro efecto tiene un microrreventón sobre el avión?	Genera variaciones de presión que pueden alterar el funcionamiento de los instrumentos de vuelo.	ATC::OM03
+¿Qué tipo de depresiones son las depresiones tropicales según el manual 3?	Depresiones no frontales, que se forman aproximadamente entre 25º N y 25º S con el mar por encima de unos 27 ºC.	ATC::OM03
+¿A quién pasan las oficinas meteorológicas de aeródromo la información recibida sobre cenizas volcánicas?	A la dependencia ATS, a la dependencia de servicios de información aeronáutica y a la oficina de vigilancia meteorológica asociadas.	ATC::OM03
+Remisiones erróneas del manual 3 (ediciones 2024 y 2026): ¿a qué apartado se refieren «8.7», «8.1» y «7.2»?	«8.7» (microrreventón) es el 9.6.2; «8.1» (impacto de la baja visibilidad) es el 9.1; «7.2» (concepto de visibilidad) es el 8.2.	ATC::OM03

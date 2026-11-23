@@ -30,7 +30,7 @@
 Completa la lista de indicadores de FIC/ACC/TACC españoles del manual 2 (7 dependencias).	Barcelona LECB, Canarias GCCC, Madrid LECM, Palma LECP, Santiago LECG, Sevilla LECS, Valencia LECL.	ATC::OM02
 ¿Qué significan las abreviaturas TACC y UAC (manual 2)?	TACC: centro de control de área terminal (terminal area control centre). UAC: centro de control de área superior (upper area control centre).	ATC::OM02
 ¿Qué significa OAC?	Centro de control de área oceánica (oceanic area control centre).	ATC::OM02
-¿Cuál es el indicador OACI de Lisboa ACC/FIC en la tabla de centros adyacentes del manual?	LPPC.	ATC::OM02
+¿Cuál es el indicador OACI de Lisboa ACC/FIC en la tabla de centros colaterales del manual?	LPPC.	ATC::OM02
 ¿Cuál es el indicador OACI de Marsella FIC/ACC/UAC?	LFMM.	ATC::OM02
 ¿Cuál es el indicador OACI de Burdeos FIC/ACC/UAC y de Brest FIC/ACC/UAC?	Burdeos LFBB; Brest LFRR.	ATC::OM02
 ¿Cuál es el indicador OACI de Casablanca ACC/FIC y de Argel ACC?	Casablanca GMMM; Argel DAAA.	ATC::OM02
@@ -100,7 +100,9 @@ Indica los designadores telegráfico y telefónico de British Airways.	BAW / SPE
 Indica los designadores telegráfico y telefónico de Iberia.	IBE / IBERIA.	ATC::OM02
 Indica los designadores telegráfico y telefónico de Ryanair.	RYR / RYANAIR.	ATC::OM02
 Indica los designadores telegráfico y telefónico de Vueling.	VLG / VUELING.	ATC::OM02
-¿Qué dos empresas de la tabla del manual tienen un designador telefónico distinto de su nombre comercial?	Air France (AIRFRANS) y British Airways (SPEEDBIRD).	ATC::OM02
+¿Qué empresas de la tabla del manual (edición de 2026) tienen un designador telefónico distinto de su nombre comercial?	Tres: Air France (AIRFRANS), British Airways (SPEEDBIRD) y Qatar Airways (QATARI).	ATC::OM02
+Indica los designadores telegráfico y telefónico de Lufthansa.	DLH / LUFTHANSA.	ATC::OM02
+Indica los designadores telegráfico y telefónico de Qatar Airways.	QTR / QATARI.	ATC::OM02
 ¿Qué edición del Doc 8585 cita el manual 2?	La 210.ª edición (Montreal, octubre de 2024).	ATC::OM02
 ¿Qué anexo de la OACI contiene las normas sobre marcas de nacionalidad y de matrícula?	El Anexo 7 del Convenio sobre Aviación Civil Internacional.	ATC::OM02
 ¿En qué orden se componen los elementos de las marcas de identificación de una aeronave?	Primero la marca de nacionalidad o la marca común y, después, la marca de matrícula.	ATC::OM02
@@ -188,6 +190,8 @@ En la figura del manual OE-FMK, ¿qué parte es la marca de nacionalidad y cuál
 ¿Qué ocurre al tirar hacia atrás de la palanca de mando (hacia el piloto)?	El timón de profundidad eleva el morro; al empujarla hacia delante, lo baja.	ATC::OM02
 ¿Cómo funciona el timón de dirección (timón vertical o de cola)?	Forma parte del estabilizador vertical y se acciona con los pedales: el pedal derecho vira a la derecha y el izquierdo, a la izquierda.	ATC::OM02
 ¿Qué contiene el fuselaje?	La cabina de mando, la zona de pasajeros, las bodegas y la zona de los equipos de funcionamiento de la aeronave.	ATC::OM02
+Además de las partes de la tabla, ¿qué dos elementos rotula la figura de la p. 17 y cómo se dicen en inglés?	Flaps (FLAPS) y borde de ataque (LEADING EDGE).	ATC::OM02
+¿Cómo se rotulan en inglés, en la figura de la p. 17, el timón vertical, el timón de profundidad, la rueda de proa y el empenaje?	Rudder, elevator, nose gear y empennage.	ATC::OM02
 ¿Qué debe hacer el tren de aterrizaje?	Sostener la aeronave, permitir su movimiento en superficie en el despegue y el aterrizaje, absorber el impacto del aterrizaje y tener capacidad de frenado y de direccionamiento.	ATC::OM02
 Enumera las siete características externas que sirven para reconocer aeronaves (manual 2).	Tipo de ala, tipo de flecha, tipo de cola, tipo de motorización, número de motores, ubicación de los motores y características del tren de aterrizaje.	ATC::OM02
 ¿Tipos de ala del manual?	Ala alta, ala baja, doble ala o biplano.	ATC::OM02
@@ -199,49 +203,97 @@ Enumera las siete características externas que sirven para reconocer aeronaves 
 ¿Tipos de tren de aterrizaje del apartado 6.2.7 (aeronaves ligeras o especiales)?	Fijo sin carenado, fijo carenado, retráctil y patines en el ala para amerizaje.	ATC::OM02
 ¿Características de reconocimiento de los helicópteros (manual 2)?	Tipo de soporte en tierra (patines o tren de aterrizaje), número de rotores (uno o dos) y número de palas del rotor.	ATC::OM02
 ¿Número de palas en las figuras de helicópteros?	Dos, tres, cuatro, cinco y ocho palas.	ATC::OM02
-¿Qué seis grupos organizan el catálogo de aeronaves del apartado 6.4?	Aeronaves comerciales de pasajeros; reactores de cercanías y regionales (commuter); aeronaves ejecutivas (privadas); helicópteros; motores alternativos o de pistón; turbohélices de transporte militar.	ATC::OM02
-¿Qué datos da el catálogo de cada aeronave?	Fabricante, nombre, designador OACI, tipo de aeronave, TAS de crucero (kt o Mach), régimen máximo de ascenso (ft/min), techo (FL) y categoría de estela turbulenta.	ATC::OM02
-A124 (Antonov): ¿descripción, TAS de crucero, ascenso, techo, WTC?	L4J; M0,78; 1000 ft/min; FL390; H.	ATC::OM02
-A319/A320/A321: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,79; 2000 ft/min; FL410; M.	ATC::OM02
-A332/A333: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,81; 2000; FL410; H.	ATC::OM02
-A342/A343/A345/A346: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,82; 1500; FL410; H.	ATC::OM02
-A388: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,89; 1500 ft/min; FL430; J.	ATC::OM02
-B733 (B733/B734/B735): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,74; 2000; FL370; M.	ATC::OM02
-B738/B739: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,78; 2000; FL410; M.	ATC::OM02
-B744: ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,85; 1500; FL450; H.	ATC::OM02
-B752/B753: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,8; 2000; FL410; M.	ATC::OM02
-B762/B763/B764: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,8; 2000; FL450; H.	ATC::OM02
-B772/B773: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,84; 2000; FL430; H.	ATC::OM02
-IL62 (Ilyushin): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,82; 1000; FL390; H.	ATC::OM02
-IL76 (Ilyushin): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,74; 1000; FL390; H.	ATC::OM02
-MD11: ¿descripción, crucero, ascenso, techo, WTC?	L3J; M0,83; 1500; FL410; H.	ATC::OM02
-MD83/MD87: ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 2000; FL370; M.	ATC::OM02
-T154 (Tupolev): ¿descripción, crucero, ascenso, techo, WTC?	L3J; M0,82; 2000; FL410; M.	ATC::OM02
-T204 (Tupolev): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,79; 1500; FL400; M.	ATC::OM02
-AT72 (ATR): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 270 kt; 1000 ft/min; FL250; M.	ATC::OM02
-CRJ1/CRJ2/CRJ7/CRJ9 (Canadair): ¿descripción, crucero, ascenso, techo, WTC?	L2J; 440 kt; 2000; FL410; M.	ATC::OM02
-E145 (Embraer): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 1500; FL370; M.	ATC::OM02
-E175/E190 (Embraer): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,83; 3000 ft/min; FL410; M.	ATC::OM02
-F100 (Fokker): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,73; 1500; FL350; M.	ATC::OM02
-F50 (Fokker): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 240 kt; 1000; FL250; M.	ATC::OM02
-RJ85 (BAE): ¿descripción, crucero, ascenso, techo, WTC?	L4J; M0,68; 1500; FL310; M. (Aparece dos veces en el manual, en el grupo regional y en el ejecutivo.)	ATC::OM02
-GLEX (Canadair): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,85; 3000; FL510; M.	ATC::OM02
-F2HT (Dassault): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,82; 2000; FL470; M.	ATC::OM02
-GLF5 (Gulfstream): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,85; 3000; FL510; M.	ATC::OM02
-LJ55 (Gates Learjet): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,76; 2000; FL510; M.	ATC::OM02
-C550 (Cessna): ¿descripción, crucero, ascenso, techo, WTC?	L2J; M0,63; 1500; FL430; L (Ligera).	ATC::OM02
-Helicóptero AS32 (Aerospatiale): ¿descripción, crucero, ascenso, techo, WTC?	H2T; 140 kt; 1500; FL200; M.	ATC::OM02
-Helicóptero B212 (Bell Augusta): ¿descripción, crucero, ascenso, techo, WTC?	H2T; 110 kt; 1500; FL150; L.	ATC::OM02
-C337 (Cessna): ¿descripción, crucero, ascenso, techo, WTC?	L2P; 165 kt; 1000; FL190; L.	ATC::OM02
-PA34 (Piper): ¿descripción, crucero, ascenso, techo, WTC?	L2P; 180 kt; 1000; FL250; L.	ATC::OM02
-TOBA (EADS Socata): ¿descripción, crucero, ascenso, techo, WTC?	L1P; 120 kt; 1000; FL130; L.	ATC::OM02
-C130 (Lockheed): ¿descripción, crucero, ascenso, techo, WTC?	L4T; 290 kt; 1000; FL300; M.	ATC::OM02
-C295 (Airtech Casa): ¿descripción, crucero, ascenso, techo, WTC?	L2T; 230 kt; 1500; FL300; M.	ATC::OM02
-¿Qué aeronave del catálogo del manual es la única Súper (J)?	El A388 (Airbus A380-800).	ATC::OM02
-¿Qué aeronaves del catálogo tienen tres motores (L3J)?	El MD11 y el T154.	ATC::OM02
-¿Qué aeronave del catálogo tiene motor a reacción pero es Ligera (L)?	La Cessna C550 (L2J, WTC L).	ATC::OM02
-¿Qué aeronaves del catálogo alcanzan el FL510?	GLEX, GLF5 y LJ55.	ATC::OM02
-¿Qué aeronaves del catálogo tienen un régimen máximo de ascenso de 3000 ft/min?	E175/E190, GLEX y GLF5.	ATC::OM02
+¿Qué siete grupos organizan el catálogo de aeronaves del apartado 6.4 (edición de 2026)?	6.4.1 Aviones comerciales de pasajeros; 6.4.2 Aviones comerciales de carga; 6.4.3 Commuter y regional jet para líneas de corto alcance; 6.4.4 Executive. Aviones corporativos y privados; 6.4.5 Helicópteros; 6.4.6 Aeronaves ligeras de motor de pistón (RECIPROCATING); 6.4.7 Aeronaves militares.	ATC::OM02
+¿Qué datos da el catálogo de cada aeronave (manual 2, edición de 2026)?	Fabricante, denominación, designador OACI, tipo de aeronave y, como características de performance: velocidad de crucero - TAS (Nº de Mach - kt), régimen máximo de ascenso inicial (ft/min), techo (FL), alcance máximo (NM), categoría de estela turbulenta (WTC), estela según RECAT-EU y envergadura.	ATC::OM02
+¿Qué aeronaves recoge el catálogo del apartado 6.4 y qué advierte el manual sobre sus datos?	Una relación, no exhaustiva, de las aeronaves más comunes en España. Los datos técnicos son aproximados y dependen de la fuente consultada y de las características de cada modelo, como la motorización.	ATC::OM02
+¿Qué dice el manual sobre las versiones de carga (apartado 6.4.2)?	Que existen versiones de carga de la mayoría de los modelos de Airbus y Boeing.	ATC::OM02
+Airbus 220-100 (BCS1): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,78 · 445 kt; 3500 ft/min; FL410; 3600 NM; M; Upper medium; 35,1 m.	ATC::OM02
+Airbus 220-300 (BCS3): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,78 · 445 kt; 3100 ft/min; FL410; 3400 NM; M; Upper medium; 35,1 m.	ATC::OM02
+Airbus 319 (A319): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,79 · 450 kt; 3500 ft/min; FL390; 3000 NM; M; Upper medium; 34,1 m.	ATC::OM02
+Airbus 319 neo (A19N): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,78 · 450 kt; 2500 ft/min; FL390; 3700 NM; M; Upper medium; 35,8 m.	ATC::OM02
+Airbus 320 (A320): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,79 · 450 kt; 2500 ft/min; FL390; 2800 NM; M; Upper medium; 34,1 m.	ATC::OM02
+Airbus 320 neo (A20N): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,78 · 450 kt; 2200 ft/min; FL390; 3400 NM; M; Upper medium; 35,8 m.	ATC::OM02
+Airbus 321 (A321): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,79 · 450 kt; 2500 ft/min; FL390; 2700 NM; M; Upper medium; 34,1 m.	ATC::OM02
+Airbus 321 neo (A21N): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,78 · 450 kt; 2000 ft/min; FL390; 4000 NM; M; Upper medium; 35,8 m.	ATC::OM02
+Airbus 330-800 (A338): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,81 · 475 kt; 2000 ft/min; FL410; 8100 NM; H; Upper heavy; 64 m.	ATC::OM02
+Airbus 330-900 (A339): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,81 · 475 kt; 2000 ft/min; FL410; 7350 NM; H; Upper heavy; 64 m.	ATC::OM02
+Airbus 350-900 (A359): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 490 kt; 3000 ft/min; FL430; 8500 NM; H; Upper heavy; 64,75 m.	ATC::OM02
+Airbus 350-1000 (A35K): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 490 kt; 2500 ft/min; FL410; 9000 NM; H; Upper heavy; 64 m.	ATC::OM02
+Airbus 380-800 (A388): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L4J; M0,85 · 520 kt; 2500 ft/min; FL430; 8000 NM; J; Super heavy; 79,8 m.	ATC::OM02
+Boeing 737-800 (B738): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,79 · 460 kt; 3000 ft/min; FL410; 2000 NM; M; Upper medium; 34,3 m.	ATC::OM02
+Boeing 737 MAX (B37M / B38M / B39M / B3XM): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,79 · 450 kt; 2800 ft/min; FL410; 3400 NM; M; Upper medium; 35,9 m.	ATC::OM02
+Boeing 747-400 (B744): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L4J; M0,85 · 510 kt; 1500 ft/min; FL450; 7300 NM; H; Upper heavy; 64,8 m.	ATC::OM02
+Boeing 747-8 (B748): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L4J; M0,86 · 510 kt; 2800 ft/min; FL430; 4400 NM; H; Upper heavy; 68,5 m. Aparece dos veces, en pasajeros y en carga, con los mismos datos.	ATC::OM02
+Boeing 777 (B772 / B773 / B77L / B77W): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,84 · 490 kt; 3000 ft/min; FL430; 7900 NM; H; Upper heavy; 64,8 m.	ATC::OM02
+Boeing 777 X (B778 / B779): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,84 · 490 kt; 2800 ft/min; FL430; 9500 NM; H; Upper heavy; 71,8 m.	ATC::OM02
+Boeing 787 (B788 / B789): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 470 kt; 2700 ft/min; FL430; 8000 NM; H; Upper heavy; 60,1 m.	ATC::OM02
+Boeing 787-10 (B78X): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,86 · 490 kt; 2700 ft/min; FL410; 7500 NM; H; Upper heavy; 60,1 m.	ATC::OM02
+Antonov 124 Ruslan (A124), grupo de carga: ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L4J; M0,78 · 430 kt; 1000 ft/min; FL390; 8900 NM; H; Super heavy; 73,3 m.	ATC::OM02
+Airbus 330-700 Beluga XL (A337): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,69 · 400 kt; 1000 ft/min; FL350; 2200 NM; H; Upper heavy; 60,3 m.	ATC::OM02
+Boeing 757-200 (B752), grupo de carga: ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,80 · 470 kt; 3500 ft/min; FL420; 3900 NM; M; Lower heavy; 38,1 m.	ATC::OM02
+ATR 72-600 (AT76): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2T; 280 kt; 1350 ft/min; FL250; 825 NM; M; Lower medium; 27 m.	ATC::OM02
+Bombardier Regional jet CRJ-1000 (CRJX): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,82 · 470 kt; 3000 ft/min; FL410; 1500 NM; M; Lower medium; 26,2 m.	ATC::OM02
+Embraer E195-E2 (E295): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,82 · 450 kt; 3000 ft/min; FL410; 3000 NM; M; Upper medium; 35,1 m.	ATC::OM02
+Bombardier Global 8000 (GL7T): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,90 · 510 kt; 3500 ft/min; FL510; 8000 NM; M; Lower medium; 31,7 m.	ATC::OM02
+Bombardier Challenger 3500 (CL35; impreso «Challenge 3500»): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,80 · 450 kt; 4500 ft/min; FL450; 3400 NM; M; Lower medium; 21 m.	ATC::OM02
+Dassault Falcon 8X (FA8X): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L3J; M0,90 · 580 kt; 3500 ft/min; FL510; 6400 NM; M; Lower medium; 26,3 m.	ATC::OM02
+Dassault Falcon 900 (F900): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L3J; M0,85 · 510 kt; 3000 ft/min; FL510; 4500 NM; M; Lower medium; 19,3 m.	ATC::OM02
+Cessna Citation M2 (C25M): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,69 · 400 kt; 3700 ft/min; FL410; 1550 NM; L; Light; 14,4 m.	ATC::OM02
+Cessna Citation Longitude (C700): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,84 · 480 kt; 4900 ft/min; FL450; 3500 NM; M; Lower medium; 22,3 m.	ATC::OM02
+Gulfstream G400 (GLF4): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 450 kt; 4000 ft/min; FL510; 4200 NM; M; Lower medium; 26,3 m.	ATC::OM02
+Gulfstream G700 (GA7C): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 480 kt; 4000 ft/min; FL510; 7700 NM; M; Lower medium; 31,4 m.	ATC::OM02
+Helicóptero Airbus EC-135 (EC35): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	H2T; 130 kt; 1500 ft/min; FL170; 430 NM; L; Light; 10,2 m.	ATC::OM02
+Helicóptero Airbus AS-365 Dauphin (AS65): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	H2T; 140 kt; 1500 ft/min; FL150; 430 NM; L; Light; 11,9 m.	ATC::OM02
+Helicóptero Airbus - Aerospatiale AS-355 Ecureuil (AS55): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	H2T; 120 kt; 1300 ft/min; FL120; 400 NM; L; Light; 10,7 m.	ATC::OM02
+Cessna 172 (C172): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1P; 110 kt; 700 ft/min; FL150; 580 NM; L; Light; 10,9 m.	ATC::OM02
+Cessna 337 (C337): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2P; 160 kt; 800 ft/min; FL190; 920 NM; L; Light; 11,6 m.	ATC::OM02
+Diamond DA-40 (DA40): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1P; 120 kt; 1000 ft/min; FL100; 590 NM; L; Light; 12 m.	ATC::OM02
+Diamond DA-42: ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2P; 190 kt; 1300 ft/min; FL180; 910 NM; L; Light; 13,4 m. (Designador impreso «C337», errata; el Doc. 8643 da DA42.)	ATC::OM02
+Tecnam P-Mentor (SIRA): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1P; 120 kt; 650 ft/min; FL130; 950 NM; L; Light; 9 m.	ATC::OM02
+Tecnam P2006T (P06T): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2P; 150 kt; 920 ft/min; FL180; 930 NM; L; Light; 11,4 m.	ATC::OM02
+Piper PA-28 Arrow (P28R): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1P; 170 kt; 750 ft/min; FL200; 910 NM; L; Light; 10,8 m.	ATC::OM02
+Piper PA-34 Seneca (PA34): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2P; 180 kt; 1300 ft/min; FL250; 880 NM; L; Light; 11,7 m.	ATC::OM02
+Eurofighter Typhoon (EUFI): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,85 · 480 kt; 4500 ft/min; FL650; 1550 NM; M; Lower medium; 11,1 m.	ATC::OM02
+Airbus A400M Grizzly (A400): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L4T; M0,72 · 420 kt; 2000 ft/min; FL400; 1800 NM; H; Lower heavy; 42,4 m.	ATC::OM02
+Airbus A330 MRTT (A332): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,81 · 470 kt; 2000 ft/min; FL410; 7000 NM; H; Upper heavy; 60,3 m.	ATC::OM02
+Airbus C295 Persuader: ¿designador en el manual, tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	A295 (así en el manual; el Doc. 8643 da C295); L2T; 240 kt; 2000 ft/min; FL300; 2200 NM; M; Lower medium; 24,45 m.	ATC::OM02
+McDonnell Douglas EF18 Hornet (F18H): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,86 · 490 kt; 30000 ft/min; FL500; 2000 NM; M; Lower medium; 17,1 m.	ATC::OM02
+McDonnell Douglas AV-8B II Harrier (HAR): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1J; M0,80 · 480 kt; 14500 ft/min; FL500; 600 NM; M; Light; 9,2 m.	ATC::OM02
+Northrop F5M Freedom fighter (F5): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L2J; M0,86 · 480 kt; 34000 ft/min; FL510; 1300 NM; M; Light; 8,1 m.	ATC::OM02
+Pilatus PC-21 (PC21): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1T; impreso «M 0.86 - 340 kt»; 4000 ft/min; FL380; 700 NM; L; Light; 8,7 m.	ATC::OM02
+AS.532 Cougar (Airbus - Aerospatiale / NHI): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	H2T; 140 kt; 1500 ft/min; FL170; 460 NM; M; Light; 16,2 m. (Designador impreso «A332», errata; el Doc. 8643 da AS32.)	ATC::OM02
+NH-90 Lobo (NH90): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	H2T; 175 kt; 2100 ft/min; FL200; 500 NM; M; Light; 16,5 m.	ATC::OM02
+General Atomics MQ-9 Predator B (Q9): ¿tipo, crucero, ascenso, techo, alcance, WTC, RECAT-EU, envergadura?	L1T; 170 kt; 4000 ft/min; FL500; 1000 NM; L; Light; 20 m.	ATC::OM02
+¿Qué aeronave del catálogo del manual es la única Súper (J)?	El A388 (Airbus 380-800).	ATC::OM02
+¿Qué aeronaves del catálogo son Super heavy en RECAT-EU?	El A388 (WTC J) y el A124 Antonov 124 Ruslan (WTC H).	ATC::OM02
+¿Qué aeronave del catálogo es Media (M) en la WTC pero Lower heavy en RECAT-EU?	El B752 (Boeing 757-200).	ATC::OM02
+¿Qué aeronaves militares del catálogo son Medias (M) en la WTC pero Light en RECAT-EU?	HAR (Harrier), F5, AS.532 Cougar y NH90.	ATC::OM02
+¿Qué aeronaves del catálogo tienen tres motores (L3J)?	Los Dassault Falcon 8X (FA8X) y Falcon 900 (F900).	ATC::OM02
+¿Qué reactor civil del catálogo es Ligero (L)?	El Cessna Citation M2 (C25M): L2J, WTC L, RECAT-EU Light.	ATC::OM02
+¿Qué aeronaves del catálogo son L1J, L1T y L4T?	L1J: HAR (Harrier). L1T: PC21 y Q9 (MQ-9). L4T: A400 (A400M).	ATC::OM02
+¿Qué aeronaves del catálogo son turbohélices bimotores de ala fija (L2T)?	AT76 (ATR 72-600) y el C295 Persuader (impreso A295).	ATC::OM02
+¿Qué cuatrimotores a reacción (L4J) recoge el catálogo?	A388, B744, B748 y A124.	ATC::OM02
+¿Qué aeronave del catálogo tiene el techo más alto y cuáles llegan a FL510?	Eurofighter (EUFI), FL650. FL510: GL7T, FA8X, F900, GLF4, GA7C y F5.	ATC::OM02
+¿Qué aeronave del catálogo tiene el techo más bajo?	La Diamond DA-40 (DA40), FL100; después AS55 (FL120) y Tecnam P-Mentor (FL130).	ATC::OM02
+¿Qué techo tienen en el catálogo A319, A320, A321 y sus versiones neo?	FL390 todos (el B738 y el 737 MAX, FL410).	ATC::OM02
+¿Qué aeronaves del catálogo tienen el mayor régimen máximo de ascenso inicial?	F5 34000 ft/min, F18H 30000 y HAR 14500 (militares). Entre los civiles, Citation Longitude (C700) 4900.	ATC::OM02
+¿Qué aeronave del catálogo tiene el mayor alcance y cuál el menor?	Mayor: Boeing 777 X (B778/B779), 9500 NM. Menor: AS-355 Ecureuil (AS55), 400 NM.	ATC::OM02
+¿Qué aeronave del catálogo tiene la mayor envergadura y cuál la menor?	Mayor: A388, 79,8 m (después A124, 73,3 m). Menor: F5, 8,1 m.	ATC::OM02
+¿Qué aeronaves del catálogo tienen el crucero más rápido?	Global 8000 (GL7T) y Falcon 8X (FA8X), M0,90; el FA8X da 580 kt, la cifra más alta en nudos.	ATC::OM02
+¿Qué aeronave aparece dos veces en el catálogo de 2026?	El Boeing 747-8 (B748), en pasajeros (p. 30) y en carga (p. 32), con los mismos datos.	ATC::OM02
+¿Designadores OACI del Airbus 220-100 y 220-300 en el catálogo?	BCS1 y BCS3.	ATC::OM02
+¿Designadores OACI del A319neo, A320neo y A321neo?	A19N, A20N y A21N.	ATC::OM02
+¿Designadores OACI del Airbus 330-800, 330-900, 350-900 y 350-1000?	A338, A339, A359 y A35K.	ATC::OM02
+¿Designadores OACI del Boeing 737 MAX en el catálogo?	B37M, B38M, B39M y B3XM.	ATC::OM02
+¿Designadores OACI del Boeing 777, 777 X, 787 y 787-10?	777: B772, B773, B77L, B77W. 777 X: B778, B779. 787: B788, B789. 787-10: B78X.	ATC::OM02
+¿Designadores OACI del Beluga XL, del A330 MRTT, del A400M y del Eurofighter?	A337, A332, A400 y EUFI.	ATC::OM02
+¿Designadores OACI del ATR 72-600, del CRJ-1000 y del E195-E2?	AT76, CRJX y E295.	ATC::OM02
+¿Designadores OACI del Global 8000, Challenger 3500, Falcon 8X y Falcon 900?	GL7T, CL35, FA8X y F900.	ATC::OM02
+¿Designadores OACI del Citation M2, Citation Longitude, Gulfstream G400 y G700?	C25M, C700, GLF4 y GA7C.	ATC::OM02
+¿Designadores OACI del EC-135, AS-365 Dauphin, AS-355 Ecureuil y NH-90?	EC35, AS65, AS55 y NH90.	ATC::OM02
+¿Designadores OACI del Tecnam P-Mentor, Tecnam P2006T, Piper PA-28 Arrow y Piper PA-34 Seneca?	SIRA, P06T, P28R y PA34.	ATC::OM02
+¿Designadores OACI del EF18 Hornet, AV-8B II Harrier, F5M, PC-21 y MQ-9 Predator B?	F18H, HAR, F5, PC21 y Q9.	ATC::OM02
+¿Qué designadores impresos en el catálogo de 2026 son erratas?	DA-42 impreso «C337» (Doc. 8643: DA42); AS.532 Cougar impreso «A332» (AS32); C295 Persuader impreso «A295» (C295).	ATC::OM02
 ¿Cómo es el designador OACI (Doc 8643) en cuanto a caracteres?	Un código alfanumérico de 2 a 4 caracteres.	ATC::OM02
 ¿Qué identifica el designador de tipo OACI (manual 2)?	Los fabricantes (AIRBUS, Antonov...) y las denominaciones de aeronave que estos dan (siglas o un nombre).	ATC::OM02
 Da los ejemplos del manual de denominaciones dadas por los fabricantes.	PiperSport (PIPER), Skymaster (CESSNA), Metro (SWEARINGEN), A380 (AIRBUS).	ATC::OM02
@@ -250,6 +302,8 @@ Da los ejemplos del manual de denominaciones dadas por los fabricantes.	PiperSpo
 ¿Cuáles son los límites de masa de las WTC de la OACI según el manual 2?	J: solo el A380-800; H: 136 000 kg o más; M: menos de 136 000 kg y más de 7000 kg; L: 7000 kg o menos.	ATC::OM02
 ¿Cómo debe considerarse el B757 a efectos de estela turbulenta?	Pesada cuando va seguido de otra aeronave; Media cuando sigue a otra aeronave.	ATC::OM02
 ¿Cuántas categorías introduce RECAT-EU y en qué se basan?	Seis categorías, basadas tanto en el peso máximo certificado al despegue como en la envergadura.	ATC::OM02
+¿En qué reglamentación se contempla el esquema RECAT-EU según el manual 2?	Solo en la reglamentación europea.	ATC::OM02
+¿Cómo define el manual 2 el acrónimo RECAT-EU en su lista de acrónimos?	Categoría de estela turbulenta alternativa a la tradicional de OACI, que agrupa las aeronaves en 6 categorías en lugar de 3 y establece separaciones mínimas específicas. (La WTC de la OACI de la p. 44 tiene cuatro: J, H, M, L.)	ATC::OM02
 Enumera por orden las seis categorías RECAT-EU.	Super Pesada (J), Pesada superior (H+), Pesada inferior (H-), Media superior (M+), Media inferior (M-), Ligera (L+) (en inglés: Super Heavy, Upper Heavy, Lower Heavy, Upper Medium, Lower Medium, Light).	ATC::OM02
 ¿Cuál es la designación oficial de las categorías RECAT-EU?	CAT-A a CAT-F, pero a los controladores se les muestran como J, H+, H-, M+, M- y L+ para distinguirlas de las WTC de la OACI.	ATC::OM02
 ¿Qué categoría WTC de la OACI equivale a la Super Pesada (Super Heavy) de RECAT-EU?	SUPER (J).	ATC::OM02
@@ -265,7 +319,7 @@ Enumera por orden las seis categorías RECAT-EU.	Super Pesada (J), Pesada superi
 ¿Segundo carácter de la descripción de aeronave?	Número de motores: 1, 2, 3, 4, 6, 8 o C.	ATC::OM02
 ¿Qué significa C como segundo carácter de la descripción?	Dos motores acoplados para accionar un solo sistema de hélice; se aplica solo a aeronaves de ala fija.	ATC::OM02
 ¿Tercer carácter de la descripción de aeronave en el manual 2?	P pistón, T turbohélice/turboeje, J reacción, E eléctrico.	ATC::OM02
-Descifra el ejemplo del manual A30B / H / L2J (Airbus A-300B2).	Designador A30B; WTC H (pesada); L2J = avión terrestre, 2 motores, reacción.	ATC::OM02
+Descifra el ejemplo del manual A339 / H / L2J (Airbus A-330-900).	Designador A339; WTC H (categoría de estela turbulenta: pesada); L2J = L landplane (avión terrestre), 2 motores, J motor a reacción.	ATC::OM02
 ¿Qué significa T como primer carácter de la descripción en el manual 2?	Aeronave de ala basculante (tilt-wing aircraft).	ATC::OM02
 ¿De qué se compone el identificador de tipo de aeronave ATA/IATA?	Designador general (3 caracteres: familia con la misma configuración y sección de fuselaje común), subtipo de avión (3 caracteres: modelo dentro de la familia) y categoría.	ATC::OM02
 ¿Categorías del designador ATA/IATA?	H helicóptero; J turborreactor (precedido del número de motores); P motor de pistón (precedido del número de motores); S hidroavión; T turbohélice (precedido del número de motores).	ATC::OM02
@@ -291,3 +345,4 @@ Descifra el ejemplo del manual A30B / H / L2J (Airbus A-300B2).	Designador A30B;
 ¿Cómo se dice en inglés «empenaje», «envergadura de ala» y «rueda de morro»?	Empennage; wing span; nose wheel.	ATC::OM02
 ¿Cómo se dice en inglés «office de abordo», «parabrisas» y «pata del tren de aterrizaje»?	Galley; windshield; landing gear leg.	ATC::OM02
 ¿Cómo se dice en inglés «deflector de lluvia», «descongelador automático» y «dispositivo director de vuelo»?	Rain remover; de-icer boot; flight director.	ATC::OM02
+¿Cómo traduce el vocabulario del manual «belly landing»?	Aterrizaje con el tren plegado (así en las dos listas de la edición de 2026).	ATC::OM02

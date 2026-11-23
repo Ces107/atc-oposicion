@@ -1,0 +1,1450 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía: Drones (UAS) y U-space</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231a4d8f%27 stroke-width=%271.9%27 stroke-linecap=%27round%27%3E%3Cstyle%3E@media(prefers-color-scheme:dark){*{stroke:%237fb0e8}}%3C/style%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%2710%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%275.5%27/%3E%3Cpath d=%27M12 12L19 5%27/%3E%3Ccircle cx=%2716.4%27 cy=%2716.6%27 r=%271.1%27/%3E%3C/svg%3E"><style>
+:root{color-scheme:light dark;
+  --bg:#f4f2ec;--surface:#ffffff;--card:#ebe8df;--fg:#1b1b1b;--mut:#5f5b53;--line:#cfcabd;
+  --acc:#1a4d8f;--acc2:#123a6e;--onacc:#ffffff;--warn:#b3450d;--ok:#2d6a3e;--bad:#a3241c;
+  --v:#2d6a3e;--vs:#b3450d;--nv:#a3241c;--d:#1a4d8f;
+  --serif:'Iowan Old Style',Charter,Cambria,Georgia,serif;--sans:system-ui,'Segoe UI',Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#161615;--surface:#1e1e1c;--card:#262624;--fg:#e7e4dc;--mut:#a19c90;--line:#3a3935;
+  --acc:#7fb0e8;--acc2:#a5c8f0;--onacc:#161615;--warn:#e08a55;--ok:#7cbf8a;--bad:#e5766d;
+  --v:#7cbf8a;--vs:#e08a55;--nv:#e5766d;--d:#7fb0e8}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--acc)}a:hover{color:var(--acc2)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+svg.i{width:1.2em;height:1.2em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em}
+svg.logo{width:22px;height:22px;flex:none;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:.5rem 1rem;font:14px var(--sans);display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+header.top a{text-decoration:none;color:var(--fg)}header.top a:hover{color:var(--acc)}
+header.top a.home{display:inline-flex;align-items:center;gap:.5rem;font:700 15px var(--serif);letter-spacing:.01em}
+header.top a.back{color:var(--mut);display:inline-flex;align-items:center;gap:.3rem}
+header.top a.back svg{transform:scaleX(-1)}
+header.top .t{color:var(--mut);margin-left:auto;font-size:13px}
+
+.wrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.25rem 1rem 4rem}
+nav.toc{position:sticky;top:3.6rem;align-self:flex-start;flex:0 0 240px;max-height:calc(100vh - 4.5rem);overflow:auto;font:13.5px/1.4 var(--sans);border-right:1px solid var(--line);padding-right:1rem}
+nav.toc>b,nav.toc summary{display:block;font:600 13px var(--sans);color:var(--mut);margin-bottom:.4rem;list-style:none}
+nav.toc summary::-webkit-details-marker{display:none}nav.toc summary{cursor:pointer}
+@media (min-width:901px){nav.toc summary{pointer-events:none}}
+nav.toc ul{list-style:none;margin:0;padding-left:.9rem}nav.toc>ul{padding-left:0}nav.toc a{color:var(--mut);text-decoration:none;display:block;padding:.18rem 0}nav.toc a:hover{color:var(--acc)}
+main{flex:1 1 auto;min-width:0;max-width:780px;overflow-wrap:break-word}
+main p,main li,main blockquote{max-width:68ch}
+.wrap>main:not(.quiz){font:17.5px/1.6 var(--serif)}
+.wrap>main:only-child{margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--fg);hyphens:none;scroll-margin-top:calc(var(--hh,2.9rem) + 1.2rem)}
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--bg);color:var(--fg);border:1px solid var(--fg);padding:.5rem .8rem;font:600 14px var(--sans)}
+.skip:focus{left:.5rem;top:.5rem}
+main:focus{outline:none}
+h1{font-weight:700;font-size:2.05rem;line-height:1.2;letter-spacing:-.01em;margin:.3rem 0 1.1rem}
+h2{font-weight:700;font-size:1.4rem;line-height:1.3;margin:2.3rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:1.06rem;line-height:1.35;margin:1.6rem 0 .4rem}
+h4{font-weight:700;font-size:1rem;margin:1.2rem 0 .3rem}
+h2 svg.i{color:var(--acc);margin-right:.35rem}
+p,li{hyphens:manual}
+main ul,main ol{padding-left:1.3rem}
+table{border-collapse:collapse;margin:1rem 0;font:14.5px/1.45 var(--sans)}
+main table{display:block;overflow-x:auto;width:max-content;max-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.45rem .7rem .45rem 0;vertical-align:top;text-align:left}
+th{font-weight:600;color:var(--mut);border-bottom:1px solid var(--fg);font-size:.92em}
+code{font:.88em var(--mono);background:var(--card);border-radius:2px;padding:.05em .3em}
+pre{background:var(--card);border-radius:2px;padding:.8rem 1rem;overflow:auto}pre code{padding:0;background:none}
+html,body{max-width:100%;overflow-x:hidden}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+main img,main svg{max-width:100%;height:auto}
+main .figwrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:2px;background:#fff;text-align:center}
+main .figwrap img{display:block;margin:0 auto;background:#fff}
+main .figwrap a{display:block;cursor:zoom-in}
+main pre{max-width:100%}main pre code,main code{overflow-wrap:anywhere}main pre code{white-space:pre-wrap;word-break:break-word}
+blockquote{margin:1.1rem 0;padding:.5rem 0 .5rem 1.1rem;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut);font-style:italic}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.b{font:600 .72em var(--sans);white-space:nowrap;margin:0 .1em}.b::before{content:"["}.b::after{content:"]"}
+.b.v{color:var(--v)}.b.vs{color:var(--vs)}.b.nv{color:var(--nv)}.b.d{color:var(--d)}
+.meta{font:13px var(--sans);color:var(--mut);margin-bottom:.8rem}
+.sub{color:var(--mut)}
+
+/* controles: rectangulares, 1px de acento, relleno solo en la accion principal */
+.btn,button.btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--acc)!important;border:1px solid var(--acc);text-decoration:none;font:600 14px var(--sans);padding:8px 14px;border-radius:2px;cursor:pointer;transition:background-color .12s,color .12s}
+.btn:hover{background:var(--card)}
+.btn.pri{background:var(--acc);color:var(--onacc)!important}.btn.pri:hover{background:var(--acc2)}
+
+/* preguntas de test */
+main.quiz{font-family:var(--sans)}
+.bar{position:sticky;top:var(--hh,2.9rem);z-index:4;background:var(--bg);border-bottom:1px solid var(--line);padding:.55rem 0;font:14px var(--sans);display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center}
+.bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
+.bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
+.bar button:hover{background:var(--card)}
+.bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
+.q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
+.qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
+.stem{margin:.2rem 0 .8rem;font:600 1.02rem/1.5 var(--serif)}
+.opt{display:flex;gap:.7rem;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.95em;padding:.55rem .75rem;margin:.3rem 0;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{color:var(--mut);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt:disabled{cursor:default;color:var(--fg)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.exp{margin-top:.7rem;font-size:.93em;padding:.2rem 0 .5rem}.okt{color:var(--ok)}.badt{color:var(--bad)}.src,.nt{color:var(--mut);font-size:.9em;margin-top:.3rem}
+
+/* listas con regla: sustituyen a las rejillas de fichas */
+.rows{border-top:1px solid var(--line);margin:.6rem 0 1.8rem}
+h2+.rows,h2+div>.rows,h2+.tw{margin-top:0}
+h2+.rows,h2+div>.rows{border-top:0}
+.row{display:flex;align-items:center;gap:.9rem;padding:.7rem .15rem;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.row>svg.i{width:1.5rem;height:1.5rem;padding:.1rem;color:var(--acc)}
+a.row:hover{background:var(--card)}a.row:hover .row-title{color:var(--acc)}
+.row-num{flex:0 0 1.5rem;text-align:center;font:700 1rem var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+.row-body{flex:1 1 auto;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.8rem}
+.row-title{font-weight:600}
+a.row-title{color:var(--fg);text-decoration:none}a.row-title:hover{color:var(--acc)}
+.row-desc{color:var(--mut);font-size:.9rem}
+.row-meta{flex:0 0 auto;color:var(--mut);font-size:.85rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row-meta a{color:var(--acc);text-decoration:none;margin-left:.9rem}.row-meta a:hover{text-decoration:underline}
+.row.lk{color:var(--acc)}
+table.src{width:100%;margin:0 0 .6rem;display:table;table-layout:fixed}
+table.src tr:first-child td{border-top:0}
+@media (max-width:700px){.hm{display:none}table.src{table-layout:auto}table.src td.act{white-space:normal}table.src td.act a{display:flex;margin:0 0 .35rem}}
+.tw{overflow-x:auto}
+table.src td.act{white-space:nowrap}
+table.src td.act a{display:inline-flex;align-items:center;gap:.3rem;margin-right:1rem;text-decoration:none;font-weight:600}
+table.src td.act a:hover{text-decoration:underline}
+.small{font-size:.85em;color:var(--mut)}
+.note{hyphens:none;color:var(--mut);font-size:.9rem;margin:.5rem 0 1.5rem}
+.paid{display:block;font-weight:700;font-size:.85em;color:var(--warn)}
+main.narrow{max-width:780px;margin:0 auto;padding:1.4rem 1rem 3rem}
+
+@media (max-width:900px){.wrap{display:block}nav.toc{position:static;max-height:none;border:0;border-bottom:1px solid var(--line);padding:0 0 .5rem;margin-bottom:1rem}nav.toc summary{padding:.5rem 0;margin:0}nav.toc a{padding:.35rem 0}.wrap{padding:.8rem 1rem 3rem}.wrap>main:not(.quiz){font-size:16.5px}h1{font-size:1.7rem}header.top{gap:.8rem}}
+@media print{header.top,nav.toc,.bar,details.side,.skip,.reading-progress,.cmdk-overlay{display:none}body{background:#fff;color:#000;font-size:11pt}.wrap{display:block;padding:0;max-width:none}main{max-width:none}a{color:#000;text-decoration:none}h2,h3{break-after:avoid}table,pre,blockquote{break-inside:avoid}}
+
+.docwrap{display:flex;gap:2.5rem;max-width:1180px;margin:0 auto;padding:1.5rem 1rem 4rem;align-items:flex-start}
+details.side{flex:0 0 232px;position:sticky;top:3.6rem;font:14px var(--sans);max-height:calc(100vh - 4.5rem);overflow:auto}
+details.side summary{display:none;cursor:pointer;font:600 14px var(--sans);padding:.5rem 0;list-style:none}
+details.side summary::-webkit-details-marker{display:none}
+details.side h3{font:600 13px var(--sans);color:var(--mut);margin:0 0 .35rem}
+details.side ul{list-style:none;margin:0 0 1.1rem;padding:0}
+details.side ul+ul{border-top:1px solid var(--line);padding-top:.7rem}
+details.side li a{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem;color:var(--fg);text-decoration:none;line-height:1.35}
+details.side li a b{flex:0 0 1.15rem;font:700 13px var(--serif);color:var(--mut);font-variant-numeric:tabular-nums}
+details.side li a svg.i{color:var(--mut)}
+details.side li a:hover{color:var(--acc)}details.side li a:hover svg.i{color:var(--acc)}
+details.side li a.active{background:var(--card);color:var(--fg);font-weight:600}
+details.side li a.active svg.i,details.side li a.active b{color:var(--acc)}
+.docmain{flex:1 1 auto;min-width:0;max-width:780px}
+.docmain h1{display:flex;align-items:center;gap:.6rem}.docmain h1 svg.i{width:1.6rem;height:1.6rem;color:var(--acc)}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--line);margin-bottom:.4rem;padding-bottom:.6rem}
+.hero h1{margin:0}
+.hero svg.illus{width:290px;height:auto;flex:none;color:var(--fg);fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:-.2rem}
+@media(max-width:900px){
+  .docwrap{display:block;padding:1rem 1rem 3rem}
+  details.side{position:static;width:auto;max-height:none;overflow:visible;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+  details.side summary{display:block;padding:.7rem 0}
+  details.side li a{padding:.6rem .5rem}
+  details.side[open] summary{margin-bottom:.4rem}
+}
+@media(max-width:560px){.hero svg.illus{display:none}.row-desc{flex:0 0 100%}}
+details.amp{margin:1.6rem 0}details.amp>summary{cursor:pointer;font:700 1.15rem var(--serif);padding:.4rem 0;border-bottom:1px solid var(--line)}
+
+.cmdk-btn{display:inline-flex;align-items:center;gap:.4rem;font:14px var(--sans);color:var(--mut);background:transparent;border:0;padding:.45rem 0;cursor:pointer;margin-left:auto}
+.cmdk-btn:hover{color:var(--acc)}
+.cmdk-btn .kbd{font:12px var(--sans);color:var(--mut);opacity:.85}
+@media (max-width:560px){.cmdk-btn .kbd{display:none}header.top{gap:.8rem}}
+.cmdk-overlay{position:fixed;inset:0;background:rgba(20,20,18,.5);z-index:80;display:none}
+.cmdk-overlay.open{display:block}
+.cmdk-panel{position:fixed;top:14vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:66vh;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--fg);border-radius:2px;overflow:hidden}
+.cmdk-input{border:0;border-bottom:1px solid var(--line);background:var(--surface);color:var(--fg);font:16px var(--sans);padding:.85rem 1rem;border-radius:0}
+.cmdk-input:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+@media (max-width:560px){.cmdk-panel{top:6vh;max-height:60vh}.cmdk-item{padding:.7rem 1rem}}
+.cmdk-list{overflow:auto;flex:1 1 auto}
+.cmdk-item{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 1rem;cursor:pointer}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--card)}
+.cmdk-t{font:600 14px var(--sans);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1 1 auto}
+.cmdk-s{font:13px var(--sans);color:var(--mut);white-space:nowrap;flex:0 0 auto}
+.cmdk-empty{padding:.9rem 1rem;color:var(--mut);font:14px var(--sans)}
+nav.toc a.active{color:var(--acc);font-weight:600}
+.reading-progress{position:fixed;top:0;left:0;height:2px;background:var(--acc);width:0;z-index:90}
+</style></head><body data-root="../../"><a class="skip" href="#main">Saltar al contenido</a><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-14c-4 0-6.5.5-8 2zM12 6.5v14"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12h.01"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5v-1h6v1M8.5 10h7M8.5 13.5h7M8.5 17h4"/></symbol><symbol id="i-speech" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4.5 4v-4H4zM8 9h8M8 12h5"/></symbol><symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/></symbol><symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.6 0 4.5 1.7 4.5 4.3"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5M12 8v4.5l3 2"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol><symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 20V4M4 7l3-3 3 3M17 4v16M14 17l3 3 3-3"/></symbol><symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/><circle cx="16.5" cy="16" r=".9"/></symbol><symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="16" y="14" width="4" height="6" rx="1"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx=".5"/><rect x="14" y="4" width="6" height="6" rx=".5"/><rect x="4" y="14" width="6" height="6" rx=".5"/><rect x="14" y="14" width="6" height="6" rx=".5"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><rect x="8" y="6" width="8" height="3.5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c.8 0 1.3 1 1.3 2.2V9l7.7 4.5v2l-7.7-2.3V18l2 1.5V21L12 20l-3.3 1v-1.5l2-1.5v-4.8L3 15.5v-2L10.7 9V4.7c0-1.2.5-2.2 1.3-2.2z"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-flow" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4"/><rect x="3" y="17" width="6" height="4"/><rect x="15" y="17" width="6" height="4"/><path d="M12 7v4M6 17v-3h12v3"/></symbol><symbol id="i-cards" viewBox="0 0 24 24"><rect x="3.5" y="8" width="14" height="11" rx="1.5"/><path d="M7 8V6.5A1.5 1.5 0 0 1 8.5 5h11A1.5 1.5 0 0 1 21 6.5V15a1.5 1.5 0 0 1-1.5 1.5h-2"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol><symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9M7 17H4.5v-8h15v8H17M7 14h10v6.5H7z"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2 2 0 0 1 3 3L8 19zM14.5 6.5l3 3"/></symbol><symbol id="i-inst" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5.5 12v6M9.5 12v6M14.5 12v6M18.5 12v6M3.5 20.5h17"/></symbol><symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 4L8 20M16 4l-1.5 16M4.5 9h16M3.5 15h16"/></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.9 9.3a4.6 4.6 0 0 0 .6 9.2z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5L9 4l6 2.5 5.5-2.5v13.5L15 20l-6-2.5-5.5 2.5zM9 4v13.5M15 6.5V20"/></symbol><symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="5.5" r="2"/><path d="M7.5 18.5H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6.5"/></symbol><symbol id="i-tower" viewBox="0 0 24 24"><path d="M9.5 21l1-9M14.5 21l-1-9M7.5 12h9L18 7.5H6zM12 7.5v-4M6 21h12"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-wing" viewBox="0 0 24 24"><path d="M3 14c4-5.5 12-6.5 18-3.5-2 3.5-10 5.5-18 3.5zM2 19.5h7M12 19.5h4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="M7.5 18.5H17a4 4 0 0 0 1.6-7.7M6.9 9.3a4.6 4.6 0 0 0 .6 9.2M9 6.2a5.5 5.5 0 0 1 8.4 4.3M4 4l16 16"/></symbol><symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H5v15h5M14 8l4 4-4 4M18 12H9"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L20 3M16 7l3 3M13.5 9.5l2 2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.5-3 7.8-7.5 9.5-4.5-1.7-7.5-5-7.5-9.5V6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.5.8-4 4 1 5.6-5-2.7-5 2.7 1-5.6-4-4 5.5-.8z"/></symbol></svg><div id="rp" class="reading-progress"></div><header class="top"><a class="home" href="../../index.html"><svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5.5"/><path d="M12 12L19 5"/><circle cx="16.4" cy="16.6" r="1.1"/></svg>ATC 2025</a><a class="back" href="index.html"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Drones (UAS) y U-space</a><button type="button" class="cmdk-btn" onclick="window.__atcSearchOpen&&window.__atcSearchOpen()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg>Buscar <span class="kbd">Ctrl K</span></button><span id="acct-slot"></span></header><div class="wrap"><nav class="toc"><details open><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#que-entra-en-el-examen">Qué entra en el examen</a></li>
+<li><a href="#tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</a></li>
+<li><a href="#1-introduccion-p-4">1. Introducción (p. 4)</a><ul>
+<li><a href="#11-origen-y-concepto-uas-p-4">1.1 Origen y concepto UAS (p. 4)</a></li>
+<li><a href="#12-concepto-de-u-space-p-4">1.2 Concepto de U-space (p. 4)</a></li>
+</ul>
+</li>
+<li><a href="#2-marco-normativo-aplicable-uas-pp-5-8">2. Marco normativo aplicable UAS (pp. 5-8)</a><ul>
+<li><a href="#21-normativa-europea-pp-5-7">2.1 Normativa europea (pp. 5-7)</a></li>
+<li><a href="#22-normativa-nacional-p-7">2.2 Normativa nacional (p. 7)</a></li>
+<li><a href="#23-mapa-normativo-y-otras-disposiciones-de-aplicacion-p-8">2.3 Mapa normativo y otras disposiciones de aplicación (p. 8)</a></li>
+</ul>
+</li>
+<li><a href="#3-sistemas-de-aeronaves-no-tripuladas-uas-pp-9-16">3. Sistemas de Aeronaves No Tripuladas (UAS) (pp. 9-16)</a><ul>
+<li><a href="#31-definicion-y-componentes-del-uas-p-9">3.1 Definición y componentes del UAS (p. 9)</a></li>
+<li><a href="#32-requisitos-para-la-operacion-de-uas-pp-10-11">3.2 Requisitos para la operación de UAS (pp. 10-11)</a></li>
+<li><a href="#33-modalidades-de-vuelo-p-12">3.3 Modalidades de vuelo (p. 12)</a></li>
+<li><a href="#34-categorias-operacionales-pp-13-14">3.4 Categorías operacionales (pp. 13-14)</a></li>
+<li><a href="#35-marcado-de-clase-uas-pp-14-15">3.5 Marcado de clase UAS (pp. 14-15)</a></li>
+<li><a href="#36-figura-riesgo-p-16-las-tres-categorias-comparadas">3.6 Figura «Riesgo» (p. 16): las tres categorías comparadas</a></li>
+</ul>
+</li>
+<li><a href="#4-integracion-de-los-uas-en-el-espacio-aereo-pp-16-19">4. Integración de los UAS en el espacio aéreo (pp. 16-19)</a><ul>
+<li><a href="#41-zonas-geograficas-uas-pp-16-17">4.1 Zonas geográficas UAS (pp. 16-17)</a></li>
+<li><a href="#42-actividades-o-servicios-no-easa-pp-17-18">4.2 Actividades o servicios NO EASA (pp. 17-18)</a></li>
+<li><a href="#43-aeromodelismo-p-18">4.3 Aeromodelismo (p. 18)</a></li>
+</ul>
+</li>
+<li><a href="#5-u-space-pp-19-28">5. U-space (pp. 19-28)</a><ul>
+<li><a href="#51-finalidad-y-objetivos-del-u-space-p-19">5.1 Finalidad y objetivos del U-space (p. 19)</a></li>
+<li><a href="#52-marco-normativo-del-u-space-pp-20-21">5.2 Marco normativo del U-space (pp. 20-21)</a></li>
+<li><a href="#53-reglamento-de-ejecucion-ue-2021664-pp-21-22">5.3 Reglamento de Ejecución (UE) 2021/664 (pp. 21-22)</a></li>
+<li><a href="#54-servicio-de-informacion-comun-cis-y-actores-p-23">5.4 Servicio de información común (CIS) y actores (p. 23)</a></li>
+<li><a href="#55-ussp-cispscisp-y-ansp-pp-24-25">5.5 USSP, CISP/sCISP y ANSP (pp. 24-25)</a></li>
+<li><a href="#56-reglamento-de-ejecucion-ue-2021665-pp-25-27">5.6 Reglamento de Ejecución (UE) 2021/665 (pp. 25-27)</a></li>
+<li><a href="#57-reglamento-de-ejecucion-ue-2021666-y-conspicuidad-electronica-pp-27-28">5.7 Reglamento de Ejecución (UE) 2021/666 y conspicuidad electrónica (pp. 27-28)</a></li>
+</ul>
+</li>
+<li><a href="#6-despliegue-del-u-space-en-espana-p-29">6. Despliegue del U-space en España (p. 29)</a><ul>
+<li><a href="#61-pandu-p-29">6.1 PANDU+ (p. 29)</a></li>
+</ul>
+</li>
+<li><a href="#7-evolucion-del-u-space-p-30">7. Evolución del U-space (p. 30)</a></li>
+<li><a href="#8-movilidad-aerea-pp-31-33">8. Movilidad aérea (pp. 31-33)</a><ul>
+<li><a href="#81-relacion-entre-u-space-y-movilidad-aerea-p-31">8.1 Relación entre U-space y movilidad aérea (p. 31)</a></li>
+<li><a href="#82-movilidad-aerea-innovadora-iam-pp-31-32">8.2 Movilidad Aérea Innovadora (IAM) (pp. 31-32)</a></li>
+<li><a href="#83-movilidad-aerea-urbana-uam-pp-32-33">8.3 Movilidad Aérea Urbana (UAM) (pp. 32-33)</a></li>
+</ul>
+</li>
+<li><a href="#9-manual-frente-a-fuentes-erratas-y-lo-que-va-mas-alla-del-manual">9. Manual frente a fuentes, erratas y lo que va más allá del manual</a><ul>
+<li><a href="#91-imprecisiones-e-incoherencias-internas-del-manual-para-responder-sigue-el-manual-en-la-frase-que-cite-la-pregunta">9.1 Imprecisiones e incoherencias internas del manual (para responder: sigue el manual, en la frase que cite la pregunta)</a></li>
+<li><a href="#92-mas-alla-del-manual-no-procede-del-manual-10-comprobado-en-los-textos-de-los-reglamentos-ediciones-en-espanol">9.2 Más allá del manual (NO procede del manual 10; comprobado en los textos de los reglamentos, ediciones en español)</a></li>
+</ul>
+</li>
+<li><a href="#10-trampas-de-examen">10. Trampas de examen</a></li>
+<li><a href="#11-imprescindible-memorizar">11. Imprescindible memorizar</a></li>
+<li><a href="#12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</a></li>
+<li><a href="#13-fuentes">13. Fuentes</a></li>
+<li><a href="#14-no-encontrado-lo-que-el-manual-no-dice">14. No encontrado (lo que el manual no dice)</a></li>
+</ul>
+</div>
+</details><script>if(innerWidth<=900)document.currentScript.parentNode.firstChild.removeAttribute("open")</script></nav><main id="main" tabindex="-1"><div class="meta">51 min de lectura</div><h1 id="om10-manual-oficial-10-de-enaire-drones-uas-y-u-space-guia-de-estudio-fiel-al-manual">Guía: Drones (UAS) y U-space</h1>
+<p><strong>Fuente:</strong> ENAIRE, <em>Drones (UAS) y U-space</em>, 33 páginas, con «Elaborado: noviembre 2026» en la cabecera y «© 2026 ENAIRE» en la portada y en el pie. Contenido en las páginas 4-33 (portada en la p. 1 e índice en las pp. 2-3). Figuras y tablas en las páginas 4, 6, 8, 10, 12, 13, 15, 16, 18, 20, 22, 25, 27, 28, 29, 30, 31 y 32. Las páginas «p.» son las del propio manual (coinciden con las del PDF). Cita recomendada: «Manual 10 (nov. 2026), capítulo x.y, p. n».</p>
+<h2 id="que-entra-en-el-examen">Qué entra en el examen</h2>
+<p>El tema 10, «Drones (UAS) y U-space», es <strong>nuevo</strong>: ENAIRE lo añadió al temario en la edición de noviembre de 2026 y no existe edición anterior. El manual es corto y descriptivo, así que <strong>cada frase, tabla y figura puede ser una pregunta</strong>. Abarca (1) el origen de los UAS y el concepto de U-space; (2) el marco normativo: Reglamento (UE) 2018/1139, Reglamento Delegado (UE) 2019/945, Reglamento de Ejecución (UE) 2019/947, SERA (923/2012), Real Decreto 517/2024 y otras disposiciones; (3) el UAS: componentes, requisitos (registro, formación, edad, seguro), modalidades de vuelo VLOS/EVLOS/BVLOS, las tres categorías operacionales y las subcategorías A1/A2/A3, el marcado de clase C0-C6; (4) la integración en el espacio aéreo: zonas geográficas UAS, actividades NO EASA, aeromodelismo; (5) el U-space: objetivos, paquete regulatorio 2021/664-665-666, espacio aéreo U-space, los <strong>cuatro servicios obligatorios</strong> y los adicionales, el CIS, los actores (AC, ANSP, CISP/sCISP, USSP, operador, piloto), la coordinación ATS y la <strong>reconfiguración dinámica del espacio aéreo (DAR)</strong>, la <strong>conspicuidad electrónica</strong>; (6) el despliegue en España (<strong>PANDU+ 2026-2030</strong>, tres objetivos); (7) la evolución del U-space; (8) la movilidad aérea (IAM, UAM, eVTOL).</p>
+<p>Preguntas probables: qué reglamento hace qué (945 = diseño, fabricación y marcado de clase, «orientado a fabricantes»; 947 = utilización, categorías; 664 = marco U-space; 665 = modifica 2017/373, ANSP, espacio aéreo <strong>controlado</strong>; 666 = modifica SERA, aviación tripulada, espacio aéreo <strong>no controlado</strong>), cifras (120 m, 16 años, 25 kg, 20 kg, 3 m, 250 g, 900 g, 4 kg, 25 de junio de 2024, 4 de junio de 2024, 4 de julio de 2018, 2026-2030), qué clase va con qué subcategoría o escenario (C5 → STS-01, C6 → STS-02), quién es el sCISP en España (<strong>ENAIRE</strong>), y listas del tipo «cuál NO es un servicio obligatorio» (la información meteorológica y el seguimiento de la conformidad son <strong>adicionales</strong>).</p>
+<h2 id="tabla-de-cobertura-capitulo-del-manual-seccion-de-esta-guia">Tabla de cobertura (capítulo del manual → sección de esta guía)</h2>
+<table>
+<thead>
+<tr>
+<th>Capítulo del manual</th>
+<th>Páginas</th>
+<th>Sección de la guía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portada e índice</td>
+<td>1-3</td>
+<td>(fuente)</td>
+</tr>
+<tr>
+<td>1. Introducción: 1.1 Origen y concepto UAS; 1.2 Concepto de U-space (+ figura)</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2. Marco normativo aplicable UAS (intro); 2.1 Normativa europea (+ figura 2018/1139)</td>
+<td>5-7</td>
+<td>2.1</td>
+</tr>
+<tr>
+<td>2.2 Normativa nacional (RD 517/2024)</td>
+<td>7</td>
+<td>2.2</td>
+</tr>
+<tr>
+<td>Figura del mapa normativo; 2.3 Otras disposiciones de aplicación</td>
+<td>8</td>
+<td>2.3</td>
+</tr>
+<tr>
+<td>3. Sistemas de Aeronaves No Tripuladas: 3.1 Definición y componentes</td>
+<td>9</td>
+<td>3.1</td>
+</tr>
+<tr>
+<td>3.2 Requisitos para la operación de UAS (+ figura de requisitos)</td>
+<td>10-11</td>
+<td>3.2</td>
+</tr>
+<tr>
+<td>3.3 Modalidades de vuelo (tabla VLOS/EVLOS/BVLOS)</td>
+<td>12</td>
+<td>3.3</td>
+</tr>
+<tr>
+<td>3.4 Categorías operacionales: 3.4.1 abierta (tabla A1/A2/A3), 3.4.2 específica, 3.4.3 certificada</td>
+<td>13-14</td>
+<td>3.4</td>
+</tr>
+<tr>
+<td>3.5 Marcado de clase UAS (tablas C0-C6)</td>
+<td>14-15</td>
+<td>3.5</td>
+</tr>
+<tr>
+<td>Figura «Riesgo» (comparación de las tres categorías)</td>
+<td>16</td>
+<td>3.6</td>
+</tr>
+<tr>
+<td>4. Integración de los UAS en el espacio aéreo; 4.1 Zonas geográficas UAS</td>
+<td>16-17</td>
+<td>4.1</td>
+</tr>
+<tr>
+<td>4.2 Actividades o servicios NO EASA (+ figura directa/indirecta)</td>
+<td>17-18</td>
+<td>4.2</td>
+</tr>
+<tr>
+<td>4.3 Aeromodelismo; paso a los espacios aéreos U-space</td>
+<td>18-19</td>
+<td>4.3</td>
+</tr>
+<tr>
+<td>5. U-space: 5.1 Finalidad y objetivos</td>
+<td>19</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>5.2 Marco normativo del U-space (+ figura)</td>
+<td>20-21</td>
+<td>5.2</td>
+</tr>
+<tr>
+<td>5.3 Reglamento de Ejecución (UE) 2021/664: 5.3.1 Espacios aéreos U-space; 5.3.2 Servicios U-space (+ dos figuras)</td>
+<td>21-22</td>
+<td>5.3</td>
+</tr>
+<tr>
+<td>5.3.3 CIS; 5.3.4 Actores del ecosistema U-space</td>
+<td>23</td>
+<td>5.4</td>
+</tr>
+<tr>
+<td>5.3.5 USSP; 5.3.6 CISP / sCISP (+ figura); 5.3.7 ANSP</td>
+<td>24-25</td>
+<td>5.5</td>
+</tr>
+<tr>
+<td>5.4 Reglamento de Ejecución (UE) 2021/665: 5.4.1 Coordinación ATS-U-space; 5.4.2 DAR (+ figura)</td>
+<td>25-27</td>
+<td>5.6</td>
+</tr>
+<tr>
+<td>5.5 Reglamento de Ejecución (UE) 2021/666: 5.5.1 Conspicuidad electrónica (+ figura)</td>
+<td>27-28</td>
+<td>5.7</td>
+</tr>
+<tr>
+<td>6. Despliegue del U-space en España: 6.1 PANDU+; 6.1.1 Objetivos principales (+ figura)</td>
+<td>29</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7. Evolución del U-space (+ ilustración)</td>
+<td>30</td>
+<td>7</td>
+</tr>
+<tr>
+<td>8. Movilidad aérea: 8.1 Relación U-space-movilidad; 8.2 IAM; 8.3 UAM</td>
+<td>31-33</td>
+<td>8</td>
+</tr>
+<tr>
+<td>(añadido) Más allá del manual, Trampas de examen, Imprescindible memorizar, Glosario, Fuentes, No encontrado</td>
+<td></td>
+<td>9-14</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-introduccion-p-4">1. Introducción (p. 4)</h2>
+<h3 id="11-origen-y-concepto-uas-p-4">1.1 Origen y concepto UAS (p. 4)</h3>
+<ul>
+<li>Los <strong>Sistemas de Aeronaves No Tripuladas (UAS)</strong>, «comúnmente denominados <strong>drones</strong>», tienen su origen en las primeras aeronaves no tripuladas empleadas con <strong>fines militares entre finales del siglo XIX y principios del siglo XX</strong>.</li>
+<li>Después, los avances en <strong>electrónica, telecomunicaciones y sistemas de navegación</strong> permitieron su evolución hacia aplicaciones <strong>civiles y comerciales</strong>, con un crecimiento significativo del sector «durante las últimas décadas».</li>
+<li>Usos actuales que cita el manual: <strong>inspección de infraestructuras, agricultura de precisión, vigilancia, gestión de emergencias, logística</strong>.</li>
+<li><strong>La normativa europea les otorga la consideración de aeronaves</strong>: sus operaciones deben integrarse de forma segura en el sistema aeronáutico y <strong>compartir el espacio aéreo con el resto de usuarios</strong>.</li>
+</ul>
+<h3 id="12-concepto-de-u-space-p-4">1.2 Concepto de U-space (p. 4)</h3>
+<ul>
+<li>El aumento progresivo de las operaciones con UAS puso de manifiesto la necesidad de <strong>mecanismos de gestión del tráfico adaptados</strong> a estas aeronaves. Como respuesta, <strong>la Unión Europea ha desarrollado el concepto de U-space</strong>.</li>
+<li><strong>Definición del manual:</strong> «El U-space es un <strong>sistema de servicios y procedimientos</strong> diseñado para permitir la gestión <strong>segura, eficiente y automatizada</strong> de un <strong>elevado número</strong> de operaciones con UAS».</li>
+<li><strong>Figura p. 4 (ilustración del U-space):</strong> un volumen rotulado «U-SPACE» sobre una ciudad, con <strong>seis geozonas (GEOZONE 1 a 6)</strong>, dos proveedores (<strong>USSP 1</strong> y <strong>USSP 2</strong>), aviones y helicópteros alrededor y el rótulo «Network of UAS routes in U-space airspace» (red de rutas de UAS en el espacio aéreo U-space).</li>
+</ul>
+<h2 id="2-marco-normativo-aplicable-uas-pp-5-8">2. Marco normativo aplicable UAS (pp. 5-8)</h2>
+<p>Introducción (p. 5), con tres ideas:</p>
+<ul>
+<li>El crecimiento de las operaciones con UAS impulsó un <strong>marco normativo específico</strong>.</li>
+<li>(Bandera de la UE) La <strong>normativa europea</strong> establece los requisitos aplicables a <strong>los UAS, sus operadores, las operaciones y los servicios U-space</strong>, con una regulación <strong>armonizada en todos los Estados miembros</strong>.</li>
+<li>(Bandera de España) En España se complementa con el <strong>Real Decreto 517/2024</strong>, que regula <strong>determinados aspectos nacionales</strong>, <strong>las actividades excluidas de la normativa europea</strong> y el <strong>régimen de zonificación</strong> mediante las <strong>zonas geográficas UAS y los espacios U-space</strong>. Además, <strong>los planes PANDU y PANDU+ orientan el despliegue progresivo del U-space en España</strong>.</li>
+</ul>
+<h3 id="21-normativa-europea-pp-5-7">2.1 Normativa europea (pp. 5-7)</h3>
+<p>Marco armonizado <strong>basado en el nivel de riesgo operacional</strong>, constituido <strong>principalmente</strong> por tres normas: <strong>Reglamento (UE) 2018/1139</strong>, <strong>Reglamento Delegado (UE) 2019/945</strong> y <strong>Reglamento de Ejecución (UE) 2019/947</strong>.</p>
+<p><strong>Reglamento (UE) 2018/1139</strong> (p. 5)
+- <strong>Del Parlamento Europeo y del Consejo, de 4 de julio de 2018</strong>, sobre <strong>normas comunes en el ámbito de la aviación civil</strong> y por el que se <strong>crea una Agencia de la Unión Europea para la Seguridad Aérea (EASA)</strong>.
+- «Posteriormente recoge que las aeronaves no tripuladas <strong>entran a formar parte del ámbito de EASA independientemente de su masa</strong>».
+- <strong>Figura p. 6 (recuadro del 2018/1139):</strong>
+  1. Definición de <strong>«aeronave no tripulada»</strong>: «Cualquier aeronave que opere o esté diseñada para operar <strong>de forma autónoma o para ser pilotada a distancia sin un piloto a bordo</strong>». Precisiones: <strong>sin distinción por razón de su uso</strong>; <strong>los aeromodelos quedan dentro del concepto de aeronave no tripulada</strong>.
+  2. <strong>La Unión Europea extiende su competencia sobre todas las aeronaves no tripuladas independientemente de su masa operativa</strong>. <strong>Excepto:</strong> las <strong>«Actividades o servicios no EASA»</strong> y las <strong>aeronaves no tripuladas incluidas en el anexo I</strong>. (Logos de la UE y de EASA, «European Union Aviation Safety Agency».)</p>
+<p><strong>Reglamento Delegado (UE) 2019/945</strong> (p. 6)
+- Establece los requisitos aplicables al <strong>diseño, fabricación y comercialización</strong> de los sistemas de UAS <strong>y de los accesorios de identificación a distancia</strong>.
+- Objetivo: que los UAS comercializados en el mercado europeo cumplan unos <strong>requisitos técnicos mínimos de seguridad y prestaciones</strong>. Para ello introduce el <strong>sistema de marcado de clase</strong>: los drones se clasifican en las <strong>clases C0 a C6</strong> en función de sus características <strong>técnicas y operacionales</strong>.
+- Además, introduce <strong>las obligaciones de fabricantes, importadores y distribuidores</strong> «procedentes de terceros países» (redacción del manual; la figura de la p. 8 dice «Operadores de terceros países»: véase la sección 9).</p>
+<p><strong>Reglamento de Ejecución (UE) 2019/947</strong> (p. 6)
+- Establece <strong>las normas y procedimientos aplicables a la utilización de UAS</strong>; es <strong>la principal referencia normativa para las operaciones con drones en Europa</strong>.
+- Característica fundamental: <strong>enfoque basado en el riesgo operacional</strong>, con <strong>tres categorías</strong>:
+  - <strong>Categoría abierta</strong>: operaciones de <strong>bajo riesgo</strong>.
+  - <strong>Categoría específica</strong>: operaciones de <strong>riesgo medio</strong>.
+  - <strong>Categoría certificada</strong>: operaciones de <strong>alto riesgo</strong>.
+- Regula también el <strong>registro de operadores</strong>, la <strong>formación de los pilotos a distancia</strong> y las <strong>condiciones aplicables a cada categoría operacional</strong>.</p>
+<p><strong>Otras disposiciones europeas de aplicación</strong> (pp. 6-7)
+- Determinadas operaciones pueden verse afectadas por otras normas europeas de navegación aérea. Destaca el <strong>Reglamento de Ejecución (UE) 923/2012 (SERA)</strong>, que establece las <strong>reglas comunes del aire</strong> aplicables en Europa y que, <strong>en determinadas circunstancias</strong>, también puede aplicarse a las operaciones con UAS.
+- En conjunto, la normativa europea cubre <strong>requisitos técnicos de las aeronaves, condiciones de operación, capacitación del personal y responsabilidades de los actores</strong>, y es <strong>la base sobre la que se desarrolla la regulación nacional</strong>.</p>
+<h3 id="22-normativa-nacional-p-7">2.2 Normativa nacional (p. 7)</h3>
+<ul>
+<li><strong>Real Decreto 517/2024, de 4 de junio</strong>: desarrolla el <strong>régimen jurídico para la utilización civil de los UAS en España</strong> y <strong>complementa</strong> el marco de la Unión Europea.</li>
+<li><strong>Entró en vigor el 25 de junio de 2024</strong>, adaptando la normativa española al nuevo marco europeo de los UAS y del U-space.</li>
+<li><strong>Principales aportaciones</strong> (seis, en el orden del manual):
+  1. El desarrollo de las <strong>disposiciones nacionales</strong> aplicables a la utilización civil de UAS.
+  2. La regulación de las <strong>actividades y servicios excluidos del ámbito del Reglamento (UE) 2018/1139</strong>, «comúnmente denominados <strong>operaciones NO EASA</strong>».
+  3. La regulación de los <strong>clubes y asociaciones de aeromodelismo</strong>.
+  4. El establecimiento del <strong>régimen de las zonas geográficas UAS</strong>, que permite al Estado <strong>limitar, restringir o facilitar</strong> operaciones en determinados volúmenes de espacio aéreo por razones de <strong>seguridad, defensa, protección, privacidad o medio ambiente</strong>.
+  5. El desarrollo del <strong>marco nacional para la designación y gestión de los espacios U-space</strong>.
+  6. La designación de <strong>ENAIRE como proveedor único de servicios de información común (sCISP)</strong> en los espacios aéreos U-space <strong>bajo responsabilidad española</strong>.</li>
+<li>En conjunto, el RD 517/2024 es <strong>el marco jurídico nacional</strong> para la integración segura y ordenada de los UAS y para el despliegue del U-space en España.</li>
+</ul>
+<h3 id="23-mapa-normativo-y-otras-disposiciones-de-aplicacion-p-8">2.3 Mapa normativo y otras disposiciones de aplicación (p. 8)</h3>
+<p><strong>Figura p. 8 (mapa de la normativa):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Caja</th>
+<th>Contenido impreso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reglamento Base (UE) 2018/1139</strong> (arriba, con dos flechas hacia abajo)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Reglamento de Ejecución (UE) 2019/947</strong> «(reglas y procedimientos para la utilización UAS)»</td>
+<td><strong>Categorías Operacionales</strong> (Abierta en verde, Específica en amarillo, Certificada en rojo); <strong>Operadores y pilotos</strong>; <strong>Condiciones de registro y formación</strong>; <strong>Riesgo (SORA)</strong></td>
+</tr>
+<tr>
+<td><strong>Reglamento Delegado (UE) 2019/945</strong> «<strong>(Orientado a fabricantes)</strong>»</td>
+<td><strong>Diseño y fabricación UAS</strong>; <strong>Marcado de clase</strong> (iconos de las clases 0 a 6); <strong>Comercialización</strong>; <strong>Operadores de terceros países</strong></td>
+</tr>
+<tr>
+<td><strong>Normativa Nacional UAS RD0517/24</strong></td>
+<td>«<strong>Zonificación, Operaciones EASA, NO EASA, clubes y asociaciones de aeromodelismo y ENAIRE como sCISP</strong>»</td>
+</tr>
+<tr>
+<td><strong>Otras normativas</strong></td>
+<td>Protección de datos y privacidad; Espectro radio eléctrico; Compatibilidad electromagnética; Medio ambiente (ruido y emisiones); Juguetes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Texto 2.3 «Otras disposiciones de aplicación»:</strong> además de lo anterior, deben tenerse en cuenta disposiciones <strong>europeas y nacionales</strong> de diversos ámbitos que afectan a las operaciones con UAS. Lista (seis):</p>
+<ol>
+<li>Requisitos técnicos de diseño y fabricación de UAS.</li>
+<li>Protección de datos y privacidad.</li>
+<li>Espectro radioeléctrico.</li>
+<li>Compatibilidad electromagnética.</li>
+<li>Medio ambiente (ruido y emisiones).</li>
+<li><strong>Juguetes</strong>.</li>
+</ol>
+<ul>
+<li>La lista del texto tiene <strong>seis</strong> elementos; la caja «Otras normativas» de la figura tiene <strong>cinco</strong> (no incluye «requisitos técnicos de diseño y fabricación»).</li>
+</ul>
+<h2 id="3-sistemas-de-aeronaves-no-tripuladas-uas-pp-9-16">3. Sistemas de Aeronaves No Tripuladas (UAS) (pp. 9-16)</h2>
+<h3 id="31-definicion-y-componentes-del-uas-p-9">3.1 Definición y componentes del UAS (p. 9)</h3>
+<ul>
+<li><strong>De acuerdo con el Reglamento (UE) 2018/1139</strong>, un UAS está compuesto por <strong>una aeronave no tripulada (UA) y el equipo necesario para permitir su operación segura</strong>.</li>
+<li>Componentes, «con carácter general» (cinco):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Definición del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aeronave no tripulada (UA)</strong></td>
+<td>aeronave destinada a operar <strong>sin piloto a bordo</strong></td>
+</tr>
+<tr>
+<td><strong>Piloto a distancia</strong></td>
+<td>persona responsable de <strong>conducir el vuelo o supervisar la trayectoria</strong> de la aeronave durante la operación</td>
+</tr>
+<tr>
+<td><strong>Estación de control remoto (RCS)</strong></td>
+<td>equipo utilizado para <strong>controlar la aeronave y supervisar el vuelo</strong></td>
+</tr>
+<tr>
+<td><strong>Enlace de mando y control (C2)</strong></td>
+<td><strong>sistema de comunicaciones</strong> que permite el intercambio de información <strong>entre la aeronave y la estación de control</strong></td>
+</tr>
+<tr>
+<td><strong>Equipos asociados</strong></td>
+<td>sistemas y dispositivos necesarios para la operación: <strong>navegación, posicionamiento, identificación a distancia o carga útil</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Conclusión del manual: un UAS es <strong>la combinación de una aeronave no tripulada y los elementos necesarios para su control y operación segura</strong>.</li>
+<li>Ojo a las siglas: el manual escribe <strong>RCS</strong> para la estación de control remoto (véase la sección 9).</li>
+</ul>
+<h3 id="32-requisitos-para-la-operacion-de-uas-pp-10-11">3.2 Requisitos para la operación de UAS (pp. 10-11)</h3>
+<ul>
+<li>Para operar un UAS hay que cumplir los requisitos de la normativa en materia de <strong>registro, formación, edad mínima, seguro y condiciones operacionales</strong> (cinco materias).</li>
+<li><strong>Figura p. 10 (cinco fichas):</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Ficha</th>
+<th>Texto impreso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Registro como Operador</strong></td>
+<td>Registrarse en la <strong>sede electrónica de AESA</strong> y obtener <strong>número de operador</strong>, que <strong>debe figurar visible en el dron</strong></td>
+</tr>
+<tr>
+<td><strong>Formación como Piloto</strong></td>
+<td>Formación mínima acreditable según la categoría operacional. <strong>Examen accesible en la web de AESA para subcategorías A1 y A3</strong></td>
+</tr>
+<tr>
+<td><strong>Seguro Obligatorio</strong></td>
+<td>Póliza de <strong>responsabilidad civil frente a terceros</strong> por daños <strong>durante cada vuelo</strong>. <strong>Excepción para UAS con MTOM inferior a 20 kg</strong></td>
+</tr>
+<tr>
+<td><strong>Reglas de Vuelo y Lugar</strong></td>
+<td>Sujeto a reglas generales <strong>según peso, personas y edificios cercanos</strong>. <strong>Consultar zonas geográficas UAS antes de cada operación</strong></td>
+</tr>
+<tr>
+<td><strong>Edad Mínima</strong></td>
+<td><strong>16 años</strong> para pilotos a distancia. <strong>En categoría abierta puede reducirse dependiendo de la clase de UAS utilizada</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Los requisitos afectan <strong>tanto al operador de UAS como al piloto a distancia</strong> y <strong>pueden variar según la categoría operacional</strong>.</li>
+<li>La normativa europea <strong>distingue entre operador de UAS y piloto a distancia</strong>, con funciones y responsabilidades específicas:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Figura</th>
+<th>Definición y responsabilidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operador de UAS</strong></td>
+<td><strong>Persona física o jurídica</strong> que <strong>utiliza o tiene intención de utilizar</strong> uno o varios UAS. <strong>Responsable de garantizar que la operación</strong> se realice conforme a la normativa y de que se cumplan los requisitos operacionales, de seguridad y, cuando proceda, de <strong>registro, formación, autorización y seguro</strong> exigibles para cada tipo de operación</td>
+</tr>
+<tr>
+<td><strong>Piloto a distancia</strong></td>
+<td><strong>Persona física</strong> responsable de <strong>conducir el UAS o supervisar su trayectoria</strong> durante el vuelo. Obligaciones: disponer de la <strong>formación requerida</strong>, operar conforme a la normativa y <strong>garantizar la seguridad de la operación durante todas sus fases</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Requisitos, uno por uno (pp. 10-11):</li>
+<li><strong>Registro:</strong> los <strong>operadores</strong> deben registrarse <strong>cuando así lo exija la normativa</strong>, obteniendo <strong>un número de operador válido en toda la Unión Europea</strong>.</li>
+<li><strong>Formación:</strong> los <strong>pilotos a distancia</strong> deben disponer de la formación, competencias y acreditaciones exigidas para <strong>la categoría operacional y el tipo de operación</strong>.</li>
+<li><strong>Edad mínima:</strong> con carácter general, <strong>16 años</strong> para actuar como piloto a distancia <strong>en España</strong>, sin perjuicio de las <strong>excepciones</strong> previstas para determinadas operaciones de <strong>bajo riesgo</strong>.</li>
+<li><strong>Seguro:</strong> el seguro de <strong>responsabilidad civil es obligatorio</strong> en las categorías <strong>específica y certificada</strong> y en las <strong>actividades o servicios NO EASA</strong>. <strong>Determinadas operaciones de bajo riesgo en categoría abierta pueden quedar exentas</strong> en los términos de la normativa.</li>
+<li><strong>Responsabilidades:</strong> <strong>el operador y el piloto a distancia</strong> deben garantizar que la operación cumple la normativa, respetando las <strong>limitaciones operacionales, las zonas geográficas UAS y las condiciones de seguridad</strong> de cada tipo de vuelo.</li>
+<li>Cierre: los requisitos específicos de cada operación <strong>dependen de la categoría operacional</strong> y de la normativa vigente.</li>
+<li>Quién registra a quién: <strong>el operador se registra</strong> (número de operador); <strong>el piloto se forma</strong>. No al revés.</li>
+</ul>
+<h3 id="33-modalidades-de-vuelo-p-12">3.3 Modalidades de vuelo (p. 12)</h3>
+<p>Tabla de tres columnas (con fotos: piloto con emisora mirando el dron; piloto con gafas de vuelo):</p>
+<table>
+<thead>
+<tr>
+<th>Modalidad</th>
+<th>Definición</th>
+<th>Uso típico según el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VLOS</strong> (<em>Visual Line of Sight</em>)</td>
+<td>el piloto a distancia mantiene <strong>contacto visual directo y continuo</strong> con la aeronave <strong>durante todo el vuelo</strong></td>
+<td><strong>el tipo de operación más habitual</strong> y <strong>la base de la mayoría de las operaciones en categoría abierta</strong></td>
+</tr>
+<tr>
+<td><strong>EVLOS</strong> (<em>Extended Visual Line of Sight</em>)</td>
+<td>permite <strong>ampliar el alcance de una operación VLOS</strong> mediante <strong>uno o varios observadores de espacio aéreo</strong></td>
+<td>los observadores <strong>mantienen contacto visual</strong> con la aeronave y <strong>transmiten información al piloto</strong>, permitiendo operar a <strong>mayores distancias sin perder la conciencia situacional</strong></td>
+</tr>
+<tr>
+<td><strong>BVLOS</strong> (<em>Beyond Visual Line of Sight</em>)</td>
+<td><strong>más allá del alcance visual del piloto</strong>, <strong>sin observación visual continua</strong> del UAS <strong>ni por el piloto ni por observadores</strong></td>
+<td>por su mayor complejidad y riesgo <strong>suelen desarrollarse en categoría específica</strong> y requieren <strong>medidas adicionales de mitigación del riesgo, sistemas de comunicaciones fiables y procedimientos específicos de seguridad</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La diferencia EVLOS/BVLOS: en EVLOS <strong>alguien</strong> (un observador) ve el dron; en BVLOS <strong>nadie</strong> lo ve.</li>
+</ul>
+<h3 id="34-categorias-operacionales-pp-13-14">3.4 Categorías operacionales (pp. 13-14)</h3>
+<p>El <strong>Reglamento de Ejecución (UE) 2019/947</strong> clasifica las operaciones <strong>en función del riesgo de la operación</strong>, con requisitos <strong>proporcionales a su nivel de complejidad</strong>: <strong>abierta, específica y certificada</strong>.</p>
+<h4 id="341-categoria-abierta-p-13">3.4.1 Categoría abierta (p. 13)</h4>
+<ul>
+<li>Operaciones de <strong>bajo riesgo</strong> que <strong>no requieren autorización operacional previa</strong> de la autoridad competente.</li>
+<li>Limitaciones que destaca el manual: <strong>altura máxima de 120 m sobre la superficie</strong> y, <strong>con carácter general, vuelo VLOS</strong>.</li>
+<li><strong>No se permiten</strong>: operaciones <strong>sobre concentraciones de personas</strong>; <strong>transporte de mercancías peligrosas</strong>; <strong>lanzamiento de materiales</strong> que puedan poner en riesgo a terceros.</li>
+<li>Tres subcategorías (tabla p. 13):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Subcategoría</th>
+<th>Nombre</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A1</strong></td>
+<td>Vuelo <strong>sobre</strong> personas</td>
+<td>permite <strong>operar sobre personas no participantes</strong>, evitando <strong>en todo caso</strong> el sobrevuelo de <strong>concentraciones</strong> de personas</td>
+</tr>
+<tr>
+<td><strong>A2</strong></td>
+<td>Vuelo <strong>cerca</strong> de personas</td>
+<td>permite <strong>operar cerca de personas no participantes</strong> manteniendo las <strong>distancias de seguridad</strong> establecidas por la normativa</td>
+</tr>
+<tr>
+<td><strong>A3</strong></td>
+<td>Vuelo <strong>alejado</strong> de personas</td>
+<td>operaciones <strong>lejos de personas y de zonas residenciales, comerciales, industriales o recreativas</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Regla: <strong>A1 sobre, A2 cerca, A3 lejos</strong> (el manual subraya «sobre», «cerca» y «alejado»). El manual no da cifras de distancia para A2 ni para A3.</li>
+</ul>
+<h4 id="342-categoria-especifica-pp-13-14">3.4.2 Categoría específica (pp. 13-14)</h4>
+<ul>
+<li>Operaciones cuyo riesgo <strong>excede las limitaciones de la categoría abierta</strong> pero que <strong>no requieren los niveles de certificación</strong> de la certificada.</li>
+<li>El operador debe <strong>demostrar que los riesgos están adecuadamente mitigados</strong> mediante <strong>alguno de tres mecanismos</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Texto del manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Declaración operacional</strong></td>
+<td>cuando la operación se ajusta a uno de los <strong>escenarios estándar (STS)</strong> definidos en la normativa europea. <strong>No requiere autorización operacional</strong></td>
+</tr>
+<tr>
+<td><strong>Autorización operacional</strong></td>
+<td><strong>emitida por la autoridad competente</strong>, normalmente <strong>basada en una evaluación del riesgo operacional</strong></td>
+</tr>
+<tr>
+<td><strong>Certificado LUC</strong> (<em>Light UAS Operator Certificate</em>)</td>
+<td>permite a determinados operadores <strong>ejercer privilegios</strong> previamente expedido por la autoridad competente (redacción literal del manual)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Engloba <strong>gran parte de las operaciones profesionales avanzadas</strong>, incluidas <strong>numerosas operaciones BVLOS</strong> y determinados vuelos en <strong>entornos urbanos</strong> o de mayor complejidad.</li>
+</ul>
+<h4 id="343-categoria-certificada-p-14">3.4.3 Categoría certificada (p. 14)</h4>
+<ul>
+<li>Reservada a operaciones de <strong>alto riesgo</strong>, con requisitos <strong>similares a los de la aviación tripulada</strong>. Con carácter general requiere <strong>tres certificaciones/licencias</strong>:
+  1. <strong>Certificación del UAS</strong>.
+  2. <strong>Certificación del operador</strong>.
+  3. <strong>Licencia del piloto a distancia</strong>.</li>
+<li>Se aplica, entre otros supuestos, a: <strong>transporte de personas</strong>; <strong>transporte de mercancías peligrosas</strong>; operaciones en las que <strong>la autoridad determine que el riesgo no puede mitigarse adecuadamente</strong> con los requisitos de la categoría específica.</li>
+</ul>
+<h3 id="35-marcado-de-clase-uas-pp-14-15">3.5 Marcado de clase UAS (pp. 14-15)</h3>
+<ul>
+<li>El <strong>Reglamento Delegado (UE) 2019/945</strong> establece el marcado de clase para los UAS <strong>destinados principalmente a operar en la categoría abierta</strong>. El marcado <strong>identifica las características técnicas</strong> de la aeronave y permite <strong>determinar las condiciones operacionales aplicables conforme al Reglamento de Ejecución (UE) 2019/947</strong>.</li>
+<li><strong>Tablas p. 15 (siete clases):</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Destinada a (texto del manual)</th>
+<th>Peso máximo (tabla)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C0</strong></td>
+<td>UAS de <strong>muy bajo riesgo</strong> operacional, generalmente asociados a operaciones en la <strong>subcategoría A1</strong></td>
+<td><strong>250 g</strong></td>
+</tr>
+<tr>
+<td><strong>C1</strong></td>
+<td>UAS destinados a operaciones en la <strong>subcategoría A1</strong>, sujetos a <strong>requisitos técnicos adicionales</strong></td>
+<td><strong>900 g</strong></td>
+</tr>
+<tr>
+<td><strong>C2</strong></td>
+<td>UAS aptos para operaciones en la <strong>subcategoría A2</strong>, permitiendo <strong>vuelos cerca de personas</strong> bajo determinadas condiciones</td>
+<td><strong>4 kg</strong></td>
+</tr>
+<tr>
+<td><strong>C3</strong></td>
+<td>UAS destinados <strong>principalmente</strong> a operaciones en la <strong>subcategoría A3</strong></td>
+<td><strong>25 kg</strong></td>
+</tr>
+<tr>
+<td><strong>C4</strong></td>
+<td>UAS de características <strong>similares a los aeromodelos tradicionales</strong>, destinados a operaciones en la <strong>subcategoría A3</strong></td>
+<td><strong>25 kg</strong></td>
+</tr>
+<tr>
+<td><strong>C5</strong></td>
+<td>UAS diseñados para operaciones en el escenario estándar <strong>STS-01</strong> de la <strong>categoría específica</strong></td>
+<td>(casilla en blanco)</td>
+</tr>
+<tr>
+<td><strong>C6</strong></td>
+<td>UAS diseñados para operaciones en el escenario estándar <strong>STS-02</strong> de la <strong>categoría específica</strong></td>
+<td>(casilla en blanco)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumen: <strong>C0 y C1 → A1; C2 → A2; C3 y C4 → A3; C5 → STS-01; C6 → STS-02</strong>. <strong>C0-C4 = categoría abierta; C5-C6 = categoría específica</strong> (lo confirma la figura de la p. 16: iconos 0-4 en la abierta, 5 y 6 en la específica).</li>
+<li><strong>C3 y C4 tienen el mismo peso máximo (25 kg)</strong>; C4 se distingue por ser <strong>como un aeromodelo tradicional</strong>.</li>
+<li>La relación entre clases y categorías permite <strong>asociar las características técnicas</strong> de cada UAS con los <strong>requisitos y limitaciones</strong> de cada tipo de operación.</li>
+<li><strong>UAS sin marcado de clase:</strong> la normativa también los contempla. Entre ellos: <strong>aeronaves introducidas en el mercado antes de la aplicación del sistema europeo de clases</strong> y <strong>UAS de construcción privada</strong>. Su uso está sujeto a las limitaciones de la normativa vigente.</li>
+<li>Conclusión: el marcado de clase es <strong>uno de los principales instrumentos de la regulación europea</strong>, al vincular las características técnicas con los requisitos operacionales de cada categoría.</li>
+</ul>
+<h3 id="36-figura-riesgo-p-16-las-tres-categorias-comparadas">3.6 Figura «Riesgo» (p. 16): las tres categorías comparadas</h3>
+<p>Eje de riesgo de «−» (izquierda) a «+» (derecha):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Categoría abierta</strong></th>
+<th><strong>Categoría específica</strong></th>
+<th><strong>Categoría certificada</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Riesgo</td>
+<td>Operaciones de <strong>bajo riesgo</strong></td>
+<td>Operaciones de <strong>riesgo medio</strong></td>
+<td>Operaciones de <strong>alto riesgo</strong></td>
+</tr>
+<tr>
+<td>Altura</td>
+<td><strong>Por debajo de 120 m</strong></td>
+<td><strong>Vuelos por encima de 120 m</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Visibilidad</td>
+<td><strong>VLOS</strong></td>
+<td><strong>BVLOS</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Masa</td>
+<td><strong>MTOM &lt; 25 kg</strong></td>
+<td><strong>MTOM &gt; 25 kg</strong></td>
+<td>UAS <strong>con una dimensión característica de 3 m o más, utilizados sobre concentraciones de personas</strong></td>
+</tr>
+<tr>
+<td>Personas / cargas</td>
+<td><strong>Prohibido sobrevuelo de concentraciones de personas</strong>; <strong>prohibido transporte y/o arrojo de materiales o mercancías peligrosas</strong></td>
+<td><strong>Vuelos sobre concentraciones de personas</strong>; <strong>arrojo de materiales</strong></td>
+<td><strong>Diseñados y utilizados para el transporte de personas o para el transporte de mercancías peligrosas</strong></td>
+</tr>
+<tr>
+<td>Clases</td>
+<td>iconos <strong>0, 1, 2, 3, 4</strong></td>
+<td>iconos <strong>5, 6</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Trámite</td>
+<td>(aspa roja) <strong>No requieren autorización de AESA ni declaración operacional</strong></td>
+<td>(marca verde) <strong>Requieren autorización de AESA o declaración operacional (Escenario Estándar) o que el operador posea un certificado LUC</strong></td>
+<td><strong>«Categoría en desarrollo»</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cifras de la figura que no están en el texto: <strong>MTOM &lt; 25 kg / &gt; 25 kg</strong> y <strong>dimensión característica de 3 m o más</strong>. La certificada figura como <strong>«categoría en desarrollo»</strong>.</li>
+</ul>
+<h2 id="4-integracion-de-los-uas-en-el-espacio-aereo-pp-16-19">4. Integración de los UAS en el espacio aéreo (pp. 16-19)</h2>
+<ul>
+<li>(El título del capítulo está impreso «NTEGRACIÓN», sin la I.) La integración se articula con <strong>diferentes instrumentos regulatorios</strong>, entre los que destacan <strong>las categorías operacionales, las modalidades de vuelo y las zonas geográficas UAS</strong> (tres), que fijan las condiciones de las operaciones con aeronaves no tripuladas.</li>
+</ul>
+<h3 id="41-zonas-geograficas-uas-pp-16-17">4.1 Zonas geográficas UAS (pp. 16-17)</h3>
+<ul>
+<li><strong>Definición:</strong> <strong>volúmenes de espacio aéreo establecidos por los Estados miembros</strong> en los que las operaciones con UAS pueden estar: <strong>a) prohibidas, b) restringidas o c) sujetas a condiciones específicas</strong>.</li>
+<li>Su establecimiento está <strong>previsto en la normativa europea</strong>; su desarrollo en España se complementa con el <strong>Real Decreto 517/2024</strong>.</li>
+<li><strong>Finalidad</strong> (seis bienes protegidos): <strong>seguridad operacional, defensa nacional, seguridad pública, protección de infraestructuras críticas, privacidad, protección del medio ambiente</strong>.</li>
+<li><strong>Medidas aplicables</strong> (cuatro):
+  1. Prohibiciones de vuelo.
+  2. Restricciones operacionales.
+  3. Requisitos adicionales para la realización de operaciones.
+  4. Condiciones específicas de <strong>equipamiento o coordinación o autorización previa</strong>.</li>
+<li>Además de las zonas de carácter general, los Estados pueden establecer zonas para <strong>necesidades operacionales específicas o situaciones concretas</strong>. Entre ellas:</li>
+<li><strong>Zonas destinadas a la gestión de emergencias y protección civil.</strong></li>
+<li>Zonas asociadas a <strong>incendios forestales</strong> u otras situaciones de emergencia.</li>
+<li><strong>Zonas temporales</strong> vinculadas a <strong>eventos con gran concentración de personas</strong>.</li>
+<li>Zonas establecidas para <strong>facilitar</strong> determinadas operaciones UAS que requieran una gestión específica del espacio aéreo.</li>
+<li><strong>En España</strong>, la información de las zonas geográficas UAS (restricciones, condiciones de utilización, requisitos) se publica a través de la plataforma <strong>ENAIRE Drones</strong>, que permite a operadores y pilotos conocer las limitaciones <strong>antes de realizar una operación</strong>.</li>
+<li>Comparación con el RD 517/2024 (p. 7): allí las zonas permiten al Estado <strong>«limitar, restringir o facilitar»</strong> por razones de <strong>seguridad, defensa, protección, privacidad o medio ambiente</strong>; aquí se habla de operaciones <strong>prohibidas, restringidas o sujetas a condiciones</strong>. Las dos listas son preguntables.</li>
+</ul>
+<h3 id="42-actividades-o-servicios-no-easa-pp-17-18">4.2 Actividades o servicios NO EASA (pp. 17-18)</h3>
+<ul>
+<li>El <strong>Real Decreto 517/2024</strong> regula determinadas actividades <strong>excluidas del Reglamento (UE) 2018/1139</strong>, conocidas como <strong>operaciones NO EASA</strong>.</li>
+<li>Incluyen: <strong>aduanas, policía, búsqueda y salvamento, lucha contra incendios, control fronterizo, vigilancia costera</strong> y otras actividades o servicios realizados <strong>en interés general bajo el control y responsabilidad de una autoridad pública</strong>.</li>
+<li><strong>Figura p. 18: pueden ser de dos tipos:</strong></li>
+<li><strong>Directa:</strong> cuando son realizadas <strong>directamente por un organismo público</strong>.</li>
+<li><strong>Indirecta:</strong> cuando son realizadas <strong>por otra organización en nombre de un organismo público</strong>.</li>
+<li>Estas operaciones tienen <strong>exención de identificación a distancia</strong> cuando actúan en operaciones contra <strong>el crimen organizado, el terrorismo o amenazas graves para la seguridad pública</strong>.</li>
+<li>Recordatorio (p. 11): <strong>el seguro de responsabilidad civil es obligatorio para las actividades NO EASA</strong>.</li>
+</ul>
+<h3 id="43-aeromodelismo-p-18">4.3 Aeromodelismo (p. 18)</h3>
+<ul>
+<li>La normativa europea establece un <strong>régimen específico</strong> para las operaciones realizadas en el marco de <strong>clubes y asociaciones de aeromodelismo</strong>, de conformidad con el <strong>artículo 16 del Reglamento de Ejecución (UE) 2019/947</strong>.</li>
+<li>Los clubes y asociaciones <strong>legalmente constituidos</strong> pueden <strong>solicitar a AESA una autorización operacional</strong> para desarrollar sus actividades bajo las condiciones de la autoridad.</li>
+<li><strong>Opciones para la práctica del aeromodelismo en España</strong> (tres):
+  1. Operar conforme a los requisitos de la <strong>categoría abierta</strong>.
+  2. Operar <strong>dentro de zonas geográficas UAS</strong>, de acuerdo con sus condiciones y limitaciones.
+  3. Operar al amparo de una <strong>autorización operacional concedida por AESA conforme al artículo 16 del Reglamento de Ejecución (UE) 2019/947</strong>.</li>
+<li>Recuerda: <strong>los aeromodelos están dentro del concepto de aeronave no tripulada</strong> (figura del 2018/1139, p. 6), y el RD 517/2024 regula los clubes y asociaciones de aeromodelismo (p. 7).</li>
+<li>Cierre del capítulo (pp. 18-19): los tipos de operación, la zonificación del espacio aéreo y los mecanismos de coordinación son los principales instrumentos de la integración progresiva y segura de los UAS. <strong>De conformidad con el Reglamento de Ejecución (UE) 2021/664, determinadas zonas geográficas UAS pueden ser designadas por los Estados miembros como espacios aéreos U-space</strong> cuando sea necesario <strong>facilitar operaciones UAS de mayor complejidad o gestionar un elevado volumen de tráfico de UAS</strong>. Su despliegue progresivo es uno de los objetivos de la <strong>estrategia nacional de zonificación y U-space</strong>.</li>
+</ul>
+<h2 id="5-u-space-pp-19-28">5. U-space (pp. 19-28)</h2>
+<h3 id="51-finalidad-y-objetivos-del-u-space-p-19">5.1 Finalidad y objetivos del U-space (p. 19)</h3>
+<ul>
+<li>El U-space responde a la necesidad de facilitar la integración segura de los UAS en el espacio aéreo, <strong>especialmente en entornos de elevada densidad de tráfico o de mayor complejidad operacional</strong>.</li>
+<li><strong>Principales objetivos</strong> (seis):
+  1. Facilitar la <strong>integración segura</strong> de los UAS en el espacio aéreo.
+  2. Incrementar la <strong>seguridad operacional</strong> de las operaciones con UAS.
+  3. Permitir la gestión de un <strong>elevado volumen de operaciones simultáneas</strong>.
+  4. Favorecer la <strong>digitalización y automatización</strong> de los procesos de gestión del tráfico UAS.
+  5. Facilitar operaciones de <strong>mayor complejidad</strong>, incluidas las <strong>BVLOS</strong>.
+  6. Garantizar la <strong>coordinación entre los distintos actores</strong>.</li>
+<li>El despliegue del U-space es <strong>uno de los pilares de la estrategia europea</strong> para integrar los UAS y para desarrollar <strong>nuevos servicios de movilidad aérea</strong> basados en aeronaves no tripuladas.</li>
+<li>Objetivo en una frase: facilitar operaciones con UAS de forma <strong>segura, eficiente y escalable</strong> mediante un entorno de gestión <strong>altamente digitalizado y automatizado</strong>.</li>
+</ul>
+<h3 id="52-marco-normativo-del-u-space-pp-20-21">5.2 Marco normativo del U-space (pp. 20-21)</h3>
+<ul>
+<li>(Figura p. 20: un teléfono con un mapa de drones conectado a una nube rotulada «U-space».)</li>
+<li>Conjunto de normas europeas que regulan <strong>los espacios aéreos U-space, los servicios U-space y los actores</strong> que participan en su prestación y utilización.</li>
+<li><strong>Base jurídica: el Reglamento (UE) 2018/1139</strong>, sobre el que se desarrolla el <strong>paquete regulatorio U-space</strong>, constituido principalmente por:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Reglamento</th>
+<th>Qué hace (texto del manual)</th>
+<th>Ámbito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reglamento de Ejecución (UE) 2021/664</strong></td>
+<td>«Es <strong>el marco regulador para el U-space</strong>»</td>
+<td>espacios, servicios y actores U-space</td>
+</tr>
+<tr>
+<td><strong>Reglamento de Ejecución (UE) 2021/665</strong></td>
+<td><strong>Modifica el Reglamento de Ejecución (UE) 2017/373</strong>, incorporando requisitos para los <strong>proveedores de servicios de navegación aérea (ANSP)</strong> en relación con los volúmenes U-space situados en <strong>espacio aéreo controlado</strong></td>
+<td>ANSP, espacio aéreo <strong>controlado</strong></td>
+</tr>
+<tr>
+<td><strong>Reglamento de Ejecución (UE) 2021/666</strong></td>
+<td><strong>Modifica el Reglamento de Ejecución (UE) 923/2012 (SERA)</strong>, estableciendo requisitos para <strong>la aviación tripulada</strong> para garantizar su <strong>visibilidad electrónica</strong> en los espacios aéreos U-space situados en <strong>espacio aéreo no controlado</strong></td>
+<td>aviación tripulada, espacio aéreo <strong>no controlado</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>El conjunto establece las condiciones para la <strong>designación de espacios aéreos U-space</strong>, la <strong>prestación de servicios U-space</strong> y la <strong>coordinación entre actores</strong>.</li>
+<li><strong>En España</strong> lo complementa el <strong>Real Decreto 517/2024</strong> (aspectos nacionales de utilización de UAS, zonas geográficas UAS, designación de espacios aéreos U-space y <strong>Servicio de Información Común</strong>).</li>
+<li>El despliegue nacional se apoya en la <strong>estrategia PANDU+</strong>, que actúa como <strong>instrumento de planificación y coordinación</strong> y <strong>no constituye una norma jurídica de obligado cumplimiento</strong>.</li>
+<li>Regla nemotécnica: <strong>664 = marco; 665 = 2017/373 + ANSP + controlado; 666 = SERA + tripulados + no controlado</strong> (de menor a mayor: marco, controladores, pilotos).</li>
+</ul>
+<h3 id="53-reglamento-de-ejecucion-ue-2021664-pp-21-22">5.3 Reglamento de Ejecución (UE) 2021/664 (pp. 21-22)</h3>
+<ul>
+<li>Establece el marco regulador aplicable a <strong>los espacios aéreos U-space, los servicios U-space y los mecanismos de coordinación</strong>.</li>
+<li>Se aplica <strong>principalmente</strong> a los espacios aéreos U-space, a los servicios U-space y a los <strong>actores responsables de su prestación y utilización</strong>. Establece además requisitos de <strong>coordinación con la aviación tripulada</strong> para garantizar la <strong>interoperabilidad y la seguridad operacional</strong>.</li>
+</ul>
+<h4 id="531-espacios-aereos-u-space-p-21">5.3.1 Espacios aéreos U-space (p. 21)</h4>
+<ul>
+<li><strong>Definición:</strong> un espacio aéreo U-space es <strong>una zona geográfica UAS designada por un Estado miembro en la que las operaciones con UAS solo pueden realizarse con el apoyo de servicios U-space</strong>.</li>
+<li>Por tanto: <strong>todo espacio aéreo U-space es una zona geográfica UAS, pero no toda zona geográfica UAS es un espacio aéreo U-space</strong>.</li>
+<li>Se designan para gestionar entornos de <strong>elevada densidad de operaciones</strong> o de <strong>mayor complejidad operacional</strong>.</li>
+</ul>
+<h4 id="532-servicios-u-space-pp-21-22">5.3.2 Servicios U-space (pp. 21-22)</h4>
+<ul>
+<li><strong>Definición:</strong> <strong>servicios digitales</strong> destinados a facilitar la realización <strong>segura, eficiente y automatizada</strong> de operaciones con UAS <strong>dentro de un espacio aéreo U-space</strong>.</li>
+<li>Los prestan <strong>proveedores de servicios U-space (USSP) certificados por la autoridad competente</strong> a los <strong>operadores UAS</strong> que pretendan operar o estén operando en un espacio aéreo U-space.</li>
+<li><strong>El Reglamento 2021/664 establece cuatro servicios obligatorios</strong> (figura p. 22):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Servicio obligatorio</th>
+<th>Texto de la figura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Servicio de autorización de vuelo</strong></td>
+<td>permite <strong>gestionar las autorizaciones necesarias</strong> para realizar operaciones en dicho espacio aéreo U-space</td>
+</tr>
+<tr>
+<td><strong>Servicio de información de tráfico</strong></td>
+<td>suministra información sobre <strong>el tráfico aéreo que pueda afectar a la operación del UAS</strong> en su entorno operacional</td>
+</tr>
+<tr>
+<td><strong>Servicio de identificación de red</strong></td>
+<td>permite obtener y poner a disposición <strong>la información de identificación a distancia y la posición de los UAS</strong> que operan en dicho espacio aéreo U-space</td>
+</tr>
+<tr>
+<td><strong>Servicio de geoconsciencia (<em>geo-awareness</em>)</strong></td>
+<td>proporciona información sobre <strong>las condiciones operacionales, limitaciones y restricciones</strong> aplicables al espacio aéreo U-space</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Nota al pie de la figura: «<strong>Geoconsciencia.</strong> Capacidad del UAS de <strong>detectar su intrusión en un espacio aéreo restringido y avisar al piloto</strong> para que realice las acciones rectificadoras oportunas».</li>
+<li><strong>Servicios U-space adicionales</strong> (no obligatorios), para mejorar <strong>la seguridad, la eficiencia y la capacidad</strong>: por ejemplo, el <strong>seguimiento de la conformidad de la operación (<em>conformance monitoring</em>)</strong> y la <strong>información meteorológica</strong>.</li>
+<li><strong>Figura p. 22 (diagrama radial «U-space»):</strong> seis servicios alrededor: <strong>Autorización de vuelo de UAS; Identificación de red; Geoconsciencia; Información sobre el tráfico</strong>; y, con asterisco y círculo discontinuo, <strong>información meteorológica</strong> y <strong>supervisión de la conformidad</strong>. Leyenda: «<strong>*Servicios opcionales</strong>».</li>
+<li>El texto dice «seguimiento de la conformidad» y la figura «supervisión de la conformidad»: es el mismo servicio (<em>conformance monitoring</em>).</li>
+<li>Regla para el examen: <strong>obligatorios = 4 (autorización de vuelo, información de tráfico, identificación de red, geoconsciencia)</strong>; <strong>opcionales/adicionales = meteorología y conformidad</strong>.</li>
+</ul>
+<h3 id="54-servicio-de-informacion-comun-cis-y-actores-p-23">5.4 Servicio de información común (CIS) y actores (p. 23)</h3>
+<h4 id="533-servicio-de-informacion-comun-cis-p-23">5.3.3 Servicio de Información Común (CIS) (p. 23)</h4>
+<ul>
+<li>El <strong>Servicio de Información Común</strong> (<em>Common Information Service</em>, <strong>CIS</strong>) <strong>proporciona y difunde la información común estática y dinámica</strong> necesaria para apoyar la prestación de los servicios U-space y garantizar su <strong>funcionamiento coordinado</strong>.</li>
+<li>Esta información común:</li>
+<li><strong>Puede incluir</strong> datos de <strong>estructura del espacio aéreo, zonas geográficas UAS, restricciones operacionales</strong> y cualquier otra información aeronáutica u operacional necesaria.</li>
+<li><strong>Constituye una fuente única y fiable para los proveedores de servicios U-space</strong> y es <strong>esencial para la prestación coordinada</strong> de los servicios U-space a los operadores UAS.</li>
+</ul>
+<h4 id="534-actores-del-ecosistema-u-space-p-23">5.3.4 Actores del ecosistema U-space (p. 23)</h4>
+<p>Seis actores principales, en el orden del manual:</p>
+<table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>Responsabilidad según el manual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Autoridad competente (AC)</strong></td>
+<td><strong>supervisión y aplicación del marco regulador U-space</strong> y funciones que le atribuye la normativa europea y nacional</td>
+</tr>
+<tr>
+<td><strong>Proveedor de servicios de navegación aérea (ANSP)</strong></td>
+<td>prestación de servicios de navegación aérea y <strong>coordinación con los servicios U-space cuando resulte necesario</strong></td>
+</tr>
+<tr>
+<td><strong>Proveedor de servicios de información común (CISP)</strong></td>
+<td><strong>proporcionar el Servicio de Información Común</strong></td>
+</tr>
+<tr>
+<td><strong>Proveedor de servicios U-space (USSP)</strong></td>
+<td><strong>prestar los servicios U-space a los operadores de UAS</strong></td>
+</tr>
+<tr>
+<td><strong>Operador de UAS</strong></td>
+<td>persona <strong>física o jurídica</strong> responsable de la <strong>realización de la operación</strong> y del cumplimiento de los requisitos</td>
+</tr>
+<tr>
+<td><strong>Piloto a distancia</strong></td>
+<td>persona <strong>física</strong> responsable de <strong>conducir la aeronave o supervisar su trayectoria</strong> durante el vuelo</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Operador = persona física <strong>o jurídica</strong>; piloto = persona <strong>física</strong> (solo).</li>
+</ul>
+<h3 id="55-ussp-cispscisp-y-ansp-pp-24-25">5.5 USSP, CISP/sCISP y ANSP (pp. 24-25)</h3>
+<h4 id="535-proveedor-de-servicios-u-space-ussp-p-24">5.3.5 Proveedor de Servicios U-space (USSP) (p. 24)</h4>
+<ul>
+<li>Los USSP son <strong>entidades certificadas</strong> responsables de prestar los servicios U-space a los operadores de UAS en espacios aéreos U-space.</li>
+<li><strong>Utilizan la información del CIS</strong> y prestan los servicios necesarios para apoyar <strong>la planificación, autorización, ejecución y supervisión</strong> de las operaciones (cuatro fases).</li>
+<li>Deben cumplir los requisitos europeos para garantizar una prestación <strong>segura, continua e interoperable</strong>.</li>
+</ul>
+<h4 id="536-proveedor-de-servicios-de-informacion-comun-cisp-pp-24-25">5.3.6 Proveedor de Servicios de Información Común (CISP) (pp. 24-25)</h4>
+<ul>
+<li>El CIS será prestado por <strong>uno o varios CISP</strong>, según el modelo de cada Estado miembro.</li>
+<li>Los Estados <strong>podrán</strong> designar un <strong>Proveedor de Servicios de Información Común único (sCISP)</strong>. <strong>En España, el Real Decreto 517/2024 designa a ENAIRE como proveedor único de servicios de información común.</strong></li>
+<li>Cada CISP (o el sCISP) es responsable de <strong>recopilar, mantener actualizada y poner a disposición</strong> la información común.</li>
+<li>Para ello <strong>integra información de</strong>: la <strong>Autoridad competente (AC)</strong>, los <strong>ANSP</strong>, los <strong>USSP</strong> y <strong>otros proveedores de información</strong> cuando sea necesario.</li>
+<li><strong>Figura p. 25:</strong></li>
+<li><strong>Autoridad competente (AC)</strong> aporta: <strong>límites geográficos</strong> del espacio aéreo U-space designado; <strong>requisitos de performance</strong> (del UAS, del servicio U-space y condiciones operativas del espacio aéreo); <strong>una lista con los USSP certificados</strong>; <strong>zonas geográficas UAS relevantes</strong> para el espacio aéreo U-space; <strong>restricciones estáticas y dinámicas</strong>.</li>
+<li><strong>ANSP</strong> aporta: <strong>reconfiguración dinámica del espacio aéreo</strong>; <strong>datos operacionales en tiempo real</strong>.</li>
+<li><strong>USSP</strong> aporta: <strong>términos y condiciones de los servicios U-space</strong>.</li>
+<li>Esquema: «<strong>Información común</strong>» (cajas <strong>CA</strong>, <strong>ANSP</strong>, <strong>USSP</strong>) ↔ <strong>Single CISP</strong> ↔ <strong>USSP 1, USSP 2 … USSP n</strong> (los USSP también se comunican entre sí) ↔ drones. (La figura escribe «CA»; el texto, «AC».)</li>
+<li>Esta información es <strong>la base común</strong> para garantizar la <strong>interoperabilidad, la coordinación y el funcionamiento eficiente</strong> de los servicios U-space.</li>
+</ul>
+<h4 id="537-proveedor-de-servicios-de-navegacion-aerea-ansp-p-25">5.3.7 Proveedor de servicios de navegación aérea (ANSP) (p. 25)</h4>
+<ul>
+<li>Los ANSP <strong>participan en la coordinación entre las operaciones tripuladas y no tripuladas</strong>, proporcionando <strong>información operacional relevante</strong> para el ecosistema U-space, conforme al <strong>Reglamento de Ejecución (UE) 2021/665</strong>, que desarrolla sus funciones específicas.</li>
+</ul>
+<h3 id="56-reglamento-de-ejecucion-ue-2021665-pp-25-27">5.6 Reglamento de Ejecución (UE) 2021/665 (pp. 25-27)</h3>
+<ul>
+<li><strong>Modifica el Reglamento de Ejecución (UE) 2017/373</strong> e incorpora requisitos para los <strong>proveedores de servicios de gestión del tránsito aéreo y navegación aérea (ATM/ANS)</strong> en relación con los espacios aéreos U-space situados en <strong>espacio aéreo controlado</strong>.</li>
+<li>Finalidad: garantizar <strong>la coordinación entre los servicios de tránsito aéreo y el ecosistema U-space</strong>, donde <strong>coexisten aeronaves tripuladas y no tripuladas</strong>.</li>
+</ul>
+<h4 id="541-coordinacion-entre-los-servicios-ats-y-el-ecosistema-u-space-p-26">5.4.1 Coordinación entre los servicios ATS y el ecosistema U-space (p. 26)</h4>
+<p>Los proveedores ATS tienen un <strong>papel fundamental</strong> en los espacios aéreos U-space situados en <strong>espacio aéreo controlado</strong>. En particular (tres obligaciones):</p>
+<ol>
+<li><strong>Facilitarán la información sobre tráfico tripulado</strong> necesaria para la prestación del <strong>Servicio de Información Común (CIS)</strong>.</li>
+<li><strong>Coordinarán sus actuaciones con los proveedores de servicios U-space (USSP)</strong>.</li>
+<li><strong>Aplicarán, cuando proceda, medidas de Reconfiguración Dinámica del Espacio Aéreo (DAR)</strong> para garantizar la coexistencia segura entre la aviación <strong>tripulada</strong> y las operaciones con UAS.</li>
+</ol>
+<h4 id="542-reconfiguracion-dinamica-del-espacio-aereo-dar-pp-26-27">5.4.2 Reconfiguración dinámica del espacio aéreo (DAR) (pp. 26-27)</h4>
+<ul>
+<li>El Reglamento establece mecanismos para la coexistencia segura entre <strong>operaciones con UAS, aviación tripulada y resto de usuarios</strong>.</li>
+<li><strong>DAR (<em>Dynamic Airspace Reconfiguration</em>)</strong>: permite <strong>modificar temporalmente las condiciones de utilización de un espacio aéreo U-space</strong> cuando sea necesario por <strong>motivos operacionales, de seguridad o de coordinación del tráfico aéreo</strong>.</li>
+<li>Facilita la adaptación temporal a: <strong>situaciones de elevada demanda, operaciones especiales, emergencias o necesidades específicas de coordinación</strong> entre aeronaves tripuladas y no tripuladas.</li>
+<li>Su aplicación requiere coordinación entre <strong>los proveedores ATS, los ANSP, los USSP y, cuando proceda, los CISP</strong>.</li>
+<li>Permite adaptar temporalmente las condiciones <strong>sin necesidad de modificar permanentemente la estructura</strong> del espacio aéreo.</li>
+<li><strong>Figura p. 27 (dos viñetas):</strong> 1) «<strong>U-space in controlled airspace</strong>» con drones, un controlador y un hospital, y un helicóptero fuera; 2) el controlador establece una «<strong>Temporary limitation</strong>» (limitación temporal): un pasillo que <strong>excluye a los drones</strong> para que el <strong>helicóptero</strong> llegue al hospital. Es el ejemplo gráfico de DAR.</li>
+</ul>
+<h3 id="57-reglamento-de-ejecucion-ue-2021666-y-conspicuidad-electronica-pp-27-28">5.7 Reglamento de Ejecución (UE) 2021/666 y conspicuidad electrónica (pp. 27-28)</h3>
+<ul>
+<li><strong>Modifica el Reglamento de Ejecución (UE) 923/2012 (SERA)</strong> y establece requisitos para determinadas operaciones de <strong>aviación tripulada</strong> en espacios aéreos U-space.</li>
+<li><strong>Regla clave:</strong> las <strong>aeronaves tripuladas que operen en un espacio aéreo U-space y no reciban servicios de control de tránsito aéreo</strong> deberán ser <strong>electrónicamente perceptibles</strong>, de modo que <strong>su posición pueda ponerse a disposición de los USSP</strong> para la prestación segura de los servicios U-space.</li>
+</ul>
+<h4 id="551-conspicuidad-electronica-p-27">5.5.1 Conspicuidad electrónica (p. 27)</h4>
+<ul>
+<li><strong>Capacidad de una aeronave para transmitir información que permita conocer su presencia y posición mediante sistemas de vigilancia apropiados</strong>, a diferencia de la <strong>conspicuidad visual</strong>, que se basa en la <strong>observación directa</strong> de la aeronave.</li>
+<li><strong>Figura p. 28:</strong> «<strong>U-space airspace</strong>» sobre una ciudad, con drones y <strong>helicópteros que emiten señales</strong> (ondas): representa la conspicuidad electrónica de la aviación tripulada.</li>
+<li>Contraste para el examen: <strong>2021/665 → espacio aéreo controlado (ATS/ANSP, DAR)</strong>; <strong>2021/666 → aeronaves tripuladas sin servicio de control (no controlado), conspicuidad electrónica</strong>.</li>
+</ul>
+<h2 id="6-despliegue-del-u-space-en-espana-p-29">6. Despliegue del U-space en España (p. 29)</h2>
+<ul>
+<li>La implantación es <strong>progresiva</strong>, combinando <strong>el marco regulador europeo, la normativa nacional y las iniciativas estratégicas</strong> de las administraciones y organizaciones del sector.</li>
+<li>Objetivo: facilitar la integración segura y eficiente de los UAS y el desarrollo de <strong>nuevas operaciones y servicios</strong> basados en aeronaves no tripuladas.</li>
+</ul>
+<h3 id="61-pandu-p-29">6.1 PANDU+ (p. 29)</h3>
+<ul>
+<li><strong>Plan de Acción Nacional para el Despliegue del U-space y la Zonificación (PANDU+) 2026-2030</strong>: establece <strong>la hoja de ruta nacional</strong> para <strong>completar el despliegue del U-space</strong>, <strong>avanzar en el establecimiento y gestión de las zonas geográficas de UAS</strong> y favorecer la <strong>integración progresiva de operaciones UAS de mayor complejidad</strong>. (Miniatura de la portada del plan al lado.)</li>
+<li>Recuerda (p. 21): PANDU+ es un <strong>instrumento de planificación y coordinación</strong>, <strong>no una norma jurídica de obligado cumplimiento</strong>. La p. 5 cita <strong>PANDU y PANDU+</strong> como los planes que orientan el despliegue.</li>
+</ul>
+<h4 id="611-objetivos-principales-p-29">6.1.1 Objetivos principales (p. 29)</h4>
+<p>PANDU+ articula sus actuaciones en <strong>tres objetivos principales</strong> (figura en cascada):</p>
+<table>
+<thead>
+<tr>
+<th>Objetivo</th>
+<th>Líneas (texto de la figura)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Zonificación del espacio aéreo</strong></td>
+<td>Zonas geográficas de UAS; Nuevas estructuras de espacio aéreo; Estandarización de las coordinaciones</td>
+</tr>
+<tr>
+<td><strong>2. Desarrollo del U-space</strong></td>
+<td>Despliegue operacional del U-space; Evolución del U-space; <strong>Habilitadores de la IAM en España</strong></td>
+</tr>
+<tr>
+<td><strong>3. Actividades transversales</strong></td>
+<td>Coordinación y divulgación; Actualización de la regulación; Gestión de la seguridad y la calidad; <strong>Plan de Acción de Zonificación</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Distractor posible: el «Plan de Acción de Zonificación» está dentro de <strong>Actividades transversales</strong>, no de «Zonificación del espacio aéreo». Los «Habilitadores de la IAM» están en <strong>Desarrollo del U-space</strong>.</li>
+</ul>
+<h2 id="7-evolucion-del-u-space-p-30">7. Evolución del U-space (p. 30)</h2>
+<ul>
+<li>La implantación del U-space es <strong>un elemento clave</strong> para la integración progresiva de las operaciones con UAS en el sistema aeronáutico <strong>europeo</strong>.</li>
+<li>La disponibilidad de espacios aéreos U-space y de servicios asociados permitirá apoyar operaciones <strong>cada vez más complejas</strong> y ampliar las capacidades operacionales de los UAS.</li>
+<li>Se enmarca en la <strong>estrategia europea de integración gradual</strong> de los UAS y en las iniciativas de <strong>movilidad aérea innovadora</strong>.</li>
+<li>(Ilustración p. 30: ciudad dentro de un cilindro U-space con drones de reparto, un eVTOL de pasajeros, un aeropuerto con torre, un centro de control y un centro de datos; fuera, aviones, un caza, un helicóptero sanitario y zonas delimitadas. Sin texto.)</li>
+</ul>
+<h2 id="8-movilidad-aerea-pp-31-33">8. Movilidad aérea (pp. 31-33)</h2>
+<ul>
+<li>La evolución de los UAS y el despliegue del U-space favorecen <strong>nuevas formas de movilidad aérea</strong> basadas en <strong>aeronaves innovadoras</strong> y <strong>servicios digitales avanzados</strong> (foto de un eVTOL de pasajeros multirrotor, p. 31).</li>
+<li>Persiguen ampliar las capacidades del sistema aeronáutico incorporando <strong>nuevas tecnologías, nuevos modelos operacionales y soluciones avanzadas de gestión del tráfico aéreo</strong>.</li>
+</ul>
+<h3 id="81-relacion-entre-u-space-y-movilidad-aerea-p-31">8.1 Relación entre U-space y movilidad aérea (p. 31)</h3>
+<ul>
+<li>El U-space proporciona <strong>un entorno operativo basado en servicios digitales</strong> que facilita operaciones UAS de creciente complejidad.</li>
+<li>La disponibilidad de <strong>espacios aéreos U-space, servicios U-space, mecanismos de coordinación y sistemas de intercambio de información</strong> crea las condiciones para integrar nuevas capacidades de movilidad aérea.</li>
+<li>El U-space es <strong>un elemento facilitador</strong> para la evolución de las operaciones con UAS y los nuevos servicios con aeronaves innovadoras.</li>
+</ul>
+<h3 id="82-movilidad-aerea-innovadora-iam-pp-31-32">8.2 Movilidad Aérea Innovadora (IAM) (pp. 31-32)</h3>
+<ul>
+<li>La <strong>Movilidad Aérea Innovadora</strong> (<em>Innovative Air Mobility</em>, <strong>IAM</strong>) comprende las operaciones y servicios de movilidad aérea <strong>habilitados por nuevas tecnologías aeronáuticas</strong> y por la <strong>integración de soluciones innovadoras en el sistema de transporte</strong>.</li>
+<li>La IAM (tres rasgos):</li>
+<li><strong>Se define como la movilidad segura, eficiente y sostenible de personas y mercancías</strong> posibilitada por <strong>tecnologías de nueva generación integradas en un sistema multimodal de transporte</strong>.</li>
+<li>Engloba operaciones y servicios innovadores que <strong>aportan valor a los ciudadanos y al sector aeronáutico</strong>.</li>
+<li>Abarca entornos <strong>urbanos, periurbanos y regionales</strong>.</li>
+<li>Tecnologías asociadas a la IAM (cinco):
+  1. <strong>Aeronaves de despegue y aterrizaje vertical (eVTOL)</strong>.
+  2. <strong>Sistemas altamente automatizados</strong>.
+  3. <strong>Servicios digitales avanzados</strong>.
+  4. <strong>Nuevas soluciones de conectividad e intercambio de información</strong>.
+  5. <strong>Tecnologías avanzadas de navegación, vigilancia y gestión del tráfico</strong>.</li>
+</ul>
+<h3 id="83-movilidad-aerea-urbana-uam-pp-32-33">8.3 Movilidad Aérea Urbana (UAM) (pp. 32-33)</h3>
+<ul>
+<li>La <strong>Movilidad Aérea Urbana</strong> (<em>Urban Air Mobility</em>, <strong>UAM</strong>):</li>
+<li>Es <strong>un ámbito específico de la IAM</strong> centrado en el <strong>transporte de personas y mercancías en entornos urbanos y periurbanos</strong>.</li>
+<li>Comprende nuevas formas de transporte aéreo apoyadas en la <strong>propulsión eléctrica</strong> y las <strong>aeronaves eVTOL</strong>.</li>
+<li>Posibles aplicaciones (cinco): <strong>transporte de mercancías; distribución urgente de suministros; servicios de emergencia; inspección de infraestructuras; futuras operaciones de transporte de pasajeros</strong>.</li>
+<li>Cierre (p. 33): la evolución de estas aplicaciones depende del <strong>desarrollo de las tecnologías aeronáuticas</strong>, de la <strong>disponibilidad de servicios digitales adecuados</strong> y de la <strong>integración progresiva de los UAS</strong> en el sistema aeronáutico.</li>
+<li>Jerarquía: <strong>UAM ⊂ IAM</strong>. La IAM incluye además el ámbito <strong>regional</strong>; la UAM se limita a lo <strong>urbano y periurbano</strong>.</li>
+</ul>
+<hr />
+<h2 id="9-manual-frente-a-fuentes-erratas-y-lo-que-va-mas-alla-del-manual">9. Manual frente a fuentes, erratas y lo que va más allá del manual</h2>
+<h3 id="91-imprecisiones-e-incoherencias-internas-del-manual-para-responder-sigue-el-manual-en-la-frase-que-cite-la-pregunta">9.1 Imprecisiones e incoherencias internas del manual (para responder: sigue el manual, en la frase que cite la pregunta)</h3>
+<ol>
+<li><strong>Seguro (pp. 10-11).</strong> La figura dice «Seguro Obligatorio … <strong>Excepción para UAS con MTOM inferior a 20 kg</strong>»; el texto dice que el seguro es obligatorio en <strong>específica, certificada y NO EASA</strong>, y que <strong>«determinadas operaciones de bajo riesgo en categoría abierta» pueden quedar exentas</strong>. Las dos frases no coinciden en el criterio (masa frente a categoría). Si la pregunta da «20 kg», sale de la figura; si habla de categorías, del texto.</li>
+<li><strong>Edad mínima (pp. 10-11).</strong> Texto: 16 años «sin perjuicio de las excepciones … para determinadas operaciones de bajo riesgo»; figura: 16 años, «<strong>en categoría abierta puede reducirse dependiendo de la clase de UAS</strong>». Compatibles; la figura es más concreta.</li>
+<li><strong>2019/945 y terceros países (pp. 6 y 8).</strong> El texto habla de «obligaciones de fabricantes, importadores y distribuidores procedentes de terceros países»; la figura de la p. 8 lista «<strong>Operadores de terceros países</strong>».</li>
+<li><strong>Geoconsciencia (p. 22).</strong> El recuadro la define como un <strong>servicio</strong> que «proporciona información sobre las condiciones operacionales, limitaciones y restricciones»; la nota al pie la define como una <strong>capacidad del UAS</strong> de detectar su intrusión en un espacio restringido y avisar al piloto.</li>
+<li><strong>Conformidad (p. 22).</strong> Texto: «<strong>seguimiento</strong> de la conformidad»; figura: «<strong>supervisión</strong> de la conformidad». Mismo servicio opcional.</li>
+<li><strong>AC / CA (pp. 23-25).</strong> El texto abrevia la autoridad competente como <strong>AC</strong>; la figura de la p. 25 pone <strong>CA</strong>.</li>
+<li><strong>Masa 25 kg (pp. 15-16).</strong> La figura usa «MTOM &lt; 25 kg» (abierta) y «MTOM &gt; 25 kg» (específica); las clases C3 y C4 tienen <strong>peso máximo 25 kg</strong>. El manual no dice qué pasa con exactamente 25 kg.</li>
+<li><strong>Concentraciones de personas (p. 16).</strong> La figura pone «vuelos sobre concentraciones de personas» en la <strong>específica</strong> y «UAS con dimensión característica de 3 m o más, utilizados sobre concentraciones de personas» en la <strong>certificada</strong>.</li>
+<li><strong>Ámbito del 2021/665 (pp. 20 y 25).</strong> En la p. 20 sus requisitos son para los «<strong>ANSP</strong>» en volúmenes U-space en espacio aéreo controlado; en la p. 25, para los «proveedores de servicios de gestión del tránsito aéreo y navegación aérea (<strong>ATM/ANS</strong>)».</li>
+<li><strong>Erratas de forma:</strong> «4. <strong>NTEGRACIÓN</strong> DE LOS UAS» (p. 16); «2.3. OTRAS <strong>DISposicionES</strong>» (p. 8); la frase «De conformidad con el artículo 16 del Reglamento de Ejecución (UE) 2019/947.» queda suelta (p. 18); la definición del LUC («ejercer privilegios previamente expedido») está mal construida (p. 14); «mantener actualizar» (p. 24); la tabla de clases deja <strong>en blanco el peso de C5 y C6</strong> (p. 15).</li>
+<li><strong>«Otras normativas» (p. 8).</strong> La caja de la figura lista <strong>cinco</strong> ámbitos (protección de datos y privacidad; espectro radioeléctrico; compatibilidad electromagnética; medio ambiente; juguetes); el texto del apartado 2.3 lista <strong>seis</strong> (añade «requisitos técnicos de diseño y fabricación de UAS»).</li>
+</ol>
+<h3 id="92-mas-alla-del-manual-no-procede-del-manual-10-comprobado-en-los-textos-de-los-reglamentos-ediciones-en-espanol">9.2 Más allá del manual (NO procede del manual 10; comprobado en los textos de los reglamentos, ediciones en español)</h3>
+<p>Lo que sigue <strong>no está en el manual</strong> y no debe usarse para contestar en contra del manual; sirve para entender y para detectar distractores.</p>
+<ul>
+<li><strong>Reglamento de Ejecución (UE) 2021/664, artículo 3, apartado 2:</strong> las operaciones de UAS en el espacio aéreo U-space están sujetas <strong>como mínimo</strong> a cuatro servicios obligatorios: identificación de red (art. 8), geoconsciencia (art. 9), autorización de vuelo de UAS (art. 10) e información sobre el tráfico (art. 11). Coincide con el manual. Según el apartado 3, los Estados <strong>pueden exigir</strong>, sobre la base de la <strong>evaluación del riesgo en el espacio aéreo</strong>, servicios adicionales elegidos entre los de los artículos 12 (<strong>información meteorológica</strong>) y 13 (<strong>seguimiento de la conformidad</strong>).</li>
+<li><strong>2021/664, artículo 4:</strong> si un Estado designa espacio aéreo U-space <strong>dentro del espacio aéreo controlado</strong>, debe aplicarse la <strong>reconfiguración dinámica del espacio aéreo</strong> del punto <strong>ATS.TR.237</strong> del Reglamento 2021/665 para que las aeronaves tripuladas con servicio de control y los UAS <strong>permanezcan separados</strong>.</li>
+<li><strong>2021/664, artículo 5:</strong> los Estados <strong>pueden designar un proveedor único</strong> de servicios de información común, en exclusiva, para la totalidad o parte de sus espacios aéreos U-space (el «sCISP» del manual).</li>
+<li><strong>2021/664, artículo 6, apartado 2:</strong> los operadores de UAS <strong>pueden prestarse servicios U-space a sí mismos</strong>; en ese caso se consideran USSP. <strong>Apartado 4:</strong> antes de cada vuelo, el operador presenta una <strong>solicitud de autorización de vuelo</strong> a su USSP.</li>
+<li><strong>Aplicación:</strong> los Reglamentos 2021/664 y 2021/666 son <strong>aplicables desde el 26 de enero de 2023</strong>. El 2021/666 está fechado el <strong>22 de abril de 2021</strong> (DOUE L 139 de 23-04-2021).</li>
+<li><strong>2021/666:</strong> añade a SERA las definiciones de «espacio aéreo U-Space» y «servicio de U-Space» y sustituye <strong>SERA.6005</strong> (RMZ, TMZ y, en su letra c, <strong>espacio aéreo U-Space</strong>): las aeronaves tripuladas en espacio aéreo U-Space <strong>sin servicio de control</strong> deben ser <strong>continuamente perceptibles electrónicamente para los USSP</strong>; las RMZ, TMZ y espacios U-Space deben publicarse en las publicaciones de información aeronáutica.</li>
+<li><strong>Siglas que el manual usa sin desarrollar:</strong> <strong>SORA</strong> (figura p. 8) es la metodología de evaluación de riesgos de la categoría específica (<em>Specific Operations Risk Assessment</em>); <strong>MTOM</strong> = masa máxima de despegue (<em>maximum take-off mass</em>). Desarrollos añadidos aquí, no impresos en el manual.</li>
+<li>La sigla habitual en la literatura para la estación de control es <strong>RPS</strong> (<em>remote pilot station</em>); el manual escribe <strong>RCS</strong>. Para el examen, la del manual.</li>
+</ul>
+<h2 id="10-trampas-de-examen">10. Trampas de examen</h2>
+<ol>
+<li><strong>945 frente a 947.</strong> <strong>2019/945 = Reglamento Delegado</strong>: diseño, fabricación, comercialización, accesorios de identificación a distancia, <strong>marcado de clase C0-C6</strong>, «orientado a fabricantes». <strong>2019/947 = Reglamento de Ejecución</strong>: <strong>utilización</strong>, <strong>categorías</strong> abierta/específica/certificada, registro de operadores, formación de pilotos, SORA. «Delegado» va con 945; «de Ejecución» con 947.</li>
+<li><strong>2018/1139</strong> es del <strong>Parlamento Europeo y del Consejo, de 4 de julio de 2018</strong>, crea <strong>EASA</strong> y es <strong>la base jurídica</strong> tanto del marco UAS como del paquete U-space. No es «de Ejecución».</li>
+<li><strong>Paquete U-space:</strong> <strong>664 = marco regulador</strong>; <strong>665 modifica 2017/373</strong> (ANSP / ATM/ANS, espacio aéreo <strong>controlado</strong>, DAR); <strong>666 modifica 923/2012 (SERA)</strong> (aviación <strong>tripulada</strong>, visibilidad electrónica, espacio aéreo <strong>no controlado</strong>). Intercambiar 2017/373 y 923/2012 es el distractor obvio.</li>
+<li><strong>RD 517/2024:</strong> <strong>de 4 de junio</strong> de 2024; <strong>en vigor el 25 de junio de 2024</strong>. No confundir las dos fechas.</li>
+<li><strong>ENAIRE es el sCISP</strong> (proveedor <strong>único</strong> de servicios de <strong>información común</strong>) en España, por el <strong>RD 517/2024</strong>. No es «USSP único» ni lo designa el 2021/664.</li>
+<li><strong>Cuatro servicios obligatorios:</strong> autorización de vuelo, información de tráfico, identificación de red, geoconsciencia. <strong>Meteorología y seguimiento/supervisión de la conformidad son adicionales u opcionales.</strong> El CIS no es uno de los cuatro: es el servicio de <strong>información común</strong> que presta el CISP a los USSP.</li>
+<li><strong>Quién presta qué:</strong> los <strong>USSP</strong> prestan servicios U-space <strong>a los operadores de UAS</strong>; el <strong>CISP</strong> presta el <strong>CIS</strong>; los <strong>ATS</strong> facilitan información de <strong>tráfico tripulado</strong> al CIS, se coordinan con los USSP y aplican <strong>DAR</strong>.</li>
+<li><strong>Todo espacio U-space es zona geográfica UAS; no toda zona geográfica UAS es espacio U-space.</strong></li>
+<li><strong>Zonas geográficas:</strong> operaciones <strong>prohibidas, restringidas o sujetas a condiciones específicas</strong> (definición, p. 16); el RD 517/2024 permite <strong>limitar, restringir o facilitar</strong> (p. 7). Se publican en <strong>ENAIRE Drones</strong>.</li>
+<li><strong>120 m sobre la superficie</strong> = altura máxima en <strong>categoría abierta</strong>. La figura de la p. 16 asocia «<strong>vuelos por encima de 120 m</strong>» a la <strong>específica</strong>.</li>
+<li><strong>Edad mínima: 16 años</strong> (con excepciones de bajo riesgo; en abierta puede reducirse según la clase).</li>
+<li><strong>Seguro:</strong> obligatorio en <strong>específica, certificada y NO EASA</strong>; excepción en la figura: <strong>MTOM inferior a 20 kg</strong>. No confundir 20 kg (seguro) con 25 kg (abierta/específica; C3/C4).</li>
+<li><strong>Subcategorías:</strong> <strong>A1 sobre</strong> personas no participantes (nunca sobre concentraciones), <strong>A2 cerca</strong>, <strong>A3 alejado</strong> (lejos de zonas residenciales, comerciales, industriales o recreativas).</li>
+<li><strong>Clases:</strong> C0 250 g; <strong>C1 900 g</strong>; <strong>C2 4 kg</strong>; C3 25 kg; C4 25 kg (aeromodelo tradicional, A3); <strong>C5 → STS-01</strong>; <strong>C6 → STS-02</strong>. C0/C1 → A1; C2 → A2; C3/C4 → A3.</li>
+<li><strong>Específica: tres vías:</strong> declaración operacional (<strong>STS</strong>, <strong>sin</strong> autorización), autorización operacional (evaluación del riesgo), <strong>LUC</strong> (<em>Light UAS Operator Certificate</em>).</li>
+<li><strong>Certificada: tres requisitos:</strong> certificación del UAS, certificación del operador, <strong>licencia</strong> del piloto a distancia. Casos: transporte de <strong>personas</strong>, de <strong>mercancías peligrosas</strong>, riesgo no mitigable en específica; figura: <strong>dimensión característica de 3 m o más</strong> sobre concentraciones de personas; «<strong>categoría en desarrollo</strong>».</li>
+<li><strong>EVLOS</strong> usa <strong>observadores de espacio aéreo</strong>; en <strong>BVLOS</strong> no hay observación visual continua <strong>ni del piloto ni de observadores</strong>. <strong>VLOS</strong> es el tipo <strong>más habitual</strong>, base de la abierta; <strong>BVLOS</strong> suele ir a la <strong>específica</strong>.</li>
+<li><strong>NO EASA:</strong> reguladas por el <strong>RD 517/2024</strong>, excluidas del <strong>2018/1139</strong>; <strong>directa</strong> (organismo público) o <strong>indirecta</strong> (otra organización en nombre de un organismo público); <strong>exención de identificación a distancia</strong> contra <strong>crimen organizado, terrorismo o amenazas graves</strong> para la seguridad pública.</li>
+<li><strong>Aeromodelismo:</strong> <strong>artículo 16 del 2019/947</strong>; autorización operacional de <strong>AESA</strong> a clubes y asociaciones <strong>legalmente constituidos</strong>; tres opciones (abierta, zonas geográficas, autorización del art. 16). Los aeromodelos <strong>son</strong> aeronaves no tripuladas.</li>
+<li><strong>Operador = persona física o jurídica</strong> (se registra; número válido en toda la UE, visible en el dron); <strong>piloto a distancia = persona física</strong> (se forma). Examen en la web de AESA para <strong>A1 y A3</strong> (no A2).</li>
+<li><strong>Componentes del UAS:</strong> UA, piloto a distancia, <strong>RCS</strong>, enlace <strong>C2</strong>, equipos asociados. El <strong>C2</strong> une aeronave y estación de control.</li>
+<li><strong>PANDU+ 2026-2030</strong> no es una norma de obligado cumplimiento; <strong>tres objetivos</strong>: zonificación del espacio aéreo, desarrollo del U-space, actividades transversales.</li>
+<li><strong>IAM ⊃ UAM.</strong> La IAM abarca entornos urbanos, periurbanos <strong>y regionales</strong>; la UAM, urbanos y periurbanos. La IAM se define como movilidad <strong>segura, eficiente y sostenible</strong> de personas y mercancías en un sistema <strong>multimodal</strong>.</li>
+<li><strong>Conspicuidad electrónica</strong> (transmitir presencia y posición mediante vigilancia) ≠ <strong>conspicuidad visual</strong> (observación directa).</li>
+<li><strong>DAR</strong> modifica <strong>temporalmente</strong> las condiciones de un espacio aéreo U-space <strong>sin cambiar su estructura de forma permanente</strong>; requiere coordinación ATS, ANSP, USSP y, cuando proceda, CISP.</li>
+<li><strong>Origen militar de los UAS:</strong> <strong>finales del siglo XIX y principios del XX</strong>.</li>
+</ol>
+<h2 id="11-imprescindible-memorizar">11. Imprescindible memorizar</h2>
+<ul>
+<li><strong>U-space</strong> = sistema de <strong>servicios y procedimientos</strong> para la gestión <strong>segura, eficiente y automatizada</strong> de un <strong>elevado número</strong> de operaciones con UAS (UE).</li>
+<li>Normativa europea UAS: <strong>2018/1139</strong> (PE y Consejo, <strong>4-7-2018</strong>, crea EASA; UAS en el ámbito de EASA <strong>independientemente de su masa</strong>; excepciones: actividades NO EASA y UAS del anexo I); <strong>Delegado 2019/945</strong> (diseño, fabricación, comercialización, identificación a distancia, <strong>C0-C6</strong>, terceros países); <strong>Ejecución 2019/947</strong> (utilización, riesgo, <strong>abierta/específica/certificada</strong> = bajo/medio/alto riesgo, registro, formación, art. 16 aeromodelismo); <strong>923/2012 (SERA)</strong>.</li>
+<li><strong>RD 517/2024, de 4 de junio</strong>, en vigor el <strong>25 de junio de 2024</strong>: disposiciones nacionales, <strong>NO EASA</strong>, <strong>aeromodelismo</strong>, <strong>zonas geográficas UAS</strong>, <strong>espacios U-space</strong>, <strong>ENAIRE sCISP</strong>.</li>
+<li>Otras disposiciones (6): diseño y fabricación; datos y privacidad; espectro radioeléctrico; compatibilidad electromagnética; medio ambiente (ruido y emisiones); juguetes.</li>
+<li>Componentes UAS (5): <strong>UA, piloto a distancia, RCS, C2, equipos asociados</strong>.</li>
+<li>Requisitos: <strong>registro</strong> (operador, sede electrónica de AESA, número válido en la UE y visible en el dron), <strong>formación</strong> (examen AESA A1/A3), <strong>16 años</strong>, <strong>seguro RC</strong> (específica, certificada, NO EASA; figura: excepción <strong>MTOM &lt; 20 kg</strong>), reglas de vuelo y lugar.</li>
+<li><strong>VLOS / EVLOS (observadores) / BVLOS</strong>.</li>
+<li>Abierta: <strong>bajo riesgo</strong>, <strong>sin autorización previa</strong>, <strong>120 m</strong>, <strong>VLOS</strong>, <strong>MTOM &lt; 25 kg</strong>, sin concentraciones, sin mercancías peligrosas ni lanzamiento de materiales; <strong>A1 sobre / A2 cerca / A3 lejos</strong>.</li>
+<li>Específica: <strong>riesgo medio</strong>; <strong>declaración (STS) / autorización operacional / LUC</strong>; BVLOS, &gt; 120 m, &gt; 25 kg (figura); clases <strong>C5 (STS-01), C6 (STS-02)</strong>.</li>
+<li>Certificada: <strong>alto riesgo</strong>; certificación UAS + certificación operador + <strong>licencia</strong> del piloto; personas, mercancías peligrosas; <strong>≥ 3 m</strong> sobre concentraciones; «en desarrollo».</li>
+<li>Clases: <strong>C0 250 g (A1), C1 900 g (A1), C2 4 kg (A2), C3 25 kg (A3), C4 25 kg (A3, aeromodelo), C5 STS-01, C6 STS-02</strong>; UAS sin marcado de clase: anteriores al sistema de clases y de construcción privada.</li>
+<li>Zonas geográficas UAS: <strong>prohibidas / restringidas / sujetas a condiciones</strong>; 6 finalidades; 4 medidas; zonas especiales (emergencias y protección civil, incendios forestales, eventos, facilitación); <strong>ENAIRE Drones</strong>.</li>
+<li>NO EASA: aduanas, policía, SAR, incendios, control fronterizo, vigilancia costera; <strong>directa / indirecta</strong>; exención de identificación a distancia (crimen organizado, terrorismo, amenazas graves).</li>
+<li>Paquete U-space: <strong>664 marco; 665 → 2017/373, ANSP, controlado; 666 → SERA, tripulados, no controlado</strong>; base: <strong>2018/1139</strong>; PANDU+ no es norma obligatoria.</li>
+<li><strong>Espacio aéreo U-space</strong> = zona geográfica UAS donde <strong>solo</strong> se opera con apoyo de servicios U-space.</li>
+<li><strong>4 servicios obligatorios</strong>: autorización de vuelo, información de tráfico, identificación de red, geoconsciencia. <strong>Adicionales</strong>: conformidad, meteorología.</li>
+<li><strong>CIS</strong>: información común <strong>estática y dinámica</strong>; fuente <strong>única y fiable</strong> para los USSP.</li>
+<li><strong>6 actores</strong>: AC, ANSP, CISP, USSP, operador, piloto.</li>
+<li><strong>USSP</strong>: entidades <strong>certificadas</strong>; planificación, autorización, ejecución y supervisión. <strong>CISP/sCISP</strong>: recopila, mantiene actualizada y pone a disposición la información común; integra datos de AC, ANSP, USSP y otros.</li>
+<li>Figura p. 25: AC → límites, performance, lista de USSP, zonas, restricciones estáticas y dinámicas; ANSP → DAR, datos en tiempo real; USSP → términos y condiciones.</li>
+<li>ATS en U-space controlado: info de <strong>tráfico tripulado</strong> al CIS; coordinación con USSP; <strong>DAR</strong> cuando proceda.</li>
+<li><strong>DAR</strong>: cambio <strong>temporal</strong> de las condiciones; demanda elevada, operaciones especiales, emergencias, coordinación.</li>
+<li><strong>2021/666</strong>: tripulados en U-space <strong>sin servicio de control</strong> → <strong>electrónicamente perceptibles</strong>; posición a disposición de los <strong>USSP</strong>.</li>
+<li><strong>PANDU+ 2026-2030</strong>: zonificación del espacio aéreo; desarrollo del U-space; actividades transversales.</li>
+<li><strong>IAM</strong>: eVTOL, sistemas automatizados, servicios digitales, conectividad, navegación/vigilancia/gestión del tráfico. <strong>UAM</strong> ⊂ IAM: urbano y periurbano; propulsión eléctrica, eVTOL; 5 aplicaciones.</li>
+</ul>
+<h2 id="12-glosario-bilingue-es-en">12. Glosario bilingüe (ES → EN)</h2>
+<table>
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sistema de aeronave no tripulada (UAS)</td>
+<td>unmanned aircraft system</td>
+</tr>
+<tr>
+<td>aeronave no tripulada (UA)</td>
+<td>unmanned aircraft</td>
+</tr>
+<tr>
+<td>dron</td>
+<td>drone</td>
+</tr>
+<tr>
+<td>piloto a distancia</td>
+<td>remote pilot</td>
+</tr>
+<tr>
+<td>operador de UAS</td>
+<td>UAS operator</td>
+</tr>
+<tr>
+<td>estación de control remoto (RCS, en el manual)</td>
+<td>remote control station / remote pilot station</td>
+</tr>
+<tr>
+<td>enlace de mando y control (C2)</td>
+<td>command and control link</td>
+</tr>
+<tr>
+<td>identificación a distancia</td>
+<td>remote identification</td>
+</tr>
+<tr>
+<td>carga útil</td>
+<td>payload</td>
+</tr>
+<tr>
+<td>masa máxima de despegue (MTOM)</td>
+<td>maximum take-off mass</td>
+</tr>
+<tr>
+<td>aeromodelo / aeromodelismo</td>
+<td>model aircraft / aeromodelling</td>
+</tr>
+<tr>
+<td>alcance visual (VLOS)</td>
+<td>visual line of sight</td>
+</tr>
+<tr>
+<td>alcance visual ampliado (EVLOS)</td>
+<td>extended visual line of sight</td>
+</tr>
+<tr>
+<td>más allá del alcance visual (BVLOS)</td>
+<td>beyond visual line of sight</td>
+</tr>
+<tr>
+<td>observador de espacio aéreo</td>
+<td>airspace observer</td>
+</tr>
+<tr>
+<td>categoría abierta / específica / certificada</td>
+<td>open / specific / certified category</td>
+</tr>
+<tr>
+<td>subcategoría A1 / A2 / A3</td>
+<td>subcategory A1 / A2 / A3</td>
+</tr>
+<tr>
+<td>personas no participantes</td>
+<td>uninvolved persons</td>
+</tr>
+<tr>
+<td>concentración de personas</td>
+<td>assembly of people</td>
+</tr>
+<tr>
+<td>mercancías peligrosas</td>
+<td>dangerous goods</td>
+</tr>
+<tr>
+<td>declaración operacional</td>
+<td>operational declaration</td>
+</tr>
+<tr>
+<td>escenario estándar (STS)</td>
+<td>standard scenario</td>
+</tr>
+<tr>
+<td>autorización operacional</td>
+<td>operational authorisation</td>
+</tr>
+<tr>
+<td>certificado de operador de UAS ligeros (LUC)</td>
+<td>light UAS operator certificate</td>
+</tr>
+<tr>
+<td>evaluación del riesgo operacional (SORA)</td>
+<td>specific operations risk assessment</td>
+</tr>
+<tr>
+<td>marcado de clase</td>
+<td>class marking / class identification label</td>
+</tr>
+<tr>
+<td>zona geográfica UAS</td>
+<td>UAS geographical zone</td>
+</tr>
+<tr>
+<td>actividades o servicios NO EASA</td>
+<td>non-EASA activities or services</td>
+</tr>
+<tr>
+<td>espacio aéreo U-space</td>
+<td>U-space airspace</td>
+</tr>
+<tr>
+<td>servicio U-space</td>
+<td>U-space service</td>
+</tr>
+<tr>
+<td>proveedor de servicios U-space (USSP)</td>
+<td>U-space service provider</td>
+</tr>
+<tr>
+<td>servicio de información común (CIS)</td>
+<td>common information service</td>
+</tr>
+<tr>
+<td>proveedor de servicios de información común (CISP)</td>
+<td>common information service provider</td>
+</tr>
+<tr>
+<td>proveedor único de servicios de información común (sCISP)</td>
+<td>single common information service provider</td>
+</tr>
+<tr>
+<td>proveedor de servicios de navegación aérea (ANSP)</td>
+<td>air navigation service provider</td>
+</tr>
+<tr>
+<td>autoridad competente (AC)</td>
+<td>competent authority</td>
+</tr>
+<tr>
+<td>servicio de autorización de vuelo</td>
+<td>UAS flight authorisation service</td>
+</tr>
+<tr>
+<td>servicio de información de tráfico</td>
+<td>traffic information service</td>
+</tr>
+<tr>
+<td>servicio de identificación de red</td>
+<td>network identification service</td>
+</tr>
+<tr>
+<td>servicio de geoconsciencia</td>
+<td>geo-awareness service</td>
+</tr>
+<tr>
+<td>seguimiento de la conformidad</td>
+<td>conformance monitoring</td>
+</tr>
+<tr>
+<td>servicio de información meteorológica</td>
+<td>weather information service</td>
+</tr>
+<tr>
+<td>reconfiguración dinámica del espacio aéreo (DAR)</td>
+<td>dynamic airspace reconfiguration</td>
+</tr>
+<tr>
+<td>conspicuidad electrónica / visual</td>
+<td>electronic / visual conspicuity</td>
+</tr>
+<tr>
+<td>electrónicamente perceptible</td>
+<td>electronically conspicuous</td>
+</tr>
+<tr>
+<td>espacio aéreo controlado / no controlado</td>
+<td>controlled / uncontrolled airspace</td>
+</tr>
+<tr>
+<td>reglas del aire (SERA)</td>
+<td>standardised European rules of the air</td>
+</tr>
+<tr>
+<td>Plan de Acción Nacional para el Despliegue del U-space y la Zonificación (PANDU+)</td>
+<td>national action plan for U-space deployment and zoning</td>
+</tr>
+<tr>
+<td>Movilidad Aérea Innovadora (IAM)</td>
+<td>innovative air mobility</td>
+</tr>
+<tr>
+<td>Movilidad Aérea Urbana (UAM)</td>
+<td>urban air mobility</td>
+</tr>
+<tr>
+<td>aeronave de despegue y aterrizaje vertical (eVTOL; el manual no desarrolla la «e», de eléctrica)</td>
+<td>electric vertical take-off and landing aircraft</td>
+</tr>
+<tr>
+<td>sistema multimodal de transporte</td>
+<td>multimodal transport system</td>
+</tr>
+<tr>
+<td>propulsión eléctrica</td>
+<td>electric propulsion</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-fuentes">13. Fuentes</h2>
+<ul>
+<li>ENAIRE, <em>Drones (UAS) y U-space</em>, Elaborado noviembre 2026, 33 pp. (todas las páginas; figuras y tablas incluidas).</li>
+<li>Solo para la sección 9.2 (no examinable como «manual»): Reglamento de Ejecución (UE) 2021/664, versión consolidada en español de 22-02-2026 (arts. 3, 4, 5, 6, 12, 13, 19); Reglamento de Ejecución (UE) 2021/666, en español (DOUE L 139 de 23-04-2021).</li>
+</ul>
+<h2 id="14-no-encontrado-lo-que-el-manual-no-dice">14. No encontrado (lo que el manual no dice)</h2>
+<ul>
+<li><strong>Peso máximo de las clases C5 y C6:</strong> casillas en blanco en la tabla de la p. 15.</li>
+<li><strong>Distancias de seguridad de la subcategoría A2</strong> y distancia mínima de la A3: el manual remite a «la normativa» sin cifras.</li>
+<li><strong>Contenido de los escenarios STS-01 y STS-02:</strong> el manual solo los nombra (C5 y C6).</li>
+<li><strong>Desarrollo de las siglas SORA y MTOM:</strong> aparecen en figuras (pp. 8, 10, 16) sin desarrollar.</li>
+<li><strong>Fechas de los Reglamentos 2019/945, 2019/947 y 2021/664-666:</strong> el manual da solo los números; la fecha de aplicación del paquete U-space no figura (véase la sección 9.2).</li>
+<li><strong>Qué es el «anexo I»</strong> del 2018/1139 citado en la figura de la p. 6: no se explica.</li>
+<li><strong>El plan PANDU (anterior a PANDU+):</strong> se nombra en la p. 5, sin periodo ni contenido.</li>
+<li><strong>Edad mínima reducida en categoría abierta:</strong> no se da la cifra.</li>
+</ul></main></div><script src="../../assets/search.js" defer></script><script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body></html>
