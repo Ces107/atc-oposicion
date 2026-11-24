@@ -43,6 +43,38 @@
   function dayKey(ms) { var d = new Date(ms); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
   function daysSince(ts, now) { return ts ? Math.max(0, (now - ts) / DAY) : null; }
 
+  /* ---------- tarjetas (tarjetas/index.html, assets/cards.js): vencidas por área y minutos del registro ----------
+     atc_cards_v1:<mazo> = { t, res: { id: { d: día en que vence, i, e, r, l, last } } } (día = días desde 1970 con el
+     cambio a las 04:00); atc_cards_log_v1 = { sessions: [{ ts, d: mazo, n: notas, ok: bien o fácil, ms }] }.
+     Mazos EN* = inglés; el resto, conocimientos. Las visitas a tarjetas/ no cuentan en el plan: cuenta el registro. */
+  var CARDS_PRE = 'atc_cards_v1:', CARDS_LOG = 'atc_cards_log_v1', CARDS_HREF = 'tarjetas/index.html';
+  function cardArea(deck) { return /^EN/.test(String(deck)) ? 'en' : 'kn'; }
+  function cardDay(ms) { var d = new Date(ms); return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate() - (d.getHours() < 4 ? 1 : 0)) / DAY); }
+  // registro -> sesiones como las de los módulos (ts, correct, wrong: sessionRec las entiende) con área y minutos
+  function cardSessions(log) {
+    var list = log && Array.isArray(log.sessions) ? log.sessions : [];
+    return list.map(function (s) {
+      if (!s || typeof s !== 'object') return null;
+      var ts = num(s.ts), n = num(s.n), ms = num(s.ms);
+      if (ts === null || n === null || n <= 0) return null;
+      var ok = clamp(num(s.ok) || 0, 0, n);
+      return { ts: ts, correct: ok, wrong: n - ok, n: n, area: cardArea(s.d), deck: String(s.d || ''), min: Math.max(0, (ms || 0) / 60000) };
+    }).filter(Boolean);
+  }
+  function cardsState(decks, now) {
+    var td = cardDay(now), out = { kn: { due: 0, seen: 0, last: null }, en: { due: 0, seen: 0, last: null } };
+    Object.keys(decks || {}).forEach(function (d) {
+      var res = decks[d] && decks[d].res, o = out[cardArea(d)];
+      if (!res || typeof res !== 'object') return;
+      Object.keys(res).forEach(function (id) {
+        var s = res[id]; if (!s || typeof s !== 'object') return;
+        o.seen++; if ((s.d | 0) <= td) o.due++;
+        if (num(s.last) && (!o.last || s.last > o.last)) o.last = s.last;
+      });
+    });
+    return out;
+  }
+
   /* ---------- conocimientos: dominio por pregunta, por tema ---------- */
   function questionMastery(r, now) {
     if (!r) return 0;
@@ -220,8 +252,9 @@
 
   /* ---------- plan semanal: reparto de horas según la fase (findings S1 §8) ----------
      Ajustes en atc_plan_v1 = { h: horas por semana, f1 / f2 / f3: 'AAAA-MM-DD' }; una fecha vacía se estima con los plazos
-     de 2025: convocatoria publicada el 20-11-2025 y Fase 1 79 días después (7-8 feb 2026); el temario 2026 se republicó
-     el 20-11-2026, aún sin convocatoria -> Fase 1 estimada 2027-02-07. Fase 2 = Fase 1 + 34 d; Fase 3 = Fase 1 + 65 d.
+     de 2025: convocatoria publicada el 20-11-2025 y Fase 1 79 días después (7-8 feb 2026). La de 2026 salió en el BOE
+     el 24-11-2026 (inscripción hasta el 18-12): con el mismo desfase la Fase 1 cae el fin de semana del 6-7 o del
+     13-14 de febrero de 2027; se planifica con el más temprano -> 2027-02-07. Fase 2 = Fase 1 + 34 d; Fase 3 = + 65 d.
      Minutos hechos: atc_visits[día][sección] (sección = primer tramo de la ruta) en la semana de lunes a domingo; las
      sesiones 3B registradas cuentan 30 / 40 min ese día si el tiempo en pantalla fue menor (se practican fuera). */
   var PLAN_KEY = 'atc_plan_v1';
@@ -256,21 +289,22 @@
     for (var i = 0; i < 7; i++) out.push(dayKey(new Date(d.getFullYear(), d.getMonth(), d.getDate() - off + i, 12).getTime()));
     return out;
   }
-  function weekMinutes(vis, scores3b, now) {
-    var today = dayKey(now), out = { kn: 0, en: 0, ap: 0, co: 0 }, credit = {};
+  function weekMinutes(vis, scores3b, now, cardsLog) {
+    var today = dayKey(now), out = { kn: 0, en: 0, ap: 0, co: 0 }, credit = {}, cm = {};
+    cardSessions(cardsLog).forEach(function (s) { var k = dayKey(s.ts); cm[k] = cm[k] || { kn: 0, en: 0 }; cm[k][s.area] += s.min; });
     scoreSessions(scores3b).forEach(function (s) { var k = dayKey(s.day); credit[k] = (credit[k] || 0) + (CO_CREDIT[s.type] || 0); });
     weekDays(now).forEach(function (k) {
       if (k > today) return;
       var o = (vis && vis[k]) || {}, sec = { kn: 0, en: 0, ap: 0, co: 0 };
       Object.keys(o).forEach(function (s) { var a = SECTION_AREA[s], v = num(o[s]); if (a && v > 0) sec[a] += v; });
-      ORDER.forEach(function (a) { out[a] += a === 'co' ? Math.max(sec.co / 60, credit[k] || 0) : sec[a] / 60; });
+      ORDER.forEach(function (a) { out[a] += a === 'co' ? Math.max(sec.co / 60, credit[k] || 0) : sec[a] / 60 + ((cm[k] && cm[k][a]) || 0); });
     });
     ORDER.forEach(function (a) { out[a] = Math.round(out[a]); });
     return out;
   }
-  function weekPlan(raw, vis, scores3b, now) {
+  function weekPlan(raw, vis, scores3b, now, cardsLog) {
     var cfg = planCfg(raw), today = dayKey(now), st = stageOf(cfg, today), sp = SPLIT[st];
-    var done = weekMinutes(vis, scores3b, now), days = weekDays(now), areas = {}, total = 0;
+    var done = weekMinutes(vis, scores3b, now, cardsLog), days = weekDays(now), areas = {}, total = 0;
     ORDER.forEach(function (a) {
       var target = Math.round(cfg.h * 60 * sp[a]);
       areas[a] = { share: sp[a], target: target, done: done[a], left: target - done[a], behind: sp[a] > 0 && done[a] < target };
@@ -284,10 +318,16 @@
 
   function actionKn(k, meta, now) {
     var parts = k.parts.slice().sort(function (a, b) { return a.ready - b.ready || b.due - a.due; });
-    var dueTotal = k.due;
+    var dueTotal = k.due, cd = k.cards ? k.cards.due : 0;
+    if (cd >= 10 && cd >= dueTotal) return { kind: 'tarjetas', href: CARDS_HREF + '#kn', label: 'Tarjetas', why: cd + ' vencidas', min: minutes(Math.min(20, 2 + cd * 0.15)) };
     if (dueTotal >= 8) {
       var topDue = k.parts.slice().sort(function (a, b) { return b.due - a.due; })[0];
       return { kind: 'repaso', href: 'simulacros/entrenador.html#sel=due', label: 'Repaso', why: dueTotal + ' vencidas', min: minutes(Math.min(15, 4 + dueTotal * 0.35)), topic: topDue.t };
+    }
+    // una tanda de tarjetas al día: las vencidas que haya o, si ya se estudia (tarjetas empezadas o 30 preguntas vistas), las nuevas
+    var kc = k.cards;
+    if (kc && kc.on && !kc.today && (cd > 0 || kc.seen > 0 || k.seen >= 30)) {
+      return { kind: 'tarjetas', href: CARDS_HREF + '#kn', label: 'Tarjetas', why: cd ? cd + ' vencidas' : 'nuevas', min: minutes(cd ? Math.min(20, 2 + cd * 0.15) : 5) };
     }
     var w = parts[0], tm = meta.topics[w.t] || {};
     if (w.seen < Math.max(10, w.n * 0.08) && tm.s) {
@@ -298,6 +338,8 @@
   function actionEn(e, stage) {
     // tras la Fase 1 el inglés que queda es el oral (Fase 3A)
     if (stage === 'f2' || stage === 'f3') return { kind: 'ingles', step: 'oral', href: EN_ORAL, label: 'Inglés oral', why: '', min: 20 };
+    var ce = e.cards ? e.cards.due : 0;
+    if (ce >= 10) return { kind: 'tarjetas', href: CARDS_HREF + '#en', label: 'Tarjetas English', why: ce + ' vencidas', min: minutes(Math.min(15, 2 + ce * 0.15)) };
     var ps = e.parts.slice().sort(function (a, b) { return a.n - b.n; });
     var open = ps.filter(function (p) { return p.n > 0 && p.n < 20; })[0];
     var p = open || ps[0];
@@ -336,8 +378,16 @@
     var meta = snap.meta || { topics: {}, q: {}, en: [], co: [] };
     snap.meta = meta;
     var A = { kn: knowledge(snap, now), en: english(snap, now), ap: aptitudes(snap, now), co: conduct(snap, now) };
+    var CS = cardsState(snap.cards, now);
+    // on = la página pasa los mazos (los tests antiguos no); today = notas de tarjetas de hoy según el registro
+    var cToday = { kn: 0, en: 0 }, tkey = dayKey(now);
+    cardSessions(snap.cardsLog).forEach(function (s) { if (dayKey(s.ts) === tkey) cToday[s.area] += s.n; });
+    ['kn', 'en'].forEach(function (a) {
+      A[a].cards = CS[a]; CS[a].on = !!snap.cards; CS[a].today = cToday[a];
+      if (CS[a].last && (!A[a].last || CS[a].last > A[a].last)) A[a].last = CS[a].last;
+    });
     // sin snap.plan (tests antiguos, datos viejos) todo sigue como antes; el navegador siempre lo pasa (vacío = valores por defecto)
-    var wk = snap.plan ? weekPlan(snap.plan, snap.visits, snap.scores3b, now) : null;
+    var wk = snap.plan ? weekPlan(snap.plan, snap.visits, snap.scores3b, now, snap.cardsLog) : null;
     var out = {}, list = [];
     ORDER.forEach(function (id) {
       var d = A[id], cfg = AREAS[id];
@@ -397,10 +447,12 @@
   function snapshot() {
     var snap = { meta: root.ATC_META || null, trainer: lsGet('atctrainer:v1'), quiz: {}, mods: {}, seen: lsGet('atc_seen') || {}, simRuns: [], scores3b: lsGet('atc3b.scores.v1') };
     var last = 0;
+    snap.cards = {}; snap.cardsLog = lsGet(CARDS_LOG);
     try {
       for (var i = 0; i < root.localStorage.length; i++) {
         var k = root.localStorage.key(i);
         if (k.indexOf('atcquiz:ingles/') === 0) { snap.quiz[k] = lsGet(k) || {}; }
+        else if (k.indexOf(CARDS_PRE) === 0) { snap.cards[k.slice(CARDS_PRE.length)] = lsGet(k); }
       }
     } catch (e) {}
     MODS.forEach(function (m) { var d = lsGet(m.key); snap.mods[m.key] = d && Array.isArray(d.sessions) ? d.sessions : []; });
@@ -511,6 +563,38 @@
     return Math.round(100 * (h[today][id] - h[ref][id]));
   }
 
+  /* ---------- trámites con plazo: una fila arriba de «Hoy» y de la portada hasta marcarla o hasta que vence ----------
+     Convocatoria 2026 (BOE-B-2026-38773, 24-11-2026): inscripción del 25-11-2026 09:00 al 18-12-2026 23:59, tasa 15,57 €.
+     atc_tasks_v1 = { id: ms en que se marcó como hecha }. */
+  var TASKS_KEY = 'atc_tasks_v1';
+  var TASKS = [{ id: 'insc2026', name: 'Inscripción', from: '2026-11-25', to: '2026-12-18', note: '15,57 €', href: 'https://empleo.enaire.es/empleo/' }];
+  function openTasks(done, today) {
+    done = done && typeof done === 'object' && !Array.isArray(done) ? done : {};
+    return TASKS.filter(function (t) { return !done[t.id] && today <= t.to; }).map(function (t) {
+      return { id: t.id, name: t.name, note: t.note, href: t.href, from: t.from, to: t.to, open: today >= t.from, left: dayDiff(today, t.to) };
+    });
+  }
+  function shortDate(k) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k); return +m[3] + ' ' + ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][+m[2] - 1]; }
+  function tasksHtml(now) {
+    var list = openTasks(lsGet(TASKS_KEY), dayKey(now));
+    if (!list.length) return '';
+    return '<div class="rows ptasks">' + list.map(function (t) {
+      return '<div class="row' + (t.left <= 5 ? ' soon' : '') + '">' + ic('doc') + '<span class="row-body"><a class="row-title" href="' + esc(t.href) + '" target="_blank" rel="noopener">' + esc(t.name) + '</a>' +
+        '<span class="row-desc">' + (t.open ? 'hasta ' + shortDate(t.to) : 'desde ' + shortDate(t.from)) + ' · ' + esc(t.note) + '</span></span>' +
+        '<span class="row-meta"><b>' + t.left + ' d</b><button type="button" class="btn ptick" data-task="' + esc(t.id) + '" aria-label="Hecha" title="Hecha">' + ic('check') + '</button></span></div>';
+    }).join('') + '</div>';
+  }
+  function setTask(id, on) {
+    var o = lsGet(TASKS_KEY); o = o && typeof o === 'object' && !Array.isArray(o) ? o : {};
+    if (on) o[id] = Date.now(); else delete o[id];
+    lsSet(TASKS_KEY, o);
+  }
+  // pinta las filas en el contenedor y vuelve a llamar a `again` al marcar una (para repintar lo que dependa de ello)
+  function mountTasks(box, again) {
+    box.innerHTML = tasksHtml(Date.now());
+    box.querySelectorAll('.ptick').forEach(function (b) { b.onclick = function () { setTask(b.dataset.task, true); if (again) again(); else mountTasks(box); }; });
+  }
+
   /* ---------- bloque "Semana": objetivo de minutos por área y fase, y ajustes (atc_plan_v1) ---------- */
   var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var PHASE = { f1: 'Fase 1', f2: 'Fase 2', f3: 'Fase 3' };
@@ -536,6 +620,8 @@
     ['f1', 'f2', 'f3'].forEach(function (f) {
       h += '<label for="pl-' + f + '">' + PHASE[f] + '</label><input id="pl-' + f + '" type="date" value="' + (cfg.est[f] ? '' : cfg[f]) + '"><span class="pest" id="pl-' + f + '-e"></span>';
     });
+    // trámites: la casilla permite desmarcar uno marcado por error
+    TASKS.forEach(function (t) { h += '<label for="pl-t-' + t.id + '">' + esc(t.name) + '</label><input id="pl-t-' + t.id + '" type="checkbox" class="ptk" data-task="' + t.id + '"><span></span>'; });
     return h + '</div></details>';
   }
   function savePlan(el) {
@@ -555,9 +641,14 @@
     var items = plan(res, budget), first = items[0];
     var segFocus = doc.activeElement && doc.activeElement.closest && doc.activeElement.closest('.seg') ? doc.activeElement.dataset.m : null;
     if (!el.querySelector('.hoy-a')) {
-      el.innerHTML = '<div class="hoy-a"></div>' + settingsForm(res.week.cfg) + '<div class="hoy-b"></div>';
-      el.querySelectorAll('.pform input').forEach(function (inp) { inp.addEventListener('change', function () { savePlan(el); renderHoy(el); }); });
+      el.innerHTML = '<div class="hoy-t"></div><div class="hoy-a"></div>' + settingsForm(res.week.cfg) + '<div class="hoy-b"></div>';
+      el.querySelectorAll('.pform input').forEach(function (inp) {
+        inp.addEventListener('change', function () { if (inp.classList.contains('ptk')) setTask(inp.dataset.task, inp.checked); else savePlan(el); renderHoy(el); });
+      });
     }
+    mountTasks(el.querySelector('.hoy-t'), function () { renderHoy(el); });
+    var tdone = lsGet(TASKS_KEY) || {};
+    el.querySelectorAll('.pform .ptk').forEach(function (inp) { inp.checked = !!tdone[inp.dataset.task]; });
 
     var h = '<a class="next" href="' + BASE + first.href + '">' + ic('play') + '<span><b>Siguiente</b><span>' + esc(first.label) + (first.why ? ' · ' + esc(first.why) : '') + ' · ' + first.min + ' min</span></span>' + ic('arrow') + '</a>';
     h += '<div class="seg" role="group">' + [15, 30, 60].map(function (m) { return '<button type="button" data-m="' + m + '"' + (m === budget ? ' aria-pressed="true"' : '') + '>' + m + ' min</button>'; }).join('') + '</div>';
@@ -580,7 +671,7 @@
     h += '<p class="pnum"><b>' + streak(snap.visits, now) + '</b> días seguidos · <b>' + (week / 60).toFixed(1).replace('.', ',') + '</b> h en 7 días</p>';
 
     h += '<details class="how"><summary>Cálculo</summary><p>Prioridad = eliminados en la prueba × distancia al objetivo × frescura (días sin tocarla; vencidas del entrenador). El minutaje reparte esa prioridad y cada área elegida baja de peso. Es una estimación a partir de lo guardado en este navegador, no una medición.</p>' +
-      '<p>Semana (lunes a domingo): horas × reparto de la fase. Antes de la Fase 1: conocimientos 35 %, inglés 20 % (escrito 10, oral 10), aptitudes y FEAST 35 % (15 + 20), conductual 10 %. Entre la Fase 1 y la 2: aptitudes y FEAST 70 %, inglés oral 10 %, conductual 20 %. Tras la Fase 2: inglés oral 35 %, conductual 65 %. Un área bajo su objetivo semanal va antes que una que ya lo cumple; un área al 0 % no se propone. La marca de la barra es lo que tocaría hasta hoy. Minutos = tiempo activo en cada sección; una sesión 3B registrada cuenta 30 o 40 min. Fecha vacía = estimada con los plazos de 2025 (Fase 1 79 días tras la convocatoria; Fase 2 +34 d; Fase 3 +65 d).</p></details>';
+      '<p>Semana (lunes a domingo): horas × reparto de la fase. Antes de la Fase 1: conocimientos ' + Math.round(100 * SPLIT.f1.kn) + ' %, inglés ' + Math.round(100 * SPLIT.f1.en) + ' %, aptitudes y FEAST ' + Math.round(100 * SPLIT.f1.ap) + ' %, conductual ' + Math.round(100 * SPLIT.f1.co) + ' %. Entre la Fase 1 y la 2: aptitudes y FEAST ' + Math.round(100 * SPLIT.f2.ap) + ' %, inglés ' + Math.round(100 * SPLIT.f2.en) + ' %, conductual ' + Math.round(100 * SPLIT.f2.co) + ' %. Tras la Fase 2: inglés oral ' + Math.round(100 * SPLIT.f3.en) + ' %, conductual ' + Math.round(100 * SPLIT.f3.co) + ' %. Un área bajo su objetivo semanal va antes que una que ya lo cumple; un área al 0 % no se propone. La marca de la barra es lo que tocaría hasta hoy. Minutos = tiempo activo en cada sección; una sesión 3B registrada cuenta 30 o 40 min. Fecha vacía = estimada con los plazos de 2025: convocatoria 2026 publicada el 24 nov; Fase 1 hacia el 6-7 o el 13-14 de febrero (se usa el primero); Fase 2 +34 d; Fase 3 +65 d.</p></details>';
     el.querySelector('.hoy-b').innerHTML = h;
     var c = res.week.cfg;
     ['f1', 'f2', 'f3'].forEach(function (f) { var s = el.querySelector('#pl-' + f + '-e'); if (s) s.textContent = c.est[f] ? 'est. ' + fdate(c[f]) : ''; });
@@ -617,10 +708,30 @@
       line.innerHTML = '<span>' + esc(it.label) + (it.why ? ' · ' + esc(it.why) : '') + ' · ' + it.min + ' min</span>';
       var an = line.closest('a'); if (an) an.setAttribute('href', BASE + it.href);
     });
+    // portada: dominio de cada tema en su fila (barra con la marca del objetivo; las vencidas del entrenador, si hay)
+    if (line) loadMeta(function (m) {
+      if (!m) return;
+      var kn = knowledge(snapshot(), Date.now()), by = {};
+      kn.parts.forEach(function (x) { by[x.t] = x; });
+      doc.querySelectorAll('a.row[href*="temario/"]').forEach(function (a) {
+        var mm = /temario\/(\d\d)-[^\/]+\/index\.html$/.exec(a.getAttribute('href') || ''), x = mm && by[+mm[1]];
+        if (!x || a.querySelector('.tmast')) return;
+        var s = doc.createElement('span'); s.className = 'row-meta tmast';
+        s.title = pct(x.ready) + (x.due ? ' · ' + x.due + ' vencidas' : '');
+        s.innerHTML = (x.due ? '<b>' + x.due + '</b>' : '') + bar(x.ready, AREAS.kn.target, x.ready >= AREAS.kn.target ? 'ok' : '');
+        a.appendChild(s);
+      });
+    });
+    var card = line && line.closest('a');
+    if (card && !doc.getElementById('hoy-tasks')) {
+      var tb = doc.createElement('div'); tb.id = 'hoy-tasks';
+      card.parentNode.insertBefore(tb, card);
+      mountTasks(tb);
+    }
   }
 
   var API = { compute: compute, plan: plan, AREAS: AREAS, MODS: MODS, moduleState: moduleState, sessionScore: sessionScore, sessionRec: sessionRec, questionMastery: questionMastery, streak: streak, minutesPerDay: minutesPerDay, dayKey: dayKey, scoreSessions: scoreSessions,
-    SPLIT: SPLIT, planCfg: planCfg, stageOf: stageOf, weekDays: weekDays, weekMinutes: weekMinutes, weekPlan: weekPlan, areaOf: areaOf };
+    SPLIT: SPLIT, cardSessions: cardSessions, cardsState: cardsState, cardDay: cardDay, planCfg: planCfg, stageOf: stageOf, weekDays: weekDays, weekMinutes: weekMinutes, weekPlan: weekPlan, areaOf: areaOf, openTasks: openTasks };
   root.ATCProgress = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (doc) { if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init(); }

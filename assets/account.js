@@ -502,6 +502,8 @@
     + '.acct-pop button.acct-l:hover,.acct-pop a.acct-l:hover{color:var(--a-acc)}.acct-pop .acct-l .acct-i{color:var(--a-mut)}'
     + '.acct-pop .acct-l:focus-visible{outline:2px solid var(--a-acc);outline-offset:-2px}'
     + '#acct-slot{display:inline-flex;align-items:center}'
+    + '[data-acct-slot] .acct-btn{width:40px;height:40px}'
+    + '@media(max-width:640px),(pointer:coarse){#acct-slot .acct-btn,[data-acct-slot] .acct-btn,.acct-fixed .acct-btn{width:44px;height:44px}}'
     + '.acct-admin{font:14px system-ui,"Segoe UI",Roboto,sans-serif}.acct-admin pre{max-height:50vh;overflow:auto;border:1px solid var(--line,#cfcabd);padding:8px;margin:8px 0;font:12px ui-monospace,Consolas,monospace;white-space:pre-wrap;word-break:break-all}';
 
   var btn, pop, wrap, mounted = false, open = false, mode = 'out', view = '';
@@ -527,7 +529,8 @@
     if (mounted || !document.body) return;
     mounted = true;
     var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
-    var slot = document.getElementById('acct-slot');
+    // #acct-slot: cabecera del sitio; [data-acct-slot]: hueco que build_opo.py mete en la cabecera de las paginas autonomas
+    var slot = document.getElementById('acct-slot') || document.querySelector('[data-acct-slot]');
     wrap = document.createElement('span'); wrap.className = 'acct-root acct-wrap';
     if (slot) slot.appendChild(wrap); else { wrap.classList.add('acct-fixed'); document.body.appendChild(wrap); }
     btn = document.createElement('button'); btn.type = 'button'; btn.className = 'acct-btn'; btn.setAttribute('aria-haspopup', 'dialog'); btn.setAttribute('aria-expanded', 'false');

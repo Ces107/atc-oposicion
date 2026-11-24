@@ -133,7 +133,7 @@ table.kv th{font-weight:400}
 .head span{white-space:nowrap}
 @media (max-width:420px){.head{gap:10px;font-size:.82rem}}
 </style>
-</head>
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}.acct-hhost.acct-hhost{position:relative;padding-right:56px}.acct-hslot{position:absolute;right:4px;top:min(50%,36px);transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.acct-float{float:right;position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:4px 0 0 8px}@media print{.acct-hslot,.acct-float{display:none}}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
@@ -733,7 +733,7 @@ function menu(){
   const module = d.prefs.lastModule || 'm1';
   const p = d.prefs[module] || {};
   const mc = MODCFG[module];
-  show('<div class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Memoria y atención</h1></div>' +
+  show('<div class="acct-hhost top"><span class="acct-hslot" data-acct-slot></span><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Memoria y atención</h1></div>' +
     '<div class="setup"><div class="mods" role="radiogroup" aria-label="Módulo">' +
     MODULES.map(function(m){ return '<button type="button" class="mod" role="radio" data-m="' + m + '" aria-checked="' + (m === module) + '">' + IC(MODULE_ICON[m]) + '<span>' + MODULE_LABEL_ES[m] + '</span></button>'; }).join('') +
     '</div><div class="form"><input type="hidden" id="module" value="' + module + '">' +

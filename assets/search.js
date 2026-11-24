@@ -93,35 +93,21 @@ if(hd){
   if('ResizeObserver' in window)new ResizeObserver(hh).observe(hd);else addEventListener('resize',hh);
 }
 
-var tocLinks=document.querySelectorAll('nav.toc a[href^="#"]');
-if(tocLinks.length&&'IntersectionObserver' in window){
-  var map=[];
-  tocLinks.forEach(function(a){var id=decodeURIComponent(a.getAttribute('href').slice(1));var el=document.getElementById(id);if(el)map.push([el,a])});
-  if(map.length){
-    var current=null;
-    var obs=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        var pair=null;
-        for(var i=0;i<map.length;i++){if(map[i][0]===en.target){pair=map[i];break}}
-        if(!pair||!en.isIntersecting)return;
-        if(current)current.classList.remove('active');
-        current=pair[1];current.classList.add('active');
-      });
-    },{rootMargin:'-10% 0px -75% 0px',threshold:0});
-    map.forEach(function(p){obs.observe(p[0])});
-  }
-}
-
-var rp=document.getElementById('rp');
-if(rp){
-  var ticking=false;
-  function upd(){
-    var h=document.documentElement;
-    var d=h.scrollHeight-h.clientHeight;
-    rp.style.width=(d>0?Math.min(1,Math.max(0,h.scrollTop/d)):0)*100+'%';
-    ticking=false;
-  }
-  document.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(upd);ticking=true}},{passive:true});
-  upd();
+// paginas pedidas por adelantado: Chrome usa las speculation rules del <head> (hover o pulsacion); el resto, un
+// prefetch al pulsar o tras 80 ms de hover. Solo paginas del sitio, nunca descargas.
+var specOk=false;try{specOk=HTMLScriptElement.supports&&HTMLScriptElement.supports('speculationrules')}catch(e){}
+if(!specOk&&location.protocol!=='file:'){
+  var done={},tmr=null;
+  var pf=function(a){
+    if(!a||a.target||a.hasAttribute('download')||a.origin!==location.origin)return;
+    if(!/(\.html|\/)$/.test(a.pathname))return;
+    var u=a.href.split('#')[0];if(done[u]||u===location.href.split('#')[0])return;done[u]=1;
+    var l=document.createElement('link');
+    if(l.relList&&l.relList.supports&&l.relList.supports('prefetch')){l.rel='prefetch';l.href=u;document.head.appendChild(l)}
+    else{try{fetch(u,{credentials:'same-origin'}).catch(function(){})}catch(e){}}
+  };
+  var near=function(e){return e.target&&e.target.closest?e.target.closest('a[href]'):null};
+  document.addEventListener('pointerdown',function(e){pf(near(e))},{passive:true,capture:true});
+  document.addEventListener('mouseover',function(e){var a=near(e);clearTimeout(tmr);if(a)tmr=setTimeout(function(){pf(a)},80)},{passive:true});
 }
 })();

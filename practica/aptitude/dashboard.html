@@ -118,17 +118,18 @@ label.inl{display:inline-flex;align-items:center;gap:6px}
   .ab{grid-template-columns:1fr auto;grid-template-areas:"nm v" "bar bar" "tr tr";gap:4px 10px}
   .ab .tr{text-align:left}
   .fig{margin-right:20px;padding-right:0}
-  nav.tabs{flex-wrap:nowrap;overflow-x:auto}
-  nav.tabs button{padding:9px 9px;white-space:nowrap;font-size:.92rem}
+  nav.tabs{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;margin:0 -16px 20px;padding:0 16px;scroll-padding:0 16px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{flex:none;min-height:44px;padding:9px 11px;white-space:nowrap;font-size:.92rem;scroll-snap-align:start}
   nav.tabs button .i{display:none}
   .ab.nd{grid-template-areas:"nm v"}
   .ab.nd .bar-w,.ab.nd .tr{display:none}
 }
 </style>
-</head>
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}.acct-hhost.acct-hhost{position:relative;padding-right:56px}.acct-hslot{position:absolute;right:4px;top:min(50%,36px);transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.acct-float{float:right;position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:4px 0 0 8px}@media print{.acct-hslot,.acct-float{display:none}}</style></head>
 <body>
 <div id="app">
-  <header class="top">
+  <header class="acct-hhost top"><span class="acct-hslot" data-acct-slot></span>
     <div class="brand"><svg class="i"><use href="#i-logo"/></svg><h1>Progreso</h1></div>
     <div class="meta" id="topchips"></div>
   </header>

@@ -171,7 +171,7 @@ td.mod{white-space:normal;min-width:240px;max-width:360px}
 @media (max-width:1000px){#app.dual{display:block}#sec{border-left:0;border-top:1px solid var(--rule);padding:16px 0 0;margin-top:20px}}
 @media (max-width:720px){.question{font-size:2.1rem}}
 </style>
-</head>
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}.acct-hhost.acct-hhost{position:relative;padding-right:56px}.acct-hslot{position:absolute;right:4px;top:min(50%,36px);transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.acct-float{float:right;position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:4px 0 0 8px}@media print{.acct-hslot,.acct-float{display:none}}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
@@ -847,7 +847,7 @@ document.addEventListener('click', function(e){
 });
 function stopAll(){ if (timers.tick) clearInterval(timers.tick); if (timers.raf) cancelAnimationFrame(timers.raf); if (timers.fb) clearTimeout(timers.fb); if (timers.dl) clearTimeout(timers.dl); timers.tick = null; timers.raf = null; timers.fb = null; timers.dl = null; }
 function show(html){ app.className = ''; app.innerHTML = html; window.scrollTo(0, 0); }
-function topBar(icon, title){ return '<div class="top">' + IC(icon) + '<h1>' + title + '</h1></div>'; }
+function topBar(icon, title){ return '<div class="acct-hhost top"><span class="acct-hslot" data-acct-slot></span>' + IC(icon) + '<h1>' + title + '</h1></div>'; }
 function backBtn(target){ return '<button class="btn back" id="back" type="button" title="Esc">' + IC('back') + (target || 'Menú') + '</button>'; }
 function kvRow(k, v){ return '<tr><th>' + k + '</th><td>' + v + '</td></tr>'; }
 

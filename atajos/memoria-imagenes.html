@@ -105,7 +105,7 @@ button.col:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (max-width:520px){.col{width:76px}.tile{width:56px;height:56px}.col .dg{font-size:1.25rem}}
 
 </style>
-</head>
+<style>@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}.acct-hhost.acct-hhost{position:relative;padding-right:56px}.acct-hslot{position:absolute;right:4px;top:min(50%,36px);transform:translateY(-50%);display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.acct-float{float:right;position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:4px 0 0 8px}@media print{.acct-hslot,.acct-float{display:none}}</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="4.8"/><path d="M12 12 19.2 4.8"/><circle cx="16.4" cy="15.8" r=".9"/></symbol>
@@ -130,7 +130,7 @@ button.col:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </defs></svg>
 
 <div id="app">
-<header class="top"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Imágenes</h1><a class="back" href="index.html"><svg class="ic sm" aria-hidden="true"><use href="#i-back"/></svg>Atajos</a></header>
+<header class="acct-hhost top"><span class="acct-hslot" data-acct-slot></span><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><h1>Imágenes</h1><a class="back" href="index.html"><svg class="ic sm" aria-hidden="true"><use href="#i-back"/></svg>Atajos</a></header>
 <main>
 <div class="row top2"><div class="seg" id="lang" role="group" aria-label="Tabla"><button type="button" data-v="es" aria-pressed="true">ES</button><button type="button" data-v="en" aria-pressed="false">EN</button></div><span class="small warnc">Tablas no intercambiables</span></div>
 
