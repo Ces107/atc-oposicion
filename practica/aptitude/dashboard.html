@@ -223,7 +223,7 @@ const MODNAME = {
   'lis.dictation':'Dictado de elementos', 'lis.passage':'Comprensión de pasajes',
   'mm.single':'Cálculo mental (tarea única)', 'mm.dual':'Cálculo mental (doble tarea)',
   'ss.sim':'Simulador de sector (HTML)', 'sim':'Simulador radar en Python',
-  'sim.audio':'Sim: tarea hablada', 'sim.plan':'Sim: separación/transferencia/nivel/zona', 'sim.worst':'Sim: peor componente', 'sim.comms':'Sim: colacionado/transferencia/alerta', 'sim.num':'Sim: tiempo al conflicto/ETA', 'sim.alert':'Sim: alerta', 'endur':'Resistencia (último tercio)'
+  'sim.audio':'Sim: tarea hablada', 'sim.strips':'Sim: planificador de fichas', 'sim.plan':'Sim: separación/transferencia/nivel/zona', 'sim.worst':'Sim: peor componente', 'sim.comms':'Sim: colacionado/transferencia/alerta', 'sim.num':'Sim: tiempo al conflicto/ETA', 'sim.alert':'Sim: alerta', 'endur':'Resistencia (último tercio)'
 };
 // Spanish display names for the sim component keys (the keys themselves stay English: they come from the sim JSON)
 const COMPNAME = { 'Separation':'Separación', 'Handoff':'Transferencia', 'Level request':'Petición de nivel', 'Restricted area':'Zona restringida', 'Read-back check':'Comprobación de colacionado', 'Transfer of communication':'Transferencia de comunicaciones', 'Alert (vigilance)':'Alerta (vigilancia)', 'Time to conflict':'Tiempo al conflicto', 'ETA estimate':'Estimación de ETA' };
@@ -316,6 +316,7 @@ function mkRec(o){
 const CSV_MODULES = [
   // Every pattern accepts the English label and the Spanish forms ("." stands for an accented letter)
   [/Spoken task|Tarea (auditiva|hablada)/i, 'sim.audio'],  // filas nuevas del CSV del simulador (tarea hablada)
+  [/Strip planner|Planificador de (fichas|tiras)/i, 'sim.strips'],  // modo planificador de fichas
   [/Radar Sector Sim|Simulador de sector radar|Simulador radar/i, 'sim'], [/Sector sim|Simulador de sector/i, 'ss.sim'],
   [/Fast categori[sz]ation|Categorizaci.n r.pida|Clasificaci.n r.pida/i, 'rad.cat'], [/Radar conflict|Conflictos? (en|de) radar|Detecci.n de conflictos/i, 'rad.conf'], [/Heading arithmetic|Aritm.tica de rumbos|C.lculo de rumbos/i, 'rad.arith'],
   [/(Spatial|Espacial):\s*(3D|Rotaci.n 3D)/i, 'sp.rot3d'], [/(Spatial|Espacial):\s*(Cube|Cubo|Desarrollo|Plantilla)/i, 'sp.net'], [/(Spatial|Espacial):\s*(2D|Rotaci.n y simetr.a 2D)/i, 'sp.shape2d'], [/(Spatial|Espacial):\s*(Paper|Papel|Plegado)/i, 'sp.fold'], [/(Spatial|Espacial):\s*(View|Vista)/i, 'sp.view'], [/(Spatial|Espacial):\s*(mixed|mixto|mezcla)/i, 'sp.mixed'],

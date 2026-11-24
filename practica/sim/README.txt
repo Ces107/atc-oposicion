@@ -79,6 +79,9 @@ Practice   the 3-minute tutorial (scripted, not saved).
 Adaptive   starts at level 1. +1 level after 2 clean runs (levels 1-4) or 3 clean runs (level 5+); -1 after 2 failed runs in a row.
            "Clean" = goal met. Never raise the level before accuracy holds: consistency first, speed second.
 Ladder     pick any level 1-10. Each run gets a new seed; in the debrief press R to retry the SAME seed (same traffic).
+Plan       STRIP PLANNER (menu rows "Plan adaptativo" and "Plan L<n>", < > picks the level): no radar picture, only flight
+           strips and a schematic of the routes. Find the pairs that will lose separation, solve them, catch the
+           strips that are wrongly coordinated. Own ladder and adaptive state, same rule. See the section below.
 
 WHAT EACH MECHANIC TRAINS (details and sources: DESIGN.md)
 ----------------------------------------------------------
@@ -151,3 +154,65 @@ Changelog 2026-11-24 (spoken secondary task)
 * Clips: assets/voice/<es|en>/*.wav, made offline by tools/make_voice.py with the Windows SAPI voices (no network);
   if a language has no voice, the script writes tone-coded clips instead and voice.json says "fallback": true.
 * Tests: tests/test_audio_task.py (40 tests).
+
+
+Changelog 2026-11-24 (strip planner mode)
+-----------------------------------------
+A planner work sample: you work from flight progress strips, not from the radar picture.
+
+THE BOARD   left: one strip per aircraft that will cross the sector, sorted by entry time; a strip arrives some
+            minutes before its entry and leaves 1 minute after its exit. Strip = callsign, type, speed (kt), entry
+            point and time, the points of its route, exit point and time, RFL (level it flies) and XFL (exit level).
+            Every time falls on :00 or :30 of the exercise clock (top bar). Times over the inner points are printed
+            only at levels 1-3. Right: the route structure (no aircraft): 8 entry/exit points, 4 inner points,
+            segment lengths 24 / 36 / 48 NM; each exit point accepts either even ("par") or odd ("impar") levels.
+            Speeds are 240, 360 or 480 kt = 4, 6 or 8 NM per minute.
+RULES       Same level and: less than 3 minutes apart over a common point, or one overtakes the other on a common
+            segment, or they meet head-on on a common segment = conflict. A level change happens over a point and
+            there the aircraft counts at both levels. Every aircraft must leave over its exit point at its XFL.
+            A strip is WRONG when its exit time does not match entry time + route length / speed, or when its XFL
+            is not accepted by its exit point.
+CONTROLS    click a strip or Tab                     select
+            C on one strip, then C on another        declare that pair a conflict (right-click = pair with the selected strip)
+            X                                        the selected strip is wrongly coordinated (before it enters)
+            Left/Right  Up/Down (Shift = 2000 ft)    choose a segment of the route, change its level
+            + / -                                    hold at the entry point, 1 minute steps (before entry)
+            R                                        the alternative route over another point (before entry)
+            Enter / Esc                              apply the change / cancel it.  A segment can change only before
+                                                     the aircraft reaches it.  F1 rules and keys.  P pause, Q abandon
+            V + digits + Enter, M                    the spoken secondary task, exactly as in the radar runs
+ITEMS       Detection (declared before it happens = correct, never declared = blank, false alarm = wrong);
+            Separation (did not happen = correct, happened = wrong, also one you created);
+            Coordination (wrong strip marked = correct, missed = blank, a right strip marked = wrong);
+            Exit (every aircraft whose levels you changed: leaves at its XFL = correct, otherwise wrong).
+SCORE       100 minus: loss 12, undetected conflict 3, false alarm 3, missed wrong strip 4, right strip marked 2,
+            bad exit 6, resolution cost above the allowance 1 per unit (cap 15). Cost units = minutes of hold +
+            extra minutes of rerouting + segments left at another level; allowance = the cheapest single fix of
+            every designed conflict (computed when the exercise is generated) + 1 per conflict.
+            Goal met = accuracy >= the level's goal and 0 losses. Seconds per item in the CSV = mean real seconds
+            from the strip(s) reaching the board to each decision.
+LADDER      Lvl Strips Conflicts Wrong strips 1 minute = Strip before entry Times over inner points Check on apply
+             1      6       2         0          7.0 s          12 min             yes                 yes
+             2      8       3         1          6.5 s          12 min             yes                 yes
+             3     10       4         1          6.0 s          11 min             yes                 yes
+             4     12       5         2          5.5 s          10 min             no                  no
+             5     15       6         2          5.0 s          10 min             no                  no
+             6     18       7         3          4.5 s           9 min             no                  no
+             7     21       8         3          4.0 s           8 min             no                  no
+             8     25      10         4          3.6 s           8 min             no                  no
+             9     29      12         5          3.2 s           7 min             no                  no
+            10     34      14         6          2.8 s           6 min             no                  no
+            A run lasts about 5 real minutes at every level; conflicts per real minute rise from 0.4 (L1) to 3.1 (L10).
+            "Check on apply" = right after Enter the game says RESUELTO / CREA CONFLICTO / SIN EFECTO.
+            Every designed conflict can be solved by one action costing at most 4 units, decided when generated.
+DEBRIEF     Resumen (score, items, components, cost against the minimum, spoken task), Conflictos (each conflict,
+            when you declared it, what you changed, and for a missed one the cheapest fix), Fichas (wrong strips,
+            exits). N next, R same seed, A spoken-task solo block, E export CSV.
+STATS FILE  sim_stats.json gains "planner_runs", "planner_adaptive" and "planner_best"; older files load unchanged.
+CSV         one row per planner run: Module "Strip Planner (Ladder)" or "Strip Planner (Adaptive)", same 10 columns;
+            a run with the spoken task adds "Spoken task: ... (with planner)".
+HONEST LIMIT The real planner test (MULTI-PASS, and whatever PDEA contains) is not public: the strip layout, the 3-minute
+            rule, the allowed actions and the scoring here are a reconstruction from candidate accounts, not the test.
+Files: atcsim/core/planner.py (route structure, ladder, generator, rules, scoring), atcsim/planner_bot.py (scripted
+players), atcsim/ui/planner_ui.py (screens). Tests: tests/test_planner.py (56 tests).
+Calibration: python tools/calibrate_planner.py [--core].  End-to-end: tools/e2e_sim.py now ends with P2 and P5.
