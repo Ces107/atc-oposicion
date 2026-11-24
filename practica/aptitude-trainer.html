@@ -743,14 +743,15 @@ function menu(){
   const tarj = [
     ['calc','1','Mental arithmetic','Additions, subtractions, multiplications and divisions, multi-operand chains and mixed operations from level 6, decimals from level 7.'],
     ['d2','2','Attention cancellation','d2 style (test de atención d2): mark only the “d with exactly two dashes”. Rows, speed and lookalike distractors grow with the level.'],
-    ['lr','3','Left/right','Left or right OF THE FIGURE? Goal: 2.0 s with ≥95 %. Rotated figures and short exposure from level 7.'],
-    ['nback','4','Dual n-back','Position and letter n steps back, from n=1 to n=6 with shrinking intervals.']
+    ['lr','3','Left/right','Left or right OF THE FIGURE? Goal: 2.0 s with ≥95 %. Rotated figures and short exposure from level 7.']
+    // Dual n-back (configNback) is hidden from the menu since b1123: no description of the real tests names it and it does
+    // not count in the dashboard's readiness. Its code, stored sessions and history stay.
   ];
   const primera = !d.sesiones.length;
   pantalla(
     '<h1>ATC Aptitude Trainer</h1>' +
-    (primera ? '<div class="bien-caja"><b>First time here?</b><ol class="pasos"><li>Pick a module (press <kbd>1</kbd> to <kbd>4</kbd>). Each one opens with a short explanation.</li><li>Press <b>Practice</b> on that screen: 3 easy items that are not saved, to learn the keys.</li><li>Then start a real session at level 1 or 2 and move up only when accuracy stays at ' + PRECISION_MINIMA + ' % or more. Level 5 is the Phase 2 target.</li></ol></div>' :
-      '<p class="suave">Keys <kbd>1</kbd> to <kbd>4</kbd> pick a module, <kbd>H</kbd> opens your stats, <kbd>Esc</kbd> comes back here. Never speed up while accuracy is below ' + PRECISION_MINIMA + ' %.</p>') +
+    (primera ? '<div class="bien-caja"><b>First time here?</b><ol class="pasos"><li>Pick a module (press <kbd>1</kbd> to <kbd>3</kbd>). Each one opens with a short explanation.</li><li>Press <b>Practice</b> on that screen: 3 easy items that are not saved, to learn the keys.</li><li>Then start a real session at level 1 or 2 and move up only when accuracy stays at ' + PRECISION_MINIMA + ' % or more. Level 5 is the Phase 2 target.</li></ol></div>' :
+      '<p class="suave">Keys <kbd>1</kbd> to <kbd>3</kbd> pick a module, <kbd>H</kbd> opens your stats, <kbd>Esc</kbd> comes back here. Never speed up while accuracy is below ' + PRECISION_MINIMA + ' %.</p>') +
     (almacenOk ? '' : '<div class="aviso-caja">The browser does not allow saving the history (localStorage unavailable). It will be kept only while this tab stays open.</div>') +
     '<div class="rejilla">' + tarj.map(function(t){
       return '<button class="tarjeta" data-m="' + t[0] + '"><span class="num">' + t[1] + '</span><h2 style="display:inline">' + t[2] + '</h2><p>' + t[3] + '</p><p class="datos">' + esc(resumenModulo(t[0])) + '</p></button>';
@@ -765,7 +766,6 @@ function menu(){
     if (e.key === '1'){ e.preventDefault(); configCalc(); }
     else if (e.key === '2'){ e.preventDefault(); configD2(); }
     else if (e.key === '3'){ e.preventDefault(); configLR(); }
-    else if (e.key === '4'){ e.preventDefault(); configNback(); }
     else if (e.key === 'h' || e.key === 'H'){ e.preventDefault(); historial(); }
   };
 }

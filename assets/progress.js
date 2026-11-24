@@ -26,13 +26,18 @@
     { id: 'mem', key: 'atc_memattn_v1', name: 'Memoria', href: 'practica/aptitude/game-memory-attention.html', icon: 'grid' },
     { id: 'mm', key: 'atc_mentalmath_v1', name: 'Cálculo', href: 'practica/aptitude/game-mental-math.html', icon: 'calc' },
     { id: 'lis', key: 'atc_listening_v1', name: 'Escucha', href: 'practica/aptitude/game-listening.html', icon: 'headphones' },
-    { id: 'ss', key: 'atc_sectorsim_v1', name: 'Sector', href: 'practica/aptitude/game-sector-sim.html', icon: 'plane' }
+    { id: 'ss', key: 'atc_sectorsim_v1', name: 'Sector', href: 'practica/aptitude/game-sector-sim.html', icon: 'plane' },
+    { id: 'apt', key: 'atc_aptmock_v1', name: 'Simulacro', href: 'practica/aptitude/mock-aptitude.html', icon: 'clip' }
   ];
 
   function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
   function num(x) { x = +x; return isFinite(x) ? x : null; }
   function shrink(good, n, prior, k) { return (good + prior * k) / (n + k); }
-  function msOf(ts) { ts = num(ts); if (ts === null) return null; return ts < 1e11 ? ts * 1000 : ts; }
+  // los juegos guardan ts como texto ISO (new Date().toISOString()); el entrenador, como número
+  function msOf(ts) {
+    if (typeof ts === 'string' && isNaN(+ts)) { var t = Date.parse(ts); return isNaN(t) ? null : t; }
+    ts = num(ts); if (ts === null) return null; return ts < 1e11 ? ts * 1000 : ts;
+  }
   function dayKey(ms) { var d = new Date(ms); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
   function daysSince(ts, now) { return ts ? Math.max(0, (now - ts) / DAY) : null; }
 
@@ -100,6 +105,8 @@
     if (!s || typeof s !== 'object') return null;
     var ts = msOf(s.ts); if (ts === null) return null;
     var c = num(s.correct != null ? s.correct : s.ok), w = num(s.wrong != null ? s.wrong : s.bad), b = num(s.blank) || 0;
+    // simulacro de aptitudes: 60 netos de 76 es una nota de cabeza y equivale al nivel objetivo (5)
+    if (num(s.net) !== null && s.level == null) return { ts: ts, acc: 96, level: clamp(5 * s.net / 60, 0, 10), skip: false, n: (c || 0) + (w || 0) + b };
     var acc = num(s.accuracy != null ? s.accuracy : s.acc);
     if (acc === null && c !== null && w !== null) { var tot = c + w + b; acc = tot ? 100 * c / tot : null; }
     if (acc === null) return null;

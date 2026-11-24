@@ -1,6 +1,6 @@
 # ATC Listening and Dictation Trainer — README
 
-File: `game-listening.html` (single file, vanilla JS/CSS, no dependencies, English UI, dark theme, works by double-click in Chrome/Edge from `file://`). Companion of `aptitude-trainer.html` and `game-mental-math.html` (same look, same CSV convention, same manual-ladder / adaptive / custom pattern); this trainer owns aviation-English **listening and dictation**, which the other two do not cover.
+File: `game-listening.html` (single file, vanilla JS/CSS, no dependencies, Spanish UI with English audio and questions, light and dark scheme, works by double-click in Chrome/Edge from `file://`). Companion of `aptitude-trainer.html` and `game-mental-math.html` (same look, same CSV convention, same manual-ladder / adaptive / custom pattern); this trainer owns aviation-English **listening and dictation**, which the other two do not cover.
 
 ## What it trains, and why
 
@@ -11,6 +11,29 @@ Phase 1's written English test (C1, 20 questions) is reading/grammar, but the or
 3. **Degraded conditions** — background noise (Web Audio white noise, gain scaled by level), reduced/zero replays, faster speech, accent rotation across whatever English voices are installed, and (from level 5) a dual-task mental-arithmetic load running in parallel — because FEAST measures performance under divided attention, and the real frequency is never studio-quiet.
 
 A **visual fallback** (word-by-word display, same pace the level would have spoken) covers a machine with no installed English voice, so the trainer is never blocked by missing TTS.
+
+4. **General English (menu card "Inglés general", key 3)** — the FEAST English listening test is general listening comprehension (news items, announcements, short talks, conversations; heard once, then comprehension questions), not radio phraseology. This module trains exactly that genre. See the section below.
+
+## General-English comprehension (module 3)
+
+Added in batch b1123 (audit `coord/b1123/findings/AAPT-aptitudes-feast.md`, section 3 row "FEAST English listening" and improvement 6).
+
+- **Bank**: 45 original passages (`GEN_BANK` in the PURE LOGIC block), 15 per level, 171 questions. Kinds: news item, announcement, short talk, conversation between a woman and a man, instructions, weather, travel information. Neutral topics, invented places. Each passage has 3-5 questions with options A-D, one correct; the distractors are what a half-listening candidate would pick (the old gate, the other time mentioned, the inland temperature instead of the coast one, the frequency instead of the journey time).
+- **Levels** (shown as N1-N3):
+
+| Level | Name | Default speed | Words | Questions | What it asks | Stored `level` |
+|---|---|---|---|---|---|---|
+| N1 | Básico | 0.92× | 72-97 | 3 | facts stated once: numbers, times, places, reasons | 3 |
+| N2 | Estándar (objetivo) | 1.00× | 97-121 | 4 | details among several similar ones, light inference | 5 |
+| N3 | Exigente | 1.12× | 135-157 | 4-5 | attitude, implied meaning, small calculations (cost rise, rent difference, "tiny is generous") | 7 |
+
+  The stored `level` is the equivalent rung of the shared 10-level ladder (level 5 = target everywhere), so the dashboard and the "Siguiente" engine score these sessions without any change on their side. N2 is called the target because it is natural speed with mixed literal and inference items; there is no published speed or item count for the real test.
+- **Flow**: choose level, voice (only installed English voices are listed; "Probar" plays a test sentence), speed and number of passages. Each passage is spoken **once** (no replay button, as in the real test), sentence by sentence through `speechSynthesis`; the text stays hidden. Conversations use a voice of each speaker's gender when one is installed (guessed from the voice name), otherwise the chosen voice with a higher or lower pitch. Then the questions appear; answers can be changed until "Siguiente"; no right/wrong marks during the session. Unanswered questions count as blank.
+- **Result**: correct / wrong / blank, accuracy (green from 90 %, the internal target of the AAPT protocol), seconds per question, goal, endurance line for long sessions, and a **review**: per passage the transcript and, per question, the answer given, the correct one and a one-line explanation (the quoted words that decide it, or the inference). Passages with a mistake are open; the rest are collapsed.
+- **Passage choice**: never-seen passages of the level first, then the least recently seen (`comp.seen`, last 45 ids).
+- **No English voice / no speech engine / engine that never starts**: the module says "Sin voz en inglés: lectura con tiempo" and offers the same passages as reading practice: the text is shown with a countdown (time the voice would take at about 160 words a minute, plus 5 s), then hidden when the questions appear. If the voice fails mid-session, that passage switches to reading. Reading sessions are stored with `mode:'reading'`, `level:null`, `count:false`, so neither the dashboard (needs a level) nor "Siguiente" (skips `count:false`) treats them as listening.
+- **Stored data** (same key `atc_listening_v1`, same `sessions` list): `{ ts, module:'Passage comprehension: general English', level, mode, correct, wrong, blank, spi, accuracy, goal, met, rate, replays:0, thirds, comp:'general', cl }`. The module label starts with "Passage comprehension" on purpose: the dashboard's label regex files it under `lis.passage` (H5 English listening). Preferences live in `comp: { cl, n, voice, seen }`. Old stored data is read unchanged.
+- **Tests** (outside the project, in the scratch folder of batch b1123): a Node check of the bank (four distinct options, one correct after shuffling, 60-170 words, chunks rebuild the text, correct option not systematically the longest) and a headless-Chrome run with `speechSynthesis` stubbed (one play, hidden text, stored shape, old data, reading fallback, silent engine, 375 px, console errors).
 
 ## The ten-level ladder
 
@@ -85,6 +108,7 @@ History is kept in `localStorage` (all reads/writes wrapped in try/catch; the ap
 
 - **Daily, 10-15 minutes:** Element dictation, Ladder or Adaptive, single-task, levels 2-5 depending on current accuracy. Accuracy first: do not move to a higher level (or let Adaptive move you up) until 96 %+ is routine — the app enforces this for Ladder/Custom via the anti-acceleration rule, and structurally for Adaptive.
 - **3x/week, 10-15 minutes:** Passage comprehension at the same level as your dictation work, to build "understood it, not just transcribed it."
+- **Daily, 10 minutes (15 after Phase 1):** General English (module 3), 4 passages, N2 until 90 % is routine, then N3. This is the module that matches the FEAST English listening test; dictation and ATC passages are a complement, not a substitute.
 - **2-3x/week, once level 5 dictation is comfortable single-task:** Dual-task at load 1-2, level 5-6. This is the closest thing in this tool to a FEAST-style divided-attention format (the resemblance is by design, not validated).
 - **Weekly, one session:** No-voice check — if you install or change an English voice on Windows, run one session in each module with the "Use the detected voice instead" banner active to confirm real audio still plays.
 - **Occasionally, for confidence and stress-testing:** levels 7-10, single-task, no hints, no replays. Expect low accuracy at 9-10 — that is by design, not a sign of regression.

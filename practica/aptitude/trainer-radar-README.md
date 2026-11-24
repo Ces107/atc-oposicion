@@ -81,6 +81,24 @@ Each round shows a rule set; objects (colour × shape) then appear one by one an
 
 Dual-task monitor: a MONITOR light in the header turns amber at random every 4 to 9 seconds for 1.6 s; press **Space** while it is amber. Hits, signals and false presses are reported separately on the result screen. Compare your main accuracy against a session without the monitor: the difference is your dual-task cost.
 
+#### 150-object benchmark and rule changes in the middle of a block (batch b1123)
+
+Mode **Referencia · 150 objetos · 1,8 s** (only in Categorías) is a fixed block that matches the length of the platform's sorting session (about 150 objects in 4.5 minutes) and the top-result target of the training protocol (at least 96 % at 1.8 s or less per object; an internal goal, not an official norm).
+
+| Parameter | Value |
+|---|---|
+| Objects | 150 in one round, no level change inside the block |
+| Rule set | complexity 4 (two colours, two shapes, keys D F J K), as level 6 |
+| Time per object | 1.8 s; no answer in time = blank |
+| Rule bar | shown at the start, then hidden |
+| Rule changes | 4, at unannounced points: one per fifth of the block, jittered by up to 45 % of a fifth, never in the first 5 objects, at least 6 objects apart and at least 5 before the end |
+| Change message | the new rule replaces the object for 3 s (keys ignored meanwhile), then the stream goes on |
+| Mirrored frames, dual task, hints | none |
+
+Report: accuracy (correct / 150; blanks count as errors), mean response time and mean of the slowest 10 % of responses (answered objects only), errors in the 5 objects right after each change versus the rest, a table per rule (objects, wrong, blank, errors after the change) and per rule type (colour or shape), and **whether the target was met** (accuracy ≥ 96 % and mean response ≤ 1.8 s). A benchmark never moves the adaptive level, the streak or the personal bests.
+
+Custom mode has the slider **Cambios de regla por ronda** (0 to 4) with the same mechanism; when the rule bar is visible (hint tier 1 or more) it switches to the new rule after the message. The ten-level ladder is unchanged (mid-block changes only in the benchmark and in Custom).
+
 ## Hints (tiers 0 to 3)
 
 Press **?** during play. Tier 0 = none. Tiers are available up to level 4 (tier 3), level 5 (tier 2), level 6 (tier 1); none from level 7 up. In Custom mode any tier can be chosen. A session that used any hint is recorded but is **not valid** for progression, personal bests or the streak (accuracy counts, the Valid column says No). Tier 3 shows the full solution and the item counts as blank.
@@ -97,10 +115,13 @@ After every wrong arithmetic answer the worked solution is shown; after every pi
 
 The result screen shows level and mode, correct / wrong / blank, seconds per item, accuracy, whether the goal was met, a plain statement of where the level sits (level 5 = target for Phase 2; 7 and above = beyond the competition), the personal best at this level (lowest seconds per item among valid sessions), your adaptive level, streak and highest unlocked level, and the dual-task report when on. Accuracy = correct / (correct + wrong + blank). Seconds per item = mean response time of answered items (blank items after a time-out are excluded).
 
-History is stored in `localStorage` under the key `atc_radar_v2` (every read and write is inside try/catch; if the browser refuses, a warning shows and the data lives only while the tab is open). **CSV export**: separator `;`, decimal point, UTF-8 with BOM, columns `Date;Module;Level;Correct;Wrong;Blank;Seconds per item;Accuracy %;Goal;Met`. Date is `dd/mm/yyyy hh:mm`. The level column contains 1 to 10 or `Custom`.
+History is stored in `localStorage` under the key `atc_radar_v2` (every read and write is inside try/catch; if the browser refuses, a warning shows and the data lives only while the tab is open). **CSV export**: separator `;`, decimal point, UTF-8 with BOM, columns `Date;Module;Level;Correct;Wrong;Blank;Seconds per item;Accuracy %;Goal;Met`. Date is `dd/mm/yyyy hh:mm`. The level column contains 1 to 10 or `Custom`; a benchmark row has level 6 and the module `Fast categorization [benchmark]`.
+
+Benchmark sessions are stored with the others (same `sessions` list, same module name `Fast categorization`) and carry extra fields: `bench: true`, `mode: 'bench'`, `level: 6`, `target` (true / false), `changes` (number of rule changes), `rtMean` and `rtSlow10` (seconds), `post` and `rest` as `[objects, correct, wrong, blank]`, `byRule` as `[objects, correct, wrong, blank, post-change objects, post-change errors]` per rule, `byAttr` as `{color: [...], shape: [...]}`. A Custom session with rule changes stores the same fields except `bench` and `target`. Older sessions without these fields load unchanged. The dashboard reads the benchmark as a level-6 categorization session and shows it against the 150-object target.
 
 ## How to use it in the weekly plan
 
+* Categorization: two to three 10-minute blocks a week; once a week (Sunday check) play one **Referencia · 150** block and compare it with the target.
 * 3 to 4 sessions a week, 15 to 20 minutes each, on days you also do the other aptitude trainers. Alternate modules: for example Monday conflict detection + heading arithmetic, Wednesday categorization, Friday whichever module has the lowest accuracy.
 * One session = one module at one level. Do not chase level 10: pass level 5 at 96 % repeatedly first, then treat 6 to 10 as margin.
 * Play levels 1 to 4 mainly to build accuracy, then use Adaptive mode as the daily default. Do a dual-task session once a week from level 5 to measure the dual-task cost.

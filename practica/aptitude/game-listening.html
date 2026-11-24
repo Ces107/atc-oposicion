@@ -91,6 +91,14 @@ td.mod{white-space:normal;min-width:180px}
 .optBtn.bad{border-color:var(--bad);color:var(--bad)}
 .optBtn:disabled{color:var(--text);cursor:default}
 .optBtn.ok:disabled{color:var(--good)} .optBtn.bad:disabled{color:var(--bad)}
+.optBtn.sel{border-color:var(--accent);background:var(--stripe);box-shadow:inset 4px 0 0 var(--accent)}
+.ptext{font-family:var(--serif);font-size:1.06rem;line-height:1.6;text-align:left;margin:.7rem 0;overflow-wrap:anywhere}
+.gbar{max-width:320px;margin:.6rem auto}
+details.rev{border-top:1px solid var(--rule);padding:4px 0}
+details.rev summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+details.rev summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rq{padding:6px 0}
+.rq p{margin:.2rem 0}
 .key{display:inline-block;padding:0 6px;border:1px solid var(--rule);border-radius:2px;font-size:.78rem;background:var(--surface);color:var(--text)}
 .voice{color:var(--soft);font-size:.86rem;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin:10px 0}
 .voice .link{padding:2px 8px;font-size:.86rem}
@@ -482,6 +490,385 @@ function verifyMCQ(mcq){
 // PASSAGE_ITEMS scales down the level's item count for the longer passage module.
 function passageItemCount(level){ return Math.max(3, Math.round(LEVELS[level].items / 3)); }
 
+/* ---------- General-English comprehension bank (FEAST English listening: general passages, one play) ----------
+   Original passages. l = level 1-3 (length, speed, inference); k = kind; t = text, or for a conversation a list of
+   [speaker, line]; q = [question, [correct option, three wrong options], one-line explanation]. Options are shuffled
+   when the passage is built, so the correct one is always written first here. */
+const GEN_BANK = [
+{ id:'a01', l:1, k:'announce', t:"Good morning. This is an announcement for passengers waiting for the 9:40 train to Norbridge. Because of a signal problem near Calder Bay, this train will now leave from platform six instead of platform two. It is running about fifteen minutes late and should depart at 9:55. The café on platform six is open, and hot drinks are half price for passengers on this service until ten o'clock. We are sorry for the delay.", q:[
+  ["Why is the train late?", ["A signal problem","A shortage of staff","Bad weather on the line","A broken-down train ahead"], "«Because of a signal problem near Calder Bay»."],
+  ["Which platform will the train leave from?", ["Platform six","Platform two","Platform nine","Platform ten"], "«from platform six instead of platform two»."],
+  ["What time should the train now depart?", ["9:55","9:40","10:00","9:15"], "«should depart at 9:55»; 9:40 era la hora original."]]},
+{ id:'a02', l:1, k:'weather', t:"And now the weather for the weekend. Saturday will start cold and foggy, especially near the river, but the fog should clear by late morning, leaving a dry and sunny afternoon with a top temperature of eleven degrees. On Sunday, a band of rain will arrive from the west around lunchtime, and the wind will get stronger in the evening. If you are planning a walk or a bike ride, Saturday afternoon is clearly the better choice.", q:[
+  ["When should the fog clear on Saturday?", ["By late morning","Before sunrise","By mid-afternoon","Not until the evening"], "«the fog should clear by late morning»."],
+  ["What is the highest temperature on Saturday?", ["11 degrees","7 degrees","12 degrees","2 degrees"], "«a top temperature of eleven degrees»."],
+  ["When is the best time for a walk?", ["Saturday afternoon","Saturday morning","Sunday lunchtime","Sunday evening"], "«Saturday afternoon is clearly the better choice»."]]},
+{ id:'a03', l:1, k:'news', t:"The public library in Westmoor will reopen next Monday after six months of building work. The old building now has a new roof, a lift, and a larger children's area on the ground floor. Opening hours will also change: the library will open at nine every weekday and stay open until eight in the evening on Thursdays. To celebrate, all late fees will be cancelled for the first two weeks, so readers can return old books without paying anything.", q:[
+  ["How long was the library closed?", ["Six months","Two weeks","Nine months","One year"], "«after six months of building work»."],
+  ["On which day does the library stay open until eight?", ["Thursday","Monday","Friday","Saturday"], "«until eight in the evening on Thursdays»."],
+  ["What can readers do in the first two weeks?", ["Return late books without paying a fee","Borrow twice as many books as usual","Join the library without an identity card","Take home a free children's book"], "«late fees will be cancelled for the first two weeks»."]]},
+{ id:'a04', l:1, k:'conv', t:[
+  ["Woman","Hello, I'd like to book a table for this Friday, please."],
+  ["Man","Of course. For how many people, and at what time?"],
+  ["Woman","Four people, at half past seven."],
+  ["Man","I'm afraid we're fully booked at seven thirty. I can offer you a table at a quarter past eight, or one on the terrace at seven."],
+  ["Woman","The terrace might be cold in March. We'll take a quarter past eight, then."],
+  ["Man","Fine. Can I have a name, please?"],
+  ["Woman","Lopez. And one of us is vegetarian, if that helps."]], q:[
+  ["How many people is the booking for?", ["Four","Two","Five","Seven"], "«Four people»."],
+  ["What time is the table booked for?", ["8:15","7:30","7:00","8:45"], "«We'll take a quarter past eight»."],
+  ["Why doesn't the woman want the terrace?", ["She thinks it will be cold","It is too noisy near the road","It costs more to sit outside","It is already fully booked"], "«The terrace might be cold in March»."]]},
+{ id:'a05', l:1, k:'instr', t:"Welcome to the Riverside Sports Centre. Before you use the pool for the first time, please follow these steps. First, collect a wristband from reception; it opens your locker, and you must return it when you leave. Second, take a shower before you enter the water. Third, check the board next to the pool: lanes one and two are for fast swimmers, and lane three is for slower swimmers and beginners. Children under eight must be with an adult at all times.", q:[
+  ["What does the wristband do?", ["It opens your locker","It pays for drinks","It books a lane","It opens the main door"], "«it opens your locker»."],
+  ["Which lane should a beginner use?", ["Lane three","Lane one","Lane two","Lane eight"], "«lane three is for slower swimmers and beginners»."],
+  ["Who must always be with an adult?", ["Children under eight","Children under ten","All beginners","Anyone in lane three"], "«Children under eight must be with an adult»."]]},
+{ id:'a06', l:1, k:'travel', t:"Passengers flying to Lisbon on flight 482 are asked to go to gate 17. Please note that the gate has changed; it was previously shown as gate 12. Boarding will begin in twenty minutes, at 3:10. Passengers with small children or who need extra help will be invited to board first, followed by passengers seated in rows 20 to 35. Please have your boarding pass and passport ready, and remember that only one piece of hand luggage is allowed.", q:[
+  ["Which gate should passengers go to?", ["Gate 17","Gate 12","Gate 20","Gate 7"], "«go to gate 17»; la 12 era la anterior."],
+  ["What time does boarding begin?", ["3:10","3:20","3:30","2:50"], "«Boarding will begin in twenty minutes, at 3:10»."],
+  ["Who boards first?", ["Families with children and anyone needing help","Passengers seated in rows 20 to 35","Passengers travelling without any hand luggage","Passengers with seats near the front of the plane"], "«with small children or who need extra help will be invited to board first»."]]},
+{ id:'a07', l:1, k:'news', t:"Work on the new footbridge over the River Lark will start in April and is expected to take about a year. The bridge will connect the train station with the city park, saving pedestrians a walk of around fifteen minutes. During the work, the riverside path will be closed between the station and the old mill, and walkers will have to use Mill Street instead. The project will cost four million euros, half of which comes from a European grant.", q:[
+  ["How long will the work take?", ["About a year","About six months","About fifteen months","About two years"], "«expected to take about a year»."],
+  ["Which route must walkers use during the work?", ["Mill Street","The riverside path","The park road","Station Road"], "«walkers will have to use Mill Street instead»."],
+  ["How much money comes from the grant?", ["Two million euros","Four million euros","One million euros","Fifteen million euros"], "«four million euros, half of which comes from a European grant»: la mitad de 4."]]},
+{ id:'a08', l:1, k:'announce', t:"Attention, please. The museum will close in thirty minutes, at half past five. The gift shop on the first floor will stay open until six o'clock for anyone who wishes to buy books or postcards. Visitors who have left bags or coats in the cloakroom should collect them before going to the shop, because the cloakroom closes with the galleries. Tomorrow the museum opens at eleven instead of ten, because of a private event in the main hall.", q:[
+  ["What time does the museum close today?", ["5:30","6:00","5:00","4:30"], "«at half past five»; la tienda, a las seis."],
+  ["Why should visitors go to the cloakroom first?", ["It closes when the galleries close","The shop does not allow bags","It closes earlier than the galleries","It is next to the shop"], "«because the cloakroom closes with the galleries»."],
+  ["Why does the museum open later tomorrow?", ["There is a private event","There is building work","There is a staff meeting","It is a public holiday"], "«because of a private event in the main hall»."]]},
+{ id:'a09', l:1, k:'talk', t:"Many people think that honeybees are the most important pollinators, but in fact wild bees do a large part of the work. There are more than two hundred species of wild bee in this region alone. Most of them live alone, not in large colonies, and many make their nests in the ground. You can help them by leaving a small part of your garden untidy, with bare soil and dead plant stems, and by planting flowers that bloom at different times of the year.", q:[
+  ["How many species of wild bee live in the region?", ["More than two hundred","About twenty","More than two thousand","Fewer than one hundred"], "«more than two hundred species of wild bee in this region»."],
+  ["Where do many wild bees make their nests?", ["In the ground","In large hives","In tall trees","Under roofs"], "«many make their nests in the ground»."],
+  ["What does the speaker suggest?", ["Leaving part of the garden untidy","Buying a beehive","Removing dead plant stems","Planting only one kind of flower"], "«leaving a small part of your garden untidy»."]]},
+{ id:'a10', l:1, k:'conv', t:[
+  ["Man","Excuse me, I think I left my phone on a bus this morning. Has anyone handed one in?"],
+  ["Woman","What kind of phone is it, and which bus were you on?"],
+  ["Man","It's a black phone in a red case. I took the number 14 from the hospital at about eight."],
+  ["Woman","Let me check. We have a phone in a red case, but it was found on the number 41."],
+  ["Man","That could be mine. I'm not sure I read the number correctly."],
+  ["Woman","What's the picture on the lock screen?"],
+  ["Man","A white dog on a beach."],
+  ["Woman","Then this is yours."]], q:[
+  ["What colour is the phone case?", ["Red","Black","White","Blue"], "«a black phone in a red case»."],
+  ["Which bus was the phone found on?", ["Number 41","Number 14","Number 40","Number 4"], "«it was found on the number 41»."],
+  ["How does the woman know the phone is his?", ["He describes the lock-screen picture","He gives the phone number correctly","He shows the ticket for the number 14","He knows the code to unlock it"], "«What's the picture on the lock screen?» … «Then this is yours»."]]},
+{ id:'a11', l:1, k:'instr', t:"From the first of June, recycling collection in the town will change. Paper and cardboard go in the blue bin, which will be collected every second Tuesday. Plastic bottles and cans go in the yellow bag, collected every Friday. Glass must now be taken to the bottle banks at supermarkets, because it will no longer be collected from homes. Food waste goes in the small brown bin, also on Fridays. Please put your bins out after seven in the evening the night before collection.", q:[
+  ["How often is the blue bin collected?", ["Every two weeks","Every week","Every Friday","Once a month"], "«every second Tuesday» = cada dos semanas."],
+  ["What happens to glass from June?", ["Residents take it to bottle banks","It goes in the yellow bag with cans","It is collected every second Tuesday","It goes in the brown bin on Fridays"], "«Glass must now be taken to the bottle banks»."],
+  ["When should bins be put out?", ["After seven the evening before","Before seven in the morning","On Tuesday morning","Any time on collection day"], "«after seven in the evening the night before collection»."]]},
+{ id:'a12', l:1, k:'travel', t:"Due to strong winds, the 11:30 ferry to Pellham Island has been cancelled. Passengers with tickets for this crossing can travel on the 2:00 ferry at no extra cost, or ask for a full refund at the ticket office. Please note that the 2:00 ferry is expected to be very busy, so passengers travelling with a car are advised to arrive at least forty-five minutes before departure. The café in the terminal building is open until four.", q:[
+  ["Why was the ferry cancelled?", ["Strong winds","Engine trouble","Fog","Too few passengers"], "«Due to strong winds»."],
+  ["What can ticket holders do?", ["Take the 2:00 ferry free or get a refund","Take the 2:00 ferry for a small charge","Travel the next day only","Get half the price back"], "«at no extra cost, or ask for a full refund»."],
+  ["By what time should drivers arrive for the 2:00 ferry?", ["1:15","1:45","1:30","12:45"], "«at least forty-five minutes before departure»: 2:00 − 0:45."]]},
+{ id:'a13', l:1, k:'weather', t:"Today will be the hottest day of the week, with temperatures reaching thirty-four degrees inland and around twenty-nine on the coast. The heat will be strongest between two and five in the afternoon, so people are advised to avoid physical exercise at that time and to drink plenty of water. A light sea breeze will make the coast more comfortable. Tomorrow, temperatures will drop by about six degrees, and there is a small chance of a thunderstorm in the mountains.", q:[
+  ["What temperature is expected on the coast?", ["About 29 degrees","About 34 degrees","About 23 degrees","About 39 degrees"], "«around twenty-nine on the coast»; 34 es en el interior."],
+  ["When is the heat strongest?", ["From two to five in the afternoon","From noon until two in the afternoon","In the late morning, before lunch","From five until eight in the evening"], "«between two and five in the afternoon»."],
+  ["What will happen tomorrow?", ["It will be about six degrees cooler","It will be hotter on the coast","There will be storms on the coast","The sea breeze will stop"], "«temperatures will drop by about six degrees»."]]},
+{ id:'a14', l:1, k:'talk', t:"Good afternoon, everyone. Today I want to give you three simple tips for better sleep. First, try to go to bed and get up at the same time every day, even at weekends. Second, avoid coffee and tea after about two o'clock, because caffeine can stay in your body for up to eight hours. Third, keep your bedroom cool and dark; a temperature of around eighteen degrees is ideal for most people.", q:[
+  ["After what time should people avoid coffee?", ["About two o'clock","About eight o'clock","Midday","Six in the evening"], "«avoid coffee and tea after about two o'clock»."],
+  ["How long can caffeine stay in the body?", ["Up to eight hours","Up to two hours","Up to eighteen hours","Up to two days"], "«can stay in your body for up to eight hours»."],
+  ["What bedroom temperature is recommended?", ["About 18 degrees","About 8 degrees","About 22 degrees","About 28 degrees"], "«around eighteen degrees is ideal»."]]},
+{ id:'a15', l:1, k:'announce', t:"Good evening, shoppers. The store will be closing in fifteen minutes. Please bring your purchases to the tills now. Self-service tills three to eight are already closed, so please use the staffed tills near the main entrance. If you are collecting an online order, the collection point at the back of the store remains open until nine thirty. Remember that from tomorrow the store opens one hour earlier, at seven in the morning, every day except Sunday.", q:[
+  ["Which tills are already closed?", ["Self-service tills three to eight","The staffed tills by the entrance","Tills one to three","Every till except one"], "«Self-service tills three to eight are already closed»."],
+  ["Until when is the online collection point open?", ["9:30","9:15","9:00","8:30"], "«remains open until nine thirty»."],
+  ["From tomorrow, what time will the store open on a Monday?", ["7:00","6:00","8:00","9:00"], "«one hour earlier, at seven in the morning, every day except Sunday»."]]},
+
+{ id:'b01', l:2, k:'news', t:"The city's bike-sharing scheme has had its busiest year since it began in 2019. More than 1.2 million journeys were made, an increase of almost a third compared with last year. The council believes the main reason is the new electric bikes, which were added in March and now make up about forty percent of the fleet. Most trips are short: the average journey lasts just eleven minutes. However, not everyone is happy. Residents in the old town have complained that bikes are often left on narrow pavements, blocking the way for wheelchairs and prams. From next month, users who leave a bike outside an official parking area will be charged a fee of five euros.", q:[
+  ["How many journeys were made this year?", ["More than 1.2 million","Just under 1.2 million","About 400,000","Exactly 2.1 million"], "«More than 1.2 million journeys were made»."],
+  ["According to the council, why did use increase?", ["The new electric bikes","Lower prices","New parking areas","More bike lanes in the old town"], "«the main reason is the new electric bikes»."],
+  ["What is the problem in the old town?", ["Bikes left on pavements block the way","There are not enough bikes for residents","Electric bikes go too fast in narrow streets","Bikes are often stolen from parking areas"], "«bikes are often left on narrow pavements, blocking the way»."],
+  ["What will happen from next month?", ["Users who park badly will pay a fee","Electric bikes will cost five euros more","Bikes will be banned from the old town","Trips will be limited to eleven minutes"], "«users who leave a bike outside an official parking area will be charged a fee»."]]},
+{ id:'b02', l:2, k:'conv', t:[
+  ["Woman","Hi Tom, are you free on Thursday to go through the budget with me?"],
+  ["Man","Thursday morning's difficult. I'm at the dentist until eleven. What about the afternoon?"],
+  ["Woman","I've got a training session from one to three. Could we meet at half past three?"],
+  ["Man","That works. Should we book the small meeting room?"],
+  ["Woman","It's being painted this week. Let's use my office instead; it's quiet enough."],
+  ["Man","Fine. Do you want me to bring last year's figures?"],
+  ["Woman","Yes, please, and the sales report too, if Maria has finished it."],
+  ["Man","She said she'd send it on Wednesday evening, so it should be ready."]], q:[
+  ["Why can't the man meet on Thursday morning?", ["He has a dentist appointment","He has a training session","He is painting the meeting room","He is meeting Maria"], "«I'm at the dentist until eleven»."],
+  ["What time will they meet?", ["3:30","1:00","3:00","11:00"], "«Could we meet at half past three?» «That works»."],
+  ["Where will they meet?", ["In the woman's office","In the small meeting room","In the man's office","In the training room"], "«It's being painted this week. Let's use my office instead»."],
+  ["What does the man expect about the sales report?", ["It will be ready by Thursday","It will not be finished in time","Maria will bring it to the meeting","He will write it on Wednesday"], "«She said she'd send it on Wednesday evening, so it should be ready»."]]},
+{ id:'b03', l:2, k:'weather', t:"Here is the mountain forecast for tomorrow. Conditions will be good in the morning, with light winds and clear skies above about 1,500 metres, although valleys may have patches of low cloud until nine o'clock. From early afternoon, cloud will build quickly over the western peaks, and there is a high risk of thunderstorms between three and six, with possible hail. Winds on the summits will increase to fifty kilometres per hour by evening. The freezing level will be at around 3,200 metres. Walkers are strongly advised to plan routes that allow them to be off high ground by early afternoon.", q:[
+  ["What may affect the valleys early in the morning?", ["Low cloud","Hail","Strong winds","Thunderstorms"], "«valleys may have patches of low cloud until nine o'clock»."],
+  ["When is the thunderstorm risk highest?", ["Between three and six","Before nine","Late in the evening","Between noon and two"], "«a high risk of thunderstorms between three and six»."],
+  ["How strong will the summit winds become?", ["50 km/h","15 km/h","32 km/h","100 km/h"], "«increase to fifty kilometres per hour by evening»."],
+  ["What is the main advice for walkers?", ["Be off high ground by early afternoon","Start walking only after nine o'clock","Avoid the valleys in the early morning","Stay below 1,500 metres all day"], "«be off high ground by early afternoon»."]]},
+{ id:'b04', l:2, k:'announce', t:"Welcome to the university open day. A few practical points before you start. The main talks take place in the Great Hall, beginning at ten with an introduction from the head of admissions. Subject talks run every hour from eleven, in the buildings listed in your programme. Student guides in green T-shirts lead campus tours from the main entrance every thirty minutes; each tour takes about forty minutes. Please note that the science labs can only be visited on a tour, not on your own. Lunch is available in the student café, which accepts cards only. Finally, if you would like to talk to someone about grants and fees, the finance team is in Room 104 all day.", q:[
+  ["Where does the introduction take place?", ["In the Great Hall","In Room 104","At the main entrance","In the student café"], "«The main talks take place in the Great Hall, beginning at ten with an introduction»."],
+  ["How often do campus tours leave?", ["Every thirty minutes","Every forty minutes","Every hour","Every fifteen minutes"], "«every thirty minutes; each tour takes about forty minutes»."],
+  ["How can visitors see the science labs?", ["Only by joining a tour","On their own after eleven","By asking in Room 104","During the subject talks"], "«can only be visited on a tour, not on your own»."],
+  ["What should visitors know about the café?", ["It does not take cash","It is closed at lunchtime","It only serves students","It is in Room 104"], "«which accepts cards only»."]]},
+{ id:'b05', l:2, k:'talk', t:"Thank you for coming on this walking tour. We're standing in Market Square, which has hosted a weekly market for more than six hundred years. Originally, farmers came here every Wednesday to sell cattle and grain, but in the nineteenth century, when the railway arrived, the cattle market moved to a site near the station, and this square became a place for food and household goods. The clock on the building opposite was a gift from a local wool merchant in 1862, and it's said that he paid for it so that traders could no longer argue about when the market had to close. Today, the market runs on Saturdays, and in December there's a night market on Fridays as well.", q:[
+  ["On which day was the original market held?", ["Wednesday","Saturday","Friday","Sunday"], "«farmers came here every Wednesday»."],
+  ["What happened when the railway arrived?", ["The cattle market moved near the station","The square was closed for almost a century","The weekly market moved to Saturdays","Farmers stopped selling grain in the square"], "«when the railway arrived, the cattle market moved to a site near the station»."],
+  ["Why did the merchant reportedly pay for the clock?", ["To stop arguments about closing time","To celebrate the arrival of the railway","To advertise his wool business","To replace an older clock in the square"], "«so that traders could no longer argue about when the market had to close»."],
+  ["When is the night market held?", ["On Fridays in December","On Saturdays all year","On Wednesdays in winter","Every Friday"], "«in December there's a night market on Fridays»."]]},
+{ id:'b06', l:2, k:'conv', t:[
+  ["Woman","Hi, I bought this kettle here last week, but it switches itself off before the water boils."],
+  ["Man","I'm sorry about that. Do you have the receipt?"],
+  ["Woman","I've got the email confirmation on my phone. I paid by card."],
+  ["Man","That's fine. Would you like a replacement or your money back?"],
+  ["Woman","Well, I've read a few reviews saying the same thing happens with this model. I'd rather not take the risk."],
+  ["Man","I understand. I'll put the refund through now. It usually takes three to five working days to appear on your card."],
+  ["Woman","Fine. And could you recommend a different one?"],
+  ["Man","This one here is a bit more expensive, but it comes with a three-year guarantee."]], q:[
+  ["What is wrong with the kettle?", ["It switches off before the water boils","It leaks water onto the kitchen counter","It takes far too long to boil the water","It does not switch on at all"], "«it switches itself off before the water boils»."],
+  ["How does the woman prove she bought it?", ["With an email on her phone","With a paper receipt","With her bank statement","With the original box"], "«I've got the email confirmation on my phone»."],
+  ["Why does the woman choose a refund?", ["She fears a new one would have the same fault","She would rather buy a cheaper model from another shop","The shop has no replacements in stock","She needs the money back quickly"], "Inferencia: «the same thing happens with this model. I'd rather not take the risk»."],
+  ["What is special about the kettle the man recommends?", ["It has a three-year guarantee","It is cheaper","It boils water faster","It has good online reviews"], "«a bit more expensive, but it comes with a three-year guarantee»."]]},
+{ id:'b07', l:2, k:'news', t:"Train services across the northern region will be reduced on Monday and Tuesday because of a strike by maintenance staff. The rail company says about half of the usual services will run, mainly on the main lines between large cities. Branch lines, including the coastal line to Sandhaven, will have no trains at all, and replacement buses will run instead, taking roughly twice as long as the train. Passengers with tickets for these days can use them on Wednesday instead, or claim a refund online. The union says the strike is about safety rules, not pay, and talks will continue at the end of the week.", q:[
+  ["Who is going on strike?", ["Maintenance staff","Train drivers","Bus drivers","Ticket office staff"], "«a strike by maintenance staff»."],
+  ["What will happen on the coastal line?", ["Buses will replace the trains","Half the usual trains will run","Trains will run only to Sandhaven","Trains will take twice as long"], "«will have no trains at all, and replacement buses will run instead»."],
+  ["What can ticket holders do?", ["Travel on Wednesday or claim a refund","Travel free at the weekend","Exchange tickets at the station only","Use them on the replacement bus only"], "«can use them on Wednesday instead, or claim a refund online»."],
+  ["According to the union, what is the strike about?", ["Safety rules","Pay","Working hours","Job cuts"], "«the strike is about safety rules, not pay»."]]},
+{ id:'b08', l:2, k:'instr', t:"Thanks for buying the HomeLink router. Setting it up takes about ten minutes. First, connect the grey cable from the wall socket to the port marked 'Line', not to the yellow ports, which are for computers. Then plug in the power and wait until the light on the front stops flashing and turns solid white; this can take up to five minutes. Don't press the reset button on the back during this time. The network name and password are printed on the card attached to the bottom of the router. If the light turns red, switch the router off, wait thirty seconds, and try again before calling our helpline.", q:[
+  ["Where should the grey cable go?", ["Into the port marked 'Line'","Into one of the yellow ports","Into the back of the computer","Into the socket by the reset button"], "«to the port marked 'Line', not to the yellow ports»."],
+  ["What shows that the router is ready?", ["A solid white light","A flashing white light","A red light","A yellow light"], "«stops flashing and turns solid white»."],
+  ["Where is the password?", ["On a card on the bottom of the router","On a label on the front of the router","In the instruction booklet","On the back, by the reset button"], "«printed on the card attached to the bottom of the router»."],
+  ["What should you do first if the light turns red?", ["Switch it off and wait thirty seconds","Press the reset button on the back","Call the helpline straight away","Change the grey cable for a new one"], "«switch the router off, wait thirty seconds, and try again before calling»."]]},
+{ id:'b09', l:2, k:'travel', t:"The Hop-On city bus runs two routes. The red route goes around the historic centre and takes about an hour if you stay on the bus; the blue route goes out to the harbour and the science museum and takes ninety minutes. One ticket is valid on both routes for twenty-four hours from the moment you first use it, not from the time you buy it. Buses leave every fifteen minutes in summer and every half hour from November to March. Audio commentary is available in eight languages through the headphones provided. Tickets bought online are ten percent cheaper than tickets bought from the driver.", q:[
+  ["Which route goes to the harbour?", ["The blue route","The red route","Both routes","Neither route"], "«the blue route goes out to the harbour and the science museum»."],
+  ["When does the ticket start to be valid?", ["When you first use it","When you buy it","At midnight","When the first bus leaves"], "«from the moment you first use it, not from the time you buy it»."],
+  ["How often do the buses run in January?", ["Every half hour","Every fifteen minutes","Every hour","Every ninety minutes"], "«every half hour from November to March»."],
+  ["How can you pay less?", ["Buy the ticket online","Buy it from the driver","Use only the red route","Travel in summer"], "«Tickets bought online are ten percent cheaper»."]]},
+{ id:'b10', l:2, k:'weather', t:"The national weather service has issued an orange warning for the east coast from midnight tonight until midday tomorrow. A deep area of low pressure will bring gusts of up to one hundred and ten kilometres per hour on exposed coasts, and waves of six to eight metres. Inland, winds will be weaker, but heavy rain could cause local flooding, particularly in low-lying areas near rivers. Ferry companies have already cancelled tomorrow's early crossings, and drivers of high vehicles are advised not to use the coastal motorway. Conditions are expected to improve quickly in the afternoon, with sunny spells and much lighter winds.", q:[
+  ["How long does the warning last?", ["From midnight until midday","From midday until midnight","All day tomorrow","Until tomorrow evening"], "«from midnight tonight until midday tomorrow»."],
+  ["What is the main risk inland?", ["Flooding after heavy rain","Waves of six to eight metres","Gusts of 110 km/h","Snow on high ground"], "«Inland, winds will be weaker, but heavy rain could cause local flooding»."],
+  ["Who should avoid the coastal motorway?", ["Drivers of high vehicles","All drivers on the coast","Cyclists and motorcyclists","Passengers of early ferries"], "«drivers of high vehicles are advised not to use the coastal motorway»."],
+  ["What will the afternoon be like?", ["Better, with sun and lighter winds","Still stormy on the exposed coast","Wet, with flooding near rivers","Calm, but with fog in low areas"], "«improve quickly in the afternoon, with sunny spells and much lighter winds»."]]},
+{ id:'b11', l:2, k:'conv', t:[
+  ["Man","So, are we taking the train to the lake on Saturday, or driving?"],
+  ["Woman","The train's cheaper, but the first one doesn't get there until eleven."],
+  ["Man","And driving takes an hour and a half, if there's no traffic. Parking at the lake is fifteen euros now, though."],
+  ["Woman","Fifteen? Last year it was free."],
+  ["Man","They changed it in the spring. Still, if we leave at seven, we'd have the whole morning there."],
+  ["Woman","Seven on a Saturday? You know I'm not a morning person."],
+  ["Man","Fair enough. Train it is, then. I'll book the tickets tonight."],
+  ["Woman","Great. I'll bring the food."]], q:[
+  ["What is the disadvantage of the train?", ["It arrives late in the morning","It is more expensive","It takes an hour and a half","It doesn't go to the lake"], "«the first one doesn't get there until eleven»."],
+  ["What has changed at the lake?", ["Parking is no longer free","The station has closed","The road is busier","Parking now costs more than fifteen euros"], "«Parking … is fifteen euros now» «Last year it was free»."],
+  ["Why do they choose the train?", ["The woman doesn't want to leave early","The car is being repaired this week","The train is faster than driving","The man doesn't like driving to the lake"], "Inferencia: «Seven on a Saturday? … I'm not a morning person» «Fair enough. Train it is»."],
+  ["What will the man do tonight?", ["Book the train tickets","Prepare the food for the trip","Check the traffic in the morning","Pay for parking online"], "«I'll book the tickets tonight»."]]},
+{ id:'b12', l:2, k:'talk', t:"Today's talk is about trees in cities. Most people know that trees make streets more pleasant, but they also have measurable effects. On a hot summer day, a street with a full line of trees can be up to five degrees cooler than a similar street without them. Trees also slow down rainwater, which reduces pressure on drains during storms. However, planting the wrong tree in the wrong place causes problems. Some species have roots that lift pavements, and others drop sticky fruit on parked cars. That is why our department now chooses species carefully, and why we plant young trees in autumn, when the soil is still warm but the air is cool.", q:[
+  ["How much cooler can a tree-lined street be?", ["Up to five degrees","Up to ten degrees","About two degrees","Up to fifteen degrees"], "«can be up to five degrees cooler»."],
+  ["How do trees help during storms?", ["They slow down rainwater","They protect cars from the wind","They keep drains clean","They stop all flooding"], "«Trees also slow down rainwater, which reduces pressure on drains»."],
+  ["Which problem does the speaker mention?", ["Roots that lift pavements","Leaves that block drains","Trees that need too much water","Branches that fall on cars"], "«Some species have roots that lift pavements»."],
+  ["Why are young trees planted in autumn?", ["The soil is warm and the air is cool","It rains more often in autumn","Young trees are cheaper to buy in autumn","The streets are quieter in autumn"], "«when the soil is still warm but the air is cool»."]]},
+{ id:'b13', l:2, k:'announce', t:"Good evening and welcome to the City Concert Hall. Tonight's performance will begin in about ten minutes. Please make sure your mobile phones are switched off; photography and recording are not permitted during the concert. The first half lasts around fifty minutes and will be followed by a twenty-minute interval. Drinks for the interval can be ordered now at the bars on the ground and second floors and will be waiting for you. Latecomers will only be admitted during a suitable pause in the music. In case of emergency, exits are clearly marked on each level, and staff in black jackets will guide you.", q:[
+  ["How long is the interval?", ["Twenty minutes","Ten minutes","Fifty minutes","Fifteen minutes"], "«a twenty-minute interval»."],
+  ["Where can interval drinks be ordered?", ["On the ground and second floors","Only on the ground floor","On the first and second floors","At the main entrance"], "«at the bars on the ground and second floors»."],
+  ["When can latecomers go in?", ["During a suitable pause in the music","Only after the twenty-minute interval","At any time, through the side doors","Not at all once the concert starts"], "«only be admitted during a suitable pause in the music»."],
+  ["How can you recognise the staff?", ["They wear black jackets","They carry torches","They wear name badges","They stand by the bars"], "«staff in black jackets will guide you»."]]},
+{ id:'b14', l:2, k:'news', t:"Schools in the Valley district will start serving lunches made mainly with local produce from September. Under the new plan, at least sixty percent of the ingredients must come from farms within a hundred kilometres. The district says this will support local farmers and reduce transport, although the cost per meal is expected to rise by about thirty cents. Parents will not pay more, because the difference will be covered by the regional government for the first two years. After that, the district will review the scheme. Some head teachers have welcomed the plan but warned that kitchens in older schools are too small to cook fresh food for every pupil.", q:[
+  ["What share of the ingredients must be local?", ["At least sixty percent","About thirty percent","Exactly half","At least eighty percent"], "«at least sixty percent of the ingredients must come from farms within a hundred kilometres»."],
+  ["What will happen to the cost of a meal?", ["It will rise by about thirty cents","It will fall by about thirty cents","It will stay exactly the same","It will rise by about sixty cents"], "«expected to rise by about thirty cents»."],
+  ["Who will pay the extra cost at first?", ["The regional government","The parents of the pupils","The local farmers","The district's schools"], "«covered by the regional government for the first two years»."],
+  ["What concern do some head teachers have?", ["Some kitchens are too small","Local food is of lower quality","Pupils won't like the food","Farmers can't supply enough"], "«kitchens in older schools are too small»."]]},
+{ id:'b15', l:2, k:'travel', t:"Good afternoon, ladies and gentlemen, this is your captain speaking. We've now reached our cruising altitude, and our flight time to Dublin is expected to be two hours and ten minutes, so we should land about fifteen minutes ahead of schedule. The weather in Dublin is cloudy, with a temperature of nine degrees and some light rain. In about an hour we may pass through an area of turbulence, so whenever the seat-belt sign is on, please return to your seat. The cabin crew will shortly be coming through the cabin with drinks and snacks, and a selection of hot meals is available to buy.", q:[
+  ["How long is the flight expected to take?", ["2 hours 10 minutes","2 hours 15 minutes","1 hour 50 minutes","2 hours 50 minutes"], "«two hours and ten minutes»."],
+  ["When will they land compared with the schedule?", ["About fifteen minutes early","On time","About ten minutes late","About fifteen minutes late"], "«about fifteen minutes ahead of schedule»."],
+  ["What is the weather in Dublin?", ["Cloudy, light rain, nine degrees","Sunny and dry, nine degrees","Cloudy and dry, nineteen degrees","Heavy rain and strong wind"], "«cloudy, with a temperature of nine degrees and some light rain»."],
+  ["What should passengers do when the seat-belt sign is on?", ["Return to their seats","Stop eating","Switch off their phones","Call the cabin crew"], "«whenever the seat-belt sign is on, please return to your seat»."]]},
+
+{ id:'c01', l:3, k:'talk', t:"When our museum stopped charging for entry three years ago, many people predicted disaster, including some of our own trustees. They said visitors wouldn't value what they didn't pay for, and that we'd lose the income we needed to look after the building. Well, the numbers tell a different story. Visitor figures have more than doubled, and, more interestingly, the share of visitors from the poorer neighbourhoods around us has gone from about one in twenty to almost one in five. It's true that ticket income disappeared, but spending in the café and shop has risen so much that it covers roughly two-thirds of what we lost. The rest comes from a new membership scheme, which now has more than four thousand members. I won't pretend it's been easy for the staff, because busier galleries mean more work, but I don't think anyone here would want to go back.", q:[
+  ["What did critics predict?", ["That visitors wouldn't value it and income would fall","That the galleries would become too crowded","That staff would leave because of the extra workload","That members would stop paying their fees"], "«visitors wouldn't value what they didn't pay for, and that we'd lose the income»."],
+  ["Which result does the speaker find most interesting?", ["More visitors from poorer neighbourhoods","The doubling of visitor numbers overall","The rise in spending in the café and shop","The success of the new membership scheme"], "«more interestingly, the share of visitors from the poorer neighbourhoods … almost one in five»."],
+  ["How much of the lost ticket income do the café and shop cover?", ["About two-thirds","All of it","About one-fifth","About half"], "«covers roughly two-thirds of what we lost»."],
+  ["What is the speaker's attitude to free entry?", ["Positive, while admitting it has costs","Enthusiastic, with no reservations","Doubtful, because income has fallen","Worried that staff will leave"], "Actitud: defiende el cambio y admite «I won't pretend it's been easy for the staff»."]]},
+{ id:'c02', l:3, k:'conv', t:[
+  ["Woman","Have you seen the email about the office move?"],
+  ["Man","I have. Third floor, by the end of the month. I suppose the view will be better up there, at least."],
+  ["Woman","The view, yes. But have you seen the plan? It's all open space. No closed offices, not even for team leaders."],
+  ["Man","Well, it might make it easier to ask quick questions."],
+  ["Woman","Easier for people to interrupt you, you mean. I do half my work on the phone. How am I going to do that with thirty people around me?"],
+  ["Man","They mentioned some small rooms for calls."],
+  ["Woman","Four rooms for the whole floor, and one of them is the size of a cupboard. I'll be booking them a week in advance."],
+  ["Man","Maybe ask if you can work from home on the days with lots of calls? Several people in my team already do that."],
+  ["Woman","That's actually not a bad idea. I'll talk to Ruth about it tomorrow."]], q:[
+  ["How does the woman feel about the move?", ["Unhappy about the open-plan office","Pleased that the view will be better","Excited to sit nearer her colleagues","Unsure, because she hasn't seen the plan"], "Actitud: «Easier for people to interrupt you, you mean»."],
+  ["Why is she particularly worried?", ["She spends a lot of time on the phone","She thinks the new floor will be too small","The move is happening far too soon","She will no longer sit with her team"], "«I do half my work on the phone»."],
+  ["What does she imply about the call rooms?", ["There will not be enough of them","They will be too noisy","They are on another floor","They are only for team leaders"], "Implícito: «Four rooms for the whole floor. I'll be booking them a week in advance»."],
+  ["What will the woman probably do next?", ["Ask Ruth about working from home","Book a call room for next week","Refuse to move to the third floor","Email the whole team about the plan"], "«I'll talk to Ruth about it tomorrow»."]]},
+{ id:'c03', l:3, k:'news', t:"Divers exploring the bottom of Lake Arden have found the remains of a wooden boat that experts believe is around eight hundred years old. Tests on a small sample of the wood are expected to confirm its age by the spring. The boat, about nine metres long, was discovered last month during a survey carried out because of unusually low water levels after the dry summer. Archaeologists say it is too fragile to be lifted at present. Instead, they plan to make a detailed 3D scan this winter and decide next year whether it can be raised safely. 'If we moved it now, it would almost certainly fall apart,' said the project leader, Dr Hana Ruiz. 'Leaving it under water is actually the best way to protect it until we have a proper plan.' The exact location is being kept secret to prevent damage by amateur divers, some of whom have already been seen in the area.", q:[
+  ["Why was the survey carried out?", ["Water levels were unusually low","A diver had reported seeing a boat","The lake was being cleaned after summer","A new bridge was being planned"], "«a survey carried out because of unusually low water levels»."],
+  ["What will happen this winter?", ["The boat will be scanned","The boat will be lifted","The boat will go to a museum","The survey will begin"], "«make a detailed 3D scan this winter»."],
+  ["Why does Dr Ruiz want to leave the boat under water?", ["The water protects it for now","It is too heavy to lift","The lake will be drained next year","Divers want to visit it"], "«Leaving it under water is actually the best way to protect it»."],
+  ["Why is the location secret?", ["To protect the boat from amateur divers","Because the survey has not finished yet","Because the lake belongs to a private owner","To stop people fishing in that part of the lake"], "«to prevent damage by amateur divers»."]]},
+{ id:'c04', l:3, k:'talk', t:"A common question from students is whether it's better to take notes on a laptop or by hand. Several studies have compared the two, and the results are more interesting than a simple 'paper wins'. In a typical experiment, students watch a short lecture, take notes in one of the two ways, and are tested on it later. Students who type tend to write down much more, often almost word for word. Students who write by hand can't keep up, so they're forced to summarise, and that extra processing seems to help them understand the ideas. In tests of facts a day later, the two groups often do about equally well. The difference appears in questions about concepts, where hand-writers usually score higher. Now, does that mean you should throw away your laptop? Not necessarily. If you type, the lesson is simply to resist the temptation to copy everything, and to put things in your own words.", q:[
+  ["What do students who type tend to do?", ["Write down almost everything word for word","Write down less than students using paper","Summarise the ideas in their own words","Remember more facts the next day"], "«write down much more, often almost word for word»."],
+  ["Why do hand-writers summarise?", ["They can't write fast enough to copy it all","Their teachers ask them to write summaries","They understand the ideas more quickly","They want to save paper and time"], "«can't keep up, so they're forced to summarise»."],
+  ["In which questions do hand-writers usually do better?", ["Questions about concepts","Questions about facts","All questions","Questions a week later"], "«The difference appears in questions about concepts»."],
+  ["What is the speaker's main advice?", ["Whatever you use, put ideas in your own words","Always take notes by hand rather than typing","Stop using laptops in class altogether","Type everything so that nothing is missed"], "«resist the temptation to copy everything, and to put things in your own words»."]]},
+{ id:'c05', l:3, k:'announce', t:"This is an announcement for passengers on the 18:05 service to Ashford. Due to a fault with the train at platform four, this service will now be formed of four carriages instead of eight. It will still leave at the normal time. Passengers with reserved seats in coaches E to H should therefore sit in any available seat in coaches A to D. Because this train will be very crowded, passengers who are travelling only as far as Milton Road are advised to take the 18:20 stopping service from platform two, which calls at all stations and will arrive at Milton Road just six minutes later than the 18:05. Please note that the buffet will not be available on the 18:05 this evening. First-class ticket holders affected by the change can claim a partial refund. We apologise for any inconvenience this may cause.", q:[
+  ["Why is the train shorter than usual?", ["There is a fault with the train","There are fewer passengers","The platform is too short","Some coaches are being cleaned"], "«Due to a fault with the train … four carriages instead of eight»."],
+  ["Where should a passenger with a reservation in coach F sit?", ["In any free seat in coaches A to D","In the same seat, now in coach E","On the 18:20 service from platform two","In first class, at no extra cost"], "«reserved seats in coaches E to H should … sit in any available seat in coaches A to D»."],
+  ["Who is advised to take the 18:20 service?", ["Passengers going only to Milton Road","Passengers holding first-class tickets","Passengers travelling all the way to Ashford","Passengers who have no seat reservation"], "«passengers who are travelling only as far as Milton Road»."],
+  ["How much later than the 18:05 does the 18:20 reach Milton Road?", ["Six minutes","Fifteen minutes","Twenty minutes","Nine minutes"], "«will arrive at Milton Road just six minutes later than the 18:05»."],
+  ["What can affected first-class ticket holders claim?", ["A partial refund","A full refund","A free upgrade","A reserved seat on the 18:20"], "«can claim a partial refund»."]]},
+{ id:'c06', l:3, k:'conv', t:[
+  ["Woman","You finished second in the city marathon on Sunday, in two hours and fourteen minutes, your best ever time. You must be delighted."],
+  ["Man","Delighted with the time, yes. With the result, ask me again next week."],
+  ["Woman","You were leading until the last two kilometres. What happened?"],
+  ["Man","Honestly, I made a tactical mistake. I went too early, at around thirty-five kilometres, because I felt strong. That's exactly what my coach had told me not to do."],
+  ["Woman","So you'll be listening to her more carefully next time?"],
+  ["Man","I think she'll make sure of that. But seriously, the winner ran a very smart race. He was patient, and he deserved it."],
+  ["Woman","What's next for you?"],
+  ["Man","A few weeks of rest, because my legs really need it, and then I'll start preparing for the national championships in the spring."]], q:[
+  ["How does the runner feel about his result?", ["Pleased with his time, not with second place","Completely satisfied with his whole race","Angry with the winner for his tactics","Simply glad that he managed to finish"], "«Delighted with the time, yes. With the result, ask me again next week»."],
+  ["What mistake did he make?", ["He sped up too early","He started too slowly","He missed a drinks station","He followed the winner too closely"], "«I went too early, at around thirty-five kilometres»."],
+  ["What does he say about his coach?", ["She had warned him against that tactic","She told him to attack at 35 kilometres","She will stop coaching him after this race","She was not at the race to advise him"], "«exactly what my coach had told me not to do»."],
+  ["What does he say about the winner?", ["He ran a clever race and deserved to win","He was lucky that the leader slowed down","He started too fast but managed to hold on","He was not as strong as the runner-up"], "«ran a very smart race. He was patient, and he deserved it»."],
+  ["What will he do next?", ["Rest for a few weeks","Run another marathon next week","Change coach","Start training at once"], "«A few weeks of rest, and then …»."]]},
+{ id:'c07', l:3, k:'weather', t:"Looking further ahead to next week, the picture is less certain than usual. Most computer models suggest that high pressure will build from the south by Tuesday, bringing several dry, settled days and temperatures a few degrees above average for the time of year. Nights, however, could be quite cold under the clear skies, with a risk of frost in sheltered valleys. At the same time, a minority of models keep a slow-moving area of low pressure close to the north-west, which would mean cloud and showers there, possibly lasting until Thursday. On balance, the south and east look most likely to stay dry, while the north-west is the area where the forecast could change. If you are planning outdoor events up there, it would be wise to check again on Sunday, when we should have a much clearer idea.", q:[
+  ["What do most models suggest?", ["High pressure and dry weather from Tuesday","Showers spreading to the south and east","Low pressure staying over the whole country until Thursday","Temperatures well below the average"], "«Most computer models suggest that high pressure will build … by Tuesday»."],
+  ["Which area has the least certain forecast?", ["The north-west","The south","The east","The whole country"], "«the north-west is the area where the forecast could change»."],
+  ["What does the forecaster suggest to people planning events in the north-west?", ["Check the forecast again on Sunday","Cancel their events to be on the safe side","Move their events to Tuesday","Hold their events on Thursday instead"], "«it would be wise to check again on Sunday»."],
+  ["How confident is the forecaster about next week?", ["Less confident than usual","Completely confident","Unable to say anything","More confident than usual"], "«the picture is less certain than usual»."]]},
+{ id:'c08', l:3, k:'news', t:"The town council of Brayford has announced that it will extend its trial of a four-day working week for office staff for another year. The trial is the first of its kind in the region, and other councils have been following it closely. During the first six months, employees worked thirty-two hours instead of thirty-seven, with no cut in pay. According to an independent report, the number of sick days fell by a quarter, and the council filled vacant positions much faster than before. However, the report also found that phone queues for some services became longer on Fridays, when fewer staff were available. The council says it will solve this by having teams take different days off. Opposition councillors remain unconvinced. They argue that six months is too short to judge and that the report did not measure the quality of the work.", q:[
+  ["How many hours a week did staff work during the trial?", ["32","37","36","30"], "«thirty-two hours instead of thirty-seven»."],
+  ["Which result did the report find?", ["Fewer sick days","Lower pay","More vacant positions","Shorter phone queues on Fridays"], "«the number of sick days fell by a quarter»."],
+  ["How will the council deal with the Friday problem?", ["Teams will take different days off","It will hire extra staff for Fridays","It will close the phone lines on Fridays","It will end the trial"], "«by having teams take different days off»."],
+  ["What is the opposition's view?", ["Six months is too short to judge","The trial should become permanent","Staff should be paid less","The report was too long"], "«six months is too short to judge»."]]},
+{ id:'c09', l:3, k:'talk', t:"Before we go inside the castle, a word about what you're about to see. Much of what visitors think is medieval was actually built in the 1890s, when the owner, a wealthy businessman, decided the ruins weren't romantic enough. He added the towers you can see on the left, the great hall, and most of the furniture, all designed to look five hundred years older than it was. His builders even reused stone from a ruined church nearby, which makes dating some of the walls surprisingly difficult. For a long time, historians dismissed this as a fake. Today we're more generous. The Victorian rebuilding tells us a lot about how people in that period imagined the Middle Ages, and the original walls, which you'll see in the courtyard, are still here underneath it all. So enjoy the great hall, but do keep an eye out for the older stones.", q:[
+  ["When were the towers on the left built?", ["In the 1890s","In the Middle Ages","Five hundred years ago","In the 1990s"], "«actually built in the 1890s … He added the towers»."],
+  ["Why did the owner rebuild the castle?", ["He thought the ruins weren't romantic enough","The old castle was in danger of falling down","He wanted to open the castle to paying visitors","Historians asked him to restore the towers"], "«decided the ruins weren't romantic enough»."],
+  ["How do historians see the rebuilding today?", ["As useful evidence of Victorian ideas","As a worthless fake with no historical value","As genuinely medieval buildings","As a mistake that should be removed"], "«Today we're more generous … tells us a lot about how people in that period imagined the Middle Ages»."],
+  ["What does the guide suggest about the great hall?", ["It only looks medieval","It is the oldest part","It was rebuilt in the Middle Ages","It is closed to visitors"], "Implícito: el «great hall» es de 1890, «designed to look five hundred years older»."],
+  ["Where can the original walls be seen?", ["In the courtyard","In the great hall","In the towers on the left","Behind the furniture"], "«the original walls, which you'll see in the courtyard»."]]},
+{ id:'c10', l:3, k:'conv', t:[
+  ["Man","Hi, I'm Daniel from number twelve. Sorry to bother you."],
+  ["Woman","Not at all. Is everything all right?"],
+  ["Man","Well, it's about your dog. I work nights at the moment, so I sleep during the day, and he barks quite a lot in the mornings, after you've left."],
+  ["Woman","Oh no. I had no idea. He's always so quiet when I'm here."],
+  ["Man","I'm sure he is. I don't want to make a big thing of it. It's just that it's been going on for a couple of weeks."],
+  ["Woman","That's when I started my new job, and I'm out from eight until six now. He's probably not used to being alone for so long. My sister has offered to take him on weekdays. Maybe I should accept."],
+  ["Man","That would be great, if it's not too much trouble. And honestly, it's only until March, when I'm back on days."],
+  ["Woman","I'll call her tonight and let you know tomorrow."]], q:[
+  ["Why is the barking a problem for the man?", ["He sleeps during the day","He works from home in the mornings","He has a young baby at home","He is afraid of large dogs"], "«I work nights … so I sleep during the day»."],
+  ["Why didn't the woman know about the barking?", ["The dog is quiet when she is at home","She works nights and sleeps in the day","Her sister has been looking after the dog","She has only just moved into the street"], "«He's always so quiet when I'm here»."],
+  ["What does the woman think is the cause?", ["The dog is alone for longer than before","The dog has been ill for a couple of weeks","The dog doesn't like the man next door","The dog is new and still settling in"], "«He's probably not used to being alone for so long»."],
+  ["How does the man raise the problem?", ["Politely, trying to avoid conflict","Angrily, threatening to complain","As a joke","Through the woman's sister"], "Actitud: «Sorry to bother you» «I don't want to make a big thing of it»."],
+  ["What does he mean by 'it's only until March'?", ["His night shifts end in March","He is moving out in March","The dog will be trained by March","Her new job ends in March"], "«until March, when I'm back on days»."]]},
+{ id:'c11', l:3, k:'instr', t:"Right, everyone, before we start the evacuation exercise, here's how it will work. When the alarm sounds, stop what you're doing and leave by the nearest exit, but not by the lifts, and not by the main staircase, which will be kept clear for the fire service. That means people on this floor should use the east stairs, next to the kitchen. Don't stop to collect coats or bags; we're timing this. If you're in a meeting room, close the door behind you as you leave. Once outside, go to assembly point B in the car park, not point A by the front door, which is closed because of the building work. Floor wardens in yellow vests will count everyone, so please stay at the assembly point until you're told you can go back in. Last time it took eleven minutes. The target is under six.", q:[
+  ["Which stairs should people on this floor use?", ["The east stairs","The main staircase","The west stairs","The stairs by the front door"], "«people on this floor should use the east stairs, next to the kitchen»."],
+  ["Why must the main staircase not be used?", ["It is kept clear for the fire service","It is closed because of the building work","It is too narrow for everyone at once","It leads only to assembly point A"], "«the main staircase, which will be kept clear for the fire service»."],
+  ["Why is assembly point A not being used?", ["It is closed because of building work","It is too close to the kitchen exit","It is kept free for the fire service","It is too small for the whole office"], "«point A by the front door, which is closed because of the building work»."],
+  ["What is the target time for the exercise?", ["Under six minutes","Eleven minutes","Under five minutes","Under ten minutes"], "«Last time it took eleven minutes. The target is under six»."]]},
+{ id:'c12', l:3, k:'news', t:"A new study suggests that households throw away nearly a fifth of the food they buy, and that the biggest single cause is not cooking too much but buying too much. Researchers followed four hundred families for a year and found that those who wrote a shopping list and checked their fridge before going out wasted about thirty percent less. The families also kept a diary of everything they threw away, and bread, salad and fruit were the items wasted most often. Interestingly, special offers such as 'buy one, get one free' made things worse, because the extra items were often forgotten until they went off. The researchers don't blame the shops alone, though. 'Offers aren't the problem in themselves,' said the lead author. 'The problem is that we treat a bargain as a reason to buy, rather than asking whether we'll actually eat it.'", q:[
+  ["According to the study, what is the main cause of food waste?", ["Buying too much","Cooking too much","Poor storage","Food going off in shops"], "«not cooking too much but buying too much»."],
+  ["How much less did the list-writing families waste?", ["About thirty percent less","About a fifth less","About half as much","About four percent less"], "«wasted about thirty percent less»; un quinto es lo que se tira en total."],
+  ["Why did special offers increase waste?", ["Extra items were forgotten until they went bad","The food on offer was usually of poor quality","People cooked larger meals than they needed","Shops put food close to its date on offer"], "«the extra items were often forgotten until they went off»."],
+  ["What is the lead author's view?", ["Shoppers should ask if they will eat it","Shops should stop special offers completely","Offers are the main cause of food waste","Families should simply cook smaller meals"], "«rather than asking whether we'll actually eat it»; «Offers aren't the problem in themselves»."]]},
+{ id:'c13', l:3, k:'news', t:"The opening of the rail link between the city centre and the airport has been delayed again, this time until next autumn. The line was originally due to open two years ago, and its cost has risen from 300 to 420 million euros. Around eight million passengers use the airport each year, and most of them currently reach the city by car or taxi. The latest delay is due to problems with the signalling system, which failed safety tests in October. The transport minister said she was 'deeply frustrated' but insisted that safety could not be compromised. Business groups have criticised the delay, pointing out that the airport bus is often stuck in traffic and that journey times of over an hour put off conference organisers. When it opens, trains will run every ten minutes and the journey will take eighteen minutes.", q:[
+  ["By how much has the cost risen?", ["120 million euros","420 million euros","300 million euros","200 million euros"], "«from 300 to 420 million euros»: 420 − 300 = 120."],
+  ["What caused the latest delay?", ["Signalling problems found in safety tests","A lack of money after the cost rise","Problems with the new airport station","A strike by the construction workers"], "«problems with the signalling system, which failed safety tests»."],
+  ["How did the minister react?", ["She was frustrated but put safety first","She blamed the business groups for it","She promised the line would open this year","She said she was not concerned at all"], "«'deeply frustrated' but insisted that safety could not be compromised»."],
+  ["Why are business groups concerned?", ["Slow airport buses put off conference organisers","Train tickets are likely to be too expensive","Trains will not run often enough for business","The airport is too small for big conferences"], "«journey times of over an hour put off conference organisers»."],
+  ["How long will the train journey take?", ["18 minutes","10 minutes","Over an hour","28 minutes"], "«the journey will take eighteen minutes»; 10 es la frecuencia."]]},
+{ id:'c14', l:3, k:'conv', t:[
+  ["Woman","So, what did you think of the flat on Hill Street?"],
+  ["Man","It's in a great location, five minutes from the station. And the kitchen's been completely redone."],
+  ["Woman","But?"],
+  ["Man","Well, the bedroom faces the main road, and there's a bus stop right outside. I was there at four in the afternoon and could hardly hear the agent."],
+  ["Woman","Hmm. Did you ask whether the windows are double glazed?"],
+  ["Man","I did. They're not, and the landlord has no plans to change them."],
+  ["Woman","And the rent?"],
+  ["Man","Eleven hundred a month, plus bills. Which is a hundred more than the one in Park Lane."],
+  ["Woman","The Park Lane one was the one with the tiny kitchen, wasn't it?"],
+  ["Man","Tiny is generous. But it's quiet, and you know how badly I sleep."],
+  ["Woman","Sounds like you've already decided."],
+  ["Man","I suppose I have. I'll call the agent in the morning."]], q:[
+  ["What is the main advantage of the Hill Street flat?", ["Its location near the station","Its rent, lower than Park Lane","Its quiet bedroom at the back","Its new bathroom and large garden"], "«a great location, five minutes from the station»."],
+  ["What problem did the man notice there?", ["The bedroom is very noisy","The kitchen is old","The agent was late","The bus stop is far away"], "«the bedroom faces the main road … could hardly hear the agent»."],
+  ["How much is the rent of the Park Lane flat?", ["1,000 a month","1,100 a month","1,200 a month","900 a month"], "«Eleven hundred … a hundred more than the one in Park Lane»: 1100 − 100."],
+  ["Which flat will the man probably take?", ["The Park Lane flat","The Hill Street flat","Neither of them","Another flat near the station"], "Implícito: «it's quiet, and you know how badly I sleep» «Sounds like you've already decided»."],
+  ["What does he mean by 'Tiny is generous'?", ["The kitchen is even smaller than tiny","The kitchen is bigger than it looked","The landlord is a generous person","The rent is low for such a small flat"], "Ironía: «tiny» se queda corto para esa cocina."]]},
+{ id:'c15', l:3, k:'talk', t:"You may have noticed that flying from Europe to North America usually takes longer than the return journey, sometimes by more than an hour. A flight from London to New York, for example, often takes around eight hours, while the flight back can take less than seven. The reason isn't the rotation of the Earth, as many people assume, since the atmosphere rotates with the planet. It's the jet stream: a band of strong wind, often more than two hundred kilometres per hour, which blows from west to east at about the height where airliners cruise. Flying east, pilots try to stay inside it to get a free push. Flying west, they try to avoid it, which can mean taking a route that looks longer on a map but is actually faster. In winter, when the jet stream is usually strongest, the difference between the two directions is greatest.", q:[
+  ["What do many people wrongly believe?", ["The Earth's rotation causes the difference","The jet stream blows from east to west","Westbound flights are faster","Pilots avoid the jet stream flying east"], "«The reason isn't the rotation of the Earth, as many people assume»."],
+  ["In which direction does the jet stream blow?", ["From west to east","From east to west","From north to south","It changes every day"], "«blows from west to east»."],
+  ["Why might a westbound flight take a route that looks longer?", ["To avoid the jet stream","To save fuel by flying lower","To follow the Earth's rotation","To stay inside the jet stream"], "«Flying west, they try to avoid it … a route that looks longer on a map but is actually faster»."],
+  ["When is the difference between the two directions greatest?", ["In winter","In summer","At night","In spring"], "«In winter, when the jet stream is usually strongest»."]]}
+];
+const GEN_LEVELS = [null,
+  { n:1, name:'Básico',   rate:0.92, eq:3 },
+  { n:2, name:'Estándar', rate:1.0,  eq:5 },
+  { n:3, name:'Exigente', rate:1.12, eq:7 }
+];
+const GEN_KINDS = { news:'Noticia', announce:'Anuncio', talk:'Charla', conv:'Conversación', instr:'Instrucciones', weather:'Tiempo', travel:'Viaje' };
+function genSpoken(p){ return Array.isArray(p.t) ? p.t.map(function(x){ return x[1]; }).join(' ') : p.t; }
+function genWordCount(p){ return genSpoken(p).split(/\s+/).filter(function(w){ return /[A-Za-z0-9]/.test(w); }).length; }
+// Transcript lines: one per speaker turn for a conversation, one paragraph otherwise.
+function genLines(p){ return Array.isArray(p.t) ? p.t.map(function(x){ return x[0] + ': ' + x[1]; }) : [p.t]; }
+// Sentence chunks for speech (short utterances avoid the engines' cut-off on long texts); spk = speaker or ''.
+function genChunks(p){
+  const out = [];
+  const turns = Array.isArray(p.t) ? p.t : [['', p.t]];
+  turns.forEach(function(turn, ti){
+    const parts = String(turn[1]).split(/(?<=[.!?]['’]?)\s+/).filter(Boolean);
+    parts.forEach(function(s, si){ out.push({ text:s, spk:turn[0], gap: si === 0 && ti > 0 ? 450 : 160 }); });
+  });
+  return out;
+}
+// Problems of one bank entry (empty list = valid). Used by the tests and, defensively, before building.
+function genCheck(p){
+  const errs = [];
+  if (!p || !p.id) return ['sin id'];
+  if (!(p.l >= 1 && p.l <= 3)) errs.push(p.id + ': nivel');
+  if (!GEN_KINDS[p.k]) errs.push(p.id + ': tipo');
+  const w = genWordCount(p);
+  if (w < 60 || w > 170) errs.push(p.id + ': ' + w + ' palabras');
+  if (!Array.isArray(p.q) || p.q.length < 3 || p.q.length > 5) errs.push(p.id + ': preguntas');
+  (p.q || []).forEach(function(q, i){
+    if (!q[0] || !Array.isArray(q[1]) || q[1].length !== 4) { errs.push(p.id + ' Q' + (i + 1) + ': opciones'); return; }
+    const norm = q[1].map(function(o){ return String(o).trim().toLowerCase(); });
+    if (norm.some(function(o){ return !o; }) || norm.filter(function(o, j){ return norm.indexOf(o) === j; }).length !== 4) errs.push(p.id + ' Q' + (i + 1) + ': opciones repetidas');
+    if (!q[2]) errs.push(p.id + ' Q' + (i + 1) + ': explicación');
+  });
+  return errs;
+}
+// Builds the playable form: options shuffled, correctIndex points at the option written first in the bank.
+function genBuild(p, rnd){
+  return { id:p.id, kind:p.k, level:p.l, lines:genLines(p), chunks:genChunks(p), words:genWordCount(p),
+    qs: p.q.map(function(q){
+      const order = shuffle(rnd, [0, 1, 2, 3]);
+      return { q:q[0], options:order.map(function(i){ return q[1][i]; }), correctIndex:order.indexOf(0), why:q[2] };
+    }) };
+}
+// Picks n passages of a level: never-seen first, then the least recently seen; random among equals.
+function genPick(bank, level, n, seen, rnd){
+  const pool = shuffle(rnd, bank.filter(function(p){ return p.l === level; }));
+  const rank = function(p){ return (seen || []).lastIndexOf(p.id); };
+  pool.sort(function(a, b){ return rank(a) - rank(b); });
+  return pool.slice(0, Math.max(1, Math.min(n, pool.length)));
+}
+// Reading-practice time for a passage: the time the voice would take (about 160 words a minute at 1.0x) plus 5 s.
+function genReadSec(words, rate){ return Math.round(words / (160 * (rate || 1)) * 60) + 5; }
+// Voice gender guessed from the installed voice name, used only to give the two people of a conversation different voices.
+function voiceGender(v){
+  const n = (v && v.name) || '';
+  if (/female|woman|zira|hazel|susan|libby|sonia|jenny|aria|samantha|karen|moira|tessa|fiona|serena|victoria|kate|emma|amy|natasha|clara|catherine|linda|olivia|ava|allison|joanna|kimberly|salli|nicole|michelle|heera|maisie|ana\b/i.test(n)) return 'f';
+  if (/\bmale\b|\bman\b|david|mark|george|ryan|guy|daniel|alex|fred|oliver|thomas|james|william|brian|matthew|justin|joey|russell|ravi|sean|liam|eric|christopher|roger|richard|arthur|rishi/i.test(n)) return 'm';
+  return '';
+}
+// Voice and pitch for a speaker: the chosen voice for a monologue; in a conversation a voice of the speaker's
+// gender if one is installed, otherwise the chosen voice with a raised or lowered pitch.
+function genVoiceFor(spk, chosen, voices){
+  if (!spk) return { v:chosen, pitch:1 };
+  const want = /^wom/i.test(spk) ? 'f' : (/^man/i.test(spk) ? 'm' : '');
+  if (!want || voiceGender(chosen) === want) return { v:chosen, pitch:1 };
+  const alt = (voices || []).filter(function(x){ return voiceGender(x) === want; });
+  const best = alt.filter(function(x){ return chosen && x.lang === chosen.lang; })[0] || alt[0];
+  if (best) return { v:best, pitch:1 };
+  return { v:chosen, pitch: want === 'f' ? 1.25 : 0.8 };
+}
+// Score of a finished session. answers[i][j] = chosen option index or undefined (blank).
+function genScore(items, answers){
+  let correct = 0, wrong = 0, blank = 0;
+  items.forEach(function(it, i){ it.qs.forEach(function(q, j){ const a = answers[i] ? answers[i][j] : undefined; if (a === undefined || a === null) blank++; else if (a === q.correctIndex) correct++; else wrong++; }); });
+  return { correct:correct, wrong:wrong, blank:blank, total:correct + wrong + blank };
+}
+
 /* ---------- CSV / goal / records ---------- */
 function csvField(v){
   const s = (v === null || v === undefined) ? '' : String(v);
@@ -549,9 +936,10 @@ function wordDelayMs(rate){ return Math.max(160, Math.round(60000 / (150 * (rate
 
 // ==================== USER INTERFACE ====================
 // MODULES = STORED/CSV module strings (the dashboard matches them by regex): keep in English. MODULES_ES, KIND_ES and MODE_ES are display only.
-const MODULES = { dictation:'Element dictation', passage:'Passage comprehension' };
-const MODULES_ES = { dictation:'Dictado de elementos', passage:'Comprensión de pasajes' };
-const MODULE_BY_EN = { 'Element dictation':'dictation', 'Passage comprehension':'passage' };
+// 'Passage comprehension: general English' starts with the passage label on purpose: the dashboard regex files it under lis.passage.
+const MODULES = { dictation:'Element dictation', passage:'Passage comprehension', general:'Passage comprehension: general English' };
+const MODULES_ES = { dictation:'Dictado de elementos', passage:'Comprensión de pasajes', general:'Inglés general' };
+const MODULE_BY_EN = { 'Element dictation':'dictation', 'Passage comprehension':'passage', 'Passage comprehension: general English':'general' };
 const KIND_ES = { callsign:'indicativo', heading:'rumbo', flightlevel:'nivel de vuelo', altimeter:'QNH', frequency:'frecuencia', squawk:'código transpondedor', runway:'pista', weather:'meteorología', briefing:'ATIS', clearanceSeq:'autorización de salida', notam:'NOTAM' };
 function modES(m){ return MODULES_ES[MODULE_BY_EN[m]] || m; }
 const STORE_KEY = 'atc_listening_v1';
@@ -620,7 +1008,7 @@ function initSpeech(cb){
   const finish = function(){ refreshVoices(); Speech.ready = true; if (!called){ called = true; cb(); } };
   try {
     // Chrome loads its voice list asynchronously and may report it after our first look, so keep listening.
-    speechSynthesis.onvoiceschanged = function(){ const had = Speech.hasVoice; refreshVoices(); Speech.ready = true; if (!called){ called = true; cb(); } else if (Speech.hasVoice !== had && app.querySelector('.card')) menu(); };
+    speechSynthesis.onvoiceschanged = function(){ const had = Speech.hasVoice; refreshVoices(); Speech.ready = true; if (!called){ called = true; cb(); } else if (Speech.hasVoice !== had && app.querySelector('.card')) menu(); else if (Speech.hasVoice !== had && $('genCfg')) genConfig(); };
     if (speechSynthesis.getVoices().length){ finish(); return; }
   } catch (e) { Speech.ready = true; Speech.hasVoice = false; cb(); return; }
   setTimeout(finish, 500);
@@ -699,6 +1087,7 @@ function defaultCustom(){ return { rate:1.0, items:10, complexity:2, dual:0, hin
 
 /* ---------- Menu ---------- */
 function moduleSummary(id){
+  if (id === 'general') return genSummary();
   const d = load();
   const ses = d.sessions.filter(function(s){ return s.module === MODULES[id]; });
   const lv = 'L' + (d.levels[id] || 1);
@@ -709,7 +1098,7 @@ function moduleSummary(id){
 function menu(){
   clear(); sessionActive = false;
   const d = load();
-  const cards = [['dictation', 'headphones'], ['passage', 'doc']];
+  const cards = [['dictation', 'headphones'], ['passage', 'doc'], ['general', 'speech']];
   screen(
     '<div class="brand">' + ic('logo') + '<h1>Comprensión auditiva</h1></div>' +
     (storeOk ? '' : '<p><b class="warn">Historial no guardado</b></p>') +
@@ -719,7 +1108,7 @@ function menu(){
     }).join('') + '</div>' +
     '<p class="row"><button class="btn" id="levels">' + ic('sliders') + 'Niveles (L)</button><button class="btn" id="tips">' + ic('book') + 'Consejos (T)</button><button class="btn" id="hist">' + ic('history') + 'Historial (H)</button></p>'
   );
-  const go = { dictation:function(){ config('dictation'); }, passage:function(){ config('passage'); } };
+  const go = { dictation:function(){ config('dictation'); }, passage:function(){ config('passage'); }, general:genConfig };
   Array.prototype.forEach.call(app.querySelectorAll('.card'), function(b){ b.addEventListener('click', function(){ go[b.dataset.m](); }); });
   bindVoiceBanner();
   $('levels').addEventListener('click', levelsPage);
@@ -729,6 +1118,7 @@ function menu(){
     if ((e.key === 'q' || e.key === 'Q') && !d.sessions.length){ e.preventDefault(); quickStart(); }
     else if (e.key === '1'){ e.preventDefault(); config('dictation'); }
     else if (e.key === '2'){ e.preventDefault(); config('passage'); }
+    else if (e.key === '3'){ e.preventDefault(); genConfig(); }
     else if (e.key === 'l' || e.key === 'L') levelsPage();
     else if (e.key === 't' || e.key === 'T') tipsPage();
     else if (e.key === 'h' || e.key === 'H') historyPage();
@@ -1223,6 +1613,266 @@ function finishPassage(state){
     reviewHtml:reviewHtml, repeat:function(){ config('passage'); } });
 }
 
+/* ================= MODULE 3: GENERAL-ENGLISH COMPREHENSION (FEAST English listening) =================
+   One play per passage, no replay; questions after the passage; no right/wrong marks until the review.
+   Stored in the same sessions list; comp:'general' marks these sessions, cl = level 1-3, and level holds the
+   equivalent rung of the 10-level ladder (3 / 5 / 7) that the dashboard and "Siguiente" already read.
+   Reading practice (no English voice) is stored with mode 'reading', level null and count:false so that it
+   never counts as listening. */
+const GEN_TARGET = 90;
+function genPrefs(){
+  const d = load();
+  if (!d.comp || typeof d.comp !== 'object' || Array.isArray(d.comp)) d.comp = {};
+  const c = d.comp;
+  if (!(c.cl >= 1 && c.cl <= 3)) c.cl = 2;
+  if (!(c.n >= 1 && c.n <= 15)) c.n = 4;
+  if (!Array.isArray(c.seen)) c.seen = [];
+  return c;
+}
+function genAudio(){ return Speech.ready && !useVisualFallback(); }
+function genSummary(){
+  const d = load(), c = genPrefs();
+  const ses = d.sessions.filter(function(s){ return s.comp === 'general'; });
+  if (!ses.length) return 'N' + c.cl;
+  const u = ses[ses.length - 1];
+  return 'N' + c.cl + ' · ' + ses.length + (ses.length === 1 ? ' sesión' : ' sesiones') + ' · última ' + fmt(u.accuracy, 1) + ' %';
+}
+function genChosenVoice(idx){ const v = Speech.englishVoices; return v[idx] || v[0] || null; }
+// Speaks the chunks one after another. onDone once at the end; onFail if the engine never starts (the caller then
+// switches the item to reading). A chunk whose end event never arrives is closed by a timer so the item cannot hang.
+function genSpeak(chunks, chosen, rate, onProg, onDone, onFail){
+  const myGen = genCounter;
+  let i = 0, startedAny = false, over = false;
+  const alive = function(){ return myGen === genCounter && !over; };
+  const fail = function(){ if (!alive()) return; over = true; try { speechSynthesis.cancel(); } catch (e) {} Speech.failures++; onFail(); };
+  const next = function(){
+    if (!alive()) return;
+    if (i >= chunks.length){ over = true; onDone(); return; }
+    const idx = i, ch = chunks[idx];
+    let started = false, ended = false;
+    onProg(idx, chunks.length);
+    const end = function(){ if (ended || !alive() || idx !== i) return; ended = true; i++; tmr(setTimeout(next, ch.gap)); };
+    let u;
+    try { u = new SpeechSynthesisUtterance(ch.text); } catch (e) { fail(); return; }
+    Speech.cur = u; // keep a reference: Chrome can garbage-collect a running utterance and never fire onend
+    const vf = genVoiceFor(ch.spk, chosen, Speech.englishVoices);
+    try { if (vf.v){ u.voice = vf.v; u.lang = vf.v.lang; } else u.lang = 'en-GB'; } catch (e) { u.lang = 'en-GB'; }
+    u.rate = Math.max(0.5, Math.min(2, rate)); u.pitch = vf.pitch;
+    u.onstart = function(){ started = true; startedAny = true; };
+    u.onend = end;
+    u.onerror = function(){ if (!alive()) return; if (startedAny) end(); else fail(); };
+    if (!startedAny) tmr(setTimeout(function(){ if (!started && alive() && idx === i) fail(); }, 3000));
+    tmr(setTimeout(function(){ if (alive() && idx === i && !ended) end(); }, 4000 + ch.text.split(/\s+/).length * wordDelayMs(rate) * 2.5));
+    try { speechSynthesis.speak(u); } catch (e) { fail(); }
+  };
+  try { speechSynthesis.cancel(); } catch (e) {}
+  tmr(setTimeout(next, 60));
+}
+function genConfig(){
+  clear(); sessionActive = false;
+  const c = genPrefs();
+  const audio = genAudio();
+  const voices = Speech.englishVoices;
+  let vIdx = 0; voices.forEach(function(v, i){ if (v.name === c.voice) vIdx = i; });
+  screen(
+    '<div id="genCfg"><button class="link" id="back">' + ic('back') + 'Menú</button>' +
+    '<h1>' + MODULES_ES.general + '</h1>' +
+    (!Speech.ready ? '<p class="voice">' + ic('headphones') + 'Comprobando voces</p>'
+      : (audio ? '' : '<p class="voice">' + ic('doc') + '<b class="warn">Sin voz en inglés: lectura con tiempo</b>' + (Speech.hasVoice ? '<button class="link" id="useVoice">Usar voz</button>' : '') + '</p>')) +
+    '<label class="lab" for="glevel">Nivel</label><select id="glevel">' + [1, 2, 3].map(function(l){ return '<option value="' + l + '"' + (l === c.cl ? ' selected' : '') + '>' + l + ' - ' + GEN_LEVELS[l].name + (l === 2 ? ' (objetivo)' : '') + '</option>'; }).join('') + '</select>' +
+    (audio
+      ? '<label class="lab" for="gvoice">Voz</label><div class="row"><select id="gvoice" style="flex:1 1 200px;width:auto;min-width:0">' + voices.map(function(v, i){ return '<option value="' + i + '"' + (i === vIdx ? ' selected' : '') + '>' + esc(v.name) + ' (' + esc(v.lang) + ')</option>'; }).join('') + '</select><button class="btn small" id="gtest" type="button">' + ic('play') + 'Probar</button></div>' +
+        '<label class="lab" for="grate">Velocidad <span id="grateV"></span>×</label><input type="range" id="grate" min="0.6" max="1.6" step="0.02">'
+      : '') +
+    '<label class="lab" for="gn">Pasajes</label><input type="number" id="gn" min="1" max="15" value="' + c.n + '">' +
+    '<label class="lab" for="goal">Objetivo</label><input type="text" id="goal" maxlength="80" autocomplete="off" value="' + GEN_TARGET + ' % precisión">' +
+    '<p id="err" class="bad" role="alert"></p>' +
+    '<button class="btn primary" id="go">' + ic('play') + 'Iniciar</button></div>'
+  );
+  $('back').addEventListener('click', menu);
+  const uv = $('useVoice'); if (uv) uv.addEventListener('click', function(){ Speech.forcedVisual = false; Speech.failures = 0; genConfig(); });
+  const setRate = function(r){ const g = $('grate'); if (!g) return; g.value = r; $('grateV').textContent = (+g.value).toFixed(2); };
+  setRate(GEN_LEVELS[c.cl].rate);
+  $('glevel').addEventListener('change', function(){ setRate(GEN_LEVELS[+this.value].rate); });
+  if ($('grate')) $('grate').addEventListener('input', function(){ $('grateV').textContent = (+this.value).toFixed(2); });
+  if ($('gtest')) $('gtest').addEventListener('click', function(){
+    const b = $('gtest'); b.disabled = true;
+    genSpeak([{ text:'Good morning. This is the voice you will hear in the passages.', spk:'', gap:0 }], genChosenVoice(+$('gvoice').value), +$('grate').value,
+      function(){}, function(){ const x = $('gtest'); if (x) x.disabled = false; }, function(){ genConfig(); });
+  });
+  const goFn = function(){
+    const goalTxt = $('goal').value.trim();
+    if (!goalTxt){ $('err').textContent = 'Indica un objetivo'; $('goal').focus(); return; }
+    const n = Math.max(1, Math.min(15, Math.round(+$('gn').value || 4)));
+    const cl = +$('glevel').value;
+    const run = { cl:cl, n:n, goal:goalTxt, audio:genAudio(), rate: $('grate') ? +$('grate').value : GEN_LEVELS[cl].rate, voiceIdx: $('gvoice') ? +$('gvoice').value : 0 };
+    c.cl = cl; c.n = n; if (run.audio && voices[run.voiceIdx]) c.voice = voices[run.voiceIdx].name;
+    save();
+    genStart(run);
+  };
+  $('go').addEventListener('click', goFn);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON'){ e.preventDefault(); goFn(); } };
+  $('go').focus();
+}
+function genStart(run){
+  clear();
+  sessionActive = true;
+  const c = genPrefs();
+  const items = genPick(GEN_BANK, run.cl, run.n, c.seen, Math.random).filter(function(p){ return genCheck(p).length === 0; }).map(function(p){ return genBuild(p, Math.random); });
+  genItem({ run:run, items:items, idx:0, answers:[], read:[], activeMs:0, thirdRes:[] });
+}
+function genItem(state){
+  clear();
+  const it = state.items[state.idx];
+  const audio = state.run.audio && !useVisualFallback();
+  const ans = [];
+  let phase = 'ready', shown = false;
+  const t0 = performance.now();
+  screen(
+    '<div class="head"><span>Pasaje <b>' + (state.idx + 1) + '</b> / ' + state.items.length + '</span><span>' + esc(GEN_KINDS[it.kind]) + '</span><span>' + (audio ? '1 escucha' : 'Lectura') + '</span><button class="link" id="quit" type="button">Salir</button></div>' +
+    '<div class="bar"><div style="width:' + (state.idx / state.items.length * 100) + '%"></div></div>' +
+    '<div class="playbox" id="pbox"></div>' +
+    '<p class="keys"><span class="key">Enter</span> ' + (audio ? 'escuchar' : 'leer') + ' / siguiente · <span class="key">A-D</span> responder · <span class="key">Esc Esc</span> salir</p>' +
+    '<div id="qs"></div>'
+  );
+  $('quit').addEventListener('click', quitSession);
+  const box = $('pbox');
+  function readyBox(isAudio){
+    box.innerHTML = ic(isAudio ? 'headphones' : 'doc', 'big') + '<div class="playword" id="pw" aria-live="polite">' + esc(GEN_KINDS[it.kind]) + '</div>' +
+      '<div class="bar gbar"><div id="pbar"></div></div>' +
+      '<button class="btn primary" id="play" style="margin-top:10px">' + ic('play') + (isAudio ? 'Escuchar' : 'Leer') + '</button>';
+    $('play').addEventListener('click', isAudio ? listen : startReading);
+    $('play').focus();
+  }
+  function listen(){
+    if (phase !== 'ready') return;
+    phase = 'playing';
+    box.innerHTML = ic('headphones', 'big') + '<div class="playword" id="pw" aria-live="polite">Escuchando</div><div class="bar gbar"><div id="pbar"></div></div>';
+    genSpeak(it.chunks, genChosenVoice(state.run.voiceIdx), state.run.rate,
+      function(i, n){ const b = $('pbar'); if (b) b.style.width = (i / n * 100) + '%'; },
+      function(){ const b = $('pbar'); if (b) b.style.width = '100%'; const w = $('pw'); if (w) w.textContent = 'Fin'; showQuestions(); },
+      function(){ state.read[state.idx] = true; phase = 'ready'; startReading(); });
+  }
+  function startReading(){
+    if (phase === 'reading' || shown) return;
+    phase = 'reading'; state.read[state.idx] = true;
+    let left = genReadSec(it.words, state.run.rate);
+    box.innerHTML = '<div class="playword small" id="pw"><span id="tleft">' + left + '</span> s</div>' +
+      '<div class="ptext">' + it.lines.map(esc).join('<br>') + '</div>' +
+      '<button class="btn primary" id="toQs">' + ic('arrow') + 'Preguntas</button>';
+    $('toQs').addEventListener('click', endReading);
+    $('toQs').focus();
+    tmr(setInterval(function(){ left--; const t = $('tleft'); if (t) t.textContent = Math.max(0, left); if (left <= 0) endReading(); }, 1000));
+  }
+  function endReading(){
+    if (shown) return;
+    timers.forEach(function(t){ clearInterval(t); });
+    box.innerHTML = ic('doc', 'big') + '<div class="playword" id="pw">Fin</div>';
+    showQuestions();
+  }
+  function choose(qi, oi){
+    if (!shown) return;
+    ans[qi] = oi;
+    Array.prototype.forEach.call($('gq' + qi).querySelectorAll('.optBtn'), function(b, bi){ b.classList.toggle('sel', bi === oi); b.setAttribute('aria-pressed', bi === oi ? 'true' : 'false'); });
+  }
+  function showQuestions(){
+    if (shown) return;
+    shown = true; phase = 'questions';
+    $('qs').innerHTML = it.qs.map(function(q, qi){
+      return '<div class="passageQ"><p><b>Q' + (qi + 1) + '.</b> ' + esc(q.q) + '</p><div class="optsList" id="gq' + qi + '">' +
+        q.options.map(function(o, oi){ return '<button class="optBtn" aria-pressed="false" data-q="' + qi + '" data-o="' + oi + '"><b>' + 'ABCD'[oi] + ')</b> ' + esc(o) + '</button>'; }).join('') +
+        '</div></div>';
+    }).join('') + '<p class="row"><button class="btn primary" id="next">' + ic('arrow') + (state.idx + 1 < state.items.length ? 'Siguiente' : 'Terminar') + '</button></p>';
+    Array.prototype.forEach.call($('qs').querySelectorAll('.optBtn'), function(b){ b.addEventListener('click', function(){ choose(+b.dataset.q, +b.dataset.o); }); });
+    $('next').addEventListener('click', next);
+    const first = $('qs').querySelector('.optBtn'); if (first) first.focus();
+  }
+  function next(){
+    if (!shown || phase === 'done') return;
+    phase = 'done';
+    const ms = performance.now() - t0;
+    state.activeMs += ms;
+    state.answers[state.idx] = it.qs.map(function(q, qi){ return ans[qi]; });
+    it.qs.forEach(function(q, qi){ const a = ans[qi]; state.thirdRes.push({ ok:a === q.correctIndex, blank:a === undefined, sec:(ms / 1000) / it.qs.length, t:0 }); });
+    state.idx++;
+    if (state.idx >= state.items.length) genFinish(state); else genItem(state);
+  }
+  onKey = function(e){
+    if (e.key === 'Enter' && e.target && e.target.tagName === 'BUTTON') return; // Enter on a focused button presses that button
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      if (phase === 'ready'){ if (audio) listen(); else startReading(); }
+      else if (phase === 'reading') endReading();
+      else if (shown && it.qs.every(function(q, qi){ return ans[qi] !== undefined; })) next();
+      return;
+    }
+    const k = e.key.length === 1 ? 'ABCD'.indexOf(e.key.toUpperCase()) : -1;
+    if (k >= 0 && shown && phase === 'questions'){
+      const fe = document.activeElement, fq = fe && fe.dataset && fe.dataset.q !== undefined ? +fe.dataset.q : -1;
+      const qi = fq >= 0 ? fq : it.qs.findIndex(function(q, i){ return ans[i] === undefined; });
+      if (qi >= 0){
+        e.preventDefault(); choose(qi, k);
+        const nx = $('gq' + (qi + 1)); const target = nx ? nx.querySelector('.optBtn') : $('next'); if (target) target.focus();
+      }
+    }
+  };
+  readyBox(audio);
+}
+function genFinish(state){
+  clear(); sessionActive = false;
+  const d = load(), c = genPrefs(), run = state.run;
+  const sc = genScore(state.items, state.answers);
+  const accuracy = sc.total ? sc.correct / sc.total * 100 : 0;
+  const spi = sc.total ? state.activeMs / 1000 / sc.total : null;
+  const listened = run.audio && !state.read.some(Boolean);
+  const met = evaluateGoal(run.goal, { accuracy:accuracy, spi:spi, correct:sc.correct });
+  const ses = { ts:new Date().toISOString(), module:MODULES.general, level: listened ? GEN_LEVELS[run.cl].eq : null, mode: listened ? 'ladder' : 'reading',
+    correct:sc.correct, wrong:sc.wrong, blank:sc.blank, spi:spi, accuracy:accuracy, goal:run.goal, met:met,
+    rate:run.rate, replays:0, thirds:atcThirds(state.thirdRes, 0), comp:'general', cl:run.cl };
+  if (!listened) ses.count = false;
+  d.sessions.push(ses);
+  const ids = state.items.map(function(it){ return it.id; });
+  c.seen = c.seen.filter(function(id){ return ids.indexOf(id) < 0; }).concat(ids).slice(-GEN_BANK.length);
+  save();
+  let goalHtml;
+  if (met === true) goalHtml = '<p>' + ic('check', 'good') + ' <b class="good">Objetivo cumplido</b> “' + esc(run.goal) + '”</p>';
+  else if (met === false) goalHtml = '<p><b class="warn">Objetivo no cumplido</b> “' + esc(run.goal) + '”</p>';
+  else goalHtml = '<p class="soft">Objetivo no legible: “' + esc(run.goal) + '”</p>';
+  const endLine = atcEnduranceLine(ses.thirds);
+  const review = state.items.map(function(it, i){
+    const a = state.answers[i] || [];
+    const ok = it.qs.filter(function(q, qi){ return a[qi] === q.correctIndex; }).length;
+    return '<details class="rev"' + (ok < it.qs.length ? ' open' : '') + '><summary>#' + (i + 1) + ' ' + esc(GEN_KINDS[it.kind]) + ' · <span class="' + (ok === it.qs.length ? 'good' : 'bad') + '">' + ok + ' / ' + it.qs.length + '</span>' + (state.read[i] ? ' · lectura' : '') + '</summary>' +
+      '<div class="ptext">' + it.lines.map(esc).join('<br>') + '</div>' +
+      it.qs.map(function(q, qi){
+        const u = a[qi], good = u === q.correctIndex;
+        return '<div class="rq"><p><b>Q' + (qi + 1) + '.</b> ' + esc(q.q) + '</p>' +
+          '<p>' + (good ? '<span class="good">' + ic('check') + ' ' + esc(q.options[q.correctIndex]) + '</span>'
+            : '<span class="bad">' + (u === undefined ? 'En blanco' : '✗ ' + esc(q.options[u])) + '</span> → <b class="good">' + esc(q.options[q.correctIndex]) + '</b>') + '</p>' +
+          '<p class="soft small">' + esc(q.why) + '</p></div>';
+      }).join('') + '</details>';
+  }).join('');
+  screen(
+    '<h1>' + MODULES_ES.general + '</h1>' +
+    '<p class="soft">N' + run.cl + ' ' + GEN_LEVELS[run.cl].name + ' · ' + (listened ? fmt(run.rate, 2) + '× · 1 escucha' : 'lectura') + '</p>' +
+    '<div class="figures">' +
+      '<div class="figure"><b>' + sc.correct + '</b><span>Correctas</span></div>' +
+      '<div class="figure"><b>' + sc.wrong + '</b><span>Incorrectas</span></div>' +
+      '<div class="figure"><b>' + sc.blank + '</b><span>En blanco</span></div>' +
+      '<div class="figure"><b class="' + (accuracy >= GEN_TARGET ? 'good' : 'bad') + '">' + fmt(accuracy, 1) + ' %</b><span>Precisión</span></div>' +
+      '<div class="figure"><b>' + fmt(spi, 1) + '</b><span>s por pregunta</span></div>' +
+    '</div>' +
+    goalHtml + (endLine ? '<p class="soft">' + esc(endLine) + '</p>' : '') +
+    '<h2>Revisión</h2>' + review +
+    '<p class="row" style="margin-top:14px"><button class="btn primary" id="rep">' + ic('repeat') + 'Repetir</button><button class="btn" id="men">Menú</button><button class="btn" id="his">' + ic('history') + 'Historial</button></p>'
+  );
+  $('rep').addEventListener('click', genConfig);
+  $('men').addEventListener('click', menu);
+  $('his').addEventListener('click', historyPage);
+  onKey = function(e){ if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') genConfig(); else if (e.key === 'h' || e.key === 'H') historyPage(); };
+  $('rep').focus();
+}
+
 /* ---------- Levels and goals page ---------- */
 function levelsPage(){
   clear(); sessionActive = false;
@@ -1268,7 +1918,7 @@ function historyPage(){
     '<button class="link" id="back">' + ic('back') + 'Menú</button><h1>Historial</h1>' +
     (rows.length ? '' : '<p class="soft">Sin sesiones</p>') +
     (rows.length ? '<div class="tbox"><table><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Errores</th><th>Blanco</th><th>s/ítem</th><th>Precisión</th><th>Objetivo</th><th>Cumplido</th></tr>' +
-      rows.map(function(s){ return '<tr><td>' + dateEU(s.ts) + '</td><td class="mod">' + esc(modES(s.module)) + '</td><td>' + (s.level || 'personalizado') + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi,2) + '</td><td>' + fmt(s.accuracy,1) + ' %</td><td>' + esc(s.goal||'') + '</td><td>' + (s.met === true ? 'Sí' : s.met === false ? 'No' : '—') + '</td></tr>'; }).join('') +
+      rows.map(function(s){ return '<tr><td>' + dateEU(s.ts) + '</td><td class="mod">' + esc(modES(s.module)) + '</td><td>' + (s.comp === 'general' ? 'N' + esc(s.cl) + (s.mode === 'reading' ? ' lectura' : '') : (s.level || 'personalizado')) + '</td><td>' + s.correct + '</td><td>' + s.wrong + '</td><td>' + s.blank + '</td><td>' + fmt(s.spi,2) + '</td><td>' + fmt(s.accuracy,1) + ' %</td><td>' + esc(s.goal||'') + '</td><td>' + (s.met === true ? 'Sí' : s.met === false ? 'No' : '—') + '</td></tr>'; }).join('') +
       '</table></div>' : '') +
     '<p class="row" style="margin-top:12px"><button class="btn primary" id="csv">' + ic('download') + 'Exportar</button><button class="btn danger" id="clr">' + ic('trash') + 'Borrar</button></p>'
   );

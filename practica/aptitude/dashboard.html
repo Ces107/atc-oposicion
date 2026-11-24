@@ -240,9 +240,11 @@ const ABILITIES = [
   { id:'H1', name:'Visualización (3D)', head:true,  w:{ 'sp.rot3d':.35, 'sp.net':.35, 'sp.view':.15, 'sp.fold':.15, 'sp.mixed':.25 } },
   { id:'H2', name:'Capacidad de clasificación', head:true,  w:{ 'rad.cat':.45, 'mem.m6':.25, 'at.d2':.15, 'mat.logic':.075, 'mat.series':.075 } },
   { id:'H3', name:'Planificación ATC',  head:true,  w:{ 'rad.conf':.30, 'sim.plan':.40, 'ss.sim':.20, 'rad.arith':.10 } },
-  { id:'H4', name:'Multitarea',         head:true,  w:{ 'sim.worst':.35, 'sim.comms':.25, 'mm.dual':.20, 'ss.sim':.10, 'mem.m7':.10 } },
+  // Weight 0 = listed but never scored (b1123, AAPT section 3): no description of the real tests names dual n-back or a
+  // Stroop-type task (M7), and their far transfer is about nil, so they no longer move readiness, gates or recommendations.
+  { id:'H4', name:'Multitarea',         head:true,  w:{ 'sim.worst':.35, 'sim.comms':.25, 'mm.dual':.20, 'ss.sim':.10, 'mem.m7':0 } },
   { id:'H5', name:'Comprensión oral en inglés',  head:true,  w:{ 'lis.dictation':.5, 'lis.passage':.5 } },
-  { id:'S1', name:'Memoria de trabajo', head:false, w:{ 'mem.m1':.35, 'mem.m2':.25, 'mem.m4':.25, 'mem.m3':.15 } },
+  { id:'S1', name:'Memoria de trabajo', head:false, w:{ 'mem.m1':.35, 'mem.m2':.25, 'mem.m4':.25, 'mem.m3':.15, 'at.nback':0 } },
   { id:'S2', name:'Aritmética numérica y de rumbos', head:false, w:{ 'mm.single':.5, 'rad.arith':.25, 'at.calc':.15, 'sim.num':.10 } },
   { id:'S3', name:'Dirección (izquierda/derecha)', head:false, w:{ 'at.lr':.6, 'rad.arith':.2, 'sp.shape2d':.2 } },
   { id:'S4', name:'Vigilancia y resistencia', head:false, w:{ 'mem.m5':.5, 'sim.alert':.2, 'endur':.3 } },
@@ -305,7 +307,8 @@ function mkRec(o){
     game: o.game || '?', label: String(o.label || ''), key: o.key || 'unknown', ts: ts, level: custom ? parseLevel(lvlRaw) : parseLevel(lvlRaw), mode: String(o.mode || ''),
     correct: c, wrong: w, blank: b, n: n, spi: spi, accuracy: acc, hinted: !!o.hinted, assisted: !!o.assisted, custom: custom,
     counted: o.counted !== false, thirds: cleanThirds(o.thirds), components: o.components && typeof o.components === 'object' ? o.components : null,
-    dual: o.dual || null, source: o.source || 'live', losses: (o.losses === undefined || o.losses === null || !isFinite(+o.losses)) ? null : +o.losses
+    dual: o.dual || null, source: o.source || 'live', losses: (o.losses === undefined || o.losses === null || !isFinite(+o.losses)) ? null : +o.losses,
+    bench: !!o.bench
   };
   rec.id = dkey(rec);
   return { rec: rec };
@@ -346,7 +349,7 @@ const ADAPTERS = {
   },
   atc_radar_v2: function(s){
     const label = s.module || '';
-    return mkRec({ game:'rad', label:label, key:keyFromLabel(label), ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, hinted:!!s.hinted, thirds:s.thirds });
+    return mkRec({ game:'rad', label:label, key:keyFromLabel(label), ts:s.ts, level:s.level, mode:s.mode, c:s.correct, w:s.wrong, b:s.blank, spi:s.spi, acc:s.accuracy, hinted:!!s.hinted, thirds:s.thirds, bench:!!s.bench });
   },
   atc_spatial_v1: function(s){
     const label = s.module || '';
@@ -421,7 +424,7 @@ function csvToRecords(text){
     const spi = String(r[ix('seconds per item')] || '').replace(',', '.');
     const acc = String(r[ix('accuracy %')] || '').replace(',', '.');
     const o = mkRec({ game:'csv', label:label, key:key, ts:r[ix('date')], level:lv, mode:mode, c:r[ix('correct')], w:r[ix('wrong')], b:r[ix('blank')], spi:spi, acc:acc,
-      hinted:/\((hints used|con pistas|pistas usadas)\)/i.test(label), counted:!/Learn practice|Pr.ctica de aprendizaje|Pr.ctica guiada|\(aprendizaje\)/i.test(label), source:'csv' });
+      hinted:/\((hints used|con pistas|pistas usadas)\)/i.test(label), counted:!/Learn practice|Pr.ctica de aprendizaje|Pr.ctica guiada|\(aprendizaje\)/i.test(label), source:'csv', bench:/\[benchmark\]/i.test(label) });
     if (o.err) rej.push(o.err); else recs.push(o.rec);
   }
   return { kind:'games', records:recs, rejected:rej };
@@ -595,6 +598,7 @@ function recommend(records, abils, now){
     Object.keys(a.w || ABIL[a.id].w).forEach(function(m){
       if (!linkFor(m) || /^sim\./.test(m) || m === 'endur') return;
       const om = ABIL[a.id].w[m];
+      if (!(om > 0)) return;   // weight-0 modules are never recommended
       let recent = 0;
       records.forEach(function(r){ if (r.key === m && r.ts > now - 14 * DAY) recent += r.n; });
       const score = om / (1 + recent / 60) * (a.incomplete && present.indexOf(m) < 0 ? 10 : 1);
@@ -607,7 +611,7 @@ function recommend(records, abils, now){
     const adv = mod ? adviceLevel(records, mod) : null;
     let level = adv ? adv.level : (a.S !== null ? clamp(Math.floor(levelFromScore(a.S)), 1, 10) : 1);
     if (a.S !== null && !adv) level = clamp(Math.round(levelFromScore(a.S)), 1, 10);
-    const missing = a.incomplete ? Object.keys(ABIL[a.id].w).filter(function(m){ return (a.modsPresent || []).indexOf(m) < 0; }).map(function(m){ return MODNAME[m]; }) : [];
+    const missing = a.incomplete ? Object.keys(ABIL[a.id].w).filter(function(m){ return ABIL[a.id].w[m] > 0 && (a.modsPresent || []).indexOf(m) < 0; }).map(function(m){ return MODNAME[m]; }) : [];
     return { kind:kind, incomplete:!!a.incomplete, missing:missing, ability:a.id, abilityName:a.name, mod:mod, modName:mod ? MODNAME[mod] : null, level:level, why:adv ? adv.why : null, minutes:15, alt:alt || null, S:a.S, confidence:a.confidence, discounted:a.discounted };
   };
   const gather = heads.filter(function(a){ return a.confidence === 'None' || a.incomplete; });
@@ -725,6 +729,107 @@ function mockFade(records, start, end){
   if (a.R === null || b.R === null) return { ok:false, first:a.R, last:b.R };
   return { ok:true, first:a.R, last:b.R, fade:a.R - b.R };
 }
+
+/* ---------- 76-item aptitude mock (localStorage atc_aptmock_v1, written by another page) and top-result targets (b1123) ---------- */
+// Shape: {"sessions":[{"ts":ms,"correct":n,"wrong":n,"blank":n,"net":x,"secs":n}]}. Read defensively: the key may be absent or
+// malformed. net = correct - wrong / 3 when net is missing. A session needs a date and a finite net.
+const APT_ITEMS = 76, APT_BEST_NET = 72, APT_TARGET_NET = 60;   // AAPT s.1: the best 2025 score (50 points) = about 72 net items
+function aptMockClean(d){
+  if (!d || typeof d !== 'object' || !Array.isArray(d.sessions)) return null;
+  const out = []; let rejected = 0;
+  d.sessions.forEach(function(s){
+    if (!s || typeof s !== 'object'){ rejected++; return; }
+    const ts = parseDate(s.ts), c = +s.correct, w = +s.wrong, b = +s.blank;
+    const counts = [c, w, b].every(function(x){ return isFinite(x) && x >= 0; });
+    const net = (s.net !== undefined && s.net !== null && s.net !== '' && isFinite(+s.net)) ? +s.net : (counts ? c - w / 3 : NaN);
+    if (ts === null || !isFinite(net)){ rejected++; return; }
+    out.push({ ts:ts, correct:counts ? c : null, wrong:counts ? w : null, blank:counts ? b : null, net:net, secs:isFinite(+s.secs) && s.secs !== null && s.secs !== '' ? +s.secs : null });
+  });
+  return { sessions: out.sort(function(a, b){ return a.ts - b.ts; }), rejected: rejected };
+}
+// Composite in net items: last, best, mean of the last 3, and that mean as approximate points (best net 72 = 50 points).
+function aptComposite(sessions){
+  if (!sessions || !sessions.length) return null;
+  const l3 = sessions.slice(-3), last = sessions[sessions.length - 1];
+  const mean3 = l3.reduce(function(s, x){ return s + x.net; }, 0) / l3.length;
+  return { n:sessions.length, last:last.net, lastTs:last.ts, best:Math.max.apply(null, sessions.map(function(x){ return x.net; })), mean3:mean3,
+    pts:clamp(50 * mean3 / APT_BEST_NET, 0, 50), target:APT_TARGET_NET, met:last.net >= APT_TARGET_NET };
+}
+// AAPT section 5, "top-result target" column (internal goals, not official norms), one row per trainer.
+// pool: the last 3 valid sessions of the keys at level >= minLevel (any level when null) in the 42-day window, pooled:
+//   items >= minN (30 unless set), accuracy >= acc, item-weighted s/item <= spi when set.
+// bench: the last 150-object categorization benchmark. sim: the last 4 Python-sim runs at level >= 6, 3 without loss.
+// dual: mental-math dual-task cost at level 5 (pooled single minus pooled dual accuracy) <= 5 points.
+// mock: last 76-item mock net >= 60. none: weight 0 in readiness, listed with its current level only.
+const TARGETS = [
+  { id:'mock',   name:'Simulacro de aptitud, 76', kind:'mock', goal:'neto ≥60', link:'mock-aptitude.html' },
+  { id:'mat',    name:'Razonamiento abstracto mixto', kind:'pool', keys:['mat.mixed'], minLevel:6, acc:96, spi:13, goal:'N6 · ≥96 % · ≤13 s' },
+  { id:'sp',     name:'Espacial mixto', kind:'pool', keys:['sp.mixed'], minLevel:6, acc:96, spi:18, goal:'N6 · ≥96 % · ≤18 s' },
+  { id:'rot3d',  name:'Rotación mental 3D', kind:'pool', keys:['sp.rot3d'], minLevel:null, acc:90, spi:3, goal:'≥90 % · ≤3 s' },
+  { id:'d2',     name:'Cancelación de atención (d2)', kind:'pool', keys:['at.d2'], minLevel:6, acc:98, goal:'N6 · errores ≤2 %' },
+  { id:'cat150', name:'Categorización · 150', kind:'bench', keys:['rad.cat'], acc:96, spi:1.8, goal:'≥96 % · ≤1,8 s' },
+  { id:'cat',    name:'Categorización rápida', kind:'pool', keys:['rad.cat'], minLevel:7, acc:96, goal:'N7 · ≥96 %' },
+  { id:'lr',     name:'Izquierda/derecha', kind:'pool', keys:['at.lr'], minLevel:null, acc:95, spi:2, minN:100, goal:'≥95 % · ≤2,0 s · 100' },
+  { id:'conf',   name:'Detección de conflictos', kind:'pool', keys:['rad.conf'], minLevel:6, acc:96, goal:'N6 · ≥96 %' },
+  { id:'arith',  name:'Aritmética de rumbos', kind:'pool', keys:['rad.arith'], minLevel:6, acc:96, goal:'N6 · ≥96 %' },
+  { id:'sim',    name:'Simulador radar', kind:'sim', keys:['sim'], minLevel:6, goal:'N6 sin pérdidas · 3 de 4' },
+  { id:'dual',   name:'Cálculo mental, doble tarea', kind:'dual', keys:['mm.dual'], goal:'coste ≤5 pts en N5' },
+  { id:'m1',     name:'Memoria de tiras M1', kind:'pool', keys:['mem.m1'], minLevel:6, acc:96, goal:'N6 · ≥96 %' },
+  { id:'m2',     name:'Amplitud M2', kind:'pool', keys:['mem.m2'], minLevel:6, acc:96, goal:'N6 · ≥96 %' },
+  { id:'pass',   name:'Comprensión de pasajes', kind:'pool', keys:['lis.passage'], minLevel:null, acc:90, goal:'≥90 %' },
+  { id:'dict',   name:'Dictado de elementos', kind:'pool', keys:['lis.dictation'], minLevel:6, acc:96, goal:'N6 · ≥96 %' },
+  { id:'nback',  name:'N-back doble', kind:'none', keys:['at.nback'], goal:'peso 0' },
+  { id:'m7',     name:'Interferencia tipo Stroop (M7)', kind:'none', keys:['mem.m7'], goal:'peso 0' }
+];
+function poolOf(rs){
+  let n = 0, c = 0, sn = 0, ss = 0;
+  rs.forEach(function(r){ n += r.n; c += r.accuracy / 100 * r.n; if (r.spi !== null && r.spi !== undefined){ sn += r.n; ss += r.spi * r.n; } });
+  return { n:n, acc:n ? c / n * 100 : null, spi:sn ? ss / sn : null, sessions:rs.length };
+}
+// rows: [{id, name, goal, kind, link, cur, pool, met}]; cur = the latest session (any date) of the row's modules;
+// met = true / false, or null when there is nothing to judge yet.
+function targetRows(records, mockSessions, now){
+  const from = now - WINDOW_DAYS * DAY;
+  const byTs = function(a, b){ return a.ts - b.ts; };
+  return TARGETS.map(function(t){
+    const row = { id:t.id, name:t.name, goal:t.goal, kind:t.kind, link:t.link || (t.keys && t.kind !== 'none' ? linkFor(t.keys[0]) : null), cur:null, pool:null, met:null };
+    if (t.kind === 'mock'){
+      const c = aptComposite(mockSessions);
+      if (c){ row.cur = { net:c.last, best:c.best }; row.met = c.met; }
+      return row;
+    }
+    if (t.kind === 'bench'){
+      const b = records.filter(function(r){ return t.keys.indexOf(r.key) >= 0 && r.bench && r.counted && !r.custom; }).sort(byTs);
+      if (b.length){ const r = b[b.length - 1]; row.cur = { acc:r.accuracy, spi:r.spi, n:r.n }; row.met = r.n >= 150 && r.accuracy >= t.acc && r.spi !== null && r.spi <= t.spi; }
+      return row;
+    }
+    if (t.kind === 'sim'){
+      const runs = records.filter(function(r){ return r.key === 'sim' && r.counted && !r.custom && !r.assisted && r.level !== null; }).sort(byTs);
+      if (!runs.length) return row;
+      const last = runs[runs.length - 1]; row.cur = { level:last.level, losses:last.losses };
+      const at = runs.filter(function(r){ return r.level >= t.minLevel; }).slice(-4);
+      row.met = at.filter(function(r){ return r.losses === 0; }).length >= 3;
+      return row;
+    }
+    const valid = records.filter(function(r){ return t.keys.indexOf(r.key) >= 0 && isValid(r); }).sort(byTs);
+    if (valid.length){ const r = valid[valid.length - 1]; row.cur = { level:r.level, acc:r.accuracy, spi:r.spi }; }
+    if (t.kind === 'none') return row;
+    const recent = valid.filter(function(r){ return r.ts >= from && r.ts <= now; });
+    if (t.kind === 'dual'){
+      const l5 = function(k){ return records.filter(function(r){ return r.key === k && isValid(r) && r.level === 5 && r.ts >= from && r.ts <= now; }); };
+      const s = poolOf(l5('mm.single')), d = poolOf(l5('mm.dual'));
+      if (s.n && d.n){ row.pool = { cost:s.acc - d.acc }; row.met = s.acc - d.acc <= 5; }
+      else if (valid.length) row.met = false;
+      return row;
+    }
+    if (!valid.length) return row;
+    const at = recent.filter(function(r){ return t.minLevel === null || r.level >= t.minLevel; }).slice(-3);
+    if (!at.length){ row.met = false; return row; }
+    const p = poolOf(at); row.pool = p;
+    row.met = p.n >= (t.minN || 30) && p.acc >= t.acc && (t.spi === undefined || (p.spi !== null && p.spi <= t.spi));
+    return row;
+  });
+}
 //==CORE END==
 
 /* =====================================================================================================
@@ -781,9 +886,27 @@ function readLive(){
   });
   return { records:recs, health:health };
 }
+const APTMOCK_KEY = 'atc_aptmock_v1';
+// The 76-item mock page owns this key; the dashboard only reads it. Absent key = no figure, no error.
+function readAptMock(){
+  const h = { name:'Simulacro de aptitud', found:false, ok:true, sessions:0, accepted:0, rejected:0, last:null, list:[] };
+  let raw = null;
+  try { raw = localStorage.getItem(APTMOCK_KEY); } catch (e) { h.ok = false; h.error = 'almacenamiento bloqueado'; }
+  if (raw === null || raw === undefined) return h;
+  h.found = true;
+  let d = null;
+  try { d = JSON.parse(raw); } catch (e) { h.ok = false; h.error = 'JSON ilegible (' + raw.length + ' caracteres)'; return h; }
+  const c = aptMockClean(d);
+  if (!c){ h.ok = false; h.error = 'estructura inesperada (sin lista "sessions")'; return h; }
+  h.sessions = d.sessions.length; h.accepted = c.sessions.length; h.rejected = c.rejected; h.list = c.sessions;
+  h.last = c.sessions.length ? c.sessions[c.sessions.length - 1].ts : null;
+  return h;
+}
+let APTMOCK = { list:[] };
 function recompute(){
   const lv = readLive();
   LIVE = lv.records; HEALTH = lv.health;
+  APTMOCK = readAptMock();
   const m = mergeRecords(LIVE, state.imported);
   ALL = m.records;
   MODEL = computeModel(ALL, NOW());
@@ -839,8 +962,10 @@ function renderHero(now){
   }
   const sg = stageGates(ALL, now);
   const gate = function(ok){ return ok ? ic('check', 'good') : '<span class="soft">-</span>'; };
+  const ac = aptComposite(APTMOCK.list);
   let figs = '<div class="figs">' + fig(rd.unknown ? '<span class="soft">-</span>' : f0(rd.R), 'Preparación') +
     (rd.unknown ? '' : fig(f0(ABIL_S(rd.weakest)), 'Más débil: ' + ABIL[rd.weakest].name)) +
+    (ac ? '<div class="fig" id="aptnet"><span class="n">' + f1(ac.mean3) + '<span class="soft" style="font-size:1.1rem"> / ' + APT_ITEMS + '</span></span><span class="l">Aptitud, neto · ≈ ' + f1(ac.pts) + ' pts · objetivo ' + APT_TARGET_NET + '</span></div>' : '') +
     fig(gate(sg.stageAB), 'Umbral A-B') + fig(gate(sg.stageC), 'Umbral C') + '</div>';
   if (state.examDate){
     const days = Math.ceil((new Date(state.examDate + 'T00:00:00').getTime() - now) / DAY);
@@ -874,7 +999,25 @@ function renderOverviewRest(now, rd){
     heads.map(function(a){ return abilityRow(a, rd.weakest); }).join('') +
     '<h3>De apoyo</h3>' + sup.map(function(a){ return abilityRow(a, null); }).join('') + '</div>' +
     '<div><h2>Últimos 7 días</h2><div class="days">' + dayHtml + '</div><p class="meta" style="margin-top:8px">' + active + '/7 días &middot; ' + f0(totalMin) + ' min</p></div></div>';
-  $('tab-overview').insertAdjacentHTML('beforeend', html);
+  $('tab-overview').insertAdjacentHTML('beforeend', html + targetsHtml(now));
+}
+// Top-result targets next to the current level of each trainer (rows with weight 0 are dimmed).
+function curText(r){
+  const c = r.cur;
+  if (!c) return '<span class="soft">-</span>';
+  if (r.kind === 'mock') return 'neto ' + f1(c.net) + ' <span class="soft">(máx. ' + f1(c.best) + ')</span>';
+  if (r.kind === 'bench') return f1(c.acc) + ' % · ' + (c.spi === null ? '-' : c.spi.toFixed(2)) + ' s';
+  if (r.kind === 'sim') return 'N' + c.level + ' · ' + (c.losses === null ? '-' : c.losses) + ' pérd.';
+  let t = 'N' + c.level + ' · ' + f0(c.acc) + ' %' + (c.spi !== null && c.spi !== undefined ? ' · ' + (c.spi < 10 ? c.spi.toFixed(1) : f0(c.spi)) + ' s' : '');
+  if (r.kind === 'dual' && r.pool) t += ' · coste ' + f1(r.pool.cost);
+  return t;
+}
+function targetsHtml(now){
+  return '<h2>Objetivos</h2><div class="tw"><table id="targets"><tr><th>Entrenador</th><th>Ahora</th><th>Objetivo</th><th></th></tr>' +
+    targetRows(ALL, APTMOCK.list, now).map(function(r){
+      const nm = r.link ? '<a href="' + r.link + '">' + esc(r.name) + '</a>' : esc(r.name);
+      return '<tr data-t="' + r.id + '"' + (r.kind === 'none' ? ' class="soft"' : '') + '><td>' + nm + '</td><td>' + curText(r) + '</td><td>' + esc(r.goal) + '</td><td>' + (r.met === true ? ic('check', 'good') : '') + '</td></tr>';
+    }).join('') + '</table></div>';
 }
 function spark(a, now, big){
   const W = 420, H = 130, L = 30, B = 18, T = 8, Rg = 8;
@@ -1071,10 +1214,12 @@ function renderData(now){
     const rej = Object.keys(h.rejected).map(function(r){ return h.rejected[r] + ' ' + r; }).join(', ');
     return '<tr><td><a href="' + GAMES[k].href + '">' + esc(h.name) + '</a></td><td>' + (!h.found ? '<span class="soft">-</span>' : (h.ok ? '<span class="good">OK</span>' : '<span class="bad">problema: ' + esc(h.error) + '</span>')) + '</td><td class="num">' + h.sessions + '</td><td class="num">' + h.accepted + '</td><td>' + (h.last ? ago(h.last, now) : '-') + '</td><td>' + (rej ? '<span class="warn">rechazadas: ' + esc(rej) + '</span>' : '') + '</td></tr>';
   }).join('');
+  const am = APTMOCK;
+  const amRow = '<tr><td>' + esc(am.name) + '</td><td>' + (!am.found ? '<span class="soft">-</span>' : (am.ok ? '<span class="good">OK</span>' : '<span class="bad">problema: ' + esc(am.error) + '</span>')) + '</td><td class="num">' + am.sessions + '</td><td class="num">' + am.accepted + '</td><td>' + (am.last ? ago(am.last, now) : '-') + '</td><td>' + (am.rejected ? '<span class="warn">rechazadas: ' + am.rejected + '</span>' : '') + '</td></tr>';
   const imp = {}; state.imported.forEach(function(r){ imp[r.source] = (imp[r.source] || 0) + 1; });
   const lb = state.lastBackup, lbTxt = lb ? fdate(lb) + ' (' + ago(lb, now) + ')' : 'nunca';
   const recent = ALL.slice(-25).reverse();
-  let html = '<h2 style="margin-top:0">Fuentes</h2><div class="tw"><table><tr><th>Fuente</th><th>Estado</th><th class="num">Sesiones</th><th class="num">Aceptadas</th><th>Última</th><th></th></tr>' + rows +
+  let html = '<h2 style="margin-top:0">Fuentes</h2><div class="tw"><table><tr><th>Fuente</th><th>Estado</th><th class="num">Sesiones</th><th class="num">Aceptadas</th><th>Última</th><th></th></tr>' + rows + amRow +
     '<tr><td>Importadas</td><td>' + (state.imported.length ? 'OK' : '<span class="soft">-</span>') + '</td><td class="num">' + state.imported.length + '</td><td class="num">' + state.imported.length + '</td><td>' + (state.imported.length ? ago(Math.max.apply(null, state.imported.map(function(r){ return r.ts; })), now) : '-') + '</td><td class="soft">' + Object.keys(imp).map(function(k){ return imp[k] + ' ' + k; }).join(', ') + '</td></tr></table></div>' +
     '<p class="small">Total <b>' + ALL.length + '</b> &middot; última copia <b>' + lbTxt + '</b>' + (storeOk ? '' : ' &middot; <span class="bad">Almacenamiento bloqueado</span>') + '</p>';
   html += '<h2>Importar</h2><div class="drop" id="drop">' + ic('upload') + 'Suelta archivos<button class="btn" id="pick">Elegir</button></div><div id="impmsg" class="small" style="margin-top:8px"></div>' +
@@ -1181,6 +1326,7 @@ function renderBanners(now){
   const b = [];
   if (!storeOk) b.push('<div class="banner err"><b>Almacenamiento bloqueado</b> Exporta antes de cerrar.</div>');
   Object.keys(HEALTH).forEach(function(k){ if (HEALTH[k].found && !HEALTH[k].ok) b.push('<div class="banner err"><b>No se pudo leer el historial de ' + esc(HEALTH[k].name) + '</b> ' + esc(HEALTH[k].error) + '</div>'); });
+  if (APTMOCK.found && !APTMOCK.ok) b.push('<div class="banner err"><b>No se pudo leer el historial de ' + esc(APTMOCK.name) + '</b> ' + esc(APTMOCK.error) + '</div>');
   const anyFound = Object.keys(HEALTH).some(function(k){ return HEALTH[k].found; });
   if (!anyFound && !state.imported.length) b.push('<div class="banner"><b>No hay historial de juegos</b></div>');
   if (ALL.length && (!state.lastBackup || now - state.lastBackup > 7 * DAY)) b.push('<div class="banner"><b>Última copia: ' + (state.lastBackup ? ago(state.lastBackup, now) : 'nunca') + '</b><button class="btn small" data-goto="data">' + ic('download') + 'Hacer copia</button></div>');
@@ -1209,9 +1355,9 @@ function init(){
   loadState();
   try { const t = sessionStorage.getItem('atc_dash_tab'); if (t && TABS.some(function(x){ return x[0] === t; })) curTab = t; } catch (e) {}
   recompute(); renderTabs(); renderAll(); initDrop();
-  window.addEventListener('storage', function(e){ if (e.key && GAMES[e.key]){ recompute(); renderAll(); } });
+  window.addEventListener('storage', function(e){ if (e.key && (GAMES[e.key] || e.key === APTMOCK_KEY)){ recompute(); renderAll(); } });
   document.addEventListener('visibilitychange', function(){ if (!document.hidden){ recompute(); renderAll(); } });
-  window.App = { recompute:recompute, renderAll:renderAll, handleFiles:handleFiles, importText:importText, get all(){ return ALL; }, get model(){ return MODEL; }, get state(){ return state; }, get health(){ return HEALTH; } };
+  window.App = { recompute:recompute, renderAll:renderAll, handleFiles:handleFiles, importText:importText, get all(){ return ALL; }, get model(){ return MODEL; }, get state(){ return state; }, get health(){ return HEALTH; }, get aptmock(){ return APTMOCK; }, targets:function(){ return targetRows(ALL, APTMOCK.list, NOW()); } };
 }
 if (typeof document !== 'undefined' && document.getElementById('app')) init();
 </script>
