@@ -216,6 +216,67 @@
     return o;
   }
 
+  /* ---------- plan semanal: reparto de horas según la fase (findings S1 §8) ----------
+     Ajustes en atc_plan_v1 = { h: horas por semana, f1 / f2 / f3: 'AAAA-MM-DD' }; una fecha vacía se estima con los plazos
+     de 2025: convocatoria publicada el 20-11-2025 y Fase 1 79 días después (7-8 feb 2026); el temario 2026 se republicó
+     el 20-11-2026, aún sin convocatoria -> Fase 1 estimada 2027-02-07. Fase 2 = Fase 1 + 34 d; Fase 3 = Fase 1 + 65 d.
+     Minutos hechos: atc_visits[día][sección] (sección = primer tramo de la ruta) en la semana de lunes a domingo; las
+     sesiones 3B registradas cuentan 30 / 40 min ese día si el tiempo en pantalla fue menor (se practican fuera). */
+  var PLAN_KEY = 'atc_plan_v1';
+  var PLAN_H = 15;
+  var F1_EST = '2027-02-07', F2_AFTER = 34, F3_AFTER = 65;
+  var SPLIT = {
+    // Inglés al 8-10 %: el candidato ya tiene un C1 sólido y dos horas semanales de academia fuera de la web (decisión
+    // suya, 24-11-2026). Lo que se libera va a lo que más separa en el orden final: conductual y FEAST.
+    f1: { kn: 0.37, en: 0.08, ap: 0.40, co: 0.15 }, // aptitudes 17 + FEAST 23
+    f2: { kn: 0, en: 0.08, ap: 0.70, co: 0.22 },    // aptitudes y FEAST 70; inglés oral 8
+    f3: { kn: 0, en: 0.10, ap: 0, co: 0.90 }         // inglés oral 10
+  };
+  var SECTION_AREA = { temario: 'kn', simulacros: 'kn', ingles: 'en', practica: 'ap', atajos: 'ap', conductual: 'co' };
+  var CO_CREDIT = { entrevista: 30, grupo: 40 };
+  var EN_ORAL = 'ingles/oral-question-bank.html';
+
+  function isDay(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && dayKey(sesDay(s)) === s; }
+  function addDays(k, n) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k); return dayKey(new Date(+m[1], +m[2] - 1, +m[3] + n, 12).getTime()); }
+  function dayDiff(a, b) { return Math.round((sesDay(b) - sesDay(a)) / DAY); }
+  function areaOf(path) { return SECTION_AREA[String(path || '').split('/')[0]] || null; }
+  function planCfg(raw) {
+    raw = raw && typeof raw === 'object' ? raw : {};
+    var h = num(raw.h); if (h === null || h < 0) h = PLAN_H;
+    var d = {}; ['f1', 'f2', 'f3'].forEach(function (f) { d[f] = isDay(raw[f]) ? raw[f] : null; });
+    var f1 = d.f1 || F1_EST;
+    return { h: h, f1: f1, f2: d.f2 || addDays(f1, F2_AFTER), f3: d.f3 || addDays(f1, F3_AFTER), est: { f1: !d.f1, f2: !d.f2, f3: !d.f3 } };
+  }
+  // el día de la prueba aún cuenta como la fase que se prepara
+  function stageOf(cfg, today) { return today <= cfg.f1 ? 'f1' : today <= cfg.f2 ? 'f2' : 'f3'; }
+  function weekDays(now) {
+    var d = new Date(now), off = (d.getDay() + 6) % 7, out = [];
+    for (var i = 0; i < 7; i++) out.push(dayKey(new Date(d.getFullYear(), d.getMonth(), d.getDate() - off + i, 12).getTime()));
+    return out;
+  }
+  function weekMinutes(vis, scores3b, now) {
+    var today = dayKey(now), out = { kn: 0, en: 0, ap: 0, co: 0 }, credit = {};
+    scoreSessions(scores3b).forEach(function (s) { var k = dayKey(s.day); credit[k] = (credit[k] || 0) + (CO_CREDIT[s.type] || 0); });
+    weekDays(now).forEach(function (k) {
+      if (k > today) return;
+      var o = (vis && vis[k]) || {}, sec = { kn: 0, en: 0, ap: 0, co: 0 };
+      Object.keys(o).forEach(function (s) { var a = SECTION_AREA[s], v = num(o[s]); if (a && v > 0) sec[a] += v; });
+      ORDER.forEach(function (a) { out[a] += a === 'co' ? Math.max(sec.co / 60, credit[k] || 0) : sec[a] / 60; });
+    });
+    ORDER.forEach(function (a) { out[a] = Math.round(out[a]); });
+    return out;
+  }
+  function weekPlan(raw, vis, scores3b, now) {
+    var cfg = planCfg(raw), today = dayKey(now), st = stageOf(cfg, today), sp = SPLIT[st];
+    var done = weekMinutes(vis, scores3b, now), days = weekDays(now), areas = {}, total = 0;
+    ORDER.forEach(function (a) {
+      var target = Math.round(cfg.h * 60 * sp[a]);
+      areas[a] = { share: sp[a], target: target, done: done[a], left: target - done[a], behind: sp[a] > 0 && done[a] < target };
+      total += done[a];
+    });
+    return { cfg: cfg, h: cfg.h, stage: st, date: cfg[st], est: cfg.est[st], to: dayDiff(today, cfg[st]), today: today, days: days, elapsed: days.indexOf(today) + 1, areas: areas, done: total };
+  }
+
   /* ---------- prioridad y acciones ---------- */
   function minutes(n) { return Math.max(5, Math.round(n)); }
 
@@ -232,7 +293,9 @@
     }
     return { kind: 'preguntas', href: 'simulacros/entrenador.html#sel=new&t=' + w.t, label: 'Tema ' + w.t, why: Math.round(100 * w.ready) + '%', min: 15, topic: w.t };
   }
-  function actionEn(e) {
+  function actionEn(e, stage) {
+    // tras la Fase 1 el inglés que queda es el oral (Fase 3A)
+    if (stage === 'f2' || stage === 'f3') return { kind: 'ingles', step: 'oral', href: EN_ORAL, label: 'Inglés oral', why: '', min: 20 };
     var ps = e.parts.slice().sort(function (a, b) { return a.n - b.n; });
     var open = ps.filter(function (p) { return p.n > 0 && p.n < 20; })[0];
     var p = open || ps[0];
@@ -271,6 +334,8 @@
     var meta = snap.meta || { topics: {}, q: {}, en: [], co: [] };
     snap.meta = meta;
     var A = { kn: knowledge(snap, now), en: english(snap, now), ap: aptitudes(snap, now), co: conduct(snap, now) };
+    // sin snap.plan (tests antiguos, datos viejos) todo sigue como antes; el navegador siempre lo pasa (vacío = valores por defecto)
+    var wk = snap.plan ? weekPlan(snap.plan, snap.visits, snap.scores3b, now) : null;
     var out = {}, list = [];
     ORDER.forEach(function (id) {
       var d = A[id], cfg = AREAS[id];
@@ -280,29 +345,36 @@
       var info = (d.n < 10 && id !== 'co') || (id === 'co' && !d.started) ? 1.15 : 1; // sin datos: medir tiene valor
       var bonus = id === 'kn' ? 1 + 0.3 * Math.min(1, d.due / 40) : 1;
       var score = cfg.stake * gap * fresh * info * bonus;
-      var act = id === 'kn' ? actionKn(d, meta, now) : id === 'en' ? actionEn(d) : id === 'ap' ? actionAp(d, now) : actionCo(d);
+      var act = id === 'kn' ? actionKn(d, meta, now) : id === 'en' ? actionEn(d, wk && wk.stage) : id === 'ap' ? actionAp(d, now) : actionCo(d);
       act.area = id;
       var o = { id: id, name: cfg.name, icon: cfg.icon, stake: cfg.stake, target: cfg.target, ready: d.ready, gap: gap, score: score, last: d.last, stale: stale, n: d.n, data: d, action: act };
+      // nivel: 2 = bajo su objetivo semanal, 1 = cumplido (o sin plan), -1 = 0 % en esta fase (nunca se propone)
+      o.week = wk ? wk.areas[id] : null;
+      o.tier = !wk ? 1 : !o.week.share ? -1 : o.week.behind ? 2 : 1;
       out[id] = o; list.push(o);
     });
-    list.sort(function (a, b) { return b.score - a.score; });
-    return { areas: out, ranked: list, now: now };
+    list.sort(function (a, b) { return b.tier - a.tier || b.score - a.score; });
+    return { areas: out, ranked: list, now: now, week: wk };
   }
 
-  // reparte los minutos entre las areas con mas retorno; cada area elegida pierde peso para que el plan no sea monotono
+  // reparte los minutos entre las areas con mas retorno; cada area elegida pierde peso para que el plan no sea monotono.
+  // Con plan semanal, las áreas que aún no llegan a su objetivo de la semana van antes (lo que se propone hoy descuenta
+  // de lo que falta) y las de 0 % en la fase no entran.
   function plan(res, budget) {
-    var left = budget, items = [], sc = {};
-    res.ranked.forEach(function (a) { sc[a.id] = a.score; });
+    var left = budget, items = [], sc = {}, need = {};
+    res.ranked.forEach(function (a) { sc[a.id] = a.score; need[a.id] = a.week ? a.week.left : 0; });
+    var tier = function (id) { var w = res.areas[id].week; return !w ? 1 : !w.share ? -1 : need[id] > 0 ? 2 : 1; };
     var guard = 0;
     while (left >= 8 && guard++ < 6) {
-      var id = Object.keys(sc).sort(function (x, y) { return sc[y] - sc[x]; })[0];
-      if (!id || sc[id] <= 0) break;
+      var id = Object.keys(sc).filter(function (x) { return tier(x) >= 0 && sc[x] > 0; })
+        .sort(function (x, y) { return tier(y) - tier(x) || sc[y] - sc[x]; })[0];
+      if (!id) break;
       var a = res.areas[id], act = Object.assign({}, a.action);
-      if (items.some(function (i) { return i.area === id && i.href === act.href; })) { sc[id] *= 0.3; continue; }
+      if (items.some(function (i) { return i.area === id && i.href === act.href; })) { sc[id] *= 0.3; need[id] = 0; continue; }
       act.min = Math.min(act.min, left);
-      items.push(act); left -= act.min; sc[id] *= 0.45;
+      items.push(act); left -= act.min; sc[id] *= 0.45; need[id] -= act.min;
     }
-    if (!items.length) { var f = res.ranked[0].action; items.push(Object.assign({}, f)); }
+    if (!items.length) { var f = (res.ranked.filter(function (x) { return tier(x.id) >= 0; })[0] || res.ranked[0]).action; items.push(Object.assign({}, f)); }
     return items;
   }
 
@@ -337,6 +409,8 @@
     Object.keys(snap.seen).forEach(function (p) { if (p.indexOf('ingles/uoe') === 0 && snap.seen[p].t > last) last = snap.seen[p].t; });
     snap.quizLast = last || null;
     snap.visits = vis;
+    var pl = lsGet(PLAN_KEY);
+    snap.plan = pl && typeof pl === 'object' && !Array.isArray(pl) ? pl : {};
     return snap;
   }
 
@@ -393,8 +467,8 @@
   }
   function pct(x) { return Math.round(100 * clamp(x, 0, 1)) + '%'; }
 
-  function bar(ready, target) {
-    return '<span class="pbar"><i style="width:' + (100 * clamp(ready, 0, 1)).toFixed(1) + '%"></i><b style="left:' + (100 * target) + '%"></b></span>';
+  function bar(ready, target, cls) {
+    return '<span class="pbar' + (cls ? ' ' + cls : '') + '"><i style="width:' + (100 * clamp(ready, 0, 1)).toFixed(1) + '%"></i><b style="left:' + (100 * target) + '%"></b></span>';
   }
 
   function subRows(a) {
@@ -435,6 +509,41 @@
     return Math.round(100 * (h[today][id] - h[ref][id]));
   }
 
+  /* ---------- bloque "Semana": objetivo de minutos por área y fase, y ajustes (atc_plan_v1) ---------- */
+  var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  var PHASE = { f1: 'Fase 1', f2: 'Fase 2', f3: 'Fase 3' };
+  function fdate(k) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(k); return +m[3] + ' ' + MES[+m[2] - 1] + ' ' + m[1]; }
+  function hrs(min) { return String(Math.round(min / 6) / 10).replace('.', ','); }
+
+  function weekBlock(res) {
+    var wk = res.week, pace = wk.elapsed / 7;
+    var h = '<h2>' + ic('clip') + 'Semana</h2><p class="pnum pwk"><span>' + PHASE[wk.stage] + (wk.to >= 0 ? ' · <b>' + wk.to + ' d</b>' : '') +
+      ' · ' + fdate(wk.date) + (wk.est ? ' <span class="pest">estimada</span>' : '') + '</span><span class="pwh"><b>' + hrs(wk.done) + '</b>/' + hrs(wk.h * 60) + ' h</span></p>';
+    h += '<div class="tw"><table class="src ptab pweek"><tr><th>Prueba</th><th></th><th class="n">min</th><th class="n hm">Reparto</th></tr>';
+    ORDER.forEach(function (id) {
+      var a = res.areas[id], w = a.week; if (!w.share) return;
+      h += '<tr><td>' + esc(a.name) + '</td><td>' + bar(w.target ? w.done / w.target : 1, pace, w.behind ? '' : 'ok') + '</td><td class="n">' + w.done + '/' + w.target +
+        '</td><td class="n hm">' + Math.round(100 * w.share) + '%</td></tr>';
+    });
+    return h + '</table></div>';
+  }
+  // el formulario se crea una vez y no se rehace al guardar: así no pierde el foco ni el campo de fecha a medio escribir
+  function settingsForm(cfg) {
+    var h = '<details class="pset"><summary>' + ic('settings') + 'Ajustes</summary><div class="pform">' +
+      '<label for="pl-h">h/semana</label><input id="pl-h" type="number" min="0" step="0.5" inputmode="decimal" value="' + cfg.h + '"><span></span>';
+    ['f1', 'f2', 'f3'].forEach(function (f) {
+      h += '<label for="pl-' + f + '">' + PHASE[f] + '</label><input id="pl-' + f + '" type="date" value="' + (cfg.est[f] ? '' : cfg[f]) + '"><span class="pest" id="pl-' + f + '-e"></span>';
+    });
+    return h + '</div></details>';
+  }
+  function savePlan(el) {
+    var o = lsGet(PLAN_KEY); o = o && typeof o === 'object' && !Array.isArray(o) ? o : {};
+    var hv = String(el.querySelector('#pl-h').value || '').replace(',', '.'), hn = hv === '' ? NaN : +hv;
+    if (isFinite(hn) && hn >= 0) o.h = hn; else delete o.h;
+    ['f1', 'f2', 'f3'].forEach(function (f) { var v = el.querySelector('#pl-' + f).value; if (isDay(v)) o[f] = v; else delete o[f]; });
+    lsSet(PLAN_KEY, o);
+  }
+
   function renderHoy(el) {
     var now = Date.now();
     var budget = +(lsGet('atc_hoy_min') || 30);
@@ -442,14 +551,20 @@
     var res = compute(snap, now);
     var hist = recordHist(res, now);
     var items = plan(res, budget), first = items[0];
+    var segFocus = doc.activeElement && doc.activeElement.closest && doc.activeElement.closest('.seg') ? doc.activeElement.dataset.m : null;
+    if (!el.querySelector('.hoy-a')) {
+      el.innerHTML = '<div class="hoy-a"></div>' + settingsForm(res.week.cfg) + '<div class="hoy-b"></div>';
+      el.querySelectorAll('.pform input').forEach(function (inp) { inp.addEventListener('change', function () { savePlan(el); renderHoy(el); }); });
+    }
 
     var h = '<a class="next" href="' + BASE + first.href + '">' + ic('play') + '<span><b>Siguiente</b><span>' + esc(first.label) + (first.why ? ' · ' + esc(first.why) : '') + ' · ' + first.min + ' min</span></span>' + ic('arrow') + '</a>';
     h += '<div class="seg" role="group">' + [15, 30, 60].map(function (m) { return '<button type="button" data-m="' + m + '"' + (m === budget ? ' aria-pressed="true"' : '') + '>' + m + ' min</button>'; }).join('') + '</div>';
     h += '<div class="rows">' + items.map(function (it) {
       return '<a class="row" href="' + BASE + it.href + '">' + ic(res.areas[it.area].icon) + '<span class="row-body"><span class="row-title">' + esc(it.label) + '</span><span class="row-desc">' + esc(res.areas[it.area].name) + (it.why ? ' · ' + esc(it.why) : '') + '</span></span><span class="row-meta">' + it.min + ' min</span></a>';
     }).join('') + '</div>';
+    el.querySelector('.hoy-a').innerHTML = h + weekBlock(res);
 
-    h += '<h2>' + ic('chart') + 'Progreso</h2><div class="tw"><table class="src ptab"><tr><th>Prueba</th><th></th><th class="n">Dominio</th><th class="n">14 d</th><th class="n hm">Elimina</th><th class="n hm">Último</th></tr>';
+    h = '<h2>' + ic('chart') + 'Progreso</h2><div class="tw"><table class="src ptab"><tr><th>Prueba</th><th></th><th class="n">Dominio</th><th class="n">14 d</th><th class="n hm">Elimina</th><th class="n hm">Último</th></tr>';
     ORDER.forEach(function (id) {
       var a = res.areas[id], dl = deltaFor(hist, id, now);
       h += '<tr><td>' + esc(a.name) + '</td><td>' + bar(a.ready, a.target) + '</td><td class="n">' + pct(a.ready) + '</td><td class="n">' + (dl === null ? '' : (dl > 0 ? '+' : '') + dl) + '</td><td class="n hm">' + Math.round(100 * a.stake) + '%</td><td class="n hm">' + ago(a.last, now) + '</td></tr>';
@@ -462,10 +577,14 @@
     h += '<h2>' + ic('history') + 'Actividad</h2><div class="pact">' + act.map(function (x) { return '<span title="' + x.k + ' · ' + x.m + ' min"><i style="height:' + Math.round(100 * x.m / mx) + '%"></i></span>'; }).join('') + '</div>';
     h += '<p class="pnum"><b>' + streak(snap.visits, now) + '</b> días seguidos · <b>' + (week / 60).toFixed(1).replace('.', ',') + '</b> h en 7 días</p>';
 
-    h += '<details class="how"><summary>Cálculo</summary><p>Prioridad = eliminados en la prueba × distancia al objetivo × frescura (días sin tocarla; vencidas del entrenador). El minutaje reparte esa prioridad y cada área elegida baja de peso. Es una estimación a partir de lo guardado en este navegador, no una medición.</p></details>';
-    el.innerHTML = h;
+    h += '<details class="how"><summary>Cálculo</summary><p>Prioridad = eliminados en la prueba × distancia al objetivo × frescura (días sin tocarla; vencidas del entrenador). El minutaje reparte esa prioridad y cada área elegida baja de peso. Es una estimación a partir de lo guardado en este navegador, no una medición.</p>' +
+      '<p>Semana (lunes a domingo): horas × reparto de la fase. Antes de la Fase 1: conocimientos 35 %, inglés 20 % (escrito 10, oral 10), aptitudes y FEAST 35 % (15 + 20), conductual 10 %. Entre la Fase 1 y la 2: aptitudes y FEAST 70 %, inglés oral 10 %, conductual 20 %. Tras la Fase 2: inglés oral 35 %, conductual 65 %. Un área bajo su objetivo semanal va antes que una que ya lo cumple; un área al 0 % no se propone. La marca de la barra es lo que tocaría hasta hoy. Minutos = tiempo activo en cada sección; una sesión 3B registrada cuenta 30 o 40 min. Fecha vacía = estimada con los plazos de 2025 (Fase 1 79 días tras la convocatoria; Fase 2 +34 d; Fase 3 +65 d).</p></details>';
+    el.querySelector('.hoy-b').innerHTML = h;
+    var c = res.week.cfg;
+    ['f1', 'f2', 'f3'].forEach(function (f) { var s = el.querySelector('#pl-' + f + '-e'); if (s) s.textContent = c.est[f] ? 'est. ' + fdate(c[f]) : ''; });
     el.querySelectorAll('.seg button').forEach(function (b) {
       b.onclick = function () { lsSet('atc_hoy_min', +b.dataset.m); renderHoy(el); };
+      if (segFocus && b.dataset.m === segFocus) b.focus();
     });
   }
 
@@ -498,7 +617,8 @@
     });
   }
 
-  var API = { compute: compute, plan: plan, AREAS: AREAS, MODS: MODS, moduleState: moduleState, sessionScore: sessionScore, sessionRec: sessionRec, questionMastery: questionMastery, streak: streak, minutesPerDay: minutesPerDay, dayKey: dayKey, scoreSessions: scoreSessions };
+  var API = { compute: compute, plan: plan, AREAS: AREAS, MODS: MODS, moduleState: moduleState, sessionScore: sessionScore, sessionRec: sessionRec, questionMastery: questionMastery, streak: streak, minutesPerDay: minutesPerDay, dayKey: dayKey, scoreSessions: scoreSessions,
+    SPLIT: SPLIT, planCfg: planCfg, stageOf: stageOf, weekDays: weekDays, weekMinutes: weekMinutes, weekPlan: weekPlan, areaOf: areaOf };
   root.ATCProgress = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (doc) { if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init(); }

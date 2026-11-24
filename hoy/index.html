@@ -179,7 +179,16 @@ nav.toc a.active{color:var(--acc);font-weight:600}
 .ptab td,.ptab th{padding:9px 8px}.ptab td:nth-child(2){width:34%}
 .ptab .n,.psub .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .ptab tr.sub td{padding:0 8px 10px;border-top:0}
-.ptab summary,.how summary{cursor:pointer;color:var(--mut);font-size:14px}
+.ptab summary,.how summary,.pset summary{cursor:pointer;color:var(--mut);font-size:14px}
+.pbar.ok i{background:var(--ok)}
+.pwk{display:flex;flex-wrap:wrap;gap:2px 12px;max-width:none}.pwh{margin-left:auto}
+.pest{color:var(--mut);font-size:13px;font-style:italic}
+.pset{margin:0 0 6px}.pset summary{display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.pform{display:grid;grid-template-columns:auto auto 1fr;gap:8px 12px;align-items:center;margin:6px 0 10px;font:14px var(--sans)}
+.pform label{color:var(--mut)}
+.pform input{font:15px var(--sans);padding:6px 8px;min-height:40px;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--fg)}
+.pform input[type=number]{width:5.5em}
+.pform input:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
 .psub{width:100%;margin:8px 0 2px;border-collapse:collapse}.psub td{padding:4px 6px;border-top:1px solid var(--line);font-size:14px}
 .psub td:nth-child(2){width:36%}
 .pact{display:flex;gap:4px;align-items:flex-end;height:72px;border-bottom:1px solid var(--line);margin:8px 0 6px}
