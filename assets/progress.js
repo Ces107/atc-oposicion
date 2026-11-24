@@ -11,11 +11,13 @@
   // quienes superaron todo (ahí se gana el puesto). Conductual 0,71 + 0,45; aptitudes y FEAST 0,45 + 0,29; inglés escrito
   // y oral 0,46 + 0,16; conocimientos 0,22 + 0,11. target = dominio que corresponde a una nota de cabeza (48/50 en
   // conocimientos, 17/20 en inglés), no al aprobado.
+  // pts = puntos de esa parte en la nota final (390): conocimientos 50; inglés escrito 20 + oral 50; aptitudes 50 +
+  // FEAST y PDEA 100; conductual 120. Es lo que se enseña en la tabla; stake solo ordena.
   var AREAS = {
-    kn: { name: 'Conocimientos', icon: 'target', stake: 0.33, target: 0.95 },
-    en: { name: 'Inglés', icon: 'speech', stake: 0.62, target: 0.85 },
-    ap: { name: 'Aptitudes', icon: 'cross', stake: 0.74, target: 0.90 },
-    co: { name: 'Conductual', icon: 'people', stake: 1.16, target: 100 / 120 } // dominio = nota 3B / 120; objetivo de cabeza 100
+    kn: { name: 'Conocimientos', icon: 'target', stake: 0.33, target: 0.95, pts: 50 },
+    en: { name: 'Inglés', icon: 'speech', stake: 0.62, target: 0.85, pts: 70 },
+    ap: { name: 'Aptitudes', icon: 'cross', stake: 0.74, target: 0.90, pts: 150 },
+    co: { name: 'Conductual', icon: 'people', stake: 1.16, target: 100 / 120, pts: 120 } // dominio = nota 3B / 120; objetivo de cabeza 100
   };
   var ORDER = ['kn', 'en', 'ap', 'co'];
 
@@ -347,7 +349,7 @@
       var score = cfg.stake * gap * fresh * info * bonus;
       var act = id === 'kn' ? actionKn(d, meta, now) : id === 'en' ? actionEn(d, wk && wk.stage) : id === 'ap' ? actionAp(d, now) : actionCo(d);
       act.area = id;
-      var o = { id: id, name: cfg.name, icon: cfg.icon, stake: cfg.stake, target: cfg.target, ready: d.ready, gap: gap, score: score, last: d.last, stale: stale, n: d.n, data: d, action: act };
+      var o = { id: id, name: cfg.name, icon: cfg.icon, stake: cfg.stake, pts: cfg.pts, target: cfg.target, ready: d.ready, gap: gap, score: score, last: d.last, stale: stale, n: d.n, data: d, action: act };
       // nivel: 2 = bajo su objetivo semanal, 1 = cumplido (o sin plan), -1 = 0 % en esta fase (nunca se propone)
       o.week = wk ? wk.areas[id] : null;
       o.tier = !wk ? 1 : !o.week.share ? -1 : o.week.behind ? 2 : 1;
@@ -564,10 +566,10 @@
     }).join('') + '</div>';
     el.querySelector('.hoy-a').innerHTML = h + weekBlock(res);
 
-    h = '<h2>' + ic('chart') + 'Progreso</h2><div class="tw"><table class="src ptab"><tr><th>Prueba</th><th></th><th class="n">Dominio</th><th class="n">14 d</th><th class="n hm">Elimina</th><th class="n hm">Último</th></tr>';
+    h = '<h2>' + ic('chart') + 'Progreso</h2><div class="tw"><table class="src ptab"><tr><th>Prueba</th><th></th><th class="n">Dominio</th><th class="n">14 d</th><th class="n hm">Puntos</th><th class="n hm">Último</th></tr>';
     ORDER.forEach(function (id) {
       var a = res.areas[id], dl = deltaFor(hist, id, now);
-      h += '<tr><td>' + esc(a.name) + '</td><td>' + bar(a.ready, a.target) + '</td><td class="n">' + pct(a.ready) + '</td><td class="n">' + (dl === null ? '' : (dl > 0 ? '+' : '') + dl) + '</td><td class="n hm">' + Math.round(100 * a.stake) + '%</td><td class="n hm">' + ago(a.last, now) + '</td></tr>';
+      h += '<tr><td>' + esc(a.name) + '</td><td>' + bar(a.ready, a.target) + '</td><td class="n">' + pct(a.ready) + '</td><td class="n">' + (dl === null ? '' : (dl > 0 ? '+' : '') + dl) + '</td><td class="n hm">' + a.pts + '</td><td class="n hm">' + ago(a.last, now) + '</td></tr>';
       h += '<tr class="sub"><td colspan="6"><details><summary>Detalle</summary>' + subRows(a) + '</details></td></tr>';
     });
     h += '</table></div>';
