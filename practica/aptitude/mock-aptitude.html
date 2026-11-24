@@ -2343,7 +2343,7 @@ function scoreForm(form, ans){
     else if (a === q.it.answer){ c++; x.c++; }
     else { w++; x.w++; }
   });
-  return { c:c, w:w, b:b, net:round2(c - w / 3), fam:fam };
+  return { c:c, w:w, b:b, net:round2(c - 0.33 * w), fam:fam };  // 0,33 exacto: es lo que cuadra con las notas publicadas
 }
 // Published mark: the best net score of the call is worth 50 (2025: best net about 72.01 of 76).
 function toPts(net){ return round2(Math.min(MAX_PTS, Math.max(0, net) * MAX_PTS / BEST_NET)); }
@@ -2613,7 +2613,7 @@ function results(form, ans, r, secs, paper, saved){
     '<div class="scl"><span style="left:' + pct(passNet) + '%">Apto</span><span style="left:' + pct(TOP_NET) + '%">Cabeza</span></div>' +
     (saved ? '' : '<p class="warn">Sin guardar</p>') +
     '<div class="tbl"><table><thead><tr><th></th><th>' + ic('check') + '</th><th>' + ic('x') + '</th><th>' + ic('dash') + '</th><th>Neta</th></tr></thead><tbody>' +
-    FAMS.map(function(f){ const x = r.fam[f]; return '<tr><td>' + ic('f-' + f) + ' ' + FAM_LABEL[f] + '</td><td>' + x.c + '</td><td>' + x.w + '</td><td>' + x.b + '</td><td><b>' + num(x.c - x.w / 3) + '</b></td></tr>'; }).join('') +
+    FAMS.map(function(f){ const x = r.fam[f]; return '<tr><td>' + ic('f-' + f) + ' ' + FAM_LABEL[f] + '</td><td>' + x.c + '</td><td>' + x.w + '</td><td>' + x.b + '</td><td><b>' + num(x.c - 0.33 * x.w) + '</b></td></tr>'; }).join('') +
     '</tbody></table></div>';
   const miss = form.items.filter(function(q, i){ return ans[i] !== q.it.answer; });
   if (miss.length){
@@ -2714,7 +2714,41 @@ document.addEventListener('keydown', function(e){
 });
 document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') saveRun(); });
 window.addEventListener('pagehide', saveRun);
-home();
+
+/* ---------- Día de la Fase 1 (simulacros/dia-fase-1.html): ?dia=<id> empieza o sigue el simulacro de ese día y, al
+   entregar, guarda el registro como siempre y vuelve allí; ?dia=<id>&rev=1 enseña la revisión del simulacro entregado.
+   Sin ?dia la página funciona igual que antes. */
+const DIA_KEY = 'atc_aptmock_dia_v1', DIA_BACK = '../../simulacros/dia-fase-1.html';
+const DIA = (function(){
+  try { const p = new URLSearchParams(location.search), t = p.get('dia'); return t && /^[0-9a-z]{1,20}$/.test(t) ? { tok:t, rev:p.get('rev') === '1' } : null; }
+  catch (e) { return null; }
+})();
+if (DIA){
+  const finish0 = finish;
+  home = function(){ if (S && S.mode === 'run') saveRun(); stop(); location.replace(DIA_BACK); };
+  finish = function(form, ans, secs, paper){
+    if (paper) return finish0(form, ans, secs, paper);
+    const r = scoreForm(form, ans), ts = Date.now();
+    lsSet(STORE_KEY, pushRecord(lsGet(STORE_KEY), makeRecord(r, secs, false, ts)));
+    lsSet(DIA_KEY, { tok:DIA.tok, code:form.code, a:ans.map(function(x){ return x < 0 ? '-' : LETTERS[x]; }).join(''), secs:secs, ts:ts });
+    location.replace(DIA_BACK);
+  };
+  const dk = lsGet(DIA_KEY) || {}, mine = dk.tok === DIA.tok && !!normCode(dk.code), handed = mine && typeof dk.a === 'string';
+  if (DIA.rev){
+    let form = null;
+    if (handed && dk.a.length === N_ITEMS){ try { form = buildForm(normCode(dk.code)); } catch (e) { form = null; } }
+    if (form){
+      const ans = dk.a.split('').map(function(ch){ return LETTERS.indexOf(ch); });
+      results(form, ans, scoreForm(form, ans), dk.secs || 0, false, true);
+      const again = $('again'); if (again) again.remove();
+    } else home();
+  } else if (handed) home();
+  else {
+    const run = lsGet(RUN_KEY);
+    if (mine && run && normCode(run.code) === normCode(dk.code) && typeof run.a === 'string') startRun(normCode(run.code), run);
+    else { const c = newCode(); lsSet(DIA_KEY, { tok:DIA.tok, code:c }); startRun(c, null); }
+  }
+} else home();
 </script>
 <script src="../../assets/config.js"></script><script src="../../assets/account.js" defer></script><script src="../../assets/progress.js" defer></script></body>
 </html>

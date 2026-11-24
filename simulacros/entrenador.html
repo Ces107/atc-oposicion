@@ -253,7 +253,7 @@ function finish(){if(!run||run.done)return;run.done=true;clearInterval(run.timer
   if(!r.qs.length){home();return}
   const answered=r.qs.filter(x=>x.pick!==null),right=answered.filter(x=>x.pick===x.q.a),wrong=r.qs.filter(x=>x.pick!==x.q.a);
   // nota como en la Fase 1 real: cada fallo resta 0,33 y la pregunta en blanco no resta (deducido de las notas de 2025)
-  const un=r.qs.length-answered.length,bad=answered.length-right.length,net=right.length-bad/3;S.hist.unshift({t:Date.now(),mode:r.mode,n:r.qs.length,right:right.length,bad:bad,label:r.label});S.hist=S.hist.slice(0,40);save();
+  const un=r.qs.length-answered.length,bad=answered.length-right.length,net=right.length-0.33*bad;S.hist.unshift({t:Date.now(),mode:r.mode,n:r.qs.length,right:right.length,bad:bad,label:r.label});S.hist=S.hist.slice(0,40);save();
   const pt={};r.qs.forEach(x=>{const t=x.q.t;pt[t]=pt[t]||{n:0,ok:0};pt[t].n++;if(x.pick===x.q.a)pt[t].ok++});
   const secs=Math.round((Date.now()-r.t0)/1000);
   let h=`<h2>Resultado</h2><div class="grid"><div class="stat"><b>${right.length}/${r.qs.length}</b><span>aciertos</span></div><div class="stat"><b>${net.toFixed(2).replace('.',',')}</b><span>netos (fallo −0,33)</span></div><div class="stat"><b>${(50*Math.max(0,net)/r.qs.length).toFixed(1).replace('.',',')}</b><span>sobre 50</span></div><div class="stat"><b>${fmt(secs)}</b><span>tiempo${r.mode==='exam'?' (límite '+fmt(r.total)+')':''}</span></div>${un?`<div class="stat"><b>${un}</b><span>sin contestar</span></div>`:''}</div>`;
