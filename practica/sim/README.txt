@@ -37,6 +37,7 @@ Resume            R = resume own navigation (direct to the next waypoint ahead)
 Direct-to         Shift+click a fix on the scope with an aircraft selected (only fixes still ahead on its route; a plain click never sends anything)
 Transfer          T (inside 20 NM of the exit gate), then the frequency key 1/2/3 shown on the task
 Tasks             Y/N read-back, Space alert, A/D level request, 1-6 memory / estimates. Every button shows its key; you can also click
+Spoken task       V + digits + Enter = the sum you heard;  M = the code you heard is the target. Traffic never stops
 Pause             P (a paused run at level 5+ is marked "assisted" and does not move Adaptive mode)
 Abandon           Q while paused (P, or Esc with nothing selected). Abandoned runs are not saved
 Feedback          every task shows OK / WRONG / MISSED at the top of the scope the moment it is answered or expires
@@ -114,7 +115,8 @@ DESIGN.md              research + skill map   tests/         pytest suite       
 KNOWN LIMITS (honest)
 ---------------------
 * The level calibration and the skill mapping are inferences from public descriptions; nobody outside the test provider knows the real items.
-* Sound is not used (no assets, no hardware dependency); alerts are visual only.
+* Sound is used only by the spoken secondary task (see the changelog of 2026-11-24); alerts are still visual only.
+  The clips are Windows SAPI voices, clear but synthetic; the real tests' audio (voice, pace, content) is not public.
 * The bot that validates difficulty uses perfect information; a human will be slower. Do not read "the bot meets the goal at level 7" as "level 7 is easy".
 * Same seed = same traffic and same task sequence, but task timing depends on your frame timing, so tasks may appear a fraction of a second apart.
 
@@ -126,3 +128,26 @@ Changelog 2026-09-25 (wave 5)
 * Paired-seed dual-task cost: on the debrief press B to replay the same seed and level in "Radar-only" mode (same traffic, no interrupting tasks; it never changes Adaptive mode, personal bests or the clean streak). The debrief then shows the accuracy gap on the radar items (separation, handoff, restricted area) versus the run with tasks, in points. Threshold 5 points at level 5 is a proposal from the wave-5 design spec, not an official cut-off. Caveat: the bot/human plays differently in the two runs, so with few items the number is noisy.
 * Optional coach: if `atc_profile.json` exists in the per-user folder above ({"weakest": "H4", "suggestedSimLevel": 4, "abilities": {"H4": {"S": 61}}}) the menu shows one Coach line, and with no run history the Adaptive start level is the suggested level. Missing or malformed files are ignored silently. The sim's own adaptive rule stays authoritative.
 * Tests: tests/test_wave5.py (10 tests).
+
+
+Changelog 2026-11-24 (spoken secondary task)
+--------------------------------------------
+* While you control traffic, short SPOKEN items arrive (headphones or speakers). Two variants, one per run:
+  Σ  digit sums: a tone, then 3-7 digits; type V, the sum, Enter.
+  =  code match: a target code (ICAO letter + digits, e.g. KILO 4 7) is shown on the briefing and spoken at the start;
+     codes are spoken now and then; press M only when the code is the target. Items = targets (hit / miss) + false presses;
+     an ignored non-target is not an item, so doing nothing scores 0.
+  The top bar shows the speaker (cyan = speaking, amber = answer now), Σ or the target, the key and a time bar.
+* Menu row "Audio": Enter cycles auto / Σ / = / no; Left/Right (or the right end of the row) switches the voice ES / EN
+  and plays a sample. "auto" (default) = on from level 5, sums on even seeds and codes on odd seeds. Radar-only runs never
+  have it. Rate, length and answer window grow with the level (atcsim/core/audio_task.py, AUDIO_LEVELS).
+* Debrief: accuracy and response time of the spoken task, apart from the radar score (it never changes items, score,
+  goal or Adaptive). A = "audio solo": the same spoken items (same seed) with no traffic, saved as the single-task
+  baseline; the debrief then shows the dual-task cost (solo accuracy minus accuracy with traffic, in points, and the
+  extra response time). Esc leaves it without saving.
+* Stats file: each run gains "audio" (null when off) and the file gains "audio_solo" and "settings"; older files load
+  unchanged. CSV: one extra row per run with the task ("Spoken task: digit sums (with radar)", seconds per item = mean
+  response time, Goal carries the dual-task cost) and one row per solo block ("... (solo)").
+* Clips: assets/voice/<es|en>/*.wav, made offline by tools/make_voice.py with the Windows SAPI voices (no network);
+  if a language has no voice, the script writes tone-coded clips instead and voice.json says "fallback": true.
+* Tests: tests/test_audio_task.py (40 tests).
