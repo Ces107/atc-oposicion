@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ATC Aptitude Trainer</title>
+<title>Entrenador de aptitudes ATC</title>
 <style>
 :root{
   --bg:#12151a; --panel:#1b2028; --panel2:#232a34; --borde:#3a4452;
@@ -120,6 +120,8 @@ function fmt(x, d){
   if (x === null || x === undefined || isNaN(x)) return '—';
   return Number(x).toFixed(d === undefined ? 1 : d);
 }
+// Display only (prose, result and stats screens): Spanish decimal comma. Questions, timers and the CSV keep fmt().
+function fmtC(x, d){ return fmt(x, d).replace('.', ','); }
 
 /* ==================================================================
    Difficulty system shared by all four modules (mandatory, see the
@@ -174,17 +176,17 @@ function dualSiguienteDigito(rnd, prev){
 }
 
 function nivelStatement(nivel){
-  if (nivel <= 3) return 'Level ' + nivel + ' is below the target: use it to build the method, then move up.';
-  if (nivel === 4) return 'Level 4 = a solid, standard candidate. One step below the target.';
-  if (nivel === 5) return 'Level 5 = the target for Phase 2: what a well-prepared candidate should master.';
-  if (nivel === 6) return 'Level 6 = above the target; a comfortable margin over most candidates.';
-  return 'Level ' + nivel + ' is beyond the competition: do not expect a high accuracy here; it trains your ceiling.';
+  if (nivel <= 3) return 'El nivel ' + nivel + ' está por debajo del objetivo: úsalo para asentar el método y luego sube.';
+  if (nivel === 4) return 'Nivel 4 = un candidato sólido y estándar. Un escalón por debajo del objetivo.';
+  if (nivel === 5) return 'Nivel 5 = el objetivo para la Fase 2: lo que debe dominar un candidato bien preparado.';
+  if (nivel === 6) return 'Nivel 6 = por encima del objetivo; un margen cómodo sobre la mayoría de candidatos.';
+  return 'El nivel ' + nivel + ' va más allá de la oposición: no esperes una precisión alta aquí; entrena tu techo.';
 }
 function recomendacion(nivel, precision){
-  if (precision < 60) return 'Accuracy is low: go down one level and slow down before the next session.';
-  if (precision < PRECISION_MINIMA) return 'Accuracy is below ' + PRECISION_MINIMA + ' %: do NOT speed up. Repeat this level at the same pace and aim for accuracy first.';
-  if (nivel >= MAX_NIVEL) return 'You hold accuracy at the top level. There is nothing above: repeat to consolidate.';
-  return 'Accuracy is at or above ' + PRECISION_MINIMA + ' %: you may try level ' + (nivel + 1) + ' next.';
+  if (precision < 60) return 'La precisión es baja: baja un nivel y ve más despacio en la próxima sesión.';
+  if (precision < PRECISION_MINIMA) return 'La precisión está por debajo del ' + PRECISION_MINIMA + ' %: NO aceleres. Repite este nivel al mismo ritmo y busca primero la precisión.';
+  if (nivel >= MAX_NIVEL) return 'Mantienes la precisión en el nivel máximo. No hay nada por encima: repite para consolidar.';
+  return 'La precisión está en el ' + PRECISION_MINIMA + ' % o más: puedes probar el nivel ' + (nivel + 1) + '.';
 }
 
 /* ---- 1. Mental arithmetic: 10-level ladder ---- */
@@ -193,16 +195,16 @@ function recomendacion(nivel, precision){
 // mixto = probability of a compound "a x b +/- c" item instead of a plain chain/mul/div item;
 // itemLimit = seconds allowed per item in "timed item" mode; dual = dual-task load (0-3).
 const CALC_NIVELES = [null,
-  { name:'Warm-up',     terms:2, add:[1,9],      mulA:[2,5],   mulB:[2,5],   divB:[2,5],   divQ:[2,5],   decimals:0, mixto:0,   itemLimit:12,  dual:0 },
-  { name:'Easy',        terms:2, add:[5,20],     mulA:[2,9],   mulB:[2,9],   divB:[2,9],   divQ:[2,9],   decimals:0, mixto:0,   itemLimit:10,  dual:0 },
-  { name:'Steady',      terms:2, add:[10,50],    mulA:[2,12],  mulB:[2,9],   divB:[2,9],   divQ:[2,12],  decimals:0, mixto:.15, itemLimit:9,   dual:0 },
-  { name:'Standard',    terms:3, add:[20,99],    mulA:[2,12],  mulB:[2,12],  divB:[2,12],  divQ:[2,12],  decimals:0, mixto:.25, itemLimit:8,   dual:0 },
-  { name:'Competitive', terms:3, add:[50,200],   mulA:[10,30], mulB:[2,9],   divB:[10,30], divQ:[2,12],  decimals:0, mixto:.35, itemLimit:7,   dual:0 },
-  { name:'Hard',        terms:4, add:[100,500],  mulA:[11,25], mulB:[11,19], divB:[11,40], divQ:[3,15],  decimals:0, mixto:.45, itemLimit:6,   dual:0 },
-  { name:'Elite',       terms:4, add:[200,999],  mulA:[12,50], mulB:[6,20],  divB:[12,60], divQ:[6,19],  decimals:1, mixto:.55, itemLimit:5,   dual:1 },
-  { name:'Extreme',     terms:4, add:[500,2500], mulA:[25,99], mulB:[11,29], divB:[12,99], divQ:[11,29], decimals:1, mixto:.65, itemLimit:4.5, dual:1 },
-  { name:'Superhuman',  terms:5, add:[1000,5000],mulA:[30,120],mulB:[12,40], divB:[13,99], divQ:[12,40], decimals:2, mixto:.8,  itemLimit:4,   dual:2 },
-  { name:'Impossible',  terms:5, add:[2000,9999],mulA:[40,150],mulB:[15,60], divB:[14,99], divQ:[13,60], decimals:2, mixto:1,   itemLimit:3,   dual:3 }
+  { name:'Calentamiento',     terms:2, add:[1,9],      mulA:[2,5],   mulB:[2,5],   divB:[2,5],   divQ:[2,5],   decimals:0, mixto:0,   itemLimit:12,  dual:0 },
+  { name:'Fácil',        terms:2, add:[5,20],     mulA:[2,9],   mulB:[2,9],   divB:[2,9],   divQ:[2,9],   decimals:0, mixto:0,   itemLimit:10,  dual:0 },
+  { name:'Constante',      terms:2, add:[10,50],    mulA:[2,12],  mulB:[2,9],   divB:[2,9],   divQ:[2,12],  decimals:0, mixto:.15, itemLimit:9,   dual:0 },
+  { name:'Estándar',    terms:3, add:[20,99],    mulA:[2,12],  mulB:[2,12],  divB:[2,12],  divQ:[2,12],  decimals:0, mixto:.25, itemLimit:8,   dual:0 },
+  { name:'Competitivo', terms:3, add:[50,200],   mulA:[10,30], mulB:[2,9],   divB:[10,30], divQ:[2,12],  decimals:0, mixto:.35, itemLimit:7,   dual:0 },
+  { name:'Difícil',        terms:4, add:[100,500],  mulA:[11,25], mulB:[11,19], divB:[11,40], divQ:[3,15],  decimals:0, mixto:.45, itemLimit:6,   dual:0 },
+  { name:'Élite',       terms:4, add:[200,999],  mulA:[12,50], mulB:[6,20],  divB:[12,60], divQ:[6,19],  decimals:1, mixto:.55, itemLimit:5,   dual:1 },
+  { name:'Extremo',     terms:4, add:[500,2500], mulA:[25,99], mulB:[11,29], divB:[12,99], divQ:[11,29], decimals:1, mixto:.65, itemLimit:4.5, dual:1 },
+  { name:'Sobrehumano',  terms:5, add:[1000,5000],mulA:[30,120],mulB:[12,40], divB:[13,99], divQ:[12,40], decimals:2, mixto:.8,  itemLimit:4,   dual:2 },
+  { name:'Imposible',  terms:5, add:[2000,9999],mulA:[40,150],mulB:[15,60], divB:[14,99], divQ:[13,60], decimals:2, mixto:1,   itemLimit:3,   dual:3 }
 ];
 function calcCadena(c, rnd){
   const escala = Math.pow(10, c.decimals);
@@ -269,12 +271,12 @@ function calcManualParams(nivel, hint){
 function calcCustomParams(cfg){
   const nivel = limitar(cfg.nivel, 1, MAX_NIVEL);
   const c = CALC_NIVELES[nivel];
-  return Object.assign({}, c, { nivel:nivel, etiqueta:'Custom', itemLimit:cfg.itemLimit, items:limitar(cfg.items, 5, 40),
+  return Object.assign({}, c, { nivel:nivel, etiqueta:'Personalizado', itemLimit:cfg.itemLimit, items:limitar(cfg.items, 5, 40),
     dual:limitar(cfg.dual, 0, 3), hintMax:hintMaxDeNivel(nivel, cfg.hint) });
 }
 function calcAdaptiveParams(s, hint){
   const cx = CALC_NIVELES[s.nivel], sp = CALC_NIVELES[adaptivaNivelVelocidad(s)];
-  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptive', itemLimit:sp.itemLimit, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
+  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptativo', itemLimit:sp.itemLimit, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
 }
 
 /* ---- 2. d2-style attention cancellation: 10-level ladder ---- */
@@ -291,16 +293,16 @@ function d2Pools(){
 }
 const D2_POOLS = d2Pools();
 const D2_NIVELES = [null,
-  { name:'Warm-up',     rows:10, len:36, sec:26, pObj:.35, near:0,   dual:0 },
-  { name:'Easy',        rows:12, len:40, sec:24, pObj:.33, near:.15, dual:0 },
-  { name:'Steady',      rows:14, len:44, sec:22, pObj:.32, near:.30, dual:0 },
-  { name:'Standard',    rows:14, len:47, sec:20, pObj:.30, near:.45, dual:0 },
-  { name:'Competitive', rows:16, len:50, sec:18, pObj:.30, near:.55, dual:0 },
-  { name:'Hard',        rows:16, len:54, sec:16, pObj:.28, near:.65, dual:0 },
-  { name:'Elite',       rows:18, len:58, sec:14, pObj:.28, near:.75, dual:1 },
-  { name:'Extreme',     rows:18, len:62, sec:12, pObj:.26, near:.85, dual:1 },
-  { name:'Superhuman',  rows:20, len:66, sec:10, pObj:.25, near:.93, dual:2 },
-  { name:'Impossible',  rows:20, len:70, sec:8,  pObj:.25, near:1,   dual:3 }
+  { name:'Calentamiento',     rows:10, len:36, sec:26, pObj:.35, near:0,   dual:0 },
+  { name:'Fácil',        rows:12, len:40, sec:24, pObj:.33, near:.15, dual:0 },
+  { name:'Constante',      rows:14, len:44, sec:22, pObj:.32, near:.30, dual:0 },
+  { name:'Estándar',    rows:14, len:47, sec:20, pObj:.30, near:.45, dual:0 },
+  { name:'Competitivo', rows:16, len:50, sec:18, pObj:.30, near:.55, dual:0 },
+  { name:'Difícil',        rows:16, len:54, sec:16, pObj:.28, near:.65, dual:0 },
+  { name:'Élite',       rows:18, len:58, sec:14, pObj:.28, near:.75, dual:1 },
+  { name:'Extremo',     rows:18, len:62, sec:12, pObj:.26, near:.85, dual:1 },
+  { name:'Sobrehumano',  rows:20, len:66, sec:10, pObj:.25, near:.93, dual:2 },
+  { name:'Imposible',  rows:20, len:70, sec:8,  pObj:.25, near:1,   dual:3 }
 ];
 function d2GenerarFila(rnd, n, pObj, near){
   n = n || D2_NIVELES[4].len; pObj = pObj === undefined ? 0.3 : pObj; near = near === undefined ? 0.5 : near;
@@ -343,12 +345,12 @@ function d2ManualParams(nivel, hint){
 function d2CustomParams(cfg){
   const nivel = limitar(cfg.nivel, 1, MAX_NIVEL);
   const c = D2_NIVELES[nivel];
-  return Object.assign({}, c, { nivel:nivel, etiqueta:'Custom', sec:cfg.sec, rows:limitar(cfg.rows, 5, 25),
+  return Object.assign({}, c, { nivel:nivel, etiqueta:'Personalizado', sec:cfg.sec, rows:limitar(cfg.rows, 5, 25),
     dual:limitar(cfg.dual, 0, 3), hintMax:hintMaxDeNivel(nivel, cfg.hint) });
 }
 function d2AdaptiveParams(s, hint){
   const cx = D2_NIVELES[s.nivel], sp = D2_NIVELES[adaptivaNivelVelocidad(s)];
-  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptive', sec:sp.sec, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
+  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptativo', sec:sp.sec, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
 }
 
 /* ---- 3. Left/right with perspective: 10-level ladder ---- */
@@ -359,16 +361,16 @@ function lrLadoPantalla(mira, lado){
   return lado;
 }
 const LR_NIVELES = [null,
-  { name:'Warm-up',     n:15, exposure:0,   rot:[0],                                itemLimit:0,   dual:0 },
-  { name:'Easy',        n:15, exposure:0,   rot:[0],                                itemLimit:0,   dual:0 },
-  { name:'Steady',      n:20, exposure:0,   rot:[0,180],                            itemLimit:0,   dual:0 },
-  { name:'Standard',    n:20, exposure:0,   rot:[0,180],                            itemLimit:6,   dual:0 },
-  { name:'Competitive', n:20, exposure:0,   rot:[0,90,180,270],                     itemLimit:4,   dual:0 },
-  { name:'Hard',        n:20, exposure:0,   rot:[0,90,180,270],                     itemLimit:3,   dual:0 },
-  { name:'Elite',       n:25, exposure:2.5, rot:[0,45,90,135,180,225,270,315],      itemLimit:3,   dual:1 },
-  { name:'Extreme',     n:25, exposure:1.8, rot:[0,45,90,135,180,225,270,315],      itemLimit:2.5, dual:1 },
-  { name:'Superhuman',  n:30, exposure:1.3, rot:[0,45,90,135,180,225,270,315],      itemLimit:2,   dual:2 },
-  { name:'Impossible',  n:30, exposure:1.0, rot:'free',                             itemLimit:1.5, dual:3 }
+  { name:'Calentamiento',     n:15, exposure:0,   rot:[0],                                itemLimit:0,   dual:0 },
+  { name:'Fácil',        n:15, exposure:0,   rot:[0],                                itemLimit:0,   dual:0 },
+  { name:'Constante',      n:20, exposure:0,   rot:[0,180],                            itemLimit:0,   dual:0 },
+  { name:'Estándar',    n:20, exposure:0,   rot:[0,180],                            itemLimit:6,   dual:0 },
+  { name:'Competitivo', n:20, exposure:0,   rot:[0,90,180,270],                     itemLimit:4,   dual:0 },
+  { name:'Difícil',        n:20, exposure:0,   rot:[0,90,180,270],                     itemLimit:3,   dual:0 },
+  { name:'Élite',       n:25, exposure:2.5, rot:[0,45,90,135,180,225,270,315],      itemLimit:3,   dual:1 },
+  { name:'Extremo',     n:25, exposure:1.8, rot:[0,45,90,135,180,225,270,315],      itemLimit:2.5, dual:1 },
+  { name:'Sobrehumano',  n:30, exposure:1.3, rot:[0,45,90,135,180,225,270,315],      itemLimit:2,   dual:2 },
+  { name:'Imposible',  n:30, exposure:1.0, rot:'free',                             itemLimit:1.5, dual:3 }
 ];
 // Balanced sequence: half facing you, half back turned; half left, half right. rotSpec is either
 // an array of allowed rotation angles (degrees, applied to the whole figure on screen) or 'free'
@@ -402,27 +404,27 @@ function lrManualParams(nivel, hint){
 function lrCustomParams(cfg){
   const nivel = limitar(cfg.nivel, 1, MAX_NIVEL);
   const c = LR_NIVELES[nivel];
-  return Object.assign({}, c, { nivel:nivel, etiqueta:'Custom', itemLimit:cfg.itemLimit, exposure:cfg.exposure,
+  return Object.assign({}, c, { nivel:nivel, etiqueta:'Personalizado', itemLimit:cfg.itemLimit, exposure:cfg.exposure,
     n:limitar(cfg.items, 10, 40), dual:limitar(cfg.dual, 0, 3), hintMax:hintMaxDeNivel(nivel, cfg.hint) });
 }
 function lrAdaptiveParams(s, hint){
   const cx = LR_NIVELES[s.nivel], sp = LR_NIVELES[adaptivaNivelVelocidad(s)];
-  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptive', itemLimit:sp.itemLimit, exposure:sp.exposure, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
+  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptativo', itemLimit:sp.itemLimit, exposure:sp.exposure, dual:0, hintMax:hintMaxDeNivel(s.nivel, hint) });
 }
 
 /* ---- 4. Dual n-back: 10-level ladder ---- */
 const NB_LETRAS = ['C','H','K','L','Q','R','S','W'];
 const NB_NIVELES = [null,
-  { name:'Warm-up',     n:1, interval:3000 },
-  { name:'Easy',        n:1, interval:2500 },
-  { name:'Steady',      n:2, interval:2500 },
-  { name:'Standard',    n:2, interval:2000 },
-  { name:'Competitive', n:3, interval:2000 },
-  { name:'Hard',        n:3, interval:1700 },
-  { name:'Elite',       n:4, interval:1500 },
-  { name:'Extreme',     n:4, interval:1300 },
-  { name:'Superhuman',  n:5, interval:1100 },
-  { name:'Impossible',  n:6, interval:900  }
+  { name:'Calentamiento',     n:1, interval:3000 },
+  { name:'Fácil',        n:1, interval:2500 },
+  { name:'Constante',      n:2, interval:2500 },
+  { name:'Estándar',    n:2, interval:2000 },
+  { name:'Competitivo', n:3, interval:2000 },
+  { name:'Difícil',        n:3, interval:1700 },
+  { name:'Élite',       n:4, interval:1500 },
+  { name:'Extremo',     n:4, interval:1300 },
+  { name:'Sobrehumano',  n:5, interval:1100 },
+  { name:'Imposible',  n:6, interval:900  }
 ];
 function nbCanal(rnd, n, len, pMatch, opciones){
   const v = [];
@@ -477,28 +479,29 @@ function nbManualParams(nivel, hint){
 function nbCustomParams(cfg){
   const nivel = limitar(cfg.nivel, 1, MAX_NIVEL);
   const c = NB_NIVELES[nivel];
-  return Object.assign({}, c, { nivel:nivel, etiqueta:'Custom', interval:cfg.interval, hintMax:hintMaxDeNivel(nivel, cfg.hint) });
+  return Object.assign({}, c, { nivel:nivel, etiqueta:'Personalizado', interval:cfg.interval, hintMax:hintMaxDeNivel(nivel, cfg.hint) });
 }
 function nbAdaptiveParams(s, hint){
   const cx = NB_NIVELES[s.nivel], sp = NB_NIVELES[adaptivaNivelVelocidad(s)];
-  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptive', interval:sp.interval, hintMax:hintMaxDeNivel(s.nivel, hint) });
+  return Object.assign({}, cx, { nivel:s.nivel, etiqueta:'Adaptativo', interval:sp.interval, hintMax:hintMaxDeNivel(s.nivel, hint) });
 }
 
 /* ---- Goal, anti-speed-up rule, records, CSV (shared) ---- */
 // Returns true / false, or null if the goal text cannot be interpreted.
-// Recognised patterns: "96 %" (accuracy), "2.0 s" / "2,0 seconds" (seconds per item), "30 correct" / "30 hits" (correct answers).
+// Recognised patterns: "96 %" (accuracy), "2,0 s" / "2.0 segundos" (seconds per item), "30 aciertos" / "30 correct" (correct answers).
+// English words are still accepted so goals saved by the earlier English version keep being graded.
 function evaluarObjetivo(texto, r){
   const t = String(texto || '').replace(/\s+/g, ' ');
   const num = function(x){ return parseFloat(x.replace(',', '.')); };
   let res = null;
   const mp = t.match(/(\d+(?:[.,]\d+)?)\s*%/);
   if (mp) res = r.precision >= num(mp[1]);
-  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:seconds|second|secs|sec|s)(?![a-z])/i);
+  const ms = t.match(/(\d+(?:[.,]\d+)?)\s*(?:segundos|segundo|seconds|second|secs|seg|sec|s)(?![a-záéíóúñ])/i);
   if (ms && r.spi !== null && r.spi !== undefined){ const ok = r.spi <= num(ms[1]); res = res === null ? ok : (res && ok); }
-  const ma = t.match(/(\d+)\s*(?:correct|hits)/i);
+  const ma = t.match(/(\d+)\s*(?:aciertos|acierto|correctas|correctos|correct|hits)/i);
   if (ma){ const ok = r.aciertos >= parseInt(ma[1], 10); res = res === null ? ok : (res && ok); }
-  // d2: "concentration over 40" / "concentration 40"
-  const mc = t.match(/concentration\D{0,14}?(\d+)/i);
+  // d2: "concentración de más de 40" / "concentración 40" (also the English "concentration over 40")
+  const mc = t.match(/(?:concentraci[oó]n|concentration)\D{0,14}?(\d+)/i);
   if (mc && r.concentracion !== undefined && r.concentracion !== null){ const ok = r.concentracion >= parseInt(mc[1], 10); res = res === null ? ok : (res && ok); }
   return res;
 }
@@ -535,12 +538,13 @@ function csvCampo(v){
   return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
 }
 // Column order is the one fixed by the task card: Level is the third column.
+// The header stays in English on purpose: the dashboard's CSV import (aptitude/dashboard.html, csvToRecords) matches these exact names.
 function aCSV(sesiones){
   const cab = ['Date','Module','Level','Correct','Wrong','Blank','Seconds per item','Accuracy %','Goal','Met'];
   const filas = sesiones.map(function(s){
     return [fechaES(s.ts), s.modulo, s.etiquetaNivel || '', s.aciertos, s.fallos, s.blanco,
       (s.spi === null || s.spi === undefined) ? '' : fmt(s.spi, 2), fmt(s.precision, 1), s.objetivo,
-      s.cumplido === true ? 'Yes' : (s.cumplido === false ? 'No' : '')].map(csvCampo).join(';');
+      s.cumplido === true ? 'Sí' : (s.cumplido === false ? 'No' : '')].map(csvCampo).join(';');
   });
   return '﻿' + [cab.join(';')].concat(filas).join('\r\n') + '\r\n';
 }
@@ -568,24 +572,28 @@ function atcThirdsLine(th){
   const acc = function(x){ return x.n > 0 ? x.c / x.n * 100 : null; };
   const a = th.map(acc);
   const txt = a.map(function(v){ return v === null ? '—' : String(Math.round(v)); }).join(' / ');
-  let fade = ' (too few items per third for a fade estimate)';
+  let fade = ' (muy pocos elementos por tercio para estimar la caída)';
   if (th[0].n >= 8 && th[2].n >= 8){
     const f = Math.round(a[2]) - Math.round(a[0]);
-    fade = ' → fade ' + (f > 0 ? '+' : (f < 0 ? '−' : '')) + Math.abs(f) + ' pts';
+    fade = ' → caída ' + (f > 0 ? '+' : (f < 0 ? '−' : '')) + Math.abs(f) + ' pts';
   }
-  return 'Accuracy by thirds: ' + txt + ' %' + fade;
+  return 'Precisión por tercios: ' + txt + ' %' + fade;
 }
 // ==== LOGICA PURA FIN ====
 
 // ==================== USER INTERFACE ====================
 const MODULOS = {
-  calc:  'Mental arithmetic',
-  d2:    'Attention cancellation',
-  lr:    'Left/right',
-  nback: 'Dual n-back'
+  calc:  'Cálculo mental',
+  d2:    'Cancelación de atención',
+  lr:    'Izquierda/derecha',
+  nback: 'N-back dual'
 };
-// Module names used by the earlier Spanish version, so saved history is not lost.
-const MODULOS_ANTIGUOS = { 'Cálculo mental':'Mental arithmetic', 'Cancelación de atención':'Attention cancellation', 'Izquierda/derecha':'Left/right' };
+// These names are stored in every session (s.modulo) and the dashboard maps them by regex
+// (aptitude/dashboard.html CSV_MODULES accepts both the English and the Spanish names).
+// Names used by the earlier English version, migrated on load so saved history is not lost.
+const MODULOS_ANTIGUOS = { 'Mental arithmetic':'Cálculo mental', 'Attention cancellation':'Cancelación de atención', 'Left/right':'Izquierda/derecha', 'Dual n-back':'N-back dual' };
+// Display names for the internal mode values ('manual' / 'adaptive' / 'custom' stay as stored keys).
+const MODO_TXT = { manual:'manual', adaptive:'adaptativo', custom:'personalizado' };
 const CLAVE_ALMACEN = 'atc_entrenador_v1';
 let memoria = null, almacenOk = true;
 let onKey = null, temporizadores = [];
@@ -610,6 +618,8 @@ function cargar(){
     if (MODULOS_ANTIGUOS[s.modulo]) s.modulo = MODULOS_ANTIGUOS[s.modulo];
     if (s.nivel === undefined) s.nivel = null;             // sessions saved before this upgrade: level unknown
     if (s.etiquetaNivel === undefined) s.etiquetaNivel = s.nivel === null ? '' : String(s.nivel);
+    // Level labels saved by the English version ("Custom 5", "Adaptive"): rename so stats group them with the new ones.
+    if (typeof s.etiquetaNivel === 'string') s.etiquetaNivel = s.etiquetaNivel.replace(/^Custom\b/, 'Personalizado').replace(/^Adaptive$/, 'Adaptativo');
     if (s.modo === undefined) s.modo = s.nivel === null ? 'manual' : s.modo;
     if (s.ayudados === undefined) s.ayudados = 0;
   });
@@ -661,7 +671,7 @@ function pedirSalida(){
   escArmado = ahora;
   let b = $('salida');
   if (!b){ b = document.createElement('div'); b.id = 'salida'; b.className = 'toast'; b.setAttribute('role', 'alert'); document.body.appendChild(b); }
-  b.textContent = 'Press Esc again to quit. This session will NOT be saved.';
+  b.textContent = 'Pulsa Esc otra vez para salir. Esta sesión NO se guardará.';
   tempo(setTimeout(function(){ escArmado = 0; const x = $('salida'); if (x) x.remove(); }, 2500));
 }
 
@@ -715,48 +725,48 @@ function dualPulsar(){
   else { dualState.falsos++; flash('#ff8a80'); }
 }
 function dualBoxHtml(nivelDual){
-  return nivelDual ? '<div class="dual" id="dualbox"><div class="peq suave">Side task: press <kbd>D</kbd> only when the digit is the SAME as the flash before (green = right, red = false alarm).</div><div class="dg" id="dualdig">-</div></div>' : '';
+  return nivelDual ? '<div class="dual" id="dualbox"><div class="peq suave">Tarea secundaria: pulsa <kbd>D</kbd> solo cuando la cifra sea IGUAL a la del destello anterior (verde = bien, rojo = falsa alarma).</div><div class="dg" id="dualdig">-</div></div>' : '';
 }
 function dualResultadoHtml(){
   const u = dualUltimo; dualUltimo = null;
   if (!u) return '';
   const ok = u.misses + u.falsos === 0;
-  return '<p class="' + (ok ? 'bien' : 'suave') + '">Side task: ' + u.hits + ' of ' + u.repeticiones + ' repeats caught · ' + u.misses + ' missed · ' + u.falsos + ' false alarms.</p>';
+  return '<p class="' + (ok ? 'bien' : 'suave') + '">Tarea secundaria: ' + u.hits + ' de ' + u.repeticiones + ' repeticiones detectadas · ' + u.misses + ' omitidas · ' + u.falsos + ' falsas alarmas.</p>';
 }
 
 /* ---------- Menu ---------- */
 function resumenModulo(id){
   const d = cargar();
   const ses = d.sesiones.filter(function(s){ return s.modulo === MODULOS[id]; });
-  if (!ses.length) return 'No sessions yet. Set your first baseline!';
+  if (!ses.length) return 'Aún no hay sesiones. ¡Marca tu primera referencia!';
   const u = ses[ses.length - 1];
   let rec = '';
   if (u.nivel !== null){
     const best = mejorPersonal(ses, u.modulo, u.clave, u.nivel, u.mayorEsMejor);
-    if (best) rec = ' · Best at level ' + u.nivel + ': ' + (id === 'lr' ? fmt(best.puntos, 2) + ' s' : best.puntos);
+    if (best) rec = ' · Mejor en el nivel ' + u.nivel + ': ' + (id === 'lr' ? fmtC(best.puntos, 2) + ' s' : best.puntos);
   }
-  return 'Sessions: ' + ses.length + ' · Last: ' + fmt(u.precision, 1) + ' % (level ' + (u.etiquetaNivel || '—') + ')' + rec;
+  return 'Sesiones: ' + ses.length + ' · Última: ' + fmtC(u.precision, 1) + ' % (nivel ' + (u.etiquetaNivel || '—') + ')' + rec;
 }
 function menu(){
   limpiar();
   const d = cargar();
   const tarj = [
-    ['calc','1','Mental arithmetic','Additions, subtractions, multiplications and divisions, multi-operand chains and mixed operations from level 6, decimals from level 7.'],
-    ['d2','2','Attention cancellation','d2 style (test de atención d2): mark only the “d with exactly two dashes”. Rows, speed and lookalike distractors grow with the level.'],
-    ['lr','3','Left/right','Left or right OF THE FIGURE? Goal: 2.0 s with ≥95 %. Rotated figures and short exposure from level 7.']
+    ['calc','1','Cálculo mental','Sumas, restas, multiplicaciones y divisiones; cadenas de varios operandos y operaciones combinadas desde el nivel 6, decimales desde el nivel 7.'],
+    ['d2','2','Cancelación de atención','Estilo d2 (test de atención d2): marca solo la «d con exactamente dos rayas». Las filas, la velocidad y los distractores parecidos aumentan con el nivel.'],
+    ['lr','3','Izquierda/derecha','¿Izquierda o derecha DE LA FIGURA? Objetivo: 2,0 s con ≥95 %. Figuras giradas y exposición breve desde el nivel 7.']
     // Dual n-back (configNback) is hidden from the menu since b1123: no description of the real tests names it and it does
     // not count in the dashboard's readiness. Its code, stored sessions and history stay.
   ];
   const primera = !d.sesiones.length;
   pantalla(
-    '<h1>ATC Aptitude Trainer</h1>' +
-    (primera ? '<div class="bien-caja"><b>First time here?</b><ol class="pasos"><li>Pick a module (press <kbd>1</kbd> to <kbd>3</kbd>). Each one opens with a short explanation.</li><li>Press <b>Practice</b> on that screen: 3 easy items that are not saved, to learn the keys.</li><li>Then start a real session at level 1 or 2 and move up only when accuracy stays at ' + PRECISION_MINIMA + ' % or more. Level 5 is the Phase 2 target.</li></ol></div>' :
-      '<p class="suave">Keys <kbd>1</kbd> to <kbd>3</kbd> pick a module, <kbd>H</kbd> opens your stats, <kbd>Esc</kbd> comes back here. Never speed up while accuracy is below ' + PRECISION_MINIMA + ' %.</p>') +
-    (almacenOk ? '' : '<div class="aviso-caja">The browser does not allow saving the history (localStorage unavailable). It will be kept only while this tab stays open.</div>') +
+    '<h1>Entrenador de aptitudes ATC</h1>' +
+    (primera ? '<div class="bien-caja"><b>¿Primera vez aquí?</b><ol class="pasos"><li>Elige un módulo (pulsa de <kbd>1</kbd> a <kbd>3</kbd>). Cada uno empieza con una explicación breve.</li><li>Pulsa <b>Práctica</b> en esa pantalla: 3 elementos fáciles que no se guardan, para aprender las teclas.</li><li>Después empieza una sesión real en el nivel 1 o 2 y sube solo cuando la precisión se mantenga en el ' + PRECISION_MINIMA + ' % o más. El nivel 5 es el objetivo de la Fase 2.</li></ol></div>' :
+      '<p class="suave">Las teclas de <kbd>1</kbd> a <kbd>3</kbd> eligen módulo, <kbd>H</kbd> abre tus estadísticas y <kbd>Esc</kbd> vuelve aquí. No aceleres nunca mientras la precisión esté por debajo del ' + PRECISION_MINIMA + ' %.</p>') +
+    (almacenOk ? '' : '<div class="aviso-caja">El navegador no permite guardar el historial (localStorage no disponible). Solo se conservará mientras esta pestaña siga abierta.</div>') +
     '<div class="rejilla">' + tarj.map(function(t){
       return '<button class="tarjeta" data-m="' + t[0] + '"><span class="num">' + t[1] + '</span><h2 style="display:inline">' + t[2] + '</h2><p>' + t[3] + '</p><p class="datos">' + esc(resumenModulo(t[0])) + '</p></button>';
     }).join('') + '</div>' +
-    '<p style="margin-top:16px"><button class="btn" id="hist">Stats, history and CSV (H)</button></p>'
+    '<p style="margin-top:16px"><button class="btn" id="hist">Estadísticas, historial y CSV (H)</button></p>'
   );
   const ir = { calc:configCalc, d2:configD2, lr:configLR, nback:configNback };
   Array.prototype.forEach.call(app.querySelectorAll('.tarjeta'), function(b){ b.addEventListener('click', function(){ ir[b.dataset.m](); }); });
@@ -784,9 +794,10 @@ function bindSliders(specs){
   specs.forEach(function(s){ $(s.id).addEventListener('input', function(){ $(s.id + 'v').textContent = $(s.id).value; }); });
 }
 function hintSelectHtml(hint, nota){
-  return '<label class="et" for="hi">Hints (0 none, 1 nudge, 2 method, 3 full solution; off from level ' + (HINT_MAX_LEVEL + 1) + ')</label>' +
-    fillSelect('hi', [[0,'0 - no hints'],[1,'1 - nudge'],[2,'2 - method'],[3,'3 - full worked solution']], hint) +
-    '<p class="peq suave" id="hnota" data-base="' + esc(nota || 'A hinted item counts as wrong for accuracy. Press H during an item.') + '">' + (nota || 'A hinted item counts as wrong for accuracy. Press H during an item.') + '</p>';
+  const notaBase = 'Un elemento con pista cuenta como fallo en la precisión. Pulsa H durante un elemento.';
+  return '<label class="et" for="hi">Pistas (0 ninguna, 1 empujón, 2 método, 3 solución completa; desactivadas desde el nivel ' + (HINT_MAX_LEVEL + 1) + ')</label>' +
+    fillSelect('hi', [[0,'0 - sin pistas'],[1,'1 - empujón'],[2,'2 - método'],[3,'3 - solución completa paso a paso']], hint) +
+    '<p class="peq suave" id="hnota" data-base="' + esc(nota || notaBase) + '">' + (nota || notaBase) + '</p>';
 }
 // Hints are forced off from level 7 up (hintMaxDeNivel): show that in the form instead of silently ignoring the selector.
 function actualizarHint(){
@@ -794,10 +805,10 @@ function actualizarHint(){
   const lv = $('lv') ? parseInt($('lv').value, 10) : ($('cl') ? parseInt($('cl').value, 10) : 1);
   const off = lv > HINT_MAX_LEVEL;
   hi.disabled = off;
-  const n = $('hnota'); if (n) n.textContent = n.dataset.base + (off ? ' Hints are switched off at level ' + (HINT_MAX_LEVEL + 1) + ' and above.' : '');
+  const n = $('hnota'); if (n) n.textContent = n.dataset.base + (off ? ' Las pistas se desactivan a partir del nivel ' + (HINT_MAX_LEVEL + 1) + '.' : '');
 }
 function botonesInicio(praticaTxt){
-  return '<p class="fila" style="margin-top:10px"><button class="btn primario" id="go">Start (Enter)</button><button class="btn" id="prac">Practice: ' + (praticaTxt || '3 easy items') + ', not saved</button></p>';
+  return '<p class="fila" style="margin-top:10px"><button class="btn primario" id="go">Empezar (Intro)</button><button class="btn" id="prac">Práctica: ' + (praticaTxt || '3 elementos fáciles') + ', sin guardar</button></p>';
 }
 function configEnter(go){
   onKey = function(e){
@@ -808,14 +819,14 @@ function configEnter(go){
 function objetivoAviso(mod){
   const o = $('obj'), a = $('objaviso'); if (!o || !a) return;
   const t = o.value.trim();
-  a.textContent = t && evaluarObjetivo(t, { precision:100, spi:0, aciertos:9999, concentracion: mod === 'd2' ? 9999 : undefined }) === null ? 'Note: this goal cannot be graded automatically; you will be asked yes/no at the end. Use a number with %, s or "correct".' : '';
+  a.textContent = t && evaluarObjetivo(t, { precision:100, spi:0, aciertos:9999, concentracion: mod === 'd2' ? 9999 : undefined }) === null ? 'Nota: este objetivo no se puede evaluar automáticamente; al final se te preguntará sí o no. Usa un número con %, s o «aciertos».' : '';
 }
 function ladderTableHtml(niveles, campos){
-  let h = '<div class="tabla-caja"><table><tr><th>Level</th><th>Name</th>' + campos.map(function(f){ return '<th>' + f[1] + '</th>'; }).join('') + '<th>Hints</th><th>Dual task</th></tr>';
+  let h = '<div class="tabla-caja"><table><tr><th>Nivel</th><th>Nombre</th>' + campos.map(function(f){ return '<th>' + f[1] + '</th>'; }).join('') + '<th>Pistas</th><th>Tarea doble</th></tr>';
   for (let l = 1; l <= MAX_NIVEL; l++){
     const L = niveles[l];
     h += '<tr><td>' + l + '</td><td>' + L.name + '</td>' + campos.map(function(f){ return '<td>' + (f[2] ? f[2](L[f[0]]) : L[f[0]]) + '</td>'; }).join('') +
-      '<td>' + (l <= HINT_MAX_LEVEL ? '0-3' : 'off') + '</td><td>' + (L.dual ? ['','light','medium','heavy'][L.dual] : 'off') + '</td></tr>';
+      '<td>' + (l <= HINT_MAX_LEVEL ? '0-3' : 'no') + '</td><td>' + (L.dual ? ['','ligera','media','intensa'][L.dual] : 'no') + '</td></tr>';
   }
   return h + '</table></div>';
 }
@@ -824,43 +835,43 @@ function statCard(v, l){ return '<div class="cifra"><b>' + v + '</b><span>' + l 
 /* ================= 1. MENTAL ARITHMETIC ================= */
 function configCalc(){
   const d = cargar();
-  const u = cfgDe(d, 'calc', { modo:'manual', nivel:1, submodo:'n20', goal:'≥96 % accuracy', hint:0,
+  const u = cfgDe(d, 'calc', { modo:'manual', nivel:1, submodo:'n20', goal:'≥96 % de precisión', hint:0,
     custom:{ nivel:5, itemLimit:7, items:20, dual:0, hint:0 } });
   pantalla(
-    '<div class="panel"><button class="enlace" id="volver">← Menu (Esc)</button>' +
-    '<h1>Mental arithmetic (cálculo mental)</h1>' +
-    '<p class="suave">How it works: a sum appears (for example <b>17 + 25 = ?</b>). Type the result and press <kbd>Enter</kbd>. You see at once whether you were right and how long it took. Levels 4+ chain 3 to 5 add/subtract terms; compound items like "a × b ± c" grow with the level; decimals appear from level 7.</p>' +
+    '<div class="panel"><button class="enlace" id="volver">← Menú (Esc)</button>' +
+    '<h1>Cálculo mental</h1>' +
+    '<p class="suave">Cómo funciona: aparece una operación (por ejemplo <b>17 + 25 = ?</b>). Escribe el resultado y pulsa <kbd>Intro</kbd>. Ves al momento si has acertado y cuánto has tardado. Desde el nivel 4 se encadenan de 3 a 5 términos de suma y resta; las operaciones combinadas del tipo «a × b ± c» aumentan con el nivel; los decimales aparecen desde el nivel 7.</p>' +
     '<div class="grid2"><div>' +
-    '<label class="et" for="mo">Mode</label>' + fillSelect('mo', [['manual','Manual level (1-10)'],['adaptive','Adaptive (adjusts itself)'],['custom','Custom (sliders)']], u.modo) +
+    '<label class="et" for="mo">Modo</label>' + fillSelect('mo', [['manual','Nivel manual (1-10)'],['adaptive','Adaptativo (se ajusta solo)'],['custom','Personalizado (deslizadores)']], u.modo) +
     '<div id="modebox"></div></div><div>' +
-    '<label class="et" for="obj">Numeric goal for this session (required)</label>' +
+    '<label class="et" for="obj">Objetivo numérico de esta sesión (obligatorio)</label>' +
     '<input type="text" id="obj" maxlength="80" autocomplete="off" value="' + esc(u.goal) + '">' +
-    '<p class="peq suave">Examples: “≥96 % accuracy today”, “≤5 s per item”, “30 correct”.</p><p class="peq aviso" id="objaviso"></p>' +
-    hintSelectHtml(u.hint, 'For calc, a hint gives a decomposition method for the current item (press H). Using it counts the item as assisted (wrong for accuracy).') +
+    '<p class="peq suave">Ejemplos: «≥96 % de precisión hoy», «≤5 s por elemento», «30 aciertos».</p><p class="peq aviso" id="objaviso"></p>' +
+    hintSelectHtml(u.hint, 'En cálculo, una pista te da un método de descomposición para la operación actual (pulsa H). Usarla cuenta la operación como asistida (fallo en la precisión).') +
     '</div></div>' +
     '<p id="err" class="mal" role="alert"></p>' + botonesInicio() + '</div>' +
-    '<details class="panel"><summary>The ten levels</summary>' + ladderTableHtml(CALC_NIVELES, [
-      ['terms','Chain terms'], ['mixto','Mixed prob.', function(v){ return Math.round(v*100) + ' %'; }],
-      ['decimals','Decimals'], ['itemLimit','Time limit', function(v){ return v + ' s'; }]
-    ]) + '<p class="peq suave">Level 5 = the target for Phase 2. In "Timed item" sub-mode every item must be answered within the level time limit or it counts as blank.</p></details>'
+    '<details class="panel"><summary>Los diez niveles</summary>' + ladderTableHtml(CALC_NIVELES, [
+      ['terms','Términos por cadena'], ['mixto','Prob. combinadas', function(v){ return Math.round(v*100) + ' %'; }],
+      ['decimals','Decimales'], ['itemLimit','Tiempo límite', function(v){ return String(v).replace('.', ',') + ' s'; }]
+    ]) + '<p class="peq suave">Nivel 5 = el objetivo para la Fase 2. En la modalidad «tiempo por elemento» cada operación debe responderse dentro del tiempo límite del nivel o cuenta como en blanco.</p></details>'
   );
   function drawMode(){
     const mo = $('mo').value; let h = '';
     if (mo === 'manual'){
       const opts = []; for (let l = 1; l <= MAX_NIVEL; l++) opts.push([l, l + ' ' + CALC_NIVELES[l].name]);
-      h = '<label class="et" for="lv">Level</label>' + fillSelect('lv', opts, u.nivel) +
+      h = '<label class="et" for="lv">Nivel</label>' + fillSelect('lv', opts, u.nivel) +
         '<p class="peq suave" id="lvs">' + esc(nivelStatement(u.nivel)) + '</p>' +
-        '<label class="et" for="sm">Session type</label>' + fillSelect('sm', [['t60','60 seconds total'],['n20','20 questions, untimed each'],['titem','20 questions, timed item (uses the level time limit)']], u.submodo);
+        '<label class="et" for="sm">Tipo de sesión</label>' + fillSelect('sm', [['t60','60 segundos en total'],['n20','20 preguntas, sin tiempo por pregunta'],['titem','20 preguntas con tiempo por elemento (usa el límite del nivel)']], u.submodo);
     } else if (mo === 'adaptive'){
       const start = d.ultimo.calcAdaptStart || 2;
-      h = '<p class="peq suave">Starts at level ' + start + ', 20 timed items. Level rises after 5 correct answers in a row and falls after 2 mistakes in a row. The per-item time limit only tightens once the last 10 answers are ' + PRECISION_MINIMA + ' % accurate or more: it never speeds up while accuracy is low. Dual task is off.</p>';
+      h = '<p class="peq suave">Empieza en el nivel ' + start + ', 20 elementos con tiempo. El nivel sube tras 5 aciertos seguidos y baja tras 2 fallos seguidos. El tiempo límite por elemento solo se reduce cuando las 10 últimas respuestas tienen una precisión del ' + PRECISION_MINIMA + ' % o más: nunca acelera mientras la precisión es baja. Sin tarea doble.</p>';
     } else {
       const c = u.custom;
       h = slidersHtml([
-        { id:'cl', label:'Number complexity (level)', min:1, max:10, val:c.nivel },
-        { id:'cli', label:'Time limit per item (0 = none)', min:0, max:15, step:.5, val:c.itemLimit, unit:'s' },
-        { id:'cit', label:'Items', min:5, max:40, val:c.items },
-        { id:'cdu', label:'Dual task (0 off, 1 light, 2 medium, 3 heavy)', min:0, max:3, val:c.dual }
+        { id:'cl', label:'Complejidad de los números (nivel)', min:1, max:10, val:c.nivel },
+        { id:'cli', label:'Tiempo límite por elemento (0 = sin límite)', min:0, max:15, step:.5, val:c.itemLimit, unit:'s' },
+        { id:'cit', label:'Elementos', min:5, max:40, val:c.items },
+        { id:'cdu', label:'Tarea doble (0 no, 1 ligera, 2 media, 3 intensa)', min:0, max:3, val:c.dual }
       ]);
     }
     $('modebox').innerHTML = h;
@@ -874,7 +885,7 @@ function configCalc(){
   $('volver').addEventListener('click', menu);
   const go = function(){
     const v = $('obj').value.trim();
-    if (!v){ $('err').textContent = 'Write a numeric goal before starting.'; $('obj').focus(); return; }
+    if (!v){ $('err').textContent = 'Escribe un objetivo numérico antes de empezar.'; $('obj').focus(); return; }
     u.modo = $('mo').value; u.goal = v; u.hint = parseInt($('hi').value, 10);
     if (u.modo === 'manual'){ u.nivel = parseInt($('lv').value, 10); u.submodo = $('sm').value; }
     if (u.modo === 'custom') u.custom = { nivel:+$('cl').value, itemLimit:+$('cli').value, items:+$('cit').value, dual:+$('cdu').value, hint:u.hint };
@@ -889,9 +900,9 @@ function configCalc(){
 function calcHintTexts(preg){
   if (preg.op === 'suma'){
     return [
-      'Work through the chain in order; round the next term to the nearest ten if that helps, then correct by the small remainder.',
-      'Keep a running total after each + or −, left to right. Do not try to add everything at once.',
-      'Full working: ' + preg.texto + ' = ' + fmt(preg.respuesta, preg.decimales) + '.'
+      'Recorre la cadena en orden; si te ayuda, redondea el siguiente término a la decena más próxima y luego corrige con el pequeño resto.',
+      'Lleva un total acumulado tras cada + o −, de izquierda a derecha. No intentes sumarlo todo de golpe.',
+      'Solución completa: ' + preg.texto + ' = ' + fmt(preg.respuesta, preg.decimales) + '.'
     ];
   }
   if (preg.op === 'mul'){
@@ -900,36 +911,36 @@ function calcHintTexts(preg){
     const big = preg.b >= 10 ? preg.b : (preg.a >= 10 ? preg.a : 0), other = big === preg.b ? preg.a : preg.b;
     if (!big){
       return [
-        'Single-digit product: use the times table, or a neighbour you know (×5 is half of ×10, ×9 is ×10 minus one lot).',
-        'Rewrite it from a fact you know: for example ' + preg.a + ' × ' + preg.b + ' = ' + preg.a + ' × ' + (preg.b - 1) + ' + ' + preg.a + '.',
-        'Full working: ' + preg.a + ' × ' + preg.b + ' = ' + preg.respuesta + '.'
+        'Producto de una cifra: usa la tabla de multiplicar o un vecino que conozcas (×5 es la mitad de ×10; ×9 es ×10 menos una vez el número).',
+        'Reescríbelo a partir de un resultado que conozcas: por ejemplo ' + preg.a + ' × ' + preg.b + ' = ' + preg.a + ' × ' + (preg.b - 1) + ' + ' + preg.a + '.',
+        'Solución completa: ' + preg.a + ' × ' + preg.b + ' = ' + preg.respuesta + '.'
       ];
     }
     const t0 = Math.floor(big / 10) * 10, u0 = big - t0;
     if (u0 === 0){
       return [
-        'The factor ' + big + ' is a round ten: multiply by ' + (big / 10) + ' first, then by 10.',
+        'El factor ' + big + ' es una decena exacta: multiplica primero por ' + (big / 10) + ' y luego por 10.',
         preg.a + ' × ' + preg.b + ' = ' + other + ' × ' + (big / 10) + ' × 10.',
-        'Full working: ' + other + ' × ' + (big / 10) + ' = ' + (other * big / 10) + '; times 10 = ' + preg.respuesta + '.'
+        'Solución completa: ' + other + ' × ' + (big / 10) + ' = ' + (other * big / 10) + '; por 10 = ' + preg.respuesta + '.'
       ];
     }
     return [
-      'Split the larger factor (' + big + ') into tens and units.',
+      'Descompón el factor mayor (' + big + ') en decenas y unidades.',
       preg.a + ' × ' + preg.b + ' = ' + other + ' × ' + t0 + ' + ' + other + ' × ' + u0 + '.',
-      'Full working: ' + other + ' × ' + t0 + ' = ' + (other * t0) + '; ' + other + ' × ' + u0 + ' = ' + (other * u0) + '; total ' + preg.respuesta + '.'
+      'Solución completa: ' + other + ' × ' + t0 + ' = ' + (other * t0) + '; ' + other + ' × ' + u0 + ' = ' + (other * u0) + '; total ' + preg.respuesta + '.'
     ];
   }
   if (preg.op === 'div'){
     return [
-      'Think in easy multiples of the divisor (×10, ×5, ×2) and subtract them from the dividend.',
-      'Subtract multiples of ' + preg.b + ' from ' + preg.a + ' until 0 remains; add up how many times you subtracted.',
-      'Full working: ' + preg.a + ' ÷ ' + preg.b + ' = ' + preg.respuesta + ' (because ' + preg.b + ' × ' + preg.respuesta + ' = ' + preg.a + ').'
+      'Piensa en múltiplos fáciles del divisor (×10, ×5, ×2) y réstalos del dividendo.',
+      'Resta múltiplos de ' + preg.b + ' a ' + preg.a + ' hasta que quede 0; suma cuántas veces has restado.',
+      'Solución completa: ' + preg.a + ' ÷ ' + preg.b + ' = ' + preg.respuesta + ' (porque ' + preg.b + ' × ' + preg.respuesta + ' = ' + preg.a + ').'
     ];
   }
   return [
-    'Do the multiplication first, then apply the + or − at the end.',
-    preg.a + ' × ' + preg.b + ' = ' + (preg.a * preg.b) + ', then ' + (preg.signo > 0 ? '+ ' : '− ') + preg.c + '.',
-    'Full working: ' + preg.texto + ' = ' + preg.respuesta + '.'
+    'Haz primero la multiplicación y aplica el + o el − al final.',
+    preg.a + ' × ' + preg.b + ' = ' + (preg.a * preg.b) + '; después ' + (preg.signo > 0 ? '+ ' : '− ') + preg.c + '.',
+    'Solución completa: ' + preg.texto + ' = ' + preg.respuesta + '.'
   ];
 }
 // Shared: level to start the next adaptive session at. Modules that adapt inside the session (calc, d2, lr) keep the level
@@ -954,20 +965,20 @@ function iniciarCalc(cfg){
   const inicio = performance.now();
   // A limit of 0 (Custom slider) means "no time limit": never time out.
   const conLimite = function(){ return submodo === 'titem' && params.itemLimit > 0; };
-  function etiquetaNivel(){ return modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Custom ' + params.nivel : 'Adaptive'); }
+  function etiquetaNivel(){ return modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Personalizado ' + params.nivel : 'Adaptativo'); }
   function nivelActual(){ return modo === 'adaptive' ? adapt.nivel : params.nivel; }
   pantalla(
     dualBoxHtml(params.dual) +
-    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Practice</b>: 3 easy items, nothing is saved. Type the answer, press Enter.</div>' : '') +
-    '<div class="cabecera"><span>' + (submodo === 't60' ? 'Time: <b id="crono">60.0</b> s' : 'Question <b id="prog">1</b> / ' + items) +
-    (conLimite() ? ' · item <b id="itl">' + fmt(params.itemLimit, 1) + '</b> s' : '') +
-    '</span><span>Level <b id="niv">' + nivelActual() + '</b></span><span>Correct <b id="ac">0</b></span><span>Wrong <b id="fa">0</b></span></div>' +
+    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Práctica</b>: 3 elementos fáciles, no se guarda nada. Escribe la respuesta y pulsa Intro.</div>' : '') +
+    '<div class="cabecera"><span>' + (submodo === 't60' ? 'Tiempo: <b id="crono">60.0</b> s' : 'Pregunta <b id="prog">1</b> / ' + items) +
+    (conLimite() ? ' · elemento <b id="itl">' + fmt(params.itemLimit, 1) + '</b> s' : '') +
+    '</span><span>Nivel <b id="niv">' + nivelActual() + '</b></span><span>Aciertos <b id="ac">0</b></span><span>Fallos <b id="fa">0</b></span></div>' +
     '<div class="barra" id="barra"><div id="bar"></div></div>' +
     '<div class="pregunta" id="q"></div>' +
-    '<input class="entrada" id="resp" type="text" inputmode="decimal" autocomplete="off" aria-label="Answer">' +
+    '<input class="entrada" id="resp" type="text" inputmode="decimal" autocomplete="off" aria-label="Respuesta">' +
     '<div class="retro" id="retro" aria-live="polite"></div>' +
-    (params.hintMax ? '<p class="fila" style="justify-content:center"><button class="btn" id="hintbtn">Hint (H)</button></p><div id="hinttext"></div>' : '') +
-    '<p class="suave peq" style="text-align:center">Enter to answer' + (params.hintMax ? ' · H for a hint' : '') + (params.dual ? ' · D for the side task' : '') + ' · Esc twice quits without saving</p></div>'
+    (params.hintMax ? '<p class="fila" style="justify-content:center"><button class="btn" id="hintbtn">Pista (H)</button></p><div id="hinttext"></div>' : '') +
+    '<p class="suave peq" style="text-align:center">Intro para responder' + (params.hintMax ? ' · H para una pista' : '') + (params.dual ? ' · D para la tarea secundaria' : '') + ' · Esc dos veces sale sin guardar</p></div>'
   );
   const inp = $('resp');
   inp.addEventListener('input', function(){ const c = inp.value.replace(/[^0-9.,\-]/g, ''); if (c !== inp.value) inp.value = c; });
@@ -992,7 +1003,7 @@ function iniciarCalc(cfg){
     const total = ac + fa + bl + ayudados;
     const rec = {
       id:'calc', clave:'calc-' + (modo === 'manual' ? submodo : modo), modo:modo, nivel:nivelFinal, etiquetaNivel:etiquetaNivel(), practice:practice,
-      params:'Mode ' + modo + ' (' + ({ t60:'60 seconds', n20:'20 questions, untimed', titem:items + ' questions, timed item' }[submodo]) + ')' + (modo === 'adaptive' ? ' · started at level ' + adaptInicio : ''),
+      params:'Modo ' + MODO_TXT[modo] + ' (' + ({ t60:'60 segundos', n20:'20 preguntas, sin tiempo', titem:items + ' preguntas con tiempo por elemento' }[submodo]) + ')' + (modo === 'adaptive' ? ' · empezó en el nivel ' + adaptInicio : ''),
       aciertos:ac, fallos:fa + ayudados, blanco:bl, ayudados:ayudados, spi:spi, precision: total ? ac / total * 100 : 0,
       objetivo:cfg.goal, puntos:ac, mayorEsMejor:true, thirds:atcThirds(resT, submodo === 't60' ? 60 : 0)
     };
@@ -1014,9 +1025,9 @@ function iniciarCalc(cfg){
     else if (ok) ac++; else fa++;
     if (modo === 'adaptive') adapt = adaptivaPaso(adapt, ok && curHint === 0);
     const retro = $('retro');
-    if (curHint > 0) retro.innerHTML = '<span class="aviso">Hint used, counts as wrong · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
-    else if (ok) retro.innerHTML = '<span class="bien">✓ Correct · ' + fmt(ms / 1000, 2) + ' s</span>';
-    else retro.innerHTML = '<span class="mal">✗ Wrong · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
+    if (curHint > 0) retro.innerHTML = '<span class="aviso">Pista usada, cuenta como fallo · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
+    else if (ok) retro.innerHTML = '<span class="bien">✓ Correcto · ' + fmtC(ms / 1000, 2) + ' s</span>';
+    else retro.innerHTML = '<span class="mal">✗ Incorrecto · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
     idx++;
     fin1();
   }
@@ -1024,7 +1035,7 @@ function iniciarCalc(cfg){
     if (fin) return;
     const v = calcParseRespuesta(inp.value);
     if (isNaN(v)){
-      $('retro').innerHTML = '<span class="aviso">Type a number first (digits, one decimal point, optional minus), then Enter.</span>';
+      $('retro').innerHTML = '<span class="aviso">Escribe primero un número (cifras, una coma o punto decimal y, si hace falta, el signo menos) y pulsa Intro.</span>';
       inp.classList.remove('sacude'); void inp.offsetWidth; inp.classList.add('sacude');
       inp.focus(); return;
     }
@@ -1034,7 +1045,7 @@ function iniciarCalc(cfg){
     if (fin || !params.hintMax || curHint >= params.hintMax) return;
     curHint += 1;
     const textos = calcHintTexts(preg);
-    const nombres = ['', 'Hint 1 (nudge)', 'Hint 2 (method)', 'Hint 3 (full worked solution)'];
+    const nombres = ['', 'Pista 1 (empujón)', 'Pista 2 (método)', 'Pista 3 (solución completa paso a paso)'];
     $('hinttext').innerHTML = '<div class="aviso-caja"><b>' + nombres[curHint] + '.</b> ' + esc(textos[curHint - 1]) + '</div>';
     if (curHint >= params.hintMax) $('hintbtn').disabled = true;
     inp.focus();
@@ -1061,7 +1072,7 @@ function iniciarCalc(cfg){
       if (rest <= 0){
         tiempos.push(params.itemLimit * 1000); bl++; idx++;
         resT.push({ ok:false, blank:true, sec:params.itemLimit, t:(performance.now() - inicio) / 1000 });   // endurance data must count timed-out items too
-        $('retro').innerHTML = '<span class="mal">Time is up · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
+        $('retro').innerHTML = '<span class="mal">Se acabó el tiempo · ' + esc(preg.texto) + ' = ' + fmt(preg.respuesta, preg.decimales) + '</span>';
         if (modo === 'adaptive') adapt = adaptivaPaso(adapt, false);
         fin1();
       }
@@ -1081,50 +1092,50 @@ function d2Celda(it, i){
     '<text x="12" y="27" text-anchor="middle" font-size="24" font-family="Arial,Helvetica,sans-serif" fill="#111">' + it.c + '</text></svg>';
 }
 const D2_TIPS = [
-  'Scan left to right without skipping; keep a mental anchor at the cursor position.',
-  'The letter d with exactly two dashes counts, wherever they are placed (both above, both below, or split). The letter p never counts, and a d with 1, 3 or 4 dashes never counts.',
-  'Worked example: d with 1 above + 1 below = 2 → mark it. d with 2 above + 0 below = 2 → mark it. d with 2 above + 1 below = 3 → do not mark. p with 1 above + 1 below → do not mark (wrong letter).'
+  'Recorre la fila de izquierda a derecha sin saltarte nada; mantén un ancla mental en la posición del cursor.',
+  'Cuenta la letra d con exactamente dos rayas, estén donde estén (las dos arriba, las dos abajo o una y una). La letra p nunca cuenta, y una d con 1, 3 o 4 rayas tampoco.',
+  'Ejemplo resuelto: d con 1 arriba + 1 abajo = 2 → márcala. d con 2 arriba + 0 abajo = 2 → márcala. d con 2 arriba + 1 abajo = 3 → no la marques. p con 1 arriba + 1 abajo → no la marques (letra equivocada).'
 ];
 function configD2(){
   const d = cargar();
-  const u = cfgDe(d, 'd2', { modo:'manual', nivel:4, goal:'≥96 % accuracy', hint:0, custom:{ nivel:5, sec:18, rows:16, dual:0, hint:0 } });
+  const u = cfgDe(d, 'd2', { modo:'manual', nivel:4, goal:'≥96 % de precisión', hint:0, custom:{ nivel:5, sec:18, rows:16, dual:0, hint:0 } });
   const ejemplo = function(c, a, b){ return d2Celda({ c:c, arriba:a, abajo:b }, 0).replace('class="d2c"', 'class="d2c" style="background:#f4f1e8;width:34px;height:58px"'); };
   pantalla(
-    '<div class="panel"><button class="enlace" id="volver">← Menu (Esc)</button>' +
-    '<h1>Attention cancellation, d2 style (cancelación de atención)</h1>' +
-    '<p class="suave">A row of letters d and p, each with dashes above and/or below. Mark only the <b>d with exactly two dashes in total</b> (above plus below). Ignore the p, and any d with 1, 3 or 4 dashes. The row changes by itself when the time is up.</p>' +
-    '<p class="fila">Mark: ' + ejemplo('d', 1, 1) + ejemplo('d', 2, 0) + ejemplo('d', 0, 2) + ' &nbsp; Skip: ' + ejemplo('d', 1, 0) + ejemplo('d', 2, 1) + ejemplo('p', 1, 1) + '</p>' +
-    '<div class="aviso-caja"><b>Keys:</b> <span class="tecla">Space</span> = it is a target (marks it and moves on) · <span class="tecla">→</span> = not a target (moves on) · <span class="tecla">←</span> = undo one step. Green = hit, red = wrong mark, orange border = target you let pass.</div>' +
+    '<div class="panel"><button class="enlace" id="volver">← Menú (Esc)</button>' +
+    '<h1>Cancelación de atención, estilo d2</h1>' +
+    '<p class="suave">Una fila de letras d y p, cada una con rayas arriba y/o abajo. Marca solo la <b>d con exactamente dos rayas en total</b> (arriba más abajo). Ignora las p y cualquier d con 1, 3 o 4 rayas. La fila cambia sola cuando se acaba el tiempo.</p>' +
+    '<p class="fila">Marcar: ' + ejemplo('d', 1, 1) + ejemplo('d', 2, 0) + ejemplo('d', 0, 2) + ' &nbsp; Saltar: ' + ejemplo('d', 1, 0) + ejemplo('d', 2, 1) + ejemplo('p', 1, 1) + '</p>' +
+    '<div class="aviso-caja"><b>Teclas:</b> <span class="tecla">Espacio</span> = es un objetivo (lo marca y avanza) · <span class="tecla">→</span> = no es objetivo (avanza) · <span class="tecla">←</span> = deshace un paso. Verde = acierto, rojo = marca errónea, borde naranja = objetivo que se te ha pasado.</div>' +
     '<div class="grid2"><div>' +
-    '<label class="et" for="mo">Mode</label>' + fillSelect('mo', [['manual','Manual level (1-10)'],['adaptive','Adaptive (adjusts itself)'],['custom','Custom (sliders)']], u.modo) +
+    '<label class="et" for="mo">Modo</label>' + fillSelect('mo', [['manual','Nivel manual (1-10)'],['adaptive','Adaptativo (se ajusta solo)'],['custom','Personalizado (deslizadores)']], u.modo) +
     '<div id="modebox"></div></div><div>' +
-    '<label class="et" for="obj">Numeric goal for this session (required)</label>' +
+    '<label class="et" for="obj">Objetivo numérico de esta sesión (obligatorio)</label>' +
     '<input type="text" id="obj" maxlength="80" autocomplete="off" value="' + esc(u.goal) + '">' +
-    '<p class="peq suave">Examples: “≥96 % accuracy”, “concentration over 40”.</p><p class="peq aviso" id="objaviso"></p>' +
-    hintSelectHtml(u.hint, 'For this continuous task, hints are shown once before the session starts (not mid-row), so they do not interrupt the timing.') +
+    '<p class="peq suave">Ejemplos: «≥96 % de precisión», «concentración de más de 40».</p><p class="peq aviso" id="objaviso"></p>' +
+    hintSelectHtml(u.hint, 'En esta tarea continua, las pistas se muestran una vez antes de empezar la sesión (no a mitad de fila), para no interrumpir el cronometraje.') +
     '</div></div>' +
-    '<p id="err" class="mal" role="alert"></p>' + botonesInicio('one short row') + '</div>' +
-    '<details class="panel"><summary>The ten levels</summary>' + ladderTableHtml(D2_NIVELES, [
-      ['rows','Rows'], ['len','Row length'], ['sec','Seconds/row'],
-      ['near','Lookalike distractors', function(v){ return Math.round(v * 100) + ' %'; }]
-    ]) + '<p class="peq suave">"Lookalike distractors" = share of non-target characters that are a near miss (right letter wrong count, or right count wrong letter) instead of an easy reject.</p></details>'
+    '<p id="err" class="mal" role="alert"></p>' + botonesInicio('una fila corta') + '</div>' +
+    '<details class="panel"><summary>Los diez niveles</summary>' + ladderTableHtml(D2_NIVELES, [
+      ['rows','Filas'], ['len','Longitud de fila'], ['sec','Segundos/fila'],
+      ['near','Distractores parecidos', function(v){ return Math.round(v * 100) + ' %'; }]
+    ]) + '<p class="peq suave">«Distractores parecidos» = proporción de caracteres no objetivo que casi lo son (letra correcta con número de rayas incorrecto, o número correcto con letra incorrecta) en lugar de un descarte fácil.</p></details>'
   );
   function drawMode(){
     const mo = $('mo').value; let h = '';
     if (mo === 'manual'){
-      const opts = []; for (let l = 1; l <= MAX_NIVEL; l++) opts.push([l, l + ' ' + D2_NIVELES[l].name + ' (' + D2_NIVELES[l].sec + ' s/row)']);
-      h = '<label class="et" for="lv">Level</label>' + fillSelect('lv', opts, u.nivel) +
+      const opts = []; for (let l = 1; l <= MAX_NIVEL; l++) opts.push([l, l + ' ' + D2_NIVELES[l].name + ' (' + D2_NIVELES[l].sec + ' s/fila)']);
+      h = '<label class="et" for="lv">Nivel</label>' + fillSelect('lv', opts, u.nivel) +
         '<p class="peq suave" id="lvs">' + esc(nivelStatement(u.nivel)) + '</p>';
     } else if (mo === 'adaptive'){
       const start = d.ultimo.d2AdaptStart || 2;
-      h = '<p class="peq suave">Starts at level ' + start + '. Level rises after 5 rows in a row at ' + PRECISION_MINIMA + ' %+ hit accuracy and falls after 2 rows below it. The time per row only tightens once the last 10 rows are ' + PRECISION_MINIMA + ' % accurate or more. Dual task is off.</p>';
+      h = '<p class="peq suave">Empieza en el nivel ' + start + '. El nivel sube tras 5 filas seguidas con una precisión del ' + PRECISION_MINIMA + ' % o más y baja tras 2 filas por debajo. El tiempo por fila solo se reduce cuando las 10 últimas filas tienen una precisión del ' + PRECISION_MINIMA + ' % o más. Sin tarea doble.</p>';
     } else {
       const c = u.custom;
       h = slidersHtml([
-        { id:'cl', label:'Distractor lookalikes (level)', min:1, max:10, val:c.nivel },
-        { id:'csec', label:'Seconds per row', min:4, max:30, val:c.sec },
-        { id:'cro', label:'Rows', min:5, max:25, val:c.rows },
-        { id:'cdu', label:'Dual task (0 off, 1 light, 2 medium, 3 heavy)', min:0, max:3, val:c.dual }
+        { id:'cl', label:'Distractores parecidos (nivel)', min:1, max:10, val:c.nivel },
+        { id:'csec', label:'Segundos por fila', min:4, max:30, val:c.sec },
+        { id:'cro', label:'Filas', min:5, max:25, val:c.rows },
+        { id:'cdu', label:'Tarea doble (0 no, 1 ligera, 2 media, 3 intensa)', min:0, max:3, val:c.dual }
       ]);
     }
     $('modebox').innerHTML = h;
@@ -1138,7 +1149,7 @@ function configD2(){
   $('volver').addEventListener('click', menu);
   const go = function(){
     const v = $('obj').value.trim();
-    if (!v){ $('err').textContent = 'Write a numeric goal before starting.'; $('obj').focus(); return; }
+    if (!v){ $('err').textContent = 'Escribe un objetivo numérico antes de empezar.'; $('obj').focus(); return; }
     u.modo = $('mo').value; u.goal = v; u.hint = parseInt($('hi').value, 10);
     if (u.modo === 'manual') u.nivel = parseInt($('lv').value, 10);
     if (u.modo === 'custom') u.custom = { nivel:+$('cl').value, sec:+$('csec').value, rows:+$('cro').value, dual:+$('cdu').value, hint:u.hint };
@@ -1162,16 +1173,16 @@ function iniciarD2(cfg){
   else { adapt = adaptivaIniciar(d.ultimo.d2AdaptStart || 2); params = d2AdaptiveParams(adapt, cfg.hint); }
   const filasRes = [], resD2 = [];
   let fila, marcas, cur, maxCur, filaN = 0, tFila = 0, tTotal = 0, fin = false, celdas = [], totalChars = 0;
-  const tips = !practice && cfg.hint > 0 && params.hintMax ? '<details class="aviso-caja" open><summary>Reminder (hint level ' + cfg.hint + ')</summary>' + D2_TIPS.slice(0, cfg.hint).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('') + '</details>' : '';
+  const tips = !practice && cfg.hint > 0 && params.hintMax ? '<details class="aviso-caja" open><summary>Recordatorio (nivel de pista ' + cfg.hint + ')</summary>' + D2_TIPS.slice(0, cfg.hint).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('') + '</details>' : '';
   function totalRows(){ return practice ? 1 : (modo === 'custom' ? params.rows : (modo === 'adaptive' ? 16 : params.rows)); }
   const ROWS = totalRows();
   pantalla(
     dualBoxHtml(params.dual) + tips +
-    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Practice</b>: one short row, nothing is saved. Space marks a d with two dashes, → skips everything else.</div>' : '') +
-    '<div class="cabecera"><span>Row <b id="fn">1</b> / ' + ROWS + '</span><span>Row time <b id="tf">' + fmt(params.sec, 1) + '</b> s</span><span>Level <b id="niv">' + params.nivel + '</b></span><span>Concentration <b id="cc">0</b></span></div>' +
+    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Práctica</b>: una fila corta, no se guarda nada. Espacio marca una d con dos rayas; → salta todo lo demás.</div>' : '') +
+    '<div class="cabecera"><span>Fila <b id="fn">1</b> / ' + ROWS + '</span><span>Tiempo de fila <b id="tf">' + fmt(params.sec, 1) + '</b> s</span><span>Nivel <b id="niv">' + params.nivel + '</b></span><span>Concentración <b id="cc">0</b></span></div>' +
     '<div class="barra" id="barra"><div id="bar"></div></div><div class="fila-d2" id="fila"></div>' +
     '<div class="retro" id="retro" aria-live="polite"></div>' +
-    '<p class="suave peq" style="text-align:center">Space = mark · → = skip · ← = undo · Esc twice quits without saving' + (params.dual ? ' · D = side task' : '') + '</p></div>'
+    '<p class="suave peq" style="text-align:center">Espacio = marcar · → = saltar · ← = deshacer · Esc dos veces sale sin guardar' + (params.dual ? ' · D = tarea secundaria' : '') + '</p></div>'
   );
   function ccActual(){
     const t = d2Total(filasRes.concat([d2PuntuarFila(fila, marcas, maxCur)]));
@@ -1209,7 +1220,7 @@ function iniciarD2(cfg){
     const r = d2PuntuarFila(fila, marcas, maxCur); r.seg = dur;
     resD2.push({ n:r.aciertos + r.comisiones + r.omisiones, c:r.aciertos, b:r.omisiones, sec:dur });
     filasRes.push(r); filaN++;
-    if ($('retro')) $('retro').innerHTML = '<span class="' + (r.comisiones + r.omisiones === 0 ? 'bien' : 'suave') + '">Row ' + filaN + ' done: ' + r.aciertos + ' hits · ' + r.omisiones + ' missed · ' + r.comisiones + ' wrong marks' + (maxCur < fila.length ? ' · time ran out at character ' + maxCur + ' of ' + fila.length : '') + '</span>';
+    if ($('retro')) $('retro').innerHTML = '<span class="' + (r.comisiones + r.omisiones === 0 ? 'bien' : 'suave') + '">Fila ' + filaN + ' terminada: ' + r.aciertos + ' aciertos · ' + r.omisiones + ' omitidos · ' + r.comisiones + ' marcas erróneas' + (maxCur < fila.length ? ' · el tiempo se acabó en el carácter ' + maxCur + ' de ' + fila.length : '') + '</span>';
     if (modo === 'adaptive'){ const rowOk = r.procesados > 0 && (r.aciertos / Math.max(1, r.aciertos + r.comisiones + r.omisiones)) >= PRECISION_MINIMA / 100; adapt = adaptivaPaso(adapt, rowOk); }
     if (filaN >= ROWS) acabar(); else nuevaFila();
   }
@@ -1228,7 +1239,7 @@ function iniciarD2(cfg){
     const maxV = Math.max(10, Math.max.apply(null, filasRes.map(function(f){ return f.procesados; })));
     const bw = (W - ml - mr) / filasRes.length;
     const yv = function(v){ return mt + (1 - Math.max(0, v) / maxV) * (H - mt - mb); };
-    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Performance curve per row" style="background:#0d1014;border-radius:8px">';
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Curva de rendimiento por fila" style="background:#0d1014;border-radius:8px">';
     [0, .25, .5, .75, 1].forEach(function(f){
       const v = Math.round(maxV * f), y = yv(v);
       svg += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y + '" y2="' + y + '" stroke="#3a4452" stroke-width="1"/><text x="' + (ml - 6) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#aab5c4">' + v + '</text>';
@@ -1239,26 +1250,26 @@ function iniciarD2(cfg){
       svg += '<rect x="' + (x + bw / 2) + '" y="' + yv(f.concentracion) + '" width="' + (bw / 2 - 3) + '" height="' + (yv(0) - yv(f.concentracion)) + '" fill="#4fc3f7"/>';
       svg += '<text x="' + (x + bw / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="11" fill="#aab5c4">' + (i + 1) + '</text>';
     });
-    svg += '</svg><p class="peq suave"><span style="color:#8fa0b6">■</span> Items processed per row &nbsp; <span style="color:#4fc3f7">■</span> Concentration per row (hits − commission errors). Horizontal axis: row number.</p>';
+    svg += '</svg><p class="peq suave"><span style="color:#8fa0b6">■</span> Elementos procesados por fila &nbsp; <span style="color:#4fc3f7">■</span> Concentración por fila (aciertos − errores de comisión). Eje horizontal: número de fila.</p>';
     const media = function(a){ return a.length ? a.reduce(function(s, x){ return s + x; }, 0) / a.length : 0; };
     const ini = media(filasRes.slice(0, 3).map(function(f){ return f.concentracion; }));
     const fini = media(filasRes.slice(-3).map(function(f){ return f.concentracion; }));
     const fatiga = fini < ini - 1
-      ? 'The last rows perform worse than the first ones (' + fmt(fini, 1) + ' versus ' + fmt(ini, 1) + '): there is fatigue.'
-      : 'Performance stays stable from start to finish.';
+      ? 'Las últimas filas rinden peor que las primeras (' + fmtC(fini, 1) + ' frente a ' + fmtC(ini, 1) + '): hay fatiga.'
+      : 'El rendimiento se mantiene estable de principio a fin.';
     const cobertura = totalChars ? t.procesados / totalChars * 100 : 0;
-    const extra = '<h2>d2 detail</h2>' +
-      (cobertura < 60 ? '<div class="aviso-caja"><b>Low coverage:</b> you reached only ' + fmt(cobertura, 0) + ' % of the characters (' + t.procesados + ' of ' + totalChars + '). Accuracy is measured only on what you processed, so a high figure here does not mean the level is easy. Work through more of each row without losing accuracy.</div>' : '') +
+    const extra = '<h2>Detalle d2</h2>' +
+      (cobertura < 60 ? '<div class="aviso-caja"><b>Cobertura baja:</b> solo has llegado al ' + fmtC(cobertura, 0) + ' % de los caracteres (' + t.procesados + ' de ' + totalChars + '). La precisión se mide solo sobre lo que has procesado, así que una cifra alta aquí no significa que el nivel sea fácil. Avanza más en cada fila sin perder precisión.</div>' : '') +
       '<div class="cifras">' +
-      statCard(t.procesados + ' / ' + totalChars, 'Characters processed') + statCard(t.aciertos, 'Hits') + statCard(t.omisiones, 'Omission errors') +
-      statCard(t.comisiones, 'Commission errors') + statCard(t.concentracion, 'Concentration') + statCard(fmt(t.errorPct, 1) + ' %', 'Errors over processed') +
-      '</div><h2>Performance per row</h2>' + svg + '<p>' + fatiga + '</p>';
+      statCard(t.procesados + ' / ' + totalChars, 'Caracteres procesados') + statCard(t.aciertos, 'Aciertos') + statCard(t.omisiones, 'Errores de omisión') +
+      statCard(t.comisiones, 'Errores de comisión') + statCard(t.concentracion, 'Concentración') + statCard(fmtC(t.errorPct, 1) + ' %', 'Errores sobre procesados') +
+      '</div><h2>Rendimiento por fila</h2>' + svg + '<p>' + fatiga + '</p>';
     const nivelFinal = modo === 'adaptive' ? adapt.nivel : params.nivel;
     const rec = { id:'d2', clave:'d2', modo:modo, nivel:nivelFinal, practice:practice, concentracion:t.concentracion,
-      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Custom ' + params.nivel : 'Adaptive'),
-      params: filaN + ' rows · processed ' + t.procesados + ' · concentration ' + t.concentracion,
+      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Personalizado ' + params.nivel : 'Adaptativo'),
+      params: filaN + ' filas · procesados ' + t.procesados + ' · concentración ' + t.concentracion,
       aciertos:t.aciertos, fallos:t.comisiones, blanco:t.omisiones, ayudados:0, spi:spi, precision:t.precision,
-      etiquetaPrecision:'hits / (hits + omissions + commissions)',
+      etiquetaPrecision:'aciertos / (aciertos + omisiones + comisiones)',
       objetivo:cfg.goal, puntos:t.concentracion, mayorEsMejor:true, extra:extra, thirds:atcThirds(resD2, 0) };
     if (modo === 'adaptive' && t.procesados) d.ultimo.d2AdaptStart = inicioAdaptativo(adapt.nivel, rec.precision, false);
     mostrarResultado(rec, extra, function(){ iniciarD2(cfg); }, configD2);
@@ -1292,7 +1303,7 @@ function lrSVG(it){
   // Scale so the rotated picture always fits inside the square frame (a 300x260 picture turned by 45 deg is wider than 300).
   const rad = it.rot * Math.PI / 180, cw = Math.abs(Math.cos(rad)), sw = Math.abs(Math.sin(rad));
   const escala = Math.min(1, 300 / Math.max(300 * cw + 260 * sw, 300 * sw + 260 * cw)).toFixed(3);
-  let s = '<svg class="figura" viewBox="0 0 300 260" role="img" aria-label="Human figure with a marked object" style="transform:rotate(' + it.rot + 'deg) scale(' + escala + ')">';
+  let s = '<svg class="figura" viewBox="0 0 300 260" role="img" aria-label="Figura humana con un objeto marcado" style="transform:rotate(' + it.rot + 'deg) scale(' + escala + ')">';
   s += '<rect x="124" y="160" width="24" height="76" rx="6" fill="' + pant + '"/><rect x="152" y="160" width="24" height="76" rx="6" fill="' + pant + '"/>';
   s += '<line x1="124" y1="86" x2="60" y2="140" stroke="' + camisa + '" stroke-width="15" stroke-linecap="round"/>';
   s += '<line x1="176" y1="86" x2="240" y2="140" stroke="' + camisa + '" stroke-width="15" stroke-linecap="round"/>';
@@ -1312,48 +1323,48 @@ function lrSVG(it){
   else s += '<circle cx="' + xPunto + '" cy="62" r="13" fill="#ffb300" stroke="#fff" stroke-width="3"/>';
   return s + '</svg>';
 }
-const REGLA_LR = '<details><summary>Reversal rule</summary><p>If the figure <b>faces you</b>, its left is YOUR right and its right is YOUR left: they are <b>reversed</b>. If the figure <b>has its back to you</b> (it looks the way you look), they <b>coincide</b>. Key question: which way is it facing? Face visible = reverse; back of the head visible = same. If the picture is rotated, first work out which way is up for the figure, then apply the same rule: rotating the image never changes which hand is the figure\'s own left or right.</p></details>';
+const REGLA_LR = '<details><summary>Regla de inversión</summary><p>Si la figura <b>te mira de frente</b>, su izquierda es TU derecha y su derecha es TU izquierda: están <b>invertidas</b>. Si la figura <b>está de espaldas</b> (mira hacia donde miras tú), <b>coinciden</b>. Pregunta clave: ¿hacia dónde mira? Cara visible = invertir; nuca visible = igual. Si la imagen está girada, averigua primero dónde está el «arriba» de la figura y aplica la misma regla: girar la imagen nunca cambia cuál es la mano izquierda o derecha de la propia figura.</p></details>';
 // Display names for the internal side values.
-const LADO_TXT = { izquierda:'left', derecha:'right' };
+const LADO_TXT = { izquierda:'izquierda', derecha:'derecha' };
 function configLR(){
   const d = cargar();
-  const u = cfgDe(d, 'lr', { modo:'manual', nivel:4, goal:'≤2.0 s with ≥95 %', hint:0, custom:{ nivel:5, itemLimit:4, exposure:0, items:20, dual:0, hint:0 } });
+  const u = cfgDe(d, 'lr', { modo:'manual', nivel:4, goal:'≤2,0 s con ≥95 %', hint:0, custom:{ nivel:5, itemLimit:4, exposure:0, items:20, dual:0, hint:0 } });
   pantalla(
-    '<div class="panel"><button class="enlace" id="volver">← Menu (Esc)</button>' +
-    '<h1>Left/right with perspective (izquierda/derecha)</h1>' +
-    '<p class="suave">A figure appears, facing you or with its back to you, with an orange object (in one hand or loose at one side). Answer whether it is on the <b>left or the right OF THE FIGURE</b> with the keys <span class="tecla">←</span> and <span class="tecla">→</span>. Baseline: 2.0 s per item with ≥95 %. From level 6 the figure can be rotated on screen, and from level 7 it can vanish after a short exposure.' + REGLA_LR + '</p>' +
+    '<div class="panel"><button class="enlace" id="volver">← Menú (Esc)</button>' +
+    '<h1>Izquierda/derecha con perspectiva</h1>' +
+    '<p class="suave">Aparece una figura, de frente o de espaldas, con un objeto naranja (en una mano o suelto a un lado). Responde si está a la <b>izquierda o a la derecha DE LA FIGURA</b> con las teclas <span class="tecla">←</span> y <span class="tecla">→</span>. Referencia: 2,0 s por elemento con ≥95 %. Desde el nivel 6 la figura puede aparecer girada en pantalla y desde el nivel 7 puede desaparecer tras una exposición breve.' + REGLA_LR + '</p>' +
     '<div class="grid2"><div>' +
-    '<label class="et" for="mo">Mode</label>' + fillSelect('mo', [['manual','Manual level (1-10)'],['adaptive','Adaptive (adjusts itself)'],['custom','Custom (sliders)']], u.modo) +
+    '<label class="et" for="mo">Modo</label>' + fillSelect('mo', [['manual','Nivel manual (1-10)'],['adaptive','Adaptativo (se ajusta solo)'],['custom','Personalizado (deslizadores)']], u.modo) +
     '<div id="modebox"></div></div><div>' +
-    '<label class="et" for="obj">Numeric goal for this session (required)</label>' +
+    '<label class="et" for="obj">Objetivo numérico de esta sesión (obligatorio)</label>' +
     '<input type="text" id="obj" maxlength="80" autocomplete="off" value="' + esc(u.goal) + '">' +
-    '<p class="peq suave">Examples: “≤2.0 s with ≥95 %”, “20 correct”.</p><p class="peq aviso" id="objaviso"></p>' +
+    '<p class="peq suave">Ejemplos: «≤2,0 s con ≥95 %», «20 aciertos».</p><p class="peq aviso" id="objaviso"></p>' +
     hintSelectHtml(u.hint) +
     '</div></div>' +
     '<p id="err" class="mal" role="alert"></p>' + botonesInicio() + '</div>' +
-    '<details class="panel"><summary>The ten levels</summary>' + ladderTableHtml(LR_NIVELES, [
-      ['n','Items'], ['exposure','Exposure', function(v){ return v ? v + ' s' : 'always'; }],
-      ['rot','Rotations', function(v){ return v === 'free' ? 'free (15° steps)' : (v.length > 1 ? v.length + ' angles' : 'none'); }],
-      ['itemLimit','Time limit', function(v){ return v ? v + ' s' : 'none'; }]
+    '<details class="panel"><summary>Los diez niveles</summary>' + ladderTableHtml(LR_NIVELES, [
+      ['n','Elementos'], ['exposure','Exposición', function(v){ return v ? String(v).replace('.', ',') + ' s' : 'siempre'; }],
+      ['rot','Giros', function(v){ return v === 'free' ? 'libre (pasos de 15°)' : (v.length > 1 ? v.length + ' ángulos' : 'ninguno'); }],
+      ['itemLimit','Tiempo límite', function(v){ return v ? String(v).replace('.', ',') + ' s' : 'sin límite'; }]
     ]) + '</details>'
   );
   function drawMode(){
     const mo = $('mo').value; let h = '';
     if (mo === 'manual'){
       const opts = []; for (let l = 1; l <= MAX_NIVEL; l++) opts.push([l, l + ' ' + LR_NIVELES[l].name]);
-      h = '<label class="et" for="lv">Level</label>' + fillSelect('lv', opts, u.nivel) +
+      h = '<label class="et" for="lv">Nivel</label>' + fillSelect('lv', opts, u.nivel) +
         '<p class="peq suave" id="lvs">' + esc(nivelStatement(u.nivel)) + '</p>';
     } else if (mo === 'adaptive'){
       const start = d.ultimo.lrAdaptStart || 2;
-      h = '<p class="peq suave">Starts at level ' + start + '. Level rises after 5 correct answers in a row and falls after 2 mistakes in a row. The time limit and exposure only tighten once the last 10 answers are ' + PRECISION_MINIMA + ' % accurate or more. Dual task is off.</p>';
+      h = '<p class="peq suave">Empieza en el nivel ' + start + '. El nivel sube tras 5 aciertos seguidos y baja tras 2 fallos seguidos. El tiempo límite y la exposición solo se reducen cuando las 10 últimas respuestas tienen una precisión del ' + PRECISION_MINIMA + ' % o más. Sin tarea doble.</p>';
     } else {
       const c = u.custom;
       h = slidersHtml([
-        { id:'cl', label:'Rotation complexity (level)', min:1, max:10, val:c.nivel },
-        { id:'cli', label:'Time limit per item (0 = none)', min:0, max:8, step:.5, val:c.itemLimit, unit:'s' },
-        { id:'cex', label:'Exposure (0 = always visible)', min:0, max:5, step:.5, val:c.exposure, unit:'s' },
-        { id:'cit', label:'Items', min:10, max:40, val:c.items },
-        { id:'cdu', label:'Dual task (0 off, 1 light, 2 medium, 3 heavy)', min:0, max:3, val:c.dual }
+        { id:'cl', label:'Complejidad de los giros (nivel)', min:1, max:10, val:c.nivel },
+        { id:'cli', label:'Tiempo límite por elemento (0 = sin límite)', min:0, max:8, step:.5, val:c.itemLimit, unit:'s' },
+        { id:'cex', label:'Exposición (0 = siempre visible)', min:0, max:5, step:.5, val:c.exposure, unit:'s' },
+        { id:'cit', label:'Elementos', min:10, max:40, val:c.items },
+        { id:'cdu', label:'Tarea doble (0 no, 1 ligera, 2 media, 3 intensa)', min:0, max:3, val:c.dual }
       ]);
     }
     $('modebox').innerHTML = h;
@@ -1367,7 +1378,7 @@ function configLR(){
   $('volver').addEventListener('click', menu);
   const go = function(){
     const v = $('obj').value.trim();
-    if (!v){ $('err').textContent = 'Write a numeric goal before starting.'; $('obj').focus(); return; }
+    if (!v){ $('err').textContent = 'Escribe un objetivo numérico antes de empezar.'; $('obj').focus(); return; }
     u.modo = $('mo').value; u.goal = v; u.hint = parseInt($('hi').value, 10);
     if (u.modo === 'manual') u.nivel = parseInt($('lv').value, 10);
     if (u.modo === 'custom') u.custom = { nivel:+$('cl').value, itemLimit:+$('cli').value, exposure:+$('cex').value, items:+$('cit').value, dual:+$('cdu').value, hint:u.hint };
@@ -1381,9 +1392,9 @@ function configLR(){
 }
 function lrHintTexts(it){
   return [
-    'First decide: do you see the face (front) or the back of the head?',
-    'Rule: facing you = reversed (its left is your right); back turned = same (its left is your left).',
-    'It is on the ' + LADO_TXT[it.lado] + ' of the figure.'
+    'Decide primero: ¿ves la cara (de frente) o la nuca (de espaldas)?',
+    'Regla: de frente = invertido (su izquierda es tu derecha); de espaldas = igual (su izquierda es tu izquierda).',
+    'Está a la ' + LADO_TXT[it.lado] + ' de la figura.'
   ];
 }
 function iniciarLR(cfg){
@@ -1402,13 +1413,13 @@ function iniciarLR(cfg){
   let i = 0, t0 = 0, fin = false, curHint = 0, hidden = false;
   pantalla(
     dualBoxHtml(params.dual) +
-    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Practice</b>: 3 items, nothing is saved. Facing you = reversed, back turned = same side as you see it.</div>' : '') +
-    '<div class="cabecera"><span>Item <b id="n">1</b> / ' + N + '</span><span>Level <b>' + params.nivel + '</b></span><span>Average <b id="med">—</b> s</span><span>Accuracy <b id="pre">—</b></span>' +
-    (params.itemLimit ? '<span>Time <b id="tm">' + fmt(params.itemLimit, 1) + '</b> s</span>' : '') + '</div>' +
-    '<div class="barra" id="barra"><div id="bar"></div></div><p class="suave" style="text-align:center;margin:.2rem 0">Is the orange object on the left or on the right <b>OF THE FIGURE</b>? &nbsp;<span class="tecla">←</span> <span class="tecla">→</span></p>' +
+    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Práctica</b>: 3 elementos, no se guarda nada. De frente = invertido; de espaldas = el mismo lado que ves.</div>' : '') +
+    '<div class="cabecera"><span>Elemento <b id="n">1</b> / ' + N + '</span><span>Nivel <b>' + params.nivel + '</b></span><span>Media <b id="med">—</b> s</span><span>Precisión <b id="pre">—</b></span>' +
+    (params.itemLimit ? '<span>Tiempo <b id="tm">' + fmt(params.itemLimit, 1) + '</b> s</span>' : '') + '</div>' +
+    '<div class="barra" id="barra"><div id="bar"></div></div><p class="suave" style="text-align:center;margin:.2rem 0">¿El objeto naranja está a la izquierda o a la derecha <b>DE LA FIGURA</b>? &nbsp;<span class="tecla">←</span> <span class="tecla">→</span></p>' +
     '<div class="figbox" id="figbox"><div id="fig"></div></div><div class="retro" id="retro" aria-live="polite"></div>' +
-    (params.hintMax ? '<p class="fila" style="justify-content:center"><button class="btn" id="hintbtn">Hint (H)</button></p><div id="hinttext"></div>' : '') +
-    '<p class="fila" style="justify-content:center"><button class="btn" id="bi">← Left</button><button class="btn" id="bd">Right →</button></p></div>'
+    (params.hintMax ? '<p class="fila" style="justify-content:center"><button class="btn" id="hintbtn">Pista (H)</button></p><div id="hinttext"></div>' : '') +
+    '<p class="fila" style="justify-content:center"><button class="btn" id="bi">← Izquierda</button><button class="btn" id="bd">Derecha →</button></p></div>'
   );
   function mostrar(){
     if (modo === 'adaptive'){ params = lrAdaptiveParams(adapt, cfg.hint); }
@@ -1424,7 +1435,7 @@ function iniciarLR(cfg){
     if (fin || !params.hintMax || curHint >= params.hintMax) return;
     curHint += 1;
     const textos = lrHintTexts(seq[i]);
-    const nombres = ['', 'Hint 1 (nudge)', 'Hint 2 (method)', 'Hint 3 (full solution)'];
+    const nombres = ['', 'Pista 1 (empujón)', 'Pista 2 (método)', 'Pista 3 (solución completa)'];
     $('hinttext').innerHTML = '<div class="aviso-caja"><b>' + nombres[curHint] + '.</b> ' + esc(textos[curHint - 1]) + '</div>';
     if (curHint >= params.hintMax) $('hintbtn').disabled = true;
   }
@@ -1435,10 +1446,10 @@ function iniciarLR(cfg){
     resps.push({ ok:ok, ms:ms, mira:it.mira, ayudado:curHint > 0, blanco:!!timeout });
     if (modo === 'adaptive') adapt = adaptivaPaso(adapt, ok);
     const r = lrResumen(resps.filter(function(x){ return !x.ayudado; }));
-    $('med').textContent = fmt(r.spi, 2); $('pre').textContent = fmt(resps.filter(function(x){ return x.ok; }).length / resps.length * 100, 0) + ' %';
-    if (timeout) $('retro').innerHTML = '<span class="mal">Time is up · it was ' + LADO_TXT[it.lado] + '</span>';
-    else if (curHint > 0) $('retro').innerHTML = '<span class="aviso">Hint used · counts as wrong</span>';
-    else $('retro').innerHTML = ok ? '<span class="bien">✓ ' + fmt(ms / 1000, 2) + ' s</span>' : '<span class="mal">✗ it was ' + LADO_TXT[it.lado] + '</span> <span class="suave">' + fmt(ms / 1000, 2) + ' s</span>';
+    $('med').textContent = fmtC(r.spi, 2); $('pre').textContent = fmt(resps.filter(function(x){ return x.ok; }).length / resps.length * 100, 0) + ' %';
+    if (timeout) $('retro').innerHTML = '<span class="mal">Se acabó el tiempo · era ' + LADO_TXT[it.lado] + '</span>';
+    else if (curHint > 0) $('retro').innerHTML = '<span class="aviso">Pista usada · cuenta como fallo</span>';
+    else $('retro').innerHTML = ok ? '<span class="bien">✓ ' + fmtC(ms / 1000, 2) + ' s</span>' : '<span class="mal">✗ era ' + LADO_TXT[it.lado] + '</span> <span class="suave">' + fmtC(ms / 1000, 2) + ' s</span>';
     i++;
     if (i >= N) acabar(); else mostrar();
   }
@@ -1449,18 +1460,18 @@ function iniciarLR(cfg){
     const ayudados = resps.length - clean.length;
     const por = function(m){ const a = clean.filter(function(x){ return x.mira === m; }); return a.length ? lrResumen(a) : null; };
     const f = por('frente'), e = por('espalda');
-    const extra = '<div class="' + (r.cumple ? 'bien-caja' : 'aviso-caja') + '"><b>Baseline (' + fmt(LR_OBJ_SEG, 1) + ' s with ≥' + LR_OBJ_PREC + ' %):</b> ' +
-      (r.cumple ? 'reached.' : (r.precision < LR_OBJ_PREC ? 'first recover accuracy; speed comes afterwards.' : 'accuracy is sufficient, you are ' + fmt(r.spi - LR_OBJ_SEG, 2) + ' s per item short.')) + '</div>' +
-      '<p>Facing you (reverse): ' + (f ? fmt(f.spi, 2) + ' s · ' + fmt(f.precision, 0) + ' %' : '—') +
-      '<br>Back turned (coincides): ' + (e ? fmt(e.spi, 2) + ' s · ' + fmt(e.precision, 0) + ' %' : '—') + '</p>' + REGLA_LR;
+    const extra = '<div class="' + (r.cumple ? 'bien-caja' : 'aviso-caja') + '"><b>Referencia (' + fmtC(LR_OBJ_SEG, 1) + ' s con ≥' + LR_OBJ_PREC + ' %):</b> ' +
+      (r.cumple ? 'alcanzada.' : (r.precision < LR_OBJ_PREC ? 'recupera primero la precisión; la velocidad viene después.' : 'la precisión es suficiente; te faltan ' + fmtC(r.spi - LR_OBJ_SEG, 2) + ' s por elemento.')) + '</div>' +
+      '<p>De frente (invertir): ' + (f ? fmtC(f.spi, 2) + ' s · ' + fmt(f.precision, 0) + ' %' : '—') +
+      '<br>De espaldas (coincide): ' + (e ? fmtC(e.spi, 2) + ' s · ' + fmt(e.precision, 0) + ' %' : '—') + '</p>' + REGLA_LR;
     const nivelFinal = modo === 'adaptive' ? adapt.nivel : params.nivel;
     const blancos = resps.filter(function(x){ return x.blanco; }).length;
     const aciertosTot = resps.filter(function(x){ return x.ok; }).length;
     // Accuracy counts every item shown (hinted and timed-out ones are wrong); seconds/item uses only unassisted answers.
     const precisionTot = resps.length ? aciertosTot / resps.length * 100 : 0;
     const rec = { id:'lr', clave:'lr', modo:modo, nivel:nivelFinal, practice:practice,
-      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Custom ' + params.nivel : 'Adaptive'),
-      params:resps.length + ' items · baseline ' + fmt(LR_OBJ_SEG, 1) + ' s with ≥' + LR_OBJ_PREC + ' %',
+      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Personalizado ' + params.nivel : 'Adaptativo'),
+      params:resps.length + ' elementos · referencia ' + fmtC(LR_OBJ_SEG, 1) + ' s con ≥' + LR_OBJ_PREC + ' %',
       aciertos:aciertosTot, fallos:resps.length - aciertosTot - blancos, blanco:blancos, ayudados:ayudados, spi:r.spi, precision:precisionTot,
       objetivo:cfg.goal, puntos:Math.round((r.spi || 0) * 100) / 100, mayorEsMejor:false, extra:extra,
       thirds:atcThirds(resps.map(function(x){ return { ok:x.ok, blank:x.blanco, sec:x.ms / 1000 }; }), 0) };
@@ -1483,7 +1494,7 @@ function iniciarLR(cfg){
     const elapsed = (performance.now() - t0) / 1000;
     if (params.exposure && elapsed >= params.exposure && !hidden){
       hidden = true;
-      $('figbox').insertAdjacentHTML('beforeend', '<div class="oculto-fig">Figure hidden after ' + fmt(params.exposure, 1) + ' s: answer from memory.</div>');
+      $('figbox').insertAdjacentHTML('beforeend', '<div class="oculto-fig">Figura oculta tras ' + fmtC(params.exposure, 1) + ' s: responde de memoria.</div>');
     }
     if (params.itemLimit){
       const rest = params.itemLimit - elapsed;
@@ -1503,51 +1514,51 @@ function hayVoz(){
 function hablar(l){
   try {
     speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(l); u.lang = 'en-US'; u.rate = 0.9;
+    const u = new SpeechSynthesisUtterance(l); u.lang = 'es-ES'; u.rate = 0.9;
     speechSynthesis.speak(u);
   } catch (e) {}
 }
 const NB_TIPS = [
-  'Say the position and letter silently to yourself as they appear: that rehearsal is what keeps n items in memory.',
-  'Method: keep a short mental queue of the last n stimuli (position and letter). When a new one appears, compare it with the one about to leave the queue.',
-  'Worked example for n = 2: sequence C, H, C. The third item is a letter match because it equals the item two back (C). Compare grid positions the same way.'
+  'Repite en silencio la posición y la letra según aparecen: ese repaso es lo que mantiene n elementos en la memoria.',
+  'Método: mantén una cola mental corta con los n últimos estímulos (posición y letra). Cuando aparezca uno nuevo, compáralo con el que está a punto de salir de la cola.',
+  'Ejemplo resuelto con n = 2: secuencia C, H, C. El tercer elemento coincide en letra porque es igual al de dos pasos atrás (C). Compara las posiciones de la cuadrícula del mismo modo.'
 ];
 function configNback(){
   const d = cargar(), voz = hayVoz();
-  const u = cfgDe(d, 'nback', { modo:'manual', nivel:3, goal:'≥96 % accuracy', hint:0, voz:'vis', custom:{ nivel:5, interval:2000, hint:0 } });
+  const u = cfgDe(d, 'nback', { modo:'manual', nivel:3, goal:'≥96 % de precisión', hint:0, voz:'vis', custom:{ nivel:5, interval:2000, hint:0 } });
   pantalla(
-    '<div class="panel"><button class="enlace" id="volver">← Menu (Esc)</button>' +
-    '<h1>Dual n-back</h1>' +
-    '<p class="suave">Squares light up in a 3×3 grid and a letter appears with each one. Press <span class="tecla">A</span> when the position is the same as <b>n</b> steps ago, and <span class="tecla">L</span> when the letter is the same as n steps ago (both if both match; nothing if neither does). With n=1 you compare with the previous stimulus; with n=2, the one before that. Levels 1-2 use n=1; level 10 uses n=6.</p>' +
+    '<div class="panel"><button class="enlace" id="volver">← Menú (Esc)</button>' +
+    '<h1>N-back dual</h1>' +
+    '<p class="suave">Se iluminan casillas en una cuadrícula de 3×3 y con cada una aparece una letra. Pulsa <span class="tecla">A</span> cuando la posición sea la misma que hace <b>n</b> pasos y <span class="tecla">L</span> cuando la letra sea la misma que hace n pasos (las dos si coinciden ambas; ninguna si no coincide nada). Con n=1 comparas con el estímulo anterior; con n=2, con el de antes. Los niveles 1-2 usan n=1; el nivel 10 usa n=6.</p>' +
     '<div class="grid2"><div>' +
-    '<label class="et" for="mo">Mode</label>' + fillSelect('mo', [['manual','Manual level (1-10)'],['adaptive','Adaptive (adjusts itself)'],['custom','Custom (sliders)']], u.modo) +
+    '<label class="et" for="mo">Modo</label>' + fillSelect('mo', [['manual','Nivel manual (1-10)'],['adaptive','Adaptativo (se ajusta solo)'],['custom','Personalizado (deslizadores)']], u.modo) +
     '<div id="modebox"></div>' +
-    '<label class="et" for="voz">Letter</label><select id="voz"><option value="voz"' + (voz ? '' : ' disabled') + (u.voz === 'voz' ? ' selected' : '') + '>Spoken' + (voz ? '' : ' (no voice available)') + '</option><option value="vis"' + (!voz || u.voz !== 'voz' ? ' selected' : '') + '>Visual only</option></select>' +
+    '<label class="et" for="voz">Letra</label><select id="voz"><option value="voz"' + (voz ? '' : ' disabled') + (u.voz === 'voz' ? ' selected' : '') + '>Hablada' + (voz ? '' : ' (no hay voz disponible)') + '</option><option value="vis"' + (!voz || u.voz !== 'voz' ? ' selected' : '') + '>Solo visual</option></select>' +
     '</div><div>' +
-    '<label class="et" for="obj">Numeric goal for this session (required)</label>' +
+    '<label class="et" for="obj">Objetivo numérico de esta sesión (obligatorio)</label>' +
     '<input type="text" id="obj" maxlength="80" autocomplete="off" value="' + esc(u.goal) + '">' +
-    '<p class="peq suave">Examples: “≥96 % accuracy”, “20 correct”.</p><p class="peq aviso" id="objaviso"></p>' +
-    hintSelectHtml(u.hint, 'For this real-time task, hints are shown once before the session starts as strategy tips (not mid-stream, which would defeat the continuous-attention task).') +
+    '<p class="peq suave">Ejemplos: «≥96 % de precisión», «20 aciertos».</p><p class="peq aviso" id="objaviso"></p>' +
+    hintSelectHtml(u.hint, 'En esta tarea en tiempo real, las pistas se muestran una vez antes de empezar la sesión como consejos de estrategia (no a mitad de la serie, porque anularían la tarea de atención continua).') +
     '</div></div>' +
-    '<p id="err" class="mal" role="alert"></p>' + botonesInicio('a short n=1 round') + '</div>' +
-    '<details class="panel"><summary>The ten levels</summary>' + ladderTableHtml(NB_NIVELES, [
-      ['n','n (back distance)'], ['interval','Interval', function(v){ return fmt(v / 1000, 1) + ' s'; }]
-    ]) + '<p class="peq suave">Session length is 20 + n stimuli, so it grows with the level too. Dual task is off throughout: the position + letter comparison already is the dual task.</p></details>'
+    '<p id="err" class="mal" role="alert"></p>' + botonesInicio('una ronda corta con n=1') + '</div>' +
+    '<details class="panel"><summary>Los diez niveles</summary>' + ladderTableHtml(NB_NIVELES, [
+      ['n','n (pasos atrás)'], ['interval','Intervalo', function(v){ return fmtC(v / 1000, 1) + ' s'; }]
+    ]) + '<p class="peq suave">La sesión dura 20 + n estímulos, así que también crece con el nivel. Aquí nunca hay tarea doble aparte: comparar posición y letra ya es la tarea doble.</p></details>'
   );
   function drawMode(){
     const mo = $('mo').value; let h = '';
     if (mo === 'manual'){
       const opts = []; for (let l = 1; l <= MAX_NIVEL; l++) opts.push([l, l + ' ' + NB_NIVELES[l].name + ' (n=' + NB_NIVELES[l].n + ')']);
-      h = '<label class="et" for="lv">Level</label>' + fillSelect('lv', opts, u.nivel) +
+      h = '<label class="et" for="lv">Nivel</label>' + fillSelect('lv', opts, u.nivel) +
         '<p class="peq suave" id="lvs">' + esc(nivelStatement(u.nivel)) + '</p>';
     } else if (mo === 'adaptive'){
       const start = d.ultimo.nbAdaptStart || 2;
-      h = '<p class="peq suave">Starts at level ' + start + ' (n = ' + NB_NIVELES[start].n + '). n cannot change in the middle of a stream, so the level adapts <b>between sessions</b>: it goes up one level after a session at ' + PRECISION_MINIMA + ' % or more, down one level below 60 %, and stays otherwise.</p>';
+      h = '<p class="peq suave">Empieza en el nivel ' + start + ' (n = ' + NB_NIVELES[start].n + '). n no puede cambiar a mitad de una serie, así que el nivel se adapta <b>entre sesiones</b>: sube un nivel tras una sesión con el ' + PRECISION_MINIMA + ' % o más, baja uno por debajo del 60 % y, si no, se mantiene.</p>';
     } else {
       const c = u.custom;
       h = slidersHtml([
-        { id:'cl', label:'n-back difficulty (level, sets n)', min:1, max:10, val:c.nivel },
-        { id:'cin', label:'Interval per stimulus', min:700, max:3500, step:100, val:c.interval, unit:'ms' }
+        { id:'cl', label:'Dificultad del n-back (nivel, fija n)', min:1, max:10, val:c.nivel },
+        { id:'cin', label:'Intervalo por estímulo', min:700, max:3500, step:100, val:c.interval, unit:'ms' }
       ]);
     }
     $('modebox').innerHTML = h;
@@ -1561,7 +1572,7 @@ function configNback(){
   $('volver').addEventListener('click', menu);
   const go = function(){
     const v = $('obj').value.trim();
-    if (!v){ $('err').textContent = 'Write a numeric goal before starting.'; $('obj').focus(); return; }
+    if (!v){ $('err').textContent = 'Escribe un objetivo numérico antes de empezar.'; $('obj').focus(); return; }
     u.modo = $('mo').value; u.goal = v; u.hint = parseInt($('hi').value, 10); u.voz = $('voz').value;
     if (u.modo === 'manual') u.nivel = parseInt($('lv').value, 10);
     if (u.modo === 'custom') u.custom = { nivel:+$('cl').value, interval:+$('cin').value, hint:u.hint };
@@ -1589,26 +1600,26 @@ function iniciarNback(cfg){
   const puls = { pos:[], let:[] };
   const obj = { pos:nbObjetivos(seq.pos, n), let:nbObjetivos(seq.let, n) };
   let i = -1, fin = false;
-  const tips = !practice && cfg.hint > 0 && params.hintMax ? '<details class="aviso-caja" open><summary>Strategy tips (hint level ' + cfg.hint + ')</summary>' + NB_TIPS.slice(0, cfg.hint).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('') + '</details>' : '';
+  const tips = !practice && cfg.hint > 0 && params.hintMax ? '<details class="aviso-caja" open><summary>Consejos de estrategia (nivel de pista ' + cfg.hint + ')</summary>' + NB_TIPS.slice(0, cfg.hint).map(function(t){ return '<p>' + esc(t) + '</p>'; }).join('') + '</details>' : '';
   pantalla(
     tips +
-    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Practice</b>: n = 1, nothing is saved. Press <b>A</b> if the square is where the previous one was, <b>L</b> if the letter repeats the previous one.</div>' : '') +
-    '<div class="cabecera"><span>Stimulus <b id="k">0</b> / ' + seq.len + '</span><span>Level <b>' + params.nivel + '</b></span><span>n = <b>' + n + '</b></span></div>' +
+    '<div class="panel">' + (practice ? '<div class="aviso-caja"><b>Práctica</b>: n = 1, no se guarda nada. Pulsa <b>A</b> si la casilla está donde estaba la anterior y <b>L</b> si la letra repite la anterior.</div>' : '') +
+    '<div class="cabecera"><span>Estímulo <b id="k">0</b> / ' + seq.len + '</span><span>Nivel <b>' + params.nivel + '</b></span><span>n = <b>' + n + '</b></span></div>' +
     '<div class="barra" id="barra"><div id="bar"></div></div>' +
     '<div class="cuadricula" id="cuad">' + [0,1,2,3,4,5,6,7,8].map(function(x){ return '<div data-p="' + x + '"></div>'; }).join('') + '</div>' +
     '<div class="letra-grande" id="letra" aria-live="off"></div>' +
-    '<p class="fila" style="justify-content:center"><span class="tecla" id="ka">A · position</span><span class="tecla" id="kl">L · letter</span></p>' +
-    '<div class="retro suave" id="retro" aria-live="polite">Get ready…</div>' +
-    '<p class="suave peq" style="text-align:center">A = position repeats · L = letter repeats · Esc twice quits without saving</p></div>'
+    '<p class="fila" style="justify-content:center"><span class="tecla" id="ka">A · posición</span><span class="tecla" id="kl">L · letra</span></p>' +
+    '<div class="retro suave" id="retro" aria-live="polite">Prepárate…</div>' +
+    '<p class="suave peq" style="text-align:center">A = se repite la posición · L = se repite la letra · Esc dos veces sale sin guardar</p></div>'
   );
   const celdas = Array.prototype.slice.call($('cuad').children);
   function textoJuicio(j){
     const partes = [];
-    [['pos','Position'],['let','Letter']].forEach(function(c){
+    [['pos','Posición'],['let','Letra']].forEach(function(c){
       const o = obj[c[0]][j], p = !!puls[c[0]][j];
       if (o && p) partes.push('<span class="bien">' + c[1] + ' ✓</span>');
-      else if (!o && p) partes.push('<span class="mal">' + c[1] + ': false alarm</span>');
-      else if (o && !p) partes.push('<span class="aviso">' + c[1] + ': omission</span>');
+      else if (!o && p) partes.push('<span class="mal">' + c[1] + ': falsa alarma</span>');
+      else if (o && !p) partes.push('<span class="aviso">' + c[1] + ': omisión</span>');
     });
     return partes.join(' · ');
   }
@@ -1640,11 +1651,11 @@ function iniciarNback(cfg){
     fin = true;
     const t = nbPuntuar(seq, n, puls);
     const extra = '<div class="cifras">' +
-      statCard(t.pos.aciertos + ' / ' + t.pos.objetivos, 'Position: hits / targets') +
-      statCard(t.let.aciertos + ' / ' + t.let.objetivos, 'Letter: hits / targets') +
-      statCard(t.pos.falsas + t.let.falsas, 'False alarms (' + t.pos.falsas + ' pos., ' + t.let.falsas + ' letter)') +
-      statCard(t.pos.omisiones + t.let.omisiones, 'Omissions (' + t.pos.omisiones + ' pos., ' + t.let.omisiones + ' letter)') +
-      '</div><p class="suave peq">Accuracy counts all correct decisions (hits and correct rejections) out of the ' + (2 * seq.len) + ' judgements of the session.</p>';
+      statCard(t.pos.aciertos + ' / ' + t.pos.objetivos, 'Posición: aciertos / objetivos') +
+      statCard(t.let.aciertos + ' / ' + t.let.objetivos, 'Letra: aciertos / objetivos') +
+      statCard(t.pos.falsas + t.let.falsas, 'Falsas alarmas (' + t.pos.falsas + ' pos., ' + t.let.falsas + ' letra)') +
+      statCard(t.pos.omisiones + t.let.omisiones, 'Omisiones (' + t.pos.omisiones + ' pos., ' + t.let.omisiones + ' letra)') +
+      '</div><p class="suave peq">La precisión cuenta todas las decisiones correctas (aciertos y rechazos correctos) sobre los ' + (2 * seq.len) + ' juicios de la sesión.</p>';
     const resNB = [];
     for (let k = 0; k < seq.len; k++){
       let c = 0, b = 0;
@@ -1656,10 +1667,10 @@ function iniciarNback(cfg){
     }
     const nivelFinal = params.nivel;
     const rec = { id:'nback', clave:'nback-' + n, modo:modo, nivel:nivelFinal, practice:practice,
-      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Custom ' + params.nivel : 'Adaptive'),
-      params:'n = ' + n + ' · ' + seq.len + ' stimuli · ' + fmt(intervalo / 1000, 1) + ' s · ' + (voz ? 'spoken letter' : 'visual only'),
+      etiquetaNivel: modo === 'manual' ? String(practice ? 1 : cfg.nivel) : (modo === 'custom' ? 'Personalizado ' + params.nivel : 'Adaptativo'),
+      params:'n = ' + n + ' · ' + seq.len + ' estímulos · ' + fmtC(intervalo / 1000, 1) + ' s · ' + (voz ? 'letra hablada' : 'solo visual'),
       aciertos:t.aciertos, fallos:t.falsas, blanco:t.omisiones, ayudados:0, spi:intervalo / 1000, precision:t.precision,
-      etiquetaPrecision:'correct decisions',
+      etiquetaPrecision:'decisiones correctas',
       objetivo:cfg.goal, puntos:t.aciertos, mayorEsMejor:true, extra:extra, thirds:atcThirds(resNB, 0) };
     // n cannot change mid-stream, so adaptive n-back moves between sessions (it used to stay at the start level forever).
     if (modo === 'adaptive') d.ultimo.nbAdaptStart = inicioAdaptativo(params.nivel, rec.precision, true);
@@ -1682,10 +1693,10 @@ function mostrarResultado(r, extraHtml, repetirFn, cambiarFn){
   const intentos = r.aciertos + r.fallos + r.blanco;
   if (r.practice || intentos === 0){
     const msg = r.practice
-      ? '<p class="bien-caja"><b>Practice complete.</b> ' + r.aciertos + ' of ' + intentos + ' right. Nothing was saved. When the keys feel natural, start a real session at level 1 or 2.</p>'
-      : '<p class="aviso-caja"><b>No answers were given</b>, so this session was not saved (it would only add a 0 % line to your history).</p>';
-    pantalla('<div class="panel"><h1>' + (r.practice ? 'Practice · ' : 'Session not saved · ') + MODULOS[r.id] + '</h1>' + msg + dualHtml +
-      '<p class="fila" style="margin-top:14px"><button class="btn primario" id="rep">' + (r.practice ? 'Practice again (Enter)' : 'Try again (Enter)') + '</button><button class="btn" id="cam">' + (r.practice ? 'Set up a real session' : 'Settings') + '</button><button class="btn" id="men">Menu (Esc)</button></p></div>');
+      ? '<p class="bien-caja"><b>Práctica terminada.</b> ' + r.aciertos + ' de ' + intentos + ' correctas. No se ha guardado nada. Cuando las teclas te salgan solas, empieza una sesión real en el nivel 1 o 2.</p>'
+      : '<p class="aviso-caja"><b>No has dado ninguna respuesta</b>, así que esta sesión no se ha guardado (solo añadiría una línea del 0 % a tu historial).</p>';
+    pantalla('<div class="panel"><h1>' + (r.practice ? 'Práctica · ' : 'Sesión no guardada · ') + MODULOS[r.id] + '</h1>' + msg + dualHtml +
+      '<p class="fila" style="margin-top:14px"><button class="btn primario" id="rep">' + (r.practice ? 'Practicar otra vez (Intro)' : 'Intentarlo de nuevo (Intro)') + '</button><button class="btn" id="cam">' + (r.practice ? 'Preparar una sesión real' : 'Ajustes') + '</button><button class="btn" id="men">Menú (Esc)</button></p></div>');
     finResultado(repetirFn, cambiarFn);
     return;
   }
@@ -1703,43 +1714,43 @@ function mostrarResultado(r, extraHtml, repetirFn, cambiarFn){
   const streak = rachaModulo(d.sesiones, ses.modulo);
   const unidad = r.id === 'lr' ? ' s' : '';
   let objetivoHtml;
-  if (cumplido === true) objetivoHtml = '<div class="bien-caja"><b class="bien">Goal met.</b> “' + esc(r.objetivo) + '”</div>';
-  else if (cumplido === false) objetivoHtml = '<div class="aviso-caja"><b class="aviso">Goal not met.</b> “' + esc(r.objetivo) + '”</div>';
-  else objetivoHtml = '<div class="aviso-caja" id="cajaobj">I could not interpret your goal “' + esc(r.objetivo) + '”. Did you meet it? ' +
-    '<button class="btn" id="siobj">Yes</button> <button class="btn" id="noobj">No</button></div>';
+  if (cumplido === true) objetivoHtml = '<div class="bien-caja"><b class="bien">Objetivo cumplido.</b> «' + esc(r.objetivo) + '»</div>';
+  else if (cumplido === false) objetivoHtml = '<div class="aviso-caja"><b class="aviso">Objetivo no cumplido.</b> «' + esc(r.objetivo) + '»</div>';
+  else objetivoHtml = '<div class="aviso-caja" id="cajaobj">No he podido interpretar tu objetivo «' + esc(r.objetivo) + '». ¿Lo has cumplido? ' +
+    '<button class="btn" id="siobj">Sí</button> <button class="btn" id="noobj">No</button></div>';
   // Best line: state whether this session beat the previous best, instead of showing a stale number.
   let mejorHtml = '';
   if (r.nivel !== null){
-    if (record) mejorHtml = '<p class="bien">New personal best at level ' + esc(r.etiquetaNivel) + ': ' + fmt(r.puntos, r.id === 'lr' ? 2 : 0) + unidad + ' (previous: ' + fmt(mejorAntes.puntos, r.id === 'lr' ? 2 : 0) + unidad + ').</p>';
-    else if (mejorAntes) mejorHtml = '<p class="suave">Personal best at this level (manual, no hints): ' + fmt(mejorAntes.puntos, r.id === 'lr' ? 2 : 0) + unidad + '.</p>';
-    else mejorHtml = '<p class="suave">' + (r.modo === 'manual' && !r.ayudados && valida ? 'First hint-free manual session at this level: this is now your reference.' : 'No hint-free manual record yet at this level (records need a manual session at ' + PRECISION_MINIMA + ' %+ with no hints).') + '</p>';
+    if (record) mejorHtml = '<p class="bien">Nueva mejor marca personal en el nivel ' + esc(r.etiquetaNivel) + ': ' + fmtC(r.puntos, r.id === 'lr' ? 2 : 0) + unidad + ' (anterior: ' + fmtC(mejorAntes.puntos, r.id === 'lr' ? 2 : 0) + unidad + ').</p>';
+    else if (mejorAntes) mejorHtml = '<p class="suave">Mejor marca personal en este nivel (manual, sin pistas): ' + fmtC(mejorAntes.puntos, r.id === 'lr' ? 2 : 0) + unidad + '.</p>';
+    else mejorHtml = '<p class="suave">' + (r.modo === 'manual' && !r.ayudados && valida ? 'Primera sesión manual sin pistas en este nivel: a partir de ahora es tu referencia.' : 'Aún no hay marca manual sin pistas en este nivel (las marcas exigen una sesión manual con el ' + PRECISION_MINIMA + ' % o más y sin pistas).') + '</p>';
   }
-  const tend = previas.length ? '<p class="suave">Accuracy trend at this level: ' + previas.map(function(s){ return fmt(s.precision, 0); }).concat([fmt(r.precision, 0)]).join(' → ') + ' %</p>' : '';
+  const tend = previas.length ? '<p class="suave">Evolución de la precisión en este nivel: ' + previas.map(function(s){ return fmt(s.precision, 0); }).concat([fmt(r.precision, 0)]).join(' → ') + ' %</p>' : '';
   const sig = r.modo === 'adaptive' ? d.ultimo[(r.id === 'nback' ? 'nb' : r.id) + 'AdaptStart'] : null;
   pantalla(
-    '<div class="panel"><h1>Result · ' + MODULOS[r.id] + '</h1>' +
-    '<p class="suave">' + esc(r.params) + ' · level ' + esc(r.etiquetaNivel) + '</p>' +
-    (guardado ? '' : '<div class="aviso-caja">This session could not be written to the browser storage; it is kept only while this tab stays open.</div>') +
-    (record ? '<p><span class="record">Personal record!</span></p>' : '') +
+    '<div class="panel"><h1>Resultado · ' + MODULOS[r.id] + '</h1>' +
+    '<p class="suave">' + esc(r.params) + ' · nivel ' + esc(r.etiquetaNivel) + '</p>' +
+    (guardado ? '' : '<div class="aviso-caja">Esta sesión no se ha podido guardar en el almacenamiento del navegador; solo se conserva mientras esta pestaña siga abierta.</div>') +
+    (record ? '<p><span class="record">¡Récord personal!</span></p>' : '') +
     '<div class="cifras">' +
-      statCard(r.aciertos, 'Correct') + statCard(r.fallos, 'Wrong') + statCard(r.blanco, 'Blank / timed out') +
-      (r.ayudados ? statCard(r.ayudados, 'Assisted (hint used)') : '') +
-      statCard(fmt(r.spi, 2), r.id === 'nback' ? 's per stimulus' : 's per item') +
-      '<div class="cifra"><b class="' + (valida ? 'bien' : 'mal') + '">' + fmt(r.precision, 1) + ' %</b><span>Accuracy' + (r.etiquetaPrecision ? ' (' + r.etiquetaPrecision + ')' : '') + '</span></div>' +
-      statCard(streak, 'goals met in a row') +
+      statCard(r.aciertos, 'Aciertos') + statCard(r.fallos, 'Fallos') + statCard(r.blanco, 'En blanco / fuera de tiempo') +
+      (r.ayudados ? statCard(r.ayudados, 'Asistidos (con pista)') : '') +
+      statCard(fmtC(r.spi, 2), r.id === 'nback' ? 's por estímulo' : 's por elemento') +
+      '<div class="cifra"><b class="' + (valida ? 'bien' : 'mal') + '">' + fmtC(r.precision, 1) + ' %</b><span>Precisión' + (r.etiquetaPrecision ? ' (' + r.etiquetaPrecision + ')' : '') + '</span></div>' +
+      statCard(streak, 'objetivos cumplidos seguidos') +
     '</div>' + objetivoHtml + dualHtml + mejorHtml + tend +
     (ses.thirds ? '<p class="suave" id="terciosLinea">' + esc(atcThirdsLine(ses.thirds)) + '</p>' : '') +
     '<div class="bien-caja">' + esc(nivelStatement(r.nivel === null ? 5 : r.nivel)) + '</div>' +
-    '<div class="' + (valida ? 'bien-caja' : 'aviso-caja') + '"><b>Next:</b> ' + esc(recomendacion(r.nivel === null ? 5 : r.nivel, r.precision)) + '</div>' +
-    (sig ? '<p class="suave">Adaptive: the next adaptive session of this module starts at level ' + sig + '.</p>' : '') +
+    '<div class="' + (valida ? 'bien-caja' : 'aviso-caja') + '"><b>Siguiente:</b> ' + esc(recomendacion(r.nivel === null ? 5 : r.nivel, r.precision)) + '</div>' +
+    (sig ? '<p class="suave">Adaptativo: la próxima sesión adaptativa de este módulo empieza en el nivel ' + sig + '.</p>' : '') +
     (extraHtml || '') +
-    '<p class="fila" style="margin-top:14px"><button class="btn primario" id="rep">Repeat same session (Enter)</button><button class="btn" id="cam">Change settings</button><button class="btn" id="men">Menu (Esc)</button><button class="btn" id="his">Stats (H)</button></p></div>'
+    '<p class="fila" style="margin-top:14px"><button class="btn primario" id="rep">Repetir la misma sesión (Intro)</button><button class="btn" id="cam">Cambiar ajustes</button><button class="btn" id="men">Menú (Esc)</button><button class="btn" id="his">Estadísticas (H)</button></p></div>'
   );
   if (cumplido === null){
     const idx = d.sesiones.length - 1;
     const marcar = function(v){
       d.sesiones[idx].cumplido = v; guardar();
-      $('cajaobj').innerHTML = 'Recorded: ' + (v ? '<b class="bien">met</b>' : '<b class="aviso">not met</b>') + '.';
+      $('cajaobj').innerHTML = 'Anotado: ' + (v ? '<b class="bien">cumplido</b>' : '<b class="aviso">no cumplido</b>') + '.';
     };
     $('siobj').addEventListener('click', function(){ marcar(true); });
     $('noobj').addEventListener('click', function(){ marcar(false); });
@@ -1774,7 +1785,7 @@ function marcador(idx, x, y, col){
 }
 const MOD_IDS = ['calc', 'd2', 'lr', 'nback'];
 const MOD_COLS = ['#4fc3f7', '#ffb74d', '#81c784', '#ce93d8'];
-const PUNTOS_ROT = { calc:'correct answers', d2:'concentration', lr:'s per item (lower is better)', nback:'correct decisions' };
+const PUNTOS_ROT = { calc:'aciertos', d2:'concentración', lr:'s por elemento (menos es mejor)', nback:'decisiones correctas' };
 function media(a){ return a.length ? a.reduce(function(s, x){ return s + x; }, 0) / a.length : null; }
 function rachaMaxima(sesiones, modulo){
   let m = 0, c = 0;
@@ -1788,8 +1799,8 @@ function tendenciaTxt(ses){
   const ant = ses.slice(-10, -5).map(function(s){ return s.precision; });
   if (!ant.length) return '';
   const dif = media(ult) - media(ant);
-  if (Math.abs(dif) < 0.5) return '<span class="tendencia">→ flat</span>';
-  return dif > 0 ? '<span class="tendencia bien">↑ +' + fmt(dif, 1) + ' pts</span>' : '<span class="tendencia mal">↓ ' + fmt(dif, 1) + ' pts</span>';
+  if (Math.abs(dif) < 0.5) return '<span class="tendencia">→ estable</span>';
+  return dif > 0 ? '<span class="tendencia bien">↑ +' + fmtC(dif, 1) + ' pts</span>' : '<span class="tendencia mal">↓ ' + fmtC(dif, 1) + ' pts</span>';
 }
 function mejorDe(ses, mayor){
   let b = null;
@@ -1797,24 +1808,24 @@ function mejorDe(ses, mayor){
   return b;
 }
 function graficoTendencia(ses, moduloTxt){
-  if (!ses.length) return '<p class="suave">No sessions to plot yet.</p>';
+  if (!ses.length) return '<p class="suave">Aún no hay sesiones para la gráfica.</p>';
   const pts = ses.slice(-40);
   const W = 720, H = 260, ml = 44, mr = 14, mt = 12, mb = 30;
   const minP = Math.min(90, Math.floor(Math.min.apply(null, pts.map(function(p){ return p.precision; })) / 5) * 5);
   const x = function(k){ return pts.length === 1 ? ml + (W - ml - mr) / 2 : ml + k / (pts.length - 1) * (W - ml - mr); };
   const y = function(v){ return mt + (100 - Math.max(minP, v)) / (100 - minP) * (H - mt - mb); };
-  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Accuracy per session, ' + esc(moduloTxt) + '" style="background:#0d1014;border-radius:8px;max-height:280px">';
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Precisión por sesión, ' + esc(moduloTxt) + '" style="background:#0d1014;border-radius:8px;max-height:280px">';
   const paso = (100 - minP) > 20 ? 10 : 5;
   for (let v = minP; v <= 100; v += paso){
     s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="#2c3440"/><text x="' + (ml - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="#aab5c4">' + v + '</text>';
   }
-  s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(PRECISION_MINIMA) + '" y2="' + y(PRECISION_MINIMA) + '" stroke="#7bd88f" stroke-dasharray="6 4"/><text x="' + (W - mr) + '" y="' + (y(PRECISION_MINIMA) - 4) + '" text-anchor="end" font-size="11" fill="#7bd88f">minimum ' + PRECISION_MINIMA + ' %</text>';
+  s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(PRECISION_MINIMA) + '" y2="' + y(PRECISION_MINIMA) + '" stroke="#7bd88f" stroke-dasharray="6 4"/><text x="' + (W - mr) + '" y="' + (y(PRECISION_MINIMA) - 4) + '" text-anchor="end" font-size="11" fill="#7bd88f">mínimo ' + PRECISION_MINIMA + ' %</text>';
   MOD_IDS.forEach(function(id, idx){
     const a = []; pts.forEach(function(p, k){ if (p.modulo === MODULOS[id]) a.push({ k:k, p:p }); });
     if (a.length > 1) s += '<polyline fill="none" stroke="' + MOD_COLS[idx] + '" stroke-width="1.5" opacity=".6" points="' + a.map(function(o){ return x(o.k) + ',' + y(o.p.precision); }).join(' ') + '"/>';
     a.forEach(function(o){ s += marcador(idx, x(o.k), y(o.p.precision), MOD_COLS[idx]); });
   });
-  s += '<text x="' + (ml + (W - ml - mr) / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="#aab5c4">last ' + pts.length + ' sessions, oldest to newest</text></svg>';
+  s += '<text x="' + (ml + (W - ml - mr) / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="#aab5c4">últimas ' + pts.length + ' sesiones, de la más antigua a la más reciente</text></svg>';
   return s + '<p class="leyenda peq">' + MOD_IDS.map(function(id, idx){
     return '<span><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true">' + marcador(idx, 0, 0, MOD_COLS[idx]) + '</svg> ' + MODULOS[id] + '</span>';
   }).join('') + '</p>';
@@ -1827,15 +1838,15 @@ function historial(filtro){
   const f = statsFiltro();
   const todas = d.sesiones;
   const ses = f === 'all' ? todas : todas.filter(function(s){ return s.modulo === MODULOS[f]; });
-  const tabs = '<div class="tabs" role="group" aria-label="Filter by module"><button class="btn" data-f="all" aria-pressed="' + (f === 'all') + '">All modules</button>' +
+  const tabs = '<div class="tabs" role="group" aria-label="Filtrar por módulo"><button class="btn" data-f="all" aria-pressed="' + (f === 'all') + '">Todos los módulos</button>' +
     MOD_IDS.map(function(id, k){ return '<button class="btn" data-f="' + id + '" aria-pressed="' + (f === id) + '">' + (k + 1) + ' ' + MODULOS[id] + '</button>'; }).join('') + '</div>';
   let resumen = '';
   if (f === 'all'){
-    resumen = '<div class="tabla-caja"><table><thead><tr><th>Module</th><th>Sessions</th><th>Avg accuracy (last 5)</th><th>Best accuracy</th><th>Trend</th><th>Goals met in a row</th><th>Best run</th><th>Last session</th></tr></thead><tbody>' +
+    resumen = '<div class="tabla-caja"><table><thead><tr><th>Módulo</th><th>Sesiones</th><th>Precisión media (últimas 5)</th><th>Mejor precisión</th><th>Tendencia</th><th>Objetivos cumplidos seguidos</th><th>Mejor racha</th><th>Última sesión</th></tr></thead><tbody>' +
       MOD_IDS.map(function(id){
         const m = todas.filter(function(s){ return s.modulo === MODULOS[id]; });
-        if (!m.length) return '<tr><td>' + MODULOS[id] + '</td><td colspan="7" class="suave">No sessions yet</td></tr>';
-        return '<tr><td>' + MODULOS[id] + '</td><td>' + m.length + '</td><td>' + fmt(media(m.slice(-5).map(function(s){ return s.precision; })), 1) + ' %</td><td>' + fmt(Math.max.apply(null, m.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + (tendenciaTxt(m) || '—') + '</td><td>' + rachaModulo(todas, MODULOS[id]) + '</td><td>' + rachaMaxima(todas, MODULOS[id]) + '</td><td>' + fechaES(m[m.length - 1].ts) + '</td></tr>';
+        if (!m.length) return '<tr><td>' + MODULOS[id] + '</td><td colspan="7" class="suave">Aún no hay sesiones</td></tr>';
+        return '<tr><td>' + MODULOS[id] + '</td><td>' + m.length + '</td><td>' + fmtC(media(m.slice(-5).map(function(s){ return s.precision; })), 1) + ' %</td><td>' + fmtC(Math.max.apply(null, m.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + (tendenciaTxt(m) || '—') + '</td><td>' + rachaModulo(todas, MODULOS[id]) + '</td><td>' + rachaMaxima(todas, MODULOS[id]) + '</td><td>' + fechaES(m[m.length - 1].ts) + '</td></tr>';
       }).join('') + '</tbody></table></div>';
   } else if (ses.length){
     const niveles = {};
@@ -1848,30 +1859,30 @@ function historial(filtro){
     });
     const mayor = f !== 'lr';
     resumen = '<div class="cifras">' +
-      statCard(ses.length, 'sessions') + statCard(fmt(media(ses.slice(-5).map(function(s){ return s.precision; })), 1) + ' %', 'avg accuracy, last 5') +
-      statCard(fmt(Math.max.apply(null, ses.map(function(s){ return s.precision; })), 1) + ' %', 'best accuracy') +
-      statCard(rachaModulo(todas, MODULOS[f]), 'goals met in a row (now)') + statCard(rachaMaxima(todas, MODULOS[f]), 'best run of goals met') + '</div>' +
-      '<p>Trend (last 5 vs the 5 before): ' + (tendenciaTxt(ses) || '<span class="suave">needs 6+ sessions</span>') + '</p>' +
-      '<h3>By level</h3><div class="tabla-caja"><table><thead><tr><th>Level</th><th>Sessions</th><th>Avg accuracy</th><th>Best accuracy</th><th>Best ' + PUNTOS_ROT[f] + '</th><th>Trend</th><th>Last</th></tr></thead><tbody>' +
+      statCard(ses.length, 'sesiones') + statCard(fmtC(media(ses.slice(-5).map(function(s){ return s.precision; })), 1) + ' %', 'precisión media, últimas 5') +
+      statCard(fmtC(Math.max.apply(null, ses.map(function(s){ return s.precision; })), 1) + ' %', 'mejor precisión') +
+      statCard(rachaModulo(todas, MODULOS[f]), 'objetivos cumplidos seguidos (ahora)') + statCard(rachaMaxima(todas, MODULOS[f]), 'mejor racha de objetivos cumplidos') + '</div>' +
+      '<p>Tendencia (últimas 5 frente a las 5 anteriores): ' + (tendenciaTxt(ses) || '<span class="suave">hacen falta 6 sesiones o más</span>') + '</p>' +
+      '<h3>Por nivel</h3><div class="tabla-caja"><table><thead><tr><th>Nivel</th><th>Sesiones</th><th>Precisión media</th><th>Mejor precisión</th><th>Mejor: ' + PUNTOS_ROT[f] + '</th><th>Tendencia</th><th>Última</th></tr></thead><tbody>' +
       orden.map(function(k){
         const g = niveles[k];
         const b = mejorDe(g, mayor);
-        return '<tr><td>' + esc(k) + '</td><td>' + g.length + '</td><td>' + fmt(media(g.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + fmt(Math.max.apply(null, g.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + (b === null ? '—' : fmt(b, f === 'lr' ? 2 : 0)) + '</td><td>' + (tendenciaTxt(g) || '—') + '</td><td>' + fmt(g[g.length - 1].precision, 1) + ' %</td></tr>';
+        return '<tr><td>' + esc(k) + '</td><td>' + g.length + '</td><td>' + fmtC(media(g.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + fmtC(Math.max.apply(null, g.map(function(s){ return s.precision; })), 1) + ' %</td><td>' + (b === null ? '—' : fmtC(b, f === 'lr' ? 2 : 0)) + '</td><td>' + (tendenciaTxt(g) || '—') + '</td><td>' + fmtC(g[g.length - 1].precision, 1) + ' %</td></tr>';
       }).join('') + '</tbody></table></div>';
   }
   const filas = ses.slice().reverse().slice(0, 100).map(function(s){
     return '<tr><td>' + fechaES(s.ts) + '</td><td>' + esc(s.modulo) + '</td><td title="' + esc(s.params) + '">' + esc(s.etiquetaNivel || '—') + '</td><td>' + s.aciertos + '</td><td>' + s.fallos + '</td><td>' + s.blanco + '</td><td>' +
-      fmt(s.spi, 2) + '</td><td>' + fmt(s.precision, 1) + '</td><td class="goalcell">' + esc(s.objetivo) + '</td><td>' +
-      (s.cumplido === true ? 'Yes' : (s.cumplido === false ? 'No' : '—')) + '</td><td>' + (s.valida ? 'Yes' : 'No') + '</td></tr>';
+      fmtC(s.spi, 2) + '</td><td>' + fmtC(s.precision, 1) + '</td><td class="goalcell">' + esc(s.objetivo) + '</td><td>' +
+      (s.cumplido === true ? 'Sí' : (s.cumplido === false ? 'No' : '—')) + '</td><td>' + (s.valida ? 'Sí' : 'No') + '</td></tr>';
   }).join('');
   pantalla(
-    '<div class="panel"><button class="enlace" id="volver">← Menu (Esc)</button><h1>Stats and history</h1>' + tabs +
+    '<div class="panel"><button class="enlace" id="volver">← Menú (Esc)</button><h1>Estadísticas e historial</h1>' + tabs +
     (todas.length ? resumen : '') +
-    '<h2>Accuracy per session</h2>' + graficoTendencia(ses, f === 'all' ? 'all modules' : MODULOS[f]) +
-    '<h2>Sessions (' + ses.length + (ses.length > 100 ? ', showing the last 100' : '') + ')</h2>' +
-    (ses.length ? '<div class="tabla-caja"><table><thead><tr><th>Date</th><th>Module</th><th>Level</th><th>Correct</th><th>Wrong</th><th>Blank</th><th>s/item</th><th>Accuracy %</th><th>Goal</th><th>Met</th><th>Valid</th></tr></thead><tbody>' + filas + '</tbody></table></div>' : '<p class="suave">There are no sessions yet. Play one and it appears here.</p>') +
-    '<p class="fila" style="margin-top:14px"><button class="btn primario" id="csv">Export CSV (all sessions)</button><button class="btn peligro" id="borrar">Delete history</button><span id="conf"></span></p>' +
-    '<p class="suave peq">Valid = accuracy of at least ' + PRECISION_MINIMA + ' %. Hover the Level cell for the session parameters. The CSV uses “;” as the separator, a decimal point, and UTF-8 with BOM: it opens directly in Excel. Columns: Date;Module;Level;Correct;Wrong;Blank;Seconds per item;Accuracy %;Goal;Met.</p></div>'
+    '<h2>Precisión por sesión</h2>' + graficoTendencia(ses, f === 'all' ? 'todos los módulos' : MODULOS[f]) +
+    '<h2>Sesiones (' + ses.length + (ses.length > 100 ? ', se muestran las 100 últimas' : '') + ')</h2>' +
+    (ses.length ? '<div class="tabla-caja"><table><thead><tr><th>Fecha</th><th>Módulo</th><th>Nivel</th><th>Aciertos</th><th>Fallos</th><th>En blanco</th><th>s/elemento</th><th>Precisión %</th><th>Objetivo</th><th>Cumplido</th><th>Válida</th></tr></thead><tbody>' + filas + '</tbody></table></div>' : '<p class="suave">Aún no hay sesiones. Juega una y aparecerá aquí.</p>') +
+    '<p class="fila" style="margin-top:14px"><button class="btn primario" id="csv">Exportar CSV (todas las sesiones)</button><button class="btn peligro" id="borrar">Borrar historial</button><span id="conf"></span></p>' +
+    '<p class="suave peq">Válida = precisión del ' + PRECISION_MINIMA + ' % como mínimo. Pasa el ratón por la celda Nivel para ver los parámetros de la sesión. El CSV usa «;» como separador, punto decimal y UTF-8 con BOM: se abre directamente en Excel. Las cabeceras de columna van en inglés porque el panel de seguimiento las lee al importar: Date (fecha); Module (módulo); Level (nivel); Correct (aciertos); Wrong (fallos); Blank (en blanco); Seconds per item (segundos por elemento); Accuracy % (precisión); Goal (objetivo); Met (cumplido).</p></div>'
   );
   Array.prototype.forEach.call(app.querySelectorAll('.tabs .btn'), function(b){ b.addEventListener('click', function(){ historial(b.dataset.f); }); });
   $('volver').addEventListener('click', menu);
@@ -1881,14 +1892,14 @@ function historial(filtro){
       const a = document.createElement('a');
       const fh = new Date();
       a.href = URL.createObjectURL(blob);
-      a.download = 'aptitude-trainer-' + fh.getFullYear() + pad2(fh.getMonth() + 1) + pad2(fh.getDate()) + '.csv';
+      a.download = 'entrenador-aptitudes-' + fh.getFullYear() + pad2(fh.getMonth() + 1) + pad2(fh.getDate()) + '.csv';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
-      $('conf').innerHTML = '<span class="bien">CSV downloaded (' + d.sesiones.length + ' sessions).</span>';
-    } catch (e) { $('conf').innerHTML = '<span class="mal">The file could not be generated.</span>'; }
+      $('conf').innerHTML = '<span class="bien">CSV descargado (' + d.sesiones.length + ' sesiones).</span>';
+    } catch (e) { $('conf').innerHTML = '<span class="mal">No se ha podido generar el archivo.</span>'; }
   });
   $('borrar').addEventListener('click', function(){
-    $('conf').innerHTML = '<span class="aviso">Are you sure? All sessions and saved settings will be deleted.</span> <button class="btn peligro" id="si">Yes, delete</button> <button class="btn" id="no">Cancel</button>';
+    $('conf').innerHTML = '<span class="aviso">¿Seguro? Se borrarán todas las sesiones y los ajustes guardados.</span> <button class="btn peligro" id="si">Sí, borrar</button> <button class="btn" id="no">Cancelar</button>';
     $('no').addEventListener('click', function(){ $('conf').innerHTML = ''; $('borrar').focus(); });
     $('si').addEventListener('click', function(){
       memoria = { sesiones:[], ultimo:{} }; guardar(); statsFiltro.v = 'all'; historial();

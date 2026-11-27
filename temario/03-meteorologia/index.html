@@ -95,6 +95,7 @@ main.quiz{font-family:var(--sans)}
 .bar #score{margin-right:auto;font-variant-numeric:tabular-nums}
 .bar button{font:600 13px var(--sans);padding:6px 12px;border:1px solid var(--acc);background:transparent;color:var(--acc);border-radius:2px;cursor:pointer}
 .bar button:hover{background:var(--card)}
+@media (max-width:640px){.bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:.5rem;white-space:nowrap;font-size:13px}.bar::-webkit-scrollbar{display:none}.bar>*{flex:0 0 auto}.bar button{padding:6px 9px}.bar #score{margin-right:.2rem}}
 .bar label{display:inline-flex;align-items:center;gap:.35rem;color:var(--mut)}
 .q{border-top:1px solid var(--line);padding:1.1rem 0 .6rem;margin:0}
 .qn{font:600 .8rem var(--sans);color:var(--mut);font-variant-numeric:tabular-nums}
